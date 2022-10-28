@@ -84,5 +84,7 @@
   "rgstr_code_5": "User's Information is not available, please contact to Admin.",
   "rgstr_code_7": "OTP code is invalid",
   "rgstr_code_8": "System error",
-  "rgstr_code_9": "Account is not activated"
+  "rgstr_code_9": "Account is not activated",
+  "choose_an_apartment": "Choose an apartment",
+  "search_aparment": "Search apartment"
 }

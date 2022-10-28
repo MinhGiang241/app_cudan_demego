@@ -77,60 +77,56 @@ class AuthPrv extends ChangeNotifier {
               ));
         }).then((value) async {
       if (value != null) {
-        await APITower.getApartments().then((r) {
-          if (r.status == null) {
-            apartments = r;
-            isLoading = false;
-            notifyListeners();
-            Utils.pushScreen(context, ApartmentSeletionScreen(listProject: r));
-          } else {
-            Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.error(
-                  msg: S.of(context).err_x(r.message ?? " "),
-                ));
-          }
-        });
+        Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName);
+        // await APITower.getApartments().then((r) {
+        //   if (r.status == null) {
+        //     apartments = r;
+        //     isLoading = false;
+        //     notifyListeners();
+        //     Utils.pushScreen(context, ApartmentSeletionScreen(listProject: r));
+        //   } else {
+        //     Utils.showDialog(
+        //         context: context,
+        //         dialog: PrimaryDialog.error(
+        //           msg: S.of(context).err_x(r.message ?? " "),
+        //         ));
+        //   }
+        // });
 
-        await getUserInfo();
+        // await getUserInfo();
       }
     });
   }
 
-  Future<void> onCreateAccount(BuildContext context, String phone, String name,
+  Future<void> onCreateAccount(BuildContext context, String user, String name,
       String email, String pass, String cPass) async {
-    await APIAuth.createAccount(
-            phoneNum: phone,
-            fullName: name,
+    await APIAuth.createResidentAccount(
+            user: user,
+            name: name,
             email: email,
             passWord: pass,
             confirmPassword: cPass)
         .then((value) {
-      if (value.status == null) {
-        if (value.code == 6) {
-          Utils.pushScreen(
-              context, VerifyOTPScreen(phone: phone, name: name, pass: pass));
-        } else if (value.code == 0) {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.success(msg: 'S.of(context).rgstr_code_0'));
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.errorCode(code: value.code));
-        }
+      if (value.code == 0) {
+        Utils.showDialog(
+            context: context,
+            dialog: PrimaryDialog.success(
+              msg: S.of(context).rgstr_code_0,
+              onClose: () {
+                Navigator.pushNamed(context, SignInScreen.routeName);
+              },
+            ));
       } else {
-        if (value.status == 'internet_error') {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(msg: 'S.of(context).network_error'));
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                  msg: 'S.of(context).err_x(value.message ?? "")'));
-        }
+        Utils.showDialog(
+            context: context,
+            dialog: PrimaryDialog.error(
+              msg: value.message,
+            ));
       }
+    }).catchError((e) {
+      Utils.showDialog(
+          context: context,
+          dialog: PrimaryDialog.error(msg: S.of(context).err_internet));
     });
   }
 
@@ -140,38 +136,38 @@ class AuthPrv extends ChangeNotifier {
     String otp,
   ) async {
     await APIAuth.verifyOTP(phoneNum: phone, otp: otp).then((value) {
-      if (value.status == null) {
-        if (value.code == 0) {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.success(
-                msg: "S.of(context).rgstr_code_0",
-              )).then((value) {
-            Utils.pushAndRemoveUntil(
-                context, const SignInScreen(), (route) => route.isFirst);
-          });
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.errorCode(
-                code: value.code,
-              ));
-        }
-      } else {
-        if (value.status == "internet_error") {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: " S.of(context).network_error",
-              ));
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: "S.of(context).err_x(value.message ?? " ")",
-              ));
-        }
-      }
+      // if (value.status == null) {
+      //   if (value.code == 0) {
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.success(
+      //           msg: "S.of(context).rgstr_code_0",
+      //         )).then((value) {
+      //       Utils.pushAndRemoveUntil(
+      //           context, const SignInScreen(), (route) => route.isFirst);
+      //     });
+      //   } else {
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.errorCode(
+      //           code: value.code,
+      //         ));
+      //   }
+      // } else {
+      //   if (value.status == "internet_error") {
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.error(
+      //           msg: " S.of(context).network_error",
+      //         ));
+      //   } else {
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.error(
+      //           msg: "S.of(context).err_x(value.message ?? " ")",
+      //         ));
+      //   }
+      // }
     });
   }
 

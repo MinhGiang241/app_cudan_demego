@@ -34,34 +34,34 @@ class ResetPassPrv extends ChangeNotifier {
           .then((value) {
         isLoading = false;
         notifyListeners();
-        if (value.status == null) {
-          if (value.code == 0) {
-            Utils.showDialog(
-                    context: context,
-                    dialog: PrimaryDialog.success(
-                        msg: "S.of(context).update_success"))
-                .then((value) {
-              int count = 3;
-              Navigator.popUntil(context, (route) => count-- == 0);
-            });
-          } else {
-            Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.errorCode(code: value.code));
-          }
-        } else {
-          if (value.status == 'internet_error') {
-            Utils.showDialog(
-                context: context,
-                dialog:
-                    PrimaryDialog.error(msg: "S.of(context).network_error"));
-          } else {
-            Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.error(
-                    msg: "S.of(context).err_x(value.message ?? " ")"));
-          }
-        }
+        // if (value.status == null) {
+        //   if (value.code == 0) {
+        //     Utils.showDialog(
+        //             context: context,
+        //             dialog: PrimaryDialog.success(
+        //                 msg: "S.of(context).update_success"))
+        //         .then((value) {
+        //       int count = 3;
+        //       Navigator.popUntil(context, (route) => count-- == 0);
+        //     });
+        //   } else {
+        //     Utils.showDialog(
+        //         context: context,
+        //         dialog: PrimaryDialog.errorCode(code: value.code));
+        //   }
+        // } else {
+        //   if (value.status == 'internet_error') {
+        //     Utils.showDialog(
+        //         context: context,
+        //         dialog:
+        //             PrimaryDialog.error(msg: "S.of(context).network_error"));
+        //   } else {
+        //     Utils.showDialog(
+        //         context: context,
+        //         dialog: PrimaryDialog.error(
+        //             msg: "S.of(context).err_x(value.message ?? " ")"));
+        //   }
+        // }
       });
     } else {
       if (newPassController.text.isEmpty) {

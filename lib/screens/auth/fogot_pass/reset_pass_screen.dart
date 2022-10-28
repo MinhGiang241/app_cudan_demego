@@ -16,6 +16,7 @@ import '../prv/reset_pass_prv.dart';
 class ResetPassScreen extends StatelessWidget {
   const ResetPassScreen({Key? key, required this.phone, required this.token})
       : super(key: key);
+  static const routeName = '/reset-password';
   final String phone;
   final String token;
 

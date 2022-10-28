@@ -19,25 +19,47 @@ class ApartmentSeletionScreen extends StatefulWidget {
       _ApartmentSeletionScreenState();
 }
 
+// Fake data
+var apartments = [
+  Apartments(detail: "test", id: '1', name: "test1", floorPlan: [
+    FloorPlan(id: 'f1', name: 'loor', detail: "df1"),
+    FloorPlan(id: 'f2', name: 'loor', detail: "df1"),
+  ]),
+  Apartments(detail: "test", id: '2', name: "test2", floorPlan: [
+    FloorPlan(id: 'f1', name: 'loor', detail: "df2"),
+    FloorPlan(id: 'f2', name: 'loor', detail: "df2"),
+  ]),
+];
+
 class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
   @override
   Widget build(BuildContext context) {
     //APITower.getToaNha();
     return PrimaryScreen(
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<AuthPrv>().onSignOut(context);
+              },
+              icon: const Icon(Icons.logout)),
+          hpad(12)
+        ],
+      ),
       body: Column(
         children: [
           vpad(24 +
               AppBar().preferredSize.height +
               MediaQuery.of(context).padding.top),
           Center(
-              child: Text("S.of(context).choose_an_apartment",
+              child: Text(S.of(context).choose_an_apartment,
                   style: txtDisplayMedium())),
           vpad(36),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: PrimaryTextField(
-              hint: "S.of(context).search_aparment",
+              hint: S.of(context).search_aparment,
               prefixIcon: const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: PrimaryIcon(
@@ -48,9 +70,10 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
           vpad(16),
           Expanded(
               child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
             children: [
-              ...widget.listProject!.apartments!
+              // ...widget.listProject!.apartments!
+              ...apartments
                   .map<Widget>((e) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -62,9 +85,9 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                                     padding: const EdgeInsets.only(bottom: 16),
                                     child: PrimaryCard(
                                       onTap: () {
-                                        context
-                                            .read<AuthPrv>()
-                                            .onSelectApartment(context, e);
+                                        // context
+                                        //     .read<AuthPrv>()
+                                        //     .onSelectApartment(context, e);
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(15),

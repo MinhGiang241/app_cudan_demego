@@ -1,9 +1,14 @@
 import 'dart:io';
 
+// import 'package:graphql/client.dart';
+
+import 'package:graphql/client.dart';
+
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import '../models/response_file_upload.dart';
 import '../models/response_register.dart';
+import '../models/response.dart';
 import '../models/response_user.dart';
 import '../services/api_service.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
@@ -12,29 +17,29 @@ class APIAuth {
   static Future<oauth2.Client?> signIn(
       {required String username,
       required String password,
-      OnError? onError}) async {
+      ErrorHandle? onError}) async {
     return await ApiService.shared
         .getClient(username: username, password: password, onError: onError);
   }
 
-  static Future<ResponseRegister> createAccount(
-      {required String phoneNum,
-      required String fullName,
-      required String email,
-      required String passWord,
-      required String confirmPassword}) async {
-    final body = {
-      "phoneNumber": phoneNum,
-      "fullName": fullName,
-      "email": email,
-      "password": passWord,
-      "confirmPassword": passWord
-    };
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/register', useToken: false, data: body);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
+  // static Future<ResponseRegister> createAccount(
+  //     {required String phoneNum,
+  //     required String fullName,
+  //     required String email,
+  //     required String passWord,
+  //     required String confirmPassword}) async {
+  //   final body = {
+  //     "phoneNumber": phoneNum,
+  //     "fullName": fullName,
+  //     "email": email,
+  //     "password": passWord,
+  //     "confirmPassword": passWord
+  //   };
+  //   final data = await ApiService.shared
+  //       .postApi(path: 'api/mobile/register', useToken: false, data: body);
+  //   // print(data);
+  //   return ResponseRegister.fromJson(data);
+  // }
 
   static Future<ResponseRegister> verifyOTP({
     required String phoneNum,
@@ -47,7 +52,7 @@ class APIAuth {
     return ResponseRegister.fromJson(data);
   }
 
-  static Future<void> signOut({OnError? onError}) async {
+  static Future<void> signOut({ErrorHandle? onError}) async {
     return await ApiService.shared.deleteCre();
   }
 
@@ -155,5 +160,42 @@ class APIAuth {
         .postApi(path: 'api/mobile/resetPassword', useToken: false, data: body);
     // print(data);
     return ResponseRegister.fromJson(data);
+  }
+
+  static Future<ResponseRegister> createResidentAccount(
+      {required String user,
+      required String name,
+      required String email,
+      required String passWord,
+      required String confirmPassword}) async {
+    var mutationCreateResidentAccount = '''
+      mutation (\$user:String, \$name:String,\$password:String,\$email:String,\$confirmPassword:String){
+    response: resident_create_resident_account (user :\$user,name: \$name,password: \$password,email: \$email,confirmPassword: \$confirmPassword ) {
+        code
+        message
+        data 
+      }
+    }
+     
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(mutationCreateResidentAccount),
+      variables: {
+        "user": user,
+        "name": name,
+        "email": email,
+        "password": passWord,
+        "confirmPassword": confirmPassword
+      },
+    );
+
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    var res = ResponseModule.fromJson(data);
+    if (res.response == null) {
+      res.error != null ? throw (res.error!) : throw ('');
+    }
+
+    return ResponseRegister.fromJson(res.response);
   }
 }

@@ -13,7 +13,7 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
 
 typedef OnSendProgress = Function(int, int);
-typedef OnError = Function();
+typedef ErrorHandle = Function();
 
 class ApiService {
   static ApiService shared = ApiService();
@@ -33,7 +33,7 @@ class ApiService {
   Future<oauth2.Client?> getClient(
       {required String username,
       required String password,
-      OnError? onError}) async {
+      ErrorHandle? onError}) async {
     userName = username;
     passWord = password;
     final client = await getExistClient();
@@ -49,7 +49,7 @@ class ApiService {
   }
 
   Future<oauth2.Client?> _getCre(
-      String username, String password, OnError? onError) async {
+      String username, String password, ErrorHandle? onError) async {
     final authorizationEndpoint = Uri.parse(tokenEndpointUrl);
     try {
       final cli = await oauth2.resourceOwnerPasswordGrant(
@@ -117,7 +117,7 @@ class ApiService {
       {dynamic data,
       required String path,
       bool useToken = true,
-      OnError? onError,
+      ErrorHandle? onError,
       OnSendProgress? onSendProgress}) async {
     Options? options;
     if (useToken) {
@@ -174,7 +174,7 @@ class ApiService {
       {required String path,
       bool useToken = true,
       Map<String, dynamic>? params,
-      OnError? onError}) async {
+      ErrorHandle? onError}) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
@@ -230,7 +230,7 @@ class ApiService {
       {dynamic data,
       required String path,
       bool useToken = true,
-      OnError? onError,
+      ErrorHandle? onError,
       OnSendProgress? onSendProgress}) async {
     Options? options;
     if (useToken) {
@@ -283,7 +283,7 @@ class ApiService {
     }
   }
 
-  Future<GraphQLClient> getClientGraphQL({OnError? onError}) async {
+  Future<GraphQLClient> getClientGraphQL({ErrorHandle? onError}) async {
     late AuthLink authLink;
     var client = await getExistClient();
     if (client == null) {
@@ -327,6 +327,24 @@ class ApiService {
       }
       return result.data!;
     } on OperationException catch (e) {
+      return {"status": "error", "message": e.toString()};
+    }
+  }
+
+  Future<Map<String, dynamic>> mutationhqlQuery(MutationOptions options) async {
+    try {
+      final cl = await getClientGraphQL();
+      final result = await cl.mutate(options);
+
+      if (result.data == null) {
+        // throw ("network_connection_err");
+        return {
+          "status": "internet_error",
+          "message": "network_connection_err"
+        };
+      }
+      return result.data!;
+    } catch (e) {
       return {"status": "error", "message": e.toString()};
     }
   }

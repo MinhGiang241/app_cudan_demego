@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
+        "choose_an_apartment":
+            MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirm_pass":
@@ -117,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9": MessageLookupByLibrary.simpleMessage(
             "Tài khoản chưa được kích hoạt"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "search_aparment": MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),

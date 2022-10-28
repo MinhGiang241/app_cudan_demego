@@ -32,29 +32,29 @@ class ChangePassPrv extends ChangeNotifier {
           .then((value) async {
         isLoading = false;
         notifyListeners();
-        if (value.status == null) {
-          if (value.success == true) {
-            await Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.success(
-                  msg: "", // S.of(context).update_success,
-                )).then((value) {
-              // Utils.pop(context);
-            });
-          } else {
-            Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.error(
-                  msg: "", //S.of(context).err_x(value.message ?? ""),
-                ));
-          }
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: "", // S.of(context).err_x(value.message ?? ""),
-              ));
-        }
+        // if (value.status == null) {
+        //   if (value.success == true) {
+        //     await Utils.showDialog(
+        //         context: context,
+        //         dialog: PrimaryDialog.success(
+        //           msg: "", // S.of(context).update_success,
+        //         )).then((value) {
+        //       // Utils.pop(context);
+        //     });
+        //   } else {
+        //     Utils.showDialog(
+        //         context: context,
+        //         dialog: PrimaryDialog.error(
+        //           msg: "", //S.of(context).err_x(value.message ?? ""),
+        //         ));
+        //   }
+        // } else {
+        //   Utils.showDialog(
+        //       context: context,
+        //       dialog: PrimaryDialog.error(
+        //         msg: "", // S.of(context).err_x(value.message ?? ""),
+        //       ));
+        // }
       });
     } else {
       if (currentPassController.text.isEmpty) {

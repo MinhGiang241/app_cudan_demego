@@ -18,7 +18,7 @@ class SignUpPrv extends ChangeNotifier {
   String? cPassValidate;
 
   final AuthPrv authPrv;
-  SignUpPrv(this.authPrv);
+  SignUpPrv({required this.authPrv});
 
   bool isLoading = false;
 
@@ -30,11 +30,11 @@ class SignUpPrv extends ChangeNotifier {
       await authPrv
           .onCreateAccount(
         context,
-        phoneController.text,
-        nameController.text,
-        emailController.text,
-        passController.text,
-        cPassController.text,
+        phoneController.text.trim(),
+        nameController.text.trim(),
+        emailController.text.trim(),
+        passController.text.trim(),
+        cPassController.text.trim(),
       )
           .then((value) {
         isLoading = false;

@@ -84,5 +84,7 @@
   "rgstr_code_5": "Thông tin người dùng không có sẵn trên hệ thống, vui lòng liên hệ với Admin.",
   "rgstr_code_7": "Mã xác thực không hợp lệ",
   "rgstr_code_8": "Lỗi hệ thống",
-  "rgstr_code_9": "Tài khoản chưa được kích hoạt"
+  "rgstr_code_9": "Tài khoản chưa được kích hoạt",
+  "choose_an_apartment": "Chọn dự án",
+  "search_aparment": "Chọn căn hộ"
 }

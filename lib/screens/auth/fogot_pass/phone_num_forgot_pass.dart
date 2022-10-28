@@ -26,7 +26,8 @@ class PhoneNumForgotPassScreen extends StatelessWidget {
               key: context.read<ForgotPassPrv>().formKey,
               child: SafeArea(
                 child: ListView(
-                  padding: const EdgeInsets.only(top: 24),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   children: [
                     PrimaryTextField(
                       controller: context.read<ForgotPassPrv>().phoneController,

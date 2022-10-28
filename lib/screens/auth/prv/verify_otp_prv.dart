@@ -23,12 +23,12 @@ class VerifyOTPPrv extends ChangeNotifier {
   int second = 60;
 
   final AuthPrv authPrv;
-  final String phone;
+  final String user;
   final String name;
   final String email;
   final String pass;
   late Timer timer;
-  VerifyOTPPrv(this.authPrv, this.phone, this.name, this.pass, this.email) {
+  VerifyOTPPrv(this.authPrv, this.user, this.name, this.pass, this.email) {
     _startTimer();
   }
 
@@ -58,37 +58,35 @@ class VerifyOTPPrv extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       if (isForgotPass) {
-        await APIAuth.generateToken(phoneNum: phone, otp: otpController.text)
+        await APIAuth.generateToken(phoneNum: user, otp: otpController.text)
             .then((value) {
           isLoading = false;
           notifyListeners();
-          if (value.status == null) {
-            if (value.code == 0) {
-              Utils.pushScreen(context,
-                  ResetPassScreen(phone: phone, token: value.message!));
-            } else {
-              Utils.showDialog(
-                  context: context,
-                  dialog: PrimaryDialog.errorCode(code: value.code));
-            }
-          } else {
-            if (value.status == 'internet_error') {
-              Utils.showDialog(
-                  context: context,
-                  dialog:
-                      PrimaryDialog.error(msg: 'S.of(context).network_error'));
-            } else {
-              Utils.showDialog(
-                  context: context,
-                  dialog: PrimaryDialog.error(
-                      msg: 'S.of(context).err_x(value.message ?? "")'));
-            }
-          }
+          // if (value.status == null) {
+          //   if (value.code == 0) {
+          //     Utils.pushScreen(
+          //         context, ResetPassScreen(phone: user, token: value.message!));
+          //   } else {
+          //     Utils.showDialog(
+          //         context: context,
+          //         dialog: PrimaryDialog.errorCode(code: value.code));
+          //   }
+          // } else {
+          //   if (value.status == 'internet_error') {
+          //     Utils.showDialog(
+          //         context: context,
+          //         dialog:
+          //             PrimaryDialog.error(msg: 'S.of(context).network_error'));
+          //   } else {
+          //     Utils.showDialog(
+          //         context: context,
+          //         dialog: PrimaryDialog.error(
+          //             msg: 'S.of(context).err_x(value.message ?? "")'));
+          //   }
+          // }
         });
       } else {
-        await authPrv
-            .onVerify(context, phone, otpController.text)
-            .then((value) {
+        await authPrv.onVerify(context, user, otpController.text).then((value) {
           isLoading = false;
           notifyListeners();
         });
@@ -103,33 +101,33 @@ class VerifyOTPPrv extends ChangeNotifier {
   resend(BuildContext context) async {
     isResending = true;
     notifyListeners();
-    await APIAuth.createAccount(
-            phoneNum: phone,
-            fullName: name,
-            email: email,
-            passWord: pass,
-            confirmPassword: pass)
-        .then((value) {
-      isResending = false;
-      notifyListeners();
-      if (value.status == null) {
-        second = 60;
-        _startTimer();
-      } else {
-        if (value.status == "internet_error") {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: ' S.of(context).network_error',
-              ));
-        } else {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: 'S.of(context).err_x(value.message ?? "")',
-              ));
-        }
-      }
-    });
+    //   await APIAuth.createAccount(
+    //           phoneNum: phone,
+    //           fullName: name,
+    //           email: email,
+    //           passWord: pass,
+    //           confirmPassword: pass)
+    //       .then((value) {
+    //     isResending = false;
+    //     notifyListeners();
+    //     if (value.status == null) {
+    //       second = 60;
+    //       _startTimer();
+    //     } else {
+    //       if (value.status == "internet_error") {
+    //         Utils.showDialog(
+    //             context: context,
+    //             dialog: PrimaryDialog.error(
+    //               msg: ' S.of(context).network_error',
+    //             ));
+    //       } else {
+    //         Utils.showDialog(
+    //             context: context,
+    //             dialog: PrimaryDialog.error(
+    //               msg: 'S.of(context).err_x(value.message ?? "")',
+    //             ));
+    //       }
+    //     }
+    //   });
   }
 }

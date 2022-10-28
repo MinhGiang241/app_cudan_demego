@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
+        "choose_an_apartment":
+            MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_pass":
@@ -114,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "search_aparment":
+            MessageLookupByLibrary.simpleMessage("Search apartment"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),

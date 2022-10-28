@@ -909,6 +909,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose an apartment`
+  String get choose_an_apartment {
+    return Intl.message(
+      'Choose an apartment',
+      name: 'choose_an_apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search apartment`
+  String get search_aparment {
+    return Intl.message(
+      'Search apartment',
+      name: 'search_aparment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import 'primary_button.dart';
@@ -17,6 +16,7 @@ class CustomDialog extends StatelessWidget {
       this.code,
       this.content,
       this.useBackground = false,
+      this.onClose,
       this.type = DialogType.custom});
 
   final String? title;
@@ -25,6 +25,7 @@ class CustomDialog extends StatelessWidget {
   final Widget? content;
   final DialogType type;
   final bool useBackground;
+  final Function()? onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,12 @@ class CustomDialog extends StatelessWidget {
                         buttonSize: ButtonSize.medium,
                         onTap: () {
                           Navigator.pop(context);
+
+                          if (onClose != null) {
+                            onClose!();
+                          }
+
+                          // Navigator.pop(context);
                         },
                       ),
                     if (content != null) content!,
@@ -140,8 +147,8 @@ class CustomDialog extends StatelessWidget {
 }
 
 class PrimaryDialog extends CustomDialog {
-  const PrimaryDialog.success({Key? key, String? msg})
-      : super(type: DialogType.success, msg: msg, key: key);
+  const PrimaryDialog.success({Key? key, String? msg, Function()? onClose})
+      : super(type: DialogType.success, msg: msg, key: key, onClose: onClose);
   const PrimaryDialog.error({Key? key, String? msg})
       : super(type: DialogType.error, msg: msg, key: key);
   const PrimaryDialog.errorCode({Key? key, int? code})

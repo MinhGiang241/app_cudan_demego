@@ -58,16 +58,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Form(
-              // key: context.read<SignUpPrv>().formKey,
+              key: context.read<SignUpPrv>().formKey,
               child: Column(
                 children: [
                   PrimaryTextField(
-                    // controller: context.read<SignUpPrv>().nameController,
+                    controller: context.read<SignUpPrv>().nameController,
                     label: S.of(context).full_name,
                     hint: S.of(context).enter_name,
                     isRequired: true,
                     textCapitalization: TextCapitalization.words,
-                    // validateString: context.watch<SignUpPrv>().nameValidate,
+                    validateString: context.watch<SignUpPrv>().nameValidate,
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "";
@@ -77,12 +77,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   vpad(16),
                   PrimaryTextField(
-                    // controller: context.read<SignUpPrv>().phoneController,
+                    controller: context.read<SignUpPrv>().phoneController,
                     label: S.of(context).phone_num,
                     hint: S.of(context).enter_phone,
                     keyboardType: TextInputType.phone,
                     isRequired: true,
-                    // validateString: context.watch<SignUpPrv>().phoneValidate,
+                    validateString: context.watch<SignUpPrv>().phoneValidate,
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "";
@@ -92,12 +92,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   vpad(16),
                   PrimaryTextField(
-                    // controller: context.read<SignUpPrv>().emailController,
+                    controller: context.read<SignUpPrv>().emailController,
                     label: S.of(context).email,
                     hint: S.of(context).enter_email,
                     keyboardType: TextInputType.phone,
                     isRequired: true,
-                    // validateString: context.watch<SignUpPrv>().emailValidate,
+                    validateString: context.watch<SignUpPrv>().emailValidate,
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "";
@@ -107,12 +107,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   vpad(16),
                   PrimaryTextField(
-                    // controller: context.read<SignUpPrv>().passController,
+                    controller: context.read<SignUpPrv>().passController,
                     obscureText: true,
                     label: S.of(context).password,
                     hint: S.of(context).enter_pas,
                     isRequired: true,
-                    // validateString: context.watch<SignUpPrv>().passValidate,
+                    validateString: context.watch<SignUpPrv>().passValidate,
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "";
@@ -122,12 +122,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   vpad(16),
                   PrimaryTextField(
-                    // controller: context.read<SignUpPrv>().cPassController,s
+                    controller: context.read<SignUpPrv>().cPassController,
                     obscureText: true,
                     label: S.of(context).confirm_pass,
                     hint: S.of(context).enter_pas,
                     isRequired: true,
-                    // validateString: context.watch<SignUpPrv>().cPassValidate,
+                    validateString: context.watch<SignUpPrv>().cPassValidate,
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "";
@@ -158,9 +158,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   PrimaryButton(
                     text: S.of(context).create_acc_1,
                     onTap: () async {
-                      // await context.read<SignUpPrv>().signUp(context);
+                      await context.read<SignUpPrv>().signUp(context);
                     },
-                    // isLoading: context.watch<SignUpPrv>().isLoading,
+                    isLoading: context.watch<SignUpPrv>().isLoading,
                     width: double.infinity,
                   ),
                   vpad(32),

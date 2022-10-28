@@ -89,37 +89,37 @@ class EditInfoProvider extends ChangeNotifier {
             sex: gender,
             userName: nameController.text)
         .then((value) async {
-      if (value.status == null) {
-        if (value.success == true) {
-          await authPrv.getUserInfo().then((value) {
-            isSaving = false;
-            notifyListeners();
-            Utils.showDialog(
-                context: context,
-                dialog: PrimaryDialog.success(
-                  msg: "S.of(context).update_success",
-                )).then((value) {
-              // Utils.pop(context);
-            });
-          });
-        } else {
-          isSaving = false;
-          notifyListeners();
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg: "S.of(context).err_x(value.message ?? value.status)",
-              ));
-        }
-      } else {
-        isSaving = false;
-        notifyListeners();
-        Utils.showDialog(
-            context: context,
-            dialog: PrimaryDialog.error(
-              msg: "S.of(context).err_x(value.message ?? value.status)",
-            ));
-      }
+      // if (value.status == null) {
+      //   if (value.success == true) {
+      //     await authPrv.getUserInfo().then((value) {
+      //       isSaving = false;
+      //       notifyListeners();
+      //       Utils.showDialog(
+      //           context: context,
+      //           dialog: PrimaryDialog.success(
+      //             msg: "S.of(context).update_success",
+      //           )).then((value) {
+      //         // Utils.pop(context);
+      //       });
+      //     });
+      //   } else {
+      //     isSaving = false;
+      //     notifyListeners();
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.error(
+      //           msg: "S.of(context).err_x(value.message ?? value.status)",
+      //         ));
+      //   }
+      // } else {
+      //   isSaving = false;
+      //   notifyListeners();
+      //   Utils.showDialog(
+      //       context: context,
+      //       dialog: PrimaryDialog.error(
+      //         msg: "S.of(context).err_x(value.message ?? value.status)",
+      //       ));
+      // }
     });
   }
 
