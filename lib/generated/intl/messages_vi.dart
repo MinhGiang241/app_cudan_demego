@@ -24,9 +24,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "account": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
+        "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
+        "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
         "can_not_empty":
@@ -40,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
+        "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
         "create_acc_1": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "current_pass":
@@ -47,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "electricity": MessageLookupByLibrary.simpleMessage("Điện"),
+        "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
@@ -67,20 +72,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_unknown":
             MessageLookupByLibrary.simpleMessage("Lỗi Không xác định"),
         "err_x": m0,
+        "event": MessageLookupByLibrary.simpleMessage("Sự kiện"),
+        "event_msg": MessageLookupByLibrary.simpleMessage(
+            "Theo dõi các sự kiện từng ngày/ tháng"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
+        "gym_card": MessageLookupByLibrary.simpleMessage("Thẻ Gym"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản ?"),
+        "hello": MessageLookupByLibrary.simpleMessage("Xin chào"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "housework": MessageLookupByLibrary.simpleMessage("Giúp việc"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Số điện thoại/Email hoặc mật khẩu không chính xác"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
+        "news": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản ?"),
@@ -92,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "Chúng tôi đã gửi mã OTP đến Số điện thoại đăng ký của quý khách. Vui lòng nhập mã OTP để thực hiện xác thực."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
+        "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ xe"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
@@ -100,6 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "residence_news":
+            MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Đăng ký thành công, vui lòng đăng nhập"),
@@ -122,7 +138,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_aparment": MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
+        "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "shopping_online":
+            MessageLookupByLibrary.simpleMessage("Mua sắm online"),
+        "shopping_represent": MessageLookupByLibrary.simpleMessage("Đi chợ hộ"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Đăng Nhập"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "sign_out_msg": MessageLookupByLibrary.simpleMessage(
@@ -140,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại!")
       };

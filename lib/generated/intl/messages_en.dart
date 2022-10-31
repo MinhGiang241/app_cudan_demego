@@ -24,9 +24,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
         "can_not_empty": MessageLookupByLibrary.simpleMessage("Can not empty"),
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
+        "covenient_service":
+            MessageLookupByLibrary.simpleMessage("Covenient service"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
         "create_acc_1":
             MessageLookupByLibrary.simpleMessage("Create an account"),
@@ -47,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
+        "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
@@ -65,20 +71,28 @@ class MessageLookup extends MessageLookupByLibrary {
             "Check your internet connection!"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_x": m0,
+        "event": MessageLookupByLibrary.simpleMessage("Event"),
+        "event_msg":
+            MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
+        "gym_card": MessageLookupByLibrary.simpleMessage("Gym card"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
+        "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "housework": MessageLookupByLibrary.simpleMessage("Housework"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Phone number/Email or password is not correct."),
         "info": MessageLookupByLibrary.simpleMessage("Infomation"),
+        "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
+        "news": MessageLookupByLibrary.simpleMessage("News"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
@@ -89,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
+        "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
@@ -97,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "residence_news":
+            MessageLookupByLibrary.simpleMessage("Residence news"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Register successfully, please sign in"),
@@ -120,7 +137,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Search apartment"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
+        "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "shopping_online":
+            MessageLookupByLibrary.simpleMessage("Shopping online"),
+        "shopping_represent":
+            MessageLookupByLibrary.simpleMessage("Shopping represent"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),
         "sign_out_msg":
@@ -138,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "water": MessageLookupByLibrary.simpleMessage("Water"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }

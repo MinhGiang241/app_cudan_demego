@@ -90,11 +90,11 @@ class S {
     );
   }
 
-  /// `Account`
-  String get account {
+  /// `Account name`
+  String get account_name {
     return Intl.message(
-      'Account',
-      name: 'account',
+      'Account name',
+      name: 'account_name',
       desc: '',
       args: [],
     );
@@ -925,6 +925,186 @@ class S {
     return Intl.message(
       'Search apartment',
       name: 'search_aparment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello`
+  String get hello {
+    return Intl.message(
+      'Hello',
+      name: 'hello',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News`
+  String get news {
+    return Intl.message(
+      'News',
+      name: 'news',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bill`
+  String get bills {
+    return Intl.message(
+      'Bill',
+      name: 'bills',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electricity`
+  String get electricity {
+    return Intl.message(
+      'Electricity',
+      name: 'electricity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Water`
+  String get water {
+    return Intl.message(
+      'Water',
+      name: 'water',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Internet`
+  String get internet {
+    return Intl.message(
+      'Internet',
+      name: 'internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service`
+  String get services {
+    return Intl.message(
+      'Service',
+      name: 'services',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parking card`
+  String get parking_card {
+    return Intl.message(
+      'Parking card',
+      name: 'parking_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Elevator card`
+  String get elevator_card {
+    return Intl.message(
+      'Elevator card',
+      name: 'elevator_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gym card`
+  String get gym_card {
+    return Intl.message(
+      'Gym card',
+      name: 'gym_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Covenient service`
+  String get covenient_service {
+    return Intl.message(
+      'Covenient service',
+      name: 'covenient_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping represent`
+  String get shopping_represent {
+    return Intl.message(
+      'Shopping represent',
+      name: 'shopping_represent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping online`
+  String get shopping_online {
+    return Intl.message(
+      'Shopping online',
+      name: 'shopping_online',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Housework`
+  String get housework {
+    return Intl.message(
+      'Housework',
+      name: 'housework',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event`
+  String get event {
+    return Intl.message(
+      'Event',
+      name: 'event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Residence news`
+  String get residence_news {
+    return Intl.message(
+      'Residence news',
+      name: 'residence_news',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow events by date/month`
+  String get event_msg {
+    return Intl.message(
+      'Follow events by date/month',
+      name: 'event_msg',
       desc: '',
       args: [],
     );

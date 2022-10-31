@@ -10,6 +10,7 @@ import '../screens/auth/prv/sign_in_prv.dart';
 import '../screens/auth/prv/sign_up_prv.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -41,11 +42,19 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const PhoneNumForgotPassScreen(),
         );
+
       // case ResetPassScreen.routeName:
       //   return MaterialPageRoute(
       //     settings: routeSetting,
       //     builder: (_) => const ResetPassScreen(),
       //   );
+      case HomeScreen.routeName:
+        return MaterialPageRoute(
+            settings: routeSetting,
+            builder: (_) => ChangeNotifierProvider(
+                create: (context) =>
+                    SignUpPrv(authPrv: context.read<AuthPrv>()),
+                builder: (context, child) => const HomeScreen()));
       case ApartmentSeletionScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,

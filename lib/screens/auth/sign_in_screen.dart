@@ -66,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   PrimaryTextField(
                     controller: context.read<SingInPrv>().accountController,
-                    label: S.of(context).account,
+                    label: S.of(context).account_name,
                     hint: S.of(context).enter_email_phone,
                     isRequired: true,
                     validator: (v) {

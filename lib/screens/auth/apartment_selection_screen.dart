@@ -9,6 +9,7 @@ import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
+import '../home/home_screen.dart';
 
 class ApartmentSeletionScreen extends StatefulWidget {
   const ApartmentSeletionScreen({Key? key, this.listProject}) : super(key: key);
@@ -85,6 +86,10 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                                     padding: const EdgeInsets.only(bottom: 16),
                                     child: PrimaryCard(
                                       onTap: () {
+                                        Navigator.of(context)
+                                            .pushNamedAndRemoveUntil(
+                                                HomeScreen.routeName,
+                                                (route) => false);
                                         // context
                                         //     .read<AuthPrv>()
                                         //     .onSelectApartment(context, e);

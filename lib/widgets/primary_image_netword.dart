@@ -55,8 +55,8 @@ class PrimaryImageNetwork extends StatelessWidget {
                           path!.endsWith(".xlsx") ||
                           path!.endsWith(".pdf") ||
                           path!.endsWith(".txt")) {
-                        launchUrlString(
-                            "${ApiConstants.baseURL}/content/media/$path",
+                        launchUrlString(path!,
+                            // "${ApiConstants.baseURL}/content/media/$path",
                             mode: LaunchMode.externalApplication);
                       } else {
                         Navigator.push(
@@ -65,11 +65,12 @@ class PrimaryImageNetwork extends StatelessWidget {
                               pageBuilder: (context, animation,
                                       secondaryAnimation) =>
                                   PhotoViewer(
-                                      link:
-                                          "${ApiConstants.baseURL}/content/media/$path",
+                                      link: path!,
+                                      // "${ApiConstants.baseURL}/content/media/$path",
                                       listLink: listLink ??
                                           [
-                                            "${ApiConstants.baseURL}/content/media/$path"
+                                            path!,
+                                            //"${ApiConstants.baseURL}/content/media/$path"
                                           ],
                                       initIndex: initIndex ?? 0,
                                       heroTag: tag),
@@ -86,13 +87,16 @@ class PrimaryImageNetwork extends StatelessWidget {
                       Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation,
-                                    secondaryAnimation) =>
-                                PhotoViewer(
-                                    link: customUrl!,
-                                    initIndex: 0,
-                                    listLink: [customUrl!],
-                                    heroTag: tag),
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    PhotoViewer(
+                                        link: customUrl!,
+                                        initIndex: 0,
+                                        listLink: [
+                                          path!,
+                                          // customUrl!,
+                                        ],
+                                        heroTag: tag),
                             transitionsBuilder: (context, animation,
                                 secondaryAnimation, child) {
                               return FadeTransition(
@@ -105,8 +109,8 @@ class PrimaryImageNetwork extends StatelessWidget {
                   }
                 : null,
             child: CachedNetworkImage(
-              imageUrl:
-                  customUrl ?? "${ApiConstants.baseURL}/content/media/$path",
+              imageUrl: customUrl ??
+                  path!, //ApiConstants.baseURL}/content/media/$path",
               fit: fit ?? BoxFit.cover,
               height: height,
               width: width,
@@ -247,11 +251,12 @@ class _PhotoViewerState extends State<PhotoViewer> {
                 scrollPhysics: const ClampingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: CachedNetworkImageProvider(widget
-                            .listLink[index]
-                            .startsWith("http")
-                        ? widget.listLink[index]
-                        : "${ApiConstants.baseURL}/content/media/${widget.listLink[index]}"),
+                    imageProvider: CachedNetworkImageProvider(
+                      widget.listLink[index].startsWith("http")
+                          ? widget.listLink[index]
+                          : widget.listLink[
+                              index], //"${ApiConstants.baseURL}/content/media/${widget.listLink[index]}",
+                    ),
                     initialScale: PhotoViewComputedScale.contained,
                     heroAttributes:
                         PhotoViewHeroAttributes(tag: widget.heroTag),
