@@ -11,6 +11,12 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  mail,
+  feedback,
+  housework,
+  store_front,
+  shopping_cart,
+  elevator,
   search_outline,
   home_smile,
   home,
@@ -153,7 +159,8 @@ class PrimaryIcon extends StatelessWidget {
       default:
         return Container(
           decoration: BoxDecoration(
-            color: _gradientWhite(),
+            // color: _gradientWhite(),
+            gradient: _gradientColor(),
             borderRadius: borderRadius ?? BorderRadius.circular(24),
             // gradient: _gradientWhite(),
             border: Border.all(color: Colors.white30, width: 0.5),
@@ -213,6 +220,29 @@ class PrimaryIcon extends StatelessWidget {
         return redColor;
       default:
         return Colors.white;
+    }
+  }
+
+  LinearGradient _gradientColor() {
+    switch (gradients) {
+      case PrimaryIconGradient.blue:
+        return gradientBlue;
+      case PrimaryIconGradient.primary:
+        return gradientPrimary;
+      case PrimaryIconGradient.green:
+        return gradientGreen;
+      case PrimaryIconGradient.pink:
+        return gradientPink;
+      case PrimaryIconGradient.purple:
+        return gradientPurple;
+      case PrimaryIconGradient.turquoise:
+        return gradientTurquoise;
+      case PrimaryIconGradient.yellow:
+        return gradientYellow;
+      case PrimaryIconGradient.red:
+        return gradientRed;
+      default:
+        return gradientWhite;
     }
   }
 }

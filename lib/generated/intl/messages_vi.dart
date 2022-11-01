@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
@@ -39,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
@@ -76,9 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "event_msg": MessageLookupByLibrary.simpleMessage(
             "Theo dõi các sự kiện từng ngày/ tháng"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
+        "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
+        "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Thẻ Gym"),
         "have_acc":
@@ -92,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
+        "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "news": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),

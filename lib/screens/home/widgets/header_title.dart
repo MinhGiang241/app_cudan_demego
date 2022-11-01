@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 import '../../../constants/constants.dart';
 import '../../../widgets/primary_icon.dart';
@@ -12,9 +13,13 @@ class HeaderTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: IconButton(
-        icon: const Icon(Icons.logout),
-        onPressed: () {},
+      leading: Transform(
+        alignment: Alignment.center,
+        transform: Matrix4.rotationY(math.pi),
+        child: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.logout),
+        ),
       ),
       title: Center(
         child: Text.rich(TextSpan(children: [

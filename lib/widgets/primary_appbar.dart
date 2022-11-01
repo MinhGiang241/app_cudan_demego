@@ -4,17 +4,17 @@ import '../constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryAppbar extends StatelessWidget with PreferredSizeWidget {
-  const PrimaryAppbar(
-      {Key? key,
-      this.title,
-      this.actions,
-      this.tabController,
-      this.tabs,
-      this.isTabScrollabel = true,
-      this.child,
-      this.leading,
-      this.height})
-      : super(key: key);
+  const PrimaryAppbar({
+    Key? key,
+    this.title,
+    this.actions,
+    this.tabController,
+    this.tabs,
+    this.isTabScrollabel = true,
+    this.child,
+    this.leading,
+    this.height,
+  }) : super(key: key);
   final String? title;
   final List<Widget>? actions;
   final TabController? tabController;

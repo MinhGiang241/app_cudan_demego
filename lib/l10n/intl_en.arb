@@ -104,5 +104,11 @@
   "housework": "Housework",
   "event": "Event",
   "residence_news": "Residence news",
-  "event_msg": "Follow events by date/month"
+  "event_msg": "Follow events by date/month",
+  "reflection": "Refection",
+  "feedback": "Feedback",
+  "complain": "Complain",
+  "forum": "Forum",
+  "message": "Message",
+  "account": "Account"
 }

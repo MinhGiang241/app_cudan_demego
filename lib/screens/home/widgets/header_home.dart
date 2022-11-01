@@ -66,20 +66,20 @@ class HeaderHome extends StatelessWidget {
                                       .watch<AuthPrv>()
                                       .selectedApartment
                                       ?.name ??
-                                  "",
+                                  "Test",
                               style: txtLinkMedium()),
                           if ((context
                                       .watch<AuthPrv>()
                                       .selectedApartment
                                       ?.detail ??
-                                  "")
+                                  "Test")
                               .isNotEmpty)
                             Text(
                                 context
                                         .watch<AuthPrv>()
                                         .selectedApartment
                                         ?.detail ??
-                                    "",
+                                    "Test",
                                 style:
                                     txtBodySmallRegular(color: grayScaleColor2))
                         ]),

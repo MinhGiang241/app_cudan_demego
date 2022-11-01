@@ -5,8 +5,8 @@ import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import 'home_title_widget.dart';
 
-class ServicesHome extends StatelessWidget {
-  const ServicesHome({
+class ConvinientServiceHome extends StatelessWidget {
+  const ConvinientServiceHome({
     Key? key,
   }) : super(key: key);
 
@@ -15,11 +15,11 @@ class ServicesHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).services,
       onTapShowAll: () {
-        // Utils.pushScreen(context, const ListServicesScreen());
+        // Utils.pushScreen(context, const BillsScreen());
       },
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: 85,
@@ -32,24 +32,24 @@ class ServicesHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: primaryColorBase.withOpacity(0.25),
+                          color: yellowColor.withOpacity(0.25),
                           offset: const Offset(0, 16))
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.car,
+                    icons: PrimaryIcons.shopping_cart,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.blue,
+                    gradients: PrimaryIconGradient.yellow,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const ParkingCardListScreen());
+                      // Utils.pushScreen(context, const BillsScreen());
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).parking_card,
+                Text(S.of(context).shopping_represent,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],
@@ -66,24 +66,24 @@ class ServicesHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: pinkColor.withOpacity(0.25),
+                          color: turquoiseColor.withOpacity(0.25),
                           offset: const Offset(0, 16))
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.elevator,
+                    icons: PrimaryIcons.store_front,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.pink,
+                    gradients: PrimaryIconGradient.turquoise,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const ResidentCardListScreen());
+                      // Utils.pushScreen(context, const BillsScreen());
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).elevator_card,
+                Text(S.of(context).shopping_online,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],
@@ -100,24 +100,24 @@ class ServicesHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: purpleColor.withOpacity(0.25),
+                          color: greenColor.withOpacity(0.25),
                           offset: const Offset(0, 16))
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.gym,
+                    icons: PrimaryIcons.housework,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.purple,
+                    gradients: PrimaryIconGradient.green,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const ServicesTrackingScreen());
+                      // Utils.pushScreen(context, const BillsScreen());
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).gym_card,
+                Text(S.of(context).housework,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],

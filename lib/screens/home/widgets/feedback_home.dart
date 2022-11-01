@@ -5,15 +5,15 @@ import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import 'home_title_widget.dart';
 
-class ServicesHome extends StatelessWidget {
-  const ServicesHome({
+class FeedbackHome extends StatelessWidget {
+  const FeedbackHome({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return HomeTitleWidget(
-      title: S.of(context).services,
+      title: S.of(context).reflection,
       onTapShowAll: () {
         // Utils.pushScreen(context, const ListServicesScreen());
       },
@@ -37,7 +37,7 @@ class ServicesHome extends StatelessWidget {
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.car,
+                    icons: PrimaryIcons.feedback,
                     style: PrimaryIconStyle.gradient,
                     gradients: PrimaryIconGradient.blue,
                     color: Colors.white,
@@ -49,9 +49,11 @@ class ServicesHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).parking_card,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).feedback,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -66,14 +68,14 @@ class ServicesHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: pinkColor.withOpacity(0.25),
+                          color: yellowColor.withOpacity(0.25),
                           offset: const Offset(0, 16))
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.elevator,
+                    icons: PrimaryIcons.mail,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.pink,
+                    gradients: PrimaryIconGradient.yellow,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
@@ -83,46 +85,13 @@ class ServicesHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).elevator_card,
+                Text(S.of(context).complain,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],
             ),
           ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: purpleColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
-                    ],
-                  ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.gym,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.purple,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      // Utils.pushScreen(context, const ServicesTrackingScreen());
-                    },
-                  ),
-                ),
-                vpad(12),
-                Text(S.of(context).gym_card,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
-              ],
-            ),
-          ),
+          hpad(85)
         ],
       ),
     );

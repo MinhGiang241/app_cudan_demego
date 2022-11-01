@@ -14,8 +14,10 @@ import '../auth/prv/auth_prv.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
 import 'widgets/choose_apartment_bottom_sheet.dart';
+import 'widgets/convinent_service_home.dart';
 import 'widgets/event_home.dart';
 import 'widgets/events_widget.dart';
+import 'widgets/feedback_home.dart';
 import 'widgets/header_home.dart';
 import 'widgets/header_title.dart';
 import 'widgets/home_title_widget.dart';
@@ -71,67 +73,48 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.center,
           children: [
             Scaffold(
-              body: RepaintBoundary(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      vpad(16 + MediaQuery.of(context).padding.top),
-                      const HeaderTitle(),
-                      vpad(30),
-                      const HeaderHome(),
-                      vpad(30),
-                      const ProjectInfoHome(),
-                      vpad(30),
-                      const BillsHome(),
-                      vpad(30),
-                      const ServicesHome(),
-                      vpad(30),
-                      const EventsHome(),
-                      vpad(24),
-                      const NewsHome(),
-                      vpad(kBottomNavigationBarHeight + 50)
-                    ],
+                body: RepaintBoundary(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      children: [
+                        vpad(16 + MediaQuery.of(context).padding.top),
+                        const HeaderTitle(),
+                        vpad(30),
+                        const HeaderHome(),
+                        vpad(30),
+                        const ProjectInfoHome(),
+                        vpad(30),
+                        const BillsHome(),
+                        vpad(30),
+                        const ServicesHome(),
+                        vpad(30),
+                        const ConvinientServiceHome(),
+                        vpad(30),
+                        const FeedbackHome(),
+                        vpad(30),
+                        const EventsHome(),
+                        vpad(24),
+                        const NewsHome(),
+                        vpad(kBottomNavigationBarHeight + 50)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: Icon(Icons.phone_sharp,
-                    size: 40,
-                    color: primaryColorBase,
-                    shadows: [
-                      Shadow(
-                          offset: const Offset(-2, 2),
-                          color: Colors.black.withOpacity(0.5),
-                          blurRadius: 10.0),
-                    ]),
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.business),
-                    label: 'Business',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.school),
-                    label: 'School',
-                  ),
-                ],
-                currentIndex: _selectedIndex,
-                selectedItemColor: Colors.amber[800],
-                onTap: _onItemTapped,
-              ),
-            ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {},
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.phone_sharp,
+                      size: 40,
+                      color: primaryColorBase,
+                      shadows: [
+                        Shadow(
+                            offset: const Offset(-2, 2),
+                            color: Colors.black.withOpacity(0.5),
+                            blurRadius: 10.0),
+                      ]),
+                ),
+                bottomNavigationBar: _bottomNavigationBar),
             if (isLoading)
               const Center(
                   child: PrimaryCard(
@@ -142,6 +125,57 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         );
       },
+    );
+  }
+
+  Widget get _bottomNavigationBar {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10)
+        ],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Colors.white,
+          ),
+          child: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home),
+                label: S.of(context).home,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.article),
+                label: S.of(context).forum,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.chat_bubble),
+                label: S.of(context).message,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.account_circle),
+                label: S.of(context).account,
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: primaryColorBase,
+            unselectedItemColor: grayScaleColorBase.withOpacity(0.58),
+            onTap: _onItemTapped,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+          ),
+        ),
+      ),
     );
   }
 }

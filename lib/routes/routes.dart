@@ -10,6 +10,7 @@ import '../screens/auth/prv/sign_in_prv.dart';
 import '../screens/auth/prv/sign_up_prv.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
+import '../screens/bills/bills_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
@@ -61,6 +62,13 @@ class AppRoutes {
           builder: (_) => ChangeNotifierProvider(
               create: (context) => AuthPrv()..start(),
               builder: (context, child) => ApartmentSeletionScreen()),
+        );
+      case BillsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => ChangeNotifierProvider(
+              create: (context) => AuthPrv()..start(),
+              builder: (context, child) => const BillsScreen()),
         );
       default:
         return MaterialPageRoute(

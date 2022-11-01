@@ -1109,6 +1109,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Refection`
+  String get reflection {
+    return Intl.message(
+      'Refection',
+      name: 'reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feedback`
+  String get feedback {
+    return Intl.message(
+      'Feedback',
+      name: 'feedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complain`
+  String get complain {
+    return Intl.message(
+      'Complain',
+      name: 'complain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forum`
+  String get forum {
+    return Intl.message(
+      'Forum',
+      name: 'forum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get message {
+    return Intl.message(
+      'Message',
+      name: 'message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

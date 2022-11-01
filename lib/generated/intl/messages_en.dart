@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
@@ -38,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
@@ -75,9 +77,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
+        "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "forum": MessageLookupByLibrary.simpleMessage("Forum"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym card"),
         "have_acc":
@@ -91,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "message": MessageLookupByLibrary.simpleMessage("Message"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
         "news": MessageLookupByLibrary.simpleMessage("News"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -109,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
+        "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
