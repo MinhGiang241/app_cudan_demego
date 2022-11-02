@@ -1169,6 +1169,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Register service history`
+  String get his_reg_service {
+    return Intl.message(
+      'Register service history',
+      name: 'his_reg_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

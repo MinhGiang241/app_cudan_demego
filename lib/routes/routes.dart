@@ -12,6 +12,9 @@ import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
 import '../screens/home/home_screen.dart';
+import '../screens/services/gym_card/add_gym_card_screen.dart';
+import '../screens/services/gym_card/gym_card_list_screen.dart';
+import '../screens/services/service_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -44,11 +47,6 @@ class AppRoutes {
           builder: (_) => const PhoneNumForgotPassScreen(),
         );
 
-      // case ResetPassScreen.routeName:
-      //   return MaterialPageRoute(
-      //     settings: routeSetting,
-      //     builder: (_) => const ResetPassScreen(),
-      //   );
       case HomeScreen.routeName:
         return MaterialPageRoute(
             settings: routeSetting,
@@ -59,16 +57,27 @@ class AppRoutes {
       case ApartmentSeletionScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => ChangeNotifierProvider(
-              create: (context) => AuthPrv()..start(),
-              builder: (context, child) => ApartmentSeletionScreen()),
+          builder: (_) => const ApartmentSeletionScreen(),
         );
       case BillsScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => ChangeNotifierProvider(
-              create: (context) => AuthPrv()..start(),
-              builder: (context, child) => const BillsScreen()),
+          builder: (_) => const BillsScreen(),
+        );
+      case ServiceScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ServiceScreen(),
+        );
+      case GymCardListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const GymCardListScreen(),
+        );
+      case AddGymCardScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const AddGymCardScreen(),
         );
       default:
         return MaterialPageRoute(

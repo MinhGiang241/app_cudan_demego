@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../services/gym_card/gym_card_list_screen.dart';
+import '../../services/service_screen.dart';
 import 'home_title_widget.dart';
 
 class ServicesHome extends StatelessWidget {
@@ -15,7 +17,7 @@ class ServicesHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).services,
       onTapShowAll: () {
-        // Utils.pushScreen(context, const ListServicesScreen());
+        Navigator.pushNamed(context, ServiceScreen.routeName);
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,6 +114,8 @@ class ServicesHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(GymCardListScreen.routeName);
                       // Utils.pushScreen(context, const ServicesTrackingScreen());
                     },
                   ),

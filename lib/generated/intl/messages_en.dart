@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
+        "his_reg_service":
+            MessageLookupByLibrary.simpleMessage("Register service history"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
@@ -139,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),

@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,9 @@ class ResetPassScreen extends StatelessWidget {
         create: (context) => ResetPassPrv(phone, token),
         builder: (context, snapshot) {
           return PrimaryScreen(
-            appBar: PrimaryAppbar(title: S.of(context).reset_pass),
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+            ),
             body: SafeArea(
               child: Form(
                 key: context.read<ResetPassPrv>().formKey,
@@ -34,6 +37,13 @@ class ResetPassScreen extends StatelessWidget {
                   // padding: const EdgeInsets.all(24),
                   children: [
                     vpad(24),
+                    Center(
+                      child: Text(
+                        S.of(context).reset_pass,
+                        style: txtDisplayMedium(),
+                      ),
+                    ),
+                    vpad(45),
                     PrimaryTextField(
                       controller:
                           context.read<ResetPassPrv>().newPassController,
@@ -83,8 +93,8 @@ class ResetPassScreen extends StatelessWidget {
                                       msg: "S.of(context).update_success"))
                               .then((value) {
                             int count = 3;
-                            Navigator.popUntil(
-                                context, (route) => count-- == 0);
+                            Navigator.popAndPushNamed(
+                                context, SignInScreen.routeName);
                           });
                           await context.read<ResetPassPrv>().resetPass(context);
                         },

@@ -21,8 +21,8 @@
   "confirm_pass": "Nhập lại mật khẩu",
   "can_not_empty": "Không được để trống",
   "terms_services": "Điều khoản dịch vụ",
-  "otp_verify": "Xác thực OTP",
-  "otp_msg": "Chúng tôi đã gửi mã OTP đến Số điện thoại đăng ký của quý khách. Vui lòng nhập mã OTP để thực hiện xác thực.",
+  "otp_verify": "Nhập mã bảo mật",
+  "otp_msg": "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự.",
   "not_get_otp": "Không nhận được OTP?",
   "resend": "Gửi lại",
   "verify": "Xác thực",
@@ -95,7 +95,7 @@
   "water": "Nước",
   "internet": "Internet",
   "services": "Dịch vụ",
-  "parking_card": "Thẻ xe",
+  "parking_card": "Thẻ phương tiện",
   "elevator_card": "Thẻ thang máy",
   "gym_card": "Thẻ Gym",
   "covenient_service": "Tiện ích",
@@ -110,5 +110,7 @@
   "complain": "Khiếu nại",
   "forum": "Diễn đàn",
   "message": "Tin nhắn",
-  "account": "Tài khoản"
+  "account": "Tài khoản",
+  "his_reg_service": "Lịch sử đăng ký dịch vụ",
+  "search": "Tìm kiếm"
 }

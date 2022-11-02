@@ -88,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản ?"),
         "hello": MessageLookupByLibrary.simpleMessage("Xin chào"),
+        "his_reg_service":
+            MessageLookupByLibrary.simpleMessage("Lịch sử đăng ký dịch vụ"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "housework": MessageLookupByLibrary.simpleMessage("Giúp việc"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
@@ -108,9 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
-            "Chúng tôi đã gửi mã OTP đến Số điện thoại đăng ký của quý khách. Vui lòng nhập mã OTP để thực hiện xác thực."),
-        "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
-        "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ xe"),
+            "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
+        "otp_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
+        "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
@@ -140,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9": MessageLookupByLibrary.simpleMessage(
             "Tài khoản chưa được kích hoạt"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "search_aparment": MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),

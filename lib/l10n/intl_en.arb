@@ -110,5 +110,7 @@
   "complain": "Complain",
   "forum": "Forum",
   "message": "Message",
-  "account": "Account"
+  "account": "Account",
+  "his_reg_service": "Register service history",
+  "search": "Search"
 }

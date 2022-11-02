@@ -10,6 +10,7 @@ import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 import '../prv/forgot_pass_prv.dart';
 import '../verify_otp_screen.dart';
+import 'option_send_otp.dart';
 
 class PhoneNumForgotPassScreen extends StatelessWidget {
   const PhoneNumForgotPassScreen({Key? key}) : super(key: key);
@@ -21,7 +22,9 @@ class PhoneNumForgotPassScreen extends StatelessWidget {
         create: (context) => ForgotPassPrv(),
         builder: (context, snapshot) {
           return PrimaryScreen(
-            appBar: PrimaryAppbar(title: S.of(context).forgot_pass),
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+            ),
             body: Form(
               key: context.read<ForgotPassPrv>().formKey,
               child: SafeArea(
@@ -29,6 +32,14 @@ class PhoneNumForgotPassScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   children: [
+                    // vpad(24 + topSafePad(context) + appbarHeight(context)),
+                    Center(
+                      child: Text(
+                        S.of(context).forgot_pass,
+                        style: txtDisplayMedium(),
+                      ),
+                    ),
+                    vpad(45),
                     PrimaryTextField(
                       controller: context.read<ForgotPassPrv>().phoneController,
                       label: S.of(context).phone_num,
@@ -48,13 +59,14 @@ class PhoneNumForgotPassScreen extends StatelessWidget {
                     PrimaryButton(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
-                          Utils.pushScreen(
-                              context,
-                              VerifyOTPScreen(
-                                  phone: '',
-                                  name: "",
-                                  pass: "",
-                                  isForgotPass: true));
+                          Utils.pushScreen(context, (const OptionSendOtp()));
+                          // Utils.pushScreen(
+                          //     context,
+                          //     VerifyOTPScreen(
+                          //         phone: '',
+                          //         name: "",
+                          //         pass: "",
+                          //         isForgotPass: true));
                           // await context
                           //     .read<ForgotPassPrv>()
                           //     .sendVerify(context);

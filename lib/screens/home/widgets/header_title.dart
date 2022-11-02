@@ -1,4 +1,6 @@
+import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
 import '../../../constants/constants.dart';
@@ -17,7 +19,9 @@ class HeaderTitle extends StatelessWidget {
         alignment: Alignment.center,
         transform: Matrix4.rotationY(math.pi),
         child: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<AuthPrv>().onSignOut(context);
+          },
           icon: const Icon(Icons.logout),
         ),
       ),

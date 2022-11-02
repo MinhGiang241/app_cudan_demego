@@ -215,6 +215,7 @@ class AuthPrv extends ChangeNotifier {
                       secondaryBackgroundColor: redColor2,
                       onTap: () {
                         Utils.pop(context, true);
+                        Navigator.of(context).pushNamed(SignInScreen.routeName);
                       },
                     ),
                   ),

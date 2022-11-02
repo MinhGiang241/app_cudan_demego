@@ -13,7 +13,7 @@ class ConvinientServiceHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeTitleWidget(
-      title: S.of(context).services,
+      title: S.of(context).covenient_service,
       onTapShowAll: () {
         // Utils.pushScreen(context, const BillsScreen());
       },
