@@ -149,8 +149,8 @@ class CustomDialog extends StatelessWidget {
 class PrimaryDialog extends CustomDialog {
   const PrimaryDialog.success({Key? key, String? msg, Function()? onClose})
       : super(type: DialogType.success, msg: msg, key: key, onClose: onClose);
-  const PrimaryDialog.error({Key? key, String? msg})
-      : super(type: DialogType.error, msg: msg, key: key);
+  const PrimaryDialog.error({Key? key, String? msg, Function()? onClose})
+      : super(type: DialogType.error, msg: msg, key: key, onClose: onClose);
   const PrimaryDialog.errorCode({Key? key, int? code})
       : super(type: DialogType.error, code: code, key: key);
   const PrimaryDialog.custom({

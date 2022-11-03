@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
 
 import '../../models/response_bantinduan_details.dart';
@@ -19,22 +20,30 @@ import '../models/response_thecudan_list.dart';
 import 'api_service.dart';
 
 class APITower {
-  static Future getToaNha() async {
+  static Future getToaNha(BuildContext context) async {
     await ApiService.shared
-        .getApi(path: 'api/queries/paging/getToaNha')
+        .getApi(
+      path: 'api/queries/paging/getToaNha',
+    )
         .then((value) {
       // log(jsonEncode(value.toString()));
     });
   }
 
-  static Future<ResponseNewsDetails> getNewsDetails(String id) async {
-    final data = await ApiService.shared.getApi(path: 'api/content/$id');
+  static Future<ResponseNewsDetails> getNewsDetails(
+      BuildContext context, String id) async {
+    final data = await ApiService.shared.getApi(
+      path: 'api/content/$id',
+    );
     // print(data);
     return ResponseNewsDetails.fromJson(data);
   }
 
   static Future<ResponseBanTinDuAnList> getBanTinDuAn(
-      {String? tag, int? pageSize, int? currentPage}) async {
+      {required BuildContext context,
+      String? tag,
+      int? pageSize,
+      int? currentPage}) async {
     var params = <String, dynamic>{};
 
     var value = <String, dynamic>{};
@@ -101,11 +110,12 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options);
+    final data = await ApiService.shared.graphqlQuery(options, context);
     return ResponseBanTinDuAnList.fromJson(data);
   }
 
-  static Future<ResponseComments> getComments({required String id}) async {
+  static Future<ResponseComments> getComments(
+      {required String id, required BuildContext context}) async {
     var params = <String, dynamic>{};
 
     params['parameters'] = "{ParentId: '$id'}";
@@ -152,14 +162,15 @@ class APITower {
     final QueryOptions options = QueryOptions(
         document: gql(queries),
         variables: {"parameters": "${params['parameters']}"});
-    final data = await ApiService.shared.graphqlQuery(
-      options,
-    );
+    final data = await ApiService.shared.graphqlQuery(options, context);
     return ResponseComments.fromJson(data);
   }
 
-  static Future<ResponseBanTinDuAnDetails> getBTDADetails(String id) async {
-    final data = await ApiService.shared.getApi(path: 'api/content/$id');
+  static Future<ResponseBanTinDuAnDetails> getBTDADetails(
+      String id, BuildContext context) async {
+    final data = await ApiService.shared.getApi(
+      path: 'api/content/$id',
+    );
     // print(data);
     return ResponseBanTinDuAnDetails.fromJson(data);
   }
@@ -178,13 +189,15 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/GetTheXe', params: params.isEmpty ? null : params);
+      path: 'api/queries/GetTheXe',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponseParkingCardsList.fromJson(data);
   }
 
   static Future<ResponsePetList> getPetsList(
-      {int? pageSize, int? currentPage}) async {
+      {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -197,14 +210,15 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/GetListVatNuoi',
-        params: params.isEmpty ? null : params);
+      path: 'api/queries/GetListVatNuoi',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponsePetList.fromJson(data);
   }
 
   static Future<ResponseConstructionProfileList> getConstructionList(
-      {int? pageSize, int? currentPage}) async {
+      {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -217,14 +231,15 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/paging/GetListDangKyThiCong',
-        params: params.isEmpty ? null : params);
+      path: 'api/queries/paging/GetListDangKyThiCong',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponseConstructionProfileList.fromJson(data);
   }
 
   static Future<ResponseTheCuDanList> getTheCuDan(
-      {int? pageSize, int? currentPage}) async {
+      {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -237,14 +252,15 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/GetTheCuDan',
-        params: params.isEmpty ? null : params);
+      path: 'api/queries/GetTheCuDan',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponseTheCuDanList.fromJson(data);
   }
 
   static Future<ResponseParcelList> getParcelList(
-      {int? pageSize, int? currentPage}) async {
+      {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -257,13 +273,15 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/GetBuuPham', params: params.isEmpty ? null : params);
+      path: 'api/queries/GetBuuPham',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponseParcelList.fromJson(data);
   }
 
   static Future<ResponseLostAndFoundList> getLostAndFoundList(
-      {int? pageSize, int? currentPage}) async {
+      {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -276,13 +294,14 @@ class APITower {
       params['parameters'] = value;
     }
     final data = await ApiService.shared.getApi(
-        path: 'api/queries/GetAllLostAndFound',
-        params: params.isEmpty ? null : params);
+      path: 'api/queries/GetAllLostAndFound',
+      params: params.isEmpty ? null : params,
+    );
     // print(data);
     return ResponseLostAndFoundList.fromJson(data);
   }
 
-  static Future<ResponseApartment> getApartments() async {
+  static Future<ResponseApartment> getApartments(BuildContext context) async {
     final data =
         await ApiService.shared.getApi(path: 'api/mobile/getAllApartment');
     // print(data);
@@ -290,7 +309,7 @@ class APITower {
   }
 
   static Future<ResponseDanhMucBanTin> getDanhMucBanTin(
-      {required String alias}) async {
+      {required String alias, required BuildContext context}) async {
     var params = <String, dynamic>{};
 
     var value = <String, dynamic>{};
@@ -323,12 +342,15 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options);
+    final data = await ApiService.shared.graphqlQuery(options, context);
     return ResponseDanhMucBanTin.fromJson(data);
   }
 
   static Future<ResponseNewsList> getNewsList(
-      {String? tag, int? pageSize, int? currentPage}) async {
+      {String? tag,
+      int? pageSize,
+      int? currentPage,
+      required BuildContext context}) async {
     var params = <String, dynamic>{};
 
     var value = <String, dynamic>{};
@@ -396,12 +418,15 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options);
+    final data = await ApiService.shared.graphqlQuery(options, context);
     return ResponseNewsList.fromJson(data);
   }
 
   static Future<ResponseForums> getForums(
-      {required bool published, int? pageSize, int? currentPage}) async {
+      {required bool published,
+      int? pageSize,
+      int? currentPage,
+      required BuildContext context}) async {
     var params = <String, dynamic>{};
 
     var value = <String, dynamic>{};
@@ -463,36 +488,37 @@ class APITower {
     final QueryOptions options = QueryOptions(
         document: gql(queries),
         variables: {"parameters": "${params['parameters']}"});
-    final data = await ApiService.shared.graphqlQuery(options);
+    final data = await ApiService.shared.graphqlQuery(options, context);
 
     return ResponseForums.fromJson(data);
   }
 
-  static Future<ResponseLike> likeBanTin({
-    required String idBanTin,
-    required String idUser,
-  }) async {
+  static Future<ResponseLike> likeBanTin(
+      {required String idBanTin,
+      required String idUser,
+      required BuildContext context}) async {
     final body = {
       "ContentType": "LikeBanTin",
       "Owner": idUser,
       "ContainedPart": {"ListContentItemId": idBanTin}
     };
-    final data =
-        await ApiService.shared.postApi(path: 'api/content', data: body);
+    final data = await ApiService.shared
+        .postApi(path: 'api/content', data: body, context: context);
     // print(data);
     return ResponseLike.fromJson(data);
   }
 
-  static Future<ResponseLike> unlikeBantin({
-    required String id,
-  }) async {
-    final data = await ApiService.shared.deleteApi(path: 'api/content/$id');
+  static Future<ResponseLike> unlikeBantin(
+      {required String id, required BuildContext context}) async {
+    final data = await ApiService.shared
+        .deleteApi(path: 'api/content/$id', context: context);
     // print(data);
     return ResponseLike.fromJson(data);
   }
 
   static Future<ResponseCreateComment> comment(
-      {required String idBanTin,
+      {required BuildContext context,
+      required String idBanTin,
       required String idUser,
       required String content}) async {
     final body = {
@@ -506,8 +532,8 @@ class APITower {
         "BanTinId": {"Text": idBanTin}
       }
     };
-    final data =
-        await ApiService.shared.postApi(path: 'api/content', data: body);
+    final data = await ApiService.shared
+        .postApi(path: 'api/content', data: body, context: context);
     // print(data);
     return ResponseCreateComment.fromJson(data);
   }

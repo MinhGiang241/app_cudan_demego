@@ -105,12 +105,15 @@
   "event": "Sự kiện",
   "residence_news": "Bảng tin cư dân",
   "event_msg": "Theo dõi các sự kiện từng ngày/ tháng",
-  "refection": "Góc phản ánh",
+  "reflection": "Góc phản ánh",
   "feedback": "Góp ý",
   "complain": "Khiếu nại",
   "forum": "Diễn đàn",
   "message": "Tin nhắn",
   "account": "Tài khoản",
   "his_reg_service": "Lịch sử đăng ký dịch vụ",
-  "search": "Tìm kiếm"
+  "search": "Tìm kiếm",
+  "res_card": "Thẻ cư dân",
+  "pet": "Thú nuôi",
+  "pool": "Bể bơi"
 }

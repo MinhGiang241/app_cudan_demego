@@ -17,19 +17,23 @@ class HomePrv extends ChangeNotifier {
   List<NewsListItems>? newsList;
   List<BTDAItems>? btdaList;
   bool isLoading = false;
+  late BuildContext context;
 
-  HomePrv() {
+  HomePrv(ctx) {
+    context = ctx;
     _initial();
   }
 
   Future _initial() async {
-    await APITower.getBanTinDuAn(pageSize: 3, currentPage: 1).then((value) {
+    await APITower.getBanTinDuAn(pageSize: 3, currentPage: 1, context: context)
+        .then((value) {
       if (value.status == null) {
         btdaList = value.getBanTinDuAn?.items;
         notifyListeners();
       }
     });
-    await APITower.getNewsList(pageSize: 3, currentPage: 1).then((value) {
+    await APITower.getNewsList(pageSize: 3, currentPage: 1, context: context)
+        .then((value) {
       if (value.status == null) {
         newsList = value.getAllBanTin?.items;
         notifyListeners();
@@ -44,7 +48,9 @@ class HomePrv extends ChangeNotifier {
         .contentItems!
         .any((element) => element.owner == userId)) {
       APITower.likeBanTin(
-              idBanTin: newsList![index].contentItemId!, idUser: userId)
+              idBanTin: newsList![index].contentItemId!,
+              idUser: userId,
+              context: context)
           .then((value) {
         if (kDebugMode) {
           print("like");
@@ -61,7 +67,7 @@ class HomePrv extends ChangeNotifier {
               .contentItemId ??
           "";
 
-      APITower.unlikeBantin(id: id).then((value) {
+      APITower.unlikeBantin(id: id, context: context).then((value) {
         if (kDebugMode) {
           print("unlike");
         }
@@ -81,7 +87,9 @@ class HomePrv extends ChangeNotifier {
         .contentItems!
         .any((element) => element.owner == userId)) {
       APITower.likeBanTin(
-              idBanTin: btdaList![index].contentItemId!, idUser: userId)
+              idBanTin: btdaList![index].contentItemId!,
+              idUser: userId,
+              context: context)
           .then((value) {
         if (kDebugMode) {
           print("like");
@@ -98,7 +106,7 @@ class HomePrv extends ChangeNotifier {
               .contentItemId ??
           "";
 
-      APITower.unlikeBantin(id: id).then((value) {
+      APITower.unlikeBantin(id: id, context: context).then((value) {
         if (kDebugMode) {
           print("unlike");
         }
@@ -115,13 +123,15 @@ class HomePrv extends ChangeNotifier {
       BuildContext context, NewsListItems newsListItems, int index) async {
     isLoading = true;
     notifyListeners();
-    await APITower.getDanhMucBanTin(alias: "danh-muc-ban-tin")
+    await APITower.getDanhMucBanTin(alias: "danh-muc-ban-tin", context: context)
         .then((danhmuc) async {
       isLoading = false;
       notifyListeners();
       if (danhmuc.status == null) {
-        await APITower.getNewsDetails(newsListItems.contentItemId!)
-            .then((value) {
+        await APITower.getNewsDetails(
+          context,
+          newsListItems.contentItemId!,
+        ).then((value) {
           final likeNum = double.parse(
                   (value.privateBanTinPart?.soLuongLike?.value ?? 0).toString())
               .round();
@@ -186,12 +196,13 @@ class HomePrv extends ChangeNotifier {
   toBTDADetails(BuildContext context, BTDAItems btdaItems, int index) async {
     isLoading = true;
     notifyListeners();
-    await APITower.getDanhMucBanTin(alias: "danh-muc-du-an")
+    await APITower.getDanhMucBanTin(alias: "danh-muc-du-an", context: context)
         .then((danhmuc) async {
       isLoading = false;
       notifyListeners();
       if (danhmuc.status == null) {
-        await APITower.getBTDADetails(btdaItems.contentItemId!).then((value) {
+        await APITower.getBTDADetails(btdaItems.contentItemId!, context)
+            .then((value) {
           final likeNum = double.parse(
                   (value.privateBanTinPart?.soLuongLike?.value ?? 0).toString())
               .round();

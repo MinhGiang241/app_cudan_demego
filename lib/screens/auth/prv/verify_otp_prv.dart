@@ -58,7 +58,8 @@ class VerifyOTPPrv extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       if (isForgotPass) {
-        await APIAuth.generateToken(phoneNum: user, otp: otpController.text)
+        await APIAuth.generateToken(
+                phoneNum: user, otp: otpController.text, context: context)
             .then((value) {
           isLoading = false;
           notifyListeners();

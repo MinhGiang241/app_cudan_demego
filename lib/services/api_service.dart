@@ -4,6 +4,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_cudan/utils/utils.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:flutter/cupertino.dart';
+
 import '../constants/constants.dart';
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -11,6 +15,8 @@ import 'package:graphql/client.dart';
 
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
+
+import '../screens/auth/sign_in_screen.dart';
 
 typedef OnSendProgress = Function(int, int);
 typedef ErrorHandle = Function();
@@ -31,25 +37,27 @@ class ApiService {
   final _graphqlLink = HttpLink(ApiConstants.baseURL);
 
   Future<oauth2.Client?> getClient(
-      {required String username,
+      {required BuildContext context,
+      required String username,
       required String password,
+      bool remember = false,
       ErrorHandle? onError}) async {
     userName = username;
     passWord = password;
     final client = await getExistClient();
     if (client != null) {
       if (client.credentials.isExpired) {
-        return await _getCre(username, password, onError);
+        return await _getCre(username, password, onError, remember);
       } else {
         return client;
       }
     } else {
-      return await _getCre(username, password, onError);
+      return await _getCre(username, password, onError, remember);
     }
   }
 
   Future<oauth2.Client?> _getCre(
-      String username, String password, ErrorHandle? onError) async {
+      String username, String password, ErrorHandle? onError, remember) async {
     final authorizationEndpoint = Uri.parse(tokenEndpointUrl);
     try {
       final cli = await oauth2.resourceOwnerPasswordGrant(
@@ -62,7 +70,10 @@ class ApiService {
       );
       final path = await getApplicationDocumentsDirectory();
       final credentialsFile = File('${path.path}/credential.json');
-      await credentialsFile.writeAsString(cli.credentials.toJson());
+      if (remember) {
+        await credentialsFile.writeAsString(cli.credentials.toJson());
+      }
+
       return cli;
     } catch (e) {
       print(e);
@@ -95,29 +106,34 @@ class ApiService {
     }
   }
 
-  Future<oauth2.Client> refresh(oauth2.Client client) async {
+  Future<oauth2.Client> refresh(oauth2.Client client, remember) async {
     final cli = await client.refreshCredentials();
     final path = await getApplicationDocumentsDirectory();
     final credentialsFile = File('${path.path}/credential.json');
-    await credentialsFile.writeAsString(client.credentials.toJson());
+    if (remember) {
+      await credentialsFile.writeAsString(client.credentials.toJson());
+    }
+
     return cli;
   }
 
-  Future<bool> isExpired() async {
+  Future<bool> isExpired(BuildContext context) async {
     final client = await getExistClient();
     return client!.credentials.isExpired;
   }
 
-  Future<String> getToken() async {
+  Future<String> getToken(BuildContext context) async {
     final client = await getExistClient();
     return client!.credentials.accessToken;
   }
 
   Future<Map<String, dynamic>> postApi(
       {dynamic data,
+      required BuildContext context,
       required String path,
       bool useToken = true,
       ErrorHandle? onError,
+      bool remember = false,
       OnSendProgress? onSendProgress}) async {
     Options? options;
     if (useToken) {
@@ -128,7 +144,7 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client);
+          client = await refresh(client, remember);
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -173,6 +189,7 @@ class ApiService {
   Future<Map<String, dynamic>> getApi(
       {required String path,
       bool useToken = true,
+      bool remember = false,
       Map<String, dynamic>? params,
       ErrorHandle? onError}) async {
     Options? options;
@@ -184,7 +201,7 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client);
+          client = await refresh(client, remember);
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -229,7 +246,9 @@ class ApiService {
   Future<Map<String, dynamic>> deleteApi(
       {dynamic data,
       required String path,
+      required BuildContext context,
       bool useToken = true,
+      bool remember = false,
       ErrorHandle? onError,
       OnSendProgress? onSendProgress}) async {
     Options? options;
@@ -241,7 +260,7 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client);
+          client = await refresh(client, remember);
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -283,7 +302,10 @@ class ApiService {
     }
   }
 
-  Future<GraphQLClient> getClientGraphQL({ErrorHandle? onError}) async {
+  Future<GraphQLClient> getClientGraphQL(
+      {ErrorHandle? onError,
+      required BuildContext context,
+      bool remember = false}) async {
     late AuthLink authLink;
     var client = await getExistClient();
     if (client == null) {
@@ -292,7 +314,7 @@ class ApiService {
       //print(client.credentials.expiration);
       if (client.credentials.isExpired) {
         // print("EXPired");
-        client = await refresh(client);
+        client = await refresh(client, remember);
         log(client.credentials.accessToken);
         authLink = AuthLink(
           getToken: () async => 'Bearer ${client?.credentials.accessToken}',
@@ -315,8 +337,9 @@ class ApiService {
     return graphQLClient;
   }
 
-  Future<Map<String, dynamic>> graphqlQuery(QueryOptions options) async {
-    final cl = await getClientGraphQL();
+  Future<Map<String, dynamic>> graphqlQuery(
+      QueryOptions options, BuildContext context) async {
+    final cl = await getClientGraphQL(context: context);
     try {
       final result = await cl.query(options);
       if (result.data == null) {
@@ -331,9 +354,10 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> mutationhqlQuery(MutationOptions options) async {
+  Future<Map<String, dynamic>> mutationhqlQuery(
+      MutationOptions options, BuildContext context) async {
     try {
-      final cl = await getClientGraphQL();
+      final cl = await getClientGraphQL(context: context);
       final result = await cl.mutate(options);
 
       if (result.data == null) {

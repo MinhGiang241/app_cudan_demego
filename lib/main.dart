@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => AuthPrv()..start(),
+          create: (context) => AuthPrv()..start(context),
         ),
         ChangeNotifierProvider(create: (context) => LangPrv(lang))
       ],

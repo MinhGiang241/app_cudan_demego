@@ -73,6 +73,7 @@ class EditInfoProvider extends ChangeNotifier {
     if (avatar != null) {
       //final length = await avatar!.length();
       await APIAuth.uploadImage(
+              context: context,
               files: [avatar!],
               onSendProgress: (a, b) {
                 // print(a / b);
@@ -82,6 +83,7 @@ class EditInfoProvider extends ChangeNotifier {
       });
     }
     await APIAuth.updateUserInfo(
+            context: context,
             avatarLink: link,
             birthday: date,
             cmnd: idNumController.text,

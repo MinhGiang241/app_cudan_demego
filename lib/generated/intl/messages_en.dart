@@ -114,10 +114,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
+        "pet": MessageLookupByLibrary.simpleMessage("Pet"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "residence_news":

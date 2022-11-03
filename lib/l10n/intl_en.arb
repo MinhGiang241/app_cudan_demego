@@ -112,5 +112,8 @@
   "message": "Message",
   "account": "Account",
   "his_reg_service": "Register service history",
-  "search": "Search"
+  "search": "Search",
+  "res_card": "Residence card",
+  "pet": "Pet",
+  "pool": "Pool"
 }

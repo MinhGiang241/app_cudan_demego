@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:app_cudan/screens/auth/prv/sign_in_prv.dart';
 import 'package:app_cudan/screens/auth/sign_up_screen.dart';
+import 'package:app_cudan/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,12 @@ class _SignInScreenState extends State<SignInScreen> {
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),
     //   builder: (context, state) {
     return PrimaryScreen(
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: BackButton(
+            onPressed: () => Navigator.pushReplacementNamed(
+                context, SplashScreen.routeName)),
+      ),
       body: Form(
         key: context.read<SingInPrv>().formKey,
         child: ListView(
@@ -103,11 +109,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: 22.0,
                               height: 22.0,
                               child: Checkbox(
-                                value: context.read<SingInPrv>().rememer_acc,
+                                value: context.read<AuthPrv>().remember,
                                 onChanged: (_) {
                                   setState(() {
-                                    context.read<SingInPrv>().rememer_acc =
-                                        !context.read<SingInPrv>().rememer_acc;
+                                    context.read<AuthPrv>().remember =
+                                        !context.read<AuthPrv>().remember;
                                   });
                                 },
                               ),
@@ -137,6 +143,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       onTap: () async {
                         FocusScope.of(context).unfocus();
                         await context.read<SingInPrv>().signIn(context);
+
                         // Navigator.pushNamed(
                         //     context, ApartmentSeletionScreen.routeName);
                       },

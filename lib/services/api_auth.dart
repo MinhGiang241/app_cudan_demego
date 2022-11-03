@@ -2,6 +2,7 @@ import 'dart:io';
 
 // import 'package:graphql/client.dart';
 
+import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
 
 import '../constants/api_constant.dart';
@@ -14,12 +15,19 @@ import '../services/api_service.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 class APIAuth {
-  static Future<oauth2.Client?> signIn(
-      {required String username,
-      required String password,
-      ErrorHandle? onError}) async {
-    return await ApiService.shared
-        .getClient(username: username, password: password, onError: onError);
+  static Future<oauth2.Client?> signIn({
+    required BuildContext context,
+    required String username,
+    required String password,
+    ErrorHandle? onError,
+    bool remember = false,
+  }) async {
+    return await ApiService.shared.getClient(
+        username: username,
+        password: password,
+        onError: onError,
+        context: context,
+        remember: remember);
   }
 
   // static Future<ResponseRegister> createAccount(
@@ -42,21 +50,26 @@ class APIAuth {
   // }
 
   static Future<ResponseRegister> verifyOTP({
+    required BuildContext context,
     required String phoneNum,
     required String otp,
   }) async {
     final body = {"phoneNumber": phoneNum, "Otp": otp};
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/verifyOtp', useToken: false, data: body);
+    final data = await ApiService.shared.postApi(
+        path: 'api/mobile/verifyOtp',
+        useToken: false,
+        data: body,
+        context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
-  static Future<void> signOut({ErrorHandle? onError}) async {
+  static Future<void> signOut(
+      {ErrorHandle? onError, required BuildContext context}) async {
     return await ApiService.shared.deleteCre();
   }
 
-  static Future<ResponseUser> getUserInfo() async {
+  static Future<ResponseUser> getUserInfo(BuildContext context) async {
     final data = await ApiService.shared.getApi(
       path: 'api/mobile/userinfo',
     );
@@ -65,7 +78,9 @@ class APIAuth {
   }
 
   static Future<ResponseFileUpload> uploadImage(
-      {required List<File> files, OnSendProgress? onSendProgress}) async {
+      {required List<File> files,
+      OnSendProgress? onSendProgress,
+      required BuildContext context}) async {
     final multipartFiles = <MultipartFile>[];
     for (var i = 0; i < files.length; i++) {
       final mpf = await MultipartFile.fromFile(files[i].path);
@@ -74,14 +89,18 @@ class APIAuth {
 
     final map = {"files": multipartFiles};
     final body = FormData.fromMap(map);
-    final data = await ApiService.shared
-        .postApi(path: 'api/media', data: body, onSendProgress: onSendProgress);
+    final data = await ApiService.shared.postApi(
+        path: 'api/media',
+        data: body,
+        onSendProgress: onSendProgress,
+        context: context);
     // print(data);
     return ResponseFileUpload.fromJson(data);
   }
 
   static Future<ResponseRegister> updateUserInfo(
-      {String? email,
+      {required BuildContext context,
+      String? email,
       String? userName,
       String? company,
       String? avatarLink,
@@ -103,13 +122,14 @@ class APIAuth {
 
     //print(body);
     final data = await ApiService.shared
-        .postApi(path: 'api/mobile/updateInfo', data: body);
+        .postApi(path: 'api/mobile/updateInfo', data: body, context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
   static Future<ResponseRegister> changePass(
-      {required String phoneNum,
+      {required BuildContext context,
+      required String phoneNum,
       required String oldPass,
       required String newPass}) async {
     final body = {
@@ -117,34 +137,44 @@ class APIAuth {
       "OldPassWord": oldPass,
       "NewPassWord": newPass
     };
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/changePassword', data: body);
+    final data = await ApiService.shared.postApi(
+        path: 'api/mobile/changePassword', data: body, context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
   static Future<ResponseRegister> forgotPass({
     required String phoneNum,
+    required BuildContext context,
   }) async {
     final body = {
       "PhoneNumber": phoneNum,
     };
     final data = await ApiService.shared.postApi(
-        path: 'api/mobile/forgotPassword', useToken: false, data: body);
+        path: 'api/mobile/forgotPassword',
+        useToken: false,
+        data: body,
+        context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
   static Future<ResponseRegister> generateToken(
-      {required String phoneNum, required String otp}) async {
+      {required BuildContext context,
+      required String phoneNum,
+      required String otp}) async {
     final body = {"PhoneNumber": phoneNum, "Otp": otp};
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/generateToken', useToken: false, data: body);
+    final data = await ApiService.shared.postApi(
+        path: 'api/mobile/generateToken',
+        useToken: false,
+        data: body,
+        context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
   static Future<ResponseRegister> resetPass({
+    required BuildContext context,
     required String phoneNum,
     required String token,
     required String newPass,
@@ -156,14 +186,18 @@ class APIAuth {
       "NewPassWord": newPass,
       "ConfirmPassword": confirmPass
     };
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/resetPassword', useToken: false, data: body);
+    final data = await ApiService.shared.postApi(
+        path: 'api/mobile/resetPassword',
+        useToken: false,
+        data: body,
+        context: context);
     // print(data);
     return ResponseRegister.fromJson(data);
   }
 
   static Future<ResponseRegister> createResidentAccount(
-      {required String user,
+      {required BuildContext context,
+      required String user,
       required String name,
       required String email,
       required String passWord,
@@ -190,7 +224,7 @@ class APIAuth {
       },
     );
 
-    final data = await ApiService.shared.mutationhqlQuery(options);
+    final data = await ApiService.shared.mutationhqlQuery(options, context);
     var res = ResponseModule.fromJson(data);
     if (res.response == null) {
       res.error != null ? throw (res.error!) : throw ('');

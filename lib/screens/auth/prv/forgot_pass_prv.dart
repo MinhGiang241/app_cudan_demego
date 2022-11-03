@@ -20,7 +20,8 @@ class ForgotPassPrv extends ChangeNotifier {
       phoneValidate = null;
       isLoading = true;
       notifyListeners();
-      await APIAuth.forgotPass(phoneNum: phoneController.text).then((value) {
+      await APIAuth.forgotPass(phoneNum: phoneController.text, context: context)
+          .then((value) {
         isLoading = false;
         notifyListeners();
         // if (value.status == null) {

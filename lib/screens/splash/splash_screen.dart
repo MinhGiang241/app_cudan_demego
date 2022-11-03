@@ -1,4 +1,7 @@
+import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
+import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
@@ -73,8 +76,15 @@ class SplashScreen extends StatelessWidget {
                                     buttonType: ButtonType.white,
                                     textColor: primaryColor1,
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .pushNamed(SignInScreen.routeName);
+                                      var auth =
+                                          context.read<AuthPrv>().authStatus;
+                                      if (auth == AuthStatus.auth) {
+                                        Navigator.of(context)
+                                            .pushNamed(HomeScreen.routeName);
+                                      } else {
+                                        Navigator.of(context)
+                                            .pushNamed(SignInScreen.routeName);
+                                      }
                                     },
                                   ),
                                   vpad(24),

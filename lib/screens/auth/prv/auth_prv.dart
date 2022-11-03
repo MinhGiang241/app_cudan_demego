@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ import '../../../services/prf_data.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dialog.dart';
+import '../../home/home_screen.dart';
 import '../apartment_selection_screen.dart';
 import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
@@ -30,13 +33,16 @@ class AuthPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
-  Future<void> start() async {
+  bool remember = false;
+
+  Future<void> start(BuildContext context) async {
     await ApiService.shared.getExistClient().then((cre) async {
       if (cre != null) {
         if (cre.credentials.isExpired) {
           authStatus = AuthStatus.unauthen;
-          await ApiService.shared.refresh(cre);
+          await ApiService.shared.refresh(cre, remember);
         }
+
         authStatus = AuthStatus.auth;
 
         // apartments = PrfData.shared.getApartments();
@@ -44,6 +50,7 @@ class AuthPrv extends ChangeNotifier {
         // selectedApartment = PrfData.shared.getFLoorPlan();
 
         // await getUserInfo();
+
       } else {
         authStatus = AuthStatus.unauthen;
       }
@@ -51,8 +58,8 @@ class AuthPrv extends ChangeNotifier {
     });
   }
 
-  Future<void> getUserInfo() async {
-    await APIAuth.getUserInfo().then((value) {
+  Future<void> getUserInfo(BuildContext context) async {
+    await APIAuth.getUserInfo(context).then((value) {
       if (value.status == null) {
         userInfo = value;
         notifyListeners();
@@ -66,8 +73,10 @@ class AuthPrv extends ChangeNotifier {
     notifyListeners();
 
     await APIAuth.signIn(
+        context: context,
         username: account,
         password: pass,
+        remember: remember,
         onError: () {
           Utils.showDialog(
               context: context,
@@ -77,6 +86,7 @@ class AuthPrv extends ChangeNotifier {
               ));
         }).then((value) async {
       if (value != null) {
+        authStatus = AuthStatus.auth;
         Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName);
         // await APITower.getApartments().then((r) {
         //   if (r.status == null) {
@@ -101,6 +111,7 @@ class AuthPrv extends ChangeNotifier {
   Future<void> onCreateAccount(BuildContext context, String user, String name,
       String email, String pass, String cPass) async {
     await APIAuth.createResidentAccount(
+            context: context,
             user: user,
             name: name,
             email: email,
@@ -135,7 +146,8 @@ class AuthPrv extends ChangeNotifier {
     String phone,
     String otp,
   ) async {
-    await APIAuth.verifyOTP(phoneNum: phone, otp: otp).then((value) {
+    await APIAuth.verifyOTP(phoneNum: phone, otp: otp, context: context)
+        .then((value) {
       // if (value.status == null) {
       //   if (value.code == 0) {
       //     Utils.showDialog(
@@ -241,7 +253,7 @@ class AuthPrv extends ChangeNotifier {
         if ((value as bool)) {
           userInfo = null;
           selectedApartment = null;
-          await APIAuth.signOut().then((value) async {
+          await APIAuth.signOut(context: context).then((value) async {
             authStatus = AuthStatus.unauthen;
             await PrfData.shared.deleteApartment();
             notifyListeners();

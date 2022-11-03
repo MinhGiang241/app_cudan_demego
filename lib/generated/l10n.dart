@@ -1189,6 +1189,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Residence card`
+  String get res_card {
+    return Intl.message(
+      'Residence card',
+      name: 'res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet`
+  String get pet {
+    return Intl.message(
+      'Pet',
+      name: 'pet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pool`
+  String get pool {
+    return Intl.message(
+      'Pool',
+      name: 'pool',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

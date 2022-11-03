@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // });
 
     return ChangeNotifierProvider<HomePrv>(
-      create: (context) => HomePrv(),
+      create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
 

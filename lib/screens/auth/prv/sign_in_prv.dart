@@ -10,7 +10,6 @@ class SingInPrv extends ChangeNotifier {
 
   String? accountValidate;
   String? passValidate;
-  bool rememer_acc = false;
 
   final AuthPrv authPrv;
   SingInPrv({required this.authPrv});

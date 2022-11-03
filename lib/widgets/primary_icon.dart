@@ -11,6 +11,12 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  car_bg,
+  dog_bg,
+  elevator_bg,
+  gym_bg,
+  identity_bg,
+  swim_bg,
   mail,
   feedback,
   housework,

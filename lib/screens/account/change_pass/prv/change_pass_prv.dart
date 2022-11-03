@@ -26,6 +26,7 @@ class ChangePassPrv extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       await APIAuth.changePass(
+              context: context,
               phoneNum: phoneNum,
               oldPass: currentPassController.text,
               newPass: newPassController.text)

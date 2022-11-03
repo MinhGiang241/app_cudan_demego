@@ -116,9 +116,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
+        "pet": MessageLookupByLibrary.simpleMessage("Thú nuôi"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
+        "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
+        "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "residence_news":

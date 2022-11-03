@@ -27,6 +27,7 @@ class ResetPassPrv extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       await APIAuth.resetPass(
+              context: context,
               phoneNum: phone,
               token: token,
               newPass: newPassController.text,
