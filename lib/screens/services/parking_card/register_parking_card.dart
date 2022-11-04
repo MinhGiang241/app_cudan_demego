@@ -28,8 +28,8 @@ class _RegisterParkingCardState extends State<RegisterParkingCard> {
           body: ListView(
             padding: EdgeInsets.only(
                 top: appbarHeight(context) + topSafePad(context) + 24,
-                left: 24,
-                right: 24),
+                left: 12,
+                right: 12),
             children: [
               PrimaryTextField(
                   controller:

@@ -3,11 +3,27 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/response_apartment.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../auth/prv/auth_prv.dart';
 import 'choose_apartment_bottom_sheet.dart';
+
+var fakeApartments = ResponseApartment(
+  apartments: [
+    Apartments(
+      detail: 'detail',
+      floorPlan: [
+        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
+        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
+        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
+      ],
+      id: '1',
+      name: 'giang',
+    )
+  ],
+);
 
 class HeaderHome extends StatelessWidget {
   const HeaderHome({
@@ -43,7 +59,9 @@ class HeaderHome extends StatelessWidget {
                 Utils.showBottomSheet(
                     context: context,
                     child: ChooseAparmentBottomSheet(
-                        list: context.read<AuthPrv>().apartments!));
+                        list:
+                            fakeApartments //context.read<AuthPrv>().apartments!,
+                        ));
               },
               borderRadius: BorderRadius.circular(50),
               child: Padding(

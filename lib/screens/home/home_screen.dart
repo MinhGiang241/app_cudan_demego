@@ -10,6 +10,7 @@ import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_image_netword.dart';
 import '../../widgets/primary_loading.dart';
+import '../account/account_screen.dart';
 import '../auth/prv/auth_prv.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ];
 
   void _onItemTapped(int index) {
+    print(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -68,64 +70,85 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
+        return Stack(alignment: Alignment.center, children: [
+          Scaffold(
+            body: _navigationTab(context),
+            bottomNavigationBar: _bottomNavigationBar,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: Colors.white,
+              child: Icon(Icons.phone_sharp,
+                  size: 40,
+                  color: primaryColorBase,
+                  shadows: [
+                    Shadow(
+                        offset: const Offset(-2, 2),
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 10.0),
+                  ]),
+            ),
+          ),
+          if (isLoading)
+            const Center(
+              child: PrimaryCard(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: PrimaryLoading(),
+                ),
+              ),
+            )
+        ]);
 
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Scaffold(
-                body: RepaintBoundary(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        vpad(16 + MediaQuery.of(context).padding.top),
-                        const HeaderTitle(),
-                        vpad(30),
-                        const HeaderHome(),
-                        vpad(30),
-                        const ProjectInfoHome(),
-                        vpad(30),
-                        const BillsHome(),
-                        vpad(30),
-                        const ServicesHome(),
-                        vpad(30),
-                        const ConvinientServiceHome(),
-                        vpad(30),
-                        const FeedbackHome(),
-                        vpad(30),
-                        const EventsHome(),
-                        vpad(24),
-                        const NewsHome(),
-                        vpad(kBottomNavigationBarHeight + 50)
-                      ],
-                    ),
-                  ),
-                ),
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.phone_sharp,
-                      size: 40,
-                      color: primaryColorBase,
-                      shadows: [
-                        Shadow(
-                            offset: const Offset(-2, 2),
-                            color: Colors.black.withOpacity(0.5),
-                            blurRadius: 10.0),
-                      ]),
-                ),
-                bottomNavigationBar: _bottomNavigationBar),
-            if (isLoading)
-              const Center(
-                  child: PrimaryCard(
-                      child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: PrimaryLoading(),
-              )))
-          ],
-        );
+        // _navigationTab(context);
       },
     );
+  }
+
+  Widget _navigationTab(BuildContext context) {
+    final isLoading = context.watch<HomePrv>().isLoading;
+    switch (_selectedIndex) {
+      case 0:
+        return RepaintBoundary(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                vpad(16 + MediaQuery.of(context).padding.top),
+                const HeaderTitle(),
+                vpad(30),
+                const HeaderHome(),
+                vpad(30),
+                const ProjectInfoHome(),
+                vpad(30),
+                const BillsHome(),
+                vpad(30),
+                const ServicesHome(),
+                vpad(30),
+                const ConvinientServiceHome(),
+                vpad(30),
+                const FeedbackHome(),
+                vpad(30),
+                const EventsHome(),
+                vpad(24),
+                const NewsHome(),
+                vpad(kBottomNavigationBarHeight + 50)
+              ],
+            ),
+          ),
+        );
+      case 3:
+        return const AccountScreen();
+
+      default:
+        return const Center(
+          child: PrimaryCard(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: PrimaryLoading(),
+            ),
+          ),
+        );
+    }
   }
 
   Widget get _bottomNavigationBar {

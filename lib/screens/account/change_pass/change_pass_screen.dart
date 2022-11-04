@@ -53,7 +53,7 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
               children: [
                 vpad(24),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Form(
                     key: context.read<ChangePassPrv>().formKey,
                     child: Column(

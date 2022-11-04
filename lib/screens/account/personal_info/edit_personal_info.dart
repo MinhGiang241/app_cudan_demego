@@ -15,9 +15,9 @@ import '../../auth/prv/auth_prv.dart';
 import 'provider/edit_info_provider.dart';
 
 class EditPersonalInfo extends StatelessWidget {
-  final ResponseUser user;
+  final ResponseUser? user;
 
-  const EditPersonalInfo({super.key, required this.user});
+  const EditPersonalInfo({super.key, this.user});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -95,7 +95,7 @@ class EditPersonalInfo extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     PrimaryTextField(

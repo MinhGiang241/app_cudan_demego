@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/response_apartment.dart';
+import '../screens/account/personal_info/personal_info_screen.dart';
 import '../screens/auth/apartment_selection_screen.dart';
 import '../screens/auth/fogot_pass/phone_num_forgot_pass.dart';
 import '../screens/auth/fogot_pass/reset_pass_screen.dart';
@@ -59,6 +60,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ApartmentSeletionScreen(),
+        );
+      case PersonalInfoScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const PersonalInfoScreen(),
         );
       case BillsScreen.routeName:
         return MaterialPageRoute(

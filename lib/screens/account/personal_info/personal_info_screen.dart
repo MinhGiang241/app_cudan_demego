@@ -14,6 +14,7 @@ import 'edit_personal_info.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
   const PersonalInfoScreen({Key? key}) : super(key: key);
+  static const routeName = '/info';
 
   @override
   State<PersonalInfoScreen> createState() => _PersonalInfoScreenState();
@@ -100,7 +101,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           ListView(
             children: [
               Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: PrimaryInfoWidget(
                     listInfoView: listInfoView,
                     lable: S.of(context).info,
@@ -110,8 +111,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           ),
           Positioned(
               bottom: 24,
-              left: 34,
-              right: 34,
+              left: 12,
+              right: 12,
               child: SafeArea(
                   child: PrimaryButton(
                 text: S.of(context).edit,
@@ -119,7 +120,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   Utils.pushScreen(
                       context,
                       EditPersonalInfo(
-                        user: userInfo!,
+                        user: userInfo,
                       ));
                 },
               )))

@@ -18,7 +18,7 @@ class PlanInfoTab extends StatelessWidget {
     return ListView(
       children: [
         Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(12.0),
             child: DashButton(
               text: "S.of(context).register_r_card",
               icon: const PrimaryIcon(
@@ -30,7 +30,7 @@ class PlanInfoTab extends StatelessWidget {
               },
             )),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: PrimaryInfoWidget(listInfoView: [
             InfoContentView(title: 'S.of(context).signal', content: "ABCXYZ"),
             InfoContentView(

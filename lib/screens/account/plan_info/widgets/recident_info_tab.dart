@@ -66,7 +66,7 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
+      padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
       child: PrimaryCard(
           onTap: () {
             if (isShow) {
