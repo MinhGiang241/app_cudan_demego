@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
+import 'package:app_cudan/screens/services/parcel/parcels_list_screen.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
@@ -10,6 +11,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
 import 'parking_card/parking_card_list_screen.dart';
+import 'resident_card/resident_card_screen.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -40,13 +42,13 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientGreen,
         "icon": PrimaryIcons.identity_bg,
         "title": S.current.res_card,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": ResidentCardListScreen.routeName,
       },
       {
         "background": gradientYellow,
         "icon": PrimaryIcons.dog_bg,
         "title": S.current.pet,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": ParcelListScreen.routeName,
       },
       {
         "background": gradientTurquoise,

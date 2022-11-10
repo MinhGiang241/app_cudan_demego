@@ -4,7 +4,7 @@ class ResponseTheCuDanList {
   dynamic status;
   String? message;
 
-  ResponseTheCuDanList({this.items, this.count});
+  ResponseTheCuDanList({this.items, this.count, this.status});
 
   ResponseTheCuDanList.fromJson(Map<String, dynamic> json) {
     status = json["status"];

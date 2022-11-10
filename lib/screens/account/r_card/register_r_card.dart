@@ -31,8 +31,8 @@ class _RegisterRecidentCardState extends State<RegisterRecidentCard> {
                   top: AppBar().preferredSize.height +
                       MediaQuery.of(context).padding.top +
                       24,
-                  left: 24,
-                  right: 24,
+                  left: 12,
+                  right: 12,
                   bottom: 24),
               children: [
                 PrimaryTextField(

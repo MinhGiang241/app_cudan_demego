@@ -15,7 +15,9 @@ import '../screens/bills/bills_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
+import '../screens/services/parcel/parcels_list_screen.dart';
 import '../screens/services/parking_card/parking_card_list_screen.dart';
+import '../screens/services/resident_card/resident_card_screen.dart';
 import '../screens/services/service_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
@@ -90,6 +92,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ParkingCardListScreen(),
+        );
+      case ResidentCardListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ResidentCardListScreen(),
+        );
+      case ParcelListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ParcelListScreen(),
         );
       default:
         return MaterialPageRoute(

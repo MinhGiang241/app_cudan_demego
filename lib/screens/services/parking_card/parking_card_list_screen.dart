@@ -190,7 +190,7 @@ class _ParkingCardListScreenState extends State<ParkingCardListScreen> {
     // final apartment = context.watch<AuthPrv>().selectedApartment;
     final apartment = apartmentExample;
     return ChangeNotifierProvider(
-      create: (context) => ParkingCardProvider(apartment!.apartmentId ?? ""),
+      create: (context) => ParkingCardProvider(apartment.apartmentId ?? ""),
       builder: (context, state) {
         // final parkingCards =
         //     context.watch<ParkingCardProvider>().parkingCardsList;

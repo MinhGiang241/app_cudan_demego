@@ -239,7 +239,7 @@ class APITower {
   }
 
   static Future<ResponseTheCuDanList> getTheCuDan(
-      {int? pageSize, int? currentPage, required BuildContext context}) async {
+      {int? pageSize, int? currentPage}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {
@@ -260,7 +260,7 @@ class APITower {
   }
 
   static Future<ResponseParcelList> getParcelList(
-      {int? pageSize, int? currentPage, required BuildContext context}) async {
+      {int? pageSize, int? currentPage}) async {
     var params = <String, dynamic>{};
     var value = <String, dynamic>{};
     if (pageSize != null) {

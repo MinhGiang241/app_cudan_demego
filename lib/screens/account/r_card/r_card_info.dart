@@ -25,19 +25,20 @@ class _RecidentCardInfoState extends State<RecidentCardInfo>
   Widget build(BuildContext context) {
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-          title: ' S.of(context).r_card_details',
-          tabController: tabController,
-          // isTabScrollable: false,
-          tabs: [
-            Tab(text: 'S.of(context).details'),
-            Tab(text: 'S.of(context).timeline'),
-          ]),
+        title: ' S.of(context).r_card_details',
+        tabController: tabController,
+        isTabScrollabel: false,
+        tabs: [
+          Tab(text: 'S.of(context).details'),
+          Tab(text: 'S.of(context).timeline'),
+        ],
+      ),
       body: TabBarView(controller: tabController, children: [
         ListView(
           children: [
             vpad(24),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: PrimaryInfoWidget(
                   lable: 'S.of(context).r_card_info',
                   listInfoView: [
