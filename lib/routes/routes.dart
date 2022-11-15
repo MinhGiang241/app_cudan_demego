@@ -34,7 +34,9 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => ChangeNotifierProvider(
             create: (context) => SingInPrv(authPrv: context.read<AuthPrv>()),
-            builder: ((context, child) => const SignInScreen()),
+            builder: ((context, child) => SignInScreen(
+                  context: context,
+                )),
           ),
         );
       case SignUpScreen.routeName:
@@ -48,7 +50,7 @@ class AppRoutes {
       case PhoneNumForgotPassScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => const PhoneNumForgotPassScreen(),
+          builder: (_) => PhoneNumForgotPassScreen(),
         );
 
       case HomeScreen.routeName:

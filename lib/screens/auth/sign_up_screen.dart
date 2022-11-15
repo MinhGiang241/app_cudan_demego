@@ -10,7 +10,9 @@ import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
 import 'prv/auth_prv.dart';
 import 'prv/sign_up_prv.dart';
+import 'prv/verify_otp_prv.dart';
 import 'sign_in_screen.dart';
+import 'verify_otp_screen.dart';
 import 'widgets/term_policies.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -99,8 +101,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: context.read<SignUpPrv>().emailController,
                           label: S.of(context).email,
                           hint: S.of(context).enter_email,
-                          keyboardType: TextInputType.phone,
-                          isRequired: true,
                           validateString:
                               context.watch<SignUpPrv>().emailValidate,
                           validator: (v) {
@@ -164,7 +164,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         PrimaryButton(
                           text: S.of(context).create_acc_1,
                           onTap: () async {
-                            await context.read<SignUpPrv>().signUp(context);
+                            // await context.read<SignUpPrv>().signUp(context);
+                            // ignore: prefer_function_declarations_over_variables
+                            var signUp = () async {
+                              print('verify');
+                              await context.read<SignUpPrv>().signUp(context);
+                            };
+
+                            var email =
+                                context.read<SignUpPrv>().emailController.text;
+                            var name =
+                                context.read<SignUpPrv>().nameController.text;
+                            var pass =
+                                context.read<SignUpPrv>().passController.text;
+                            var phone =
+                                context.read<SignUpPrv>().phoneController.text;
+
+                            if (context
+                                .read<SignUpPrv>()
+                                .formKey
+                                .currentState!
+                                .validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VerifyOTPScreen(
+                                      email: email,
+                                      name: name,
+                                      pass: pass,
+                                      phone: phone,
+                                      isForgotPass: false,
+                                      verify: signUp),
+                                ),
+                              );
+                            }
                           },
                           isLoading: context.watch<SignUpPrv>().isLoading,
                           width: double.infinity,

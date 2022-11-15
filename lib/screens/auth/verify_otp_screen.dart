@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class VerifyOTPScreen extends StatefulWidget {
       required this.name,
       required this.pass,
       required this.email,
+      this.verify,
       this.isForgotPass = false})
       : super(key: key);
   final String phone;
@@ -25,6 +27,7 @@ class VerifyOTPScreen extends StatefulWidget {
   final String pass;
   final String email;
   final bool isForgotPass;
+  final Function()? verify;
 
   @override
   State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
@@ -88,8 +91,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         activeFillColor: Colors.white,
                         activeColor: Colors.white,
                         inactiveFillColor: Colors.white),
-                    // errorAnimationController:
-                    //     context.read<VerifyOTPPrv>().errorAnimationController,
+                    errorAnimationController:
+                        context.read<VerifyOTPPrv>().errorAnimationController,
                     enableActiveFill: true,
                     animationDuration: const Duration(milliseconds: 300),
                   ),
@@ -97,7 +100,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 vpad(28),
                 StreamBuilder<int>(
                     initialData: 60,
-                    // stream: context.read<VerifyOTPPrv>().timeResendController.stream,
+                    stream: context
+                        .read<VerifyOTPPrv>()
+                        .timeResendController
+                        .stream,
                     builder: (context, snapshot) {
                       final second = snapshot.data ?? 60;
                       return Row(
@@ -106,8 +112,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           Text(S.of(context).not_get_otp,
                               style: txtMedium(14, grayScaleColor2)),
                           hpad(12),
-                          // context.watch<VerifyOTPPrv>().isResending
-                          false
+                          context.watch<VerifyOTPPrv>().isResending
                               ? const SizedBox(
                                   height: 20,
                                   width: 20,
@@ -116,9 +121,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                               : GestureDetector(
                                   onTap: second == 0
                                       ? () async {
-                                          // await context
-                                          //     .read<VerifyOTPPrv>()
-                                          //     .resend(context);
+                                          await context
+                                              .read<VerifyOTPPrv>()
+                                              .resend(context);
                                         }
                                       : null,
                                   child: Text(S.of(context).resend,
@@ -143,8 +148,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                       // context
                       //     .read<VerifyOTPPrv>()
                       //     .verify(context, widget.isForgotPass);
-                      Utils.pushScreen(
-                          context, ResetPassScreen(phone: '', token: ''));
+                      if (widget.isForgotPass) {
+                        Utils.pushScreen(
+                            context, ResetPassScreen(phone: '', token: ''));
+                      } else {
+                        // Utils.pushScreen(context, SignInScreen());
+                        widget.verify!();
+                      }
                     },
                   ),
                 )

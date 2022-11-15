@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:app_cudan/screens/auth/prv/sign_in_prv.dart';
 import 'package:app_cudan/screens/auth/sign_up_screen.dart';
@@ -7,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/prf_data.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_screen.dart';
@@ -15,19 +18,29 @@ import 'apartment_selection_screen.dart';
 import 'fogot_pass/phone_num_forgot_pass.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key, this.isFromSignUp = false}) : super(key: key);
+  const SignInScreen({Key? key, this.isFromSignUp = false, this.context})
+      : super(key: key);
   static const routeName = '/sign-in';
   final bool isFromSignUp;
+  final BuildContext? context;
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<SingInPrv>(widget.context!).initAccountSave();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // return ChangeNotifierProvider<SingInPrv>(
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),
     //   builder: (context, state) {
+
     return PrimaryScreen(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -109,6 +122,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: 22.0,
                               height: 22.0,
                               child: Checkbox(
+                                fillColor:
+                                    MaterialStateProperty.all(primaryColorBase),
                                 value: context.read<AuthPrv>().remember,
                                 onChanged: (_) {
                                   setState(() {
@@ -119,9 +134,17 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                             hpad(10),
-                            Text(
-                              S.of(context).remember_acc,
-                              style: txtLinkSmall(color: primaryColorBase),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  context.read<AuthPrv>().remember =
+                                      !context.read<AuthPrv>().remember;
+                                });
+                              },
+                              child: Text(
+                                S.of(context).remember_acc,
+                                style: txtLinkSmall(color: primaryColorBase),
+                              ),
                             )
                           ],
                         ),
@@ -142,6 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   PrimaryButton(
                       onTap: () async {
                         FocusScope.of(context).unfocus();
+
                         await context.read<SingInPrv>().signIn(context);
 
                         // Navigator.pushNamed(

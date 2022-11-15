@@ -110,7 +110,7 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options, context);
+    final data = await ApiService.shared.graphqlQuery(options);
     return ResponseBanTinDuAnList.fromJson(data);
   }
 
@@ -162,7 +162,9 @@ class APITower {
     final QueryOptions options = QueryOptions(
         document: gql(queries),
         variables: {"parameters": "${params['parameters']}"});
-    final data = await ApiService.shared.graphqlQuery(options, context);
+    final data = await ApiService.shared.graphqlQuery(
+      options,
+    );
     return ResponseComments.fromJson(data);
   }
 
@@ -342,7 +344,7 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options, context);
+    final data = await ApiService.shared.graphqlQuery(options);
     return ResponseDanhMucBanTin.fromJson(data);
   }
 
@@ -418,7 +420,7 @@ class APITower {
         variables: {
           "parameters": params.isEmpty ? null : "${params['parameters']}"
         });
-    final data = await ApiService.shared.graphqlQuery(options, context);
+    final data = await ApiService.shared.graphqlQuery(options);
     return ResponseNewsList.fromJson(data);
   }
 
@@ -488,7 +490,7 @@ class APITower {
     final QueryOptions options = QueryOptions(
         document: gql(queries),
         variables: {"parameters": "${params['parameters']}"});
-    final data = await ApiService.shared.graphqlQuery(options, context);
+    final data = await ApiService.shared.graphqlQuery(options);
 
     return ResponseForums.fromJson(data);
   }

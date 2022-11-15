@@ -6,15 +6,32 @@ import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
+import '../../../widgets/primary_dialog.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 import '../prv/forgot_pass_prv.dart';
 import '../verify_otp_screen.dart';
 import 'option_send_otp.dart';
 
-class PhoneNumForgotPassScreen extends StatelessWidget {
-  const PhoneNumForgotPassScreen({Key? key}) : super(key: key);
+class PhoneNumForgotPassScreen extends StatefulWidget {
+  PhoneNumForgotPassScreen({Key? key}) : super(key: key);
   static const routeName = '/forgot';
+
+  @override
+  State<PhoneNumForgotPassScreen> createState() =>
+      _PhoneNumForgotPassScreenState();
+}
+
+class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
+  int pageIndex = 0;
+  PageController pageController = PageController(initialPage: 0);
+
+  next() {
+    if (pageIndex <= 4) {
+      pageController.animateToPage(pageIndex++,
+          duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +76,26 @@ class PhoneNumForgotPassScreen extends StatelessWidget {
                     PrimaryButton(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
-                          Utils.pushScreen(context, (const OptionSendOtp()));
-                          // Utils.pushScreen(
-                          //     context,
-                          //     VerifyOTPScreen(
-                          //         phone: '',
-                          //         name: "",
-                          //         pass: "",
-                          //         isForgotPass: true));
-                          // await context
-                          //     .read<ForgotPassPrv>()
-                          //     .sendVerify(context);
+                          await context
+                              .read<ForgotPassPrv>()
+                              .getEmailAndPhone(context)
+                              .then((value) {
+                            var email = context.read<ForgotPassPrv>().email;
+                            var phone =
+                                context.read<ForgotPassPrv>().phoneNumber;
+                            Utils.pushScreen(
+                                context,
+                                (OptionSendOtp(
+                                  email: email,
+                                  phone: phone,
+                                )));
+                          }).catchError((e) {
+                            Utils.showDialog(
+                                context: context,
+                                dialog: PrimaryDialog.error(
+                                  msg: S.of(context).err_x(e),
+                                ));
+                          });
                         },
                         text: S.of(context).send_verify,
                         isLoading: context.watch<ForgotPassPrv>().isLoading,

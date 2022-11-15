@@ -115,5 +115,8 @@
   "search": "Search",
   "res_card": "Residence card",
   "pet": "Pet",
-  "pool": "Pool"
+  "pool": "Pool",
+  "way_send_otp": "How would you like to receive a code to reset your password?",
+  "send_to_phone": "Send OTP to phone number",
+  "send_to_email": "Send OTP to email"
 }

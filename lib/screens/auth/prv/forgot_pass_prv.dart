@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
@@ -11,16 +13,46 @@ class ForgotPassPrv extends ChangeNotifier {
 
   String? phoneValidate;
 
+  String? phoneNumber;
+  String? email;
+
   final formKey = GlobalKey<FormState>();
+  // final formKey1 = GlobalKey<FormState>();
 
   bool isLoading = false;
+
+  getEmailAndPhone(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      phoneValidate = null;
+      isLoading = true;
+      var userInfoResponse = await APIAuth.getUserInformationByUsername(
+          phoneController.text.trim());
+      if (userInfoResponse == null) {
+        isLoading = false;
+        notifyListeners();
+        throw (S.of(context).err_conn);
+      } else if (userInfoResponse['response']['data'] != null) {
+        var userInfo = userInfoResponse['response']['data'];
+        phoneNumber = userInfo['phone_number'];
+        email = userInfo['email'];
+        isLoading = false;
+        notifyListeners();
+      } else {
+        var mess = userInfoResponse['response']['message'];
+        isLoading = false;
+        notifyListeners();
+        throw (mess);
+      }
+    }
+  }
 
   sendVerify(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       phoneValidate = null;
       isLoading = true;
       notifyListeners();
-      await APIAuth.forgotPass(phoneNum: phoneController.text, context: context)
+      await APIAuth.forgotPass(
+              phoneNum: phoneController.text.trim(), context: context)
           .then((value) {
         isLoading = false;
         notifyListeners();

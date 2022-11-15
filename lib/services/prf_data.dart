@@ -7,11 +7,13 @@ import '../models/response_apartment.dart';
 class PrfData {
   static final PrfData shared = PrfData();
   final _userBox = Hive.box("USER");
+  final _signIn = Hive.box('SIGNIN');
   final _settingBox = Hive.box("SETTINGS");
   final _apartmentBox = Hive.box("APARTMENTS");
 
   static Future open() async {
     await Hive.openBox("USER");
+    await Hive.openBox("SIGNIN");
     await Hive.openBox("SETTINGS");
     await Hive.openBox("APARTMENTS");
   }
@@ -58,6 +60,23 @@ class PrfData {
 
   Future<void> setToken(String token) async {
     return _userBox.put(_tokenKey, token);
+  }
+
+  Future<void> setSignInStore(String user, String password) async {
+    await _signIn.put("acc", user);
+    await _signIn.put("pass", password);
+    print('set');
+  }
+
+  getSignInStore() async {
+    var acc = await _signIn.get("acc");
+    var pass = await _signIn.get("pass");
+
+    return {"acc": acc, 'pass': pass};
+  }
+
+  Future<void> deteleSignInStore() async {
+    await _signIn.deleteAll(["acc", 'pass']);
   }
 
   String? getToken() {

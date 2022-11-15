@@ -87,6 +87,12 @@ class AuthPrv extends ChangeNotifier {
         }).then((value) async {
       if (value != null) {
         authStatus = AuthStatus.auth;
+        if (remember) {
+          await PrfData.shared.setSignInStore(account, pass);
+        } else {
+          await PrfData.shared.deteleSignInStore();
+        }
+
         Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName);
         // await APITower.getApartments().then((r) {
         //   if (r.status == null) {

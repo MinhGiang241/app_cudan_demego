@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../services/prf_data.dart';
 import 'auth_prv.dart';
 
 class SingInPrv extends ChangeNotifier {
@@ -15,6 +16,14 @@ class SingInPrv extends ChangeNotifier {
   SingInPrv({required this.authPrv});
 
   bool isLoading = false;
+
+  initAccountSave() async {
+    var acc = await PrfData.shared.getSignInStore();
+    if (acc != null && acc['acc'] != null && acc['pass'] != null) {
+      accountController.text = acc['acc'];
+      passController.text = acc['pass'];
+    }
+  }
 
   signIn(BuildContext context) async {
     if (formKey.currentState!.validate()) {

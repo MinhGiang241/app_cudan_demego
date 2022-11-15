@@ -44,6 +44,7 @@ class ApiService {
       ErrorHandle? onError}) async {
     userName = username;
     passWord = password;
+
     final client = await getExistClient();
     if (client != null) {
       if (client.credentials.isExpired) {
@@ -70,9 +71,9 @@ class ApiService {
       );
       final path = await getApplicationDocumentsDirectory();
       final credentialsFile = File('${path.path}/credential.json');
-      if (remember) {
-        await credentialsFile.writeAsString(cli.credentials.toJson());
-      }
+      // if (remember) {
+      await credentialsFile.writeAsString(cli.credentials.toJson());
+      // }
 
       return cli;
     } catch (e) {
@@ -303,12 +304,11 @@ class ApiService {
   }
 
   Future<GraphQLClient> getClientGraphQL(
-      {ErrorHandle? onError,
-      required BuildContext context,
-      bool remember = false}) async {
+      {ErrorHandle? onError, bool remember = false}) async {
     late AuthLink authLink;
     var client = await getExistClient();
     if (client == null) {
+      authLink = AuthLink(getToken: () => 'Bearer ');
       onError?.call();
     } else {
       //print(client.credentials.expiration);
@@ -337,9 +337,8 @@ class ApiService {
     return graphQLClient;
   }
 
-  Future<Map<String, dynamic>> graphqlQuery(
-      QueryOptions options, BuildContext context) async {
-    final cl = await getClientGraphQL(context: context);
+  Future<Map<String, dynamic>> graphqlQuery(QueryOptions options) async {
+    final cl = await getClientGraphQL();
     try {
       final result = await cl.query(options);
       if (result.data == null) {
@@ -355,9 +354,10 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> mutationhqlQuery(
-      MutationOptions options, BuildContext context) async {
+    MutationOptions options,
+  ) async {
     try {
-      final cl = await getClientGraphQL(context: context);
+      final cl = await getClientGraphQL();
       final result = await cl.mutate(options);
 
       if (result.data == null) {

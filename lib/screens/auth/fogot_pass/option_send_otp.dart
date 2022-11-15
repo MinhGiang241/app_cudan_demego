@@ -13,7 +13,10 @@ import '../prv/forgot_pass_prv.dart';
 import '../verify_otp_screen.dart';
 
 class OptionSendOtp extends StatefulWidget {
-  const OptionSendOtp({super.key});
+  const OptionSendOtp({super.key, this.email, this.phone});
+
+  final String? email;
+  final String? phone;
 
   @override
   State<OptionSendOtp> createState() => _OptionSendOtpState();
@@ -37,13 +40,13 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                   vpad(24 + topSafePad(context) + appbarHeight(context)),
                   Center(
                     child: Text(
-                      "Đặt lại mật khẩu",
+                      S.of(context).reset_pass,
                       style: txtDisplayMedium(),
                     ),
                   ),
                   vpad(20),
                   Text(
-                    'Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?',
+                    S.of(context).way_send_otp,
                     style: txtBodySmallRegular(color: grayScaleColorBase),
                     textAlign: TextAlign.center,
                     softWrap: true,
@@ -51,7 +54,7 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                   vpad(42),
                   RadioListTile<int>(
                     title: Text(
-                      'Gửi mã về SDT +840123456789',
+                      '${S.of(context).send_to_phone}: ${widget.phone}',
                       style: txtBodySmallRegular(color: grayScaleColorBase),
                     ),
                     value: 1,
@@ -64,7 +67,7 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                   ),
                   RadioListTile<int>(
                     title: Text(
-                      'Gửi mã về Email dung****23@gmail.com',
+                      '${S.of(context).send_to_email}: ${widget.email}',
                       style: txtBodySmallRegular(color: grayScaleColorBase),
                     ),
                     value: 2,
