@@ -52,32 +52,34 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                     softWrap: true,
                   ),
                   vpad(42),
-                  RadioListTile<int>(
-                    title: Text(
-                      '${S.of(context).send_to_phone}: ${widget.phone}',
-                      style: txtBodySmallRegular(color: grayScaleColorBase),
+                  if (widget.phone != null)
+                    RadioListTile<int>(
+                      title: Text(
+                        '${S.of(context).send_to_phone}: ${widget.phone}',
+                        style: txtBodySmallRegular(color: grayScaleColorBase),
+                      ),
+                      value: 1,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
                     ),
-                    value: 1,
-                    groupValue: _selectedOption,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedOption = value!;
-                      });
-                    },
-                  ),
-                  RadioListTile<int>(
-                    title: Text(
-                      '${S.of(context).send_to_email}: ${widget.email}',
-                      style: txtBodySmallRegular(color: grayScaleColorBase),
+                  if (widget.email != null)
+                    RadioListTile<int>(
+                      title: Text(
+                        '${S.of(context).send_to_email}: ${widget.email}',
+                        style: txtBodySmallRegular(color: grayScaleColorBase),
+                      ),
+                      value: 2,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
                     ),
-                    value: 2,
-                    groupValue: _selectedOption,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedOption = value!;
-                      });
-                    },
-                  ),
                 ],
               ),
               Positioned(
@@ -122,7 +124,7 @@ class ConfirmChoice extends StatelessWidget {
                 vpad(24 + topSafePad(context) + appbarHeight(context)),
                 Center(
                   child: Text(
-                    "Đặt lại mật khẩu",
+                    S.of(context).reset_pass,
                     style: txtDisplayMedium(),
                   ),
                 ),
@@ -135,8 +137,8 @@ class ConfirmChoice extends StatelessWidget {
                 vpad(45),
                 Text(
                   choice == 1
-                      ? 'SDT +840123456789'
-                      : 'Email dung****23@gmail.com',
+                      ? context.read<ForgotPassPrv>().phoneNumber!
+                      : context.read<ForgotPassPrv>().email!,
                   style: txtBodySmallRegular(color: grayScaleColorBase),
                   textAlign: TextAlign.center,
                   softWrap: true,

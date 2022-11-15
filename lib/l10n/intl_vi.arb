@@ -118,5 +118,6 @@
   "pool": "Bể bơi",
   "way_send_otp": "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?",
   "send_to_phone": "Gửi mã về SDT",
-  "send_to_email": "Gửi mã về email"
+  "send_to_email": "Gửi mã về email",
+  "not_blank": "Không được để trống"
 }

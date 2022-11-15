@@ -118,5 +118,6 @@
   "pool": "Pool",
   "way_send_otp": "How would you like to receive a code to reset your password?",
   "send_to_phone": "Send OTP to phone number",
-  "send_to_email": "Send OTP to email"
+  "send_to_email": "Send OTP to email",
+  "not_blank": "Not Blank"
 }

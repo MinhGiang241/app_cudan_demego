@@ -1219,6 +1219,36 @@ class S {
       args: [],
     );
   }
+
+  /// `How would you like to receive a code to reset your password?`
+  String get way_send_otp {
+    return Intl.message(
+      'How would you like to receive a code to reset your password?',
+      name: 'way_send_otp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP to phone number`
+  String get send_to_phone {
+    return Intl.message(
+      'Send OTP to phone number',
+      name: 'send_to_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP to email`
+  String get send_to_email {
+    return Intl.message(
+      'Send OTP to email',
+      name: 'send_to_email',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
