@@ -119,5 +119,7 @@
   "way_send_otp": "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?",
   "send_to_phone": "Gửi mã về SDT",
   "send_to_email": "Gửi mã về email",
-  "not_blank": "Không được để trống"
+  "not_blank": "Không được để trống",
+  "parcel": "Bưu phẩm",
+  "send_otp_to": "Gửi mã để đặt lại mật khẩu về"
 }

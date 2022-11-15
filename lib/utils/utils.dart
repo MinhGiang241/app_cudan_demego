@@ -434,4 +434,20 @@ class Utils {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
+
+  static showConnectionError(BuildContext context) {
+    Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.error(
+          msg: S.of(context).err_conn,
+        ));
+  }
+
+  static showErrorMessage(BuildContext context, String message) {
+    Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.error(
+          msg: S.of(context).err_x(message),
+        ));
+  }
 }

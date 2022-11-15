@@ -21,6 +21,30 @@ class ForgotPassPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
+  sendOtpViaEmail(BuildContext context, String? mail) async {
+    isLoading = true;
+    notifyListeners();
+    if (mail != null) {
+      await APIAuth.sendOtpViaEmail(mail).then(
+        (data) {
+          isLoading = false;
+          notifyListeners();
+          if (data == null) {
+            Utils.showConnectionError(context);
+          }
+          if (data['authorization_generate_otp']['code'] != 0) {
+            Utils.showErrorMessage(
+                context, data['authorization_generate_otp']['message']);
+          }
+        },
+      ).catchError((e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
+      });
+    }
+  }
+
   getEmailAndPhone(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       phoneValidate = null;

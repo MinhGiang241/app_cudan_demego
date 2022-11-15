@@ -119,5 +119,7 @@
   "way_send_otp": "How would you like to receive a code to reset your password?",
   "send_to_phone": "Send OTP to phone number",
   "send_to_email": "Send OTP to email",
-  "not_blank": "Not Blank"
+  "not_blank": "Can not empty!",
+  "parcel": "Parcel",
+  "send_otp_to": "Send OTP reset password code to"
 }

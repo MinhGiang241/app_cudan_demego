@@ -22,7 +22,7 @@ class ConnectError extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "", //S.of(context).err_conn,
+              S.of(context).err_conn,
               style: txtBodyLargeBold(color: grayScaleColorBase),
             ),
             if (title != null) vpad(20),

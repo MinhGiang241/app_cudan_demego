@@ -61,6 +61,28 @@ class APIAuth {
     return data;
   }
 
+  static Future sendOtpViaEmail(String email) async {
+    var sendOtp = '''
+  mutation (\$mailTo: String) {
+  authorization_generate_otp(mailTo: \$mailTo){
+    code
+    message
+    data
+    }
+  }
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(sendOtp),
+      variables: {
+        "mailTo": email,
+      },
+    );
+
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    return data;
+  }
+
   static Future<ResponseRegister> verifyOTP({
     required BuildContext context,
     required String phoneNum,

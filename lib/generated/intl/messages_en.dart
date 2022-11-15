@@ -104,12 +104,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
+        "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
+        "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personal_info":
@@ -148,6 +150,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "send_otp_to": MessageLookupByLibrary.simpleMessage(
+            "Send OTP reset password code to"),
+        "send_to_email":
+            MessageLookupByLibrary.simpleMessage("Send OTP to email"),
+        "send_to_phone":
+            MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
@@ -173,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
+        "way_send_otp": MessageLookupByLibrary.simpleMessage(
+            "How would you like to receive a code to reset your password?"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }

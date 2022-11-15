@@ -1249,6 +1249,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Can not empty!`
+  String get not_blank {
+    return Intl.message(
+      'Can not empty!',
+      name: 'not_blank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcel`
+  String get parcel {
+    return Intl.message(
+      'Parcel',
+      name: 'parcel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP reset password code to`
+  String get send_otp_to {
+    return Intl.message(
+      'Send OTP reset password code to',
+      name: 'send_otp_to',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

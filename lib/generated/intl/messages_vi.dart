@@ -106,12 +106,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản ?"),
         "no_comment":
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
+        "not_blank":
+            MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
+        "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "personal_info":
@@ -149,6 +152,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "search_aparment": MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
+        "send_otp_to": MessageLookupByLibrary.simpleMessage(
+            "Gửi mã để đặt lại mật khẩu về"),
+        "send_to_email":
+            MessageLookupByLibrary.simpleMessage("Gửi mã về email"),
+        "send_to_phone": MessageLookupByLibrary.simpleMessage("Gửi mã về SDT"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
@@ -173,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
+        "way_send_otp": MessageLookupByLibrary.simpleMessage(
+            "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại!")
       };
