@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
 
 import '../../models/response_bantinduan_details.dart';
+import '../generated/l10n.dart';
 import '../models/response_apartment.dart';
 import '../models/response_bantinduan_list.dart';
 import '../models/response_comments.dart';
@@ -16,11 +17,67 @@ import '../models/response_news_list_model.dart';
 import '../models/response_parcel_list.dart';
 import '../models/response_parking_card_model.dart';
 import '../models/response_pet_list_model.dart';
+import '../models/response_resident_info.dart';
 import '../models/response_thecudan_list.dart';
 import 'api_service.dart';
 
 class APITower {
-  static Future getToaNha(BuildContext context) async {
+  static Future getResidentInfo() async {
+    var query = '''
+    mutation {
+        response: resident_get_resident_info_by_account  {
+            code
+            message
+            data
+        }
+    }
+        
+    ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    // ignore: unnecessary_null_comparison
+    if (data == null) {
+      throw (S.current.err_conn);
+    } else if (data['response']['code'] != 0) {
+      throw (data['response']['message']);
+    } else {
+      var userInfo = ResponseResidentInfo.fromJson(data['response']['data']);
+      return userInfo;
+    }
+  }
+
+  static Future getUserOwnInfo(String residentId) async {
+    var queryGetUserInfo = '''
+    mutation (\$residentId:String){
+    response: resident_get_resident_own_info (residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(queryGetUserInfo),
+      variables: {
+        "residentId": residentId,
+      },
+    );
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    // ignore: unnecessary_null_comparison
+    if (data == null) {
+      throw (S.current.err_conn);
+    } else if (data['response']['code'] != 0) {
+      throw (data['response']['message']);
+    } else {
+      return data['response']['data'];
+    }
+  }
+
+  static Future getINfo() async {
     await ApiService.shared
         .getApi(
       path: 'api/queries/paging/getToaNha',

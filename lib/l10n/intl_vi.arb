@@ -121,5 +121,6 @@
   "send_to_email": "Gửi mã về email",
   "not_blank": "Không được để trống",
   "parcel": "Bưu phẩm",
-  "send_otp_to": "Gửi mã để đặt lại mật khẩu về"
+  "send_otp_to": "Gửi mã để đặt lại mật khẩu về",
+  "register_code": "Mã đăng ký"
 }

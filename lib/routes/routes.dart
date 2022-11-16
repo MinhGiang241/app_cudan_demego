@@ -63,7 +63,9 @@ class AppRoutes {
       case ApartmentSeletionScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => const ApartmentSeletionScreen(),
+          builder: (context) => ApartmentSeletionScreen(
+            context: context,
+          ),
         );
       case PersonalInfoScreen.routeName:
         return MaterialPageRoute(

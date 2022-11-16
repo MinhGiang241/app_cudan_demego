@@ -1,4 +1,3 @@
-import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,7 @@ import 'prv/auth_prv.dart';
 import 'prv/verify_otp_prv.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
-  VerifyOTPScreen(
+  const VerifyOTPScreen(
       {Key? key,
       required this.phone,
       required this.name,

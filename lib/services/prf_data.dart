@@ -65,7 +65,6 @@ class PrfData {
   Future<void> setSignInStore(String user, String password) async {
     await _signIn.put("acc", user);
     await _signIn.put("pass", password);
-    print('set');
   }
 
   getSignInStore() async {

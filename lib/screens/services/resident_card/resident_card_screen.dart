@@ -205,10 +205,10 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10, vertical: 4),
                                         decoration: BoxDecoration(
-                                            color: trangThai!.toLowerCase() ==
+                                            color: trangThai.toLowerCase() ==
                                                     "hoatdong"
                                                 ? greenColorBase
-                                                : trangThai!.toLowerCase() ==
+                                                : trangThai.toLowerCase() ==
                                                         "chothe"
                                                     ? yellowColor1
                                                     : redColor3,

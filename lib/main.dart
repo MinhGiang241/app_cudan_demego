@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,6 +31,30 @@ void main() async {
   final lang = PrfData.shared.getLanguage();
   setLocaleMessages('vi', ViMessages());
 
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    bool inDebug = false;
+
+    assert(() {
+      inDebug = true;
+      return true;
+    }());
+    if (inDebug) {
+      return ErrorWidget(details.exception);
+    }
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        'Error\n${details.exception}',
+        style: const TextStyle(
+          color: Colors.orangeAccent,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  };
+
   runApp(MyApp(lang: lang ?? 0));
 }
 
@@ -45,7 +70,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthPrv()..start(context),
         ),
-        ChangeNotifierProvider(create: (context) => LangPrv(lang))
+        ChangeNotifierProvider(create: (context) => LangPrv(lang)),
+        ChangeNotifierProvider(create: (context) => ResidentInfoPrv())
       ],
       builder: (context, child) {
         return MaterialApp(

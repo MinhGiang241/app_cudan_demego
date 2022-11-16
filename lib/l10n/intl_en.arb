@@ -121,5 +121,6 @@
   "send_to_email": "Send OTP to email",
   "not_blank": "Can not empty!",
   "parcel": "Parcel",
-  "send_otp_to": "Send OTP reset password code to"
+  "send_otp_to": "Send OTP reset password code to",
+  "register_code": "Register code"
 }

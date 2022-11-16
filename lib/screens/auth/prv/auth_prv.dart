@@ -3,10 +3,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/response_apartment.dart';
+import '../../../models/response_resident_own.dart';
 import '../../../models/response_user.dart';
 import '../../../services/api_auth.dart';
 import '../../../services/api_service.dart';
@@ -19,6 +21,7 @@ import '../../home/home_screen.dart';
 import '../apartment_selection_screen.dart';
 import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
+import 'resident_info_prv.dart';
 
 enum AuthStatus { unknown, auth, unauthen }
 
@@ -33,7 +36,7 @@ class AuthPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
-  bool remember = false;
+  bool remember = true;
 
   Future<void> start(BuildContext context) async {
     await ApiService.shared.getExistClient().then((cre) async {
@@ -92,8 +95,32 @@ class AuthPrv extends ChangeNotifier {
         } else {
           await PrfData.shared.deteleSignInStore();
         }
+        await APITower.getResidentInfo().then((value) async {
+          context.read<ResidentInfoPrv>().userInfo = value;
+          await APITower.getUserOwnInfo(value.id).then((v) {
+            context.read<ResidentInfoPrv>().listOwn.clear();
+            v.forEach((i) {
+              context
+                  .read<ResidentInfoPrv>()
+                  .listOwn
+                  .add(ResponseResidentOwn.fromJson(i));
+            });
+            var listOwn = context.read<ResidentInfoPrv>().listOwn;
+            Navigator.of(context)
+                .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+              "listOwn": listOwn,
+            });
+          }).catchError((e) {
+            Utils.showErrorMessage(context, e);
+          });
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
 
-        Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName);
+        // Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName,arguments: {
+        //   // "residentId":value.['resident_resident_find_phone_by_email']['data']
+        // });
+
         // await APITower.getApartments().then((r) {
         //   if (r.status == null) {
         //     apartments = r;

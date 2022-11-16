@@ -4,24 +4,22 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../models/response_bantinduan_list.dart';
-import '../../utils/utils.dart';
+
 import '../../widgets/primary_card.dart';
-import '../../widgets/primary_icon.dart';
-import '../../widgets/primary_image_netword.dart';
+
 import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
-import '../auth/prv/auth_prv.dart';
+
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
-import 'widgets/choose_apartment_bottom_sheet.dart';
+
 import 'widgets/convinent_service_home.dart';
 import 'widgets/event_home.dart';
-import 'widgets/events_widget.dart';
+
 import 'widgets/feedback_home.dart';
 import 'widgets/header_home.dart';
 import 'widgets/header_title.dart';
-import 'widgets/home_title_widget.dart';
+
 import 'widgets/new_home.dart';
 import 'widgets/project_info_home.dart';
 import 'widgets/services_home.dart';

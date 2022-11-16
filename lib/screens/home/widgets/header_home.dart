@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/response_apartment.dart';
+import '../../../models/response_resident_own.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../auth/prv/auth_prv.dart';
+import '../../auth/prv/resident_info_prv.dart';
 import 'choose_apartment_bottom_sheet.dart';
 
 var fakeApartments = ResponseApartment(
@@ -25,13 +27,29 @@ var fakeApartments = ResponseApartment(
   ],
 );
 
-class HeaderHome extends StatelessWidget {
+class HeaderHome extends StatefulWidget {
   const HeaderHome({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<HeaderHome> createState() => _HeaderHomeState();
+}
+
+class _HeaderHomeState extends State<HeaderHome> {
+  @override
   Widget build(BuildContext context) {
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
+    var selectedApartment =
+        context.read<ResidentInfoPrv>().selectedApartment?.apartment;
+    var listOwn = context.read<ResidentInfoPrv>().listOwn;
+
+    selectApartment(ResponseResidentOwn select) {
+      setState(() {
+        context.read<ResidentInfoPrv>().selectApartment(select);
+      });
+    }
+
     return Column(
       children: [
         Row(
@@ -45,7 +63,7 @@ class HeaderHome extends StatelessWidget {
             Text('${S.of(context).hello}, ',
                 style: txtBodySmallRegular(color: grayScaleColor2)),
             Text(
-              'Dung Nguyễn',
+              userInfo?.info_name ?? '',
               style: txtLinkMedium(),
             )
           ],
@@ -59,8 +77,8 @@ class HeaderHome extends StatelessWidget {
                 Utils.showBottomSheet(
                     context: context,
                     child: ChooseAparmentBottomSheet(
-                        list:
-                            fakeApartments //context.read<AuthPrv>().apartments!,
+                        selectApartment: selectApartment,
+                        list: listOwn //context.read<AuthPrv>().apartments!,
                         ));
               },
               borderRadius: BorderRadius.circular(50),
@@ -79,27 +97,11 @@ class HeaderHome extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                              context
-                                      .watch<AuthPrv>()
-                                      .selectedApartment
-                                      ?.name ??
-                                  "Test",
+                          Text(selectedApartment?.name ?? "Test",
                               style: txtLinkMedium()),
-                          if ((context
-                                      .watch<AuthPrv>()
-                                      .selectedApartment
-                                      ?.detail ??
-                                  "Test")
-                              .isNotEmpty)
-                            Text(
-                                context
-                                        .watch<AuthPrv>()
-                                        .selectedApartment
-                                        ?.detail ??
-                                    "Test",
-                                style:
-                                    txtBodySmallRegular(color: grayScaleColor2))
+                          Text(selectedApartment?.name ?? "Test",
+                              style:
+                                  txtBodySmallRegular(color: grayScaleColor2))
                         ]),
                     const Spacer(),
                     const Icon(Icons.keyboard_arrow_down_rounded,
