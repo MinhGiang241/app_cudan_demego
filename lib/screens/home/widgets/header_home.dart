@@ -42,6 +42,10 @@ class _HeaderHomeState extends State<HeaderHome> {
     var userInfo = context.read<ResidentInfoPrv>().userInfo;
     var selectedApartment =
         context.read<ResidentInfoPrv>().selectedApartment?.apartment;
+    var selectedBulding =
+        context.read<ResidentInfoPrv>().selectedApartment?.building;
+    var selectedFloor =
+        context.read<ResidentInfoPrv>().selectedApartment?.floor;
     var listOwn = context.read<ResidentInfoPrv>().listOwn;
 
     selectApartment(ResponseResidentOwn select) {
@@ -99,9 +103,9 @@ class _HeaderHomeState extends State<HeaderHome> {
                         children: [
                           Text(selectedApartment?.name ?? "Test",
                               style: txtLinkMedium()),
-                          Text(selectedApartment?.name ?? "Test",
+                          Text(selectedBulding?.name ?? "Test",
                               style:
-                                  txtBodySmallRegular(color: grayScaleColor2))
+                                  txtBodySmallRegular(color: grayScaleColor2)),
                         ]),
                     const Spacer(),
                     const Icon(Icons.keyboard_arrow_down_rounded,
