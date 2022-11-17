@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_dialog.dart';
+import '../fogot_pass/option_send_otp.dart';
 import '../verify_otp_screen.dart';
 
 class ForgotPassPrv extends ChangeNotifier {
@@ -49,8 +51,16 @@ class ForgotPassPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       phoneValidate = null;
       isLoading = true;
-      var userInfoResponse = await APIAuth.getUserInformationByUsername(
-          phoneController.text.trim());
+      var userName = phoneController.text.trim();
+      if (RegexText.isEmail(phoneController.text.trim())) {
+        var userNameByEmail =
+            await APIAuth.findUserNameByEmail(email: userName);
+        if (userNameByEmail != null) {
+          userName = userNameByEmail;
+        }
+      }
+      var userInfoResponse =
+          await APIAuth.getUserInformationByUsername(userName);
       if (userInfoResponse == null) {
         isLoading = false;
         notifyListeners();
@@ -61,6 +71,13 @@ class ForgotPassPrv extends ChangeNotifier {
         email = userInfo['email'];
         isLoading = false;
         notifyListeners();
+
+        Utils.pushScreen(
+            context,
+            (OptionSendOtp(
+              email: email,
+              phone: phoneNumber,
+            )));
       } else {
         var mess = userInfoResponse['response']['message'];
         isLoading = false;

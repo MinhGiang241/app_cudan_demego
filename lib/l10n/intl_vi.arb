@@ -150,5 +150,7 @@
   "edit_res_card": "Chỉnh sửa thẻ cư dân",
   "update": "Cập nhật",
   "approved": "Đã duyệt",
-  "wait_approve": "Chờ duyệt"
+  "wait_approve": "Chờ duyệt",
+  "phone_email":"Số điện thoại/ Email",
+  "enter_phone_email":"Nhập số điện thoại hoặc email"
 }

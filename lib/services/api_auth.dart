@@ -103,14 +103,6 @@ class APIAuth {
     return await ApiService.shared.deleteCre();
   }
 
-  static Future<ResponseUser> getUserInfo(BuildContext context) async {
-    final data = await ApiService.shared.getApi(
-      path: 'api/mobile/userinfo',
-    );
-    // print(data);
-    return ResponseUser.fromJson(data);
-  }
-
   static Future<ResponseFileUpload> uploadImage(
       {required List<File> files,
       OnSendProgress? onSendProgress,

@@ -42,6 +42,8 @@ class APITower {
       throw (S.current.err_conn);
     } else if (data['response']['code'] != 0) {
       throw (data['response']['message']);
+    } else if (data['response']['data'] == null) {
+      return null;
     } else {
       var userInfo = ResponseResidentInfo.fromJson(data['response']['data']);
       return userInfo;

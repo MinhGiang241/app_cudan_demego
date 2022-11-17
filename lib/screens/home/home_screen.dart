@@ -10,6 +10,7 @@ import '../../widgets/primary_card.dart';
 import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
 
+import '../auth/prv/resident_info_prv.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
 
@@ -52,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // ];
 
   void _onItemTapped(int index) {
-    print(index);
     setState(() {
       _selectedIndex = index;
     });

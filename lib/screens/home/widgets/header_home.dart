@@ -73,58 +73,59 @@ class _HeaderHomeState extends State<HeaderHome> {
           ],
         ),
         vpad(30),
-        RepaintBoundary(
-          child: Row(children: [
-            PrimaryCard(
-              width: dvWidth(context) - 48,
-              onTap: () {
-                Utils.showBottomSheet(
-                    context: context,
-                    child: ChooseAparmentBottomSheet(
-                        selectApartment: selectApartment,
-                        list: listOwn //context.read<AuthPrv>().apartments!,
-                        ));
-              },
-              borderRadius: BorderRadius.circular(50),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    const PrimaryIcon(
-                      padding: EdgeInsets.all(9),
-                      icons: PrimaryIcons.home_smile,
-                      color: primaryColor4,
-                      backgroundColor: primaryColor5,
-                      style: PrimaryIconStyle.round,
-                    ),
-                    hpad(12),
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(selectedApartment?.name ?? "Test",
-                              style: txtLinkMedium()),
-                          Text(selectedBulding?.name ?? "Test",
-                              style:
-                                  txtBodySmallRegular(color: grayScaleColor2)),
-                        ]),
-                    const Spacer(),
-                    const Icon(Icons.keyboard_arrow_down_rounded,
-                        color: grayScaleColor2)
-                  ],
+        if (Provider.of<ResidentInfoPrv>(context).listOwn.isNotEmpty)
+          RepaintBoundary(
+            child: Row(children: [
+              PrimaryCard(
+                width: dvWidth(context) - 48,
+                onTap: () {
+                  Utils.showBottomSheet(
+                      context: context,
+                      child: ChooseAparmentBottomSheet(
+                          selectApartment: selectApartment,
+                          list: listOwn //context.read<AuthPrv>().apartments!,
+                          ));
+                },
+                borderRadius: BorderRadius.circular(50),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      const PrimaryIcon(
+                        padding: EdgeInsets.all(9),
+                        icons: PrimaryIcons.home_smile,
+                        color: primaryColor4,
+                        backgroundColor: primaryColor5,
+                        style: PrimaryIconStyle.round,
+                      ),
+                      hpad(12),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(selectedApartment?.name ?? "Test",
+                                style: txtLinkMedium()),
+                            Text(selectedBulding?.name ?? "Test",
+                                style: txtBodySmallRegular(
+                                    color: grayScaleColor2)),
+                          ]),
+                      const Spacer(),
+                      const Icon(Icons.keyboard_arrow_down_rounded,
+                          color: grayScaleColor2)
+                    ],
+                  ),
                 ),
               ),
-            ),
-            // const Spacer(),
-            // PrimaryIcon(
-            //     icons: PrimaryIcons.bell_outline,
-            //     style: PrimaryIconStyle.gradient,
-            //     color: grayScaleColor2,
-            //     //badge: "2",
-            //     onTap: () {
-            //       // Utils.pushScreen(context, const NotificationScreen());
-            //     }),
-          ]),
-        ),
+              // const Spacer(),
+              // PrimaryIcon(
+              //     icons: PrimaryIcons.bell_outline,
+              //     style: PrimaryIconStyle.gradient,
+              //     color: grayScaleColor2,
+              //     //badge: "2",
+              //     onTap: () {
+              //       // Utils.pushScreen(context, const NotificationScreen());
+              //     }),
+            ]),
+          ),
       ],
     );
   }

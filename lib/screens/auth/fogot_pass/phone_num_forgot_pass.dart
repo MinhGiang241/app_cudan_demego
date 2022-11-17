@@ -59,9 +59,9 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                     vpad(45),
                     PrimaryTextField(
                       controller: context.read<ForgotPassPrv>().phoneController,
-                      label: S.of(context).phone_num,
-                      hint: S.of(context).enter_phone,
-                      keyboardType: TextInputType.phone,
+                      label: S.of(context).phone_email,
+                      hint: S.of(context).enter_phone_email,
+                      // keyboardType: TextInputType.phone,
                       isRequired: true,
                       validator: (v) {
                         if (v!.isEmpty) {
@@ -79,17 +79,8 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                           await context
                               .read<ForgotPassPrv>()
                               .getEmailAndPhone(context)
-                              .then((value) {
-                            var email = context.read<ForgotPassPrv>().email;
-                            var phone =
-                                context.read<ForgotPassPrv>().phoneNumber;
-                            Utils.pushScreen(
-                                context,
-                                (OptionSendOtp(
-                                  email: email,
-                                  phone: phone,
-                                )));
-                          }).catchError((e) {
+                              .then((value) {})
+                              .catchError((e) {
                             Utils.showDialog(
                                 context: context,
                                 dialog: PrimaryDialog.error(

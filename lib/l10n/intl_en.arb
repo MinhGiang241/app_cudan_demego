@@ -150,5 +150,7 @@
   "edit_res_card": "edit resident card",
   "update": "Update",
   "approved": "Approved",
-  "wait_approve": "Waiting approve"
+  "wait_approve": "Waiting approve",
+  "phone_email":"Phone/ Email",
+  "enter_phone_email":"Enter phone number or email"
 }

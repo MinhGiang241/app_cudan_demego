@@ -26,14 +26,23 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
+        "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
+        "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
         "can_not_empty": MessageLookupByLibrary.simpleMessage("Can not empty"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancel_reason": MessageLookupByLibrary.simpleMessage("Reject_reason"),
+        "cancel_register":
+            MessageLookupByLibrary.simpleMessage("Cancel register"),
+        "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
+        "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
         "choose_an_apartment":
@@ -51,8 +60,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_letter": MessageLookupByLibrary.simpleMessage("Delete letter"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "details": MessageLookupByLibrary.simpleMessage("Details"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "edit_res_card":
+            MessageLookupByLibrary.simpleMessage("edit resident card"),
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -66,16 +79,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_pas": MessageLookupByLibrary.simpleMessage("Enter password"),
         "enter_phone":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
+        "enter_phone_email":
+            MessageLookupByLibrary.simpleMessage("Enter phone number or email"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Error Connection"),
-        "err_internet": MessageLookupByLibrary.simpleMessage(
-            "Check your internet connection!"),
+        "err_internet":
+            MessageLookupByLibrary.simpleMessage("Can not connect to server!"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_x": m0,
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
+        "expired": MessageLookupByLibrary.simpleMessage("Expired"),
+        "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
@@ -83,21 +100,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
-        "gym_card": MessageLookupByLibrary.simpleMessage("Gym card"),
+        "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
+        "history": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
+        "identity_photo": MessageLookupByLibrary.simpleMessage(
+            "Identity card/ passport photos"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Phone number/Email or password is not correct."),
         "info": MessageLookupByLibrary.simpleMessage("Infomation"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
+        "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "missing_report":
+            MessageLookupByLibrary.simpleMessage("Missing Report"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
         "news": MessageLookupByLibrary.simpleMessage("News"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -107,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
+        "note": MessageLookupByLibrary.simpleMessage("Note"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
@@ -117,12 +142,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
+        "phone_email": MessageLookupByLibrary.simpleMessage("Phone/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
+        "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
+        "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
+        "related_doc_photo":
+            MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
+        "res_card_details":
+            MessageLookupByLibrary.simpleMessage("Resident card details"),
+        "res_card_register":
+            MessageLookupByLibrary.simpleMessage("Resident card register"),
+        "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "residence_news":
@@ -152,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),
+        "send_request": MessageLookupByLibrary.simpleMessage("Send request"),
         "send_to_email":
             MessageLookupByLibrary.simpleMessage("Send OTP to email"),
         "send_to_phone":
@@ -177,9 +214,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registering for a resident account means consenting to "),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),

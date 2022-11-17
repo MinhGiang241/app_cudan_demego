@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `Check your internet connection!`
+  /// `Can not connect to server!`
   String get err_internet {
     return Intl.message(
-      'Check your internet connection!',
+      'Can not connect to server!',
       name: 'err_internet',
       desc: '',
       args: [],
@@ -1030,10 +1030,10 @@ class S {
     );
   }
 
-  /// `Gym card`
+  /// `Gym service`
   String get gym_card {
     return Intl.message(
-      'Gym card',
+      'Gym service',
       name: 'gym_card',
       desc: '',
       args: [],
@@ -1275,6 +1275,316 @@ class S {
     return Intl.message(
       'Send OTP reset password code to',
       name: 'send_otp_to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register code`
+  String get register_code {
+    return Intl.message(
+      'Register code',
+      name: 'register_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card status`
+  String get card_status {
+    return Intl.message(
+      'Card status',
+      name: 'card_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Letter status`
+  String get letter_status {
+    return Intl.message(
+      'Letter status',
+      name: 'letter_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card number`
+  String get card_num {
+    return Intl.message(
+      'Card number',
+      name: 'card_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apartment`
+  String get apartment {
+    return Intl.message(
+      'Apartment',
+      name: 'apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send request`
+  String get send_request {
+    return Intl.message(
+      'Send request',
+      name: 'send_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete letter`
+  String get delete_letter {
+    return Intl.message(
+      'Delete letter',
+      name: 'delete_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel register`
+  String get cancel_register {
+    return Intl.message(
+      'Cancel register',
+      name: 'cancel_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lock`
+  String get lock {
+    return Intl.message(
+      'Lock',
+      name: 'lock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extend`
+  String get extend {
+    return Intl.message(
+      'Extend',
+      name: 'extend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Missing Report`
+  String get missing_report {
+    return Intl.message(
+      'Missing Report',
+      name: 'missing_report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject card`
+  String get reject_card {
+    return Intl.message(
+      'Reject card',
+      name: 'reject_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident card register`
+  String get res_card_register {
+    return Intl.message(
+      'Resident card register',
+      name: 'res_card_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos`
+  String get photos {
+    return Intl.message(
+      'Photos',
+      name: 'photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity card/ passport photos`
+  String get identity_photo {
+    return Intl.message(
+      'Identity card/ passport photos',
+      name: 'identity_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add photos`
+  String get add_photo {
+    return Intl.message(
+      'Add photos',
+      name: 'add_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident photos`
+  String get res_photo {
+    return Intl.message(
+      'Resident photos',
+      name: 'res_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Related document photos`
+  String get related_doc_photo {
+    return Intl.message(
+      'Related document photos',
+      name: 'related_doc_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident card details`
+  String get res_card_details {
+    return Intl.message(
+      'Resident card details',
+      name: 'res_card_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get history {
+    return Intl.message(
+      'History',
+      name: 'history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired`
+  String get expired {
+    return Intl.message(
+      'Expired',
+      name: 'expired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject_reason`
+  String get cancel_reason {
+    return Intl.message(
+      'Reject_reason',
+      name: 'cancel_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note`
+  String get note {
+    return Intl.message(
+      'Note',
+      name: 'note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `edit resident card`
+  String get edit_res_card {
+    return Intl.message(
+      'edit resident card',
+      name: 'edit_res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved`
+  String get approved {
+    return Intl.message(
+      'Approved',
+      name: 'approved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting approve`
+  String get wait_approve {
+    return Intl.message(
+      'Waiting approve',
+      name: 'wait_approve',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone/ Email`
+  String get phone_email {
+    return Intl.message(
+      'Phone/ Email',
+      name: 'phone_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter phone number or email`
+  String get enter_phone_email {
+    return Intl.message(
+      'Enter phone number or email',
+      name: 'enter_phone_email',
       desc: '',
       args: [],
     );

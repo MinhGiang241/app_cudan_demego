@@ -61,15 +61,6 @@ class AuthPrv extends ChangeNotifier {
     });
   }
 
-  Future<void> getUserInfo(BuildContext context) async {
-    await APIAuth.getUserInfo(context).then((value) {
-      if (value.status == null) {
-        userInfo = value;
-        notifyListeners();
-      }
-    });
-  }
-
   Future<void> onSignIn(
       BuildContext context, String account, String pass) async {
     isLoading = true;
@@ -96,23 +87,32 @@ class AuthPrv extends ChangeNotifier {
           await PrfData.shared.deteleSignInStore();
         }
         await APITower.getResidentInfo().then((value) async {
-          context.read<ResidentInfoPrv>().userInfo = value;
-          await APITower.getUserOwnInfo(value.id).then((v) {
-            context.read<ResidentInfoPrv>().listOwn.clear();
-            v.forEach((i) {
-              context
-                  .read<ResidentInfoPrv>()
-                  .listOwn
-                  .add(ResponseResidentOwn.fromJson(i));
+          if (value != null) {
+            context.read<ResidentInfoPrv>().userInfo = value;
+            await APITower.getUserOwnInfo(value.id).then((v) {
+              context.read<ResidentInfoPrv>().listOwn.clear();
+              v.forEach((i) {
+                context
+                    .read<ResidentInfoPrv>()
+                    .listOwn
+                    .add(ResponseResidentOwn.fromJson(i));
+              });
+              var listOwn = context.read<ResidentInfoPrv>().listOwn;
+              Navigator.of(context)
+                  .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+                "listOwn": listOwn,
+              });
+            }).catchError((e) {
+              Utils.showErrorMessage(context, e);
             });
-            var listOwn = context.read<ResidentInfoPrv>().listOwn;
-            Navigator.of(context)
-                .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
-              "listOwn": listOwn,
-            });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+          } else {
+            Navigator.of(context).pushNamed(
+              HomeScreen.routeName,
+              // arguments: {
+              //   "listOwn": [],
+              // },
+            );
+          }
         }).catchError((e) {
           Utils.showErrorMessage(context, e);
         });
@@ -137,7 +137,7 @@ class AuthPrv extends ChangeNotifier {
         // });
 
         // await getUserInfo();
-      }
+      } else {}
     });
   }
 
