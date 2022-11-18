@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../services/prf_data.dart';
+import '../../../utils/utils.dart';
 import 'auth_prv.dart';
 
 class SingInPrv extends ChangeNotifier {
@@ -35,8 +36,13 @@ class SingInPrv extends ChangeNotifier {
           .then((value) {
         isLoading = false;
         notifyListeners();
+      }).catchError((e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
       });
     } else {
+      isLoading = false;
       if (accountController.text.isEmpty) {
         accountValidate = S.current.can_not_empty;
       } else {

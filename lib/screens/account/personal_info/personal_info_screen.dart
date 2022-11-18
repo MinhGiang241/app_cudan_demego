@@ -27,8 +27,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     List<InfoContentView> listInfoView = [
       InfoContentView(
           title: S.current.full_name,
-          content: userInfo?.userName ?? "S.of(context).not_update",
-          contentStyle: userInfo?.userName != null
+          content: "userInfo?.userName" ?? "S.of(context).not_update",
+          contentStyle: "userInfo?.userName" != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -49,8 +49,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontWeight: FontWeight.w600)),
       InfoContentView(
           title: "S.current.id_number",
-          content: userInfo?.cmnd ?? "S.of(context).not_update",
-          contentStyle: userInfo?.cmnd != null
+          content: "userInfo?.cmnd" ?? "S.of(context).not_update",
+          contentStyle: "userInfo?.cmnd" != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -60,10 +60,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontWeight: FontWeight.w600)),
       InfoContentView(
           title: "S.current.date_of_birth",
-          content: userInfo?.birthday != null
-              ? Utils.dateFormat(userInfo!.birthday!)
+          content: "userInfo?.birthday" != null
+              ? Utils.dateFormat("userInfo!.birthday"!)
               : "S.of(context).not_update",
-          contentStyle: userInfo?.birthday != null
+          contentStyle: "userInfo?.birthday" != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -84,8 +84,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontWeight: FontWeight.w600)),
       InfoContentView(
           title: "S.current.country",
-          content: userInfo?.national ?? "S.of(context).not_update",
-          contentStyle: userInfo?.national != null
+          content: "userInfo?.national" ?? "S.of(context).not_update",
+          contentStyle: "userInfo?.national" != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -120,7 +120,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   Utils.pushScreen(
                       context,
                       EditPersonalInfo(
-                        user: userInfo,
+                        user: null,
                       ));
                 },
               )))

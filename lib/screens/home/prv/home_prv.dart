@@ -42,7 +42,7 @@ class HomePrv extends ChangeNotifier {
   }
 
   likeNews(BuildContext context, int index) async {
-    final userId = context.read<AuthPrv>().userInfo!.userId!;
+    final userId = "context.read<AuthPrv>().userInfo!.userId";
     if (!newsList![index]
         .list!
         .contentItems!
@@ -81,7 +81,7 @@ class HomePrv extends ChangeNotifier {
   }
 
   likeBTDA(BuildContext context, int index) async {
-    final userId = context.read<AuthPrv>().userInfo!.userId!;
+    final userId = 'context.read<AuthPrv>().userInfo!.userId!';
     if (!btdaList![index]
         .list!
         .contentItems!

@@ -163,7 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   vpad(32),
                   PrimaryButton(
-                      onTap: context.read<SingInPrv>().isLoading
+                      onTap: context.watch<SingInPrv>().isLoading
                           ? null
                           : () async {
                               FocusScope.of(context).unfocus();

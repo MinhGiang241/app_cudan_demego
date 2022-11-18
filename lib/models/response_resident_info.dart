@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'account.dart';
+
 class ResponseResidentInfo {
   String? id;
   String? createdTime;
@@ -28,37 +30,40 @@ class ResponseResidentInfo {
   String? place_of_issue;
   String? identity_card;
   String? phone;
-  ResponseResidentInfo({
-    this.code,
-    this.createdTime,
-    this.date_birth,
-    this.districtId,
-    this.education,
-    this.email,
-    this.ethnicId,
-    this.id,
-    this.identity_card,
-    this.identity_card_required,
-    this.info_name,
-    this.isDraft,
-    this.isLocked,
-    this.job,
-    this.material_status,
-    this.nationalId,
-    this.permanent_address,
-    this.phone,
-    this.phone_required,
-    this.place_of_issue,
-    this.place_of_issue_required,
-    this.provinceId,
-    this.qualification,
-    this.residence_type,
-    this.sex,
-    this.updatedTime,
-    this.wardsId,
-  });
+  Account? account;
+  ResponseResidentInfo(
+      {this.code,
+      this.createdTime,
+      this.date_birth,
+      this.districtId,
+      this.education,
+      this.email,
+      this.ethnicId,
+      this.id,
+      this.identity_card,
+      this.identity_card_required,
+      this.info_name,
+      this.isDraft,
+      this.isLocked,
+      this.job,
+      this.material_status,
+      this.nationalId,
+      this.permanent_address,
+      this.phone,
+      this.phone_required,
+      this.place_of_issue,
+      this.place_of_issue_required,
+      this.provinceId,
+      this.qualification,
+      this.residence_type,
+      this.sex,
+      this.updatedTime,
+      this.wardsId,
+      this.account});
 
   ResponseResidentInfo.fromJson(Map<String, dynamic> json) {
+    account =
+        json['account'] != null ? Account.fromJson(json['account']) : null;
     id = json['_id'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
@@ -116,6 +121,7 @@ class ResponseResidentInfo {
     data['place_of_issue'] = place_of_issue;
     data['identity_card'] = identity_card;
     data['phone'] = phone;
+    data['account'] = account != null ? account!.toJson() : null;
     return data;
   }
 }

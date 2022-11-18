@@ -31,7 +31,7 @@ class AccountScreen extends StatelessWidget {
               child: SizedBox(
                   height: 64,
                   child: Row(children: [
-                    if (userInfo?.avatarLink == null)
+                    if ("userInfo?.avatarLink" == null)
                       const CircleAvatar(
                           radius: 32,
                           backgroundColor: grayScaleColor4,
@@ -44,14 +44,14 @@ class AccountScreen extends StatelessWidget {
                         radius: 32,
                         backgroundColor: grayScaleColor4,
                         backgroundImage: CachedNetworkImageProvider(
-                            ApiConstants.baseURL + userInfo!.avatarLink!),
+                            ApiConstants.baseURL + "userInfo!.avatarLink"!),
                       ),
                     hpad(16),
                     Expanded(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                          Text(userInfo?.userName ?? "Username",
+                          Text("userInfo?.userName" ?? "Username",
                               style: txtLinkLarge()),
                           const Spacer(),
                           Text(

@@ -10,10 +10,11 @@ import 'package:dio/dio.dart';
 import '../models/response_file_upload.dart';
 import '../models/response_register.dart';
 import '../models/response.dart';
-import '../models/response_user.dart';
 import '../services/api_service.dart';
 import '../constants/regex_text.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
+
+import '../utils/utils.dart';
 
 class APIAuth {
   static Future<oauth2.Client?> signIn({
@@ -25,12 +26,18 @@ class APIAuth {
   }) async {
     var user = username;
     if (RegexText.isEmail(username)) {
-      var data = await findUserNameByEmail(email: username);
-      if (data['resident_resident_find_phone_by_email']['data'] != null) {
-        user = data['resident_resident_find_phone_by_email']['data'];
-      }
+      await findUserNameByEmail(email: username).then((v) {
+        user = v;
+      }).catchError((e) {
+        onError!.call();
+      });
+      // if (data != null) {
+      //   user = data['userName'];
+      // }
     } else {
-      await getUserInformationByUsername(user);
+      await getUserInformationByUsername(user).then((v) {}).catchError((e) {
+        throw (e);
+      });
     }
 
     return await ApiService.shared.getClient(
@@ -39,6 +46,32 @@ class APIAuth {
         onError: onError,
         context: context,
         remember: remember);
+  }
+
+  static getAccountInfo() async {
+    var query = '''
+    mutation {
+        response: account_get_account_info  {
+            code
+            message
+            data
+        }
+    }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
   }
 
   static Future resetPassword(String userName, String newPassword) async {

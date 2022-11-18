@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/account.dart';
 import '../../../models/response_apartment.dart';
+import '../../../models/response_resident_info.dart';
 import '../../../models/response_resident_own.dart';
 import '../../../models/response_user.dart';
 import '../../../services/api_auth.dart';
@@ -30,7 +32,9 @@ enum AuthStatus { unknown, auth, unauthen }
 class AuthPrv extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.unknown;
 
-  ResponseUser? userInfo;
+  Account? account;
+
+  ResponseResidentInfo? userInfo;
 
   ResponseApartment? apartments;
 
@@ -88,12 +92,17 @@ class AuthPrv extends ChangeNotifier {
         } else {
           await PrfData.shared.deteleSignInStore();
         }
+        // await APIAuth.getAccountInfo().then((v) {
+        //   context.watch<AuthPrv>().account = Account.fromJson(v);
+        // }).catchError((e) {});
         await APITower.getResidentInfo().then((value) async {
           if (value != null) {
-            context.read<ResidentInfoPrv>().userInfo = value;
-            await APITower.getUserOwnInfo(value.id).then((v) {
+            context.read<ResidentInfoPrv>().userInfo =
+                ResponseResidentInfo.fromJson(value);
+            await APITower.getUserOwnInfo(userInfo!.id as String).then((v) {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
+                print(i);
                 context
                     .read<ResidentInfoPrv>()
                     .listOwn
