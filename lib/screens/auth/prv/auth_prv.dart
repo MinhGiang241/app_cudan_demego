@@ -12,7 +12,6 @@ import '../../../models/account.dart';
 import '../../../models/response_apartment.dart';
 import '../../../models/response_resident_info.dart';
 import '../../../models/response_resident_own.dart';
-import '../../../models/response_user.dart';
 import '../../../services/api_auth.dart';
 import '../../../services/api_service.dart';
 import '../../../services/api_tower.dart';

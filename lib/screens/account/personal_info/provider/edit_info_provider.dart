@@ -13,7 +13,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../models/response_user.dart';
+
 import '../../../../models/selection_model.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
@@ -39,7 +39,7 @@ class EditInfoProvider extends ChangeNotifier {
 
   AuthPrv authPrv;
 
-  EditInfoProvider(ResponseUser? user, this.authPrv) {
+  EditInfoProvider(user, this.authPrv) {
     avatarLink = user?.avatarLink;
     date = user?.birthday;
     gender = user?.sex;
