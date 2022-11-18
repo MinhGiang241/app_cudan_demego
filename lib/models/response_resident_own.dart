@@ -46,10 +46,15 @@ class ResponseResidentOwn {
     apartmentId = json['apartmentId'];
     type = json['type'];
     status = json['status'];
-    building = Building.fromJson(json['building']);
-    resident = ResponseResidentInfo.fromJson(json['resident']);
-    floor = Floor.fromJson(json['floor']);
-    apartment = Apartment.fromJson(json['apartment']);
+    building =
+        json['building'] != null ? Building.fromJson(json['building']) : null;
+    resident = json['resident'] != null
+        ? ResponseResidentInfo.fromJson(json['resident'])
+        : null;
+    floor = json['floor'] != null ? Floor.fromJson(json['floor']) : null;
+    apartment = json['apartment'] != null
+        ? Apartment.fromJson(json['apartment'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

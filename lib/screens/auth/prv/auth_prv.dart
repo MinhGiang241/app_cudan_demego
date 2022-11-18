@@ -98,7 +98,10 @@ class AuthPrv extends ChangeNotifier {
           if (value != null) {
             context.read<ResidentInfoPrv>().userInfo =
                 ResponseResidentInfo.fromJson(value);
-            await APITower.getUserOwnInfo(userInfo!.id as String).then((v) {
+
+            await APITower.getUserOwnInfo(
+                    context.read<ResidentInfoPrv>().userInfo!.id as String)
+                .then((v) {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
                 print(i);
