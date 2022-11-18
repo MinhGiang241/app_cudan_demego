@@ -29,6 +29,8 @@ class APIAuth {
       if (data['resident_resident_find_phone_by_email']['data'] != null) {
         user = data['resident_resident_find_phone_by_email']['data'];
       }
+    } else {
+      await getUserInformationByUsername(user);
     }
 
     return await ApiService.shared.getClient(
@@ -39,10 +41,43 @@ class APIAuth {
         remember: remember);
   }
 
+  static Future resetPassword(String userName, String newPassword) async {
+    var query = '''
+    mutation (\$userName:String,\$newPassword:String){
+        response: authorization_reset_password_ (userName: \$userName,newPassword: \$newPassword ) {
+            code
+            message
+            data
+        }
+    }
+            
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "userName": userName,
+        "newPassword": newPassword,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future sendOTPviaPhone(String phone) async {}
+
   static Future getUserInformationByUsername(String phone) async {
-    var findAccountQuerry = '''
+    var findAccountQuery = '''
     mutation (\$phone:String){
-        response: account_find_email_by_phone (phone: \$phone ) {
+        response: account_find_user_info_by_phone (phone: \$phone ) {
             code
             message
             data
@@ -51,20 +86,58 @@ class APIAuth {
     ''';
 
     final MutationOptions options = MutationOptions(
-      document: gql(findAccountQuerry),
+      document: gql(findAccountQuery),
       variables: {
         "phone": phone,
       },
     );
 
-    final data = await ApiService.shared.mutationhqlQuery(options);
-    return data;
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future verifyOtp(String otp, String sendTo) async {
+    var query = '''
+    mutation (\$otp:String,\$sendTo:String){
+        response: authorization_veryfyOTP (otp: \$otp,sendTo: \$sendTo ) {
+            code
+            message
+            data
+        }
+    }
+            
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "otp": otp,
+        "sendTo": sendTo,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
   }
 
   static Future sendOtpViaEmail(String email) async {
     var sendOtp = '''
   mutation (\$mailTo: String) {
-  authorization_generate_otp(mailTo: \$mailTo){
+  response :authorization_generate_otp(mailTo: \$mailTo){
     code
     message
     data
@@ -79,23 +152,15 @@ class APIAuth {
       },
     );
 
-    final data = await ApiService.shared.mutationhqlQuery(options);
-    return data;
-  }
+    final results = await ApiService.shared.mutationhqlQuery(options);
 
-  static Future<ResponseRegister> verifyOTP({
-    required BuildContext context,
-    required String phoneNum,
-    required String otp,
-  }) async {
-    final body = {"phoneNumber": phoneNum, "Otp": otp};
-    final data = await ApiService.shared.postApi(
-        path: 'api/mobile/verifyOtp',
-        useToken: false,
-        data: body,
-        context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
   }
 
   static Future<void> signOut(
@@ -124,107 +189,10 @@ class APIAuth {
     return ResponseFileUpload.fromJson(data);
   }
 
-  static Future<ResponseRegister> updateUserInfo(
-      {required BuildContext context,
-      String? email,
-      String? userName,
-      String? company,
-      String? avatarLink,
-      String? birthday,
-      String? sex,
-      String? cmnd,
-      String? national}) async {
-    final body = {};
-    if (email != null && email.isNotEmpty) body['email'] = email;
-    if (userName != null && userName.isNotEmpty) body['userName'] = userName;
-    if (company != null && company.isNotEmpty) body['congTy'] = company;
-    if (avatarLink != null && avatarLink.isNotEmpty) {
-      body['avatarLink'] = avatarLink;
-    }
-    if (birthday != null && birthday.isNotEmpty) body['birthday'] = birthday;
-    if (sex != null && sex.isNotEmpty) body['sex'] = sex;
-    if (cmnd != null && cmnd.isNotEmpty) body['cmnd'] = cmnd;
-    if (national != null && national.isNotEmpty) body['national'] = national;
-
-    //print(body);
-    final data = await ApiService.shared
-        .postApi(path: 'api/mobile/updateInfo', data: body, context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
-
-  static Future<ResponseRegister> changePass(
-      {required BuildContext context,
-      required String phoneNum,
-      required String oldPass,
-      required String newPass}) async {
-    final body = {
-      "phoneNumber": phoneNum,
-      "OldPassWord": oldPass,
-      "NewPassWord": newPass
-    };
-    final data = await ApiService.shared.postApi(
-        path: 'api/mobile/changePassword', data: body, context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
-
-  static Future<ResponseRegister> forgotPass({
-    required String phoneNum,
-    required BuildContext context,
-  }) async {
-    final body = {
-      "PhoneNumber": phoneNum,
-    };
-    final data = await ApiService.shared.postApi(
-        path: 'api/mobile/forgotPassword',
-        useToken: false,
-        data: body,
-        context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
-
-  static Future<ResponseRegister> generateToken(
-      {required BuildContext context,
-      required String phoneNum,
-      required String otp}) async {
-    final body = {"PhoneNumber": phoneNum, "Otp": otp};
-    final data = await ApiService.shared.postApi(
-        path: 'api/mobile/generateToken',
-        useToken: false,
-        data: body,
-        context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
-
-  static Future<ResponseRegister> resetPass({
-    required BuildContext context,
-    required String phoneNum,
-    required String token,
-    required String newPass,
-    required String confirmPass,
-  }) async {
-    final body = {
-      "PhoneNumber": phoneNum,
-      "Token": token,
-      "NewPassWord": newPass,
-      "ConfirmPassword": confirmPass
-    };
-    final data = await ApiService.shared.postApi(
-        path: 'api/mobile/resetPassword',
-        useToken: false,
-        data: body,
-        context: context);
-    // print(data);
-    return ResponseRegister.fromJson(data);
-  }
-
   static Future findUserNameByEmail({required String email}) async {
-    var querry = '''
+    var query = '''
     mutation (\$email:String ){
-	resident_resident_find_phone_by_email(email:\$email) {
+	response: resident_resident_find_phone_by_email(email:\$email) {
 		code
 		message
 		data
@@ -232,14 +200,20 @@ class APIAuth {
 }
     ''';
     final MutationOptions options = MutationOptions(
-      document: gql(querry),
+      document: gql(query),
       variables: {
         "email": email,
       },
     );
+    final results = await ApiService.shared.mutationhqlQuery(options);
 
-    final data = await ApiService.shared.mutationhqlQuery(options);
-    return data;
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message!);
+    } else {
+      return res.response.data;
+    }
   }
 
   static Future<ResponseRegister> createResidentAccount(
@@ -273,10 +247,10 @@ class APIAuth {
 
     final data = await ApiService.shared.mutationhqlQuery(options);
     var res = ResponseModule.fromJson(data);
-    if (res.response == null) {
-      res.error != null ? throw (res.error!) : throw ('');
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return ResponseRegister.fromJson(res.response.data);
     }
-
-    return ResponseRegister.fromJson(res.response);
   }
 }

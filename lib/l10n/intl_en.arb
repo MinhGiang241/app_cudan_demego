@@ -23,7 +23,7 @@
   "can_not_empty": "Can not empty",
   "terms_services": "Terms services",
   "otp_verify": "OTP verify",
-  "otp_msg": "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.",
+  "otp_msg": "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.",
   "not_get_otp": "Did not receive OTP?",
   "resend": "Resend",
   "verify": "Verify",
@@ -152,5 +152,12 @@
   "approved": "Approved",
   "wait_approve": "Waiting approve",
   "phone_email":"Phone/ Email",
-  "enter_phone_email":"Enter phone number or email"
+  "enter_phone_email":"Enter phone number or email",
+  "not_found_account":"Not found account Information",
+  "we_send_to":"We sent otp code to :{to}",
+  "success_opt":"Send OTP code successfully",
+  "otp_invalid" :"OTP code is invalid !",
+  "reset_pass_success":"Reset Password successfully, please Sign in again",
+  "re_sign_in":"Please sign in again",
+  "success_sign_up":"Sign up successfully"
 }

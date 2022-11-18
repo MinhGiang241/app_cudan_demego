@@ -163,42 +163,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         vpad(32),
                         PrimaryButton(
                           text: S.of(context).create_acc_1,
-                          onTap: () async {
-                            // await context.read<SignUpPrv>().signUp(context);
-                            // ignore: prefer_function_declarations_over_variables
-                            var signUp = () async {
-                              print('verify');
-                              await context.read<SignUpPrv>().signUp(context);
-                            };
-
-                            var email =
-                                context.read<SignUpPrv>().emailController.text;
-                            var name =
-                                context.read<SignUpPrv>().nameController.text;
-                            var pass =
-                                context.read<SignUpPrv>().passController.text;
-                            var phone =
-                                context.read<SignUpPrv>().phoneController.text;
-
-                            if (context
-                                .read<SignUpPrv>()
-                                .formKey
-                                .currentState!
-                                .validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => VerifyOTPScreen(
-                                      email: email,
-                                      name: name,
-                                      pass: pass,
-                                      phone: phone,
-                                      isForgotPass: false,
-                                      verify: signUp),
-                                ),
-                              );
-                            }
-                          },
+                          onTap: context.watch<SignUpPrv>().isLoading
+                              ? null
+                              : () async {
+                                  await context
+                                      .read<SignUpPrv>()
+                                      .signUp(context);
+                                },
                           isLoading: context.watch<SignUpPrv>().isLoading,
                           width: double.infinity,
                         ),

@@ -290,10 +290,10 @@ class S {
     );
   }
 
-  /// `We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.`
+  /// `We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.`
   String get otp_msg {
     return Intl.message(
-      'We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.',
+      'We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.',
       name: 'otp_msg',
       desc: '',
       args: [],
@@ -1585,6 +1585,76 @@ class S {
     return Intl.message(
       'Enter phone number or email',
       name: 'enter_phone_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not found account Information`
+  String get not_found_account {
+    return Intl.message(
+      'Not found account Information',
+      name: 'not_found_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We sent otp code to :{to}`
+  String we_send_to(Object to) {
+    return Intl.message(
+      'We sent otp code to :$to',
+      name: 'we_send_to',
+      desc: '',
+      args: [to],
+    );
+  }
+
+  /// `Send OTP code successfully`
+  String get success_opt {
+    return Intl.message(
+      'Send OTP code successfully',
+      name: 'success_opt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP code is invalid !`
+  String get otp_invalid {
+    return Intl.message(
+      'OTP code is invalid !',
+      name: 'otp_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password successfully, please Sign in again`
+  String get reset_pass_success {
+    return Intl.message(
+      'Reset Password successfully, please Sign in again',
+      name: 'reset_pass_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in again`
+  String get re_sign_in {
+    return Intl.message(
+      'Please sign in again',
+      name: 're_sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up successfully`
+  String get success_sign_up {
+    return Intl.message(
+      'Sign up successfully',
+      name: 'success_sign_up',
       desc: '',
       args: [],
     );

@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
 
@@ -36,17 +37,15 @@ class APITower {
     final MutationOptions options = MutationOptions(
       document: gql(query),
     );
-    final data = await ApiService.shared.mutationhqlQuery(options);
-    // ignore: unnecessary_null_comparison
-    if (data == null) {
-      throw (S.current.err_conn);
-    } else if (data['response']['code'] != 0) {
-      throw (data['response']['message']);
-    } else if (data['response']['data'] == null) {
-      return null;
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
     } else {
-      var userInfo = ResponseResidentInfo.fromJson(data['response']['data']);
-      return userInfo;
+      return res.response.data;
     }
   }
 
@@ -68,25 +67,15 @@ class APITower {
         "residentId": residentId,
       },
     );
-    final data = await ApiService.shared.mutationhqlQuery(options);
-    // ignore: unnecessary_null_comparison
-    if (data == null) {
-      throw (S.current.err_conn);
-    } else if (data['response']['code'] != 0) {
-      throw (data['response']['message']);
-    } else {
-      return data['response']['data'];
-    }
-  }
+    final results = await ApiService.shared.mutationhqlQuery(options);
 
-  static Future getINfo() async {
-    await ApiService.shared
-        .getApi(
-      path: 'api/queries/paging/getToaNha',
-    )
-        .then((value) {
-      // log(jsonEncode(value.toString()));
-    });
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
   }
 
   static Future<ResponseNewsDetails> getNewsDetails(

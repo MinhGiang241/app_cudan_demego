@@ -15,16 +15,16 @@ import '../../../widgets/primary_text_field.dart';
 import '../prv/reset_pass_prv.dart';
 
 class ResetPassScreen extends StatelessWidget {
-  const ResetPassScreen({Key? key, required this.phone, required this.token})
+  const ResetPassScreen({Key? key, required this.user, required this.token})
       : super(key: key);
   static const routeName = '/reset-password';
-  final String phone;
+  final String user;
   final String token;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ResetPassPrv>(
-        create: (context) => ResetPassPrv(phone, token),
+        create: (context) => ResetPassPrv(user, token),
         builder: (context, snapshot) {
           return PrimaryScreen(
             appBar: AppBar(
@@ -85,19 +85,16 @@ class ResetPassScreen extends StatelessWidget {
                     ),
                     vpad(30),
                     PrimaryButton(
-                        onTap: () async {
-                          FocusScope.of(context).unfocus();
-                          Utils.showDialog(
-                                  context: context,
-                                  dialog: PrimaryDialog.success(
-                                      msg: "S.of(context).update_success"))
-                              .then((value) {
-                            int count = 3;
-                            Navigator.popAndPushNamed(
-                                context, SignInScreen.routeName);
-                          });
-                          await context.read<ResetPassPrv>().resetPass(context);
-                        },
+                        isLoading: context.watch<ResetPassPrv>().isLoading,
+                        onTap: context.watch<ResetPassPrv>().isLoading
+                            ? () {}
+                            : () async {
+                                FocusScope.of(context).unfocus();
+
+                                await context
+                                    .read<ResetPassPrv>()
+                                    .resetPass(context);
+                              },
                         text: S.of(context).reset_pass,
                         // isLoading: context.watch<ResetPassPrv>().isLoading,
                         width: double.infinity)

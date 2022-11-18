@@ -16,6 +16,7 @@ import 'package:graphql/client.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
 
+import '../generated/l10n.dart';
 import '../screens/auth/sign_in_screen.dart';
 
 typedef OnSendProgress = Function(int, int);
@@ -343,13 +344,14 @@ class ApiService {
       final result = await cl.query(options);
       if (result.data == null) {
         return {
-          "status": "internet_error",
-          "message": "network_connection_err"
+          "response": {"code": 1, "message": S.current.err_conn, "data": null}
         };
       }
       return result.data!;
     } on OperationException catch (e) {
-      return {"status": "error", "message": e.toString()};
+      return {
+        "response": {"code": 1, "message": e.toString(), "data": null}
+      };
     }
   }
 
@@ -363,13 +365,14 @@ class ApiService {
       if (result.data == null) {
         // throw ("network_connection_err");
         return {
-          "status": "internet_error",
-          "message": "network_connection_err"
+          "response": {"code": 1, "message": S.current.err_conn}
         };
       }
       return result.data!;
     } catch (e) {
-      return {"status": "error", "message": e.toString()};
+      return {
+        "response": {"code": 1, "message": e.toString()}
+      };
     }
   }
 }

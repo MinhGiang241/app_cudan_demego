@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
@@ -16,68 +17,32 @@ class ResetPassPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
-  String phone;
+  String user;
   String token;
 
-  ResetPassPrv(this.phone, this.token);
+  ResetPassPrv(this.user, this.token);
 
   resetPass(BuildContext context) async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate() &&
+        newPassController.text.trim() == cNewPassController.text.trim()) {
       validateNewPass = validateCNewPass = null;
       isLoading = true;
       notifyListeners();
-      await APIAuth.resetPass(
-              context: context,
-              phoneNum: phone,
-              token: token,
-              newPass: newPassController.text,
-              confirmPass: cNewPassController.text)
-          .then((value) {
+      await APIAuth.resetPassword(user, newPassController.text.trim())
+          .then((v) {
         isLoading = false;
         notifyListeners();
-        // if (value.status == null) {
-        //   if (value.code == 0) {
-        //     Utils.showDialog(
-        //             context: context,
-        //             dialog: PrimaryDialog.success(
-        //                 msg: "S.of(context).update_success"))
-        //         .then((value) {
-        //       int count = 3;
-        //       Navigator.popUntil(context, (route) => count-- == 0);
-        //     });
-        //   } else {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.errorCode(code: value.code));
-        //   }
-        // } else {
-        //   if (value.status == 'internet_error') {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog:
-        //             PrimaryDialog.error(msg: "S.of(context).network_error"));
-        //   } else {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.error(
-        //             msg: "S.of(context).err_x(value.message ?? " ")"));
-        //   }
-        // }
+        Utils.showSuccessMessage(
+            context: context,
+            e: '${S.of(context).reset_pass_success}, ${S.of(context).re_sign_in}',
+            onClose: () {
+              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+            });
+      }).catchError((e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
       });
-    } else {
-      if (newPassController.text.isEmpty) {
-        validateNewPass = S.of(context).can_not_empty;
-      } else {
-        validateNewPass = null;
-      }
-      if (cNewPassController.text.isEmpty) {
-        validateCNewPass = S.of(context).can_not_empty;
-      } else if (cNewPassController.text != newPassController.text) {
-        validateCNewPass = "S.of(context).rgstr_code_2";
-      } else {
-        validateCNewPass = null;
-      }
-      notifyListeners();
-    }
+    } else {}
   }
 }

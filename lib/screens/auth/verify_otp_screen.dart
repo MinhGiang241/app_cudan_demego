@@ -18,6 +18,7 @@ class VerifyOTPScreen extends StatefulWidget {
       required this.name,
       required this.pass,
       required this.email,
+      required this.isPhone,
       this.verify,
       this.isForgotPass = false})
       : super(key: key);
@@ -25,6 +26,7 @@ class VerifyOTPScreen extends StatefulWidget {
   final String name;
   final String pass;
   final String email;
+  final bool isPhone;
   final bool isForgotPass;
   final Function()? verify;
 
@@ -36,8 +38,14 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<VerifyOTPPrv>(
-        create: (context) => VerifyOTPPrv(context.read<AuthPrv>(), widget.phone,
-            widget.name, widget.pass, widget.email),
+        create: (context) => VerifyOTPPrv(
+            context.read<AuthPrv>(),
+            widget.phone,
+            widget.name,
+            widget.pass,
+            widget.email,
+            widget.phone,
+            widget.isPhone),
         builder: (context, snapshot) {
           return PrimaryScreen(
             appBar: AppBar(backgroundColor: Colors.transparent),
@@ -59,7 +67,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                       ),
                       vpad(24),
                       Text(
-                        "Chúng tôi đã gửi cho bạn mã đến:+84383873719",
+                        S.of(context).we_send_to(
+                            widget.isPhone ? widget.phone : widget.email),
                         style: txtMedium(14, grayScaleColor2),
                         textAlign: TextAlign.center,
                       ),
@@ -70,10 +79,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: PinCodeTextField(
-                    // controller: context.read<VerifyOTPPrv>().otpController,
+                    controller: context.read<VerifyOTPPrv>().otpController,
                     appContext: context,
                     length: 6,
-                    onChanged: (v) {},
+                    onTap: () {},
+                    onChanged: (v) {
+                      context.read<VerifyOTPPrv>().offTextError();
+                    },
                     autoFocus: true,
                     animationType: AnimationType.fade,
                     cursorColor: grayScaleColor1,
@@ -96,7 +108,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     animationDuration: const Duration(milliseconds: 300),
                   ),
                 ),
-                vpad(28),
+                vpad(14),
+                if (context.watch<VerifyOTPPrv>().otpValidate != null)
+                  Center(
+                    child: Text(S.of(context).otp_invalid,
+                        style: txtMedium(14, redColorBase)),
+                  ),
+                vpad(14),
                 StreamBuilder<int>(
                     initialData: 60,
                     stream: context
@@ -118,16 +136,17 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                   child:
                                       CircularProgressIndicator(strokeWidth: 3))
                               : GestureDetector(
-                                  onTap: second == 0
-                                      ? () async {
-                                          await context
-                                              .read<VerifyOTPPrv>()
-                                              .resend(context);
-                                        }
-                                      : null,
+                                  onTap: () async {
+                                    await context
+                                        .read<VerifyOTPPrv>()
+                                        .resend(context);
+                                  },
                                   child: Text(S.of(context).resend,
                                       style: txtLinkSmall(
-                                          color: second == 0
+                                          color: (second == 0 ||
+                                                  context
+                                                      .watch<VerifyOTPPrv>()
+                                                      .isResending)
                                               ? primaryColorBase
                                               : primaryColor4)),
                                 ),
@@ -142,19 +161,25 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: PrimaryButton(
+                    isLoading: context.watch<VerifyOTPPrv>().isLoading,
                     text: S.of(context).verify,
-                    onTap: () {
-                      // context
-                      //     .read<VerifyOTPPrv>()
-                      //     .verify(context, widget.isForgotPass);
-                      if (widget.isForgotPass) {
-                        Utils.pushScreen(
-                            context, ResetPassScreen(phone: '', token: ''));
-                      } else {
-                        // Utils.pushScreen(context, SignInScreen());
-                        widget.verify!();
-                      }
-                    },
+                    onTap: context.watch<VerifyOTPPrv>().isLoading
+                        ? () {}
+                        : () {
+                            // context
+                            //     .read<VerifyOTPPrv>()
+                            //     .verify(context, widget.isForgotPass);
+                            if (widget.isForgotPass) {
+                              context
+                                  .read<VerifyOTPPrv>()
+                                  .verify(context, widget.isForgotPass, () {});
+                              // Utils.pushScreen(
+                              //     context, ResetPassScreen(phone: '', token: ''));
+                            } else {
+                              // Utils.pushScreen(context, SignInScreen());
+
+                            }
+                          },
                   ),
                 )
               ],

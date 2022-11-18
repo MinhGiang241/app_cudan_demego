@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:app_cudan/screens/account/change_pass/change_pass_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dialog.dart';
 import '../../home/home_screen.dart';
 import '../apartment_selection_screen.dart';
+import '../fogot_pass/reset_pass_screen.dart';
 import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
 import 'resident_info_prv.dart';
@@ -155,65 +157,44 @@ class AuthPrv extends ChangeNotifier {
         Utils.showDialog(
             context: context,
             dialog: PrimaryDialog.success(
-              msg: S.of(context).rgstr_code_0,
+              msg:
+                  '${S.of(context).success_sign_up}, ${S.of(context).re_sign_in}',
               onClose: () {
-                Navigator.pushNamed(context, SignInScreen.routeName);
+                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
               },
             ));
-      } else {
-        Utils.showDialog(
-            context: context,
-            dialog: PrimaryDialog.error(
-              msg: value.message,
-            ));
-      }
+      } else {}
     }).catchError((e) {
-      Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.error(msg: S.of(context).err_internet));
+      Utils.showErrorMessage(context, e);
     });
   }
 
   Future<void> onVerify(
-    BuildContext context,
-    String phone,
-    String otp,
-  ) async {
-    await APIAuth.verifyOTP(phoneNum: phone, otp: otp, context: context)
-        .then((value) {
-      // if (value.status == null) {
-      //   if (value.code == 0) {
-      //     Utils.showDialog(
-      //         context: context,
-      //         dialog: PrimaryDialog.success(
-      //           msg: "S.of(context).rgstr_code_0",
-      //         )).then((value) {
-      //       Utils.pushAndRemoveUntil(
-      //           context, const SignInScreen(), (route) => route.isFirst);
-      //     });
-      //   } else {
-      //     Utils.showDialog(
-      //         context: context,
-      //         dialog: PrimaryDialog.errorCode(
-      //           code: value.code,
-      //         ));
-      //   }
-      // } else {
-      //   if (value.status == "internet_error") {
-      //     Utils.showDialog(
-      //         context: context,
-      //         dialog: PrimaryDialog.error(
-      //           msg: " S.of(context).network_error",
-      //         ));
-      //   } else {
-      //     Utils.showDialog(
-      //         context: context,
-      //         dialog: PrimaryDialog.error(
-      //           msg: "S.of(context).err_x(value.message ?? " ")",
-      //         ));
-      //   }
-      // }
-    });
+      BuildContext context,
+      String name,
+      String mail,
+      String phone,
+      String otp,
+      bool isFogotPass,
+      bool isPhone,
+      Function verify) async {
+    if (isFogotPass) {
+      await APIAuth.verifyOtp(otp, isPhone ? phone : mail).then((v) {
+        Utils.pushScreen(
+            context,
+            ResetPassScreen(
+              user: name,
+              token: '',
+            ));
+      }).catchError((e) {
+        Utils.showErrorMessage(context, e);
+      });
+    } else {
+      // await APIAuth.verifyOtp(otp, isPhone ? phone : mail)
+      await verify().then((v) {}).catchError((e) {
+        Utils.showErrorMessage(context, e);
+      });
+    }
   }
 
   Future<void> onSelectApartment(

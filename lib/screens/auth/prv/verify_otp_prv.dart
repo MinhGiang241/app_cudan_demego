@@ -26,9 +26,12 @@ class VerifyOTPPrv extends ChangeNotifier {
   final String user;
   final String name;
   final String email;
+  final String phone;
   final String pass;
+  final bool isPhone;
   late Timer timer;
-  VerifyOTPPrv(this.authPrv, this.user, this.name, this.pass, this.email) {
+  VerifyOTPPrv(this.authPrv, this.user, this.name, this.pass, this.email,
+      this.phone, this.isPhone) {
     _startTimer();
   }
 
@@ -41,6 +44,11 @@ class VerifyOTPPrv extends ChangeNotifier {
   bool isLoading = false;
   bool isResending = false;
 
+  offTextError() {
+    otpValidate = null;
+    notifyListeners();
+  }
+
   _startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
       second--;
@@ -51,43 +59,26 @@ class VerifyOTPPrv extends ChangeNotifier {
     });
   }
 
-  verify(BuildContext context, bool isForgotPass) async {
+  verify(BuildContext context, bool isForgotPass, Function verify) async {
     if (otpController.text.isEmpty || otpController.text.length < 6) {
       _onError();
     } else {
+      otpValidate = null;
       isLoading = true;
       notifyListeners();
       if (isForgotPass) {
-        await APIAuth.generateToken(
-                phoneNum: user, otp: otpController.text, context: context)
+        await authPrv
+            .onVerify(context, name, email, phone, otpController.text,
+                isForgotPass, isPhone, () {})
             .then((value) {
           isLoading = false;
           notifyListeners();
-          // if (value.status == null) {
-          //   if (value.code == 0) {
-          //     Utils.pushScreen(
-          //         context, ResetPassScreen(phone: user, token: value.message!));
-          //   } else {
-          //     Utils.showDialog(
-          //         context: context,
-          //         dialog: PrimaryDialog.errorCode(code: value.code));
-          //   }
-          // } else {
-          //   if (value.status == 'internet_error') {
-          //     Utils.showDialog(
-          //         context: context,
-          //         dialog:
-          //             PrimaryDialog.error(msg: 'S.of(context).network_error'));
-          //   } else {
-          //     Utils.showDialog(
-          //         context: context,
-          //         dialog: PrimaryDialog.error(
-          //             msg: 'S.of(context).err_x(value.message ?? "")'));
-          //   }
-          // }
         });
       } else {
-        await authPrv.onVerify(context, user, otpController.text).then((value) {
+        await authPrv
+            .onVerify(context, name, email, phone, otpController.text,
+                isForgotPass, isPhone, verify)
+            .then((value) {
           isLoading = false;
           notifyListeners();
         });
@@ -96,39 +87,35 @@ class VerifyOTPPrv extends ChangeNotifier {
   }
 
   _onError() {
+    otpValidate = S.current.otp_invalid;
+    notifyListeners();
     errorAnimationController.add(ErrorAnimationType.shake);
   }
 
   resend(BuildContext context) async {
     isResending = true;
     notifyListeners();
-    //   await APIAuth.createAccount(
-    //           phoneNum: phone,
-    //           fullName: name,
-    //           email: email,
-    //           passWord: pass,
-    //           confirmPassword: pass)
-    //       .then((value) {
-    //     isResending = false;
-    //     notifyListeners();
-    //     if (value.status == null) {
-    //       second = 60;
-    //       _startTimer();
-    //     } else {
-    //       if (value.status == "internet_error") {
-    //         Utils.showDialog(
-    //             context: context,
-    //             dialog: PrimaryDialog.error(
-    //               msg: ' S.of(context).network_error',
-    //             ));
-    //       } else {
-    //         Utils.showDialog(
-    //             context: context,
-    //             dialog: PrimaryDialog.error(
-    //               msg: 'S.of(context).err_x(value.message ?? "")',
-    //             ));
-    //       }
-    //     }
-    //   });
+
+    if (isPhone) {
+      await APIAuth.sendOTPviaPhone(phone).then((v) {
+        Utils.showSuccessMessage(
+            context: context, e: S.of(context).success_opt);
+        second = 60;
+        notifyListeners();
+      }).catchError((e) {
+        Utils.showErrorMessage(context, e);
+      });
+    } else {
+      await APIAuth.sendOtpViaEmail(email).then((v) {
+        Utils.showSuccessMessage(
+            context: context, e: S.of(context).success_opt);
+        second = 60;
+        notifyListeners();
+      }).catchError((e) {
+        Utils.showErrorMessage(context, e);
+      });
+      isResending = false;
+      notifyListeners();
+    }
   }
 }

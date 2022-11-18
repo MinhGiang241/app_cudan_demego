@@ -163,14 +163,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   vpad(32),
                   PrimaryButton(
-                      onTap: () async {
-                        FocusScope.of(context).unfocus();
+                      onTap: context.read<SingInPrv>().isLoading
+                          ? null
+                          : () async {
+                              FocusScope.of(context).unfocus();
 
-                        await context.read<SingInPrv>().signIn(context);
+                              await context.read<SingInPrv>().signIn(context);
 
-                        // Navigator.pushNamed(
-                        //     context, ApartmentSeletionScreen.routeName);
-                      },
+                              // Navigator.pushNamed(
+                              //     context, ApartmentSeletionScreen.routeName);
+                            },
                       text: S.of(context).sign_in,
                       isLoading: context.watch<SingInPrv>().isLoading,
                       width: double.infinity)

@@ -24,39 +24,39 @@ class ChangePassPrv extends ChangeNotifier {
       validateNewPass = null;
       validateCNewPass = null;
       isLoading = true;
-      notifyListeners();
-      await APIAuth.changePass(
-              context: context,
-              phoneNum: phoneNum,
-              oldPass: currentPassController.text,
-              newPass: newPassController.text)
-          .then((value) async {
-        isLoading = false;
-        notifyListeners();
-        // if (value.status == null) {
-        //   if (value.success == true) {
-        //     await Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.success(
-        //           msg: "", // S.of(context).update_success,
-        //         )).then((value) {
-        //       // Utils.pop(context);
-        //     });
-        //   } else {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.error(
-        //           msg: "", //S.of(context).err_x(value.message ?? ""),
-        //         ));
-        //   }
-        // } else {
-        //   Utils.showDialog(
-        //       context: context,
-        //       dialog: PrimaryDialog.error(
-        //         msg: "", // S.of(context).err_x(value.message ?? ""),
-        //       ));
-        // }
-      });
+      // notifyListeners();
+      // await APIAuth.changePass(
+      //         context: context,
+      //         phoneNum: phoneNum,
+      //         oldPass: currentPassController.text,
+      //         newPass: newPassController.text)
+      //     .then((value) async {
+      //   isLoading = false;
+      //   notifyListeners();
+      // if (value.status == null) {
+      //   if (value.success == true) {
+      //     await Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.success(
+      //           msg: "", // S.of(context).update_success,
+      //         )).then((value) {
+      //       // Utils.pop(context);
+      //     });
+      //   } else {
+      //     Utils.showDialog(
+      //         context: context,
+      //         dialog: PrimaryDialog.error(
+      //           msg: "", //S.of(context).err_x(value.message ?? ""),
+      //         ));
+      //   }
+      // } else {
+      //   Utils.showDialog(
+      //       context: context,
+      //       dialog: PrimaryDialog.error(
+      //         msg: "", // S.of(context).err_x(value.message ?? ""),
+      //       ));
+      // }
+      // });
     } else {
       if (currentPassController.text.isEmpty) {
         validateCurrentPass = ""; // S.of(context).can_not_be_empty;

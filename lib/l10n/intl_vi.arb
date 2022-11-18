@@ -22,7 +22,7 @@
   "can_not_empty": "Không được để trống",
   "terms_services": "Điều khoản dịch vụ",
   "otp_verify": "Nhập mã bảo mật",
-  "otp_msg": "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự.",
+  "otp_msg": "Vui lòng kiểm tra điện thoại hoặc email để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự.",
   "not_get_otp": "Không nhận được OTP?",
   "resend": "Gửi lại",
   "verify": "Xác thực",
@@ -152,5 +152,12 @@
   "approved": "Đã duyệt",
   "wait_approve": "Chờ duyệt",
   "phone_email":"Số điện thoại/ Email",
-  "enter_phone_email":"Nhập số điện thoại hoặc email"
+  "enter_phone_email":"Nhập số điện thoại hoặc email",
+  "not_found_account":"Không tìm thấy thông tin tài khoản",
+  "we_send_to":"Chúng tôi đã gửi cho bạn mã đến: {to}",
+  "success_opt":"Gửi mã OTP thành công",
+  "otp_invalid" :"Mã OTP không hợp lệ !",
+  "reset_pass_success":"Đổi mật khẩu thành công, hãy đăng nhập lại",
+  "re_sign_in":"Hãy đăng nhập lại",
+  "success_sign_up":"Đăng ký thành công"
 }

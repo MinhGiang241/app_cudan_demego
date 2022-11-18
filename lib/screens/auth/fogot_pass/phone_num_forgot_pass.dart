@@ -14,7 +14,7 @@ import '../verify_otp_screen.dart';
 import 'option_send_otp.dart';
 
 class PhoneNumForgotPassScreen extends StatefulWidget {
-  PhoneNumForgotPassScreen({Key? key}) : super(key: key);
+  const PhoneNumForgotPassScreen({Key? key}) : super(key: key);
   static const routeName = '/forgot';
 
   @override
@@ -36,7 +36,9 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ForgotPassPrv>(
-        create: (context) => ForgotPassPrv(),
+        create: (context) => ForgotPassPrv(
+              isForgotPass: true,
+            ),
         builder: (context, snapshot) {
           return PrimaryScreen(
             appBar: AppBar(
@@ -80,13 +82,7 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                               .read<ForgotPassPrv>()
                               .getEmailAndPhone(context)
                               .then((value) {})
-                              .catchError((e) {
-                            Utils.showDialog(
-                                context: context,
-                                dialog: PrimaryDialog.error(
-                                  msg: S.of(context).err_x(e),
-                                ));
-                          });
+                              .catchError((e) {});
                         },
                         text: S.of(context).send_verify,
                         isLoading: context.watch<ForgotPassPrv>().isLoading,

@@ -16,10 +16,16 @@ import '../prv/forgot_pass_prv.dart';
 import '../verify_otp_screen.dart';
 
 class OptionSendOtp extends StatefulWidget {
-  const OptionSendOtp({super.key, this.email, this.phone});
-
+  const OptionSendOtp(
+      {super.key,
+      this.email,
+      this.phone,
+      required this.isForgotPass,
+      required this.userName});
+  final bool isForgotPass;
   final String? email;
   final String? phone;
+  final String? userName;
 
   @override
   State<OptionSendOtp> createState() => _OptionSendOtpState();
@@ -31,7 +37,7 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ForgotPassPrv>(
-      create: (context) => ForgotPassPrv(),
+      create: (context) => ForgotPassPrv(isForgotPass: widget.isForgotPass),
       builder: (context, snapshot) {
         return PrimaryScreen(
             appBar: AppBar(
@@ -97,11 +103,18 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                       onTap: () {
                         if (_selectedOption == 1) {
                           Utils.pushScreen(
-                              context, ConfirmChoice(choice: widget.phone));
+                              context,
+                              ConfirmChoice(
+                                userName: widget.userName,
+                                choice: widget.phone,
+                                isForgotPass: widget.isForgotPass,
+                              ));
                         } else if (_selectedOption == 2) {
                           Utils.pushScreen(
                               context,
                               ConfirmChoice(
+                                userName: widget.userName,
+                                isForgotPass: widget.isForgotPass,
                                 choice: widget.email,
                                 numChoice: _selectedOption,
                               ));
@@ -121,13 +134,16 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
 }
 
 class ConfirmChoice extends StatefulWidget {
-  const ConfirmChoice({
-    super.key,
-    this.choice,
-    this.numChoice,
-  });
+  const ConfirmChoice(
+      {super.key,
+      this.choice,
+      this.numChoice,
+      required this.isForgotPass,
+      required this.userName});
   final String? choice;
+  final String? userName;
   final int? numChoice;
+  final bool isForgotPass;
 
   @override
   State<ConfirmChoice> createState() => _ConfirmChoiceState();
@@ -137,15 +153,24 @@ class _ConfirmChoiceState extends State<ConfirmChoice> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ForgotPassPrv>(
-      create: (context) => ForgotPassPrv(),
+      create: (context) => ForgotPassPrv(isForgotPass: widget.isForgotPass),
       builder: (context, snapshot) {
+        sendOTPviaPhone() async {
+          setState(() {
+            context.read<ForgotPassPrv>().isLoading = true;
+          });
+          await context
+              .read<ForgotPassPrv>()
+              .sendOtpViaPhone(context, widget.choice, widget.userName ?? '');
+        }
+
         sendOTPviaEmail() async {
           setState(() {
             context.read<ForgotPassPrv>().isLoading = true;
           });
           await context
               .read<ForgotPassPrv>()
-              .sendOtpViaEmail(context, widget.choice);
+              .sendOtpViaEmail(context, widget.choice, widget.userName ?? "");
         }
 
         return PrimaryScreen(
@@ -187,26 +212,33 @@ class _ConfirmChoiceState extends State<ConfirmChoice> {
                     width: dvWidth(context) - 48,
                     text: S.of(context).next,
                     isLoading: context.read<ForgotPassPrv>().isLoading,
-                    onTap: () async {
-                      if (widget.numChoice == 2) {
-                        await sendOTPviaEmail();
-                        setState(() {
-                          context.read<ForgotPassPrv>().isLoading = false;
-                        });
-                      }
+                    onTap: context.read<ForgotPassPrv>().isLoading
+                        ? null
+                        : () async {
+                            if (widget.numChoice == 1) {
+                              sendOTPviaPhone();
+                              setState(() {
+                                context.read<ForgotPassPrv>().isLoading = false;
+                              });
+                            } else if (widget.numChoice == 2) {
+                              await sendOTPviaEmail();
+                              setState(() {
+                                context.read<ForgotPassPrv>().isLoading = false;
+                              });
+                            }
 
-                      // Utils.pushScreen(
-                      //     context,
-                      //     VerifyOTPScreen(
-                      //         phone: '',
-                      //         name: "",
-                      //         pass: "",
-                      //         email: '',
-                      //         isForgotPass: true));
-                      // await context
-                      //     .read<ForgotPassPrv>()
-                      //     .sendVerify(context);
-                    },
+                            // Utils.pushScreen(
+                            //     context,
+                            //     VerifyOTPScreen(
+                            //         phone: '',
+                            //         name: "",
+                            //         pass: "",
+                            //         email: '',
+                            //         isForgotPass: true));
+                            // await context
+                            //     .read<ForgotPassPrv>()
+                            //     .sendVerify(context);
+                          },
                   ),
                 ),
               )

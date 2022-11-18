@@ -443,11 +443,24 @@ class Utils {
         ));
   }
 
-  static showErrorMessage(BuildContext context, String message) {
+  static showErrorMessage(BuildContext context, String e) {
     Utils.showDialog(
         context: context,
         dialog: PrimaryDialog.error(
-          msg: S.of(context).err_x(message),
+          msg: S.of(context).err_x(e),
+        ));
+  }
+
+  static showSuccessMessage(
+      // BuildContext context, String e, Function()? onClose
+      {required BuildContext context,
+      required String e,
+      Function()? onClose}) {
+    Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.success(
+          msg: e,
+          onClose: onClose,
         ));
   }
 }

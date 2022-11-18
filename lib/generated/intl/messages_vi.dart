@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(message) => "Lỗi: ${message}";
 
+  static String m1(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
@@ -131,12 +133,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
+        "not_found_account": MessageLookupByLibrary.simpleMessage(
+            "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
+        "otp_invalid":
+            MessageLookupByLibrary.simpleMessage("Mã OTP không hợp lệ !"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
-            "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
+            "Vui lòng kiểm tra điện thoại hoặc email để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
@@ -150,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "photos": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
+        "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
@@ -164,6 +171,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "res_photo": MessageLookupByLibrary.simpleMessage("Ảnh cư dân"),
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "reset_pass_success": MessageLookupByLibrary.simpleMessage(
+            "Đổi mật khẩu thành công, hãy đăng nhập lại"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
@@ -208,6 +217,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
         "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "success_opt":
+            MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
+        "success_sign_up":
+            MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Điều khoản dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
@@ -222,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
+        "we_send_to": m1,
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại!")
       };

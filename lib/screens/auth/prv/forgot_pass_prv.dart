@@ -4,6 +4,7 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../models/account.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_dialog.dart';
@@ -11,19 +12,33 @@ import '../fogot_pass/option_send_otp.dart';
 import '../verify_otp_screen.dart';
 
 class ForgotPassPrv extends ChangeNotifier {
+  ForgotPassPrv({
+    required this.isForgotPass,
+  });
   final phoneController = TextEditingController();
 
   String? phoneValidate;
+  String? user;
 
   String? phoneNumber;
   String? email;
+  String? userName;
+  final bool isForgotPass;
 
   final formKey = GlobalKey<FormState>();
   // final formKey1 = GlobalKey<FormState>();
 
   bool isLoading = false;
 
-  sendOtpViaEmail(BuildContext context, String? mail) async {
+  sendOtpViaPhone(BuildContext context, String? phone, String userName) async {
+    isLoading = true;
+    notifyListeners();
+    await APIAuth.sendOTPviaPhone(phoneNumber!).then((v) {}).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
+  }
+
+  sendOtpViaEmail(BuildContext context, String? mail, String userNa) async {
     isLoading = true;
     notifyListeners();
     if (mail != null) {
@@ -31,58 +46,63 @@ class ForgotPassPrv extends ChangeNotifier {
         (data) {
           isLoading = false;
           notifyListeners();
-          if (data == null) {
-            Utils.showConnectionError(context);
-          }
-          if (data['authorization_generate_otp']['code'] != 0) {
-            Utils.showErrorMessage(
-                context, data['authorization_generate_otp']['message']);
-          }
+          Utils.pushScreen(
+              context,
+              VerifyOTPScreen(
+                isForgotPass: true,
+                phone: '',
+                name: userNa,
+                pass: '',
+                email: mail,
+                isPhone: false,
+              ));
+          if (data != null) {}
         },
-      ).catchError((e) {
-        isLoading = false;
-        notifyListeners();
-        Utils.showErrorMessage(context, e);
-      });
+      );
     }
   }
 
   getEmailAndPhone(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      phoneValidate = null;
-      isLoading = true;
-      var userName = phoneController.text.trim();
-      if (RegexText.isEmail(phoneController.text.trim())) {
-        var userNameByEmail =
-            await APIAuth.findUserNameByEmail(email: userName);
-        if (userNameByEmail != null) {
-          userName = userNameByEmail;
+      try {
+        phoneValidate = null;
+        isLoading = true;
+        userName = phoneController.text.trim();
+        if (RegexText.isEmail(phoneController.text.trim())) {
+          var userNameByEmail =
+              await APIAuth.findUserNameByEmail(email: userName!);
+          if (userNameByEmail != null) {
+            userName = userNameByEmail;
+          }
         }
-      }
-      var userInfoResponse =
-          await APIAuth.getUserInformationByUsername(userName);
-      if (userInfoResponse == null) {
-        isLoading = false;
-        notifyListeners();
-        throw (S.of(context).err_conn);
-      } else if (userInfoResponse['response']['data'] != null) {
-        var userInfo = userInfoResponse['response']['data'];
-        phoneNumber = userInfo['phone_number'];
-        email = userInfo['email'];
-        isLoading = false;
-        notifyListeners();
+        var userInfoResponseData =
+            await APIAuth.getUserInformationByUsername(userName!);
 
-        Utils.pushScreen(
-            context,
-            (OptionSendOtp(
-              email: email,
-              phone: phoneNumber,
-            )));
-      } else {
-        var mess = userInfoResponse['response']['message'];
+        var userInfoResponse = Account.fromJson(userInfoResponseData);
+        if (userInfoResponse == null) {
+          isLoading = false;
+          notifyListeners();
+          throw (S.of(context).not_found_account);
+        } else {
+          var userInfo = userInfoResponse;
+          phoneNumber = userInfo.phone_number;
+          email = userInfo.email;
+          isLoading = false;
+          notifyListeners();
+
+          Utils.pushScreen(
+              context,
+              (OptionSendOtp(
+                userName: userName,
+                isForgotPass: true,
+                email: email,
+                phone: phoneNumber,
+              )));
+        }
+      } catch (e) {
         isLoading = false;
         notifyListeners();
-        throw (mess);
+        Utils.showErrorMessage(context, e.toString());
       }
     }
   }
@@ -92,39 +112,6 @@ class ForgotPassPrv extends ChangeNotifier {
       phoneValidate = null;
       isLoading = true;
       notifyListeners();
-      await APIAuth.forgotPass(
-              phoneNum: phoneController.text.trim(), context: context)
-          .then((value) {
-        isLoading = false;
-        notifyListeners();
-        // if (value.status == null) {
-        //   if (value.code == 6) {
-        //     Utils.pushScreen(
-        //         context,
-        //         VerifyOTPScreen(
-        //             phone: phoneController.text,
-        //             name: "",
-        //             pass: "",
-        //             isForgotPass: true));
-        //   } else {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.errorCode(code: value.code));
-        //   }
-        // } else {
-        //   if (value.status == 'internet_error') {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog:
-        //             PrimaryDialog.error(msg: 'S.of(context).network_error'));
-        //   } else {
-        //     Utils.showDialog(
-        //         context: context,
-        //         dialog: PrimaryDialog.error(
-        //             msg: 'S.of(context).err_x(value.message ?? "")'));
-        //   }
-        // }
-      });
     } else {
       if (phoneController.text.isEmpty) {
         phoneValidate = 'S.of(context).can_not_empty';

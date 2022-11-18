@@ -25,7 +25,7 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
         builder: (context, snapshot) {
           return PrimaryScreen(
             appBar: PrimaryAppbar(
-              title: S.of(context).change_pass,
+              // title:  S.of(context).change_pass,
               actions: [
                 if (!context.watch<ChangePassPrv>().isLoading)
                   TextButton(

@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(message) => "Error: ${message}";
 
+  static String m1(to) => "We sent otp code to :${to}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
@@ -129,12 +131,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
+        "not_found_account": MessageLookupByLibrary.simpleMessage(
+            "Not found account Information"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
+        "otp_invalid":
+            MessageLookupByLibrary.simpleMessage("OTP code is invalid !"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
-            "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
+            "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
@@ -147,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
+        "re_sign_in":
+            MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
@@ -161,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "reset_pass_success": MessageLookupByLibrary.simpleMessage(
+            "Reset Password successfully, please Sign in again"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
@@ -208,6 +218,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "success_opt":
+            MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
+        "success_sign_up":
+            MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
@@ -222,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
+        "we_send_to": m1,
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }
