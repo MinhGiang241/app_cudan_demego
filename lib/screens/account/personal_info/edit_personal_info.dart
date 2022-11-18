@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/response_user.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
@@ -15,7 +14,7 @@ import '../../auth/prv/auth_prv.dart';
 import 'provider/edit_info_provider.dart';
 
 class EditPersonalInfo extends StatelessWidget {
-  final ResponseUser? user;
+  final user;
 
   const EditPersonalInfo({super.key, this.user});
   @override
