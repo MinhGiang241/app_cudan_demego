@@ -36,3 +36,5 @@ String mapErrorTypeToMsg(ErrorType type) {
       return S.current.err_unknown;
   }
 }
+
+typedef ErrorHandleFunc = Function(String);

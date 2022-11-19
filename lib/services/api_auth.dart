@@ -14,6 +14,7 @@ import '../services/api_service.dart';
 import '../constants/regex_text.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
+import '../utils/error_handler.dart';
 import '../utils/utils.dart';
 
 class APIAuth {
@@ -21,7 +22,7 @@ class APIAuth {
     required BuildContext context,
     required String username,
     required String password,
-    ErrorHandle? onError,
+    ErrorHandleFunc? onError,
     bool remember = false,
   }) async {
     var user = username;
@@ -29,7 +30,7 @@ class APIAuth {
       await findUserNameByEmail(email: username).then((v) {
         user = v;
       }).catchError((e) {
-        onError!.call();
+        onError!.call(e);
       });
       // if (data != null) {
       //   user = data['userName'];
@@ -197,7 +198,7 @@ class APIAuth {
   }
 
   static Future<void> signOut(
-      {ErrorHandle? onError, required BuildContext context}) async {
+      {ErrorHandleFunc? onError, required BuildContext context}) async {
     return await ApiService.shared.deleteCre();
   }
 

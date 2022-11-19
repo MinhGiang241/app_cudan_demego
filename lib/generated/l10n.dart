@@ -910,6 +910,16 @@ class S {
     );
   }
 
+  /// `Choose a project`
+  String get choose_a_project {
+    return Intl.message(
+      'Choose a project',
+      name: 'choose_a_project',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Choose an apartment`
   String get choose_an_apartment {
     return Intl.message(
@@ -1655,6 +1665,36 @@ class S {
     return Intl.message(
       'Sign up successfully',
       name: 'success_sign_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No have transportation card`
+  String get no_trans_card {
+    return Intl.message(
+      'No have transportation card',
+      name: 'no_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resister new card`
+  String get add_trans_card {
+    return Intl.message(
+      'Resister new card',
+      name: 'add_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No have transportation letter`
+  String get no_trans_letter {
+    return Intl.message(
+      'No have transportation letter',
+      name: 'no_trans_letter',
       desc: '',
       args: [],
     );

@@ -18,7 +18,7 @@ import '../models/response_news_list_model.dart';
 import '../models/response_parcel_list.dart';
 import '../models/response_parking_card_model.dart';
 import '../models/response_pet_list_model.dart';
-import '../models/response_resident_info.dart';
+import '../models/resident_info.dart';
 import '../models/response_thecudan_list.dart';
 import 'api_service.dart';
 

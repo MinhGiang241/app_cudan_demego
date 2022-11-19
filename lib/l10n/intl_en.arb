@@ -85,6 +85,7 @@
   "rgstr_code_7": "OTP code is invalid",
   "rgstr_code_8": "System error",
   "rgstr_code_9": "Account is not activated",
+  "choose_a_project": "Choose a project",
   "choose_an_apartment": "Choose an apartment",
   "search_aparment": "Search apartment",
   "hello": "Hello",
@@ -159,5 +160,9 @@
   "otp_invalid" :"OTP code is invalid !",
   "reset_pass_success":"Reset Password successfully, please Sign in again",
   "re_sign_in":"Please sign in again",
-  "success_sign_up":"Sign up successfully"
+  "success_sign_up":"Sign up successfully",
+  "no_trans_card":"No have transportation card",
+  "add_trans_card":"Resister new card",
+  "no_trans_letter":"No have transportation letter"
+
 }

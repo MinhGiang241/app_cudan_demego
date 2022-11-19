@@ -6,6 +6,7 @@ import '../screens/account/personal_info/personal_info_screen.dart';
 import '../screens/auth/apartment_selection_screen.dart';
 import '../screens/auth/fogot_pass/phone_num_forgot_pass.dart';
 import '../screens/auth/fogot_pass/reset_pass_screen.dart';
+import '../screens/auth/project_selection_screen.dart';
 import '../screens/auth/prv/auth_prv.dart';
 import '../screens/auth/prv/sign_in_prv.dart';
 import '../screens/auth/prv/sign_up_prv.dart';
@@ -50,7 +51,7 @@ class AppRoutes {
       case PhoneNumForgotPassScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => PhoneNumForgotPassScreen(),
+          builder: (_) => const PhoneNumForgotPassScreen(),
         );
 
       case HomeScreen.routeName:
@@ -60,6 +61,11 @@ class AppRoutes {
                 create: (context) =>
                     SignUpPrv(authPrv: context.read<AuthPrv>()),
                 builder: (context, child) => const HomeScreen()));
+      case ProjectSelectionScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (context) => const ProjectSelectionScreen(),
+        );
       case ApartmentSeletionScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
@@ -95,7 +101,7 @@ class AppRoutes {
       case ParkingCardListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => const ParkingCardListScreen(),
+          builder: (context) => ParkingCardListScreen(ctx: context),
         );
       case ResidentCardListScreen.routeName:
         return MaterialPageRoute(

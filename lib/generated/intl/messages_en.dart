@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
+        "add_trans_card":
+            MessageLookupByLibrary.simpleMessage("Resister new card"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -47,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
+        "choose_a_project":
+            MessageLookupByLibrary.simpleMessage("Choose a project"),
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
@@ -130,6 +134,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
+        "no_trans_card":
+            MessageLookupByLibrary.simpleMessage("No have transportation card"),
+        "no_trans_letter": MessageLookupByLibrary.simpleMessage(
+            "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),

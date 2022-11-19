@@ -100,13 +100,20 @@ class _HeaderHomeState extends State<HeaderHome> {
                       ),
                       hpad(12),
                       Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(selectedApartment?.name ?? "Test",
-                                style: txtLinkMedium()),
-                            Text(selectedBulding?.name ?? "Test",
-                                style: txtBodySmallRegular(
-                                    color: grayScaleColor2)),
+                            Text(
+                              selectedApartment?.name ?? "Test",
+                              style: txtLinkMedium(),
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              selectedBulding?.name ?? "Test",
+                              style:
+                                  txtBodySmallRegular(color: grayScaleColor2),
+                              textAlign: TextAlign.left,
+                            ),
                           ]),
                       const Spacer(),
                       const Icon(Icons.keyboard_arrow_down_rounded,

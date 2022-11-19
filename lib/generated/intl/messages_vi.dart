@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "active": MessageLookupByLibrary.simpleMessage("Hoạt động"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
+        "add_trans_card":
+            MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -47,8 +49,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
+        "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "choose_an_apartment":
-            MessageLookupByLibrary.simpleMessage("Chọn dự án"),
+            MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
@@ -131,6 +134,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản ?"),
         "no_comment":
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
+        "no_trans_card":
+            MessageLookupByLibrary.simpleMessage("Không có thẻ xe nào"),
+        "no_trans_letter":
+            MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
@@ -195,7 +202,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tài khoản chưa được kích hoạt"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
-        "search_aparment": MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
+        "search_aparment":
+            MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Gửi mã để đặt lại mật khẩu về"),

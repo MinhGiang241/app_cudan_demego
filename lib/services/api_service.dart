@@ -18,9 +18,9 @@ import 'package:path_provider/path_provider.dart';
 
 import '../generated/l10n.dart';
 import '../screens/auth/sign_in_screen.dart';
+import '../utils/error_handler.dart';
 
 typedef OnSendProgress = Function(int, int);
-typedef ErrorHandle = Function();
 
 class ApiService {
   static ApiService shared = ApiService();
@@ -42,7 +42,7 @@ class ApiService {
       required String username,
       required String password,
       bool remember = false,
-      ErrorHandle? onError}) async {
+      ErrorHandleFunc? onError}) async {
     userName = username;
     passWord = password;
 
@@ -58,8 +58,8 @@ class ApiService {
     }
   }
 
-  Future<oauth2.Client?> _getCre(
-      String username, String password, ErrorHandle? onError, remember) async {
+  Future<oauth2.Client?> _getCre(String username, String password,
+      ErrorHandleFunc? onError, remember) async {
     final authorizationEndpoint = Uri.parse(tokenEndpointUrl);
     try {
       final cli = await oauth2.resourceOwnerPasswordGrant(
@@ -78,8 +78,7 @@ class ApiService {
 
       return cli;
     } catch (e) {
-      print(e);
-      onError?.call();
+      onError?.call(e.toString());
       return null;
     }
   }
@@ -134,14 +133,14 @@ class ApiService {
       required BuildContext context,
       required String path,
       bool useToken = true,
-      ErrorHandle? onError,
+      ErrorHandleFunc? onError,
       bool remember = false,
       OnSendProgress? onSendProgress}) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
       if (client == null) {
-        onError?.call();
+        onError?.call('');
       } else {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
@@ -193,12 +192,12 @@ class ApiService {
       bool useToken = true,
       bool remember = false,
       Map<String, dynamic>? params,
-      ErrorHandle? onError}) async {
+      ErrorHandleFunc? onError}) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
       if (client == null) {
-        onError?.call();
+        onError?.call('');
       } else {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
@@ -251,13 +250,13 @@ class ApiService {
       required BuildContext context,
       bool useToken = true,
       bool remember = false,
-      ErrorHandle? onError,
+      ErrorHandleFunc? onError,
       OnSendProgress? onSendProgress}) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
       if (client == null) {
-        onError?.call();
+        onError?.call('');
       } else {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
@@ -284,7 +283,7 @@ class ApiService {
     }
     try {
       final response = await _dio.delete(path, data: data, options: options);
-      print(response);
+
       return jsonDecode(response.toString());
     } on DioError catch (e) {
       if (e.response != null) {
@@ -305,12 +304,12 @@ class ApiService {
   }
 
   Future<GraphQLClient> getClientGraphQL(
-      {ErrorHandle? onError, bool remember = false}) async {
+      {ErrorHandleFunc? onError, bool remember = false}) async {
     late AuthLink authLink;
     var client = await getExistClient();
     if (client == null) {
       authLink = AuthLink(getToken: () => 'Bearer ');
-      onError?.call();
+      onError?.call('');
     } else {
       //print(client.credentials.expiration);
       if (client.credentials.isExpired) {

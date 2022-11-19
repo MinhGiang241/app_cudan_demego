@@ -10,7 +10,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/account.dart';
 import '../../../models/response_apartment.dart';
-import '../../../models/response_resident_info.dart';
+import '../../../models/resident_info.dart';
 import '../../../models/response_resident_own.dart';
 import '../../../models/response_user.dart';
 import '../../../services/api_auth.dart';
@@ -23,6 +23,7 @@ import '../../../widgets/primary_dialog.dart';
 import '../../home/home_screen.dart';
 import '../apartment_selection_screen.dart';
 import '../fogot_pass/reset_pass_screen.dart';
+import '../project_selection_screen.dart';
 import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
 import 'resident_info_prv.dart';
@@ -72,19 +73,21 @@ class AuthPrv extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
+    onError(String va) {
+      Utils.showDialog(
+          context: context,
+          dialog: PrimaryDialog.error(
+            msg: '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
+          ));
+    }
+
     await APIAuth.signIn(
-        context: context,
-        username: account,
-        password: pass,
-        remember: remember,
-        onError: () {
-          Utils.showDialog(
-              context: context,
-              dialog: PrimaryDialog.error(
-                msg:
-                    '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
-              ));
-        }).then((value) async {
+            context: context,
+            username: account,
+            password: pass,
+            remember: remember,
+            onError: onError)
+        .then((value) async {
       if (value != null) {
         authStatus = AuthStatus.auth;
         if (remember) {
@@ -99,23 +102,26 @@ class AuthPrv extends ChangeNotifier {
           if (value != null) {
             context.read<ResidentInfoPrv>().userInfo =
                 ResponseResidentInfo.fromJson(value);
-
+            context.read<ResidentInfoPrv>().residentId =
+                context.read<ResidentInfoPrv>().userInfo != null
+                    ? context.read<ResidentInfoPrv>().userInfo!.id
+                    : null;
             await APITower.getUserOwnInfo(
                     context.read<ResidentInfoPrv>().userInfo!.id as String)
                 .then((v) {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
-                print(i);
                 context
                     .read<ResidentInfoPrv>()
                     .listOwn
                     .add(ResponseResidentOwn.fromJson(i));
               });
-              var listOwn = context.read<ResidentInfoPrv>().listOwn;
-              Navigator.of(context)
-                  .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
-                "listOwn": listOwn,
-              });
+              Navigator.pushReplacementNamed(
+                  context, ProjectSelectionScreen.routeName);
+              // Navigator.of(context)
+              //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+              //   "listOwn": listOwn,
+              // });
             }).catchError((e) {
               Utils.showErrorMessage(context, e);
             });

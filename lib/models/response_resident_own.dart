@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'response_resident_info.dart';
+import 'resident_info.dart';
 
 class ResponseResidentOwn {
   String? id;

@@ -14,7 +14,7 @@ import '../../../widgets/timeline_view.dart';
 class ParkingCardDetailsScreen extends StatefulWidget {
   const ParkingCardDetailsScreen({Key? key, required this.item})
       : super(key: key);
-  final ParkingCard item;
+  final ParkingCards item;
 
   @override
   State<ParkingCardDetailsScreen> createState() =>

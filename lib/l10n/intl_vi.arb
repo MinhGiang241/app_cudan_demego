@@ -85,8 +85,9 @@
   "rgstr_code_7": "Mã xác thực không hợp lệ",
   "rgstr_code_8": "Lỗi hệ thống",
   "rgstr_code_9": "Tài khoản chưa được kích hoạt",
-  "choose_an_apartment": "Chọn dự án",
-  "search_aparment": "Chọn căn hộ",
+  "choose_a_project": "Chọn dự án",
+  "choose_an_apartment": "Chọn căn hộ",
+  "search_aparment": "Tìm kiếm căn hộ",
   "hello": "Xin chào",
   "news": "Tin tức",
   "all": "Tất cả",
@@ -159,5 +160,8 @@
   "otp_invalid" :"Mã OTP không hợp lệ !",
   "reset_pass_success":"Đổi mật khẩu thành công, hãy đăng nhập lại",
   "re_sign_in":"Hãy đăng nhập lại",
-  "success_sign_up":"Đăng ký thành công"
+  "success_sign_up":"Đăng ký thành công",
+  "no_trans_card":"Không có thẻ xe nào",
+  "add_trans_card":"Đăng ký thẻ mới",
+  "no_trans_letter":"Không có phiếu đăng ký nào"
 }

@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +20,10 @@ import '../../auth/prv/auth_prv.dart';
 import 'parking_card_details_screem.dart';
 import 'providers/parking_card_provider.dart';
 import 'register_parking_card.dart';
+import 'tabs/trans_card_list_tabs.dart';
 
 var parkingCardListExamples = ResponseParkingCardsList(count: 3, items: [
-  ParkingCard(
+  ParkingCards(
       aliasPart: AliasPart1(alias: '1'),
       author: "Giang",
       contentItemId: 'id1',
@@ -96,7 +98,7 @@ var parkingCardListExamples = ResponseParkingCardsList(count: 3, items: [
         soDangKy: SoDangKy(value: '1234'),
       ),
       titlePart: TitlePart(title: 'TitlePart')),
-  ParkingCard(
+  ParkingCards(
       aliasPart: AliasPart1(alias: '1'),
       author: "Giang",
       contentItemId: 'id1',
@@ -177,18 +179,26 @@ var apartmentExample =
     FloorPlan(detail: 'detail', floorPlan: '11', id: '1', name: 'name');
 
 class ParkingCardListScreen extends StatefulWidget {
-  const ParkingCardListScreen({Key? key}) : super(key: key);
+  const ParkingCardListScreen({Key? key, required this.ctx}) : super(key: key);
+  final BuildContext ctx;
   static const routeName = '/parking-card';
-
   @override
   State<ParkingCardListScreen> createState() => _ParkingCardListScreenState();
 }
 
-class _ParkingCardListScreenState extends State<ParkingCardListScreen> {
+class _ParkingCardListScreenState extends State<ParkingCardListScreen>
+    with TickerProviderStateMixin {
+  late TabController tabController = TabController(length: 2, vsync: this);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final apartment = context.watch<AuthPrv>().selectedApartment;
     final apartment = apartmentExample;
+
     return ChangeNotifierProvider(
       create: (context) => ParkingCardProvider(apartment.apartmentId ?? ""),
       builder: (context, state) {
@@ -198,219 +208,276 @@ class _ParkingCardListScreenState extends State<ParkingCardListScreen> {
         final parkingCards = parkingCardListExamples;
 
         return PrimaryScreen(
-          appBar: PrimaryAppbar(title: S.of(context).parking_card),
-          body: Builder(builder: (context) {
-            if (parkingCards == null) {
-              return const Center(child: PrimaryLoading());
-            } else if (parkingCards.status != null) {
-              return PrimaryErrorWidget(
-                code: parkingCards.status,
-                message: parkingCards.message,
-                onRetry: () {
-                  context.read<ParkingCardProvider>().retry();
-                },
-              );
-            } else if (parkingCards.items!.isEmpty) {
-              return PrimaryEmptyWidget(
-                emptyText: 'S.of(context).no_parking_card',
-                buttonText: ' S.of(context).register_parking_card',
-                icons: PrimaryIcons.car,
-                action: () {
-                  Utils.pushScreen(context, const RegisterParkingCard());
-                },
-              );
-            }
-            return Stack(
-              children: [
-                SafeArea(
-                  child: ListView(
+          appBar: PrimaryAppbar(
+            title: S.of(context).parking_card,
+            tabController: tabController,
+            isTabScrollabel: false,
+            tabs: [
+              Tab(text: S.of(context).card_status),
+              Tab(text: S.of(context).letter_status),
+            ],
+          ),
+          body: FutureBuilder(
+              future: context.read<ParkingCardProvider>().getTrasportCardList(
+                  context, context.read<ResidentInfoPrv>().residentId ?? ''),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: PrimaryLoading());
+                } else if (snapshot.connectionState == ConnectionState.none) {
+                  return PrimaryErrorWidget(
+                    code: snapshot.hasError ? "err" : "1",
+                    message: snapshot.data.toString(),
+                    onRetry: () => context
+                        .read<ParkingCardProvider>()
+                        .getTrasportCardList(context,
+                            context.read<ResidentInfoPrv>().residentId ?? ''),
+                  );
+                } else {
+                  return TabBarView(
+                    controller: tabController,
                     children: [
-                      vpad(24),
-                      ...List.generate(parkingCards.items!.length, (index) {
-                        List<InfoContentView> listContent = [
-                          InfoContentView(
-                              title: 'S.of(context).card_num',
-                              content: (parkingCards
-                                          .items?[index]
-                                          .khachHangTheXe
-                                          ?.contentItems?[0]
-                                          .khachHangTheXe
-                                          ?.soThe
-                                          ?.text ??
-                                      "")
-                                  .toUpperCase(),
-                              contentStyle: txtBold(16, primaryColor1)),
-                          InfoContentView(
-                              title: S.of(context).full_name,
-                              content: parkingCards
-                                  .items![index]
-                                  .khachHangTheXe!
-                                  .contentItems![0]
-                                  .khachHangTheXe!
-                                  .khachHang!
-                                  .displayTexts![0]
-                                  .toUpperCase(),
-                              contentStyle: txtBold(14)),
-                          InfoContentView(
-                              title: 'S.of(context).vehicle_type',
-                              content: parkingCards.items![index].theXe!
-                                  .loaiPhuongTien!.displayTexts![0],
-                              contentStyle: txtSemiBold(12)),
-                          InfoContentView(
-                              title: 'S.of(context).license_plates',
-                              content: parkingCards
-                                  .items![index].theXe!.bienKiemSoat!.text,
-                              contentStyle: txtSemiBold(12)),
-                        ];
-                        final trangThai = parkingCards
-                            .items![index].privateTheXePart!.trangThai;
+                      TransportationCardListTab(
+                        residentId: context.watch<ResidentInfoPrv>().residentId,
+                        cardList: context
+                            .watch<ParkingCardProvider>()
+                            .transportationCardList,
+                      ),
+                      Stack(
+                        children: [
+                          SafeArea(
+                            child: ListView(
+                              children: [
+                                vpad(24),
+                                ...List.generate(parkingCards.items!.length,
+                                    (index) {
+                                  List<InfoContentView> listContent = [
+                                    InfoContentView(
+                                        title: 'S.of(context).card_num',
+                                        content: (parkingCards
+                                                    .items?[index]
+                                                    .khachHangTheXe
+                                                    ?.contentItems?[0]
+                                                    .khachHangTheXe
+                                                    ?.soThe
+                                                    ?.text ??
+                                                "")
+                                            .toUpperCase(),
+                                        contentStyle:
+                                            txtBold(16, primaryColor1)),
+                                    InfoContentView(
+                                        title: S.of(context).full_name,
+                                        content: parkingCards
+                                            .items![index]
+                                            .khachHangTheXe!
+                                            .contentItems![0]
+                                            .khachHangTheXe!
+                                            .khachHang!
+                                            .displayTexts![0]
+                                            .toUpperCase(),
+                                        contentStyle: txtBold(14)),
+                                    InfoContentView(
+                                        title: 'S.of(context).vehicle_type',
+                                        content: parkingCards
+                                            .items![index]
+                                            .theXe!
+                                            .loaiPhuongTien!
+                                            .displayTexts![0],
+                                        contentStyle: txtSemiBold(12)),
+                                    InfoContentView(
+                                        title: 'S.of(context).license_plates',
+                                        content: parkingCards.items![index]
+                                            .theXe!.bienKiemSoat!.text,
+                                        contentStyle: txtSemiBold(12)),
+                                  ];
+                                  final trangThai = parkingCards.items![index]
+                                      .privateTheXePart!.trangThai;
 
-                        if (trangThai == null) {
-                          return vpad(0);
-                        }
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 12, right: 12, bottom: 16),
-                          child: PrimaryCard(
+                                  if (trangThai == null) {
+                                    return vpad(0);
+                                  }
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12, right: 12, bottom: 16),
+                                    child: PrimaryCard(
+                                        onTap: () {
+                                          Utils.pushScreen(
+                                              context,
+                                              ParkingCardDetailsScreen(
+                                                  item: parkingCards
+                                                      .items![index]));
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                      color: trangThai.text!
+                                                                  .toLowerCase() ==
+                                                              "hoatdong"
+                                                          ? greenColorBase
+                                                          : redColor3,
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .only(
+                                                              topRight: Radius
+                                                                  .circular(12),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      8))),
+                                                  child: Text(
+                                                    trangThai.text!
+                                                                .toLowerCase() ==
+                                                            "hoatdong"
+                                                        ? 'S.of(context).active'
+                                                        : 'S.of(context).inactive',
+                                                    style: txtSemiBold(
+                                                        12, Colors.white),
+                                                  ),
+                                                )),
+                                            vpad(16),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              child: Table(
+                                                columnWidths: const {
+                                                  0: FlexColumnWidth(2),
+                                                  1: FlexColumnWidth(3)
+                                                },
+                                                children: listContent
+                                                    .map<TableRow>((e) =>
+                                                        TableRow(children: [
+                                                          Text(e.title,
+                                                              style: txtMedium(
+                                                                  12,
+                                                                  grayScaleColor2)),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    bottom: 16),
+                                                            child: Text(
+                                                                e.content ?? "",
+                                                                style: e
+                                                                    .contentStyle),
+                                                          )
+                                                        ]))
+                                                    .toList(),
+                                              ),
+                                            ),
+                                            // vpad(16),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  if (trangThai.text!
+                                                          .toLowerCase() !=
+                                                      "hoatdong")
+                                                    PrimaryButton(
+                                                      text:
+                                                          'S.of(context).extend',
+                                                      buttonSize:
+                                                          ButtonSize.xsmall,
+                                                      buttonType:
+                                                          ButtonType.secondary,
+                                                      secondaryBackgroundColor:
+                                                          yellowColor5,
+                                                      textColor: const Color(
+                                                          0xffFF7A00),
+                                                      onTap: () {},
+                                                    ),
+                                                  if (trangThai.text!
+                                                          .toLowerCase() ==
+                                                      "hoatdong")
+                                                    hpad(16),
+                                                  if (trangThai.text!
+                                                          .toLowerCase() ==
+                                                      "hoatdong")
+                                                    PrimaryButton(
+                                                      text:
+                                                          'S.of(context).report_lost',
+                                                      buttonSize:
+                                                          ButtonSize.xsmall,
+                                                      buttonType:
+                                                          ButtonType.secondary,
+                                                      secondaryBackgroundColor:
+                                                          primaryColor5,
+                                                      textColor:
+                                                          primaryColorBase,
+                                                      onTap: () {
+                                                        context
+                                                            .read<
+                                                                ParkingCardProvider>()
+                                                            .reportLostCard(
+                                                                context);
+                                                      },
+                                                    ),
+                                                  if (trangThai.text!
+                                                          .toLowerCase() ==
+                                                      "hoatdong")
+                                                    hpad(16),
+                                                  if (trangThai.text!
+                                                          .toLowerCase() ==
+                                                      "hoatdong")
+                                                    PrimaryButton(
+                                                      text:
+                                                          'S.of(context).deactive_card',
+                                                      buttonSize:
+                                                          ButtonSize.xsmall,
+                                                      buttonType:
+                                                          ButtonType.secondary,
+                                                      secondaryBackgroundColor:
+                                                          redColor5,
+                                                      textColor: redColorBase,
+                                                      onTap: () {
+                                                        context
+                                                            .read<
+                                                                ParkingCardProvider>()
+                                                            .deactiveCard(
+                                                                context);
+                                                      },
+                                                    )
+                                                ],
+                                              ),
+                                            ),
+                                            vpad(16),
+                                          ],
+                                        )),
+                                  );
+                                }),
+                                vpad(bottomSafePad(context) + 50),
+                              ],
+                            ),
+                          ),
+                          vpad(16),
+                          Positioned(
+                            bottom: (bottomSafePad(context) + 24),
+                            left: 24,
+                            right: 24,
+                            child: PrimaryButton(
+                              text: 'S.of(context).register_parking_card',
                               onTap: () {
                                 Utils.pushScreen(
-                                    context,
-                                    ParkingCardDetailsScreen(
-                                        item: parkingCards.items![index]));
+                                    context, const RegisterParkingCard());
                               },
-                              child: Column(
-                                children: [
-                                  Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 4),
-                                        decoration: BoxDecoration(
-                                            color:
-                                                trangThai.text!.toLowerCase() ==
-                                                        "hoatdong"
-                                                    ? greenColorBase
-                                                    : redColor3,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(12),
-                                                    bottomLeft:
-                                                        Radius.circular(8))),
-                                        child: Text(
-                                          trangThai.text!.toLowerCase() ==
-                                                  "hoatdong"
-                                              ? 'S.of(context).active'
-                                              : 'S.of(context).inactive',
-                                          style: txtSemiBold(12, Colors.white),
-                                        ),
-                                      )),
-                                  vpad(16),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Table(
-                                      columnWidths: const {
-                                        0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3)
-                                      },
-                                      children: listContent
-                                          .map<TableRow>((e) =>
-                                              TableRow(children: [
-                                                Text(e.title,
-                                                    style: txtMedium(
-                                                        12, grayScaleColor2)),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 16),
-                                                  child: Text(e.content ?? "",
-                                                      style: e.contentStyle),
-                                                )
-                                              ]))
-                                          .toList(),
-                                    ),
-                                  ),
-                                  // vpad(16),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        if (trangThai.text!.toLowerCase() !=
-                                            "hoatdong")
-                                          PrimaryButton(
-                                            text: 'S.of(context).extend',
-                                            buttonSize: ButtonSize.xsmall,
-                                            buttonType: ButtonType.secondary,
-                                            secondaryBackgroundColor:
-                                                yellowColor5,
-                                            textColor: const Color(0xffFF7A00),
-                                            onTap: () {},
-                                          ),
-                                        if (trangThai.text!.toLowerCase() ==
-                                            "hoatdong")
-                                          hpad(16),
-                                        if (trangThai.text!.toLowerCase() ==
-                                            "hoatdong")
-                                          PrimaryButton(
-                                            text: 'S.of(context).report_lost',
-                                            buttonSize: ButtonSize.xsmall,
-                                            buttonType: ButtonType.secondary,
-                                            secondaryBackgroundColor:
-                                                primaryColor5,
-                                            textColor: primaryColorBase,
-                                            onTap: () {
-                                              context
-                                                  .read<ParkingCardProvider>()
-                                                  .reportLostCard(context);
-                                            },
-                                          ),
-                                        if (trangThai.text!.toLowerCase() ==
-                                            "hoatdong")
-                                          hpad(16),
-                                        if (trangThai.text!.toLowerCase() ==
-                                            "hoatdong")
-                                          PrimaryButton(
-                                            text: 'S.of(context).deactive_card',
-                                            buttonSize: ButtonSize.xsmall,
-                                            buttonType: ButtonType.secondary,
-                                            secondaryBackgroundColor: redColor5,
-                                            textColor: redColorBase,
-                                            onTap: () {
-                                              context
-                                                  .read<ParkingCardProvider>()
-                                                  .deactiveCard(context);
-                                            },
-                                          )
-                                      ],
-                                    ),
-                                  ),
-                                  vpad(16),
-                                ],
-                              )),
-                        );
-                      }),
-                      vpad(bottomSafePad(context) + 50),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  ),
-                ),
-                vpad(16),
-                Positioned(
-                  bottom: (bottomSafePad(context) + 24),
-                  left: 24,
-                  right: 24,
-                  child: PrimaryButton(
-                    text: 'S.of(context).register_parking_card',
-                    onTap: () {
-                      Utils.pushScreen(context, const RegisterParkingCard());
-                    },
-                  ),
-                ),
-              ],
-            );
-          }),
+                  );
+                }
+              }),
         );
       },
     );

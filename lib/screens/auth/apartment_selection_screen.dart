@@ -26,16 +26,6 @@ class ApartmentSeletionScreen extends StatefulWidget {
 }
 
 // Fake data
-var apartments = [
-  Apartments(detail: "test", id: '1', name: "test1", floorPlan: [
-    FloorPlan(id: 'f1', name: 'loor', detail: "df1"),
-    FloorPlan(id: 'f2', name: 'loor', detail: "df1"),
-  ]),
-  Apartments(detail: "test", id: '2', name: "test2", floorPlan: [
-    FloorPlan(id: 'f1', name: 'loor', detail: "df2"),
-    FloorPlan(id: 'f2', name: 'loor', detail: "df2"),
-  ]),
-];
 
 class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
   @override

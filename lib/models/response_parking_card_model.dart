@@ -1,5 +1,5 @@
 class ResponseParkingCardsList {
-  List<ParkingCard>? items;
+  List<ParkingCards>? items;
   int? count;
   dynamic status;
   String? message;
@@ -9,7 +9,7 @@ class ResponseParkingCardsList {
   ResponseParkingCardsList.fromJson(Map<String, dynamic> json) {
     items = json["items"] == null
         ? null
-        : (json["items"] as List).map((e) => ParkingCard.fromJson(e)).toList();
+        : (json["items"] as List).map((e) => ParkingCards.fromJson(e)).toList();
     count = json["count"];
     status = json["status"];
     message = json["message"];
@@ -25,7 +25,7 @@ class ResponseParkingCardsList {
   }
 }
 
-class ParkingCard {
+class ParkingCards {
   String? contentItemId;
   String? contentItemVersionId;
   String? contentType;
@@ -44,7 +44,7 @@ class ParkingCard {
   AliasPart1? aliasPart;
   PrivateTheXePart? privateTheXePart;
 
-  ParkingCard(
+  ParkingCards(
       {this.contentItemId,
       this.contentItemVersionId,
       this.contentType,
@@ -63,7 +63,7 @@ class ParkingCard {
       this.aliasPart,
       this.privateTheXePart});
 
-  ParkingCard.fromJson(Map<String, dynamic> json) {
+  ParkingCards.fromJson(Map<String, dynamic> json) {
     contentItemId = json["ContentItemId"];
     contentItemVersionId = json["ContentItemVersionId"];
     contentType = json["ContentType"];
