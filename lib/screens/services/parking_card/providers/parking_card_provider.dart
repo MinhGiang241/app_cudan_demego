@@ -21,15 +21,11 @@ class ParkingCardProvider extends ChangeNotifier {
 
   bool isLoading = true;
 
-  final String toaNhaId;
-
-  ParkingCardProvider(this.toaNhaId) {
-    _initial();
-  }
+  ParkingCardProvider();
 
   getTrasportCardList(BuildContext context, String? residentId) async {
     transportationCardList.clear();
-    print('card list');
+
     await APITrans.getTransportCardList(
       residentId!,
     ).then((v) {
@@ -44,118 +40,21 @@ class ParkingCardProvider extends ChangeNotifier {
     // notifyListeners();
   }
 
+  //card
+  extendCard(BuildContext context) {}
+  missingReport(BuildContext context) {}
+  lockCard(BuildContext context) {}
+
+//letter
+  cancelLetter(BuildContext context) {}
+  sendRequest(BuildContext context) {}
+  editLetter(BuildContext context) {}
+  deleteLetter(BuildContext context) {}
+
 //old
-  reportLostCard(BuildContext context) async {
-    await Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.custom(
-          title: 'S.of(context).report_lost_card',
-          content: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: Column(
-              children: [
-                Text('S.of(context).report_lost_card_msg',
-                    style: txtBodySmallRegular(), textAlign: TextAlign.center),
-                vpad(20),
-                PrimaryButton(
-                  onTap: () {},
-                  width: double.infinity,
-                  text: S.of(context).confirm,
-                  buttonType: ButtonType.secondary,
-                  textColor: primaryColorBase,
-                  secondaryBackgroundColor: Colors.blue[50],
-                ),
-                vpad(20),
-                PrimaryButton(
-                  onTap: () {},
-                  width: double.infinity,
-                  text: 'S.of(context).confirm_register',
-                  buttonType: ButtonType.primary,
-                  secondaryBackgroundColor: primaryColor5,
-                ),
-                vpad(20),
-                PrimaryButton(
-                  onTap: () {},
-                  width: double.infinity,
-                  text: S.of(context).cancel,
-                  buttonType: ButtonType.secondary,
-                  textColor: redColorBase,
-                  secondaryBackgroundColor: redColor5,
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-
-  deactiveCard(BuildContext context) {
-    Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.custom(
-          title: 'S.of(context).deactive_card',
-          content: Column(
-            children: [
-              Text('S.of(context).reason_deactive',
-                  style: txtBodySmallRegular(), textAlign: TextAlign.center),
-              vpad(10),
-              PrimaryRadio(
-                isSelected: true,
-                title: "Tôi đã bán phương tiện",
-                onTap: () {},
-              ),
-              PrimaryRadio(
-                isSelected: false,
-                title: "Tôi chuyển nhà",
-                onTap: () {},
-              ),
-              PrimaryRadio(
-                isSelected: false,
-                title: "Khác",
-                onTap: () {},
-              ),
-              // TextField()
-              vpad(10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      text: S.of(context).cancel,
-                      buttonType: ButtonType.secondary,
-                      secondaryBackgroundColor: redColor5,
-                      textColor: redColorBase,
-                      onTap: () {
-                        Utils.pop(context);
-                      },
-                    ),
-                  ),
-                  hpad(32),
-                  Expanded(
-                    child: PrimaryButton(
-                      text: S.of(context).confirm,
-                      buttonType: ButtonType.primary,
-                      secondaryBackgroundColor: redColor5,
-                      isFit: true,
-                      onTap: () {},
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ));
-  }
-
-  Future _initial() async {
-    await APITower.getParkingCardsList().then((value) async {
-      parkingCardsList = value;
-      notifyListeners();
-    });
-  }
 
   Future retry() async {
     parkingCardsList = null;
     notifyListeners();
-    _initial();
   }
 }

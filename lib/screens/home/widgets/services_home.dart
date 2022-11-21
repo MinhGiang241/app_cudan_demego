@@ -4,7 +4,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../services/gym_card/gym_card_list_screen.dart';
-import '../../services/parking_card/parking_card_list_screen.dart';
+import '../../services/parking_card/transport_card_list_screen.dart';
 import '../../services/service_screen.dart';
 import 'home_title_widget.dart';
 
@@ -48,7 +48,7 @@ class ServicesHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       Navigator.pushNamed(
-                          context, ParkingCardListScreen.routeName);
+                          context, TransportationCardListScreen.routeName);
                       // Utils.pushScreen(context, const ParkingCardListScreen());
                     },
                   ),

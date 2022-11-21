@@ -10,7 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
-import 'parking_card/parking_card_list_screen.dart';
+import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientBlue,
         "icon": PrimaryIcons.car_bg,
         "title": S.current.parking_card,
-        "navigator": ParkingCardListScreen.routeName,
+        "navigator": TransportationCardListScreen.routeName,
       },
       {
         "background": gradientPink,

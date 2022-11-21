@@ -17,7 +17,9 @@ import '../screens/home/home_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
 import '../screens/services/parcel/parcels_list_screen.dart';
-import '../screens/services/parking_card/parking_card_list_screen.dart';
+import '../screens/services/parking_card/register_parking_card.dart';
+import '../screens/services/parking_card/transport_card_list_screen.dart';
+import '../screens/services/parking_card/transportation_details_screen.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
 import '../screens/services/service_screen.dart';
 import '../screens/splash/splash_screen.dart';
@@ -98,10 +100,20 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const AddGymCardScreen(),
         );
-      case ParkingCardListScreen.routeName:
+      case TransportationCardListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (context) => ParkingCardListScreen(ctx: context),
+          builder: (context) => TransportationCardListScreen(ctx: context),
+        );
+      case TransportationCardDetails.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const TransportationCardDetails(),
+        );
+      case RegisterTransportationCard.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const RegisterTransportationCard(),
         );
       case ResidentCardListScreen.routeName:
         return MaterialPageRoute(

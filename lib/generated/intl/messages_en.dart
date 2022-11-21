@@ -20,9 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(message) => "Error: ${message}";
+  static String m0(delete) => "Do you want to delete ${delete}?";
 
-  static String m1(to) => "We sent otp code to :${to}";
+  static String m1(message) => "Error: ${message}";
+
+  static String m2(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -56,6 +58,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirm_delete_service": m0,
+        "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
+            "Do you want to lock transportation card?"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "covenient_service":
@@ -72,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
+        "edit_trans_card": MessageLookupByLibrary.simpleMessage(
+            "Register transportation card"),
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -93,7 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server!"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
-        "err_x": m0,
+        "err_x": m1,
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
@@ -112,18 +119,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
-        "history": MessageLookupByLibrary.simpleMessage("History"),
+        "history": MessageLookupByLibrary.simpleMessage("Timeline"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
             "Identity card/ passport photos"),
+        "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Phone number/Email or password is not correct."),
         "info": MessageLookupByLibrary.simpleMessage("Infomation"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
+        "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
+        "liscene_plate": MessageLookupByLibrary.simpleMessage("Liscene plate"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
+        "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "missing_report":
@@ -164,8 +175,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
+        "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
+        "register_trans_card": MessageLookupByLibrary.simpleMessage(
+            "Register transportation card"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
+        "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
@@ -181,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Reset Password successfully, please Sign in again"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
+        "resident_info":
+            MessageLookupByLibrary.simpleMessage("Resident information"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Register successfully, please sign in"),
@@ -235,6 +252,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Registering for a resident account means consenting to "),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "trans_card":
+            MessageLookupByLibrary.simpleMessage("Transportation card"),
+        "trans_card_details":
+            MessageLookupByLibrary.simpleMessage("Transportation card details"),
+        "trans_info":
+            MessageLookupByLibrary.simpleMessage("Transportation information"),
+        "trans_letter":
+            MessageLookupByLibrary.simpleMessage("Transportation letter"),
+        "trans_type":
+            MessageLookupByLibrary.simpleMessage("Transportation type"),
+        "transportation":
+            MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
@@ -244,7 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m1,
+        "we_send_to": m2,
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }

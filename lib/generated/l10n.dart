@@ -1500,10 +1500,10 @@ class S {
     );
   }
 
-  /// `History`
+  /// `Timeline`
   String get history {
     return Intl.message(
-      'History',
+      'Timeline',
       name: 'history',
       desc: '',
       args: [],
@@ -1695,6 +1695,176 @@ class S {
     return Intl.message(
       'No have transportation letter',
       name: 'no_trans_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation`
+  String get transportation {
+    return Intl.message(
+      'Transportation',
+      name: 'transportation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Liscene plate`
+  String get liscene_plate {
+    return Intl.message(
+      'Liscene plate',
+      name: 'liscene_plate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lock card`
+  String get lock_card {
+    return Intl.message(
+      'Lock card',
+      name: 'lock_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get l_new {
+    return Intl.message(
+      'New',
+      name: 'l_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to delete {delete}?`
+  String confirm_delete_service(Object delete) {
+    return Intl.message(
+      'Do you want to delete $delete?',
+      name: 'confirm_delete_service',
+      desc: '',
+      args: [delete],
+    );
+  }
+
+  /// `Do you want to lock transportation card?`
+  String get confirm_lock_trans_card {
+    return Intl.message(
+      'Do you want to lock transportation card?',
+      name: 'confirm_lock_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation letter`
+  String get trans_letter {
+    return Intl.message(
+      'Transportation letter',
+      name: 'trans_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation card`
+  String get trans_card {
+    return Intl.message(
+      'Transportation card',
+      name: 'trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation card details`
+  String get trans_card_details {
+    return Intl.message(
+      'Transportation card details',
+      name: 'trans_card_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident information`
+  String get resident_info {
+    return Intl.message(
+      'Resident information',
+      name: 'resident_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation information`
+  String get trans_info {
+    return Intl.message(
+      'Transportation information',
+      name: 'trans_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation type`
+  String get trans_type {
+    return Intl.message(
+      'Transportation type',
+      name: 'trans_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register number`
+  String get reg_num {
+    return Intl.message(
+      'Register number',
+      name: 'reg_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject reason`
+  String get reject_reason {
+    return Intl.message(
+      'Reject reason',
+      name: 'reject_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive`
+  String get inactive {
+    return Intl.message(
+      'Inactive',
+      name: 'inactive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register transportation card`
+  String get register_trans_card {
+    return Intl.message(
+      'Register transportation card',
+      name: 'register_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register transportation card`
+  String get edit_trans_card {
+    return Intl.message(
+      'Register transportation card',
+      name: 'edit_trans_card',
       desc: '',
       args: [],
     );

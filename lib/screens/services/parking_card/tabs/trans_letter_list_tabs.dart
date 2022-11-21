@@ -1,42 +1,41 @@
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/services/resident_card/prv/resident_card_prv.dart';
-import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../constants/constants.dart';
-import '../../../../../models/info_content_view.dart';
-import '../../../../../models/transportation_card.dart';
+import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../models/info_content_view.dart';
+import '../../../../models/transportation_card.dart';
+import '../../../../utils/utils.dart';
+import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
-import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
-import '../../../../widgets/primary_loading.dart';
+import '../../../auth/prv/resident_info_prv.dart';
 import '../transportation_details_screen.dart';
 
-class TransportationCardListTab extends StatelessWidget {
-  TransportationCardListTab({
+class TransportationLetterListTab extends StatelessWidget {
+  TransportationLetterListTab({
     super.key,
     required this.cardList,
     this.residentId,
-    required this.extend,
-    required this.lockCard,
-    required this.missingReport,
+    required this.cancelRegister,
+    required this.sendRequest,
+    required this.edit,
+    required this.deleteLetter,
   });
+
   final List<TransportationCard> cardList;
   String? residentId;
-  Function() extend;
-  Function() missingReport;
-  Function() lockCard;
+  Function() cancelRegister;
+  Function() sendRequest;
+  Function() edit;
+  Function() deleteLetter;
 
   @override
   Widget build(BuildContext context) {
     return (cardList.isEmpty)
         ? PrimaryEmptyWidget(
-            emptyText: S.of(context).no_trans_card,
+            emptyText: S.of(context).no_trans_letter,
             // buttonText: S.of(context).add_trans_card,
             icons: PrimaryIcons.car,
             action: () {
@@ -82,6 +81,15 @@ class TransportationCardListTab extends StatelessWidget {
                           content: cardList[index].number_plate,
                           contentStyle: txtBold(14),
                         ),
+                        InfoContentView(
+                          title: S.of(context).status,
+                          content:
+                              genStatus(cardList[index].ticket_status ?? ''),
+                          contentStyle: txtBold(
+                              14,
+                              genStatusColor(
+                                  cardList[index].ticket_status ?? '')),
+                        ),
                       ];
                       return Padding(
                         padding: const EdgeInsets.only(
@@ -95,27 +103,27 @@ class TransportationCardListTab extends StatelessWidget {
                           },
                           child: Column(
                             children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: cardList[index].card_status ==
-                                              "ACTIVE"
-                                          ? greenColorBase
-                                          : redColor2,
-                                      borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(12),
-                                          bottomLeft: Radius.circular(8))),
-                                  child: Text(
-                                    cardList[index].card_status == "ACTIVE"
-                                        ? S.of(context).active
-                                        : S.of(context).lock,
-                                    style: txtSemiBold(12, Colors.white),
-                                  ),
-                                ),
-                              ),
+                              // Align(
+                              //   alignment: Alignment.centerRight,
+                              //   child: Container(
+                              //     padding: const EdgeInsets.symmetric(
+                              //         horizontal: 10, vertical: 4),
+                              //     decoration: BoxDecoration(
+                              //         color: cardList[index].card_status ==
+                              //                 "ACTIVE"
+                              //             ? greenColorBase
+                              //             : pinkColorBase,
+                              //         borderRadius: const BorderRadius.only(
+                              //             topRight: Radius.circular(12),
+                              //             bottomLeft: Radius.circular(8))),
+                              //     child: Text(
+                              //       cardList[index].card_status == "ACTIVE"
+                              //           ? S.of(context).active
+                              //           : S.of(context).lock,
+                              //       style: txtSemiBold(12, Colors.white),
+                              //     ),
+                              //   ),
+                              // ),
                               vpad(16),
                               Padding(
                                 padding:
@@ -146,7 +154,21 @@ class TransportationCardListTab extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (cardList[index].card_status == "ACTIVE")
+                              if (cardList[index].ticket_status == "CANCEL")
+                                Row(
+                                  children: [
+                                    hpad(12),
+                                    PrimaryButton(
+                                      buttonSize: ButtonSize.small,
+                                      buttonType: ButtonType.secondary,
+                                      secondaryBackgroundColor: redColor4,
+                                      textColor: redColor,
+                                      text: S.of(context).cancel_register,
+                                      onTap: cancelRegister,
+                                    ),
+                                  ],
+                                ),
+                              if (cardList[index].ticket_status == "NEW")
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -154,24 +176,41 @@ class TransportationCardListTab extends StatelessWidget {
                                     PrimaryButton(
                                       buttonSize: ButtonSize.small,
                                       buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: yellowColor4,
-                                      text: S.of(context).extend,
-                                      textColor: yellowColor1,
+                                      secondaryBackgroundColor: greenColor4,
+                                      text: S.of(context).send_request,
+                                      textColor: greenColor1,
+                                      onTap: sendRequest,
                                     ),
                                     PrimaryButton(
                                       buttonSize: ButtonSize.small,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: primaryColor5,
-                                      text: S.of(context).missing_report,
+                                      text: S.of(context).edit,
                                       textColor: primaryColor1,
+                                      onTap: edit,
                                     ),
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
-                                      buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: redColor4,
-                                      textColor: redColor,
-                                      text: S.of(context).lock_card,
-                                    ),
+                                        buttonSize: ButtonSize.small,
+                                        buttonType: ButtonType.secondary,
+                                        secondaryBackgroundColor: redColor4,
+                                        textColor: redColor,
+                                        text: S.of(context).delete_letter,
+                                        onTap: deleteLetter
+
+                                        // () {
+                                        //   Utils.showConfirmMessage(
+                                        //       context: context,
+                                        //       title: S
+                                        //           .of(context)
+                                        //           .confirm_delete_service(
+                                        //             S
+                                        //                 .of(context)
+                                        //                 .trans_letter
+                                        //                 .toLowerCase(),
+                                        //           ),
+                                        //       onConfirm: () {});
+                                        // },
+                                        ),
                                   ],
                                 ),
                               vpad(12)
@@ -181,18 +220,6 @@ class TransportationCardListTab extends StatelessWidget {
                       );
                     },
                   )
-                  // ...listContent.map((e) => Table(
-                  //       columnWidths: const {
-                  //         0: FlexColumnWidth(2),
-                  //         1: FlexColumnWidth(3)
-                  //       },
-                  //       children: [
-                  //         TableRow(children: [
-                  //           Text('sasa'),
-                  //           Text('sasa'),
-                  //         ])
-                  //       ],
-                  //     ))
                 ],
               ),
             ),

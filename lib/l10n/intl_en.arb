@@ -144,7 +144,7 @@
   "related_doc_photo": "Related document photos",
   "res_card_details": "Resident card details",
   "details": "Details",
-  "history": "History",
+  "history": "Timeline",
   "expired": "Expired",
   "cancel_reason": "Reject_reason",
   "note": "Note",
@@ -163,6 +163,22 @@
   "success_sign_up":"Sign up successfully",
   "no_trans_card":"No have transportation card",
   "add_trans_card":"Resister new card",
-  "no_trans_letter":"No have transportation letter"
-
+  "no_trans_letter":"No have transportation letter",
+  "transportation":"Transportation",
+  "liscene_plate":"Liscene plate",
+  "lock_card":"Lock card",
+  "l_new":"New",
+  "confirm_delete_service":"Do you want to delete {delete}?",
+  "confirm_lock_trans_card":"Do you want to lock transportation card?",
+  "trans_letter":"Transportation letter",
+  "trans_card":"Transportation card",
+  "trans_card_details":"Transportation card details",
+  "resident_info":"Resident information",
+  "trans_info":"Transportation information",
+  "trans_type":"Transportation type",
+  "reg_num":"Register number",
+  "reject_reason":"Reject reason",
+  "inactive":"Inactive",
+  "register_trans_card":"Register transportation card",
+  "edit_trans_card":"Register transportation card"
 }

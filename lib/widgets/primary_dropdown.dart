@@ -15,17 +15,9 @@ var data = [
   'Lựa chọn 2',
   'Lựa chọn 3',
   'Lựa chọn 4',
-  'Lựa chọn 5',
-  'Lựa chọn 6',
-  'Lựa chọn 7',
-  'Lựa chọn 8',
-  'Lựa chọn 9',
-  'Lựa chọn 10',
-  'Lựa chọn 11',
-  'Lựa chọn 12',
-  'Lựa chọn 13',
-  'Lựa chọn 14'
 ];
+
+var text = ['1', '2', '3', '4'];
 
 var items = data.asMap().entries.map((v) {
   return DropdownMenuItem(
@@ -88,6 +80,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 ),
                 buttonIcon: const Icon(Icons.arrow_drop_down),
                 searchHint: '--${S.of(context).select}--',
+                searchHintStyle: txtBodySmallBold(color: grayScaleColor3),
                 onConfirm: (v) {
                   selectedList = v;
                 },
@@ -112,6 +105,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                   hint: Text(
                     "--${S.of(context).select}--",
                     overflow: TextOverflow.ellipsis,
+                    style: txtBodySmallBold(color: grayScaleColor3),
                   ),
                   style: txtBodySmallBold(color: grayScaleColorBase),
                   decoration: InputDecoration(

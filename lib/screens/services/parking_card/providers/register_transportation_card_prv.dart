@@ -6,7 +6,7 @@ import '../../../../utils/utils.dart';
 import '../../../../models/selection_model.dart';
 import '../../../../utils/utils.dart';
 
-class RegisterParkingCardPrv extends ChangeNotifier {
+class RegisterTransportationCardPrv extends ChangeNotifier {
   final List<SelectionModel> listVehicles = [
     SelectionModel(title: "Xe máy"),
     SelectionModel(title: "Ô tô")

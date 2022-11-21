@@ -225,27 +225,6 @@ class APITower {
     return ResponseBanTinDuAnDetails.fromJson(data);
   }
 
-  static Future<ResponseParkingCardsList> getParkingCardsList(
-      {int? pageSize, int? currentPage}) async {
-    var params = <String, dynamic>{};
-    var value = <String, dynamic>{};
-    if (pageSize != null) {
-      value['PageSize'] = pageSize;
-    }
-    if (currentPage != null) {
-      value['Page'] = currentPage;
-    }
-    if (value.isNotEmpty) {
-      params['parameters'] = value;
-    }
-    final data = await ApiService.shared.getApi(
-      path: 'api/queries/GetTheXe',
-      params: params.isEmpty ? null : params,
-    );
-    // print(data);
-    return ResponseParkingCardsList.fromJson(data);
-  }
-
   static Future<ResponsePetList> getPetsList(
       {int? pageSize, int? currentPage, required BuildContext context}) async {
     var params = <String, dynamic>{};

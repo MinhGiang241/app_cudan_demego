@@ -463,4 +463,49 @@ class Utils {
           onClose: onClose,
         ));
   }
+
+  static showConfirmMessage(
+      {required BuildContext context,
+      String title = '',
+      String content = '',
+      Function()? onConfirm}) {
+    Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.custom(
+          title: title,
+          content: Column(
+            children: [
+              Text(content, style: txtBodySmallRegular()),
+              vpad(12),
+              const Icon(Icons.dangerous),
+              vpad(12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  PrimaryButton(
+                    width: 120,
+                    text: S.of(context).cancel,
+                    buttonSize: ButtonSize.small,
+                    buttonType: ButtonType.red,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  PrimaryButton(
+                    width: 120,
+                    text: S.of(context).confirm,
+                    buttonSize: ButtonSize.small,
+                    buttonType: ButtonType.primary,
+                    onTap: () {
+                      Navigator.pop(context);
+                      onConfirm!();
+                    },
+                  )
+                ],
+              ),
+              vpad(12),
+            ],
+          ),
+        ));
+  }
 }
