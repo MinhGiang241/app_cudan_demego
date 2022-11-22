@@ -132,7 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
-        "liscene_plate": MessageLookupByLibrary.simpleMessage("Liscene plate"),
+        "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
+        "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
+            "Register transportation photos (2 side)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
         "register_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
@@ -183,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
+        "related_photo": MessageLookupByLibrary.simpleMessage("Related photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
         "res_card_details":

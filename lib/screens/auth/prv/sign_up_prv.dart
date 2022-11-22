@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../generated/l10n.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
+import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
 import 'auth_prv.dart';
 
@@ -66,12 +67,14 @@ class SignUpPrv extends ChangeNotifier {
       Utils.pushScreen(
           context,
           VerifyOTPScreen(
-              phone: phoneController.text.trim(),
-              name: phoneController.text.trim(),
-              pass: passController.text.trim(),
-              email: emailController.text.trim(),
-              verify: onSignUp,
-              isPhone: true));
+            isForgotPass: false,
+            phone: phoneController.text.trim(),
+            name: phoneController.text.trim(),
+            pass: passController.text.trim(),
+            email: emailController.text.trim(),
+            verify: onSignUp,
+            isPhone: true,
+          ));
     } else {
       if (nameController.text.trim().isEmpty) {
         nameValidate = S.of(context).can_not_empty;

@@ -202,6 +202,27 @@ class APIAuth {
     return await ApiService.shared.deleteCre();
   }
 
+  static Future<List<ResponseFileUpload>> uploadSingleFile(
+      {required List<File> files,
+      OnSendProgress? onSendProgress,
+      required BuildContext context}) async {
+    List<ResponseFileUpload> results = [];
+    for (var i = 0; i < files.length; i++) {
+      final mpf = await MultipartFile.fromFile(files[i].path);
+      final map = {
+        "file": [mpf]
+      };
+      final body = FormData.fromMap(map);
+      final data = await ApiService.shared.postApi(
+          path: ApiConstants.uploadURL,
+          data: body,
+          onSendProgress: onSendProgress,
+          context: context);
+      results.add(ResponseFileUpload.fromJson(data));
+    }
+    return results;
+  }
+
   static Future<ResponseFileUpload> uploadImage(
       {required List<File> files,
       OnSendProgress? onSendProgress,
@@ -215,7 +236,7 @@ class APIAuth {
     final map = {"files": multipartFiles};
     final body = FormData.fromMap(map);
     final data = await ApiService.shared.postApi(
-        path: 'api/media',
+        path: ApiConstants.uploadURL,
         data: body,
         onSendProgress: onSendProgress,
         context: context);

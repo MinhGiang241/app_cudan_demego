@@ -165,7 +165,7 @@
   "add_trans_card":"Resister new card",
   "no_trans_letter":"No have transportation letter",
   "transportation":"Transportation",
-  "liscene_plate":"Liscene plate",
+  "licene_plate":"Licene plate",
   "lock_card":"Lock card",
   "l_new":"New",
   "confirm_delete_service":"Do you want to delete {delete}?",
@@ -180,5 +180,7 @@
   "reject_reason":"Reject reason",
   "inactive":"Inactive",
   "register_trans_card":"Register transportation card",
-  "edit_trans_card":"Register transportation card"
+  "edit_trans_card":"Register transportation card",
+  "reg_trans_photos":"Register transportation photos (2 side)",
+  "related_photo":"Related photos"
 }

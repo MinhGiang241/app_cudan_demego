@@ -78,7 +78,7 @@ class TransportationCardListTab extends StatelessWidget {
                           contentStyle: txtBold(14),
                         ),
                         InfoContentView(
-                          title: S.of(context).liscene_plate,
+                          title: S.of(context).licene_plate,
                           content: cardList[index].number_plate,
                           contentStyle: txtBold(14),
                         ),

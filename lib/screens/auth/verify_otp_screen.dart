@@ -10,6 +10,7 @@ import '../../widgets/primary_screen.dart';
 import 'fogot_pass/reset_pass_screen.dart';
 import 'prv/auth_prv.dart';
 import 'prv/verify_otp_prv.dart';
+import 'sign_in_screen.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
   const VerifyOTPScreen(
@@ -175,9 +176,18 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                   .verify(context, widget.isForgotPass, () {});
                               // Utils.pushScreen(
                               //     context, ResetPassScreen(phone: '', token: ''));
-                            } else {
-                              // Utils.pushScreen(context, SignInScreen());
 
+                            } else {
+                              context.read<VerifyOTPPrv>().verify(
+                                  context, widget.isForgotPass, widget.verify!);
+                              // widget.verify!().then((v) {
+                              // Utils.showSuccessMessage(
+                              //     context: context,
+                              //     e: '${S.of(context).success_sign_up}, ${S.of(context).re_sign_in.toLowerCase()}',
+                              //     onClose: () {
+                              //       Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+                              //     });
+                              // }).catchError((e) {});
                             }
                           },
                   ),

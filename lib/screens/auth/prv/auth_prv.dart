@@ -124,6 +124,8 @@ class AuthPrv extends ChangeNotifier {
               // });
             }).catchError((e) {
               Utils.showErrorMessage(context, e);
+              isLoading = false;
+              notifyListeners();
             });
           } else {
             Navigator.of(context).pushNamed(
@@ -172,15 +174,12 @@ class AuthPrv extends ChangeNotifier {
             confirmPassword: cPass)
         .then((value) {
       if (value.code == 0) {
-        Utils.showDialog(
+        Utils.showSuccessMessage(
             context: context,
-            dialog: PrimaryDialog.success(
-              msg:
-                  '${S.of(context).success_sign_up}, ${S.of(context).re_sign_in}',
-              onClose: () {
-                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-              },
-            ));
+            e: '${S.of(context).success_sign_up}, ${S.of(context).re_sign_in}',
+            onClose: () {
+              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+            });
       } else {}
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

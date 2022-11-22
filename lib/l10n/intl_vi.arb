@@ -64,7 +64,7 @@
   "success": "Thành công",
   "failure": "Thất bại",
   "delete": "Xóa",
-  "err_conn": "Lỗi kết nối",
+  "err_conn": "Lỗi kết nối internet" ,
   "err_unknown": "Lỗi Không xác định",
   "err_internet": "Không kết nối được với máy chủ",
   "male": "Nam",
@@ -165,7 +165,7 @@
   "add_trans_card":"Đăng ký thẻ mới",
   "no_trans_letter":"Không có phiếu đăng ký nào",
   "transportation":"Phương tiện",
-  "liscene_plate":"Biển số xe",
+  "licene_plate":"Biển số xe",
   "lock_card": "Khóa thẻ",
   "l_new":"Mới",
   "confirm_delete_service":"Bạn có chắc chắn xóa {delete} không?",
@@ -180,5 +180,7 @@
   "reject_reason":"Lý do hủy",
   "inactive":"Dừng hoạt động",
   "register_trans_card":"Đăng ký thẻ phương tiện",
-  "edit_trans_card":"Chỉnh sửa thẻ phương tiện"
+  "edit_trans_card":"Chỉnh sửa thẻ phương tiện",
+  "reg_trans_photos":"Đăng ký xe (2 mặt)",
+  "related_photo":"Ảnh liên quan"
 }

@@ -25,8 +25,7 @@ typedef OnSendProgress = Function(int, int);
 class ApiService {
   static ApiService shared = ApiService();
 
-  final Dio _dio =
-      Dio(BaseOptions(baseUrl: '${ApiConstants.baseURL}/content/'));
+  final Dio _dio = Dio(BaseOptions(baseUrl: ApiConstants.baseURL));
   String tokenEndpointUrl = ApiConstants.authorizationEndpoint;
   String clientId = ApiConstants.clientId; //"importer";
   String secret = ApiConstants.clientSecret;
@@ -168,7 +167,7 @@ class ApiService {
     try {
       final response = await _dio.post(path,
           data: data, options: options, onSendProgress: onSendProgress);
-      return jsonDecode(response.toString());
+      return {"data": response.toString()};
     } on DioError catch (e) {
       if (e.response != null) {
         try {

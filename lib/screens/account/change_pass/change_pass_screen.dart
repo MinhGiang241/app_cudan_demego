@@ -59,6 +59,7 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                     child: Column(
                       children: [
                         PrimaryTextField(
+                          onTap: () {},
                           controller: context
                               .read<ChangePassPrv>()
                               .currentPassController,

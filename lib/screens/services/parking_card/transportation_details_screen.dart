@@ -113,17 +113,21 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                           content: arg.vehicleType!.name ?? "",
                         ),
                         InfoContentView(
-                          title: S.of(context).liscene_plate,
+                          title: S.of(context).licene_plate,
                           content: arg.number_plate,
                         ),
                         InfoContentView(
                           title: S.of(context).reg_num,
                           content: arg.registration_number,
                         ),
-                        InfoContentView(title: S.of(context).photos, images: [
-                          "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_front}",
-                          "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_back}"
-                        ]),
+                        if (arg.registration_image_front != null &&
+                            arg.registration_image_back != null)
+                          InfoContentView(title: S.of(context).photos, images: [
+                            if (arg.registration_image_front != null)
+                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_front}",
+                            if (arg.registration_image_back != null)
+                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_back}"
+                          ]),
                         InfoContentView(
                             title: S.of(context).card_num,
                             content: arg.code!.toUpperCase(),

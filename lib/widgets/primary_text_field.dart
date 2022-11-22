@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -58,6 +59,7 @@ class PrimaryTextField extends StatefulWidget {
   final Color? background;
   final Color? textColor;
   final TextAlign? textAlign;
+
   EdgeInsetsGeometry? margin;
 
   @override
@@ -103,10 +105,12 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
               stream: showPassController?.stream,
               builder: (context, snapshot) {
                 final showPass = snapshot.data!;
+
+                print(widget.onTap);
                 return PrimaryCard(
+                  onTap: widget.onTap,
                   background: widget.background,
                   margin: widget.margin,
-                  onTap: widget.onTap,
                   child: TextFormField(
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: widget.blockSpace

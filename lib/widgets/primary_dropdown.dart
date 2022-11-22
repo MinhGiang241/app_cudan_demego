@@ -1,3 +1,4 @@
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/container.dart';
@@ -35,12 +36,18 @@ class PrimaryDropDown extends StatefulWidget {
     this.onChange,
     this.selectList,
     this.isMultiple = false,
+    this.validator,
     this.selectMultileList,
+    this.validateString,
+    this.isError = false,
   });
+  final bool isError;
   final String? label;
   final bool isRequired;
   final bool isMultiple;
+  final String? Function(dynamic)? validator;
   String? value;
+  String? validateString;
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
   final List<String>? selectMultileList;
@@ -72,6 +79,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
         if (widget.label != null) vpad(8),
         widget.isMultiple
             ? MultiSelectDialogField(
+                validator: widget.validator,
                 title: Text(S.of(context).select),
                 selectedColor: secondaryColorBase,
                 buttonText: Text(
@@ -97,9 +105,11 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
               )
             : PrimaryCard(
                 child: DropdownButtonFormField<dynamic>(
+                  isDense: true,
+                  validator: widget.validator,
                   dropdownColor: Colors.white,
                   value: widget.value,
-                  isExpanded: true,
+                  isExpanded: false,
                   // value: items[indexSelected],
                   // dropdownColor: Colors.black,
                   hint: Text(
@@ -119,6 +129,10 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                       borderSide:
                           const BorderSide(color: primaryColor2, width: 2),
                     ),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                            const BorderSide(color: redColor2, width: 2)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -132,8 +146,52 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                       },
                   items: widget.selectList ?? items,
                 ),
-              )
+              ),
+        if (widget.validateString != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0, left: 4),
+            child: Text(
+              widget.validateString!,
+              style: txtRegular(13, redColorBase),
+            ),
+          )
       ],
     );
   }
+}
+
+class DropdownFormField<T> extends FormField<T> {
+  DropdownFormField({
+    Key? key,
+    required InputDecoration decoration,
+    required T initialValue,
+    required List<DropdownMenuItem<T>> items,
+    bool autovalidate = false,
+    FormFieldSetter<T>? onSaved,
+    FormFieldValidator<T>? validator,
+  }) : super(
+          key: key,
+          onSaved: onSaved,
+          validator: validator,
+          // autovalidate: autovalidate,
+          initialValue: items.contains(initialValue) ? initialValue : null,
+          builder: (FormFieldState<T> field) {
+            final InputDecoration effectiveDecoration = (decoration)
+                .applyDefaults(Theme.of(field.context).inputDecorationTheme);
+
+            return InputDecorator(
+              decoration: effectiveDecoration.copyWith(
+                  errorText: field.hasError ? field.errorText : null),
+              isEmpty: field.value == '' || field.value == null,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<T>(
+                  value: field.value,
+                  isDense: true,
+                  onChanged: field.didChange,
+                  items: items.toList(),
+                ),
+              ),
+            );
+          },
+        );
 }

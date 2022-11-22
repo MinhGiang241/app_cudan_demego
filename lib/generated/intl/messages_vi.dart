@@ -94,7 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập số điện thoại hoặc email"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
-        "err_conn": MessageLookupByLibrary.simpleMessage("Lỗi kết nối"),
+        "err_conn":
+            MessageLookupByLibrary.simpleMessage("Lỗi kết nối internet"),
         "err_internet": MessageLookupByLibrary.simpleMessage(
             "Không kết nối được với máy chủ"),
         "err_unknown":
@@ -132,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "letter_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phiếu"),
-        "liscene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
+        "licene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
@@ -177,6 +178,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký"),
+        "reg_trans_photos":
+            MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "register_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
@@ -184,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
+        "related_photo": MessageLookupByLibrary.simpleMessage("Ảnh liên quan"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
         "res_card_details":

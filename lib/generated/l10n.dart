@@ -1710,11 +1710,11 @@ class S {
     );
   }
 
-  /// `Liscene plate`
-  String get liscene_plate {
+  /// `Licene plate`
+  String get licene_plate {
     return Intl.message(
-      'Liscene plate',
-      name: 'liscene_plate',
+      'Licene plate',
+      name: 'licene_plate',
       desc: '',
       args: [],
     );
@@ -1865,6 +1865,26 @@ class S {
     return Intl.message(
       'Register transportation card',
       name: 'edit_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register transportation photos (2 side)`
+  String get reg_trans_photos {
+    return Intl.message(
+      'Register transportation photos (2 side)',
+      name: 'reg_trans_photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Related photos`
+  String get related_photo {
+    return Intl.message(
+      'Related photos',
+      name: 'related_photo',
       desc: '',
       args: [],
     );

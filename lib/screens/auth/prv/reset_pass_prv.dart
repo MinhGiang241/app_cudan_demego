@@ -43,6 +43,20 @@ class ResetPassPrv extends ChangeNotifier {
         notifyListeners();
         Utils.showErrorMessage(context, e);
       });
-    } else {}
+    } else {
+      if (newPassController.text.isEmpty) {
+        validateNewPass = S.of(context).not_blank;
+      } else {
+        validateNewPass = null;
+      }
+      if (cNewPassController.text.isEmpty) {
+        validateCNewPass = S.of(context).not_blank;
+      } else if (newPassController.text.trim() !=
+          cNewPassController.text.trim()) {
+        validateCNewPass = S.of(context).rgstr_code_2;
+      } else {
+        validateCNewPass = null;
+      }
+    }
   }
 }

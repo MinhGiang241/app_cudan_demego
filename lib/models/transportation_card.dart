@@ -102,6 +102,7 @@ class VehicleType {
   bool? isDraft;
   String? code;
   String? name;
+
   VehicleType.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];

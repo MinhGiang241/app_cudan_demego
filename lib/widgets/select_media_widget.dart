@@ -15,6 +15,7 @@ class SelectMediaWidget extends StatelessWidget {
       this.images = const [],
       this.onSelect,
       this.onRemove,
+      this.isDash = true,
       this.isRequired = false})
       : super(key: key);
   final String? title;
@@ -22,19 +23,21 @@ class SelectMediaWidget extends StatelessWidget {
   final Function()? onSelect;
   final Function(int)? onRemove;
   final bool isRequired;
+  final bool isDash;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
-            DashButton(
-              text: 'S.of(context).add_image',
-              lable: title,
-              isRequired: isRequired,
-              icon: const PrimaryIcon(icons: PrimaryIcons.image_add),
-              onTap: onSelect,
-            ),
+            if (isDash)
+              DashButton(
+                text: S.of(context).add_photo,
+                lable: title,
+                isRequired: isRequired,
+                icon: const PrimaryIcon(icons: PrimaryIcons.image_add),
+                onTap: onSelect,
+              ),
           ],
         ),
         if (images.isNotEmpty)

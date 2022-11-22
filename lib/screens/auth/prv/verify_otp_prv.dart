@@ -8,6 +8,7 @@ import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_dialog.dart';
 import '../fogot_pass/reset_pass_screen.dart';
+import '../sign_in_screen.dart';
 import 'auth_prv.dart';
 
 class VerifyOTPPrv extends ChangeNotifier {
@@ -75,13 +76,17 @@ class VerifyOTPPrv extends ChangeNotifier {
           notifyListeners();
         });
       } else {
-        await authPrv
-            .onVerify(context, name, email, phone, otpController.text,
-                isForgotPass, isPhone, verify)
-            .then((value) {
-          isLoading = false;
-          notifyListeners();
-        });
+        await verify().then((v) {});
+        // await
+        //  authPrv
+        //     .onVerify(context, name, email, phone, otpController.text,
+        //         isForgotPass, isPhone, verify)
+        //     .then((value) {
+        //   isLoading = false;
+        //   notifyListeners();
+        // });
+        isLoading = false;
+        notifyListeners();
       }
     }
   }
@@ -105,6 +110,8 @@ class VerifyOTPPrv extends ChangeNotifier {
       }).catchError((e) {
         Utils.showErrorMessage(context, e);
       });
+      isResending = false;
+      notifyListeners();
     } else {
       await APIAuth.sendOtpViaEmail(email).then((v) {
         Utils.showSuccessMessage(

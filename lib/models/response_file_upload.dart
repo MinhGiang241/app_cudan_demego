@@ -2,12 +2,14 @@ class ResponseFileUpload {
   List<ResponseFile>? files;
   dynamic status;
   String? message;
+  dynamic data;
 
   ResponseFileUpload({this.files});
 
   ResponseFileUpload.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    data = json['data'];
     files = json["files"] == null
         ? null
         : (json["files"] as List).map((e) => ResponseFile.fromJson(e)).toList();

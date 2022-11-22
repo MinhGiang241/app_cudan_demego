@@ -128,6 +128,23 @@ class EditPersonalInfo extends StatelessWidget {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      // onTap:()async{
+
+                      // },
+                      // onTap: () {
+
+                      // await showMenu(
+                      //   context: context,
+                      //   position: RelativeRect.fromLTRB(100, 100, 100, 100),
+                      //   items: [
+                      //     PopupMenuItem<String>(
+                      //         child: const Text('Doge'), value: 'Doge'),
+                      //     PopupMenuItem<String>(
+                      //         child: const Text('Lion'), value: 'Lion'),
+                      //   ],
+                      //   elevation: 8.0,
+                      // );
+                      // },
                       controller:
                           context.read<EditInfoProvider>().genderController,
                       label: " S.of(context).gender",
