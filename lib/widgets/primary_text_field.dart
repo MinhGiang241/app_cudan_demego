@@ -112,6 +112,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                   background: widget.background,
                   margin: widget.margin,
                   child: TextFormField(
+                    onTap: widget.onTap,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: widget.blockSpace
                         ? <TextInputFormatter>[

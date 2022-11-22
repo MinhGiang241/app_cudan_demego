@@ -230,7 +230,7 @@ class Utils {
             children: [
               vpad(24),
               ItemSelected(
-                  text: "S.current.camera",
+                  text: S.current.camera,
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.camera, color: grayScaleColor2),
                   onTap: () async {
@@ -242,7 +242,7 @@ class Utils {
                     });
                   }),
               ItemSelected(
-                text: " S.current.gallery",
+                text: S.current.gallery,
                 icon: const PrimaryIcon(
                     icons: PrimaryIcons.image, color: grayScaleColor2),
                 onTap: () async {
@@ -256,7 +256,7 @@ class Utils {
               ),
               if (Platform.isIOS && isFile)
                 ItemSelected(
-                  text: "S.current.file_selection",
+                  text: S.current.file_selection,
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.folder_open, color: grayScaleColor2),
                   onTap: () async {
@@ -326,10 +326,10 @@ class Utils {
       await showDialog(
           context: context,
           dialog: PrimaryDialog.custom(
-            title: "S.current.permission_denied",
+            title: S.current.permission_denied,
             content: Column(
               children: [
-                Text("S.current.permission_denied_msg"),
+                Text(S.current.permission_denied_msg),
                 vpad(20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

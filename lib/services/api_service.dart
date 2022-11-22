@@ -110,9 +110,8 @@ class ApiService {
     final cli = await client.refreshCredentials();
     final path = await getApplicationDocumentsDirectory();
     final credentialsFile = File('${path.path}/credential.json');
-    if (remember) {
-      await credentialsFile.writeAsString(client.credentials.toJson());
-    }
+
+    await credentialsFile.writeAsString(client.credentials.toJson());
 
     return cli;
   }

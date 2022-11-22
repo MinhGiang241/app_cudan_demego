@@ -1,4 +1,3 @@
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/container.dart';
@@ -108,7 +107,10 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                   isDense: true,
                   validator: widget.validator,
                   dropdownColor: Colors.white,
-                  value: widget.value,
+                  value: widget.value ??
+                      (widget.selectList!.isNotEmpty
+                          ? widget.selectList![0].value
+                          : null),
                   isExpanded: false,
                   // value: items[indexSelected],
                   // dropdownColor: Colors.black,

@@ -1889,6 +1889,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File selection`
+  String get file_selection {
+    return Intl.message(
+      'File selection',
+      name: 'file_selection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission denied`
+  String get permission_denied {
+    return Intl.message(
+      'Permission denied',
+      name: 'permission_denied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have permission`
+  String get permission_denied_msg {
+    return Intl.message(
+      'You don\'t have permission',
+      name: 'permission_denied_msg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

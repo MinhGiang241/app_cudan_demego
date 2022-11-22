@@ -129,6 +129,7 @@ class _RegisterTransportationCardState
                             if (v!.isEmpty) {
                               return '';
                             }
+                            return null;
                           }),
                           controller: context
                               .read<RegisterTransportationCardPrv>()
@@ -140,6 +141,12 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          validator: ((v) {
+                            if (v!.isEmpty) {
+                              return '';
+                            }
+                            return null;
+                          }),
                           controller: context
                               .read<RegisterTransportationCardPrv>()
                               .regNumController,

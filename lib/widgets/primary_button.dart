@@ -73,6 +73,7 @@ class PrimaryButton extends StatelessWidget {
                                       strokeWidth: 3,
                                     ))
                                 : Text(text ?? "",
+                                    softWrap: true,
                                     style: _txtStyle(
                                         buttonSize ?? ButtonSize.large),
                                     textAlign: TextAlign.center),

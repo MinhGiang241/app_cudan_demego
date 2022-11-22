@@ -174,7 +174,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
+                                      buttonSize: ButtonSize.xsmall,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: greenColor4,
                                       text: S.of(context).send_request,
@@ -182,7 +182,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                       onTap: sendRequest,
                                     ),
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
+                                      buttonSize: ButtonSize.xsmall,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: primaryColor5,
                                       text: S.of(context).edit,
@@ -190,7 +190,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                       onTap: edit,
                                     ),
                                     PrimaryButton(
-                                        buttonSize: ButtonSize.small,
+                                        buttonSize: ButtonSize.xsmall,
                                         buttonType: ButtonType.secondary,
                                         secondaryBackgroundColor: redColor4,
                                         textColor: redColor,

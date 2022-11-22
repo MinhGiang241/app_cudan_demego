@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
+        "camera": MessageLookupByLibrary.simpleMessage("Máy ảnh"),
         "can_not_empty":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
@@ -109,10 +110,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
+        "file_selection": MessageLookupByLibrary.simpleMessage("Chọn file"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản ?"),
@@ -166,6 +169,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "permission_denied":
+            MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
+        "permission_denied_msg":
+            MessageLookupByLibrary.simpleMessage("Bạn chưa cấp quyền ứng dụng"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Thú nuôi"),

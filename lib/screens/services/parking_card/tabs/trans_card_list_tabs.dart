@@ -152,21 +152,21 @@ class TransportationCardListTab extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
+                                      buttonSize: ButtonSize.xsmall,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: yellowColor4,
                                       text: S.of(context).extend,
                                       textColor: yellowColor1,
                                     ),
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
+                                      buttonSize: ButtonSize.xsmall,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: primaryColor5,
                                       text: S.of(context).missing_report,
                                       textColor: primaryColor1,
                                     ),
                                     PrimaryButton(
-                                      buttonSize: ButtonSize.small,
+                                      buttonSize: ButtonSize.xsmall,
                                       buttonType: ButtonType.secondary,
                                       secondaryBackgroundColor: redColor4,
                                       textColor: redColor,

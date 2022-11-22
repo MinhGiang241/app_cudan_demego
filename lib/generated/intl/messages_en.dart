@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "can_not_empty": MessageLookupByLibrary.simpleMessage("Can not empty"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Reject_reason"),
@@ -109,10 +110,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "file_selection":
+            MessageLookupByLibrary.simpleMessage("File selection"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
@@ -164,6 +168,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "permission_denied":
+            MessageLookupByLibrary.simpleMessage("Permission denied"),
+        "permission_denied_msg":
+            MessageLookupByLibrary.simpleMessage("You don\'t have permission"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
