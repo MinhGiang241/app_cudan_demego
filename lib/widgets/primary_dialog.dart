@@ -6,7 +6,7 @@ import '../generated/l10n.dart';
 import 'primary_button.dart';
 import 'primary_icon.dart';
 
-enum DialogType { success, error, custom }
+enum DialogType { success, error, alert, custom }
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog(
@@ -17,12 +17,14 @@ class CustomDialog extends StatelessWidget {
       this.content,
       this.useBackground = false,
       this.onClose,
+      this.customIcons,
       this.type = DialogType.custom});
 
   final String? title;
   final String? msg;
   final int? code;
   final Widget? content;
+  final PrimaryIcon? customIcons;
   final DialogType type;
   final bool useBackground;
   final Function()? onClose;
@@ -51,6 +53,8 @@ class CustomDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     vpad(24),
+                    if (type == DialogType.custom && customIcons != null)
+                      customIcons!,
                     if (type != DialogType.custom)
                       PrimaryIcon(
                         icons: type == DialogType.success
@@ -65,6 +69,8 @@ class CustomDialog extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                       ),
                     if (type != DialogType.custom) vpad(16),
+                    if (type == DialogType.custom && customIcons != null)
+                      vpad(16),
                     if (title != null)
                       Text(
                         _title(),
@@ -157,8 +163,10 @@ class PrimaryDialog extends CustomDialog {
     Key? key,
     String? title,
     Widget? content,
+    PrimaryIcon? customIcons,
     bool useBackground = false,
   }) : super(
+          customIcons: customIcons,
           type: DialogType.custom,
           key: key,
           title: title,

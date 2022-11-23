@@ -187,5 +187,14 @@
   "gallery": "Gallery",
   "file_selection": "File selection",
   "permission_denied": "Permission denied",
-  "permission_denied_msg": "You don't have permission"
+  "permission_denied_msg": "You don't have permission",
+  "success_cr_new_trans":"Add new transportation card successfully",
+  "success_send_req_trans":"Send to approve request successfully",
+  "success_edit":"Edit successfully",
+  "success_remove":"Remove {del} successfully",
+  "success_lock_card":"Lock card successfully",
+  "confirm_send_request":"Do you want to send to approve request?",
+  "not_empty_trans_image":"Not empty Register transportation photos!",
+  "photo_front_side":"Photo front size",
+  "photo_back_side":"Photo back size"
 }

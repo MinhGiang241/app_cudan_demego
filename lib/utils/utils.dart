@@ -472,13 +472,23 @@ class Utils {
     Utils.showDialog(
         context: context,
         dialog: PrimaryDialog.custom(
+          // customIcons: const PrimaryIcon(
+          //   icons: PrimaryIcons.alert,
+          //   color: Colors.white,
+          //   style: PrimaryIconStyle.gradient,
+          //   gradients: PrimaryIconGradient.yellow,
+          //   size: 32,
+          //   padding: EdgeInsets.all(12),
+          // ),
           title: title,
           content: Column(
             children: [
-              Text(content, style: txtBodySmallRegular()),
-              vpad(12),
-              const Icon(Icons.dangerous),
-              vpad(12),
+              Text(
+                content,
+                style: txtBodySmallRegular(),
+                textAlign: TextAlign.center,
+              ),
+              vpad(24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -497,7 +507,6 @@ class Utils {
                     buttonSize: ButtonSize.small,
                     buttonType: ButtonType.primary,
                     onTap: () {
-                      Navigator.pop(context);
                       onConfirm!();
                     },
                   )

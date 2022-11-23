@@ -11,6 +11,7 @@ import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../auth/prv/resident_info_prv.dart';
+import '../register_parking_card.dart';
 import '../transportation_details_screen.dart';
 
 class TransportationLetterListTab extends StatelessWidget {
@@ -27,9 +28,9 @@ class TransportationLetterListTab extends StatelessWidget {
   final List<TransportationCard> cardList;
   String? residentId;
   Function() cancelRegister;
-  Function() sendRequest;
+  Function(String) sendRequest;
   Function() edit;
-  Function() deleteLetter;
+  Function(String) deleteLetter;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +180,8 @@ class TransportationLetterListTab extends StatelessWidget {
                                       secondaryBackgroundColor: greenColor4,
                                       text: S.of(context).send_request,
                                       textColor: greenColor1,
-                                      onTap: sendRequest,
+                                      onTap: () =>
+                                          sendRequest(cardList[index].id!),
                                     ),
                                     PrimaryButton(
                                       buttonSize: ButtonSize.xsmall,
@@ -187,7 +189,16 @@ class TransportationLetterListTab extends StatelessWidget {
                                       secondaryBackgroundColor: primaryColor5,
                                       text: S.of(context).edit,
                                       textColor: primaryColor1,
-                                      onTap: edit,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context,
+                                            RegisterTransportationCard
+                                                .routeName,
+                                            arguments: {
+                                              "isEdit": true,
+                                              "data": cardList[index]
+                                            });
+                                      },
                                     ),
                                     PrimaryButton(
                                         buttonSize: ButtonSize.xsmall,
@@ -195,7 +206,8 @@ class TransportationLetterListTab extends StatelessWidget {
                                         secondaryBackgroundColor: redColor4,
                                         textColor: redColor,
                                         text: S.of(context).delete_letter,
-                                        onTap: deleteLetter
+                                        onTap: () =>
+                                            deleteLetter(cardList[index].id!)
 
                                         // () {
                                         //   Utils.showConfirmMessage(
@@ -219,7 +231,8 @@ class TransportationLetterListTab extends StatelessWidget {
                         ),
                       );
                     },
-                  )
+                  ),
+                  vpad(60)
                 ],
               ),
             ),

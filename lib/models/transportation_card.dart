@@ -19,6 +19,7 @@ class TransportationCard {
     this.type,
     this.updatedTime,
     this.vehicleTypeId,
+    this.other_image,
   });
   String? id;
   String? createdTime;
@@ -38,6 +39,7 @@ class TransportationCard {
   String? code;
   String? card_status;
   VehicleType? vehicleType;
+  List<OtherImage>? other_image;
 
   TransportationCard.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -57,6 +59,14 @@ class TransportationCard {
     ticket_status = json['ticket_status'];
     code = json['code'];
     card_status = json['card_status'];
+    // ignore: prefer_null_aware_operators
+    other_image = json['other_image'] != null
+        ? json['other_image'].length != 0
+            ? json['other_image']
+                .map<OtherImage>((e) => OtherImage.fromJson(e))
+                .toList()
+            : null
+        : null;
     vehicleType = json['vehicleType'] != null
         ? VehicleType.fromJson(json['vehicleType'])
         : null;
@@ -67,8 +77,8 @@ class TransportationCard {
     data['_id'] = id;
     data['createdTime'] = createdTime;
     data['updatedTime'] = updatedTime;
-    data['isLocked'] = isLocked;
-    data['isDraft'] = isDraft;
+    // data['isLocked'] = isLocked ?? false;
+    data['isDraft'] = isDraft ?? false;
     data['card_type'] = card_type;
     data['apartmentId'] = apartmentId;
     data['residentId'] = residentId;
@@ -81,7 +91,9 @@ class TransportationCard {
     data['ticket_status'] = ticket_status;
     data['code'] = code;
     data['card_status'] = card_status;
-    data['vehicleType'] = vehicleType != null ? vehicleType!.toJson() : null;
+    data['other_image'] =
+        other_image != null ? [...other_image!.map((e) => e.toJson())] : null;
+    // data['vehicleType'] = vehicleType != null ? vehicleType!.toJson() : null;
     return data;
   }
 }
@@ -118,6 +130,23 @@ class VehicleType {
     data['updatedTime'] = updatedTime;
     data['isDraft'] = isDraft;
     data['code'] = code;
+    data['name'] = name;
+    return data;
+  }
+}
+
+class OtherImage {
+  String? id;
+  String? name;
+
+  OtherImage({this.id, this.name});
+  OtherImage.fromJson(Map<String, dynamic> json) {
+    id = json['file_id'];
+    name = json['name'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['file_id'] = id;
     data['name'] = name;
     return data;
   }

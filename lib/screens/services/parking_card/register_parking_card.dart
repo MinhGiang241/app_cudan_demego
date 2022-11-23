@@ -3,11 +3,14 @@ import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/transportation_card.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_error_widget.dart';
+import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
@@ -30,8 +33,18 @@ class _RegisterTransportationCardState
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
 
     var isEdit = arg['isEdit'];
+    TransportationCard card = TransportationCard();
+    if (isEdit) {
+      card = arg['data'];
+    }
+
     return ChangeNotifierProvider(
       create: (context) => RegisterTransportationCardPrv(
+          vehicleType: card.vehicleTypeId,
+          id: card.id,
+          imageUrlFront: card.registration_image_front,
+          imageUrlBack: card.registration_image_back,
+          residentId: context.read<ResidentInfoPrv>().residentId,
           apartmentId:
               context.read<ResidentInfoPrv>().selectedApartment?.apartmentId),
       builder: (context, state) {
@@ -55,6 +68,17 @@ class _RegisterTransportationCardState
                         onRetry: () async {
                           setState(() {});
                         });
+                  }
+
+                  if (isEdit) {
+                    context
+                        .read<RegisterTransportationCardPrv>()
+                        .liceneController
+                        .text = card.number_plate ?? '';
+                    context
+                        .read<RegisterTransportationCardPrv>()
+                        .regNumController
+                        .text = card.registration_number ?? '';
                   }
 
                   var listApartmentChoice =
@@ -111,6 +135,9 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryDropDown(
+                          value: context
+                              .read<RegisterTransportationCardPrv>()
+                              .vehicleType,
                           validateString: context
                               .read<RegisterTransportationCardPrv>()
                               .validateVehicleType,
@@ -125,6 +152,9 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          validateString: context
+                              .watch<RegisterTransportationCardPrv>()
+                              .validateLiceneNum,
                           validator: ((v) {
                             if (v!.isEmpty) {
                               return '';
@@ -141,12 +171,16 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          validateString: context
+                              .watch<RegisterTransportationCardPrv>()
+                              .validateRegNum,
                           validator: ((v) {
                             if (v!.isEmpty) {
                               return '';
                             }
                             return null;
                           }),
+                          keyboardType: TextInputType.number,
                           controller: context
                               .read<RegisterTransportationCardPrv>()
                               .regNumController,
@@ -160,64 +194,198 @@ class _RegisterTransportationCardState
                           S.of(context).photos,
                           style: txtBodySmallRegular(color: grayScaleColorBase),
                         ),
-                        // Row(
-                        //   children: [
-                        //     Checkbox(
-                        //       value: context
-                        //           .watch<RegisterTransportationCardPrv>()
-                        //           .isOwner,
-                        //       side: const BorderSide(
-                        //           color: secondaryColor3, width: 2),
-                        //       onChanged: context
-                        //           .read<RegisterTransportationCardPrv>()
-                        //           .onChangeOwnerOfV,
-                        //       activeColor: secondaryColor2,
-                        //       shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(4)),
-                        //     ),
-                        //     hpad(8),
-                        //     Text('S.of(context).owner_of_vehicle',
-                        //         style: txtBodySmallBold(color: grayScaleColor2))
-                        //   ],
-                        // ),
                         vpad(16),
-                        // PrimaryTextField(
-                        //   controller: context
-                        //       .read<RegisterTransportationCardPrv>()
-                        //       .noteController,
-                        //   label: 'S.of(context).note',
-                        //   hint: 'S.of(context).enter_note',
-                        //   maxLines: 4,
-                        // ),
-                        // vpad(16),
-
-                        SelectMediaWidget(
-                          isDash: context
-                                      .read<RegisterTransportationCardPrv>()
-                                      .imagesVehicle
-                                      .length <
-                                  2
-                              ? true
-                              : false,
-                          images: context
-                              .watch<RegisterTransportationCardPrv>()
-                              .imagesVehicle,
-                          title: S.of(context).reg_trans_photos,
-                          onRemove: context
-                              .read<RegisterTransportationCardPrv>()
-                              .onRemoveImageV,
-                          onSelect: () {
-                            if (context
-                                    .read<RegisterTransportationCardPrv>()
-                                    .imagesVehicle
-                                    .length <
-                                2) {
+                        if (isEdit &&
+                            context
+                                    .watch<RegisterTransportationCardPrv>()
+                                    .imageUrlFront !=
+                                null)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                S.of(context).photo_front_side,
+                                style: txtBodySmallRegular(
+                                    color: grayScaleColorBase),
+                              ),
+                              vpad(12),
+                              SizedBox(
+                                height: 116,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 14.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                  '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlFront!}')),
+                                          Positioned(
+                                            top: 2,
+                                            right: 2,
+                                            child: PrimaryIcon(
+                                              icons: PrimaryIcons.close,
+                                              style: PrimaryIconStyle.gradient,
+                                              gradients:
+                                                  PrimaryIconGradient.red,
+                                              color: Colors.white,
+                                              padding: const EdgeInsets.all(4),
+                                              onTap: () {
+                                                context
+                                                    .read<
+                                                        RegisterTransportationCardPrv>()
+                                                    .removeImageTwoSide(
+                                                        context, true);
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        if (!isEdit ||
+                            (isEdit &&
+                                context
+                                        .watch<RegisterTransportationCardPrv>()
+                                        .imageUrlFront ==
+                                    null))
+                          SelectMediaWidget(
+                            isDash: context
+                                    .watch<RegisterTransportationCardPrv>()
+                                    .imageFileFront
+                                    .isNotEmpty
+                                ? false
+                                : true,
+                            images: context
+                                .watch<RegisterTransportationCardPrv>()
+                                .imageFileFront,
+                            title: S.of(context).photo_front_side,
+                            onRemove: context
+                                .read<RegisterTransportationCardPrv>()
+                                .onRemoveFront,
+                            onSelect: () {
                               context
                                   .read<RegisterTransportationCardPrv>()
-                                  .onSelectImageVehicle(context);
-                            }
-                          },
-                        ),
+                                  .onSelectFrontPhoto(context);
+                            },
+                          ),
+                        vpad(16),
+                        if (isEdit &&
+                            context
+                                    .watch<RegisterTransportationCardPrv>()
+                                    .imageUrlBack !=
+                                null)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                S.of(context).photo_back_side,
+                                style: txtBodySmallRegular(
+                                    color: grayScaleColorBase),
+                              ),
+                              vpad(12),
+                              SizedBox(
+                                height: 116,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 14.0),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                  '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlBack!}')),
+                                          Positioned(
+                                            top: 2,
+                                            right: 2,
+                                            child: PrimaryIcon(
+                                              icons: PrimaryIcons.close,
+                                              style: PrimaryIconStyle.gradient,
+                                              gradients:
+                                                  PrimaryIconGradient.red,
+                                              color: Colors.white,
+                                              padding: const EdgeInsets.all(4),
+                                              onTap: () {
+                                                context
+                                                    .read<
+                                                        RegisterTransportationCardPrv>()
+                                                    .removeImageTwoSide(
+                                                        context, false);
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+
+                        if (!isEdit ||
+                            (isEdit &&
+                                context
+                                        .watch<RegisterTransportationCardPrv>()
+                                        .imageUrlBack ==
+                                    null))
+                          SelectMediaWidget(
+                            isDash: context
+                                    .watch<RegisterTransportationCardPrv>()
+                                    .imageFileBack
+                                    .isNotEmpty
+                                ? false
+                                : true,
+                            images: context
+                                .watch<RegisterTransportationCardPrv>()
+                                .imageFileBack,
+                            title: S.of(context).photo_back_side,
+                            onRemove: context
+                                .read<RegisterTransportationCardPrv>()
+                                .onRemoveBack,
+                            onSelect: () {
+                              context
+                                  .read<RegisterTransportationCardPrv>()
+                                  .onSelectBackPhoto(context);
+                            },
+                          ),
+                        // SelectMediaWidget(
+                        //   isDash: context
+                        //               .read<RegisterTransportationCardPrv>()
+                        //               .imagesVehicle
+                        //               .length <
+                        //           2
+                        //       ? true
+                        //       : false,
+                        //   images: context
+                        //       .watch<RegisterTransportationCardPrv>()
+                        //       .imagesVehicle,
+                        //   title: S.of(context).reg_trans_photos,
+                        //   onRemove: context
+                        //       .read<RegisterTransportationCardPrv>()
+                        //       .onRemoveImageV,
+                        //   onSelect: () {
+                        //     if (context
+                        //             .read<RegisterTransportationCardPrv>()
+                        //             .imagesVehicle
+                        //             .length <
+                        //         2) {
+                        //       context
+                        //           .read<RegisterTransportationCardPrv>()
+                        //           .onSelectImageVehicle(context);
+                        //     }
+                        //   },
+                        // ),
                         vpad(16),
                         SelectMediaWidget(
                           // isDash: context
@@ -235,15 +403,9 @@ class _RegisterTransportationCardState
                               .read<RegisterTransportationCardPrv>()
                               .onRemoveImageR,
                           onSelect: () {
-                            if (context
-                                    .read<RegisterTransportationCardPrv>()
-                                    .imagesVehicle
-                                    .length <
-                                2) {
-                              context
-                                  .read<RegisterTransportationCardPrv>()
-                                  .onSelectImageRelated(context);
-                            }
+                            context
+                                .read<RegisterTransportationCardPrv>()
+                                .onSelectImageRelated(context);
                           },
                         ),
                         vpad(36),
@@ -251,25 +413,32 @@ class _RegisterTransportationCardState
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             PrimaryButton(
+                              isLoading: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .isLoading,
                               buttonSize: ButtonSize.medium,
-                              text: S.of(context).add_new,
+                              text: isEdit
+                                  ? S.of(context).update
+                                  : S.of(context).add_new,
                               onTap: () {
-                                // context
-                                //     .read<RegisterTransportationCardPrv>()
-                                //     .uploadVehicleImage(context);
+                                FocusScope.of(context).unfocus();
                                 context
                                     .read<RegisterTransportationCardPrv>()
-                                    .onSubmitCreate(context);
+                                    .onAddNewTransCard(context, false);
                               },
                             ),
                             PrimaryButton(
+                              isLoading: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .isLoading,
                               buttonSize: ButtonSize.medium,
                               buttonType: ButtonType.green,
                               text: S.of(context).send_request,
                               onTap: () {
+                                FocusScope.of(context).unfocus();
                                 context
                                     .read<RegisterTransportationCardPrv>()
-                                    .uploadVehicleImage(context);
+                                    .onAddNewTransCard(context, true);
                               },
                             ),
                           ],

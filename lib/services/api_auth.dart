@@ -207,18 +207,20 @@ class APIAuth {
       OnSendProgress? onSendProgress,
       required BuildContext context}) async {
     List<ResponseFileUpload> results = [];
-    for (var i = 0; i < files.length; i++) {
-      final mpf = await MultipartFile.fromFile(files[i].path);
-      final map = {
-        "file": [mpf]
-      };
-      final body = FormData.fromMap(map);
-      final data = await ApiService.shared.postApi(
-          path: ApiConstants.uploadURL,
-          data: body,
-          onSendProgress: onSendProgress,
-          context: context);
-      results.add(ResponseFileUpload.fromJson(data));
+    if (files.isNotEmpty) {
+      for (var i = 0; i < files.length; i++) {
+        final mpf = await MultipartFile.fromFile(files[i].path);
+        final map = {
+          "file": [mpf]
+        };
+        final body = FormData.fromMap(map);
+        final data = await ApiService.shared.postApi(
+            path: ApiConstants.uploadURL,
+            data: body,
+            onSendProgress: onSendProgress,
+            context: context);
+        results.add(ResponseFileUpload.fromJson(data));
+      }
     }
     return results;
   }

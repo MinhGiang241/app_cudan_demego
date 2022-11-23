@@ -120,13 +120,18 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                           title: S.of(context).reg_num,
                           content: arg.registration_number,
                         ),
-                        if (arg.registration_image_front != null &&
+                        if (arg.registration_image_front != null ||
                             arg.registration_image_back != null)
                           InfoContentView(title: S.of(context).photos, images: [
                             if (arg.registration_image_front != null)
                               "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_front}",
                             if (arg.registration_image_back != null)
-                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_back}"
+                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_back}",
+                            if (arg.other_image != null)
+                              ...arg.other_image!.map(
+                                (e) =>
+                                    "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${e.name}",
+                              )
                           ]),
                         InfoContentView(
                             title: S.of(context).card_num,

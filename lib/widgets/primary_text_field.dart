@@ -106,7 +106,6 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
               builder: (context, snapshot) {
                 final showPass = snapshot.data!;
 
-                print(widget.onTap);
                 return PrimaryCard(
                   onTap: widget.onTap,
                   background: widget.background,

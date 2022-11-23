@@ -7,6 +7,113 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APITrans {
+  static Future lockTransportationCard(String id) async {
+    var query = '''
+    mutation (\$_id:String,\$status:String){
+        response: card_change_active_status_transport_card (_id: \$_id,status:\$status )
+    }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"_id": id, "status": "INACTIVE"},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future sendToApproveTransportationCard(String id) async {
+    var query = '''
+    mutation (\$id:String){
+        response: card_send_to_approved_transportation_card (id: \$id ) {
+            code
+            message
+            data
+        }
+      } 
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"id": id},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future removeTransportationCard(String id) async {
+    var query = '''
+        mutation (\$_id: String){
+    response: remove_TransportCard_dto (_id:\$_id){
+      code
+      message
+      data {
+        _id
+      }
+    }
+  }
+  ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"_id": id},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveTransportationCard(data) async {
+    var query = '''
+          mutation (\$data: TransportCardInputDto){
+      response: save_TransportCard_dto(data:\$data){
+        data {
+          _id
+        }
+        message
+        code
+      }
+    }
+      ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"data": data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getTransportationType() async {
     var query = '''
     query  {

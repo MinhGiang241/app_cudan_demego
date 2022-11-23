@@ -1939,6 +1939,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Add new transportation card successfully`
+  String get success_cr_new_trans {
+    return Intl.message(
+      'Add new transportation card successfully',
+      name: 'success_cr_new_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send to approve request successfully`
+  String get success_send_req_trans {
+    return Intl.message(
+      'Send to approve request successfully',
+      name: 'success_send_req_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit successfully`
+  String get success_edit {
+    return Intl.message(
+      'Edit successfully',
+      name: 'success_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove {del} successfully`
+  String success_remove(Object del) {
+    return Intl.message(
+      'Remove $del successfully',
+      name: 'success_remove',
+      desc: '',
+      args: [del],
+    );
+  }
+
+  /// `Lock card successfully`
+  String get success_lock_card {
+    return Intl.message(
+      'Lock card successfully',
+      name: 'success_lock_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to send to approve request?`
+  String get confirm_send_request {
+    return Intl.message(
+      'Do you want to send to approve request?',
+      name: 'confirm_send_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not empty Register transportation photos!`
+  String get not_empty_trans_image {
+    return Intl.message(
+      'Not empty Register transportation photos!',
+      name: 'not_empty_trans_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo front size`
+  String get photo_front_side {
+    return Intl.message(
+      'Photo front size',
+      name: 'photo_front_side',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo back size`
+  String get photo_back_side {
+    return Intl.message(
+      'Photo back size',
+      name: 'photo_back_side',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

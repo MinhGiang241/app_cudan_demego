@@ -24,7 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(message) => "Error: ${message}";
 
-  static String m2(to) => "We sent otp code to :${to}";
+  static String m2(del) => "Remove ${del} successfully";
+
+  static String m3(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -64,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Do you want to lock transportation card?"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
+        "confirm_send_request": MessageLookupByLibrary.simpleMessage(
+            "Do you want to send to approve request?"),
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
@@ -154,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
+        "not_empty_trans_image": MessageLookupByLibrary.simpleMessage(
+            "Not empty Register transportation photos!"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),
         "not_get_otp":
@@ -177,6 +183,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
         "phone_email": MessageLookupByLibrary.simpleMessage("Phone/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "photo_back_side":
+            MessageLookupByLibrary.simpleMessage("Photo back size"),
+        "photo_front_side":
+            MessageLookupByLibrary.simpleMessage("Photo front size"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
@@ -254,8 +264,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "success_cr_new_trans": MessageLookupByLibrary.simpleMessage(
+            "Add new transportation card successfully"),
+        "success_edit":
+            MessageLookupByLibrary.simpleMessage("Edit successfully"),
+        "success_lock_card":
+            MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
+        "success_remove": m2,
+        "success_send_req_trans": MessageLookupByLibrary.simpleMessage(
+            "Send to approve request successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "terms_services":
@@ -284,7 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m2,
+        "we_send_to": m3,
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }

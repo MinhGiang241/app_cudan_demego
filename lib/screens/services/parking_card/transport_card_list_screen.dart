@@ -12,6 +12,7 @@ import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 
+import '../../home/home_screen.dart';
 import 'providers/parking_card_provider.dart';
 import 'tabs/trans_card_list_tabs.dart';
 
@@ -44,6 +45,9 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
 
         return PrimaryScreen(
           appBar: PrimaryAppbar(
+            leading: BackButton(
+                onPressed: () => Navigator.pushReplacementNamed(
+                    context, HomeScreen.routeName)),
             title: S.of(context).parking_card,
             tabController: tabController,
             isTabScrollabel: false,
@@ -104,9 +108,9 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                         missingReport: () => context
                             .read<ParkingCardProvider>()
                             .missingReport(context),
-                        lockCard: () => context
+                        lockCard: (String id) => context
                             .read<ParkingCardProvider>()
-                            .lockCard(context),
+                            .lockCard(context, id),
                         residentId: context.watch<ResidentInfoPrv>().residentId,
                         cardList: transCardList,
                       ),
@@ -114,12 +118,12 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                         edit: () => context
                             .read<ParkingCardProvider>()
                             .editLetter(context),
-                        sendRequest: () => context
+                        sendRequest: (String id) => context
                             .read<ParkingCardProvider>()
-                            .sendRequest(context),
-                        deleteLetter: () => context
+                            .sendRequest(context, id),
+                        deleteLetter: (String id) => context
                             .read<ParkingCardProvider>()
-                            .deleteLetter(context),
+                            .deleteLetter(context, id),
                         cancelRegister: () => context
                             .read<ParkingCardProvider>()
                             .cancelLetter(context),

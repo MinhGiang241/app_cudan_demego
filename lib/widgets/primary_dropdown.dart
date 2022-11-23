@@ -107,10 +107,11 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                   isDense: true,
                   validator: widget.validator,
                   dropdownColor: Colors.white,
-                  value: widget.value ??
-                      (widget.selectList!.isNotEmpty
-                          ? widget.selectList![0].value
-                          : null),
+                  value: widget.value,
+                  // ??
+                  //     (widget.selectList!.isNotEmpty
+                  //         ? widget.selectList![0].value
+                  //         : null),
                   isExpanded: false,
                   // value: items[indexSelected],
                   // dropdownColor: Colors.black,

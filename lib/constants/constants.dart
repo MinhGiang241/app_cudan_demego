@@ -98,6 +98,10 @@ final gradientPrimaryGreen = LinearGradient(colors: [
   const Color(0xff23D2C3).withOpacity(1),
   const Color(0xff23D2C3).withOpacity(0.8)
 ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+final gradientPrimaryRed = LinearGradient(colors: [
+  const Color(0xffFF4141).withOpacity(1),
+  const Color(0xffFF4141).withOpacity(0.8)
+], begin: Alignment.centerLeft, end: Alignment.centerRight);
 
 const Color blueColor = Color(0xff466FFF);
 const Color blueColor2 = Color(0xff4975FF);

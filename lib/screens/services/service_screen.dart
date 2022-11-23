@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcels_list_screen.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
@@ -58,7 +59,12 @@ class ServiceScreen extends StatelessWidget {
       },
     ];
     return PrimaryScreen(
-        appBar: AppBar(backgroundColor: Colors.transparent),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                  context, HomeScreen.routeName)),
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SafeArea(

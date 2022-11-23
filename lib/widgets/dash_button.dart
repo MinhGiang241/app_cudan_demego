@@ -11,12 +11,14 @@ class DashButton extends StatelessWidget {
     this.onTap,
     this.lable,
     this.isRequired = false,
+    this.isDash = true,
   }) : super(key: key);
   final String text;
   final Widget? icon;
   final Function()? onTap;
   final String? lable;
   final bool isRequired;
+  final bool isDash;
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +35,29 @@ class DashButton extends StatelessWidget {
             ],
           ),
         if (lable != null) vpad(8),
-        InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(12),
-            child: DottedBorder(
-                color: primaryColor3,
-                radius: const Radius.circular(12),
-                borderType: BorderType.RRect,
-                strokeWidth: 1,
-                dashPattern: const [4, 4],
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 32),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (icon != null) icon!,
-                          Text(text,
-                              style: txtLinkMedium(color: primaryColorBase))
-                        ])))),
+        if (isDash)
+          InkWell(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                onTap!();
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: DottedBorder(
+                  color: primaryColor3,
+                  radius: const Radius.circular(12),
+                  borderType: BorderType.RRect,
+                  strokeWidth: 1,
+                  dashPattern: const [4, 4],
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 32),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (icon != null) icon!,
+                            Text(text,
+                                style: txtLinkMedium(color: primaryColorBase))
+                          ])))),
       ],
     );
   }

@@ -50,7 +50,7 @@ class PrimaryButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: isRectangle ? null : BorderRadius.circular(28),
-          onTap: onTap,
+          onTap: isLoading ? () {} : onTap,
           child: Padding(
             padding: _paddingContent(buttonSize ?? ButtonSize.large),
             child: Row(
@@ -152,7 +152,7 @@ class PrimaryButton extends StatelessWidget {
       case ButtonType.yellow:
         return gradientYeallow;
       case ButtonType.red:
-        return gradientRed;
+        return gradientPrimaryRed;
       case ButtonType.green:
         return gradientPrimaryGreen;
       default:

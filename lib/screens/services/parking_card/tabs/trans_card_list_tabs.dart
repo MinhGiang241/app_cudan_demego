@@ -30,7 +30,7 @@ class TransportationCardListTab extends StatelessWidget {
   String? residentId;
   Function() extend;
   Function() missingReport;
-  Function() lockCard;
+  Function(String) lockCard;
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +157,7 @@ class TransportationCardListTab extends StatelessWidget {
                                       secondaryBackgroundColor: yellowColor4,
                                       text: S.of(context).extend,
                                       textColor: yellowColor1,
+                                      onTap: () {},
                                     ),
                                     PrimaryButton(
                                       buttonSize: ButtonSize.xsmall,
@@ -164,6 +165,7 @@ class TransportationCardListTab extends StatelessWidget {
                                       secondaryBackgroundColor: primaryColor5,
                                       text: S.of(context).missing_report,
                                       textColor: primaryColor1,
+                                      onTap: () {},
                                     ),
                                     PrimaryButton(
                                       buttonSize: ButtonSize.xsmall,
@@ -171,6 +173,8 @@ class TransportationCardListTab extends StatelessWidget {
                                       secondaryBackgroundColor: redColor4,
                                       textColor: redColor,
                                       text: S.of(context).lock_card,
+                                      onTap: () =>
+                                          lockCard(cardList[index].id!),
                                     ),
                                   ],
                                 ),
@@ -180,7 +184,7 @@ class TransportationCardListTab extends StatelessWidget {
                         ),
                       );
                     },
-                  )
+                  ),
                   // ...listContent.map((e) => Table(
                   //       columnWidths: const {
                   //         0: FlexColumnWidth(2),
@@ -193,6 +197,7 @@ class TransportationCardListTab extends StatelessWidget {
                   //         ])
                   //       ],
                   //     ))
+                  vpad(60)
                 ],
               ),
             ),
