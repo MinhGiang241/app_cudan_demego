@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 
 import '../generated/l10n.dart';
+import '../models/transportation_card.dart';
 import 'dash_button.dart';
 import 'primary_icon.dart';
 
@@ -13,15 +15,19 @@ class SelectMediaWidget extends StatelessWidget {
       {Key? key,
       this.title,
       this.images = const [],
+      this.existImages = const [],
       this.onSelect,
       this.onRemove,
+      this.onRemoveExist,
       this.isDash = true,
       this.isRequired = false})
       : super(key: key);
   final String? title;
+  final List<OtherImage> existImages;
   final List<File> images;
   final Function()? onSelect;
   final Function(int)? onRemove;
+  final Function(int)? onRemoveExist;
   final bool isRequired;
   final bool isDash;
   @override
@@ -40,41 +46,94 @@ class SelectMediaWidget extends StatelessWidget {
             ),
           ],
         ),
-        if (images.isNotEmpty)
+        if (images.isNotEmpty || existImages.isNotEmpty)
           Column(
             children: [
               vpad(16),
               SizedBox(
-                height: 116,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(right: 14.0),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(images[index])),
-                        Positioned(
-                          top: 2,
-                          right: 2,
-                          child: PrimaryIcon(
-                            icons: PrimaryIcons.close,
-                            style: PrimaryIconStyle.gradient,
-                            gradients: PrimaryIconGradient.red,
-                            color: Colors.white,
-                            padding: const EdgeInsets.all(4),
-                            onTap: () {
-                              onRemove?.call(index);
-                            },
-                          ),
+                  height: 116,
+                  child: ListView(scrollDirection: Axis.horizontal, children: [
+                    ...existImages.asMap().entries.map(
+                          (e) => Padding(
+                              padding: const EdgeInsets.only(right: 14.0),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                          '${ApiConstants.uploadURL}/?load=${e.value.id!}')),
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        onRemoveExist?.call(e.key);
+                                      },
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ),
+                    ...images.asMap().entries.map(
+                          (e) => Padding(
+                              padding: const EdgeInsets.only(right: 14.0),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.file(e.value)),
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        onRemove?.call(e.key);
+                                      },
+                                    ),
+                                  )
+                                ],
+                              )),
                         )
-                      ],
-                    ),
+                  ])
+                  //  ListView.builder(
+                  //   scrollDirection: Axis.horizontal,
+                  //   itemCount: images.length,
+                  //   itemBuilder: (context, index) => Padding(
+                  //     padding: const EdgeInsets.only(right: 14.0),
+                  //     child: Stack(
+                  //       children: [
+                  //         ClipRRect(
+                  //             borderRadius: BorderRadius.circular(8),
+                  //             child: Image.file(images[index])),
+                  //         Positioned(
+                  //           top: 2,
+                  //           right: 2,
+                  //           child: PrimaryIcon(
+                  //             icons: PrimaryIcons.close,
+                  //             style: PrimaryIconStyle.gradient,
+                  //             gradients: PrimaryIconGradient.red,
+                  //             color: Colors.white,
+                  //             padding: const EdgeInsets.all(4),
+                  //             onTap: () {
+                  //               onRemove?.call(index);
+                  //             },
+                  //           ),
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   ),
-                ),
-              ),
             ],
           )
       ],

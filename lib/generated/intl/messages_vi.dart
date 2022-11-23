@@ -158,8 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
-        "not_empty_trans_image": MessageLookupByLibrary.simpleMessage(
-            "Không để trống hình ảnh đăng ký xe (2 mặt)!"),
+        "not_empty_trans_back": MessageLookupByLibrary.simpleMessage(
+            "Không để trống hình ảnh đăng ký xe mặt sau"),
+        "not_empty_trans_front": MessageLookupByLibrary.simpleMessage(
+            "Không để trống hình ảnh đăng ký xe mặt trước"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
@@ -202,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
-        "related_photo": MessageLookupByLibrary.simpleMessage("Ảnh liên quan"),
+        "related_photo": MessageLookupByLibrary.simpleMessage("Ảnh khác"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
         "res_card_details":
@@ -282,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trans_card": MessageLookupByLibrary.simpleMessage("Thẻ xe"),
         "trans_card_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết thẻ phương tiện"),
+        "trans_cer": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
         "trans_letter":

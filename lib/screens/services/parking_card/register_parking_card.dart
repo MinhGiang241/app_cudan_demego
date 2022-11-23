@@ -44,6 +44,7 @@ class _RegisterTransportationCardState
           id: card.id,
           imageUrlFront: card.registration_image_front,
           imageUrlBack: card.registration_image_back,
+          otherExistedImages: card.other_image,
           residentId: context.read<ResidentInfoPrv>().residentId,
           apartmentId:
               context.read<ResidentInfoPrv>().selectedApartment?.apartmentId),
@@ -193,6 +194,20 @@ class _RegisterTransportationCardState
                         Text(
                           S.of(context).photos,
                           style: txtBodySmallRegular(color: grayScaleColorBase),
+                        ),
+                        vpad(16),
+                        Row(
+                          children: [
+                            Text(
+                              S.of(context).trans_cer,
+                              style:
+                                  txtBodySmallBold(color: grayScaleColorBase),
+                            ),
+                            Text(
+                              "*",
+                              style: txtBodySmallBold(color: redColorBase),
+                            ),
+                          ],
                         ),
                         vpad(16),
                         if (isEdit &&
@@ -395,6 +410,13 @@ class _RegisterTransportationCardState
                           //         2
                           //     ? true
                           //     : false,
+                          existImages: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .otherExistedImages ??
+                              [],
+                          onRemoveExist: context
+                              .read<RegisterTransportationCardPrv>()
+                              .onRemoveExist,
                           images: context
                               .watch<RegisterTransportationCardPrv>()
                               .imagesRelated,

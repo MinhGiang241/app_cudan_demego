@@ -182,7 +182,7 @@
   "register_trans_card": "Đăng ký thẻ phương tiện",
   "edit_trans_card": "Chỉnh sửa thẻ phương tiện",
   "reg_trans_photos": "Đăng ký xe (2 mặt)",
-  "related_photo": "Ảnh liên quan",
+  "related_photo": "Ảnh khác",
   "camera": "Máy ảnh",
   "gallery": "Thư viện",
   "file_selection": "Chọn file",
@@ -194,7 +194,9 @@
   "success_remove":"Xóa {del} thành công",
   "success_lock_card":"Khóa thẻ thành công",
   "confirm_send_request":"Bạn có muốn gửi duyệt phiếu ?",
-  "not_empty_trans_image":"Không để trống hình ảnh đăng ký xe (2 mặt)!",
+  "not_empty_trans_front":"Không để trống hình ảnh đăng ký xe mặt trước",
+  "not_empty_trans_back":"Không để trống hình ảnh đăng ký xe mặt sau",
   "photo_front_side":"Ảnh mặt trước",
-  "photo_back_side":"Ảnh mặt sau"
+  "photo_back_side":"Ảnh mặt sau",
+  "trans_cer":"Đăng ký xe"
 }

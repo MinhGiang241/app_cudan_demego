@@ -182,7 +182,7 @@
   "register_trans_card": "Register transportation card",
   "edit_trans_card": "Register transportation card",
   "reg_trans_photos": "Register transportation photos (2 side)",
-  "related_photo": "Related photos",
+  "related_photo": "Other photos",
   "camera": "Camera",
   "gallery": "Gallery",
   "file_selection": "File selection",
@@ -194,7 +194,10 @@
   "success_remove":"Remove {del} successfully",
   "success_lock_card":"Lock card successfully",
   "confirm_send_request":"Do you want to send to approve request?",
-  "not_empty_trans_image":"Not empty Register transportation photos!",
+  "not_empty_trans_front":"Not empty register transportation front side photo",
+  "not_empty_trans_back":"Not empty register transportation back side photo",
   "photo_front_side":"Photo front size",
-  "photo_back_side":"Photo back size"
+  "photo_back_side":"Photo back size",
+  "trans_cer":"registration certificate"
+  
 }

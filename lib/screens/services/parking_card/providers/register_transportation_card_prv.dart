@@ -19,6 +19,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     this.id,
     this.imageUrlBack,
     this.imageUrlFront,
+    this.otherExistedImages,
   });
   final List<SelectionModel> listVehicles = [
     SelectionModel(title: "Xe máy"),
@@ -54,6 +55,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? imageUrlBack;
   List<File> imageFileBack = [];
   String? imageUrlRelated;
+  List<OtherImage>? otherExistedImages = [];
   List<OtherImage> otherImages = [];
 
   String? validateApartment;
@@ -118,7 +120,10 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       uploadFrontPhoto(context).then((v) {
         return uploadBackPhoto(context);
+      }).then((v) {
+        return uploadRelatedImage(context);
       }).then((_) {
+        var lisOther = otherExistedImages! + otherImages;
         var newCard = TransportationCard(
             id: id,
             apartmentId: apartmentId,
@@ -132,10 +137,11 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
             ticket_status: isRequest ? "WAIT" : "NEW");
         var data = newCard.toJson();
         // print(data2);
-        if (isRequest &&
-            (newCard.registration_image_front == null ||
-                newCard.registration_image_back == null)) {
-          throw (S.of(context).not_empty_trans_image);
+        if (isRequest && newCard.registration_image_front == null) {
+          throw (S.of(context).not_empty_trans_front);
+        }
+        if (isRequest && newCard.registration_image_back == null) {
+          throw (S.of(context).not_empty_trans_back);
         }
         return APITrans.saveTransportationCard(data);
       }).then((v) {
@@ -192,9 +198,12 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     await APIAuth.uploadSingleFile(files: imageFileFront, context: context)
         .then((v) {
       isLoading = false;
-      notifyListeners();
 
-      imageUrlFront = v[0].data;
+      if (v.isNotEmpty) {
+        imageUrlFront = v[0].data;
+      }
+
+      notifyListeners();
     }).catchError((e) {
       isLoading = false;
       notifyListeners();
@@ -210,8 +219,9 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         .then((v) {
       isLoading = false;
       notifyListeners();
-
-      imageUrlBack = v[0].data;
+      if (v.isNotEmpty) {
+        imageUrlBack = v[0].data;
+      }
     }).catchError((e) {
       isLoading = false;
       notifyListeners();
@@ -303,6 +313,11 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
 
   onRemoveImageR(int index) {
     imagesRelated.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExist(int index) {
+    otherExistedImages!.removeAt(index);
     notifyListeners();
   }
 }

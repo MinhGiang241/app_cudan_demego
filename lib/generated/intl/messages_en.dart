@@ -158,8 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
-        "not_empty_trans_image": MessageLookupByLibrary.simpleMessage(
-            "Not empty Register transportation photos!"),
+        "not_empty_trans_back": MessageLookupByLibrary.simpleMessage(
+            "Not empty register transportation back side photo"),
+        "not_empty_trans_front": MessageLookupByLibrary.simpleMessage(
+            "Not empty register transportation front side photo"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),
         "not_get_otp":
@@ -203,7 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
-        "related_photo": MessageLookupByLibrary.simpleMessage("Related photos"),
+        "related_photo": MessageLookupByLibrary.simpleMessage("Other photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
         "res_card_details":
@@ -286,6 +288,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation card"),
         "trans_card_details":
             MessageLookupByLibrary.simpleMessage("Transportation card details"),
+        "trans_cer":
+            MessageLookupByLibrary.simpleMessage("registration certificate"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Transportation information"),
         "trans_letter":

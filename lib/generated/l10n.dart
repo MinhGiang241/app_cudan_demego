@@ -1880,10 +1880,10 @@ class S {
     );
   }
 
-  /// `Related photos`
+  /// `Other photos`
   String get related_photo {
     return Intl.message(
-      'Related photos',
+      'Other photos',
       name: 'related_photo',
       desc: '',
       args: [],
@@ -2000,11 +2000,21 @@ class S {
     );
   }
 
-  /// `Not empty Register transportation photos!`
-  String get not_empty_trans_image {
+  /// `Not empty register transportation front side photo`
+  String get not_empty_trans_front {
     return Intl.message(
-      'Not empty Register transportation photos!',
-      name: 'not_empty_trans_image',
+      'Not empty register transportation front side photo',
+      name: 'not_empty_trans_front',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not empty register transportation back side photo`
+  String get not_empty_trans_back {
+    return Intl.message(
+      'Not empty register transportation back side photo',
+      name: 'not_empty_trans_back',
       desc: '',
       args: [],
     );
@@ -2025,6 +2035,16 @@ class S {
     return Intl.message(
       'Photo back size',
       name: 'photo_back_side',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `registration certificate`
+  String get trans_cer {
+    return Intl.message(
+      'registration certificate',
+      name: 'trans_cer',
       desc: '',
       args: [],
     );
