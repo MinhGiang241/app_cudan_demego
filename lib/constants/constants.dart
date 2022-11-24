@@ -102,6 +102,18 @@ final gradientPrimaryRed = LinearGradient(colors: [
   const Color(0xffFF4141).withOpacity(1),
   const Color(0xffFF4141).withOpacity(0.8)
 ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+final gradientPrimaryWhite = LinearGradient(colors: [
+  const Color(0xffFFFFFF).withOpacity(0.9),
+  const Color(0xffFFFFFF).withOpacity(0.7)
+], begin: Alignment.topLeft, end: Alignment.bottomRight);
+final gradientPrimaryBlack = LinearGradient(colors: [
+  const Color(0xff4E4B66).withOpacity(0.9),
+  const Color(0xffA0A3BD).withOpacity(0.9)
+], begin: Alignment.topLeft, end: Alignment.bottomRight);
+final gradientPrimaryYellow = LinearGradient(colors: [
+  const Color(0xffFFA900).withOpacity(0.9),
+  const Color(0xffFFBE34).withOpacity(0.9),
+], begin: Alignment.topLeft, end: Alignment.bottomRight);
 
 const Color blueColor = Color(0xff466FFF);
 const Color blueColor2 = Color(0xff4975FF);
@@ -136,6 +148,14 @@ final gradientYellow = LinearGradient(
     colors: [const Color(0xffFFBF35).withOpacity(0.6), const Color(0xffFFA900)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter);
+final gradientBrow = LinearGradient(
+    colors: [const Color(0xFFDB7C23).withOpacity(0.6), const Color(0xFFDB7C23)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter);
+final gradientOrange = LinearGradient(
+    colors: [const Color(0xFFF56420).withOpacity(0.6), const Color(0xFFF56420)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter);
 
 final gradientPurple = LinearGradient(
     colors: [const Color(0xff6C4DDA).withOpacity(0.6), const Color(0xff522ED2)],
@@ -146,19 +166,10 @@ final gradientRed = LinearGradient(
     colors: [const Color(0xffFF4141).withOpacity(0.6), const Color(0xffEB2323)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter);
-
-final gradientWhite = LinearGradient(colors: [
-  const Color(0xffFFFFFF).withOpacity(0.9),
-  const Color(0xffFFFFFF).withOpacity(0.7)
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
-final gradientBlack = LinearGradient(colors: [
-  const Color(0xff4E4B66).withOpacity(0.9),
-  const Color(0xffA0A3BD).withOpacity(0.9)
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
-final gradientYeallow = LinearGradient(colors: [
-  const Color(0xffFFA900).withOpacity(0.9),
-  const Color(0xffFFBE34).withOpacity(0.9),
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
+final gradientBlack = LinearGradient(
+    colors: [const Color(0xff4E4B66).withOpacity(0.6), const Color(0xff4E4B66)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter);
 
 TextStyle txtDisplayLarge({Color? color}) => TextStyle(
       fontFamily: family,

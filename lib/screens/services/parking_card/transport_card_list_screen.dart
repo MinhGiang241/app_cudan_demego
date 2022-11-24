@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/parking_card/register_parking_card.dart';
 import 'package:app_cudan/screens/services/parking_card/tabs/trans_letter_list_tabs.dart';
+import 'package:app_cudan/screens/services/service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
           appBar: PrimaryAppbar(
             leading: BackButton(
                 onPressed: () => Navigator.pushReplacementNamed(
-                    context, HomeScreen.routeName)),
+                    context, ServiceScreen.routeName)),
             title: S.of(context).parking_card,
             tabController: tabController,
             isTabScrollabel: false,

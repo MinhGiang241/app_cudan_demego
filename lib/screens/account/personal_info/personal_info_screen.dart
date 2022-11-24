@@ -104,7 +104,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   padding: const EdgeInsets.all(12.0),
                   child: PrimaryInfoWidget(
                     listInfoView: listInfoView,
-                    lable: S.of(context).info,
+                    label: S.of(context).info,
                   )),
               vpad(100)
             ],

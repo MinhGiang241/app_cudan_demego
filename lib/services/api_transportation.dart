@@ -33,7 +33,7 @@ class APITrans {
   static Future sendToApproveTransportationCard(String id) async {
     var query = '''
     mutation (\$id:String){
-        response: card_send_to_approved_transportation_card (id: \$id ) {
+        response: card_mobile_send_to_approved_transportation_card (id: \$id ) {
             code
             message
             data
@@ -147,7 +147,7 @@ class APITrans {
   static Future getTransportCardList(String residentId) async {
     var query = '''
         mutation (\$residentId:String){
-      response: vehicle_get_transportation_card_list_by_residentId (residentId: \$residentId ) {
+      response: vehicle_mobile_get_transportation_card_list_by_residentId (residentId: \$residentId ) {
           code
           message
           data

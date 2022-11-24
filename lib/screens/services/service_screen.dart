@@ -11,6 +11,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
+import 'delivery/delivery_list_screen.dart';
 import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
 
@@ -54,6 +55,54 @@ class ServiceScreen extends StatelessWidget {
       {
         "background": gradientTurquoise,
         "icon": PrimaryIcons.swim_bg,
+        "title": S.current.pool,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientBlue,
+        "icon": PrimaryIcons.bone,
+        "title": S.current.pet,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientBlack,
+        "icon": PrimaryIcons.wrench,
+        "title": S.current.construction,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientRed,
+        "icon": PrimaryIcons.box,
+        "title": S.current.reg_deliver,
+        "navigator": DeliveryListScreen.routeName,
+      },
+      {
+        "background": gradientBrow,
+        "icon": PrimaryIcons.package,
+        "title": S.current.parcel,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientOrange,
+        "icon": PrimaryIcons.user_detail,
+        "title": S.current.info_reception,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientTurquoise,
+        "icon": PrimaryIcons.binoculars,
+        "title": S.current.missing_obj,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientPink,
+        "icon": PrimaryIcons.birthday,
+        "title": S.current.pool,
+        "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "background": gradientGreen,
+        "icon": PrimaryIcons.credit_card_alt,
         "title": S.current.pool,
         "navigator": GymCardListScreen.routeName,
       },
@@ -118,10 +167,11 @@ class ServiceScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      vpad(0)
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

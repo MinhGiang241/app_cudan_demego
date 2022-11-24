@@ -40,7 +40,7 @@ class _RecidentCardInfoState extends State<RecidentCardInfo>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: PrimaryInfoWidget(
-                  lable: 'S.of(context).r_card_info',
+                  label: 'S.of(context).r_card_info',
                   listInfoView: [
                     InfoContentView(
                         title: 'S.of(context).signal',

@@ -26,7 +26,7 @@ class APITower {
   static Future getResidentInfo() async {
     var query = '''
     mutation {
-        response: resident_get_resident_info_by_account  {
+        response: resident_mobile_get_resident_info_by_account  {
             code
             message
             data
@@ -52,7 +52,7 @@ class APITower {
   static Future getUserOwnInfo(String residentId) async {
     var queryGetUserInfo = '''
     mutation (\$residentId:String){
-    response: resident_get_resident_own_info (residentId: \$residentId ) {
+    response: resident_mobile_get_resident_own_info (residentId: \$residentId ) {
         code
         message
         data

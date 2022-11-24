@@ -10,17 +10,17 @@ class PrimaryInfoWidget extends StatelessWidget {
   const PrimaryInfoWidget({
     Key? key,
     required this.listInfoView,
-    this.lable,
+    this.label,
   }) : super(key: key);
 
   final List<InfoContentView> listInfoView;
-  final String? lable;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (lable != null) Text(lable!, style: txtMedium(14, grayScaleColor2)),
-      if (lable != null) vpad(12),
+      if (label != null) Text(label!, style: txtMedium(14, grayScaleColor2)),
+      if (label != null) vpad(12),
       PrimaryCard(
           child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),

@@ -28,7 +28,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: PrimaryInfoWidget(
-                lable: 'S.of(context).parcel_info',
+                label: 'S.of(context).parcel_info',
                 listInfoView: [
                   InfoContentView(
                       title: 'S.of(context).parcel_name',
@@ -57,7 +57,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: PrimaryInfoWidget(
-                lable: 'S.of(context).receiver',
+                label: 'S.of(context).receiver',
                 listInfoView: [
                   InfoContentView(
                       title: 'S.of(context).receiver_name',

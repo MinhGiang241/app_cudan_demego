@@ -249,7 +249,7 @@ class PrimaryIcon extends StatelessWidget {
       case PrimaryIconGradient.red:
         return gradientRed;
       default:
-        return gradientWhite;
+        return gradientPrimaryWhite;
     }
   }
 }

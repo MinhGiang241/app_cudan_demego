@@ -123,11 +123,13 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
       }).then((v) {
         return uploadRelatedImage(context);
       }).then((_) {
-        var lisOther = otherExistedImages! + otherImages;
+        otherExistedImages ??= [];
+
+        var listOther = otherExistedImages! + otherImages;
         var newCard = TransportationCard(
             id: id,
             apartmentId: apartmentId,
-            other_image: otherImages,
+            other_image: listOther,
             vehicleTypeId: vehicleType,
             registration_image_back: imageUrlBack,
             registration_image_front: imageUrlFront,

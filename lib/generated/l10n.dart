@@ -2040,11 +2040,281 @@ class S {
     );
   }
 
-  /// `registration certificate`
+  /// `Registration certificate`
   String get trans_cer {
     return Intl.message(
-      'registration certificate',
+      'Registration certificate',
       name: 'trans_cer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration construction`
+  String get reg_const {
+    return Intl.message(
+      'Registration construction',
+      name: 'reg_const',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction`
+  String get construction {
+    return Intl.message(
+      'Construction',
+      name: 'construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Missing object`
+  String get missing_obj {
+    return Intl.message(
+      'Missing object',
+      name: 'missing_obj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information reception`
+  String get info_reception {
+    return Intl.message(
+      'Information reception',
+      name: 'info_reception',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow services`
+  String get follow_ser {
+    return Intl.message(
+      'Follow services',
+      name: 'follow_ser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register delivery`
+  String get reg_deliver {
+    return Intl.message(
+      'Register delivery',
+      name: 'reg_deliver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tranfer out`
+  String get tranfer_out {
+    return Intl.message(
+      'Tranfer out',
+      name: 'tranfer_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tranfer in`
+  String get tranfer_in {
+    return Intl.message(
+      'Tranfer in',
+      name: 'tranfer_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register tranfer out`
+  String get tranfer_out_reg {
+    return Intl.message(
+      'Register tranfer out',
+      name: 'tranfer_out_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register tranfer in`
+  String get tranfer_in_reg {
+    return Intl.message(
+      'Register tranfer in',
+      name: 'tranfer_in_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start time`
+  String get start_time {
+    return Intl.message(
+      'Start time',
+      name: 'start_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End time`
+  String get end_time {
+    return Intl.message(
+      'End time',
+      name: 'end_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel register`
+  String get cancel_reg {
+    return Intl.message(
+      'Cancel register',
+      name: 'cancel_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add package`
+  String get add_package {
+    return Intl.message(
+      'Add package',
+      name: 'add_package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Package`
+  String get package {
+    return Intl.message(
+      'Package',
+      name: 'package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Package infomation`
+  String get package_info {
+    return Intl.message(
+      'Package infomation',
+      name: 'package_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get hour {
+    return Intl.message(
+      'Time',
+      name: 'hour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need protection support`
+  String get need_support {
+    return Intl.message(
+      'Need protection support',
+      name: 'need_support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer list`
+  String get transfer_list {
+    return Intl.message(
+      'Transfer list',
+      name: 'transfer_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dimention`
+  String get dimention {
+    return Intl.message(
+      'Dimention',
+      name: 'dimention',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Package Name`
+  String get package_name {
+    return Intl.message(
+      'Package Name',
+      name: 'package_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight`
+  String get weight {
+    return Intl.message(
+      'Weight',
+      name: 'weight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer type`
+  String get transfer_type {
+    return Intl.message(
+      'Transfer type',
+      name: 'transfer_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tranfer information`
+  String get delivery_info {
+    return Intl.message(
+      'Tranfer information',
+      name: 'delivery_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any package`
+  String get no_delivery {
+    return Intl.message(
+      'Don\'t have any package',
+      name: 'no_delivery',
       desc: '',
       args: [],
     );

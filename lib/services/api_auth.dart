@@ -111,7 +111,7 @@ class APIAuth {
   static Future getUserInformationByUsername(String phone) async {
     var findAccountQuery = '''
     mutation (\$phone:String){
-        response: account_find_user_info_by_phone (phone: \$phone ) {
+        response: account_mobile_find_user_info_by_phone (phone: \$phone ) {
             code
             message
             data
@@ -249,7 +249,7 @@ class APIAuth {
   static Future findUserNameByEmail({required String email}) async {
     var query = '''
     mutation (\$email:String ){
-	response: resident_resident_find_phone_by_email(email:\$email) {
+	response: resident_mobile_resident_find_phone_by_email  (email:\$email) {
 		code
 		message
 		data
@@ -281,13 +281,14 @@ class APIAuth {
       required String passWord,
       required String confirmPassword}) async {
     var mutationCreateResidentAccount = '''
-      mutation (\$user:String, \$name:String,\$password:String,\$email:String,\$confirmPassword:String){
-    response: resident_create_resident_account (user :\$user,name: \$name,password: \$password,email: \$email,confirmPassword: \$confirmPassword ) {
+      mutation (\$name:String,\$password:String,\$email:String,\$confirmPassword:String,\$user:String){
+    response: resident_mobile_create_resident_account (name: \$name,password: \$password,email: \$email,confirmPassword: \$confirmPassword,user: \$user ) {
         code
         message
-        data 
-      }
+        data
     }
+}
+        
      
     ''';
 

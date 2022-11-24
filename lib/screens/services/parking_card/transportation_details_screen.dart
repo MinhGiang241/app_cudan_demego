@@ -51,7 +51,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: PrimaryInfoWidget(
-                      lable: S.of(context).resident_info,
+                      label: S.of(context).resident_info,
                       listInfoView: [
                         InfoContentView(
                             title: S.of(context).full_name,
@@ -106,7 +106,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: PrimaryInfoWidget(
-                      lable: S.of(context).trans_info,
+                      label: S.of(context).trans_info,
                       listInfoView: [
                         InfoContentView(
                           title: S.of(context).trans_type,
