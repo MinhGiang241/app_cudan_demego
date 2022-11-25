@@ -188,8 +188,8 @@
   "file_selection": "Chọn file",
   "permission_denied": "Từ chối truy cập",
   "permission_denied_msg": "Bạn chưa cấp quyền ứng dụng", 
-  "success_cr_new_trans":"Thêm mới thẻ thành công",
-  "success_send_req_trans":"Gửi duyệt thành công",
+  "success_cr_new":"Thêm mới thành công",
+  "success_send_req":"Gửi duyệt thành công",
   "success_edit":"Chỉnh sửa thành công",
   "success_remove":"Xóa {del} thành công",
   "success_lock_card":"Khóa thẻ thành công",
@@ -225,5 +225,7 @@
   "add":"Thêm",
   "transfer_type":"Loại chuyển",
   "delivery_info":"Thông tin đồ chuyển",
-  "no_delivery":"Không có đăng ký chuyển đố nào"
+  "no_delivery":"Không có đăng ký chuyển đố nào",
+  "l_w_e":"Dài x rộng x cao"
+  
 }

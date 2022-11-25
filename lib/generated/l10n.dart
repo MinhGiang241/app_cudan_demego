@@ -1940,21 +1940,21 @@ class S {
     );
   }
 
-  /// `Add new transportation card successfully`
-  String get success_cr_new_trans {
+  /// `Add new successfully`
+  String get success_cr_new {
     return Intl.message(
-      'Add new transportation card successfully',
-      name: 'success_cr_new_trans',
+      'Add new successfully',
+      name: 'success_cr_new',
       desc: '',
       args: [],
     );
   }
 
   /// `Send to approve request successfully`
-  String get success_send_req_trans {
+  String get success_send_req {
     return Intl.message(
       'Send to approve request successfully',
-      name: 'success_send_req_trans',
+      name: 'success_send_req',
       desc: '',
       args: [],
     );
@@ -2315,6 +2315,16 @@ class S {
     return Intl.message(
       'Don\'t have any package',
       name: 'no_delivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Length x width x elevation`
+  String get l_w_e {
+    return Intl.message(
+      'Length x width x elevation',
+      name: 'l_w_e',
       desc: '',
       args: [],
     );

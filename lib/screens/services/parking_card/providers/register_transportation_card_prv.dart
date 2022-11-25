@@ -152,11 +152,11 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
             e: id != null
                 ? S.of(context).success_edit
                 : isRequest
-                    ? S.of(context).success_send_req_trans
-                    : S.of(context).success_cr_new_trans,
+                    ? S.of(context).success_send_req
+                    : S.of(context).success_cr_new,
             onClose: () {
               // var count = 0;
-              Navigator.pushNamed(
+              Navigator.pushReplacementNamed(
                   context, TransportationCardListScreen.routeName);
             });
       }).catchError((e) {

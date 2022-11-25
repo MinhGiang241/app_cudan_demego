@@ -149,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếp nhận thông tin"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
+        "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "letter_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phiếu"),
@@ -289,8 +290,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
         "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
-        "success_cr_new_trans":
-            MessageLookupByLibrary.simpleMessage("Thêm mới thẻ thành công"),
+        "success_cr_new":
+            MessageLookupByLibrary.simpleMessage("Thêm mới thành công"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thành công"),
         "success_lock_card":
@@ -298,7 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
         "success_remove": m2,
-        "success_send_req_trans":
+        "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),

@@ -105,6 +105,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
             : PrimaryCard(
                 child: DropdownButtonFormField<dynamic>(
                   isDense: true,
+
                   validator: widget.validator,
                   dropdownColor: Colors.white,
                   value: widget.value,
@@ -112,7 +113,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                   //     (widget.selectList!.isNotEmpty
                   //         ? widget.selectList![0].value
                   //         : null),
-                  isExpanded: false,
+                  isExpanded: true,
                   // value: items[indexSelected],
                   // dropdownColor: Colors.black,
                   hint: Text(

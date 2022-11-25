@@ -39,7 +39,7 @@ class Delivery {
   String? status;
   bool? help_check;
   List<ItemDeliver>? item_added_list;
-  List<Image>? image;
+  List<ImageDelivery>? image;
   Delivery.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     createdTime = json['createdTime'];
@@ -58,7 +58,9 @@ class Delivery {
     help_check = json['help_check'];
     image = json['image'] != null
         ? json['image'].length != 0
-            ? json['image'].map<Image>((e) => Image.fromJson(e)).toList()
+            ? json['image']
+                .map<ImageDelivery>((e) => ImageDelivery.fromJson(e))
+                .toList()
             : []
         : [];
     item_added_list = json['item_added_list'] != null
@@ -106,14 +108,13 @@ class ItemDeliver {
   String? updatedTime;
   String? item_name;
   String? dimension;
-  String? note;
   double? weight;
   ItemDeliver.fromJson(Map<String, dynamic> json) {
     createdTime = json['createdTime'];
     dimension = json['dimension'];
     item_name = json['item_name'];
     updatedTime = json['updatedTime'];
-    note = json['note'];
+
     weight = double.tryParse(json['weight'].toString()) != null
         ? double.parse(json['weight'].toString())
         : null;
@@ -125,17 +126,17 @@ class ItemDeliver {
     data['item_name'] = item_name;
     data['updatedTime'] = updatedTime;
     data['weight'] = weight;
-    data['note'] = note;
+
     return data;
   }
 }
 
-class Image {
+class ImageDelivery {
   String? id;
   String? name;
 
-  Image({this.id, this.name});
-  Image.fromJson(Map<String, dynamic> json) {
+  ImageDelivery({this.id, this.name});
+  ImageDelivery.fromJson(Map<String, dynamic> json) {
     id = json['file_id'];
     name = json['name'];
   }

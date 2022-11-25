@@ -85,7 +85,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                               ? null
                               : [
                                   ...arg.image!.map((v) =>
-                                      "${ApiConstants.uploadURL}/?load=$v")
+                                      "${ApiConstants.uploadURL}/?load=${v.id}")
                                 ])
                     ],
                   ),

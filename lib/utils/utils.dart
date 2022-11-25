@@ -102,6 +102,15 @@ class Utils {
     return formattedDate;
   }
 
+  static String timeFormat(String time, [String? format]) {
+    if (time.isEmpty) {
+      return "";
+    }
+    DateTime pickedTime = DateTime.parse(time);
+    String formattedTime = DateFormat(format ?? 'HH:mm').format(pickedTime);
+    return formattedTime;
+  }
+
   static String timeAgo(BuildContext context, String date) {
     if (date.isEmpty) {
       return "";

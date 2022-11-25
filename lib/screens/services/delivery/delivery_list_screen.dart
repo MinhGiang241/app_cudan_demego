@@ -20,6 +20,7 @@ import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
 import 'package_details_screen.dart';
 import 'provider/delivery_list_prv.dart';
+import 'register_delivery_screen.dart';
 
 class DeliveryListScreen extends StatefulWidget {
   static const routeName = '/delivery';
@@ -45,8 +46,8 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
             floatingActionButton: FloatingActionButton(
               tooltip: S.of(context).add_trans_card,
               onPressed: () {
-                // Navigator.pushNamed(context, RegisterTransportationCard.routeName,
-                //     arguments: {"isEdit": false});
+                Navigator.pushNamed(context, RegisterDelivery.routeName,
+                    arguments: {"isEdit": false});
               },
               backgroundColor: primaryColorBase,
               child: const Icon(
@@ -173,7 +174,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                       ],
                                     ),
                                   ),
-                                  if (e.status == "NEW")
+                                  if (e.status == "WAIT")
                                     Row(
                                       children: [
                                         hpad(16),
@@ -187,8 +188,10 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                         )
                                       ],
                                     ),
-                                  if (e.status == "WAIT")
+                                  if (e.status == "NEW")
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: [
                                         PrimaryButton(
                                           onTap: () {},
@@ -199,7 +202,14 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                           textColor: greenColor,
                                         ),
                                         PrimaryButton(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.pushNamed(context,
+                                                RegisterDelivery.routeName,
+                                                arguments: {
+                                                  "isEdit": true,
+                                                  "data": e,
+                                                });
+                                          },
                                           text: S.of(context).edit,
                                           buttonSize: ButtonSize.xsmall,
                                           buttonType: ButtonType.secondary,

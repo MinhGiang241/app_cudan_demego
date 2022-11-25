@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
@@ -124,13 +125,12 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                             arg.registration_image_back != null)
                           InfoContentView(title: S.of(context).photos, images: [
                             if (arg.registration_image_front != null)
-                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_front}",
+                              "${ApiConstants.uploadURL}?load=${arg.registration_image_front}",
                             if (arg.registration_image_back != null)
-                              "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${arg.registration_image_back}",
+                              "${ApiConstants.uploadURL}?load=${arg.registration_image_back}",
                             if (arg.other_image != null)
                               ...arg.other_image!.map(
-                                (e) =>
-                                    "https://api.dev.buildingtenant.masflex.vn/headless/stream/upload?load=${e.name}",
+                                (e) => "${ApiConstants.uploadURL}?load=${e.id}",
                               )
                           ]),
                         InfoContentView(

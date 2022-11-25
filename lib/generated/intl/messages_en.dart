@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Information reception"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
+        "l_w_e":
+            MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
@@ -293,8 +295,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
-        "success_cr_new_trans": MessageLookupByLibrary.simpleMessage(
-            "Add new transportation card successfully"),
+        "success_cr_new":
+            MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Edit successfully"),
         "success_lock_card":
@@ -302,7 +304,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
         "success_remove": m2,
-        "success_send_req_trans": MessageLookupByLibrary.simpleMessage(
+        "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),

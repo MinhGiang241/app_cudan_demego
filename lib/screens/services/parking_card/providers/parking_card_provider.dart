@@ -73,7 +73,7 @@ class ParkingCardProvider extends ChangeNotifier {
           await APITrans.sendToApproveTransportationCard(id).then((v) {
             Utils.showSuccessMessage(
                 context: context,
-                e: S.of(context).success_send_req_trans,
+                e: S.of(context).success_send_req,
                 onClose: () {
                   Navigator.pushReplacementNamed(
                       context, TransportationCardListScreen.routeName);

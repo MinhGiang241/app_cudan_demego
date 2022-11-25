@@ -188,8 +188,8 @@
   "file_selection": "File selection",
   "permission_denied": "Permission denied",
   "permission_denied_msg": "You don't have permission",
-  "success_cr_new_trans":"Add new transportation card successfully",
-  "success_send_req_trans":"Send to approve request successfully",
+  "success_cr_new":"Add new successfully",
+  "success_send_req":"Send to approve request successfully",
   "success_edit":"Edit successfully",
   "success_remove":"Remove {del} successfully",
   "success_lock_card":"Lock card successfully",
@@ -225,5 +225,6 @@
   "add":"Add",
   "transfer_type":"Transfer type",
   "delivery_info":"Tranfer information",
-  "no_delivery":"Don't have any package"
+  "no_delivery":"Don't have any package",
+  "l_w_e":"Length x width x elevation"
 }
