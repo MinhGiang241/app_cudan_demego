@@ -51,6 +51,7 @@ class ParkingCardProvider extends ChangeNotifier {
         context: context,
         onConfirm: () async {
           APITrans.lockTransportationCard(id).then((v) {
+            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_lock_card,
@@ -68,7 +69,36 @@ class ParkingCardProvider extends ChangeNotifier {
   }
 
 //letter
-  cancelLetter(BuildContext context) {}
+  cancelLetter(BuildContext context, TransportationCard card) async {
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).cancel_request,
+      content: S.of(context).confirm_cancel_request,
+      onConfirm: () async {
+        card.ticket_status = "CANCEL";
+
+        await APITrans.saveTransportationCard(card.toJson()).then(
+          (v) {
+            Navigator.pop(context);
+            Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_send_req,
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    TransportationCardListScreen.routeName,
+                    (route) => route.isFirst);
+              },
+            );
+          },
+        ).catchError((e) {
+          Navigator.pop(context);
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+  }
+
   sendRequest(BuildContext context, String id) async {
     Utils.showConfirmMessage(
         title: S.of(context).send_request,
@@ -76,6 +106,7 @@ class ParkingCardProvider extends ChangeNotifier {
         context: context,
         onConfirm: () async {
           await APITrans.sendToApproveTransportationCard(id).then((v) {
+            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -102,6 +133,7 @@ class ParkingCardProvider extends ChangeNotifier {
         context: context,
         onConfirm: () async {
           await APITrans.removeTransportationCard(id).then((v) {
+            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S

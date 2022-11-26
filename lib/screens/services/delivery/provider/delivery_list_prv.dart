@@ -12,11 +12,13 @@ class DeliveryListPrv extends ChangeNotifier {
   cancelRequetsAprrove(BuildContext context, Delivery data) {
     Utils.showConfirmMessage(
         context: context,
-        title: S.of(context).confirm_cancel_request,
+        title: S.of(context).cancel_request,
+        content: S.of(context).confirm_cancel_request,
         onConfirm: () {
           data.status = 'CANCEL';
           data.reasons = 'NGUOIDUNGHUY';
           APIDelivery.saveNewDelivery(data.toJson()).then((v) {
+            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_can_req,
@@ -25,6 +27,7 @@ class DeliveryListPrv extends ChangeNotifier {
                       DeliveryListScreen.routeName, (route) => route.isFirst);
                 });
           }).catchError((e) {
+            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -42,6 +45,7 @@ class DeliveryListPrv extends ChangeNotifier {
           context: context,
           onConfirm: () {
             APIDelivery.saveNewDelivery(data.toJson()).then((v) {
+              Navigator.pop(context);
               Utils.showSuccessMessage(
                   context: context,
                   e: S.of(context).success_send_req,
@@ -50,6 +54,7 @@ class DeliveryListPrv extends ChangeNotifier {
                         DeliveryListScreen.routeName, (route) => route.isFirst);
                   });
             }).catchError((e) {
+              Navigator.pop(context);
               Utils.showErrorMessage(context, e);
             });
           });
@@ -80,6 +85,7 @@ class DeliveryListPrv extends ChangeNotifier {
         context: context,
         onConfirm: () async {
           await APIDelivery.deleteDelivery(id).then((v) {
+            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S

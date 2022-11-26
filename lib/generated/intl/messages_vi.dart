@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "cancel_reg": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_register": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
+        "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy phiếu"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),

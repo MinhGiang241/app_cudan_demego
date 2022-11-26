@@ -303,7 +303,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                     vpad(16),
                     ...context
                         .watch<RegisterDeliveryPrv>()
-                        .packageItems!
+                        .packageItems
                         .asMap()
                         .entries
                         .map(

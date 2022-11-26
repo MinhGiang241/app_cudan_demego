@@ -27,7 +27,7 @@ class TransportationLetterListTab extends StatelessWidget {
 
   final List<TransportationCard> cardList;
   String? residentId;
-  Function() cancelRegister;
+  Function(TransportationCard) cancelRegister;
   Function(String) sendRequest;
   Function() edit;
   Function(String) deleteLetter;
@@ -155,7 +155,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (cardList[index].ticket_status == "CANCEL")
+                              if (cardList[index].ticket_status == "WAIT")
                                 Row(
                                   children: [
                                     hpad(12),
@@ -165,7 +165,8 @@ class TransportationLetterListTab extends StatelessWidget {
                                       secondaryBackgroundColor: redColor4,
                                       textColor: redColor,
                                       text: S.of(context).cancel_register,
-                                      onTap: cancelRegister,
+                                      onTap: () =>
+                                          cancelRegister(cardList[index]),
                                     ),
                                   ],
                                 ),

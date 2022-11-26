@@ -125,9 +125,9 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                         deleteLetter: (String id) => context
                             .read<ParkingCardProvider>()
                             .deleteLetter(context, id),
-                        cancelRegister: () => context
+                        cancelRegister: (TransportationCard card) => context
                             .read<ParkingCardProvider>()
-                            .cancelLetter(context),
+                            .cancelLetter(context, card),
                         residentId: context.watch<ResidentInfoPrv>().residentId,
                         cardList: transCardLetter,
                       ),

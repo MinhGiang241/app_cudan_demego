@@ -516,7 +516,11 @@ class Utils {
                     buttonSize: ButtonSize.small,
                     buttonType: ButtonType.primary,
                     onTap: () {
-                      onConfirm!();
+                      if (onConfirm == null) {
+                        Navigator.of(context).pop();
+                      } else {
+                        onConfirm();
+                      }
                     },
                   )
                 ],

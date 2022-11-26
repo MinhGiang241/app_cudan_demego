@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_reg": MessageLookupByLibrary.simpleMessage("Cancel register"),
         "cancel_register":
             MessageLookupByLibrary.simpleMessage("Cancel register"),
+        "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),

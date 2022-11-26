@@ -230,5 +230,6 @@
   "edit_reg_deliver":"Edit register delivery",
   "item_list_not_empty":"Item list can not be empty!",
   "confirm_cancel_request":"Do you want to cancel Request",
-  "success_can_req":"Cancel letter successfully"
+  "success_can_req":"Cancel letter successfully",
+  "cancel_request":"Cancel letter"
 }
