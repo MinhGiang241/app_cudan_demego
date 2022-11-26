@@ -23,7 +23,7 @@ class SelectMediaWidget extends StatelessWidget {
       this.isRequired = false})
       : super(key: key);
   final String? title;
-  final List<OtherImage> existImages;
+  final List existImages;
   final List<File> images;
   final Function()? onSelect;
   final Function(int)? onRemove;

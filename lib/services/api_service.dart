@@ -83,19 +83,23 @@ class ApiService {
   }
 
   Future<oauth2.Client?> getExistClient() async {
-    final path = await getApplicationDocumentsDirectory();
-    final credentialsFile = File('${path.path}/credential.json');
-    var exists = await credentialsFile.exists();
-    if (exists) {
-      var credentials =
-          oauth2.Credentials.fromJson(await credentialsFile.readAsString());
-      return oauth2.Client(
-        credentials,
-        identifier: clientId,
-        secret: '',
-      );
+    try {
+      final path = await getApplicationDocumentsDirectory();
+      final credentialsFile = File('${path.path}/credential.json');
+      var exists = await credentialsFile.exists();
+      if (exists) {
+        var credentials =
+            oauth2.Credentials.fromJson(await credentialsFile.readAsString());
+        return oauth2.Client(
+          credentials,
+          identifier: clientId,
+          secret: '',
+        );
+      }
+      return null;
+    } catch (e) {
+      return null;
     }
-    return null;
   }
 
   deleteCre() async {
@@ -107,6 +111,7 @@ class ApiService {
   }
 
   Future<oauth2.Client> refresh(oauth2.Client client, remember) async {
+    // try {
     final cli = await client.refreshCredentials();
     final path = await getApplicationDocumentsDirectory();
     final credentialsFile = File('${path.path}/credential.json');
@@ -114,6 +119,9 @@ class ApiService {
     await credentialsFile.writeAsString(client.credentials.toJson());
 
     return cli;
+    // } catch (e) {
+    //   // return oauth2.Client;
+    // }
   }
 
   Future<bool> isExpired(BuildContext context) async {

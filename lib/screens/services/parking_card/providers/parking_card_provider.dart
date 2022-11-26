@@ -55,10 +55,15 @@ class ParkingCardProvider extends ChangeNotifier {
                 context: context,
                 e: S.of(context).success_lock_card,
                 onClose: () {
-                  Navigator.pushReplacementNamed(
-                      context, TransportationCardListScreen.routeName);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      TransportationCardListScreen.routeName,
+                      (route) => route.isFirst);
                 });
-          }).catchError((e) {});
+          }).catchError((e) {
+            Navigator.pop(context);
+            Utils.showErrorMessage(context, e);
+          });
         });
   }
 
@@ -75,8 +80,10 @@ class ParkingCardProvider extends ChangeNotifier {
                 context: context,
                 e: S.of(context).success_send_req,
                 onClose: () {
-                  Navigator.pushReplacementNamed(
-                      context, TransportationCardListScreen.routeName);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      TransportationCardListScreen.routeName,
+                      (route) => route.isFirst);
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -101,8 +108,10 @@ class ParkingCardProvider extends ChangeNotifier {
                     .of(context)
                     .success_remove(S.of(context).trans_letter.toLowerCase()),
                 onClose: () {
-                  Navigator.pushReplacementNamed(
-                      context, TransportationCardListScreen.routeName);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      TransportationCardListScreen.routeName,
+                      (route) => route.isFirst);
                 });
           }).catchError((e) {
             Navigator.pop(context);

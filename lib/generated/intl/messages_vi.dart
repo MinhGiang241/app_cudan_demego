@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
+        "confirm_cancel_request":
+            MessageLookupByLibrary.simpleMessage("Bạn có muốn hủy duyệt phiếu"),
         "confirm_delete_service": m0,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn khóa thẻ xe không?"),
@@ -85,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "edit_reg_deliver":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký chuyển đồ"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ cư dân"),
         "edit_trans_card":
@@ -148,6 +152,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Tiếp nhận thông tin"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
+        "item_list_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Danh sách chuyển đồ không được để trống"),
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
@@ -290,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
         "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "success_can_req":
+            MessageLookupByLibrary.simpleMessage("Hủy duyệt phiếu thành công"),
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Thêm mới thành công"),
         "success_edit":

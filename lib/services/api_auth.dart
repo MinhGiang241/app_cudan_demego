@@ -36,9 +36,9 @@ class APIAuth {
       //   user = data['userName'];
       // }
     } else {
-      await getUserInformationByUsername(user).then((v) {}).catchError((e) {
-        throw (e);
-      });
+      // await getUserInformationByUsername(user).then((v) {}).catchError((e) {
+      //   throw (e);
+      // });
     }
 
     return await ApiService.shared.getClient(

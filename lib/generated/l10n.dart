@@ -2329,6 +2329,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit register delivery`
+  String get edit_reg_deliver {
+    return Intl.message(
+      'Edit register delivery',
+      name: 'edit_reg_deliver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item list can not be empty!`
+  String get item_list_not_empty {
+    return Intl.message(
+      'Item list can not be empty!',
+      name: 'item_list_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel Request`
+  String get confirm_cancel_request {
+    return Intl.message(
+      'Do you want to cancel Request',
+      name: 'confirm_cancel_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel letter successfully`
+  String get success_can_req {
+    return Intl.message(
+      'Cancel letter successfully',
+      name: 'success_can_req',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

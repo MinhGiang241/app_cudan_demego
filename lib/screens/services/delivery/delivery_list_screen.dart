@@ -99,13 +99,13 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                             InfoContentView(
                               title: S.of(context).start_time,
                               content:
-                                  '${Utils.dateFormat(e.start_hour ?? "")}${Utils.dateFormat(e.start_time ?? "")}',
+                                  '${(e.start_hour != null ? e.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.start_time ?? "")}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
                               title: S.of(context).end_time,
                               content:
-                                  '${Utils.dateFormat(e.end_hour ?? "")}${Utils.dateFormat(e.end_time ?? "")}',
+                                  '${(e.end_hour != null ? e.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.end_time ?? "")}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
@@ -139,7 +139,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                       child: Text(
                                         e.type_transfer == 'IN'
                                             ? S.of(context).tranfer_in_reg
-                                            : 'OUT',
+                                            : S.of(context).tranfer_out_reg,
                                         textAlign: TextAlign.right,
                                         style: txtBodySmallRegular(
                                             color: grayScaleColorBase),
@@ -179,7 +179,12 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                       children: [
                                         hpad(16),
                                         PrimaryButton(
-                                          onTap: () {},
+                                          onTap: () {
+                                            context
+                                                .read<DeliveryListPrv>()
+                                                .cancelRequetsAprrove(
+                                                    context, e);
+                                          },
                                           text: S.of(context).cancel_register,
                                           buttonSize: ButtonSize.xsmall,
                                           buttonType: ButtonType.secondary,
@@ -194,7 +199,11 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         PrimaryButton(
-                                          onTap: () {},
+                                          onTap: () {
+                                            context
+                                                .read<DeliveryListPrv>()
+                                                .sendToApprove(context, e);
+                                          },
                                           text: S.of(context).send_request,
                                           buttonSize: ButtonSize.xsmall,
                                           buttonType: ButtonType.secondary,
@@ -218,8 +227,13 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                           textColor: primaryColorBase,
                                         ),
                                         PrimaryButton(
-                                          onTap: () {},
-                                          text: S.of(context).cancel_register,
+                                          onTap: () {
+                                            context
+                                                .read<DeliveryListPrv>()
+                                                .deleteLetter(
+                                                    context, e.id ?? '');
+                                          },
+                                          text: S.of(context).delete_letter,
                                           buttonSize: ButtonSize.xsmall,
                                           buttonType: ButtonType.secondary,
                                           secondaryBackgroundColor: redColor5,

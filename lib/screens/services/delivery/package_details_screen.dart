@@ -58,12 +58,12 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       InfoContentView(
                         title: S.of(context).start_time,
                         content:
-                            '${Utils.dateFormat(arg.end_hour ?? "")}${Utils.dateFormat(arg.end_time ?? "")}',
+                            '${(arg.start_hour != null ? arg.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(arg.end_time ?? "")}',
                       ),
                       InfoContentView(
                         title: S.of(context).trans_type,
                         content:
-                            '${Utils.dateFormat(arg.end_hour ?? "")}${Utils.dateFormat(arg.end_time ?? "")}',
+                            '${(arg.end_hour != null ? arg.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(arg.end_time ?? "")}',
                       ),
                       InfoContentView(
                         title: S.of(context).card_num,
@@ -105,20 +105,25 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   child: Column(
                     children: [
-                      ...arg.item_added_list!.map((e) => PrimaryInfoWidget(
-                            listInfoView: [
-                              InfoContentView(
-                                title: S.of(context).package_name,
-                                content: e.item_name,
+                      ...arg.item_added_list!.map((e) => Column(
+                            children: [
+                              PrimaryInfoWidget(
+                                listInfoView: [
+                                  InfoContentView(
+                                    title: S.of(context).package_name,
+                                    content: e.item_name,
+                                  ),
+                                  InfoContentView(
+                                    title: '${S.of(context).weight} (kg)',
+                                    content: e.weight.toString(),
+                                  ),
+                                  InfoContentView(
+                                    title: '${S.of(context).dimention} (cm)',
+                                    content: e.dimension,
+                                  ),
+                                ],
                               ),
-                              InfoContentView(
-                                title: '${S.of(context).weight} (kg)',
-                                content: e.weight.toString(),
-                              ),
-                              InfoContentView(
-                                title: '${S.of(context).dimention} (cm)',
-                                content: e.dimension,
-                              ),
+                              vpad(16),
                             ],
                           ))
                     ],

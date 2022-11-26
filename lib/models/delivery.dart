@@ -41,7 +41,7 @@ class Delivery {
   List<ItemDeliver>? item_added_list;
   List<ImageDelivery>? image;
   Delivery.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['_id'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     apartmentId = json['apartmentId'];
@@ -51,6 +51,8 @@ class Delivery {
     type_transfer = json['type_transfer'];
     start_time = json['start_time'];
     end_time = json['end_time'];
+    start_hour = json['start_hour'];
+    end_hour = json['end_hour'];
     code = json['code'];
     reasons = json['reasons'];
     note_reason = json['note_reason'];
@@ -82,6 +84,8 @@ class Delivery {
     data['phone_number'] = phone_number;
     data['type_transfer'] = type_transfer;
     data['start_time'] = start_time;
+    data['start_hour'] = start_hour;
+    data['end_hour'] = end_hour;
     data['describe'] = describe;
     data['end_time'] = end_time;
     data['code'] = code;

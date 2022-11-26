@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirm_cancel_request": MessageLookupByLibrary.simpleMessage(
+            "Do you want to cancel Request"),
         "confirm_delete_service": m0,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Do you want to lock transportation card?"),
@@ -88,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "edit_reg_deliver":
+            MessageLookupByLibrary.simpleMessage("Edit register delivery"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
@@ -150,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Information reception"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
+        "item_list_not_empty":
+            MessageLookupByLibrary.simpleMessage("Item list can not be empty!"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
@@ -295,6 +301,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "success_can_req":
+            MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":

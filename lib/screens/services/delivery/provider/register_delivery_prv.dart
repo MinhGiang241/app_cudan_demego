@@ -15,17 +15,24 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
 
 class RegisterDeliveryPrv extends ChangeNotifier {
+  RegisterDeliveryPrv({
+    this.id,
+    this.helpCheck = false,
+    this.packageItems = const [],
+    this.existedImage = const [],
+    this.type = 1,
+  });
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
   int type = 1;
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
+  final TextEditingController startDateController = TextEditingController();
+  final TextEditingController endDateController = TextEditingController();
   TextEditingController startHourController = TextEditingController();
   TextEditingController endHourController = TextEditingController();
   TextEditingController packageNameController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController dimentionController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
   bool helpCheck = false;
   String? id;
   String? validateStartDate;
@@ -37,28 +44,35 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   bool isLoading = false;
 
   List<File> imagesDelivery = [];
+  List<ImageDelivery> existedImage = [];
   List<ItemDeliver> packageItems = [];
   List<ImageDelivery> submitImageDelivery = [];
 
   onSendSummitDelivery(BuildContext context, bool isRequest) {
     FocusScope.of(context).unfocus();
+
     if (formKey.currentState!.validate()) {
       uploadDeliveryImage(context).then((v) {
         var newDelivery = Delivery(
           phone_number: context.read<ResidentInfoPrv>().userInfo!.phone,
           note_reason: noteController.text.trim(),
-          item_added_list: packageItems.isNotEmpty ? packageItems : null,
+          item_added_list: (packageItems.isNotEmpty) ? packageItems : null,
           start_time:
               '${startDateController.text.split('/').reversed.join('-')}T17:00:00',
           end_time:
               '${endDateController.text.split('/').reversed.join('-')}T17:00:00',
-          start_hour: '${startHourController.text}:00',
-          end_hour: '${endHourController.text}:00',
+          start_hour: startHourController.text.isNotEmpty
+              ? '${startHourController.text}:00'
+              : null,
+          end_hour: endHourController.text.isNotEmpty
+              ? '${endHourController.text}:00'
+              : null,
           id: id,
-          image: submitImageDelivery,
+          help_check: helpCheck,
+          image: submitImageDelivery + existedImage,
           residentId: context.read<ResidentInfoPrv>().residentId,
-          status: isRequest ? "NEW" : "WAIT",
-          type_transfer: type == 1 ? "IN" : "OUT",
+          status: isRequest ? "WAIT" : "NEW",
+          type_transfer: type == 1 ? "OUT" : "IN",
           apartmentId:
               context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
         );
@@ -75,8 +89,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                     : S.of(context).success_cr_new,
             onClose: () {
               // var count = 0;
-              Navigator.pushReplacementNamed(
-                  context, DeliveryListScreen.routeName);
+              Navigator.pushNamedAndRemoveUntil(context,
+                  DeliveryListScreen.routeName, (route) => route.isFirst);
             });
       }).catchError((e) {
         Utils.showErrorMessage(context, e.toString());
@@ -149,6 +163,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   }
 
   removeExistedImages(int index) {
+    existedImage.removeAt(index);
     notifyListeners();
   }
   // List<File> imagesRelated = [];

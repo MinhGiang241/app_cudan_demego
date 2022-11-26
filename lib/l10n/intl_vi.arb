@@ -226,6 +226,9 @@
   "transfer_type":"Loại chuyển",
   "delivery_info":"Thông tin đồ chuyển",
   "no_delivery":"Không có đăng ký chuyển đố nào",
-  "l_w_e":"Dài x rộng x cao"
-  
+  "l_w_e":"Dài x rộng x cao",
+  "edit_reg_deliver":"Chỉnh sửa đăng ký chuyển đồ",
+  "item_list_not_empty":"Danh sách chuyển đồ không được để trống",
+  "confirm_cancel_request":"Bạn có muốn hủy duyệt phiếu",
+  "success_can_req":"Hủy duyệt phiếu thành công"
 }

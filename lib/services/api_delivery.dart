@@ -4,6 +4,35 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIDelivery {
+  static Future deleteDelivery(String id) async {
+    var query = '''
+        mutation (\$_id:String){
+      response: remove_TransferItems_dto(_id:\$_id){
+        code
+        message
+        data{
+          _id
+        }
+      }
+    }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"_id": id},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future saveNewDelivery(Map<String, dynamic> data) async {
     var query = '''
   mutation (\$data:TransferItemsInputDto) {

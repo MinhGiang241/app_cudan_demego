@@ -226,5 +226,9 @@
   "transfer_type":"Transfer type",
   "delivery_info":"Tranfer information",
   "no_delivery":"Don't have any package",
-  "l_w_e":"Length x width x elevation"
+  "l_w_e":"Length x width x elevation",
+  "edit_reg_deliver":"Edit register delivery",
+  "item_list_not_empty":"Item list can not be empty!",
+  "confirm_cancel_request":"Do you want to cancel Request",
+  "success_can_req":"Cancel letter successfully"
 }

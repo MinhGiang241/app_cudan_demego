@@ -49,6 +49,12 @@ class _RegisterTransportationCardState
           apartmentId:
               context.read<ResidentInfoPrv>().selectedApartment?.apartmentId),
       builder: (context, state) {
+        if (isEdit) {
+          context.read<RegisterTransportationCardPrv>().liceneController.text =
+              card.number_plate ?? '';
+          context.read<RegisterTransportationCardPrv>().regNumController.text =
+              card.registration_number ?? '';
+        }
         return PrimaryScreen(
           appBar: PrimaryAppbar(
               title: isEdit
@@ -69,17 +75,6 @@ class _RegisterTransportationCardState
                         onRetry: () async {
                           setState(() {});
                         });
-                  }
-
-                  if (isEdit) {
-                    context
-                        .read<RegisterTransportationCardPrv>()
-                        .liceneController
-                        .text = card.number_plate ?? '';
-                    context
-                        .read<RegisterTransportationCardPrv>()
-                        .regNumController
-                        .text = card.registration_number ?? '';
                   }
 
                   var listApartmentChoice =
