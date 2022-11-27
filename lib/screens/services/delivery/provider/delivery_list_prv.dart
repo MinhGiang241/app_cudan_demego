@@ -35,6 +35,7 @@ class DeliveryListPrv extends ChangeNotifier {
 
   sendToApprove(BuildContext context, Delivery data) {
     if (data.item_added_list == null || data.item_added_list!.isEmpty) {
+      
       Utils.showErrorMessage(context, S.of(context).item_list_not_empty);
       return;
     } else {

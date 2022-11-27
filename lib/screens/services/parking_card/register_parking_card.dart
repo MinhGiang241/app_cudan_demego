@@ -46,7 +46,7 @@ class _RegisterTransportationCardState
           imageUrlBack: card.registration_image_back,
           otherExistedImages: card.other_image,
           residentId: context.read<ResidentInfoPrv>().residentId,
-          apartmentId:
+          apartmentId: card.apartmentId ??
               context.read<ResidentInfoPrv>().selectedApartment?.apartmentId),
       builder: (context, state) {
         if (isEdit) {
@@ -114,15 +114,14 @@ class _RegisterTransportationCardState
                           onChange: (v) {
                             context
                                 .read<RegisterTransportationCardPrv>()
-                                .apartmentId = v;
+                                .onSelectApartment(v);
                           },
                           label: S.of(context).apartment,
                           selectList: listApartmentChoice,
                           isRequired: true,
                           value: context
-                              .read<ResidentInfoPrv>()
-                              .selectedApartment
-                              ?.apartmentId,
+                              .read<RegisterTransportationCardPrv>()
+                              .apartmentId,
                         ),
                         vpad(16),
                         Text(

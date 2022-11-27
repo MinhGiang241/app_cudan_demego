@@ -194,8 +194,8 @@
   "success_remove":"Xóa {del} thành công",
   "success_lock_card":"Khóa thẻ thành công",
   "confirm_send_request":"Bạn có muốn gửi duyệt phiếu ?",
-  "not_empty_trans_front":"Không để trống hình ảnh đăng ký xe mặt trước",
-  "not_empty_trans_back":"Không để trống hình ảnh đăng ký xe mặt sau",
+  "not_empty_front":"Không để trống hình ảnh mặt trước",
+  "not_empty_back":"Không để trống hình ảnh mặt sau",
   "photo_front_side":"Ảnh mặt trước",
   "photo_back_side":"Ảnh mặt sau",
   "trans_cer":"Đăng ký xe",
@@ -231,5 +231,9 @@
   "item_list_not_empty":"Danh sách chuyển đồ không được để trống",
   "confirm_cancel_request":"Bạn có muốn hủy duyệt phiếu",
   "success_can_req":"Hủy duyệt phiếu thành công",
-  "cancel_request":"Hủy phiếu"
+  "cancel_request":"Hủy phiếu",
+  "register_res_card":"Register resident card",
+  "no_card":"Không có thẻ nào",
+  "no_letter":"Không có phếu nào!",
+  "confirm_lock_card":"Bạn có muốn khóa thẻ?"
 }

@@ -66,6 +66,11 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? liceneNum;
   String? regNum;
 
+  onSelectApartment(String id) {
+    apartmentId = id;
+    notifyListeners();
+  }
+
   onSelectBackPhoto(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
@@ -118,6 +123,8 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
 
   onAddNewTransCard(BuildContext context, bool isRequest) {
     if (formKey.currentState!.validate()) {
+      isLoading = true;
+      notifyListeners();
       uploadFrontPhoto(context).then((v) {
         return uploadBackPhoto(context);
       }).then((v) {
@@ -140,19 +147,21 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         var data = newCard.toJson();
         // print(data2);
         if (isRequest && newCard.registration_image_front == null) {
-          throw (S.of(context).not_empty_trans_front);
+          throw (S.of(context).not_empty_front);
         }
         if (isRequest && newCard.registration_image_back == null) {
-          throw (S.of(context).not_empty_trans_back);
+          throw (S.of(context).not_empty_back);
         }
         return APITrans.saveTransportationCard(data);
       }).then((v) {
+        isLoading = false;
+        notifyListeners();
         Utils.showSuccessMessage(
             context: context,
-            e: id != null
-                ? S.of(context).success_edit
-                : isRequest
-                    ? S.of(context).success_send_req
+            e: isRequest
+                ? S.of(context).success_send_req
+                : id != null
+                    ? S.of(context).success_edit
                     : S.of(context).success_cr_new,
             onClose: () {
               // var count = 0;
@@ -161,6 +170,8 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
             });
       }).catchError((e) {
         Utils.showErrorMessage(context, e.toString());
+        isLoading = false;
+        notifyListeners();
       });
     } else {
       isLoading = false;

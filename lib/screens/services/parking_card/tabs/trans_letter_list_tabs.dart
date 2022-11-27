@@ -208,22 +208,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                         textColor: redColor,
                                         text: S.of(context).delete_letter,
                                         onTap: () =>
-                                            deleteLetter(cardList[index].id!)
-
-                                        // () {
-                                        //   Utils.showConfirmMessage(
-                                        //       context: context,
-                                        //       title: S
-                                        //           .of(context)
-                                        //           .confirm_delete_service(
-                                        //             S
-                                        //                 .of(context)
-                                        //                 .trans_letter
-                                        //                 .toLowerCase(),
-                                        //           ),
-                                        //       onConfirm: () {});
-                                        // },
-                                        ),
+                                            deleteLetter(cardList[index].id!)),
                                   ],
                                 ),
                               vpad(12)

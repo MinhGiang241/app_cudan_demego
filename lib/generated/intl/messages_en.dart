@@ -68,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": MessageLookupByLibrary.simpleMessage(
             "Do you want to cancel Request"),
         "confirm_delete_service": m0,
+        "confirm_lock_card":
+            MessageLookupByLibrary.simpleMessage("Do you want to lock card?"),
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Do you want to lock transportation card?"),
         "confirm_pass":
@@ -177,18 +179,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
+        "no_card":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any card !"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
         "no_delivery":
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
+        "no_letter":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any letter !"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("No have transportation card"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
-        "not_empty_trans_back": MessageLookupByLibrary.simpleMessage(
-            "Not empty register transportation back side photo"),
-        "not_empty_trans_front": MessageLookupByLibrary.simpleMessage(
-            "Not empty register transportation front side photo"),
+        "not_empty_back":
+            MessageLookupByLibrary.simpleMessage("Not empty back side photo"),
+        "not_empty_front":
+            MessageLookupByLibrary.simpleMessage("Not empty front side photo"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),
         "not_get_otp":
@@ -234,6 +240,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
+        "register_res_card":
+            MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),

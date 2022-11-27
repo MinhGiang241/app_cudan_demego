@@ -2000,21 +2000,21 @@ class S {
     );
   }
 
-  /// `Not empty register transportation front side photo`
-  String get not_empty_trans_front {
+  /// `Not empty front side photo`
+  String get not_empty_front {
     return Intl.message(
-      'Not empty register transportation front side photo',
-      name: 'not_empty_trans_front',
+      'Not empty front side photo',
+      name: 'not_empty_front',
       desc: '',
       args: [],
     );
   }
 
-  /// `Not empty register transportation back side photo`
-  String get not_empty_trans_back {
+  /// `Not empty back side photo`
+  String get not_empty_back {
     return Intl.message(
-      'Not empty register transportation back side photo',
-      name: 'not_empty_trans_back',
+      'Not empty back side photo',
+      name: 'not_empty_back',
       desc: '',
       args: [],
     );
@@ -2375,6 +2375,46 @@ class S {
     return Intl.message(
       'Cancel letter',
       name: 'cancel_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng ký thẻ cư dân`
+  String get register_res_card {
+    return Intl.message(
+      'Đăng ký thẻ cư dân',
+      name: 'register_res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any card !`
+  String get no_card {
+    return Intl.message(
+      'Don\'t have any card !',
+      name: 'no_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any letter !`
+  String get no_letter {
+    return Intl.message(
+      'Don\'t have any letter !',
+      name: 'no_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to lock card?`
+  String get confirm_lock_card {
+    return Intl.message(
+      'Do you want to lock card?',
+      name: 'confirm_lock_card',
       desc: '',
       args: [],
     );

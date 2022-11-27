@@ -194,8 +194,8 @@
   "success_remove":"Remove {del} successfully",
   "success_lock_card":"Lock card successfully",
   "confirm_send_request":"Do you want to send to approve request?",
-  "not_empty_trans_front":"Not empty register transportation front side photo",
-  "not_empty_trans_back":"Not empty register transportation back side photo",
+  "not_empty_front":"Not empty front side photo",
+  "not_empty_back":"Not empty back side photo",
   "photo_front_side":"Photo front size",
   "photo_back_side":"Photo back size",
   "trans_cer":"Registration certificate",
@@ -231,5 +231,9 @@
   "item_list_not_empty":"Item list can not be empty!",
   "confirm_cancel_request":"Do you want to cancel Request",
   "success_can_req":"Cancel letter successfully",
-  "cancel_request":"Cancel letter"
+  "cancel_request":"Cancel letter",
+  "register_res_card":"Đăng ký thẻ cư dân",
+  "no_card":"Don't have any card !",
+  "no_letter":"Don't have any letter !",
+  "confirm_lock_card":"Do you want to lock card?"
 }

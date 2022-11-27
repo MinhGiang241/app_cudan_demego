@@ -67,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn hủy duyệt phiếu"),
         "confirm_delete_service": m0,
+        "confirm_lock_card":
+            MessageLookupByLibrary.simpleMessage("Bạn có muốn khóa thẻ?"),
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn khóa thẻ xe không?"),
         "confirm_pass":
@@ -174,20 +176,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản ?"),
+        "no_card": MessageLookupByLibrary.simpleMessage("Không có thẻ nào"),
         "no_comment":
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
         "no_delivery": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký chuyển đố nào"),
+        "no_letter": MessageLookupByLibrary.simpleMessage("Không có phếu nào!"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("Không có thẻ xe nào"),
         "no_trans_letter":
             MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
-        "not_empty_trans_back": MessageLookupByLibrary.simpleMessage(
-            "Không để trống hình ảnh đăng ký xe mặt sau"),
-        "not_empty_trans_front": MessageLookupByLibrary.simpleMessage(
-            "Không để trống hình ảnh đăng ký xe mặt trước"),
+        "not_empty_back": MessageLookupByLibrary.simpleMessage(
+            "Không để trống hình ảnh mặt sau"),
+        "not_empty_front": MessageLookupByLibrary.simpleMessage(
+            "Không để trống hình ảnh mặt trước"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
@@ -231,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
+        "register_res_card":
+            MessageLookupByLibrary.simpleMessage("Register resident card"),
         "register_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),

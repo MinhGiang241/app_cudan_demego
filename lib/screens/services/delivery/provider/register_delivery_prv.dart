@@ -82,10 +82,10 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       }).then((v) {
         Utils.showSuccessMessage(
             context: context,
-            e: id != null
-                ? S.of(context).success_edit
-                : isRequest
-                    ? S.of(context).success_send_req
+            e: isRequest
+                ? S.of(context).success_send_req
+                : id != null
+                    ? S.of(context).success_edit
                     : S.of(context).success_cr_new,
             onClose: () {
               // var count = 0;

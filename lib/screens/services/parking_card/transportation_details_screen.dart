@@ -122,7 +122,9 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                           content: arg.registration_number,
                         ),
                         if (arg.registration_image_front != null ||
-                            arg.registration_image_back != null)
+                            arg.registration_image_back != null ||
+                            arg.other_image != null ||
+                            arg.other_image!.isNotEmpty)
                           InfoContentView(title: S.of(context).photos, images: [
                             if (arg.registration_image_front != null)
                               "${ApiConstants.uploadURL}?load=${arg.registration_image_front}",
