@@ -78,10 +78,14 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                     },
                   );
                 } else {
+                  var l = context.read<DeliveryListPrv>().listItems;
+
+                  l.sort((a, b) =>
+                      genOrder(a.status ?? "") - genOrder(b.status ?? ""));
                   return ListView(
                     children: [
                       vpad(24),
-                      ...context.read<DeliveryListPrv>().listItems.map(
+                      ...l.map(
                         (e) {
                           var listContent = [
                             InfoContentView(

@@ -147,11 +147,13 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                             content: genStatus(arg.ticket_status ?? ''),
                             contentStyle:
                                 genContentStyle(arg.ticket_status ?? "")),
-                        InfoContentView(
-                          title: S.of(context).card_status,
-                          content: genStatus(arg.card_status ?? ''),
-                          contentStyle: genContentStyle(arg.card_status ?? ""),
-                        ),
+                        if (arg.card_status != null)
+                          InfoContentView(
+                            title: S.of(context).card_status,
+                            content: genStatus(arg.card_status ?? ''),
+                            contentStyle:
+                                genContentStyle(arg.card_status ?? ""),
+                          ),
                         if (arg.ticket_status == "CANCEL")
                           InfoContentView(
                             title: S.of(context).reject_reason,
@@ -167,29 +169,30 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                       ]),
                 ),
                 vpad(24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    if (arg.ticket_status == "APPROVED")
-                      PrimaryButton(
-                        width: 150,
-                        text: S.of(context).missing_report,
-                        buttonType: ButtonType.secondary,
-                        textColor: primaryColorBase,
-                        secondaryBackgroundColor: primaryColor5,
-                        onTap: () {},
-                      ),
-                    if (arg.ticket_status == "APPROVED")
-                      PrimaryButton(
-                        width: 150,
-                        text: S.of(context).lock_card,
-                        buttonType: ButtonType.secondary,
-                        textColor: redColorBase,
-                        secondaryBackgroundColor: redColor5,
-                        onTap: () {},
-                      )
-                  ],
-                ),
+                if (arg.card_status == "ACTIVE")
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      if (arg.ticket_status == "APPROVED")
+                        PrimaryButton(
+                          width: 150,
+                          text: S.of(context).missing_report,
+                          buttonType: ButtonType.secondary,
+                          textColor: primaryColorBase,
+                          secondaryBackgroundColor: primaryColor5,
+                          onTap: () {},
+                        ),
+                      if (arg.ticket_status == "APPROVED")
+                        PrimaryButton(
+                          width: 150,
+                          text: S.of(context).lock_card,
+                          buttonType: ButtonType.secondary,
+                          textColor: redColorBase,
+                          secondaryBackgroundColor: redColor5,
+                          onTap: () {},
+                        )
+                    ],
+                  ),
                 vpad(kBottomNavigationBarHeight),
               ],
             ),

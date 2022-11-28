@@ -119,11 +119,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                           content: genStatus(arg.ticket_status ?? ''),
                           contentStyle:
                               genContentStyle(arg.ticket_status ?? "")),
-                      InfoContentView(
-                        title: S.of(context).card_status,
-                        content: genStatus(arg.card_status ?? ''),
-                        contentStyle: genContentStyle(arg.card_status ?? ""),
-                      ),
+                      if (arg.card_status != null)
+                        InfoContentView(
+                          title: S.of(context).card_status,
+                          content: genStatus(arg.card_status ?? ''),
+                          contentStyle: genContentStyle(arg.card_status ?? ""),
+                        ),
                       if (arg.ticket_status == "CANCEL")
                         InfoContentView(
                           title: S.of(context).reject_reason,

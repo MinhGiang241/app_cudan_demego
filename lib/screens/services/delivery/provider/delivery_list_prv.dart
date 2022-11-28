@@ -80,9 +80,8 @@ class DeliveryListPrv extends ChangeNotifier {
   deleteLetter(BuildContext context, String id) {
     Utils.showConfirmMessage(
         title: S.of(context).delete_letter,
-        content: S
-            .of(context)
-            .confirm_delete_service(S.of(context).trans_letter.toLowerCase()),
+        content: S.of(context).confirm_delete_service(
+            S.of(context).delivery_letter.toLowerCase()),
         context: context,
         onConfirm: () async {
           await APIDelivery.deleteDelivery(id).then((v) {

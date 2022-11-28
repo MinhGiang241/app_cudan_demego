@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/info_content_view.dart';
 import '../../../models/transportation_card.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_error_widget.dart';
@@ -113,7 +114,10 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                             .read<ParkingCardProvider>()
                             .lockCard(context, id),
                         residentId: context.watch<ResidentInfoPrv>().residentId,
-                        cardList: transCardList,
+                        cardList: transCardList
+                          ..sort((a, b) =>
+                              genOrder(a.card_status ?? "") -
+                              genOrder(b.card_status ?? "")),
                       ),
                       TransportationLetterListTab(
                         edit: () => context
@@ -129,7 +133,10 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                             .read<ParkingCardProvider>()
                             .cancelLetter(context, card),
                         residentId: context.watch<ResidentInfoPrv>().residentId,
-                        cardList: transCardLetter,
+                        cardList: transCardLetter
+                          ..sort((a, b) =>
+                              genOrder(a.ticket_status ?? "") -
+                              genOrder(b.ticket_status ?? "")),
                       ),
                     ],
                   );

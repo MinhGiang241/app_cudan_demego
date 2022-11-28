@@ -77,8 +77,10 @@ class AuthPrv extends ChangeNotifier {
       Utils.showDialog(
           context: context,
           dialog: PrimaryDialog.error(
-            msg: '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
-          ));
+              // msg: '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
+              msg: va.contains("host")
+                  ? S.of(context).err_conn
+                  : '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}'));
     }
 
     await APIAuth.signIn(

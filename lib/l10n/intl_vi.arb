@@ -16,7 +16,7 @@
   "create_acc_1": "Tạo tài khoản",
   "have_acc": "Bạn đã có tài khoản ?",
   "full_name": "Họ và Tên",
-  "enter_name": "Nhập tên",
+  "enter_name": "Nhập họ và tên",
   "enter_username": "Nhập tên tài khoản",
   "confirm_pass": "Nhập lại mật khẩu",
   "can_not_empty": "Không được để trống",
@@ -237,5 +237,7 @@
   "no_letter":"Không có phiếu nào!",
   "confirm_lock_card":"Bạn có muốn khóa thẻ?",
   "success_cancel":"Hủy duyệt thành công",
-  "w":"Home Community Smart Living"
+  "w":"Home Community Smart Living",
+  "not_empty_vehicle_type":"Loại phương tiện không được để trống",
+  "delivery_letter":"Phiếu đăng ký chuyển đồ"
 }

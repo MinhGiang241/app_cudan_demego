@@ -289,7 +289,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                     Row(
                       children: [
                         DashButton(
-                          text: S.of(context).add_package,
+                          text: S.of(context).package_info,
                           lable: S.of(context).add_package,
                           isRequired: true,
                           icon: const PrimaryIcon(

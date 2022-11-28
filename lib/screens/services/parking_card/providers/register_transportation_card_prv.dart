@@ -112,9 +112,9 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
             transTypeList.add(VehicleType.fromJson(e));
           });
         }
-        if (transTypeList.isNotEmpty && vehicleType == null) {
-          vehicleType = transTypeList[0].id;
-        }
+        // if (transTypeList.isNotEmpty && vehicleType == null) {
+        //   vehicleType = transTypeList[0].id;
+        // }
       },
     ).catchError((e) {
       Utils.showErrorMessage(context, e);
@@ -146,12 +146,12 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
             ticket_status: isRequest ? "WAIT" : "NEW");
         var data = newCard.toJson();
         // print(data2);
-        if (isRequest && newCard.registration_image_front == null) {
-          throw (S.of(context).not_empty_front);
+        if (vehicleType == null) {
+          throw (S.of(context).not_empty_vehicle_type);
         }
-        if (isRequest && newCard.registration_image_back == null) {
-          throw (S.of(context).not_empty_back);
-        }
+        // if (isRequest && newCard.registration_image_back == null) {
+        //   throw (S.of(context).not_empty_back);
+        // }
         return APITrans.saveTransportationCard(data);
       }).then((v) {
         isLoading = false;

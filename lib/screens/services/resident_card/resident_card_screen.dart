@@ -109,7 +109,10 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                               .lockCard(context, card),
                           residentId:
                               context.watch<ResidentInfoPrv>().residentId,
-                          cardList: resCardList,
+                          cardList: resCardList
+                            ..sort((a, b) =>
+                                genOrder(a.card_status ?? "") -
+                                genOrder(b.card_status ?? "")),
                         ),
                         ResidentLetterTab(
                           edit: () => context
@@ -126,7 +129,10 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                               .cancelLetter(context, card),
                           residentId:
                               context.watch<ResidentInfoPrv>().residentId,
-                          cardList: resCardLetter,
+                          cardList: resCardLetter
+                            ..sort((a, b) =>
+                                genOrder(a.ticket_status ?? "") -
+                                genOrder(b.ticket_status ?? "")),
                         ),
                       ],
                     );

@@ -86,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_letter": MessageLookupByLibrary.simpleMessage("Xóa phiếu"),
         "delivery_info":
             MessageLookupByLibrary.simpleMessage("Thông tin đồ chuyển"),
+        "delivery_letter":
+            MessageLookupByLibrary.simpleMessage("Phiếu đăng ký chuyển đồ"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
@@ -106,7 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ email"),
         "enter_email_phone":
             MessageLookupByLibrary.simpleMessage("Nhập SDT/Email "),
-        "enter_name": MessageLookupByLibrary.simpleMessage("Nhập tên"),
+        "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Nhập số"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
         "enter_phone":
@@ -193,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không để trống hình ảnh mặt sau"),
         "not_empty_front": MessageLookupByLibrary.simpleMessage(
             "Không để trống hình ảnh mặt trước"),
+        "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
+            "Loại phương tiện không được để trống"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":

@@ -61,6 +61,25 @@ genStatusColor(String status) {
   }
 }
 
+genOrder(String status) {
+  switch (status) {
+    case "NEW":
+      return 1;
+    case "APPROVED":
+      return 2;
+    case "WAIT":
+      return 3;
+    case "CANCEL":
+      return 4;
+    case "INACTIVE":
+      return 5;
+    case "ACTiVE":
+      return 6;
+    default:
+      return 0;
+  }
+}
+
 genContentStyle(String content) {
   switch (content) {
     case "ACTIVE":

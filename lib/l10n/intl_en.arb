@@ -236,5 +236,7 @@
   "no_card":"Don't have any card !",
   "no_letter":"Don't have any letter !",
   "confirm_lock_card":"Do you want to lock card?",
-  "w":"Home Community Smart Living"
+  "w":"Home Community Smart Living",
+  "not_empty_vehicle_type":"Vehicle type can not be empty",
+  "delivery_letter":"Delivery_letter"
 }

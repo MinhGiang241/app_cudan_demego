@@ -89,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_letter": MessageLookupByLibrary.simpleMessage("Delete letter"),
         "delivery_info":
             MessageLookupByLibrary.simpleMessage("Tranfer information"),
+        "delivery_letter":
+            MessageLookupByLibrary.simpleMessage("Delivery_letter"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
@@ -195,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not empty back side photo"),
         "not_empty_front":
             MessageLookupByLibrary.simpleMessage("Not empty front side photo"),
+        "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
+            "Vehicle type can not be empty"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),
         "not_get_otp":

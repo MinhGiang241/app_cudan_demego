@@ -2429,6 +2429,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Vehicle type can not be empty`
+  String get not_empty_vehicle_type {
+    return Intl.message(
+      'Vehicle type can not be empty',
+      name: 'not_empty_vehicle_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery_letter`
+  String get delivery_letter {
+    return Intl.message(
+      'Delivery_letter',
+      name: 'delivery_letter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
