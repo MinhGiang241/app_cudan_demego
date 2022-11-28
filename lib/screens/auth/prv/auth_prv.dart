@@ -252,7 +252,7 @@ class AuthPrv extends ChangeNotifier {
                   Expanded(
                     child: PrimaryButton(
                       text: S.of(context).sign_out,
-                      buttonSize: ButtonSize.medium,
+                      buttonSize: ButtonSize.small,
                       isFit: true,
                       buttonType: ButtonType.secondary,
                       secondaryBackgroundColor: redColor2,
@@ -265,8 +265,9 @@ class AuthPrv extends ChangeNotifier {
                   hpad(24),
                   Expanded(
                     child: PrimaryButton(
+                      isFit: true,
                       text: S.of(context).cancel,
-                      buttonSize: ButtonSize.medium,
+                      buttonSize: ButtonSize.small,
                       buttonType: ButtonType.secondary,
                       secondaryBackgroundColor: primaryColor4,
                       textColor: primaryColorBase,

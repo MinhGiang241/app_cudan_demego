@@ -76,7 +76,6 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       notifyListeners();
       Utils.showErrorMessage(context, e.toString());
     });
-    ;
   }
 
   onRemoveFront(int index) {

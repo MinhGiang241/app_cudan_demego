@@ -181,7 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
         "no_delivery": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký chuyển đố nào"),
-        "no_letter": MessageLookupByLibrary.simpleMessage("Không có phếu nào!"),
+        "no_letter":
+            MessageLookupByLibrary.simpleMessage("Không có phiếu nào!"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("Không có thẻ xe nào"),
         "no_trans_letter":
@@ -236,7 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "register_res_card":
-            MessageLookupByLibrary.simpleMessage("Register resident card"),
+            MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
@@ -347,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "w":
+            MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(

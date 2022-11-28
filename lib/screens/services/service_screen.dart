@@ -7,6 +7,7 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
@@ -14,6 +15,7 @@ import '../../widgets/search_bar.dart';
 import 'delivery/delivery_list_screen.dart';
 import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
+import 'service_prv.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -107,74 +109,84 @@ class ServiceScreen extends StatelessWidget {
         "navigator": GymCardListScreen.routeName,
       },
     ];
-    return PrimaryScreen(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          leading: BackButton(
-              onPressed: () => Navigator.pushReplacementNamed(
-                  context, HomeScreen.routeName)),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SafeArea(
-            child: ListView(
-              children: [
-                vpad(12),
-                Center(
-                  child: Text(
-                    S.of(context).services,
-                    style: txtDisplayMedium(),
-                  ),
-                ),
-                SearchBar(),
-                vpad(12),
-                SizedBox(
-                  height: dvHeight(context) - 215,
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 15,
-                    childAspectRatio: 1.4,
-                    children: [
-                      ...data.map(
-                        (e) => InkWell(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(e["navigator"] as String);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(12)),
-                              gradient: e['background'] as Gradient,
+    return ChangeNotifierProvider(
+        create: (context) => ServicePrv(),
+        builder: (context, state) {
+          return PrimaryScreen(
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: BackButton(
+                    onPressed: () => Navigator.pushReplacementNamed(
+                        context, HomeScreen.routeName)),
+              ),
+              body: FutureBuilder(
+                  future: context.read<ServicePrv>().getExtraService(),
+                  builder: (context, builder) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SafeArea(
+                        child: ListView(
+                          children: [
+                            vpad(12),
+                            Center(
+                              child: Text(
+                                S.of(context).services,
+                                style: txtDisplayMedium(),
+                              ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                PrimaryIcon(
-                                  icons: e['icon'] as PrimaryIcons,
-                                  size: 80,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  e['title'] as String,
-                                  style:
-                                      txtBodyMediumRegular(color: Colors.white),
-                                )
-                              ],
+                            SearchBar(),
+                            vpad(12),
+                            SizedBox(
+                              height: dvHeight(context) - 215,
+                              child: GridView.count(
+                                shrinkWrap: true,
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 18,
+                                crossAxisSpacing: 15,
+                                childAspectRatio: 1.4,
+                                children: [
+                                  ...data.map(
+                                    (e) => InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                            e["navigator"] as String);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(12)),
+                                          gradient: e['background'] as Gradient,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            PrimaryIcon(
+                                              icons: e['icon'] as PrimaryIcons,
+                                              size: 80,
+                                              color: Colors.white,
+                                            ),
+                                            Text(
+                                              e['title'] as String,
+                                              style: txtBodyMediumRegular(
+                                                  color: Colors.white),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  vpad(0)
+                                ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                      vpad(0)
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
+                    );
+                  }));
+        });
   }
 }

@@ -76,13 +76,13 @@ class ParkingCardProvider extends ChangeNotifier {
       content: S.of(context).confirm_cancel_request,
       onConfirm: () async {
         card.ticket_status = "CANCEL";
-
+        card.reasons = "NGUOIDUNGHUY";
         await APITrans.saveTransportationCard(card.toJson()).then(
           (v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,
-              e: S.of(context).success_send_req,
+              e: S.of(context).success_can_req,
               onClose: () {
                 Navigator.pushNamedAndRemoveUntil(
                     context,

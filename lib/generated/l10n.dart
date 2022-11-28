@@ -2419,6 +2419,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Home Community Smart Living`
+  String get w {
+    return Intl.message(
+      'Home Community Smart Living',
+      name: 'w',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

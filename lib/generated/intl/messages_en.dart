@@ -357,6 +357,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "w":
+            MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(

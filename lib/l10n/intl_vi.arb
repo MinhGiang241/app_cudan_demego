@@ -232,8 +232,10 @@
   "confirm_cancel_request":"Bạn có muốn hủy duyệt phiếu",
   "success_can_req":"Hủy duyệt phiếu thành công",
   "cancel_request":"Hủy phiếu",
-  "register_res_card":"Register resident card",
+  "register_res_card":"Đăng ký thẻ cư dân",
   "no_card":"Không có thẻ nào",
-  "no_letter":"Không có phếu nào!",
-  "confirm_lock_card":"Bạn có muốn khóa thẻ?"
+  "no_letter":"Không có phiếu nào!",
+  "confirm_lock_card":"Bạn có muốn khóa thẻ?",
+  "success_cancel":"Hủy duyệt thành công",
+  "w":"Home Community Smart Living"
 }

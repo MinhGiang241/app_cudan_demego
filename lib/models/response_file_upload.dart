@@ -3,6 +3,7 @@ class ResponseFileUpload {
   dynamic status;
   String? message;
   dynamic data;
+  String? name;
 
   ResponseFileUpload({this.files});
 
@@ -10,6 +11,7 @@ class ResponseFileUpload {
     status = json["status"];
     message = json["message"];
     data = json['data'];
+    name = json['name'];
     files = json["files"] == null
         ? null
         : (json["files"] as List).map((e) => ResponseFile.fromJson(e)).toList();

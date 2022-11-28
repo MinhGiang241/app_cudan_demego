@@ -211,7 +211,8 @@ class APIAuth {
       for (var i = 0; i < files.length; i++) {
         final mpf = await MultipartFile.fromFile(files[i].path);
         final map = {
-          "file": [mpf]
+          "file": [mpf],
+          "name": files[i].path.split('/').last
         };
         final body = FormData.fromMap(map);
         final data = await ApiService.shared.postApi(

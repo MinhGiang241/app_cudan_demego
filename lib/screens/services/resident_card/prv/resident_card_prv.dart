@@ -32,7 +32,7 @@ class ResidentCardPrv extends ChangeNotifier {
         title: S.of(context).lock_card,
         content: S.of(context).confirm_lock_card,
         onConfirm: () async {
-          card.card_status = "LOCK";
+          card.card_status = "INACTIVE";
           APIResCard.saveResidentCard(card.toJson()).then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(

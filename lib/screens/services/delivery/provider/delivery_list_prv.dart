@@ -35,14 +35,14 @@ class DeliveryListPrv extends ChangeNotifier {
 
   sendToApprove(BuildContext context, Delivery data) {
     if (data.item_added_list == null || data.item_added_list!.isEmpty) {
-      
       Utils.showErrorMessage(context, S.of(context).item_list_not_empty);
       return;
     } else {
       data.status = 'WAIT';
 
       Utils.showConfirmMessage(
-          title: S.of(context).confirm_send_request,
+          title: S.of(context).send_request,
+          content: S.of(context).confirm_send_request,
           context: context,
           onConfirm: () {
             APIDelivery.saveNewDelivery(data.toJson()).then((v) {

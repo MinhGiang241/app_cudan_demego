@@ -129,6 +129,30 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 22.0,
+                        height: 22.0,
+                        child: Checkbox(
+                          fillColor:
+                              MaterialStateProperty.all(primaryColorBase),
+                          value: arg.help_check,
+                          onChanged: (v) {},
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Text(S.of(context).need_support,
+                            style:
+                                txtBodySmallRegular(color: grayScaleColorBase)),
+                      )
+                    ],
+                  ),
+                ),
+                vpad(bottomSafePad(context) + 24)
               ],
             ),
             ListView(

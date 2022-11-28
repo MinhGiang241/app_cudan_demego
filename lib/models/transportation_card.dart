@@ -1,26 +1,30 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:app_cudan/models/reason.dart';
+
 class TransportationCard {
-  TransportationCard({
-    this.apartmentId,
-    this.card_status,
-    this.card_type,
-    this.code,
-    this.createdTime,
-    this.id,
-    this.isDraft,
-    this.isLocked,
-    this.number_plate,
-    this.registration_image_back,
-    this.registration_image_front,
-    this.registration_number,
-    this.residentId,
-    this.ticket_status,
-    this.type,
-    this.updatedTime,
-    this.vehicleTypeId,
-    this.other_image,
-  });
+  TransportationCard(
+      {this.apartmentId,
+      this.card_status,
+      this.card_type,
+      this.code,
+      this.createdTime,
+      this.id,
+      this.isDraft,
+      this.isLocked,
+      this.number_plate,
+      this.registration_image_back,
+      this.registration_image_front,
+      this.registration_number,
+      this.residentId,
+      this.ticket_status,
+      this.type,
+      this.updatedTime,
+      this.vehicleTypeId,
+      this.other_image,
+      this.cancel_reason,
+      this.reasons,
+      this.vehicleType});
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -40,6 +44,9 @@ class TransportationCard {
   String? card_status;
   VehicleType? vehicleType;
   List<OtherImage>? other_image;
+  Reason? cancel_reason;
+  String? note_reason;
+  String? reasons;
 
   TransportationCard.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -59,6 +66,8 @@ class TransportationCard {
     ticket_status = json['ticket_status'];
     code = json['code'];
     card_status = json['card_status'];
+    note_reason = json['note_reason'];
+    reasons = json['reasons'];
     // ignore: prefer_null_aware_operators
     other_image = json['other_image'] != null
         ? json['other_image'].length != 0
@@ -69,6 +78,11 @@ class TransportationCard {
         : null;
     vehicleType = json['vehicleType'] != null
         ? VehicleType.fromJson(json['vehicleType'])
+        : null;
+    cancel_reason = json['cancel_reason'] != null
+        ? json['cancel_reason'].isNotEmpty
+            ? Reason.fromJson(json['cancel_reason'][0])
+            : null
         : null;
   }
 
@@ -90,6 +104,7 @@ class TransportationCard {
     data['type'] = type;
     data['ticket_status'] = ticket_status;
     data['code'] = code;
+    data['reasons'] = reasons;
     data['card_status'] = card_status;
     data['other_image'] =
         other_image != null ? [...other_image!.map((e) => e.toJson())] : null;

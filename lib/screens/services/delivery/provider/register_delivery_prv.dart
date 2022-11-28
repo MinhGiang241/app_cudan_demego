@@ -54,7 +54,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       uploadDeliveryImage(context).then((v) {
         var newDelivery = Delivery(
-          phone_number: context.read<ResidentInfoPrv>().userInfo!.phone,
+          phone_number:
+              context.read<ResidentInfoPrv>().userInfo!.phone_required,
           note_reason: noteController.text.trim(),
           item_added_list: (packageItems.isNotEmpty) ? packageItems : null,
           start_time:
@@ -125,7 +126,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       if (v.isNotEmpty) {
         for (var element in v) {
           submitImageDelivery
-              .add(ImageDelivery(id: element.data, name: element.data));
+              .add(ImageDelivery(id: element.name, name: element.data));
         }
       }
     }).catchError((e) {

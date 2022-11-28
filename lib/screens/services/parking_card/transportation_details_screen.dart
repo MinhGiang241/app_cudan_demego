@@ -88,9 +88,12 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                           content: context
                                       .read<ResidentInfoPrv>()
                                       .userInfo!
-                                      .phone !=
+                                      .phone_required !=
                                   null
-                              ? context.read<ResidentInfoPrv>().userInfo!.phone!
+                              ? context
+                                  .read<ResidentInfoPrv>()
+                                  .userInfo!
+                                  .phone_required!
                               : '',
                         ),
                         InfoContentView(
@@ -152,12 +155,14 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                         if (arg.ticket_status == "CANCEL")
                           InfoContentView(
                             title: S.of(context).reject_reason,
-                            content: "Chưa khớp thông tin",
+                            content: arg.cancel_reason != null
+                                ? arg.cancel_reason!.name ?? ""
+                                : '',
                           ),
                         if (arg.ticket_status == "CANCEL")
                           InfoContentView(
                             title: S.of(context).note,
-                            content: "Thông tin CMND không trùng khớp",
+                            content: arg.note_reason ?? "",
                           ),
                       ]),
                 ),

@@ -42,13 +42,18 @@ class SplashScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Image.asset(AppImage.qltnLogo, width: dvWidth(context) / 3),
+                    Image.asset(AppImage.qltnLogo, width: dvWidth(context) / 4),
                     vpad(16),
                     Text.rich(TextSpan(children: [
                       TextSpan(text: "DEME", style: txtBold(24)),
                       TextSpan(text: "GO", style: txtBold(24, yellowColor1)),
                     ])),
-                    vpad(16),
+                    vpad(8),
+                    Text(
+                      S.of(context).w,
+                      style: txtBold(14, grayScaleColor2),
+                    ),
+                    vpad(8),
                     Image.asset(AppImage.illustration,
                         width: dvWidth(context) * 0.8),
                     vpad(24),

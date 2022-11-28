@@ -38,7 +38,7 @@ class ResidentCard {
   Building? building;
   Floor? floor;
   ResponseResidentInfo? resident;
-  List<Reason>? cancel_reason;
+  Reason? cancel_reason;
 
   ResidentCard.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -60,7 +60,7 @@ class ResidentCard {
     resident = ResponseResidentInfo.fromJson(json['resident']);
     cancel_reason = json['cancel_reason'] != null
         ? json['cancel_reason'].isNotEmpty
-            ? json['cancel_reason'].map((e) => Reason.fromJson(e))
+            ? Reason.fromJson(json['cancel_reason'][0])
             : null
         : null;
   }

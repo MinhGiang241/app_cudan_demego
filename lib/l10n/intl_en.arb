@@ -235,5 +235,6 @@
   "register_res_card":"Đăng ký thẻ cư dân",
   "no_card":"Don't have any card !",
   "no_letter":"Don't have any letter !",
-  "confirm_lock_card":"Do you want to lock card?"
+  "confirm_lock_card":"Do you want to lock card?",
+  "w":"Home Community Smart Living"
 }

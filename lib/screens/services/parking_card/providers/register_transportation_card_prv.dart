@@ -275,7 +275,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
       if (v.isNotEmpty) {
         for (var element in v) {
           // otherImages.add({"file": element.data, 'name': element.data});
-          otherImages.add(OtherImage(id: element.data, name: element.data));
+          otherImages.add(OtherImage(id: element.data, name: element.name));
         }
       }
     }).catchError((e) {
