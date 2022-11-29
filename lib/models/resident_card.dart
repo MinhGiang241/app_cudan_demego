@@ -19,6 +19,7 @@ class ResidentCard {
       this.residentId,
       this.ticket_status,
       this.updatedTime,
+      this.resident_image,
       this.cancel_reason,
       this.apartment});
   String? id;
@@ -34,6 +35,7 @@ class ResidentCard {
   String? ticket_status;
   String? reasons;
   String? note_reason;
+  String? resident_image;
   Apartment? apartment;
   Building? building;
   Floor? floor;
@@ -53,6 +55,7 @@ class ResidentCard {
     card_status = json['card_status'];
     ticket_status = json['ticket_status'];
     reasons = json['reasons'];
+    resident_image = json['resident_image'];
     note_reason = json['note_reason'];
     apartment = Apartment.fromJson(json['apartment']);
     building = Building.fromJson(json['building']);
@@ -80,6 +83,7 @@ class ResidentCard {
     data['other_image'] = other_image;
     data['card_status'] = card_status;
     data['ticket_status'] = ticket_status;
+    data['resident_image'] = resident_image;
 
     return data;
   }

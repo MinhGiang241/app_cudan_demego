@@ -61,7 +61,8 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                                       children: [
                                         Text(e.apartment?.name ?? "",
                                             style: txtLinkMedium()),
-                                        Text(e.building?.name ?? "",
+                                        Text(
+                                            '${e.floor?.name ?? ""}- ${e.building?.name ?? ""}',
                                             style: txtBodySmallRegular(
                                                 color: grayScaleColor2))
                                       ],

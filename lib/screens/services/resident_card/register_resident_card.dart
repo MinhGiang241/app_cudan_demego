@@ -31,10 +31,12 @@ class RegisterResidentCard extends StatelessWidget {
     }
     return ChangeNotifierProvider(
       create: (context) => RegisterResidentCardPrv(
+        code: card.code,
         id: card.id,
         imageUrlFront: card.identity_image_front,
         imageUrlBack: card.identity_image_back,
         otherImage: card.other_image,
+        imageUrlResident: card.resident_image,
         residentId: context.read<ResidentInfoPrv>().residentId,
         apartmentId: card.apartmentId ??
             context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
@@ -60,6 +62,7 @@ class RegisterResidentCard extends StatelessWidget {
               children: [
                 vpad(20),
                 PrimaryDropDown(
+                  isDense: false,
                   onChange: (v) {
                     context.read<RegisterResidentCardPrv>().apartmentId = v;
                   },
@@ -69,6 +72,24 @@ class RegisterResidentCard extends StatelessWidget {
                   value: context.read<RegisterResidentCardPrv>().apartmentId,
                 ),
                 vpad(16),
+                Text(
+                  S.of(context).photos,
+                  style: txtBodySmallRegular(color: grayScaleColorBase),
+                ),
+                vpad(16),
+                Row(
+                  children: [
+                    Text(
+                      S.of(context).identity_photo,
+                      style: txtBodySmallRegular(color: grayScaleColorBase),
+                    ),
+                    Text(
+                      " *",
+                      style: txtBodySmallRegular(color: redColor1),
+                    ),
+                  ],
+                ),
+                vpad(16),
                 if (isEdit &&
                     context.watch<RegisterResidentCardPrv>().imageUrlFront !=
                         null)
@@ -76,7 +97,7 @@ class RegisterResidentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        S.of(context).photo_front_side,
+                        S.of(context).front_side,
                         style: txtBodySmallRegular(color: grayScaleColorBase),
                       ),
                       vpad(12),
@@ -131,7 +152,7 @@ class RegisterResidentCard extends StatelessWidget {
                         : true,
                     images:
                         context.watch<RegisterResidentCardPrv>().imageFileFront,
-                    title: S.of(context).photo_front_side,
+                    title: S.of(context).front_side,
                     onRemove:
                         context.read<RegisterResidentCardPrv>().onRemoveFront,
                     onSelect: () {
@@ -148,7 +169,7 @@ class RegisterResidentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        S.of(context).photo_back_side,
+                        S.of(context).back_side,
                         style: txtBodySmallRegular(color: grayScaleColorBase),
                       ),
                       vpad(12),
@@ -201,13 +222,86 @@ class RegisterResidentCard extends StatelessWidget {
                         : true,
                     images:
                         context.watch<RegisterResidentCardPrv>().imageFileBack,
-                    title: S.of(context).photo_back_side,
+                    title: S.of(context).back_side,
                     onRemove:
                         context.read<RegisterResidentCardPrv>().onRemoveBack,
                     onSelect: () {
                       context
                           .read<RegisterResidentCardPrv>()
                           .onSelectBackPhoto(context);
+                    },
+                  ),
+                vpad(16),
+                if (isEdit &&
+                    context.watch<RegisterResidentCardPrv>().imageUrlResident !=
+                        null)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        S.of(context).res_photo,
+                        style: txtBodySmallRegular(color: grayScaleColorBase),
+                      ),
+                      vpad(12),
+                      SizedBox(
+                        height: 116,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 14.0),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                          '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlResident!}')),
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        context
+                                            .read<RegisterResidentCardPrv>()
+                                            .onRemoveUrlImage(context, 0);
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                if (!isEdit ||
+                    (isEdit &&
+                        context
+                                .watch<RegisterResidentCardPrv>()
+                                .imageUrlResident ==
+                            null))
+                  SelectMediaWidget(
+                    isDash: context
+                            .watch<RegisterResidentCardPrv>()
+                            .residentImageFile
+                            .isNotEmpty
+                        ? false
+                        : true,
+                    images: context
+                        .watch<RegisterResidentCardPrv>()
+                        .residentImageFile,
+                    title: S.of(context).res_photo,
+                    onRemove:
+                        context.read<RegisterResidentCardPrv>().onRemoveRes,
+                    onSelect: () {
+                      context
+                          .read<RegisterResidentCardPrv>()
+                          .onSelectResPhoto(context);
                     },
                   ),
                 vpad(16),
@@ -285,30 +379,34 @@ class RegisterResidentCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     PrimaryButton(
-                      isLoading:
-                          context.watch<RegisterResidentCardPrv>().isLoading,
+                      // isLoading:
+                      //     context.watch<RegisterResidentCardPrv>().isLoading,
                       buttonSize: ButtonSize.medium,
                       text:
                           isEdit ? S.of(context).update : S.of(context).add_new,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        context
-                            .read<RegisterResidentCardPrv>()
-                            .onSubmitCard(context, false);
-                      },
+                      onTap: context.watch<RegisterResidentCardPrv>().isLoading
+                          ? () {}
+                          : () {
+                              FocusScope.of(context).unfocus();
+                              context
+                                  .read<RegisterResidentCardPrv>()
+                                  .onSubmitCard(context, false);
+                            },
                     ),
                     PrimaryButton(
-                      isLoading:
-                          context.watch<RegisterResidentCardPrv>().isLoading,
+                      // isLoading:
+                      //     context.watch<RegisterResidentCardPrv>().isLoading,
                       buttonSize: ButtonSize.medium,
                       buttonType: ButtonType.green,
                       text: S.of(context).send_request,
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        context
-                            .read<RegisterResidentCardPrv>()
-                            .onSubmitCard(context, true);
-                      },
+                      onTap: context.watch<RegisterResidentCardPrv>().isLoading
+                          ? () {}
+                          : () {
+                              FocusScope.of(context).unfocus();
+                              context
+                                  .read<RegisterResidentCardPrv>()
+                                  .onSubmitCard(context, true);
+                            },
                     ),
                   ],
                 ),

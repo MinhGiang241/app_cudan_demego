@@ -117,13 +117,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   ),
                 vpad(14),
                 StreamBuilder<int>(
-                    initialData: 60,
+                    initialData: 30,
                     stream: context
                         .read<VerifyOTPPrv>()
                         .timeResendController
                         .stream,
                     builder: (context, snapshot) {
-                      final second = snapshot.data ?? 60;
+                      final second = snapshot.data ?? 30;
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -138,13 +138,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                       CircularProgressIndicator(strokeWidth: 3))
                               : GestureDetector(
                                   onTap: () async {
-                                    await context
-                                        .read<VerifyOTPPrv>()
-                                        .resend(context);
+                                    if (second <= 0) {
+                                      await context
+                                          .read<VerifyOTPPrv>()
+                                          .resend(context);
+                                    }
                                   },
                                   child: Text(S.of(context).resend,
                                       style: txtLinkSmall(
-                                          color: (second == 0 ||
+                                          color: (second <= 0 ||
                                                   context
                                                       .watch<VerifyOTPPrv>()
                                                       .isResending)
@@ -163,7 +165,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: PrimaryButton(
                     isLoading: context.watch<VerifyOTPPrv>().isLoading,
-                    text: S.of(context).verify,
+                    text: S.of(context).next,
                     onTap: context.watch<VerifyOTPPrv>().isLoading
                         ? () {}
                         : () {

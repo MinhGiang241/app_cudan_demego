@@ -37,6 +37,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
     return ChangeNotifierProvider(
       create: (context) => RegisterDeliveryPrv(
+          code: delivery.code,
           id: delivery.id,
           existedImage: delivery.image ?? [],
           helpCheck: delivery.help_check ?? false,
@@ -47,9 +48,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
           context.read<RegisterDeliveryPrv>().noteController.text =
               delivery.note_reason ?? '';
           context.read<RegisterDeliveryPrv>().startDateController.text =
-              Utils.dateFormat(delivery.start_time ?? '');
+              Utils.dateFormat(delivery.start_time ?? '', 0);
           context.read<RegisterDeliveryPrv>().endDateController.text =
-              Utils.dateFormat(delivery.end_time ?? '');
+              Utils.dateFormat(delivery.end_time ?? '', 0);
           context.read<RegisterDeliveryPrv>().noteController.text =
               delivery.note_reason ?? '';
           if (delivery.start_hour != null) {
@@ -289,8 +290,8 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                     Row(
                       children: [
                         DashButton(
-                          text: S.of(context).package_info,
-                          lable: S.of(context).add_package,
+                          text: S.of(context).add_package,
+                          lable: S.of(context).package_info,
                           isRequired: true,
                           icon: const PrimaryIcon(
                               icons: PrimaryIcons.add_to_queue),
@@ -366,9 +367,10 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                         ),
                     vpad(16),
                     PrimaryTextField(
+                      maxLength: 500,
                       controller:
                           context.read<RegisterDeliveryPrv>().noteController,
-                      label: S.of(context).note,
+                      label: S.of(context).description,
                       maxLines: 3,
                     ),
                     vpad(16),
@@ -404,25 +406,29 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         PrimaryButton(
-                          isLoading:
-                              context.watch<RegisterDeliveryPrv>().isLoading,
+                          // isLoading:
+                          //     context.watch<RegisterDeliveryPrv>().isLoading,
                           buttonSize: ButtonSize.medium,
                           text: isEdit
                               ? S.of(context).update
                               : S.of(context).add_new,
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .onSendSummitDelivery(context, false),
+                          onTap: context.watch<RegisterDeliveryPrv>().isLoading
+                              ? () {}
+                              : () => context
+                                  .read<RegisterDeliveryPrv>()
+                                  .onSendSummitDelivery(context, false),
                         ),
                         PrimaryButton(
-                          isLoading:
-                              context.watch<RegisterDeliveryPrv>().isLoading,
+                          // isLoading:
+                          //     context.watch<RegisterDeliveryPrv>().isLoading,
                           buttonType: ButtonType.green,
                           buttonSize: ButtonSize.medium,
                           text: S.of(context).send_request,
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .onSendSummitDelivery(context, true),
+                          onTap: context.watch<RegisterDeliveryPrv>().isLoading
+                              ? () {}
+                              : () => context
+                                  .read<RegisterDeliveryPrv>()
+                                  .onSendSummitDelivery(context, true),
                         ),
                       ],
                     ),

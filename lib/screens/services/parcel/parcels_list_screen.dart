@@ -245,7 +245,7 @@ class _ParcelListScreenState extends State<ParcelListScreen>
                                             context,
                                             ParcelsListMonthScreen(
                                               title: Utils.dateFormat(
-                                                  date, "MMMM"),
+                                                  date, 0, "MMMM"),
                                               list: list,
                                             ));
                                       },
@@ -257,7 +257,7 @@ class _ParcelListScreenState extends State<ParcelListScreen>
                                             Expanded(
                                                 child: Text(
                                                     Utils.dateFormat(
-                                                        date, "MMMM"),
+                                                        date, 0, "MMMM"),
                                                     style: txtMedium(
                                                         13, grayScaleColor2))),
                                             Text("${list.length}",

@@ -74,6 +74,7 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                       validateString:
                           context.watch<ForgotPassPrv>().phoneValidate,
                     ),
+
                     vpad(30),
                     PrimaryButton(
                         onTap: () async {
@@ -84,7 +85,7 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                               .then((value) {})
                               .catchError((e) {});
                         },
-                        text: S.of(context).send_verify,
+                        text: S.of(context).next,
                         isLoading: context.watch<ForgotPassPrv>().isLoading,
                         width: double.infinity)
                   ],

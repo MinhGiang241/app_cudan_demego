@@ -42,7 +42,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                   InfoContentView(
                       title: 'S.of(context).sending_time',
                       content: Utils.dateFormat(
-                          widget.item.buuPham?.thoiGianGui?.value ?? "")),
+                          widget.item.buuPham?.thoiGianGui?.value ?? "", 0)),
                   InfoContentView(
                       title: 'S.of(context).note',
                       content: widget.item.buuPham?.ghiChu?.text),
@@ -71,7 +71,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     InfoContentView(
                         title: 'S.of(context).receiving_time',
                         content:
-                            Utils.dateFormat(widget.item.modifiedUtc ?? "")),
+                            Utils.dateFormat(widget.item.modifiedUtc ?? "", 0)),
                 ]),
           )
         ],

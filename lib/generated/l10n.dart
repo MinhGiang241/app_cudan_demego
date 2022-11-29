@@ -1880,10 +1880,10 @@ class S {
     );
   }
 
-  /// `Other photos`
+  /// `Related document photos`
   String get related_photo {
     return Intl.message(
-      'Other photos',
+      'Related document photos',
       name: 'related_photo',
       desc: '',
       args: [],
@@ -2445,6 +2445,176 @@ class S {
     return Intl.message(
       'Delivery_letter',
       name: 'delivery_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Front side`
+  String get front_side {
+    return Intl.message(
+      'Front side',
+      name: 'front_side',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back side`
+  String get back_side {
+    return Intl.message(
+      'Back side',
+      name: 'back_side',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày bắt đầu không được để trống!`
+  String get start_date_not_empty {
+    return Intl.message(
+      'Ngày bắt đầu không được để trống!',
+      name: 'start_date_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày kết thúc không được để trống!`
+  String get end_date_not_empty {
+    return Intl.message(
+      'Ngày kết thúc không được để trống!',
+      name: 'end_date_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày bắt đầu không được nhỏ hơn ngày hiện tại!`
+  String get start_date_after_now {
+    return Intl.message(
+      'Ngày bắt đầu không được nhỏ hơn ngày hiện tại!',
+      name: 'start_date_after_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày kết thúc không được nhỏ hơn ngày hiện tại!`
+  String get end_date_after_now {
+    return Intl.message(
+      'Ngày kết thúc không được nhỏ hơn ngày hiện tại!',
+      name: 'end_date_after_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày kết thúc không được nhỏ hơn ngày bắt đầu!`
+  String get end_date_after_start_date {
+    return Intl.message(
+      'Ngày kết thúc không được nhỏ hơn ngày bắt đầu!',
+      name: 'end_date_after_start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Package items can not be empty!`
+  String get package_items_not_empty {
+    return Intl.message(
+      'Package items can not be empty!',
+      name: 'package_items_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Letter code`
+  String get letter_num {
+    return Intl.message(
+      'Letter code',
+      name: 'letter_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không nhập tiếng Việt có dấu`
+  String get not_vietnamese {
+    return Intl.message(
+      'Không nhập tiếng Việt có dấu',
+      name: 'not_vietnamese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không nhập ký tự đặc biệt`
+  String get not_special_char {
+    return Intl.message(
+      'Không nhập ký tự đặc biệt',
+      name: 'not_special_char',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity card front side image can not be empty!`
+  String get identity_front_not_empty {
+    return Intl.message(
+      'Identity card front side image can not be empty!',
+      name: 'identity_front_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity card back side image can not be empty!`
+  String get identity_back_not_empty {
+    return Intl.message(
+      'Identity card back side image can not be empty!',
+      name: 'identity_back_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident image can not empty!`
+  String get res_image_not_empty {
+    return Intl.message(
+      'Resident image can not empty!',
+      name: 'res_image_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Related document image can not empty!`
+  String get related_image_not_empty {
+    return Intl.message(
+      'Related document image can not empty!',
+      name: 'related_image_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resgiter vehicle card front site  image can not be empty!`
+  String get resgiter_vehicle_front_image_not_empty {
+    return Intl.message(
+      'Resgiter vehicle card front site  image can not be empty!',
+      name: 'resgiter_vehicle_front_image_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resgiter vehicle card back site  image can not be empty!`
+  String get resgiter_vehicle_back_image_not_empty {
+    return Intl.message(
+      'Resgiter vehicle card back site  image can not be empty!',
+      name: 'resgiter_vehicle_back_image_not_empty',
       desc: '',
       args: [],
     );

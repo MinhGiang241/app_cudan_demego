@@ -90,7 +90,10 @@ class TransportationCardListTab extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).pushNamed(
                               TransportationCardDetails.routeName,
-                              arguments: cardList[index],
+                              arguments: {
+                                "card": cardList[index],
+                                "lockCard": () => lockCard(cardList[index].id!)
+                              },
                             );
                           },
                           child: Column(

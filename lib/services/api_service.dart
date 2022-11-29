@@ -174,7 +174,7 @@ class ApiService {
     try {
       final response = await _dio.post(path,
           data: data, options: options, onSendProgress: onSendProgress);
-      print(data);
+      // print(data);
       return {"data": response.toString(), "name": data.fields[0].value};
     } on DioError catch (e) {
       if (e.response != null) {

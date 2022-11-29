@@ -34,6 +34,9 @@ class PrimaryTextField extends StatefulWidget {
     this.background,
     this.textColor,
     this.textAlign,
+    this.maxLength,
+    this.onChanged,
+    this.filter = const [],
     this.blockSpace = false,
   });
 
@@ -59,7 +62,9 @@ class PrimaryTextField extends StatefulWidget {
   final Color? background;
   final Color? textColor;
   final TextAlign? textAlign;
-
+  final int? maxLength;
+  final List<TextInputFormatter>? filter;
+  Function(String)? onChanged;
   EdgeInsetsGeometry? margin;
 
   @override
@@ -111,13 +116,15 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                   background: widget.background,
                   margin: widget.margin,
                   child: TextFormField(
+                    onChanged: widget.onChanged,
+                    maxLength: widget.maxLength,
                     onTap: widget.onTap,
                     textAlign: widget.textAlign ?? TextAlign.start,
-                    inputFormatters: widget.blockSpace
-                        ? <TextInputFormatter>[
-                            FilteringTextInputFormatter.deny(RegExp(r'[ ]'))
-                          ]
-                        : null,
+                    inputFormatters: <TextInputFormatter>[
+                      if (widget.blockSpace)
+                        FilteringTextInputFormatter.deny(RegExp(r'[ ]')),
+                      ...?widget.filter
+                    ],
                     enabled: widget.enable,
                     autofocus: widget.autoFocus,
                     controller: widget.controller,
@@ -133,6 +140,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     cursorColor: primaryColor2,
                     maxLines: widget.maxLines,
                     decoration: InputDecoration(
+                        counterText: '',
                         hintText: widget.hint,
                         hintStyle: txtBodySmallBold(color: grayScaleColor3),
                         errorStyle: const TextStyle(fontSize: 0, height: 0),

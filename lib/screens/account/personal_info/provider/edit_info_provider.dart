@@ -185,11 +185,11 @@ class EditInfoProvider extends ChangeNotifier {
     }
     await Utils.showDatePickers(context, initDate: initialdate, onChange: (v) {
       date = v.toIso8601String();
-      final d = Utils.dateFormat(v.toString());
+      final d = Utils.dateFormat(v.toString(), 0);
       dateOfBirthController.text = d;
     }, onDone: (v) {
       date = v.toIso8601String();
-      final d = Utils.dateFormat(v.toString());
+      final d = Utils.dateFormat(v.toString(), 0);
       dateOfBirthController.text = d;
     });
   }

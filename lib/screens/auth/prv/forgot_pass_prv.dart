@@ -104,6 +104,13 @@ class ForgotPassPrv extends ChangeNotifier {
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       }
+    } else {
+      if (phoneController.text.isEmpty) {
+        phoneValidate = S.of(context).can_not_empty;
+      } else {
+        phoneValidate = null;
+      }
+      notifyListeners();
     }
   }
 
@@ -114,7 +121,7 @@ class ForgotPassPrv extends ChangeNotifier {
       notifyListeners();
     } else {
       if (phoneController.text.isEmpty) {
-        phoneValidate = 'S.of(context).can_not_empty';
+        phoneValidate = S.of(context).can_not_empty;
       } else {
         phoneValidate = null;
       }

@@ -34,7 +34,7 @@ class ResetPassPrv extends ChangeNotifier {
         notifyListeners();
         Utils.showSuccessMessage(
             context: context,
-            e: '${S.of(context).reset_pass_success}, ${S.of(context).re_sign_in}',
+            e: S.of(context).reset_pass_success,
             onClose: () {
               Navigator.pushReplacementNamed(context, SignInScreen.routeName);
             });

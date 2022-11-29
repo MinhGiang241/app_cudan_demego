@@ -32,7 +32,10 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
   @override
   Widget build(BuildContext context) {
     final arg =
-        ModalRoute.of(context)!.settings.arguments as TransportationCard;
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    var card = arg['card'];
+    var lockCard = arg['lockCard'];
     return PrimaryScreen(
         appBar: PrimaryAppbar(
           title: S.of(context).trans_card_details,
@@ -99,7 +102,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                         InfoContentView(
                             title: S.of(context).expired,
                             content: Utils.dateFormat(
-                                '2022-10-28T03:35:33.057+0000')),
+                                '2022-10-28T03:35:33.057+0000', 0)),
                         // InfoContentView(
                         //     title: S.of(context).status,
                         //     content: "widget.item.ai?.text!",
@@ -114,85 +117,89 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                       listInfoView: [
                         InfoContentView(
                           title: S.of(context).trans_type,
-                          content: arg.vehicleType!.name ?? "",
+                          content: card.vehicleType!.name ?? "",
                         ),
                         InfoContentView(
                           title: S.of(context).licene_plate,
-                          content: arg.number_plate,
+                          content: card.number_plate,
                         ),
                         InfoContentView(
                           title: S.of(context).reg_num,
-                          content: arg.registration_number,
+                          content: card.registration_number,
                         ),
-                        if (arg.registration_image_front != null ||
-                            arg.registration_image_back != null ||
-                            arg.other_image != null ||
-                            arg.other_image!.isNotEmpty)
+                        if (card.registration_image_front != null ||
+                            card.registration_image_back != null ||
+                            card.other_image != null ||
+                            card.other_image!.isNotEmpty)
                           InfoContentView(title: S.of(context).photos, images: [
-                            if (arg.registration_image_front != null)
-                              "${ApiConstants.uploadURL}?load=${arg.registration_image_front}",
-                            if (arg.registration_image_back != null)
-                              "${ApiConstants.uploadURL}?load=${arg.registration_image_back}",
-                            if (arg.other_image != null)
-                              ...arg.other_image!.map(
+                            if (card.registration_image_front != null)
+                              "${ApiConstants.uploadURL}?load=${card.registration_image_front}",
+                            if (card.registration_image_back != null)
+                              "${ApiConstants.uploadURL}?load=${card.registration_image_back}",
+                            if (card.other_image != null)
+                              ...card.other_image!.map(
                                 (e) => "${ApiConstants.uploadURL}?load=${e.id}",
                               )
                           ]),
                         InfoContentView(
-                            title: S.of(context).card_num,
-                            content: arg.code!.toUpperCase(),
+                            title: card.ticket_status == 'APPROVED'
+                                ? S.of(context).card_num
+                                : S.of(context).letter_num,
+                            content: card.code!.toUpperCase(),
                             contentStyle: txtBold(16, purpleColorBase)),
                         InfoContentView(
                             title: S.of(context).letter_status,
-                            content: genStatus(arg.ticket_status ?? ''),
+                            content: genStatus(card.ticket_status ?? ''),
                             contentStyle:
-                                genContentStyle(arg.ticket_status ?? "")),
-                        if (arg.card_status != null)
+                                genContentStyle(card.ticket_status ?? "")),
+                        if (card.card_status != null)
                           InfoContentView(
                             title: S.of(context).card_status,
-                            content: genStatus(arg.card_status ?? ''),
+                            content: genStatus(card.card_status ?? ''),
                             contentStyle:
-                                genContentStyle(arg.card_status ?? ""),
+                                genContentStyle(card.card_status ?? ""),
                           ),
-                        if (arg.ticket_status == "CANCEL")
+                        if (card.ticket_status == "CANCEL")
                           InfoContentView(
                             title: S.of(context).reject_reason,
-                            content: arg.cancel_reason != null
-                                ? arg.cancel_reason!.name ?? ""
+                            content: card.cancel_reason != null
+                                ? card.cancel_reason!.name ?? ""
                                 : '',
                           ),
-                        if (arg.ticket_status == "CANCEL")
+                        if (card.ticket_status == "CANCEL")
                           InfoContentView(
                             title: S.of(context).note,
-                            content: arg.note_reason ?? "",
+                            content: card.note_reason ?? "",
                           ),
                       ]),
                 ),
-                vpad(24),
-                if (arg.card_status == "ACTIVE")
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      if (arg.ticket_status == "APPROVED")
-                        PrimaryButton(
-                          width: 150,
-                          text: S.of(context).missing_report,
-                          buttonType: ButtonType.secondary,
-                          textColor: primaryColorBase,
-                          secondaryBackgroundColor: primaryColor5,
-                          onTap: () {},
-                        ),
-                      if (arg.ticket_status == "APPROVED")
-                        PrimaryButton(
-                          width: 150,
-                          text: S.of(context).lock_card,
-                          buttonType: ButtonType.secondary,
-                          textColor: redColorBase,
-                          secondaryBackgroundColor: redColor5,
-                          onTap: () {},
-                        )
-                    ],
-                  ),
+                // vpad(24),
+                // if (card.card_status == "ACTIVE")
+                //   Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     children: [
+                //       if (card.ticket_status == "APPROVED")
+                //         PrimaryButton(
+                //           width: 150,
+                //           text: S.of(context).missing_report,
+                //           buttonType: ButtonType.secondary,
+                //           textColor: primaryColorBase,
+                //           secondaryBackgroundColor: primaryColor5,
+                //           onTap: () {},
+                //         ),
+                //       if (card.ticket_status == "APPROVED")
+                //         PrimaryButton(
+                //           width: 150,
+                //           text: S.of(context).lock_card,
+                //           buttonType: ButtonType.secondary,
+                //           textColor: redColorBase,
+                //           secondaryBackgroundColor: redColor5,
+                //           onTap: () {
+                //             lockCard();
+                //           },
+                //         )
+                //     ],
+                //   ),
                 vpad(kBottomNavigationBarHeight),
               ],
             ),

@@ -93,12 +93,20 @@ class Utils {
     return a.format(c);
   }
 
-  static String dateFormat(String date, [String? format]) {
+  static String dateFormat(String date, int choice, [String? format]) {
     if (date.isEmpty) {
       return "";
     }
     DateTime dateTime = DateTime.parse(date);
-    String formattedDate = DateFormat(format ?? 'dd/MM/yyyy').format(dateTime);
+    DateTime d = dateTime;
+    if (choice == -1) {
+      d = dateTime.subtract(const Duration(hours: 7));
+    } else if (choice == 1) {
+      d = dateTime.add(const Duration(hours: 7));
+    } else {
+      d = dateTime;
+    }
+    String formattedDate = DateFormat(format ?? 'dd/MM/yyyy').format(d);
     return formattedDate;
   }
 

@@ -19,63 +19,90 @@ class RegisterResidentCardPrv extends ChangeNotifier {
     this.otherImage,
     this.residentId,
     this.apartmentId,
+    this.imageUrlResident,
+    this.code,
   });
 
   bool isLoading = false;
   String? id;
+  String? code;
   String? imageUrlFront;
   String? imageUrlBack;
   String? otherImage;
   String? residentId;
   String? apartmentId;
+  String? imageUrlResident;
   List<File> imageFileFront = [];
   List<File> imageFileBack = [];
+  List<File> residentImageFile = [];
   List<File> otherImageFile = [];
+
   onSubmitCard(BuildContext context, bool isRequest) {
     isLoading = true;
-    notifyListeners();
-    uploadFrontPhoto(context).then((v) {
-      return uploadBackPhoto(context);
-    }).then((v) {
-      return uploadOtherImage(context);
-    }).then((v) {
-      var newCard = ResidentCard(
-          id: id,
-          apartmentId: apartmentId,
-          residentId: residentId,
-          identity_image_front: imageUrlFront,
-          identity_image_back: imageUrlBack,
-          other_image: otherImage,
-          ticket_status: isRequest ? "WAIT" : "NEW");
-      if (isRequest && newCard.identity_image_front == null) {
-        throw (S.of(context).not_empty_front);
+    try {
+      var listError = [];
+      if (imageUrlFront == null && imageFileFront.isEmpty) {
+        throw (S.of(context).identity_front_not_empty);
+      } else if (imageUrlBack == null && imageFileBack.isEmpty) {
+        throw (S.of(context).identity_back_not_empty);
+      } else if (imageUrlResident == null && residentImageFile.isEmpty) {
+        throw (S.of(context).res_image_not_empty);
+      } else if (otherImage == null && otherImageFile.isEmpty) {
+        throw (S.of(context).related_image_not_empty);
       }
-      if (isRequest && newCard.identity_image_back == null) {
-        throw (S.of(context).not_empty_back);
-      }
-      var data = newCard.toJson();
 
-      return APIResCard.saveResidentCard(data);
-    }).then((v) {
-      isLoading = false;
-      notifyListeners();
-      Utils.showSuccessMessage(
-          context: context,
-          e: isRequest
-              ? S.of(context).success_send_req
-              : id != null
-                  ? S.of(context).success_edit
-                  : S.of(context).success_cr_new,
-          onClose: () {
-            // var count = 0;
-            Navigator.pushReplacementNamed(
-                context, ResidentCardListScreen.routeName);
-          });
-    }).catchError((e) {
+      uploadFrontPhoto(context).then((v) async {
+        return uploadBackPhoto(context);
+      }).then((v) {
+        return uploadOtherImage(context);
+      }).then((v) {
+        return uploadResPhoto(context);
+      }).then((v) {
+        var newCard = ResidentCard(
+            id: id,
+            code: code,
+            apartmentId: apartmentId,
+            residentId: residentId,
+            identity_image_front: imageUrlFront,
+            identity_image_back: imageUrlBack,
+            other_image: otherImage,
+            resident_image: imageUrlResident,
+            ticket_status: isRequest ? "WAIT" : "NEW");
+        // if (isRequest && newCard.identity_image_front == null) {
+        //   throw (S.of(context).not_empty_front);
+        // }
+        // if (isRequest && newCard.identity_image_back == null) {
+        //   throw (S.of(context).not_empty_back);
+        // }
+        var data = newCard.toJson();
+
+        return APIResCard.saveResidentCard(data);
+      }).then((v) async {
+        await Utils.showSuccessMessage(
+            context: context,
+            e: isRequest
+                ? S.of(context).success_send_req
+                : id != null
+                    ? S.of(context).success_edit
+                    : S.of(context).success_cr_new,
+            onClose: () {
+              print('tap');
+              isLoading = false;
+              notifyListeners();
+              Navigator.pushNamedAndRemoveUntil(context,
+                  ResidentCardListScreen.routeName, (route) => route.isFirst,
+                  arguments: 1);
+            });
+      }).catchError((e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e.toString());
+      });
+    } catch (e) {
       isLoading = false;
       notifyListeners();
       Utils.showErrorMessage(context, e.toString());
-    });
+    }
   }
 
   onRemoveFront(int index) {
@@ -98,11 +125,26 @@ class RegisterResidentCardPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  onRemoveRes(int index) {
+    residentImageFile.removeAt(index);
+    notifyListeners();
+  }
+
   onSelectBackPhoto(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imageFileBack.addAll(list);
+        notifyListeners();
+      }
+    });
+  }
+
+  onSelectResPhoto(BuildContext context) async {
+    await Utils.selectImage(context, false).then((value) {
+      if (value != null) {
+        final list = value.map<File>((e) => File(e.path)).toList();
+        residentImageFile.addAll(list);
         notifyListeners();
       }
     });
@@ -124,7 +166,9 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   }
 
   onRemoveUrlImage(BuildContext context, int choice) {
-    if (choice == 1) {
+    if (choice == 0) {
+      imageUrlResident = null;
+    } else if (choice == 1) {
       imageUrlFront = null;
     } else if (choice == 2) {
       imageUrlBack = null;
@@ -162,6 +206,25 @@ class RegisterResidentCardPrv extends ChangeNotifier {
 
       if (v.isNotEmpty) {
         imageUrlBack = v[0].data;
+      }
+
+      notifyListeners();
+    }).catchError((e) {
+      isLoading = false;
+      notifyListeners();
+      throw (e);
+    });
+  }
+
+  uploadResPhoto(BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
+    await APIAuth.uploadSingleFile(files: residentImageFile, context: context)
+        .then((v) {
+      isLoading = false;
+
+      if (v.isNotEmpty) {
+        imageUrlResident = v[0].data;
       }
 
       notifyListeners();

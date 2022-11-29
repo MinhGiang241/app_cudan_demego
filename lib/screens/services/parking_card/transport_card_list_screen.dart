@@ -39,6 +39,12 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as int?;
+    var initIndex = 0;
+    if (arg != null) {
+      initIndex = arg;
+    }
+    tabController.index = initIndex;
     return ChangeNotifierProvider(
       create: (context) => ParkingCardProvider(),
       builder: (context, state) {
@@ -116,6 +122,8 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                         residentId: context.watch<ResidentInfoPrv>().residentId,
                         cardList: transCardList
                           ..sort((a, b) =>
+                              b.updatedTime!.compareTo(a.updatedTime!))
+                          ..sort((a, b) =>
                               genOrder(a.card_status ?? "") -
                               genOrder(b.card_status ?? "")),
                       ),
@@ -134,6 +142,8 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                             .cancelLetter(context, card),
                         residentId: context.watch<ResidentInfoPrv>().residentId,
                         cardList: transCardLetter
+                          ..sort((a, b) =>
+                              b.updatedTime!.compareTo(a.updatedTime!))
                           ..sort((a, b) =>
                               genOrder(a.ticket_status ?? "") -
                               genOrder(b.ticket_status ?? "")),

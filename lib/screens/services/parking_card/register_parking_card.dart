@@ -1,10 +1,12 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
+import '../../../constants/regex_text.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/transportation_card.dart';
 import '../../../widgets/primary_appbar.dart';
@@ -41,6 +43,7 @@ class _RegisterTransportationCardState
     return ChangeNotifierProvider(
       create: (context) => RegisterTransportationCardPrv(
           vehicleType: card.vehicleTypeId,
+          code: card.code,
           id: card.id,
           imageUrlFront: card.registration_image_front,
           imageUrlBack: card.registration_image_back,
@@ -108,6 +111,7 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryDropDown(
+                          isDense: false,
                           validateString: context
                               .read<RegisterTransportationCardPrv>()
                               .validateApartment,
@@ -147,15 +151,51 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          blockSpace: true,
+                          filter: [
+                            FilteringTextInputFormatter.deny(RegExp(
+                                r"(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*#?&]")),
+                            FilteringTextInputFormatter.deny(
+                                RegExp(r"[+-/':;:]")),
+                            FilteringTextInputFormatter.deny(RegExp(r'["]')),
+                          ],
+                          maxLength: 9,
+                          // onChanged: (v){
+                          //   if(v.length >=9){
+                          //     context
+                          //     .read<RegisterTransportationCardPrv>()
+                          //     .liceneController.
+                          //   }
+                          // },
                           validateString: context
                               .watch<RegisterTransportationCardPrv>()
                               .validateLiceneNum,
                           validator: ((v) {
                             if (v!.isEmpty) {
                               return '';
+                            } else if (RegexText.vietNameseChar(v)) {
+                              return '';
+                            } else if (RegexText.requiredSpecialChar(v)) {
+                              return '';
                             }
                             return null;
                           }),
+                          onChanged: (v) {
+                            context
+                                .read<RegisterTransportationCardPrv>()
+                                .liceneController
+                                .text = v.toUpperCase();
+                            context
+                                    .read<RegisterTransportationCardPrv>()
+                                    .liceneController
+                                    .selection =
+                                TextSelection.collapsed(
+                                    offset: context
+                                        .read<RegisterTransportationCardPrv>()
+                                        .liceneController
+                                        .text
+                                        .length);
+                          },
                           controller: context
                               .read<RegisterTransportationCardPrv>()
                               .liceneController,
@@ -166,6 +206,10 @@ class _RegisterTransportationCardState
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          filter: [
+                            FilteringTextInputFormatter.deny(RegExp(r'[.,]'))
+                          ],
+                          maxLength: 6,
                           validateString: context
                               .watch<RegisterTransportationCardPrv>()
                               .validateRegNum,
@@ -429,33 +473,41 @@ class _RegisterTransportationCardState
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             PrimaryButton(
-                              isLoading: context
-                                  .watch<RegisterTransportationCardPrv>()
-                                  .isLoading,
+                              // isLoading: context
+                              //     .watch<RegisterTransportationCardPrv>()
+                              //     .isLoading,
                               buttonSize: ButtonSize.medium,
                               text: isEdit
                                   ? S.of(context).update
                                   : S.of(context).add_new,
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                                context
-                                    .read<RegisterTransportationCardPrv>()
-                                    .onAddNewTransCard(context, false);
-                              },
+                              onTap: context
+                                      .watch<RegisterTransportationCardPrv>()
+                                      .isLoading
+                                  ? () {}
+                                  : () {
+                                      FocusScope.of(context).unfocus();
+                                      context
+                                          .read<RegisterTransportationCardPrv>()
+                                          .onAddNewTransCard(context, false);
+                                    },
                             ),
                             PrimaryButton(
-                              isLoading: context
-                                  .watch<RegisterTransportationCardPrv>()
-                                  .isLoading,
+                              // isLoading: context
+                              //     .watch<RegisterTransportationCardPrv>()
+                              //     .isLoading,
                               buttonSize: ButtonSize.medium,
                               buttonType: ButtonType.green,
                               text: S.of(context).send_request,
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                                context
-                                    .read<RegisterTransportationCardPrv>()
-                                    .onAddNewTransCard(context, true);
-                              },
+                              onTap: context
+                                      .watch<RegisterTransportationCardPrv>()
+                                      .isLoading
+                                  ? () {}
+                                  : () {
+                                      FocusScope.of(context).unfocus();
+                                      context
+                                          .read<RegisterTransportationCardPrv>()
+                                          .onAddNewTransCard(context, true);
+                                    },
                             ),
                           ],
                         ),

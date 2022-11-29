@@ -274,7 +274,7 @@ class APIAuth {
     }
   }
 
-  static Future<ResponseRegister> createResidentAccount(
+  static Future createResidentAccount(
       {required BuildContext context,
       required String user,
       required String name,
@@ -309,7 +309,7 @@ class APIAuth {
     if (res.response.code != 0) {
       throw (res.response.message ?? '');
     } else {
-      return ResponseRegister.fromJson(res.response.data);
+      return (res.response.data);
     }
   }
 }

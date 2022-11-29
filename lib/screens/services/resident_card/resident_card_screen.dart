@@ -40,6 +40,12 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as int?;
+    var initIndex = 0;
+    if (arg != null) {
+      initIndex = arg;
+    }
+    tabController.index = initIndex;
     return ChangeNotifierProvider(
         create: (context) => ResidentCardPrv(),
         builder: (context, state) {

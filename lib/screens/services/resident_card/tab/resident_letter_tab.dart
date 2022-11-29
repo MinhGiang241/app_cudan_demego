@@ -52,7 +52,7 @@ class ResidentLetterTab extends StatelessWidget {
                       (index) {
                         var listContent = [
                           InfoContentView(
-                            title: S.of(context).card_num,
+                            title: S.of(context).letter_num,
                             content: cardList[index].code,
                             contentStyle: txtBold(16, primaryColor1),
                           ),
@@ -92,7 +92,7 @@ class ResidentLetterTab extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).pushNamed(
                                 ResidentCardDetails.routeName,
-                                arguments: cardList[index],
+                                arguments: {"card": cardList[index]},
                               );
                             },
                             child: Column(
@@ -150,9 +150,9 @@ class ResidentLetterTab extends StatelessWidget {
                                       PrimaryButton(
                                         buttonSize: ButtonSize.xsmall,
                                         buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: greenColor4,
+                                        secondaryBackgroundColor: greenColor7,
                                         text: S.of(context).send_request,
-                                        textColor: greenColor1,
+                                        textColor: greenColor8,
                                         onTap: () =>
                                             sendRequest(cardList[index]),
                                       ),

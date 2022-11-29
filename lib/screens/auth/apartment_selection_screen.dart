@@ -112,7 +112,8 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                                 Text(e.building?.name ?? '',
                                     style: txtLinkSmall()),
                                 vpad(4),
-                                Text(e.apartment?.name ?? '',
+                                Text(
+                                    '${e.apartment?.name ?? ''} - ${e.floor?.name ?? ''}',
                                     style: txtBodySmallBold()),
                               ],
                             )

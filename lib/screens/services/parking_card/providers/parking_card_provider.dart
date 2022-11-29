@@ -59,7 +59,8 @@ class ParkingCardProvider extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       TransportationCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 0);
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -87,7 +88,8 @@ class ParkingCardProvider extends ChangeNotifier {
                 Navigator.pushNamedAndRemoveUntil(
                     context,
                     TransportationCardListScreen.routeName,
-                    (route) => route.isFirst);
+                    (route) => route.isFirst,
+                    arguments: 1);
               },
             );
           },
@@ -114,7 +116,8 @@ class ParkingCardProvider extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       TransportationCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 1);
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -143,7 +146,8 @@ class ParkingCardProvider extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       TransportationCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 1);
                 });
           }).catchError((e) {
             Navigator.pop(context);

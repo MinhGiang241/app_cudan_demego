@@ -113,10 +113,13 @@ class AuthPrv extends ChangeNotifier {
                 .then((v) {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
-                context
-                    .read<ResidentInfoPrv>()
-                    .listOwn
-                    .add(ResponseResidentOwn.fromJson(i));
+                if (i['status'] == 'ACTIVE' &&
+                    (i['type'] == 'BUY' || i['type'] == 'RENT')) {
+                  context
+                      .read<ResidentInfoPrv>()
+                      .listOwn
+                      .add(ResponseResidentOwn.fromJson(i));
+                }
               });
               Navigator.pushReplacementNamed(
                   context, ProjectSelectionScreen.routeName);
@@ -175,14 +178,12 @@ class AuthPrv extends ChangeNotifier {
             passWord: pass,
             confirmPassword: cPass)
         .then((value) {
-      if (value.code == 0) {
-        Utils.showSuccessMessage(
-            context: context,
-            e: '${S.of(context).success_sign_up}, ${S.of(context).re_sign_in}',
-            onClose: () {
-              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-            });
-      } else {}
+      Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_sign_up,
+          onClose: () {
+            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+          });
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

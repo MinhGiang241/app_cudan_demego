@@ -45,6 +45,7 @@ class ResetPassScreen extends StatelessWidget {
                     ),
                     vpad(45),
                     PrimaryTextField(
+                      blockSpace: true,
                       controller:
                           context.read<ResetPassPrv>().newPassController,
                       obscureText: true,
@@ -62,6 +63,7 @@ class ResetPassScreen extends StatelessWidget {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      blockSpace: true,
                       controller:
                           context.read<ResetPassPrv>().cNewPassController,
                       obscureText: true,
@@ -95,7 +97,7 @@ class ResetPassScreen extends StatelessWidget {
                                     .read<ResetPassPrv>()
                                     .resetPass(context);
                               },
-                        text: S.of(context).reset_pass,
+                        text: S.of(context).confirm,
                         // isLoading: context.watch<ResetPassPrv>().isLoading,
                         width: double.infinity)
                   ],

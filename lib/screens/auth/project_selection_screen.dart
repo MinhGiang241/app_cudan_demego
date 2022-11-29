@@ -53,9 +53,8 @@ class ProjectSelectionScreen extends StatelessWidget {
                   ...projects.map(
                     (e) => PrimaryCard(
                         onTap: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              ApartmentSeletionScreen.routeName,
-                              (route) => false);
+                          Navigator.of(context)
+                              .pushNamed(ApartmentSeletionScreen.routeName);
                         },
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Padding(

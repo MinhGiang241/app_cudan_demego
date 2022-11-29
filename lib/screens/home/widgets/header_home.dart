@@ -104,12 +104,12 @@ class _HeaderHomeState extends State<HeaderHome> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              selectedApartment?.name ?? "Test",
+                              selectedApartment?.name ?? "",
                               style: txtLinkMedium(),
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              selectedBulding?.name ?? "Test",
+                              '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
                               style:
                                   txtBodySmallRegular(color: grayScaleColor2),
                               textAlign: TextAlign.left,

@@ -39,9 +39,11 @@ class PrimaryDropDown extends StatefulWidget {
     this.selectMultileList,
     this.validateString,
     this.isError = false,
+    this.isDense = true,
   });
   final bool isError;
   final String? label;
+  final bool isDense;
   final bool isRequired;
   final bool isMultiple;
   final String? Function(dynamic)? validator;
@@ -104,7 +106,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
               )
             : PrimaryCard(
                 child: DropdownButtonFormField<dynamic>(
-                  isDense: true,
+                  isDense: widget.isDense,
 
                   validator: widget.validator,
                   dropdownColor: Colors.white,

@@ -6,6 +6,7 @@ import 'package:app_cudan/screens/services/delivery/delivery_list_screen.dart';
 import 'package:app_cudan/services/api_delivery.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
@@ -17,6 +18,7 @@ import '../../../../widgets/primary_button.dart';
 class RegisterDeliveryPrv extends ChangeNotifier {
   RegisterDeliveryPrv({
     this.id,
+    this.code,
     this.helpCheck = false,
     this.packageItems = const [],
     this.existedImage = const [],
@@ -35,12 +37,15 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   final TextEditingController noteController = TextEditingController();
   bool helpCheck = false;
   String? id;
+  String? code;
   String? validateStartDate;
   String? validateEndDate;
   String? validateType;
   String? validatePackageName;
   String? validateWeight;
   String? validateDimention;
+  DateTime? startDate;
+  DateTime? endDate;
   bool isLoading = false;
 
   List<File> imagesDelivery = [];
@@ -52,50 +57,96 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     FocusScope.of(context).unfocus();
 
     if (formKey.currentState!.validate()) {
-      uploadDeliveryImage(context).then((v) {
-        var newDelivery = Delivery(
-          phone_number:
-              context.read<ResidentInfoPrv>().userInfo!.phone_required,
-          note_reason: noteController.text.trim(),
-          item_added_list: (packageItems.isNotEmpty) ? packageItems : null,
-          start_time:
-              '${startDateController.text.split('/').reversed.join('-')}T17:00:00',
-          end_time:
-              '${endDateController.text.split('/').reversed.join('-')}T17:00:00',
-          start_hour: startHourController.text.isNotEmpty
-              ? '${startHourController.text}:00'
-              : null,
-          end_hour: endHourController.text.isNotEmpty
-              ? '${endHourController.text}:00'
-              : null,
-          id: id,
-          help_check: helpCheck,
-          image: submitImageDelivery + existedImage,
-          residentId: context.read<ResidentInfoPrv>().residentId,
-          status: isRequest ? "WAIT" : "NEW",
-          type_transfer: type == 1 ? "OUT" : "IN",
-          apartmentId:
-              context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
-        );
+      isLoading = true;
+      notifyListeners();
+      try {
+        var listError = [];
+        var now = DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day);
+        // throw (endDate!.compareTo(startDate!) < 0);
+        if (startDate == null) {
+          listError.add(S.of(context).start_date_not_empty);
+        }
+        if (startDate!.compareTo(now) < 0) {
+          listError.add(S.of(context).start_date_after_now);
+        }
+        if (endDate == null) {
+          listError.add(S.of(context).end_date_not_empty);
+        }
+        if (endDate!.compareTo(now) < 0) {
+          listError.add(S.of(context).end_date_after_now);
+        }
+        if (endDate!.compareTo(startDate!) < 0) {
+          listError.add(S.of(context).end_date_after_start_date);
+        }
+        if (listError.isNotEmpty) {
+          throw (listError.join(',  '));
+        }
+        if (packageItems.isEmpty) {
+          throw (S.of(context).package_items_not_empty);
+        }
 
-        var data = newDelivery.toJson();
-        return APIDelivery.saveNewDelivery(data);
-      }).then((v) {
-        Utils.showSuccessMessage(
-            context: context,
-            e: isRequest
-                ? S.of(context).success_send_req
-                : id != null
-                    ? S.of(context).success_edit
-                    : S.of(context).success_cr_new,
-            onClose: () {
-              // var count = 0;
-              Navigator.pushNamedAndRemoveUntil(context,
-                  DeliveryListScreen.routeName, (route) => route.isFirst);
-            });
-      }).catchError((e) {
+        uploadDeliveryImage(context).then((v) {
+          var newDelivery = Delivery(
+            phone_number:
+                context.read<ResidentInfoPrv>().userInfo!.phone_required,
+            describe: noteController.text.trim(),
+            item_added_list: (packageItems.isNotEmpty) ? packageItems : null,
+            start_time: startDate!.toIso8601String(),
+            end_time: endDate!.toIso8601String(),
+            start_hour: startHourController.text.isNotEmpty
+                ? '${startHourController.text}:00'
+                : null,
+            end_hour: endHourController.text.isNotEmpty
+                ? '${endHourController.text}:00'
+                : null,
+            id: id,
+            help_check: helpCheck,
+            image: submitImageDelivery + existedImage,
+            residentId: context.read<ResidentInfoPrv>().residentId,
+            status: isRequest ? "WAIT" : "NEW",
+            type_transfer: type == 1 ? "OUT" : "IN",
+            apartmentId:
+                context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
+          );
+
+          var data = newDelivery.toJson();
+          return APIDelivery.saveNewDelivery(data);
+        }).then((v) {
+          Utils.showSuccessMessage(
+              context: context,
+              e: isRequest
+                  ? S.of(context).success_send_req
+                  : id != null
+                      ? S.of(context).success_edit
+                      : S.of(context).success_cr_new,
+              onClose: () {
+                // var count = 0;
+                isLoading = false;
+                notifyListeners();
+                Navigator.pushNamedAndRemoveUntil(context,
+                    DeliveryListScreen.routeName, (route) => route.isFirst);
+              });
+        }).catchError((e) {
+          isLoading = false;
+          validateStartDate = null;
+          validateEndDate = null;
+          validateType = null;
+          validatePackageName = null;
+          validateDimention = null;
+          notifyListeners();
+          Utils.showErrorMessage(context, e.toString());
+        });
+      } catch (e) {
+        isLoading = false;
+        validateStartDate = null;
+        validateEndDate = null;
+        validateType = null;
+        validatePackageName = null;
+        validateDimention = null;
+        notifyListeners();
         Utils.showErrorMessage(context, e.toString());
-      });
+      }
     } else {
       if (startDateController.text.isEmpty) {
         validateStartDate = "${S.of(context).date}: ${S.of(context).not_blank}";
@@ -126,7 +177,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       if (v.isNotEmpty) {
         for (var element in v) {
           submitImageDelivery
-              .add(ImageDelivery(id: element.name, name: element.data));
+              .add(ImageDelivery(id: element.data, name: element.name));
         }
       }
     }).catchError((e) {
@@ -187,7 +238,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       lastDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
-        startDateController.text = Utils.dateFormat(v.toIso8601String());
+        startDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
+        startDate = v;
       }
     });
   }
@@ -210,7 +262,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       lastDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
-        endDateController.text = Utils.dateFormat(v.toIso8601String());
+        endDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
+        endDate = v;
       }
     });
   }
@@ -281,6 +334,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                     children: [
                       vpad(16),
                       PrimaryTextField(
+                        maxLength: 100,
+                        blockSpace: true,
                         validateString: validatePackageName,
                         controller: packageNameController,
                         label: S.of(context).package_name,
@@ -295,6 +350,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                       ),
                       vpad(16),
                       PrimaryTextField(
+                        maxLength: 100,
+                        blockSpace: true,
                         validateString: validateWeight,
                         controller: weightController,
                         label: '${S.of(context).weight} (kg)',
@@ -310,6 +367,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                       ),
                       vpad(16),
                       PrimaryTextField(
+                        maxLength: 100,
+                        blockSpace: true,
                         validateString: validateDimention,
                         controller: dimentionController,
                         label: '${S.of(context).dimention} (cm)',

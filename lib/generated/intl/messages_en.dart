@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
+        "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
@@ -105,6 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "end_date_after_now": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được nhỏ hơn ngày hiện tại!"),
+        "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu!"),
+        "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được để trống!"),
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter email"),
@@ -138,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
+        "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
@@ -150,6 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
+        "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Identity card back side image can not be empty!"),
+        "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Identity card front side image can not be empty!"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
             "Identity card/ passport photos"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
@@ -165,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "letter_num": MessageLookupByLibrary.simpleMessage("Letter code"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
@@ -203,6 +216,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Not found account Information"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
+        "not_special_char":
+            MessageLookupByLibrary.simpleMessage("Không nhập ký tự đặc biệt"),
+        "not_vietnamese": MessageLookupByLibrary.simpleMessage(
+            "Không nhập tiếng Việt có dấu"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
@@ -213,6 +230,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "package": MessageLookupByLibrary.simpleMessage("Package"),
         "package_info":
             MessageLookupByLibrary.simpleMessage("Package infomation"),
+        "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Package items can not be empty!"),
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
@@ -252,18 +271,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
-        "related_photo": MessageLookupByLibrary.simpleMessage("Other photos"),
+        "related_image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Related document image can not empty!"),
+        "related_photo":
+            MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
         "res_card_details":
             MessageLookupByLibrary.simpleMessage("Resident card details"),
         "res_card_register":
             MessageLookupByLibrary.simpleMessage("Resident card register"),
+        "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Resident image can not empty!"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "reset_pass_success": MessageLookupByLibrary.simpleMessage(
             "Reset Password successfully, please Sign in again"),
+        "resgiter_vehicle_back_image_not_empty":
+            MessageLookupByLibrary.simpleMessage(
+                "Resgiter vehicle card back site  image can not be empty!"),
+        "resgiter_vehicle_front_image_not_empty":
+            MessageLookupByLibrary.simpleMessage(
+                "Resgiter vehicle card front site  image can not be empty!"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
         "resident_info":
@@ -311,6 +341,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you want to sign out?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
+        "start_date_after_now": MessageLookupByLibrary.simpleMessage(
+            "Ngày bắt đầu không được nhỏ hơn ngày hiện tại!"),
+        "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ngày bắt đầu không được để trống!"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),

@@ -77,7 +77,10 @@ class ResidentCardTab extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pushNamed(
                           ResidentCardDetails.routeName,
-                          arguments: cardList[index],
+                          arguments: {
+                            "card": cardList[index],
+                            "lockCard": () => lockCard(cardList[index])
+                          },
                         );
                       },
                       child: Column(children: [

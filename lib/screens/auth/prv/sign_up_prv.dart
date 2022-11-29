@@ -49,19 +49,35 @@ class SignUpPrv extends ChangeNotifier {
       cPassValidate =
           emailValidate = phoneValidate = passValidate = nameValidate = null;
       onSignUp() async {
-        await authPrv
-            .onCreateAccount(
-          context,
-          phoneController.text.trim(),
-          nameController.text.trim(),
-          emailController.text.trim(),
-          passController.text.trim(),
-          cPassController.text.trim(),
-        )
+        // await authPrv.onCreateAccount(
+        //   context,
+        //   phoneController.text.trim(),
+        //   nameController.text.trim(),
+        //   emailController.text.trim(),
+        //   passController.text.trim(),
+        //   cPassController.text.trim(),
+        // );
+
+        await APIAuth.createResidentAccount(
+                context: context,
+                user: phoneController.text.trim(),
+                name: nameController.text.trim(),
+                email: emailController.text.trim(),
+                passWord: passController.text.trim(),
+                confirmPassword: cPassController.text.trim())
             .then((value) {
-          isLoading = false;
-          notifyListeners();
+          Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_sign_up,
+              onClose: () {
+                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+              });
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+
+        isLoading = false;
+        notifyListeners();
       }
 
       Utils.pushScreen(

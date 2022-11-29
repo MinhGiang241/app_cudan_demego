@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
+        "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
@@ -102,6 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "end_date_after_now": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được nhỏ hơn ngày hiện tại!"),
+        "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu !"),
+        "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ngày kết thúc không được để trống!"),
         "end_time": MessageLookupByLibrary.simpleMessage("Thời gian kết thúc"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
         "enter_email":
@@ -136,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Theo dõi dịch vụ"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
+        "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
@@ -148,6 +156,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "hour": MessageLookupByLibrary.simpleMessage("Giờ"),
         "housework": MessageLookupByLibrary.simpleMessage("Giúp việc"),
+        "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMND/CCCD/Hộ chiếu! mặt sau không được để trống"),
+        "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMND/CCCD/Hộ chiếu! mặt trước không được để trống"),
         "identity_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh CMND/ CCCD/ Hộ chiếu"),
         "inactive": MessageLookupByLibrary.simpleMessage("Dừng hoạt động"),
@@ -162,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "letter_num": MessageLookupByLibrary.simpleMessage("Mã phiếu"),
         "letter_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phiếu"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
@@ -201,6 +214,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
+        "not_special_char": MessageLookupByLibrary.simpleMessage(
+            "Can not contain special symbol"),
+        "not_vietnamese": MessageLookupByLibrary.simpleMessage(
+            "Can not contain Vietnamese letter"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_invalid":
@@ -211,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "package": MessageLookupByLibrary.simpleMessage("Hàng hóa"),
         "package_info":
             MessageLookupByLibrary.simpleMessage("Thông tin hàng hóa"),
+        "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Thông tin hàng hóa không được để trống"),
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
@@ -248,18 +267,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
-        "related_photo": MessageLookupByLibrary.simpleMessage("Ảnh khác"),
+        "related_image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh tài liệu liên quan không được để trống!"),
+        "related_photo":
+            MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
         "res_card_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết thẻ cư dân"),
         "res_card_register":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
+        "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh cư dân không được để trống!"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Ảnh cư dân"),
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "reset_pass_success": MessageLookupByLibrary.simpleMessage(
-            "Đổi mật khẩu thành công, hãy đăng nhập lại"),
+            "Mật khẩu được cập nhật thành công,"),
+        "resgiter_vehicle_back_image_not_empty":
+            MessageLookupByLibrary.simpleMessage(
+                "Ảnh thẻ đăng ký xe mặt sau không được để trống!"),
+        "resgiter_vehicle_front_image_not_empty":
+            MessageLookupByLibrary.simpleMessage(
+                "Ảnh thẻ đăng ký xe mặt trước không được để trống!"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
         "resident_info":
@@ -299,12 +329,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Mua sắm online"),
         "shopping_represent": MessageLookupByLibrary.simpleMessage("Đi chợ hộ"),
-        "sign_in": MessageLookupByLibrary.simpleMessage("Đăng Nhập"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "sign_out_msg": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn đăng xuất không ?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
+        "start_date_after_now": MessageLookupByLibrary.simpleMessage(
+            "Ngày bắt đầu không được nhỏ hơn ngày hiện tại!"),
+        "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ngày bắt đầu không được để trống!"),
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
         "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),

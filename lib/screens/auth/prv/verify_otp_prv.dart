@@ -21,7 +21,7 @@ class VerifyOTPPrv extends ChangeNotifier {
 
   String? otpValidate;
 
-  int second = 60;
+  int second = 30;
 
   final AuthPrv authPrv;
   final String user;
@@ -105,7 +105,9 @@ class VerifyOTPPrv extends ChangeNotifier {
       await APIAuth.sendOTPviaPhone(phone).then((v) {
         Utils.showSuccessMessage(
             context: context, e: S.of(context).success_opt);
-        second = 60;
+
+        second = 30;
+        // _startTimer();
         notifyListeners();
       }).catchError((e) {
         Utils.showErrorMessage(context, e);
@@ -116,7 +118,9 @@ class VerifyOTPPrv extends ChangeNotifier {
       await APIAuth.sendOtpViaEmail(email).then((v) {
         Utils.showSuccessMessage(
             context: context, e: S.of(context).success_opt);
-        second = 60;
+        second = 30;
+
+        _startTimer();
         notifyListeners();
       }).catchError((e) {
         Utils.showErrorMessage(context, e);

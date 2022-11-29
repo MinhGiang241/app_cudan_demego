@@ -30,7 +30,7 @@ genStatus(String status) {
     case "ACTIVE":
       return S.current.active;
     case "INACTIVE":
-      return S.current.inactive;
+      return S.current.lock;
     case "LOCK":
       return S.current.lock;
     case "APPROVED":

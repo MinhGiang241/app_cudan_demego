@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/services/api_transportation.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     this.imageUrlBack,
     this.imageUrlFront,
     this.otherExistedImages,
+    this.code,
   });
   final List<SelectionModel> listVehicles = [
     SelectionModel(title: "Xe máy"),
@@ -49,6 +51,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? apartmentId;
   String? residentId;
   String? id;
+  String? code;
 
   String? imageUrlFront;
   List<File> imageFileFront = [];
@@ -125,58 +128,89 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
-      uploadFrontPhoto(context).then((v) {
-        return uploadBackPhoto(context);
-      }).then((v) {
-        return uploadRelatedImage(context);
-      }).then((_) {
-        otherExistedImages ??= [];
-
-        var listOther = otherExistedImages! + otherImages;
-        var newCard = TransportationCard(
-            id: id,
-            apartmentId: apartmentId,
-            other_image: listOther,
-            vehicleTypeId: vehicleType,
-            registration_image_back: imageUrlBack,
-            registration_image_front: imageUrlFront,
-            residentId: residentId,
-            number_plate: liceneController.text.trim(),
-            registration_number: regNumController.text.trim(),
-            ticket_status: isRequest ? "WAIT" : "NEW");
-        var data = newCard.toJson();
-        // print(data2);
-        if (vehicleType == null) {
-          throw (S.of(context).not_empty_vehicle_type);
+      try {
+        var listError = [];
+        if (imageUrlFront == null && imageFileFront.isEmpty) {
+          listError.add(S.of(context).resgiter_vehicle_front_image_not_empty);
         }
-        // if (isRequest && newCard.registration_image_back == null) {
-        //   throw (S.of(context).not_empty_back);
-        // }
-        return APITrans.saveTransportationCard(data);
-      }).then((v) {
-        isLoading = false;
-        notifyListeners();
-        Utils.showSuccessMessage(
-            context: context,
-            e: isRequest
-                ? S.of(context).success_send_req
-                : id != null
-                    ? S.of(context).success_edit
-                    : S.of(context).success_cr_new,
-            onClose: () {
-              // var count = 0;
-              Navigator.pushReplacementNamed(
-                  context, TransportationCardListScreen.routeName);
-            });
-      }).catchError((e) {
+        if (imageUrlBack == null && imageFileBack.isEmpty) {
+          listError.add(S.of(context).resgiter_vehicle_back_image_not_empty);
+        }
+
+        if (listError.isNotEmpty) {
+          throw (listError.join(', '));
+        }
+
+        uploadFrontPhoto(context).then((v) {
+          return uploadBackPhoto(context);
+        }).then((v) {
+          return uploadRelatedImage(context);
+        }).then((_) {
+          otherExistedImages ??= [];
+
+          var listOther = otherExistedImages! + otherImages;
+          var newCard = TransportationCard(
+              code: code,
+              id: id,
+              apartmentId: apartmentId,
+              other_image: listOther,
+              vehicleTypeId: vehicleType,
+              registration_image_back: imageUrlBack,
+              registration_image_front: imageUrlFront,
+              residentId: residentId,
+              number_plate: liceneController.text.trim(),
+              registration_number: regNumController.text.trim(),
+              ticket_status: isRequest ? "WAIT" : "NEW");
+          var data = newCard.toJson();
+          // print(data2);
+          if (vehicleType == null) {
+            throw (S.of(context).not_empty_vehicle_type);
+          }
+          // if (isRequest && newCard.registration_image_back == null) {
+          //   throw (S.of(context).not_empty_back);
+          // }
+          return APITrans.saveTransportationCard(data);
+        }).then((v) {
+          Utils.showSuccessMessage(
+              context: context,
+              e: isRequest
+                  ? S.of(context).success_send_req
+                  : id != null
+                      ? S.of(context).success_edit
+                      : S.of(context).success_cr_new,
+              onClose: () {
+                isLoading = false;
+                notifyListeners();
+                // var count = 0;
+                Navigator.pushReplacementNamed(
+                    context, TransportationCardListScreen.routeName,
+                    arguments: 1);
+              });
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e.toString());
+          isLoading = false;
+          notifyListeners();
+        });
+      } catch (e) {
+        validateApartment = null;
+        validateVehicleType = null;
+        validateLiceneNum = null;
+        validateRegNum = null;
+        vehicleType = null;
+        liceneNum = null;
+        regNum = null;
         Utils.showErrorMessage(context, e.toString());
         isLoading = false;
         notifyListeners();
-      });
+      }
     } else {
       isLoading = false;
       if (liceneController.text.trim().isEmpty) {
         validateLiceneNum = S.current.not_blank;
+      } else if (RegexText.vietNameseChar(liceneController.text.trim())) {
+        validateLiceneNum = S.current.not_vietnamese;
+      } else if (RegexText.requiredSpecialChar(liceneController.text.trim())) {
+        validateLiceneNum = S.current.not_special_char;
       } else {
         validateLiceneNum = null;
       }

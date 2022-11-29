@@ -53,7 +53,7 @@ class TransportationLetterListTab extends StatelessWidget {
                     (index) {
                       var listContent = [
                         InfoContentView(
-                          title: S.of(context).card_num,
+                          title: S.of(context).letter_num,
                           content: cardList[index].code,
                           contentStyle: txtBold(16, primaryColor1),
                         ),
@@ -99,7 +99,7 @@ class TransportationLetterListTab extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).pushNamed(
                               TransportationCardDetails.routeName,
-                              arguments: cardList[index],
+                              arguments: {"card": cardList[index]},
                             );
                           },
                           child: Column(

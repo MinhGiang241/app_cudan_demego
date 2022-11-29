@@ -70,7 +70,8 @@ class ResidentCardPrv extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       ResidentCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 1);
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -95,7 +96,8 @@ class ResidentCardPrv extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       ResidentCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 1);
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -121,7 +123,8 @@ class ResidentCardPrv extends ChangeNotifier {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
                       ResidentCardListScreen.routeName,
-                      (route) => route.isFirst);
+                      (route) => route.isFirst,
+                      arguments: 1);
                 });
           }).catchError((e) {
             Navigator.pop(context);

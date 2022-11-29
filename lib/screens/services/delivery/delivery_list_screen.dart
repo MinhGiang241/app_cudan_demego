@@ -80,8 +80,10 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                 } else {
                   var l = context.read<DeliveryListPrv>().listItems;
 
-                  l.sort((a, b) =>
-                      genOrder(a.status ?? "") - genOrder(b.status ?? ""));
+                  l
+                    ..sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!))
+                    ..sort((a, b) =>
+                        genOrder(a.status ?? "") - genOrder(b.status ?? ""));
                   return ListView(
                     children: [
                       vpad(24),
@@ -103,13 +105,13 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                             InfoContentView(
                               title: S.of(context).start_time,
                               content:
-                                  '${(e.start_hour != null ? e.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.start_time ?? "")}',
+                                  '${(e.start_hour != null ? e.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.start_time ?? "", 0)}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
                               title: S.of(context).end_time,
                               content:
-                                  '${(e.end_hour != null ? e.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.end_time ?? "")}',
+                                  '${(e.end_hour != null ? e.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.end_time ?? "", 0)}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
@@ -211,8 +213,8 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                           text: S.of(context).send_request,
                                           buttonSize: ButtonSize.xsmall,
                                           buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: greenColor4,
-                                          textColor: greenColor,
+                                          secondaryBackgroundColor: greenColor7,
+                                          textColor: greenColor8,
                                         ),
                                         PrimaryButton(
                                           onTap: () {

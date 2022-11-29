@@ -61,7 +61,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       InfoContentView(
           title: "S.current.date_of_birth",
           content: userInfo?.birthday != null
-              ? Utils.dateFormat(userInfo!.birthday!)
+              ? Utils.dateFormat(userInfo!.birthday!, 0)
               : "S.of(context).not_update",
           contentStyle: userInfo?.birthday != null
               ? const TextStyle(
