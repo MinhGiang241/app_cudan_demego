@@ -367,6 +367,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Registering for a resident account means consenting to "),
+        "this_trans_letter":
+            MessageLookupByLibrary.simpleMessage("Transportation letter"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Tranfer in"),
         "tranfer_in_reg":

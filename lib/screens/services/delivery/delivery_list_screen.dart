@@ -59,6 +59,33 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
               future: context.read<DeliveryListPrv>().getDeliveryList(
                   context, context.read<ResidentInfoPrv>().residentId ?? ''),
               builder: (context, snapshot) {
+                var newLetter = [];
+                var approvedLetter = [];
+                var waitLetter = [];
+                var cancelLetter = [];
+                for (var i in context.read<DeliveryListPrv>().listItems) {
+                  if (i.status == "NEW") {
+                    newLetter.add(i);
+                  } else if (i.status == "APPROVED") {
+                    approvedLetter.add(i);
+                  } else if (i.status == "WAIT") {
+                    waitLetter.add(i);
+                  } else if (i.status == "CANCEL") {
+                    cancelLetter.add(i);
+                  }
+                }
+
+                newLetter
+                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+                approvedLetter
+                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+                waitLetter
+                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+                cancelLetter
+                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+                var list =
+                    newLetter + approvedLetter + waitLetter + cancelLetter;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
@@ -68,7 +95,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                       onRetry: () async {
                         setState(() {});
                       });
-                } else if (context.read<DeliveryListPrv>().listItems.isEmpty) {
+                } else if (list.isEmpty) {
                   return PrimaryEmptyWidget(
                     emptyText: S.of(context).no_delivery,
                     // buttonText: S.of(context).add_trans_card,
@@ -78,20 +105,14 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                     },
                   );
                 } else {
-                  var l = context.read<DeliveryListPrv>().listItems;
-
-                  l
-                    ..sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!))
-                    ..sort((a, b) =>
-                        genOrder(a.status ?? "") - genOrder(b.status ?? ""));
                   return ListView(
                     children: [
                       vpad(24),
-                      ...l.map(
+                      ...list.map(
                         (e) {
                           var listContent = [
                             InfoContentView(
-                              title: S.of(context).card_num,
+                              title: S.of(context).letter_num,
                               content: e.code,
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
@@ -105,13 +126,13 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                             InfoContentView(
                               title: S.of(context).start_time,
                               content:
-                                  '${(e.start_hour != null ? e.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.start_time ?? "", 0)}',
+                                  '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 0)}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
                               title: S.of(context).end_time,
                               content:
-                                  '${(e.end_hour != null ? e.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(e.end_time ?? "", 0)}',
+                                  '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 0)}',
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
@@ -158,8 +179,8 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                         horizontal: 16),
                                     child: Table(
                                       columnWidths: const {
-                                        0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3)
+                                        0: FlexColumnWidth(4),
+                                        1: FlexColumnWidth(6)
                                       },
                                       children: [
                                         ...listContent.map<TableRow>((i) {

@@ -157,9 +157,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("Giờ"),
         "housework": MessageLookupByLibrary.simpleMessage("Giúp việc"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ảnh CMND/CCCD/Hộ chiếu! mặt sau không được để trống"),
+            "Ảnh CMND/CCCD/Hộ chiếu mặt sau không được để trống!"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ảnh CMND/CCCD/Hộ chiếu! mặt trước không được để trống"),
+            "Ảnh CMND/CCCD/Hộ chiếu mặt trước không được để trống!"),
         "identity_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh CMND/ CCCD/ Hộ chiếu"),
         "inactive": MessageLookupByLibrary.simpleMessage("Dừng hoạt động"),
@@ -283,7 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "reset_pass_success": MessageLookupByLibrary.simpleMessage(
-            "Mật khẩu được cập nhật thành công,"),
+            "Mật khẩu được cập nhật thành công!"),
         "resgiter_vehicle_back_image_not_empty":
             MessageLookupByLibrary.simpleMessage(
                 "Ảnh thẻ đăng ký xe mặt sau không được để trống!"),
@@ -361,6 +361,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Điều khoản dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản cư dân đồng nghĩa với việc đồng thuận với "),
+        "this_trans_letter":
+            MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Chuyển đồ vào"),
         "tranfer_in_reg":

@@ -42,6 +42,7 @@ class _RegisterTransportationCardState
 
     return ChangeNotifierProvider(
       create: (context) => RegisterTransportationCardPrv(
+          isShowLicense: card.type == 'BICYCLE' ? false : true,
           vehicleType: card.vehicleTypeId,
           code: card.code,
           id: card.id,
@@ -140,119 +141,144 @@ class _RegisterTransportationCardState
                           validateString: context
                               .read<RegisterTransportationCardPrv>()
                               .validateVehicleType,
-                          onChange: (v) {
-                            context
-                                .read<RegisterTransportationCardPrv>()
-                                .vehicleType = v;
-                          },
+                          onChange: context
+                              .read<RegisterTransportationCardPrv>()
+                              .onChangevehicleType,
+
+                          // (v) {
+                          //   context
+                          //       .read<RegisterTransportationCardPrv>()
+                          //       .vehicleType = v;
+                          // },
                           label: S.of(context).trans_type,
                           selectList: vehicleTypeList,
                           isRequired: true,
                         ),
-                        vpad(16),
-                        PrimaryTextField(
-                          blockSpace: true,
-                          filter: [
-                            FilteringTextInputFormatter.deny(RegExp(
-                                r"(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*#?&]")),
-                            FilteringTextInputFormatter.deny(
-                                RegExp(r"[+-/':;:]")),
-                            FilteringTextInputFormatter.deny(RegExp(r'["]')),
-                          ],
-                          maxLength: 9,
-                          // onChanged: (v){
-                          //   if(v.length >=9){
-                          //     context
-                          //     .read<RegisterTransportationCardPrv>()
-                          //     .liceneController.
-                          //   }
-                          // },
-                          validateString: context
-                              .watch<RegisterTransportationCardPrv>()
-                              .validateLiceneNum,
-                          validator: ((v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            } else if (RegexText.vietNameseChar(v)) {
-                              return '';
-                            } else if (RegexText.requiredSpecialChar(v)) {
-                              return '';
-                            }
-                            return null;
-                          }),
-                          onChanged: (v) {
-                            context
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          vpad(16),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          PrimaryTextField(
+                            blockSpace: true,
+                            filter: [
+                              FilteringTextInputFormatter.deny(RegExp(
+                                  r"(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*#?&]")),
+                              FilteringTextInputFormatter.deny(
+                                  RegExp(r"[+-/':;:]")),
+                              FilteringTextInputFormatter.deny(RegExp(r'["]')),
+                            ],
+                            maxLength: 9,
+                            // onChanged: (v){
+                            //   if(v.length >=9){
+                            //     context
+                            //     .read<RegisterTransportationCardPrv>()
+                            //     .liceneController.
+                            //   }
+                            // },
+                            validateString: context
+                                .watch<RegisterTransportationCardPrv>()
+                                .validateLiceneNum,
+                            validator: ((v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              } else if (RegexText.vietNameseChar(v)) {
+                                return '';
+                              } else if (RegexText.requiredSpecialChar(v)) {
+                                return '';
+                              }
+                              return null;
+                            }),
+                            onChanged: (v) {
+                              context
+                                  .read<RegisterTransportationCardPrv>()
+                                  .liceneController
+                                  .text = v.toUpperCase();
+                              context
+                                      .read<RegisterTransportationCardPrv>()
+                                      .liceneController
+                                      .selection =
+                                  TextSelection.collapsed(
+                                      offset: context
+                                          .read<RegisterTransportationCardPrv>()
+                                          .liceneController
+                                          .text
+                                          .length);
+                            },
+                            controller: context
                                 .read<RegisterTransportationCardPrv>()
-                                .liceneController
-                                .text = v.toUpperCase();
-                            context
-                                    .read<RegisterTransportationCardPrv>()
-                                    .liceneController
-                                    .selection =
-                                TextSelection.collapsed(
-                                    offset: context
-                                        .read<RegisterTransportationCardPrv>()
-                                        .liceneController
-                                        .text
-                                        .length);
-                          },
-                          controller: context
-                              .read<RegisterTransportationCardPrv>()
-                              .liceneController,
-                          label: S.of(context).licene_plate,
-                          hint:
-                              '${S.of(context).enter} ${S.of(context).licene_plate.toLowerCase()}',
-                          isRequired: true,
-                        ),
-                        vpad(16),
-                        PrimaryTextField(
-                          filter: [
-                            FilteringTextInputFormatter.deny(RegExp(r'[.,]'))
-                          ],
-                          maxLength: 6,
-                          validateString: context
-                              .watch<RegisterTransportationCardPrv>()
-                              .validateRegNum,
-                          validator: ((v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          }),
-                          keyboardType: TextInputType.number,
-                          controller: context
-                              .read<RegisterTransportationCardPrv>()
-                              .regNumController,
-                          label: S.of(context).reg_num,
-                          hint:
-                              '${S.of(context).enter} ${S.of(context).reg_num.toLowerCase()}',
-                          isRequired: true,
-                        ),
+                                .liceneController,
+                            label: S.of(context).licene_plate,
+                            hint:
+                                '${S.of(context).enter} ${S.of(context).licene_plate.toLowerCase()}',
+                            isRequired: true,
+                          ),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          vpad(16),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          PrimaryTextField(
+                            filter: [
+                              FilteringTextInputFormatter.deny(RegExp(r'[.,]'))
+                            ],
+                            maxLength: 6,
+                            validateString: context
+                                .watch<RegisterTransportationCardPrv>()
+                                .validateRegNum,
+                            validator: ((v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              }
+                              return null;
+                            }),
+                            keyboardType: TextInputType.number,
+                            controller: context
+                                .read<RegisterTransportationCardPrv>()
+                                .regNumController,
+                            label: S.of(context).reg_num,
+                            hint:
+                                '${S.of(context).enter} ${S.of(context).reg_num.toLowerCase()}',
+                            isRequired: true,
+                          ),
                         vpad(16),
                         Text(
                           S.of(context).photos,
                           style: txtBodySmallRegular(color: grayScaleColorBase),
                         ),
-                        vpad(16),
-                        Row(
-                          children: [
-                            Text(
-                              S.of(context).trans_cer,
-                              style:
-                                  txtBodySmallBold(color: grayScaleColorBase),
-                            ),
-                            Text(
-                              "*",
-                              style: txtBodySmallBold(color: redColorBase),
-                            ),
-                          ],
-                        ),
-                        vpad(16),
-                        if (isEdit &&
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          vpad(16),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          Row(
+                            children: [
+                              Text(
+                                S.of(context).trans_cer,
+                                style:
+                                    txtBodySmallBold(color: grayScaleColorBase),
+                              ),
+                              Text(
+                                "*",
+                                style: txtBodySmallBold(color: redColorBase),
+                              ),
+                            ],
+                          ),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          vpad(16),
+                        if ((isEdit &&
                             context
                                     .watch<RegisterTransportationCardPrv>()
                                     .imageUrlFront !=
-                                null)
+                                null))
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -303,115 +329,130 @@ class _RegisterTransportationCardState
                               ),
                             ],
                           ),
-                        if (!isEdit ||
-                            (isEdit &&
-                                context
-                                        .watch<RegisterTransportationCardPrv>()
-                                        .imageUrlFront ==
-                                    null))
-                          SelectMediaWidget(
-                            isDash: context
-                                    .watch<RegisterTransportationCardPrv>()
-                                    .imageFileFront
-                                    .isNotEmpty
-                                ? false
-                                : true,
-                            images: context
-                                .watch<RegisterTransportationCardPrv>()
-                                .imageFileFront,
-                            title: S.of(context).photo_front_side,
-                            onRemove: context
-                                .read<RegisterTransportationCardPrv>()
-                                .onRemoveFront,
-                            onSelect: () {
-                              context
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          if (!isEdit ||
+                              (isEdit &&
+                                  context
+                                          .watch<
+                                              RegisterTransportationCardPrv>()
+                                          .imageUrlFront ==
+                                      null))
+                            SelectMediaWidget(
+                              isDash: context
+                                      .watch<RegisterTransportationCardPrv>()
+                                      .imageFileFront
+                                      .isNotEmpty
+                                  ? false
+                                  : true,
+                              images: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .imageFileFront,
+                              title: S.of(context).photo_front_side,
+                              onRemove: context
                                   .read<RegisterTransportationCardPrv>()
-                                  .onSelectFrontPhoto(context);
-                            },
-                          ),
-                        vpad(16),
-                        if (isEdit &&
-                            context
-                                    .watch<RegisterTransportationCardPrv>()
-                                    .imageUrlBack !=
-                                null)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                S.of(context).photo_back_side,
-                                style: txtBodySmallRegular(
-                                    color: grayScaleColorBase),
-                              ),
-                              vpad(12),
-                              SizedBox(
-                                height: 116,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 14.0),
-                                      child: Stack(
-                                        children: [
-                                          ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              child: Image.network(
-                                                  '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlBack!}')),
-                                          Positioned(
-                                            top: 2,
-                                            right: 2,
-                                            child: PrimaryIcon(
-                                              icons: PrimaryIcons.close,
-                                              style: PrimaryIconStyle.gradient,
-                                              gradients:
-                                                  PrimaryIconGradient.red,
-                                              color: Colors.white,
-                                              padding: const EdgeInsets.all(4),
-                                              onTap: () {
-                                                context
-                                                    .read<
-                                                        RegisterTransportationCardPrv>()
-                                                    .removeImageTwoSide(
-                                                        context, false);
-                                              },
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  .onRemoveFront,
+                              onSelect: () {
+                                context
+                                    .read<RegisterTransportationCardPrv>()
+                                    .onSelectFrontPhoto(context);
+                              },
+                            ),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          vpad(16),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          if (isEdit &&
+                              context
+                                      .watch<RegisterTransportationCardPrv>()
+                                      .imageUrlBack !=
+                                  null)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.of(context).photo_back_side,
+                                  style: txtBodySmallRegular(
+                                      color: grayScaleColorBase),
                                 ),
-                              ),
-                            ],
-                          ),
-
-                        if (!isEdit ||
-                            (isEdit &&
-                                context
-                                        .watch<RegisterTransportationCardPrv>()
-                                        .imageUrlBack ==
-                                    null))
-                          SelectMediaWidget(
-                            isDash: context
-                                    .watch<RegisterTransportationCardPrv>()
-                                    .imageFileBack
-                                    .isNotEmpty
-                                ? false
-                                : true,
-                            images: context
-                                .watch<RegisterTransportationCardPrv>()
-                                .imageFileBack,
-                            title: S.of(context).photo_back_side,
-                            onRemove: context
-                                .read<RegisterTransportationCardPrv>()
-                                .onRemoveBack,
-                            onSelect: () {
-                              context
+                                vpad(12),
+                                SizedBox(
+                                  height: 116,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 14.0),
+                                        child: Stack(
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.network(
+                                                    '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlBack!}')),
+                                            Positioned(
+                                              top: 2,
+                                              right: 2,
+                                              child: PrimaryIcon(
+                                                icons: PrimaryIcons.close,
+                                                style:
+                                                    PrimaryIconStyle.gradient,
+                                                gradients:
+                                                    PrimaryIconGradient.red,
+                                                color: Colors.white,
+                                                padding:
+                                                    const EdgeInsets.all(4),
+                                                onTap: () {
+                                                  context
+                                                      .read<
+                                                          RegisterTransportationCardPrv>()
+                                                      .removeImageTwoSide(
+                                                          context, false);
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                        if (context
+                            .watch<RegisterTransportationCardPrv>()
+                            .isShowLicense)
+                          if (!isEdit ||
+                              (isEdit &&
+                                  context
+                                          .watch<
+                                              RegisterTransportationCardPrv>()
+                                          .imageUrlBack ==
+                                      null))
+                            SelectMediaWidget(
+                              isDash: context
+                                      .watch<RegisterTransportationCardPrv>()
+                                      .imageFileBack
+                                      .isNotEmpty
+                                  ? false
+                                  : true,
+                              images: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .imageFileBack,
+                              title: S.of(context).photo_back_side,
+                              onRemove: context
                                   .read<RegisterTransportationCardPrv>()
-                                  .onSelectBackPhoto(context);
-                            },
-                          ),
+                                  .onRemoveBack,
+                              onSelect: () {
+                                context
+                                    .read<RegisterTransportationCardPrv>()
+                                    .onSelectBackPhoto(context);
+                              },
+                            ),
                         // SelectMediaWidget(
                         //   isDash: context
                         //               .read<RegisterTransportationCardPrv>()
@@ -473,41 +514,33 @@ class _RegisterTransportationCardState
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             PrimaryButton(
-                              // isLoading: context
-                              //     .watch<RegisterTransportationCardPrv>()
-                              //     .isLoading,
+                              isLoading: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .isAddNewLoading,
                               buttonSize: ButtonSize.medium,
                               text: isEdit
                                   ? S.of(context).update
                                   : S.of(context).add_new,
-                              onTap: context
-                                      .watch<RegisterTransportationCardPrv>()
-                                      .isLoading
-                                  ? () {}
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                      context
-                                          .read<RegisterTransportationCardPrv>()
-                                          .onAddNewTransCard(context, false);
-                                    },
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                context
+                                    .read<RegisterTransportationCardPrv>()
+                                    .onAddNewTransCard(context, false);
+                              },
                             ),
                             PrimaryButton(
-                              // isLoading: context
-                              //     .watch<RegisterTransportationCardPrv>()
-                              //     .isLoading,
+                              isLoading: context
+                                  .watch<RegisterTransportationCardPrv>()
+                                  .isSendApproveLoading,
                               buttonSize: ButtonSize.medium,
                               buttonType: ButtonType.green,
                               text: S.of(context).send_request,
-                              onTap: context
-                                      .watch<RegisterTransportationCardPrv>()
-                                      .isLoading
-                                  ? () {}
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                      context
-                                          .read<RegisterTransportationCardPrv>()
-                                          .onAddNewTransCard(context, true);
-                                    },
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                context
+                                    .read<RegisterTransportationCardPrv>()
+                                    .onAddNewTransCard(context, true);
+                              },
                             ),
                           ],
                         ),

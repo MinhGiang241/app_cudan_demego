@@ -105,41 +105,41 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                       controller: tabController,
                       children: [
                         ResidentCardTab(
-                          extend: () =>
-                              context.read<ResidentCardPrv>().extend(context),
-                          missingReport: () => context
-                              .read<ResidentCardPrv>()
-                              .missingReport(context),
-                          lockCard: (ResidentCard card) => context
-                              .read<ResidentCardPrv>()
-                              .lockCard(context, card),
-                          residentId:
-                              context.watch<ResidentInfoPrv>().residentId,
-                          cardList: resCardList
-                            ..sort((a, b) =>
-                                genOrder(a.card_status ?? "") -
-                                genOrder(b.card_status ?? "")),
-                        ),
+                            extend: () =>
+                                context.read<ResidentCardPrv>().extend(context),
+                            missingReport: () => context
+                                .read<ResidentCardPrv>()
+                                .missingReport(context),
+                            lockCard: (ResidentCard card) => context
+                                .read<ResidentCardPrv>()
+                                .lockCard(context, card),
+                            residentId:
+                                context.watch<ResidentInfoPrv>().residentId,
+                            cardList: resCardList),
                         ResidentLetterTab(
-                          edit: () => context
-                              .read<ResidentCardPrv>()
-                              .editLetter(context),
-                          sendRequest: (ResidentCard data) => context
-                              .read<ResidentCardPrv>()
-                              .sendRequest(context, data),
-                          deleteLetter: (String id) => context
-                              .read<ResidentCardPrv>()
-                              .deleteLetter(context, id),
-                          cancelRegister: (ResidentCard card) => context
-                              .read<ResidentCardPrv>()
-                              .cancelLetter(context, card),
-                          residentId:
-                              context.watch<ResidentInfoPrv>().residentId,
-                          cardList: resCardLetter
-                            ..sort((a, b) =>
-                                genOrder(a.ticket_status ?? "") -
-                                genOrder(b.ticket_status ?? "")),
-                        ),
+                            edit: () => context
+                                .read<ResidentCardPrv>()
+                                .editLetter(context),
+                            sendRequest: (ResidentCard data) => context
+                                .read<ResidentCardPrv>()
+                                .sendRequest(context, data),
+                            deleteLetter: (String id) => context
+                                .read<ResidentCardPrv>()
+                                .deleteLetter(context, id),
+                            cancelRegister: (ResidentCard card) => context
+                                .read<ResidentCardPrv>()
+                                .cancelLetter(context, card),
+                            residentId:
+                                context.watch<ResidentInfoPrv>().residentId,
+                            cardList: resCardLetter
+                            // ..sort(
+                            //   (a, b) =>
+                            //       (b.updatedTime!).compareTo(a.updatedTime!),
+                            // )
+                            // ..sort((a, b) =>
+                            //     genOrder(a.ticket_status ?? "") -
+                            //     genOrder(b.ticket_status ?? "")),
+                            ),
                       ],
                     );
                   }

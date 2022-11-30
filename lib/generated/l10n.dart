@@ -1770,6 +1770,16 @@ class S {
     );
   }
 
+  /// `Transportation letter`
+  String get this_trans_letter {
+    return Intl.message(
+      'Transportation letter',
+      name: 'this_trans_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Transportation card`
   String get trans_card {
     return Intl.message(

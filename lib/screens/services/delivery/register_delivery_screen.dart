@@ -37,6 +37,12 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
     return ChangeNotifierProvider(
       create: (context) => RegisterDeliveryPrv(
+          startDate: delivery.start_time != null
+              ? DateTime.parse(delivery.start_time ?? "")
+              : null,
+          endDate: delivery.end_time != null
+              ? DateTime.parse(delivery.end_time ?? "")
+              : null,
           code: delivery.code,
           id: delivery.id,
           existedImage: delivery.image ?? [],
@@ -406,29 +412,27 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         PrimaryButton(
-                          // isLoading:
-                          //     context.watch<RegisterDeliveryPrv>().isLoading,
+                          isLoading: context
+                              .watch<RegisterDeliveryPrv>()
+                              .isAddNewLoading,
                           buttonSize: ButtonSize.medium,
                           text: isEdit
                               ? S.of(context).update
                               : S.of(context).add_new,
-                          onTap: context.watch<RegisterDeliveryPrv>().isLoading
-                              ? () {}
-                              : () => context
-                                  .read<RegisterDeliveryPrv>()
-                                  .onSendSummitDelivery(context, false),
+                          onTap: () => context
+                              .read<RegisterDeliveryPrv>()
+                              .onSendSummitDelivery(context, false),
                         ),
                         PrimaryButton(
-                          // isLoading:
-                          //     context.watch<RegisterDeliveryPrv>().isLoading,
+                          isLoading: context
+                              .watch<RegisterDeliveryPrv>()
+                              .isSendApproveLoading,
                           buttonType: ButtonType.green,
                           buttonSize: ButtonSize.medium,
                           text: S.of(context).send_request,
-                          onTap: context.watch<RegisterDeliveryPrv>().isLoading
-                              ? () {}
-                              : () => context
-                                  .read<RegisterDeliveryPrv>()
-                                  .onSendSummitDelivery(context, true),
+                          onTap: () => context
+                              .read<RegisterDeliveryPrv>()
+                              .onSendSummitDelivery(context, true),
                         ),
                       ],
                     ),

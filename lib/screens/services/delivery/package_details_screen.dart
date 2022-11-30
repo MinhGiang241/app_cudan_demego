@@ -58,15 +58,15 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       InfoContentView(
                         title: S.of(context).start_time,
                         content:
-                            '${(arg.start_hour != null ? arg.start_hour!.substring(0, 5) : "")} ${Utils.dateFormat(arg.end_time ?? "", 0)}',
+                            '${(arg.start_hour != null ? "${arg.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
                       ),
                       InfoContentView(
                         title: S.of(context).end_time,
                         content:
-                            '${(arg.end_hour != null ? arg.end_hour!.substring(0, 5) : "")} ${Utils.dateFormat(arg.end_time ?? "", 0)}',
+                            '${(arg.end_hour != null ? "${arg.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
                       ),
                       InfoContentView(
-                        title: S.of(context).card_num,
+                        title: S.of(context).letter_num,
                         content: arg.code,
                         contentStyle: txtBold(16, purpleColorBase),
                       ),

@@ -23,7 +23,8 @@ class RegisterResidentCardPrv extends ChangeNotifier {
     this.code,
   });
 
-  bool isLoading = false;
+  bool isAddNewLoading = false;
+  bool isSendApproveLoading = false;
   String? id;
   String? code;
   String? imageUrlFront;
@@ -38,17 +39,24 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   List<File> otherImageFile = [];
 
   onSubmitCard(BuildContext context, bool isRequest) {
-    isLoading = true;
+    if (isRequest) {
+      isSendApproveLoading = true;
+    } else {
+      isAddNewLoading = true;
+    }
+    notifyListeners();
+
     try {
       var listError = [];
       if (imageUrlFront == null && imageFileFront.isEmpty) {
-        throw (S.of(context).identity_front_not_empty);
-      } else if (imageUrlBack == null && imageFileBack.isEmpty) {
-        throw (S.of(context).identity_back_not_empty);
-      } else if (imageUrlResident == null && residentImageFile.isEmpty) {
-        throw (S.of(context).res_image_not_empty);
-      } else if (otherImage == null && otherImageFile.isEmpty) {
-        throw (S.of(context).related_image_not_empty);
+        listError.add(S.of(context).identity_front_not_empty);
+      }
+      if (imageUrlBack == null && imageFileBack.isEmpty) {
+        listError.add(S.of(context).identity_back_not_empty);
+      }
+
+      if (listError.isNotEmpty) {
+        throw (listError.join(', '));
       }
 
       uploadFrontPhoto(context).then((v) async {
@@ -86,20 +94,23 @@ class RegisterResidentCardPrv extends ChangeNotifier {
                     ? S.of(context).success_edit
                     : S.of(context).success_cr_new,
             onClose: () {
-              print('tap');
-              isLoading = false;
-              notifyListeners();
               Navigator.pushNamedAndRemoveUntil(context,
                   ResidentCardListScreen.routeName, (route) => route.isFirst,
                   arguments: 1);
             });
+        isAddNewLoading = false;
+        isSendApproveLoading = false;
+        notifyListeners();
       }).catchError((e) {
-        isLoading = false;
+        isAddNewLoading = false;
+        isSendApproveLoading = false;
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       });
     } catch (e) {
-      isLoading = false;
+      isAddNewLoading = false;
+      isSendApproveLoading = false;
+      notifyListeners();
       notifyListeners();
       Utils.showErrorMessage(context, e.toString());
     }
@@ -179,76 +190,60 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   }
 
   uploadFrontPhoto(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: imageFileFront, context: context)
         .then((v) {
-      isLoading = false;
-
       if (v.isNotEmpty) {
         imageUrlFront = v[0].data;
       }
 
       notifyListeners();
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
     });
   }
 
   uploadBackPhoto(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: imageFileBack, context: context)
         .then((v) {
-      isLoading = false;
-
       if (v.isNotEmpty) {
         imageUrlBack = v[0].data;
       }
 
       notifyListeners();
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
     });
   }
 
   uploadResPhoto(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: residentImageFile, context: context)
         .then((v) {
-      isLoading = false;
-
       if (v.isNotEmpty) {
         imageUrlResident = v[0].data;
       }
 
       notifyListeners();
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
     });
   }
 
   uploadOtherImage(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: otherImageFile, context: context)
         .then((v) {
-      isLoading = false;
-
       if (v.isNotEmpty) {
         otherImage = v[0].data;
       }
 
       notifyListeners();
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
     });

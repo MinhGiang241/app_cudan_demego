@@ -110,44 +110,34 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                     controller: tabController,
                     children: [
                       TransportationCardListTab(
-                        extend: () => context
-                            .read<ParkingCardProvider>()
-                            .extendCard(context),
-                        missingReport: () => context
-                            .read<ParkingCardProvider>()
-                            .missingReport(context),
-                        lockCard: (String id) => context
-                            .read<ParkingCardProvider>()
-                            .lockCard(context, id),
-                        residentId: context.watch<ResidentInfoPrv>().residentId,
-                        cardList: transCardList
-                          ..sort((a, b) =>
-                              b.updatedTime!.compareTo(a.updatedTime!))
-                          ..sort((a, b) =>
-                              genOrder(a.card_status ?? "") -
-                              genOrder(b.card_status ?? "")),
-                      ),
+                          extend: () => context
+                              .read<ParkingCardProvider>()
+                              .extendCard(context),
+                          missingReport: () => context
+                              .read<ParkingCardProvider>()
+                              .missingReport(context),
+                          lockCard: (String id) => context
+                              .read<ParkingCardProvider>()
+                              .lockCard(context, id),
+                          residentId:
+                              context.watch<ResidentInfoPrv>().residentId,
+                          cardList: transCardList),
                       TransportationLetterListTab(
-                        edit: () => context
-                            .read<ParkingCardProvider>()
-                            .editLetter(context),
-                        sendRequest: (String id) => context
-                            .read<ParkingCardProvider>()
-                            .sendRequest(context, id),
-                        deleteLetter: (String id) => context
-                            .read<ParkingCardProvider>()
-                            .deleteLetter(context, id),
-                        cancelRegister: (TransportationCard card) => context
-                            .read<ParkingCardProvider>()
-                            .cancelLetter(context, card),
-                        residentId: context.watch<ResidentInfoPrv>().residentId,
-                        cardList: transCardLetter
-                          ..sort((a, b) =>
-                              b.updatedTime!.compareTo(a.updatedTime!))
-                          ..sort((a, b) =>
-                              genOrder(a.ticket_status ?? "") -
-                              genOrder(b.ticket_status ?? "")),
-                      ),
+                          edit: () => context
+                              .read<ParkingCardProvider>()
+                              .editLetter(context),
+                          sendRequest: (String id) => context
+                              .read<ParkingCardProvider>()
+                              .sendRequest(context, id),
+                          deleteLetter: (String id) => context
+                              .read<ParkingCardProvider>()
+                              .deleteLetter(context, id),
+                          cancelRegister: (TransportationCard card) => context
+                              .read<ParkingCardProvider>()
+                              .cancelLetter(context, card),
+                          residentId:
+                              context.watch<ResidentInfoPrv>().residentId,
+                          cardList: transCardLetter),
                     ],
                   );
                 }

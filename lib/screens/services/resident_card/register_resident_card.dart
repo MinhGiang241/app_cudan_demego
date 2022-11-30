@@ -379,34 +379,32 @@ class RegisterResidentCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     PrimaryButton(
-                      // isLoading:
-                      //     context.watch<RegisterResidentCardPrv>().isLoading,
+                      isLoading: context
+                          .watch<RegisterResidentCardPrv>()
+                          .isAddNewLoading,
                       buttonSize: ButtonSize.medium,
                       text:
                           isEdit ? S.of(context).update : S.of(context).add_new,
-                      onTap: context.watch<RegisterResidentCardPrv>().isLoading
-                          ? () {}
-                          : () {
-                              FocusScope.of(context).unfocus();
-                              context
-                                  .read<RegisterResidentCardPrv>()
-                                  .onSubmitCard(context, false);
-                            },
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        context
+                            .read<RegisterResidentCardPrv>()
+                            .onSubmitCard(context, false);
+                      },
                     ),
                     PrimaryButton(
-                      // isLoading:
-                      //     context.watch<RegisterResidentCardPrv>().isLoading,
+                      isLoading: context
+                          .watch<RegisterResidentCardPrv>()
+                          .isSendApproveLoading,
                       buttonSize: ButtonSize.medium,
                       buttonType: ButtonType.green,
                       text: S.of(context).send_request,
-                      onTap: context.watch<RegisterResidentCardPrv>().isLoading
-                          ? () {}
-                          : () {
-                              FocusScope.of(context).unfocus();
-                              context
-                                  .read<RegisterResidentCardPrv>()
-                                  .onSubmitCard(context, true);
-                            },
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        context
+                            .read<RegisterResidentCardPrv>()
+                            .onSubmitCard(context, true);
+                      },
                     ),
                   ],
                 ),

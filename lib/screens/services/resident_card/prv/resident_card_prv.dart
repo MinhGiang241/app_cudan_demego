@@ -84,7 +84,8 @@ class ResidentCardPrv extends ChangeNotifier {
   sendRequest(BuildContext context, ResidentCard data) {
     data.ticket_status = 'WAIT';
     Utils.showConfirmMessage(
-        title: S.of(context).confirm_send_request,
+        title: S.of(context).send_request,
+        content: S.of(context).confirm_send_request,
         context: context,
         onConfirm: () {
           APIResCard.saveResidentCard(data.toJson()).then((v) {

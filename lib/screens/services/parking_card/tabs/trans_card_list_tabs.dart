@@ -34,7 +34,21 @@ class TransportationCardListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (cardList.isEmpty)
+    var activeCard = [];
+    var inactiveCard = [];
+    for (var i in cardList) {
+      if (i.card_status == 'ACTIVE') {
+        activeCard.add(i);
+      } else {
+        inactiveCard.add(i);
+      }
+    }
+
+    activeCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    inactiveCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+    var list = activeCard + inactiveCard;
+    return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_trans_card,
             // buttonText: S.of(context).add_trans_card,
@@ -49,12 +63,12 @@ class TransportationCardListTab extends StatelessWidget {
                 children: [
                   vpad(24),
                   ...List.generate(
-                    cardList.length,
+                    list.length,
                     (index) {
                       var listContent = [
                         InfoContentView(
                           title: S.of(context).card_num,
-                          content: cardList[index].code,
+                          content: list[index].code,
                           contentStyle: txtBold(16, primaryColor1),
                         ),
                         InfoContentView(
@@ -74,12 +88,12 @@ class TransportationCardListTab extends StatelessWidget {
                         ),
                         InfoContentView(
                           title: S.of(context).transportation,
-                          content: cardList[index].vehicleType?.name ?? '',
+                          content: list[index].vehicleType?.name ?? '',
                           contentStyle: txtBold(14),
                         ),
                         InfoContentView(
                           title: S.of(context).licene_plate,
-                          content: cardList[index].number_plate,
+                          content: list[index].number_plate,
                           contentStyle: txtBold(14),
                         ),
                       ];
@@ -91,8 +105,8 @@ class TransportationCardListTab extends StatelessWidget {
                             Navigator.of(context).pushNamed(
                               TransportationCardDetails.routeName,
                               arguments: {
-                                "card": cardList[index],
-                                "lockCard": () => lockCard(cardList[index].id!)
+                                "card": list[index],
+                                "lockCard": () => lockCard(list[index].id!)
                               },
                             );
                           },
@@ -104,15 +118,14 @@ class TransportationCardListTab extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 4),
                                   decoration: BoxDecoration(
-                                      color: cardList[index].card_status ==
-                                              "ACTIVE"
+                                      color: list[index].card_status == "ACTIVE"
                                           ? greenColorBase
                                           : redColor2,
                                       borderRadius: const BorderRadius.only(
                                           topRight: Radius.circular(12),
                                           bottomLeft: Radius.circular(8))),
                                   child: Text(
-                                    cardList[index].card_status == "ACTIVE"
+                                    list[index].card_status == "ACTIVE"
                                         ? S.of(context).active
                                         : S.of(context).lock,
                                     style: txtSemiBold(12, Colors.white),
@@ -149,7 +162,7 @@ class TransportationCardListTab extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (cardList[index].card_status == "ACTIVE")
+                              if (list[index].card_status == "ACTIVE")
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -176,8 +189,7 @@ class TransportationCardListTab extends StatelessWidget {
                                       secondaryBackgroundColor: redColor4,
                                       textColor: redColor,
                                       text: S.of(context).lock_card,
-                                      onTap: () =>
-                                          lockCard(cardList[index].id!),
+                                      onTap: () => lockCard(list[index].id!),
                                     ),
                                   ],
                                 ),

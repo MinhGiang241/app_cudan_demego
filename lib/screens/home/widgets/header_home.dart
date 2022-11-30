@@ -57,6 +57,8 @@ class _HeaderHomeState extends State<HeaderHome> {
     return Column(
       children: [
         Row(
+          textBaseline: TextBaseline.ideographic,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
           children: [
             hpad(21),
             const Icon(
@@ -89,37 +91,38 @@ class _HeaderHomeState extends State<HeaderHome> {
                 borderRadius: BorderRadius.circular(50),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
-                      const PrimaryIcon(
+                  child: ListTile(
+                      leading: const PrimaryIcon(
                         padding: EdgeInsets.all(9),
                         icons: PrimaryIcons.home_smile,
                         color: primaryColor4,
                         backgroundColor: primaryColor5,
                         style: PrimaryIconStyle.round,
                       ),
-                      hpad(12),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              selectedApartment?.name ?? "",
-                              style: txtLinkMedium(),
-                              textAlign: TextAlign.left,
-                            ),
-                            Text(
-                              '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
-                              style:
-                                  txtBodySmallRegular(color: grayScaleColor2),
-                              textAlign: TextAlign.left,
-                            ),
-                          ]),
-                      const Spacer(),
-                      const Icon(Icons.keyboard_arrow_down_rounded,
-                          color: grayScaleColor2)
-                    ],
-                  ),
+                      // hpad(12),
+                      title: Column(
+                        children: [
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  selectedApartment?.name ?? "",
+                                  style: txtLinkMedium(),
+                                  textAlign: TextAlign.left,
+                                ),
+                                Text(
+                                  '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
+                                  style: txtBodySmallRegular(
+                                      color: grayScaleColor2),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ]),
+                        ],
+                      ),
+                      // const Spacer(),
+                      trailing: const Icon(Icons.keyboard_arrow_down_rounded,
+                          color: grayScaleColor2)),
                 ),
               ),
               // const Spacer(),

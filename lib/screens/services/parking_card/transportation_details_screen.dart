@@ -34,7 +34,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    var card = arg['card'];
+    var card = arg['card'] as TransportationCard;
     var lockCard = arg['lockCard'];
     return PrimaryScreen(
         appBar: PrimaryAppbar(
@@ -119,18 +119,19 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                           title: S.of(context).trans_type,
                           content: card.vehicleType!.name ?? "",
                         ),
-                        InfoContentView(
-                          title: S.of(context).licene_plate,
-                          content: card.number_plate,
-                        ),
-                        InfoContentView(
-                          title: S.of(context).reg_num,
-                          content: card.registration_number,
-                        ),
+                        if (card.type != 'BICYCLE')
+                          InfoContentView(
+                            title: S.of(context).licene_plate,
+                            content: card.number_plate,
+                          ),
+                        if (card.type != 'BICYCLE')
+                          InfoContentView(
+                            title: S.of(context).reg_num,
+                            content: card.registration_number,
+                          ),
                         if (card.registration_image_front != null ||
                             card.registration_image_back != null ||
-                            card.other_image != null ||
-                            card.other_image!.isNotEmpty)
+                            card.other_image != null)
                           InfoContentView(title: S.of(context).photos, images: [
                             if (card.registration_image_front != null)
                               "${ApiConstants.uploadURL}?load=${card.registration_image_front}",

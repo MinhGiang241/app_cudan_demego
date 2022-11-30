@@ -22,6 +22,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
     this.imageUrlFront,
     this.otherExistedImages,
     this.code,
+    this.isShowLicense = true,
   });
   final List<SelectionModel> listVehicles = [
     SelectionModel(title: "Xe máy"),
@@ -33,7 +34,8 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   ];
 
   bool isOwner = false;
-  bool isLoading = false;
+  bool isAddNewLoading = false;
+  bool isSendApproveLoading = false;
   final formKey = GlobalKey<FormState>();
   List<VehicleType> transTypeList = [];
 
@@ -60,6 +62,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? imageUrlRelated;
   List<OtherImage>? otherExistedImages = [];
   List<OtherImage> otherImages = [];
+  bool isShowLicense = true;
 
   String? validateApartment;
   String? validateVehicleType;
@@ -68,6 +71,22 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? vehicleType;
   String? liceneNum;
   String? regNum;
+
+  onChangevehicleType(v) {
+    vehicleType = v;
+    try {
+      var bike = transTypeList.firstWhere((e) => e.code == 'BICYCLE');
+      if (v == bike.id) {
+        isShowLicense = false;
+        notifyListeners();
+      } else {
+        isShowLicense = true;
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   onSelectApartment(String id) {
     apartmentId = id;
@@ -125,16 +144,25 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   onAddNewTransCard(BuildContext context, bool isRequest) {
-    if (formKey.currentState!.validate()) {
-      isLoading = true;
+    if (formKey.currentState!.validate() || !isShowLicense) {
+      if (isRequest) {
+        isSendApproveLoading = true;
+      } else {
+        isAddNewLoading = true;
+      }
       notifyListeners();
       try {
         var listError = [];
-        if (imageUrlFront == null && imageFileFront.isEmpty) {
+
+        if (isShowLicense && imageUrlFront == null && imageFileFront.isEmpty) {
           listError.add(S.of(context).resgiter_vehicle_front_image_not_empty);
         }
-        if (imageUrlBack == null && imageFileBack.isEmpty) {
+        if (isShowLicense && imageUrlBack == null && imageFileBack.isEmpty) {
           listError.add(S.of(context).resgiter_vehicle_back_image_not_empty);
+        }
+
+        if (vehicleType == null) {
+          listError.add(S.of(context).not_empty_vehicle_type);
         }
 
         if (listError.isNotEmpty) {
@@ -148,8 +176,12 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         }).then((_) {
           otherExistedImages ??= [];
 
+          var type =
+              transTypeList.firstWhere((element) => element.id == vehicleType);
+
           var listOther = otherExistedImages! + otherImages;
           var newCard = TransportationCard(
+              type: type.code,
               code: code,
               id: id,
               apartmentId: apartmentId,
@@ -163,15 +195,13 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
               ticket_status: isRequest ? "WAIT" : "NEW");
           var data = newCard.toJson();
           // print(data2);
-          if (vehicleType == null) {
-            throw (S.of(context).not_empty_vehicle_type);
-          }
+
           // if (isRequest && newCard.registration_image_back == null) {
           //   throw (S.of(context).not_empty_back);
           // }
           return APITrans.saveTransportationCard(data);
-        }).then((v) {
-          Utils.showSuccessMessage(
+        }).then((v) async {
+          await Utils.showSuccessMessage(
               context: context,
               e: isRequest
                   ? S.of(context).success_send_req
@@ -179,16 +209,24 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
                       ? S.of(context).success_edit
                       : S.of(context).success_cr_new,
               onClose: () {
-                isLoading = false;
-                notifyListeners();
                 // var count = 0;
                 Navigator.pushReplacementNamed(
                     context, TransportationCardListScreen.routeName,
                     arguments: 1);
               });
+
+          isSendApproveLoading = false;
+
+          isAddNewLoading = false;
+
+          notifyListeners();
         }).catchError((e) {
           Utils.showErrorMessage(context, e.toString());
-          isLoading = false;
+
+          isSendApproveLoading = false;
+
+          isAddNewLoading = false;
+
           notifyListeners();
         });
       } catch (e) {
@@ -196,15 +234,14 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         validateVehicleType = null;
         validateLiceneNum = null;
         validateRegNum = null;
-        vehicleType = null;
-        liceneNum = null;
-        regNum = null;
         Utils.showErrorMessage(context, e.toString());
-        isLoading = false;
+        isSendApproveLoading = false;
+        isAddNewLoading = false;
         notifyListeners();
       }
     } else {
-      isLoading = false;
+      isSendApproveLoading = false;
+      isAddNewLoading = false;
       if (liceneController.text.trim().isEmpty) {
         validateLiceneNum = S.current.not_blank;
       } else if (RegexText.vietNameseChar(liceneController.text.trim())) {
@@ -240,19 +277,15 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   uploadFrontPhoto(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: imageFileFront, context: context)
         .then((v) {
-      isLoading = false;
-
       if (v.isNotEmpty) {
         imageUrlFront = v[0].data;
       }
 
       notifyListeners();
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
       // Utils.showErrorMessage(context, e);
@@ -260,17 +293,14 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   uploadBackPhoto(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(files: imageFileBack, context: context)
         .then((v) {
-      isLoading = false;
       notifyListeners();
       if (v.isNotEmpty) {
         imageUrlBack = v[0].data;
       }
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       throw (e);
       // Utils.showErrorMessage(context, e);
@@ -278,12 +308,8 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   uploadVehicleImage(BuildContext context) async {
-    isLoading = true;
-    notifyListeners();
     await APIAuth.uploadSingleFile(files: imagesVehicle, context: context)
         .then((v) {
-      isLoading = false;
-      notifyListeners();
       if (v.length == 1) {
         imageUrlFront = v[0].data;
       } else if (v.length == 2) {
@@ -291,20 +317,16 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         imageUrlBack = v[1].data;
       }
     }).catchError((e) {
-      isLoading = false;
-      notifyListeners();
       throw (e);
       // Utils.showErrorMessage(context, e);
     });
   }
 
   uploadRelatedImage(BuildContext context) async {
-    isLoading = true;
     otherImages = [];
-    notifyListeners();
+
     await APIAuth.uploadSingleFile(files: imagesRelated, context: context)
         .then((v) {
-      isLoading = false;
       notifyListeners();
       if (v.isNotEmpty) {
         for (var element in v) {
@@ -313,9 +335,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
         }
       }
     }).catchError((e) {
-      isLoading = false;
-      notifyListeners();
-      Utils.showErrorMessage(context, e);
+      throw (e);
     });
   }
 

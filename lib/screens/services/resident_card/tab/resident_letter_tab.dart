@@ -33,7 +33,29 @@ class ResidentLetterTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (cardList.isEmpty)
+    var newLetter = [];
+    var approvedLetter = [];
+    var waitLetter = [];
+    var cancelLetter = [];
+    for (var i in cardList) {
+      if (i.ticket_status == "NEW") {
+        newLetter.add(i);
+      } else if (i.ticket_status == "APPROVED") {
+        approvedLetter.add(i);
+      } else if (i.ticket_status == "WAIT") {
+        waitLetter.add(i);
+      } else if (i.ticket_status == "CANCEL") {
+        cancelLetter.add(i);
+      }
+    }
+
+    newLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    approvedLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+    var list = newLetter + approvedLetter + waitLetter + cancelLetter;
+    return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_letter,
             icons: PrimaryIcons.identity_bg,
@@ -48,19 +70,19 @@ class ResidentLetterTab extends StatelessWidget {
                   children: [
                     vpad(24),
                     ...List.generate(
-                      cardList.length,
+                      list.length,
                       (index) {
                         var listContent = [
                           InfoContentView(
                             title: S.of(context).letter_num,
-                            content: cardList[index].code,
+                            content: list[index].code,
                             contentStyle: txtBold(16, primaryColor1),
                           ),
                           InfoContentView(
                             title: S.of(context).full_name,
-                            content: cardList[index].resident != null
-                                ? cardList[index].resident!.info_name != null
-                                    ? cardList[index]
+                            content: list[index].resident != null
+                                ? list[index].resident!.info_name != null
+                                    ? list[index]
                                         .resident!
                                         .info_name!
                                         .toUpperCase()
@@ -70,19 +92,18 @@ class ResidentLetterTab extends StatelessWidget {
                           ),
                           InfoContentView(
                             title: S.of(context).apartment,
-                            content: cardList[index].apartment != null
-                                ? "${cardList[index].apartment!.name}, ${cardList[index].floor!.name}, ${cardList[index].building!.name}"
+                            content: list[index].apartment != null
+                                ? "${list[index].apartment!.name}, ${list[index].floor!.name}, ${list[index].building!.name}"
                                 : "",
                             contentStyle: txtBold(16, grayScaleColorBase),
                           ),
                           InfoContentView(
                             title: S.of(context).status,
-                            content:
-                                genStatus(cardList[index].ticket_status ?? ''),
+                            content: genStatus(list[index].ticket_status ?? ''),
                             contentStyle: txtBold(
                                 14,
                                 genStatusColor(
-                                    cardList[index].ticket_status ?? '')),
+                                    list[index].ticket_status ?? '')),
                           ),
                         ];
                         return Padding(
@@ -92,7 +113,7 @@ class ResidentLetterTab extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).pushNamed(
                                 ResidentCardDetails.routeName,
-                                arguments: {"card": cardList[index]},
+                                arguments: {"card": list[index]},
                               );
                             },
                             child: Column(
@@ -127,7 +148,7 @@ class ResidentLetterTab extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (cardList[index].ticket_status == "WAIT")
+                                if (list[index].ticket_status == "WAIT")
                                   Row(
                                     children: [
                                       hpad(12),
@@ -138,11 +159,11 @@ class ResidentLetterTab extends StatelessWidget {
                                         textColor: redColor,
                                         text: S.of(context).cancel_register,
                                         onTap: () =>
-                                            cancelRegister(cardList[index]),
+                                            cancelRegister(list[index]),
                                       ),
                                     ],
                                   ),
-                                if (cardList[index].ticket_status == "NEW")
+                                if (list[index].ticket_status == "NEW")
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -153,8 +174,7 @@ class ResidentLetterTab extends StatelessWidget {
                                         secondaryBackgroundColor: greenColor7,
                                         text: S.of(context).send_request,
                                         textColor: greenColor8,
-                                        onTap: () =>
-                                            sendRequest(cardList[index]),
+                                        onTap: () => sendRequest(list[index]),
                                       ),
                                       PrimaryButton(
                                         buttonSize: ButtonSize.xsmall,
@@ -167,7 +187,7 @@ class ResidentLetterTab extends StatelessWidget {
                                               RegisterResidentCard.routeName,
                                               arguments: {
                                                 "isEdit": true,
-                                                "data": cardList[index]
+                                                "data": list[index]
                                               });
                                         },
                                       ),
@@ -178,7 +198,7 @@ class ResidentLetterTab extends StatelessWidget {
                                         textColor: redColor,
                                         text: S.of(context).delete_letter,
                                         onTap: () => deleteLetter(
-                                          cardList[index].id!,
+                                          list[index].id!,
                                         ),
                                       ),
                                     ],

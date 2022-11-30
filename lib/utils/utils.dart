@@ -26,7 +26,7 @@ class Utils {
     return showGeneralDialog(
       context: context,
       transitionDuration: const Duration(milliseconds: 250),
-      barrierDismissible: true,
+      barrierDismissible: false,
       barrierLabel: "",
       transitionBuilder: (
         context,

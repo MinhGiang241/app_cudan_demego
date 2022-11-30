@@ -171,6 +171,7 @@
   "confirm_delete_service": "Do you want to delete {delete}?",
   "confirm_lock_trans_card": "Do you want to lock transportation card?",
   "trans_letter": "Transportation letter",
+  "this_trans_letter": "Transportation letter",
   "trans_card": "Transportation card",
   "trans_card_details": "Transportation card details",
   "resident_info": "Resident information",

@@ -30,7 +30,22 @@ class ResidentCardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (cardList.isEmpty)
+    var activeCard = [];
+    var inactiveCard = [];
+    for (var i in cardList) {
+      if (i.card_status == 'ACTIVE') {
+        activeCard.add(i);
+      } else {
+        inactiveCard.add(i);
+      }
+    }
+
+    activeCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    inactiveCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+    var list = activeCard + inactiveCard;
+
+    return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_card,
             icons: PrimaryIcons.identity_bg,
@@ -42,29 +57,26 @@ class ResidentCardTab extends StatelessWidget {
             SafeArea(
               child: ListView(children: [
                 vpad(24),
-                ...List.generate(cardList.length, (index) {
+                ...List.generate(list.length, (index) {
                   var listContent = [
                     InfoContentView(
                       title: S.of(context).card_num,
-                      content: cardList[index].code,
+                      content: list[index].code,
                       contentStyle: txtBold(16, primaryColor1),
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
-                      content: cardList[index].resident != null
-                          ? cardList[index].resident!.info_name != null
-                              ? cardList[index]
-                                  .resident!
-                                  .info_name!
-                                  .toUpperCase()
+                      content: list[index].resident != null
+                          ? list[index].resident!.info_name != null
+                              ? list[index].resident!.info_name!.toUpperCase()
                               : ''
                           : "",
                       contentStyle: txtBold(16, grayScaleColorBase),
                     ),
                     InfoContentView(
                       title: S.of(context).apartment,
-                      content: cardList[index].apartment != null
-                          ? "${cardList[index].apartment!.name}, ${cardList[index].floor!.name}, ${cardList[index].building!.name}"
+                      content: list[index].apartment != null
+                          ? "${list[index].apartment!.name}, ${list[index].floor!.name}, ${list[index].building!.name}"
                           : "",
                       contentStyle: txtBold(16, grayScaleColorBase),
                     ),
@@ -78,8 +90,8 @@ class ResidentCardTab extends StatelessWidget {
                         Navigator.of(context).pushNamed(
                           ResidentCardDetails.routeName,
                           arguments: {
-                            "card": cardList[index],
-                            "lockCard": () => lockCard(cardList[index])
+                            "card": list[index],
+                            "lockCard": () => lockCard(list[index])
                           },
                         );
                       },
@@ -90,14 +102,14 @@ class ResidentCardTab extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                                color: cardList[index].card_status == "ACTIVE"
+                                color: list[index].card_status == "ACTIVE"
                                     ? greenColorBase
                                     : redColor2,
                                 borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(12),
                                     bottomLeft: Radius.circular(8))),
                             child: Text(
-                              cardList[index].card_status == "ACTIVE"
+                              list[index].card_status == "ACTIVE"
                                   ? S.of(context).active
                                   : S.of(context).lock,
                               style: txtSemiBold(12, Colors.white),
@@ -132,7 +144,7 @@ class ResidentCardTab extends StatelessWidget {
                             ],
                           ),
                         ),
-                        if (cardList[index].card_status == "ACTIVE")
+                        if (list[index].card_status == "ACTIVE")
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -158,7 +170,7 @@ class ResidentCardTab extends StatelessWidget {
                                 secondaryBackgroundColor: redColor4,
                                 textColor: redColor,
                                 text: S.of(context).lock_card,
-                                onTap: () => lockCard(cardList[index]),
+                                onTap: () => lockCard(list[index]),
                               ),
                             ],
                           ),

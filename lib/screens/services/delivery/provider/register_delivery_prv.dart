@@ -16,14 +16,15 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
 
 class RegisterDeliveryPrv extends ChangeNotifier {
-  RegisterDeliveryPrv({
-    this.id,
-    this.code,
-    this.helpCheck = false,
-    this.packageItems = const [],
-    this.existedImage = const [],
-    this.type = 1,
-  });
+  RegisterDeliveryPrv(
+      {this.id,
+      this.code,
+      this.helpCheck = false,
+      this.packageItems = const [],
+      this.existedImage = const [],
+      this.type = 1,
+      this.startDate,
+      this.endDate});
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
   int type = 1;
@@ -46,7 +47,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   String? validateDimention;
   DateTime? startDate;
   DateTime? endDate;
-  bool isLoading = false;
+  bool isAddNewLoading = false;
+  bool isSendApproveLoading = false;
 
   List<File> imagesDelivery = [];
   List<ImageDelivery> existedImage = [];
@@ -57,7 +59,11 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     FocusScope.of(context).unfocus();
 
     if (formKey.currentState!.validate()) {
-      isLoading = true;
+      if (isRequest) {
+        isSendApproveLoading = true;
+      } else {
+        isAddNewLoading = true;
+      }
       notifyListeners();
       try {
         var listError = [];
@@ -66,19 +72,20 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         // throw (endDate!.compareTo(startDate!) < 0);
         if (startDate == null) {
           listError.add(S.of(context).start_date_not_empty);
-        }
-        if (startDate!.compareTo(now) < 0) {
+        } else if (startDate!.compareTo(now) < 0) {
           listError.add(S.of(context).start_date_after_now);
         }
         if (endDate == null) {
           listError.add(S.of(context).end_date_not_empty);
-        }
-        if (endDate!.compareTo(now) < 0) {
+        } else if (endDate!.compareTo(now) < 0) {
           listError.add(S.of(context).end_date_after_now);
         }
-        if (endDate!.compareTo(startDate!) < 0) {
-          listError.add(S.of(context).end_date_after_start_date);
+        if (startDate != null && endDate != null) {
+          if (endDate!.compareTo(startDate!) < 0) {
+            listError.add(S.of(context).end_date_after_start_date);
+          }
         }
+
         if (listError.isNotEmpty) {
           throw (listError.join(',  '));
         }
@@ -88,6 +95,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
         uploadDeliveryImage(context).then((v) {
           var newDelivery = Delivery(
+            code: code,
             phone_number:
                 context.read<ResidentInfoPrv>().userInfo!.phone_required,
             describe: noteController.text.trim(),
@@ -112,8 +120,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
           var data = newDelivery.toJson();
           return APIDelivery.saveNewDelivery(data);
-        }).then((v) {
-          Utils.showSuccessMessage(
+        }).then((v) async {
+          await Utils.showSuccessMessage(
               context: context,
               e: isRequest
                   ? S.of(context).success_send_req
@@ -122,13 +130,16 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                       : S.of(context).success_cr_new,
               onClose: () {
                 // var count = 0;
-                isLoading = false;
-                notifyListeners();
+
                 Navigator.pushNamedAndRemoveUntil(context,
                     DeliveryListScreen.routeName, (route) => route.isFirst);
               });
+          isSendApproveLoading = false;
+          isAddNewLoading = false;
+          notifyListeners();
         }).catchError((e) {
-          isLoading = false;
+          isSendApproveLoading = false;
+          isAddNewLoading = false;
           validateStartDate = null;
           validateEndDate = null;
           validateType = null;
@@ -138,7 +149,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           Utils.showErrorMessage(context, e.toString());
         });
       } catch (e) {
-        isLoading = false;
+        isSendApproveLoading = false;
+        isAddNewLoading = false;
         validateStartDate = null;
         validateEndDate = null;
         validateType = null;
@@ -168,11 +180,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   }
 
   uploadDeliveryImage(BuildContext context) async {
-    isLoading = true;
     notifyListeners();
     await APIAuth.uploadSingleFile(context: context, files: imagesDelivery)
         .then((v) {
-      isLoading = false;
       notifyListeners();
       if (v.isNotEmpty) {
         for (var element in v) {
@@ -181,7 +191,6 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         }
       }
     }).catchError((e) {
-      isLoading = false;
       notifyListeners();
       Utils.showErrorMessage(context, e);
     });
@@ -334,7 +343,6 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                     children: [
                       vpad(16),
                       PrimaryTextField(
-                        maxLength: 100,
                         blockSpace: true,
                         validateString: validatePackageName,
                         controller: packageNameController,

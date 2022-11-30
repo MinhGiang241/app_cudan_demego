@@ -34,7 +34,29 @@ class TransportationLetterListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (cardList.isEmpty)
+    var newLetter = [];
+    var approvedLetter = [];
+    var waitLetter = [];
+    var cancelLetter = [];
+    for (var i in cardList) {
+      if (i.ticket_status == "NEW") {
+        newLetter.add(i);
+      } else if (i.ticket_status == "APPROVED") {
+        approvedLetter.add(i);
+      } else if (i.ticket_status == "WAIT") {
+        waitLetter.add(i);
+      } else if (i.ticket_status == "CANCEL") {
+        cancelLetter.add(i);
+      }
+    }
+
+    newLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    approvedLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+    var list = newLetter + approvedLetter + waitLetter + cancelLetter;
+    return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_trans_letter,
             // buttonText: S.of(context).add_trans_card,
@@ -49,12 +71,12 @@ class TransportationLetterListTab extends StatelessWidget {
                 children: [
                   vpad(24),
                   ...List.generate(
-                    cardList.length,
+                    list.length,
                     (index) {
                       var listContent = [
                         InfoContentView(
                           title: S.of(context).letter_num,
-                          content: cardList[index].code,
+                          content: list[index].code,
                           contentStyle: txtBold(16, primaryColor1),
                         ),
                         InfoContentView(
@@ -74,22 +96,19 @@ class TransportationLetterListTab extends StatelessWidget {
                         ),
                         InfoContentView(
                           title: S.of(context).transportation,
-                          content: cardList[index].vehicleType?.name ?? '',
+                          content: list[index].vehicleType?.name ?? '',
                           contentStyle: txtBold(14),
                         ),
                         InfoContentView(
                           title: S.of(context).licene_plate,
-                          content: cardList[index].number_plate,
+                          content: list[index].number_plate,
                           contentStyle: txtBold(14),
                         ),
                         InfoContentView(
                           title: S.of(context).status,
-                          content:
-                              genStatus(cardList[index].ticket_status ?? ''),
-                          contentStyle: txtBold(
-                              14,
-                              genStatusColor(
-                                  cardList[index].ticket_status ?? '')),
+                          content: genStatus(list[index].ticket_status ?? ''),
+                          contentStyle: txtBold(14,
+                              genStatusColor(list[index].ticket_status ?? '')),
                         ),
                       ];
                       return Padding(
@@ -99,7 +118,7 @@ class TransportationLetterListTab extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).pushNamed(
                               TransportationCardDetails.routeName,
-                              arguments: {"card": cardList[index]},
+                              arguments: {"card": list[index]},
                             );
                           },
                           child: Column(
@@ -155,7 +174,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (cardList[index].ticket_status == "WAIT")
+                              if (list[index].ticket_status == "WAIT")
                                 Row(
                                   children: [
                                     hpad(12),
@@ -165,12 +184,11 @@ class TransportationLetterListTab extends StatelessWidget {
                                       secondaryBackgroundColor: redColor4,
                                       textColor: redColor,
                                       text: S.of(context).cancel_register,
-                                      onTap: () =>
-                                          cancelRegister(cardList[index]),
+                                      onTap: () => cancelRegister(list[index]),
                                     ),
                                   ],
                                 ),
-                              if (cardList[index].ticket_status == "NEW")
+                              if (list[index].ticket_status == "NEW")
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -181,8 +199,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                       secondaryBackgroundColor: greenColor4,
                                       text: S.of(context).send_request,
                                       textColor: greenColor1,
-                                      onTap: () =>
-                                          sendRequest(cardList[index].id!),
+                                      onTap: () => sendRequest(list[index].id!),
                                     ),
                                     PrimaryButton(
                                       buttonSize: ButtonSize.xsmall,
@@ -197,7 +214,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                                 .routeName,
                                             arguments: {
                                               "isEdit": true,
-                                              "data": cardList[index]
+                                              "data": list[index]
                                             });
                                       },
                                     ),
@@ -208,7 +225,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                         textColor: redColor,
                                         text: S.of(context).delete_letter,
                                         onTap: () =>
-                                            deleteLetter(cardList[index].id!)),
+                                            deleteLetter(list[index].id!)),
                                   ],
                                 ),
                               vpad(12)
