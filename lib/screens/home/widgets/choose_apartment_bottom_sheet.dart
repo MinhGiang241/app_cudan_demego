@@ -46,33 +46,31 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 16),
-                                child: Row(
-                                  children: [
-                                    const PrimaryIcon(
-                                      icons: PrimaryIcons.home_smile,
-                                      style: PrimaryIconStyle.round,
-                                      backgroundColor: primaryColor5,
-                                      color: primaryColor4,
-                                    ),
-                                    hpad(12),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(e.apartment?.name ?? "",
-                                            style: txtLinkMedium()),
-                                        Text(
-                                            '${e.floor?.name ?? ""}- ${e.building?.name ?? ""}',
-                                            style: txtBodySmallRegular(
-                                                color: grayScaleColor2))
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    // const PrimaryIcon(
-                                    //     icons: PrimaryIcons.check,
-                                    //     size: 32,
-                                    //     color: primaryColor3)
-                                  ],
+                                child: ListTile(
+                                  leading: const PrimaryIcon(
+                                    icons: PrimaryIcons.home_smile,
+                                    style: PrimaryIconStyle.round,
+                                    backgroundColor: primaryColor5,
+                                    color: primaryColor4,
+                                  ),
+
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(e.apartment?.name ?? "",
+                                          style: txtLinkMedium()),
+                                      Text(
+                                          '${e.floor?.name ?? ""}- ${e.building?.name ?? ""}',
+                                          style: txtBodySmallRegular(
+                                              color: grayScaleColor2))
+                                    ],
+                                  ),
+
+                                  // const PrimaryIcon(
+                                  //     icons: PrimaryIcons.check,
+                                  //     size: 32,
+                                  //     color: primaryColor3)
                                 ),
                               ),
                             ),

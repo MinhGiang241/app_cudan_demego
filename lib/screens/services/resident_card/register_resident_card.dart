@@ -11,6 +11,7 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dropdown.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_media_widget.dart';
 import '../../auth/prv/resident_info_prv.dart';
@@ -111,8 +112,11 @@ class RegisterResidentCard extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                          '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlFront!}')),
+                                      child: PrimaryImageNetwork(
+                                        canShowPhotoView: true,
+                                        path:
+                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlFront!}',
+                                      )),
                                   Positioned(
                                     top: 2,
                                     right: 2,
@@ -183,8 +187,11 @@ class RegisterResidentCard extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                          '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlBack!}')),
+                                      child: PrimaryImageNetwork(
+                                        canShowPhotoView: true,
+                                        path:
+                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlBack!}',
+                                      )),
                                   Positioned(
                                     top: 2,
                                     right: 2,
@@ -253,8 +260,11 @@ class RegisterResidentCard extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                          '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlResident!}')),
+                                      child: PrimaryImageNetwork(
+                                        canShowPhotoView: true,
+                                        path:
+                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlResident!}',
+                                      )),
                                   Positioned(
                                     top: 2,
                                     right: 2,
@@ -325,8 +335,11 @@ class RegisterResidentCard extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                          '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().otherImage!}')),
+                                      child: PrimaryImageNetwork(
+                                        canShowPhotoView: true,
+                                        path:
+                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().otherImage!}',
+                                      )),
                                   Positioned(
                                     top: 2,
                                     right: 2,

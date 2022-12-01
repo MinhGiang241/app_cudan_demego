@@ -56,6 +56,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     label: S.of(context).resident_info,
                     listInfoView: [
                       InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).full_name,
                           content: context
                                       .read<ResidentInfoPrv>()
@@ -70,6 +71,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                               : '',
                           contentStyle: txtBold(16, primaryColor1)),
                       InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).email,
                           content: context
                                       .read<ResidentInfoPrv>()
@@ -80,6 +82,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                               : '',
                           contentStyle: txtBold(14)),
                       InfoContentView(
+                        isHorizontal: true,
                         title:
                             // ignore: unnecessary_string_interpolations
                             S.of(context).phone_num,
@@ -95,6 +98,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                             : '',
                       ),
                       InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).expired,
                           content: Utils.dateFormat(
                               '2022-10-28T03:35:33.057+0000', 0)),
@@ -114,24 +118,26 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                           //   )
                         ]),
                       InfoContentView(
-                          title: card.ticket_status == 'APPROVED'
-                              ? S.of(context).card_num
-                              : S.of(context).letter_num,
+                          isHorizontal: true,
+                          title: S.of(context).card_num,
                           content: card.code!.toUpperCase(),
                           contentStyle: txtBold(16, purpleColorBase)),
                       InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).letter_status,
                           content: genStatus(card.ticket_status ?? ''),
                           contentStyle:
                               genContentStyle(card.ticket_status ?? "")),
                       if (card.card_status != null)
                         InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).card_status,
                           content: genStatus(card.card_status ?? ''),
                           contentStyle: genContentStyle(card.card_status ?? ""),
                         ),
                       if (card.ticket_status == "CANCEL")
                         InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).reject_reason,
                           content: card.cancel_reason != null
                               ? card.cancel_reason!.name ?? ""
@@ -139,6 +145,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                         ),
                       if (card.ticket_status == "CANCEL")
                         InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).note,
                           content: card.note_reason,
                         ),

@@ -45,6 +45,13 @@ class AuthPrv extends ChangeNotifier {
 
   bool remember = true;
 
+  clearData() {
+    account = null;
+    apartments = null;
+    selectedApartment = null;
+    notifyListeners();
+  }
+
   Future<void> start(BuildContext context) async {
     await ApiService.shared.getExistClient().then((cre) async {
       if (cre != null) {
@@ -92,6 +99,7 @@ class AuthPrv extends ChangeNotifier {
         .then((value) async {
       if (value != null) {
         authStatus = AuthStatus.auth;
+
         if (remember) {
           await PrfData.shared.setSignInStore(account, pass);
         } else {
@@ -100,49 +108,7 @@ class AuthPrv extends ChangeNotifier {
         // await APIAuth.getAccountInfo().then((v) {
         //   context.watch<AuthPrv>().account = Account.fromJson(v);
         // }).catchError((e) {});
-        await APITower.getResidentInfo().then((value) async {
-          if (value != null) {
-            context.read<ResidentInfoPrv>().userInfo =
-                ResponseResidentInfo.fromJson(value);
-            context.read<ResidentInfoPrv>().residentId =
-                context.read<ResidentInfoPrv>().userInfo != null
-                    ? context.read<ResidentInfoPrv>().userInfo!.id
-                    : null;
-            await APITower.getUserOwnInfo(
-                    context.read<ResidentInfoPrv>().userInfo!.id as String)
-                .then((v) {
-              context.read<ResidentInfoPrv>().listOwn.clear();
-              v.forEach((i) {
-                if (i['status'] == 'ACTIVE' &&
-                    (i['type'] == 'BUY' || i['type'] == 'RENT')) {
-                  context
-                      .read<ResidentInfoPrv>()
-                      .listOwn
-                      .add(ResponseResidentOwn.fromJson(i));
-                }
-              });
-              Navigator.pushReplacementNamed(
-                  context, ProjectSelectionScreen.routeName);
-              // Navigator.of(context)
-              //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
-              //   "listOwn": listOwn,
-              // });
-            }).catchError((e) {
-              Utils.showErrorMessage(context, e);
-              isLoading = false;
-              notifyListeners();
-            });
-          } else {
-            Navigator.of(context).pushNamed(
-              HomeScreen.routeName,
-              // arguments: {
-              //   "listOwn": [],
-              // },
-            );
-          }
-        }).catchError((e) {
-          Utils.showErrorMessage(context, e);
-        });
+        return await APITower.getResidentInfo(account);
 
         // Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName,arguments: {
         //   // "residentId":value.['resident_resident_find_phone_by_email']['data']
@@ -165,6 +131,38 @@ class AuthPrv extends ChangeNotifier {
 
         // await getUserInfo();
       } else {}
+    }).then((value) async {
+      if (value != null) {
+        context.read<ResidentInfoPrv>().setUserInfo(value);
+        return await APITower.getUserOwnInfo(value['_id'] as String);
+      } else {
+        Navigator.of(context).pushNamed(
+          HomeScreen.routeName,
+          // arguments: {
+          //   "listOwn": [],
+          // },
+        );
+      }
+    }).then((v) {
+      // var l = context.read<ResidentInfoPrv>().listOwn;
+      context.read<ResidentInfoPrv>().clearListOwn();
+
+      v.forEach((i) {
+        if (i['status'] == 'ACTIVE' &&
+            (i['type'] == 'BUY' || i['type'] == 'RENT')) {
+          context.read<ResidentInfoPrv>().addListOwn(i);
+        }
+      });
+      Navigator.pushNamedAndRemoveUntil(
+          context, ProjectSelectionScreen.routeName, (r) => r.isActive);
+      // Navigator.of(context)
+      //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+      //   "listOwn": listOwn,
+      // });
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+      isLoading = false;
+      notifyListeners();
     });
   }
 
@@ -259,9 +257,21 @@ class AuthPrv extends ChangeNotifier {
                       isFit: true,
                       buttonType: ButtonType.secondary,
                       secondaryBackgroundColor: redColor2,
-                      onTap: () {
+                      onTap: () async {
                         Utils.pop(context, true);
-                        Navigator.of(context).pushNamed(SignInScreen.routeName);
+                        await APIAuth.signOut(context: context);
+                        context.read<ResidentInfoPrv>().clearListOwn();
+                        // context.read<ResidentInfoPrv>().selectedApartment =
+                        //     null;
+                        // context.read<ResidentInfoPrv>().residentId = null;
+                        // context.read<ResidentInfoPrv>().userInfo = null;
+                        // context.read<AuthPrv>().userInfo = null;
+                        // context.read<AuthPrv>().account = null;
+                        // context.read<AuthPrv>().apartments = null;
+                        context.read<AuthPrv>().clearData();
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            SignInScreen.routeName,
+                            ((route) => route.isCurrent));
                       },
                     ),
                   ),

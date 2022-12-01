@@ -201,6 +201,26 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  onEditPackage(BuildContext context, int index) {
+    var newItem = ItemDeliver(
+      weight: double.tryParse(weightController.text.trim()) != null
+          ? double.parse(weightController.text.trim())
+          : 0,
+      item_name: packageNameController.text.trim(),
+      dimension: dimentionController.text.trim(),
+    );
+
+    packageItems[index] = newItem;
+
+    weightController.text = '';
+    packageNameController.text = '';
+    dimentionController.text = '';
+    validateDimention = null;
+    validateWeight = null;
+    validatePackageName = null;
+    notifyListeners();
+  }
+
   onAddPackage(BuildContext context) {
     packageItems.add(ItemDeliver(
       weight: double.tryParse(weightController.text.trim()) != null
@@ -296,8 +316,18 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  addPackage(BuildContext context) {
-    showModalBottomSheet(
+  addPackage(BuildContext context, MapEntry<int, ItemDeliver>? item) async {
+    if (item != null) {
+      weightController.text = item.value.weight.toString();
+      packageNameController.text = item.value.item_name.toString();
+      dimentionController.text = item.value.dimension.toString();
+      validateDimention = null;
+      validateWeight = null;
+      validatePackageName = null;
+      notifyListeners();
+    }
+
+    await showModalBottomSheet(
       isScrollControlled: true,
       // shape: const RoundedRectangleBorder(
       //   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -329,7 +359,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                       },
                     ),
                     Text(
-                      S.of(context).add_package,
+                      item != null
+                          ? S.of(context).edit_package
+                          : S.of(context).add_package,
                       style: txtBodyLargeBold(color: grayScaleColorBase),
                       textAlign: TextAlign.center,
                     ),
@@ -395,7 +427,12 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                         text: S.of(context).add_package,
                         onTap: () {
                           if (formKey1.currentState!.validate()) {
-                            onAddPackage(context);
+                            if (item != null) {
+                              onEditPackage(context, item.key);
+                            } else {
+                              onAddPackage(context);
+                            }
+
                             // formKey1.currentState!.dispose();
                             Navigator.pop(context);
                           } else {

@@ -9,6 +9,7 @@ import '../generated/l10n.dart';
 import '../models/transportation_card.dart';
 import 'dash_button.dart';
 import 'primary_icon.dart';
+import 'primary_image_netword.dart';
 
 class SelectMediaWidget extends StatelessWidget {
   const SelectMediaWidget(
@@ -60,8 +61,11 @@ class SelectMediaWidget extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                          '${ApiConstants.uploadURL}/?load=${e.value.id!}')),
+                                      child: PrimaryImageNetwork(
+                                        canShowPhotoView: true,
+                                        path:
+                                            '${ApiConstants.uploadURL}/?load=${e.value.id!}',
+                                      )),
                                   Positioned(
                                     top: 2,
                                     right: 2,
@@ -86,7 +90,12 @@ class SelectMediaWidget extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
-                                      child: Image.file(e.value)),
+                                      child: PrimaryImageNetwork(
+                                        file: e.value,
+                                      )
+
+                                      //  Image.file(e.value),
+                                      ),
                                   Positioned(
                                     top: 2,
                                     right: 2,

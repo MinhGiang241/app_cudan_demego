@@ -96,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
         "edit_reg_deliver":
             MessageLookupByLibrary.simpleMessage("Edit register delivery"),
         "edit_res_card":
@@ -107,11 +108,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được nhỏ hơn ngày hiện tại!"),
+            "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu!"),
+            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu"),
         "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được để trống!"),
+            "Ngày kết thúc không được để trống"),
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter email"),
@@ -128,7 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Error Connection"),
         "err_internet":
-            MessageLookupByLibrary.simpleMessage("Can not connect to server!"),
+            MessageLookupByLibrary.simpleMessage("Can not connect to server"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_x": m1,
         "event": MessageLookupByLibrary.simpleMessage("Event"),
@@ -159,9 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Identity card back side image can not be empty!"),
+            "Identity card back side image can not be empty"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Identity card front side image can not be empty!"),
+            "Identity card front side image can not be empty"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
             "Identity card/ passport photos"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
@@ -172,7 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Information reception"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "item_list_not_empty":
-            MessageLookupByLibrary.simpleMessage("Item list can not be empty!"),
+            MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
@@ -194,18 +195,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
-        "no_card":
-            MessageLookupByLibrary.simpleMessage("Don\'t have any card !"),
+        "no_card": MessageLookupByLibrary.simpleMessage("Don\'t have any card"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
         "no_delivery":
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_letter":
-            MessageLookupByLibrary.simpleMessage("Don\'t have any letter !"),
+            MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("No have transportation card"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
-        "not_blank": MessageLookupByLibrary.simpleMessage("Can not empty!"),
+        "not_blank": MessageLookupByLibrary.simpleMessage("Can not be empty"),
         "not_empty_back":
             MessageLookupByLibrary.simpleMessage("Not empty back side photo"),
         "not_empty_front":
@@ -216,14 +216,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Not found account Information"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
-        "not_special_char":
-            MessageLookupByLibrary.simpleMessage("Không nhập ký tự đặc biệt"),
+        "not_special_char": MessageLookupByLibrary.simpleMessage(
+            "Can not contain special symbol"),
         "not_vietnamese": MessageLookupByLibrary.simpleMessage(
-            "Không nhập tiếng Việt có dấu"),
+            "Can not contain Vietnamese letter"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
-            MessageLookupByLibrary.simpleMessage("OTP code is invalid !"),
+            MessageLookupByLibrary.simpleMessage("OTP code is invalid"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
@@ -231,7 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_info":
             MessageLookupByLibrary.simpleMessage("Package infomation"),
         "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Package items can not be empty!"),
+            "Package items can not be empty"),
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
@@ -272,7 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "related_doc_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "related_image_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Related document image can not empty!"),
+            "Related document image can not empty"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
@@ -282,7 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "res_card_register":
             MessageLookupByLibrary.simpleMessage("Resident card register"),
         "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Resident image can not empty!"),
+            "Resident image can not empty"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
@@ -290,10 +290,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Reset Password successfully, please Sign in again"),
         "resgiter_vehicle_back_image_not_empty":
             MessageLookupByLibrary.simpleMessage(
-                "Resgiter vehicle card back site  image can not be empty!"),
+                "Resgiter vehicle card back site  image can not be empty"),
         "resgiter_vehicle_front_image_not_empty":
             MessageLookupByLibrary.simpleMessage(
-                "Resgiter vehicle card front site  image can not be empty!"),
+                "Resgiter vehicle card front site  image can not be empty"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
         "resident_info":
@@ -342,9 +342,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
-            "Ngày bắt đầu không được nhỏ hơn ngày hiện tại!"),
+            "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
         "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ngày bắt đầu không được để trống!"),
+            "Ngày bắt đầu không được để trống"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
@@ -405,6 +405,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "How would you like to receive a code to reset your password?"),
         "we_send_to": m3,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
-        "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back!")
+        "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back")
       };
 }

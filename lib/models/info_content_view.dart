@@ -11,6 +11,7 @@ class InfoContentView {
   final List<String>? dateRange;
   final bool isCheckType;
   final bool isCheck;
+  final bool isHorizontal;
   final String? rowKey;
 
   InfoContentView(
@@ -20,6 +21,7 @@ class InfoContentView {
       this.images,
       this.isCheckType = false,
       this.isCheck = false,
+      this.isHorizontal = false,
       this.dateRange,
       this.contentStyle = const TextStyle(
           fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)});
@@ -89,7 +91,7 @@ genContentStyle(String content) {
     case "LOCK":
       return txtBold(14, pinkColorBase);
     case "APPROVED":
-      return txtBold(14, greenColor);
+      return txtBold(14, greenColor6);
     case "NEW":
       return txtBold(14, grayScaleColor1);
     case "WAIT":

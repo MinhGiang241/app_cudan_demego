@@ -101,25 +101,22 @@ class _HeaderHomeState extends State<HeaderHome> {
                       ),
                       // hpad(12),
                       title: Column(
-                        children: [
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  selectedApartment?.name ?? "",
-                                  style: txtLinkMedium(),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
-                                  style: txtBodySmallRegular(
-                                      color: grayScaleColor2),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ]),
-                        ],
-                      ),
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              selectedApartment?.name ?? "",
+                              style: txtLinkMedium(),
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
+                              style:
+                                  txtBodySmallRegular(color: grayScaleColor2),
+                              textAlign: TextAlign.left,
+                            ),
+                          ]),
+
                       // const Spacer(),
                       trailing: const Icon(Icons.keyboard_arrow_down_rounded,
                           color: grayScaleColor2)),

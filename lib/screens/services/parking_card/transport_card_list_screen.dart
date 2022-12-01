@@ -4,6 +4,7 @@ import 'package:app_cudan/screens/services/parking_card/tabs/trans_letter_list_t
 import 'package:app_cudan/screens/services/service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -31,7 +32,7 @@ class TransportationCardListScreen extends StatefulWidget {
 class _ParkingCardListScreenState extends State<TransportationCardListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-
+  var initIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -40,11 +41,18 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as int?;
-    var initIndex = 0;
+
     if (arg != null) {
       initIndex = arg;
     }
     tabController.index = initIndex;
+
+    void _onRefresh() {
+      setState(() {
+        initIndex = tabController.index;
+      });
+    }
+
     return ChangeNotifierProvider(
       create: (context) => ParkingCardProvider(),
       builder: (context, state) {
@@ -69,6 +77,7 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
             onPressed: () {
               Navigator.pushNamed(context, RegisterTransportationCard.routeName,
                   arguments: {"isEdit": false});
+              // setState(() {});
             },
             backgroundColor: primaryColorBase,
             child: const Icon(
@@ -90,7 +99,9 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                         // await context.read<ParkingCardProvider>().getTrasportCardList(
                         //     context,
                         //     context.read<ResidentInfoPrv>().residentId ?? '');
-                        setState(() {});
+                        setState(() {
+                          initIndex = initIndex;
+                        });
                       });
                 } else {
                   List<TransportationCard> transCardList = [];
@@ -110,6 +121,7 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                     controller: tabController,
                     children: [
                       TransportationCardListTab(
+                          onRefresh: _onRefresh,
                           extend: () => context
                               .read<ParkingCardProvider>()
                               .extendCard(context),
@@ -120,9 +132,10 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                               .read<ParkingCardProvider>()
                               .lockCard(context, id),
                           residentId:
-                              context.watch<ResidentInfoPrv>().residentId,
+                              context.read<ResidentInfoPrv>().residentId,
                           cardList: transCardList),
                       TransportationLetterListTab(
+                          onRefresh: _onRefresh,
                           edit: () => context
                               .read<ParkingCardProvider>()
                               .editLetter(context),
@@ -136,7 +149,7 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                               .read<ParkingCardProvider>()
                               .cancelLetter(context, card),
                           residentId:
-                              context.watch<ResidentInfoPrv>().residentId,
+                              context.read<ResidentInfoPrv>().residentId,
                           cardList: transCardLetter),
                     ],
                   );

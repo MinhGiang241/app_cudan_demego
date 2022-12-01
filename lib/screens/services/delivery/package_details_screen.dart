@@ -50,43 +50,51 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                     label: S.of(context).delivery_info,
                     listInfoView: [
                       InfoContentView(
+                        isHorizontal: true,
                         title: S.of(context).transfer_type,
                         content: arg.type_transfer == "IN"
                             ? S.of(context).tranfer_in
                             : S.of(context).tranfer_out,
                       ),
                       InfoContentView(
+                        isHorizontal: true,
                         title: S.of(context).start_time,
                         content:
                             '${(arg.start_hour != null ? "${arg.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
                       ),
                       InfoContentView(
+                        isHorizontal: true,
                         title: S.of(context).end_time,
                         content:
                             '${(arg.end_hour != null ? "${arg.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
                       ),
                       InfoContentView(
-                        title: S.of(context).letter_num,
+                        isHorizontal: true,
+                        title: S.of(context).card_num,
                         content: arg.code,
                         contentStyle: txtBold(16, purpleColorBase),
                       ),
+                      if (arg.describe != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).description,
+                          content: arg.describe,
+                          contentStyle: txtBold(16, purpleColorBase),
+                        ),
                       InfoContentView(
-                        title: S.of(context).description,
-                        content: arg.describe,
-                        contentStyle: txtBold(16, purpleColorBase),
-                      ),
-                      InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).letter_status,
                           content: genStatus(arg.status ?? ''),
                           contentStyle: genContentStyle(arg.status ?? "")),
-                      InfoContentView(
-                          title: S.of(context).photos,
-                          images: arg.image!.isEmpty
-                              ? null
-                              : [
-                                  ...arg.image!.map((v) =>
-                                      "${ApiConstants.uploadURL}/?load=${v.id}")
-                                ])
+                      if (arg.image!.isNotEmpty)
+                        InfoContentView(
+                            title: S.of(context).photos,
+                            images: arg.image!.isEmpty
+                                ? null
+                                : [
+                                    ...arg.image!.map((v) =>
+                                        "${ApiConstants.uploadURL}/?load=${v.id}")
+                                  ])
                     ],
                   ),
                 ),

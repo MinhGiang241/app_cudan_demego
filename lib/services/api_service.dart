@@ -105,7 +105,8 @@ class ApiService {
   deleteCre() async {
     final path = await getApplicationDocumentsDirectory();
     final credentialsFile = File('${path.path}/credential.json');
-    if (await credentialsFile.exists()) {
+    print(credentialsFile);
+    if (credentialsFile.existsSync()) {
       await credentialsFile.delete();
     }
   }

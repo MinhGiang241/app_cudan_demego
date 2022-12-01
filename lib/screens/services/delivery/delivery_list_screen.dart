@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -31,6 +32,9 @@ class DeliveryListScreen extends StatefulWidget {
 }
 
 class _DeliveryListScreenState extends State<DeliveryListScreen> {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -105,178 +109,205 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                     },
                   );
                 } else {
-                  return ListView(
-                    children: [
-                      vpad(24),
-                      ...list.map(
-                        (e) {
-                          var listContent = [
-                            InfoContentView(
-                              title: S.of(context).letter_num,
-                              content: e.code,
-                              contentStyle: txtBold(14, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).package,
-                              content: e.item_added_list!
-                                  .map((x) => x.item_name)
-                                  .join(', '),
-                              contentStyle: txtBold(14, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).start_time,
-                              content:
-                                  '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 0)}',
-                              contentStyle: txtBold(14, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).end_time,
-                              content:
-                                  '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 0)}',
-                              contentStyle: txtBold(14, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).status,
-                              content: genStatus(e.status ?? ''),
-                              contentStyle:
-                                  txtBold(14, genStatusColor(e.status ?? '')),
-                            ),
-                          ];
+                  return SafeArea(
+                    child: SmartRefresher(
+                      enablePullDown: true,
+                      enablePullUp: false,
+                      header: WaterDropMaterialHeader(
+                          backgroundColor: Theme.of(context).primaryColor),
+                      controller: _refreshController,
+                      onRefresh: () {
+                        setState(() {});
+                        _refreshController.loadComplete();
+                      },
+                      child: ListView(
+                        children: [
+                          vpad(24),
+                          ...list.map(
+                            (e) {
+                              var listContent = [
+                                InfoContentView(
+                                  title: "${S.of(context).letter_num} :",
+                                  content: e.code,
+                                  contentStyle: txtBold(14, grayScaleColorBase),
+                                ),
+                                InfoContentView(
+                                  title: "${S.of(context).package} :",
+                                  content: e.item_added_list!
+                                      .map((x) => x.item_name)
+                                      .join(', '),
+                                  contentStyle: txtBold(14, grayScaleColorBase),
+                                ),
+                                InfoContentView(
+                                  title: "${S.of(context).start_time} :",
+                                  content:
+                                      '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 0)}',
+                                  contentStyle: txtBold(14, grayScaleColorBase),
+                                ),
+                                InfoContentView(
+                                  title: "${S.of(context).end_time} :",
+                                  content:
+                                      '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 0)}',
+                                  contentStyle: txtBold(14, grayScaleColorBase),
+                                ),
+                                InfoContentView(
+                                  title: "${S.of(context).status} :",
+                                  content: genStatus(e.status ?? ''),
+                                  contentStyle: txtBold(
+                                      14, genStatusColor(e.status ?? '')),
+                                ),
+                              ];
 
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              left: 12,
-                              right: 12,
-                              bottom: 16,
-                            ),
-                            child: PrimaryCard(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, PackageDetailScreen.routeName,
-                                    arguments: e);
-                              },
-                              child: Column(
-                                children: [
-                                  vpad(12),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        e.type_transfer == 'IN'
-                                            ? S.of(context).tranfer_in_reg
-                                            : S.of(context).tranfer_out_reg,
-                                        textAlign: TextAlign.right,
-                                        style: txtBodySmallRegular(
-                                            color: grayScaleColorBase),
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 12,
+                                  right: 12,
+                                  bottom: 16,
+                                ),
+                                child: PrimaryCard(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, PackageDetailScreen.routeName,
+                                        arguments: e);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      vpad(12),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            e.type_transfer == 'IN'
+                                                ? S.of(context).tranfer_in_reg
+                                                : S.of(context).tranfer_out_reg,
+                                            textAlign: TextAlign.right,
+                                            style: txtBodySmallRegular(
+                                                color: grayScaleColorBase),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  vpad(12),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Table(
-                                      columnWidths: const {
-                                        0: FlexColumnWidth(4),
-                                        1: FlexColumnWidth(6)
-                                      },
-                                      children: [
-                                        ...listContent.map<TableRow>((i) {
-                                          return TableRow(children: [
-                                            Text(
-                                              i.title,
-                                              style: txtMedium(
-                                                  12, grayScaleColor2),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 16),
-                                              child: Text(i.content ?? "",
-                                                  style: i.contentStyle),
+                                      vpad(12),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Table(
+                                          textBaseline:
+                                              TextBaseline.ideographic,
+                                          defaultVerticalAlignment:
+                                              TableCellVerticalAlignment
+                                                  .baseline,
+                                          columnWidths: const {
+                                            0: FlexColumnWidth(4),
+                                            1: FlexColumnWidth(6)
+                                          },
+                                          children: [
+                                            ...listContent.map<TableRow>((i) {
+                                              return TableRow(children: [
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 16),
+                                                    child: Text(
+                                                      i.title,
+                                                      style: txtMedium(
+                                                          12, grayScaleColor2),
+                                                    ),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  child: Text(i.content ?? "",
+                                                      style: i.contentStyle),
+                                                )
+                                              ]);
+                                            })
+                                          ],
+                                        ),
+                                      ),
+                                      if (e.status == "WAIT")
+                                        Row(
+                                          children: [
+                                            hpad(16),
+                                            PrimaryButton(
+                                              onTap: () {
+                                                context
+                                                    .read<DeliveryListPrv>()
+                                                    .cancelRequetsAprrove(
+                                                        context, e);
+                                              },
+                                              text:
+                                                  S.of(context).cancel_register,
+                                              buttonSize: ButtonSize.xsmall,
+                                              buttonType: ButtonType.secondary,
+                                              secondaryBackgroundColor:
+                                                  redColor5,
+                                              textColor: redColorBase,
                                             )
-                                          ]);
-                                        })
-                                      ],
-                                    ),
+                                          ],
+                                        ),
+                                      if (e.status == "NEW")
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            PrimaryButton(
+                                              onTap: () {
+                                                context
+                                                    .read<DeliveryListPrv>()
+                                                    .sendToApprove(context, e);
+                                              },
+                                              text: S.of(context).send_request,
+                                              buttonSize: ButtonSize.xsmall,
+                                              buttonType: ButtonType.secondary,
+                                              secondaryBackgroundColor:
+                                                  greenColor7,
+                                              textColor: greenColor8,
+                                            ),
+                                            PrimaryButton(
+                                              onTap: () {
+                                                Navigator.pushNamed(context,
+                                                    RegisterDelivery.routeName,
+                                                    arguments: {
+                                                      "isEdit": true,
+                                                      "data": e,
+                                                    });
+                                              },
+                                              text: S.of(context).edit,
+                                              buttonSize: ButtonSize.xsmall,
+                                              buttonType: ButtonType.secondary,
+                                              secondaryBackgroundColor:
+                                                  primaryColor5,
+                                              textColor: primaryColorBase,
+                                            ),
+                                            PrimaryButton(
+                                              onTap: () {
+                                                context
+                                                    .read<DeliveryListPrv>()
+                                                    .deleteLetter(
+                                                        context, e.id ?? '');
+                                              },
+                                              text: S.of(context).delete_letter,
+                                              buttonSize: ButtonSize.xsmall,
+                                              buttonType: ButtonType.secondary,
+                                              secondaryBackgroundColor:
+                                                  redColor5,
+                                              textColor: redColorBase,
+                                            ),
+                                          ],
+                                        ),
+                                      vpad(16),
+                                    ],
                                   ),
-                                  if (e.status == "WAIT")
-                                    Row(
-                                      children: [
-                                        hpad(16),
-                                        PrimaryButton(
-                                          onTap: () {
-                                            context
-                                                .read<DeliveryListPrv>()
-                                                .cancelRequetsAprrove(
-                                                    context, e);
-                                          },
-                                          text: S.of(context).cancel_register,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: redColor5,
-                                          textColor: redColorBase,
-                                        )
-                                      ],
-                                    ),
-                                  if (e.status == "NEW")
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        PrimaryButton(
-                                          onTap: () {
-                                            context
-                                                .read<DeliveryListPrv>()
-                                                .sendToApprove(context, e);
-                                          },
-                                          text: S.of(context).send_request,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: greenColor7,
-                                          textColor: greenColor8,
-                                        ),
-                                        PrimaryButton(
-                                          onTap: () {
-                                            Navigator.pushNamed(context,
-                                                RegisterDelivery.routeName,
-                                                arguments: {
-                                                  "isEdit": true,
-                                                  "data": e,
-                                                });
-                                          },
-                                          text: S.of(context).edit,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor:
-                                              primaryColor5,
-                                          textColor: primaryColorBase,
-                                        ),
-                                        PrimaryButton(
-                                          onTap: () {
-                                            context
-                                                .read<DeliveryListPrv>()
-                                                .deleteLetter(
-                                                    context, e.id ?? '');
-                                          },
-                                          text: S.of(context).delete_letter,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: redColor5,
-                                          textColor: redColorBase,
-                                        ),
-                                      ],
-                                    ),
-                                  vpad(16),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                                ),
+                              );
+                            },
+                          ),
+                          vpad(60)
+                        ],
                       ),
-                      vpad(60)
-                    ],
+                    ),
                   );
                 }
               },

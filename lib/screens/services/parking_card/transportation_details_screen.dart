@@ -58,48 +58,52 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                       label: S.of(context).resident_info,
                       listInfoView: [
                         InfoContentView(
+                            isHorizontal: true,
                             title: S.of(context).full_name,
                             content: context
-                                        .read<ResidentInfoPrv>()
+                                        .watch<ResidentInfoPrv>()
                                         .userInfo!
                                         .info_name !=
                                     null
                                 ? context
-                                    .read<ResidentInfoPrv>()
+                                    .watch<ResidentInfoPrv>()
                                     .userInfo!
                                     .info_name!
                                     .toUpperCase()
                                 : '',
                             contentStyle: txtBold(16, primaryColor1)),
                         InfoContentView(
+                            isHorizontal: true,
                             title: S.of(context).email,
                             content: context
-                                        .read<ResidentInfoPrv>()
+                                        .watch<ResidentInfoPrv>()
                                         .userInfo!
                                         .email !=
                                     null
                                 ? context
-                                    .read<ResidentInfoPrv>()
+                                    .watch<ResidentInfoPrv>()
                                     .userInfo!
                                     .email!
                                 : '',
                             contentStyle: txtBold(14)),
                         InfoContentView(
+                          isHorizontal: true,
                           title:
                               // ignore: unnecessary_string_interpolations
                               S.of(context).phone_num,
                           content: context
-                                      .read<ResidentInfoPrv>()
+                                      .watch<ResidentInfoPrv>()
                                       .userInfo!
                                       .phone_required !=
                                   null
                               ? context
-                                  .read<ResidentInfoPrv>()
+                                  .watch<ResidentInfoPrv>()
                                   .userInfo!
                                   .phone_required!
                               : '',
                         ),
                         InfoContentView(
+                            isHorizontal: true,
                             title: S.of(context).expired,
                             content: Utils.dateFormat(
                                 '2022-10-28T03:35:33.057+0000', 0)),
@@ -116,16 +120,19 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                       label: S.of(context).trans_info,
                       listInfoView: [
                         InfoContentView(
+                          isHorizontal: true,
                           title: S.of(context).trans_type,
-                          content: card.vehicleType!.name ?? "",
+                          content: card.vehicleType!.name,
                         ),
                         if (card.type != 'BICYCLE')
                           InfoContentView(
+                            isHorizontal: true,
                             title: S.of(context).licene_plate,
                             content: card.number_plate,
                           ),
                         if (card.type != 'BICYCLE')
                           InfoContentView(
+                            isHorizontal: true,
                             title: S.of(context).reg_num,
                             content: card.registration_number,
                           ),
@@ -143,9 +150,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                               )
                           ]),
                         InfoContentView(
-                            title: card.ticket_status == 'APPROVED'
-                                ? S.of(context).card_num
-                                : S.of(context).letter_num,
+                            title: S.of(context).card_num,
                             content: card.code!.toUpperCase(),
                             contentStyle: txtBold(16, purpleColorBase)),
                         InfoContentView(

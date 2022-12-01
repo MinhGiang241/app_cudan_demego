@@ -303,7 +303,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                               icons: PrimaryIcons.add_to_queue),
                           onTap: () => context
                               .read<RegisterDeliveryPrv>()
-                              .addPackage(context),
+                              .addPackage(context, null),
                         ),
                       ],
                     ),
@@ -333,7 +333,11 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                               },
                               key: UniqueKey(),
                               child: PrimaryCard(
-                                  onTap: () {},
+                                  onTap: () {
+                                    context
+                                        .read<RegisterDeliveryPrv>()
+                                        .addPackage(context, e);
+                                  },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 14, horizontal: 16),
@@ -356,10 +360,17 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                               Text(e.value.item_name ?? '',
                                                   style: txtLinkSmall()),
                                               vpad(2),
-                                              Text(e.value.weight.toString(),
-                                                  style: txtLinkSmall()),
+                                              Text(
+                                                  e.value.weight != null
+                                                      ? '${S.of(context).weight} (kg): ${e.value.weight.toString()}'
+                                                      : '',
+                                                  style:
+                                                      txtBodyXSmallRegular()),
                                               vpad(2),
-                                              Text(e.value.dimension ?? '',
+                                              Text(
+                                                  e.value.dimension != null
+                                                      ? '${S.of(context).dimention} (cm): ${e.value.dimension}'
+                                                      : '',
                                                   style:
                                                       txtBodyXSmallRegular()),
                                             ],

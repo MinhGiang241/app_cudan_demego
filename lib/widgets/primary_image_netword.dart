@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -22,6 +24,7 @@ class PrimaryImageNetwork extends StatelessWidget {
     this.customUrl,
     this.fileName,
     this.listLink,
+    this.file,
     this.initIndex,
   }) : super(key: key);
 
@@ -35,6 +38,7 @@ class PrimaryImageNetwork extends StatelessWidget {
   final String? customUrl;
   final List<String>? listLink;
   final int? initIndex;
+  final File? file;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class PrimaryImageNetwork extends StatelessWidget {
           child: InkWell(
             onTap: canShowPhotoView
                 ? () {
-                    if (customUrl == null) {
+                    if (path != null && customUrl == null) {
                       if (path!.endsWith(".docx") ||
                           path!.endsWith(".doc") ||
                           path!.endsWith(".xls") ||
@@ -58,6 +62,30 @@ class PrimaryImageNetwork extends StatelessWidget {
                         launchUrlString(path!,
                             // "${ApiConstants.baseURL}/content/media/$path",
                             mode: LaunchMode.externalApplication);
+                      } else if (file != null) {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation,
+                                      secondaryAnimation) =>
+                                  PhotoViewer(
+                                      link: path!,
+                                      // "${ApiConstants.baseURL}/content/media/$path",
+                                      listLink: listLink ??
+                                          [
+                                            path!,
+                                            //"${ApiConstants.baseURL}/content/media/$path"
+                                          ],
+                                      initIndex: initIndex ?? 0,
+                                      heroTag: tag),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
+                              },
+                            ));
                       } else {
                         Navigator.push(
                             context,
@@ -90,10 +118,10 @@ class PrimaryImageNetwork extends StatelessWidget {
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
                                     PhotoViewer(
-                                        link: customUrl!,
+                                        file: file,
+                                        link: customUrl,
                                         initIndex: 0,
-                                        listLink: [
-                                          path!,
+                                        listLink: const [
                                           // customUrl!,
                                         ],
                                         heroTag: tag),
@@ -108,87 +136,89 @@ class PrimaryImageNetwork extends StatelessWidget {
                     }
                   }
                 : null,
-            child: CachedNetworkImage(
-              imageUrl: customUrl ??
-                  path!, //ApiConstants.baseURL}/content/media/$path",
-              fit: fit ?? BoxFit.cover,
-              height: height,
-              width: width,
-              errorWidget: (context, r, v) {
-                Widget eWidget = const Icon(
-                  Icons.broken_image,
-                  color: Colors.black45,
-                );
-                if (r.endsWith(".doc") || r.endsWith(".docx")) {
-                  eWidget = Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/doc.png",
-                        width: 64,
-                        height: 64,
-                      ),
-                      vpad(6),
-                      if (fileName != null)
-                        Text(fileName!, style: txtBold(12, Colors.white))
-                    ],
-                  );
-                }
-                if (r.endsWith(".xls") || r.endsWith(".xlsx")) {
-                  eWidget = Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/xls.png",
-                        width: 64,
-                        height: 64,
-                      ),
-                      vpad(6),
-                      if (fileName != null)
-                        Text(fileName!, style: txtBold(12, Colors.white))
-                    ],
-                  );
-                }
-                if (r.endsWith(".pdf")) {
-                  eWidget = Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/pdf.png",
-                        width: 64,
-                        height: 64,
-                      ),
-                      vpad(6),
-                      if (fileName != null)
-                        Text(fileName!, style: txtBold(12, Colors.white))
-                    ],
-                  );
-                }
-                if (r.endsWith(".txt")) {
-                  eWidget = Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/txt.png",
-                        width: 64,
-                        height: 64,
-                      ),
-                      vpad(6),
-                      if (fileName != null)
-                        Text(fileName!, style: txtBold(12, Colors.white))
-                    ],
-                  );
-                }
-                return Container(
-                    color: Colors.black38, child: Center(child: eWidget));
-              },
-              placeholder: (context, url) {
-                return Center(
-                  child: Icon(Icons.image,
-                      color: grayScaleColor1.withOpacity(0.6), size: 30),
-                );
-              },
-            ),
+            child: file == null
+                ? CachedNetworkImage(
+                    imageUrl: customUrl ??
+                        path!, //ApiConstants.baseURL}/content/media/$path",
+                    fit: fit ?? BoxFit.cover,
+                    height: height,
+                    width: width,
+                    errorWidget: (context, r, v) {
+                      Widget eWidget = const Icon(
+                        Icons.broken_image,
+                        color: Colors.black45,
+                      );
+                      if (r.endsWith(".doc") || r.endsWith(".docx")) {
+                        eWidget = Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/doc.png",
+                              width: 64,
+                              height: 64,
+                            ),
+                            vpad(6),
+                            if (fileName != null)
+                              Text(fileName!, style: txtBold(12, Colors.white))
+                          ],
+                        );
+                      }
+                      if (r.endsWith(".xls") || r.endsWith(".xlsx")) {
+                        eWidget = Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/xls.png",
+                              width: 64,
+                              height: 64,
+                            ),
+                            vpad(6),
+                            if (fileName != null)
+                              Text(fileName!, style: txtBold(12, Colors.white))
+                          ],
+                        );
+                      }
+                      if (r.endsWith(".pdf")) {
+                        eWidget = Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/pdf.png",
+                              width: 64,
+                              height: 64,
+                            ),
+                            vpad(6),
+                            if (fileName != null)
+                              Text(fileName!, style: txtBold(12, Colors.white))
+                          ],
+                        );
+                      }
+                      if (r.endsWith(".txt")) {
+                        eWidget = Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/txt.png",
+                              width: 64,
+                              height: 64,
+                            ),
+                            vpad(6),
+                            if (fileName != null)
+                              Text(fileName!, style: txtBold(12, Colors.white))
+                          ],
+                        );
+                      }
+                      return Container(
+                          color: Colors.black38, child: Center(child: eWidget));
+                    },
+                    placeholder: (context, url) {
+                      return Center(
+                        child: Icon(Icons.image,
+                            color: grayScaleColor1.withOpacity(0.6), size: 30),
+                      );
+                    },
+                  )
+                : Image.file(file!),
           ),
         ),
       ),
@@ -199,17 +229,19 @@ class PrimaryImageNetwork extends StatelessWidget {
 class PhotoViewer extends StatefulWidget {
   PhotoViewer(
       {Key? key,
-      required this.link,
+      this.link,
+      this.file,
       required this.heroTag,
       required this.listLink,
       required this.initIndex})
       : pageController = PageController(initialPage: initIndex),
         super(key: key);
-  final String link;
+  final String? link;
   final List<String> listLink;
   final String heroTag;
   final int initIndex;
   final PageController pageController;
+  final File? file;
 
   @override
   State<PhotoViewer> createState() => _PhotoViewerState();
@@ -239,49 +271,66 @@ class _PhotoViewerState extends State<PhotoViewer> {
           leading: const CloseButton(
             color: Colors.white,
           ),
-          title: Text(
-            "$currentIndex/${widget.listLink.length}",
-            style: txtMedium(15, Colors.white),
-          ),
+          // title: Text(
+          //   "$currentIndex/${widget.listLink.length}",
+          //   style: txtMedium(15, Colors.white),
+          // ),
         ),
         body: Column(
           children: [
             Expanded(
-              child: PhotoViewGallery.builder(
-                scrollPhysics: const ClampingScrollPhysics(),
-                builder: (BuildContext context, int index) {
-                  return PhotoViewGalleryPageOptions(
-                    imageProvider: CachedNetworkImageProvider(
-                      widget.listLink[index].startsWith("http")
-                          ? widget.listLink[index]
-                          : widget.listLink[
-                              index], //"${ApiConstants.baseURL}/content/media/${widget.listLink[index]}",
-                    ),
-                    initialScale: PhotoViewComputedScale.contained,
-                    heroAttributes:
-                        PhotoViewHeroAttributes(tag: widget.heroTag),
-                  );
-                },
-                itemCount: widget.listLink.length,
+              child: widget.file != null
+                  ? (PhotoViewGallery.builder(
+                          itemCount: 1,
+                          scrollPhysics: const ClampingScrollPhysics(),
+                          builder: (BuildContext context, int index) {
+                            return PhotoViewGalleryPageOptions(
+                                imageProvider: FileImage(widget.file!),
+                                initialScale: PhotoViewComputedScale.contained,
+                                heroAttributes: PhotoViewHeroAttributes(
+                                    tag: widget.heroTag));
+                          })
 
-                loadingBuilder: (context, event) => Center(
-                  child: SizedBox(
-                    width: 20.0,
-                    height: 20.0,
-                    child: CircularProgressIndicator(
-                      value: event == null
-                          ? 0
-                          : event.cumulativeBytesLoaded /
-                              (event.expectedTotalBytes ?? 1),
-                    ),
-                  ),
-                ),
-                backgroundDecoration: const BoxDecoration(color: Colors.black),
+                      // PhotoView(
+                      //   imageProvider: FileImage(widget.file!),
+                      // )
+                      )
+                  : PhotoViewGallery.builder(
+                      scrollPhysics: const ClampingScrollPhysics(),
+                      builder: (BuildContext context, int index) {
+                        return PhotoViewGalleryPageOptions(
+                          imageProvider: CachedNetworkImageProvider(
+                            widget.listLink[index].startsWith("http")
+                                ? widget.listLink[index]
+                                : widget.listLink[
+                                    index], //"${ApiConstants.baseURL}/content/media/${widget.listLink[index]}",
+                          ),
+                          initialScale: PhotoViewComputedScale.contained,
+                          heroAttributes:
+                              PhotoViewHeroAttributes(tag: widget.heroTag),
+                        );
+                      },
+                      itemCount: widget.listLink.length,
 
-                pageController: widget.pageController,
-                onPageChanged: onPageChanged,
-                // heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
-              ),
+                      loadingBuilder: (context, event) => Center(
+                        child: SizedBox(
+                          width: 20.0,
+                          height: 20.0,
+                          child: CircularProgressIndicator(
+                            value: event == null
+                                ? 0
+                                : event.cumulativeBytesLoaded /
+                                    (event.expectedTotalBytes ?? 1),
+                          ),
+                        ),
+                      ),
+                      backgroundDecoration:
+                          const BoxDecoration(color: Colors.black),
+
+                      pageController: widget.pageController,
+                      onPageChanged: onPageChanged,
+                      // heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
+                    ),
             ),
           ],
         ));

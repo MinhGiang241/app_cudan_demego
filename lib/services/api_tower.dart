@@ -23,20 +23,19 @@ import '../models/response_thecudan_list.dart';
 import 'api_service.dart';
 
 class APITower {
-  static Future getResidentInfo() async {
+  static Future getResidentInfo(String userName) async {
     var query = '''
-    mutation {
-        response: resident_mobile_get_resident_info_by_account  {
-            code
-            message
-            data
-        }
+    mutation (\$userName:String){
+    response: resident_mobile_get_resident_info_by_account (userName: \$userName ) {
+        code
+        message
+        data
     }
-        
+    }    
+       
     ''';
     final MutationOptions options = MutationOptions(
-      document: gql(query),
-    );
+        document: gql(query), variables: {"userName": userName});
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

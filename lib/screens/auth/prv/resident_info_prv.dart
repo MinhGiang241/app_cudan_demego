@@ -12,6 +12,26 @@ class ResidentInfoPrv extends ChangeNotifier {
   ResponseResidentOwn? selectedApartment;
   String? residentId;
 
+  addListOwn(i) {
+    listOwn.add(ResponseResidentOwn.fromJson(i));
+    notifyListeners();
+  }
+
+  clearListOwn() {
+    // selectedApartment = null;
+    // residentId = null;
+    // userInfo = null;
+    listOwn.clear();
+    notifyListeners();
+  }
+
+  setUserInfo(value) {
+    userInfo = ResponseResidentInfo.fromJson(value);
+    residentId = userInfo != null ? userInfo!.id : null;
+    // print(residentId);
+    // notifyListeners();
+  }
+
   selectApartment(ResponseResidentOwn select) {
     selectedApartment = select;
     notifyListeners();

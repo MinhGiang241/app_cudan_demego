@@ -13,6 +13,7 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
@@ -54,9 +55,9 @@ class _RegisterTransportationCardState
               context.read<ResidentInfoPrv>().selectedApartment?.apartmentId),
       builder: (context, state) {
         if (isEdit) {
-          context.read<RegisterTransportationCardPrv>().liceneController.text =
+          context.watch<RegisterTransportationCardPrv>().liceneController.text =
               card.number_plate ?? '';
-          context.read<RegisterTransportationCardPrv>().regNumController.text =
+          context.watch<RegisterTransportationCardPrv>().regNumController.text =
               card.registration_number ?? '';
         }
         return PrimaryScreen(
@@ -300,8 +301,11 @@ class _RegisterTransportationCardState
                                           ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8),
-                                              child: Image.network(
-                                                  '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlFront!}')),
+                                              child: PrimaryImageNetwork(
+                                                canShowPhotoView: true,
+                                                path:
+                                                    '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlFront!}',
+                                              )),
                                           Positioned(
                                             top: 2,
                                             right: 2,
@@ -392,8 +396,11 @@ class _RegisterTransportationCardState
                                             ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
-                                                child: Image.network(
-                                                    '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlBack!}')),
+                                                child: PrimaryImageNetwork(
+                                                  canShowPhotoView: true,
+                                                  path:
+                                                      '${ApiConstants.uploadURL}/?load=${context.watch<RegisterTransportationCardPrv>().imageUrlBack!}',
+                                                )),
                                             Positioned(
                                               top: 2,
                                               right: 2,

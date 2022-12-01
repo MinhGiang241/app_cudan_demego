@@ -38,7 +38,8 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var listOwn = widget.context.read<ResidentInfoPrv>().listOwn;
+    var listOwn = widget.context.watch<ResidentInfoPrv>().listOwn;
+    print(listOwn);
     var listProject = [];
     for (var e in listOwn) {
       if (e.apartment?.name != null) {
@@ -97,27 +98,25 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Padding(
                           padding: const EdgeInsets.all(15),
-                          child: Row(children: [
-                            const PrimaryIcon(
-                              icons: PrimaryIcons.home_smile,
-                              color: primaryColor4,
-                              backgroundColor: primaryColor5,
-                              style: PrimaryIconStyle.round,
-                              padding: EdgeInsets.all(12),
-                            ),
-                            hpad(16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(e.building?.name ?? '',
-                                    style: txtLinkSmall()),
-                                vpad(4),
-                                Text(
-                                    '${e.apartment?.name ?? ''} - ${e.floor?.name ?? ''}',
-                                    style: txtBodySmallBold()),
-                              ],
-                            )
-                          ]),
+                          child: ListTile(
+                              leading: const PrimaryIcon(
+                                icons: PrimaryIcons.home_smile,
+                                color: primaryColor4,
+                                backgroundColor: primaryColor5,
+                                style: PrimaryIconStyle.round,
+                                padding: EdgeInsets.all(12),
+                              ),
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(e.building?.name ?? '',
+                                      style: txtLinkSmall()),
+                                  vpad(4),
+                                  Text(
+                                      '${e.apartment?.name ?? ''} - ${e.floor?.name ?? ''}',
+                                      style: txtBodySmallBold()),
+                                ],
+                              )),
                         ),
                       )
 

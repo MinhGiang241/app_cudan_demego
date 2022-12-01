@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `Welcome back!`
+  /// `Welcome back`
   String get wellcome_back {
     return Intl.message(
-      'Welcome back!',
+      'Welcome back',
       name: 'wellcome_back',
       desc: '',
       args: [],
@@ -720,10 +720,10 @@ class S {
     );
   }
 
-  /// `Can not connect to server!`
+  /// `Can not connect to server`
   String get err_internet {
     return Intl.message(
-      'Can not connect to server!',
+      'Can not connect to server',
       name: 'err_internet',
       desc: '',
       args: [],
@@ -1260,10 +1260,10 @@ class S {
     );
   }
 
-  /// `Can not empty!`
+  /// `Can not be empty`
   String get not_blank {
     return Intl.message(
-      'Can not empty!',
+      'Can not be empty',
       name: 'not_blank',
       desc: '',
       args: [],
@@ -1630,10 +1630,10 @@ class S {
     );
   }
 
-  /// `OTP code is invalid !`
+  /// `OTP code is invalid`
   String get otp_invalid {
     return Intl.message(
-      'OTP code is invalid !',
+      'OTP code is invalid',
       name: 'otp_invalid',
       desc: '',
       args: [],
@@ -2350,10 +2350,10 @@ class S {
     );
   }
 
-  /// `Item list can not be empty!`
+  /// `Item list can not be empty`
   String get item_list_not_empty {
     return Intl.message(
-      'Item list can not be empty!',
+      'Item list can not be empty',
       name: 'item_list_not_empty',
       desc: '',
       args: [],
@@ -2400,20 +2400,20 @@ class S {
     );
   }
 
-  /// `Don't have any card !`
+  /// `Don't have any card`
   String get no_card {
     return Intl.message(
-      'Don\'t have any card !',
+      'Don\'t have any card',
       name: 'no_card',
       desc: '',
       args: [],
     );
   }
 
-  /// `Don't have any letter !`
+  /// `Don't have any letter`
   String get no_letter {
     return Intl.message(
-      'Don\'t have any letter !',
+      'Don\'t have any letter',
       name: 'no_letter',
       desc: '',
       args: [],
@@ -2480,60 +2480,60 @@ class S {
     );
   }
 
-  /// `Ngày bắt đầu không được để trống!`
+  /// `Ngày bắt đầu không được để trống`
   String get start_date_not_empty {
     return Intl.message(
-      'Ngày bắt đầu không được để trống!',
+      'Ngày bắt đầu không được để trống',
       name: 'start_date_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được để trống!`
+  /// `Ngày kết thúc không được để trống`
   String get end_date_not_empty {
     return Intl.message(
-      'Ngày kết thúc không được để trống!',
+      'Ngày kết thúc không được để trống',
       name: 'end_date_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày bắt đầu không được nhỏ hơn ngày hiện tại!`
+  /// `Ngày bắt đầu không được nhỏ hơn ngày hiện tại`
   String get start_date_after_now {
     return Intl.message(
-      'Ngày bắt đầu không được nhỏ hơn ngày hiện tại!',
+      'Ngày bắt đầu không được nhỏ hơn ngày hiện tại',
       name: 'start_date_after_now',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được nhỏ hơn ngày hiện tại!`
+  /// `Ngày kết thúc không được nhỏ hơn ngày hiện tại`
   String get end_date_after_now {
     return Intl.message(
-      'Ngày kết thúc không được nhỏ hơn ngày hiện tại!',
+      'Ngày kết thúc không được nhỏ hơn ngày hiện tại',
       name: 'end_date_after_now',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được nhỏ hơn ngày bắt đầu!`
+  /// `Ngày kết thúc không được nhỏ hơn ngày bắt đầu`
   String get end_date_after_start_date {
     return Intl.message(
-      'Ngày kết thúc không được nhỏ hơn ngày bắt đầu!',
+      'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
       name: 'end_date_after_start_date',
       desc: '',
       args: [],
     );
   }
 
-  /// `Package items can not be empty!`
+  /// `Package items can not be empty`
   String get package_items_not_empty {
     return Intl.message(
-      'Package items can not be empty!',
+      'Package items can not be empty',
       name: 'package_items_not_empty',
       desc: '',
       args: [],
@@ -2550,81 +2550,91 @@ class S {
     );
   }
 
-  /// `Không nhập tiếng Việt có dấu`
+  /// `Can not contain Vietnamese letter`
   String get not_vietnamese {
     return Intl.message(
-      'Không nhập tiếng Việt có dấu',
+      'Can not contain Vietnamese letter',
       name: 'not_vietnamese',
       desc: '',
       args: [],
     );
   }
 
-  /// `Không nhập ký tự đặc biệt`
+  /// `Can not contain special symbol`
   String get not_special_char {
     return Intl.message(
-      'Không nhập ký tự đặc biệt',
+      'Can not contain special symbol',
       name: 'not_special_char',
       desc: '',
       args: [],
     );
   }
 
-  /// `Identity card front side image can not be empty!`
+  /// `Identity card front side image can not be empty`
   String get identity_front_not_empty {
     return Intl.message(
-      'Identity card front side image can not be empty!',
+      'Identity card front side image can not be empty',
       name: 'identity_front_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Identity card back side image can not be empty!`
+  /// `Identity card back side image can not be empty`
   String get identity_back_not_empty {
     return Intl.message(
-      'Identity card back side image can not be empty!',
+      'Identity card back side image can not be empty',
       name: 'identity_back_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resident image can not empty!`
+  /// `Resident image can not empty`
   String get res_image_not_empty {
     return Intl.message(
-      'Resident image can not empty!',
+      'Resident image can not empty',
       name: 'res_image_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Related document image can not empty!`
+  /// `Related document image can not empty`
   String get related_image_not_empty {
     return Intl.message(
-      'Related document image can not empty!',
+      'Related document image can not empty',
       name: 'related_image_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resgiter vehicle card front site  image can not be empty!`
+  /// `Resgiter vehicle card front site  image can not be empty`
   String get resgiter_vehicle_front_image_not_empty {
     return Intl.message(
-      'Resgiter vehicle card front site  image can not be empty!',
+      'Resgiter vehicle card front site  image can not be empty',
       name: 'resgiter_vehicle_front_image_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resgiter vehicle card back site  image can not be empty!`
+  /// `Resgiter vehicle card back site  image can not be empty`
   String get resgiter_vehicle_back_image_not_empty {
     return Intl.message(
-      'Resgiter vehicle card back site  image can not be empty!',
+      'Resgiter vehicle card back site  image can not be empty',
       name: 'resgiter_vehicle_back_image_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit package`
+  String get edit_package {
+    return Intl.message(
+      'Edit package',
+      name: 'edit_package',
       desc: '',
       args: [],
     );

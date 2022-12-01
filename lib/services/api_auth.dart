@@ -2,8 +2,11 @@ import 'dart:io';
 
 // import 'package:graphql/client.dart';
 
+import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';

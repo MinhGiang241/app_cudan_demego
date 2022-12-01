@@ -37,15 +37,22 @@ class ResidentCardListScreen extends StatefulWidget {
 class _ResidentCardListScreenState extends State<ResidentCardListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-
+  var initIndex = 0;
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as int?;
-    var initIndex = 0;
+
     if (arg != null) {
       initIndex = arg;
     }
     tabController.index = initIndex;
+
+    void _onRefresh() {
+      setState(() {
+        initIndex = tabController.index;
+      });
+    }
+
     return ChangeNotifierProvider(
         create: (context) => ResidentCardPrv(),
         builder: (context, state) {
@@ -105,6 +112,7 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                       controller: tabController,
                       children: [
                         ResidentCardTab(
+                            onRefresh: _onRefresh,
                             extend: () =>
                                 context.read<ResidentCardPrv>().extend(context),
                             missingReport: () => context
@@ -114,9 +122,10 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                                 .read<ResidentCardPrv>()
                                 .lockCard(context, card),
                             residentId:
-                                context.watch<ResidentInfoPrv>().residentId,
+                                context.read<ResidentInfoPrv>().residentId,
                             cardList: resCardList),
                         ResidentLetterTab(
+                            onRefresh: _onRefresh,
                             edit: () => context
                                 .read<ResidentCardPrv>()
                                 .editLetter(context),
@@ -130,7 +139,7 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                                 .read<ResidentCardPrv>()
                                 .cancelLetter(context, card),
                             residentId:
-                                context.watch<ResidentInfoPrv>().residentId,
+                                context.read<ResidentInfoPrv>().residentId,
                             cardList: resCardLetter
                             // ..sort(
                             //   (a, b) =>

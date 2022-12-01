@@ -34,7 +34,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Row(
                     children: [
-                      Text(listInfoView[index].title,
+                      Text("${listInfoView[index].title} :",
                           style: txtMedium(14, grayScaleColor2)),
                       hpad(16),
                       SizedBox(
@@ -56,6 +56,30 @@ class PrimaryInfoWidget extends StatelessWidget {
                   ),
                 );
               }
+              if (listInfoView[index].isHorizontal) {
+                return Table(
+                  textBaseline: TextBaseline.ideographic,
+                  defaultVerticalAlignment: TableCellVerticalAlignment.baseline,
+                  columnWidths: const {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(3)
+                  },
+                  children: [
+                    TableRow(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Text("${listInfoView[index].title} :",
+                            style: txtMedium(14, grayScaleColor2)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Text(listInfoView[index].content ?? "",
+                            style: listInfoView[index].contentStyle),
+                      ),
+                    ])
+                  ],
+                );
+              }
               return SizedBox(
                 width: (listInfoView[index].rowKey != null)
                     ? (MediaQuery.of(context).size.width) / 3
@@ -65,11 +89,11 @@ class PrimaryInfoWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(listInfoView[index].title,
+                      Text("${listInfoView[index].title} :",
                           style: txtMedium(14, grayScaleColor2)),
                       vpad(6),
                       if (listInfoView[index].content != null)
-                        Text("${listInfoView[index].content} ",
+                        Text("${listInfoView[index].content}",
                             style: listInfoView[index].contentStyle),
                       if (listInfoView[index].images != null) vpad(6),
                       if (listInfoView[index].images != null)
