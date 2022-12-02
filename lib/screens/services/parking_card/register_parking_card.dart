@@ -165,20 +165,10 @@ class _RegisterTransportationCardState
                           PrimaryTextField(
                             blockSpace: true,
                             filter: [
-                              FilteringTextInputFormatter.deny(RegExp(
-                                  r"(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*#?&]")),
-                              FilteringTextInputFormatter.deny(
-                                  RegExp(r"[+-/':;:]")),
-                              FilteringTextInputFormatter.deny(RegExp(r'["]')),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r"[0-9a-zA-Z]")),
                             ],
                             maxLength: 9,
-                            // onChanged: (v){
-                            //   if(v.length >=9){
-                            //     context
-                            //     .read<RegisterTransportationCardPrv>()
-                            //     .liceneController.
-                            //   }
-                            // },
                             validateString: context
                                 .watch<RegisterTransportationCardPrv>()
                                 .validateLiceneNum,
@@ -225,7 +215,8 @@ class _RegisterTransportationCardState
                             .isShowLicense)
                           PrimaryTextField(
                             filter: [
-                              FilteringTextInputFormatter.deny(RegExp(r'[.,]'))
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]'))
                             ],
                             maxLength: 6,
                             validateString: context

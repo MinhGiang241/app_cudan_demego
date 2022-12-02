@@ -63,10 +63,10 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
               future: context.read<DeliveryListPrv>().getDeliveryList(
                   context, context.read<ResidentInfoPrv>().residentId ?? ''),
               builder: (context, snapshot) {
-                var newLetter = [];
-                var approvedLetter = [];
-                var waitLetter = [];
-                var cancelLetter = [];
+                List<Delivery> newLetter = [];
+                List<Delivery> approvedLetter = [];
+                List<Delivery> waitLetter = [];
+                List<Delivery> cancelLetter = [];
                 for (var i in context.read<DeliveryListPrv>().listItems) {
                   if (i.status == "NEW") {
                     newLetter.add(i);
@@ -88,7 +88,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                 cancelLetter
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-                var list =
+                List<Delivery> list =
                     newLetter + approvedLetter + waitLetter + cancelLetter;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: PrimaryLoading());
@@ -285,8 +285,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                               onTap: () {
                                                 context
                                                     .read<DeliveryListPrv>()
-                                                    .deleteLetter(
-                                                        context, e.id ?? '');
+                                                    .deleteLetter(context, e);
                                               },
                                               text: S.of(context).delete_letter,
                                               buttonSize: ButtonSize.xsmall,

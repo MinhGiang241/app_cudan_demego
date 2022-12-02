@@ -128,9 +128,9 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                           missingReport: () => context
                               .read<ParkingCardProvider>()
                               .missingReport(context),
-                          lockCard: (String id) => context
+                          lockCard: (TransportationCard card) => context
                               .read<ParkingCardProvider>()
-                              .lockCard(context, id),
+                              .lockCard(context, card),
                           residentId:
                               context.read<ResidentInfoPrv>().residentId,
                           cardList: transCardList),
@@ -139,12 +139,12 @@ class _ParkingCardListScreenState extends State<TransportationCardListScreen>
                           edit: () => context
                               .read<ParkingCardProvider>()
                               .editLetter(context),
-                          sendRequest: (String id) => context
+                          sendRequest: (TransportationCard card) => context
                               .read<ParkingCardProvider>()
-                              .sendRequest(context, id),
-                          deleteLetter: (String id) => context
+                              .sendRequest(context, card),
+                          deleteLetter: (TransportationCard card) => context
                               .read<ParkingCardProvider>()
-                              .deleteLetter(context, id),
+                              .deleteLetter(context, card),
                           cancelRegister: (TransportationCard card) => context
                               .read<ParkingCardProvider>()
                               .cancelLetter(context, card),

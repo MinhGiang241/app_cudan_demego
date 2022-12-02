@@ -68,7 +68,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                     TableRow(children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16),
-                        child: Text("${listInfoView[index].title} :",
+                        child: Text("${listInfoView[index].title}:",
                             style: txtMedium(14, grayScaleColor2)),
                       ),
                       Padding(
@@ -89,7 +89,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("${listInfoView[index].title} :",
+                      Text("${listInfoView[index].title}:",
                           style: txtMedium(14, grayScaleColor2)),
                       vpad(6),
                       if (listInfoView[index].content != null)

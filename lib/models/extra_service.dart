@@ -27,6 +27,7 @@ class ExtraService {
   String? link_affiliate;
   ServiceIcon? service_icon;
   Payment? payments;
+  Pay? pay;
 
   ExtraService.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -39,6 +40,7 @@ class ExtraService {
     isAffiliate = json['isAffiliate'];
     description = json['description'];
     link_affiliate = json['link_affiliate'];
+    pay = json['pay'] != null ? Pay.fromJson(json['pay']) : null;
     service_icon = json['service_icon'] != null
         ? ServiceIcon.fromjson(json['service_icon'])
         : null;
@@ -84,6 +86,46 @@ class ServiceIcon {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['file_id'] = id;
     data['name'] = name;
+    return data;
+  }
+}
+
+class Pay {
+  Pay({
+    this.code,
+    this.createdTime,
+    this.id,
+    this.isValue,
+    this.month,
+    this.name,
+    this.updatedTime,
+  });
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? name;
+  String? month;
+  bool? isValue;
+
+  Pay.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    code = json['code'];
+    name = json['name'];
+    month = json['month'];
+    isValue = json['isValue'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['code'] = code;
+    data['name'] = name;
+    data['month'] = month;
+    data['isValue'] = isValue;
     return data;
   }
 }

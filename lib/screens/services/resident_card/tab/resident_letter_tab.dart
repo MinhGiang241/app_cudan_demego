@@ -31,17 +31,17 @@ class ResidentLetterTab extends StatelessWidget {
   Function(ResidentCard) cancelRegister;
   Function(ResidentCard) sendRequest;
   Function() edit;
-  Function(String) deleteLetter;
+  Function(ResidentCard) deleteLetter;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   Function() onRefresh;
 
   @override
   Widget build(BuildContext context) {
-    var newLetter = [];
-    var approvedLetter = [];
-    var waitLetter = [];
-    var cancelLetter = [];
+    List<ResidentCard> newLetter = [];
+    List<ResidentCard> approvedLetter = [];
+    List<ResidentCard> waitLetter = [];
+    List<ResidentCard> cancelLetter = [];
     for (var i in cardList) {
       if (i.ticket_status == "NEW") {
         newLetter.add(i);
@@ -59,7 +59,8 @@ class ResidentLetterTab extends StatelessWidget {
     waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
     cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-    var list = newLetter + approvedLetter + waitLetter + cancelLetter;
+    List<ResidentCard> list =
+        newLetter + approvedLetter + waitLetter + cancelLetter;
     return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_letter,
@@ -151,7 +152,7 @@ class ResidentLetterTab extends StatelessWidget {
                                           (e) => TableRow(
                                             children: [
                                               Text(
-                                                e.title,
+                                                "${e.title}:",
                                                 style: txtMedium(
                                                     12, grayScaleColor2),
                                               ),
@@ -218,7 +219,7 @@ class ResidentLetterTab extends StatelessWidget {
                                           textColor: redColor,
                                           text: S.of(context).delete_letter,
                                           onTap: () => deleteLetter(
-                                            list[index].id!,
+                                            list[index],
                                           ),
                                         ),
                                       ],

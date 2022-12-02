@@ -34,7 +34,7 @@ class TransportationCardListTab extends StatelessWidget {
   String? residentId;
   Function() extend;
   Function() missingReport;
-  Function(String) lockCard;
+  Function(TransportationCard) lockCard;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   Function() onRefresh;
@@ -125,7 +125,7 @@ class TransportationCardListTab extends StatelessWidget {
                                 TransportationCardDetails.routeName,
                                 arguments: {
                                   "card": list[index],
-                                  "lockCard": () => lockCard(list[index].id!)
+                                  "lockCard": () => lockCard(list[index])
                                 },
                               );
                             },
@@ -169,7 +169,7 @@ class TransportationCardListTab extends StatelessWidget {
                                         (e) => TableRow(
                                           children: [
                                             Text(
-                                              e.title,
+                                              '${e.title}:',
                                               style: txtMedium(
                                                   12, grayScaleColor2),
                                             ),
@@ -212,7 +212,7 @@ class TransportationCardListTab extends StatelessWidget {
                                         secondaryBackgroundColor: redColor4,
                                         textColor: redColor,
                                         text: S.of(context).lock_card,
-                                        onTap: () => lockCard(list[index].id!),
+                                        onTap: () => lockCard(list[index]),
                                       ),
                                     ],
                                   ),

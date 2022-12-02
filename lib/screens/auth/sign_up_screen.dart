@@ -1,5 +1,7 @@
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
@@ -66,6 +68,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Column(
                       children: [
                         PrimaryTextField(
+                          maxLength: 100,
+                          onlyText: true,
+                          // filter: [
+                          //   FilteringTextInputFormatter.allow(RegExp(
+                          //       r"[ 0-9a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]")),
+                          //   // FilteringTextInputFormatter.allow(
+                          //   //     RegExp(RegexText.vietLetter)),
+                          // ],
                           controller: context.read<SignUpPrv>().nameController,
                           label: S.of(context).full_name,
                           hint: S.of(context).enter_name,
@@ -74,14 +84,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validateString:
                               context.watch<SignUpPrv>().nameValidate,
                           validator: (v) {
-                            if (v!.isEmpty) {
+                            if (v!.trim().isEmpty) {
                               return "";
                             }
+
                             return null;
                           },
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          blockSpace: true,
+                          maxLength: 12,
                           controller: context.read<SignUpPrv>().phoneController,
                           label: S.of(context).phone_num,
                           hint: S.of(context).enter_phone,
@@ -98,20 +111,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          isShow: false,
+                          isRequired: true,
                           controller: context.read<SignUpPrv>().emailController,
                           label: S.of(context).email,
                           hint: S.of(context).enter_email,
                           validateString:
                               context.watch<SignUpPrv>().emailValidate,
                           validator: (v) {
-                            if (v!.isEmpty) {
-                              return "";
+                            if (v!.isNotEmpty && !RegexText.isEmail(v.trim())) {
+                              return '';
                             }
                             return null;
                           },
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          maxLength: 12,
+                          blockSpace: true,
                           controller: context.read<SignUpPrv>().passController,
                           obscureText: true,
                           label: S.of(context).password,
@@ -122,12 +139,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (v) {
                             if (v!.isEmpty) {
                               return "";
+                            } else if (v.trim().length < 8) {
+                              return '';
+                            } else if (!RegexText.requiredSpecialChar(
+                                v.trim())) {
+                              return '';
                             }
+
                             return null;
                           },
                         ),
                         vpad(16),
                         PrimaryTextField(
+                          blockSpace: true,
+                          maxLength: 12,
                           controller: context.read<SignUpPrv>().cPassController,
                           obscureText: true,
                           label: S.of(context).confirm_pass,
@@ -138,6 +163,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (v) {
                             if (v!.isEmpty) {
                               return "";
+                            } else if (v.trim().length < 8) {
+                              return '';
                             } else if (v !=
                                 context.read<SignUpPrv>().passController.text) {
                               return "";

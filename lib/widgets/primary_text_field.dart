@@ -38,6 +38,9 @@ class PrimaryTextField extends StatefulWidget {
     this.onChanged,
     this.filter = const [],
     this.blockSpace = false,
+    this.blockSpecial = false,
+    this.onlyText = false,
+    this.isShow = true,
   });
 
   final String? label;
@@ -57,7 +60,10 @@ class PrimaryTextField extends StatefulWidget {
   final int? maxLines;
   final bool autoFocus;
   final bool enable;
+  final bool isShow;
   final bool blockSpace;
+  final bool blockSpecial;
+  final bool onlyText;
   final String? validateString;
   final Color? background;
   final Color? textColor;
@@ -97,7 +103,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
               Text(widget.label!,
                   style: txtBodySmallRegular(color: grayScaleColorBase)),
               if (widget.isRequired) hpad(4),
-              if (widget.isRequired)
+              if (widget.isRequired && widget.isShow)
                 Text("*", style: txtBodySmallRegular(color: redColorBase))
             ],
           ),
@@ -121,8 +127,19 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     onTap: widget.onTap,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: <TextInputFormatter>[
+                      if (widget.onlyText)
+                        FilteringTextInputFormatter.allow(RegExp(
+                            r"[ 0-9a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]")),
                       if (widget.blockSpace)
                         FilteringTextInputFormatter.deny(RegExp(r'[ ]')),
+                      if (widget.blockSpecial)
+                        FilteringTextInputFormatter.deny(RegExp(
+                          r'''(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%_*#?&\[\]\(\)<>`\'+-={}"|\\/]''',
+                        )),
+                      if (widget.blockSpecial)
+                        FilteringTextInputFormatter.deny(RegExp(r'''["]''')),
+                      if (widget.blockSpecial)
+                        FilteringTextInputFormatter.deny(RegExp(r'''[_]''')),
                       ...?widget.filter
                     ],
                     enabled: widget.enable,

@@ -132,9 +132,9 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                             sendRequest: (ResidentCard data) => context
                                 .read<ResidentCardPrv>()
                                 .sendRequest(context, data),
-                            deleteLetter: (String id) => context
+                            deleteLetter: (ResidentCard card) => context
                                 .read<ResidentCardPrv>()
-                                .deleteLetter(context, id),
+                                .deleteLetter(context, card),
                             cancelRegister: (ResidentCard card) => context
                                 .read<ResidentCardPrv>()
                                 .cancelLetter(context, card),

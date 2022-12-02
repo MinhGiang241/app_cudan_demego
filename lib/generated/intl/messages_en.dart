@@ -20,13 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(delete) => "Do you want to delete ${delete}?";
+  static String m0(code) => "Do you want to cancel request letter ${code}";
 
-  static String m1(message) => "Error: ${message}";
+  static String m1(letter) => "Do you want to delete letter ${letter}?";
 
-  static String m2(del) => "Remove ${del} successfully";
+  static String m2(delete) => "Do you want to delete ${delete}?";
 
-  static String m3(to) => "We sent otp code to :${to}";
+  static String m3(card) => "Do you want to lock card ${card}?";
+
+  static String m4(approved) => "Do you want to send to approve ${approved}?";
+
+  static String m5(message) => "Error: ${message}";
+
+  static String m6(del) => "Remove ${del} successfully";
+
+  static String m7(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -66,17 +74,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
-        "confirm_cancel_request": MessageLookupByLibrary.simpleMessage(
-            "Do you want to cancel Request"),
-        "confirm_delete_service": m0,
-        "confirm_lock_card":
-            MessageLookupByLibrary.simpleMessage("Do you want to lock card?"),
+        "confirm_cancel_request": m0,
+        "confirm_delete_letter": m1,
+        "confirm_delete_service": m2,
+        "confirm_lock_card": m3,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Do you want to lock transportation card?"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
-        "confirm_send_request": MessageLookupByLibrary.simpleMessage(
-            "Do you want to send to approve request?"),
+        "confirm_send_request": m4,
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
@@ -131,7 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
-        "err_x": m1,
+        "err_x": m5,
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
@@ -206,6 +212,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not be empty"),
+        "not_dimention":
+            MessageLookupByLibrary.simpleMessage("Not be dimention"),
+        "not_email": MessageLookupByLibrary.simpleMessage("Not is email."),
         "not_empty_back":
             MessageLookupByLibrary.simpleMessage("Not empty back side photo"),
         "not_empty_front":
@@ -220,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Can not contain special symbol"),
         "not_vietnamese": MessageLookupByLibrary.simpleMessage(
             "Can not contain Vietnamese letter"),
+        "not_zero":
+            MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
@@ -235,6 +246,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
+        "pass_min_length": MessageLookupByLibrary.simpleMessage(
+            "Password length can not less than 8 letter"),
+        "pass_special": MessageLookupByLibrary.simpleMessage(
+            "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
@@ -320,6 +335,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
+        "search_project":
+            MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),
@@ -358,7 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_remove": m2,
+        "success_remove": m6,
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
@@ -403,7 +420,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m3,
+        "we_send_to": m7,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back")
       };

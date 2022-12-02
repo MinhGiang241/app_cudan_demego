@@ -44,13 +44,13 @@ class ParkingCardProvider extends ChangeNotifier {
   //card
   extendCard(BuildContext context) {}
   missingReport(BuildContext context) {}
-  lockCard(BuildContext context, String id) async {
+  lockCard(BuildContext context, TransportationCard card) async {
     Utils.showConfirmMessage(
         title: S.of(context).lock_card,
-        content: S.of(context).confirm_lock_trans_card,
+        content: S.of(context).confirm_lock_card(card.code ?? ""),
         context: context,
         onConfirm: () async {
-          APITrans.lockTransportationCard(id).then((v) {
+          APITrans.lockTransportationCard(card.id ?? "").then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
@@ -74,7 +74,7 @@ class ParkingCardProvider extends ChangeNotifier {
     Utils.showConfirmMessage(
       context: context,
       title: S.of(context).cancel_request,
-      content: S.of(context).confirm_cancel_request,
+      content: S.of(context).confirm_cancel_request(card.code ?? ""),
       onConfirm: () async {
         card.ticket_status = "CANCEL";
         card.reasons = "NGUOIDUNGHUY";
@@ -101,13 +101,17 @@ class ParkingCardProvider extends ChangeNotifier {
     );
   }
 
-  sendRequest(BuildContext context, String id) async {
+  sendRequest(
+    BuildContext context,
+    TransportationCard card,
+  ) async {
     Utils.showConfirmMessage(
         title: S.of(context).send_request,
-        content: S.of(context).confirm_send_request,
+        content: S.of(context).confirm_send_request(card.code ?? ""),
         context: context,
         onConfirm: () async {
-          await APITrans.sendToApproveTransportationCard(id).then((v) {
+          await APITrans.sendToApproveTransportationCard(card.id ?? "")
+              .then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
@@ -127,15 +131,16 @@ class ParkingCardProvider extends ChangeNotifier {
   }
 
   editLetter(BuildContext context) {}
-  deleteLetter(BuildContext context, String id) {
+  deleteLetter(
+    BuildContext context,
+    TransportationCard card,
+  ) {
     Utils.showConfirmMessage(
         title: S.of(context).delete_letter,
-        content: S
-            .of(context)
-            .confirm_delete_service(S.of(context).trans_letter.toLowerCase()),
+        content: S.of(context).confirm_delete_letter(card.code ?? ''),
         context: context,
         onConfirm: () async {
-          await APITrans.removeTransportationCard(id).then((v) {
+          await APITrans.removeTransportationCard(card.id ?? "").then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,

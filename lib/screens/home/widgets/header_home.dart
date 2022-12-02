@@ -57,21 +57,25 @@ class _HeaderHomeState extends State<HeaderHome> {
     return Column(
       children: [
         Row(
-          textBaseline: TextBaseline.ideographic,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
           children: [
             hpad(21),
             const Icon(
               Icons.favorite,
               color: primaryColor4,
             ),
-            hpad(12),
-            Text('${S.of(context).hello}, ',
-                style: txtBodySmallRegular(color: grayScaleColor2)),
-            Text(
-              userInfo?.info_name ?? '',
-              style: txtLinkMedium(),
-            )
+            Row(
+              textBaseline: TextBaseline.ideographic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                hpad(12),
+                Text('${S.of(context).hello}, ',
+                    style: txtBodySmallRegular(color: grayScaleColor2)),
+                Text(
+                  userInfo?.info_name ?? '',
+                  style: txtLinkMedium(),
+                )
+              ],
+            ),
           ],
         ),
         vpad(30),

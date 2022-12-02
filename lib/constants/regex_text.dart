@@ -1,7 +1,10 @@
 class RegexText {
+  static const vietLetter =
+      r'[àÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]';
   static bool vietNameseChar(String value) => RegExp(
         r'[àÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]',
       ).hasMatch(value);
+  static bool onlyZero(String value) => RegExp(r'[1-9]').hasMatch(value);
 
   static bool minMaxString({required String value, int? min, int? max}) =>
       RegExp("^.{$min,$max}\$").hasMatch(value);
@@ -18,7 +21,11 @@ class RegexText {
   static bool requiredNumber(String value) =>
       RegExp(r"(.*[0-9].*)").hasMatch(value);
 
-  static bool requiredSpecialChar(String value) => RegExp(
-        r"(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*#?&]",
+  static bool requiredSpecialChar(String value) =>
+      RegExp(
+        r'''(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*_#?&\[\]\(\)<>`\'+-={}"|\\/]''',
+      ).hasMatch(value) ||
+      RegExp(
+        r'''["]''',
       ).hasMatch(value);
 }

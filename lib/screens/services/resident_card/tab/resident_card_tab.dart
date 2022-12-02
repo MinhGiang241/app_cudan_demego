@@ -147,7 +147,7 @@ class ResidentCardTab extends StatelessWidget {
                                   (e) => TableRow(
                                     children: [
                                       Text(
-                                        e.title,
+                                        '${e.title}:',
                                         style: txtMedium(12, grayScaleColor2),
                                       ),
                                       Padding(

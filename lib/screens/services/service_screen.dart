@@ -120,7 +120,7 @@ class ServiceScreen extends StatelessWidget {
                         context, HomeScreen.routeName)),
               ),
               body: FutureBuilder(
-                  future: context.read<ServicePrv>().getExtraService(),
+                  future: context.read<ServicePrv>().getExtraService(context),
                   builder: (context, builder) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),

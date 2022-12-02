@@ -243,16 +243,20 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
       isSendApproveLoading = false;
       isAddNewLoading = false;
       if (liceneController.text.trim().isEmpty) {
-        validateLiceneNum = S.current.not_blank;
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_blank.toLowerCase()}";
       } else if (RegexText.vietNameseChar(liceneController.text.trim())) {
-        validateLiceneNum = S.current.not_vietnamese;
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_vietnamese.toLowerCase()}";
       } else if (RegexText.requiredSpecialChar(liceneController.text.trim())) {
-        validateLiceneNum = S.current.not_special_char;
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_special_char.toLowerCase()}";
       } else {
         validateLiceneNum = null;
       }
       if (regNumController.text.trim().isEmpty) {
-        validateRegNum = S.current.not_blank;
+        validateRegNum =
+            '${S.current.reg_num} ${S.current.not_blank.toLowerCase()}';
       } else {
         validateRegNum = null;
       }

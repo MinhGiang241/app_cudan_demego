@@ -108,7 +108,49 @@ class AuthPrv extends ChangeNotifier {
         // await APIAuth.getAccountInfo().then((v) {
         //   context.watch<AuthPrv>().account = Account.fromJson(v);
         // }).catchError((e) {});
-        return await APITower.getResidentInfo(account);
+        await APITower.getResidentInfo(account).then((value) async {
+          if (value != null) {
+            context.read<ResidentInfoPrv>().userInfo =
+                ResponseResidentInfo.fromJson(value);
+            context.read<ResidentInfoPrv>().residentId =
+                context.read<ResidentInfoPrv>().userInfo != null
+                    ? context.read<ResidentInfoPrv>().userInfo!.id
+                    : null;
+            await APITower.getUserOwnInfo(
+                    context.read<ResidentInfoPrv>().userInfo!.id as String)
+                .then((v) {
+              context.read<ResidentInfoPrv>().listOwn.clear();
+              v.forEach((i) {
+                if (i['status'] == 'ACTIVE' &&
+                    (i['type'] == 'BUY' || i['type'] == 'RENT')) {
+                  context
+                      .read<ResidentInfoPrv>()
+                      .listOwn
+                      .add(ResponseResidentOwn.fromJson(i));
+                }
+              });
+              Navigator.pushReplacementNamed(
+                  context, ProjectSelectionScreen.routeName);
+              // Navigator.of(context)
+              //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+              //   "listOwn": listOwn,
+              // });
+            }).catchError((e) {
+              Utils.showErrorMessage(context, e);
+              isLoading = false;
+              notifyListeners();
+            });
+          } else {
+            Navigator.of(context).pushNamed(
+              HomeScreen.routeName,
+              // arguments: {
+              //   "listOwn": [],
+              // },
+            );
+          }
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
 
         // Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName,arguments: {
         //   // "residentId":value.['resident_resident_find_phone_by_email']['data']
@@ -130,37 +172,53 @@ class AuthPrv extends ChangeNotifier {
         // });
 
         // await getUserInfo();
-      } else {}
-    }).then((value) async {
-      if (value != null) {
-        context.read<ResidentInfoPrv>().setUserInfo(value);
-        return await APITower.getUserOwnInfo(value['_id'] as String);
       } else {
-        Navigator.of(context).pushNamed(
-          HomeScreen.routeName,
-          // arguments: {
-          //   "listOwn": [],
-          // },
-        );
+        // throw(S.of(context).emai)
+        // onError.call('');
+        return;
       }
-    }).then((v) {
-      // var l = context.read<ResidentInfoPrv>().listOwn;
-      context.read<ResidentInfoPrv>().clearListOwn();
+    })
+        // .then((value) async {
+        //   if (value != null) {
+        //     context.read<ResidentInfoPrv>().setUserInfo(value);
+        //     return await APITower.getUserOwnInfo(value['_id'] as String);
+        //   } else {
+        //     return null;
+        //     // Navigator.of(context).pushNamed(
+        //     //   HomeScreen.routeName,
+        //     //   // arguments: {
+        //     //   //   "listOwn": [],
+        //     //   // },
+        //     // );
+        //   }
+        // }).then((v) {
+        //   // var l = context.read<ResidentInfoPrv>().listOwn;
+        //   context.read<ResidentInfoPrv>().clearListOwn();
 
-      v.forEach((i) {
-        if (i['status'] == 'ACTIVE' &&
-            (i['type'] == 'BUY' || i['type'] == 'RENT')) {
-          context.read<ResidentInfoPrv>().addListOwn(i);
-        }
-      });
-      Navigator.pushNamedAndRemoveUntil(
-          context, ProjectSelectionScreen.routeName, (r) => r.isActive);
-      // Navigator.of(context)
-      //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
-      //   "listOwn": listOwn,
-      // });
-    }).catchError((e) {
-      Utils.showErrorMessage(context, e);
+        //   if (v != null) {
+        //     v.forEach((i) {
+        //       if (i['status'] == 'ACTIVE' &&
+        //           (i['type'] == 'BUY' || i['type'] == 'RENT')) {
+        //         context.read<ResidentInfoPrv>().addListOwn(i);
+        //       }
+        //     });
+        //     Navigator.pushNamedAndRemoveUntil(
+        //         context, ProjectSelectionScreen.routeName, (r) => r.isActive);
+        //   } else {
+        //     // Navigator.of(context).pushNamed(
+        //     //   HomeScreen.routeName,
+        //     // );
+        //   }
+
+        //   // Navigator.of(context)
+        //   //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
+        //   //   "listOwn": listOwn,
+        //   // });
+        // })
+
+        .catchError((e) {
+      // Utils.showErrorMessage(context, e);
+      onError.call(e);
       isLoading = false;
       notifyListeners();
     });
@@ -282,8 +340,8 @@ class AuthPrv extends ChangeNotifier {
                       text: S.of(context).cancel,
                       buttonSize: ButtonSize.small,
                       buttonType: ButtonType.secondary,
-                      secondaryBackgroundColor: primaryColor4,
-                      textColor: primaryColorBase,
+                      secondaryBackgroundColor: primaryColor3,
+                      textColor: Colors.white,
                       onTap: () {
                         Utils.pop(context);
                       },

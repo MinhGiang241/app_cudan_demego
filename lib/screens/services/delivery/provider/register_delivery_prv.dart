@@ -6,9 +6,11 @@ import 'package:app_cudan/screens/services/delivery/delivery_list_screen.dart';
 import 'package:app_cudan/services/api_delivery.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../constants/regex_text.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/delivery.dart';
 import '../../../../services/api_auth.dart';
@@ -375,16 +377,18 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                     children: [
                       vpad(16),
                       PrimaryTextField(
-                        blockSpace: true,
+                        blockSpecial: true,
+                        maxLength: 100,
                         validateString: validatePackageName,
                         controller: packageNameController,
                         label: S.of(context).package_name,
                         isRequired: true,
                         hint: S.of(context).package_name,
                         validator: (v) {
-                          if (v!.isEmpty) {
+                          if (v!.trim().isEmpty) {
                             return '';
                           }
+
                           return null;
                         },
                       ),
@@ -401,6 +405,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                         validator: (v) {
                           if (v!.isEmpty) {
                             return '';
+                          } else if (!RegexText.onlyZero(v.trim())) {
+                            return '';
                           }
                           return null;
                         },
@@ -416,6 +422,10 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                         hint: S.of(context).l_w_e,
                         validator: (v) {
                           if (v!.isEmpty) {
+                            return '';
+                          } else if (!RegexText.onlyZero(v.trim())) {
+                            return '';
+                          } else if (RegexText.vietNameseChar(v.trim())) {
                             return '';
                           }
                           return null;
@@ -443,11 +453,20 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                             }
                             if (weightController.text.trim().isEmpty) {
                               validateWeight = S.of(context).not_blank;
+                            } else if (!RegexText.onlyZero(
+                                weightController.text.trim())) {
+                              validateWeight = S.of(context).not_zero;
                             } else {
                               validateWeight = null;
                             }
                             if (dimentionController.text.trim().isEmpty) {
                               validateDimention = S.of(context).not_blank;
+                            } else if (!RegexText.onlyZero(
+                                dimentionController.text.trim())) {
+                              validateDimention = S.of(context).not_dimention;
+                            } else if (RegexText.vietNameseChar(
+                                dimentionController.text.trim())) {
+                              validateDimention = S.of(context).not_vietnamese;
                             } else {
                               validateDimention = null;
                             }

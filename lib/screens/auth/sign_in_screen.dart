@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:app_cudan/screens/auth/prv/sign_in_prv.dart';
 import 'package:app_cudan/screens/auth/sign_up_screen.dart';
@@ -84,6 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: [
                   PrimaryTextField(
+                    blockSpace: true,
                     controller: context.read<SingInPrv>().accountController,
                     label: S.of(context).account_name,
                     hint: S.of(context).enter_email_phone,
@@ -98,6 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   vpad(16),
                   PrimaryTextField(
+                    blockSpace: true,
                     controller: context.read<SingInPrv>().passController,
                     obscureText: true,
                     isRequired: true,
@@ -167,7 +170,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           ? null
                           : () async {
                               FocusScope.of(context).unfocus();
-
                               await context.read<SingInPrv>().signIn(context);
 
                               // Navigator.pushNamed(

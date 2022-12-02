@@ -1,3 +1,4 @@
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
@@ -48,6 +49,7 @@ class SignUpPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       cPassValidate =
           emailValidate = phoneValidate = passValidate = nameValidate = null;
+      notifyListeners();
       onSignUp() async {
         // await authPrv.onCreateAccount(
         //   context,
@@ -104,17 +106,27 @@ class SignUpPrv extends ChangeNotifier {
       }
       if (passController.text.trim().isEmpty) {
         passValidate = S.of(context).can_not_empty;
+      } else if (passController.text.trim().length < 8) {
+        passValidate = S.of(context).pass_min_length;
+      } else if (!RegexText.requiredSpecialChar(passController.text.trim())) {
+        passValidate = S.of(context).pass_special;
       } else {
         passValidate = null;
       }
       if (cPassController.text.trim().isEmpty) {
         cPassValidate = S.of(context).can_not_empty;
+      } else if (cPassController.text.trim().length < 8) {
+        cPassValidate = S.of(context).pass_min_length;
+      } else if (cPassController.text.trim() != passController.text.trim()) {
+        cPassValidate = S.of(context).rgstr_code_2;
       } else {
-        if (cPassController.text.trim() != passController.text.trim()) {
-          cPassValidate = S.of(context).rgstr_code_2;
-        } else {
-          cPassValidate = null;
-        }
+        cPassValidate = null;
+      }
+      if (emailController.text.trim() != '' &&
+          !RegexText.isEmail(emailController.text.trim())) {
+        emailValidate = S.of(context).not_email;
+      } else {
+        emailValidate = null;
       }
       notifyListeners();
     }

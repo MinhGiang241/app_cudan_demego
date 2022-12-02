@@ -10,6 +10,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
+import '../../widgets/primary_text_field.dart';
 import 'apartment_selection_screen.dart';
 
 class ProjectSelectionScreen extends StatelessWidget {
@@ -45,6 +46,19 @@ class ProjectSelectionScreen extends StatelessWidget {
                 child: Text(S.of(context).choose_a_project,
                     style: txtDisplayMedium())),
             vpad(36),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: PrimaryTextField(
+                hint: S.of(context).search_project,
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: PrimaryIcon(
+                      icons: PrimaryIcons.search_outline,
+                      color: grayScaleColor2),
+                ),
+              ),
+            ),
+            vpad(16),
             Expanded(
               child: ListView(
                 padding:

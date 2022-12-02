@@ -1750,6 +1750,16 @@ class S {
     );
   }
 
+  /// `Do you want to delete letter {letter}?`
+  String confirm_delete_letter(Object letter) {
+    return Intl.message(
+      'Do you want to delete letter $letter?',
+      name: 'confirm_delete_letter',
+      desc: '',
+      args: [letter],
+    );
+  }
+
   /// `Do you want to lock transportation card?`
   String get confirm_lock_trans_card {
     return Intl.message(
@@ -2000,13 +2010,13 @@ class S {
     );
   }
 
-  /// `Do you want to send to approve request?`
-  String get confirm_send_request {
+  /// `Do you want to send to approve {approved}?`
+  String confirm_send_request(Object approved) {
     return Intl.message(
-      'Do you want to send to approve request?',
+      'Do you want to send to approve $approved?',
       name: 'confirm_send_request',
       desc: '',
-      args: [],
+      args: [approved],
     );
   }
 
@@ -2360,13 +2370,13 @@ class S {
     );
   }
 
-  /// `Do you want to cancel Request`
-  String get confirm_cancel_request {
+  /// `Do you want to cancel request letter {code}`
+  String confirm_cancel_request(Object code) {
     return Intl.message(
-      'Do you want to cancel Request',
+      'Do you want to cancel request letter $code',
       name: 'confirm_cancel_request',
       desc: '',
-      args: [],
+      args: [code],
     );
   }
 
@@ -2420,13 +2430,13 @@ class S {
     );
   }
 
-  /// `Do you want to lock card?`
-  String get confirm_lock_card {
+  /// `Do you want to lock card {card}?`
+  String confirm_lock_card(Object card) {
     return Intl.message(
-      'Do you want to lock card?',
+      'Do you want to lock card $card?',
       name: 'confirm_lock_card',
       desc: '',
-      args: [],
+      args: [card],
     );
   }
 
@@ -2635,6 +2645,66 @@ class S {
     return Intl.message(
       'Edit package',
       name: 'edit_package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not enter only zero!`
+  String get not_zero {
+    return Intl.message(
+      'Not enter only zero!',
+      name: 'not_zero',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password length can not less than 8 letter`
+  String get pass_min_length {
+    return Intl.message(
+      'Password length can not less than 8 letter',
+      name: 'pass_min_length',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least 1 special character`
+  String get pass_special {
+    return Intl.message(
+      'Password must contain at least 1 special character',
+      name: 'pass_special',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not is email.`
+  String get not_email {
+    return Intl.message(
+      'Not is email.',
+      name: 'not_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search project`
+  String get search_project {
+    return Intl.message(
+      'Search project',
+      name: 'search_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not be dimention`
+  String get not_dimention {
+    return Intl.message(
+      'Not be dimention',
+      name: 'not_dimention',
       desc: '',
       args: [],
     );

@@ -13,7 +13,7 @@ class DeliveryListPrv extends ChangeNotifier {
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).cancel_request,
-        content: S.of(context).confirm_cancel_request,
+        content: S.of(context).confirm_cancel_request(data.code ?? ""),
         onConfirm: () {
           data.status = 'CANCEL';
           data.reasons = 'NGUOIDUNGHUY';
@@ -42,7 +42,7 @@ class DeliveryListPrv extends ChangeNotifier {
 
       Utils.showConfirmMessage(
           title: S.of(context).send_request,
-          content: S.of(context).confirm_send_request,
+          content: S.of(context).confirm_send_request(data.code ?? ""),
           context: context,
           onConfirm: () {
             APIDelivery.saveNewDelivery(data.toJson()).then((v) {
@@ -77,14 +77,13 @@ class DeliveryListPrv extends ChangeNotifier {
     });
   }
 
-  deleteLetter(BuildContext context, String id) {
+  deleteLetter(BuildContext context, Delivery e) {
     Utils.showConfirmMessage(
         title: S.of(context).delete_letter,
-        content: S.of(context).confirm_delete_service(
-            S.of(context).delivery_letter.toLowerCase()),
+        content: S.of(context).confirm_delete_letter(e.code ?? ''),
         context: context,
         onConfirm: () async {
-          await APIDelivery.deleteDelivery(id).then((v) {
+          await APIDelivery.deleteDelivery(e.id ?? '').then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,

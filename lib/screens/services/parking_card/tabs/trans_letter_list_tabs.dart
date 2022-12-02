@@ -30,19 +30,19 @@ class TransportationLetterListTab extends StatelessWidget {
   final List<TransportationCard> cardList;
   String? residentId;
   Function(TransportationCard) cancelRegister;
-  Function(String) sendRequest;
+  Function(TransportationCard) sendRequest;
   Function() edit;
-  Function(String) deleteLetter;
+  Function(TransportationCard) deleteLetter;
   Function() onRefresh;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   @override
   Widget build(BuildContext context) {
-    var newLetter = [];
-    var approvedLetter = [];
-    var waitLetter = [];
-    var cancelLetter = [];
+    List<TransportationCard> newLetter = [];
+    List<TransportationCard> approvedLetter = [];
+    List<TransportationCard> waitLetter = [];
+    List<TransportationCard> cancelLetter = [];
     for (var i in cardList) {
       if (i.ticket_status == "NEW") {
         newLetter.add(i);
@@ -60,7 +60,8 @@ class TransportationLetterListTab extends StatelessWidget {
     waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
     cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-    var list = newLetter + approvedLetter + waitLetter + cancelLetter;
+    List<TransportationCard> list =
+        newLetter + approvedLetter + waitLetter + cancelLetter;
     return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_trans_letter,
@@ -178,7 +179,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                         (e) => TableRow(
                                           children: [
                                             Text(
-                                              e.title,
+                                              "${e.title}:",
                                               style: txtMedium(
                                                   12, grayScaleColor2),
                                             ),
@@ -220,8 +221,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                         secondaryBackgroundColor: greenColor7,
                                         text: S.of(context).send_request,
                                         textColor: greenColor8,
-                                        onTap: () =>
-                                            sendRequest(list[index].id!),
+                                        onTap: () => sendRequest(list[index]),
                                       ),
                                       PrimaryButton(
                                         buttonSize: ButtonSize.xsmall,
@@ -247,7 +247,7 @@ class TransportationLetterListTab extends StatelessWidget {
                                           textColor: redColor,
                                           text: S.of(context).delete_letter,
                                           onTap: () =>
-                                              deleteLetter(list[index].id!)),
+                                              deleteLetter(list[index])),
                                     ],
                                   ),
                                 vpad(12)

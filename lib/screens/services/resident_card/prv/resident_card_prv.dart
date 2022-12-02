@@ -30,7 +30,7 @@ class ResidentCardPrv extends ChangeNotifier {
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).lock_card,
-        content: S.of(context).confirm_lock_card,
+        content: S.of(context).confirm_lock_card(card.code ?? ""),
         onConfirm: () async {
           card.card_status = "INACTIVE";
           APIResCard.saveResidentCard(card.toJson()).then((v) {
@@ -51,15 +51,16 @@ class ResidentCardPrv extends ChangeNotifier {
         });
   }
 
-  deleteLetter(BuildContext context, String id) async {
+  deleteLetter(
+    BuildContext context,
+    ResidentCard card,
+  ) async {
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).delete_letter,
-        content: S
-            .of(context)
-            .confirm_delete_service(S.of(context).res_card.toLowerCase()),
+        content: S.of(context).confirm_delete_letter(card.code ?? ""),
         onConfirm: () async {
-          await APIResCard.removeResidentCard(id).then((v) {
+          await APIResCard.removeResidentCard(card.id ?? "").then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
@@ -85,7 +86,7 @@ class ResidentCardPrv extends ChangeNotifier {
     data.ticket_status = 'WAIT';
     Utils.showConfirmMessage(
         title: S.of(context).send_request,
-        content: S.of(context).confirm_send_request,
+        content: S.of(context).confirm_send_request(data.code ?? ''),
         context: context,
         onConfirm: () {
           APIResCard.saveResidentCard(data.toJson()).then((v) {
@@ -111,7 +112,7 @@ class ResidentCardPrv extends ChangeNotifier {
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).cancel_request,
-        content: S.of(context).confirm_cancel_request,
+        content: S.of(context).confirm_cancel_request(card.code ?? ""),
         onConfirm: () {
           card.ticket_status = 'CANCEL';
           card.reasons = 'NGUOIDUNGHUY';
