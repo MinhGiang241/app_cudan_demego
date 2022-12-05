@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'extra_service.dart';
+import 'reason.dart';
 import 'resident_info.dart';
 import 'response_resident_own.dart';
 
@@ -27,6 +28,7 @@ class ServiceRegistration {
     this.apartment,
     this.cancel_reason,
     this.resident,
+    this.cancel_reasons,
   });
   String? id;
   String? createdTime;
@@ -43,6 +45,7 @@ class ServiceRegistration {
   String? code;
   String? cancel_note;
   String? cancel_reason;
+  Reason? cancel_reasons;
   Pay? pay;
   bool? isMobile;
   Apartment? apartment;
@@ -67,6 +70,11 @@ class ServiceRegistration {
     isMobile = json['isMobile'];
     cancel_note = json['cancel_note'];
     cancel_reason = json['cancel_reason'];
+    cancel_reasons = json['cancel_reasons'] != null
+        ? json['cancel_reasons'].isNotEmpty
+            ? Reason.fromJson(json['cancel_reasons'][0])
+            : null
+        : null;
     building =
         json['building'] != null ? Building.fromJson(json['building']) : null;
     floor = json['floor'] != null ? Floor.fromJson(json['floor']) : null;

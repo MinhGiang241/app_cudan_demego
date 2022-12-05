@@ -93,9 +93,8 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                     if (arg.status == "CANCEL")
                       InfoContentView(
                         title: S.of(context).cancel_reason,
-                        content: genStatus(arg.status ?? ""),
-                        contentStyle:
-                            txtBold(14, genStatusColor(arg.status ?? "")),
+                        content: arg.cancel_reasons!.name ?? "",
+                        contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                   ],
                 ),
