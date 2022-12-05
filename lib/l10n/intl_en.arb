@@ -264,5 +264,12 @@
   "pass_special":"Password must contain at least 1 special character",
   "not_email":"Not is email.",
   "search_project":"Search project",
-  "not_dimention":"Not be dimention"
+  "not_dimention":"Not be dimention",
+  "service_name":"Service {service}",
+  "reg_code":"Registration code",
+  "payment_circle":"Payment circle",
+  "no_service_regitration":"Don't have any service registration",
+  "reg_date":"Registration date",
+  "expired_date":"Expired_date",
+  "reg_service":"Registration service"
 }

@@ -24,6 +24,7 @@ class TransportationCard {
       this.other_image,
       this.cancel_reason,
       this.reasons,
+      this.isMobile,
       this.vehicleType});
   String? id;
   String? createdTime;
@@ -47,6 +48,7 @@ class TransportationCard {
   Reason? cancel_reason;
   String? note_reason;
   String? reasons;
+  bool? isMobile;
 
   TransportationCard.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -68,6 +70,7 @@ class TransportationCard {
     card_status = json['card_status'];
     note_reason = json['note_reason'];
     reasons = json['reasons'];
+    isMobile = json['isMobile'];
     // ignore: prefer_null_aware_operators
     other_image = json['other_image'] != null
         ? json['other_image'].length != 0
@@ -106,6 +109,7 @@ class TransportationCard {
     data['code'] = code;
     data['reasons'] = reasons;
     data['card_status'] = card_status;
+    data['isMobile'] = isMobile;
     data['other_image'] =
         other_image != null ? [...other_image!.map((e) => e.toJson())] : null;
     // data['vehicleType'] = vehicleType != null ? vehicleType!.toJson() : null;

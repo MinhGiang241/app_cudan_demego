@@ -38,6 +38,7 @@ class Delivery {
   String? describe;
   String? status;
   bool? help_check;
+  bool? isMobile;
   List<ItemDeliver>? item_added_list;
   List<ImageDelivery>? image;
   Delivery.fromJson(Map<String, dynamic> json) {
@@ -58,6 +59,7 @@ class Delivery {
     note_reason = json['note_reason'];
     status = json['status'];
     help_check = json['help_check'];
+    isMobile = json['isMobile'] ?? false;
     image = json['image'] != null
         ? json['image'].length != 0
             ? json['image']
@@ -92,6 +94,7 @@ class Delivery {
     data['reasons'] = reasons;
     data['note_reason'] = note_reason;
     data['status'] = status;
+    data['isMobile'] = isMobile;
     data['help_check'] = help_check;
     data['image'] = image != null ? [...image!.map((e) => e.toJson())] : [];
     data['item_added_list'] = item_added_list != null

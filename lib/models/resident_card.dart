@@ -21,6 +21,7 @@ class ResidentCard {
       this.updatedTime,
       this.resident_image,
       this.cancel_reason,
+      this.isMobile,
       this.apartment});
   String? id;
   String? createdTime;
@@ -36,6 +37,7 @@ class ResidentCard {
   String? reasons;
   String? note_reason;
   String? resident_image;
+  bool? isMobile;
   Apartment? apartment;
   Building? building;
   Floor? floor;
@@ -57,10 +59,13 @@ class ResidentCard {
     reasons = json['reasons'];
     resident_image = json['resident_image'];
     note_reason = json['note_reason'];
+    isMobile = json['isMobile'];
     apartment = Apartment.fromJson(json['apartment']);
     building = Building.fromJson(json['building']);
     floor = Floor.fromJson(json['floor']);
-    resident = ResponseResidentInfo.fromJson(json['resident']);
+    resident = json['resident'] != null
+        ? ResponseResidentInfo.fromJson(json['resident'])
+        : null;
     cancel_reason = json['cancel_reason'] != null
         ? json['cancel_reason'].isNotEmpty
             ? Reason.fromJson(json['cancel_reason'][0])
@@ -84,6 +89,7 @@ class ResidentCard {
     data['card_status'] = card_status;
     data['ticket_status'] = ticket_status;
     data['resident_image'] = resident_image;
+    data['isMobile'] = isMobile;
 
     return data;
   }

@@ -181,6 +181,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
 
           var listOther = otherExistedImages! + otherImages;
           var newCard = TransportationCard(
+              isMobile: true,
               type: type.code,
               code: code,
               id: id,

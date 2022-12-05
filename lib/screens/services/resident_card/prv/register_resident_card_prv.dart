@@ -67,6 +67,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
         return uploadResPhoto(context);
       }).then((v) {
         var newCard = ResidentCard(
+            isMobile: true,
             id: id,
             code: code,
             apartmentId: apartmentId,

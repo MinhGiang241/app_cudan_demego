@@ -127,31 +127,31 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                             (e) {
                               var listContent = [
                                 InfoContentView(
-                                  title: "${S.of(context).letter_num} :",
+                                  title: "${S.of(context).letter_num}:",
                                   content: e.code,
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(
-                                  title: "${S.of(context).package} :",
+                                  title: "${S.of(context).package}:",
                                   content: e.item_added_list!
                                       .map((x) => x.item_name)
                                       .join(', '),
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(
-                                  title: "${S.of(context).start_time} :",
+                                  title: "${S.of(context).start_time}:",
                                   content:
                                       '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 0)}',
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(
-                                  title: "${S.of(context).end_time} :",
+                                  title: "${S.of(context).end_time}:",
                                   content:
                                       '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 0)}',
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(
-                                  title: "${S.of(context).status} :",
+                                  title: "${S.of(context).status}:",
                                   content: genStatus(e.status ?? ''),
                                   contentStyle: txtBold(
                                       14, genStatusColor(e.status ?? '')),

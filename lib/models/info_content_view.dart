@@ -67,9 +67,9 @@ genOrder(String status) {
   switch (status) {
     case "NEW":
       return 1;
-    case "APPROVED":
-      return 2;
     case "WAIT":
+      return 2;
+    case "APPROVED":
       return 3;
     case "CANCEL":
       return 4;

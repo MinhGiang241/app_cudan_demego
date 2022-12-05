@@ -8,7 +8,14 @@ class ServicePrv extends ChangeNotifier {
   List<ExtraService> listExtraService = [];
 
   Future getExtraService(BuildContext context) async {
-    await APIExtraService.getExtraServiceList().then((v) {}).catchError((e) {
+    await APIExtraService.getExtraServiceList().then((v) {
+      listExtraService.clear();
+
+      for (var i in v) {
+        listExtraService.add(ExtraService.fromJson(i));
+      }
+      notifyListeners();
+    }).catchError((e) {
       Utils.showSuccessMessage(context: context, e: e);
     });
   }

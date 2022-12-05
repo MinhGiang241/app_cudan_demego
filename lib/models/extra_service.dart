@@ -26,8 +26,8 @@ class ExtraService {
   String? description;
   String? link_affiliate;
   ServiceIcon? service_icon;
-  Payment? payments;
-  Pay? pay;
+  List<Payment>? payments;
+  List<Pay>? pay;
 
   ExtraService.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -40,12 +40,21 @@ class ExtraService {
     isAffiliate = json['isAffiliate'];
     description = json['description'];
     link_affiliate = json['link_affiliate'];
-    pay = json['pay'] != null ? Pay.fromJson(json['pay']) : null;
+    pay = json['pay'] != null
+        ? json['pay'].isNotEmpty
+            ? json['pay'].map<Pay>((e) => Pay.fromJson(e)).toList()
+            : []
+        : [];
+
+    payments = json['payments'] != null
+        ? json['payments'].isNotEmpty
+            ? json['payments'].map<Payment>((e) => Payment.fromJson(e)).toList()
+            : []
+        : [];
+
     service_icon = json['service_icon'] != null
         ? ServiceIcon.fromjson(json['service_icon'])
         : null;
-    payments =
-        json['payments'] != null ? Payment.fromJson(json['payments']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -99,14 +108,16 @@ class Pay {
     this.month,
     this.name,
     this.updatedTime,
+    this.price,
   });
   String? id;
   String? createdTime;
   String? updatedTime;
   String? code;
   String? name;
-  String? month;
+  int? month;
   bool? isValue;
+  int? price;
 
   Pay.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -116,6 +127,7 @@ class Pay {
     name = json['name'];
     month = json['month'];
     isValue = json['isValue'];
+    price = json['price'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -126,6 +138,7 @@ class Pay {
     data['name'] = name;
     data['month'] = month;
     data['isValue'] = isValue;
+    data['price'] = price;
     return data;
   }
 }
@@ -140,7 +153,7 @@ class Payment {
   String? id;
   String? createdTime;
   String? updatedTime;
-  double? price;
+  int? price;
   String? paymentCycle;
   Payment.fromJson(Map<String, dynamic> json) {
     id = json['_id'];

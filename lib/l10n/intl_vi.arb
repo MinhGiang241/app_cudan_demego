@@ -14,7 +14,7 @@
   "forgot_pass": "Quên mật khẩu?",
   "create_acc": "Đăng ký tài khoản",
   "create_acc_1": "Tạo tài khoản",
-  "have_acc": "Bạn đã có tài khoản ?",
+  "have_acc": "Bạn đã có tài khoản?",
   "full_name": "Họ và Tên",
   "enter_name": "Nhập họ và tên",
   "enter_username": "Nhập tên tài khoản",
@@ -265,5 +265,12 @@
   "pass_special":"Mật khẩu phải gồm 1 ký tự đặc biệt",
   "not_email":"Không phải là email.",
   "search_project":"Tìm kiếm dự án",
-  "not_dimention":"Kích thước không đúng"
+  "not_dimention":"Kích thước không đúng",
+  "service_name":"Dịch vụ {service}",
+  "reg_code":"Mã đăng ký",
+  "payment_circle":"Chu kỳ thanh toán",
+  "no_service_regitration":"Không có đăng ký dịch vụ vào",
+  "reg_date":"Ngày đăng ký",
+  "expired_date":"Ngày hết hạn",
+  "reg_service":"Đăng ký dịch vụ"
 }

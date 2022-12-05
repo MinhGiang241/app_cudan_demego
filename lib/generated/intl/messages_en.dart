@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(message) => "Error: ${message}";
 
-  static String m6(del) => "Remove ${del} successfully";
+  static String m6(service) => "Service ${service}";
 
-  static String m7(to) => "We sent otp code to :${to}";
+  static String m7(del) => "Remove ${del} successfully";
+
+  static String m8(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -142,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
         "expired": MessageLookupByLibrary.simpleMessage("Expired"),
+        "expired_date": MessageLookupByLibrary.simpleMessage("Expired_date"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
@@ -207,6 +210,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_letter":
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
+        "no_service_regitration": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any service registration"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("No have transportation card"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
@@ -251,6 +256,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "payment_circle":
+            MessageLookupByLibrary.simpleMessage("Payment circle"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
         "permission_denied_msg":
@@ -270,11 +277,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
+        "reg_code": MessageLookupByLibrary.simpleMessage("Registration code"),
         "reg_const":
             MessageLookupByLibrary.simpleMessage("Registration construction"),
+        "reg_date": MessageLookupByLibrary.simpleMessage("Registration date"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Register delivery"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
+        "reg_service":
+            MessageLookupByLibrary.simpleMessage("Registration service"),
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
@@ -346,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
+        "service_name": m6,
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "shopping_online":
@@ -375,7 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_remove": m6,
+        "success_remove": m7,
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
@@ -420,7 +432,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m7,
+        "we_send_to": m8,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back")
       };

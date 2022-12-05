@@ -19,10 +19,10 @@ import 'apartment_selection_screen.dart';
 import 'fogot_pass/phone_num_forgot_pass.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key, this.isFromSignUp = false, this.context})
+  SignInScreen({Key? key, this.isFromSignUp = false, this.context})
       : super(key: key);
   static const routeName = '/sign-in';
-  final bool isFromSignUp;
+  bool isFromSignUp;
   final BuildContext? context;
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -32,7 +32,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<SingInPrv>(widget.context!).initAccountSave();
     super.initState();
   }
 
@@ -41,7 +40,11 @@ class _SignInScreenState extends State<SignInScreen> {
     // return ChangeNotifierProvider<SingInPrv>(
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),
     //   builder: (context, state) {
-
+    Provider.of<SingInPrv>(context).initAccountSave();
+    final arg = ModalRoute.of(context)!.settings.arguments as bool?;
+    if (arg != null) {
+      widget.isFromSignUp = arg;
+    }
     return PrimaryScreen(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

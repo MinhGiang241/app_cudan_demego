@@ -61,7 +61,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                   textBaseline: TextBaseline.ideographic,
                   defaultVerticalAlignment: TableCellVerticalAlignment.baseline,
                   columnWidths: const {
-                    0: FlexColumnWidth(2),
+                    0: FlexColumnWidth(3),
                     1: FlexColumnWidth(3)
                   },
                   children: [

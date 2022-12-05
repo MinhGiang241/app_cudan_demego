@@ -9,10 +9,12 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
 import 'delivery/delivery_list_screen.dart';
+import 'extra_service/extra_service_card_list.dart';
 import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
 import 'service_prv.dart';
@@ -178,6 +180,43 @@ class ServiceScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  ...context
+                                      .read<ServicePrv>()
+                                      .listExtraService
+                                      .map((e) => InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).pushNamed(
+                                                  ExtraServiceCardListScreen
+                                                      .routeName,
+                                                  arguments: e);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(12)),
+                                                gradient: gradientPrimary,
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.network(
+                                                      fit: BoxFit.contain,
+                                                      width: 80,
+                                                      height: 80,
+                                                      "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
+                                                  Text(
+                                                    e.name ?? "",
+                                                    style: txtBodyMediumRegular(
+                                                        color: Colors.white),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )),
                                   vpad(0)
                                 ],
                               ),

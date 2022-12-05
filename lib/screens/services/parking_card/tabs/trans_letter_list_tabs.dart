@@ -115,11 +115,12 @@ class TransportationLetterListTab extends StatelessWidget {
                             content: list[index].vehicleType?.name ?? '',
                             contentStyle: txtBold(14),
                           ),
-                          InfoContentView(
-                            title: S.of(context).licene_plate,
-                            content: list[index].number_plate,
-                            contentStyle: txtBold(14),
-                          ),
+                          if (list[index].type != "BICYCLE")
+                            InfoContentView(
+                              title: S.of(context).licene_plate,
+                              content: list[index].number_plate,
+                              contentStyle: txtBold(14),
+                            ),
                           InfoContentView(
                             title: S.of(context).status,
                             content: genStatus(list[index].ticket_status ?? ''),

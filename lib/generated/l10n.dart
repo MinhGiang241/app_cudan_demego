@@ -2709,6 +2709,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Service {service}`
+  String service_name(Object service) {
+    return Intl.message(
+      'Service $service',
+      name: 'service_name',
+      desc: '',
+      args: [service],
+    );
+  }
+
+  /// `Registration code`
+  String get reg_code {
+    return Intl.message(
+      'Registration code',
+      name: 'reg_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment circle`
+  String get payment_circle {
+    return Intl.message(
+      'Payment circle',
+      name: 'payment_circle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any service registration`
+  String get no_service_regitration {
+    return Intl.message(
+      'Don\'t have any service registration',
+      name: 'no_service_regitration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration date`
+  String get reg_date {
+    return Intl.message(
+      'Registration date',
+      name: 'reg_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired_date`
+  String get expired_date {
+    return Intl.message(
+      'Expired_date',
+      name: 'expired_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration service`
+  String get reg_service {
+    return Intl.message(
+      'Registration service',
+      name: 'reg_service',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -51,8 +51,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (widget.isFromSignIn) {
                             Utils.pop(context);
                           } else {
-                            Utils.pushScreen(context,
-                                const SignInScreen(isFromSignUp: true));
+                            // Utils.pushScreen(
+                            //     context,
+                            //     SignInScreen(
+                            //         context: context, isFromSignUp: true));
+                            Navigator.pushNamed(context, SignInScreen.routeName,
+                                arguments: true);
                           }
                         },
                         borderRadius: BorderRadius.circular(5),
