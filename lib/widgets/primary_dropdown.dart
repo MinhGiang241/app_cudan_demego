@@ -47,7 +47,7 @@ class PrimaryDropDown extends StatefulWidget {
   final bool isRequired;
   final bool isMultiple;
   final String? Function(dynamic)? validator;
-  String? value;
+  dynamic value;
   String? validateString;
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
@@ -107,7 +107,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
             : PrimaryCard(
                 child: DropdownButtonFormField<dynamic>(
                   isDense: widget.isDense,
-
+                  menuMaxHeight: dvHeight(context) / 3,
                   validator: widget.validator,
                   dropdownColor: Colors.white,
                   value: widget.value,

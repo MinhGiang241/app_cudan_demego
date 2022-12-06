@@ -271,5 +271,12 @@
   "no_service_regitration":"Don't have any service registration",
   "reg_date":"Registration date",
   "expired_date":"Expired_date",
-  "reg_service":"Registration service"
+  "reg_service":"Registration service",
+  "reg_service_a":"Registration service {nameser}",
+  "edit_service_a":"Edit registration service {nameser}",
+  "max_day_pay":"Maximum payment date",
+  "need_choose_cylce_regdate":"You need to choose payment cycle and register date first",
+  "payment_cycle_not_empty":"Payment circle can be not empty",
+  "reg_day_not_empty":"Registration date can be not empty",
+  "not_upload_15mb":"Can not upload file larger 15MB"
 }

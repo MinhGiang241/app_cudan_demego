@@ -217,6 +217,7 @@ class ServiceScreen extends StatelessWidget {
                                               ),
                                             ),
                                           )),
+                                  vpad(0),
                                   vpad(0)
                                 ],
                               ),

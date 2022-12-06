@@ -32,6 +32,11 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    // Provider.of<SingInPrv>(context).initAccountSave();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<SingInPrv>(context, listen: false).initAccountSave();
+    });
+
     super.initState();
   }
 
@@ -40,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
     // return ChangeNotifierProvider<SingInPrv>(
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),
     //   builder: (context, state) {
-    Provider.of<SingInPrv>(context).initAccountSave();
+
     final arg = ModalRoute.of(context)!.settings.arguments as bool?;
     if (arg != null) {
       widget.isFromSignUp = arg;

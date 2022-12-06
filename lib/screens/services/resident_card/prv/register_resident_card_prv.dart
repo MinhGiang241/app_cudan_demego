@@ -62,9 +62,9 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       uploadFrontPhoto(context).then((v) async {
         return uploadBackPhoto(context);
       }).then((v) {
-        return uploadOtherImage(context);
-      }).then((v) {
         return uploadResPhoto(context);
+      }).then((v) {
+        return uploadOtherImage(context);
       }).then((v) {
         var newCard = ResidentCard(
             isMobile: true,

@@ -32,7 +32,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    var card = arg['card'];
+    var card = arg['card'] as ResidentCard;
     var lockCard = arg['lockCard'];
     return PrimaryScreen(
         appBar: PrimaryAppbar(
@@ -110,6 +110,8 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                             "${ApiConstants.uploadURL}?load=${card.identity_image_front}",
                           if (card.identity_image_back != null)
                             "${ApiConstants.uploadURL}?load=${card.identity_image_back}",
+                          if (card.resident_image != null)
+                            "${ApiConstants.uploadURL}?load=${card.resident_image}",
                           if (card.other_image != null)
                             "${ApiConstants.uploadURL}?load=${card.other_image}",
                           // if (arg.other_image != null)

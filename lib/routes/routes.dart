@@ -19,6 +19,7 @@ import '../screens/services/delivery/package_details_screen.dart';
 import '../screens/services/delivery/register_delivery_screen.dart';
 import '../screens/services/extra_service/extra_service_card_list.dart';
 import '../screens/services/extra_service/extra_service_details.dart';
+import '../screens/services/extra_service/extra_service_registration_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
 import '../screens/services/parcel/parcels_list_screen.dart';
@@ -161,6 +162,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ExtraServiceDetailsScreen(),
+        );
+      case ExtraServiceRegistrationScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ExtraServiceRegistrationScreen(),
         );
       case ParcelListScreen.routeName:
         return MaterialPageRoute(

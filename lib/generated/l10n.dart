@@ -2779,6 +2779,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Registration service {nameser}`
+  String reg_service_a(Object nameser) {
+    return Intl.message(
+      'Registration service $nameser',
+      name: 'reg_service_a',
+      desc: '',
+      args: [nameser],
+    );
+  }
+
+  /// `Edit registration service {nameser}`
+  String edit_service_a(Object nameser) {
+    return Intl.message(
+      'Edit registration service $nameser',
+      name: 'edit_service_a',
+      desc: '',
+      args: [nameser],
+    );
+  }
+
+  /// `Maximum payment date`
+  String get max_day_pay {
+    return Intl.message(
+      'Maximum payment date',
+      name: 'max_day_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You need to choose payment cycle and register date first`
+  String get need_choose_cylce_regdate {
+    return Intl.message(
+      'You need to choose payment cycle and register date first',
+      name: 'need_choose_cylce_regdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment circle can be not empty`
+  String get payment_cycle_not_empty {
+    return Intl.message(
+      'Payment circle can be not empty',
+      name: 'payment_cycle_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration date can be not empty`
+  String get reg_day_not_empty {
+    return Intl.message(
+      'Registration date can be not empty',
+      name: 'reg_day_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can not upload file larger 15MB`
+  String get not_upload_15mb {
+    return Intl.message(
+      'Can not upload file larger 15MB',
+      name: 'not_upload_15mb',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

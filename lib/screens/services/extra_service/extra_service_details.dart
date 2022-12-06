@@ -84,6 +84,12 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                           "${Utils.dateFormat(arg.registration_date ?? "", 0)} - ${Utils.dateFormat(arg.expiration_date ?? "", 0)}",
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
+                    if (arg.status == "APPROVED")
+                      InfoContentView(
+                        title: S.of(context).note,
+                        content: arg.note ?? "",
+                        contentStyle: txtBold(14, grayScaleColorBase),
+                      ),
                     InfoContentView(
                       title: S.of(context).status,
                       content: genStatus(arg.status ?? ""),
@@ -91,11 +97,12 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                           txtBold(14, genStatusColor(arg.status ?? "")),
                     ),
                     if (arg.status == "CANCEL")
-                      InfoContentView(
-                        title: S.of(context).cancel_reason,
-                        content: arg.cancel_reasons!.name ?? "",
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
+                      if (arg.cancel_reasons != null)
+                        InfoContentView(
+                          title: S.of(context).cancel_reason,
+                          content: arg.cancel_reasons!.name ?? "",
+                          contentStyle: txtBold(14, grayScaleColorBase),
+                        ),
                   ],
                 ),
               )

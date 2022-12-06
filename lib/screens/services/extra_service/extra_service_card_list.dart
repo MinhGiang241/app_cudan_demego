@@ -20,6 +20,7 @@ import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import '../service_screen.dart';
 import 'extra_service_details.dart';
+import 'extra_service_registration_screen.dart';
 
 class ExtraServiceCardListScreen extends StatefulWidget {
   static const routeName = '/extra-service';
@@ -40,7 +41,7 @@ class _ExtraServiceCardListScreenState
     final arg = ModalRoute.of(context)!.settings.arguments as ExtraService;
 
     return ChangeNotifierProvider(
-      create: (context) => ExtraServiceCardListPrv(),
+      create: (context) => ExtraServiceCardListPrv(extraService: arg),
       builder: (context, child) {
         return PrimaryScreen(
             appBar: PrimaryAppbar(
@@ -53,8 +54,14 @@ class _ExtraServiceCardListScreenState
             floatingActionButton: FloatingActionButton(
               tooltip: S.of(context).reg_service,
               onPressed: () {
-                // Navigator.pushNamed(context, RegisterDelivery.routeName,
-                //     arguments: {"isEdit": false});
+                Navigator.pushNamed(
+                    context, ExtraServiceRegistrationScreen.routeName,
+                    arguments: {
+                      "service": arg,
+                      "isEdit": false,
+                      "name": arg.name != null ? arg.name!.toLowerCase() : '',
+                      "serviceId": arg.id
+                    });
               },
               backgroundColor: primaryColorBase,
               child: const Icon(
@@ -240,12 +247,20 @@ class _ExtraServiceCardListScreenState
                                       ),
                                       PrimaryButton(
                                         onTap: () {
-                                          // Navigator.pushNamed(context,
-                                          //     RegisterDelivery.routeName,
-                                          //     arguments: {
-                                          //       "isEdit": true,
-                                          //       "data": e,
-                                          //     });
+                                          Navigator.pushNamed(
+                                              context,
+                                              ExtraServiceRegistrationScreen
+                                                  .routeName,
+                                              arguments: {
+                                                "service": arg,
+                                                "isEdit": true,
+                                                "name": arg.name != null
+                                                    ? arg.name!.toLowerCase()
+                                                    : '',
+                                                "serviceId": arg.id,
+                                                "data": e
+                                                // "data": arg,
+                                              });
                                         },
                                         text: S.of(context).edit,
                                         buttonSize: ButtonSize.xsmall,

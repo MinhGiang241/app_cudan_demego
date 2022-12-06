@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
+import '../generated/l10n.dart';
 import '../models/response_file_upload.dart';
 import '../models/response_register.dart';
 import '../models/response.dart';
@@ -212,6 +213,9 @@ class APIAuth {
     List<ResponseFileUpload> results = [];
     if (files.isNotEmpty) {
       for (var i = 0; i < files.length; i++) {
+        if (files[i].lengthSync() >= 15728640) {
+          throw (S.of(context).not_upload_15mb);
+        }
         final mpf = await MultipartFile.fromFile(files[i].path);
         final map = {
           "file": [mpf],

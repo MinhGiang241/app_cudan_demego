@@ -30,13 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(approved) => "Do you want to send to approve ${approved}?";
 
-  static String m5(message) => "Error: ${message}";
+  static String m5(nameser) => "Edit registration service ${nameser}";
 
-  static String m6(service) => "Service ${service}";
+  static String m6(message) => "Error: ${message}";
 
-  static String m7(del) => "Remove ${del} successfully";
+  static String m7(nameser) => "Registration service ${nameser}";
 
-  static String m8(to) => "We sent otp code to :${to}";
+  static String m8(service) => "Service ${service}";
+
+  static String m9(del) => "Remove ${del} successfully";
+
+  static String m10(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -109,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edit register delivery"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
+        "edit_service_a": m5,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
@@ -139,7 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
-        "err_x": m5,
+        "err_x": m6,
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
@@ -193,10 +198,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "max_day_pay":
+            MessageLookupByLibrary.simpleMessage("Maximum payment date"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Missing object"),
         "missing_report":
             MessageLookupByLibrary.simpleMessage("Missing Report"),
+        "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
+            "You need to choose payment cycle and register date first"),
         "need_support":
             MessageLookupByLibrary.simpleMessage("Need protection support"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
@@ -232,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
         "not_special_char": MessageLookupByLibrary.simpleMessage(
             "Can not contain special symbol"),
+        "not_upload_15mb": MessageLookupByLibrary.simpleMessage(
+            "Can not upload file larger 15MB"),
         "not_vietnamese": MessageLookupByLibrary.simpleMessage(
             "Can not contain Vietnamese letter"),
         "not_zero":
@@ -258,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Payment circle"),
+        "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Payment circle can be not empty"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
         "permission_denied_msg":
@@ -281,11 +294,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_const":
             MessageLookupByLibrary.simpleMessage("Registration construction"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Registration date"),
+        "reg_day_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Registration date can be not empty"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Register delivery"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
         "reg_service":
             MessageLookupByLibrary.simpleMessage("Registration service"),
+        "reg_service_a": m7,
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
@@ -357,7 +373,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
-        "service_name": m6,
+        "service_name": m8,
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "shopping_online":
@@ -387,7 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_remove": m7,
+        "success_remove": m9,
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
@@ -432,7 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m8,
+        "we_send_to": m10,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back")
       };

@@ -4,11 +4,99 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIExtraService {
+  static Future deleteRegistrationService(String id) async {
+    var query = '''
+  mutation (\$_id: String){
+	response: remove_ServiceRegistration_dto(_id:\$_id){
+	message
+	code
+	data {
+		  _id
+      }
+    }
+  }
+      ''';
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {"_id": id});
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveRegistrationService(data) async {
+    var query = '''
+    mutation (\$data:ServiceRegistrationInputDto){
+      response:save_ServiceRegistration_dto(data:\$data){
+        message
+        code
+        data{
+          _id
+        }
+      }
+    }
+    ''';
+
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {"data": data});
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getPaymentCycle() async {
+    var query = '''
+    query {
+      response: query_PaymentCycles_dto{
+        code
+        message
+        data{ 
+        _id
+          display_name,
+          updatedTime
+          createdTime
+          name
+          isValue
+          month
+          code
+        }
+      }
+    }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getServiceRegistration(
       String residentId, String arisingServiceId) async {
     var query = '''
     mutation (\$residentId:String,\$arisingServiceId:String){
-    response: service_moblie_get_service_registration_by_residentId_and_arising_service_id (residentId: \$residentId,arisingServiceId: \$arisingServiceId ) {
+    response: service_mobile_get_service_registration_by_residentId_and_arising_service_id (residentId: \$residentId,arisingServiceId: \$arisingServiceId ) {
         code
         message
         data

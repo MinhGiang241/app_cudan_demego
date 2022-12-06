@@ -272,5 +272,12 @@
   "no_service_regitration":"Không có đăng ký dịch vụ vào",
   "reg_date":"Ngày đăng ký",
   "expired_date":"Ngày hết hạn",
-  "reg_service":"Đăng ký dịch vụ"
+  "reg_service":"Đăng ký dịch vụ",
+  "reg_service_a":"Đăng ký dịch vụ {nameser}",
+  "edit_service_a":"Chỉnh sửa đăng ký dịch vụ {nameser}",
+  "max_day_pay":"Số ngày thanh toán tối đa",
+  "need_choose_cylce_regdate":"Bạn cần chọn chu kỳ thanh toán và ngày đăng ký trước",
+  "payment_cycle_not_empty":"Chu kỳ thanh toán không được để trống",
+  "reg_day_not_empty":"Ngày đăng ký không được để trống",
+  "not_upload_15mb":"Không upload được file lớn hơn 15MB"
 }

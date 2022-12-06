@@ -29,6 +29,8 @@ class ServiceRegistration {
     this.cancel_reason,
     this.resident,
     this.cancel_reasons,
+    this.maximum_day,
+    this.note,
   });
   String? id;
   String? createdTime;
@@ -43,6 +45,7 @@ class ServiceRegistration {
   String? expiration_date;
   String? status;
   String? code;
+  String? note;
   String? cancel_note;
   String? cancel_reason;
   Reason? cancel_reasons;
@@ -50,6 +53,7 @@ class ServiceRegistration {
   bool? isMobile;
   Apartment? apartment;
   Floor? floor;
+  int? maximum_day;
   Building? building;
   ResponseResidentInfo? resident;
 
@@ -67,7 +71,9 @@ class ServiceRegistration {
     registration_date = json['registration_date'];
     expiration_date = json['expiration_date'];
     status = json['status'];
+    note = json['note'];
     isMobile = json['isMobile'];
+    maximum_day = json['maximum_day'];
     cancel_note = json['cancel_note'];
     cancel_reason = json['cancel_reason'];
     cancel_reasons = json['cancel_reasons'] != null
@@ -102,9 +108,11 @@ class ServiceRegistration {
     data['expiration_date'] = expiration_date;
     data['status'] = status;
     data['isMobile'] = isMobile;
+    data['maximum_day'] = maximum_day;
     data['cancel_note'] = cancel_note;
+    data['note'] = note;
     data['cancel_reason'] = cancel_reason;
-    data['pay'] = pay != null ? pay!.toJson() : null;
+    // data['pay'] = pay != null ? pay!.toJson() : null;
     return data;
   }
 }
