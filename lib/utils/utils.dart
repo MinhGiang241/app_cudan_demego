@@ -385,54 +385,61 @@ class Utils {
       DateTime? startDate,
       DateTime? endDate}) async {
     if (Platform.isIOS) {
-      return showCupertinoModalPopup(
-          context: context,
-          builder: (BuildContext context) => Container(
-                height: 286,
-                padding: const EdgeInsets.only(top: 6.0),
-                margin: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                color: CupertinoColors.systemBackground.resolveFrom(context),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          vpad(0),
-                          CupertinoButton(
-                              padding: EdgeInsets.zero,
-                              child: Text(S.of(context).done),
-                              onPressed: () {
-                                Utils.pop(context);
-                              }),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: SafeArea(
-                        top: false,
-                        child: CupertinoDatePicker(
-                          mode: CupertinoDatePickerMode.date,
-                          initialDateTime: initDate ?? DateTime(2000),
-                          maximumDate: endDate ?? DateTime.now(),
-                          minimumDate: startDate ?? DateTime(1900),
-                          maximumYear: endDate != null
-                              ? endDate.year
-                              : DateTime.now().year,
-                          minimumYear:
-                              startDate != null ? startDate.year : 1900,
-                          onDateTimeChanged: (d) {
-                            onChange?.call(d);
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )).then((value) {
+      return await showDatePicker(
+        context: context,
+        firstDate: startDate ?? DateTime(1900),
+        lastDate: endDate ?? DateTime.now(),
+        initialDate: initDate ?? DateTime(2000),
+      )
+          // return showCupertinoModalPopup(
+          //     context: context,
+          //     builder: (BuildContext context) => Container(
+          //           height: 286,
+          //           padding: const EdgeInsets.only(top: 6.0),
+          //           margin: EdgeInsets.only(
+          //               bottom: MediaQuery.of(context).viewInsets.bottom),
+          //           color: CupertinoColors.systemBackground.resolveFrom(context),
+          //           child: Column(
+          //             mainAxisSize: MainAxisSize.min,
+          //             children: [
+          //               Padding(
+          //                 padding: const EdgeInsets.symmetric(horizontal: 16),
+          //                 child: Row(
+          //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //                   children: [
+          //                     vpad(0),
+          //                     CupertinoButton(
+          //                         padding: EdgeInsets.zero,
+          //                         child: Text(S.of(context).done),
+          //                         onPressed: () {
+          //                           Utils.pop(context);
+          //                         }),
+          //                   ],
+          //                 ),
+          //               ),
+          //               Expanded(
+          //                 child: SafeArea(
+          //                   top: false,
+          //                   child: CupertinoDatePicker(
+          //                     mode: CupertinoDatePickerMode.date,
+          //                     initialDateTime: initDate ?? DateTime(2000),
+          //                     maximumDate: endDate ?? DateTime.now(),
+          //                     minimumDate: startDate ?? DateTime(1900),
+          //                     maximumYear: endDate != null
+          //                         ? endDate.year
+          //                         : DateTime.now().year,
+          //                     minimumYear:
+          //                         startDate != null ? startDate.year : 1900,
+          //                     onDateTimeChanged: (d) {
+          //                       onChange?.call(d);
+          //                     },
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ))
+          .then((value) {
         if (value != null) {
           onDone?.call(value);
         }
