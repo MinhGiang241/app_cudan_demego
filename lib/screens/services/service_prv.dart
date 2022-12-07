@@ -14,9 +14,11 @@ class ServicePrv extends ChangeNotifier {
       for (var i in v) {
         listExtraService.add(ExtraService.fromJson(i));
       }
+      listExtraService.sort((a, b) => a.createdTime!.compareTo(b.createdTime!));
+
       notifyListeners();
     }).catchError((e) {
-      Utils.showSuccessMessage(context: context, e: e);
+      Utils.showErrorMessage(context, e);
     });
   }
 }

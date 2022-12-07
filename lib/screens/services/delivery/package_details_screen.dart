@@ -70,7 +70,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).card_num,
+                        title: S.of(context).letter_num,
                         content: arg.code,
                         contentStyle: txtBold(16, purpleColorBase),
                       ),
@@ -79,7 +79,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                           isHorizontal: true,
                           title: S.of(context).description,
                           content: arg.describe,
-                          contentStyle: txtBold(16, purpleColorBase),
+                          contentStyle: txtBold(16),
                         ),
                       InfoContentView(
                           isHorizontal: true,

@@ -279,5 +279,10 @@
   "need_choose_cylce_regdate":"Bạn cần chọn chu kỳ thanh toán và ngày đăng ký trước",
   "payment_cycle_not_empty":"Chu kỳ thanh toán không được để trống",
   "reg_day_not_empty":"Ngày đăng ký không được để trống",
-  "not_upload_15mb":"Không upload được file lớn hơn 15MB"
+  "not_upload_15mb":"Không upload được file lớn hơn 15MB",
+  "month":"Tháng",
+  "year":"Năm",
+  "done":"Xong",
+  "max_pay_day_not_empty":"Số ngày đăng ký tối đa không được để trống",
+  "free_service":"Dịch vụ không tính phí"
 }

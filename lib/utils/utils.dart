@@ -385,7 +385,7 @@ class Utils {
       DateTime? startDate,
       DateTime? endDate}) async {
     if (Platform.isIOS) {
-      showCupertinoModalPopup<void>(
+      return showCupertinoModalPopup(
           context: context,
           builder: (BuildContext context) => Container(
                 height: 286,
@@ -404,7 +404,7 @@ class Utils {
                           vpad(0),
                           CupertinoButton(
                               padding: EdgeInsets.zero,
-                              child: Text("S.of(context).done"),
+                              child: Text(S.of(context).done),
                               onPressed: () {
                                 Utils.pop(context);
                               }),
@@ -432,9 +432,14 @@ class Utils {
                     ),
                   ],
                 ),
-              ));
+              )).then((value) {
+        if (value != null) {
+          onDone?.call(value);
+        }
+        return value;
+      });
     } else {
-      await showDatePicker(
+      return await showDatePicker(
         context: context,
         firstDate: startDate ?? DateTime(1900),
         lastDate: endDate ?? DateTime.now(),
@@ -443,6 +448,7 @@ class Utils {
         if (value != null) {
           onDone?.call(value);
         }
+        return value;
       });
     }
   }

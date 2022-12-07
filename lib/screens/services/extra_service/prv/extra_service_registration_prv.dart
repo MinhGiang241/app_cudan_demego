@@ -2,6 +2,7 @@ import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/service_registration.dart';
 import 'package:app_cudan/services/api_extra_service.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/extra_service.dart';
@@ -20,6 +21,8 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     this.regDateString,
     this.maxDayPay,
     this.codeCycle,
+    this.code,
+    this.payList = const [],
     required this.service,
   }) {
     noteController.text = note ?? '';
@@ -30,9 +33,15 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     expiredDate = DateTime.tryParse(expiredDateString ?? "") != null
         ? DateTime.parse(expiredDateString!)
         : null;
+    if (codeCycle == 'NO_PAYMENT') {
+      month = 0;
+    }
     expiredDateController.text = Utils.dateFormat(expiredDateString ?? '', 0);
+    if (payList.isEmpty) {
+      maxDayPay = 1;
+    }
   }
-  List<Pay> payList = [];
+  List<Pay> payList;
   final TextEditingController regDateController = TextEditingController();
   final TextEditingController expiredDateController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -50,6 +59,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   bool isSendApproveLoading = false;
   String selectedApartmentId;
   String? id;
+  String? code;
   final String arisingServiceId;
   final String phoneNumber;
   final ExtraService service;
@@ -80,8 +90,13 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
         if (regDate == null) {
           listError.add(S.of(context).reg_day_not_empty);
         }
-        if (month == null) {
+        if (payList.isNotEmpty && month == null) {
           listError.add(S.of(context).payment_cycle_not_empty);
+        }
+
+        if (maxDayPay == null &&
+            (codeCycle != 'NO_PAYMENT' || payList.isNotEmpty)) {
+          listError.add(S.of(context).max_pay_day_not_empty);
         }
         if (listError.isNotEmpty) {
           throw (listError.join(',  '));
@@ -91,13 +106,14 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
             people: residentId != null ? "resident" : "quest",
             residentId: residentId,
             isMobile: true,
+            code: code,
             status: isRequest ? "WAIT" : "NEW",
             apartmentId: selectedApartmentId,
             arisingServiceId: arisingServiceId,
             registration_date: regDate!.toIso8601String(),
             expiration_date: expiredDate!.toIso8601String(),
             id: id,
-            paymentCycle: codeCycle,
+            paymentCycle: codeCycle ?? "NO_PAYMENT",
             phoneNumber: phoneNumber,
             maximum_day: maxDayPay,
             note: noteController.text.trim());
@@ -122,7 +138,11 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
                   context,
                   ExtraServiceCardListScreen.routeName,
                   (route) => route.isFirst,
-                  arguments: service);
+                  arguments: {
+                    "service": service,
+                    "year": regDate!.year,
+                    "month": regDate!.month
+                  });
             },
           );
         }).catchError((e) {
@@ -148,7 +168,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   onSelectPaymentCycle(context, v) {
-    chosenCycle = payList.firstWhere((element) => element.code == v);
+    chosenCycle = payList.firstWhereOrNull((element) => element.code == v);
     if (chosenCycle != null) {
       codeCycle = chosenCycle!.code;
       month = chosenCycle!.month ?? 0;
@@ -158,6 +178,8 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
           regDate!.day - (month == 0 ? 0 : 1));
       expiredDateController.text =
           Utils.dateFormat(expiredDate!.toIso8601String(), 0);
+    } else {
+      expiredDate = regDate;
     }
 
     notifyListeners();
@@ -177,21 +199,30 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   pickRegDate(context) async {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 10, 1, 1),
-      lastDate: DateTime(DateTime.now().year + 10, 1, 1),
-    ).then((v) {
+    Utils.showDatePickers(
+      context,
+      initDate: DateTime.now(),
+      startDate: DateTime(DateTime.now().year - 10, 1, 1),
+      endDate: DateTime(DateTime.now().year + 10, 1, 1),
+    )
+        // showDatePicker(
+        //   context: context,
+        //   initialDate: DateTime.now(),
+        //   firstDate: DateTime(DateTime.now().year - 10, 1, 1),
+        //   lastDate: DateTime(DateTime.now().year + 10, 1, 1),
+        // )
+        .then((v) {
       if (v != null) {
         regDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         regDate = v;
-        if (month != null) {
+        if (month != null && payList.isNotEmpty) {
           expiredDate = DateTime(
               regDate!.year, regDate!.month + month!, regDate!.day - 1);
 
           expiredDateController.text =
               Utils.dateFormat(expiredDate!.toIso8601String(), 0);
+        } else {
+          expiredDate = regDate;
         }
       }
       notifyListeners();
@@ -199,13 +230,15 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   getPaymentCycle(BuildContext context) async {
-    await APIExtraService.getPaymentCycle().then((v) {
-      payList.clear();
-      for (var i in v) {
-        payList.add(Pay.fromJson(i));
-      }
-    }).catchError((e) {
-      Utils.showErrorMessage(context, e);
-    });
+    // await APIExtraService.getPaymentCycle().then((v) {
+    //   payList.clear();
+    //   for (var i in v) {
+    //     if (i['isValue']) {
+    //       payList.add(Pay.fromJson(i));
+    //     }
+    //   }
+    // }).catchError((e) {
+    //   Utils.showErrorMessage(context, e);
+    // });
   }
 }

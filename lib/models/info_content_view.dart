@@ -55,7 +55,7 @@ genStatusColor(String status) {
     case "WAIT":
       return primaryColor1;
     case "CANCEL":
-      return redColorBase;
+      return redColor9;
     case "APPROVED":
       return greenColorBase;
     default:

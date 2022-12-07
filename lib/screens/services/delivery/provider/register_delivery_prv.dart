@@ -111,6 +111,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                 ? '${endHourController.text}:00'
                 : null,
             id: id,
+            isMobile: true,
             help_check: helpCheck,
             image: submitImageDelivery + existedImage,
             residentId: context.read<ResidentInfoPrv>().residentId,
@@ -193,8 +194,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         }
       }
     }).catchError((e) {
-      notifyListeners();
-      Utils.showErrorMessage(context, e);
+      throw (e);
     });
   }
 
@@ -262,12 +262,19 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   }
 
   pickStartDate(BuildContext context) {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 10, 1, 1),
-      lastDate: DateTime(DateTime.now().year + 10, 1, 1),
-    ).then((v) {
+    Utils.showDatePickers(
+      context,
+      initDate: DateTime.now(),
+      startDate: DateTime(DateTime.now().year - 10, 1, 1),
+      endDate: DateTime(DateTime.now().year + 10, 1, 1),
+    )
+        // showDatePicker(
+        //   context: context,
+        //   initialDate: DateTime.now(),
+        //   firstDate: DateTime(DateTime.now().year - 10, 1, 1),
+        //   lastDate: DateTime(DateTime.now().year + 10, 1, 1),
+        // )
+        .then((v) {
       if (v != null) {
         startDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         startDate = v;
@@ -286,12 +293,19 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   }
 
   pickEndDate(BuildContext context) {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 10, 1, 1),
-      lastDate: DateTime(DateTime.now().year + 10, 1, 1),
-    ).then((v) {
+    Utils.showDatePickers(
+      context,
+      initDate: DateTime.now(),
+      startDate: DateTime(DateTime.now().year - 10, 1, 1),
+      endDate: DateTime(DateTime.now().year + 10, 1, 1),
+    )
+        // showDatePicker(
+        //   context: context,
+        //   initialDate: DateTime.now(),
+        //   firstDate: DateTime(DateTime.now().year - 10, 1, 1),
+        //   lastDate: DateTime(DateTime.now().year + 10, 1, 1),
+        // )
+        .then((v) {
       if (v != null) {
         endDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         endDate = v;

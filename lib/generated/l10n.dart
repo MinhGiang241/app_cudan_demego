@@ -2849,6 +2849,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Month`
+  String get month {
+    return Intl.message(
+      'Month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year`
+  String get year {
+    return Intl.message(
+      'Year',
+      name: 'year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum payment date can not be empty`
+  String get max_pay_day_not_empty {
+    return Intl.message(
+      'Maximum payment date can not be empty',
+      name: 'max_pay_day_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free service`
+  String get free_service {
+    return Intl.message(
+      'Free service',
+      name: 'free_service',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -107,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
         "edit_reg_deliver":
@@ -160,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
+        "free_service": MessageLookupByLibrary.simpleMessage("Free service"),
         "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
@@ -200,10 +202,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
+        "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Maximum payment date can not be empty"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Missing object"),
         "missing_report":
             MessageLookupByLibrary.simpleMessage("Missing Report"),
+        "month": MessageLookupByLibrary.simpleMessage("Month"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "You need to choose payment cycle and register date first"),
         "need_support":
@@ -450,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "How would you like to receive a code to reset your password?"),
         "we_send_to": m10,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
-        "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back")
+        "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
+        "year": MessageLookupByLibrary.simpleMessage("Year")
       };
 }

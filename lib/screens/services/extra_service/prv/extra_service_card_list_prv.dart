@@ -9,12 +9,16 @@ import '../../../../utils/utils.dart';
 import '../extra_service_card_list.dart';
 
 class ExtraServiceCardListPrv extends ChangeNotifier {
-  ExtraServiceCardListPrv({required this.extraService});
+  ExtraServiceCardListPrv(
+      {required this.extraService, required this.year, required this.month});
   List<ServiceRegistration> listCard = [];
+  int year;
+  int month;
   ExtraService extraService;
   getRegisterExtraServiceList(
       BuildContext context, String residentId, String serviceId) async {
-    await APIExtraService.getServiceRegistration(residentId, serviceId)
+    await APIExtraService.getServiceRegistration(
+            residentId, serviceId, year, month)
         .then((v) {
       listCard.clear();
       for (var i in v) {
@@ -24,6 +28,13 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
+  }
+
+  chooseMonthYear(int selectedYear, int selectedMonth) {
+    // setState({});
+    year = selectedYear;
+    month = selectedMonth;
+    notifyListeners();
   }
 
   cancelRequetsAprrove(BuildContext context, ServiceRegistration card) {
@@ -45,7 +56,11 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                       context,
                       ExtraServiceCardListScreen.routeName,
                       (route) => route.isFirst,
-                      arguments: extraService);
+                      arguments: {
+                        "service": extraService,
+                        "year": year,
+                        "month": month,
+                      });
                 });
           }).catchError((e) {
             Navigator.pop(context);
@@ -71,7 +86,11 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                     context,
                     ExtraServiceCardListScreen.routeName,
                     (route) => route.isFirst,
-                    arguments: extraService,
+                    arguments: {
+                      "service": extraService,
+                      "year": year,
+                      "month": month,
+                    },
                   );
                 });
           }).catchError((e) {
@@ -98,7 +117,11 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                     context,
                     ExtraServiceCardListScreen.routeName,
                     (route) => route.isFirst,
-                    arguments: extraService,
+                    arguments: {
+                      "service": extraService,
+                      "year": year,
+                      "month": month,
+                    },
                   );
                 });
           }).catchError((e) {

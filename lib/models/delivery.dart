@@ -19,6 +19,7 @@ class Delivery {
       this.updatedTime,
       this.image,
       this.end_hour,
+      this.isMobile,
       this.start_hour,
       this.describe});
   String? id;

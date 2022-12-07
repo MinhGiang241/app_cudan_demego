@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/extra_service.dart';
 import '../../../models/service_registration.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -31,13 +32,15 @@ class _ExtraServiceRegistrationScreenState
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
 
     var isEdit = arg['isEdit'];
-    var service = arg['service'];
+    ExtraService service = arg['service'];
     ServiceRegistration regService = ServiceRegistration();
     if (isEdit) {
       regService = arg['data'];
     }
     return ChangeNotifierProvider(
       create: (context) => ExtraServiceRegistrationPrv(
+          payList: service.pay ?? [],
+          code: isEdit ? regService.code : null,
           service: service,
           codeCycle: isEdit ? regService.paymentCycle : null,
           maxDayPay: isEdit ? regService.maximum_day : null,
@@ -83,22 +86,25 @@ class _ExtraServiceRegistrationScreenState
                     );
                   }).toList();
 
-                  var listPaymentChoice = context
-                      .read<ExtraServiceRegistrationPrv>()
-                      .payList
-                      .map((e) {
-                    return DropdownMenuItem(
-                      value: e.code,
-                      child: Text(e.name != null ? e.name! : e.code!),
-                    );
-                  }).toList();
+                  var listPaymentChoice = service.pay != null
+                      ? service.pay!.map((e) {
+                          return DropdownMenuItem(
+                            value: e.code,
+                            child: Text(e.name != null ? e.name! : e.code!),
+                          );
+                        }).toList()
+                      : null;
                   var maxDayPayList = List.generate(
                       14,
                       (index) => DropdownMenuItem(
                             value: index + 1,
                             child: Text((index + 1).toString()),
                           ));
-                  if (isEdit) {
+                  if (isEdit &&
+                      context
+                          .read<ExtraServiceRegistrationPrv>()
+                          .payList
+                          .isNotEmpty) {
                     context.read<ExtraServiceRegistrationPrv>().chosenCycle =
                         context
                             .read<ExtraServiceRegistrationPrv>()
@@ -130,20 +136,28 @@ class _ExtraServiceRegistrationScreenState
                               .read<ExtraServiceRegistrationPrv>()
                               .onChooseApartment(context, v),
                         ),
-                        vpad(16),
-                        PrimaryDropDown(
-                          value: context
-                              .read<ExtraServiceRegistrationPrv>()
-                              .codeCycle,
-                          isRequired: true,
-                          label: S.of(context).payment_circle,
-                          selectList: listPaymentChoice,
-                          onChange: (v) {
-                            context
+                        if (context
+                            .watch<ExtraServiceRegistrationPrv>()
+                            .payList
+                            .isNotEmpty)
+                          vpad(16),
+                        if (context
+                            .watch<ExtraServiceRegistrationPrv>()
+                            .payList
+                            .isNotEmpty)
+                          PrimaryDropDown(
+                            value: context
                                 .read<ExtraServiceRegistrationPrv>()
-                                .onSelectPaymentCycle(context, v);
-                          },
-                        ),
+                                .codeCycle,
+                            isRequired: true,
+                            label: S.of(context).payment_circle,
+                            selectList: listPaymentChoice,
+                            onChange: (v) {
+                              context
+                                  .read<ExtraServiceRegistrationPrv>()
+                                  .onSelectPaymentCycle(context, v);
+                            },
+                          ),
                         vpad(16),
                         PrimaryTextField(
                           controller: context
@@ -167,38 +181,71 @@ class _ExtraServiceRegistrationScreenState
                           //   return null;
                           // },
                         ),
-                        vpad(16),
-                        PrimaryTextField(
-                          controller: context
-                              .watch<ExtraServiceRegistrationPrv>()
-                              .expiredDateController,
-                          label: S.of(context).expired_date,
-                          hint: "dd/mm/yyyy",
-                          isReadOnly: true,
-                          isRequired: true,
-                          onTap: () => context
-                              .read<ExtraServiceRegistrationPrv>()
-                              .onTapExpiredDate(context),
-                          suffixIcon:
-                              const PrimaryIcon(icons: PrimaryIcons.calendar),
-                          // validator: (v) {
-                          //   if (v!.isEmpty) {
-                          //     return '';
-                          //   }
-                          //   return null;
-                          // },
-                        ),
-                        vpad(16),
-                        PrimaryDropDown(
-                          value: context
-                              .read<ExtraServiceRegistrationPrv>()
-                              .maxDayPay,
-                          label: S.of(context).max_day_pay,
-                          selectList: maxDayPayList,
-                          onChange: (v) => context
-                              .read<ExtraServiceRegistrationPrv>()
-                              .onChangeMaxPayDate(context, v),
-                        ),
+                        if (!(context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .codeCycle ==
+                                'NO_PAYMENT' ||
+                            context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .payList
+                                .isEmpty))
+                          vpad(16),
+                        if (!(context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .codeCycle ==
+                                'NO_PAYMENT' ||
+                            context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .payList
+                                .isEmpty))
+                          PrimaryTextField(
+                            controller: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .expiredDateController,
+                            label: S.of(context).expired_date,
+                            hint: "dd/mm/yyyy",
+                            isReadOnly: true,
+                            isRequired: true,
+                            onTap: () => context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .onTapExpiredDate(context),
+                            suffixIcon:
+                                const PrimaryIcon(icons: PrimaryIcons.calendar),
+                            // validator: (v) {
+                            //   if (v!.isEmpty) {
+                            //     return '';
+                            //   }
+                            //   return null;
+                            // },
+                          ),
+                        if (!(context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .codeCycle ==
+                                'NO_PAYMENT' ||
+                            context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .payList
+                                .isEmpty))
+                          vpad(16),
+                        if (!(context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .codeCycle ==
+                                'NO_PAYMENT' ||
+                            context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .payList
+                                .isEmpty))
+                          PrimaryDropDown(
+                            isRequired: true,
+                            value: context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .maxDayPay,
+                            label: S.of(context).max_day_pay,
+                            selectList: maxDayPayList,
+                            onChange: (v) => context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .onChangeMaxPayDate(context, v),
+                          ),
                         vpad(16),
                         PrimaryTextField(
                           label: S.of(context).note,

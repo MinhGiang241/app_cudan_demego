@@ -278,5 +278,10 @@
   "need_choose_cylce_regdate":"You need to choose payment cycle and register date first",
   "payment_cycle_not_empty":"Payment circle can be not empty",
   "reg_day_not_empty":"Registration date can be not empty",
-  "not_upload_15mb":"Can not upload file larger 15MB"
+  "not_upload_15mb":"Can not upload file larger 15MB",
+  "month":"Month",
+  "year":"Year",
+  "done":"Done",
+  "max_pay_day_not_empty":"Maximum payment date can not be empty",
+  "free_service":"Free service"
 }

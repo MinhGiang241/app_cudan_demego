@@ -68,6 +68,7 @@ const Color redColor5 = Color(0xffFFE2E2);
 const Color redColor6 = Color(0xffFF0000);
 const Color redColor7 = Color(0xffFF9D9D);
 const Color redColor8 = Color(0xffDDD3D3);
+const Color redColor9 = Color(0xffEE2223);
 
 const Color greenColorBase = Color(0xff23D2C3);
 const Color greenColor1 = Color(0xff01BCAD);

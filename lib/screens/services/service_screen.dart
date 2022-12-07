@@ -188,7 +188,12 @@ class ServiceScreen extends StatelessWidget {
                                               Navigator.of(context).pushNamed(
                                                   ExtraServiceCardListScreen
                                                       .routeName,
-                                                  arguments: e);
+                                                  arguments: {
+                                                    "service": e,
+                                                    "year": DateTime.now().year,
+                                                    "month":
+                                                        DateTime.now().month
+                                                  });
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(

@@ -9,6 +9,7 @@ import '../../../generated/l10n.dart';
 import '../../../models/extra_service.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/service_registration.dart';
+import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_card.dart';
@@ -38,10 +39,13 @@ class _ExtraServiceCardListScreenState
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as ExtraService;
-
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    final service = arg['service'];
+    final y = arg["year"];
+    final m = arg["month"];
     return ChangeNotifierProvider(
-      create: (context) => ExtraServiceCardListPrv(extraService: arg),
+      create: (context) =>
+          ExtraServiceCardListPrv(extraService: service, year: y, month: m),
       builder: (context, child) {
         return PrimaryScreen(
             appBar: PrimaryAppbar(
@@ -49,7 +53,7 @@ class _ExtraServiceCardListScreenState
                   onPressed: () => Navigator.pushReplacementNamed(
                       context, ServiceScreen.routeName)),
               title: S.of(context).service_name(
-                  arg.name != null ? arg.name!.toLowerCase() : ''),
+                  service.name != null ? service.name!.toLowerCase() : ''),
             ),
             floatingActionButton: FloatingActionButton(
               tooltip: S.of(context).reg_service,
@@ -57,10 +61,12 @@ class _ExtraServiceCardListScreenState
                 Navigator.pushNamed(
                     context, ExtraServiceRegistrationScreen.routeName,
                     arguments: {
-                      "service": arg,
+                      "service": service,
                       "isEdit": false,
-                      "name": arg.name != null ? arg.name!.toLowerCase() : '',
-                      "serviceId": arg.id
+                      "name": service.name != null
+                          ? service.name!.toLowerCase()
+                          : '',
+                      "serviceId": service.id
                     });
               },
               backgroundColor: primaryColorBase,
@@ -75,7 +81,7 @@ class _ExtraServiceCardListScreenState
                   .getRegisterExtraServiceList(
                       context,
                       context.read<ResidentInfoPrv>().residentId ?? '',
-                      arg.id ?? ""),
+                      service.id ?? ""),
               builder: (context, snapshot) {
                 List<ServiceRegistration> newLetter = [];
                 List<ServiceRegistration> approvedLetter = [];
@@ -114,15 +120,49 @@ class _ExtraServiceCardListScreenState
                         setState(() {});
                       });
                 } else if (list.isEmpty) {
-                  return PrimaryEmptyWidget(
-                    emptyText: S.of(context).no_service_regitration,
-                    // buttonText: S.of(context).add_trans_card,
-                    icons: PrimaryIcons.service_feedback,
-                    action: () {
-                      // Utils.pushScreen(context, const RegisterParkingCard());
-                    },
+                  return SafeArea(
+                    child: SmartRefresher(
+                      enablePullDown: true,
+                      enablePullUp: false,
+                      header: WaterDropMaterialHeader(
+                          backgroundColor: Theme.of(context).primaryColor),
+                      controller: _refreshController,
+                      onRefresh: () {
+                        setState(() {});
+                        _refreshController.loadComplete();
+                      },
+                      child: Column(
+                        children: [
+                          vpad(24),
+                          ChooseMonthYear(
+                            title: S.of(context).his_reg_service,
+                            selectMonthAndYear: (year, month) {
+                              Provider.of<ExtraServiceCardListPrv>(context,
+                                      listen: false)
+                                  .chooseMonthYear(year, month);
+                              setState(() {});
+                            },
+                            year: context.watch<ExtraServiceCardListPrv>().year,
+                            month:
+                                context.watch<ExtraServiceCardListPrv>().month,
+                          ),
+                          Expanded(
+                            child: PrimaryEmptyWidget(
+                              emptyText: S.of(context).no_service_regitration,
+                              // buttonText: S.of(context).add_trans_card,
+                              icons: PrimaryIcons.service_feedback,
+                              action: () {
+                                // Utils.pushScreen(context, const RegisterParkingCard());
+                              },
+                            ),
+                          ),
+                          vpad(100),
+                        ],
+                      ),
+                    ),
                   );
                 }
+
                 return SafeArea(
                   child: SmartRefresher(
                     enablePullDown: true,
@@ -136,6 +176,18 @@ class _ExtraServiceCardListScreenState
                     },
                     child: ListView(children: [
                       vpad(24),
+                      ChooseMonthYear(
+                        title: S.of(context).his_reg_service,
+                        selectMonthAndYear: (year, month) {
+                          Provider.of<ExtraServiceCardListPrv>(context,
+                                  listen: false)
+                              .chooseMonthYear(year, month);
+                          setState(() {});
+                        },
+                        year: context.watch<ExtraServiceCardListPrv>().year,
+                        month: context.watch<ExtraServiceCardListPrv>().month,
+                      ),
+                      vpad(12),
                       ...list.map((e) {
                         var listContent = [
                           InfoContentView(
@@ -145,7 +197,7 @@ class _ExtraServiceCardListScreenState
                           ),
                           InfoContentView(
                             title: "${S.of(context).payment_circle}:",
-                            content: e.pay!.name ?? "",
+                            content: e.pay!.name,
                             contentStyle: txtBold(14, grayScaleColorBase),
                           ),
                           InfoContentView(
@@ -252,12 +304,13 @@ class _ExtraServiceCardListScreenState
                                               ExtraServiceRegistrationScreen
                                                   .routeName,
                                               arguments: {
-                                                "service": arg,
+                                                "service": service,
                                                 "isEdit": true,
-                                                "name": arg.name != null
-                                                    ? arg.name!.toLowerCase()
+                                                "name": service.name != null
+                                                    ? service.name!
+                                                        .toLowerCase()
                                                     : '',
-                                                "serviceId": arg.id,
+                                                "serviceId": service.id,
                                                 "data": e
                                                 // "data": arg,
                                               });

@@ -177,10 +177,11 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                                 : '',
                           ),
                         if (card.ticket_status == "CANCEL")
-                          InfoContentView(
-                            title: S.of(context).note,
-                            content: card.note_reason ?? "",
-                          ),
+                          if (card.note_reason != null)
+                            InfoContentView(
+                              title: S.of(context).note,
+                              content: card.note_reason ?? "",
+                            ),
                       ]),
                 ),
                 // vpad(24),

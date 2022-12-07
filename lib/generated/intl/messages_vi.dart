@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
+        "done": MessageLookupByLibrary.simpleMessage("Xong"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
         "edit_reg_deliver":
@@ -160,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Theo dõi dịch vụ"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
+        "free_service":
+            MessageLookupByLibrary.simpleMessage("Dịch vụ không tính phí"),
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
@@ -200,9 +203,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
+        "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Số ngày đăng ký tối đa không được để trống"),
         "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Đồ thất lạc"),
         "missing_report": MessageLookupByLibrary.simpleMessage("Báo mất"),
+        "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "Bạn cần chọn chu kỳ thanh toán và ngày đăng ký trước"),
         "need_support":
@@ -444,6 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "we_send_to": m10,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "wellcome_back":
-            MessageLookupByLibrary.simpleMessage("Chào mừng trở lại")
+            MessageLookupByLibrary.simpleMessage("Chào mừng trở lại"),
+        "year": MessageLookupByLibrary.simpleMessage("Năm")
       };
 }
