@@ -23,6 +23,7 @@
   "can_not_empty": "Can not empty",
   "terms_services": "Terms services",
   "otp_verify": "OTP verify",
+  "code_verify": "Verify security code",
   "otp_msg": "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.",
   "not_get_otp": "Did not receive OTP?",
   "resend": "Resend",
@@ -283,5 +284,8 @@
   "year":"Year",
   "done":"Done",
   "max_pay_day_not_empty":"Maximum payment date can not be empty",
-  "free_service":"Free service"
+  "free_service":"Free service",
+  "project":"Project",
+  "al_read":"read",
+  "not_read":"Unread"
 }

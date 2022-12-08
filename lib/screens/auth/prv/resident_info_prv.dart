@@ -17,6 +17,13 @@ class ResidentInfoPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  clearData() {
+    userInfo = null;
+    listOwn.clear();
+    selectedApartment = null;
+    residentId = null;
+  }
+
   clearListOwn() {
     // selectedApartment = null;
     // residentId = null;

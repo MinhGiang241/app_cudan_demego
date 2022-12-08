@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Resister new card"),
+        "al_read": MessageLookupByLibrary.simpleMessage("read"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -78,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "code_verify":
+            MessageLookupByLibrary.simpleMessage("Verify security code"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_cancel_request": m0,
@@ -244,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Not found account Information"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
+        "not_read": MessageLookupByLibrary.simpleMessage("Unread"),
         "not_special_char": MessageLookupByLibrary.simpleMessage(
             "Can not contain special symbol"),
         "not_upload_15mb": MessageLookupByLibrary.simpleMessage(
@@ -292,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
+        "project": MessageLookupByLibrary.simpleMessage("Project"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),

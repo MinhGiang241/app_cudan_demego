@@ -75,7 +75,7 @@ class TransportationCardListTab extends StatelessWidget {
                 controller: _refreshController,
                 onRefresh: () {
                   onRefresh();
-                  _refreshController.loadComplete();
+                  _refreshController.refreshCompleted();
                 },
                 child: ListView(
                   children: [

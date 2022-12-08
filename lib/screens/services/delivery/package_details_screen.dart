@@ -79,7 +79,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                           isHorizontal: true,
                           title: S.of(context).description,
                           content: arg.describe,
-                          contentStyle: txtBold(16),
                         ),
                       InfoContentView(
                           isHorizontal: true,
@@ -104,7 +103,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                     left: 12,
                   ),
                   child: Text(
-                    S.of(context).package,
+                    S.of(context).package_info,
                     style: txtMedium(14, grayScaleColor2),
                   ),
                 ),

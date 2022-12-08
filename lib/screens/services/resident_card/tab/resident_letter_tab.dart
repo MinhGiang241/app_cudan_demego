@@ -60,7 +60,7 @@ class ResidentLetterTab extends StatelessWidget {
     cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
     List<ResidentCard> list =
-        newLetter + approvedLetter + waitLetter + cancelLetter;
+        newLetter + waitLetter + approvedLetter + cancelLetter;
     return (list.isEmpty)
         ? PrimaryEmptyWidget(
             emptyText: S.of(context).no_letter,
@@ -80,7 +80,7 @@ class ResidentLetterTab extends StatelessWidget {
                   controller: _refreshController,
                   onRefresh: () {
                     onRefresh();
-                    _refreshController.loadComplete();
+                    _refreshController.refreshCompleted();
                   },
                   child: ListView(
                     children: [

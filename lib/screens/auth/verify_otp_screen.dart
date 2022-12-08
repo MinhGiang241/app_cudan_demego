@@ -54,7 +54,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
               children: [
                 vpad(24),
                 Center(
-                    child: Text(S.of(context).otp_verify,
+                    child: Text(
+                        widget.isForgotPass
+                            ? S.of(context).code_verify
+                            : S.of(context).otp_verify,
                         style: txtDisplayMedium())),
                 vpad(15),
                 Padding(
@@ -165,7 +168,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: PrimaryButton(
                     isLoading: context.watch<VerifyOTPPrv>().isLoading,
-                    text: S.of(context).next,
+                    text: !widget.isForgotPass
+                        ? S.of(context).verify
+                        : S.of(context).next,
                     onTap: context.watch<VerifyOTPPrv>().isLoading
                         ? () {}
                         : () {

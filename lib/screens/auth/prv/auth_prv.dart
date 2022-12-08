@@ -141,6 +141,10 @@ class AuthPrv extends ChangeNotifier {
               notifyListeners();
             });
           } else {
+            context.read<ResidentInfoPrv>().userInfo = null;
+            context.read<ResidentInfoPrv>().residentId = null;
+            context.read<ResidentInfoPrv>().listOwn.clear();
+            context.read<ResidentInfoPrv>().selectedApartment = null;
             Navigator.of(context).pushNamed(
               HomeScreen.routeName,
               // arguments: {
@@ -318,14 +322,11 @@ class AuthPrv extends ChangeNotifier {
                       onTap: () async {
                         Utils.pop(context, true);
                         await APIAuth.signOut(context: context);
-                        context.read<ResidentInfoPrv>().clearListOwn();
-                        // context.read<ResidentInfoPrv>().selectedApartment =
-                        //     null;
-                        // context.read<ResidentInfoPrv>().residentId = null;
-                        // context.read<ResidentInfoPrv>().userInfo = null;
-                        // context.read<AuthPrv>().userInfo = null;
-                        // context.read<AuthPrv>().account = null;
-                        // context.read<AuthPrv>().apartments = null;
+                        context.read<ResidentInfoPrv>().clearData();
+
+                        context.read<AuthPrv>().userInfo = null;
+                        context.read<AuthPrv>().account = null;
+                        context.read<AuthPrv>().apartments = null;
                         context.read<AuthPrv>().clearData();
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             SignInScreen.routeName,

@@ -384,6 +384,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                         ),
                     vpad(16),
                     PrimaryTextField(
+                      hint: S.of(context).description,
                       maxLength: 500,
                       controller:
                           context.read<RegisterDeliveryPrv>().noteController,

@@ -448,7 +448,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                       vpad(30),
                       PrimaryButton(
                         width: dvWidth(context) - 48,
-                        text: S.of(context).add_package,
+                        text: S.of(context).add,
                         onTap: () {
                           if (formKey1.currentState!.validate()) {
                             if (item != null) {

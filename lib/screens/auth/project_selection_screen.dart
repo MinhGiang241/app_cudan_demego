@@ -46,19 +46,19 @@ class ProjectSelectionScreen extends StatelessWidget {
                 child: Text(S.of(context).choose_a_project,
                     style: txtDisplayMedium())),
             vpad(36),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: PrimaryTextField(
-                hint: S.of(context).search_project,
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: PrimaryIcon(
-                      icons: PrimaryIcons.search_outline,
-                      color: grayScaleColor2),
-                ),
-              ),
-            ),
-            vpad(16),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 12),
+            //   child: PrimaryTextField(
+            //     hint: S.of(context).search_project,
+            //     prefixIcon: const Padding(
+            //       padding: EdgeInsets.all(12.0),
+            //       child: PrimaryIcon(
+            //           icons: PrimaryIcons.search_outline,
+            //           color: grayScaleColor2),
+            //     ),
+            //   ),
+            // ),
+            // vpad(16),
             Expanded(
               child: ListView(
                 padding:
@@ -67,8 +67,9 @@ class ProjectSelectionScreen extends StatelessWidget {
                   ...projects.map(
                     (e) => PrimaryCard(
                         onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(ApartmentSeletionScreen.routeName);
+                          Navigator.of(context).pushNamed(
+                              ApartmentSeletionScreen.routeName,
+                              arguments: e['title']);
                         },
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Padding(

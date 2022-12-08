@@ -66,9 +66,13 @@ class ResidentCardTab extends StatelessWidget {
                 header: WaterDropMaterialHeader(
                     backgroundColor: Theme.of(context).primaryColor),
                 controller: _refreshController,
+                onLoading: () {
+                  _refreshController.loadComplete();
+                  // _refreshController.refreshCompleted();
+                },
                 onRefresh: () {
                   onRefresh();
-                  _refreshController.loadComplete();
+                  _refreshController.refreshCompleted();
                 },
                 child: ListView(children: [
                   vpad(24),

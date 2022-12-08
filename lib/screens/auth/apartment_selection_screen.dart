@@ -14,12 +14,15 @@ import '../home/home_screen.dart';
 import 'prv/resident_info_prv.dart';
 
 class ApartmentSeletionScreen extends StatefulWidget {
-  const ApartmentSeletionScreen(
-      {Key? key, this.listProject, required this.context})
-      : super(key: key);
+  const ApartmentSeletionScreen({
+    Key? key,
+    this.listProject,
+    required this.context,
+  }) : super(key: key);
   static const routeName = '/selection';
   final ResponseApartment? listProject;
   final BuildContext context;
+
   @override
   State<ApartmentSeletionScreen> createState() =>
       _ApartmentSeletionScreenState();
@@ -38,6 +41,7 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as String;
     var listOwn = widget.context.watch<ResidentInfoPrv>().listOwn;
     print(listOwn);
     var listProject = [];
@@ -69,24 +73,28 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
               child: Text(S.of(context).choose_an_apartment,
                   style: txtDisplayMedium())),
           vpad(36),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: PrimaryTextField(
-              hint: S.of(context).search_aparment,
-              prefixIcon: const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: PrimaryIcon(
-                    icons: PrimaryIcons.search_outline, color: grayScaleColor2),
-              ),
-            ),
-          ),
-          vpad(16),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 12),
+          //   child: PrimaryTextField(
+          //     hint: S.of(context).search_aparment,
+          //     prefixIcon: const Padding(
+          //       padding: EdgeInsets.all(12.0),
+          //       child: PrimaryIcon(
+          //           icons: PrimaryIcons.search_outline, color: grayScaleColor2),
+          //     ),
+          //   ),
+          // ),
+          // vpad(16),
           Expanded(
               child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
             children: [
               // ...widget.listProject!.apartments!
               // ...listProject.map((e) => Text(e)),
+              vpad(12),
+              Text(arg, style: txtBold(14, grayScaleColorBase)),
+
+              vpad(12),
               ...listOwn.map((e) => PrimaryCard(
                         onTap: () {
                           widget.context
@@ -115,6 +123,9 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                                   Text(
                                       '${e.apartment?.name ?? ''} - ${e.floor?.name ?? ''}',
                                       style: txtBodySmallBold()),
+                                  // vpad(4),
+                                  // Text('Thông tin thêm',
+                                  //     style: txtBodySmallRegular()),
                                 ],
                               )),
                         ),

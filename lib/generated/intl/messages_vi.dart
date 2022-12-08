@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
+        "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -79,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirm_cancel_request": m0,
@@ -217,7 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "news": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
-            MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản ?"),
+            MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
         "no_card": MessageLookupByLibrary.simpleMessage("Không có thẻ nào"),
         "no_comment":
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
@@ -246,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
+        "not_read": MessageLookupByLibrary.simpleMessage("Chưa đọc"),
         "not_special_char":
             MessageLookupByLibrary.simpleMessage("Không nhập ký tự đặc biệt"),
         "not_upload_15mb": MessageLookupByLibrary.simpleMessage(
@@ -260,7 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mã OTP không hợp lệ"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "Vui lòng kiểm tra điện thoại hoặc email để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
-        "otp_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
+        "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
         "package": MessageLookupByLibrary.simpleMessage("Hàng hóa"),
         "package_info":
             MessageLookupByLibrary.simpleMessage("Thông tin hàng hóa"),
@@ -294,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "photos": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
+        "project": MessageLookupByLibrary.simpleMessage("Dự án"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
         "reg_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
@@ -411,7 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "terms_services":
-            MessageLookupByLibrary.simpleMessage("Điều khoản dịch vụ"),
+            MessageLookupByLibrary.simpleMessage("Điều khoản & dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản cư dân đồng nghĩa với việc đồng thuận với "),
         "this_trans_letter":
@@ -433,7 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe"),
         "trans_type": MessageLookupByLibrary.simpleMessage("Loại phương tiện"),
         "transfer_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách chuyển Đồ"),
+            MessageLookupByLibrary.simpleMessage("Danh sách chuyển đồ"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),

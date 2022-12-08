@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/response_bantinduan_list.dart';
+import '../../../utils/convert_date_time.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
+import '../../news/new_details_screen.dart';
+import '../../news/news_screen.dart';
 import '../prv/home_prv.dart';
 import 'home_title_widget.dart';
 
@@ -16,82 +21,7 @@ class ProjectInfoHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var listExamples = [
-      BTDAItems(
-        tieuDe: "Tiêu đề",
-        publishedUtc: "sjsjj",
-        contentItemId: '1',
-        contentType: "Hello",
-        createdUtc: "jj",
-        danhMuc: DanhMuc(
-            taxonomyContentItemId: 'd1',
-            termContentItemIds: ['dsldkas', 'asdasdas']),
-        displayText: "Display",
-        hinhAnh: HinhAnh(paths: [
-          'https://unsplash.it/120/256',
-          'https://unsplash.it/120/256'
-        ], urls: [
-          'https://unsplash.it/120/256',
-          'https://unsplash.it/120/256'
-        ]),
-        list: UsersLike(
-            contentItems: [ContentItems(contentItemId: "ct1", owner: "Giang")]),
-        noiDung: "dây là nội dung",
-        owner: "MINHGIANG",
-        privateBanTin: PrivateBanTin(soLuongComment: 12, soLuongLike: 11),
-        privateCreator: PrivateCreator(
-            anhDaiDien: AnhDaiDien(
-              paths: [
-                'https://unsplash.it/120/256',
-                'https://unsplash.it/120/256'
-              ],
-              urls: [
-                'https://unsplash.it/120/256',
-                'https://unsplash.it/120/256'
-              ],
-            ),
-            creatorId: "cra1",
-            fullName: "tmg"),
-      ),
-      BTDAItems(
-        tieuDe: "Tiêu đề",
-        publishedUtc: "sjsjj",
-        contentItemId: '1',
-        contentType: "Hello",
-        createdUtc: "jj",
-        danhMuc: DanhMuc(
-            taxonomyContentItemId: 'd1',
-            termContentItemIds: ['dsldkas', 'asdasdas']),
-        displayText: "Display",
-        hinhAnh: HinhAnh(paths: [
-          'https://unsplash.it/120/256',
-          'https://unsplash.it/120/256'
-        ], urls: [
-          'https://unsplash.it/120/256',
-          'https://unsplash.it/120/256'
-        ]),
-        list: UsersLike(
-            contentItems: [ContentItems(contentItemId: "ct1", owner: "Giang")]),
-        noiDung: "dây là nội dung",
-        owner: "MINHGIANG",
-        privateBanTin: PrivateBanTin(soLuongComment: 12, soLuongLike: 11),
-        privateCreator: PrivateCreator(
-            anhDaiDien: AnhDaiDien(
-              paths: [
-                'https://unsplash.it/120/256',
-                'https://unsplash.it/120/256'
-              ],
-              urls: [
-                'https://unsplash.it/120/256',
-                'https://unsplash.it/120/256'
-              ],
-            ),
-            creatorId: "cra1",
-            fullName: "tmg"),
-      ),
-    ];
-
-    final list = context.watch<HomePrv>().btdaList;
+    final list = context.watch<HomePrv>().newList;
     // if (list == null) {
     //   return const Center(child: PrimaryLoading());
     // } else if (list.isEmpty) {
@@ -101,12 +31,14 @@ class ProjectInfoHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).news,
       onTapShowAll: () {
+        Navigator.pushNamed(context, NewListScreen.routeName,
+            arguments: context.read<HomePrv>().newList);
         // Utils.pushScreen(context, const ListProjectInfoScreen());
       },
       child: SizedBox(
-        height: 200,
+        height: 200 + 27,
         child: ListView.builder(
-            itemCount: listExamples.length,
+            itemCount: list.length,
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
@@ -116,6 +48,9 @@ class ProjectInfoHome extends StatelessWidget {
                     child: PrimaryCard(
                         width: 256 + 32,
                         onTap: () async {
+                          Navigator.pushNamed(
+                              context, NewDetailsScreen.routeName,
+                              arguments: list[index]);
                           // await context
                           //     .read<HomePrv>()
                           //     .toBTDADetails(context, list[index], index);
@@ -127,7 +62,10 @@ class ProjectInfoHome extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(listExamples[index].tieuDe ?? "",
+                              Text(
+                                  list[index].title != null
+                                      ? list[index].title!
+                                      : "",
                                   style: txtLinkSmall(),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis),
@@ -138,14 +76,25 @@ class ProjectInfoHome extends StatelessWidget {
                                 child: PrimaryImageNetwork(
                                     canShowPhotoView: false,
                                     path:
-                                        listExamples[index].hinhAnh?.paths?[0]),
+                                        "${ApiConstants.uploadURL}?load=${list[index].image}"),
                               ),
                               vpad(8),
-                              Text(listExamples[index].noiDung ?? "",
+                              Text(
+                                  list[index].content != null
+                                      ? list[index].content!
+                                      : "",
                                   style: txtBodySmallRegular(
                                       color: grayScaleColorBase),
                                   maxLines: 1,
-                                  overflow: TextOverflow.ellipsis)
+                                  overflow: TextOverflow.ellipsis),
+                              vpad(8),
+                              Text(
+                                Utils.dateFormat(
+                                    list[index].createdTime ?? "", 1),
+                                style: txtBodySmallRegular(
+                                    color: grayScaleColorBase),
+                                maxLines: 1,
+                              )
                             ],
                           ),
                         )),

@@ -89,7 +89,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
                 List<Delivery> list =
-                    newLetter + approvedLetter + waitLetter + cancelLetter;
+                    newLetter + waitLetter + approvedLetter + cancelLetter;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
@@ -118,7 +118,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                       controller: _refreshController,
                       onRefresh: () {
                         setState(() {});
-                        _refreshController.loadComplete();
+                        _refreshController.refreshCompleted();
                       },
                       child: ListView(
                         children: [
@@ -183,8 +183,8 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                                 ? S.of(context).tranfer_in_reg
                                                 : S.of(context).tranfer_out_reg,
                                             textAlign: TextAlign.right,
-                                            style: txtBodySmallRegular(
-                                                color: grayScaleColorBase),
+                                            style:
+                                                txtMedium(12, grayScaleColor2),
                                           ),
                                         ),
                                       ),

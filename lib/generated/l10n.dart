@@ -290,6 +290,16 @@ class S {
     );
   }
 
+  /// `Verify security code`
+  String get code_verify {
+    return Intl.message(
+      'Verify security code',
+      name: 'code_verify',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.`
   String get otp_msg {
     return Intl.message(
@@ -2895,6 +2905,36 @@ class S {
     return Intl.message(
       'Free service',
       name: 'free_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project`
+  String get project {
+    return Intl.message(
+      'Project',
+      name: 'project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `read`
+  String get al_read {
+    return Intl.message(
+      'read',
+      name: 'al_read',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unread`
+  String get not_read {
+    return Intl.message(
+      'Unread',
+      name: 'not_read',
       desc: '',
       args: [],
     );

@@ -109,7 +109,7 @@ class _ExtraServiceCardListScreenState
                 cancelLetter
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
                 List<ServiceRegistration> list =
-                    newLetter + approvedLetter + waitLetter + cancelLetter;
+                    newLetter + waitLetter + approvedLetter + cancelLetter;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
@@ -129,7 +129,7 @@ class _ExtraServiceCardListScreenState
                       controller: _refreshController,
                       onRefresh: () {
                         setState(() {});
-                        _refreshController.loadComplete();
+                        _refreshController.refreshCompleted();
                       },
                       child: Column(
                         children: [
@@ -172,7 +172,7 @@ class _ExtraServiceCardListScreenState
                     controller: _refreshController,
                     onRefresh: () {
                       setState(() {});
-                      _refreshController.loadComplete();
+                      _refreshController.refreshCompleted();
                     },
                     child: ListView(children: [
                       vpad(24),
