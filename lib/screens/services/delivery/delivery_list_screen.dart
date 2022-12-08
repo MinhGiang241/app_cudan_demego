@@ -100,13 +100,24 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                         setState(() {});
                       });
                 } else if (list.isEmpty) {
-                  return PrimaryEmptyWidget(
-                    emptyText: S.of(context).no_delivery,
-                    // buttonText: S.of(context).add_trans_card,
-                    icons: PrimaryIcons.box,
-                    action: () {
-                      // Utils.pushScreen(context, const RegisterParkingCard());
+                  return SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    header: WaterDropMaterialHeader(
+                        backgroundColor: Theme.of(context).primaryColor),
+                    controller: _refreshController,
+                    onRefresh: () {
+                      setState(() {});
+                      _refreshController.refreshCompleted();
                     },
+                    child: PrimaryEmptyWidget(
+                      emptyText: S.of(context).no_delivery,
+                      // buttonText: S.of(context).add_trans_card,
+                      icons: PrimaryIcons.box,
+                      action: () {
+                        // Utils.pushScreen(context, const RegisterParkingCard());
+                      },
+                    ),
                   );
                 } else {
                   return SafeArea(

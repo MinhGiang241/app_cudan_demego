@@ -30,21 +30,35 @@ class HomePrv extends ChangeNotifier {
   }
 
   Future _initial() async {
-    // isLoading = true;
-    // notifyListeners();
-    var filter = {
-      "skip": 0,
-      "limit": 10,
-    };
+    // var filter = {
+    //   "skip": 0,
+    //   "limit": 2,
+    //   "postQueryBeforePaging": true,
+    //   "group": {
+    //     "op": "AND",
+    //     "children": [],
+    //     "operation": "~i",
+    //     "rawFilter": false,
+    //   },
+    //   "text": "",
+    //   "skipDefaultTextSearch": false,
+    //   "withRecords": false,
+    //   "inline": false,
+    //   "is_debug": false,
+    //   "unionLimit": 10
+    // };
     isNewLoading = true;
     notifyListeners();
-    await APINew.getNewList(filter).then((v) {
+    await APINew.getNewList(5, 0).then((v) {
       isNewLoading = false;
       notifyListeners();
       newList.clear();
       for (var i in v) {
         newList.add(New.fromJson(i));
       }
+      newList.sort(
+        (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
+      );
     }).catchError((e) {
       isNewLoading = false;
       notifyListeners();

@@ -11,12 +11,16 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/new.dart';
 import '../../utils/utils.dart';
+import '../../widgets/primary_empty_widget.dart';
+import '../../widgets/primary_error_widget.dart';
+import '../../widgets/primary_icon.dart';
+import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
 import 'new_details_screen.dart';
 import 'prv/news_list_prv.dart';
 
 class NewListScreen extends StatefulWidget {
-  NewListScreen({super.key});
+  const NewListScreen({super.key});
   static const routeName = '/news';
 
   @override
@@ -31,102 +35,245 @@ class _NewListScreenState extends State<NewListScreen> {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as List<New>;
     return ChangeNotifierProvider(
-      create: (context) => NewListPrv(),
+      create: (context) => NewListPrv(initList: arg),
       builder: (context, child) {
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).news,
           ),
-          body: SafeArea(
-            child: SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
-              controller: _refreshController,
-              onRefresh: () async {
-                await Future.delayed(const Duration(milliseconds: 1000));
-                if (mounted) setState(() {});
-                _refreshController.refreshCompleted();
-              },
-              onLoading: () async {
-                await Future.delayed(const Duration(milliseconds: 1000));
-                if (mounted) setState(() {});
-                _refreshController.loadComplete();
-              },
-              child: ListView(
-                children: [
-                  vpad(24),
-                  ...arg.map<Widget>(
-                    (e) {
-                      return PrimaryCard(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, NewDetailsScreen.routeName,
-                              arguments: e);
+          body: WillPopScope(
+            onWillPop: () async {
+              context.read<NewListPrv>().clearInitList();
+
+              Navigator.pop(context);
+              return Future.value(false);
+            },
+            child: SafeArea(
+              child: FutureBuilder(
+                  future: context.read<NewListPrv>().getNews(context, true),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: PrimaryLoading());
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.none) {
+                      return PrimaryErrorWidget(
+                          code: snapshot.hasError ? "err" : "1",
+                          message: snapshot.data.toString(),
+                          onRetry: () async {
+                            setState(() {});
+                          });
+                    } else if (context.watch<NewListPrv>().listNews.isEmpty) {
+                      return SmartRefresher(
+                        enablePullDown: true,
+                        enablePullUp: true,
+                        header: WaterDropMaterialHeader(
+                            backgroundColor: Theme.of(context).primaryColor),
+                        controller: _refreshController,
+                        onRefresh: () async {
+                          await Future.delayed(
+                              const Duration(milliseconds: 1000));
+                          if (mounted) setState(() {});
+                          _refreshController.refreshCompleted();
                         },
-                        height: 100,
-                        margin: const EdgeInsets.only(bottom: 16),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Text(
-                                  S.of(context).not_read,
-                                  style: txtRegular(12, greenColorBase),
-                                ),
-                              ),
-                            ),
-                            ListTile(
-                                horizontalTitleGap: 12,
-                                minVerticalPadding: 12,
-                                visualDensity:
-                                    VisualDensity.adaptivePlatformDensity,
-                                leading: Transform.translate(
-                                  offset: const Offset(0, 6),
-                                  child: ClipRRect(
-                                    child: Image.network(
-                                      "${ApiConstants.uploadURL}?load=${e.image}",
-                                      fit: BoxFit.cover,
-                                      width: 100,
-                                      height: 120,
-                                    ),
-                                  ),
-                                ),
-                                title: Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Text(e.title ?? '',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                                subtitle: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Text(e.content ?? "",
-                                          maxLines: 1,
-                                          textAlign: TextAlign.left,
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                    Text(Utils.dateFormat(e.date ?? "", 1),
-                                        maxLines: 1,
-                                        textAlign: TextAlign.left,
-                                        overflow: TextOverflow.ellipsis),
-                                  ],
-                                ),
-                                trailing: hpad(0)),
-                          ],
+                        onLoading: () async {
+                          await context
+                              .read<NewListPrv>()
+                              .getNews(context, false);
+
+                          _refreshController.loadComplete();
+                        },
+                        child: PrimaryEmptyWidget(
+                          emptyText: S.of(context).no_news,
+                          icons: PrimaryIcons.news,
+                          action: () {},
                         ),
                       );
-                    },
-                  )
-                ],
-              ),
+                    }
+                    return SmartRefresher(
+                      enablePullDown: true,
+                      enablePullUp: true,
+                      header: WaterDropMaterialHeader(
+                          backgroundColor: Theme.of(context).primaryColor),
+                      controller: _refreshController,
+                      onRefresh: () async {
+                        await Future.delayed(
+                            const Duration(milliseconds: 1000));
+                        if (mounted) setState(() {});
+                        _refreshController.refreshCompleted();
+                      },
+                      onLoading: () async {
+                        await context
+                            .read<NewListPrv>()
+                            .getNews(context, false);
+
+                        _refreshController.loadComplete();
+                      },
+                      child: ListView(
+                        children: [
+                          vpad(24),
+                          ...context
+                              .watch<NewListPrv>()
+                              .listNews
+                              .asMap()
+                              .entries
+                              .map<Widget>(
+                            (e) {
+                              if (e.key == 0) {
+                                return PrimaryCard(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, NewDetailsScreen.routeName,
+                                        arguments: e.value);
+                                  },
+                                  margin: const EdgeInsets.only(
+                                    bottom: 16,
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 16),
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        bottom: -10,
+                                        right: -10,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            S.of(context).not_read,
+                                            style:
+                                                txtRegular(12, greenColorBase),
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.value.title ?? '',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtBodyMediumBold(
+                                                color: grayScaleColorBase),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                          vpad(12),
+                                          Image.network(
+                                            "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                            fit: BoxFit.contain,
+                                            width: double.infinity,
+                                            height: 150,
+                                          ),
+                                          vpad(12),
+                                          Text(
+                                            e.value.title ?? '',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtBodyMediumBold(
+                                                color: grayScaleColorBase),
+                                          ),
+                                          vpad(12),
+                                          Text(
+                                            Utils.dateFormat(
+                                                e.value.date ?? "", 1),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.left,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtBodySmallRegular(
+                                                color: grayScaleColorBase),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+                              return PrimaryCard(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, NewDetailsScreen.routeName,
+                                      arguments: e.value);
+                                },
+                                height: 100,
+                                margin: const EdgeInsets.only(bottom: 16),
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Text(
+                                          S.of(context).not_read,
+                                          style: txtRegular(12, greenColorBase),
+                                        ),
+                                      ),
+                                    ),
+                                    ListTile(
+                                        horizontalTitleGap: 12,
+                                        minVerticalPadding: 12,
+                                        visualDensity: VisualDensity
+                                            .adaptivePlatformDensity,
+                                        leading: Transform.translate(
+                                          offset: const Offset(0, 6),
+                                          child: ClipRRect(
+                                            child: Image.network(
+                                              "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                              fit: BoxFit.cover,
+                                              width: 100,
+                                              height: 120,
+                                            ),
+                                          ),
+                                        ),
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: Text(
+                                            e.value.title ?? '',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtBodyMediumBold(
+                                                color: grayScaleColorBase),
+                                          ),
+                                        ),
+                                        subtitle: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Text(
+                                                e.value.content ?? "",
+                                                maxLines: 1,
+                                                textAlign: TextAlign.left,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: txtBodyMediumRegular(
+                                                    color: grayScaleColorBase),
+                                              ),
+                                            ),
+                                            Text(
+                                              Utils.dateFormat(
+                                                  e.value.date ?? "", 1),
+                                              maxLines: 1,
+                                              textAlign: TextAlign.left,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: txtBodySmallRegular(
+                                                  color: grayScaleColorBase),
+                                            ),
+                                          ],
+                                        ),
+                                        trailing: hpad(0)),
+                                  ],
+                                ),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  }),
             ),
           ),
         );

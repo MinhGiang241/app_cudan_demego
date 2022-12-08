@@ -288,5 +288,6 @@
   "free_service":"Dịch vụ không tính phí",
   "project":"Dự án",
   "al_read":"Đã đọc",
-  "not_read":"Chưa đọc"
+  "not_read":"Chưa đọc",
+  "no_news":"Không có tin tức nào"
 }

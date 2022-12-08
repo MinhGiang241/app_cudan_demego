@@ -2939,6 +2939,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Don't have any news`
+  String get no_news {
+    return Intl.message(
+      'Don\'t have any news',
+      name: 'no_news',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

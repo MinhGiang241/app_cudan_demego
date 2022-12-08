@@ -287,5 +287,6 @@
   "free_service":"Free service",
   "project":"Project",
   "al_read":"read",
-  "not_read":"Unread"
+  "not_read":"Unread",
+  "no_news":"Don't have any news"
 }

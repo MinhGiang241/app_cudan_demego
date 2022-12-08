@@ -226,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_delivery": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký chuyển đố nào"),
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
+        "no_news": MessageLookupByLibrary.simpleMessage("Không có tin tức nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký dịch vụ vào"),
         "no_trans_card":

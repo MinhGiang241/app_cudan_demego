@@ -227,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_letter":
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
+        "no_news": MessageLookupByLibrary.simpleMessage("Don\'t have any news"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any service registration"),
         "no_trans_card":

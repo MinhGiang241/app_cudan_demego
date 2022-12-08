@@ -173,7 +173,7 @@ class AppRoutes {
       case NewListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => NewListScreen(),
+          builder: (_) => const NewListScreen(),
         );
       case NewDetailsScreen.routeName:
         return MaterialPageRoute(
