@@ -129,14 +129,24 @@ class AuthPrv extends ChangeNotifier {
                       .add(ResponseResidentOwn.fromJson(i));
                 }
               });
-              Navigator.pushReplacementNamed(
-                  context, ProjectSelectionScreen.routeName);
+              context.read<AuthPrv>().authStatus = AuthStatus.auth;
+              notifyListeners();
+              if (context.read<ResidentInfoPrv>().listOwn.isEmpty) {
+                Navigator.of(context).pushNamed(
+                  HomeScreen.routeName,
+                );
+              } else {
+                Navigator.pushReplacementNamed(
+                    context, ProjectSelectionScreen.routeName);
+              }
+
               // Navigator.of(context)
               //     .pushNamed(ApartmentSeletionScreen.routeName, arguments: {
               //   "listOwn": listOwn,
               // });
             }).catchError((e) {
               Utils.showErrorMessage(context, e);
+              context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
               isLoading = false;
               notifyListeners();
             });
@@ -282,7 +292,7 @@ class AuthPrv extends ChangeNotifier {
     selectedApartment = floorPlan;
     authStatus = AuthStatus.auth;
     notifyListeners();
-    await PrfData.shared.setApartments(apartments!);
+
     await PrfData.shared.setFloorPlan(floorPlan).then((value) {
       Navigator.popUntil(context, (route) => route.isFirst);
     });
@@ -322,12 +332,16 @@ class AuthPrv extends ChangeNotifier {
                       onTap: () async {
                         Utils.pop(context, true);
                         await APIAuth.signOut(context: context);
+                        context.read<AuthPrv>().authStatus =
+                            AuthStatus.unauthen;
                         context.read<ResidentInfoPrv>().clearData();
 
                         context.read<AuthPrv>().userInfo = null;
                         context.read<AuthPrv>().account = null;
                         context.read<AuthPrv>().apartments = null;
                         context.read<AuthPrv>().clearData();
+                        notifyListeners();
+
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             SignInScreen.routeName,
                             ((route) => route.isCurrent));

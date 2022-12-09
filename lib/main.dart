@@ -24,6 +24,7 @@ void main() async {
 
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   await PrfData.open();
   final lang = PrfData.shared.getLanguage();

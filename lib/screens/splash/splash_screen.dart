@@ -18,6 +18,11 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var status = context.read<AuthPrv>().authStatus;
+    if (status == AuthStatus.auth) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomeScreen.routeName, (route) => false);
+    }
     return Material(
       child: Scaffold(
         body: Container(
@@ -83,15 +88,18 @@ class SplashScreen extends StatelessWidget {
                                       buttonType: ButtonType.white,
                                       textColor: primaryColor1,
                                       onTap: () {
-                                        var auth =
-                                            context.read<AuthPrv>().authStatus;
-                                        if (auth == AuthStatus.auth) {
-                                          Navigator.of(context)
-                                              .pushNamed(HomeScreen.routeName);
-                                        } else {
-                                          Navigator.of(context).pushNamed(
-                                              SignInScreen.routeName);
-                                        }
+                                        // var auth =
+                                        //     context.read<AuthPrv>().authStatus;
+                                        Navigator.of(context)
+                                            .pushNamed(SignInScreen.routeName);
+
+                                        // if (auth == AuthStatus.auth) {
+                                        //   Navigator.of(context)
+                                        //       .pushNamed(HomeScreen.routeName);
+                                        // } else {
+                                        //   Navigator.of(context).pushNamed(
+                                        //       SignInScreen.routeName);
+                                        // }
                                       },
                                     ),
                                     vpad(24),

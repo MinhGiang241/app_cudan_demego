@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../services/prf_data.dart';
@@ -42,6 +43,7 @@ class SingInPrv extends ChangeNotifier {
         Utils.showErrorMessage(context, e);
       });
     } else {
+      context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
       isLoading = false;
       if (accountController.text.isEmpty) {
         accountValidate = S.current.can_not_empty;

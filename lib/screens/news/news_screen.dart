@@ -222,6 +222,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                     Row(
                                       children: [
                                         PrimaryImageNetwork(
+                                          canShowPhotoView: false,
                                           width: 120,
                                           height: double.infinity,
                                           path:
