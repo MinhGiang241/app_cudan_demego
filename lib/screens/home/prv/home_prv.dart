@@ -20,9 +20,11 @@ class HomePrv extends ChangeNotifier {
   List<NewsListItems>? newsList;
   List<BTDAItems>? btdaList;
   bool isLoading = false;
-  bool isNewLoading = false;
+  bool isResNewsLoading = false;
+  bool isProNewsLoading = false;
   late BuildContext context;
-  List<New> newList = [];
+  List<New> newResidentList = [];
+  List<New> newProjectList = [];
 
   HomePrv(ctx) {
     context = ctx;
@@ -47,22 +49,33 @@ class HomePrv extends ChangeNotifier {
     //   "is_debug": false,
     //   "unionLimit": 10
     // };
-    isNewLoading = true;
-    notifyListeners();
-    await APINew.getNewList(5, 0).then((v) {
-      isNewLoading = false;
+    try {
+      isResNewsLoading = true;
+      isProNewsLoading = true;
       notifyListeners();
-      newList.clear();
-      for (var i in v) {
-        newList.add(New.fromJson(i));
+      var residentNews = await APINew.getNewList(5, 0, "RESIDENT");
+      for (var i in residentNews) {
+        newResidentList.add(New.fromJson(i));
       }
-      newList.sort(
+      newResidentList.sort(
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
-    }).catchError((e) {
-      isNewLoading = false;
+      var projectNews = await APINew.getNewList(5, 0, "PROJECT");
+      for (var i in projectNews) {
+        newProjectList.add(New.fromJson(i));
+      }
+      newProjectList.sort(
+        (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
+      );
+      isResNewsLoading = false;
+      isProNewsLoading = false;
       notifyListeners();
-      Utils.showErrorMessage(context, e);
-    });
+    } catch (e) {
+      isResNewsLoading = false;
+      isProNewsLoading = false;
+
+      notifyListeners();
+      Utils.showErrorMessage(context, e.toString());
+    }
   }
 }

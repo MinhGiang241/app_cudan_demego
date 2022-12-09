@@ -14,6 +14,7 @@ import '../../utils/utils.dart';
 import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
+import '../../widgets/primary_image_netword.dart';
 import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
 import 'new_details_screen.dart';
@@ -33,9 +34,9 @@ class _NewListScreenState extends State<NewListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as List<New>;
+    final arg = ModalRoute.of(context)!.settings.arguments as String;
     return ChangeNotifierProvider(
-      create: (context) => NewListPrv(initList: arg),
+      create: (context) => NewListPrv(type: arg),
       builder: (context, child) {
         return PrimaryScreen(
           appBar: PrimaryAppbar(
@@ -133,7 +134,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                   child: Stack(
                                     children: [
                                       Positioned(
-                                        bottom: -10,
+                                        bottom: -5,
                                         right: -10,
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -158,18 +159,28 @@ class _NewListScreenState extends State<NewListScreen> {
                                             textAlign: TextAlign.left,
                                           ),
                                           vpad(12),
-                                          Image.network(
-                                            "${ApiConstants.uploadURL}?load=${e.value.image}",
-                                            fit: BoxFit.contain,
+                                          SizedBox(
                                             width: double.infinity,
-                                            height: 150,
+                                            child: PrimaryImageNetwork(
+                                              canShowPhotoView: false,
+                                              path:
+                                                  "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                              fit: BoxFit.cover,
+                                              height: 150,
+                                            ),
                                           ),
+                                          // Image.network(
+                                          //   "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                          //   fit: BoxFit.contain,
+                                          //   width: double.infinity,
+                                          //   height: 150,
+                                          // ),
                                           vpad(12),
                                           Text(
                                             e.value.title ?? '',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
-                                            style: txtBodyMediumBold(
+                                            style: txtBodyMediumRegular(
                                                 color: grayScaleColorBase),
                                           ),
                                           vpad(12),
@@ -208,43 +219,31 @@ class _NewListScreenState extends State<NewListScreen> {
                                         ),
                                       ),
                                     ),
-                                    ListTile(
-                                        horizontalTitleGap: 12,
-                                        minVerticalPadding: 12,
-                                        visualDensity: VisualDensity
-                                            .adaptivePlatformDensity,
-                                        leading: Transform.translate(
-                                          offset: const Offset(0, 6),
-                                          child: ClipRRect(
-                                            child: Image.network(
+                                    Row(
+                                      children: [
+                                        PrimaryImageNetwork(
+                                          width: 120,
+                                          height: double.infinity,
+                                          path:
                                               "${ApiConstants.uploadURL}?load=${e.value.image}",
-                                              fit: BoxFit.cover,
-                                              width: 100,
-                                              height: 120,
-                                            ),
-                                          ),
                                         ),
-                                        title: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 8.0),
-                                          child: Text(
-                                            e.value.title ?? '',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: txtBodyMediumBold(
-                                                color: grayScaleColorBase),
-                                          ),
-                                        ),
-                                        subtitle: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Text(
+                                        hpad(12),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            textDirection: TextDirection.ltr,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                e.value.title ?? '',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: txtBodyMediumBold(
+                                                    color: grayScaleColorBase),
+                                              ),
+                                              Text(
                                                 e.value.content ?? "",
                                                 maxLines: 1,
                                                 textAlign: TextAlign.left,
@@ -252,19 +251,20 @@ class _NewListScreenState extends State<NewListScreen> {
                                                 style: txtBodyMediumRegular(
                                                     color: grayScaleColorBase),
                                               ),
-                                            ),
-                                            Text(
-                                              Utils.dateFormat(
-                                                  e.value.date ?? "", 1),
-                                              maxLines: 1,
-                                              textAlign: TextAlign.left,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: txtBodySmallRegular(
-                                                  color: grayScaleColorBase),
-                                            ),
-                                          ],
-                                        ),
-                                        trailing: hpad(0)),
+                                              Text(
+                                                Utils.dateFormat(
+                                                    e.value.date ?? "", 1),
+                                                maxLines: 1,
+                                                textAlign: TextAlign.left,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: txtBodySmallRegular(
+                                                    color: grayScaleColorBase),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               );

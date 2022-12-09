@@ -5,9 +5,10 @@ import '../../../services/api_new.dart';
 import '../../../utils/utils.dart';
 
 class NewListPrv extends ChangeNotifier {
-  NewListPrv({required this.initList});
+  NewListPrv({required this.type});
   int skip = 0;
-  final List<New> initList;
+  final String type;
+
   List<New> listNews = [];
   clearInitList() {
     listNews.clear();
@@ -20,13 +21,12 @@ class NewListPrv extends ChangeNotifier {
       skip = 0;
       listNews.clear();
     }
-    await APINew.getNewList(1, skip).then((v) {
+    await APINew.getNewList(5, skip, type).then((v) {
       for (var i in v) {
         listNews.add(New.fromJson(i));
       }
-      skip += 1;
+      skip += 5;
 
-      print("skip: ${skip}");
       notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

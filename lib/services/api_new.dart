@@ -4,7 +4,7 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APINew {
-  static Future getNewList(int limit, int skip) async {
+  static Future getNewList(int limit, int skip, String type) async {
 //     var query = '''
 //     query (\$filter: GeneralCollectionFilterInput){
 // 	response: query_Newss_dto(filter:\$filter){
@@ -29,17 +29,18 @@ class APINew {
 //     ''';
 
     var query = '''
-    mutation (\$limit:Float,\$skip:Float){
-        response: news_mobile_get_news (limit: \$limit,skip: \$skip ) {
-            code
-            message
-            data
-        }
+    mutation (\$limit:Float,\$skip:Float,\$type:String){
+    response: news_mobile_get_news (limit: \$limit,skip: \$skip,type: \$type ) {
+        code
+        message
+        data
+      }
     }
-            
+         
     ''';
     final QueryOptions options = QueryOptions(
-        document: gql(query), variables: {"limit": limit, "skip": skip});
+        document: gql(query),
+        variables: {"limit": limit, "skip": skip, "type": type});
 
     final results = await ApiService.shared.graphqlQuery(options);
 

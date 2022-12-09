@@ -9,6 +9,7 @@ import '../../../utils/convert_date_time.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
+import '../../../widgets/primary_loading.dart';
 import '../../news/new_details_screen.dart';
 import '../../news/news_screen.dart';
 import '../prv/home_prv.dart';
@@ -21,18 +22,19 @@ class ProjectInfoHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = context.watch<HomePrv>().newList;
-    // if (list == null) {
-    //   return const Center(child: PrimaryLoading());
-    // } else if (list.isEmpty) {
-    //   return vpad(0);
-    // }
+    var list = context.watch<HomePrv>().newProjectList;
+
+    if (context.watch<HomePrv>().isProNewsLoading) {
+      return const Center(child: PrimaryLoading());
+    } else if (list.isEmpty) {
+      return vpad(0);
+    }
 
     return HomeTitleWidget(
       title: S.of(context).news,
       onTapShowAll: () {
         Navigator.pushNamed(context, NewListScreen.routeName,
-            arguments: context.read<HomePrv>().newList);
+            arguments: "PROJECT");
         // Utils.pushScreen(context, const ListProjectInfoScreen());
       },
       child: SizedBox(
