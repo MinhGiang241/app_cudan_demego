@@ -97,6 +97,7 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
               vpad(12),
               ...listOwn.map((e) => PrimaryCard(
                         onTap: () {
+                          context.read<AuthPrv>().authStatus = AuthStatus.auth;
                           widget.context
                               .read<ResidentInfoPrv>()
                               .selectedApartment = e;

@@ -28,7 +28,7 @@ import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
 import 'resident_info_prv.dart';
 
-enum AuthStatus { unknown, auth, unauthen }
+enum AuthStatus { unknown, auth, unauthen, authRes }
 
 class AuthPrv extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.unknown;
@@ -129,6 +129,10 @@ class AuthPrv extends ChangeNotifier {
                       .add(ResponseResidentOwn.fromJson(i));
                 }
               });
+              var lo = context.read<ResidentInfoPrv>().listOwn;
+              if (lo.isNotEmpty) {
+                context.read<AuthPrv>().authStatus = AuthStatus.authRes;
+              }
               context.read<AuthPrv>().authStatus = AuthStatus.auth;
               notifyListeners();
               if (context.read<ResidentInfoPrv>().listOwn.isEmpty) {
@@ -332,8 +336,7 @@ class AuthPrv extends ChangeNotifier {
                       onTap: () async {
                         Utils.pop(context, true);
                         await APIAuth.signOut(context: context);
-                        context.read<AuthPrv>().authStatus =
-                            AuthStatus.unauthen;
+                        authStatus = AuthStatus.unauthen;
                         context.read<ResidentInfoPrv>().clearData();
 
                         context.read<AuthPrv>().userInfo = null;

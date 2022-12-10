@@ -11,6 +11,7 @@ import '../../widgets/primary_card.dart';
 import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
 
+import '../auth/prv/auth_prv.dart';
 import '../auth/prv/resident_info_prv.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
@@ -68,6 +69,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return ChangeNotifierProvider<HomePrv>(
       create: (context) => HomePrv(context),
       builder: (context, snapshot) {
+        var auth = context.watch<AuthPrv>().authStatus;
+        var res = context.watch<ResidentInfoPrv>().residentId;
+        var l = context.watch<ResidentInfoPrv>().listOwn;
+        print(auth);
+        print(res);
+        print(l);
         final isLoading = context.watch<HomePrv>().isLoading;
         return Stack(alignment: Alignment.center, children: [
           Scaffold(

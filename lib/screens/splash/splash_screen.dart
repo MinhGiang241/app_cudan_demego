@@ -5,23 +5,46 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/prf_data.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
 import '../auth/sign_up_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.isUnathen}) : super(key: key);
   static const routeName = '/';
   final bool isUnathen;
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // Provider.of<SingInPrv>(context).initAccountSave();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      var acc = await PrfData.shared.getSignInStore();
+
+      if (acc['acc'] != null && acc['pass'] != null) {
+        print(acc);
+        await Provider.of<AuthPrv>(context, listen: false)
+            .onSignIn(context, acc['acc'], acc['pass']);
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var status = context.read<AuthPrv>().authStatus;
+    var status = context.watch<AuthPrv>().authStatus;
+    print(status);
     if (status == AuthStatus.auth) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, HomeScreen.routeName, (route) => false);
+      return const HomeScreen();
     }
     return Material(
       child: Scaffold(
@@ -79,7 +102,7 @@ class SplashScreen extends StatelessWidget {
                                   opacity: animate, child: child),
                             ));
                           },
-                          child: isUnathen
+                          child: widget.isUnathen
                               ? Column(
                                   children: [
                                     PrimaryButton(
