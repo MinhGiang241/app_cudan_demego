@@ -28,8 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // Provider.of<SingInPrv>(context).initAccountSave();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       var acc = await PrfData.shared.getSignInStore();
+      var isBack = false;
+      var arg = ModalRoute.of(context)!.settings.arguments as bool?;
+      if (arg != null) {
+        isBack = arg;
+      }
 
-      if (acc['acc'] != null && acc['pass'] != null) {
+      if (acc['acc'] != null && acc['pass'] != null && !isBack) {
         print(acc);
         await Provider.of<AuthPrv>(context, listen: false)
             .onSignIn(context, acc['acc'], acc['pass']);
@@ -43,9 +48,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var status = context.watch<AuthPrv>().authStatus;
     print(status);
-    if (status == AuthStatus.auth) {
-      return const HomeScreen();
-    }
+    // if (status == AuthStatus.auth) {
+    //   return const HomeScreen();
+    // }
     return Material(
       child: Scaffold(
         body: Container(

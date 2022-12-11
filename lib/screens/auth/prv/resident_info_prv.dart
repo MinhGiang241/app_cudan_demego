@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/resident_info.dart';
 import '../../../models/response_resident_own.dart';
+import '../../../services/prf_data.dart';
 
 class ResidentInfoPrv extends ChangeNotifier {
   bool isLoading = false;
@@ -39,8 +40,14 @@ class ResidentInfoPrv extends ChangeNotifier {
     // notifyListeners();
   }
 
-  selectApartment(ResponseResidentOwn select) {
-    selectedApartment = select;
+  selectApartment(MapEntry<int, ResponseResidentOwn> select) async {
+    selectedApartment = select.value;
+    PrfData.shared.setApartments(select.key);
+    notifyListeners();
+  }
+
+  selectApartmentFromHive(int index) {
+    selectedApartment = listOwn[index];
     notifyListeners();
   }
 }

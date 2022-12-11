@@ -64,17 +64,15 @@ class PrfData {
     return await _apartmentBox.deleteAll([_floorPlan, _apartment]);
   }
 
-  Future<void> setApartments(ResponseResidentOwn apartment) {
-    return _apartmentBox.put(
-        _apartment, jsonEncode(apartment.toJson()).toString());
+  Future<void> setApartments(int index) {
+    return _apartmentBox.put(_apartment, (index).toString());
   }
 
-  ResponseResidentOwn? getApartments() {
-    final data = _apartmentBox.get(_apartment);
+  Future<int?> getApartments() async {
+    final data = await _apartmentBox.get(_apartment);
 
     if (data != null) {
-      final map = jsonDecode(data);
-      return ResponseResidentOwn.fromJson(map);
+      return int.parse(data);
     }
     return null;
   }
@@ -145,6 +143,10 @@ class PrfData {
     await _signIn.put("pass", password);
   }
 
+  Future deleteSignInStore() async {
+    await _signIn.deleteAll(["acc", "pass"]);
+  }
+
   getSignInStore() async {
     var acc = await _signIn.get("acc");
     var pass = await _signIn.get("pass");
@@ -153,7 +155,7 @@ class PrfData {
   }
 
   Future<void> deteleSignInStore() async {
-    await _signIn.deleteAll(["acc", 'pass']);
+    return await _signIn.deleteAll(["acc", 'pass']);
   }
 
   String? getToken() {

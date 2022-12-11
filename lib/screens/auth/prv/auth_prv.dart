@@ -43,7 +43,7 @@ class AuthPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
-  bool remember = true;
+  bool remember = false;
 
   clearData() {
     account = null;
@@ -118,7 +118,7 @@ class AuthPrv extends ChangeNotifier {
                     : null;
             await APITower.getUserOwnInfo(
                     context.read<ResidentInfoPrv>().userInfo!.id as String)
-                .then((v) {
+                .then((v) async {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
                 if (i['status'] == 'ACTIVE' &&
@@ -129,6 +129,7 @@ class AuthPrv extends ChangeNotifier {
                       .add(ResponseResidentOwn.fromJson(i));
                 }
               });
+              int? aprt = await PrfData.shared.getApartments();
               var lo = context.read<ResidentInfoPrv>().listOwn;
               if (lo.isNotEmpty) {
                 context.read<AuthPrv>().authStatus = AuthStatus.authRes;
@@ -136,8 +137,17 @@ class AuthPrv extends ChangeNotifier {
               context.read<AuthPrv>().authStatus = AuthStatus.auth;
               notifyListeners();
               if (context.read<ResidentInfoPrv>().listOwn.isEmpty) {
-                Navigator.of(context).pushNamed(
+                Navigator.of(context).pushNamedAndRemoveUntil(
                   HomeScreen.routeName,
+                  (route) => route.isCurrent,
+                );
+              } else if (aprt != null) {
+                print(aprt);
+                context.read<ResidentInfoPrv>().selectApartmentFromHive(aprt);
+                notifyListeners();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  HomeScreen.routeName,
+                  (route) => route.isCurrent,
                 );
               } else {
                 Navigator.pushReplacementNamed(
@@ -347,7 +357,8 @@ class AuthPrv extends ChangeNotifier {
 
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             SignInScreen.routeName,
-                            ((route) => route.isCurrent));
+                            ((route) => route.isCurrent),
+                            arguments: true);
                       },
                     ),
                   ),

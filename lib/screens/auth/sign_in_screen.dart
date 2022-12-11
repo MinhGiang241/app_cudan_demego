@@ -33,8 +33,14 @@ class _SignInScreenState extends State<SignInScreen> {
   void initState() {
     // TODO: implement initState
     // Provider.of<SingInPrv>(context).initAccountSave();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       Provider.of<SingInPrv>(context, listen: false).initAccountSave();
+      // final arg = ModalRoute.of(context)!.settings.arguments as bool?;
+      // if (arg != null) {
+      //   if (arg) {
+      //     await PrfData.shared.deleteSignInStore();
+      //   }
+      // }
     });
 
     super.initState();
@@ -49,13 +55,21 @@ class _SignInScreenState extends State<SignInScreen> {
     final arg = ModalRoute.of(context)!.settings.arguments as bool?;
     if (arg != null) {
       widget.isFromSignUp = arg;
+      if (arg) {
+        Provider.of<SingInPrv>(context, listen: false)
+            .initAccountSave()
+            .then((v) {
+          PrfData.shared.deleteSignInStore();
+        });
+      }
     }
     return PrimaryScreen(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: BackButton(
             onPressed: () => Navigator.pushReplacementNamed(
-                context, SplashScreen.routeName)),
+                context, SplashScreen.routeName,
+                arguments: true)),
       ),
       body: Form(
         key: context.read<SingInPrv>().formKey,

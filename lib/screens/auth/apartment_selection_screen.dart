@@ -6,6 +6,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/response_apartment.dart';
 import '../../services/api_tower.dart';
+import '../../services/prf_data.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
@@ -95,14 +96,16 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
               Text(arg, style: txtBold(14, grayScaleColorBase)),
 
               vpad(12),
-              ...listOwn.map((e) => PrimaryCard(
-                        onTap: () {
+              ...listOwn.asMap().entries.map((e) => PrimaryCard(
+                        onTap: () async {
                           context.read<AuthPrv>().authStatus = AuthStatus.auth;
                           widget.context
                               .read<ResidentInfoPrv>()
-                              .selectedApartment = e;
+                              .selectedApartment = e.value;
+                          await PrfData.shared.setApartments(e.key);
+
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              HomeScreen.routeName, (route) => false);
+                              HomeScreen.routeName, (route) => route.isCurrent);
                         },
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Padding(
@@ -118,11 +121,11 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(e.building?.name ?? '',
+                                  Text(e.value.building?.name ?? '',
                                       style: txtLinkSmall()),
                                   vpad(4),
                                   Text(
-                                      '${e.apartment?.name ?? ''} - ${e.floor?.name ?? ''}',
+                                      '${e.value.apartment?.name ?? ''} - ${e.value.floor?.name ?? ''}',
                                       style: txtBodySmallBold()),
                                   // vpad(4),
                                   // Text('Thông tin thêm',

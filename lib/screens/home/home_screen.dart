@@ -72,8 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
         var auth = context.watch<AuthPrv>().authStatus;
         var res = context.watch<ResidentInfoPrv>().residentId;
         var l = context.watch<ResidentInfoPrv>().listOwn;
+        var select = context.watch<ResidentInfoPrv>().selectedApartment;
         print(auth);
         print(res);
+        print(select);
         print(l);
         final isLoading = context.watch<HomePrv>().isLoading;
         return Stack(alignment: Alignment.center, children: [

@@ -39,16 +39,17 @@ class HeaderHome extends StatefulWidget {
 class _HeaderHomeState extends State<HeaderHome> {
   @override
   Widget build(BuildContext context) {
-    var userInfo = context.read<ResidentInfoPrv>().userInfo;
+    var userInfo = context.watch<ResidentInfoPrv>().userInfo;
+    var se = context.watch<ResidentInfoPrv>().selectedApartment;
     var selectedApartment =
-        context.read<ResidentInfoPrv>().selectedApartment?.apartment;
+        context.watch<ResidentInfoPrv>().selectedApartment?.apartment;
     var selectedBulding =
-        context.read<ResidentInfoPrv>().selectedApartment?.building;
+        context.watch<ResidentInfoPrv>().selectedApartment?.building;
     var selectedFloor =
-        context.read<ResidentInfoPrv>().selectedApartment?.floor;
+        context.watch<ResidentInfoPrv>().selectedApartment?.floor;
     var listOwn = context.read<ResidentInfoPrv>().listOwn;
 
-    selectApartment(ResponseResidentOwn select) {
+    selectApartment(MapEntry<int, ResponseResidentOwn> select) {
       setState(() {
         context.read<ResidentInfoPrv>().selectApartment(select);
       });

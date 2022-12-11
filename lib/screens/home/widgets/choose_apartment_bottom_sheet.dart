@@ -17,7 +17,7 @@ class ChooseAparmentBottomSheet extends StatefulWidget {
   }) : super(key: key);
 
   final List<ResponseResidentOwn> list;
-  final Function(ResponseResidentOwn) selectApartment;
+  final Function(MapEntry<int, ResponseResidentOwn>) selectApartment;
 
   @override
   State<ChooseAparmentBottomSheet> createState() =>
@@ -34,7 +34,7 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...widget.list.map((e) => Column(
+                  ...widget.list.asMap().entries.map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InkWell(
@@ -58,10 +58,10 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(e.apartment?.name ?? "",
+                                      Text(e.value.apartment?.name ?? "",
                                           style: txtLinkMedium()),
                                       Text(
-                                          '${e.floor?.name ?? ""}- ${e.building?.name ?? ""}',
+                                          '${e.value.floor?.name ?? ""}- ${e.value.building?.name ?? ""}',
                                           style: txtBodySmallRegular(
                                               color: grayScaleColor2))
                                     ],

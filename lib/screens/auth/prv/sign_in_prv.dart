@@ -24,6 +24,7 @@ class SingInPrv extends ChangeNotifier {
     if (acc != null && acc['acc'] != null && acc['pass'] != null) {
       accountController.text = acc['acc'];
       passController.text = acc['pass'];
+      return acc;
     }
   }
 

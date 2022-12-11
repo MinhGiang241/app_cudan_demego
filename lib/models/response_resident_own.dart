@@ -70,6 +70,9 @@ class ResponseResidentOwn {
     data['floorId'] = floorId;
     data['type'] = type;
     data['status'] = status;
+    data['building'] = building != null ? building!.toJson() : null;
+    data['floor'] = floor != null ? floor!.toJson() : null;
+    data['apartment'] = apartment != null ? apartment!.toJson() : null;
     return data;
   }
 }
