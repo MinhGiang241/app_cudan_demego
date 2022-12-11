@@ -43,7 +43,7 @@ class AuthPrv extends ChangeNotifier {
 
   bool isLoading = false;
 
-  bool remember = false;
+  bool remember = true;
 
   clearData() {
     account = null;
@@ -354,11 +354,16 @@ class AuthPrv extends ChangeNotifier {
                         context.read<AuthPrv>().apartments = null;
                         context.read<AuthPrv>().clearData();
                         notifyListeners();
+                        var acc = await PrfData.shared.getSignInStore();
 
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             SignInScreen.routeName,
                             ((route) => route.isCurrent),
-                            arguments: true);
+                            arguments: {
+                              'fromSignout': true,
+                              "c": acc != null ? acc['acc'] : null,
+                              "p": acc != null ? acc['pass'] : null,
+                            });
                       },
                     ),
                   ),

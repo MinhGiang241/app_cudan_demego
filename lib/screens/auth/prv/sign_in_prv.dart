@@ -22,10 +22,13 @@ class SingInPrv extends ChangeNotifier {
   initAccountSave() async {
     var acc = await PrfData.shared.getSignInStore();
     if (acc != null && acc['acc'] != null && acc['pass'] != null) {
-      accountController.text = acc['acc'];
-      passController.text = acc['pass'];
-      return acc;
+      final a = acc['acc'];
+      final p = acc['pass'];
+      accountController.text = a;
+      passController.text = p;
+      notifyListeners();
     }
+    return 0;
   }
 
   signIn(BuildContext context) async {

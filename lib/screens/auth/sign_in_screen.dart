@@ -30,38 +30,28 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    // Provider.of<SingInPrv>(context).initAccountSave();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      Provider.of<SingInPrv>(context, listen: false).initAccountSave();
-      // final arg = ModalRoute.of(context)!.settings.arguments as bool?;
-      // if (arg != null) {
-      //   if (arg) {
-      //     await PrfData.shared.deleteSignInStore();
-      //   }
-      // }
-    });
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // return ChangeNotifierProvider<SingInPrv>(
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),
     //   builder: (context, state) {
 
-    final arg = ModalRoute.of(context)!.settings.arguments as bool?;
-    if (arg != null) {
-      widget.isFromSignUp = arg;
-      if (arg) {
-        Provider.of<SingInPrv>(context, listen: false)
-            .initAccountSave()
-            .then((v) {
-          PrfData.shared.deleteSignInStore();
-        });
-      }
+    // final arg = ModalRoute.of(context)!.settings.arguments as bool?;
+    // if (arg != null) {
+    //   widget.isFromSignUp = arg;
+    //   if (arg) {
+    //     Provider.of<SingInPrv>(context, listen: false)
+    //         .initAccountSave()
+    //         .then((v) {
+    //       PrfData.shared.deleteSignInStore();
+    //     });
+    //   }
+    // }
+
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (arg != null && arg['c'] != null && arg['p'] != null) {
+      Provider.of<SingInPrv>(context).initAccountSave().then((e) {
+        return PrfData.shared.deleteSignInStore();
+      });
     }
     return PrimaryScreen(
       appBar: AppBar(

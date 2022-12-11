@@ -55,8 +55,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             //     context,
                             //     SignInScreen(
                             //         context: context, isFromSignUp: true));
-                            Navigator.pushNamed(context, SignInScreen.routeName,
-                                arguments: true);
+                            Navigator.pushNamed(
+                              context,
+                              SignInScreen.routeName,
+                            );
                           }
                         },
                         borderRadius: BorderRadius.circular(5),

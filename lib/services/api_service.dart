@@ -107,7 +107,9 @@ class ApiService {
     final credentialsFile = File('${path.path}/credential.json');
     print(credentialsFile);
     if (credentialsFile.existsSync()) {
-      await credentialsFile.delete();
+      try {
+        await credentialsFile.delete();
+      } catch (e) {}
     }
   }
 
