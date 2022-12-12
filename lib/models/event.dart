@@ -40,9 +40,10 @@ class Event {
   bool? notice;
   bool? valid;
   String? approveManId;
-  int? approve_date;
+  String? approve_date;
   String? content_event;
-  FileUpload? file_upload;
+  String? due_regist;
+  List<FileUpload>? file_upload;
   Event.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -62,9 +63,14 @@ class Event {
     approveManId = json['approveManId'];
     approve_date = json['approve_date'];
     content_event = json['content_event'];
+    due_regist = json['due_regist'];
     file_upload = json['file_upload'] != null
-        ? FileUpload.fromJson(json['file_upload'])
-        : null;
+        ? json['file_upload'].length != 0
+            ? json['file_upload']
+                .map<FileUpload>((e) => FileUpload.fromJson(e))
+                .toList()
+            : []
+        : [];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -86,7 +92,9 @@ class Event {
     data['approveManId'] = approveManId;
     data['approve_date'] = approve_date;
     data['content_event'] = content_event;
-    data['file_upload'] = file_upload != null ? file_upload!.toJson() : null;
+    data['due_regist'] = due_regist;
+    data['file_upload'] =
+        file_upload != null ? [...file_upload!.map((e) => e.toJson())] : [];
     return data;
   }
 }

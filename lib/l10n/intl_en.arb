@@ -288,5 +288,18 @@
   "project":"Project",
   "al_read":"read",
   "not_read":"Unread",
-  "no_news":"Don't have any news"
+  "no_news":"Don't have any news",
+  "happening":"Happenning",
+  "coming_soon":"Comming soon",
+  "happened":"Happened",
+  "no_event":"Don't have any event",
+  "end_time_reg":"End registration time",
+  "time_event_happening":"Time event happening",
+  "detail_view":"Details view",
+  "participate":"Participate",
+  "time_happening":"Time happening",
+  "happening_location":"Happening location",
+  "confirm_participate_event":"Confirm participate event",
+  "confirm_par_ques_event":"Do you want to participate in {eventName}?"
+
 }

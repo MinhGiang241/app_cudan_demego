@@ -2949,6 +2949,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Happenning`
+  String get happening {
+    return Intl.message(
+      'Happenning',
+      name: 'happening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comming soon`
+  String get coming_soon {
+    return Intl.message(
+      'Comming soon',
+      name: 'coming_soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Happened`
+  String get happened {
+    return Intl.message(
+      'Happened',
+      name: 'happened',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any event`
+  String get no_event {
+    return Intl.message(
+      'Don\'t have any event',
+      name: 'no_event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End registration time`
+  String get end_time_reg {
+    return Intl.message(
+      'End registration time',
+      name: 'end_time_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time event happening`
+  String get time_event_happening {
+    return Intl.message(
+      'Time event happening',
+      name: 'time_event_happening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details view`
+  String get detail_view {
+    return Intl.message(
+      'Details view',
+      name: 'detail_view',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Participate`
+  String get participate {
+    return Intl.message(
+      'Participate',
+      name: 'participate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time happening`
+  String get time_happening {
+    return Intl.message(
+      'Time happening',
+      name: 'time_happening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Happening location`
+  String get happening_location {
+    return Intl.message(
+      'Happening location',
+      name: 'happening_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm participate event`
+  String get confirm_participate_event {
+    return Intl.message(
+      'Confirm participate event',
+      name: 'confirm_participate_event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to participate in {eventName}?`
+  String confirm_par_ques_event(Object eventName) {
+    return Intl.message(
+      'Do you want to participate in $eventName?',
+      name: 'confirm_par_ques_event',
+      desc: '',
+      args: [eventName],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

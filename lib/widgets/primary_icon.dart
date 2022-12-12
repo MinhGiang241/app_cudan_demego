@@ -11,6 +11,7 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  mappin,
   clock,
   alert,
   car_bg,

@@ -13,6 +13,8 @@ import '../screens/auth/prv/sign_up_prv.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
+import '../screens/event/event_details_screen.dart';
+import '../screens/event/event_list_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
 import '../screens/news/news_screen.dart';
@@ -179,6 +181,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const NewDetailsScreen(),
+        );
+      case EventListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const EventListScreen(),
+        );
+      case EventDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const EventDetailsScreen(),
         );
       case ParcelListScreen.routeName:
         return MaterialPageRoute(
