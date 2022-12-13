@@ -41,11 +41,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(nameser) => "Đăng ký dịch vụ ${nameser}";
 
-  static String m9(service) => "Dịch vụ ${service}";
+  static String m9(eName) => "Bạn đã xác nhận tham gia ${eName} thành công";
 
-  static String m10(del) => "Xóa ${del} thành công";
+  static String m10(service) => "Dịch vụ ${service}";
 
-  static String m11(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m11(del) => "Xóa ${del} thành công";
+
+  static String m12(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -138,7 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngày kết thúc không được để trống"),
         "end_time": MessageLookupByLibrary.simpleMessage("Thời gian kết thúc"),
         "end_time_reg":
-            MessageLookupByLibrary.simpleMessage("Thởi gian kết thúc đăng ký"),
+            MessageLookupByLibrary.simpleMessage("Thời gian kết thúc đăng ký"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
         "enter_email":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ email"),
@@ -328,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký"),
         "reg_service": MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ"),
         "reg_service_a": m8,
+        "reg_time": MessageLookupByLibrary.simpleMessage("Thời gian đăng ký"),
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
@@ -385,6 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9": MessageLookupByLibrary.simpleMessage(
             "Tài khoản chưa được kích hoạt"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "scuccess_participation": m9,
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
@@ -398,7 +402,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi mã về email"),
         "send_to_phone": MessageLookupByLibrary.simpleMessage("Gửi mã về SDT"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
-        "service_name": m9,
+        "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "shopping_online":
@@ -427,7 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_remove": m10,
+        "success_remove": m11,
         "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
@@ -439,7 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
         "time_event_happening":
-            MessageLookupByLibrary.simpleMessage("Thởi gian diễn ra sự kiện"),
+            MessageLookupByLibrary.simpleMessage("Thời gian diễn ra sự kiện"),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
@@ -473,7 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m11,
+        "we_send_to": m12,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại"),

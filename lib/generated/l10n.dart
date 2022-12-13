@@ -3060,13 +3060,33 @@ class S {
     );
   }
 
-  /// `Do you want to participate in {eventName}?`
+  /// `Do you want to participate in '{eventName}'?`
   String confirm_par_ques_event(Object eventName) {
     return Intl.message(
-      'Do you want to participate in $eventName?',
+      'Do you want to participate in \'$eventName\'?',
       name: 'confirm_par_ques_event',
       desc: '',
       args: [eventName],
+    );
+  }
+
+  /// `Paticipate event '{eName}' successfully`
+  String scuccess_participation(Object eName) {
+    return Intl.message(
+      'Paticipate event \'$eName\' successfully',
+      name: 'scuccess_participation',
+      desc: '',
+      args: [eName],
+    );
+  }
+
+  /// `Time registration`
+  String get reg_time {
+    return Intl.message(
+      'Time registration',
+      name: 'reg_time',
+      desc: '',
+      args: [],
     );
   }
 }

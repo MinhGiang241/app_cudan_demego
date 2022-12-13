@@ -1,5 +1,8 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_event.dart';
 import 'package:app_cudan/services/api_new.dart';
 
+import '../../../models/event.dart';
 import '../../../models/new.dart';
 import '../../../models/response_bantinduan_list.dart' as btda;
 import '../../../models/response_news_list_model.dart';
@@ -19,9 +22,11 @@ import '../../auth/prv/auth_prv.dart';
 class HomePrv extends ChangeNotifier {
   List<NewsListItems>? newsList;
   List<BTDAItems>? btdaList;
+  Event? event;
   bool isLoading = false;
   bool isResNewsLoading = false;
   bool isProNewsLoading = false;
+  bool isEventLoading = false;
   late BuildContext context;
   List<New> newResidentList = [];
   List<New> newProjectList = [];
@@ -50,6 +55,7 @@ class HomePrv extends ChangeNotifier {
     //   "unionLimit": 10
     // };
     try {
+      isEventLoading = true;
       isResNewsLoading = true;
       isProNewsLoading = true;
       notifyListeners();
@@ -67,10 +73,19 @@ class HomePrv extends ChangeNotifier {
       newProjectList.sort(
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
+      // ignore: use_build_context_synchronously
+      var accountId = context.read<ResidentInfoPrv>().userInfo!.account!.id;
+      await APIEvent.getEventList(0, 5, "COMING", accountId ?? "").then((v) {
+        if (v.length >= 0) {
+          event = Event.fromJson(v[0]);
+        }
+      });
+      isEventLoading = false;
       isResNewsLoading = false;
       isProNewsLoading = false;
       notifyListeners();
     } catch (e) {
+      isEventLoading = false;
       isResNewsLoading = false;
       isProNewsLoading = false;
 

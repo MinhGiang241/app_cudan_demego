@@ -294,12 +294,14 @@
   "coming_soon":"Sắp diễn ra",
   "happened":"Đã diễn ra",
   "no_event":"Không có sự kiện nào",
-  "end_time_reg":"Thởi gian kết thúc đăng ký",
-  "time_event_happening":"Thởi gian diễn ra sự kiện",
+  "end_time_reg":"Thời gian kết thúc đăng ký",
+  "time_event_happening":"Thời gian diễn ra sự kiện",
   "detail_view":"Xem chi tiết",
   "participate":"Tham gia",
   "time_happening":"Thời gian diễn ra",
   "happening_location":"Địa điểm diễn ra",
   "confirm_participate_event":"Xác nhận tham gia sự kiện",
-  "confirm_par_ques_event":"Bạn chắc chắn muốn tham gia sự kiện {eventName} không?"
+  "confirm_par_ques_event":"Bạn chắc chắn muốn tham gia sự kiện {eventName} không?",
+  "scuccess_participation":"Bạn đã xác nhận tham gia {eName} thành công",
+  "reg_time":"Thời gian đăng ký"
 }

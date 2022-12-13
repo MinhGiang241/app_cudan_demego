@@ -28,7 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(card) => "Do you want to lock card ${card}?";
 
-  static String m4(eventName) => "Do you want to participate in ${eventName}?";
+  static String m4(eventName) =>
+      "Do you want to participate in \'${eventName}\'?";
 
   static String m5(approved) => "Do you want to send to approve ${approved}?";
 
@@ -38,11 +39,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(nameser) => "Registration service ${nameser}";
 
-  static String m9(service) => "Service ${service}";
+  static String m9(eName) => "Paticipate event \'${eName}\' successfully";
 
-  static String m10(del) => "Remove ${del} successfully";
+  static String m10(service) => "Service ${service}";
 
-  static String m11(to) => "We sent otp code to :${to}";
+  static String m11(del) => "Remove ${del} successfully";
+
+  static String m12(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -329,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_service":
             MessageLookupByLibrary.simpleMessage("Registration service"),
         "reg_service_a": m8,
+        "reg_time": MessageLookupByLibrary.simpleMessage("Time registration"),
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
@@ -386,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "scuccess_participation": m9,
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
@@ -400,7 +405,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
-        "service_name": m9,
+        "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "shopping_online":
@@ -430,7 +435,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_remove": m10,
+        "success_remove": m11,
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
@@ -479,7 +484,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m11,
+        "we_send_to": m12,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
         "year": MessageLookupByLibrary.simpleMessage("Year")

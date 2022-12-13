@@ -11,15 +11,26 @@ import '../../generated/l10n.dart';
 import '../../models/event.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_appbar.dart';
+import '../../widgets/primary_button.dart';
 import '../../widgets/primary_screen.dart';
 
-class EventDetailsScreen extends StatelessWidget {
+class EventDetailsScreen extends StatefulWidget {
   const EventDetailsScreen({super.key});
   static const routeName = '/event/details';
 
   @override
+  State<EventDetailsScreen> createState() => _EventDetailsScreenState();
+}
+
+class _EventDetailsScreenState extends State<EventDetailsScreen> {
+  bool isShowButtonParticipation = true;
+
+  @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Event;
+    if (arg.e != null || arg.isShowButtonParticipate == false) {
+      isShowButtonParticipation = false;
+    }
     return PrimaryScreen(
         appBar: PrimaryAppbar(
           title: S.of(context).event,
@@ -62,6 +73,14 @@ class EventDetailsScreen extends StatelessWidget {
                 },
                 textStyle: txtBodyMediumRegular(),
               ),
+              vpad(30),
+              if (isShowButtonParticipation)
+                PrimaryButton(
+                  buttonSize: ButtonSize.medium,
+                  buttonType: ButtonType.green,
+                  onTap: () {},
+                  text: S.of(context).participate,
+                ),
               vpad(60),
             ],
           ),

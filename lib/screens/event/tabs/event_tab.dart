@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/event/prv/event_list_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -53,6 +54,16 @@ class _EventTabState extends State<EventTab> {
                     child: SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
+                      onRefresh: () {
+                        context.read<EventTabPrv>().getEventList(context, true);
+                        _refreshController.refreshCompleted();
+                      },
+                      onLoading: () {
+                        context
+                            .read<EventTabPrv>()
+                            .getEventList(context, false);
+                        _refreshController.loadComplete();
+                      },
                       controller: _refreshController,
                       header: WaterDropMaterialHeader(
                           backgroundColor: Theme.of(context).primaryColor),
@@ -71,6 +82,7 @@ class _EventTabState extends State<EventTab> {
                       enablePullDown: true,
                       enablePullUp: true,
                       onRefresh: () {
+                        context.read<EventTabPrv>().getEventList(context, true);
                         _refreshController.refreshCompleted();
                       },
                       controller: _refreshController,
@@ -89,6 +101,7 @@ class _EventTabState extends State<EventTab> {
                               .watch<EventTabPrv>()
                               .listEvent
                               .map((e) => EventCardWidget(
+                                    type: widget.type,
                                     onPart: () {
                                       Utils.showConfirmMessage(
                                           context: context,
@@ -100,18 +113,29 @@ class _EventTabState extends State<EventTab> {
                                               .confirm_par_ques_event(
                                                   e.title != null
                                                       ? e.title!.toLowerCase()
-                                                      : ''));
+                                                      : ''),
+                                          onConfirm: () {
+                                            context
+                                                .read<EventTabPrv>()
+                                                .participateEvent(context, e);
+                                            setState(() {});
+                                          });
                                     },
                                     onTap: () {
                                       Navigator.pushNamed(
                                           context, EventDetailsScreen.routeName,
                                           arguments: e);
                                     },
+                                    participate: e.e,
+                                    timeStatus: e.time_status,
+                                    isPaticipation: e.isParticipation ?? false,
                                     title: e.title,
                                     endDate: e.due_regist,
                                     endEvent: e.end_time,
                                     startEvent: e.start_time,
                                     location: e.location,
+                                    isShowButtonParticipate:
+                                        e.isShowButtonParticipate ?? true,
                                   )),
                         ],
                       ),
