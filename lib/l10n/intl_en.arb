@@ -302,5 +302,9 @@
   "confirm_participate_event":"Confirm participate event",
   "confirm_par_ques_event":"Do you want to participate in '{eventName}'?",
   "scuccess_participation":"Paticipate event '{eName}' successfully",
-  "reg_time":"Time registration"
+  "reg_time":"Time registration",
+  "pay":"Payment",
+  "paid":"Paid",
+  "unpaid":"Unpaid",
+  "no_bill":"Don't have any bill"
 }

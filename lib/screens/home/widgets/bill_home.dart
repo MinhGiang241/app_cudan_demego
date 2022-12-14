@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/payment/payment_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/constants.dart';
@@ -16,13 +17,48 @@ class BillsHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).bills,
       onTapShowAll: () {
-        Navigator.of(context).pushNamed(BillsScreen.routeName);
+        Navigator.of(context).pushNamed(PaymentListScreen.routeName);
         // Utils.pushScreen(context, const BillsScreen());
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(
+            width: 85,
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          blurStyle: BlurStyle.normal,
+                          spreadRadius: 1,
+                          blurRadius: 24,
+                          color: greenColor.withOpacity(0.25),
+                          offset: const Offset(0, 16))
+                    ],
+                  ),
+                  child: PrimaryIcon(
+                    icons: PrimaryIcons.dollar,
+                    style: PrimaryIconStyle.gradient,
+                    gradients: PrimaryIconGradient.green,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(12),
+                    size: 32,
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(PaymentListScreen.routeName);
+                    },
+                  ),
+                ),
+                vpad(12),
+                Text(S.of(context).pay,
+                    textAlign: TextAlign.center,
+                    style: txtBodySmallBold(color: grayScaleColorBase))
+              ],
+            ),
+          ),
           SizedBox(
             width: 85,
             child: Column(
@@ -42,40 +78,6 @@ class BillsHome extends StatelessWidget {
                     icons: PrimaryIcons.electricity,
                     style: PrimaryIconStyle.gradient,
                     gradients: PrimaryIconGradient.yellow,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      // Utils.pushScreen(context, const BillsScreen());
-                    },
-                  ),
-                ),
-                vpad(12),
-                Text(S.of(context).electricity,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: turquoiseColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
-                    ],
-                  ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.water,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.turquoise,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,

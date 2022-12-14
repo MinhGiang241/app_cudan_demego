@@ -14,6 +14,11 @@ class EventTabPrv extends ChangeNotifier {
   int skip = 0;
   int limit = 5;
 
+  onParticipate(int index) {
+    listEvent[index].isParticipation = true;
+    notifyListeners();
+  }
+
   Future getEventList(BuildContext context, bool isFirst) async {
     if (isFirst) {
       listEvent.clear();
@@ -38,10 +43,10 @@ class EventTabPrv extends ChangeNotifier {
   Future participateEvent(BuildContext context, Event e) async {
     Navigator.pop(context);
     var paticipation = EventParticipation(
-      accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
-      eventId: e.id,
-      event_for: e.event_for,
-    );
+        accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
+        eventId: e.id,
+        event_for: e.event_for,
+        residentId: context.read<ResidentInfoPrv>().residentId);
 
     await APIEvent.participateEvent(paticipation.toJson()).then((v) {
       Utils.showSuccessMessage(

@@ -303,5 +303,9 @@
   "confirm_participate_event":"Xác nhận tham gia sự kiện",
   "confirm_par_ques_event":"Bạn chắc chắn muốn tham gia sự kiện {eventName} không?",
   "scuccess_participation":"Bạn đã xác nhận tham gia {eName} thành công",
-  "reg_time":"Thời gian đăng ký"
+  "reg_time":"Thời gian đăng ký",
+  "pay":"Thanh toán",
+  "paid":"Chưa thanh toán",
+  "unpaid":"Đã thanh toán",
+  "no_bill":"Không có hóa đơn nào"
 }

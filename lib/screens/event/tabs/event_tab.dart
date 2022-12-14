@@ -100,6 +100,8 @@ class _EventTabState extends State<EventTab> {
                           ...context
                               .watch<EventTabPrv>()
                               .listEvent
+                              .asMap()
+                              .entries
                               .map((e) => EventCardWidget(
                                     type: widget.type,
                                     onPart: () {
@@ -111,31 +113,39 @@ class _EventTabState extends State<EventTab> {
                                           content: S
                                               .of(context)
                                               .confirm_par_ques_event(
-                                                  e.title != null
-                                                      ? e.title!.toLowerCase()
+                                                  e.value.title != null
+                                                      ? e.value.title!
+                                                          .toLowerCase()
                                                       : ''),
                                           onConfirm: () {
                                             context
                                                 .read<EventTabPrv>()
-                                                .participateEvent(context, e);
+                                                .participateEvent(
+                                                    context, e.value);
                                             setState(() {});
                                           });
                                     },
                                     onTap: () {
                                       Navigator.pushNamed(
                                           context, EventDetailsScreen.routeName,
-                                          arguments: e);
+                                          arguments: {
+                                            "event": e.value,
+                                            "part": () => context
+                                                .read<EventTabPrv>()
+                                                .onParticipate(e.key)
+                                          });
                                     },
-                                    participate: e.e,
-                                    timeStatus: e.time_status,
-                                    isPaticipation: e.isParticipation ?? false,
-                                    title: e.title,
-                                    endDate: e.due_regist,
-                                    endEvent: e.end_time,
-                                    startEvent: e.start_time,
-                                    location: e.location,
+                                    participate: e.value.e,
+                                    timeStatus: e.value.time_status,
+                                    isPaticipation:
+                                        e.value.isParticipation ?? false,
+                                    title: e.value.title,
+                                    endDate: e.value.due_regist,
+                                    endEvent: e.value.end_time,
+                                    startEvent: e.value.start_time,
+                                    location: e.value.location,
                                     isShowButtonParticipate:
-                                        e.isShowButtonParticipate ?? true,
+                                        e.value.isShowButtonParticipate ?? true,
                                   )),
                         ],
                       ),

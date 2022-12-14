@@ -11,6 +11,8 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  dollar,
+  credit,
   mappin,
   clock,
   alert,

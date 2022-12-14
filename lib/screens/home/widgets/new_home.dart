@@ -59,6 +59,7 @@ class NewsHome extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 0),
                 child: PrimaryCard(
                   onTap: () {
+                    context.read<HomePrv>().markRead(context, newList[index]);
                     Navigator.pushNamed(context, NewDetailsScreen.routeName,
                         arguments: newList[index]);
                   },

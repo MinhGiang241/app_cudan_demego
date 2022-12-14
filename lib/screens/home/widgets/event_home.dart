@@ -33,39 +33,53 @@ class EventsHome extends StatelessWidget {
               : PrimaryCard(
                   onTap: () {
                     Navigator.pushNamed(context, EventDetailsScreen.routeName,
-                        arguments: context.read<HomePrv>().event);
+                        arguments: {
+                          "event": context.read<HomePrv>().event,
+                          "part": context.read<HomePrv>().onParticipate
+                        });
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20, bottom: 30, left: 24, right: 24),
-                    child: Row(
-                      children: [
-                        const EventWidget(),
-                        hpad(24),
-                        SizedBox(
-                          // width: 180,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  child: (context.watch<HomePrv>().event != null)
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 30, left: 24, right: 24),
+                          child: Row(
                             children: [
-                              Text(context.watch<HomePrv>().event!.title ?? "",
-                                  style: txtLinkMedium()),
-                              vpad(4),
-                              Text(
-                                  Utils.dateFormat(
-                                      context
-                                              .watch<HomePrv>()
-                                              .event!
-                                              .start_time ??
-                                          "",
-                                      1),
-                                  style: txtBodyXSmallRegular(
-                                      color: grayScaleColor2)),
+                              const EventWidget(),
+                              hpad(24),
+                              Expanded(
+                                child: SizedBox(
+                                  // width: 200,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          context
+                                                  .watch<HomePrv>()
+                                                  .event!
+                                                  .title ??
+                                              "",
+                                          style: txtLinkMedium()),
+                                      vpad(4),
+                                      Text(
+                                          Utils.dateFormat(
+                                              context
+                                                      .watch<HomePrv>()
+                                                      .event!
+                                                      .start_time ??
+                                                  "",
+                                              1),
+                                          style: txtBodyXSmallRegular(
+                                              color: grayScaleColor2)),
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         )
-                      ],
-                    ),
-                  )),
+                      : vpad(0),
+                )
         ],
       ),
     );

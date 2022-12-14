@@ -122,6 +122,9 @@ class _NewListScreenState extends State<NewListScreen> {
                               if (e.key == 0) {
                                 return PrimaryCard(
                                   onTap: () {
+                                    context
+                                        .read<NewListPrv>()
+                                        .markRead(context, e.key, e.value);
                                     Navigator.pushNamed(
                                         context, NewDetailsScreen.routeName,
                                         arguments: e.value);
@@ -139,9 +142,14 @@ class _NewListScreenState extends State<NewListScreen> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            S.of(context).not_read,
-                                            style:
-                                                txtRegular(12, greenColorBase),
+                                            e.value.isRead == true
+                                                ? S.of(context).al_read
+                                                : S.of(context).not_read,
+                                            style: txtRegular(
+                                                12,
+                                                e.value.isRead == true
+                                                    ? grayScaleColorBase
+                                                    : greenColorBase),
                                           ),
                                         ),
                                       ),
@@ -176,6 +184,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                           //   height: 150,
                                           // ),
                                           vpad(12),
+
                                           Text(
                                             e.value.title ?? '',
                                             maxLines: 1,
@@ -201,6 +210,9 @@ class _NewListScreenState extends State<NewListScreen> {
                               }
                               return PrimaryCard(
                                 onTap: () {
+                                  context
+                                      .read<NewListPrv>()
+                                      .markRead(context, e.key, e.value);
                                   Navigator.pushNamed(
                                       context, NewDetailsScreen.routeName,
                                       arguments: e.value);
@@ -214,8 +226,14 @@ class _NewListScreenState extends State<NewListScreen> {
                                       child: Align(
                                         alignment: Alignment.bottomRight,
                                         child: Text(
-                                          S.of(context).not_read,
-                                          style: txtRegular(12, greenColorBase),
+                                          e.value.isRead == true
+                                              ? S.of(context).al_read
+                                              : S.of(context).not_read,
+                                          style: txtRegular(
+                                              12,
+                                              e.value.isRead == true
+                                                  ? grayScaleColorBase
+                                                  : greenColorBase),
                                         ),
                                       ),
                                     ),

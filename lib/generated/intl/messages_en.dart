@@ -237,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("You don\'t have any account"),
+        "no_bill": MessageLookupByLibrary.simpleMessage("Don\'t have any bill"),
         "no_card": MessageLookupByLibrary.simpleMessage("Don\'t have any card"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
         "no_delivery":
@@ -288,6 +289,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
             "Package items can not be empty"),
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
+        "paid": MessageLookupByLibrary.simpleMessage("Paid"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
         "participate": MessageLookupByLibrary.simpleMessage("Participate"),
@@ -296,6 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pay": MessageLookupByLibrary.simpleMessage("Payment"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Payment circle"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -474,6 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

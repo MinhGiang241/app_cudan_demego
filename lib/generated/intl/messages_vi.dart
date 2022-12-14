@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
+        "no_bill": MessageLookupByLibrary.simpleMessage("Không có hóa đơn nào"),
         "no_card": MessageLookupByLibrary.simpleMessage("Không có thẻ nào"),
         "no_comment":
             MessageLookupByLibrary.simpleMessage("Chưa có bình luận nào"),
@@ -289,6 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
             "Thông tin hàng hóa không được để trống"),
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
+        "paid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "participate": MessageLookupByLibrary.simpleMessage("Tham gia"),
@@ -297,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu phải gồm 1 ký tự đặc biệt"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Chu kỳ thanh toán"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -467,6 +470,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),

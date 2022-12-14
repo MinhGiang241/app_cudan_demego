@@ -3089,6 +3089,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Payment`
+  String get pay {
+    return Intl.message(
+      'Payment',
+      name: 'pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid`
+  String get paid {
+    return Intl.message(
+      'Paid',
+      name: 'paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpaid`
+  String get unpaid {
+    return Intl.message(
+      'Unpaid',
+      name: 'unpaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any bill`
+  String get no_bill {
+    return Intl.message(
+      'Don\'t have any bill',
+      name: 'no_bill',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

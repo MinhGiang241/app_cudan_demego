@@ -50,6 +50,9 @@ class ProjectInfoHome extends StatelessWidget {
                     child: PrimaryCard(
                         width: 256 + 32,
                         onTap: () async {
+                          context
+                              .read<HomePrv>()
+                              .markRead(context, list[index]);
                           Navigator.pushNamed(
                               context, NewDetailsScreen.routeName,
                               arguments: list[index]);

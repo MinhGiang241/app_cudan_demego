@@ -130,14 +130,14 @@ class FileUpload {
 }
 
 class EventParticipation {
-  EventParticipation({
-    this.accountId,
-    this.createdTime,
-    this.eventId,
-    this.event_for,
-    this.id,
-    this.updatedTime,
-  });
+  EventParticipation(
+      {this.accountId,
+      this.createdTime,
+      this.eventId,
+      this.event_for,
+      this.id,
+      this.updatedTime,
+      this.residentId});
 
   String? id;
   String? createdTime;

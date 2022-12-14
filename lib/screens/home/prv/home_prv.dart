@@ -35,6 +35,25 @@ class HomePrv extends ChangeNotifier {
     context = ctx;
     _initial();
   }
+  onParticipate() {
+    if (event != null) {
+      event!.isParticipation = true;
+    }
+    notifyListeners();
+  }
+
+  markRead(BuildContext context, New e) async {
+    if (e.isRead != true) {
+      var mark = MarkRead(
+          accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
+          newId: e.id,
+          type: "NEW");
+      await APINew.markRead(mark.toJson());
+
+      // listNews[index].isRead = true;
+      notifyListeners();
+    }
+  }
 
   Future _initial() async {
     // var filter = {
@@ -59,14 +78,17 @@ class HomePrv extends ChangeNotifier {
       isResNewsLoading = true;
       isProNewsLoading = true;
       notifyListeners();
-      var residentNews = await APINew.getNewList(5, 0, "RESIDENT");
+      var accountId = context.read<ResidentInfoPrv>().userInfo!.account!.id;
+      var residentNews =
+          await APINew.getNewList(5, 0, "RESIDENT", accountId ?? '');
       for (var i in residentNews) {
         newResidentList.add(New.fromJson(i));
       }
       newResidentList.sort(
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
-      var projectNews = await APINew.getNewList(5, 0, "PROJECT");
+      var projectNews =
+          await APINew.getNewList(5, 0, "PROJECT", accountId ?? '');
       for (var i in projectNews) {
         newProjectList.add(New.fromJson(i));
       }
@@ -74,8 +96,8 @@ class HomePrv extends ChangeNotifier {
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
       // ignore: use_build_context_synchronously
-      var accountId = context.read<ResidentInfoPrv>().userInfo!.account!.id;
-      await APIEvent.getEventList(0, 5, "COMING", accountId ?? "").then((v) {
+
+      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "").then((v) {
         if (v.length >= 0) {
           event = Event.fromJson(v[0]);
         }
