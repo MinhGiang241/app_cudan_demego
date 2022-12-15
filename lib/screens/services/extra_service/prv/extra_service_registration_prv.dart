@@ -20,8 +20,10 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     this.expiredDateString,
     this.regDateString,
     this.maxDayPay,
-    this.codeCycle,
     this.code,
+    this.shelfLifeId,
+    this.month,
+    this.codeCycle,
     this.payList = const [],
     required this.service,
   }) {
@@ -33,12 +35,13 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     expiredDate = DateTime.tryParse(expiredDateString ?? "") != null
         ? DateTime.parse(expiredDateString!)
         : null;
-    if (codeCycle == 'NO_PAYMENT') {
-      month = 0;
-    }
+
     expiredDateController.text = Utils.dateFormat(expiredDateString ?? '', 0);
     if (payList.isEmpty) {
       maxDayPay = 1;
+    } else if (shelfLifeId != null && payList.isNotEmpty) {
+      var s = payList.firstWhere((element) => element.id == shelfLifeId);
+      codeCycle = s.code;
     }
   }
   List<Pay> payList;
@@ -52,18 +55,19 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   int? month;
   int? maxDayPay;
   Pay? chosenCycle;
-  String? codeCycle;
   DateTime? regDate;
   DateTime? expiredDate;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
   String selectedApartmentId;
+  String? codeCycle;
   String? id;
   String? code;
   final String arisingServiceId;
   final String phoneNumber;
   final ExtraService service;
   String? residentId;
+  String? shelfLifeId;
 
   onChangeMaxPayDate(BuildContext context, v) {
     maxDayPay = v;
@@ -86,16 +90,19 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     notifyListeners();
     if (formKey.currentState!.validate()) {
       try {
+        var now = DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day);
         var listError = [];
         if (regDate == null) {
           listError.add(S.of(context).reg_day_not_empty);
+        } else if (regDate!.compareTo(now) < 0) {
+          listError.add(S.of(context).reg_date_not_after_now);
         }
         if (payList.isNotEmpty && month == null) {
           listError.add(S.of(context).payment_cycle_not_empty);
         }
 
-        if (maxDayPay == null &&
-            (codeCycle != 'NO_PAYMENT' || payList.isNotEmpty)) {
+        if (maxDayPay == null && payList.isNotEmpty) {
           listError.add(S.of(context).max_pay_day_not_empty);
         }
         if (listError.isNotEmpty) {
@@ -113,9 +120,9 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
             registration_date: regDate!.toIso8601String(),
             expiration_date: expiredDate!.toIso8601String(),
             id: id,
-            paymentCycle: codeCycle ?? "NO_PAYMENT",
             phoneNumber: phoneNumber,
             maximum_day: maxDayPay,
+            shelfLifeId: shelfLifeId,
             note: noteController.text.trim());
 
         await APIExtraService.saveRegistrationService(registerService.toJson())
@@ -168,14 +175,33 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   onSelectPaymentCycle(context, v) {
-    chosenCycle = payList.firstWhereOrNull((element) => element.code == v);
+    chosenCycle = payList.firstWhereOrNull((element) => element.id == v);
     if (chosenCycle != null) {
       codeCycle = chosenCycle!.code;
-      month = chosenCycle!.month ?? 0;
+      shelfLifeId = chosenCycle!.id;
+      month = chosenCycle!.use_time ?? 0;
+      if (chosenCycle!.code == "KHONGCO") {
+        maxDayPay = 1;
+      }
     }
     if (regDateController.text.isNotEmpty && month != null) {
-      expiredDate = DateTime(regDate!.year, regDate!.month + month!,
-          regDate!.day - (month == 0 ? 0 : 1));
+      switch (chosenCycle!.type_time) {
+        case "Ngày":
+          expiredDate =
+              DateTime(regDate!.year, regDate!.month, regDate!.day + month!);
+          break;
+        case "Tháng":
+          expiredDate = DateTime(
+              regDate!.year, regDate!.month + month!, regDate!.day - 1);
+          break;
+        case "Năm":
+          expiredDate = DateTime(
+              regDate!.year + month!, regDate!.month, regDate!.day - 1);
+          break;
+        default:
+          expiredDate = DateTime(regDate!.year, regDate!.month, regDate!.day);
+          break;
+      }
       expiredDateController.text =
           Utils.dateFormat(expiredDate!.toIso8601String(), 0);
     } else {
@@ -201,7 +227,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   pickRegDate(context) async {
     Utils.showDatePickers(
       context,
-      initDate: DateTime.now(),
+      initDate: regDate ?? DateTime.now(),
       startDate: DateTime(DateTime.now().year - 10, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     )
@@ -216,8 +242,25 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
         regDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         regDate = v;
         if (month != null && payList.isNotEmpty) {
-          expiredDate = DateTime(
-              regDate!.year, regDate!.month + month!, regDate!.day - 1);
+          //  if(chosenCycle!.type_time == "Ngày"){}else if(){}
+          switch (chosenCycle!.type_time) {
+            case "Ngày":
+              expiredDate = DateTime(
+                  regDate!.year, regDate!.month, regDate!.day + month!);
+              break;
+            case "Tháng":
+              expiredDate = DateTime(
+                  regDate!.year, regDate!.month + month!, regDate!.day - 1);
+              break;
+            case "Năm":
+              expiredDate = DateTime(
+                  regDate!.year + month!, regDate!.month, regDate!.day - 1);
+              break;
+            default:
+              expiredDate =
+                  DateTime(regDate!.year, regDate!.month, regDate!.day);
+              break;
+          }
 
           expiredDateController.text =
               Utils.dateFormat(expiredDate!.toIso8601String(), 0);

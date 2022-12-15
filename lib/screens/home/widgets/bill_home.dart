@@ -87,7 +87,7 @@ class BillsHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).water,
+                Text(S.of(context).electricity,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],

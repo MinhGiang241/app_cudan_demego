@@ -13,7 +13,7 @@ class ServiceRegistration {
     this.createdTime,
     this.expiration_date,
     this.id,
-    this.paymentCycle,
+    this.shelfLifeId,
     this.people,
     this.phoneNumber,
     this.registration_date,
@@ -31,6 +31,7 @@ class ServiceRegistration {
     this.cancel_reasons,
     this.maximum_day,
     this.note,
+    this.ticket,
   });
   String? id;
   String? createdTime;
@@ -40,7 +41,7 @@ class ServiceRegistration {
   String? residentId;
   String? phoneNumber;
   String? arisingServiceId;
-  String? paymentCycle;
+  String? shelfLifeId;
   String? registration_date;
   String? expiration_date;
   String? status;
@@ -51,6 +52,7 @@ class ServiceRegistration {
   Reason? cancel_reasons;
   Pay? pay;
   bool? isMobile;
+  bool? ticket;
   Apartment? apartment;
   Floor? floor;
   int? maximum_day;
@@ -67,7 +69,7 @@ class ServiceRegistration {
     residentId = json['residentId'];
     phoneNumber = json['phoneNumber'];
     arisingServiceId = json['arisingServiceId'];
-    paymentCycle = json['paymentCycle'];
+    shelfLifeId = json['shelfLifeId'];
     registration_date = json['registration_date'];
     expiration_date = json['expiration_date'];
     status = json['status'];
@@ -76,6 +78,7 @@ class ServiceRegistration {
     maximum_day = json['maximum_day'];
     cancel_note = json['cancel_note'];
     cancel_reason = json['cancel_reason'];
+    ticket = json['ticket'];
     cancel_reasons = json['cancel_reasons'] != null
         ? json['cancel_reasons'].isNotEmpty
             ? Reason.fromJson(json['cancel_reasons'][0])
@@ -90,7 +93,7 @@ class ServiceRegistration {
     apartment = json['apartment'] != null
         ? Apartment.fromJson(json['apartment'])
         : null;
-    pay = Pay.fromJson(json['pay']);
+    pay = json['pay'] != null ? Pay.fromJson(json['pay']) : null;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -103,7 +106,7 @@ class ServiceRegistration {
     data['residentId'] = residentId;
     data['phoneNumber'] = phoneNumber;
     data['arisingServiceId'] = arisingServiceId;
-    data['paymentCycle'] = paymentCycle;
+    data['shelfLifeId'] = shelfLifeId;
     data['registration_date'] = registration_date;
     data['expiration_date'] = expiration_date;
     data['status'] = status;
@@ -112,6 +115,7 @@ class ServiceRegistration {
     data['cancel_note'] = cancel_note;
     data['note'] = note;
     data['cancel_reason'] = cancel_reason;
+    data['ticket'] = ticket;
     // data['pay'] = pay != null ? pay!.toJson() : null;
     return data;
   }

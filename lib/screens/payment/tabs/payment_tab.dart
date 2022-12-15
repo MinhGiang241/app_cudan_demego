@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/payment/prv/payment_list_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,130 +7,89 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/bill_model.dart';
+import '../../../models/extra_service.dart';
+import '../../../models/receipt.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_empty_widget.dart';
-import '../../../widgets/primary_error_widget.dart';
+
 import '../../../widgets/primary_icon.dart';
-import '../../../widgets/primary_loading.dart';
-import '../prv/payment_list_tab_prv.dart';
+
 import '../widget/payment_item.dart';
 
+// ignore: must_be_immutable
 class PaymentTab extends StatefulWidget {
-  const PaymentTab({super.key});
+  PaymentTab({super.key, this.list = const [], required this.type});
+  String type;
+  List<Receipt> list;
 
   @override
   State<PaymentTab> createState() => _PaymentTabState();
 }
 
 class _PaymentTabState extends State<PaymentTab> {
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => PaymentListTabPrv(),
-        builder: (context, builder) {
-          return FutureBuilder(
-            future: () async {}(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: PrimaryLoading());
-              } else if (snapshot.connectionState == ConnectionState.none) {
-                return PrimaryErrorWidget(
-                    code: snapshot.hasError ? "err" : "1",
-                    message: snapshot.data.toString(),
-                    onRetry: () async {
-                      setState(() {});
-                    });
-              } else if (!context
-                  .watch<PaymentListTabPrv>()
-                  .listPayment
-                  .isEmpty) {
-                return SafeArea(
-                  child: SmartRefresher(
-                    enablePullDown: true,
-                    enablePullUp: true,
-                    onRefresh: () {
-                      // context.read<PaymentListTabPrv>().getEventList(context, true);
-                      _refreshController.refreshCompleted();
-                    },
-                    onLoading: () {
-                      // context
-                      //     .read<PaymentListTabPrv>()
-                      //     .getEventList(context, false);
-                      _refreshController.loadComplete();
-                    },
-                    controller: _refreshController,
-                    header: WaterDropMaterialHeader(
-                        backgroundColor: Theme.of(context).primaryColor),
-                    child: PrimaryEmptyWidget(
-                      emptyText: S.of(context).no_bill,
-                      icons: PrimaryIcons.credit,
-                      action: () {},
+    if (widget.list.isEmpty) {
+      return SafeArea(
+        child: PrimaryEmptyWidget(
+          emptyText: S.of(context).no_bill,
+          icons: PrimaryIcons.credit,
+          action: () {},
+        ),
+      );
+    }
+
+    return Stack(
+      children: [
+        SafeArea(
+          child: ListView(
+            children: [
+              vpad(24),
+              Padding(
+                padding: const EdgeInsets.only(left: 12, bottom: 12, right: 12),
+                child: Text(
+                  "${S.of(context).bills}:",
+                  style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontFamily: family,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: grayScaleColorBase),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12, bottom: 12, right: 12),
+                child: Text(
+                  "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
+                  style: txtBold(14, grayScaleColorBase),
+                ),
+              ),
+              ...widget.list.asMap().entries.map(
+                    (e) => PaymentItem(
+                      re: e.value,
+                      isPaid: false,
+                      onSelect: context.read<PaymentListPrv>().onSelect(e.key),
                     ),
                   ),
-                );
-              } else {
-                return Stack(
-                  children: [
-                    SafeArea(
-                      child: SmartRefresher(
-                        enablePullDown: true,
-                        enablePullUp: true,
-                        onRefresh: () {
-                          // context.read<PaymentListTabPrv>().getEventList(context, true);
-                          _refreshController.refreshCompleted();
-                        },
-                        controller: _refreshController,
-                        header: WaterDropMaterialHeader(
-                            backgroundColor: Theme.of(context).primaryColor),
-                        onLoading: () {
-                          // context
-                          //     .read<PaymentListTabPrv>()
-                          //     .getEventList(context, false);
-                          _refreshController.loadComplete();
-                        },
-                        child: ListView(
-                          children: [
-                            vpad(24),
-                            PaymentItem(
-                              isPaid: true,
-                              isSelected: true,
-                              onSelect: () {},
-                            ),
-                            PaymentItem(
-                              isPaid: false,
-                              isSelected: false,
-                              onSelect: () {},
-                            ),
-                            PaymentItem(
-                              isPaid: false,
-                              isSelected: true,
-                              onSelect: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 24,
-                      left: 12,
-                      right: 12,
-                      child: SafeArea(
-                        child: PrimaryButton(
-                          text: S.of(context).pay,
-                          onTap: () {
-                            // Utils.pushScreen(context, const PaymentScreen());
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              }
-            },
-          );
-        });
+              vpad(80)
+            ],
+          ),
+        ),
+        Positioned(
+          bottom: 24,
+          left: 12,
+          right: 12,
+          child: SafeArea(
+            child: PrimaryButton(
+              text: S.of(context).pay,
+              onTap: () {
+                // Utils.pushScreen(context, const PaymentScreen());
+              },
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

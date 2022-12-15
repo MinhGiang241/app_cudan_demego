@@ -6,38 +6,38 @@ class BillsPrv extends ChangeNotifier {
   bool selectAll = false;
 
   final List<BillModel> listBill = [
-    BillModel(
-        code: "AAAA",
-        name: "Hoá đơn tiền điện",
-        content: "Hoá đơn tiền điện tháng 2",
-        date: "2022-02-02",
-        price: 1578000,
-        status: "Status",
-        vat: 0),
-    BillModel(
-        code: "AAAA",
-        name: "Hoá đơn tiền điện",
-        content: "Hoá đơn tiền điện tháng 2",
-        date: "2022-02-02",
-        price: 1578000,
-        status: "Status",
-        vat: 0),
-    BillModel(
-        code: "AAAA",
-        name: "Hoá đơn tiền điện",
-        content: "Hoá đơn tiền điện tháng 2",
-        date: "2022-03-03",
-        price: 1578000,
-        status: "Status",
-        vat: 0),
-    BillModel(
-        code: "AAAA",
-        name: "Hoá đơn tiền điện",
-        content: "Hoá đơn tiền điện tháng 2",
-        date: "2022-03-03",
-        price: 1578000,
-        status: "Status",
-        vat: 0)
+    // BillModel(
+    //     code: "AAAA",
+    //     name: "Hoá đơn tiền điện",
+    //     content: "Hoá đơn tiền điện tháng 2",
+    //     date: "2022-02-02",
+    //     price: 1578000,
+    //     status: "Status",
+    //     vat: 0),
+    // BillModel(
+    //     code: "AAAA",
+    //     name: "Hoá đơn tiền điện",
+    //     content: "Hoá đơn tiền điện tháng 2",
+    //     date: "2022-02-02",
+    //     price: 1578000,
+    //     status: "Status",
+    //     vat: 0),
+    // BillModel(
+    //     code: "AAAA",
+    //     name: "Hoá đơn tiền điện",
+    //     content: "Hoá đơn tiền điện tháng 2",
+    //     date: "2022-03-03",
+    //     price: 1578000,
+    //     status: "Status",
+    //     vat: 0),
+    // BillModel(
+    //     code: "AAAA",
+    //     name: "Hoá đơn tiền điện",
+    //     content: "Hoá đơn tiền điện tháng 2",
+    //     date: "2022-03-03",
+    //     price: 1578000,
+    //     status: "Status",
+    //     vat: 0)
   ];
 
   onSelect(int index) {

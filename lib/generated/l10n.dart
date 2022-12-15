@@ -3129,6 +3129,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Registration day is not after now`
+  String get reg_date_not_after_now {
+    return Intl.message(
+      'Registration day is not after now',
+      name: 'reg_date_not_after_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Water bill`
+  String get water_bill {
+    return Intl.message(
+      'Water bill',
+      name: 'water_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electricity bill`
+  String get elcetric_bill {
+    return Intl.message(
+      'Electricity bill',
+      name: 'elcetric_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parking bill`
+  String get parking_bill {
+    return Intl.message(
+      'Parking bill',
+      name: 'parking_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other bill`
+  String get other_bill {
+    return Intl.message(
+      'Other bill',
+      name: 'other_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service bill`
+  String get service_bill {
+    return Intl.message(
+      'Service bill',
+      name: 'service_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apartment bill`
+  String get apartment_bill {
+    return Intl.message(
+      'Apartment bill',
+      name: 'apartment_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Due date`
+  String get due_bill {
+    return Intl.message(
+      'Due date',
+      name: 'due_bill',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

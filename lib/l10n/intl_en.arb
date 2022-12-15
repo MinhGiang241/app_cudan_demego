@@ -306,5 +306,13 @@
   "pay":"Payment",
   "paid":"Paid",
   "unpaid":"Unpaid",
-  "no_bill":"Don't have any bill"
+  "no_bill":"Don't have any bill",
+  "reg_date_not_after_now":"Registration day is not after now",
+  "water_bill":"Water bill",
+  "elcetric_bill":"Electricity bill",
+  "parking_bill":"Parking bill",
+  "other_bill":"Other bill",
+  "service_bill":"Service bill",
+  "apartment_bill":"Apartment bill",
+  "due_bill":"Due date"
 }

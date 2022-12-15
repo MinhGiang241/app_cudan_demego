@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "al_read": MessageLookupByLibrary.simpleMessage("read"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
+        "apartment_bill":
+            MessageLookupByLibrary.simpleMessage("Apartment bill"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
@@ -121,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
         "edit_reg_deliver":
@@ -130,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_service_a": m6,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
+        "elcetric_bill":
+            MessageLookupByLibrary.simpleMessage("Electricity bill"),
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -277,6 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
             MessageLookupByLibrary.simpleMessage("OTP code is invalid"),
@@ -291,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "paid": MessageLookupByLibrary.simpleMessage("Paid"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
+        "parking_bill": MessageLookupByLibrary.simpleMessage("Parking bill"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Parking card"),
         "participate": MessageLookupByLibrary.simpleMessage("Participate"),
         "pass_min_length": MessageLookupByLibrary.simpleMessage(
@@ -327,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_const":
             MessageLookupByLibrary.simpleMessage("Registration construction"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Registration date"),
+        "reg_date_not_after_now": MessageLookupByLibrary.simpleMessage(
+            "Registration day is not after now"),
         "reg_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Registration date can be not empty"),
         "reg_deliver":
@@ -408,6 +417,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
+        "service_bill": MessageLookupByLibrary.simpleMessage("Service bill"),
         "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
@@ -486,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
+        "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
         "we_send_to": m12,

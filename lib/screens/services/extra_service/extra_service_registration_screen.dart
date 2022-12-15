@@ -42,16 +42,16 @@ class _ExtraServiceRegistrationScreenState
           payList: service.pay ?? [],
           code: isEdit ? regService.code : null,
           service: service,
-          codeCycle: isEdit ? regService.paymentCycle : null,
+          shelfLifeId: isEdit ? regService.shelfLifeId : null,
           maxDayPay: isEdit ? regService.maximum_day : null,
           id: isEdit ? regService.id : null,
           note: isEdit ? regService.note : null,
           regDateString: isEdit ? regService.registration_date : null,
           expiredDateString: isEdit ? regService.expiration_date : null,
           residentId: context.read<ResidentInfoPrv>().residentId,
-          phoneNumber:
+          phoneNumber: regService.phoneNumber ??
               context.read<ResidentInfoPrv>().userInfo!.phone_required!,
-          selectedApartmentId:
+          selectedApartmentId: regService.apartmentId ??
               context.read<ResidentInfoPrv>().selectedApartment!.apartmentId!,
           arisingServiceId: arg['serviceId']),
       builder: ((context, child) {
@@ -89,13 +89,15 @@ class _ExtraServiceRegistrationScreenState
                   var listPaymentChoice = service.pay != null
                       ? service.pay!.map((e) {
                           return DropdownMenuItem(
-                            value: e.code,
-                            child: Text(e.name != null ? e.name! : e.code!),
+                            value: e.id,
+                            child: Text(e.type_time != null
+                                ? "${e.use_time != null ? "${e.use_time} " : ""}${e.type_time}"
+                                : e.code!),
                           );
                         }).toList()
                       : null;
                   var maxDayPayList = List.generate(
-                      14,
+                      30,
                       (index) => DropdownMenuItem(
                             value: index + 1,
                             child: Text((index + 1).toString()),
@@ -110,11 +112,11 @@ class _ExtraServiceRegistrationScreenState
                             .read<ExtraServiceRegistrationPrv>()
                             .payList
                             .firstWhere((element) =>
-                                element.code == regService.paymentCycle);
+                                element.id == regService.shelfLifeId);
                     context.read<ExtraServiceRegistrationPrv>().month = context
                             .read<ExtraServiceRegistrationPrv>()
                             .chosenCycle!
-                            .month ??
+                            .use_time ??
                         0;
                   }
                   return Form(
@@ -129,9 +131,8 @@ class _ExtraServiceRegistrationScreenState
                           label: S.of(context).apartment,
                           selectList: listApartmentChoice,
                           value: context
-                              .read<ResidentInfoPrv>()
-                              .selectedApartment!
-                              .apartmentId,
+                              .watch<ExtraServiceRegistrationPrv>()
+                              .selectedApartmentId,
                           onChange: (v) => context
                               .read<ExtraServiceRegistrationPrv>()
                               .onChooseApartment(context, v),
@@ -148,7 +149,7 @@ class _ExtraServiceRegistrationScreenState
                           PrimaryDropDown(
                             value: context
                                 .read<ExtraServiceRegistrationPrv>()
-                                .codeCycle,
+                                .shelfLifeId,
                             isRequired: true,
                             label: S.of(context).payment_circle,
                             selectList: listPaymentChoice,
@@ -184,7 +185,7 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                'NO_PAYMENT' ||
+                                "KHONGCO" ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
@@ -193,12 +194,13 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                'NO_PAYMENT' ||
+                                "KHONGCO" ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
                                 .isEmpty))
                           PrimaryTextField(
+                            background: grayScaleColor4,
                             controller: context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .expiredDateController,
@@ -221,7 +223,7 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                'NO_PAYMENT' ||
+                                "KHONGCO" ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
@@ -230,7 +232,7 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                'NO_PAYMENT' ||
+                                "KHONGCO" ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList

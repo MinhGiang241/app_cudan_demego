@@ -72,16 +72,21 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                       content: arg.phoneNumber,
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
+                    if (arg.pay != null)
+                      InfoContentView(
+                        title: S.of(context).payment_circle,
+                        content: arg.pay != null
+                            ? "${arg.pay!.use_time != null ? "${arg.pay!.use_time} " : ""}${arg.pay!.type_time}"
+                            : "",
+                        contentStyle: txtBold(14, grayScaleColorBase),
+                      ),
                     InfoContentView(
-                      title: S.of(context).payment_circle,
-                      content: arg.pay != null ? arg.pay!.name : "",
-                      contentStyle: txtBold(14, grayScaleColorBase),
-                    ),
-                    InfoContentView(
-                      title:
-                          "${S.of(context).reg_date} - ${S.of(context).expired_date}",
-                      content:
-                          "${Utils.dateFormat(arg.registration_date ?? "", 0)} - ${Utils.dateFormat(arg.expiration_date ?? "", 0)}",
+                      title: (arg.pay != null && arg.pay!.code != "KHONGCO")
+                          ? "${S.of(context).reg_date} - ${S.of(context).expired_date}"
+                          : S.of(context).reg_date,
+                      content: (arg.pay != null && arg.pay!.code != "KHONGCO")
+                          ? "${Utils.dateFormat(arg.registration_date ?? "", 0)} - ${Utils.dateFormat(arg.expiration_date ?? "", 0)}"
+                          : Utils.dateFormat(arg.registration_date ?? "", 0),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     if (arg.status == "APPROVED")

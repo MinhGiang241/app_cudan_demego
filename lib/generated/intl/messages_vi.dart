@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
+        "apartment_bill":
+            MessageLookupByLibrary.simpleMessage("Tiền phí chung cư"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
@@ -119,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
+        "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
         "edit_reg_deliver":
@@ -128,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_service_a": m6,
         "edit_trans_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ phương tiện"),
+        "elcetric_bill": MessageLookupByLibrary.simpleMessage("Tiền điện"),
         "electricity": MessageLookupByLibrary.simpleMessage("Điện"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -278,6 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Không được nhập toàn số 0"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
+        "other_bill": MessageLookupByLibrary.simpleMessage("Tiền khác"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_invalid":
             MessageLookupByLibrary.simpleMessage("Mã OTP không hợp lệ"),
@@ -292,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
         "paid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
+        "parking_bill": MessageLookupByLibrary.simpleMessage("Tiền gửi xe"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "participate": MessageLookupByLibrary.simpleMessage("Tham gia"),
         "pass_min_length": MessageLookupByLibrary.simpleMessage(
@@ -301,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "payment_circle":
-            MessageLookupByLibrary.simpleMessage("Chu kỳ thanh toán"),
+            MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
             "Chu kỳ thanh toán không được để trống"),
         "permission_denied":
@@ -326,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "reg_const": MessageLookupByLibrary.simpleMessage("Đăng ký thi công"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Ngày đăng ký"),
+        "reg_date_not_after_now": MessageLookupByLibrary.simpleMessage(
+            "Ngày đăng ký không được nhỏ hơn ngày hiện tại"),
         "reg_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày đăng ký không được để trống"),
         "reg_deliver":
@@ -405,6 +413,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi mã về email"),
         "send_to_phone": MessageLookupByLibrary.simpleMessage("Gửi mã về SDT"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
+        "service_bill":
+            MessageLookupByLibrary.simpleMessage("Tiền đăng ký dịch vụ"),
         "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
@@ -479,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
+        "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
         "we_send_to": m12,

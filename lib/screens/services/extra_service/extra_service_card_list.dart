@@ -195,11 +195,13 @@ class _ExtraServiceCardListScreenState
                             content: e.code,
                             contentStyle: txtBold(14, primaryColor1),
                           ),
-                          InfoContentView(
-                            title: "${S.of(context).payment_circle}:",
-                            content: e.pay!.name,
-                            contentStyle: txtBold(14, grayScaleColorBase),
-                          ),
+                          if (e.pay != null && e.pay!.type_time != null)
+                            InfoContentView(
+                              title: "${S.of(context).payment_circle}:",
+                              content:
+                                  "${e.pay!.use_time != null ? "${e.pay!.use_time} " : ""}${e.pay!.type_time}",
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
                           InfoContentView(
                             title: "${S.of(context).reg_date}:",
                             content:
@@ -340,7 +342,8 @@ class _ExtraServiceCardListScreenState
                             ),
                           ),
                         );
-                      })
+                      }),
+                      vpad(60)
                     ]),
                   ),
                 );

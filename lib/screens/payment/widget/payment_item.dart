@@ -1,19 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/constants.dart';
+import '../../../generated/l10n.dart';
+import '../../../models/receipt.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 
 class PaymentItem extends StatelessWidget {
-  const PaymentItem({
+  PaymentItem({
     Key? key,
     this.isPaid = false,
     this.isSelected = false,
     this.onSelect,
+    required this.re,
   }) : super(key: key);
   final bool isPaid;
   final bool isSelected;
   final Function()? onSelect;
+  Receipt re;
+  final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
+
+  genIcon(String? type) {
+    switch (type) {
+      case "WaterFee":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.water,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.green,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      case "ElectricFee":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.electricity,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.yellow,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      case "ParkingFee":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.car,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.purple,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      case "ApartmentFee":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.home,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.red,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      case "ServiceRegistration":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.service_feedback,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.pink,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      case "Other":
+        return const PrimaryIcon(
+          icons: PrimaryIcons.calendar_check,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.primary,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+      default:
+        return const PrimaryIcon(
+          icons: PrimaryIcons.electricity,
+          style: PrimaryIconStyle.gradient,
+          gradients: PrimaryIconGradient.yellow,
+          size: 32,
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+        );
+    }
+  }
+
+  genName(String? type) {
+    switch (type) {
+      case "WaterFee":
+        return S.current.water_bill;
+      case "ElectricFee":
+        return S.current.elcetric_bill;
+      case "ParkingFee":
+        return S.current.parking_bill;
+      case "ApartmentFee":
+        return S.current.apartment_bill;
+      case "ServiceRegistration":
+        return S.current.service_bill;
+      case "Other":
+        return S.current.other_bill;
+      default:
+        return S.current.bills;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +118,23 @@ class PaymentItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         child: Row(
           children: [
-            const PrimaryIcon(
-              icons: PrimaryIcons.electricity,
-              style: PrimaryIconStyle.gradient,
-              gradients: PrimaryIconGradient.yellow,
-              size: 32,
-              padding: EdgeInsets.all(12),
-              color: Colors.white,
-            ),
+            genIcon(re.type),
             hpad(16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Hoá đơn tiền ", style: txtLinkSmall()),
+                  Text(genName(re.type) ?? re.type, style: txtLinkSmall()),
                   vpad(2),
-                  Text("1.578.000 VND", style: txtLinkSmall()),
+                  Text(
+                      formatCurrency
+                          .format(re.amount_due)
+                          .replaceAll("₫", "VND"),
+                      style: txtLinkSmall()),
                   vpad(2),
-                  Text("2/2/2022", style: txtBodyXSmallRegular()),
+                  Text(
+                      '${S.of(context).due_bill}: ${Utils.dateFormat(re.date ?? '', 1)}',
+                      style: txtBodyXSmallRegular()),
                 ],
               ),
             ),
@@ -64,7 +157,7 @@ class PaymentItem extends StatelessWidget {
                         ),
                       );
                     },
-                    child: isSelected
+                    child: re.isSelected
                         ? const PrimaryIcon(
                             padding: EdgeInsets.zero,
                             icons: PrimaryIcons.check,

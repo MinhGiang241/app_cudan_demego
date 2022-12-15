@@ -11,7 +11,7 @@ class ExtraService {
     this.isDisplay,
     this.link_affiliate,
     this.name,
-    this.payments,
+    this.use_time,
     this.service_icon,
     this.updatedTime,
   });
@@ -26,7 +26,7 @@ class ExtraService {
   String? description;
   String? link_affiliate;
   ServiceIcon? service_icon;
-  List<Payment>? payments;
+  List<Payment>? use_time;
   List<Pay>? pay;
 
   ExtraService.fromJson(Map<String, dynamic> json) {
@@ -46,9 +46,9 @@ class ExtraService {
             : []
         : [];
 
-    payments = json['payments'] != null
-        ? json['payments'].isNotEmpty
-            ? json['payments'].map<Payment>((e) => Payment.fromJson(e)).toList()
+    use_time = json['use_time'] != null
+        ? json['use_time'].isNotEmpty
+            ? json['use_time'].map<Payment>((e) => Payment.fromJson(e)).toList()
             : []
         : [];
 
@@ -104,9 +104,7 @@ class Pay {
     this.code,
     this.createdTime,
     this.id,
-    this.isValue,
-    this.month,
-    this.name,
+    this.describe,
     this.updatedTime,
     this.price,
   });
@@ -114,9 +112,9 @@ class Pay {
   String? createdTime;
   String? updatedTime;
   String? code;
-  String? name;
-  int? month;
-  bool? isValue;
+  int? use_time;
+  String? type_time;
+  String? describe;
   int? price;
 
   Pay.fromJson(Map<String, dynamic> json) {
@@ -124,20 +122,18 @@ class Pay {
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     code = json['code'];
-    name = json['name'];
-    month = json['month'];
-    isValue = json['isValue'];
+    type_time = json['type_time'];
+    use_time = json['use_time'];
     price = json['price'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = id;
-    data['createdTime'] = createdTime;
-    data['updatedTime'] = updatedTime;
+    data['type_time'] = type_time;
+    data['use_time'] = use_time;
+
     data['code'] = code;
-    data['name'] = name;
-    data['month'] = month;
-    data['isValue'] = isValue;
+    data['describe'] = describe;
     data['price'] = price;
     return data;
   }
@@ -147,20 +143,20 @@ class Payment {
   Payment(
       {this.createdTime,
       this.id,
-      this.paymentCycle,
+      this.shelfLifeId,
       this.price,
       this.updatedTime});
   String? id;
   String? createdTime;
   String? updatedTime;
   int? price;
-  String? paymentCycle;
+  String? shelfLifeId;
   Payment.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     price = json['price'];
-    paymentCycle = json['paymentCycle'];
+    shelfLifeId = json['shelfLifeId'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -168,6 +164,7 @@ class Payment {
     data['createdTime'] = createdTime;
     data['updatedTime'] = updatedTime;
     data['price'] = price;
+    data['shelfLifeId'] = shelfLifeId;
     return data;
   }
 }

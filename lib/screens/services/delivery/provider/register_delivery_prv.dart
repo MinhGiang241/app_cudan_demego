@@ -264,7 +264,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   pickStartDate(BuildContext context) {
     Utils.showDatePickers(
       context,
-      initDate: DateTime.now(),
+      initDate: startDate ?? DateTime.now(),
       startDate: DateTime(DateTime.now().year - 10, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     )
@@ -295,7 +295,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   pickEndDate(BuildContext context) {
     Utils.showDatePickers(
       context,
-      initDate: DateTime.now(),
+      initDate: endDate ?? DateTime.now(),
       startDate: DateTime(DateTime.now().year - 10, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     )

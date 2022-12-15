@@ -269,7 +269,7 @@
   "not_dimention":"Kích thước không đúng",
   "service_name":"Dịch vụ {service}",
   "reg_code":"Mã đăng ký",
-  "payment_circle":"Chu kỳ thanh toán",
+  "payment_circle":"Thời hạn sử dụng",
   "no_service_regitration":"Không có đăng ký dịch vụ vào",
   "reg_date":"Ngày đăng ký",
   "expired_date":"Ngày hết hạn",
@@ -307,5 +307,13 @@
   "pay":"Thanh toán",
   "paid":"Chưa thanh toán",
   "unpaid":"Đã thanh toán",
-  "no_bill":"Không có hóa đơn nào"
+  "no_bill":"Không có hóa đơn nào",
+  "reg_date_not_after_now":"Ngày đăng ký không được nhỏ hơn ngày hiện tại",
+  "water_bill":"Tiền nước",
+  "elcetric_bill":"Tiền điện",
+  "parking_bill":"Tiền gửi xe",
+  "other_bill":"Tiền khác",
+  "service_bill":"Tiền đăng ký dịch vụ",
+  "apartment_bill":"Tiền phí chung cư",
+  "due_bill":"Hạn đóng"
 }

@@ -18,6 +18,15 @@ class Receipt {
     this.residentId,
     this.type,
     this.updatedTime,
+    this.address,
+    this.amount_due,
+    this.content,
+    this.discount_money,
+    this.discount_percent,
+    this.full_name,
+    this.guest_name,
+    this.reason,
+    this.vat,
   });
   String? id;
   String? createdTime;
@@ -35,6 +44,17 @@ class Receipt {
   String? payer_phone;
   int? payment;
   String? type;
+  String? reason;
+  String? content;
+  String? address;
+  String? guest_name;
+  String? full_name;
+  int? vat;
+  int? discount_money;
+  int? discount_percent;
+  int? amount_due;
+  late bool isSelected;
+
   Receipt.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -52,6 +72,16 @@ class Receipt {
     payer_phone = json['payer_phone'];
     payment = json['payment'];
     type = json['type'];
+    reason = json['reason'];
+    content = json['content'];
+    address = json['address'];
+    guest_name = json['guest_name'];
+    full_name = json['full_name'];
+    vat = json['vat'];
+    discount_money = json['discount_money'];
+    discount_percent = json['discount_percent'];
+    amount_due = json['amount_due'];
+    isSelected = false;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -71,6 +101,15 @@ class Receipt {
     data['payer_phone'] = payer_phone;
     data['payment'] = payment;
     data['type'] = type;
+    data['reason'] = reason;
+    data['content'] = content;
+    data['address'] = address;
+    data['guest_name'] = guest_name;
+    data['full_name'] = full_name;
+    data['vat'] = vat;
+    data['discount_money'] = discount_money;
+    data['discount_percent'] = discount_percent;
+    data['amount_due'] = amount_due;
     return data;
   }
 }
