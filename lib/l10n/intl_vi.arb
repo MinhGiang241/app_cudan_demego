@@ -315,5 +315,15 @@
   "other_bill":"Tiền khác",
   "service_bill":"Tiền đăng ký dịch vụ",
   "apartment_bill":"Tiền phí chung cư",
-  "due_bill":"Hạn đóng"
+  "due_bill":"Hạn đóng",
+  "bill_details":"Chi tiết hóa đơn",
+  "bill_name":"Tên hóa đơn",
+  "bill_code":"Mã hóa đơn",
+  "vat":"VAT",
+  "discount":"Chiết khấu",
+  "to_money":"Thành tiền",
+  "pay_date":"Ngày đóng",
+  "content":"Nội dung",
+  "total":"Tổng cộng",
+  "payment_method":"Phương thức thanh toán"
 }

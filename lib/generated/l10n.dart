@@ -3209,6 +3209,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Bill details`
+  String get bill_details {
+    return Intl.message(
+      'Bill details',
+      name: 'bill_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bill name`
+  String get bill_name {
+    return Intl.message(
+      'Bill name',
+      name: 'bill_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bill code`
+  String get bill_code {
+    return Intl.message(
+      'Bill code',
+      name: 'bill_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VAT`
+  String get vat {
+    return Intl.message(
+      'VAT',
+      name: 'vat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount`
+  String get discount {
+    return Intl.message(
+      'Discount',
+      name: 'discount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Money`
+  String get to_money {
+    return Intl.message(
+      'Money',
+      name: 'to_money',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay date`
+  String get pay_date {
+    return Intl.message(
+      'Pay date',
+      name: 'pay_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Content`
+  String get content {
+    return Intl.message(
+      'Content',
+      name: 'content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message(
+      'Total',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment method`
+  String get payment_method {
+    return Intl.message(
+      'Payment method',
+      name: 'payment_method',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

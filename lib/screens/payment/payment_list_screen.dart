@@ -26,7 +26,9 @@ class _PaymentListScreenState extends State<PaymentListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
-  final RefreshController _refreshController =
+  final RefreshController _refreshPayController =
+      RefreshController(initialRefresh: false);
+  final RefreshController _refreshUnpayController =
       RefreshController(initialRefresh: false);
 
   @override
@@ -115,34 +117,19 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                         });
                   }
                   return SafeArea(
-                    child: SmartRefresher(
-                      enablePullDown: true,
-                      enablePullUp: false,
-                      onRefresh: () {
-                        // context.read<PaymentListTabPrv>().getEventList(context, true);
-                        _refreshController.refreshCompleted();
-                      },
-                      controller: _refreshController,
-                      header: WaterDropMaterialHeader(
-                          backgroundColor: Theme.of(context).primaryColor),
-                      onLoading: () {
-                        // context
-                        //     .read<PaymentListTabPrv>()
-                        //     .getEventList(context, false);
-                        _refreshController.loadComplete();
-                      },
-                      child: TabBarView(
-                        controller: tabController,
-                        children: [
-                          PaymentTab(
-                            list: context.watch<PaymentListPrv>().listPay,
+                    child: TabBarView(
+                      controller: tabController,
+                      children: [
+                        PaymentTab(
+                          refreshController: _refreshPayController,
+                          list: context.watch<PaymentListPrv>().listUnpay,
+                          type: "UNPAID",
+                        ),
+                        PaymentTab(
+                            refreshController: _refreshUnpayController,
                             type: "PAID",
-                          ),
-                          PaymentTab(
-                              type: "UNPAID",
-                              list: context.watch<PaymentListPrv>().listUnpay),
-                        ],
-                      ),
+                            list: context.watch<PaymentListPrv>().listPay),
+                      ],
                     ),
                   );
                 }));

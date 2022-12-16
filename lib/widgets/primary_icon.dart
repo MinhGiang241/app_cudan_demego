@@ -11,6 +11,9 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  vnpay,
+  paypal,
+  spreadsheet,
   dollar,
   credit,
   mappin,

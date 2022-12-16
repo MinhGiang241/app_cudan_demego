@@ -314,5 +314,16 @@
   "other_bill":"Other bill",
   "service_bill":"Service bill",
   "apartment_bill":"Apartment bill",
-  "due_bill":"Due date"
+  "due_bill":"Due date",
+  "bill_details":"Bill details",
+  "bill_name":"Bill name",
+  "bill_code":"Bill code",
+  "vat":"VAT",
+  "discount":"Discount",
+  "to_money":"Money",
+  "pay_date":"Pay date",
+  "content":"Content",
+  "total":"Total",
+  "payment_method":"Payment method"
+
 }

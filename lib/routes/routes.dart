@@ -18,7 +18,9 @@ import '../screens/event/event_list_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
 import '../screens/news/news_screen.dart';
+import '../screens/payment/bill_details_screen.dart';
 import '../screens/payment/payment_list_screen.dart';
+import '../screens/payment/payment_screen.dart';
 import '../screens/services/delivery/delivery_list_screen.dart';
 import '../screens/services/delivery/package_details_screen.dart';
 import '../screens/services/delivery/register_delivery_screen.dart';
@@ -197,6 +199,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const PaymentListScreen(),
+        );
+      case BillDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const BillDetailsScreen(),
+        );
+      case PaymentScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const PaymentScreen(),
         );
       case ParcelListScreen.routeName:
         return MaterialPageRoute(

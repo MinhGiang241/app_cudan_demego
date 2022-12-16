@@ -66,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
+        "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
+        "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
+        "bill_name": MessageLookupByLibrary.simpleMessage("Bill name"),
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
@@ -104,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_send_request": m5,
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
+        "content": MessageLookupByLibrary.simpleMessage("Content"),
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
@@ -122,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "detail_view": MessageLookupByLibrary.simpleMessage("Details view"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
+        "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
@@ -306,10 +311,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pay": MessageLookupByLibrary.simpleMessage("Payment"),
+        "pay_date": MessageLookupByLibrary.simpleMessage("Pay date"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Payment circle"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
             "Payment circle can be not empty"),
+        "payment_method":
+            MessageLookupByLibrary.simpleMessage("Payment method"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
         "permission_denied_msg":
@@ -464,6 +472,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Time happening"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "to_money": MessageLookupByLibrary.simpleMessage("Money"),
+        "total": MessageLookupByLibrary.simpleMessage("Total"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Tranfer in"),
         "tranfer_in_reg":
             MessageLookupByLibrary.simpleMessage("Register tranfer in"),
@@ -490,6 +500,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "w":
