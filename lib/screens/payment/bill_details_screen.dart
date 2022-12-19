@@ -11,6 +11,7 @@ import '../../models/info_content_view.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_info_widget.dart';
 import '../../widgets/primary_screen.dart';
+import 'payment_screen.dart';
 import 'widget/payment_item.dart';
 
 class BillDetailsScreen extends StatelessWidget {
@@ -57,11 +58,12 @@ class BillDetailsScreen extends StatelessWidget {
         content: Utils.dateFormat(arg.date ?? "", 1),
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
-      InfoContentView(
-        title: S.of(context).pay_date,
-        content: Utils.dateFormat(arg.date ?? "", 1),
-        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-      ),
+      if (arg.transactions.isNotEmpty)
+        InfoContentView(
+          title: S.of(context).pay_date,
+          content: Utils.dateFormat(arg.transactions[0].createdTime ?? "", 1),
+          contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+        ),
     ];
     return PrimaryScreen(
       appBar: PrimaryAppbar(
@@ -72,16 +74,23 @@ class BillDetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 28),
           child: Stack(
             children: [
-              Positioned(
-                  bottom: 10,
-                  child: PrimaryButton(
-                    onTap: () {},
-                    width: dvWidth(context) - 24,
-                    text: S.of(context).pay,
-                  )),
               PrimaryInfoWidget(
                 listInfoView: listContent,
               ),
+              if (arg.payment_status != "PAID")
+                Positioned(
+                    bottom: 10,
+                    child: PrimaryButton(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          PaymentScreen.routeName,
+                          arguments: [arg],
+                        );
+                      },
+                      width: dvWidth(context) - 24,
+                      text: S.of(context).pay,
+                    )),
             ],
           ),
         ),

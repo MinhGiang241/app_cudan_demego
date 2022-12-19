@@ -210,6 +210,7 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const PaymentScreen(),
         );
+
       case ParcelListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,

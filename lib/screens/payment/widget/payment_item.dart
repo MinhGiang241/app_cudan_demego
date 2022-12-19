@@ -131,7 +131,7 @@ class PaymentItem extends StatelessWidget {
                 children: [
                   Text(re.reason ?? "", style: txtLinkSmall()),
                   vpad(2),
-                  Text(formatCurrency.format(re.amount_due),
+                  Text(formatCurrency.format(re.amount_due ?? 0),
                       // .replaceAll("₫", ""),
                       style: txtLinkSmall()),
                   vpad(2),

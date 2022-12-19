@@ -325,5 +325,7 @@
   "pay_date":"Ngày đóng",
   "content":"Nội dung",
   "total":"Tổng cộng",
-  "payment_method":"Phương thức thanh toán"
+  "payment_method":"Phương thức thanh toán",
+  "enter_payment_pass":"Nhập mật khẩu thanh toán",
+  "success_payment":"Bạn đã thanh toán thành công"
 }

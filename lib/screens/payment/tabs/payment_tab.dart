@@ -20,14 +20,17 @@ import '../widget/payment_item.dart';
 
 // ignore: must_be_immutable
 class PaymentTab extends StatefulWidget {
-  PaymentTab(
-      {super.key,
-      this.list = const [],
-      required this.type,
-      required this.refreshController});
+  PaymentTab({
+    super.key,
+    this.list = const [],
+    required this.type,
+    required this.refreshController,
+    this.onRefresh,
+  });
   String type;
   List<Receipt> list;
   RefreshController refreshController;
+  Function()? onRefresh;
 
   @override
   State<PaymentTab> createState() => _PaymentTabState();
@@ -36,16 +39,6 @@ class PaymentTab extends StatefulWidget {
 class _PaymentTabState extends State<PaymentTab> {
   @override
   Widget build(BuildContext context) {
-    if (widget.list.isEmpty) {
-      return SafeArea(
-        child: PrimaryEmptyWidget(
-          emptyText: S.of(context).no_bill,
-          icons: PrimaryIcons.credit,
-          action: () {},
-        ),
-      );
-    }
-
     return Stack(
       children: [
         SafeArea(
@@ -54,6 +47,7 @@ class _PaymentTabState extends State<PaymentTab> {
             enablePullUp: false,
             onRefresh: () {
               // context.read<PaymentListTabPrv>().getEventList(context, true);
+              widget.onRefresh!();
               widget.refreshController.refreshCompleted();
             },
             controller: widget.refreshController,
@@ -63,43 +57,51 @@ class _PaymentTabState extends State<PaymentTab> {
               // context
               //     .read<PaymentListTabPrv>()
               //     .getEventList(context, false);
+
               widget.refreshController.loadComplete();
             },
-            child: ListView(
-              children: [
-                vpad(24),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 12, bottom: 12, right: 12),
-                  child: Text(
-                    "${S.of(context).bills}:",
-                    style: const TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontFamily: family,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: grayScaleColorBase),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 12, bottom: 12, right: 12),
-                  child: Text(
-                    "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
-                    style: txtBold(14, grayScaleColorBase),
-                  ),
-                ),
-                ...widget.list.asMap().entries.map(
-                      (e) => PaymentItem(
-                        re: e.value,
-                        isPaid: widget.type == "PAID",
-                        onSelect: () =>
-                            context.read<PaymentListPrv>().onSelect(e.key),
+            child: widget.list.isEmpty
+                ? PrimaryEmptyWidget(
+                    emptyText: S.of(context).no_bill,
+                    icons: PrimaryIcons.credit,
+                    action: () {},
+                  )
+                : ListView(
+                    children: [
+                      vpad(24),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, bottom: 12, right: 12),
+                        child: Text(
+                          "${S.of(context).bills}:",
+                          style: const TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontFamily: family,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: grayScaleColorBase),
+                        ),
                       ),
-                    ),
-                vpad(80)
-              ],
-            ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, bottom: 12, right: 12),
+                        child: Text(
+                          "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
+                          style: txtBold(14, grayScaleColorBase),
+                        ),
+                      ),
+                      ...widget.list.asMap().entries.map(
+                            (e) => PaymentItem(
+                              re: e.value,
+                              isPaid: widget.type == "PAID",
+                              onSelect: () => context
+                                  .read<PaymentListPrv>()
+                                  .onSelect(e.key),
+                            ),
+                          ),
+                      vpad(80)
+                    ],
+                  ),
           ),
         ),
         if (widget.type == "UNPAID")

@@ -33,6 +33,11 @@ class _PaymentListScreenState extends State<PaymentListScreen>
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as int?;
+    if (arg != null) {
+      initIndex = arg;
+    }
+    tabController.index = initIndex;
     return ChangeNotifierProvider(
       create: (context) => PaymentListPrv(),
       builder: (context, state) {
@@ -124,11 +129,18 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           refreshController: _refreshPayController,
                           list: context.watch<PaymentListPrv>().listUnpay,
                           type: "UNPAID",
+                          onRefresh: () {
+                            setState(() {});
+                          },
                         ),
                         PaymentTab(
-                            refreshController: _refreshUnpayController,
-                            type: "PAID",
-                            list: context.watch<PaymentListPrv>().listPay),
+                          refreshController: _refreshUnpayController,
+                          type: "PAID",
+                          list: context.watch<PaymentListPrv>().listPay,
+                          onRefresh: () {
+                            setState(() {});
+                          },
+                        ),
                       ],
                     ),
                   );

@@ -3309,6 +3309,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter payment password`
+  String get enter_payment_pass {
+    return Intl.message(
+      'Enter payment password',
+      name: 'enter_payment_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make payment successfully`
+  String get success_payment {
+    return Intl.message(
+      'Make payment successfully',
+      name: 'success_payment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

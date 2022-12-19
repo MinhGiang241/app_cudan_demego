@@ -4,6 +4,59 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIPayment {
+  static Future saveHistoryTransaction(List<Map<String, dynamic>> data) async {
+    var query = '''
+    mutation(\$data: [TransactionHistoryInputDto] ){
+	response:save_many_TransactionHistory_dto(data:\$data){
+		code
+		message
+		data
+    }
+  }
+  ''';
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      "data": data,
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveManyPayment(List<Map<String, dynamic>> data) async {
+    var query = '''
+    mutation(\$data: [ReceiptsInputDto] ){
+      response:save_many_Receipts_dto(data:\$data){
+        code
+        message
+        data
+      }
+    }
+   ''';
+
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      "data": data,
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getReceiptsList(
       String residentId, String apartmentId, int year, int month) async {
     var query = '''

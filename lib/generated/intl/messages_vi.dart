@@ -159,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Nhập số"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
+        "enter_payment_pass":
+            MessageLookupByLibrary.simpleMessage("Nhập mật khẩu thanh toán"),
         "enter_phone":
             MessageLookupByLibrary.simpleMessage("Nhập số điện thoại"),
         "enter_phone_email": MessageLookupByLibrary.simpleMessage(
@@ -453,6 +455,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
+        "success_payment": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã thanh toán thành công"),
         "success_remove": m11,
         "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),

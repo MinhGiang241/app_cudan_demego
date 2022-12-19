@@ -27,6 +27,7 @@ class Receipt {
     this.guest_name,
     this.reason,
     this.vat,
+    this.transactions = const [],
   });
   String? id;
   String? createdTime;
@@ -49,10 +50,11 @@ class Receipt {
   String? address;
   String? guest_name;
   String? full_name;
-  int? vat;
-  int? discount_money;
-  int? discount_percent;
-  int? amount_due;
+  double? vat;
+  double? discount_money;
+  double? discount_percent;
+  double? amount_due;
+  late List<TransactionHistory> transactions;
   late bool isSelected;
 
   Receipt.fromJson(Map<String, dynamic> json) {
@@ -77,10 +79,21 @@ class Receipt {
     address = json['address'];
     guest_name = json['guest_name'];
     full_name = json['full_name'];
-    vat = json['vat'];
-    discount_money = json['discount_money'];
-    discount_percent = json['discount_percent'];
-    amount_due = json['amount_due'];
+    vat = json['vat'] != null ? double.parse(json['vat'].toString()) : 0;
+    discount_money = json['discount_money'] != null
+        ? double.parse(json['discount_money'].toString())
+        : 0;
+    discount_percent = json['discount_percent'] != null
+        ? double.parse(json['discount_percent'].toString())
+        : 0;
+    amount_due = json['amount_due'] != null
+        ? double.parse(json['amount_due'].toString())
+        : 0;
+    transactions = json['transactions'] != null
+        ? json['transactions'].isNotEmpty
+            ? json['transactions'].map((e) => TransactionHistory.fromJson(e))
+            : []
+        : [];
     isSelected = false;
   }
   Map<String, dynamic> toJson() {
@@ -110,6 +123,67 @@ class Receipt {
     data['discount_money'] = discount_money;
     data['discount_percent'] = discount_percent;
     data['amount_due'] = amount_due;
+    return data;
+  }
+}
+
+class TransactionHistory {
+  TransactionHistory({
+    this.amount_money,
+    this.amount_owed,
+    this.createdTime,
+    this.date,
+    this.employeeId,
+    this.expiration_date,
+    this.id,
+    this.payment_amount,
+    this.receiptsId,
+    this.time,
+    this.updatedTime,
+  });
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? receiptsId;
+  String? employeeId;
+  double? amount_money;
+  double? payment_amount;
+  double? amount_owed;
+  String? date;
+  String? time;
+  String? expiration_date;
+  TransactionHistory.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    receiptsId = json['receiptsId'];
+    employeeId = json['employeeId'];
+    amount_money = json['amount_money'] != null
+        ? double.parse(json['amount_money'].toString())
+        : 0;
+    payment_amount = json['payment_amount'] != null
+        ? double.parse(json['payment_amount'].toString())
+        : 0;
+    amount_owed = json['amount_owed'] != null
+        ? double.parse(json['amount_owed'].toString())
+        : 0;
+    date = json['date'];
+    time = json['time'];
+    expiration_date = json['expiration_date'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['receiptsId'] = receiptsId;
+    data['employeeId'] = employeeId;
+    data['amount_money'] = amount_money;
+    data['payment_amount'] = payment_amount;
+    data['amount_owed'] = amount_owed;
+    data['date'] = date;
+    data['time'] = time;
+    data['expiration_date'] = expiration_date;
     return data;
   }
 }

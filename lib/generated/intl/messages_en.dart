@@ -160,6 +160,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_name": MessageLookupByLibrary.simpleMessage("Enter name"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Enter Number"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Enter password"),
+        "enter_payment_pass":
+            MessageLookupByLibrary.simpleMessage("Enter payment password"),
         "enter_phone":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "enter_phone_email":
@@ -456,6 +458,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
+        "success_payment":
+            MessageLookupByLibrary.simpleMessage("Make payment successfully"),
         "success_remove": m11,
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),

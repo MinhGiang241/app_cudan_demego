@@ -19,6 +19,14 @@ class PaymentListPrv extends ChangeNotifier {
   }
 
   onSelect(int index) {
+    // if(
+    //   listUnpay[index].isSelected = true
+    // ){
+
+    // }
+    for (var i in listUnpay) {
+      i.isSelected = false;
+    }
     listUnpay[index].isSelected = !listUnpay[index].isSelected;
     notifyListeners();
   }
