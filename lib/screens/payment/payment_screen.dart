@@ -28,10 +28,16 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as List<Receipt>;
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return ChangeNotifierProvider(
-        create: (context) => PaymentPrv(listReceipts: arg, ctx: context),
+        create: (context) => PaymentPrv(
+              listReceipts: arg['list'],
+              ctx: context,
+              year: arg['year'],
+              month: arg['month'],
+            ),
         builder: (context, state) {
           return PrimaryScreen(
             isPadding: false,
@@ -135,7 +141,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     children: [
                       ListView(children: [
                         vpad(12),
-                        ...arg.map((e) {
+                        ...arg['list'].map((e) {
                           var listContent = [
                             InfoContentView(
                               title: S.of(context).bill_name,

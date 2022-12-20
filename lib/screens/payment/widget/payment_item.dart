@@ -1,5 +1,7 @@
+import 'package:app_cudan/screens/payment/prv/payment_list_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -116,8 +118,11 @@ class PaymentItem extends StatelessWidget {
     return PrimaryCard(
       margin: const EdgeInsets.only(bottom: 16, left: 12, right: 12),
       onTap: () {
-        Navigator.pushNamed(context, BillDetailsScreen.routeName,
-            arguments: re);
+        Navigator.pushNamed(context, BillDetailsScreen.routeName, arguments: {
+          "re": re,
+          "year": context.read<PaymentListPrv>().year,
+          "month": context.read<PaymentListPrv>().month
+        });
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),

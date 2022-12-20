@@ -91,7 +91,9 @@ class Receipt {
         : 0;
     transactions = json['transactions'] != null
         ? json['transactions'].isNotEmpty
-            ? json['transactions'].map((e) => TransactionHistory.fromJson(e))
+            ? json['transactions']
+                .map<TransactionHistory>((e) => TransactionHistory.fromJson(e))
+                .toList()
             : []
         : [];
     isSelected = false;

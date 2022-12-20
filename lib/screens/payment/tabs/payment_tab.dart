@@ -118,7 +118,11 @@ class _PaymentTabState extends State<PaymentTab> {
                     Navigator.pushNamed(
                       context,
                       PaymentScreen.routeName,
-                      arguments: e,
+                      arguments: {
+                        "list": e,
+                        "year": context.read<PaymentListPrv>().year,
+                        "month": context.read<PaymentListPrv>().month
+                      },
                     );
                   }
                 },

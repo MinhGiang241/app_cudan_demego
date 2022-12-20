@@ -12,7 +12,11 @@ import '../../../widgets/primary_card.dart';
 import '../payment_list_screen.dart';
 
 class PaymentPrv extends ChangeNotifier {
-  PaymentPrv({required this.listReceipts, required this.ctx}) {
+  PaymentPrv(
+      {required this.listReceipts,
+      required this.ctx,
+      required this.year,
+      required this.month}) {
     sum = listReceipts.fold(
         0.0,
         (a, b) => (a +
@@ -21,6 +25,8 @@ class PaymentPrv extends ChangeNotifier {
             b.discount_money! -
             (b.discount_percent! * b.amount_due!) / 100));
   }
+  int year;
+  int month;
   List<Receipt> listReceipts = [];
   var link = "assets/icons/vnpay.svg";
   var link1 = "assets/icons/paypal.svg";
@@ -54,7 +60,7 @@ class PaymentPrv extends ChangeNotifier {
           e: S.of(ctx).success_payment,
           onClose: () {
             Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
-                arguments: 1);
+                arguments: {"index": 1, "year": year, "month": month});
           });
     });
   }
@@ -79,7 +85,7 @@ class PaymentPrv extends ChangeNotifier {
           var date = DateTime(now.year, now.month, now.day, 17);
           var time = '${now.hour}:${now.minute}';
           var newTransaction = TransactionHistory(
-            receiptsId: v['_id'],
+            receiptsId: e.id,
             amount_money: e.amount_due,
             amount_owed: 0,
             employeeId: e.employeeId,
@@ -100,7 +106,7 @@ class PaymentPrv extends ChangeNotifier {
           e: S.of(ctx).success_payment,
           onClose: () {
             Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
-                arguments: 1);
+                arguments: {"index": 1, "year": year, "month": month});
           });
     }).catchError((e) {
       isSendLoading = false;

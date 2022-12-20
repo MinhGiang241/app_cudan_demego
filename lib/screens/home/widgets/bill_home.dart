@@ -17,7 +17,8 @@ class BillsHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).bills,
       onTapShowAll: () {
-        Navigator.of(context).pushNamed(PaymentListScreen.routeName);
+        Navigator.of(context).pushNamed(PaymentListScreen.routeName,
+            arguments: {"year": null, "month": null, "index": null});
         // Utils.pushScreen(context, const BillsScreen());
       },
       child: Row(
@@ -48,7 +49,11 @@ class BillsHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       Navigator.of(context)
-                          .pushNamed(PaymentListScreen.routeName);
+                          .pushNamed(PaymentListScreen.routeName, arguments: {
+                        "year": null,
+                        "month": null,
+                        "index": null
+                      });
                     },
                   ),
                 ),

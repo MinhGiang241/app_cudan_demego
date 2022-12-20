@@ -20,48 +20,50 @@ class BillDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as Receipt;
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     var listContent = [
       InfoContentView(
         title: S.of(context).bill_name,
-        content: arg.reason,
+        content: arg['re'].reason,
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
         title: S.of(context).bill_code,
-        content: arg.id ?? "",
+        content: arg['re'].id ?? "",
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
-      if (arg.content != null)
+      if (arg['re'].content != null)
         InfoContentView(
           title: S.of(context).content,
-          content: arg.content ?? "",
+          content: arg['re'].content ?? "",
           contentStyle: txtBodySmallBold(color: grayScaleColorBase),
         ),
       InfoContentView(
         title: S.of(context).vat,
-        content: arg.vat != null
-            ? formatCurrency.format(arg.vat).replaceAll("₫", "VND")
+        content: arg['re'].vat != null
+            ? formatCurrency.format(arg['re'].vat).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
         title: S.of(context).to_money,
-        content: arg.amount_due != null
-            ? formatCurrency.format(arg.amount_due).replaceAll("₫", "VND")
+        content: arg['re'].amount_due != null
+            ? formatCurrency.format(arg['re'].amount_due).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
         title: S.of(context).due_bill,
-        content: Utils.dateFormat(arg.date ?? "", 1),
+        content: Utils.dateFormat(arg['re'].date ?? "", 1),
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
-      if (arg.transactions.isNotEmpty)
+      if (arg['re'].transactions.isNotEmpty)
         InfoContentView(
           title: S.of(context).pay_date,
-          content: Utils.dateFormat(arg.transactions[0].createdTime ?? "", 1),
+          content:
+              Utils.dateFormat(arg['re'].transactions[0].createdTime ?? "", 1),
           contentStyle: txtBodySmallBold(color: grayScaleColorBase),
         ),
     ];
@@ -77,7 +79,7 @@ class BillDetailsScreen extends StatelessWidget {
               PrimaryInfoWidget(
                 listInfoView: listContent,
               ),
-              if (arg.payment_status != "PAID")
+              if (arg['re'].payment_status != "PAID")
                 Positioned(
                     bottom: 10,
                     child: PrimaryButton(
@@ -85,7 +87,11 @@ class BillDetailsScreen extends StatelessWidget {
                         Navigator.pushNamed(
                           context,
                           PaymentScreen.routeName,
-                          arguments: [arg],
+                          arguments: {
+                            "list": [arg['re'] as Receipt],
+                            "year": arg['year'],
+                            "month": arg['month']
+                          },
                         );
                       },
                       width: dvWidth(context) - 24,

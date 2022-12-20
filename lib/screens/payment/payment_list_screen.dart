@@ -33,13 +33,16 @@ class _PaymentListScreenState extends State<PaymentListScreen>
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as int?;
-    if (arg != null) {
-      initIndex = arg;
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    if (arg['index'] != null) {
+      initIndex = arg['index'];
     }
     tabController.index = initIndex;
     return ChangeNotifierProvider(
-      create: (context) => PaymentListPrv(),
+      create: (context) =>
+          PaymentListPrv(year: arg['year'], month: arg['month']),
       builder: (context, state) {
         return PrimaryScreen(
             appBar: PrimaryAppbar(
@@ -69,8 +72,8 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                               maxTime:
                                   DateTime(DateTime.now().year + 10, 12, 31),
                               currentTime: DateTime(
-                                  context.read<PaymentListPrv>().year,
-                                  context.read<PaymentListPrv>().month,
+                                  context.read<PaymentListPrv>().year!,
+                                  context.read<PaymentListPrv>().month!,
                                   1),
                               locale: LocaleType.vi),
                         );

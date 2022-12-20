@@ -8,8 +8,12 @@ import 'package:provider/provider.dart';
 import '../../../utils/utils.dart';
 
 class PaymentListPrv extends ChangeNotifier {
-  var year = DateTime.now().year;
-  var month = DateTime.now().month;
+  PaymentListPrv({this.year, this.month}) {
+    year ??= DateTime.now().year;
+    month ??= DateTime.now().month;
+  }
+  int? year;
+  int? month;
   List<Receipt> listPay = [];
   List<Receipt> listUnpay = [];
   onChooseMonthYear(DateTime v) {
@@ -35,7 +39,8 @@ class PaymentListPrv extends ChangeNotifier {
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment!.apartmentId;
     var residentId = context.read<ResidentInfoPrv>().residentId;
-    APIPayment.getReceiptsList(residentId ?? "", apartmentId ?? '', year, month)
+    APIPayment.getReceiptsList(
+            residentId ?? "", apartmentId ?? '', year!, month!)
         .then((v) {
       listPay.clear();
       listUnpay.clear();
