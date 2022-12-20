@@ -131,6 +131,7 @@ const Color pinkColor = Color(0xffFF4E98);
 const Color yellowColor = Color(0xffFFBF35);
 const Color purpleColor = Color(0xff6C4DDA);
 const Color redColor = Color(0xffFF4141);
+const Color orangeColor = Color(0xFFF56420);
 
 final gradientBlue = LinearGradient(
     colors: [const Color(0xff466FFF).withOpacity(0.6), const Color(0xff3462FF)],

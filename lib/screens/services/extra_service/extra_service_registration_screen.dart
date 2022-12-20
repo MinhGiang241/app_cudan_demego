@@ -161,6 +161,7 @@ class _ExtraServiceRegistrationScreenState
                           ),
                         vpad(16),
                         PrimaryTextField(
+                          maxLength: 500,
                           controller: context
                               .read<ExtraServiceRegistrationPrv>()
                               .regDateController,
@@ -200,6 +201,7 @@ class _ExtraServiceRegistrationScreenState
                                 .payList
                                 .isEmpty))
                           PrimaryTextField(
+                            maxLength: 500,
                             background: grayScaleColor4,
                             controller: context
                                 .watch<ExtraServiceRegistrationPrv>()
@@ -250,6 +252,7 @@ class _ExtraServiceRegistrationScreenState
                           ),
                         vpad(16),
                         PrimaryTextField(
+                          maxLength: 500,
                           label: S.of(context).note,
                           maxLines: 3,
                           controller: context

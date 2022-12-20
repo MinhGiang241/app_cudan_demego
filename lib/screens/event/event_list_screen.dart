@@ -38,8 +38,8 @@ class _EventListScreenState extends State<EventListScreen>
         return PrimaryScreen(
             appBar: PrimaryAppbar(
               leading: BackButton(
-                onPressed: () => Navigator.pushReplacementNamed(
-                    context, HomeScreen.routeName),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => route.isCurrent),
               ),
               title: S.of(context).event,
               tabController: tabController,

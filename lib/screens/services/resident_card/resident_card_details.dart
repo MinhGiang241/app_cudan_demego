@@ -69,7 +69,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                                   .info_name!
                                   .toUpperCase()
                               : '',
-                          contentStyle: txtBold(16, primaryColor1)),
+                          contentStyle: txtBold(16)),
                       InfoContentView(
                           isHorizontal: true,
                           title: S.of(context).email,
@@ -123,7 +123,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                           isHorizontal: true,
                           title: S.of(context).card_num,
                           content: card.code!.toUpperCase(),
-                          contentStyle: txtBold(16, purpleColorBase)),
+                          contentStyle: txtBold(16, primaryColorBase)),
                       InfoContentView(
                           isHorizontal: true,
                           title: S.of(context).letter_status,

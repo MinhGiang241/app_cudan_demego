@@ -1750,20 +1750,20 @@ class S {
     );
   }
 
-  /// `Do you want to delete {delete}?`
+  /// `Do you want to delete [{delete}]?`
   String confirm_delete_service(Object delete) {
     return Intl.message(
-      'Do you want to delete $delete?',
+      'Do you want to delete [$delete]?',
       name: 'confirm_delete_service',
       desc: '',
       args: [delete],
     );
   }
 
-  /// `Do you want to delete letter {letter}?`
+  /// `Do you want to delete letter [{letter}]?`
   String confirm_delete_letter(Object letter) {
     return Intl.message(
-      'Do you want to delete letter $letter?',
+      'Do you want to delete letter [$letter]?',
       name: 'confirm_delete_letter',
       desc: '',
       args: [letter],
@@ -2000,10 +2000,10 @@ class S {
     );
   }
 
-  /// `Remove {del} successfully`
+  /// `Remove [{del}] successfully`
   String success_remove(Object del) {
     return Intl.message(
-      'Remove $del successfully',
+      'Remove [$del] successfully',
       name: 'success_remove',
       desc: '',
       args: [del],
@@ -2020,10 +2020,10 @@ class S {
     );
   }
 
-  /// `Do you want to send to approve {approved}?`
+  /// `Do you want to send to approve [{approved}]?`
   String confirm_send_request(Object approved) {
     return Intl.message(
-      'Do you want to send to approve $approved?',
+      'Do you want to send to approve [$approved]?',
       name: 'confirm_send_request',
       desc: '',
       args: [approved],
@@ -2380,10 +2380,10 @@ class S {
     );
   }
 
-  /// `Do you want to cancel request letter {code}`
+  /// `Do you want to cancel request letter [{code}]`
   String confirm_cancel_request(Object code) {
     return Intl.message(
-      'Do you want to cancel request letter $code',
+      'Do you want to cancel request letter [$code]',
       name: 'confirm_cancel_request',
       desc: '',
       args: [code],
@@ -2440,10 +2440,10 @@ class S {
     );
   }
 
-  /// `Do you want to lock card {card}?`
+  /// `Do you want to lock card [{card}]?`
   String confirm_lock_card(Object card) {
     return Intl.message(
-      'Do you want to lock card $card?',
+      'Do you want to lock card [$card]?',
       name: 'confirm_lock_card',
       desc: '',
       args: [card],
@@ -3060,20 +3060,20 @@ class S {
     );
   }
 
-  /// `Do you want to participate in '{eventName}'?`
+  /// `Do you want to participate in [{eventName}]?`
   String confirm_par_ques_event(Object eventName) {
     return Intl.message(
-      'Do you want to participate in \'$eventName\'?',
+      'Do you want to participate in [$eventName]?',
       name: 'confirm_par_ques_event',
       desc: '',
       args: [eventName],
     );
   }
 
-  /// `Paticipate event '{eName}' successfully`
+  /// `Paticipate event [{eName}] successfully`
   String scuccess_participation(Object eName) {
     return Intl.message(
-      'Paticipate event \'$eName\' successfully',
+      'Paticipate event [$eName] successfully',
       name: 'scuccess_participation',
       desc: '',
       args: [eName],
@@ -3325,6 +3325,46 @@ class S {
     return Intl.message(
       'Make payment successfully',
       name: 'success_payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Long`
+  String get long {
+    return Intl.message(
+      'Long',
+      name: 'long',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Width`
+  String get width {
+    return Intl.message(
+      'Width',
+      name: 'width',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Height`
+  String get height {
+    return Intl.message(
+      'Height',
+      name: 'height',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take place time`
+  String get take_place_time {
+    return Intl.message(
+      'Take place time',
+      name: 'take_place_time',
       desc: '',
       args: [],
     );

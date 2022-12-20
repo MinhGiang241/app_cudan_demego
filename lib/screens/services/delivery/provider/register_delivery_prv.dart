@@ -37,6 +37,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   TextEditingController packageNameController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController dimentionController = TextEditingController();
+  TextEditingController longController = TextEditingController();
+  TextEditingController widthController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   bool helpCheck = false;
   String? id;
@@ -47,6 +50,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   String? validatePackageName;
   String? validateWeight;
   String? validateDimention;
+  String? validateLong;
+  String? validateWidth;
+  String? validateHeight;
   DateTime? startDate;
   DateTime? endDate;
   bool isAddNewLoading = false;
@@ -148,6 +154,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           validateType = null;
           validatePackageName = null;
           validateDimention = null;
+          validateLong = null;
+          validateWidth = null;
+          validateHeight = null;
           notifyListeners();
           Utils.showErrorMessage(context, e.toString());
         });
@@ -159,6 +168,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         validateType = null;
         validatePackageName = null;
         validateDimention = null;
+        validateLong = null;
+        validateWidth = null;
+        validateHeight = null;
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       }
@@ -209,7 +221,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           ? double.parse(weightController.text.trim())
           : 0,
       item_name: packageNameController.text.trim(),
-      dimension: dimentionController.text.trim(),
+      dimension:
+          "${longController.text}x${widthController.text}x${heightController.text}",
     );
 
     packageItems[index] = newItem;
@@ -217,7 +230,13 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     weightController.text = '';
     packageNameController.text = '';
     dimentionController.text = '';
+    longController.text = '';
+    widthController.text = '';
+    heightController.text = '';
     validateDimention = null;
+    validateLong = null;
+    validateWidth = null;
+    validateHeight = null;
     validateWeight = null;
     validatePackageName = null;
     notifyListeners();
@@ -229,12 +248,19 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           ? double.parse(weightController.text.trim())
           : 0,
       item_name: packageNameController.text.trim(),
-      dimension: dimentionController.text.trim(),
+      dimension:
+          "${longController.text}x${widthController.text}x${heightController.text}",
     ));
     weightController.text = '';
     packageNameController.text = '';
     dimentionController.text = '';
+    longController.text = '';
+    widthController.text = '';
+    heightController.text = '';
     validateDimention = null;
+    validateLong = null;
+    validateWidth = null;
+    validateHeight = null;
     validateWeight = null;
     validatePackageName = null;
     notifyListeners();
@@ -337,7 +363,13 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       weightController.text = item.value.weight.toString();
       packageNameController.text = item.value.item_name.toString();
       dimentionController.text = item.value.dimension.toString();
+      longController.text = item.value.dimension.toString().split('x')[0];
+      widthController.text = item.value.dimension.toString().split('x')[1];
+      heightController.text = item.value.dimension.toString().split('x')[2];
       validateDimention = null;
+      validateLong = null;
+      validateWidth = null;
+      validateHeight = null;
       validateWeight = null;
       validatePackageName = null;
       notifyListeners();
@@ -365,7 +397,13 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                           weightController.text = '';
                           packageNameController.text = '';
                           dimentionController.text = '';
+                          longController.text = '';
+                          widthController.text = '';
+                          heightController.text = '';
                           validateDimention = null;
+                          validateLong = null;
+                          validateWidth = null;
+                          validateHeight = null;
                           validateWeight = null;
                           validatePackageName = null;
                           notifyListeners();
@@ -426,29 +464,104 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                         },
                       ),
                       vpad(16),
-                      PrimaryTextField(
-                        maxLength: 100,
-                        blockSpace: true,
-                        validateString: validateDimention,
-                        controller: dimentionController,
-                        label: '${S.of(context).dimention} (cm)',
-                        isRequired: true,
-                        hint: S.of(context).l_w_e,
-                        validator: (v) {
-                          if (v!.isEmpty) {
-                            return '';
-                          } else if (!RegexText.onlyZero(v.trim())) {
-                            return '';
-                          } else if (RegexText.vietNameseChar(v.trim())) {
-                            return '';
-                          }
-                          return null;
-                        },
+                      Row(
+                        children: [
+                          Text('${S.of(context).dimention} (cm)'),
+                          Text(
+                            '*',
+                            style: txtBodySmallRegular(color: redColorBase),
+                          )
+                        ],
                       ),
+                      vpad(16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: PrimaryTextField(
+                              isRequired: true,
+                              isShow: false,
+                              validateString: validateLong,
+                              keyboardType: TextInputType.number,
+                              controller: longController,
+                              label: S.of(context).long,
+                              maxLength: 100,
+                              blockSpace: true,
+                              validator: (v) {
+                                if (v!.isEmpty) {
+                                  return '';
+                                }
+
+                                return null;
+                              },
+                            ),
+                          ),
+                          hpad(24),
+                          Expanded(
+                            child: PrimaryTextField(
+                              isRequired: true,
+                              isShow: false,
+                              validateString: validateWidth,
+                              keyboardType: TextInputType.number,
+                              controller: widthController,
+                              label: S.of(context).width,
+                              maxLength: 100,
+                              blockSpace: true,
+                              validator: (v) {
+                                if (v!.isEmpty) {
+                                  return '';
+                                }
+
+                                return null;
+                              },
+                            ),
+                          ),
+                          hpad(24),
+                          Expanded(
+                            child: PrimaryTextField(
+                              isRequired: true,
+                              isShow: false,
+                              validateString: validateHeight,
+                              keyboardType: TextInputType.number,
+                              controller: heightController,
+                              label: S.of(context).height,
+                              maxLength: 100,
+                              blockSpace: true,
+                              validator: (v) {
+                                if (v!.isEmpty) {
+                                  return '';
+                                }
+
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      // PrimaryTextField(
+                      //   maxLength: 100,
+                      //   blockSpace: true,
+                      //   validateString: validateDimention,
+                      //   controller: dimentionController,
+                      //   label: '${S.of(context).dimention} (cm)',
+                      //   isRequired: true,
+                      //   hint: S.of(context).l_w_e,
+                      //   validator: (v) {
+                      //     if (v!.isEmpty) {
+                      //       return '';
+                      //     } else if (!RegexText.onlyZero(v.trim())) {
+                      //       return '';
+                      //     } else if (RegexText.vietNameseChar(v.trim())) {
+                      //       return '';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                       vpad(30),
                       PrimaryButton(
                         width: dvWidth(context) - 48,
-                        text: S.of(context).add,
+                        text: item != null
+                            ? S.of(context).edit
+                            : S.of(context).add,
                         onTap: () {
                           if (formKey1.currentState!.validate()) {
                             if (item != null) {
@@ -473,17 +586,32 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                             } else {
                               validateWeight = null;
                             }
-                            if (dimentionController.text.trim().isEmpty) {
-                              validateDimention = S.of(context).not_blank;
-                            } else if (!RegexText.onlyZero(
-                                dimentionController.text.trim())) {
-                              validateDimention = S.of(context).not_dimention;
-                            } else if (RegexText.vietNameseChar(
-                                dimentionController.text.trim())) {
-                              validateDimention = S.of(context).not_vietnamese;
+                            if (longController.text.trim().isEmpty) {
+                              validateLong = S.of(context).not_blank;
                             } else {
-                              validateDimention = null;
+                              validateLong = null;
                             }
+                            if (widthController.text.trim().isEmpty) {
+                              validateWidth = S.of(context).not_blank;
+                            } else {
+                              validateWidth = null;
+                            }
+                            if (heightController.text.trim().isEmpty) {
+                              validateHeight = S.of(context).not_blank;
+                            } else {
+                              validateHeight = null;
+                            }
+                            // if (dimentionController.text.trim().isEmpty) {
+                            //   validateDimention = S.of(context).not_blank;
+                            // } else if (!RegexText.onlyZero(
+                            //     dimentionController.text.trim())) {
+                            //   validateDimention = S.of(context).not_dimention;
+                            // } else if (RegexText.vietNameseChar(
+                            //     dimentionController.text.trim())) {
+                            //   validateDimention = S.of(context).not_vietnamese;
+                            // } else {
+                            //   validateDimention = null;
+                            // }
                             setState(() {});
                             notifyListeners();
                           }

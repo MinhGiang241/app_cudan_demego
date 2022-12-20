@@ -2,6 +2,7 @@ import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcels_list_screen.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
+import 'package:app_cudan/widgets/primary_image_netword.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
@@ -27,89 +28,98 @@ class ServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = [
       {
+        "color": primaryColorBase,
         "background": gradientBlue,
+        "icon": PrimaryIcons.inbox,
+        "title": S.current.res_card,
+        "navigator": ResidentCardListScreen.routeName,
+      },
+      {
+        "color": turquoiseColor,
+        "background": gradientTurquoise,
         "icon": PrimaryIcons.car_bg,
         "title": S.current.parking_card,
         "navigator": TransportationCardListScreen.routeName,
       },
       {
-        "background": gradientPink,
-        "icon": PrimaryIcons.elevator_bg,
-        "title": S.current.elevator_card,
-        "navigator": GymCardListScreen.routeName,
-      },
-      {
-        "background": gradientPurple,
-        "icon": PrimaryIcons.gym_bg,
-        "title": S.current.gym_card,
-        "navigator": GymCardListScreen.routeName,
-      },
-      {
+        "color": greenColorBase,
         "background": gradientGreen,
-        "icon": PrimaryIcons.identity_bg,
-        "title": S.current.res_card,
-        "navigator": ResidentCardListScreen.routeName,
-      },
-      {
-        "background": gradientYellow,
-        "icon": PrimaryIcons.dog_bg,
-        "title": S.current.pet,
-        "navigator": ParcelListScreen.routeName,
-      },
-      {
-        "background": gradientTurquoise,
-        "icon": PrimaryIcons.swim_bg,
-        "title": S.current.pool,
-        "navigator": GymCardListScreen.routeName,
-      },
-      {
-        "background": gradientBlue,
         "icon": PrimaryIcons.bone,
         "title": S.current.pet,
         "navigator": GymCardListScreen.routeName,
       },
       {
-        "background": gradientBlack,
+        "color": pinkColorBase,
+        "background": gradientPink,
         "icon": PrimaryIcons.wrench,
         "title": S.current.construction,
         "navigator": GymCardListScreen.routeName,
       },
       {
-        "background": gradientRed,
+        "color": yellowColorBase,
+        "background": gradientYellow,
         "icon": PrimaryIcons.box,
         "title": S.current.reg_deliver,
         "navigator": DeliveryListScreen.routeName,
       },
       {
-        "background": gradientBrow,
+        "color": primaryColorBase,
+        "background": gradientBlue,
         "icon": PrimaryIcons.package,
         "title": S.current.parcel,
         "navigator": GymCardListScreen.routeName,
       },
       {
-        "background": gradientOrange,
+        "color": greenColor,
+        "background": gradientGreen,
         "icon": PrimaryIcons.user_detail,
         "title": S.current.info_reception,
         "navigator": GymCardListScreen.routeName,
       },
       {
+        "color": turquoiseColor,
         "background": gradientTurquoise,
         "icon": PrimaryIcons.binoculars,
         "title": S.current.missing_obj,
         "navigator": GymCardListScreen.routeName,
       },
       {
-        "background": gradientPink,
-        "icon": PrimaryIcons.birthday,
-        "title": S.current.pool,
-        "navigator": GymCardListScreen.routeName,
-      },
-      {
-        "background": gradientGreen,
+        "color": purpleColorBase,
+        "background": gradientPurple,
         "icon": PrimaryIcons.credit_card_alt,
-        "title": S.current.pool,
+        "title": S.current.follow_ser,
         "navigator": GymCardListScreen.routeName,
       },
+      // {
+      //   "color": purpleColorBase,
+      //   "background": gradientPurple,
+      //   "icon": PrimaryIcons.gym_bg,
+      //   "title": S.current.gym_card,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
+
+      // {
+      //   "color": yellowColor7,
+      //   "background": gradientBrow,
+      //   "icon": PrimaryIcons.package,
+      //   "title": S.current.parcel,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
+
+      // {
+      //   "color": pinkColorBase,
+      //   "background": gradientPink,
+      //   "icon": PrimaryIcons.birthday,
+      //   "title": S.current.pool,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
+      // {
+      //   "color": greenColorBase,
+      //   "background": gradientGreen,
+      //   "icon": PrimaryIcons.credit_card_alt,
+      //   "title": S.current.pool,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
     ];
     return ChangeNotifierProvider(
         create: (context) => ServicePrv(),
@@ -118,8 +128,8 @@ class ServiceScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 leading: BackButton(
-                    onPressed: () => Navigator.pushReplacementNamed(
-                        context, HomeScreen.routeName)),
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
+                        HomeScreen.routeName, (route) => route.isCurrent)),
               ),
               body: FutureBuilder(
                   future: context.read<ServicePrv>().getExtraService(context),
@@ -136,10 +146,10 @@ class ServiceScreen extends StatelessWidget {
                                 style: txtDisplayMedium(),
                               ),
                             ),
-                            SearchBar(),
+                            // SearchBar(),
                             vpad(12),
                             SizedBox(
-                              height: dvHeight(context) - 215,
+                              height: dvHeight(context) - 100,
                               child: GridView.count(
                                 shrinkWrap: true,
                                 crossAxisCount: 2,
@@ -155,25 +165,60 @@ class ServiceScreen extends StatelessWidget {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(12)),
-                                          gradient: e['background'] as Gradient,
-                                        ),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(12)),
+                                            // gradient: gradientW,
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.7),
+                                                spreadRadius: 1,
+                                                blurRadius: 4,
+                                                offset: const Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ]),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            PrimaryIcon(
-                                              icons: e['icon'] as PrimaryIcons,
-                                              size: 80,
-                                              color: Colors.white,
+                                            Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        blurStyle:
+                                                            BlurStyle.normal,
+                                                        spreadRadius: 1,
+                                                        blurRadius: 24,
+                                                        color: (e['color']
+                                                                as Color)
+                                                            .withOpacity(0.25),
+                                                        offset:
+                                                            const Offset(0, 16))
+                                                  ],
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(24)),
+                                                  gradient: e['background']
+                                                      as Gradient),
+                                              child: PrimaryIcon(
+                                                icons:
+                                                    e['icon'] as PrimaryIcons,
+                                                size: 40,
+                                                color: Colors.white,
+                                              ),
                                             ),
+                                            vpad(12),
                                             Text(
                                               e['title'] as String,
-                                              style: txtBodyMediumRegular(
-                                                  color: Colors.white),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: txtBold(13),
                                             )
                                           ],
                                         ),
@@ -197,33 +242,84 @@ class ServiceScreen extends StatelessWidget {
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(12)),
-                                                gradient: gradientPrimary,
-                                              ),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(12)),
+                                                  // gradient: gradientW,
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.7),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 4,
+                                                      offset: const Offset(0,
+                                                          3), // changes position of shadow
+                                                    ),
+                                                  ]),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  Image.network(
-                                                      fit: BoxFit.contain,
-                                                      width: 80,
-                                                      height: 80,
-                                                      "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
+                                                  Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                blurStyle:
+                                                                    BlurStyle
+                                                                        .normal,
+                                                                spreadRadius: 1,
+                                                                blurRadius: 24,
+                                                                color: (primaryColorBase)
+                                                                    .withOpacity(
+                                                                        0.25),
+                                                                offset:
+                                                                    const Offset(
+                                                                        0, 16))
+                                                          ],
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                      .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          24)),
+                                                          gradient:
+                                                              gradientBlue),
+                                                      child:
+                                                          PrimaryImageNetwork(
+                                                        fit: BoxFit.contain,
+                                                        path:
+                                                            "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}",
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    24)),
+                                                      )
+
+                                                      // Image.network(
+
+                                                      //     fit: BoxFit.contain,
+                                                      //     width: 20,
+                                                      //     height: 20,
+                                                      //     "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
+
+                                                      ),
+                                                  vpad(12),
                                                   Text(
                                                     e.name ?? "",
-                                                    style: txtBodyMediumRegular(
-                                                        color: Colors.white),
+                                                    style: txtBold(13),
                                                   )
                                                 ],
                                               ),
                                             ),
                                           )),
                                   vpad(0),
-                                  vpad(0)
+                                  vpad(0),
                                 ],
                               ),
                             ),

@@ -94,7 +94,7 @@ class NewsHome extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                              Utils.dateFormat(newList[index].date ?? "", 1),
+                              "${S.of(context).take_place_time}:${Utils.dateFormat(newList[index].date ?? "", 1)}",
                               style: txtBodySmallRegular(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis)),

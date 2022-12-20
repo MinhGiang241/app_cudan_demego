@@ -45,7 +45,7 @@ class PaymentListPrv extends ChangeNotifier {
       listPay.clear();
       listUnpay.clear();
       for (var i in v) {
-        if (i['payment_status'] == "UNPAID") {
+        if (i['payment_status'] == "UNPAID" || i['payment_status'] == "OWE") {
           listUnpay.add(Receipt.fromJson(i));
         } else {
           listPay.add(Receipt.fromJson(i));

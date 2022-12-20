@@ -51,14 +51,14 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                     InfoContentView(
                       title: S.of(context).reg_code,
                       content: arg.code,
-                      contentStyle: txtBold(16, purpleColorBase),
+                      contentStyle: txtBold(16, primaryColor1),
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
                       content: context.read<ResidentInfoPrv>().userInfo != null
                           ? context.read<ResidentInfoPrv>().userInfo!.info_name
                           : '',
-                      contentStyle: txtBold(16, primaryColor1),
+                      contentStyle: txtBold(16, grayScaleColorBase),
                     ),
                     InfoContentView(
                       title: S.of(context).apartment,

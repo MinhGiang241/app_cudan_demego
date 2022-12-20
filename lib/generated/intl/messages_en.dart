@@ -20,18 +20,18 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(code) => "Do you want to cancel request letter ${code}";
+  static String m0(code) => "Do you want to cancel request letter [${code}]";
 
-  static String m1(letter) => "Do you want to delete letter ${letter}?";
+  static String m1(letter) => "Do you want to delete letter [${letter}]?";
 
-  static String m2(delete) => "Do you want to delete ${delete}?";
+  static String m2(delete) => "Do you want to delete [${delete}]?";
 
-  static String m3(card) => "Do you want to lock card ${card}?";
+  static String m3(card) => "Do you want to lock card [${card}]?";
 
   static String m4(eventName) =>
-      "Do you want to participate in \'${eventName}\'?";
+      "Do you want to participate in [${eventName}]?";
 
-  static String m5(approved) => "Do you want to send to approve ${approved}?";
+  static String m5(approved) => "Do you want to send to approve [${approved}]?";
 
   static String m6(nameser) => "Edit registration service ${nameser}";
 
@@ -39,11 +39,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(nameser) => "Registration service ${nameser}";
 
-  static String m9(eName) => "Paticipate event \'${eName}\' successfully";
+  static String m9(eName) => "Paticipate event [${eName}] successfully";
 
   static String m10(service) => "Service ${service}";
 
-  static String m11(del) => "Remove ${del} successfully";
+  static String m11(del) => "Remove [${del}] successfully";
 
   static String m12(to) => "We sent otp code to :${to}";
 
@@ -199,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Happening location"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
+        "height": MessageLookupByLibrary.simpleMessage("Height"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
@@ -230,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
+        "long": MessageLookupByLibrary.simpleMessage("Long"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
@@ -465,6 +467,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send to approve request successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
+        "take_place_time":
+            MessageLookupByLibrary.simpleMessage("Take place time"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
@@ -517,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "we_send_to": m12,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
+        "width": MessageLookupByLibrary.simpleMessage("Width"),
         "year": MessageLookupByLibrary.simpleMessage("Year")
       };
 }

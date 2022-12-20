@@ -71,7 +71,9 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                                     .info_name!
                                     .toUpperCase()
                                 : '',
-                            contentStyle: txtBold(16, primaryColor1)),
+                            contentStyle: txtBold(
+                              16,
+                            )),
                         InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).email,
@@ -153,7 +155,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                             isHorizontal: true,
                             title: S.of(context).card_num,
                             content: card.code!.toUpperCase(),
-                            contentStyle: txtBold(16, purpleColorBase)),
+                            contentStyle: txtBold(16, primaryColorBase)),
                         InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).letter_status,
@@ -179,6 +181,7 @@ class _TransportationCardDetailsState extends State<TransportationCardDetails>
                         if (card.ticket_status == "CANCEL")
                           if (card.note_reason != null)
                             InfoContentView(
+                              isHorizontal: true,
                               title: S.of(context).note,
                               content: card.note_reason ?? "",
                             ),

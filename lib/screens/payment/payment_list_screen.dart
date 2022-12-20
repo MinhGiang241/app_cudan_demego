@@ -12,6 +12,7 @@ import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
+import '../home/home_screen.dart';
 import 'tabs/payment_tab.dart';
 
 class PaymentListScreen extends StatefulWidget {
@@ -46,6 +47,10 @@ class _PaymentListScreenState extends State<PaymentListScreen>
       builder: (context, state) {
         return PrimaryScreen(
             appBar: PrimaryAppbar(
+              leading: BackButton(onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => route.isCurrent);
+              }),
               title: S.of(context).pay,
               tabController: tabController,
               isTabScrollabel: false,

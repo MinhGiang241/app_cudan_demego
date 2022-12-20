@@ -20,20 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
-  static String m0(code) => "Bạn có chắc chắn hủy đăng ký phiếu ${code} không?";
+  static String m0(code) =>
+      "Bạn có chắc chắn hủy đăng ký phiếu [${code}] không?";
 
   static String m1(letter) =>
-      "Bạn có chắc chắn muốn xóa phiếu ${letter} không?";
+      "Bạn có chắc chắn muốn xóa phiếu [${letter}] không?";
 
-  static String m2(delete) => "Bạn có chắc chắn muốn xóa ${delete} không?";
+  static String m2(delete) => "Bạn có chắc chắn muốn xóa [${delete}] không?";
 
-  static String m3(card) => "Bạn có muốn khóa thẻ ${card} không?";
+  static String m3(card) => "Bạn có muốn khóa thẻ [${card}] không?";
 
   static String m4(eventName) =>
-      "Bạn chắc chắn muốn tham gia sự kiện ${eventName} không?";
+      "Bạn chắc chắn muốn tham gia sự kiện [${eventName}] không?";
 
   static String m5(approved) =>
-      "Bạn có muốn gửi duyệt phiếu ${approved} không?";
+      "Bạn có muốn gửi duyệt phiếu [${approved}] không?";
 
   static String m6(nameser) => "Chỉnh sửa đăng ký dịch vụ ${nameser}";
 
@@ -41,11 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(nameser) => "Đăng ký dịch vụ ${nameser}";
 
-  static String m9(eName) => "Bạn đã xác nhận tham gia ${eName} thành công";
+  static String m9(eName) => "Bạn đã xác nhận tham gia [${eName}] thành công";
 
   static String m10(service) => "Dịch vụ ${service}";
 
-  static String m11(del) => "Xóa ${del} thành công";
+  static String m11(del) => "Xóa [${del}] thành công";
 
   static String m12(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
@@ -199,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Địa điểm diễn ra"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản?"),
+        "height": MessageLookupByLibrary.simpleMessage("cao"),
         "hello": MessageLookupByLibrary.simpleMessage("Xin chào"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Lịch sử đăng ký dịch vụ"),
@@ -230,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "licene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
+        "long": MessageLookupByLibrary.simpleMessage("Dài"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
@@ -327,7 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn chưa cấp quyền ứng dụng"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
-        "pet": MessageLookupByLibrary.simpleMessage("Thú nuôi"),
+        "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
         "phone_email":
             MessageLookupByLibrary.simpleMessage("Số điện thoại/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
@@ -344,7 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_const": MessageLookupByLibrary.simpleMessage("Đăng ký thi công"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Ngày đăng ký"),
         "reg_date_not_after_now": MessageLookupByLibrary.simpleMessage(
-            "Ngày đăng ký không được nhỏ hơn ngày hiện tại"),
+            "Ngày đăng ký không hợp lệ. Vui lòng chọn lại."),
         "reg_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày đăng ký không được để trống"),
         "reg_deliver":
@@ -462,6 +465,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
+        "take_place_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Điều khoản & dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
@@ -512,6 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại"),
+        "width": MessageLookupByLibrary.simpleMessage("Rộng"),
         "year": MessageLookupByLibrary.simpleMessage("Năm")
       };
 }
