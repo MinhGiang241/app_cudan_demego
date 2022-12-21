@@ -3479,6 +3479,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Missing object`
+  String get missing_object {
+    return Intl.message(
+      'Missing object',
+      name: 'missing_object',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found object`
+  String get found_object {
+    return Intl.message(
+      'Found object',
+      name: 'found_object',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History find object`
+  String get history_find_obj {
+    return Intl.message(
+      'History find object',
+      name: 'history_find_obj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Object details`
+  String get object_details {
+    return Intl.message(
+      'Object details',
+      name: 'object_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Object information`
+  String get object_info {
+    return Intl.message(
+      'Object information',
+      name: 'object_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Object code`
+  String get object_code {
+    return Intl.message(
+      'Object code',
+      name: 'object_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Object name`
+  String get object_name {
+    return Intl.message(
+      'Object name',
+      name: 'object_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Missing time`
+  String get missing_time {
+    return Intl.message(
+      'Missing time',
+      name: 'missing_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found place`
+  String get found_place {
+    return Intl.message(
+      'Found place',
+      name: 'found_place',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found time`
+  String get found_time {
+    return Intl.message(
+      'Found time',
+      name: 'found_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any missing object`
+  String get no_missing_obj {
+    return Intl.message(
+      'Don\'t have any missing object',
+      name: 'no_missing_obj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register find missing object`
+  String get reg_missing_obj {
+    return Intl.message(
+      'Register find missing object',
+      name: 'reg_missing_obj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found`
+  String get found {
+    return Intl.message(
+      'Found',
+      name: 'found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Returned`
+  String get returned {
+    return Intl.message(
+      'Returned',
+      name: 'returned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send letter`
+  String get send_letter {
+    return Intl.message(
+      'Send letter',
+      name: 'send_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait return`
+  String get wait_return {
+    return Intl.message(
+      'Wait return',
+      name: 'wait_return',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

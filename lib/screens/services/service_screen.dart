@@ -1,5 +1,6 @@
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
+import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
 
 import 'package:app_cudan/widgets/primary_icon.dart';
@@ -82,7 +83,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientTurquoise,
         "icon": PrimaryIcons.binoculars,
         "title": S.current.missing_obj,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": MissingObectScreen.routeName,
       },
       {
         "color": purpleColorBase,

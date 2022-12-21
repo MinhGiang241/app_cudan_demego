@@ -342,5 +342,22 @@
   "receipt_date":"Ngày nhận",
   "parcel_details":"Chi tiết bưu phẩm",
   "parcel_info":"Thông tin bưu phẩm",
-  "parcel_name":"Tên bưu phẩm"
+  "parcel_name":"Tên bưu phẩm",
+  "missing_object":"Đồ thất lạc",
+  "found_object":"Vật phẩm nhặt được",
+  "history_find_obj":"Lịch sử tìm đồ",
+  "object_details":"Chi tiết vật phẩm",
+  "object_info":"Thông tin vật phẩm",
+  "object_code":"Mã vật phẩm",
+  "object_name":"Tên vật phẩm",
+  "missing_time":"Thời điểm thất lạc",
+  "found_place":"Địa điểm thấy",
+  "found_time":"Thời điểm thấy",
+  "no_missing_obj":"Không có đồ thất lạc nào", 
+  "reg_missing_obj":"Đăng ký tìm đồ thất lạc",
+  "found":"Đã tìm thấy",
+  "returned":"Đã trả",
+  "send_letter":"Gửi phiếu",
+  "wait_return":"Chờ trả"
 }
+   

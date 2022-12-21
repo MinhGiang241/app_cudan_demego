@@ -341,5 +341,21 @@
   "receipt_date":"Receipted date",
   "parcel_details":"Parcel details",
   "parcel_info":"Parcel informations",
-  "parcel_name":"Parcel name"
+  "parcel_name":"Parcel name",
+  "missing_object":"Missing object",
+  "found_object":"Found object",
+  "history_find_obj":"History find object",
+  "object_details":"Object details",
+  "object_info":"Object information",
+  "object_code":"Object code",
+  "object_name":"Object name",
+  "missing_time":"Missing time",
+  "found_place":"Found place",
+  "found_time":"Found time",
+  "no_missing_obj":"Don't have any missing object",
+  "reg_missing_obj":"Register find missing object",
+  "found":"Found",
+  "returned":"Returned",
+  "send_letter":"Send letter",
+  "wait_return":"Wait return"
 }

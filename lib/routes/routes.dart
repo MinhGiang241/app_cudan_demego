@@ -29,6 +29,7 @@ import '../screens/services/extra_service/extra_service_details.dart';
 import '../screens/services/extra_service/extra_service_registration_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
+import '../screens/services/missing_object/missing_object_screen.dart';
 import '../screens/services/parcel/parcel_detail_screen.dart';
 import '../screens/services/parcel/parcel_list_screen.dart';
 import '../screens/services/parking_card/register_parking_card.dart';
@@ -220,6 +221,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ParcelDetailsScreen(),
+        );
+      case MissingObectScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const MissingObectScreen(),
         );
       default:
         return MaterialPageRoute(

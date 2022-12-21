@@ -192,6 +192,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
+        "found": MessageLookupByLibrary.simpleMessage("Found"),
+        "found_object": MessageLookupByLibrary.simpleMessage("Found object"),
+        "found_place": MessageLookupByLibrary.simpleMessage("Found place"),
+        "found_time": MessageLookupByLibrary.simpleMessage("Found time"),
         "free_service": MessageLookupByLibrary.simpleMessage("Free service"),
         "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -208,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
         "history": MessageLookupByLibrary.simpleMessage("Timeline"),
+        "history_find_obj":
+            MessageLookupByLibrary.simpleMessage("History find object"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
@@ -243,8 +249,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maximum payment date can not be empty"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Missing object"),
+        "missing_object":
+            MessageLookupByLibrary.simpleMessage("Missing object"),
         "missing_report":
             MessageLookupByLibrary.simpleMessage("Missing Report"),
+        "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "You need to choose payment cycle and register date first"),
@@ -264,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
         "no_letter":
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
+        "no_missing_obj": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any missing object"),
         "no_news": MessageLookupByLibrary.simpleMessage("Don\'t have any news"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Don\'t have any parcel"),
@@ -297,6 +308,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "object_code": MessageLookupByLibrary.simpleMessage("Object code"),
+        "object_details":
+            MessageLookupByLibrary.simpleMessage("Object details"),
+        "object_info":
+            MessageLookupByLibrary.simpleMessage("Object information"),
+        "object_name": MessageLookupByLibrary.simpleMessage("Object name"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
@@ -366,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registration date can be not empty"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Register delivery"),
+        "reg_missing_obj": MessageLookupByLibrary.simpleMessage(
+            "Register find missing object"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
         "reg_service":
             MessageLookupByLibrary.simpleMessage("Registration service"),
@@ -410,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Resident information"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
+        "returned": MessageLookupByLibrary.simpleMessage("Returned"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Register successfully, please sign in"),
         "rgstr_code_1":
@@ -435,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_project":
             MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),
         "send_request": MessageLookupByLibrary.simpleMessage("Send request"),
@@ -529,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
+        "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
