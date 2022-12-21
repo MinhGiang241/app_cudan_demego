@@ -29,7 +29,8 @@ import '../screens/services/extra_service/extra_service_details.dart';
 import '../screens/services/extra_service/extra_service_registration_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
-import '../screens/services/parcel/parcels_list_screen.dart';
+import '../screens/services/parcel/parcel_detail_screen.dart';
+import '../screens/services/parcel/parcel_list_screen.dart';
 import '../screens/services/parking_card/register_parking_card.dart';
 import '../screens/services/parking_card/transport_card_list_screen.dart';
 import '../screens/services/parking_card/transportation_details_screen.dart';
@@ -210,11 +211,15 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const PaymentScreen(),
         );
-
       case ParcelListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ParcelListScreen(),
+        );
+      case ParcelDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ParcelDetailsScreen(),
         );
       default:
         return MaterialPageRoute(

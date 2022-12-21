@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
-import 'package:app_cudan/screens/services/parcel/parcels_list_screen.dart';
+import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
+
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_image_netword.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
@@ -67,7 +68,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientBlue,
         "icon": PrimaryIcons.package,
         "title": S.current.parcel,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": ParcelListScreen.routeName,
       },
       {
         "color": greenColor,

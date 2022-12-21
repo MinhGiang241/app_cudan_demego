@@ -31,7 +31,7 @@ class BillDetailsScreen extends StatelessWidget {
       ),
       InfoContentView(
         title: S.of(context).bill_code,
-        content: arg['re'].id ?? "",
+        content: arg['re'].code ?? arg['re'].id,
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       if (arg['re'].content != null)

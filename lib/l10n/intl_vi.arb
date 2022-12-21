@@ -327,9 +327,20 @@
   "total":"Tổng cộng",
   "payment_method":"Phương thức thanh toán",
   "enter_payment_pass":"Nhập mật khẩu thanh toán",
-  "success_payment":"Bạn đã thanh toán thành công",
+  "success_payment":"Bạn đã thanh toán thành công cho [{billcode}]",
   "long":"Dài",
   "width":"Rộng",
   "height":"cao",
-  "take_place_time":"Thời gian diễn ra"
+  "take_place_time":"Thời gian diễn ra",
+  "total_money":"Tổng tiền",
+  "wait_receipt":"Chờ nhận",
+  "receipted":"Đã nhận",
+  "no_parcel":"Không có bưu phẩm nào",
+  "amount":"Số lượng",
+  "parcel_code":"Mã bưu phẩm",
+  "arrived_date":"Ngày đến",
+  "receipt_date":"Ngày nhận",
+  "parcel_details":"Chi tiết bưu phẩm",
+  "parcel_info":"Thông tin bưu phẩm",
+  "parcel_name":"Tên bưu phẩm"
 }

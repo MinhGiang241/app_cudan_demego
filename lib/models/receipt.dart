@@ -27,6 +27,7 @@ class Receipt {
     this.guest_name,
     this.reason,
     this.vat,
+    this.code,
     this.transactions = const [],
   });
   String? id;
@@ -50,6 +51,7 @@ class Receipt {
   String? address;
   String? guest_name;
   String? full_name;
+  String? code;
   double? vat;
   double? discount_money;
   double? discount_percent;
@@ -62,6 +64,7 @@ class Receipt {
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     date = json['date'];
+    code = json['code'];
     employeeId = json['employeeId'];
     phone = json['phone'];
     apartmentId = json['apartmentId'];
@@ -106,6 +109,7 @@ class Receipt {
     data['date'] = date;
     data['employeeId'] = employeeId;
     data['phone'] = phone;
+    data['code'] = code;
     data['apartmentId'] = apartmentId;
     data['residentId'] = residentId;
     data['payment_status'] = payment_status;
@@ -146,6 +150,7 @@ class TransactionHistory {
   String? id;
   String? createdTime;
   String? updatedTime;
+
   String? receiptsId;
   String? employeeId;
   double? amount_money;
@@ -158,6 +163,7 @@ class TransactionHistory {
     id = json['_id'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
+
     receiptsId = json['receiptsId'];
     employeeId = json['employeeId'];
     amount_money = json['amount_money'] != null

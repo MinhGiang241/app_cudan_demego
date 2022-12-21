@@ -326,9 +326,20 @@
   "total":"Total",
   "payment_method":"Payment method",
   "enter_payment_pass":"Enter payment password",
-  "success_payment":"Make payment successfully",
+  "success_payment":"Make payment successfully for [{billcode}]",
   "long":"Long",
   "width":"Width",
   "height":"Height",
-  "take_place_time":"Take place time"
+  "take_place_time":"Take place time",
+  "total_money":"Total money",
+  "wait_receipt":"Waiting",
+  "receipted":"Receipted",
+  "no_parcel":"Don't have any parcel",
+  "amount":"Amount",
+  "parcel_code":"Parcel code",
+  "arrived_date":"Arrived date",
+  "receipt_date":"Receipted date",
+  "parcel_details":"Parcel details",
+  "parcel_info":"Parcel informations",
+  "parcel_name":"Parcel name"
 }

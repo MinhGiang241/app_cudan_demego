@@ -136,13 +136,35 @@ class PaymentItem extends StatelessWidget {
                 children: [
                   Text(re.reason ?? "", style: txtLinkSmall()),
                   vpad(2),
-                  Text(formatCurrency.format(re.amount_due ?? 0),
-                      // .replaceAll("₫", ""),
-                      style: txtLinkSmall()),
-                  vpad(2),
-                  Text(
-                      '${S.of(context).due_bill}: ${Utils.dateFormat(re.date ?? '', 1)}',
-                      style: txtBodyXSmallRegular()),
+                  Table(
+                    textBaseline: TextBaseline.ideographic,
+                    defaultVerticalAlignment:
+                        TableCellVerticalAlignment.baseline,
+                    columnWidths: const {
+                      0: FlexColumnWidth(2),
+                      1: FlexColumnWidth(3)
+                    },
+                    children: [
+                      TableRow(children: [
+                        Text('${S.of(context).total_money}:'),
+                        Text(formatCurrency.format(re.amount_due ?? 0),
+                            style: txtLinkSmall()),
+                      ]),
+                      TableRow(children: [
+                        Text('${S.of(context).due_bill}:'),
+                        Text(
+                          Utils.dateFormat(re.date ?? '', 1),
+                        ),
+                      ]),
+                    ],
+                  )
+                  // Text(formatCurrency.format(re.amount_due ?? 0),
+                  //     // .replaceAll("₫", ""),
+                  //     style: txtLinkSmall()),
+                  // vpad(2),
+                  // Text(
+                  //     '${S.of(context).due_bill}: ${Utils.dateFormat(re.date ?? '', 1)}',
+                  //     style: txtBodyXSmallRegular()),
                 ],
               ),
             ),

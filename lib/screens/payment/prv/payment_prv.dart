@@ -46,24 +46,24 @@ class PaymentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  onTestSend(BuildContext context) async {
-    Navigator.pop(context);
-    isSendLoading = true;
-    notifyListeners();
-    await Future.delayed(const Duration(seconds: 2), () {
-      isSendLoading = false;
+  // onTestSend(BuildContext context) async {
+  //   Navigator.pop(context);
+  //   isSendLoading = true;
+  //   notifyListeners();
+  //   await Future.delayed(const Duration(seconds: 2), () {
+  //     isSendLoading = false;
 
-      notifyListeners();
-    }).then((v) {
-      Utils.showSuccessMessage(
-          context: ctx,
-          e: S.of(ctx).success_payment,
-          onClose: () {
-            Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
-                arguments: {"index": 1, "year": year, "month": month});
-          });
-    });
-  }
+  //     notifyListeners();
+  //   }).then((v) {
+  //     Utils.showSuccessMessage(
+  //         context: ctx,
+  //         e: S.of(ctx).success_payment('co'),
+  //         onClose: () {
+  //           Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
+  //               arguments: {"index": 1, "year": year, "month": month});
+  //         });
+  //   });
+  // }
 
   onSaveReceits(BuildContext context) {
     Navigator.pop(context);
@@ -103,9 +103,10 @@ class PaymentPrv extends ChangeNotifier {
       notifyListeners();
       Utils.showSuccessMessage(
           context: ctx,
-          e: S.of(ctx).success_payment,
+          e: S.of(ctx).success_payment(dataReceipts[0]['code'] ?? ''),
           onClose: () {
-            Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
+            Navigator.pushNamedAndRemoveUntil(
+                ctx, PaymentListScreen.routeName, (route) => route.isFirst,
                 arguments: {"index": 1, "year": year, "month": month});
           });
     }).catchError((e) {

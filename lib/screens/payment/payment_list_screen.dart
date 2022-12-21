@@ -47,10 +47,10 @@ class _PaymentListScreenState extends State<PaymentListScreen>
       builder: (context, state) {
         return PrimaryScreen(
             appBar: PrimaryAppbar(
-              leading: BackButton(onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, HomeScreen.routeName, (route) => route.isCurrent);
-              }),
+              // leading: BackButton(onPressed: () {
+              //   Navigator.pushNamedAndRemoveUntil(
+              //       context, HomeScreen.routeName, (route) => route.isCurrent);
+              // }),
               title: S.of(context).pay,
               tabController: tabController,
               isTabScrollabel: false,
@@ -70,7 +70,9 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           onChanged: (v) {},
                           onConfirm: (v) {
                             context.read<PaymentListPrv>().onChooseMonthYear(v);
-                            setState(() {});
+                            setState(() {
+                              initIndex = tabController.index;
+                            });
                           },
                           pickerModel: CustomMonthPicker(
                               minTime: DateTime(DateTime.now().year - 10, 1, 1),
@@ -138,7 +140,9 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           list: context.watch<PaymentListPrv>().listUnpay,
                           type: "UNPAID",
                           onRefresh: () {
-                            setState(() {});
+                            setState(() {
+                              initIndex = tabController.index;
+                            });
                           },
                         ),
                         PaymentTab(
@@ -146,7 +150,9 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           type: "PAID",
                           list: context.watch<PaymentListPrv>().listPay,
                           onRefresh: () {
-                            setState(() {});
+                            setState(() {
+                              initIndex = tabController.index;
+                            });
                           },
                         ),
                       ],

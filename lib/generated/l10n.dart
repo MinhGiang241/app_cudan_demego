@@ -3320,13 +3320,13 @@ class S {
     );
   }
 
-  /// `Make payment successfully`
-  String get success_payment {
+  /// `Make payment successfully for [{billcode}]`
+  String success_payment(Object billcode) {
     return Intl.message(
-      'Make payment successfully',
+      'Make payment successfully for [$billcode]',
       name: 'success_payment',
       desc: '',
-      args: [],
+      args: [billcode],
     );
   }
 
@@ -3365,6 +3365,116 @@ class S {
     return Intl.message(
       'Take place time',
       name: 'take_place_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total money`
+  String get total_money {
+    return Intl.message(
+      'Total money',
+      name: 'total_money',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting`
+  String get wait_receipt {
+    return Intl.message(
+      'Waiting',
+      name: 'wait_receipt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receipted`
+  String get receipted {
+    return Intl.message(
+      'Receipted',
+      name: 'receipted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any parcel`
+  String get no_parcel {
+    return Intl.message(
+      'Don\'t have any parcel',
+      name: 'no_parcel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get amount {
+    return Intl.message(
+      'Amount',
+      name: 'amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcel code`
+  String get parcel_code {
+    return Intl.message(
+      'Parcel code',
+      name: 'parcel_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrived date`
+  String get arrived_date {
+    return Intl.message(
+      'Arrived date',
+      name: 'arrived_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receipted date`
+  String get receipt_date {
+    return Intl.message(
+      'Receipted date',
+      name: 'receipt_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcel details`
+  String get parcel_details {
+    return Intl.message(
+      'Parcel details',
+      name: 'parcel_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcel informations`
+  String get parcel_info {
+    return Intl.message(
+      'Parcel informations',
+      name: 'parcel_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcel name`
+  String get parcel_name {
+    return Intl.message(
+      'Parcel name',
+      name: 'parcel_name',
       desc: '',
       args: [],
     );

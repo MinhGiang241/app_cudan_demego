@@ -59,10 +59,11 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               vpad(12),
               Text('${S.of(context).happening_location}:  ${event.location}',
                   style: txtRegular(14, grayScaleColorBase)),
-              vpad(12),
-              Text(
-                  '${S.of(context).end_time_reg}:  ${Utils.dateFormat(event.due_regist ?? '', 1)}',
-                  style: txtRegular(14, grayScaleColorBase)),
+              if (event.due_regist != null) vpad(12),
+              if (event.due_regist != null)
+                Text(
+                    '${S.of(context).end_time_reg}:  ${Utils.dateFormat(event.due_regist ?? '', 1)}',
+                    style: txtRegular(14, grayScaleColorBase)),
               if (event.file_upload != null && event.file_upload!.isNotEmpty)
                 vpad(12),
               if (event.file_upload != null && event.file_upload!.isNotEmpty)

@@ -61,10 +61,40 @@ class _PaymentTabState extends State<PaymentTab> {
               widget.refreshController.loadComplete();
             },
             child: widget.list.isEmpty
-                ? PrimaryEmptyWidget(
-                    emptyText: S.of(context).no_bill,
-                    icons: PrimaryIcons.credit,
-                    action: () {},
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      vpad(24),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, bottom: 12, right: 12),
+                        child: Text(
+                          "${S.of(context).bills}:",
+                          style: const TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontFamily: family,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: grayScaleColorBase),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 12, bottom: 12, right: 12),
+                        child: Text(
+                          "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
+                          style: txtBold(14, grayScaleColorBase),
+                        ),
+                      ),
+                      Expanded(
+                        child: PrimaryEmptyWidget(
+                          emptyText: S.of(context).no_bill,
+                          icons: PrimaryIcons.credit,
+                          action: () {},
+                        ),
+                      ),
+                      vpad(50)
+                    ],
                   )
                 : ListView(
                     children: [

@@ -211,8 +211,10 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
                       : S.of(context).success_cr_new,
               onClose: () {
                 // var count = 0;
-                Navigator.pushReplacementNamed(
-                    context, TransportationCardListScreen.routeName,
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    TransportationCardListScreen.routeName,
+                    (route) => route.isFirst,
                     arguments: 1);
               });
 
