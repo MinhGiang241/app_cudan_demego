@@ -31,10 +31,9 @@ class HomePrv extends ChangeNotifier {
   List<New> newResidentList = [];
   List<New> newProjectList = [];
 
-  // HomePrv(ctx) {
-  //   context = ctx;
-  //   _initial();
-  // }
+  HomePrv() {
+    _initial();
+  }
   onParticipate() {
     if (event != null) {
       event!.isParticipation = true;
