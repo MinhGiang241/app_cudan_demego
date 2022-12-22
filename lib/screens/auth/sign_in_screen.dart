@@ -50,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     if (arg != null && arg['c'] != null && arg['p'] != null) {
       Provider.of<SingInPrv>(context).initAccountSave().then((e) {
-        return PrfData.shared.deleteSignInStore();
+        // return PrfData.shared.deleteSignInStore();
       });
     }
     return PrimaryScreen(
@@ -178,15 +178,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   vpad(32),
                   PrimaryButton(
-                      onTap: context.watch<SingInPrv>().isLoading
-                          ? null
-                          : () async {
-                              FocusScope.of(context).unfocus();
-                              await context.read<SingInPrv>().signIn(context);
+                      onTap: () async {
+                        FocusScope.of(context).unfocus();
+                        return await context.read<SingInPrv>().signIn(context);
 
-                              // Navigator.pushNamed(
-                              //     context, ApartmentSeletionScreen.routeName);
-                            },
+                        // Navigator.pushNamed(
+                        //     context, ApartmentSeletionScreen.routeName);
+                      },
                       text: S.of(context).sign_in,
                       isLoading: context.watch<SingInPrv>().isLoading,
                       width: double.infinity)

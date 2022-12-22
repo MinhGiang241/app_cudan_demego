@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/services/missing_object/pick_item_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/prv/missing_object_prv.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
 import '../service_screen.dart';
+import 'reg_lost_item_screen.dart';
 import 'tab/missing_object_tab.dart';
 
 class MissingObectScreen extends StatefulWidget {
@@ -91,16 +93,17 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                 //     ? S.of(context).reg_missing_obj
                 //     : S.of(context).found_object,
                 onPressed: () {
-                  // Navigator.pushNamed(
-                  //     context, ExtraServiceRegistrationScreen.routeName,
-                  //     arguments: {
-                  //       "service": service,
-                  //       "isEdit": false,
-                  //       "name": service.name != null
-                  //           ? service.name!.toLowerCase()
-                  //           : '',
-                  //       "serviceId": service.id
-                  //     });
+                  if (tabController.index == 0) {
+                    Navigator.pushNamed(
+                      context,
+                      RegisterLostItemScreen.routeName,
+                    );
+                  } else {
+                    Navigator.pushNamed(
+                      context,
+                      PickItemScreen.routeName,
+                    );
+                  }
                 },
                 backgroundColor: primaryColorBase,
                 child: const Icon(

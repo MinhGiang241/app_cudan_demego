@@ -86,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
+        "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
+            "Certification of rabies vaccination"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
         "choose_a_project":
@@ -95,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "code_verify":
             MessageLookupByLibrary.simpleMessage("Verify security code"),
+        "color": MessageLookupByLibrary.simpleMessage("Color"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Comming soon"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -217,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
+        "i_agree": MessageLookupByLibrary.simpleMessage("I agree with"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
             "Identity card back side image can not be empty"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -248,6 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Maximum payment date can not be empty"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Missing object"),
         "missing_object":
             MessageLookupByLibrary.simpleMessage("Missing object"),
@@ -278,6 +283,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_news": MessageLookupByLibrary.simpleMessage("Don\'t have any news"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Don\'t have any parcel"),
+        "no_pet": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any pet registration"),
+        "no_pick_obj": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any picked object"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any service registration"),
         "no_trans_card":
@@ -314,6 +323,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "object_info":
             MessageLookupByLibrary.simpleMessage("Object information"),
         "object_name": MessageLookupByLibrary.simpleMessage("Object name"),
+        "of_building_management":
+            MessageLookupByLibrary.simpleMessage("of building management"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
@@ -358,6 +369,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
+        "pet_name": MessageLookupByLibrary.simpleMessage("Pet name"),
+        "pet_origin": MessageLookupByLibrary.simpleMessage("Pet origin"),
+        "pet_type": MessageLookupByLibrary.simpleMessage("Pet type"),
         "phone_email": MessageLookupByLibrary.simpleMessage("Phone/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
         "photo_back_side":
@@ -386,6 +400,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_missing_obj": MessageLookupByLibrary.simpleMessage(
             "Register find missing object"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
+        "reg_pet": MessageLookupByLibrary.simpleMessage("Pet registration"),
+        "reg_pet_info":
+            MessageLookupByLibrary.simpleMessage("registration pet infomation"),
+        "reg_pet_list":
+            MessageLookupByLibrary.simpleMessage("Pet registration list"),
         "reg_service":
             MessageLookupByLibrary.simpleMessage("Registration service"),
         "reg_service_a": m8,
@@ -397,6 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
+        "regulations": MessageLookupByLibrary.simpleMessage("regulations"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
         "related_doc_photo":
@@ -468,6 +488,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "sex": MessageLookupByLibrary.simpleMessage("Sex"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Shopping online"),
         "shopping_represent":

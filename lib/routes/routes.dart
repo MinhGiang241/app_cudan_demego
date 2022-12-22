@@ -29,12 +29,16 @@ import '../screens/services/extra_service/extra_service_details.dart';
 import '../screens/services/extra_service/extra_service_registration_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
+import '../screens/services/missing_object/lost_item_details_screen.dart';
 import '../screens/services/missing_object/missing_object_screen.dart';
+import '../screens/services/missing_object/pick_item_screen.dart';
+import '../screens/services/missing_object/reg_lost_item_screen.dart';
 import '../screens/services/parcel/parcel_detail_screen.dart';
 import '../screens/services/parcel/parcel_list_screen.dart';
 import '../screens/services/parking_card/register_parking_card.dart';
 import '../screens/services/parking_card/transport_card_list_screen.dart';
 import '../screens/services/parking_card/transportation_details_screen.dart';
+import '../screens/services/pet/pet_list_screen.dart';
 import '../screens/services/resident_card/register_resident_card.dart';
 import '../screens/services/resident_card/resident_card_details.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
@@ -226,6 +230,26 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const MissingObectScreen(),
+        );
+      case LostItemDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const LostItemDetailsScreen(),
+        );
+      case RegisterLostItemScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const RegisterLostItemScreen(),
+        );
+      case PickItemScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const PickItemScreen(),
+        );
+      case PetListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const PetListScreen(),
         );
       default:
         return MaterialPageRoute(

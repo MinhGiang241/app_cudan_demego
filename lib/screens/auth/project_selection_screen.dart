@@ -21,8 +21,6 @@ class ProjectSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var projects = [
       {"title": "Dự án 1", "desc": "Thông tin dự án "},
-      {"title": "Dự án 2", "desc": "Thông tin dự án "},
-      {"title": "Dự án 3", "desc": "Thông tin dự án "},
     ];
     return PrimaryScreen(
         appBar: AppBar(

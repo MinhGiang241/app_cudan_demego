@@ -67,7 +67,6 @@ class AuthPrv extends ChangeNotifier {
         // selectedApartment = PrfData.shared.getFLoorPlan();
 
         // await getUserInfo();
-
       } else {
         authStatus = AuthStatus.unauthen;
       }
@@ -117,7 +116,7 @@ class AuthPrv extends ChangeNotifier {
                     ? context.read<ResidentInfoPrv>().userInfo!.id
                     : null;
             await APITower.getUserOwnInfo(
-                    context.read<ResidentInfoPrv>().userInfo!.id as String)
+                    context.read<ResidentInfoPrv>().residentId ?? "")
                 .then((v) async {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
@@ -142,7 +141,6 @@ class AuthPrv extends ChangeNotifier {
                   (route) => route.isCurrent,
                 );
               } else if (aprt != null) {
-                print(aprt);
                 context.read<ResidentInfoPrv>().selectApartmentFromHive(aprt);
                 notifyListeners();
                 Navigator.of(context).pushNamedAndRemoveUntil(
@@ -165,19 +163,14 @@ class AuthPrv extends ChangeNotifier {
               notifyListeners();
             });
           } else {
-            context.read<ResidentInfoPrv>().userInfo = null;
-            context.read<ResidentInfoPrv>().residentId = null;
-            context.read<ResidentInfoPrv>().listOwn.clear();
-            context.read<ResidentInfoPrv>().selectedApartment = null;
-            Navigator.of(context).pushNamed(
+            // context.read<ResidentInfoPrv>().clearData();
+            return Navigator.of(context).pushNamedAndRemoveUntil(
               HomeScreen.routeName,
-              // arguments: {
-              //   "listOwn": [],
-              // },
+              (route) => route.isCurrent,
             );
           }
         }).catchError((e) {
-          Utils.showErrorMessage(context, e);
+          return Utils.showErrorMessage(context, e);
         });
 
         // Navigator.of(context).pushNamed(ApartmentSeletionScreen.routeName,arguments: {
@@ -200,6 +193,7 @@ class AuthPrv extends ChangeNotifier {
         // });
 
         // await getUserInfo();
+        return;
       } else {
         // throw(S.of(context).emai)
         // onError.call('');
@@ -249,6 +243,7 @@ class AuthPrv extends ChangeNotifier {
       onError.call(e);
       isLoading = false;
       notifyListeners();
+      return;
     });
   }
 

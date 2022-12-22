@@ -91,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
+        "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
+            "Giấy chứng nhận tiêm phòng dại"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
@@ -98,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
+        "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Sắp diễn ra"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
@@ -220,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "hour": MessageLookupByLibrary.simpleMessage("Giờ"),
         "housework": MessageLookupByLibrary.simpleMessage("Giúp việc"),
+        "i_agree": MessageLookupByLibrary.simpleMessage("Tôi đồng ý tuân thủ"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh CMND/CCCD/Hộ chiếu mặt sau không được để trống"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -251,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Số ngày đăng ký tối đa không được để trống"),
         "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
+        "minutes": MessageLookupByLibrary.simpleMessage("Biên bản"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Đồ thất lạc"),
         "missing_object": MessageLookupByLibrary.simpleMessage("Đồ thất lạc"),
         "missing_report": MessageLookupByLibrary.simpleMessage("Báo mất"),
@@ -280,6 +285,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_news": MessageLookupByLibrary.simpleMessage("Không có tin tức nào"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Không có bưu phẩm nào"),
+        "no_pet": MessageLookupByLibrary.simpleMessage(
+            "Không có đăng ký vật nuôi nào"),
+        "no_pick_obj": MessageLookupByLibrary.simpleMessage(
+            "Không có vật phẩm nhặt được nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký dịch vụ vào"),
         "no_trans_card":
@@ -318,6 +327,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "object_info":
             MessageLookupByLibrary.simpleMessage("Thông tin vật phẩm"),
         "object_name": MessageLookupByLibrary.simpleMessage("Tên vật phẩm"),
+        "of_building_management":
+            MessageLookupByLibrary.simpleMessage("của ban quản lý tòa nhà"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Tiền khác"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_invalid":
@@ -362,6 +373,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
+        "pet_name": MessageLookupByLibrary.simpleMessage("Tên vật nuôi"),
+        "pet_origin": MessageLookupByLibrary.simpleMessage("Giống loài"),
+        "pet_type": MessageLookupByLibrary.simpleMessage("Loại vật nuôi"),
         "phone_email":
             MessageLookupByLibrary.simpleMessage("Số điện thoại/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
@@ -388,6 +402,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_missing_obj":
             MessageLookupByLibrary.simpleMessage("Đăng ký tìm đồ thất lạc"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký"),
+        "reg_pet": MessageLookupByLibrary.simpleMessage("Đăng ký vật nuôi"),
+        "reg_pet_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin đăng ký vật nuôi"),
+        "reg_pet_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách đăng ký vật nuôi"),
         "reg_service": MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ"),
         "reg_service_a": m8,
         "reg_time": MessageLookupByLibrary.simpleMessage("Thời gian đăng ký"),
@@ -398,6 +417,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
+        "regulations": MessageLookupByLibrary.simpleMessage("quy định"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "related_doc_photo":
@@ -469,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "service_name": m10,
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "sex": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Mua sắm online"),
         "shopping_represent": MessageLookupByLibrary.simpleMessage("Đi chợ hộ"),

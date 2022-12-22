@@ -39,14 +39,13 @@ class HeaderHome extends StatefulWidget {
 class _HeaderHomeState extends State<HeaderHome> {
   @override
   Widget build(BuildContext context) {
-    var userInfo = context.watch<ResidentInfoPrv>().userInfo;
-    var se = context.watch<ResidentInfoPrv>().selectedApartment;
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
     var selectedApartment =
-        context.watch<ResidentInfoPrv>().selectedApartment?.apartment;
+        context.read<ResidentInfoPrv>().selectedApartment?.apartment;
     var selectedBulding =
-        context.watch<ResidentInfoPrv>().selectedApartment?.building;
+        context.read<ResidentInfoPrv>().selectedApartment?.building;
     var selectedFloor =
-        context.watch<ResidentInfoPrv>().selectedApartment?.floor;
+        context.read<ResidentInfoPrv>().selectedApartment?.floor;
     var listOwn = context.read<ResidentInfoPrv>().listOwn;
 
     selectApartment(MapEntry<int, ResponseResidentOwn> select) {
@@ -71,16 +70,19 @@ class _HeaderHomeState extends State<HeaderHome> {
                 hpad(12),
                 Text('${S.of(context).hello}, ',
                     style: txtBodySmallRegular(color: grayScaleColor2)),
-                Text(
-                  userInfo?.info_name ?? '',
-                  style: txtLinkMedium(),
-                )
+                if (userInfo != null)
+                  Text(
+                    userInfo.info_name ?? '',
+                    style: txtLinkMedium(),
+                  )
               ],
             ),
           ],
         ),
         vpad(30),
-        if (Provider.of<ResidentInfoPrv>(context).listOwn.isNotEmpty)
+        if (Provider.of<ResidentInfoPrv>(context, listen: false)
+            .listOwn
+            .isNotEmpty)
           RepaintBoundary(
             child: Row(children: [
               PrimaryCard(

@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'status.dart';
+
 class MissingObject {
   MissingObject({
     this.apartment,
@@ -7,7 +9,8 @@ class MissingObject {
     this.createdTime,
     this.customer,
     this.describe,
-    this.findTime,
+    this.find_time,
+    this.find_place,
     this.id,
     this.image,
     this.phone_number,
@@ -27,8 +30,10 @@ class MissingObject {
   String? time;
   String? describe;
   String? name;
-  String? findTime;
+  String? find_time;
+  String? find_place;
   List<MissingImage>? image;
+  Status? s;
   MissingObject.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -40,8 +45,10 @@ class MissingObject {
     status = json['status'];
     time = json['time'];
     describe = json['describe'];
-    findTime = json['findTime'];
+    find_time = json['find_time'];
+    find_place = json['find_place'];
     name = json['name'];
+    s = json['s'] != null ? Status.fromJson(json['s']) : null;
     image = json['image'] != null
         ? json['image'].isNotEmpty
             ? json['image']
@@ -62,12 +69,13 @@ class MissingObject {
     data['status'] = status;
     data['time'] = time;
     data['describe'] = describe;
-    data['findTime'] = findTime;
+    data['find_time'] = find_time;
+    data['find_place'] = find_place;
     data['describe'] = describe;
     data['name'] = name;
     data['image'] = image != null
         ? image!.map((e) {
-            e.toJson();
+            return e.toJson();
           }).toList()
         : [];
     return data;

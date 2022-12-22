@@ -41,10 +41,12 @@ class SingInPrv extends ChangeNotifier {
           .then((value) {
         isLoading = false;
         notifyListeners();
+        return;
       }).catchError((e) {
         isLoading = false;
         notifyListeners();
         Utils.showErrorMessage(context, e);
+        return;
       });
     } else {
       context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
@@ -60,6 +62,7 @@ class SingInPrv extends ChangeNotifier {
         passValidate = null;
       }
       notifyListeners();
+      return;
     }
   }
 }

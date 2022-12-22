@@ -358,6 +358,21 @@
   "found":"Đã tìm thấy",
   "returned":"Đã trả",
   "send_letter":"Gửi phiếu",
-  "wait_return":"Chờ trả"
+  "wait_return":"Chờ trả",
+  "no_pick_obj":"Không có vật phẩm nhặt được nào",
+  "reg_pet_list":"Danh sách đăng ký vật nuôi",
+  "pet_name":"Tên vật nuôi",
+  "pet_type":"Loại vật nuôi",
+  "color":"Màu sắc",
+  "no_pet":"Không có đăng ký vật nuôi nào", 
+  "pet_origin":"Giống loài", 
+  "sex":"Giới tính", 
+  "cer_vacxin_doc":"Giấy chứng nhận tiêm phòng dại",
+  "minutes":"Biên bản",
+  "i_agree":"Tôi đồng ý tuân thủ", 
+  "regulations":"quy định",
+  "of_building_management":"của ban quản lý tòa nhà",
+  "reg_pet_info":"Thông tin đăng ký vật nuôi",
+  "reg_pet":"Đăng ký vật nuôi"
 }
    

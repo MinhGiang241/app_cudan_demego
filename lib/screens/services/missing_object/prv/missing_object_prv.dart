@@ -24,11 +24,7 @@ class MissingObjectPrv extends ChangeNotifier {
       historyList.clear();
       foundList.clear();
       for (var i in v) {
-        if (i['status'] == "FOUND") {
-          foundList.add(MissingObject.fromJson(i));
-        } else {
-          historyList.add(MissingObject.fromJson(i));
-        }
+        historyList.add(MissingObject.fromJson(i));
       }
       notifyListeners();
     }).catchError((e) {

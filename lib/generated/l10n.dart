@@ -3639,6 +3639,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Don't have any picked object`
+  String get no_pick_obj {
+    return Intl.message(
+      'Don\'t have any picked object',
+      name: 'no_pick_obj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet registration list`
+  String get reg_pet_list {
+    return Intl.message(
+      'Pet registration list',
+      name: 'reg_pet_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet name`
+  String get pet_name {
+    return Intl.message(
+      'Pet name',
+      name: 'pet_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet type`
+  String get pet_type {
+    return Intl.message(
+      'Pet type',
+      name: 'pet_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color`
+  String get color {
+    return Intl.message(
+      'Color',
+      name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any pet registration`
+  String get no_pet {
+    return Intl.message(
+      'Don\'t have any pet registration',
+      name: 'no_pet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet origin`
+  String get pet_origin {
+    return Intl.message(
+      'Pet origin',
+      name: 'pet_origin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sex`
+  String get sex {
+    return Intl.message(
+      'Sex',
+      name: 'sex',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certification of rabies vaccination`
+  String get cer_vacxin_doc {
+    return Intl.message(
+      'Certification of rabies vaccination',
+      name: 'cer_vacxin_doc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message(
+      'Minutes',
+      name: 'minutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I agree with`
+  String get i_agree {
+    return Intl.message(
+      'I agree with',
+      name: 'i_agree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `regulations`
+  String get regulations {
+    return Intl.message(
+      'regulations',
+      name: 'regulations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `of building management`
+  String get of_building_management {
+    return Intl.message(
+      'of building management',
+      name: 'of_building_management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `registration pet infomation`
+  String get reg_pet_info {
+    return Intl.message(
+      'registration pet infomation',
+      name: 'reg_pet_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet registration`
+  String get reg_pet {
+    return Intl.message(
+      'Pet registration',
+      name: 'reg_pet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

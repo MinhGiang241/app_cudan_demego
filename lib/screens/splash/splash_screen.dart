@@ -24,30 +24,28 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     // Provider.of<SingInPrv>(context).initAccountSave();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      var acc = await PrfData.shared.getSignInStore();
-      var isBack = false;
-      var arg = ModalRoute.of(context)!.settings.arguments as bool?;
-      if (arg != null) {
-        isBack = arg;
-      }
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //   var acc = await PrfData.shared.getSignInStore();
+    //   var isBack = false;
+    //   var arg = ModalRoute.of(context)!.settings.arguments as bool?;
+    //   if (arg != null) {
+    //     isBack = arg;
+    //   }
 
-      if (acc['acc'] != null && acc['pass'] != null && !isBack) {
-        print(acc);
-        await Provider.of<AuthPrv>(context, listen: false)
-            .onSignIn(context, acc['acc'], acc['pass']);
-      }
-    });
+    //   if (acc['acc'] != null && acc['pass'] != null && !isBack) {
+    //     Provider.of<AuthPrv>(context, listen: false)
+    //         .onSignIn(context, acc['acc'], acc['pass']);
+    //   }
+    // });
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var status = context.watch<AuthPrv>().authStatus;
-    print(status);
+    // var status = context.watch<AuthPrv>().authStatus;
+    // print(status);
     // if (status == AuthStatus.auth) {
     //   return const HomeScreen();
     // }

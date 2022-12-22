@@ -357,5 +357,20 @@
   "found":"Found",
   "returned":"Returned",
   "send_letter":"Send letter",
-  "wait_return":"Wait return"
+  "wait_return":"Wait return",
+  "no_pick_obj":"Don't have any picked object",
+  "reg_pet_list":"Pet registration list",
+  "pet_name":"Pet name",
+  "pet_type":"Pet type",
+  "color":"Color",
+  "no_pet":"Don't have any pet registration", 
+  "pet_origin":"Pet origin", 
+  "sex":"Sex", 
+  "cer_vacxin_doc":"Certification of rabies vaccination",
+  "minutes":"Minutes",
+  "i_agree":"I agree with", 
+  "regulations":"regulations",
+  "of_building_management":"of building management",
+  "reg_pet_info":"registration pet infomation",
+  "reg_pet":"Pet registration"
 }

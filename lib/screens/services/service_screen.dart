@@ -2,6 +2,7 @@ import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
+import 'package:app_cudan/screens/services/pet/pet_list_screen.dart';
 
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_image_netword.dart';
@@ -48,7 +49,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientGreen,
         "icon": PrimaryIcons.bone,
         "title": S.current.pet,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": PetListScreen.routeName,
       },
       {
         "color": pinkColorBase,

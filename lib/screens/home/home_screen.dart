@@ -67,16 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // });
 
     return ChangeNotifierProvider<HomePrv>(
-      create: (context) => HomePrv(context),
+      create: (context) => HomePrv(),
       builder: (context, snapshot) {
-        var auth = context.watch<AuthPrv>().authStatus;
-        var res = context.watch<ResidentInfoPrv>().residentId;
-        var l = context.watch<ResidentInfoPrv>().listOwn;
-        var select = context.watch<ResidentInfoPrv>().selectedApartment;
-        print(auth);
-        print(res);
-        print(select);
-        print(l);
         final isLoading = context.watch<HomePrv>().isLoading;
         return Stack(alignment: Alignment.center, children: [
           Scaffold(
@@ -113,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _navigationTab(BuildContext context) {
-    final isLoading = context.watch<HomePrv>().isLoading;
     switch (_selectedIndex) {
       case 0:
         return RepaintBoundary(
