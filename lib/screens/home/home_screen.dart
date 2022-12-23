@@ -67,37 +67,39 @@ class _HomeScreenState extends State<HomeScreen> {
     // });
 
     return ChangeNotifierProvider<HomePrv>(
-      create: (context) => HomePrv(),
+      create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
-        return Stack(alignment: Alignment.center, children: [
-          Scaffold(
-            body: _navigationTab(context),
-            bottomNavigationBar: _bottomNavigationBar,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: Colors.white,
-              child: Icon(Icons.phone_sharp,
-                  size: 40,
-                  color: primaryColorBase,
-                  shadows: [
-                    Shadow(
-                        offset: const Offset(-2, 2),
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 10.0),
-                  ]),
-            ),
-          ),
-          if (isLoading)
-            const Center(
-              child: PrimaryCard(
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: PrimaryLoading(),
-                ),
+        return FutureBuilder(builder: (context, snap) {
+          return Stack(alignment: Alignment.center, children: [
+            Scaffold(
+              body: _navigationTab(context),
+              bottomNavigationBar: _bottomNavigationBar,
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: Colors.white,
+                child: Icon(Icons.phone_sharp,
+                    size: 40,
+                    color: primaryColorBase,
+                    shadows: [
+                      Shadow(
+                          offset: const Offset(-2, 2),
+                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 10.0),
+                    ]),
               ),
-            )
-        ]);
+            ),
+            if (isLoading)
+              const Center(
+                child: PrimaryCard(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: PrimaryLoading(),
+                  ),
+                ),
+              )
+          ]);
+        });
 
         // _navigationTab(context);
       },
@@ -129,7 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 vpad(30),
                 const EventsHome(),
                 vpad(24),
-                const NewsHome(),
+                if (context.read<ResidentInfoPrv>().residentId != null)
+                  const NewsHome(),
                 vpad(kBottomNavigationBarHeight + 50)
               ],
             ),

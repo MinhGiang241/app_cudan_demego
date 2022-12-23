@@ -15,7 +15,9 @@ class SingInPrv extends ChangeNotifier {
   String? passValidate;
 
   final AuthPrv authPrv;
-  SingInPrv({required this.authPrv});
+  SingInPrv({required this.authPrv}) {
+    initAccountSave();
+  }
 
   bool isLoading = false;
 

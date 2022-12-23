@@ -62,13 +62,7 @@ class EventsHome extends StatelessWidget {
                                           style: txtLinkMedium()),
                                       vpad(4),
                                       Text(
-                                          Utils.dateFormat(
-                                              context
-                                                      .watch<HomePrv>()
-                                                      .event!
-                                                      .start_time ??
-                                                  "",
-                                              1),
+                                          '${S.of(context).take_place_time}: ${Utils.dateFormat(context.watch<HomePrv>().event!.start_time ?? "", 1)}',
                                           style: txtBodyXSmallRegular(
                                               color: grayScaleColor2)),
                                     ],

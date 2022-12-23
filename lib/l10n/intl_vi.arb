@@ -373,6 +373,14 @@
   "regulations":"quy định",
   "of_building_management":"của ban quản lý tòa nhà",
   "reg_pet_info":"Thông tin đăng ký vật nuôi",
-  "reg_pet":"Đăng ký vật nuôi"
+  "reg_pet":"Đăng ký vật nuôi",
+  "pet_female":"Cái",
+  "pet_male":"Đực",
+  "other":"Khác",
+  "dog":"Chó",
+  "cat":"Mèo",
+  "edit_reg_pet":"Chỉnh sửa đăng ký vật nuôi",
+  "pet_info":"Thông tin vật nuôi",
+  "upload":"Tải lên"
 }
    

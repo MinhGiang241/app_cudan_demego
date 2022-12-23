@@ -3789,6 +3789,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Female`
+  String get pet_female {
+    return Intl.message(
+      'Female',
+      name: 'pet_female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get pet_male {
+    return Intl.message(
+      'Male',
+      name: 'pet_male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message(
+      'Other',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dog`
+  String get dog {
+    return Intl.message(
+      'Dog',
+      name: 'dog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cat`
+  String get cat {
+    return Intl.message(
+      'Cat',
+      name: 'cat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit registration pet`
+  String get edit_reg_pet {
+    return Intl.message(
+      'Edit registration pet',
+      name: 'edit_reg_pet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet information`
+  String get pet_info {
+    return Intl.message(
+      'Pet information',
+      name: 'pet_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

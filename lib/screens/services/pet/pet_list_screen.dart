@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/services/pet/pet_details_screen.dart';
 import 'package:app_cudan/screens/services/pet/prv/pet_list_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
@@ -9,11 +10,16 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/info_content_view.dart';
+import '../../../models/pet.dart';
+import '../../../widgets/primary_button.dart';
+import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_empty_widget.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
 import '../service_screen.dart';
+import 'register_pet_screen.dart';
 
 class PetListScreen extends StatefulWidget {
   const PetListScreen({super.key});
@@ -43,8 +49,8 @@ class _PetListScreenState extends State<PetListScreen> {
           floatingActionButton: FloatingActionButton(
             tooltip: S.of(context).reg_pet,
             onPressed: () {
-              // Navigator.pushNamed(context, RegisterDelivery.routeName,
-              //     arguments: {"isEdit": false});
+              Navigator.pushNamed(context, RegisterPetScreen.routeName,
+                  arguments: {"isEdit": false});
             },
             backgroundColor: primaryColorBase,
             child: const Icon(
@@ -53,8 +59,35 @@ class _PetListScreenState extends State<PetListScreen> {
             ),
           ),
           body: FutureBuilder(
-            future: () async {}(),
+            future: context.read<PetListPrv>().getPetList(context),
             builder: (context, snapshot) {
+              List<Pet> newLetter = [];
+              List<Pet> approvedLetter = [];
+              List<Pet> waitLetter = [];
+              List<Pet> cancelLetter = [];
+              for (var i in context.read<PetListPrv>().listPet) {
+                if (i.pet_status == "NEW") {
+                  newLetter.add(i);
+                } else if (i.pet_status == "APPROVED") {
+                  approvedLetter.add(i);
+                } else if (i.pet_status == "WAIT") {
+                  waitLetter.add(i);
+                } else if (i.pet_status == "CANCEL") {
+                  cancelLetter.add(i);
+                }
+              }
+
+              newLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              approvedLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              waitLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              cancelLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+              List<Pet> list =
+                  newLetter + waitLetter + approvedLetter + cancelLetter;
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: PrimaryLoading());
               } else if (snapshot.connectionState == ConnectionState.none) {
@@ -64,8 +97,8 @@ class _PetListScreenState extends State<PetListScreen> {
                     onRetry: () async {
                       setState(() {});
                     });
-              } else if ([].isEmpty) {
-                SmartRefresher(
+              } else if (list.isEmpty) {
+                return SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: false,
                   header: WaterDropMaterialHeader(
@@ -76,15 +109,13 @@ class _PetListScreenState extends State<PetListScreen> {
                     _refreshController.refreshCompleted();
                   },
                   child: PrimaryEmptyWidget(
-                    emptyText: S.of(context).no_delivery,
-                    // buttonText: S.of(context).add_trans_card,
+                    emptyText: S.of(context).no_pet,
                     icons: PrimaryIcons.bone,
-                    action: () {
-                      // Utils.pushScreen(context, const RegisterParkingCard());
-                    },
+                    action: () {},
                   ),
                 );
               }
+
               return SafeArea(
                 child: SmartRefresher(
                   enablePullDown: true,
@@ -96,6 +127,166 @@ class _PetListScreenState extends State<PetListScreen> {
                     setState(() {});
                     _refreshController.refreshCompleted();
                   },
+                  child: ListView(
+                    children: [
+                      vpad(24),
+                      ...list.map(
+                        (e) {
+                          var listContent = [
+                            InfoContentView(
+                              title: "${S.of(context).reg_code}:",
+                              content: e.code,
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: "${S.of(context).pet_name}:",
+                              content: e.pet_name,
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: "${S.of(context).pet_type}:",
+                              content: genType(e.pet_type ?? ""),
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: "${S.of(context).color}:",
+                              content: e.color,
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: "${S.of(context).status}:",
+                              content: genStatus(e.pet_status ?? ""),
+                              contentStyle: txtBold(
+                                  14, genStatusColor(e.pet_status ?? "")),
+                            ),
+                          ];
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                              bottom: 16,
+                            ),
+                            child: PrimaryCard(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  PetDetailsScreen.routeName,
+                                  arguments: e,
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  vpad(12),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Table(
+                                      textBaseline: TextBaseline.ideographic,
+                                      defaultVerticalAlignment:
+                                          TableCellVerticalAlignment.baseline,
+                                      columnWidths: const {
+                                        0: FlexColumnWidth(2),
+                                        1: FlexColumnWidth(3)
+                                      },
+                                      children: [
+                                        ...listContent.map<TableRow>((i) {
+                                          return TableRow(children: [
+                                            TableCell(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 16),
+                                                child: Text(
+                                                  i.title,
+                                                  style: txtMedium(
+                                                      12, grayScaleColor2),
+                                                ),
+                                              ),
+                                            ),
+                                            TableCell(
+                                              child: Text(i.content ?? "",
+                                                  style: i.contentStyle),
+                                            )
+                                          ]);
+                                        })
+                                      ],
+                                    ),
+                                  ),
+                                  if (e.pet_status == "WAIT")
+                                    Row(
+                                      children: [
+                                        hpad(16),
+                                        PrimaryButton(
+                                          onTap: () {
+                                            // context
+                                            //     .read<PetListPrv>()
+                                            //     .cancelRequetsAprrove(
+                                            //         context, e);
+                                          },
+                                          text: S.of(context).cancel_register,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor: redColor5,
+                                          textColor: redColorBase,
+                                        )
+                                      ],
+                                    ),
+                                  if (e.pet_status == "NEW")
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        PrimaryButton(
+                                          onTap: () {
+                                            // context
+                                            //     .read<DeliveryListPrv>()
+                                            //     .sendToApprove(context, e);
+                                          },
+                                          text: S.of(context).send_request,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor: greenColor7,
+                                          textColor: greenColor8,
+                                        ),
+                                        PrimaryButton(
+                                          onTap: () {
+                                            // Navigator.pushNamed(context,
+                                            //     RegisterDelivery.routeName,
+                                            //     arguments: {
+                                            //       "isEdit": true,
+                                            //       "data": e,
+                                            //     });
+                                          },
+                                          text: S.of(context).edit,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor:
+                                              primaryColor5,
+                                          textColor: primaryColorBase,
+                                        ),
+                                        PrimaryButton(
+                                          onTap: () {
+                                            // context
+                                            //     .read<DeliveryListPrv>()
+                                            //     .deleteLetter(context, e);
+                                          },
+                                          text: S.of(context).delete_letter,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor: redColor5,
+                                          textColor: redColorBase,
+                                        ),
+                                      ],
+                                    ),
+                                  vpad(16),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      vpad(60),
+                    ],
+                  ),
                 ),
               );
             },

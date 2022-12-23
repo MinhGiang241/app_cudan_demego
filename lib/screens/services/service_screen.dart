@@ -294,6 +294,7 @@ class ServiceScreen extends StatelessWidget {
                                                               gradientBlue),
                                                       child:
                                                           PrimaryImageNetwork(
+                                                        canShowPhotoView: false,
                                                         fit: BoxFit.contain,
                                                         path:
                                                             "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}",

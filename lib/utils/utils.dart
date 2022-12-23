@@ -234,6 +234,17 @@ class Utils {
   //           dialog);
   // }
 
+  static Future<List<XFile?>?> selectFile(BuildContext context, bool isMulti,
+      {bool isFile = false}) async {
+    final bool p = await requestPermistion(context, [Permission.storage]);
+    if (p) {
+      List<XFile?>? value = await _filePicker(false);
+      return value;
+    } else {
+      return null;
+    }
+  }
+
   static Future<List<XFile>?> selectImage(BuildContext context, bool isMulti,
       {bool isFile = false}) async {
     final bool p = await requestPermistion(
@@ -277,7 +288,7 @@ class Utils {
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.folder_open, color: grayScaleColor2),
                   onTap: () async {
-                    await _filePicker().then((value) {
+                    await _filePicker(false).then((value) {
                       if (value != null) {
                         pop(context, value);
                       }
@@ -292,10 +303,10 @@ class Utils {
     }
   }
 
-  static Future<List<XFile?>?> _filePicker() async {
+  static Future<List<XFile?>?> _filePicker(bool isMultiple) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowMultiple: true,
+      allowMultiple: isMultiple,
       allowedExtensions: [
         'jpg',
         'jpeg',
@@ -304,7 +315,7 @@ class Utils {
         'doc',
         'docx',
         'xls',
-        'xlsx'
+        'xlsx',
       ],
     );
     if (result != null) {

@@ -47,12 +47,12 @@ class _SignInScreenState extends State<SignInScreen> {
     //   }
     // }
 
-    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    if (arg != null && arg['c'] != null && arg['p'] != null) {
-      Provider.of<SingInPrv>(context).initAccountSave().then((e) {
-        // return PrfData.shared.deleteSignInStore();
-      });
-    }
+    // final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    // if (arg != null && arg['c'] != null && arg['p'] != null) {
+    //   Provider.of<SingInPrv>(context).initAccountSave().then((e) {
+    //     // return PrfData.shared.deleteSignInStore();
+    //   });
+    // }
     return PrimaryScreen(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

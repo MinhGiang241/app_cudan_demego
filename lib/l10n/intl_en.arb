@@ -372,5 +372,13 @@
   "regulations":"regulations",
   "of_building_management":"of building management",
   "reg_pet_info":"registration pet infomation",
-  "reg_pet":"Pet registration"
+  "reg_pet":"Pet registration",
+  "pet_female":"Female",
+  "pet_male":"Male",
+  "other":"Other",
+  "dog":"Dog",
+  "cat":"Cat",
+  "edit_reg_pet":"Edit registration pet",
+  "pet_info":"Pet information",
+  "upload":"Upload"
 }

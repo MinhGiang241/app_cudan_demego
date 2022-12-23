@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
+        "cat": MessageLookupByLibrary.simpleMessage("Mèo"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Giấy chứng nhận tiêm phòng dại"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
@@ -135,12 +136,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
+        "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
         "edit_reg_deliver":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký chuyển đồ"),
+        "edit_reg_pet":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký vật nuôi"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ cư dân"),
         "edit_service_a": m6,
@@ -329,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "object_name": MessageLookupByLibrary.simpleMessage("Tên vật phẩm"),
         "of_building_management":
             MessageLookupByLibrary.simpleMessage("của ban quản lý tòa nhà"),
+        "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Tiền khác"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),
         "otp_invalid":
@@ -373,6 +378,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
+        "pet_female": MessageLookupByLibrary.simpleMessage("Cái"),
+        "pet_info": MessageLookupByLibrary.simpleMessage("Thông tin vật nuôi"),
+        "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
         "pet_name": MessageLookupByLibrary.simpleMessage("Tên vật nuôi"),
         "pet_origin": MessageLookupByLibrary.simpleMessage("Giống loài"),
         "pet_type": MessageLookupByLibrary.simpleMessage("Loại vật nuôi"),
@@ -560,6 +568,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
+        "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),

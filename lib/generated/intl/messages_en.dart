@@ -86,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
+        "cat": MessageLookupByLibrary.simpleMessage("Cat"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Certification of rabies vaccination"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
@@ -134,12 +135,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
+        "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
         "edit_reg_deliver":
             MessageLookupByLibrary.simpleMessage("Edit register delivery"),
+        "edit_reg_pet":
+            MessageLookupByLibrary.simpleMessage("Edit registration pet"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
         "edit_service_a": m6,
@@ -325,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "object_name": MessageLookupByLibrary.simpleMessage("Object name"),
         "of_building_management":
             MessageLookupByLibrary.simpleMessage("of building management"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
         "otp_invalid":
@@ -369,6 +374,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
+        "pet_female": MessageLookupByLibrary.simpleMessage("Female"),
+        "pet_info": MessageLookupByLibrary.simpleMessage("Pet information"),
+        "pet_male": MessageLookupByLibrary.simpleMessage("Male"),
         "pet_name": MessageLookupByLibrary.simpleMessage("Pet name"),
         "pet_origin": MessageLookupByLibrary.simpleMessage("Pet origin"),
         "pet_type": MessageLookupByLibrary.simpleMessage("Pet type"),
@@ -563,6 +571,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

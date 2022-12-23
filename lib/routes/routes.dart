@@ -38,7 +38,9 @@ import '../screens/services/parcel/parcel_list_screen.dart';
 import '../screens/services/parking_card/register_parking_card.dart';
 import '../screens/services/parking_card/transport_card_list_screen.dart';
 import '../screens/services/parking_card/transportation_details_screen.dart';
+import '../screens/services/pet/pet_details_screen.dart';
 import '../screens/services/pet/pet_list_screen.dart';
+import '../screens/services/pet/register_pet_screen.dart';
 import '../screens/services/resident_card/register_resident_card.dart';
 import '../screens/services/resident_card/resident_card_details.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
@@ -250,6 +252,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const PetListScreen(),
+        );
+      case PetDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const PetDetailsScreen(),
+        );
+      case RegisterPetScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const RegisterPetScreen(),
         );
       default:
         return MaterialPageRoute(

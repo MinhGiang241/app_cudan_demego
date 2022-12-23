@@ -27,11 +27,12 @@ class HomePrv extends ChangeNotifier {
   bool isResNewsLoading = false;
   bool isProNewsLoading = false;
   bool isEventLoading = false;
-  late BuildContext context;
   List<New> newResidentList = [];
   List<New> newProjectList = [];
+  BuildContext? context;
 
-  HomePrv() {
+  HomePrv(ctx) {
+    context = ctx;
     _initial();
   }
   onParticipate() {
@@ -77,7 +78,9 @@ class HomePrv extends ChangeNotifier {
       isResNewsLoading = true;
       isProNewsLoading = true;
       notifyListeners();
-      var accountId = context.read<ResidentInfoPrv>().userInfo!.account!.id;
+      var accountId = context!.read<ResidentInfoPrv>().userInfo != null
+          ? context!.read<ResidentInfoPrv>().userInfo!.account!.id
+          : null;
       var residentNews =
           await APINew.getNewList(5, 0, "RESIDENT", accountId ?? '');
       for (var i in residentNews) {
@@ -111,7 +114,7 @@ class HomePrv extends ChangeNotifier {
       isProNewsLoading = false;
 
       notifyListeners();
-      Utils.showErrorMessage(context, e.toString());
+      Utils.showErrorMessage(context!, e.toString());
     }
   }
 }
