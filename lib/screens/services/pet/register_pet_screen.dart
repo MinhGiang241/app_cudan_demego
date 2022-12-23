@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../widgets/dropdown_textField.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_file_widget.dart';
@@ -64,25 +63,6 @@ class RegisterPetScreen extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
-                  DropDownTextFiled(),
-                  vpad(20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropDownTextFiled(
-                          label: "ksks",
-                          isRequired: true,
-                        ),
-                      ),
-                      hpad(24),
-                      Expanded(
-                        child: DropDownTextFiled(
-                          label: "ksks",
-                          isRequired: true,
-                        ),
-                      )
-                    ],
-                  ),
                   vpad(20),
                   Text(
                     S.of(context).pet_info,
@@ -99,31 +79,31 @@ class RegisterPetScreen extends StatelessWidget {
                               context.watch<RegisterPetPrv>().validateName,
                           isRequired: true,
                           label: S.of(context).pet_name,
-                          hint: S.of(context).pet_name,
                           validator: (v) {
                             if (v!.isEmpty) {
                               return '';
                             }
                             return null;
                           },
+                          hint: S.of(context).pet_name,
                         ),
                       ),
                       hpad(24),
                       Expanded(
                         child: PrimaryDropDown(
-                          // controller:
-                          //     context.read<RegisterPetPrv>().nameController,
-                          // validateString:
-                          //     context.watch<RegisterPetPrv>().validateName,
+                          controller:
+                              context.read<RegisterPetPrv>().typeController,
+                          validateString:
+                              context.watch<RegisterPetPrv>().validateType,
                           isRequired: true,
                           label: S.of(context).pet_type,
                           selectList: listPetTypes,
-                          // validator: (v) {
-                          //   // if (v!.isEmpty) {
-                          //   //   return '';
-                          //   // }
-                          //   return '';
-                          // },
+                          validator: (v) {
+                            if (v == null) {
+                              return '';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
@@ -173,9 +153,19 @@ class RegisterPetScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PrimaryDropDown(
+                          controller:
+                              context.read<RegisterPetPrv>().sexController,
                           isRequired: true,
                           label: S.of(context).sex,
                           selectList: listPetSex,
+                          validateString:
+                              context.watch<RegisterPetPrv>().validateSex,
+                          validator: (v) {
+                            if (v == null) {
+                              return '';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       hpad(24),
@@ -206,12 +196,6 @@ class RegisterPetScreen extends StatelessWidget {
                     label: S.of(context).description,
                     hint: S.of(context).description,
                     maxLines: 2,
-                    validator: (v) {
-                      if (v!.isEmpty) {
-                        return '';
-                      }
-                      return null;
-                    },
                   ),
                   vpad(16),
                   SelectMediaWidget(

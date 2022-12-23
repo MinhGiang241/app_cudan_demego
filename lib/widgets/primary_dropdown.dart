@@ -40,6 +40,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.validateString,
     this.isError = false,
     this.isDense = true,
+    this.controller,
   });
   final bool isError;
   final String? label;
@@ -52,6 +53,7 @@ class PrimaryDropDown extends StatefulWidget {
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
   final List<String>? selectMultileList;
+  TextEditingController? controller = TextEditingController();
 
   @override
   State<PrimaryDropDown> createState() => _PrimaryDropDownState();
@@ -105,52 +107,75 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 ),
               )
             : PrimaryCard(
-                child: DropdownButtonFormField<dynamic>(
-                  isDense: widget.isDense,
-                  menuMaxHeight: dvHeight(context) / 3,
-                  validator: widget.validator,
-                  dropdownColor: Colors.white,
-                  value: widget.value,
-                  // ??
-                  //     (widget.selectList!.isNotEmpty
-                  //         ? widget.selectList![0].value
-                  //         : null),
-                  isExpanded: true,
-                  // value: items[indexSelected],
-                  // dropdownColor: Colors.black,
-                  hint: Text(
-                    "--${S.of(context).select}--",
-                    overflow: TextOverflow.ellipsis,
-                    style: txtBodySmallBold(color: grayScaleColor3),
-                  ),
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintStyle: txtBodySmallBold(color: grayScaleColor3),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 12),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: primaryColor2, width: 2),
+                child: Column(
+                  children: [
+                    DropdownButtonFormField<dynamic>(
+                      isDense: widget.isDense,
+                      menuMaxHeight: dvHeight(context) / 3,
+                      validator: widget.validator,
+                      dropdownColor: Colors.white,
+                      value: widget.value ??
+                          (widget.controller != null
+                              ? widget.controller!.text.isEmpty
+                                  ? null
+                                  : widget.controller!.text
+                              : null),
+                      // ??
+                      //     (widget.selectList!.isNotEmpty
+                      //         ? widget.selectList![0].value
+                      //         : null),
+                      isExpanded: true,
+                      // value: items[indexSelected],
+                      // dropdownColor: Colors.black,
+                      hint: Text(
+                        "--${S.of(context).select}--",
+                        overflow: TextOverflow.ellipsis,
+                        style: txtBodySmallBold(color: grayScaleColor3),
+                      ),
+                      style: txtBodySmallBold(color: grayScaleColorBase),
+                      decoration: InputDecoration(
+                        errorStyle: const TextStyle(fontSize: 0, height: 0),
+                        // enabledBorder: widget.validateString != null
+                        //     ? OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(12),
+                        //         borderSide: const BorderSide(
+                        //             color: redColor2, width: 2),
+                        //       )
+                        //     : OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(12),
+                        //         borderSide: BorderSide.none,
+                        //       ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintStyle: txtBodySmallBold(color: grayScaleColor3),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 12),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              const BorderSide(color: primaryColor2, width: 2),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: redColor2, width: 2)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      onChanged: widget.onChange ??
+                          (v) {
+                            if (widget.controller != null) {
+                              widget.controller!.text = v;
+                            }
+                            if (widget.value != null) {
+                              widget.value = v.toString();
+                            }
+                          },
+                      items: widget.selectList ?? items,
                     ),
-                    errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            const BorderSide(color: redColor2, width: 2)),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  onChanged: widget.onChange ??
-                      (v) {
-                        if (widget.value != null) {
-                          widget.value = v.toString();
-                        }
-                      },
-                  items: widget.selectList ?? items,
+                  ],
                 ),
               ),
         if (widget.validateString != null)

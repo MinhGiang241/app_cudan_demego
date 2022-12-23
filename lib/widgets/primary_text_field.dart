@@ -157,6 +157,16 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     cursorColor: primaryColor2,
                     maxLines: widget.maxLines,
                     decoration: InputDecoration(
+                        // enabledBorder: widget.validateString != null
+                        //     ? OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(12),
+                        //         borderSide: const BorderSide(
+                        //             color: redColor2, width: 2),
+                        //       )
+                        //     : OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(12),
+                        //         borderSide: BorderSide.none,
+                        //       ),
                         counterText: '',
                         hintText: widget.hint,
                         hintStyle: txtBodySmallBold(color: grayScaleColor3),
