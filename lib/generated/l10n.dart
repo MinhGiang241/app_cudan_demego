@@ -2390,13 +2390,13 @@ class S {
     );
   }
 
-  /// `Cancel letter successfully`
-  String get success_can_req {
+  /// `Cancel letter [{cancode}] successfully`
+  String success_can_req(Object cancode) {
     return Intl.message(
-      'Cancel letter successfully',
+      'Cancel letter [$cancode] successfully',
       name: 'success_can_req',
       desc: '',
-      args: [],
+      args: [cancode],
     );
   }
 
@@ -3865,6 +3865,46 @@ class S {
     return Intl.message(
       'Upload',
       name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight is not larger 15kg`
+  String get weight_not_15 {
+    return Intl.message(
+      'Weight is not larger 15kg',
+      name: 'weight_not_15',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You need to agree to comply with the regulations on pet registration`
+  String get pet_agree {
+    return Intl.message(
+      'You need to agree to comply with the regulations on pet registration',
+      name: 'pet_agree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đổi trạng thái đồ thành đã trả thành công`
+  String get success_returned {
+    return Intl.message(
+      'Đổi trạng thái đồ thành đã trả thành công',
+      name: 'success_returned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đổi trạng thái đồ thành đã tìm thấy thành công`
+  String get success_find {
+    return Intl.message(
+      'Đổi trạng thái đồ thành đã tìm thấy thành công',
+      name: 'success_find',
       desc: '',
       args: [],
     );

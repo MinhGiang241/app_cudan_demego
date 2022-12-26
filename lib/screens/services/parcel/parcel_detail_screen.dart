@@ -59,7 +59,7 @@ class ParcelDetailsScreen extends StatelessWidget {
                 if (arg.image != null && arg.image!.isNotEmpty)
                   InfoContentView(title: S.of(context).photos, images: [
                     ...arg.image!.map(
-                      (e) => "${ApiConstants.uploadURL}?load=${e.file_id}",
+                      (e) => "${ApiConstants.uploadURL}?load=${e.id}",
                     )
                   ]),
               ],

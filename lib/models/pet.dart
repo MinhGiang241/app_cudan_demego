@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'reason.dart';
+
 class Pet {
   Pet({
     this.address,
@@ -22,6 +24,10 @@ class Pet {
     this.tel,
     this.updatedTime,
     this.weight,
+    this.avt_pet,
+    this.certificate,
+    this.report,
+    this.reasons,
   });
   String? id;
   String? createdTime;
@@ -35,6 +41,7 @@ class Pet {
   String? color;
   String? species;
   String? sex;
+  String? reasons;
   int? weight;
   String? describe;
   bool? check;
@@ -43,6 +50,7 @@ class Pet {
   String? pet_status;
   String? note;
   bool? isMobile;
+  Reason? r;
   List<PetFile>? avt_pet;
   List<PetFile>? certificate;
   List<PetFile>? report;
@@ -67,6 +75,12 @@ class Pet {
     pet_status = json['pet_status'];
     note = json['note'];
     isMobile = json['isMobile'];
+    reasons = json['reasons'];
+    r = json['r'] != null
+        ? json['r'].isNotEmpty
+            ? Reason.fromJson(json['r'][0])
+            : null
+        : null;
     avt_pet = json['avt_pet'] != null
         ? json['avt_pet'].isNotEmpty
             ? json['avt_pet'].map<PetFile>((e) => PetFile.fromJson(e)).toList()
@@ -107,6 +121,7 @@ class Pet {
     data['regulations'] = regulations;
     data['pet_status'] = pet_status;
     data['note'] = note;
+    data['reasons'] = reasons;
     data['isMobile'] = isMobile;
     data['avt_pet'] = avt_pet != null
         ? avt_pet!.map((e) {
@@ -128,15 +143,16 @@ class Pet {
 }
 
 class PetFile {
-  String? file_id;
+  PetFile({this.id, this.name});
+  String? id;
   String? name;
   PetFile.fromJson(Map<String, dynamic> json) {
-    file_id = json['file_id'];
+    id = json['file_id'];
     name = json['name'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['file_id'] = file_id;
+    data['file_id'] = id;
     data['name'] = name;
     return data;
   }

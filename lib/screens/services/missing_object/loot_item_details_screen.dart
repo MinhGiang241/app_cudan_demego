@@ -13,32 +13,31 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 
-class LostItemDetailsScreen extends StatefulWidget {
-  const LostItemDetailsScreen({
+class LootItemDetailsScreen extends StatefulWidget {
+  const LootItemDetailsScreen({
     super.key,
   });
-  static const routeName = '/missing-object/details';
+  static const routeName = '/missing-object/details-loot';
 
   @override
-  State<LostItemDetailsScreen> createState() => _LostItemDetailsScreenState();
+  State<LootItemDetailsScreen> createState() => _LootItemDetailsScreenState();
 }
 
-class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
+class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    MissingObject lostItem = MissingObject();
+    LootItem lootItem = LootItem();
     Function()? changeStatus;
+    if (arg['lost'] != null) {
+      lootItem = arg['lost'];
+    }
     if (arg['change'] != null) {
       changeStatus = arg['change'];
     }
-    if (arg['lost'] != null) {
-      lostItem = arg['lost'];
-    }
-
-    bool isLoading = false;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).object_details,
@@ -50,49 +49,48 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
           listInfoView: [
             InfoContentView(
               title: S.of(context).object_code,
-              content: lostItem.code,
+              content: lootItem.code,
               contentStyle: txtBold(14, grayScaleColorBase),
             ),
             InfoContentView(
               title: S.of(context).object_name,
-              content: lostItem.name,
+              content: lootItem.name,
               contentStyle: txtBold(14, grayScaleColorBase),
             ),
             InfoContentView(
               title: S.of(context).missing_time,
-              content: Utils.dateFormat(lostItem.time ?? "", 1),
+              content: Utils.dateFormat(lootItem.date ?? "", 1),
               contentStyle: txtBold(14, grayScaleColorBase),
             ),
-            if (lostItem.find_time != null)
-              InfoContentView(
-                title: S.of(context).found_time,
-                content: Utils.dateFormat(lostItem.find_time ?? "", 1),
-                contentStyle: txtBold(14, grayScaleColorBase),
-              ),
-            if (lostItem.find_place != null)
+            // if (lootItem.find_time != null)
+            //   InfoContentView(
+            //     title: S.of(context).found_time,
+            //     content: Utils.dateFormat(lostItem.find_time ?? "", 1),
+            //     contentStyle: txtBold(14, grayScaleColorBase),
+            //   ),
+            if (lootItem.address != null)
               InfoContentView(
                 title: S.of(context).found_place,
-                content: lostItem.find_place,
+                content: lootItem.address,
                 contentStyle: txtBold(14, grayScaleColorBase),
               ),
-            if (lostItem.describe != null)
+            if (lootItem.describe != null)
               InfoContentView(
                 title: S.of(context).note,
-                content: lostItem.describe,
+                content: lootItem.describe,
                 contentStyle: txtBold(14, grayScaleColorBase),
               ),
-            if (lostItem.image != null && lostItem.image!.isNotEmpty)
+            if (lootItem.photo != null && lootItem.photo!.isNotEmpty)
               InfoContentView(title: S.of(context).photos, images: [
-                ...lostItem.image!
+                ...lootItem.photo!
                     .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
               ]),
           ],
         ),
         vpad(30),
-        if (arg['status'] == "NOTFOUND")
+        if (arg['status'] == "WAIT_RETURN")
           PrimaryButton(
-            isLoading: isLoading,
-            text: S.of(context).found,
+            text: S.of(context).returned,
             onTap: () async {
               if (changeStatus != null) {
                 setState(() {

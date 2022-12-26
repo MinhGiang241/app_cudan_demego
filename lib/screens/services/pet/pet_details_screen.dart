@@ -103,6 +103,13 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                             contentStyle: txtBold(
                                 14, genStatusColor(arg.pet_status ?? "")),
                           ),
+                          if (arg.r != null)
+                            InfoContentView(
+                              isHorizontal: true,
+                              title: S.of(context).cancel_reason,
+                              content: arg.r!.name,
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
                           if (arg.describe != null)
                             InfoContentView(
                               isHorizontal: true,
@@ -115,7 +122,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               title: S.of(context).photos,
                               images: [
                                 ...arg.avt_pet!.map((e) =>
-                                    "${ApiConstants.uploadURL}/?load=${e.file_id}"),
+                                    "${ApiConstants.uploadURL}/?load=${e.id}"),
                               ],
                             ),
                         ],
@@ -140,7 +147,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                                 onTap: () async {
                                   await launchUrl(
                                     Uri.parse(
-                                        "${ApiConstants.uploadURL}?load=${e.file_id}"),
+                                        "${ApiConstants.uploadURL}?load=${e.id}"),
                                     mode: LaunchMode.externalApplication,
                                   );
                                 },
@@ -172,7 +179,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                                 onTap: () async {
                                   await launchUrl(
                                     Uri.parse(
-                                        "${ApiConstants.uploadURL}?load=${e.file_id}"),
+                                        "${ApiConstants.uploadURL}?load=${e.id}"),
                                     mode: LaunchMode.externalApplication,
                                   );
                                 },

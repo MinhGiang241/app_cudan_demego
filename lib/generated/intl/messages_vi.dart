@@ -46,12 +46,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(service) => "Dịch vụ ${service}";
 
-  static String m11(billcode) =>
+  static String m11(cancode) => "Hủy đăng ký phiếu [${cancode}] thành công";
+
+  static String m12(billcode) =>
       "Bạn đã thanh toán thành công cho [${billcode}]";
 
-  static String m12(del) => "Xóa [${del}] thành công";
+  static String m13(del) => "Xóa [${del}] thành công";
 
-  static String m13(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m14(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -378,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
+        "pet_agree": MessageLookupByLibrary.simpleMessage(
+            "bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Cái"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Thông tin vật nuôi"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
@@ -514,18 +518,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
         "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
-        "success_can_req": MessageLookupByLibrary.simpleMessage(
-            "Hủy đăng ký phiếu thành công"),
+        "success_can_req": m11,
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Thêm mới thành công"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thành công"),
+        "success_find": MessageLookupByLibrary.simpleMessage(
+            "change status item successfully"),
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_payment": m11,
-        "success_remove": m12,
+        "success_payment": m12,
+        "success_remove": m13,
+        "success_returned": MessageLookupByLibrary.simpleMessage(
+            "change status item successfully"),
         "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
@@ -582,8 +589,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m13,
+        "we_send_to": m14,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
+        "weight_not_15": MessageLookupByLibrary.simpleMessage(
+            "Cân nặng không được quá 15kg"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại"),
         "width": MessageLookupByLibrary.simpleMessage("Rộng"),

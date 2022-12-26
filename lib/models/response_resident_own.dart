@@ -125,7 +125,7 @@ class Apartment {
   bool? isDraft;
   String? code;
   String? name;
-  int? area;
+  double? area;
   String? buildingId;
   String? floorId;
   String? apartment_type;
@@ -157,7 +157,11 @@ class Apartment {
     isDraft = json['isDraft'];
     code = json['code'];
     name = json['name'];
-    area = json['area'];
+    area = json['area'] != null
+        ? double.tryParse(json['area'].toString()) != null
+            ? double.parse(json['area'].toString())
+            : 0
+        : 0;
     buildingId = json['buildingId'];
     floorId = json['floorId'];
     apartment_type = json['apartment_type'];
@@ -196,7 +200,7 @@ class Floor {
   String? code;
   String? name;
   String? buildingId;
-  int? area;
+  double? area;
 
   Floor({
     this.area,
@@ -217,7 +221,11 @@ class Floor {
     isDraft = json['isDraft'];
     code = json['code'];
     name = json['name'];
-    area = json['area'];
+    area = json['area'] != null
+        ? double.tryParse(json['area'].toString()) != null
+            ? double.parse(json['area'].toString())
+            : 0
+        : 0;
     buildingId = json['buildingId'];
   }
   Map<String, dynamic> toJson() {

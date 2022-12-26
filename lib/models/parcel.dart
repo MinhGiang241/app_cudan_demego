@@ -79,15 +79,15 @@ class Parcel {
 }
 
 class ParcelImage {
-  String? file_id;
+  String? id;
   String? name;
   ParcelImage.fromJson(Map<String, dynamic> json) {
-    file_id = json['file_id'];
+    id = json['file_id'];
     name = json['name'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['file_id'] = file_id;
+    data['file_id'] = id;
     data['name'] = name;
     return data;
   }

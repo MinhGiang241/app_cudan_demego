@@ -21,7 +21,7 @@ class DeliveryListPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S.of(context).success_can_req,
+                e: S.of(context).success_can_req(data.code ?? ""),
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(context,
                       DeliveryListScreen.routeName, (route) => route.isFirst);

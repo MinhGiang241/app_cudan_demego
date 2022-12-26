@@ -233,7 +233,7 @@
   "edit_reg_deliver":"Edit register delivery",
   "item_list_not_empty":"Item list can not be empty",
   "confirm_cancel_request":"Do you want to cancel request letter [{code}]",
-  "success_can_req":"Cancel letter successfully",
+  "success_can_req":"Cancel letter [{cancode}] successfully",
   "cancel_request":"Cancel letter",
   "register_res_card":"Đăng ký thẻ cư dân",
   "no_card":"Don't have any card",
@@ -380,5 +380,9 @@
   "cat":"Cat",
   "edit_reg_pet":"Edit registration pet",
   "pet_info":"Pet information",
-  "upload":"Upload"
+  "upload":"Upload",
+  "weight_not_15":"Weight is not larger 15kg",
+  "pet_agree":"You need to agree to comply with the regulations on pet registration",
+  "success_returned":"Đổi trạng thái đồ thành đã trả thành công",
+  "success_find":"Đổi trạng thái đồ thành đã tìm thấy thành công"
 }

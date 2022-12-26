@@ -50,7 +50,7 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S.of(context).success_can_req,
+                e: S.of(context).success_can_req(card.code ?? ""),
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context,

@@ -18,6 +18,7 @@ import '../../../widgets/primary_loading.dart';
 import '../service_screen.dart';
 import 'reg_lost_item_screen.dart';
 import 'tab/missing_object_tab.dart';
+import 'tab/picked_item_tab.dart';
 
 class MissingObectScreen extends StatefulWidget {
   const MissingObectScreen({super.key});
@@ -37,8 +38,18 @@ class _MissingObectScreenState extends State<MissingObectScreen>
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    int? year;
+    int? month;
+
+    if (arg != null) {
+      year = arg['year'];
+      month = arg['month'];
+      tabController.index = arg['index'];
+    }
     return ChangeNotifierProvider(
-        create: (context) => MissingObjectPrv(),
+        create: (context) => MissingObjectPrv(year: year, month: month),
         builder: (context, state) {
           return PrimaryScreen(
               appBar: PrimaryAppbar(
@@ -77,8 +88,8 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                                 maxTime:
                                     DateTime(DateTime.now().year + 10, 12, 31),
                                 currentTime: DateTime(
-                                    context.read<MissingObjectPrv>().year,
-                                    context.read<MissingObjectPrv>().month,
+                                    context.read<MissingObjectPrv>().year!,
+                                    context.read<MissingObjectPrv>().month!,
                                     1),
                                 locale: LocaleType.vi),
                           );
@@ -133,8 +144,10 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                         controller: tabController,
                         children: [
                           MissingObjectTab(
+                            changeStatus: () =>
+                                Future.delayed(Duration(seconds: 2)),
                             type: "HISTORY",
-                            list: context.watch<MissingObjectPrv>().historyList,
+                            list: context.watch<MissingObjectPrv>().lostList,
                             refreshController: _refreshHistoryController,
                             onRefresh: () {
                               setState(() {
@@ -142,9 +155,9 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                               });
                             },
                           ),
-                          MissingObjectTab(
+                          PickedItemTab(
                             type: "FOUND",
-                            list: context.watch<MissingObjectPrv>().foundList,
+                            list: context.watch<MissingObjectPrv>().lootList,
                             refreshController: _refreshFoundController,
                             onRefresh: () {
                               setState(() {

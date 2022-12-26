@@ -10,6 +10,7 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
+import '../loot_item_details_screen.dart';
 import '../lost_item_details_screen.dart';
 
 genLostStatus(String? status) {
@@ -25,17 +26,17 @@ genLostStatus(String? status) {
 
 genLostStyle(String? status) {
   switch (status) {
-    case "FOUND":
-      return txtBold(14, primaryColor6);
-    case "NOTFOUND":
+    case "WAIT_RETURN":
       return txtBold(14, redColorBase);
+    case "RETURNED":
+      return txtBold(14, primaryColor6);
     default:
       return txtBold(14, grayScaleColorBase);
   }
 }
 
-class MissingObjectTab extends StatefulWidget {
-  MissingObjectTab({
+class PickedItemTab extends StatefulWidget {
+  PickedItemTab({
     super.key,
     required this.refreshController,
     required this.list,
@@ -43,19 +44,19 @@ class MissingObjectTab extends StatefulWidget {
     required this.type,
     this.changeStatus,
   });
-  List<MissingObject> list = [];
+  List<LootItem> list = [];
   String type;
-  Function()? changeStatus;
 
   Function() onRefresh;
+  Function()? changeStatus;
 
   RefreshController refreshController = RefreshController();
 
   @override
-  State<MissingObjectTab> createState() => _MissingObjectTabState();
+  State<PickedItemTab> createState() => _PickedItemTabState();
 }
 
-class _MissingObjectTabState extends State<MissingObjectTab> {
+class _PickedItemTabState extends State<PickedItemTab> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -92,7 +93,7 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          LostItemDetailsScreen.routeName,
+                          LootItemDetailsScreen.routeName,
                           arguments: {
                             "lost": e,
                             "status": e.status,
@@ -137,7 +138,7 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                                 children: [
                                   TableRow(children: [
                                     Text('${S.of(context).found_time}:'),
-                                    Text(Utils.dateFormat(e.time ?? '', 1),
+                                    Text(Utils.dateFormat(e.date ?? '', 1),
                                         style: txtLinkSmall()),
                                   ]),
                                   TableRow(children: [vpad(4), vpad(4)]),
@@ -145,7 +146,7 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                                     TableRow(children: [
                                       Text('${S.of(context).found_place}:'),
                                       Text(
-                                        e.find_place ?? "",
+                                        e.address ?? "",
                                       ),
                                     ]),
                                   TableRow(children: [vpad(4), vpad(4)]),

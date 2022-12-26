@@ -43,11 +43,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(service) => "Service ${service}";
 
-  static String m11(billcode) => "Make payment successfully for [${billcode}]";
+  static String m11(cancode) => "Cancel letter [${cancode}] successfully";
 
-  static String m12(del) => "Remove [${del}] successfully";
+  static String m12(billcode) => "Make payment successfully for [${billcode}]";
 
-  static String m13(to) => "We sent otp code to :${to}";
+  static String m13(del) => "Remove [${del}] successfully";
+
+  static String m14(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -374,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Infomation"),
         "pet": MessageLookupByLibrary.simpleMessage("Pet"),
+        "pet_agree": MessageLookupByLibrary.simpleMessage(
+            "You need to agree to comply with the regulations on pet registration"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Female"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Pet information"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Male"),
@@ -514,18 +518,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
-        "success_can_req":
-            MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
+        "success_can_req": m11,
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Edit successfully"),
+        "success_find": MessageLookupByLibrary.simpleMessage(
+            "Đổi trạng thái đồ thành đã tìm thấy thành công"),
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m11,
-        "success_remove": m12,
+        "success_payment": m12,
+        "success_remove": m13,
+        "success_returned": MessageLookupByLibrary.simpleMessage(
+            "Đổi trạng thái đồ thành đã trả thành công"),
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":
@@ -585,8 +592,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m13,
+        "we_send_to": m14,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
+        "weight_not_15":
+            MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
         "width": MessageLookupByLibrary.simpleMessage("Width"),
         "year": MessageLookupByLibrary.simpleMessage("Year")

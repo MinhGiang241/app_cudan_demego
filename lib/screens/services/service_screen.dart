@@ -229,7 +229,7 @@ class ServiceScreen extends StatelessWidget {
                                     ),
                                   ),
                                   ...context
-                                      .read<ServicePrv>()
+                                      .watch<ServicePrv>()
                                       .listExtraService
                                       .map((e) => InkWell(
                                             onTap: () {

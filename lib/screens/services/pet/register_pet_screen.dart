@@ -4,10 +4,14 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/constants.dart';
+import '../../../constants/pet_regulation.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/pet.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_file_widget.dart';
@@ -22,8 +26,13 @@ class RegisterPetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     var isEdit = arg['isEdit'];
+    Pet pet = Pet();
+    if (isEdit) {
+      pet = arg['data'];
+    }
+
     return ChangeNotifierProvider(
-      create: (context) => RegisterPetPrv(),
+      create: (context) => RegisterPetPrv(existedPet: pet),
       builder: (context, builder) {
         var listPetSex = [
           DropdownMenuItem(
@@ -35,7 +44,7 @@ class RegisterPetScreen extends StatelessWidget {
             child: Text(S.of(context).pet_female),
           ),
           DropdownMenuItem(
-            value: "Other",
+            value: "OTHER",
             child: Text(S.of(context).other),
           ),
         ];
@@ -73,6 +82,7 @@ class RegisterPetScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PrimaryTextField(
+                          maxLength: 255,
                           controller:
                               context.read<RegisterPetPrv>().nameController,
                           validateString:
@@ -131,6 +141,7 @@ class RegisterPetScreen extends StatelessWidget {
                       hpad(24),
                       Expanded(
                         child: PrimaryTextField(
+                          maxLength: 100,
                           controller:
                               context.read<RegisterPetPrv>().originController,
                           validateString:
@@ -274,6 +285,19 @@ class RegisterPetScreen extends StatelessWidget {
                         ),
                       )),
                     ],
+                  ),
+                  vpad(16),
+                  Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: HtmlWidget(
+                      petRegulation,
+                      onTapUrl: (url) {
+                        launchUrl(Uri.parse(url));
+                        return false;
+                      },
+                      textStyle: txtBodyMediumRegular(),
+                    ),
                   ),
                   vpad(16),
                   Row(

@@ -233,7 +233,7 @@
   "edit_reg_deliver":"Chỉnh sửa đăng ký chuyển đồ",
   "item_list_not_empty":"Danh sách chuyển đồ không được để trống",
   "confirm_cancel_request":"Bạn có chắc chắn hủy đăng ký phiếu [{code}] không?",
-  "success_can_req":"Hủy đăng ký phiếu thành công",
+  "success_can_req":"Hủy đăng ký phiếu [{cancode}] thành công",
   "cancel_request":"Hủy đăng ký",
   "register_res_card":"Đăng ký thẻ cư dân",
   "no_card":"Không có thẻ nào",
@@ -381,6 +381,10 @@
   "cat":"Mèo",
   "edit_reg_pet":"Chỉnh sửa đăng ký vật nuôi",
   "pet_info":"Thông tin vật nuôi",
-  "upload":"Tải lên"
+  "upload":"Tải lên",
+  "weight_not_15":"Cân nặng không được quá 15kg",
+  "pet_agree":"bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi",
+  "success_returned":"change status item successfully",
+  "success_find":"change status item successfully"
 }
    

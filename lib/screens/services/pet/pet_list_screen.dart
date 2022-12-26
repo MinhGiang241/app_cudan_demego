@@ -217,10 +217,10 @@ class _PetListScreenState extends State<PetListScreen> {
                                         hpad(16),
                                         PrimaryButton(
                                           onTap: () {
-                                            // context
-                                            //     .read<PetListPrv>()
-                                            //     .cancelRequetsAprrove(
-                                            //         context, e);
+                                            context
+                                                .read<PetListPrv>()
+                                                .cancelRequetsAprrove(
+                                                    context, e);
                                           },
                                           text: S.of(context).cancel_register,
                                           buttonSize: ButtonSize.xsmall,
@@ -237,9 +237,9 @@ class _PetListScreenState extends State<PetListScreen> {
                                       children: [
                                         PrimaryButton(
                                           onTap: () {
-                                            // context
-                                            //     .read<DeliveryListPrv>()
-                                            //     .sendToApprove(context, e);
+                                            context
+                                                .read<PetListPrv>()
+                                                .sendToApprove(context, e);
                                           },
                                           text: S.of(context).send_request,
                                           buttonSize: ButtonSize.xsmall,
@@ -249,12 +249,12 @@ class _PetListScreenState extends State<PetListScreen> {
                                         ),
                                         PrimaryButton(
                                           onTap: () {
-                                            // Navigator.pushNamed(context,
-                                            //     RegisterDelivery.routeName,
-                                            //     arguments: {
-                                            //       "isEdit": true,
-                                            //       "data": e,
-                                            //     });
+                                            Navigator.pushNamed(context,
+                                                RegisterPetScreen.routeName,
+                                                arguments: {
+                                                  "isEdit": true,
+                                                  "data": e,
+                                                });
                                           },
                                           text: S.of(context).edit,
                                           buttonSize: ButtonSize.xsmall,
@@ -265,9 +265,9 @@ class _PetListScreenState extends State<PetListScreen> {
                                         ),
                                         PrimaryButton(
                                           onTap: () {
-                                            // context
-                                            //     .read<DeliveryListPrv>()
-                                            //     .deleteLetter(context, e);
+                                            context
+                                                .read<PetListPrv>()
+                                                .deleteLetter(context, e);
                                           },
                                           text: S.of(context).delete_letter,
                                           buttonSize: ButtonSize.xsmall,

@@ -29,6 +29,7 @@ import '../screens/services/extra_service/extra_service_details.dart';
 import '../screens/services/extra_service/extra_service_registration_screen.dart';
 import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
+import '../screens/services/missing_object/loot_item_details_screen.dart';
 import '../screens/services/missing_object/lost_item_details_screen.dart';
 import '../screens/services/missing_object/missing_object_screen.dart';
 import '../screens/services/missing_object/pick_item_screen.dart';
@@ -237,6 +238,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const LostItemDetailsScreen(),
+        );
+      case LootItemDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const LootItemDetailsScreen(),
         );
       case RegisterLostItemScreen.routeName:
         return MaterialPageRoute(
