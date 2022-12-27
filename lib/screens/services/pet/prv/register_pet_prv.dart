@@ -24,7 +24,7 @@ class RegisterPetPrv extends ChangeNotifier {
     weightController.text =
         existedPet!.weight != null ? existedPet!.weight.toString() : '';
     descriptionController.text = existedPet!.describe ?? "";
-    isAgree = existedPet!.check ?? false;
+    isAgree = existedPet!.check ?? true;
     existedImage = existedPet!.avt_pet ?? [];
     exitedCertificateFiles = existedPet!.certificate ?? [];
     existedReportFiles = existedPet!.report ?? [];
@@ -57,6 +57,12 @@ class RegisterPetPrv extends ChangeNotifier {
   String? validateOrigin;
   String? validateSex;
   String? validateWeight;
+  bool isShow = false;
+
+  toogleShow() {
+    isShow = !isShow;
+    notifyListeners();
+  }
 
   onSendSummitPet(BuildContext context, bool isRequest) async {
     FocusScope.of(context).unfocus();

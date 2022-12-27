@@ -305,23 +305,34 @@ class Utils {
   }
 
   static Future<List<XFile?>?> _filePicker(bool isMultiple) async {
+    var allows = [
+      'jpg',
+      'jpeg',
+      'png',
+      'pdf',
+      'doc',
+      'docx',
+      'xls',
+      'xlsx',
+    ];
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: isMultiple,
-      allowedExtensions: [
-        'jpg',
-        'jpeg',
-        'png',
-        'pdf',
-        'doc',
-        'docx',
-        'xls',
-        'xlsx',
-      ],
+      allowedExtensions: allows,
     );
     if (result != null) {
       final files = result.files.map<XFile>((e) => XFile(e.path!)).toList();
-      return files;
+      var ffiles = files.where((v) {
+        var a = (v.path.split('.').last);
+
+        if (allows.contains(a)) {
+          return true;
+        } else {
+          return false;
+        }
+      }).toList();
+
+      return ffiles;
     } else {
       return null;
     }

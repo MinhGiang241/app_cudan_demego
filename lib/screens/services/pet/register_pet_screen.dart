@@ -1,6 +1,7 @@
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -320,8 +321,6 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                         ),
                         hpad(12),
                         Expanded(
-                            child: InkWell(
-                          onTap: context.read<RegisterPetPrv>().onAgree,
                           child: RichText(
                             text: TextSpan(
                                 style: txtBodyMediumRegular(
@@ -329,32 +328,40 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                 children: [
                                   TextSpan(text: S.of(context).i_agree),
                                   TextSpan(
-                                      text: " ${S.of(context).regulations}",
-                                      style: txtBodyMediumRegular(
-                                          color: primaryColor6)),
+                                    text: " ${S.of(context).regulations}",
+                                    style: txtBodyMediumRegular(
+                                        color: primaryColor6),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        context
+                                            .read<RegisterPetPrv>()
+                                            .toogleShow();
+                                      },
+                                  ),
                                   TextSpan(
                                       text:
                                           " ${S.of(context).of_building_management}"),
                                 ]),
                           ),
-                        )),
+                        )
                       ],
                     ),
-                    vpad(16),
+                    if (context.watch<RegisterPetPrv>().isShow) vpad(16),
 
-                    Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: HtmlWidget(
-                        petRegulation,
-                        buildAsync: false,
-                        onTapUrl: (url) {
-                          launchUrl(Uri.parse(url));
-                          return false;
-                        },
-                        textStyle: txtBodyMediumRegular(),
+                    if (context.watch<RegisterPetPrv>().isShow)
+                      Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: HtmlWidget(
+                          petRegulation,
+                          buildAsync: false,
+                          onTapUrl: (url) {
+                            launchUrl(Uri.parse(url));
+                            return false;
+                          },
+                          textStyle: txtBodyMediumRegular(),
+                        ),
                       ),
-                    ),
                     vpad(16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
