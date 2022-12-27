@@ -107,7 +107,7 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
                       text: S.of(context).send_letter,
                       onTap: () => context
                           .read<RegisterLostItemPrv>()
-                          .submitRegister(context),
+                          .submitRegisterLost(context),
                     ),
                     vpad(40),
                   ],

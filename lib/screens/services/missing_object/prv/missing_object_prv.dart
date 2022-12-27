@@ -25,7 +25,9 @@ class MissingObjectPrv extends ChangeNotifier {
 
   saveLostItem(BuildContext context, MissingObject lost) async {
     lost.status = "FOUND";
-    await APILost.saveLootItem(lost.toJson()).then((v) {
+    // var apartment = context.read<ResidentInfoPrv>()
+    // lost.apartment = "${context}";
+    await APILost.saveLostItem(lost.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,
           e: S.of(context).success_returned,

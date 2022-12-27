@@ -17,11 +17,17 @@ import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_file_widget.dart';
 import '../../../widgets/select_media_widget.dart';
 import 'prv/register_pet_prv.dart';
+import '../../../constants/pet_regulation.dart';
 
-class RegisterPetScreen extends StatelessWidget {
+class RegisterPetScreen extends StatefulWidget {
   const RegisterPetScreen({super.key});
   static const routeName = '/pet/register';
 
+  @override
+  State<RegisterPetScreen> createState() => _RegisterPetScreenState();
+}
+
+class _RegisterPetScreenState extends State<RegisterPetScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
@@ -68,267 +74,331 @@ class RegisterPetScreen extends StatelessWidget {
           ),
           body: SafeArea(
             child: Form(
-              key: context.watch<RegisterPetPrv>().formKey,
-              child: ListView(
+              key: context.read<RegisterPetPrv>().formKey,
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                children: [
-                  vpad(20),
-                  Text(
-                    S.of(context).pet_info,
-                    style: txtMedium(14, grayScaleColorBase),
-                  ),
-                  vpad(16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryTextField(
-                          maxLength: 255,
-                          controller:
-                              context.read<RegisterPetPrv>().nameController,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateName,
-                          isRequired: true,
-                          label: S.of(context).pet_name,
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                          hint: S.of(context).pet_name,
-                        ),
-                      ),
-                      hpad(24),
-                      Expanded(
-                        child: PrimaryDropDown(
-                          controller:
-                              context.read<RegisterPetPrv>().typeController,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateType,
-                          isRequired: true,
-                          label: S.of(context).pet_type,
-                          selectList: listPetTypes,
-                          validator: (v) {
-                            if (v == null) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  vpad(16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryTextField(
-                          controller:
-                              context.read<RegisterPetPrv>().colorController,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateColor,
-                          isRequired: true,
-                          label: S.of(context).color,
-                          hint: S.of(context).color,
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      hpad(24),
-                      Expanded(
-                        child: PrimaryTextField(
-                          maxLength: 100,
-                          controller:
-                              context.read<RegisterPetPrv>().originController,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateOrigin,
-                          isRequired: true,
-                          label: S.of(context).pet_origin,
-                          hint: S.of(context).pet_origin,
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  vpad(16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryDropDown(
-                          controller:
-                              context.read<RegisterPetPrv>().sexController,
-                          isRequired: true,
-                          label: S.of(context).sex,
-                          selectList: listPetSex,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateSex,
-                          validator: (v) {
-                            if (v == null) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      hpad(24),
-                      Expanded(
-                        child: PrimaryTextField(
-                          controller:
-                              context.read<RegisterPetPrv>().weightController,
-                          validateString:
-                              context.watch<RegisterPetPrv>().validateWeight,
-                          isRequired: true,
-                          label: '${S.of(context).weight} (kg)',
-                          hint: S.of(context).weight,
-                          keyboardType: TextInputType.number,
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  vpad(16),
-                  PrimaryTextField(
-                    controller:
-                        context.read<RegisterPetPrv>().descriptionController,
-                    label: S.of(context).description,
-                    hint: S.of(context).description,
-                    maxLines: 2,
-                  ),
-                  vpad(16),
-                  SelectMediaWidget(
-                    title: S.of(context).photos,
-                    existImages: context.watch<RegisterPetPrv>().existedImage,
-                    images: context.watch<RegisterPetPrv>().imagesPet,
-                    onRemove: context.read<RegisterPetPrv>().onRemoveImagePet,
-                    onRemoveExist:
-                        context.read<RegisterPetPrv>().removeExistedImages,
-                    onSelect: () => context
-                        .read<RegisterPetPrv>()
-                        .onSelectImagePet(context),
-                  ),
-                  vpad(16),
-                  SelectFileWidget(
-                    existFiles:
-                        context.watch<RegisterPetPrv>().exitedCertificateFiles,
-                    onRemoveExist: context
-                        .read<RegisterPetPrv>()
-                        .removeExistedCertificateFile,
-                    onRemove:
-                        context.read<RegisterPetPrv>().onRemoveCertificate,
-                    files: context.watch<RegisterPetPrv>().certificateFiles,
-                    isRequired: true,
-                    title: S.of(context).cer_vacxin_doc,
-                    onSelect: () => context
-                        .read<RegisterPetPrv>()
-                        .onSelectCertificate(context),
-                  ),
-                  vpad(16),
-                  SelectFileWidget(
-                    existFiles:
-                        context.watch<RegisterPetPrv>().existedReportFiles,
-                    onRemoveExist:
-                        context.read<RegisterPetPrv>().removeExistedReportFile,
-                    onRemove: context.read<RegisterPetPrv>().onRemoveReport,
-                    files: context.watch<RegisterPetPrv>().reportFiles,
-                    isRequired: true,
-                    title: S.of(context).minutes,
-                    onSelect: () =>
-                        context.read<RegisterPetPrv>().onSelectReport(context),
-                  ),
-                  vpad(16),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 22.0,
-                        height: 22.0,
-                        child: Checkbox(
-                          fillColor:
-                              MaterialStateProperty.all(primaryColorBase),
-                          value: context.watch<RegisterPetPrv>().isAgree,
-                          onChanged: (v) {
-                            context.read<RegisterPetPrv>().onAgree();
-                          },
-                        ),
-                      ),
-                      hpad(12),
-                      Expanded(
-                          child: InkWell(
-                        onTap: context.read<RegisterPetPrv>().onAgree,
-                        child: RichText(
-                          text: TextSpan(
-                              style: txtBodyMediumRegular(
-                                  color: grayScaleColorBase),
-                              children: [
-                                TextSpan(text: S.of(context).i_agree),
-                                TextSpan(
-                                    text: " ${S.of(context).regulations}",
-                                    style: txtBodyMediumRegular(
-                                        color: primaryColor6)),
-                                TextSpan(
-                                    text:
-                                        " ${S.of(context).of_building_management}"),
-                              ]),
-                        ),
-                      )),
-                    ],
-                  ),
-                  vpad(16),
-                  Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: HtmlWidget(
-                      petRegulation,
-                      onTapUrl: (url) {
-                        launchUrl(Uri.parse(url));
-                        return false;
-                      },
-                      textStyle: txtBodyMediumRegular(),
+                child: Column(
+                  children: [
+                    vpad(20),
+                    Text(
+                      S.of(context).pet_info,
+                      style: txtMedium(14, grayScaleColorBase),
                     ),
-                  ),
-                  vpad(16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PrimaryButton(
-                        isLoading:
-                            context.watch<RegisterPetPrv>().isAddNewLoading,
-                        buttonSize: ButtonSize.medium,
-                        text: isEdit
-                            ? S.of(context).update
-                            : S.of(context).add_new,
-                        onTap: () => context
-                            .read<RegisterPetPrv>()
-                            .onSendSummitPet(context, false),
+                    vpad(16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryTextField(
+                            maxLength: 255,
+                            controller:
+                                context.read<RegisterPetPrv>().nameController,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateName,
+                            isRequired: true,
+                            label: S.of(context).pet_name,
+                            validator: (v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              }
+                              return null;
+                            },
+                            hint: S.of(context).pet_name,
+                          ),
+                        ),
+                        hpad(24),
+                        Expanded(
+                          child: PrimaryDropDown(
+                            controller:
+                                context.read<RegisterPetPrv>().typeController,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateType,
+                            isRequired: true,
+                            label: S.of(context).pet_type,
+                            selectList: listPetTypes,
+                            validator: (v) {
+                              if (v == null) {
+                                return '';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    vpad(16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryTextField(
+                            controller:
+                                context.read<RegisterPetPrv>().colorController,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateColor,
+                            isRequired: true,
+                            label: S.of(context).color,
+                            hint: S.of(context).color,
+                            validator: (v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        hpad(24),
+                        Expanded(
+                          child: PrimaryTextField(
+                            maxLength: 100,
+                            controller:
+                                context.read<RegisterPetPrv>().originController,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateOrigin,
+                            isRequired: true,
+                            label: S.of(context).pet_origin,
+                            hint: S.of(context).pet_origin,
+                            validator: (v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    vpad(16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryDropDown(
+                            controller:
+                                context.read<RegisterPetPrv>().sexController,
+                            isRequired: true,
+                            label: S.of(context).sex,
+                            selectList: listPetSex,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateSex,
+                            validator: (v) {
+                              if (v == null) {
+                                return '';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        hpad(24),
+                        Expanded(
+                          child: PrimaryTextField(
+                            controller:
+                                context.read<RegisterPetPrv>().weightController,
+                            validateString:
+                                context.watch<RegisterPetPrv>().validateWeight,
+                            isRequired: true,
+                            label: '${S.of(context).weight} (kg)',
+                            hint: S.of(context).weight,
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              if (((double.tryParse(context
+                                                  .read<RegisterPetPrv>()
+                                                  .weightController
+                                                  .text) !=
+                                              null &&
+                                          double.parse(context
+                                                  .read<RegisterPetPrv>()
+                                                  .weightController
+                                                  .text) >=
+                                              15) ||
+                                      double.tryParse(context
+                                              .read<RegisterPetPrv>()
+                                              .weightController
+                                              .text) ==
+                                          null) &&
+                                  context
+                                      .read<RegisterPetPrv>()
+                                      .weightController
+                                      .text
+                                      .isNotEmpty) {
+                                context
+                                    .read<RegisterPetPrv>()
+                                    .weightController
+                                    .text = '15';
+                                context
+                                        .read<RegisterPetPrv>()
+                                        .weightController
+                                        .selection =
+                                    TextSelection(
+                                        baseOffset: context
+                                            .read<RegisterPetPrv>()
+                                            .weightController
+                                            .text
+                                            .length,
+                                        extentOffset: context
+                                            .read<RegisterPetPrv>()
+                                            .weightController
+                                            .text
+                                            .length);
+
+                                setState(() {});
+                              }
+                            },
+                            validator: (v) {
+                              if (v!.isEmpty) {
+                                return '';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    vpad(16),
+                    PrimaryTextField(
+                      controller:
+                          context.read<RegisterPetPrv>().descriptionController,
+                      label: S.of(context).description,
+                      hint: S.of(context).description,
+                      maxLines: 2,
+                    ),
+                    vpad(16),
+                    SelectMediaWidget(
+                      title: S.of(context).photos,
+                      existImages: context.watch<RegisterPetPrv>().existedImage,
+                      images: context.watch<RegisterPetPrv>().imagesPet,
+                      onRemove: context.read<RegisterPetPrv>().onRemoveImagePet,
+                      onRemoveExist:
+                          context.read<RegisterPetPrv>().removeExistedImages,
+                      onSelect: () => context
+                          .read<RegisterPetPrv>()
+                          .onSelectImagePet(context),
+                    ),
+                    vpad(16),
+                    SelectFileWidget(
+                      existFiles: context
+                          .watch<RegisterPetPrv>()
+                          .exitedCertificateFiles,
+                      onRemoveExist: context
+                          .read<RegisterPetPrv>()
+                          .removeExistedCertificateFile,
+                      onRemove:
+                          context.read<RegisterPetPrv>().onRemoveCertificate,
+                      files: context.watch<RegisterPetPrv>().certificateFiles,
+                      isRequired: true,
+                      title: S.of(context).cer_vacxin_doc,
+                      onSelect: () => context
+                          .read<RegisterPetPrv>()
+                          .onSelectCertificate(context),
+                    ),
+                    vpad(16),
+                    SelectFileWidget(
+                      existFiles:
+                          context.watch<RegisterPetPrv>().existedReportFiles,
+                      onRemoveExist: context
+                          .read<RegisterPetPrv>()
+                          .removeExistedReportFile,
+                      onRemove: context.read<RegisterPetPrv>().onRemoveReport,
+                      files: context.watch<RegisterPetPrv>().reportFiles,
+                      isRequired: true,
+                      title: S.of(context).minutes,
+                      onSelect: () => context
+                          .read<RegisterPetPrv>()
+                          .onSelectReport(context),
+                    ),
+                    vpad(16),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 22.0,
+                          height: 22.0,
+                          child: Checkbox(
+                            fillColor:
+                                MaterialStateProperty.all(primaryColorBase),
+                            value: context.watch<RegisterPetPrv>().isAgree,
+                            onChanged: (v) {
+                              context.read<RegisterPetPrv>().onAgree();
+                            },
+                          ),
+                        ),
+                        hpad(12),
+                        Expanded(
+                            child: InkWell(
+                          onTap: context.read<RegisterPetPrv>().onAgree,
+                          child: RichText(
+                            text: TextSpan(
+                                style: txtBodyMediumRegular(
+                                    color: grayScaleColorBase),
+                                children: [
+                                  TextSpan(text: S.of(context).i_agree),
+                                  TextSpan(
+                                      text: " ${S.of(context).regulations}",
+                                      style: txtBodyMediumRegular(
+                                          color: primaryColor6)),
+                                  TextSpan(
+                                      text:
+                                          " ${S.of(context).of_building_management}"),
+                                ]),
+                          ),
+                        )),
+                      ],
+                    ),
+                    vpad(16),
+
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: HtmlWidget(
+                        petRegulation,
+                        buildAsync: false,
+                        onTapUrl: (url) {
+                          launchUrl(Uri.parse(url));
+                          return false;
+                        },
+                        textStyle: txtBodyMediumRegular(),
                       ),
-                      PrimaryButton(
-                        isLoading: context
-                            .watch<RegisterPetPrv>()
-                            .isSendApproveLoading,
-                        buttonType: ButtonType.green,
-                        buttonSize: ButtonSize.medium,
-                        text: S.of(context).send_request,
-                        onTap: () => context
-                            .read<RegisterPetPrv>()
-                            .onSendSummitPet(context, true),
-                      ),
-                    ],
-                  ),
-                  vpad(24),
-                ],
+                    ),
+                    vpad(16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        PrimaryButton(
+                          isLoading:
+                              context.watch<RegisterPetPrv>().isAddNewLoading,
+                          buttonSize: ButtonSize.medium,
+                          text: isEdit
+                              ? S.of(context).update
+                              : S.of(context).add_new,
+                          onTap: () => context
+                              .read<RegisterPetPrv>()
+                              .onSendSummitPet(context, false),
+                        ),
+                        PrimaryButton(
+                          isLoading: context
+                              .watch<RegisterPetPrv>()
+                              .isSendApproveLoading,
+                          buttonType: ButtonType.green,
+                          buttonSize: ButtonSize.medium,
+                          text: S.of(context).send_request,
+                          onTap: () => context
+                              .read<RegisterPetPrv>()
+                              .onSendSummitPet(context, true),
+                        ),
+                      ],
+                    ),
+                    // Container(
+                    //   color: Colors.white,
+                    //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                    //   child: HtmlWidget(
+                    //     petRegulation,
+                    //     buildAsync: false,
+                    //     onTapUrl: (url) {
+                    //       launchUrl(Uri.parse(url));
+                    //       return false;
+                    //     },
+                    //     textStyle: txtBodyMediumRegular(),
+                    //   ),
+                    // ),
+                    vpad(24),
+                  ],
+                ),
               ),
             ),
           ),

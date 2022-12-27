@@ -236,7 +236,8 @@ class Utils {
 
   static Future<List<XFile?>?> selectFile(BuildContext context, bool isMulti,
       {bool isFile = false}) async {
-    final bool p = await requestPermistion(context, [Permission.storage]);
+    final bool p = await requestPermistion(
+        context, [Permission.storage, Permission.manageExternalStorage]);
     if (p) {
       List<XFile?>? value = await _filePicker(false);
       return value;
@@ -397,6 +398,7 @@ class Utils {
       DateTime? endDate}) async {
     if (Platform.isIOS) {
       return await showDatePicker(
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
         context: context,
         firstDate: startDate ?? DateTime(1900),
         lastDate: endDate ?? DateTime.now(),

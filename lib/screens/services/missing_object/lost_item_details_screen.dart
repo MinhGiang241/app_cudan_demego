@@ -24,13 +24,14 @@ class LostItemDetailsScreen extends StatefulWidget {
 }
 
 class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     MissingObject lostItem = MissingObject();
-    Function()? changeStatus;
+    Function(MissingObject)? changeStatus;
     if (arg['change'] != null) {
       changeStatus = arg['change'];
     }
@@ -38,7 +39,6 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
       lostItem = arg['lost'];
     }
 
-    bool isLoading = false;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).object_details,
@@ -99,7 +99,7 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
                   isLoading = true;
                 });
 
-                await changeStatus();
+                await changeStatus(lostItem);
                 setState(() {
                   isLoading = false;
                 });

@@ -11,6 +11,7 @@ import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import 'dash_button.dart';
 import 'package:path/path.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 
 class SelectFileWidget extends StatelessWidget {
   const SelectFileWidget({
@@ -60,7 +61,7 @@ class SelectFileWidget extends StatelessWidget {
                           onTap: () async {
                             await launchUrl(
                               Uri.parse(
-                                  "${ApiConstants.uploadURL}?load=${e.value.file_id}"),
+                                  "${ApiConstants.uploadURL}?load=${e.value.id}"),
                               mode: LaunchMode.externalApplication,
                             );
                           },
@@ -91,12 +92,17 @@ class SelectFileWidget extends StatelessWidget {
                   (e) => Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          basename(e.value.path),
-                          textAlign: TextAlign.left,
-                          style: txtMedium(
-                            14,
-                            primaryColor6,
+                        child: InkWell(
+                          onTap: () {
+                            OpenFile.open(e.value.path);
+                          },
+                          child: Text(
+                            basename(e.value.path),
+                            textAlign: TextAlign.left,
+                            style: txtMedium(
+                              14,
+                              primaryColor6,
+                            ),
                           ),
                         ),
                       ),

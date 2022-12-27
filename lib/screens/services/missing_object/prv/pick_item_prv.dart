@@ -1,13 +1,20 @@
 import 'dart:io';
 
+import 'package:app_cudan/services/api_lost.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/missing_object.dart';
+import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
+import '../../../auth/prv/resident_info_prv.dart';
+import '../missing_object_screen.dart';
 
 class PickItemPrv extends ChangeNotifier {
   var existedImage = [];
   List<File> imagesPick = [];
+  List<MissingImage> submitImagesLoot = [];
   bool isLoading = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController placeController = TextEditingController();
@@ -20,9 +27,78 @@ class PickItemPrv extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
 
   submitPick(BuildContext context) {
+    isLoading = true;
+    validateName = null;
+    validatePlace = null;
+    validateFoundTime = null;
+    notifyListeners();
     FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
+      try {
+        var now = DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+        var listError = [];
+        if (foundDate!.compareTo(now) > 0) {
+          listError.add(S.of(context).find_time_now);
+        }
+        if (listError.isNotEmpty) {
+          throw (listError.join(',  '));
+        }
+
+        return uploadImage(context).then((v) {
+          var apartment = context.read<ResidentInfoPrv>().selectedApartment;
+
+          var loot = LootItem(
+            address: placeController.text.trim(),
+            date: foundDate!.toIso8601String(),
+            describe: noteController.text.trim(),
+            name: nameController.text.trim(),
+            photo: submitImagesLoot,
+            tel: context.read<ResidentInfoPrv>().userInfo!.phone_required,
+            residential: context.read<ResidentInfoPrv>().userInfo!.info_name,
+            status: "WAIT_RETURN",
+          );
+
+          return APILost.saveLootItem(loot.toJson());
+        }).then((v) {
+          Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_send_letter,
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(context,
+                    MissingObectScreen.routeName, (route) => route.isFirst,
+                    arguments: {
+                      "year": foundDate!.year,
+                      "month": foundDate!.month,
+                      "index": 1,
+                    });
+              });
+          isLoading = false;
+          validateName = null;
+          validatePlace = null;
+          validateFoundTime = null;
+          notifyListeners();
+        }).catchError((e) {
+          isLoading = false;
+          validateName = null;
+          validatePlace = null;
+          validateFoundTime = null;
+          notifyListeners();
+          Utils.showErrorMessage(context, e.toString());
+        });
+      } catch (e) {
+        isLoading = false;
+        validateName = null;
+        validatePlace = null;
+        validateName = null;
+        notifyListeners();
+        Utils.showErrorMessage(context, e.toString());
+      }
     } else {
+      isLoading = false;
+      validateName = null;
+      validatePlace = null;
+      validateName = null;
       if (placeController.text.trim().isEmpty) {
         validatePlace = S.of(context).not_blank;
       } else {
@@ -41,6 +117,21 @@ class PickItemPrv extends ChangeNotifier {
 
       notifyListeners();
     }
+  }
+
+  uploadImage(BuildContext context) async {
+    await APIAuth.uploadSingleFile(files: imagesPick, context: context)
+        .then((v) {
+      if (v.isNotEmpty) {
+        for (var e in v) {
+          submitImagesLoot.add(
+            MissingImage(id: e.data, name: e.name),
+          );
+        }
+      }
+    }).catchError((e) {
+      throw (e);
+    });
   }
 
   pickFoundDate(BuildContext context) {

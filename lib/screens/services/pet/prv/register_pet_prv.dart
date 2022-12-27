@@ -30,6 +30,7 @@ class RegisterPetPrv extends ChangeNotifier {
     existedReportFiles = existedPet!.report ?? [];
   }
   final formKey = GlobalKey<FormState>();
+  final key1 = GlobalKey<FormState>();
   List<PetFile> existedImage = [];
   List<File> imagesPet = [];
   List<PetFile> submitImagesPet = [];
@@ -39,7 +40,7 @@ class RegisterPetPrv extends ChangeNotifier {
   List<File> reportFiles = [];
   List<PetFile> submitReportFiles = [];
   List<PetFile> existedReportFiles = [];
-  bool isAgree = false;
+  bool isAgree = true;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
   final TextEditingController nameController = TextEditingController();
@@ -59,7 +60,8 @@ class RegisterPetPrv extends ChangeNotifier {
 
   onSendSummitPet(BuildContext context, bool isRequest) async {
     FocusScope.of(context).unfocus();
-    if (formKey.currentState!.validate()) {
+    var c = formKey.currentState!.validate();
+    if (c) {
       if (isRequest) {
         isSendApproveLoading = true;
       } else {
@@ -69,11 +71,17 @@ class RegisterPetPrv extends ChangeNotifier {
       try {
         var listError = [];
         var w = weightController.text.trim();
-        if (double.tryParse(w) != null && double.parse(w) <= 15) {
+        if (double.tryParse(w) != null && double.parse(w) >= 15) {
           listError.add(S.of(context).weight_not_15);
         }
         if (!isAgree) {
           listError.add(S.of(context).pet_agree);
+        }
+        if (exitedCertificateFiles.isEmpty && certificateFiles.isEmpty) {
+          listError.add(S.of(context).certificate_not_empty);
+        }
+        if (existedReportFiles.isEmpty && reportFiles.isEmpty) {
+          listError.add(S.of(context).report_not_empty);
         }
         if (listError.isNotEmpty) {
           throw (listError.join(',  '));
@@ -85,6 +93,8 @@ class RegisterPetPrv extends ChangeNotifier {
           return uploadReport(context);
         }).then((c) {
           var newPet = Pet(
+            id: existedPet != null ? existedPet!.id : null,
+            code: existedPet != null ? existedPet!.code : null,
             apartmentId:
                 context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
             isMobile: true,
@@ -143,6 +153,7 @@ class RegisterPetPrv extends ChangeNotifier {
         Utils.showErrorMessage(context, e.toString());
       }
     } else {
+      Utils.showErrorMessage(context, S.of(context).invalid_data);
       if (nameController.text.trim().isEmpty) {
         validateName = S.of(context).not_blank;
       } else {

@@ -45,7 +45,7 @@ class MissingObjectTab extends StatefulWidget {
   });
   List<MissingObject> list = [];
   String type;
-  Function()? changeStatus;
+  Function(MissingObject)? changeStatus;
 
   Function() onRefresh;
 

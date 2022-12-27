@@ -24,14 +24,14 @@ class LootItemDetailsScreen extends StatefulWidget {
 }
 
 class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     LootItem lootItem = LootItem();
-    Function()? changeStatus;
+    Function(LootItem)? changeStatus;
     if (arg['lost'] != null) {
       lootItem = arg['lost'];
     }
@@ -90,6 +90,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
         vpad(30),
         if (arg['status'] == "WAIT_RETURN")
           PrimaryButton(
+            isLoading: isLoading,
             text: S.of(context).returned,
             onTap: () async {
               if (changeStatus != null) {
@@ -97,7 +98,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
                   isLoading = true;
                 });
 
-                await changeStatus();
+                await changeStatus(lootItem);
                 setState(() {
                   isLoading = false;
                 });

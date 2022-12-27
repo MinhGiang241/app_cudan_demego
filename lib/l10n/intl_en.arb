@@ -383,6 +383,12 @@
   "upload":"Upload",
   "weight_not_15":"Weight is not larger 15kg",
   "pet_agree":"You need to agree to comply with the regulations on pet registration",
-  "success_returned":"Đổi trạng thái đồ thành đã trả thành công",
-  "success_find":"Đổi trạng thái đồ thành đã tìm thấy thành công"
+  "success_returned":"change status item successfully",
+  "success_find":"change status item successfully",
+  "lost_time_now":"Lost time not after now day",
+  "find_time_now":"Found time not after now day",
+  "invalid_data":"Invalid date",
+  "success_send_letter":"Send letter successfully",
+  "certificate_not_empty":"Certificate is not empty",
+  "report_not_empty":"Report is not empty"
 }

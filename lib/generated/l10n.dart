@@ -3890,21 +3890,81 @@ class S {
     );
   }
 
-  /// `Đổi trạng thái đồ thành đã trả thành công`
+  /// `change status item successfully`
   String get success_returned {
     return Intl.message(
-      'Đổi trạng thái đồ thành đã trả thành công',
+      'change status item successfully',
       name: 'success_returned',
       desc: '',
       args: [],
     );
   }
 
-  /// `Đổi trạng thái đồ thành đã tìm thấy thành công`
+  /// `change status item successfully`
   String get success_find {
     return Intl.message(
-      'Đổi trạng thái đồ thành đã tìm thấy thành công',
+      'change status item successfully',
       name: 'success_find',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lost time not after now day`
+  String get lost_time_now {
+    return Intl.message(
+      'Lost time not after now day',
+      name: 'lost_time_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found time not after now day`
+  String get find_time_now {
+    return Intl.message(
+      'Found time not after now day',
+      name: 'find_time_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid date`
+  String get invalid_data {
+    return Intl.message(
+      'Invalid date',
+      name: 'invalid_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send letter successfully`
+  String get success_send_letter {
+    return Intl.message(
+      'Send letter successfully',
+      name: 'success_send_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate is not empty`
+  String get certificate_not_empty {
+    return Intl.message(
+      'Certificate is not empty',
+      name: 'certificate_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report is not empty`
+  String get report_not_empty {
+    return Intl.message(
+      'Report is not empty',
+      name: 'report_not_empty',
       desc: '',
       args: [],
     );

@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/missing_object.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_error_widget.dart';
@@ -144,8 +145,9 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                         controller: tabController,
                         children: [
                           MissingObjectTab(
-                            changeStatus: () =>
-                                Future.delayed(Duration(seconds: 2)),
+                            changeStatus: (MissingObject lost) => context
+                                .read<MissingObjectPrv>()
+                                .saveLostItem(context, lost),
                             type: "HISTORY",
                             list: context.watch<MissingObjectPrv>().lostList,
                             refreshController: _refreshHistoryController,
@@ -156,6 +158,9 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                             },
                           ),
                           PickedItemTab(
+                            changeStatus: (LootItem loot) => context
+                                .read<MissingObjectPrv>()
+                                .saveLootItem(context, loot),
                             type: "FOUND",
                             list: context.watch<MissingObjectPrv>().lootList,
                             refreshController: _refreshFoundController,

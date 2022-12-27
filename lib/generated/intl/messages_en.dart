@@ -91,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cat": MessageLookupByLibrary.simpleMessage("Cat"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Certification of rabies vaccination"),
+        "certificate_not_empty":
+            MessageLookupByLibrary.simpleMessage("Certificate is not empty"),
         "change_pass": MessageLookupByLibrary.simpleMessage("Change password"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
         "choose_a_project":
@@ -197,6 +199,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file_selection":
             MessageLookupByLibrary.simpleMessage("File selection"),
+        "find_time_now": MessageLookupByLibrary.simpleMessage(
+            "Found time not after now day"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
@@ -240,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Information reception"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
+        "invalid_data": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "item_list_not_empty":
             MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
@@ -252,6 +257,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
+        "lost_time_now":
+            MessageLookupByLibrary.simpleMessage("Lost time not after now day"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
@@ -438,6 +445,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "report_not_empty":
+            MessageLookupByLibrary.simpleMessage("Report is not empty"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
         "res_card_details":
             MessageLookupByLibrary.simpleMessage("Resident card details"),
@@ -524,7 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Edit successfully"),
         "success_find": MessageLookupByLibrary.simpleMessage(
-            "Đổi trạng thái đồ thành đã tìm thấy thành công"),
+            "change status item successfully"),
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
@@ -532,7 +541,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_payment": m12,
         "success_remove": m13,
         "success_returned": MessageLookupByLibrary.simpleMessage(
-            "Đổi trạng thái đồ thành đã trả thành công"),
+            "change status item successfully"),
+        "success_send_letter":
+            MessageLookupByLibrary.simpleMessage("Send letter successfully"),
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request successfully"),
         "success_sign_up":

@@ -384,7 +384,13 @@
   "upload":"Tải lên",
   "weight_not_15":"Cân nặng không được quá 15kg",
   "pet_agree":"bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi",
-  "success_returned":"change status item successfully",
-  "success_find":"change status item successfully"
+  "success_returned":"Đổi trạng thái đồ thành đã trả thành công",
+  "success_find":"Đổi trạng thái đồ thành đã tìm thấy thành công",
+  "lost_time_now":"Thời điểm thất lạc phải nhỏ hơn hoặc bằng ngày hiện tại",
+  "find_time_now":"Thời điểm thấy phải nhỏ hơn hoặc bằng ngày hiện tại",
+  "invalid_data":"Dữ liệu không hợp lệ",
+  "certificate_not_empty":"Giấy chứng nhận tiêm phòng dại không được để trống",
+  "success_send_letter":"Gửi phiếu thành công",
+  "report_not_empty":"Biên bản không được để trống"
 }
    

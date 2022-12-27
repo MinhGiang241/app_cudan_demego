@@ -83,6 +83,7 @@ class MissingObject {
 }
 
 class MissingImage {
+  MissingImage({this.id, this.name});
   String? id;
   String? name;
   MissingImage.fromJson(Map<String, dynamic> json) {
@@ -165,7 +166,7 @@ class LootItem {
     data['describe'] = describe;
     data['name'] = name;
     data['time_pay'] = time_pay;
-    data['image'] = photo != null
+    data['photo'] = photo != null
         ? photo!.map((e) {
             return e.toJson();
           }).toList()
