@@ -47,8 +47,9 @@ class _MissingObectScreenState extends State<MissingObectScreen>
     if (arg != null) {
       year = arg['year'];
       month = arg['month'];
-      tabController.index = arg['index'];
+      initIndex = arg['index'];
     }
+    tabController.index = initIndex;
     return ChangeNotifierProvider(
         create: (context) => MissingObjectPrv(year: year, month: month),
         builder: (context, state) {
@@ -80,7 +81,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                                   .read<MissingObjectPrv>()
                                   .onChooseMonthYear(v);
                               setState(() {
-                                initIndex = tabController.index;
+                                tabController.index = tabController.index;
                               });
                             },
                             pickerModel: CustomMonthPicker(
@@ -136,7 +137,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                           message: snapshot.data.toString(),
                           onRetry: () async {
                             setState(() {
-                              initIndex = initIndex;
+                              initIndex = tabController.index;
                             });
                           });
                     }

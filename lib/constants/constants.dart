@@ -80,6 +80,7 @@ const Color greenColor5 = Color(0xffDAF5F3);
 
 const Color greenColor6 = Color(0xff00C950);
 const Color greenColor8 = Color(0xff4CAF50);
+const Color greenColor9 = Color(0xff4090BD);
 Color greenColor7 = const Color(0xff31DE14).withOpacity(0.38);
 
 const Color pinkColorBase = Color(0xffFF4E98);

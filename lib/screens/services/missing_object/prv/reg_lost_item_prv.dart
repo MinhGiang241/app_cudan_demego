@@ -33,7 +33,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       try {
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 0);
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
 
         var listError = [];
 
@@ -90,6 +90,9 @@ class RegisterLostItemPrv extends ChangeNotifier {
         Utils.showErrorMessage(context, e.toString());
       }
     } else {
+      isLoading = false;
+      validateName = null;
+      validateLostTime = null;
       if (lostDateController.text.isEmpty) {
         validateLostTime = S.of(context).not_blank;
       } else {

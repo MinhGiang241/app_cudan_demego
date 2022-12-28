@@ -9,10 +9,11 @@ import '../../../../utils/utils.dart';
 import '../missing_object_screen.dart';
 
 class MissingObjectPrv extends ChangeNotifier {
-  MissingObjectPrv({this.year, this.month}) {
+  MissingObjectPrv({this.year, this.month, this.initTab = 0}) {
     year ??= DateTime.now().year;
     month ??= DateTime.now().month;
   }
+  int? initTab;
   int? year;
   int? month;
   List<MissingObject> lostList = [];
@@ -66,24 +67,21 @@ class MissingObjectPrv extends ChangeNotifier {
   }
 
   getLostItemList(BuildContext context) async {
-    return await APILost.getLostItemList(year!, month!,
-            context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "")
-        .then((v) {
+    try {
       lostList.clear();
-      for (var i in v) {
+      lootList.clear();
+      var phone = context.read<ResidentInfoPrv>().userInfo!.phone_required;
+      var lost = await APILost.getLostItemList(year!, month!, phone ?? "");
+      for (var i in lost) {
         lostList.add(MissingObject.fromJson(i));
       }
-      notifyListeners();
-      return APILost.getLootItemList(year!, month!,
-          context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "");
-    }).then((v) {
-      lootList.clear();
-      for (var i in v) {
+      var loot = await APILost.getLootItemList(year!, month!, phone ?? "");
+      for (var i in loot) {
         lootList.add(LootItem.fromJson(i));
       }
       notifyListeners();
-    }).catchError((e) {
-      Utils.showErrorMessage(context, e);
-    });
+    } catch (e) {
+      Utils.showErrorMessage(context, e.toString());
+    }
   }
 }

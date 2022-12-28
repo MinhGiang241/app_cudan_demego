@@ -58,6 +58,24 @@ genStatusColor(String status) {
       return redColor9;
     case "APPROVED":
       return greenColor6;
+    case "WAIT_OWNER":
+      return primaryColorBase;
+    case "WAIT_TECHNICAL":
+      return greenColor9;
+    case "WAIT_MANAGER":
+      return purpleColor6;
+    case "WAIT_CONSTRUCTION":
+      return grayScaleColor1;
+    case "UNDER_CONSTRUCTION":
+      return primaryColor6;
+    case "PAUSE_CONSTRUCTION":
+      return redColor9;
+    case "WAIT_ACCEPTANCE":
+      return yellowColor7;
+    case "UNDER_ACCEPTANCE":
+      return primaryColorBase;
+    case "COMPLETE":
+      return greenColor8;
     default:
       return grayScaleColor1;
   }

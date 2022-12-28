@@ -3969,6 +3969,336 @@ class S {
       args: [],
     );
   }
+
+  /// `Construction list`
+  String get cons_list {
+    return Intl.message(
+      'Construction list',
+      name: 'cons_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction registration`
+  String get cons_reg {
+    return Intl.message(
+      'Construction registration',
+      name: 'cons_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction file`
+  String get cons_file {
+    return Intl.message(
+      'Construction file',
+      name: 'cons_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any construction registration`
+  String get no_reg_cons {
+    return Intl.message(
+      'Don\'t have any construction registration',
+      name: 'no_reg_cons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any construction file`
+  String get no_cons_file {
+    return Intl.message(
+      'Don\'t have any construction file',
+      name: 'no_cons_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction code`
+  String get cons_code {
+    return Intl.message(
+      'Construction code',
+      name: 'cons_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction fee`
+  String get cons_fee {
+    return Intl.message(
+      'Construction fee',
+      name: 'cons_fee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status letter`
+  String get status_letter {
+    return Intl.message(
+      'Status letter',
+      name: 'status_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction code`
+  String get status_cons {
+    return Intl.message(
+      'Construction code',
+      name: 'status_cons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File code`
+  String get code_file {
+    return Intl.message(
+      'File code',
+      name: 'code_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 1`
+  String get step1 {
+    return Intl.message(
+      'Step 1',
+      name: 'step1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 2`
+  String get step2 {
+    return Intl.message(
+      'Step 2',
+      name: 'step2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 3`
+  String get step3 {
+    return Intl.message(
+      'Step 3',
+      name: 'step3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction information`
+  String get cons_info {
+    return Intl.message(
+      'Construction information',
+      name: 'cons_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `deposit paid`
+  String get paid_deposit {
+    return Intl.message(
+      'deposit paid',
+      name: 'paid_deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction day`
+  String get cons_day {
+    return Intl.message(
+      'Construction day',
+      name: 'cons_day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off day`
+  String get off_day {
+    return Intl.message(
+      'Off day',
+      name: 'off_day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Work description`
+  String get work_description {
+    return Intl.message(
+      'Work description',
+      name: 'work_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The limit for each upload file does not exceed 15MB`
+  String get limit_15mb {
+    return Intl.message(
+      'The limit for each upload file does not exceed 15MB',
+      name: 'limit_15mb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I confirm that I will comply with the regulations on construction and will compensate for all losses, complaints, costs incurred from this construction and repair work.See more`
+  String get i_confirm {
+    return Intl.message(
+      'I confirm that I will comply with the regulations on construction and will compensate for all losses, complaints, costs incurred from this construction and repair work.See more',
+      name: 'i_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `tại đây`
+  String get here {
+    return Intl.message(
+      'tại đây',
+      name: 'here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction drawing`
+  String get cons_drawing {
+    return Intl.message(
+      'Construction drawing',
+      name: 'cons_drawing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Existing drawing`
+  String get exist_drawing {
+    return Intl.message(
+      'Existing drawing',
+      name: 'exist_drawing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Renewal drawing`
+  String get renewal_drawing {
+    return Intl.message(
+      'Renewal drawing',
+      name: 'renewal_drawing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Violation record`
+  String get violation_record {
+    return Intl.message(
+      'Violation record',
+      name: 'violation_record',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View record`
+  String get view_record {
+    return Intl.message(
+      'View record',
+      name: 'view_record',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction registration letter`
+  String get cons_reg_letter {
+    return Intl.message(
+      'Construction registration letter',
+      name: 'cons_reg_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date`
+  String get start_date {
+    return Intl.message(
+      'Start date',
+      name: 'start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date`
+  String get end_date {
+    return Intl.message(
+      'End date',
+      name: 'end_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved date`
+  String get approved_date {
+    return Intl.message(
+      'Approved date',
+      name: 'approved_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File status`
+  String get file_status {
+    return Intl.message(
+      'File status',
+      name: 'file_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File information`
+  String get file_info {
+    return Intl.message(
+      'File information',
+      name: 'file_info',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

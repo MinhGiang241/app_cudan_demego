@@ -132,11 +132,11 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                                     TableCellVerticalAlignment.baseline,
                                 columnWidths: const {
                                   0: FlexColumnWidth(3),
-                                  1: FlexColumnWidth(3)
+                                  1: FlexColumnWidth(2)
                                 },
                                 children: [
                                   TableRow(children: [
-                                    Text('${S.of(context).found_time}:'),
+                                    Text('${S.of(context).missing_time}:'),
                                     Text(Utils.dateFormat(e.time ?? '', 1),
                                         style: txtLinkSmall()),
                                   ]),

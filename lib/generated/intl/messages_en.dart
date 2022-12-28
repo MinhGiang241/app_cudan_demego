@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Apartment bill"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
+        "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Arrived date"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
@@ -100,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "code_file": MessageLookupByLibrary.simpleMessage("File code"),
         "code_verify":
             MessageLookupByLibrary.simpleMessage("Verify security code"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
@@ -118,6 +120,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_send_request": m5,
+        "cons_code": MessageLookupByLibrary.simpleMessage("Construction code"),
+        "cons_day": MessageLookupByLibrary.simpleMessage("Construction day"),
+        "cons_drawing":
+            MessageLookupByLibrary.simpleMessage("Construction drawing"),
+        "cons_fee": MessageLookupByLibrary.simpleMessage("Construction fee"),
+        "cons_file": MessageLookupByLibrary.simpleMessage("Construction file"),
+        "cons_info":
+            MessageLookupByLibrary.simpleMessage("Construction information"),
+        "cons_list": MessageLookupByLibrary.simpleMessage("Construction list"),
+        "cons_reg":
+            MessageLookupByLibrary.simpleMessage("Construction registration"),
+        "cons_reg_letter": MessageLookupByLibrary.simpleMessage(
+            "Construction registration letter"),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "content": MessageLookupByLibrary.simpleMessage("Content"),
         "covenient_service":
@@ -134,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tranfer information"),
         "delivery_letter":
             MessageLookupByLibrary.simpleMessage("Delivery_letter"),
+        "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "detail_view": MessageLookupByLibrary.simpleMessage("Details view"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
@@ -159,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
+        "end_date": MessageLookupByLibrary.simpleMessage("End date"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
@@ -191,14 +208,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
+        "exist_drawing":
+            MessageLookupByLibrary.simpleMessage("Existing drawing"),
         "expired": MessageLookupByLibrary.simpleMessage("Expired"),
         "expired_date": MessageLookupByLibrary.simpleMessage("Expired_date"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "file_info": MessageLookupByLibrary.simpleMessage("File information"),
         "file_selection":
             MessageLookupByLibrary.simpleMessage("File selection"),
+        "file_status": MessageLookupByLibrary.simpleMessage("File status"),
         "find_time_now": MessageLookupByLibrary.simpleMessage(
             "Found time not after now day"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
@@ -222,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("already have an account "),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
+        "here": MessageLookupByLibrary.simpleMessage("tại đây"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
         "history": MessageLookupByLibrary.simpleMessage("Timeline"),
@@ -231,6 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
         "housework": MessageLookupByLibrary.simpleMessage("Housework"),
         "i_agree": MessageLookupByLibrary.simpleMessage("I agree with"),
+        "i_confirm": MessageLookupByLibrary.simpleMessage(
+            "I confirm that I will comply with the regulations on construction and will compensate for all losses, complaints, costs incurred from this construction and repair work.See more"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
             "Identity card back side image can not be empty"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -254,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "letter_num": MessageLookupByLibrary.simpleMessage("Letter code"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
+        "limit_15mb": MessageLookupByLibrary.simpleMessage(
+            "The limit for each upload file does not exceed 15MB"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
@@ -285,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_bill": MessageLookupByLibrary.simpleMessage("Don\'t have any bill"),
         "no_card": MessageLookupByLibrary.simpleMessage("Don\'t have any card"),
         "no_comment": MessageLookupByLibrary.simpleMessage("No comment"),
+        "no_cons_file": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any construction file"),
         "no_delivery":
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_event":
@@ -300,6 +328,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any pet registration"),
         "no_pick_obj": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any picked object"),
+        "no_reg_cons": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any construction registration"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any service registration"),
         "no_trans_card":
@@ -338,6 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "object_name": MessageLookupByLibrary.simpleMessage("Object name"),
         "of_building_management":
             MessageLookupByLibrary.simpleMessage("of building management"),
+        "off_day": MessageLookupByLibrary.simpleMessage("Off day"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
@@ -353,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Package items can not be empty"),
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "paid": MessageLookupByLibrary.simpleMessage("Paid"),
+        "paid_deposit": MessageLookupByLibrary.simpleMessage("deposit paid"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parcel_code": MessageLookupByLibrary.simpleMessage("Parcel code"),
         "parcel_details":
@@ -445,6 +477,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "renewal_drawing":
+            MessageLookupByLibrary.simpleMessage("Renewal drawing"),
         "report_not_empty":
             MessageLookupByLibrary.simpleMessage("Report is not empty"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
@@ -520,12 +554,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you want to sign out?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
+        "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
         "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được để trống"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "status_cons":
+            MessageLookupByLibrary.simpleMessage("Construction code"),
+        "status_letter": MessageLookupByLibrary.simpleMessage("Status letter"),
+        "step1": MessageLookupByLibrary.simpleMessage("Step 1"),
+        "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
+        "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
         "success_can_req": m11,
         "success_cr_new":
@@ -594,6 +635,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "view_record": MessageLookupByLibrary.simpleMessage("View record"),
+        "violation_record":
+            MessageLookupByLibrary.simpleMessage("Violation record"),
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
@@ -609,6 +653,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
         "width": MessageLookupByLibrary.simpleMessage("Width"),
+        "work_description":
+            MessageLookupByLibrary.simpleMessage("Work description"),
         "year": MessageLookupByLibrary.simpleMessage("Year")
       };
 }

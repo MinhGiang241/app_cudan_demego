@@ -17,6 +17,7 @@ import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
+import 'construction/construction_list_screen.dart';
 import 'delivery/delivery_list_screen.dart';
 import 'extra_service/extra_service_card_list.dart';
 import 'parking_card/transport_card_list_screen.dart';
@@ -56,7 +57,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientPink,
         "icon": PrimaryIcons.wrench,
         "title": S.current.construction,
-        "navigator": GymCardListScreen.routeName,
+        "navigator": ConstructionListScreen.routeName,
       },
       {
         "color": yellowColorBase,
