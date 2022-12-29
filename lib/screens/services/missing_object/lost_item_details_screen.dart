@@ -1,6 +1,7 @@
 import 'package:app_cudan/models/missing_object.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -8,10 +9,12 @@ import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../services/api_lost.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
+import 'missing_object_screen.dart';
 
 class LostItemDetailsScreen extends StatefulWidget {
   const LostItemDetailsScreen({
@@ -31,7 +34,7 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     MissingObject lostItem = MissingObject();
-    Function(MissingObject)? changeStatus;
+    Function(BuildContext, MissingObject)? changeStatus;
     if (arg['change'] != null) {
       changeStatus = arg['change'];
     }
@@ -99,7 +102,8 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
                   isLoading = true;
                 });
 
-                await changeStatus(lostItem);
+                await changeStatus(context, lostItem);
+
                 setState(() {
                   isLoading = false;
                 });

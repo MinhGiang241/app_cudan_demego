@@ -4299,6 +4299,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Surface`
+  String get surface {
+    return Intl.message(
+      'Surface',
+      name: 'surface',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction type`
+  String get cons_type {
+    return Intl.message(
+      'Construction type',
+      name: 'cons_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End`
+  String get end {
+    return Intl.message(
+      'End',
+      name: 'end',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction registration details`
+  String get cons_reg_detail {
+    return Intl.message(
+      'Construction registration details',
+      name: 'cons_reg_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Worker amount`
+  String get worker_num {
+    return Intl.message(
+      'Worker amount',
+      name: 'worker_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction regulation`
+  String get cons_regulation {
+    return Intl.message(
+      'Construction regulation',
+      name: 'cons_regulation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction unit`
+  String get cons_unit {
+    return Intl.message(
+      'Construction unit',
+      name: 'cons_unit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction unit information`
+  String get cons_unit_info {
+    return Intl.message(
+      'Construction unit information',
+      name: 'cons_unit_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deputy`
+  String get deputy {
+    return Intl.message(
+      'Deputy',
+      name: 'deputy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone of deputy`
+  String get deputy_phone {
+    return Intl.message(
+      'Phone of deputy',
+      name: 'deputy_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CMCD/ CCCD/ Passport`
+  String get cmnd {
+    return Intl.message(
+      'CMCD/ CCCD/ Passport',
+      name: 'cmnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction document details`
+  String get cons_file_details {
+    return Intl.message(
+      'Construction document details',
+      name: 'cons_file_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document code`
+  String get file_code {
+    return Intl.message(
+      'Document code',
+      name: 'file_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login session is invalid, please sign in again`
+  String get expired_login {
+    return Intl.message(
+      'Login session is invalid, please sign in again',
+      name: 'expired_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nội quy vật nuôi`
+  String get pet_regulation {
+    return Intl.message(
+      'Nội quy vật nuôi',
+      name: 'pet_regulation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

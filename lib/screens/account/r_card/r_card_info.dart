@@ -73,8 +73,8 @@ class _RecidentCardInfoState extends State<RecidentCardInfo>
         ListView(
           children: [
             vpad(24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: TimeLineView(),
             )
           ],

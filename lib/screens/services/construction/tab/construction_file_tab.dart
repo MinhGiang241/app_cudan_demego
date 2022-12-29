@@ -13,6 +13,7 @@ import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
+import '../construction_doc_details_screen.dart';
 
 class ConstructionFileTab extends StatefulWidget {
   ConstructionFileTab({super.key, required this.getList, required this.list});
@@ -125,7 +126,15 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                       bottom: 16,
                     ),
                     child: PrimaryCard(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          ConstructionDocumentDetailsScreen.routeName,
+                          arguments: {
+                            "cons": e,
+                          },
+                        );
+                      },
                       child: Column(
                         children: [
                           Padding(

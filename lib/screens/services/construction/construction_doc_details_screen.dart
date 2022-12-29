@@ -1,6 +1,5 @@
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/services/construction/tab/construction_history_tab.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ import '../../../constants/constants.dart';
 import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../services/api_construction.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -22,25 +22,26 @@ import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 import '../../../widgets/timeline_view.dart';
 import '../../payment/widget/payment_item.dart';
+import 'tab/construction_history_tab.dart';
 
-class ConstructionRegistrationDetailsScreen extends StatefulWidget {
-  const ConstructionRegistrationDetailsScreen({super.key});
-  static const routeName = '/construction/reg-details';
+class ConstructionDocumentDetailsScreen extends StatefulWidget {
+  const ConstructionDocumentDetailsScreen({super.key});
+  static const routeName = '/construction/doc-details';
 
   @override
-  State<ConstructionRegistrationDetailsScreen> createState() =>
-      _ConstructionRegistrationDetailsScreenState();
+  State<ConstructionDocumentDetailsScreen> createState() =>
+      _ConstructionDocumentDetailsState();
 }
 
-class _ConstructionRegistrationDetailsScreenState
-    extends State<ConstructionRegistrationDetailsScreen>
+class _ConstructionDocumentDetailsState
+    extends State<ConstructionDocumentDetailsScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   @override
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    ConstructionRegistration reg = ConstructionRegistration();
+    ConstructionDocument reg = ConstructionDocument();
     if (arg['cons'] != null) {
       reg = arg['cons'];
     }
@@ -53,7 +54,7 @@ class _ConstructionRegistrationDetailsScreenState
     var draws = [...reg.current_draw!, ...reg.renovation_draw!];
     return PrimaryScreen(
         appBar: PrimaryAppbar(
-          title: S.of(context).cons_reg_detail,
+          title: S.of(context).cons_file_details,
           tabController: tabController,
           isTabScrollabel: false,
           tabs: [
@@ -99,112 +100,34 @@ class _ConstructionRegistrationDetailsScreenState
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).reg_code,
-                        content: reg.code,
+                        title: S.of(context).cons_code,
+                        content: reg.registration_code,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reg_date,
-                        content: Utils.dateFormat(reg.create_date ?? "", 1),
+                        content: Utils.dateFormat(reg.reg_date ?? "", 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title:
-                            '${S.of(context).start_time}- ${S.of(context).end}',
-                        content:
-                            '${Utils.dateFormat(reg.time_start ?? "", 1)} - ${Utils.dateFormat(reg.time_end ?? "", 1)}',
+                        title: S.of(context).approved_date,
+                        content: Utils.dateFormat(reg.createdTime ?? "", 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).cons_fee,
-                        content: formatCurrency.format(reg.construction_cost),
+                        title: S.of(context).file_code,
+                        content: reg.code,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).deposit,
-                        content: formatCurrency.format(reg.deposit_fee),
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).cons_day,
-                        content: reg.working_day.toString(),
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).off_day,
-                        content: reg.off_day.toString(),
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      if (reg.description != null)
-                        InfoContentView(
-                          isHorizontal: true,
-                          title: S.of(context).work_description,
-                          content: reg.description,
-                          contentStyle: txtBold(14, grayScaleColorBase),
-                        ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).letter_status,
+                        title: S.of(context).status,
                         content: reg.s!.name ?? "",
                         contentStyle:
                             txtBold(14, genStatusColor(reg.status ?? "")),
-                      ),
-                    ],
-                  ),
-                ),
-                vpad(16),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: PrimaryInfoWidget(
-                    label: S.of(context).cons_unit_info,
-                    listInfoView: [
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).cons_unit,
-                        content: reg.contruction_unit,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).address,
-                        content: reg.contruction_add,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).email,
-                        content: reg.contruction_email,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).deputy,
-                        content: reg.deputy,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).deputy_phone,
-                        content: reg.deputy_phone,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).cmnd,
-                        content: reg.deputy_identity,
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).worker_num,
-                        content: reg.worker_num.toString(),
-                        contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                     ],
                   ),
@@ -217,6 +140,7 @@ class _ConstructionRegistrationDetailsScreenState
                     style: txtMedium(14, grayScaleColor2),
                   ),
                 ),
+                vpad(12),
                 ...draws.map(
                   (e) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -320,7 +244,7 @@ class _ConstructionRegistrationDetailsScreenState
               ],
             ),
             ConstructionHistoryTab(
-              constructionregistrationId: reg.id ?? "",
+              constructionregistrationId: reg.constructionRegistrationId ?? "",
             )
           ],
         ));

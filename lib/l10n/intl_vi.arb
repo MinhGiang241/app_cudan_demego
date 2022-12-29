@@ -424,6 +424,22 @@
   "end_date":"Ngày kết thúc",
   "approved_date":"Ngày phê duyệt",
   "file_status":"Trạng thái hồ sơ",
-  "file_info":"Thông tin hồ sơ"
+  "file_info":"Thông tin hồ sơ",
+  "surface":"Mặt bằng",
+  "cons_type":"Loại thi công",
+  "end":"Kết thúc",
+  "cons_reg_detail":"Chi tiết đăng ký thi công",
+  "worker_num":"Số lượng công nhân",
+  "cons_regulation":"Nội quy thi công",
+  "cons_unit":"Đơn vị thi công",
+  "cons_unit_info":"Thông tin đơn vị thi công",
+  "address":"Địa chỉ",
+  "deputy":"Người đại dện",
+  "deputy_phone":"SDT người đại diện",
+  "cmnd":"CMCD/ CCCD/ Hộ chiếu",
+  "cons_file_details":"Chi tiết hồ sơ thi công",
+  "file_code":"Mã thi công",
+  "expired_login":"Phiên đăng nhập hết hạn, hãy đăng nhập lại",
+  "pet_regulation":"Nội quy vật nuôi"
 }
    

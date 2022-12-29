@@ -423,5 +423,21 @@
   "end_date":"End date",
   "approved_date":"Approved date",
   "file_status":"File status",
-  "file_info":"File information"
+  "file_info":"File information",
+  "surface":"Surface",
+  "cons_type":"Construction type",
+  "end":"End",
+  "cons_reg_detail":"Construction registration details",
+  "worker_num":"Worker amount",
+  "cons_regulation":"Construction regulation",
+  "cons_unit":"Construction unit",
+  "cons_unit_info":"Construction unit information",
+  "address":"Address",
+  "deputy":"Deputy",
+  "deputy_phone":"Phone of deputy",
+  "cmnd":"CMCD/ CCCD/ Passport",
+  "cons_file_details":"Construction document details",
+  "file_code":"Document code",
+  "expired_login":"Login session is invalid, please sign in again",
+  "pet_regulation":"Nội quy vật nuôi"
 }

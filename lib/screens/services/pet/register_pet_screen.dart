@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/constants.dart';
-import '../../../constants/pet_regulation.dart';
+
+import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/pet.dart';
 import '../../../widgets/primary_button.dart';
@@ -18,7 +19,6 @@ import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_file_widget.dart';
 import '../../../widgets/select_media_widget.dart';
 import 'prv/register_pet_prv.dart';
-import '../../../constants/pet_regulation.dart';
 
 class RegisterPetScreen extends StatefulWidget {
   const RegisterPetScreen({super.key});

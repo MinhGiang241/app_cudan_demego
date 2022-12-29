@@ -12,6 +12,7 @@ import 'package:timeago/timeago.dart';
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../models/selection_model.dart';
+import '../screens/auth/sign_in_screen.dart';
 import '../widgets/item_selected.dart';
 import '../widgets/primary_bottom_sheet.dart';
 import '../widgets/primary_button.dart';
@@ -498,11 +499,24 @@ class Utils {
   }
 
   static showErrorMessage(BuildContext context, String e) {
-    Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.error(
-          msg: S.of(context).err_x(e),
-        ));
+    if (e == 'RELOGIN') {
+      Utils.showDialog(
+          context: context,
+          dialog: PrimaryDialog.error(
+            msg: S.of(context).err_x(S.of(context).expired_login),
+            onClose: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  SignInScreen.routeName, ((route) => route.isCurrent),
+                  arguments: {});
+            },
+          ));
+    } else {
+      Utils.showDialog(
+          context: context,
+          dialog: PrimaryDialog.error(
+            msg: S.of(context).err_x(e),
+          ));
+    }
   }
 
   static showSuccessMessage(

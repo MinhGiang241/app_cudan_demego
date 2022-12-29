@@ -4,6 +4,36 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIConstruction {
+  static Future getConstructionHistory(
+      String constructionregistrationId) async {
+    var query = '''
+    mutation (\$constructionregistrationId:String){
+        response: constructiondocumenthistory_mobile_get_construction_history (constructionregistrationId: \$constructionregistrationId ) {
+            code
+            message
+            data
+        }
+    }
+              
+  ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "constructionregistrationId": constructionregistrationId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getConstructionDocumentList(
       String residentId, String apartmentId) async {
     var query = '''

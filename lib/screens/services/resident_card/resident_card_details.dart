@@ -187,8 +187,8 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
             ListView(
               children: [
                 vpad(24),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: TimeLineView(),
                 )
               ],

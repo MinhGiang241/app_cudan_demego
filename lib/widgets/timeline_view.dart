@@ -2,13 +2,14 @@ import 'package:app_cudan/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
+import '../models/construction.dart';
+import '../models/timeline_model.dart';
+import '../utils/utils.dart';
 import 'primary_card.dart';
 
 class TimeLineView extends StatelessWidget {
-  const TimeLineView({
-    Key? key,
-  }) : super(key: key);
-
+  TimeLineView({Key? key, this.content = const []}) : super(key: key);
+  List<TimelineModel> content = [];
   @override
   Widget build(BuildContext context) {
     return PrimaryCard(
@@ -29,43 +30,57 @@ class TimeLineView extends StatelessWidget {
               DotIndicator(color: i == 0 ? yellowColor1 : greenColorBase),
           indicatorPositionBuilder: (context, i) => 0,
           nodePositionBuilder: (context, i) {
-            return 0.15;
+            return 0.3;
           },
           oppositeContentsBuilder: (context, index) => Padding(
             padding: const EdgeInsets.only(right: 10, bottom: 16),
-            child: Text('20/04\n11:00',
-                style:
-                    txtRegular(10, index == 0 ? yellowColor1 : greenColorBase)),
+            child: content.isNotEmpty
+                ? Text(Utils.dateFormat(content[index].date ?? "", 1),
+                    style: txtRegular(
+                        10, index == 0 ? yellowColor1 : greenColorBase))
+                : Text('20/04\n11:00',
+                    style: txtRegular(
+                        10, index == 0 ? yellowColor1 : greenColorBase)),
           ),
           contentsBuilder: (context, index) => Padding(
             padding: const EdgeInsets.only(left: 10, bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (index != 0)
-                  Text('Tiêu đề timeline',
-                      style: txtLinkXSmall(color: greenColorBase)),
-                if (index != 0)
-                  Text('Hoàn thành', style: txtMedium(12, greenColorBase)),
-                if (index == 0)
-                  Text('Tiêu đề timeline',
-                      style: txtLinkXSmall(color: yellowColor1)),
-                if (index == 0)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text('Nơi xử lý : ....',
-                        style: txtMedium(12, yellowColor1)),
-                  ),
-                if (index == 0)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text('Trạng thái : Đang xử lý',
-                        style: txtMedium(12, yellowColor1)),
-                  ),
-              ],
+              children: content.isNotEmpty
+                  ? [
+                      if (index != 0)
+                        Text(content[index].title ?? "",
+                            style: txtLinkXSmall(color: greenColorBase)),
+                      if (index == 0)
+                        Text(content[index].title ?? "",
+                            style: txtLinkXSmall(color: yellowColor1)),
+                    ]
+                  : [
+                      if (index != 0)
+                        Text('Tiêu đề timeline',
+                            style: txtLinkXSmall(color: greenColorBase)),
+                      if (index != 0)
+                        Text('Hoàn thành',
+                            style: txtMedium(12, greenColorBase)),
+                      if (index == 0)
+                        Text('Tiêu đề timeline',
+                            style: txtLinkXSmall(color: yellowColor1)),
+                      if (index == 0)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text('Nơi xử lý : ....',
+                              style: txtMedium(12, yellowColor1)),
+                        ),
+                      if (index == 0)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text('Trạng thái : Đang xử lý',
+                              style: txtMedium(12, yellowColor1)),
+                        ),
+                    ],
             ),
           ),
-          itemCount: 10,
+          itemCount: content.length,
         ),
       ),
     ));

@@ -21,7 +21,9 @@ import '../screens/news/news_screen.dart';
 import '../screens/payment/bill_details_screen.dart';
 import '../screens/payment/payment_list_screen.dart';
 import '../screens/payment/payment_screen.dart';
+import '../screens/services/construction/construction_doc_details_screen.dart';
 import '../screens/services/construction/construction_list_screen.dart';
+import '../screens/services/construction/construction_reg_screen.dart';
 import '../screens/services/construction/construction_registration_details_screen.dart';
 import '../screens/services/delivery/delivery_list_screen.dart';
 import '../screens/services/delivery/package_details_screen.dart';
@@ -280,6 +282,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ConstructionRegistrationDetailsScreen(),
+        );
+      case ConstructionDocumentDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ConstructionDocumentDetailsScreen(),
+        );
+      case ConstructionRegScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ConstructionRegScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
+        "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
         "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "amount": MessageLookupByLibrary.simpleMessage("Số lượng"),
@@ -105,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "cmnd": MessageLookupByLibrary.simpleMessage("CMCD/ CCCD/ Hộ chiếu"),
         "code_file": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
@@ -128,11 +130,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_drawing": MessageLookupByLibrary.simpleMessage("Bản vẽ thi công"),
         "cons_fee": MessageLookupByLibrary.simpleMessage("Phí thi công"),
         "cons_file": MessageLookupByLibrary.simpleMessage("Hồ sơ thi công"),
+        "cons_file_details":
+            MessageLookupByLibrary.simpleMessage("Chi tiết hồ sơ thi công"),
         "cons_info": MessageLookupByLibrary.simpleMessage("Thông tin thi công"),
         "cons_list": MessageLookupByLibrary.simpleMessage("Danh sách thi công"),
         "cons_reg": MessageLookupByLibrary.simpleMessage("Đăng ký thi công"),
+        "cons_reg_detail":
+            MessageLookupByLibrary.simpleMessage("Chi tiết đăng ký thi công"),
         "cons_reg_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký thi công"),
+        "cons_regulation":
+            MessageLookupByLibrary.simpleMessage("Nội quy thi công"),
+        "cons_type": MessageLookupByLibrary.simpleMessage("Loại thi công"),
+        "cons_unit": MessageLookupByLibrary.simpleMessage("Đơn vị thi công"),
+        "cons_unit_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin đơn vị thi công"),
         "construction": MessageLookupByLibrary.simpleMessage("Thi công"),
         "content": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
@@ -148,6 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "delivery_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký chuyển đồ"),
         "deposit": MessageLookupByLibrary.simpleMessage("Đặt cọc"),
+        "deputy": MessageLookupByLibrary.simpleMessage("Người đại dện"),
+        "deputy_phone":
+            MessageLookupByLibrary.simpleMessage("SDT người đại diện"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "detail_view": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
@@ -172,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "end_date": MessageLookupByLibrary.simpleMessage("Ngày kết thúc"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
@@ -211,10 +227,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bản vẽ hiện trạng"),
         "expired": MessageLookupByLibrary.simpleMessage("Hết hạn"),
         "expired_date": MessageLookupByLibrary.simpleMessage("Ngày hết hạn"),
+        "expired_login": MessageLookupByLibrary.simpleMessage(
+            "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
+        "file_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
         "file_selection": MessageLookupByLibrary.simpleMessage("Chọn file"),
         "file_status": MessageLookupByLibrary.simpleMessage("Trạng thái hồ sơ"),
@@ -424,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
         "pet_name": MessageLookupByLibrary.simpleMessage("Tên vật nuôi"),
         "pet_origin": MessageLookupByLibrary.simpleMessage("Giống loài"),
+        "pet_regulation":
+            MessageLookupByLibrary.simpleMessage("Nội quy vật nuôi"),
         "pet_type": MessageLookupByLibrary.simpleMessage("Loại vật nuôi"),
         "phone_email":
             MessageLookupByLibrary.simpleMessage("Số điện thoại/ Email"),
@@ -588,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
+        "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
         "take_place_time":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "terms_services":
@@ -652,6 +674,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "width": MessageLookupByLibrary.simpleMessage("Rộng"),
         "work_description":
             MessageLookupByLibrary.simpleMessage("Mô tả công việc"),
+        "worker_num":
+            MessageLookupByLibrary.simpleMessage("Số lượng công nhân"),
         "year": MessageLookupByLibrary.simpleMessage("Năm")
       };
 }

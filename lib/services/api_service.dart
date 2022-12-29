@@ -113,18 +113,23 @@ class ApiService {
     }
   }
 
-  Future<oauth2.Client> refresh(oauth2.Client client, remember) async {
-    // try {
-    final cli = await client.refreshCredentials();
-    final path = await getApplicationDocumentsDirectory();
-    final credentialsFile = File('${path.path}/credential.json');
+  Future<oauth2.Client> refresh(
+    oauth2.Client client,
+    remember,
+  ) async {
+    // throw ("RELOGIN");
+    try {
+      final cli = await client.refreshCredentials();
+      final path = await getApplicationDocumentsDirectory();
+      final credentialsFile = File('${path.path}/credential.json');
 
-    await credentialsFile.writeAsString(client.credentials.toJson());
+      await credentialsFile.writeAsString(client.credentials.toJson());
 
-    return cli;
-    // } catch (e) {
-    //   // return oauth2.Client;
-    // }
+      return cli;
+    } catch (e) {
+      throw ("RELOGIN");
+      // return oauth2.Client;
+    }
   }
 
   Future<bool> isExpired(BuildContext context) async {
@@ -154,7 +159,11 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client, remember);
+          // ignore: use_build_context_synchronously
+          client = await refresh(
+            client,
+            remember,
+          );
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -212,7 +221,10 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client, remember);
+          client = await refresh(
+            client,
+            remember,
+          );
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -271,7 +283,10 @@ class ApiService {
         //print(client.credentials.expiration);
         if (client.credentials.isExpired) {
           // print("EXPired");
-          client = await refresh(client, remember);
+          client = await refresh(
+            client,
+            remember,
+          );
           log(client.credentials.accessToken);
           options = Options(
             headers: {
@@ -313,8 +328,10 @@ class ApiService {
     }
   }
 
-  Future<GraphQLClient> getClientGraphQL(
-      {ErrorHandleFunc? onError, bool remember = false}) async {
+  Future<GraphQLClient> getClientGraphQL({
+    ErrorHandleFunc? onError,
+    bool remember = false,
+  }) async {
     late AuthLink authLink;
     var client = await getExistClient();
     if (client == null) {
@@ -358,6 +375,11 @@ class ApiService {
       }
       return result.data!;
     } on OperationException catch (e) {
+      if (e.toString() == "RELOGIN") {
+        return {
+          "response": {"code": 10, "message": e.toString(), "data": null}
+        };
+      }
       return {
         "response": {"code": 1, "message": e.toString(), "data": null}
       };

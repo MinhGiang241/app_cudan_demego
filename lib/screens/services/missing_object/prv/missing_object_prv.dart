@@ -2,6 +2,7 @@ import 'package:app_cudan/models/missing_object.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_lost.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
@@ -26,6 +27,7 @@ class MissingObjectPrv extends ChangeNotifier {
 
   saveLostItem(BuildContext context, MissingObject lost) async {
     lost.status = "FOUND";
+    lost.find_time = DateTime.now().toIso8601String();
     // var apartment = context.read<ResidentInfoPrv>()
     // lost.apartment = "${context}";
     await APILost.saveLostItem(lost.toJson()).then((v) {
@@ -33,13 +35,15 @@ class MissingObjectPrv extends ChangeNotifier {
           context: context,
           e: S.of(context).success_returned,
           onClose: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, MissingObectScreen.routeName, (route) => route.isFirst,
-                arguments: {
-                  'year': year,
-                  'month': month,
-                  'index': 0,
-                });
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacementNamed(
+                  context, MissingObectScreen.routeName,
+                  arguments: {
+                    'year': year,
+                    'month': month,
+                    'index': 0,
+                  });
+            });
           });
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
@@ -48,18 +52,21 @@ class MissingObjectPrv extends ChangeNotifier {
 
   saveLootItem(BuildContext context, LootItem loot) async {
     loot.status = "RETURNED";
+    loot.time_pay = DateTime.now().toIso8601String();
     await APILost.saveLootItem(loot.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,
           e: S.of(context).success_returned,
           onClose: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, MissingObectScreen.routeName, (route) => route.isFirst,
-                arguments: {
-                  'year': year,
-                  'month': month,
-                  'index': 0,
-                });
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacementNamed(
+                  context, MissingObectScreen.routeName,
+                  arguments: {
+                    'year': year,
+                    'month': month,
+                    'index': 0,
+                  });
+            });
           });
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

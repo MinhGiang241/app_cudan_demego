@@ -10,6 +10,7 @@ import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
+import 'construction_reg_screen.dart';
 import 'tab/construction_file_tab.dart';
 import 'tab/construction_registration_letter.dart';
 import 'prv/construction_list_prv.dart';
@@ -55,8 +56,8 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
             floatingActionButton: FloatingActionButton(
               tooltip: S.of(context).cons_reg,
               onPressed: () {
-                // Navigator.pushNamed(context, RegisterResidentCard.routeName,
-                //     arguments: {"isEdit": false});
+                Navigator.pushNamed(context, ConstructionRegScreen.routeName,
+                    arguments: {"isEdit": false});
               },
               backgroundColor: primaryColorBase,
               child: const Icon(

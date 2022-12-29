@@ -1,10 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
+import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/pet.dart';
@@ -12,9 +15,6 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
-import 'package:dio/dio.dart';
-
-var dio = Dio();
 
 class PetDetailsScreen extends StatefulWidget {
   const PetDetailsScreen({super.key});
@@ -217,32 +217,70 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                                         children: [
                                           TextSpan(text: S.of(context).i_agree),
                                           TextSpan(
-                                              text:
-                                                  " ${S.of(context).regulations}",
-                                              style:
-                                                  txtMedium(16, primaryColor6)),
+                                            text:
+                                                " ${S.of(context).regulations}",
+                                            style: txtMedium(16, primaryColor6),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  context: context,
+                                                  builder: ((context) =>
+                                                      ListView(
+                                                        children: [
+                                                          vpad(40),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              BackButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              }),
+                                                              Text(
+                                                                S
+                                                                    .of(context)
+                                                                    .pet_regulation,
+                                                                style: txtBodyLargeBold(
+                                                                    color:
+                                                                        grayScaleColorBase),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                              hpad(50)
+                                                            ],
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        24),
+                                                            child: HtmlWidget(
+                                                              petRegulation,
+                                                              buildAsync: false,
+                                                              onTapUrl: (url) {
+                                                                return false;
+                                                              },
+                                                              textStyle:
+                                                                  txtBodyMediumRegular(),
+                                                            ),
+                                                          ),
+                                                          vpad(40),
+                                                        ],
+                                                      )),
+                                                );
+                                              },
+                                          ),
                                           TextSpan(
                                               text:
                                                   " ${S.of(context).of_building_management}"),
                                         ]),
                                   ),
-                                  // Wrap(
-                                  //   children: [
-                                  //     Text(
-                                  //       S.of(context).i_agree,
-                                  //       style: txtMedium(14, grayScaleColor2),
-                                  //     ),
-                                  //     Text(
-                                  //       " ${S.of(context).regulations}",
-                                  //       style: txtMedium(14, primaryColor6),
-                                  //     ),
-                                  //     Text(
-                                  //       " ${S.of(context).of_building_management}",
-                                  //       style: txtMedium(14, grayScaleColor2),
-                                  //       maxLines: 2,
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 ),
                               ],
                             ),
@@ -258,8 +296,8 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
             ListView(
               children: [
                 vpad(24),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: TimeLineView(),
                 )
               ],

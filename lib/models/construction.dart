@@ -40,6 +40,7 @@ class ConstructionRegistration {
     this.time_start,
     this.updatedTime,
     this.worker_num,
+    this.off_day,
     this.working_day,
   });
   String? id;
@@ -67,6 +68,7 @@ class ConstructionRegistration {
   double? construction_cost;
   double? deposit_fee;
   int? working_day;
+  int? off_day;
   bool? isConstructionCost;
   bool? isDepositFee;
   bool? confirm;
@@ -117,6 +119,7 @@ class ConstructionRegistration {
         ? double.parse(json['deposit_fee'].toString())
         : null;
     working_day = json['working_day'];
+    off_day = json['off_day'];
     isConstructionCost = json['isConstructionCost'];
     isDepositFee = json['isDepositFee'];
     confirm = json['confirm'];
@@ -179,6 +182,7 @@ class ConstructionRegistration {
     data['construction_type_name'] = construction_type_name;
     data['create_date'] = create_date;
     data['isMobile'] = isMobile;
+    data['off_day'] = off_day;
     data['_id'] = id;
     data['current_draw'] = current_draw != null
         ? current_draw!.map((e) {
@@ -419,6 +423,59 @@ class ConstructionDocument {
             return e.toJson();
           }).toList()
         : [];
+    return data;
+  }
+}
+
+class ConstructionHistory {
+  ConstructionHistory({
+    this.cancel_reason,
+    this.constructionregistrationId,
+    this.createdTime,
+    this.date,
+    this.employeeId,
+    this.id,
+    this.person,
+    this.residentId,
+    this.status,
+    this.updatedTime,
+  });
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? status;
+  String? person;
+  String? date;
+  String? cancel_reason;
+  String? residentId;
+  String? employeeId;
+  String? constructionregistrationId;
+  Status? s;
+  ConstructionHistory.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    status = json['status'];
+    person = json['person'];
+    date = json['date'];
+    cancel_reason = json['cancel_reason'];
+    residentId = json['residentId'];
+    employeeId = json['employeeId'];
+    constructionregistrationId = json['constructionregistrationId'];
+    s = json['s'] != null ? Status.fromJson(json['s']) : null;
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['status'] = status;
+    data['person'] = person;
+    data['date'] = date;
+    data['cancel_reason'] = cancel_reason;
+    data['residentId'] = residentId;
+    data['employeeId'] = employeeId;
+    data['constructionregistrationId'] = constructionregistrationId;
     return data;
   }
 }

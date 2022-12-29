@@ -12,6 +12,7 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
+import 'missing_object_screen.dart';
 
 class LootItemDetailsScreen extends StatefulWidget {
   const LootItemDetailsScreen({
@@ -31,7 +32,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     LootItem lootItem = LootItem();
-    Function(LootItem)? changeStatus;
+    Function(BuildContext, LootItem)? changeStatus;
     if (arg['lost'] != null) {
       lootItem = arg['lost'];
     }
@@ -98,7 +99,8 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
                   isLoading = true;
                 });
 
-                await changeStatus(lootItem);
+                await changeStatus(context, lootItem);
+
                 setState(() {
                   isLoading = false;
                 });

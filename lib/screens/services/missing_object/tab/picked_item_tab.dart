@@ -48,7 +48,7 @@ class PickedItemTab extends StatefulWidget {
   String type;
 
   Function() onRefresh;
-  Function(LootItem)? changeStatus;
+  Function(BuildContext, LootItem)? changeStatus;
 
   RefreshController refreshController = RefreshController();
 

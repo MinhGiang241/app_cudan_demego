@@ -146,9 +146,11 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                         controller: tabController,
                         children: [
                           MissingObjectTab(
-                            changeStatus: (MissingObject lost) => context
-                                .read<MissingObjectPrv>()
-                                .saveLostItem(context, lost),
+                            changeStatus:
+                                (BuildContext ctx, MissingObject lost) =>
+                                    context
+                                        .read<MissingObjectPrv>()
+                                        .saveLostItem(ctx, lost),
                             type: "HISTORY",
                             list: context.watch<MissingObjectPrv>().lostList,
                             refreshController: _refreshHistoryController,
@@ -159,9 +161,10 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                             },
                           ),
                           PickedItemTab(
-                            changeStatus: (LootItem loot) => context
-                                .read<MissingObjectPrv>()
-                                .saveLootItem(context, loot),
+                            changeStatus: (BuildContext ctx, LootItem loot) =>
+                                context
+                                    .read<MissingObjectPrv>()
+                                    .saveLootItem(ctx, loot),
                             type: "FOUND",
                             list: context.watch<MissingObjectPrv>().lootList,
                             refreshController: _refreshFoundController,

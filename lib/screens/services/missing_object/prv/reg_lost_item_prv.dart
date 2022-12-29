@@ -37,7 +37,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
 
         var listError = [];
 
-        if (lostDate!.compareTo(now) > 0) {
+        if (lostDate!.compareTo(now) >= 0) {
           listError.add(S.of(context).lost_time_now);
         }
         if (listError.isNotEmpty) {
