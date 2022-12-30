@@ -440,6 +440,15 @@
   "cons_file_details":"Chi tiết hồ sơ thi công",
   "file_code":"Mã thi công",
   "expired_login":"Phiên đăng nhập hết hạn, hãy đăng nhập lại",
-  "pet_regulation":"Nội quy vật nuôi"
+  "pet_regulation":"Nội quy vật nuôi",  
+  "select_surface":"Chọn mặt bằng",
+  "select_cons_type":"Chọn loại thi công",
+  "fee_paid":"Đã đóng phí",
+  "enter_cons_unit_name":"Nhập tên đơn vị thi công",
+  "enter_address":"Nhập địa chỉ",
+  "enter_worker_num":"Nhập số công nhân",
+  "enter_identity":"Nhập CMCD/ CCCD/ Hộ chiếu",
+  "enter_deputy_name":"Nhập tên người đại diện",
+  "add_file":"Thêm file"
 }
    

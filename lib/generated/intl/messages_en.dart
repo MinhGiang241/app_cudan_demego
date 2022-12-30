@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "add_file": MessageLookupByLibrary.simpleMessage("Add file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
@@ -201,9 +202,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("End registration time"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "enter_address": MessageLookupByLibrary.simpleMessage("Enter address"),
+        "enter_cons_unit_name": MessageLookupByLibrary.simpleMessage(
+            "Enter construction uint name"),
+        "enter_deputy_name":
+            MessageLookupByLibrary.simpleMessage("Enter deputy name"),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter email"),
         "enter_email_phone":
             MessageLookupByLibrary.simpleMessage("Enter email /phone"),
+        "enter_identity":
+            MessageLookupByLibrary.simpleMessage("Enter identity"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Enter name"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Enter Number"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Enter password"),
@@ -215,6 +223,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter phone number or email"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Enter username"),
+        "enter_worker_num":
+            MessageLookupByLibrary.simpleMessage("Enter worker amount"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Error Connection"),
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
@@ -231,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Login session is invalid, please sign in again"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
+        "fee_paid": MessageLookupByLibrary.simpleMessage("Fee paid"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file_code": MessageLookupByLibrary.simpleMessage("Document code"),
@@ -441,7 +452,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_name": MessageLookupByLibrary.simpleMessage("Pet name"),
         "pet_origin": MessageLookupByLibrary.simpleMessage("Pet origin"),
         "pet_regulation":
-            MessageLookupByLibrary.simpleMessage("Nội quy vật nuôi"),
+            MessageLookupByLibrary.simpleMessage("Pet regulation"),
         "pet_type": MessageLookupByLibrary.simpleMessage("Pet type"),
         "phone_email": MessageLookupByLibrary.simpleMessage("Phone/ Email"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
@@ -550,6 +561,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_project":
             MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "select_cons_type":
+            MessageLookupByLibrary.simpleMessage("Select construction type"),
+        "select_surface":
+            MessageLookupByLibrary.simpleMessage("Select surface"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),

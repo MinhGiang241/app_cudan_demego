@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "active": MessageLookupByLibrary.simpleMessage("Hoạt động"),
         "add": MessageLookupByLibrary.simpleMessage("Thêm"),
+        "add_file": MessageLookupByLibrary.simpleMessage("Thêm file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
@@ -199,10 +200,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("Thời gian kết thúc đăng ký"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
+        "enter_address": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
+        "enter_cons_unit_name":
+            MessageLookupByLibrary.simpleMessage("Nhập tên đơn vị thi công"),
+        "enter_deputy_name":
+            MessageLookupByLibrary.simpleMessage("Nhập tên người đại diện"),
         "enter_email":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ email"),
         "enter_email_phone":
             MessageLookupByLibrary.simpleMessage("Nhập SDT/Email "),
+        "enter_identity":
+            MessageLookupByLibrary.simpleMessage("Nhập CMCD/ CCCD/ Hộ chiếu"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Nhập số"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
@@ -214,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập số điện thoại hoặc email"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
+        "enter_worker_num":
+            MessageLookupByLibrary.simpleMessage("Nhập số công nhân"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Lỗi kết nối "),
         "err_internet": MessageLookupByLibrary.simpleMessage(
             "Không kết nối được với máy chủ"),
@@ -231,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
+        "fee_paid": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
@@ -550,6 +561,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_project":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm dự án"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
+        "select_cons_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
+        "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Gửi mã để đặt lại mật khẩu về"),

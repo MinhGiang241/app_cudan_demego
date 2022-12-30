@@ -215,20 +215,21 @@ class ConstructionFile {
 }
 
 class ConstructionType {
-  ConstructionType({
-    this.id,
-    this.name,
-    this.code,
-    this.createdTime,
-    this.describe,
-    this.updatedTime,
-  });
+  ConstructionType(
+      {this.id,
+      this.name,
+      this.code,
+      this.createdTime,
+      this.describe,
+      this.updatedTime,
+      this.c});
   String? id;
   String? name;
   String? createdTime;
   String? updatedTime;
   String? code;
   String? describe;
+  ConstructionCost? c;
   ConstructionType.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -236,6 +237,7 @@ class ConstructionType {
     code = json['code'];
     describe = json['describe'];
     name = json['name'];
+    c = json['c'] != null ? ConstructionCost.fromJson(json['c']) : null;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -476,6 +478,54 @@ class ConstructionHistory {
     data['residentId'] = residentId;
     data['employeeId'] = employeeId;
     data['constructionregistrationId'] = constructionregistrationId;
+    return data;
+  }
+}
+
+class ConstructionCost {
+  ConstructionCost({
+    this.chargeFormCost,
+    this.chargeFormDeposit,
+    this.cost,
+    this.createdTime,
+    this.depositFee,
+    this.id,
+    this.updatedTime,
+    this.constructiontypeId,
+  });
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? constructiontypeId;
+  double? cost;
+  String? chargeFormCost;
+  double? depositFee;
+  String? chargeFormDeposit;
+  ConstructionCost.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    constructiontypeId = json['constructiontypeId'];
+    cost = double.tryParse(json['cost'].toString()) != null
+        ? double.parse(json['cost'].toString())
+        : null;
+    chargeFormCost = json['chargeFormCost'];
+    depositFee = double.tryParse(json['depositFee'].toString()) != null
+        ? double.parse(json['depositFee'].toString())
+        : null;
+    chargeFormDeposit = json['chargeFormDeposit'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['constructiontypeId'] = constructiontypeId;
+    data['cost'] = cost;
+    data['chargeFormCost'] = chargeFormCost;
+    data['depositFee'] = depositFee;
+    data['chargeFormDeposit'] = chargeFormDeposit;
+
     return data;
   }
 }

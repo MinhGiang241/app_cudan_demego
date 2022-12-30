@@ -100,7 +100,7 @@ class HomePrv extends ChangeNotifier {
       // ignore: use_build_context_synchronously
 
       await APIEvent.getEventList(0, 1, "COMING", accountId ?? "").then((v) {
-        if (v.length >= 0) {
+        if (v.length >= 1) {
           event = Event.fromJson(v[0]);
         }
       });

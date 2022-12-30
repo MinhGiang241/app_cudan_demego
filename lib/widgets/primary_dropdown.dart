@@ -37,6 +37,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.isMultiple = false,
     this.validator,
     this.selectMultileList,
+    this.hint,
     this.validateString,
     this.isError = false,
     this.isDense = true,
@@ -44,6 +45,7 @@ class PrimaryDropDown extends StatefulWidget {
   });
   final bool isError;
   final String? label;
+  final String? hint;
   final bool isDense;
   final bool isRequired;
   final bool isMultiple;
@@ -86,7 +88,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 title: Text(S.of(context).select),
                 selectedColor: secondaryColorBase,
                 buttonText: Text(
-                  "--${S.of(context).select}--",
+                  widget.hint ?? "--${S.of(context).select}--",
                   overflow: TextOverflow.ellipsis,
                 ),
                 buttonIcon: const Icon(Icons.arrow_drop_down),

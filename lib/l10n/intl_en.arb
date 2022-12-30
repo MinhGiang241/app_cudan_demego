@@ -439,5 +439,14 @@
   "cons_file_details":"Construction document details",
   "file_code":"Document code",
   "expired_login":"Login session is invalid, please sign in again",
-  "pet_regulation":"Nội quy vật nuôi"
+  "pet_regulation":"Pet regulation",
+  "select_surface":"Select surface",
+  "select_cons_type":"Select construction type",
+  "fee_paid":"Fee paid",
+  "enter_cons_unit_name":"Enter construction uint name",
+  "enter_address":"Enter address",
+  "enter_worker_num":"Enter worker amount",
+  "enter_identity":"Enter identity",
+  "enter_deputy_name":"Enter deputy name",
+  "add_file":"Add file"
 }

@@ -23,9 +23,13 @@ class SelectFileWidget extends StatelessWidget {
     this.onRemove,
     this.onRemoveExist,
     this.isDash = true,
+    this.text,
+    this.icon,
     this.isRequired = false,
   });
   final String? title;
+  final String? text;
+  final Widget? icon;
   final List existFiles;
   final List<File> files;
   final Function()? onSelect;
@@ -41,10 +45,10 @@ class SelectFileWidget extends StatelessWidget {
         children: [
           DashButton(
             isDash: isDash,
-            text: S.of(context).upload,
+            text: text ?? S.of(context).upload,
             lable: title,
             isRequired: isRequired,
-            icon: const PrimaryIcon(icons: PrimaryIcons.plus),
+            icon: icon ?? const PrimaryIcon(icons: PrimaryIcons.plus),
             onTap: onSelect,
           ),
         ],

@@ -4450,11 +4450,101 @@ class S {
     );
   }
 
-  /// `Nội quy vật nuôi`
+  /// `Pet regulation`
   String get pet_regulation {
     return Intl.message(
-      'Nội quy vật nuôi',
+      'Pet regulation',
       name: 'pet_regulation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select surface`
+  String get select_surface {
+    return Intl.message(
+      'Select surface',
+      name: 'select_surface',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select construction type`
+  String get select_cons_type {
+    return Intl.message(
+      'Select construction type',
+      name: 'select_cons_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fee paid`
+  String get fee_paid {
+    return Intl.message(
+      'Fee paid',
+      name: 'fee_paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter construction uint name`
+  String get enter_cons_unit_name {
+    return Intl.message(
+      'Enter construction uint name',
+      name: 'enter_cons_unit_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter address`
+  String get enter_address {
+    return Intl.message(
+      'Enter address',
+      name: 'enter_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter worker amount`
+  String get enter_worker_num {
+    return Intl.message(
+      'Enter worker amount',
+      name: 'enter_worker_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter identity`
+  String get enter_identity {
+    return Intl.message(
+      'Enter identity',
+      name: 'enter_identity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter deputy name`
+  String get enter_deputy_name {
+    return Intl.message(
+      'Enter deputy name',
+      name: 'enter_deputy_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add file`
+  String get add_file {
+    return Intl.message(
+      'Add file',
+      name: 'add_file',
       desc: '',
       args: [],
     );
