@@ -17,11 +17,14 @@ class ConstructionRegPrv extends ChangeNotifier {
   List<ConstructionType> listConstructionType = [];
   final PageController controller = PageController();
 
-  List<ConstructionFile> existedOldDrawings = [];
-  List<ConstructionFile> existedrenewDrawings = [];
+  List<ConstructionFile> existedCurrentDrawings = [];
+  List<ConstructionFile> existedRenewDrawings = [];
 
-  List<File> oldDrawings = [];
+  List<File> currentDrawings = [];
   List<File> renewDrawings = [];
+
+  List<ConstructionFile> uploadedCurrentDrawings = [];
+  List<ConstructionFile> uploadedrenewDrawings = [];
 
   String? selectedApartment;
   String? selectedConstype;
@@ -70,6 +73,46 @@ class ConstructionRegPrv extends ChangeNotifier {
   bool isStep2Loading = false;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
+
+  onSelectCurentDrawing(BuildContext context) async {
+    await Utils.selectFile(context, false).then((value) {
+      if (value != null) {
+        final list = value.map<File>((e) => File(e!.path)).toList();
+        currentDrawings.addAll(list);
+        notifyListeners();
+      }
+    });
+  }
+
+  onRemoveCurentDrawing(int index) {
+    currentDrawings.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistedCurentDrawing(int index) {
+    existedCurrentDrawings.removeAt(index);
+    notifyListeners();
+  }
+
+  onSelectRenewDrawing(BuildContext context) async {
+    await Utils.selectFile(context, false).then((value) {
+      if (value != null) {
+        final list = value.map<File>((e) => File(e!.path)).toList();
+        renewDrawings.addAll(list);
+        notifyListeners();
+      }
+    });
+  }
+
+  onRemoveRenewDrawing(int index) {
+    renewDrawings.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistedRenewDrawing(int index) {
+    existedRenewDrawings.removeAt(index);
+    notifyListeners();
+  }
 
   onChangeApartment(value) {
     selectedApartment = value;

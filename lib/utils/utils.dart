@@ -237,8 +237,9 @@ class Utils {
 
   static Future<List<XFile?>?> selectFile(BuildContext context, bool isMulti,
       {bool isFile = false}) async {
-    final bool p = await requestPermistion(
-        context, [Permission.storage, Permission.manageExternalStorage]);
+    final bool p = await requestPermistion(context, [
+      Permission.storage,
+    ]);
     if (p) {
       List<XFile?>? value = await _filePicker(false);
       return value;

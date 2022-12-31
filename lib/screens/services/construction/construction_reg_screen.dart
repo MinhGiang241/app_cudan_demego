@@ -519,6 +519,21 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                                     ),
                                     vpad(16),
                                     SelectFileWidget(
+                                      onSelect: () => context
+                                          .read<ConstructionRegPrv>()
+                                          .onSelectCurentDrawing(context),
+                                      existFiles: context
+                                          .watch<ConstructionRegPrv>()
+                                          .existedCurrentDrawings,
+                                      files: context
+                                          .watch<ConstructionRegPrv>()
+                                          .currentDrawings,
+                                      onRemove: context
+                                          .read<ConstructionRegPrv>()
+                                          .onRemoveCurentDrawing,
+                                      onRemoveExist: context
+                                          .read<ConstructionRegPrv>()
+                                          .onRemoveExistedCurentDrawing,
                                       icon: const PrimaryIcon(
                                         icons: PrimaryIcons.image_add,
                                       ),
@@ -527,6 +542,21 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                                     ),
                                     vpad(16),
                                     SelectFileWidget(
+                                      onSelect: () => context
+                                          .read<ConstructionRegPrv>()
+                                          .onSelectRenewDrawing(context),
+                                      existFiles: context
+                                          .watch<ConstructionRegPrv>()
+                                          .existedRenewDrawings,
+                                      files: context
+                                          .watch<ConstructionRegPrv>()
+                                          .renewDrawings,
+                                      onRemove: context
+                                          .read<ConstructionRegPrv>()
+                                          .onRemoveRenewDrawing,
+                                      onRemoveExist: context
+                                          .read<ConstructionRegPrv>()
+                                          .onRemoveExistedRenewDrawing,
                                       icon: const PrimaryIcon(
                                         icons: PrimaryIcons.image_add,
                                       ),

@@ -72,7 +72,10 @@ class PrfData {
     final data = await _apartmentBox.get(_apartment);
 
     if (data != null) {
-      return int.parse(data);
+      if (int.tryParse(data) != null) {
+        return int.parse(data);
+      }
+      return null;
     }
     return null;
   }
