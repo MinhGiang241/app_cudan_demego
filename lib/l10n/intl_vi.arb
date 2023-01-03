@@ -383,7 +383,7 @@
   "pet_info":"Thông tin vật nuôi",
   "upload":"Tải lên",
   "weight_not_15":"Cân nặng không được quá 15kg",
-  "pet_agree":"bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi",
+  "pet_agree":"Bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi",
   "success_returned":"Đổi trạng thái đồ thành đã trả thành công",
   "success_find":"Đổi trạng thái đồ thành đã tìm thấy thành công",
   "lost_time_now":"Thời điểm thất lạc phải nhỏ hơn hoặc bằng ngày hiện tại",
@@ -449,6 +449,9 @@
   "enter_worker_num":"Nhập số công nhân",
   "enter_identity":"Nhập CMCD/ CCCD/ Hộ chiếu",
   "enter_deputy_name":"Nhập tên người đại diện",
-  "add_file":"Thêm file"
+  "add_file":"Thêm file",
+  "drawing_not_empty":"Bản vẽ không được bỏ trống",
+  "cons_agree":"Bạn cần đồng ý tuân thủ quy định về đăng ký thi công",
+  "start_date_after_now_equal":"Ngày bắt đầu phải lớn hơn ngày hiện tại"
 }
    

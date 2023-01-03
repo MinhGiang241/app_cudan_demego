@@ -1980,10 +1980,10 @@ class S {
     );
   }
 
-  /// `Send to approve request successfully`
+  /// `Send to approve request letter successfully`
   String get success_send_req {
     return Intl.message(
-      'Send to approve request successfully',
+      'Send to approve request letter successfully',
       name: 'success_send_req',
       desc: '',
       args: [],
@@ -2500,50 +2500,50 @@ class S {
     );
   }
 
-  /// `Ngày bắt đầu không được để trống`
+  /// `Start date can not be empty`
   String get start_date_not_empty {
     return Intl.message(
-      'Ngày bắt đầu không được để trống',
+      'Start date can not be empty',
       name: 'start_date_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được để trống`
+  /// `End date can not be empty`
   String get end_date_not_empty {
     return Intl.message(
-      'Ngày kết thúc không được để trống',
+      'End date can not be empty',
       name: 'end_date_not_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày bắt đầu không được nhỏ hơn ngày hiện tại`
+  /// `Start date can not be greater than now`
   String get start_date_after_now {
     return Intl.message(
-      'Ngày bắt đầu không được nhỏ hơn ngày hiện tại',
+      'Start date can not be greater than now',
       name: 'start_date_after_now',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được nhỏ hơn ngày hiện tại`
+  /// `End date can not be less than now`
   String get end_date_after_now {
     return Intl.message(
-      'Ngày kết thúc không được nhỏ hơn ngày hiện tại',
+      'End date can not be less than now',
       name: 'end_date_after_now',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày kết thúc không được nhỏ hơn ngày bắt đầu`
+  /// `End date can not be less than start date`
   String get end_date_after_start_date {
     return Intl.message(
-      'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
+      'End date can not be less than start date',
       name: 'end_date_after_start_date',
       desc: '',
       args: [],
@@ -3130,10 +3130,10 @@ class S {
     );
   }
 
-  /// `Registration day is not after now`
+  /// `Registration day is not beefore now`
   String get reg_date_not_after_now {
     return Intl.message(
-      'Registration day is not after now',
+      'Registration day is not beefore now',
       name: 'reg_date_not_after_now',
       desc: '',
       args: [],
@@ -4545,6 +4545,36 @@ class S {
     return Intl.message(
       'Add file',
       name: 'add_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drawing can be not empty`
+  String get drawing_not_empty {
+    return Intl.message(
+      'Drawing can be not empty',
+      name: 'drawing_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You need to agree to comply with the regulations on construction registration`
+  String get cons_agree {
+    return Intl.message(
+      'You need to agree to comply with the regulations on construction registration',
+      name: 'cons_agree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date must be greater than now`
+  String get start_date_after_now_equal {
+    return Intl.message(
+      'Start date must be greater than now',
+      name: 'start_date_after_now_equal',
       desc: '',
       args: [],
     );

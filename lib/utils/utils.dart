@@ -590,4 +590,18 @@ class Utils {
           ),
         ));
   }
+
+  static String? emptyValidator(v) {
+    if (v!.isEmpty) {
+      return '';
+    }
+    return null;
+  }
+
+  static String? emptyValidatorDropdown(v) {
+    if (v == null) {
+      return '';
+    }
+    return null;
+  }
 }

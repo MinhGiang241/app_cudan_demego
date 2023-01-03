@@ -126,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
         "confirm_send_request": m5,
+        "cons_agree": MessageLookupByLibrary.simpleMessage(
+            "Bạn cần đồng ý tuân thủ quy định về đăng ký thi công"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
         "cons_day": MessageLookupByLibrary.simpleMessage("Số ngày thi công"),
         "cons_drawing": MessageLookupByLibrary.simpleMessage("Bản vẽ thi công"),
@@ -171,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
+        "drawing_not_empty":
+            MessageLookupByLibrary.simpleMessage("Bản vẽ không được bỏ trống"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
@@ -448,7 +452,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
         "pet_agree": MessageLookupByLibrary.simpleMessage(
-            "bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
+            "Bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Cái"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Thông tin vật nuôi"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
@@ -590,6 +594,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("Ngày bắt đầu"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
+        "start_date_after_now_equal": MessageLookupByLibrary.simpleMessage(
+            "Ngày bắt đầu phải lớn hơn ngày hiện tại"),
         "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được để trống"),
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),

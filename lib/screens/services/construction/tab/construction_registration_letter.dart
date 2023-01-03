@@ -3,6 +3,7 @@ import 'package:app_cudan/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
@@ -15,7 +16,9 @@ import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../../../payment/widget/payment_item.dart';
+import '../construction_reg_screen.dart';
 import '../construction_registration_details_screen.dart';
+import '../prv/construction_list_prv.dart';
 
 class ConstructionRegistrationLetterTab extends StatefulWidget {
   ConstructionRegistrationLetterTab(
@@ -251,15 +254,17 @@ class _ConstructionRegistrationLetterTabState
                                 ],
                               ),
                             ),
-                            if (e.status == "WAIT")
+                            if (e.status == "WAIT_TECHNICAL" ||
+                                e.status == "WAIT_MANAGER" ||
+                                e.status == "WAIT_MANAGER")
                               Row(
                                 children: [
                                   hpad(16),
                                   PrimaryButton(
                                     onTap: () {
-                                      // context
-                                      //     .read<DeliveryListPrv>()
-                                      //     .cancelRequetsAprrove(context, e);
+                                      context
+                                          .read<ConstructionListPrv>()
+                                          .cancelRequetsAprrove(context, e);
                                     },
                                     text: S.of(context).cancel_register,
                                     buttonSize: ButtonSize.xsmall,
@@ -276,9 +281,9 @@ class _ConstructionRegistrationLetterTabState
                                 children: [
                                   PrimaryButton(
                                     onTap: () {
-                                      // context
-                                      //     .read<DeliveryListPrv>()
-                                      //     .sendToApprove(context, e);
+                                      context
+                                          .read<ConstructionListPrv>()
+                                          .sendToApprove(context, e);
                                     },
                                     text: S.of(context).send_request,
                                     buttonSize: ButtonSize.xsmall,
@@ -288,12 +293,12 @@ class _ConstructionRegistrationLetterTabState
                                   ),
                                   PrimaryButton(
                                     onTap: () {
-                                      // Navigator.pushNamed(context,
-                                      //     RegisterDelivery.routeName,
-                                      //     arguments: {
-                                      //       "isEdit": true,
-                                      //       "data": e,
-                                      //     });
+                                      Navigator.pushNamed(context,
+                                          ConstructionRegScreen.routeName,
+                                          arguments: {
+                                            "isEdit": true,
+                                            "data": e,
+                                          });
                                     },
                                     text: S.of(context).edit,
                                     buttonSize: ButtonSize.xsmall,
@@ -303,9 +308,9 @@ class _ConstructionRegistrationLetterTabState
                                   ),
                                   PrimaryButton(
                                     onTap: () {
-                                      // context
-                                      //     .read<DeliveryListPrv>()
-                                      //     .deleteLetter(context, e);
+                                      context
+                                          .read<ConstructionListPrv>()
+                                          .deleteLetter(context, e);
                                     },
                                     text: S.of(context).delete_letter,
                                     buttonSize: ButtonSize.xsmall,

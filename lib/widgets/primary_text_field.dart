@@ -41,6 +41,7 @@ class PrimaryTextField extends StatefulWidget {
     this.blockSpecial = false,
     this.onlyText = false,
     this.isShow = true,
+    this.onlyNum = false,
   });
 
   final String? label;
@@ -64,6 +65,7 @@ class PrimaryTextField extends StatefulWidget {
   final bool blockSpace;
   final bool blockSpecial;
   final bool onlyText;
+  final bool onlyNum;
   final String? validateString;
   final Color? background;
   final Color? textColor;
@@ -127,6 +129,8 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     onTap: widget.onTap,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: <TextInputFormatter>[
+                      if (widget.onlyNum)
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                       if (widget.onlyText)
                         FilteringTextInputFormatter.allow(RegExp(
                             r"[ 0-9a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]")),

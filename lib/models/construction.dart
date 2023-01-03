@@ -11,7 +11,7 @@ class ConstructionRegistration {
     this.confirm,
     this.constructionTypeId,
     this.construction_cost,
-    this.construction_type_name,
+    this.contruction_type_name,
     this.contruction_add,
     this.contruction_email,
     this.contruction_unit,
@@ -24,7 +24,7 @@ class ConstructionRegistration {
     this.description,
     this.history_code,
     this.id,
-    this.isConstructionCost,
+    this.isContructionCost,
     this.isDepositFee,
     this.isMobile,
     this.reason_description,
@@ -69,14 +69,14 @@ class ConstructionRegistration {
   double? deposit_fee;
   int? working_day;
   int? off_day;
-  bool? isConstructionCost;
+  bool? isContructionCost;
   bool? isDepositFee;
   bool? confirm;
   String? cancel_reason;
   String? reason_description;
   String? history_code;
   String? resident_name;
-  String? construction_type_name;
+  String? contruction_type_name;
   String? create_date;
   bool? isMobile;
   Status? s;
@@ -120,14 +120,15 @@ class ConstructionRegistration {
         : null;
     working_day = json['working_day'];
     off_day = json['off_day'];
-    isConstructionCost = json['isConstructionCost'];
+    isContructionCost = json['isContructionCost'];
     isDepositFee = json['isDepositFee'];
     confirm = json['confirm'];
     cancel_reason = json['cancel_reason'];
     reason_description = json['reason_description'];
     history_code = json['history_code'];
     resident_name = json['resident_name'];
-    construction_type_name = json['construction_type_name'];
+
+    contruction_type_name = json['contruction_type_name'];
     create_date = json['create_date'];
     isMobile = json['isMobile'];
     current_draw = json['current_draw'] != null
@@ -172,14 +173,14 @@ class ConstructionRegistration {
     data['construction_cost'] = construction_cost;
     data['deposit_fee'] = deposit_fee;
     data['working_day'] = working_day;
-    data['isConstructionCost'] = isConstructionCost;
+    data['isContructionCost'] = isContructionCost;
     data['isDepositFee'] = isDepositFee;
     data['confirm'] = confirm;
     data['cancel_reason'] = cancel_reason;
     data['reason_description'] = reason_description;
     data['history_code'] = history_code;
     data['resident_name'] = resident_name;
-    data['construction_type_name'] = construction_type_name;
+    data['contruction_type_name'] = contruction_type_name;
     data['create_date'] = create_date;
     data['isMobile'] = isMobile;
     data['off_day'] = off_day;
@@ -230,6 +231,7 @@ class ConstructionType {
   String? code;
   String? describe;
   ConstructionCost? c;
+  DayOff? dayOff;
   ConstructionType.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -238,6 +240,7 @@ class ConstructionType {
     describe = json['describe'];
     name = json['name'];
     c = json['c'] != null ? ConstructionCost.fromJson(json['c']) : null;
+    dayOff = json['dayOff'] != null ? DayOff.fromJson(json['dayOff']) : null;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -269,7 +272,7 @@ class ConstructionDocument {
     this.deputy_phone,
     this.description,
     this.id,
-    this.isConstructionCost,
+    this.isContructionCost,
     this.isDepositFee,
     this.isRecord,
     this.off_day,
@@ -318,7 +321,7 @@ class ConstructionDocument {
   double? deposit_fee;
   int? working_day;
   int? off_day;
-  bool? isConstructionCost;
+  bool? isContructionCost;
   bool? isDepositFee;
   bool? confirm;
   Status? s;
@@ -352,7 +355,7 @@ class ConstructionDocument {
     description = json['description'];
     working_day = json['working_day'];
     off_day = json['off_day'];
-    isConstructionCost = json['isConstructionCost'];
+    isContructionCost = json['isContructionCost'];
     isDepositFee = json['isDepositFee'];
     confirm = json['confirm'];
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
@@ -410,7 +413,7 @@ class ConstructionDocument {
     data['working_day'] = working_day;
     data['off_day'] = off_day;
     data['code'] = code;
-    data['isConstructionCost'] = isConstructionCost;
+    data['isContructionCost'] = isContructionCost;
     data['isDepositFee'] = isDepositFee;
     data['confirm'] = confirm;
     data['construction_cost'] = construction_cost;
@@ -508,7 +511,7 @@ class ConstructionCost {
     constructiontypeId = json['constructiontypeId'];
     cost = double.tryParse(json['cost'].toString()) != null
         ? double.parse(json['cost'].toString())
-        : null;
+        : 0;
     chargeFormCost = json['chargeFormCost'];
     depositFee = double.tryParse(json['depositFee'].toString()) != null
         ? double.parse(json['depositFee'].toString())
@@ -525,6 +528,46 @@ class ConstructionCost {
     data['chargeFormCost'] = chargeFormCost;
     data['depositFee'] = depositFee;
     data['chargeFormDeposit'] = chargeFormDeposit;
+
+    return data;
+  }
+}
+
+class DayOff {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  bool? d_0;
+  bool? d_1;
+  bool? d_2;
+  bool? d_3;
+  bool? d_4;
+  bool? d_5;
+  bool? d_6;
+  DayOff.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    d_0 = json['d_0'] ?? false;
+    d_1 = json['d_1'] ?? false;
+    d_2 = json['d_2'] ?? false;
+    d_3 = json['d_3'] ?? false;
+    d_4 = json['d_4'] ?? false;
+    d_5 = json['d_5'] ?? false;
+    d_6 = json['d_6'] ?? false;
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['d_0'] = d_0;
+    data['d_1'] = d_1;
+    data['d_2'] = d_2;
+    data['d_3'] = d_3;
+    data['d_4'] = d_4;
+    data['d_5'] = d_5;
+    data['d_6'] = d_6;
 
     return data;
   }

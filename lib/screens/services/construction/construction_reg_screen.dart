@@ -1,3 +1,5 @@
+import 'package:app_cudan/constants/regex_text.dart';
+import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
@@ -10,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/resident_info_prv.dart';
@@ -23,17 +26,23 @@ class ConstructionRegScreen extends StatefulWidget {
   _ConstructionRegScreenState createState() => _ConstructionRegScreenState();
 }
 
-class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
+class _ConstructionRegScreenState extends State<ConstructionRegScreen>
+    with AutomaticKeepAliveClientMixin<ConstructionRegScreen> {
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     var isEdit = false;
+    ConstructionRegistration? data;
     if (arg != null) {
       isEdit = arg['isEdit'] ?? false;
+      data = arg['data'];
     }
 
     return ChangeNotifierProvider(
-        create: (context) => ConstructionRegPrv(),
+        create: (context) => ConstructionRegPrv(existedConReg: data),
         builder: (context, state) {
           var activeStep = context.watch<ConstructionRegPrv>().activeStep;
 
@@ -62,7 +71,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                           .listConstructionType
                           .map((e) {
                         return DropdownMenuItem(
-                            value: e.code, child: Text(e.name ?? e.code ?? ""));
+                            value: e.id, child: Text(e.name ?? e.code ?? ""));
                       }).toList();
                       return Column(
                         children: [
@@ -135,7 +144,12 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                           ),
                           Expanded(
                             child: PageView(
-                              // physics: const NeverScrollableScrollPhysics(),
+                              physics: context
+                                          .watch<ConstructionRegPrv>()
+                                          .activeStep <
+                                      2
+                                  ? const NeverScrollableScrollPhysics()
+                                  : null,
                               controller:
                                   context.read<ConstructionRegPrv>().controller,
                               onPageChanged: context
@@ -146,346 +160,495 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey1,
-                                  child: ListView(
+                                  child: SingleChildScrollView(
                                     padding: const EdgeInsets.only(
                                       left: 24,
                                       right: 24,
                                     ),
-                                    children: [
-                                      vpad(12),
-                                      Text(
-                                        S.of(context).cons_info,
-                                        style: txtBold(14, grayScaleColorBase),
-                                      ),
-                                      vpad(16),
-                                      PrimaryDropDown(
-                                        onChange: context
-                                            .read<ConstructionRegPrv>()
-                                            .onChangeApartment,
-                                        hint: S.of(context).select_surface,
-                                        isDense: false,
-                                        isRequired: true,
-                                        label: S.of(context).surface,
-                                        selectList: listApartmentChoice,
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .surfaceController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateSurface,
-                                      ),
-                                      vpad(16),
-                                      PrimaryDropDown(
-                                        onChange: context
-                                            .read<ConstructionRegPrv>()
-                                            .onChangeConsType,
-                                        hint: S.of(context).select_cons_type,
-                                        isRequired: true,
-                                        label: S.of(context).cons_type,
-                                        selectList: listType,
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .consTypeController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateConsType,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        label: S.of(context).reg_date,
-                                        isRequired: true,
-                                        isReadOnly: true,
-                                        hint: "dd/mm/yyyy",
-                                        onTap: () {
-                                          context
+                                    child: Column(
+                                      children: [
+                                        vpad(12),
+                                        Text(
+                                          S.of(context).cons_info,
+                                          style:
+                                              txtBold(14, grayScaleColorBase),
+                                        ),
+                                        vpad(16),
+                                        PrimaryDropDown(
+                                          value: context
+                                              .watch<ConstructionRegPrv>()
+                                              .selectedApartment,
+                                          validator:
+                                              Utils.emptyValidatorDropdown,
+                                          onChange: context
                                               .read<ConstructionRegPrv>()
-                                              .pickRegDate(context);
-                                        },
-                                        suffixIcon: const PrimaryIcon(
-                                            icons: PrimaryIcons.calendar),
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .regDateController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateRegDate,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        label: S.of(context).start_time,
-                                        isRequired: true,
-                                        isReadOnly: true,
-                                        hint: "dd/mm/yyyy",
-                                        onTap: () {
-                                          context
+                                              .onChangeApartment,
+                                          hint: S.of(context).select_surface,
+                                          isDense: false,
+                                          isRequired: true,
+                                          label: S.of(context).surface,
+                                          selectList: listApartmentChoice,
+                                          controller: context
                                               .read<ConstructionRegPrv>()
-                                              .pickStartTime(context);
-                                        },
-                                        suffixIcon: const PrimaryIcon(
-                                            icons: PrimaryIcons.calendar),
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .startTimeController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateStartTime,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        label: S.of(context).end_time,
-                                        isRequired: true,
-                                        isReadOnly: true,
-                                        hint: "dd/mm/yyyy",
-                                        onTap: () {
-                                          context
+                                              .surfaceController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateSurface,
+                                        ),
+                                        vpad(16),
+                                        PrimaryDropDown(
+                                          value: context
+                                              .watch<ConstructionRegPrv>()
+                                              .selectedConstype,
+                                          validator:
+                                              Utils.emptyValidatorDropdown,
+                                          onChange: context
                                               .read<ConstructionRegPrv>()
-                                              .pickEndTime(context);
-                                        },
-                                        suffixIcon: const PrimaryIcon(
-                                            icons: PrimaryIcons.calendar),
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .endTimeController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateEndTime,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .consFeeController,
-                                        label: S.of(context).cons_fee,
-                                        isReadOnly: true,
-                                        enable: false,
-                                        background: grayScaleColor4,
-                                      ),
-                                      vpad(16),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 22.0,
-                                            height: 22.0,
-                                            child: Checkbox(
-                                              fillColor:
-                                                  MaterialStateProperty.all(
-                                                      primaryColorBase),
-                                              value: context
-                                                  .watch<ConstructionRegPrv>()
-                                                  .isPaidFee,
-                                              onChanged: (v) {
-                                                context
-                                                    .read<ConstructionRegPrv>()
-                                                    .toggleFee();
-                                              },
-                                            ),
-                                          ),
-                                          hpad(12),
-                                          Expanded(
-                                            child: Text(
-                                              S.of(context).fee_paid,
-                                              style: txtBold(
-                                                  14, grayScaleColorBase),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .depositController,
-                                        label: S.of(context).deposit,
-                                        isReadOnly: true,
-                                        enable: false,
-                                        background: grayScaleColor4,
-                                      ),
-                                      vpad(16),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 22.0,
-                                            height: 22.0,
-                                            child: Checkbox(
-                                              fillColor:
-                                                  MaterialStateProperty.all(
-                                                      primaryColorBase),
-                                              value: context
-                                                  .watch<ConstructionRegPrv>()
-                                                  .isPaidDeposit,
-                                              onChanged: (v) {
-                                                context
-                                                    .read<ConstructionRegPrv>()
-                                                    .toggleDeposit();
-                                              },
-                                            ),
-                                          ),
-                                          hpad(12),
-                                          Expanded(
-                                            child: Text(
-                                              S.of(context).fee_paid,
-                                              style: txtBold(
-                                                  14, grayScaleColorBase),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      vpad(16),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              child: PrimaryTextField(
-                                            enable: false,
-                                            isReadOnly: true,
-                                            keyboardType: TextInputType.number,
-                                            controller: context
+                                              .onChangeConsType,
+                                          hint: S.of(context).select_cons_type,
+                                          isRequired: true,
+                                          label: S.of(context).cons_type,
+                                          selectList: listType,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .consTypeController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateConsType,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          validator: Utils.emptyValidator,
+                                          label: S.of(context).reg_date,
+                                          isRequired: true,
+                                          isReadOnly: true,
+                                          hint: "dd/mm/yyyy",
+                                          onTap: () {
+                                            context
                                                 .read<ConstructionRegPrv>()
-                                                .workDayController,
-                                            label: S.of(context).cons_day,
-                                            background: grayScaleColor4,
-                                          )),
-                                          hpad(30),
-                                          Expanded(
-                                              child: PrimaryTextField(
-                                            enable: false,
-                                            isReadOnly: true,
-                                            controller: context
+                                                .pickRegDate(context);
+                                          },
+                                          suffixIcon: const PrimaryIcon(
+                                              icons: PrimaryIcons.calendar),
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .regDateController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateRegDate,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          validator: (v) {
+                                            if (v!.isEmpty) {
+                                              return '';
+                                            } else if (context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .endTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .endTime!
+                                                        .compareTo(context
+                                                            .read<
+                                                                ConstructionRegPrv>()
+                                                            .startTime!) <
+                                                    0) {
+                                              return "";
+                                            }
+                                            return null;
+                                          },
+                                          label: S.of(context).start_time,
+                                          isRequired: true,
+                                          isReadOnly: true,
+                                          hint: "dd/mm/yyyy",
+                                          onTap: () async {
+                                            await context
                                                 .read<ConstructionRegPrv>()
-                                                .offDayController,
-                                            keyboardType: TextInputType.number,
-                                            label: S.of(context).off_day,
-                                            background: grayScaleColor4,
-                                          )),
-                                        ],
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .describeController,
-                                        isRequired: true,
-                                        label: S.of(context).work_description,
-                                        hint: S.of(context).work_description,
-                                        maxLines: 3,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateDescribe,
-                                      ),
-                                      vpad(30),
-                                      PrimaryButton(
-                                        isLoading: context
-                                            .watch<ConstructionRegPrv>()
-                                            .isStep1Loading,
-                                        onTap: context
-                                            .read<ConstructionRegPrv>()
-                                            .onStep1Next,
-                                        text: S.of(context).next,
-                                      ),
-                                      vpad(40),
-                                    ],
+                                                .pickStartTime(context)
+                                                .then((_) {
+                                              context
+                                                  .read<ConstructionRegPrv>()
+                                                  .countDate();
+                                              context
+                                                  .read<ConstructionRegPrv>()
+                                                  .calculateFee();
+                                            });
+                                          },
+                                          suffixIcon: const PrimaryIcon(
+                                              icons: PrimaryIcons.calendar),
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .startTimeController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateStartTime,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          validator: (v) {
+                                            var now = DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day,
+                                                24);
+                                            if (v!.isEmpty) {
+                                              return '';
+                                            } else if (context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime!
+                                                        .compareTo(now) <
+                                                    0) {
+                                              return '';
+                                            } else if (context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .endTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .endTime!
+                                                        .compareTo(context
+                                                            .read<
+                                                                ConstructionRegPrv>()
+                                                            .startTime!) <
+                                                    0) {
+                                              return "";
+                                            }
+                                            return null;
+                                          },
+                                          label: S.of(context).end_time,
+                                          isRequired: true,
+                                          isReadOnly: true,
+                                          hint: "dd/mm/yyyy",
+                                          onTap: () async {
+                                            await context
+                                                .read<ConstructionRegPrv>()
+                                                .pickEndTime(context)
+                                                .then((v) {
+                                              context
+                                                  .read<ConstructionRegPrv>()
+                                                  .countDate();
+                                              context
+                                                  .read<ConstructionRegPrv>()
+                                                  .calculateFee();
+                                            });
+                                          },
+                                          suffixIcon: const PrimaryIcon(
+                                              icons: PrimaryIcons.calendar),
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .endTimeController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateEndTime,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .consFeeController,
+                                          label: S.of(context).cons_fee,
+                                          isReadOnly: true,
+                                          enable: false,
+                                          background: grayScaleColor4,
+                                        ),
+                                        vpad(16),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 22.0,
+                                              height: 22.0,
+                                              child: Checkbox(
+                                                fillColor:
+                                                    MaterialStateProperty.all(
+                                                        primaryColorBase),
+                                                value: context
+                                                    .watch<ConstructionRegPrv>()
+                                                    .isPaidFee,
+                                                onChanged: (v) {
+                                                  context
+                                                      .read<
+                                                          ConstructionRegPrv>()
+                                                      .toggleFee();
+                                                },
+                                              ),
+                                            ),
+                                            hpad(12),
+                                            Expanded(
+                                              child: Text(
+                                                S.of(context).fee_paid,
+                                                style: txtBold(
+                                                    14, grayScaleColorBase),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .depositController,
+                                          label: S.of(context).deposit,
+                                          isReadOnly: true,
+                                          enable: false,
+                                          background: grayScaleColor4,
+                                        ),
+                                        vpad(16),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 22.0,
+                                              height: 22.0,
+                                              child: Checkbox(
+                                                fillColor:
+                                                    MaterialStateProperty.all(
+                                                        primaryColorBase),
+                                                value: context
+                                                    .watch<ConstructionRegPrv>()
+                                                    .isPaidDeposit,
+                                                onChanged: (v) {
+                                                  context
+                                                      .read<
+                                                          ConstructionRegPrv>()
+                                                      .toggleDeposit();
+                                                },
+                                              ),
+                                            ),
+                                            hpad(12),
+                                            Expanded(
+                                              child: Text(
+                                                S.of(context).fee_paid,
+                                                style: txtBold(
+                                                    14, grayScaleColorBase),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        vpad(16),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: PrimaryTextField(
+                                              enable: false,
+                                              isReadOnly: true,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller: context
+                                                  .read<ConstructionRegPrv>()
+                                                  .workDayController,
+                                              label: S.of(context).cons_day,
+                                              background: grayScaleColor4,
+                                            )),
+                                            hpad(30),
+                                            Expanded(
+                                                child: PrimaryTextField(
+                                              enable: false,
+                                              isReadOnly: true,
+                                              controller: context
+                                                  .read<ConstructionRegPrv>()
+                                                  .offDayController,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              label: S.of(context).off_day,
+                                              background: grayScaleColor4,
+                                            )),
+                                          ],
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          maxLength: 1000,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .describeController,
+                                          isRequired: true,
+                                          label: S.of(context).work_description,
+                                          hint: S.of(context).work_description,
+                                          maxLines: 3,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateDescribe,
+                                        ),
+                                        vpad(30),
+                                        PrimaryButton(
+                                          width: double.infinity,
+                                          isLoading: context
+                                              .watch<ConstructionRegPrv>()
+                                              .isStep1Loading,
+                                          onTap: () => context
+                                              .read<ConstructionRegPrv>()
+                                              .onStep1Next(context),
+                                          text: S.of(context).next,
+                                        ),
+                                        vpad(40),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Form(
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey2,
-                                  child: ListView(
+                                  child: SingleChildScrollView(
                                     padding: const EdgeInsets.only(
                                       left: 24,
                                       right: 24,
                                       bottom: 12,
                                     ),
-                                    children: [
-                                      vpad(12),
-                                      Text(S.of(context).cons_unit_info,
-                                          style:
-                                              txtBold(14, grayScaleColorBase)),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .consUnitController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateConsUnit,
-                                        label: S.of(context).cons_unit,
-                                        isRequired: true,
-                                        hint:
-                                            S.of(context).enter_cons_unit_name,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .addressController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateAddress,
-                                        label: S.of(context).address,
-                                        isRequired: true,
-                                        hint: S.of(context).enter_address,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .deputyController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateDeputy,
-                                        label: S.of(context).deputy,
-                                        isRequired: true,
-                                        hint: S.of(context).enter_deputy_name,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .phoneController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validatePhone,
-                                        keyboardType: TextInputType.number,
-                                        label: S.of(context).deputy_phone,
-                                        isRequired: true,
-                                        hint: S.of(context).enter_phone,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .identityController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateIdentity,
-                                        label: S.of(context).cmnd,
-                                        isRequired: true,
-                                        hint: S.of(context).enter_identity,
-                                      ),
-                                      vpad(16),
-                                      PrimaryTextField(
-                                        controller: context
-                                            .read<ConstructionRegPrv>()
-                                            .workerNumController,
-                                        validateString: context
-                                            .watch<ConstructionRegPrv>()
-                                            .validateWorkerNum,
-                                        label: S.of(context).worker_num,
-                                        isRequired: true,
-                                        hint: S.of(context).enter_worker_num,
-                                      ),
-                                      vpad(30),
-                                      PrimaryButton(
-                                        isLoading: context
-                                            .watch<ConstructionRegPrv>()
-                                            .isStep2Loading,
-                                        onTap: context
-                                            .read<ConstructionRegPrv>()
-                                            .onStep2Next,
-                                        text: S.of(context).next,
-                                      ),
-                                      vpad(40),
-                                    ],
+                                    child: Column(
+                                      children: [
+                                        vpad(12),
+                                        Text(S.of(context).cons_unit_info,
+                                            style: txtBold(
+                                                14, grayScaleColorBase)),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          maxLength: 225,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .consUnitController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateConsUnit,
+                                          label: S.of(context).cons_unit,
+                                          isRequired: true,
+                                          hint: S
+                                              .of(context)
+                                              .enter_cons_unit_name,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          maxLength: 225,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .addressController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateAddress,
+                                          label: S.of(context).address,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_address,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          maxLength: 225,
+                                          blockSpace: true,
+                                          validator: (v) {
+                                            if (v!.isEmpty) {
+                                              return '';
+                                            } else if (!RegexText.isEmail(v)) {
+                                              return '';
+                                            }
+                                            return null;
+                                          },
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .emailController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateEmail,
+                                          label: S.of(context).email,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_email,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          maxLength: 100,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .deputyController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateDeputy,
+                                          label: S.of(context).deputy,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_deputy_name,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          blockSpace: true,
+                                          blockSpecial: true,
+                                          maxLength: 12,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .phoneController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validatePhone,
+                                          keyboardType: TextInputType.number,
+                                          label: S.of(context).deputy_phone,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_phone,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          blockSpace: true,
+                                          blockSpecial: true,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .identityController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateIdentity,
+                                          label: S.of(context).cmnd,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_identity,
+                                        ),
+                                        vpad(16),
+                                        PrimaryTextField(
+                                          keyboardType: TextInputType.number,
+                                          maxLength: 3,
+                                          onlyNum: true,
+                                          validator: Utils.emptyValidator,
+                                          controller: context
+                                              .read<ConstructionRegPrv>()
+                                              .workerNumController,
+                                          validateString: context
+                                              .watch<ConstructionRegPrv>()
+                                              .validateWorkerNum,
+                                          label: S.of(context).worker_num,
+                                          isRequired: true,
+                                          hint: S.of(context).enter_worker_num,
+                                        ),
+                                        vpad(30),
+                                        PrimaryButton(
+                                          width: double.infinity,
+                                          isLoading: context
+                                              .watch<ConstructionRegPrv>()
+                                              .isStep2Loading,
+                                          onTap: () => context
+                                              .read<ConstructionRegPrv>()
+                                              .onStep2Next(context),
+                                          text: S.of(context).next,
+                                        ),
+                                        vpad(40),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 ListView(
@@ -658,27 +821,27 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         PrimaryButton(
-                                          // isLoading: context
-                                          //     .watch<RegisterDeliveryPrv>()
-                                          //     .isAddNewLoading,
+                                          isLoading: context
+                                              .watch<ConstructionRegPrv>()
+                                              .isAddNewLoading,
                                           buttonSize: ButtonSize.medium,
                                           text: isEdit
                                               ? S.of(context).update
                                               : S.of(context).add_new,
-                                          // onTap: () => context
-                                          //     .read<RegisterDeliveryPrv>()
-                                          //     .onSendSummitDelivery(context, false),
+                                          onTap: () => context
+                                              .read<ConstructionRegPrv>()
+                                              .onSendSubmit(context, false),
                                         ),
                                         PrimaryButton(
-                                          // isLoading: context
-                                          //     .watch<RegisterDeliveryPrv>()
-                                          //     .isSendApproveLoading,
+                                          isLoading: context
+                                              .watch<ConstructionRegPrv>()
+                                              .isSendApproveLoading,
                                           buttonType: ButtonType.green,
                                           buttonSize: ButtonSize.medium,
                                           text: S.of(context).send_request,
-                                          // onTap: () => context
-                                          //     .read<RegisterDeliveryPrv>()
-                                          //     .onSendSummitDelivery(context, true),
+                                          onTap: () => context
+                                              .read<ConstructionRegPrv>()
+                                              .onSendSubmit(context, true),
                                         ),
                                       ],
                                     ),

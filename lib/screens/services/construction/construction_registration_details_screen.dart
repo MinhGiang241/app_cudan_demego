@@ -117,18 +117,20 @@ class _ConstructionRegistrationDetailsScreenState
                             '${Utils.dateFormat(reg.time_start ?? "", 1)} - ${Utils.dateFormat(reg.time_end ?? "", 1)}',
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).cons_fee,
-                        content: formatCurrency.format(reg.construction_cost),
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).deposit,
-                        content: formatCurrency.format(reg.deposit_fee),
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
+                      if (reg.construction_cost != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).cons_fee,
+                          content: formatCurrency.format(reg.construction_cost),
+                          contentStyle: txtBold(14, grayScaleColorBase),
+                        ),
+                      if (reg.deposit_fee != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).deposit,
+                          content: formatCurrency.format(reg.deposit_fee),
+                          contentStyle: txtBold(14, grayScaleColorBase),
+                        ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).cons_day,

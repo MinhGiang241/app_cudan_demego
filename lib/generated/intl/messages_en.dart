@@ -123,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_send_request": m5,
+        "cons_agree": MessageLookupByLibrary.simpleMessage(
+            "You need to agree to comply with the regulations on construction registration"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Construction code"),
         "cons_day": MessageLookupByLibrary.simpleMessage("Construction day"),
         "cons_drawing":
@@ -172,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "drawing_not_empty":
+            MessageLookupByLibrary.simpleMessage("Drawing can be not empty"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
@@ -193,11 +197,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "end": MessageLookupByLibrary.simpleMessage("End"),
         "end_date": MessageLookupByLibrary.simpleMessage("End date"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
+            "End date can not be less than now"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu"),
-        "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được để trống"),
+            "End date can not be less than start date"),
+        "end_date_not_empty":
+            MessageLookupByLibrary.simpleMessage("End date can not be empty"),
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("End registration time"),
@@ -474,7 +478,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Registration construction"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Registration date"),
         "reg_date_not_after_now": MessageLookupByLibrary.simpleMessage(
-            "Registration day is not after now"),
+            "Registration day is not beefore now"),
         "reg_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Registration date can be not empty"),
         "reg_deliver":
@@ -591,9 +595,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
-            "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
-        "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Ngày bắt đầu không được để trống"),
+            "Start date can not be greater than now"),
+        "start_date_after_now_equal": MessageLookupByLibrary.simpleMessage(
+            "Start date must be greater than now"),
+        "start_date_not_empty":
+            MessageLookupByLibrary.simpleMessage("Start date can not be empty"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "status_cons":
@@ -621,7 +627,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_send_letter":
             MessageLookupByLibrary.simpleMessage("Send letter successfully"),
         "success_send_req": MessageLookupByLibrary.simpleMessage(
-            "Send to approve request successfully"),
+            "Send to approve request letter successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Surface"),
