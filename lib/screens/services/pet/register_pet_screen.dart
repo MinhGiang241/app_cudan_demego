@@ -3,6 +3,7 @@ import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -75,15 +76,21 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
           ),
           body: SafeArea(
             child: Form(
+              onChanged: () => context.read<RegisterPetPrv>().validate(context),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: context.read<RegisterPetPrv>().formKey,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
                     vpad(20),
-                    Text(
-                      S.of(context).pet_info,
-                      style: txtMedium(14, grayScaleColorBase),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        S.of(context).pet_info,
+                        style: txtBold(14, grayScaleColorBase),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                     vpad(16),
                     Row(
@@ -131,6 +138,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                       children: [
                         Expanded(
                           child: PrimaryTextField(
+                            maxLength: 100,
                             controller:
                                 context.read<RegisterPetPrv>().colorController,
                             validateString:
@@ -190,6 +198,10 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                         hpad(24),
                         Expanded(
                           child: PrimaryTextField(
+                            filter: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9.,]'))
+                            ],
                             controller:
                                 context.read<RegisterPetPrv>().weightController,
                             validateString:
@@ -243,7 +255,15 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               }
                             },
                             validator: (v) {
+                              var w = context
+                                  .read<RegisterPetPrv>()
+                                  .weightController
+                                  .text
+                                  .trim();
                               if (v!.isEmpty) {
+                                return '';
+                              } else if (double.tryParse(w) != null &&
+                                  double.parse(w) == 0) {
                                 return '';
                               }
                               return null;
@@ -254,6 +274,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      maxLength: 1000,
                       controller:
                           context.read<RegisterPetPrv>().descriptionController,
                       label: S.of(context).description,
@@ -323,14 +344,14 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                         Expanded(
                           child: RichText(
                             text: TextSpan(
-                                style: txtBodyMediumRegular(
+                                style: txtBodyMediumBold(
                                     color: grayScaleColorBase),
                                 children: [
                                   TextSpan(text: S.of(context).i_agree),
                                   TextSpan(
                                     text: " ${S.of(context).regulations}",
-                                    style: txtBodyMediumRegular(
-                                        color: primaryColor6),
+                                    style:
+                                        txtBodyMediumBold(color: primaryColor6),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         context

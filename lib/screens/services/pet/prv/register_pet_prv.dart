@@ -19,7 +19,7 @@ class RegisterPetPrv extends ChangeNotifier {
     nameController.text = existedPet!.pet_name ?? "";
     typeController.text = existedPet!.pet_type ?? "";
     colorController.text = existedPet!.color ?? "";
-    originController.text = existedPet!.pet_type ?? '';
+    originController.text = existedPet!.species ?? '';
     sexController.text = existedPet!.sex ?? '';
     weightController.text =
         existedPet!.weight != null ? existedPet!.weight.toString() : '';
@@ -58,6 +58,52 @@ class RegisterPetPrv extends ChangeNotifier {
   String? validateSex;
   String? validateWeight;
   bool isShow = false;
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateName = null;
+      validateType = null;
+      validateColor = null;
+      validateOrigin = null;
+      validateSex = null;
+      validateWeight = null;
+    } else {
+      var w = weightController.text.trim();
+      if (nameController.text.trim().isEmpty) {
+        validateName = S.of(context).not_blank;
+      } else {
+        validateName = null;
+      }
+      if (typeController.text.trim().isEmpty) {
+        validateType = S.of(context).not_blank;
+      } else {
+        validateType = null;
+      }
+      if (colorController.text.trim().isEmpty) {
+        validateColor = S.of(context).not_blank;
+      } else {
+        validateColor = null;
+      }
+      if (originController.text.trim().isEmpty) {
+        validateOrigin = S.of(context).not_blank;
+      } else {
+        validateOrigin = null;
+      }
+      if (sexController.text.trim().isEmpty) {
+        validateSex = S.of(context).not_blank;
+      } else {
+        validateSex = null;
+      }
+      if (weightController.text.trim().isEmpty) {
+        validateWeight = S.of(context).not_blank;
+      } else if (double.tryParse(w) != null && double.parse(w) == 0) {
+        validateWeight = S.of(context).weight_not_zero;
+      } else {
+        validateWeight = null;
+      }
+    }
+
+    notifyListeners();
+  }
 
   toogleShow() {
     isShow = !isShow;
@@ -67,6 +113,7 @@ class RegisterPetPrv extends ChangeNotifier {
   onSendSummitPet(BuildContext context, bool isRequest) async {
     FocusScope.of(context).unfocus();
     var c = formKey.currentState!.validate();
+    var w = weightController.text.trim();
     if (c) {
       if (isRequest) {
         isSendApproveLoading = true;
@@ -76,8 +123,8 @@ class RegisterPetPrv extends ChangeNotifier {
       notifyListeners();
       try {
         var listError = [];
-        var w = weightController.text.trim();
-        if (double.tryParse(w) != null && double.parse(w) >= 15) {
+
+        if (double.tryParse(w) != null && double.parse(w) > 15) {
           listError.add(S.of(context).weight_not_15);
         }
         if (!isAgree) {
@@ -127,7 +174,7 @@ class RegisterPetPrv extends ChangeNotifier {
               context: context,
               e: isRequest
                   ? S.of(context).success_send_req
-                  : existedPet != null
+                  : existedPet!.id != null
                       ? S.of(context).success_edit
                       : S.of(context).success_cr_new,
               onClose: () {
@@ -187,6 +234,8 @@ class RegisterPetPrv extends ChangeNotifier {
       }
       if (weightController.text.trim().isEmpty) {
         validateWeight = S.of(context).not_blank;
+      } else if (double.tryParse(w) != null && double.parse(w) == 0) {
+        validateWeight = S.of(context).weight_not_zero;
       } else {
         validateWeight = null;
       }
@@ -256,12 +305,14 @@ class RegisterPetPrv extends ChangeNotifier {
   }
 
   onSelectImagePet(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesPet.addAll(list);
         notifyListeners();
       }
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
   }
 

@@ -8,6 +8,7 @@ import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_physics.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/regulation.dart';
@@ -145,10 +146,9 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                           Expanded(
                             child: PageView(
                               physics: context
-                                          .watch<ConstructionRegPrv>()
-                                          .activeStep <
-                                      2
-                                  ? const NeverScrollableScrollPhysics()
+                                      .watch<ConstructionRegPrv>()
+                                      .isDisableRightCroll
+                                  ? const LeftBlockedScrollPhysics()
                                   : null,
                               controller:
                                   context.read<ConstructionRegPrv>().controller,
@@ -157,6 +157,11 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                   .onPageChanged,
                               children: <Widget>[
                                 Form(
+                                  onChanged: () => context
+                                      .read<ConstructionRegPrv>()
+                                      .validate1(context),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey1,
@@ -365,7 +370,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         vpad(16),
                                         PrimaryTextField(
                                           controller: context
-                                              .read<ConstructionRegPrv>()
+                                              .watch<ConstructionRegPrv>()
                                               .consFeeController,
                                           label: S.of(context).cons_fee,
                                           isReadOnly: true,
@@ -506,6 +511,11 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                   ),
                                 ),
                                 Form(
+                                  onChanged: () => context
+                                      .read<ConstructionRegPrv>()
+                                      .validate2(context),
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey2,

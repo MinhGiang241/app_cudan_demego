@@ -94,7 +94,7 @@ class _ConstructionRegistrationDetailsScreenState
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).cons_type,
-                        content: reg.code,
+                        content: reg.constructionType!.name ?? '',
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(

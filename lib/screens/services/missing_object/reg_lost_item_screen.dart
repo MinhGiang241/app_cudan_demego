@@ -33,12 +33,16 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
             ),
             body: SafeArea(
               child: Form(
+                onChanged: () =>
+                    context.read<RegisterLostItemPrv>().validate(context),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: context.read<RegisterLostItemPrv>().formKey,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   children: [
                     vpad(24),
                     PrimaryTextField(
+                      maxLength: 225,
                       validateString:
                           context.read<RegisterLostItemPrv>().validateName,
                       controller:
@@ -95,6 +99,7 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      maxLength: 500,
                       hint: S.of(context).note,
                       controller:
                           context.read<RegisterLostItemPrv>().noteController,

@@ -81,7 +81,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                                   .read<MissingObjectPrv>()
                                   .onChooseMonthYear(v);
                               setState(() {
-                                tabController.index = tabController.index;
+                                initIndex = tabController.index;
                               });
                             },
                             pickerModel: CustomMonthPicker(

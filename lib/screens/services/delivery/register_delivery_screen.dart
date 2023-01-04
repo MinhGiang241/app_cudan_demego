@@ -76,6 +76,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                   : S.of(context).reg_deliver),
           body: Builder(builder: (context) {
             return Form(
+              onChanged: () =>
+                  context.read<RegisterDeliveryPrv>().validate(context),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: context.watch<RegisterDeliveryPrv>().formKey,
               child: SafeArea(
                 child: ListView(

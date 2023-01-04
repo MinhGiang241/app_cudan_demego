@@ -150,7 +150,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                             InfoContentView(
                               title: S.of(context).bill_code,
-                              content: e.id,
+                              content: e.code ?? e.id,
                               contentStyle: txtBold(13, grayScaleColorBase),
                             ),
                             if (e.content != null)
@@ -161,11 +161,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                             InfoContentView(
                               title: S.of(context).vat,
-                              content: e.vat != null
-                                  ? formatCurrency
-                                      .format(e.vat)
-                                      .replaceAll("₫", "VND")
-                                  : "0 VND",
+                              content: e.vat != null ? "${e.vat} %" : "0 %",
                               contentStyle: txtBold(13, grayScaleColorBase),
                             ),
                             InfoContentView(

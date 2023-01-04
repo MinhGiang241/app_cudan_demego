@@ -69,6 +69,13 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   String? residentId;
   String? shelfLifeId;
 
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+    } else {}
+
+    notifyListeners();
+  }
+
   onChangeMaxPayDate(BuildContext context, v) {
     maxDayPay = v;
     notifyListeners();

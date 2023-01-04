@@ -4550,11 +4550,21 @@ class S {
     );
   }
 
-  /// `Drawing can be not empty`
-  String get drawing_not_empty {
+  /// `Existed drawing can not be empty`
+  String get existed_drawing_not_empty {
     return Intl.message(
-      'Drawing can be not empty',
-      name: 'drawing_not_empty',
+      'Existed drawing can not be empty',
+      name: 'existed_drawing_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Renew drawing can not be empty`
+  String get renew_drawing_not_empty {
+    return Intl.message(
+      'Renew drawing can not be empty',
+      name: 'renew_drawing_not_empty',
       desc: '',
       args: [],
     );
@@ -4575,6 +4585,46 @@ class S {
     return Intl.message(
       'Start date must be greater than now',
       name: 'start_date_after_now_equal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight can not be zero`
+  String get weight_not_zero {
+    return Intl.message(
+      'Weight can not be zero',
+      name: 'weight_not_zero',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload file is not supported`
+  String get file_not_support {
+    return Intl.message(
+      'Upload file is not supported',
+      name: 'file_not_support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Found`
+  String get success_found {
+    return Intl.message(
+      'Found',
+      name: 'success_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image can not be empty`
+  String get image_not_empty {
+    return Intl.message(
+      'Image can not be empty',
+      name: 'image_not_empty',
       desc: '',
       args: [],
     );

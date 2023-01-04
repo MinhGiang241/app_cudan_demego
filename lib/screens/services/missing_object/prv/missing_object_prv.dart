@@ -33,7 +33,7 @@ class MissingObjectPrv extends ChangeNotifier {
     await APILost.saveLostItem(lost.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,
-          e: S.of(context).success_returned,
+          e: S.of(context).success_found,
           onClose: () {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacementNamed(
@@ -64,7 +64,7 @@ class MissingObjectPrv extends ChangeNotifier {
                   arguments: {
                     'year': year,
                     'month': month,
-                    'index': 0,
+                    'index': 1,
                   });
             });
           });
@@ -86,7 +86,7 @@ class MissingObjectPrv extends ChangeNotifier {
       for (var i in loot) {
         lootList.add(LootItem.fromJson(i));
       }
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }

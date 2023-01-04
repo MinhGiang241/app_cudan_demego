@@ -25,6 +25,31 @@ class PickItemPrv extends ChangeNotifier {
   String? validatePlace;
   String? validateFoundTime;
   final formKey = GlobalKey<FormState>();
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateName = null;
+      validatePlace = null;
+      validateFoundTime = null;
+    } else {
+      if (placeController.text.trim().isEmpty) {
+        validatePlace = S.of(context).not_blank;
+      } else {
+        validatePlace = null;
+      }
+      if (nameController.text.trim().isEmpty) {
+        validateName = S.of(context).not_blank;
+      } else {
+        validateName = null;
+      }
+      if (foundController.text.trim().isEmpty) {
+        validateFoundTime = S.of(context).not_blank;
+      } else {
+        validateFoundTime = null;
+      }
+    }
+
+    notifyListeners();
+  }
 
   submitPick(BuildContext context) {
     isLoading = true;
@@ -40,6 +65,9 @@ class PickItemPrv extends ChangeNotifier {
         var listError = [];
         if (foundDate!.compareTo(now) > 0) {
           listError.add(S.of(context).find_time_now);
+        }
+        if (imagesPick.isEmpty) {
+          listError.add(S.of(context).image_not_empty);
         }
         if (listError.isNotEmpty) {
           throw (listError.join(',  '));
@@ -149,7 +177,7 @@ class PickItemPrv extends ChangeNotifier {
   }
 
   onSelectImagePick(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesPick.addAll(list);

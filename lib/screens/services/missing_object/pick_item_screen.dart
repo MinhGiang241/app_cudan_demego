@@ -33,12 +33,15 @@ class _PickItemScreenState extends State<PickItemScreen> {
             ),
             body: SafeArea(
               child: Form(
+                onChanged: () => context.read<PickItemPrv>().validate(context),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: context.read<PickItemPrv>().formKey,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   children: [
                     vpad(24),
                     PrimaryTextField(
+                      maxLength: 255,
                       validateString: context.read<PickItemPrv>().validateName,
                       controller: context.read<PickItemPrv>().nameController,
                       label: S.of(context).object_name,
@@ -53,6 +56,7 @@ class _PickItemScreenState extends State<PickItemScreen> {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      maxLength: 255,
                       validateString: context.read<PickItemPrv>().validatePlace,
                       controller: context.read<PickItemPrv>().placeController,
                       label: S.of(context).found_place,
@@ -101,6 +105,7 @@ class _PickItemScreenState extends State<PickItemScreen> {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      maxLength: 500,
                       hint: S.of(context).note,
                       controller: context.read<PickItemPrv>().noteController,
                       label: S.of(context).note,

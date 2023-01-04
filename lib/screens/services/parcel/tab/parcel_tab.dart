@@ -139,7 +139,7 @@ class _ParcelTabState extends State<ParcelTab> {
                                   ),
                                   vpad(4),
                                   Text(
-                                      '${S.of(context).parcel_code}: ${e.name ?? ""}'),
+                                      '${S.of(context).parcel_code}: ${e.code ?? ""}'),
                                   vpad(4),
                                   if (widget.type == "WAIT")
                                     Text(

@@ -24,7 +24,7 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
       for (var i in v) {
         listCard.add(ServiceRegistration.fromJson(i));
       }
-      notifyListeners();
+      // notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

@@ -59,7 +59,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
               contentStyle: txtBold(14, grayScaleColorBase),
             ),
             InfoContentView(
-              title: S.of(context).missing_time,
+              title: S.of(context).found_time,
               content: Utils.dateFormat(lootItem.date ?? "", 1),
               contentStyle: txtBold(14, grayScaleColorBase),
             ),

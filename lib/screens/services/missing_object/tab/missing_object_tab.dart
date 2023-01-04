@@ -58,6 +58,20 @@ class MissingObjectTab extends StatefulWidget {
 class _MissingObjectTabState extends State<MissingObjectTab> {
   @override
   Widget build(BuildContext context) {
+    // List<MissingObject> list = [];
+    List<MissingObject> foundList = [];
+    List<MissingObject> notFoundList = [];
+
+    for (var i in widget.list) {
+      if (i.status == "FOUND") {
+        foundList.add(i);
+      } else {
+        notFoundList.add(i);
+      }
+    }
+    foundList.sort((a, b) => b.time!.compareTo(a.time ?? ""));
+    notFoundList.sort((a, b) => b.time!.compareTo(a.time ?? ""));
+    List<MissingObject> list = notFoundList + foundList;
     return SafeArea(
       child: SmartRefresher(
         enablePullDown: true,
@@ -87,7 +101,7 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
             : ListView(
                 children: [
                   vpad(24),
-                  ...widget.list.map(
+                  ...list.map(
                     (e) => PrimaryCard(
                       onTap: () {
                         Navigator.pushNamed(

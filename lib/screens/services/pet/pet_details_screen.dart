@@ -98,7 +98,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                           ),
                           InfoContentView(
                             isHorizontal: true,
-                            title: S.of(context).reg_code,
+                            title: S.of(context).status,
                             content: genStatus(arg.pet_status ?? ""),
                             contentStyle: txtBold(
                                 14, genStatusColor(arg.pet_status ?? "")),
@@ -108,6 +108,13 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               isHorizontal: true,
                               title: S.of(context).cancel_reason,
                               content: arg.r!.name,
+                              contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
+                          if (arg.note != null)
+                            InfoContentView(
+                              isHorizontal: true,
+                              title: S.of(context).cancel_reason,
+                              content: arg.note,
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                           if (arg.describe != null)

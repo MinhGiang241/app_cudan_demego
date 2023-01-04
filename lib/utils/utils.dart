@@ -241,7 +241,7 @@ class Utils {
       Permission.storage,
     ]);
     if (p) {
-      List<XFile?>? value = await _filePicker(false);
+      List<XFile?>? value = await _filePicker(false, false);
       return value;
     } else {
       return null;
@@ -282,6 +282,8 @@ class Utils {
                     if (value != null) {
                       pop(context, value);
                     }
+                  }).catchError((e) {
+                    Utils.showErrorMessage(context, e);
                   });
                 },
               ),
@@ -291,10 +293,12 @@ class Utils {
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.folder_open, color: grayScaleColor2),
                   onTap: () async {
-                    await _filePicker(false).then((value) {
+                    await _filePicker(false, true).then((value) {
                       if (value != null) {
                         pop(context, value);
                       }
+                    }).catchError((e) {
+                      Utils.showErrorMessage(context, e);
                     });
                   },
                 ),
@@ -306,7 +310,8 @@ class Utils {
     }
   }
 
-  static Future<List<XFile?>?> _filePicker(bool isMultiple) async {
+  static Future<List<XFile?>?> _filePicker(
+      bool isMultiple, bool isImage) async {
     var allows = [
       'jpg',
       'jpeg',
@@ -317,6 +322,11 @@ class Utils {
       'xls',
       'xlsx',
     ];
+    var allowsImage = [
+      'jpg',
+      'jpeg',
+      'png',
+    ];
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: isMultiple,
@@ -326,12 +336,24 @@ class Utils {
       final files = result.files.map<XFile>((e) => XFile(e.path!)).toList();
       var ffiles = files.where((v) {
         var a = (v.path.split('.').last);
-
-        if (allows.contains(a)) {
-          return true;
+        if (isImage) {
+          if (!allowsImage.contains(a)) {
+            return false;
+          } else {
+            return true;
+          }
         } else {
-          return false;
+          if (!allows.contains(a)) {
+            return false;
+          } else {
+            return true;
+          }
         }
+        // if (allows.contains(a)) {
+        //   return true;
+        // } else {
+        //   return false;
+        // }
       }).toList();
 
       return ffiles;
@@ -343,13 +365,24 @@ class Utils {
   static Future<List<XFile>?> _imagePicker(
       bool isMulti, ImageSource source) async {
     final picker = ImagePicker();
+    var allows = [
+      'jpg',
+      'jpeg',
+      'png',
+    ];
 
     if (isMulti && source == ImageSource.gallery) {
       return await picker.pickMultiImage();
     }
     final image = await picker.pickImage(source: source);
+
     if (image != null) {
-      return [image];
+      var a = (image.path.split('.').last);
+      if (!allows.contains(a)) {
+        throw (S.current.file_not_support);
+      } else {
+        return [image];
+      }
     } else {
       return null;
     }
@@ -409,6 +442,7 @@ class Utils {
       DateTime? initDate,
       DateTime? startDate,
       DateTime? endDate}) async {
+    FocusScope.of(context).unfocus();
     if (Platform.isIOS) {
       return await showDatePicker(
         initialEntryMode: DatePickerEntryMode.calendarOnly,

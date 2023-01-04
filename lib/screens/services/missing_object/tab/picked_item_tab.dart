@@ -59,6 +59,19 @@ class PickedItemTab extends StatefulWidget {
 class _PickedItemTabState extends State<PickedItemTab> {
   @override
   Widget build(BuildContext context) {
+    List<LootItem> waitList = [];
+    List<LootItem> returnedList = [];
+
+    for (var i in widget.list) {
+      if (i.status == "WAIT_RETURN") {
+        waitList.add(i);
+      } else {
+        returnedList.add(i);
+      }
+    }
+    waitList.sort((a, b) => b.date!.compareTo(a.date ?? ""));
+    returnedList.sort((a, b) => b.date!.compareTo(a.date ?? ""));
+    List<LootItem> list = waitList + returnedList;
     return SafeArea(
       child: SmartRefresher(
         enablePullDown: true,
@@ -88,7 +101,7 @@ class _PickedItemTabState extends State<PickedItemTab> {
             : ListView(
                 children: [
                   vpad(24),
-                  ...widget.list.map(
+                  ...list.map(
                     (e) => PrimaryCard(
                       onTap: () {
                         Navigator.pushNamed(

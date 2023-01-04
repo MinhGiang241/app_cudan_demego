@@ -449,7 +449,12 @@
   "enter_identity":"Enter identity",
   "enter_deputy_name":"Enter deputy name",
   "add_file":"Add file",
-  "drawing_not_empty":"Drawing can be not empty",
+  "existed_drawing_not_empty":"Existed drawing can not be empty",
+  "renew_drawing_not_empty":"Renew drawing can not be empty",
   "cons_agree":"You need to agree to comply with the regulations on construction registration",
-  "start_date_after_now_equal":"Start date must be greater than now"
-}
+  "start_date_after_now_equal":"Start date must be greater than now",
+  "weight_not_zero":"Weight can not be zero",
+  "file_not_support":"Upload file is not supported",
+  "success_found":"Found",
+  "image_not_empty":"Image can not be empty"
+} 

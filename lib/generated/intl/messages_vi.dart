@@ -173,8 +173,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
-        "drawing_not_empty":
-            MessageLookupByLibrary.simpleMessage("Bản vẽ không được bỏ trống"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
@@ -197,7 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
-            "Ngày kết thúc không được nhỏ hơn ngày bắt đầu "),
+            "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu "),
         "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được để trống"),
         "end_time": MessageLookupByLibrary.simpleMessage("Thời gian kết thúc"),
@@ -239,6 +237,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Theo dõi các sự kiện từng ngày/ tháng"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ hiện trạng"),
+        "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Bản vẽ hiện trạng không được bỏ trống"),
         "expired": MessageLookupByLibrary.simpleMessage("Hết hạn"),
         "expired_date": MessageLookupByLibrary.simpleMessage("Ngày hết hạn"),
         "expired_login": MessageLookupByLibrary.simpleMessage(
@@ -250,6 +250,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
+        "file_not_support": MessageLookupByLibrary.simpleMessage(
+            "File tải lên không đúng định dạng. Vui lòng tải lại"),
         "file_selection": MessageLookupByLibrary.simpleMessage("Chọn file"),
         "file_status": MessageLookupByLibrary.simpleMessage("Trạng thái hồ sơ"),
         "find_time_now": MessageLookupByLibrary.simpleMessage(
@@ -295,6 +297,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh CMND/CCCD/Hộ chiếu mặt trước không được để trống"),
         "identity_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh CMND/ CCCD/ Hộ chiếu"),
+        "image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Hình ảnh không được để trống"),
         "inactive": MessageLookupByLibrary.simpleMessage("Dừng hoạt động"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Số điện thoại/Email hoặc mật khẩu không chính xác."),
@@ -319,12 +323,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "long": MessageLookupByLibrary.simpleMessage("Dài"),
         "lost_time_now": MessageLookupByLibrary.simpleMessage(
-            "Thời điểm thất lạc phải nhỏ hơn hoặc bằng ngày hiện tại"),
+            "Thời điểm thất lạc không được lớn hơn ngày hiện tại"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
-            "Số ngày đăng ký tối đa không được để trống"),
+            "Số ngày thanh toán tối đa không được để trống"),
         "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "minutes": MessageLookupByLibrary.simpleMessage("Biên bản"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Đồ thất lạc"),
@@ -512,6 +516,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
+        "renew_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Bản vẽ cải tạo không được bỏ trống"),
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ cải tạo"),
         "report_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -615,6 +621,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thành công"),
         "success_find": MessageLookupByLibrary.simpleMessage(
             "Đổi trạng thái đồ thành đã tìm thấy thành công"),
+        "success_found": MessageLookupByLibrary.simpleMessage("Đã tìm thấy"),
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
@@ -688,7 +695,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "we_send_to": m14,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
-            "Cân nặng không được quá 15kg"),
+            "Trọng lượng không được quá 15kg"),
+        "weight_not_zero":
+            MessageLookupByLibrary.simpleMessage("Trọng lượng phải khác không"),
         "wellcome_back":
             MessageLookupByLibrary.simpleMessage("Chào mừng trở lại"),
         "width": MessageLookupByLibrary.simpleMessage("Rộng"),

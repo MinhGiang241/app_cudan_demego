@@ -63,6 +63,32 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   List<ItemDeliver> packageItems = [];
   List<ImageDelivery> submitImageDelivery = [];
 
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateStartDate = null;
+      validateEndDate = null;
+      validateType = null;
+      validatePackageName = null;
+      validateDimention = null;
+      validateLong = null;
+      validateWidth = null;
+      validateHeight = null;
+    } else {
+      if (startDateController.text.isEmpty) {
+        validateStartDate = "${S.of(context).date}: ${S.of(context).not_blank}";
+      } else {
+        validateStartDate = null;
+      }
+      if (endDateController.text.isEmpty) {
+        validateEndDate = "${S.of(context).date}: ${S.of(context).not_blank}";
+      } else {
+        validateEndDate = null;
+      }
+    }
+
+    notifyListeners();
+  }
+
   onSendSummitDelivery(BuildContext context, bool isRequest) {
     FocusScope.of(context).unfocus();
 
@@ -278,7 +304,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   // List<File> imagesRelated = [];
 
   onSelectImageDelivery(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesDelivery.addAll(list);
@@ -302,8 +328,10 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         // )
         .then((v) {
       if (v != null) {
-        startDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         startDate = v;
+        startDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
+        validateStartDate = null;
+        notifyListeners();
       }
     });
   }
@@ -335,6 +363,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       if (v != null) {
         endDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         endDate = v;
+        validateEndDate = null;
+        notifyListeners();
       }
     });
   }

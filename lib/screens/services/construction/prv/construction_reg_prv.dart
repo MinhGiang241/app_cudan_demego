@@ -69,6 +69,7 @@ class ConstructionRegPrv extends ChangeNotifier {
   final formKey3 = GlobalKey<FormState>();
   ConstructionRegistration? existedConReg = ConstructionRegistration();
   DayOff? dayoff;
+  bool isDisableRightCroll = true;
   int activeStep = 0;
   List<ConstructionType> listConstructionType = [];
   final PageController controller = PageController();
@@ -137,6 +138,26 @@ class ConstructionRegPrv extends ChangeNotifier {
   int? workday = 0;
   int? offday;
 
+  validate1(BuildContext context) {
+    if (formKey1.currentState!.validate()) {
+      clearValidStringStep1();
+    } else {
+      genValidStep1();
+    }
+
+    notifyListeners();
+  }
+
+  validate2(BuildContext context) {
+    if (formKey2.currentState!.validate()) {
+      clearValidStringStep2();
+    } else {
+      genValidStep2();
+    }
+
+    notifyListeners();
+  }
+
   onSendSubmit(BuildContext context, bool isRequest) async {
     if (isRequest) {
       isSendApproveLoading = true;
@@ -153,11 +174,11 @@ class ConstructionRegPrv extends ChangeNotifier {
         return e.id == selectedConstype;
       });
       var listError = [];
-      if (existedCurrentDrawings.isEmpty &&
-          existedRenewDrawings.isEmpty &&
-          currentDrawings.isEmpty &&
-          renewDrawings.isEmpty) {
-        listError.add(S.of(context).drawing_not_empty);
+      if (existedCurrentDrawings.isEmpty && currentDrawings.isEmpty) {
+        listError.add(S.of(context).existed_drawing_not_empty);
+      }
+      if (existedRenewDrawings.isEmpty && renewDrawings.isEmpty) {
+        listError.add(S.of(context).renew_drawing_not_empty);
       }
       // if (formKey1.currentState!.validate() &&
       //     formKey2.currentState!.validate()) {
@@ -169,12 +190,12 @@ class ConstructionRegPrv extends ChangeNotifier {
       if (listError.isNotEmpty) {
         throw (listError.join(',  '));
       }
-      return uploadCurrentDrawing(context).then((v) {
+      await uploadCurrentDrawing(context).then((v) {
         return uploadRenewDrawing(context);
       }).then((v) {
         ConstructionRegistration conReg = ConstructionRegistration(
           id: existedConReg != null ? existedConReg!.id : null,
-
+          code: existedConReg != null ? existedConReg!.code : null,
           apartmentId: selectedApartment,
           confirm: isAgree,
           isMobile: true,
@@ -206,8 +227,8 @@ class ConstructionRegPrv extends ChangeNotifier {
           resident_phone: resident.phone_required,
           time_start: startTime!.toIso8601String(),
           time_end: endTime!.toIso8601String(),
-          // resident_relationship: apartment.type,
-          contruction_type_name: consType.name,
+          //   // resident_relationship: apartment.type,
+          contruction_type_name: consType.name ?? "",
         );
         return APIConstruction.saveConstructionRegistration(conReg.toJson());
       }).then((v) {
@@ -230,7 +251,7 @@ class ConstructionRegPrv extends ChangeNotifier {
             context: context,
             e: isRequest
                 ? S.of(context).success_send_req
-                : existedConReg != null
+                : existedConReg != null && existedConReg!.id != null
                     ? S.of(context).success_edit
                     : S.of(context).success_cr_new,
             onClose: () {
@@ -369,14 +390,16 @@ class ConstructionRegPrv extends ChangeNotifier {
   }
 
   onChangeApartment(value) {
-    surfaceController.text = value;
     selectedApartment = value;
+    surfaceController.text = value;
+    validateSurface = null;
     notifyListeners();
   }
 
   onChangeConsType(value) {
     consTypeController.text = value;
     selectedConstype = value;
+    validateConsType = null;
     calculateFee();
 
     // var type = listConstructionType
@@ -402,10 +425,17 @@ class ConstructionRegPrv extends ChangeNotifier {
     FocusScope.of(context).unfocus();
 
     if (formKey1.currentState!.validate()) {
+      isDisableRightCroll = false;
+      notifyListeners();
       clearValidStringStep1();
-      controller.animateToPage(++activeStep,
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.bounceInOut);
+      controller
+          .animateToPage(++activeStep,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.bounceInOut)
+          .then((_) {
+        isDisableRightCroll = true;
+        notifyListeners();
+      });
     } else {
       genValidStep1();
     }
@@ -444,14 +474,18 @@ class ConstructionRegPrv extends ChangeNotifier {
       validateStartTime = S.current.not_blank;
     } else if (startTime!.compareTo(now) < 0) {
       validateStartTime = S.current.start_date_after_now_equal;
-    } else if (endTime!.compareTo(startTime!) < 0) {
+    } else if (startTime != null &&
+        endTime != null &&
+        endTime!.compareTo(startTime!) < 0) {
       validateStartTime = S.current.end_date_after_start_date;
     } else {
       validateStartTime = null;
     }
     if (endTimeController.text.trim().isEmpty) {
       validateEndTime = S.current.not_blank;
-    } else if (endTime!.compareTo(startTime!) < 0) {
+    } else if (startTime != null &&
+        endTime != null &&
+        endTime!.compareTo(startTime!) < 0) {
       validateEndTime = S.current.end_date_after_start_date;
     } else {
       validateEndTime = null;
@@ -517,6 +551,8 @@ class ConstructionRegPrv extends ChangeNotifier {
   onStep2Next(BuildContext context) {
     FocusScope.of(context).unfocus();
     if (formKey2.currentState!.validate()) {
+      isDisableRightCroll = false;
+      notifyListeners();
       clearValidStringStep2();
       controller.animateToPage(++activeStep,
           duration: const Duration(milliseconds: 250),
@@ -567,8 +603,10 @@ class ConstructionRegPrv extends ChangeNotifier {
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
-        startTimeController.text = Utils.dateFormat(v.toIso8601String(), 0);
         startTime = v;
+        startTimeController.text = Utils.dateFormat(v.toIso8601String(), 0);
+
+        notifyListeners();
       }
     });
   }
@@ -636,8 +674,10 @@ class ConstructionRegPrv extends ChangeNotifier {
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
-        endTimeController.text = Utils.dateFormat(v.toIso8601String(), 0);
         endTime = v;
+        endTimeController.text = Utils.dateFormat(v.toIso8601String(), 0);
+
+        notifyListeners();
       }
     });
   }

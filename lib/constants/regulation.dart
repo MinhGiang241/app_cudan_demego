@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 var petRegulation = r'''
-<h3 style="text-align:justify;">Quy dịnh về vật nuôi trong chung cư</h3>
+<h3 style="text-align:justify;">QUY ĐỊNH VỀ VẬT NUÔI TRONG CHUNG CƯ</h3>
 <p style="text-align:justify;"><i><strong>Người nuôi chó, mèo phải tuân thủ quy định như sau:</strong></i></p>
 
 <p style="text-align:justify;">1. Phải đăng ký việc nuôi chó với Ủy ban nhân dân cấp xã tại các đô thị, nơi đông dân cư;

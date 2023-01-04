@@ -62,12 +62,29 @@ class ResidentLetterTab extends StatelessWidget {
     List<ResidentCard> list =
         newLetter + waitLetter + approvedLetter + cancelLetter;
     return (list.isEmpty)
-        ? PrimaryEmptyWidget(
-            emptyText: S.of(context).no_letter,
-            icons: PrimaryIcons.identity_bg,
-            action: () {
-              // Utils.pushScreen(context, const RegisterParkingCard());
-            },
+        ? SafeArea(
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: false,
+              header: WaterDropMaterialHeader(
+                  backgroundColor: Theme.of(context).primaryColor),
+              controller: _refreshController,
+              onLoading: () {
+                _refreshController.loadComplete();
+                // _refreshController.refreshCompleted();
+              },
+              onRefresh: () {
+                onRefresh();
+                _refreshController.refreshCompleted();
+              },
+              child: PrimaryEmptyWidget(
+                emptyText: S.of(context).no_card,
+                icons: PrimaryIcons.identity_bg,
+                action: () {
+                  // Utils.pushScreen(context, const RegisterParkingCard());
+                },
+              ),
+            ),
           )
         : Stack(
             children: [

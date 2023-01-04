@@ -31,7 +31,7 @@ class NewDetailsScreen extends StatelessWidget {
               Text(
                 arg.title ?? '',
                 style: txtBodyLargeBold(),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
               vpad(12),
               Text(Utils.dateFormat(arg.date ?? '', 1),

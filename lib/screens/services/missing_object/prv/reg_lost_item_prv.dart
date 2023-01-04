@@ -24,6 +24,26 @@ class RegisterLostItemPrv extends ChangeNotifier {
   String? validateLostTime;
   final formKey = GlobalKey<FormState>();
 
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateName = null;
+      validateLostTime = null;
+    } else {
+      if (lostDateController.text.isEmpty) {
+        validateLostTime = S.of(context).not_blank;
+      } else {
+        validateLostTime = null;
+      }
+      if (nameController.text.trim().isEmpty) {
+        validateName = S.of(context).not_blank;
+      } else {
+        validateName = null;
+      }
+    }
+
+    notifyListeners();
+  }
+
   submitRegisterLost(BuildContext context) {
     isLoading = true;
     validateName = null;
@@ -138,7 +158,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
   }
 
   onSelectImageLost(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesLost.addAll(list);

@@ -174,8 +174,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
-        "drawing_not_empty":
-            MessageLookupByLibrary.simpleMessage("Drawing can be not empty"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
@@ -239,6 +237,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Existing drawing"),
+        "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Existed drawing can not be empty"),
         "expired": MessageLookupByLibrary.simpleMessage("Expired"),
         "expired_date": MessageLookupByLibrary.simpleMessage("Expired_date"),
         "expired_login": MessageLookupByLibrary.simpleMessage(
@@ -250,6 +250,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file_code": MessageLookupByLibrary.simpleMessage("Document code"),
         "file_info": MessageLookupByLibrary.simpleMessage("File information"),
+        "file_not_support": MessageLookupByLibrary.simpleMessage(
+            "Upload file is not supported"),
         "file_selection":
             MessageLookupByLibrary.simpleMessage("File selection"),
         "file_status": MessageLookupByLibrary.simpleMessage("File status"),
@@ -294,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Identity card front side image can not be empty"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
             "Identity card/ passport photos"),
+        "image_not_empty":
+            MessageLookupByLibrary.simpleMessage("Image can not be empty"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Phone number/Email or password is not correct."),
@@ -512,6 +516,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "renew_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Renew drawing can not be empty"),
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Renewal drawing"),
         "report_not_empty":
@@ -616,6 +622,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edit successfully"),
         "success_find": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
+        "success_found": MessageLookupByLibrary.simpleMessage("Found"),
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
@@ -693,6 +700,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),
+        "weight_not_zero":
+            MessageLookupByLibrary.simpleMessage("Weight can not be zero"),
         "wellcome_back": MessageLookupByLibrary.simpleMessage("Welcome back"),
         "width": MessageLookupByLibrary.simpleMessage("Width"),
         "work_description":

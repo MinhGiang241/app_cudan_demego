@@ -72,6 +72,36 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? liceneNum;
   String? regNum;
 
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateApartment = null;
+      validateVehicleType = null;
+      validateLiceneNum = null;
+      validateRegNum = null;
+    } else {
+      if (liceneController.text.trim().isEmpty) {
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_blank.toLowerCase()}";
+      } else if (RegexText.vietNameseChar(liceneController.text.trim())) {
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_vietnamese.toLowerCase()}";
+      } else if (RegexText.requiredSpecialChar(liceneController.text.trim())) {
+        validateLiceneNum =
+            "${S.current.licene_plate} ${S.current.not_special_char.toLowerCase()}";
+      } else {
+        validateLiceneNum = null;
+      }
+      if (regNumController.text.trim().isEmpty) {
+        validateRegNum =
+            '${S.current.reg_num} ${S.current.not_blank.toLowerCase()}';
+      } else {
+        validateRegNum = null;
+      }
+    }
+
+    notifyListeners();
+  }
+
   onChangevehicleType(v) {
     vehicleType = v;
     try {
@@ -352,7 +382,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   onSelectImageVehicle(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesVehicle.addAll(list);
@@ -362,7 +392,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   onSelectImageRelated(BuildContext context) async {
-    await Utils.selectImage(context, true).then((value) {
+    await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
         imagesRelated.addAll(list);
