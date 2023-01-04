@@ -52,6 +52,7 @@ class ConstructionListPrv extends ChangeNotifier {
   cancelRequetsAprrove(
       BuildContext context, ConstructionRegistration data) async {
     data.status = 'CANCEL';
+    data.cancel_reason = 'NGUOIDUNGHUY';
     data.isMobile = true;
     Utils.showConfirmMessage(
         context: context,
