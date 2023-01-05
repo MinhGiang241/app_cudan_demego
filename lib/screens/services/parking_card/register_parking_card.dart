@@ -103,10 +103,16 @@ class _RegisterTransportationCardState
                   }).toList();
 
                   return Form(
-                    onChanged: () => context
-                        .read<RegisterTransportationCardPrv>()
-                        .validate(context),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    onChanged:
+                        context.watch<RegisterTransportationCardPrv>().autoVaid
+                            ? () => context
+                                .read<RegisterTransportationCardPrv>()
+                                .validate(context)
+                            : null,
+                    autovalidateMode:
+                        context.watch<RegisterTransportationCardPrv>().autoVaid
+                            ? AutovalidateMode.onUserInteraction
+                            : null,
                     key: context.watch<RegisterTransportationCardPrv>().formKey,
                     child: ListView(
                       children: [

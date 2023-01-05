@@ -1,7 +1,9 @@
 import 'package:app_cudan/models/missing_object.dart';
+import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
@@ -11,6 +13,7 @@ import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../lost_item_details_screen.dart';
+import '../prv/missing_object_prv.dart';
 
 genLostStatus(String? status) {
   switch (status) {
@@ -86,101 +89,143 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
         onLoading: () {
           widget.refreshController.loadComplete();
         },
-        child: widget.list.isEmpty
-            ? Column(
-                children: [
-                  Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            vpad(12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                S.of(context).status,
+                style: txtBold(12, grayScaleColor2),
+              ),
+            ),
+            vpad(12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: PrimaryDropDown(
+                selectList: [
+                  DropdownMenuItem(
+                    value: 0,
+                    child: Text(S.of(context).all),
+                  ),
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text(S.of(context).found),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text(S.of(context).not_found),
+                  ),
+                ],
+              ),
+            ),
+            widget.list.isEmpty
+                ? Expanded(
                     child: PrimaryEmptyWidget(
                       emptyText: S.of(context).no_pick_obj,
                       icons: PrimaryIcons.binoculars,
                       action: () {},
                     ),
-                  ),
-                ],
-              )
-            : ListView(
-                children: [
-                  vpad(24),
-                  ...list.map(
-                    (e) => PrimaryCard(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          LostItemDetailsScreen.routeName,
-                          arguments: {
-                            "lost": e,
-                            "status": e.status,
-                            "change": widget.changeStatus,
-                          },
-                        );
-                      },
-                      margin: const EdgeInsets.only(
-                          bottom: 16, left: 12, right: 12),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 14,
-                          horizontal: 16,
-                        ),
-                        child: Row(children: [
-                          const PrimaryIcon(
-                            icons: PrimaryIcons.binoculars,
-                            style: PrimaryIconStyle.gradient,
-                            gradients: PrimaryIconGradient.turquoise,
-                            size: 32,
-                            padding: EdgeInsets.all(12),
-                            color: Colors.white,
-                          ),
-                          hpad(16),
-                          Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                e.name ?? "",
-                                style: txtBold(16),
-                              ),
-                              vpad(4),
-                              Table(
-                                textBaseline: TextBaseline.ideographic,
-                                defaultVerticalAlignment:
-                                    TableCellVerticalAlignment.baseline,
-                                columnWidths: const {
-                                  0: FlexColumnWidth(3),
-                                  1: FlexColumnWidth(2)
-                                },
-                                children: [
-                                  TableRow(children: [
-                                    Text('${S.of(context).missing_time}:'),
-                                    Text(Utils.dateFormat(e.time ?? '', 1),
-                                        style: txtLinkSmall()),
-                                  ]),
-                                  TableRow(children: [vpad(4), vpad(4)]),
-                                  if (widget.type == "FOUND")
-                                    TableRow(children: [
-                                      Text('${S.of(context).found_place}:'),
+                  )
+                : Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          vpad(16),
+                          ...list.map(
+                            (e) => PrimaryCard(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  LostItemDetailsScreen.routeName,
+                                  arguments: {
+                                    "lost": e,
+                                    "status": e.status,
+                                    "change": widget.changeStatus,
+                                  },
+                                );
+                              },
+                              margin: const EdgeInsets.only(
+                                  bottom: 16, left: 12, right: 12),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                  horizontal: 16,
+                                ),
+                                child: Row(children: [
+                                  const PrimaryIcon(
+                                    icons: PrimaryIcons.binoculars,
+                                    style: PrimaryIconStyle.gradient,
+                                    gradients: PrimaryIconGradient.turquoise,
+                                    size: 32,
+                                    padding: EdgeInsets.all(12),
+                                    color: Colors.white,
+                                  ),
+                                  hpad(16),
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
                                       Text(
-                                        e.find_place ?? "",
+                                        e.name ?? "",
+                                        style: txtBold(16),
                                       ),
-                                    ]),
-                                  TableRow(children: [vpad(4), vpad(4)]),
-                                  TableRow(children: [
-                                    Text('${S.of(context).status}:'),
-                                    Text(
-                                      e.s!.name ?? "",
-                                      style: genLostStyle(e.status ?? ""),
-                                    )
-                                  ]),
-                                ],
-                              )
-                            ],
-                          ))
-                        ]),
+                                      vpad(4),
+                                      Table(
+                                        textBaseline: TextBaseline.ideographic,
+                                        defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.baseline,
+                                        columnWidths: const {
+                                          0: FlexColumnWidth(3),
+                                          1: FlexColumnWidth(2)
+                                        },
+                                        children: [
+                                          TableRow(children: [
+                                            Text(
+                                                '${S.of(context).missing_time}:'),
+                                            Text(
+                                                Utils.dateFormat(
+                                                    e.time ?? '', 1),
+                                                style: txtLinkSmall()),
+                                          ]),
+                                          TableRow(
+                                              children: [vpad(4), vpad(4)]),
+                                          if (widget.type == "FOUND")
+                                            TableRow(children: [
+                                              Text(
+                                                  '${S.of(context).found_place}:'),
+                                              Text(
+                                                e.find_place ?? "",
+                                              ),
+                                            ]),
+                                          TableRow(
+                                              children: [vpad(4), vpad(4)]),
+                                          TableRow(children: [
+                                            Text('${S.of(context).status}:'),
+                                            Text(
+                                              e.s!.name ?? "",
+                                              style:
+                                                  genLostStyle(e.status ?? ""),
+                                            )
+                                          ]),
+                                        ],
+                                      )
+                                    ],
+                                  ))
+                                ]),
+                              ),
+                            ),
+                          ),
+                          vpad(60),
+                        ],
                       ),
                     ),
                   ),
-                  vpad(60),
-                ],
-              ),
+          ],
+        ),
       ),
     );
   }

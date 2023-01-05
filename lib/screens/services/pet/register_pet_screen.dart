@@ -76,8 +76,12 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
           ),
           body: SafeArea(
             child: Form(
-              onChanged: () => context.read<RegisterPetPrv>().validate(context),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: context.watch<RegisterPetPrv>().autoValid
+                  ? () => context.read<RegisterPetPrv>().validate(context)
+                  : null,
+              autovalidateMode: context.watch<RegisterPetPrv>().autoValid
+                  ? AutovalidateMode.onUserInteraction
+                  : null,
               key: context.read<RegisterPetPrv>().formKey,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -94,6 +98,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: PrimaryTextField(
@@ -116,6 +121,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                         hpad(24),
                         Expanded(
                           child: PrimaryDropDown(
+                            onChange:
+                                context.read<RegisterPetPrv>().changeTypePet,
                             controller:
                                 context.read<RegisterPetPrv>().typeController,
                             validateString:
@@ -135,6 +142,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: PrimaryTextField(
@@ -177,9 +185,12 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: PrimaryDropDown(
+                            onChange:
+                                context.read<RegisterPetPrv>().changeSexPet,
                             controller:
                                 context.read<RegisterPetPrv>().sexController,
                             isRequired: true,
@@ -191,6 +202,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               if (v == null) {
                                 return '';
                               }
+
                               return null;
                             },
                           ),
@@ -252,6 +264,40 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                             .length);
 
                                 setState(() {});
+                              } else if (context
+                                      .read<RegisterPetPrv>()
+                                      .weightController
+                                      .text
+                                      .contains('.') &&
+                                  context
+                                          .read<RegisterPetPrv>()
+                                          .weightController
+                                          .text
+                                          .split('.')
+                                          .last
+                                          .length >
+                                      2) {
+                                context
+                                        .read<RegisterPetPrv>()
+                                        .weightController
+                                        .text =
+                                    ((double.parse(v) * 100).floor() / 100)
+                                        .toStringAsFixed(2);
+                                context
+                                        .read<RegisterPetPrv>()
+                                        .weightController
+                                        .selection =
+                                    TextSelection(
+                                        baseOffset: context
+                                            .read<RegisterPetPrv>()
+                                            .weightController
+                                            .text
+                                            .length,
+                                        extentOffset: context
+                                            .read<RegisterPetPrv>()
+                                            .weightController
+                                            .text
+                                            .length);
                               }
                             },
                             validator: (v) {

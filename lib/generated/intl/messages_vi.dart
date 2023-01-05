@@ -143,7 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_reg_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký thi công"),
         "cons_regulation":
-            MessageLookupByLibrary.simpleMessage("Nội quy thi công"),
+            MessageLookupByLibrary.simpleMessage("Quy định thi công"),
         "cons_type": MessageLookupByLibrary.simpleMessage("Loại thi công"),
         "cons_unit": MessageLookupByLibrary.simpleMessage("Đơn vị thi công"),
         "cons_unit_info":
@@ -165,7 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deposit": MessageLookupByLibrary.simpleMessage("Đặt cọc"),
         "deputy": MessageLookupByLibrary.simpleMessage("Người đại dện"),
         "deputy_phone":
-            MessageLookupByLibrary.simpleMessage("SDT người đại diện"),
+            MessageLookupByLibrary.simpleMessage("SĐT người đại diện"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "detail_view": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
+        "edit_reg_const":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký thi công"),
         "edit_reg_deliver":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký chuyển đồ"),
         "edit_reg_pet":
@@ -210,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ email"),
         "enter_email_phone":
-            MessageLookupByLibrary.simpleMessage("Nhập SDT/Email "),
+            MessageLookupByLibrary.simpleMessage("Nhập SĐT/Email "),
         "enter_identity":
             MessageLookupByLibrary.simpleMessage("Nhập CMCD/ CCCD/ Hộ chiếu"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
@@ -248,7 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fee_paid": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
-        "file_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
+        "file_code": MessageLookupByLibrary.simpleMessage("Mã hổ sơ"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "File tải lên không đúng định dạng. Vui lòng tải lại"),
@@ -379,13 +381,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_dimention":
             MessageLookupByLibrary.simpleMessage("Kích thước không đúng"),
         "not_email":
-            MessageLookupByLibrary.simpleMessage("Không phải là email."),
+            MessageLookupByLibrary.simpleMessage("Email không đúng định dạng"),
         "not_empty_back": MessageLookupByLibrary.simpleMessage(
             "Không để trống hình ảnh mặt sau"),
         "not_empty_front": MessageLookupByLibrary.simpleMessage(
             "Không để trống hình ảnh mặt trước"),
         "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
             "Loại phương tiện không được để trống"),
+        "not_found": MessageLookupByLibrary.simpleMessage("Chưa tìm thấy"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
@@ -472,6 +475,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_front_side":
             MessageLookupByLibrary.simpleMessage("Ảnh mặt trước"),
         "photos": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
+        "pick_file_error": MessageLookupByLibrary.simpleMessage(
+            "Bạn chỉ có thể upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx"),
+        "pick_image_error": MessageLookupByLibrary.simpleMessage(
+            "Bạn chỉ có thể upload file jpeg, jpg, png"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
         "project": MessageLookupByLibrary.simpleMessage("Dự án"),
@@ -580,7 +587,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_request": MessageLookupByLibrary.simpleMessage("Gửi duyệt"),
         "send_to_email":
             MessageLookupByLibrary.simpleMessage("Gửi mã về email"),
-        "send_to_phone": MessageLookupByLibrary.simpleMessage("Gửi mã về SDT"),
+        "send_to_phone": MessageLookupByLibrary.simpleMessage("Gửi mã về SĐT"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
         "service_bill":
             MessageLookupByLibrary.simpleMessage("Tiền đăng ký dịch vụ"),
@@ -679,9 +686,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "vew_records": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_record": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "violation_record":
+            MessageLookupByLibrary.simpleMessage("Biên bản vi phạm"),
+        "violation_records":
             MessageLookupByLibrary.simpleMessage("Biên bản vi phạm"),
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),

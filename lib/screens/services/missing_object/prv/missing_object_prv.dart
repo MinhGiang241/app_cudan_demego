@@ -27,7 +27,8 @@ class MissingObjectPrv extends ChangeNotifier {
 
   saveLostItem(BuildContext context, MissingObject lost) async {
     lost.status = "FOUND";
-    lost.find_time = DateTime.now().toIso8601String();
+    lost.find_time =
+        (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
     // var apartment = context.read<ResidentInfoPrv>()
     // lost.apartment = "${context}";
     await APILost.saveLostItem(lost.toJson()).then((v) {
@@ -52,7 +53,8 @@ class MissingObjectPrv extends ChangeNotifier {
 
   saveLootItem(BuildContext context, LootItem loot) async {
     loot.status = "RETURNED";
-    loot.time_pay = DateTime.now().toIso8601String();
+    loot.time_pay =
+        (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
     await APILost.saveLootItem(loot.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,

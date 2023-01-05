@@ -37,6 +37,7 @@ class _ConstructionDocumentDetailsState
     extends State<ConstructionDocumentDetailsScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
+  var isShowRecorg = false;
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -95,25 +96,25 @@ class _ConstructionDocumentDetailsState
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).cons_type,
-                        content: reg.code,
+                        content: reg.constructionType!.name ?? "",
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).cons_code,
-                        content: reg.registration_code,
+                        content: reg.c!.code ?? "",
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reg_date,
-                        content: Utils.dateFormat(reg.reg_date ?? "", 1),
+                        content: Utils.dateTimeFormat(reg.reg_date ?? "", 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).approved_date,
-                        content: Utils.dateFormat(reg.createdTime ?? "", 1),
+                        content: Utils.dateTimeFormat(reg.createdTime ?? "", 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
@@ -124,11 +125,17 @@ class _ConstructionDocumentDetailsState
                       ),
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).status,
+                        title: S.of(context).file_status,
                         content: reg.s!.name ?? "",
                         contentStyle:
                             txtBold(14, genStatusColor(reg.status ?? "")),
                       ),
+                      // InfoContentView(
+                      //   isHorizontal: true,
+                      //   title: S.of(context).cancel_reason,
+                      //   content: reg.ca ?? "",
+                      //   contentStyle: txtBold(14, grayScaleColorBase),
+                      // ),
                     ],
                   ),
                 ),
@@ -166,80 +173,123 @@ class _ConstructionDocumentDetailsState
                   ),
                 ),
                 vpad(16),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 22.0,
-                      height: 22.0,
-                      child: Checkbox(
-                        fillColor: MaterialStateProperty.all(primaryColorBase),
-                        value: reg.confirm,
-                        onChanged: (v) {},
+                if (reg.status == "COMPLETE" && reg.v!.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(children: [
+                      Text("${S.of(context).violation_record}:",
+                          style: txtMedium(14, grayScaleColor2)),
+                      hpad(30),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              isShowRecorg = !isShowRecorg;
+                            });
+                          },
+                          child: Text(S.of(context).view_record))
+                    ]),
+                  ),
+
+                vpad(12),
+                if (reg.v!.isNotEmpty && isShowRecorg)
+                  ...reg.v![0].image!.map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: InkWell(
+                        onTap: () async {
+                          await launchUrl(
+                            Uri.parse("${ApiConstants.uploadURL}?load=${e.id}"),
+                            mode: LaunchMode.externalApplication,
+                          );
+                        },
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            e.name ?? "",
+                            textAlign: TextAlign.left,
+                            style: txtMedium(
+                              14,
+                              primaryColor6,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    hpad(12),
-                    Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                            style: txtMedium(16, grayScaleColor2),
-                            children: [
-                              TextSpan(text: S.of(context).i_confirm),
-                              TextSpan(
-                                text: " ${S.of(context).here}",
-                                style: txtMedium(16, primaryColor6),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      context: context,
-                                      builder: ((context) => ListView(
-                                            children: [
-                                              vpad(40),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  BackButton(onPressed: () {
-                                                    Navigator.pop(context);
-                                                  }),
-                                                  Text(
-                                                    S
-                                                        .of(context)
-                                                        .cons_regulation,
-                                                    style: txtBodyLargeBold(
-                                                        color:
-                                                            grayScaleColorBase),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  hpad(50)
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 24),
-                                                child: HtmlWidget(
-                                                  consRe,
-                                                  buildAsync: false,
-                                                  onTapUrl: (url) {
-                                                    return false;
-                                                  },
-                                                  textStyle:
-                                                      txtBodyMediumRegular(),
-                                                ),
-                                              ),
-                                              vpad(40),
-                                            ],
-                                          )),
-                                    );
-                                  },
-                              ),
-                            ]),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       width: 22.0,
+                //       height: 22.0,
+                //       child: Checkbox(
+                //         fillColor: MaterialStateProperty.all(primaryColorBase),
+                //         value: reg.confirm,
+                //         onChanged: (v) {},
+                //       ),
+                //     ),
+                //     hpad(12),
+                //     Expanded(
+                //       child: RichText(
+                //         text: TextSpan(
+                //             style: txtMedium(16, grayScaleColor2),
+                //             children: [
+                //               TextSpan(text: S.of(context).i_confirm),
+                //               TextSpan(
+                //                 text: " ${S.of(context).here}",
+                //                 style: txtMedium(16, primaryColor6),
+                //                 recognizer: TapGestureRecognizer()
+                //                   ..onTap = () {
+                //                     showModalBottomSheet(
+                //                       isScrollControlled: true,
+                //                       context: context,
+                //                       builder: ((context) => ListView(
+                //                             children: [
+                //                               vpad(40),
+                //                               Row(
+                //                                 mainAxisAlignment:
+                //                                     MainAxisAlignment
+                //                                         .spaceBetween,
+                //                                 children: [
+                //                                   BackButton(onPressed: () {
+                //                                     Navigator.pop(context);
+                //                                   }),
+                //                                   Text(
+                //                                     S
+                //                                         .of(context)
+                //                                         .cons_regulation,
+                //                                     style: txtBodyLargeBold(
+                //                                         color:
+                //                                             grayScaleColorBase),
+                //                                     textAlign: TextAlign.center,
+                //                                   ),
+                //                                   hpad(50)
+                //                                 ],
+                //                               ),
+                //                               Padding(
+                //                                 padding:
+                //                                     const EdgeInsets.symmetric(
+                //                                         horizontal: 24),
+                //                                 child: HtmlWidget(
+                //                                   consRe,
+                //                                   buildAsync: false,
+                //                                   onTapUrl: (url) {
+                //                                     return false;
+                //                                   },
+                //                                   textStyle:
+                //                                       txtBodyMediumRegular(),
+                //                                 ),
+                //                               ),
+                //                               vpad(40),
+                //                             ],
+                //                           )),
+                //                     );
+                //                   },
+                //               ),
+                //             ]),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 vpad(40),
               ],
             ),

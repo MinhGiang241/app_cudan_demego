@@ -42,7 +42,7 @@ class Pet {
   String? species;
   String? sex;
   String? reasons;
-  int? weight;
+  double? weight;
   String? describe;
   bool? check;
   String? address;
@@ -67,7 +67,9 @@ class Pet {
     color = json['color'];
     species = json['species'];
     sex = json['sex'];
-    weight = json['weight'];
+    weight = double.tryParse(json['weight'].toString()) != null
+        ? double.parse(json['weight'].toString())
+        : 0;
     describe = json['describe'];
     check = json['check'];
     address = json['address'];

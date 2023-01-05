@@ -94,6 +94,24 @@ class Utils {
     return a.format(c);
   }
 
+  static String dateTimeFormat(String date, int choice, [String? format]) {
+    if (date.isEmpty) {
+      return "";
+    }
+    DateTime dateTime = DateTime.parse(date);
+    DateTime d = dateTime;
+    if (choice == -1) {
+      d = dateTime.subtract(const Duration(hours: 7));
+    } else if (choice == 1) {
+      d = dateTime.add(const Duration(hours: 7));
+    } else {
+      d = dateTime;
+    }
+    // String formattedDate = DateFormat(format ?? 'dd/MM/yyyy').format(d);
+    return "${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')} ${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}";
+    // return formattedDate;
+  }
+
   static String dateFormat(String date, int choice, [String? format]) {
     if (date.isEmpty) {
       return "";
@@ -241,7 +259,10 @@ class Utils {
       Permission.storage,
     ]);
     if (p) {
-      List<XFile?>? value = await _filePicker(false, false);
+      List<XFile?>? value = await _filePicker(false, false).catchError((e) {
+        showErrorMessage(context, e);
+        return null;
+      });
       return value;
     } else {
       return null;
@@ -334,6 +355,12 @@ class Utils {
     );
     if (result != null) {
       final files = result.files.map<XFile>((e) => XFile(e.path!)).toList();
+      if (!isImage && !allows.contains(files[0].path.split(".").last)) {
+        throw (S.current.pick_file_error);
+      }
+      if (isImage && !allowsImage.contains(files[0].path.split(".").last)) {
+        throw (S.current.pick_image_error);
+      }
       var ffiles = files.where((v) {
         var a = (v.path.split('.').last);
         if (isImage) {
@@ -379,7 +406,7 @@ class Utils {
     if (image != null) {
       var a = (image.path.split('.').last);
       if (!allows.contains(a)) {
-        throw (S.current.file_not_support);
+        throw (S.current.pick_image_error);
       } else {
         return [image];
       }

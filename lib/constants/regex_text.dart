@@ -10,7 +10,8 @@ class RegexText {
       RegExp("^.{$min,$max}\$").hasMatch(value);
 
   static bool isEmail(String value) =>
-      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+      // RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+      RegExp(r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$').hasMatch(value);
 
   static bool requiredUpperCase(String value) =>
       RegExp(r"(.*[A-Z].*)").hasMatch(value);

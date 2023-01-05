@@ -19,6 +19,7 @@ import '../../../payment/widget/payment_item.dart';
 import '../construction_reg_screen.dart';
 import '../construction_registration_details_screen.dart';
 import '../prv/construction_list_prv.dart';
+import '../../../../utils/convert_date_time.dart';
 
 class ConstructionRegistrationLetterTab extends StatefulWidget {
   ConstructionRegistrationLetterTab(
@@ -202,14 +203,15 @@ class _ConstructionRegistrationLetterTabState
                                           RichText(
                                             text: TextSpan(children: [
                                               TextSpan(
-                                                  text:
-                                                      "${S.of(context).reg_date}:  ",
-                                                  style: txtRegular(
-                                                      14, grayScaleColorBase)),
+                                                text:
+                                                    "${S.of(context).reg_date}:  ",
+                                                style: txtMedium(
+                                                    14, grayScaleColor2),
+                                              ),
                                               TextSpan(
-                                                text: Utils.dateFormat(
-                                                    e.create_date ?? "", 1),
-                                                style: txtRegular(
+                                                text: Utils.dateTimeFormat(
+                                                    e.create_date ?? '', 1),
+                                                style: txtMedium(
                                                     14, greenColorBase),
                                               ),
                                             ]),
@@ -255,8 +257,7 @@ class _ConstructionRegistrationLetterTabState
                               ),
                             ),
                             if (e.status == "WAIT_TECHNICAL" ||
-                                e.status == "WAIT_MANAGER" ||
-                                e.status == "WAIT_MANAGER")
+                                e.status == "WAIT_OWNER")
                               Row(
                                 children: [
                                   hpad(16),

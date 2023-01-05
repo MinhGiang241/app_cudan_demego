@@ -62,8 +62,13 @@ class ConstructionRegPrv extends ChangeNotifier {
       depositFee = existedConReg!.deposit_fee ?? 0;
       workday = existedConReg!.working_day ?? 0;
       offday = existedConReg!.off_day ?? 0;
+    } else {
+      regDate = DateTime.now();
+      regDateController.text = Utils.dateFormat(regDate!.toIso8601String(), 1);
     }
   }
+  bool autoValidStep1 = false;
+  bool autoValidStep2 = false;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
@@ -208,7 +213,8 @@ class ConstructionRegPrv extends ChangeNotifier {
           deputy_phone: phoneController.text.trim(),
           contruction_add: addressController.text.trim(),
           contruction_email: emailController.text.trim(),
-          create_date: regDate!.toIso8601String(),
+          create_date:
+              (regDate!.subtract(const Duration(hours: 7))).toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,
           deputy_identity: identityController.text.trim(),
@@ -225,8 +231,10 @@ class ConstructionRegPrv extends ChangeNotifier {
               : null,
           resident_name: resident.info_name,
           resident_phone: resident.phone_required,
-          time_start: startTime!.toIso8601String(),
-          time_end: endTime!.toIso8601String(),
+          time_start:
+              (startTime!.subtract(const Duration(hours: 7))).toIso8601String(),
+          time_end:
+              (endTime!.subtract(const Duration(hours: 7))).toIso8601String(),
           //   // resident_relationship: apartment.type,
           contruction_type_name: consType.name ?? "",
         );
@@ -423,7 +431,7 @@ class ConstructionRegPrv extends ChangeNotifier {
 
   onStep1Next(BuildContext context) {
     FocusScope.of(context).unfocus();
-
+    autoValidStep1 = true;
     if (formKey1.currentState!.validate()) {
       isDisableRightCroll = false;
       notifyListeners();
@@ -550,6 +558,7 @@ class ConstructionRegPrv extends ChangeNotifier {
 
   onStep2Next(BuildContext context) {
     FocusScope.of(context).unfocus();
+    autoValidStep2 = true;
     if (formKey2.currentState!.validate()) {
       isDisableRightCroll = false;
       notifyListeners();

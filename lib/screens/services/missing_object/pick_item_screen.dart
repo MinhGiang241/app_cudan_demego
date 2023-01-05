@@ -33,8 +33,12 @@ class _PickItemScreenState extends State<PickItemScreen> {
             ),
             body: SafeArea(
               child: Form(
-                onChanged: () => context.read<PickItemPrv>().validate(context),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onChanged: context.watch<PickItemPrv>().autoValid
+                    ? () => context.read<PickItemPrv>().validate(context)
+                    : null,
+                autovalidateMode: context.watch<PickItemPrv>().autoValid
+                    ? AutovalidateMode.onUserInteraction
+                    : null,
                 key: context.read<PickItemPrv>().formKey,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 12),

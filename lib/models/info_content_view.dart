@@ -59,11 +59,11 @@ genStatusColor(String status) {
     case "APPROVED":
       return greenColor6;
     case "WAIT_OWNER":
-      return primaryColorBase;
+      return purpleColor6;
     case "WAIT_TECHNICAL":
       return greenColor9;
     case "WAIT_MANAGER":
-      return purpleColor6;
+      return primaryColorBase;
     case "WAIT_CONSTRUCTION":
       return grayScaleColor1;
     case "UNDER_CONSTRUCTION":

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'reason.dart';
 import 'status.dart';
 
 class ConstructionRegistration {
@@ -80,6 +81,7 @@ class ConstructionRegistration {
   String? create_date;
   bool? isMobile;
   Status? s;
+  Reason? r;
   ConstructionType? constructionType;
   List<ConstructionFile>? current_draw;
   List<ConstructionFile>? renovation_draw;
@@ -107,7 +109,7 @@ class ConstructionRegistration {
     time_start = json['time_start'];
     time_end = json['time_end'];
     description = json['description'];
-    s = json['status'] != null ? Status.fromJson(json['s']) : null;
+    s = json['s'] != null ? Status.fromJson(json['s']) : null;
     constructionType = json['constructionType'] != null
         ? ConstructionType.fromJson(json['constructionType'])
         : null;
@@ -131,6 +133,11 @@ class ConstructionRegistration {
     contruction_type_name = json['contruction_type_name'];
     create_date = json['create_date'];
     isMobile = json['isMobile'];
+    r = json['r'] != null
+        ? json['r'].isNotEmpty
+            ? Reason.fromJson(json['r'][0])
+            : null
+        : null;
     current_draw = json['current_draw'] != null
         ? json['current_draw'].isNotEmpty
             ? json['current_draw']
@@ -325,9 +332,11 @@ class ConstructionDocument {
   bool? isDepositFee;
   bool? confirm;
   Status? s;
+  List<ViolationRecord>? v;
   String? reg_date;
   ConstructionType? constructionType;
-  String? isRecord;
+  ConstructionRegistration? c;
+  bool? isRecord;
   ConstructionDocument.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -357,8 +366,17 @@ class ConstructionDocument {
     off_day = json['off_day'];
     isContructionCost = json['isContructionCost'];
     isDepositFee = json['isDepositFee'];
+    isRecord = json['isRecord'] ?? false;
     confirm = json['confirm'];
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
+    c = json['c'] != null ? ConstructionRegistration.fromJson(json['c']) : null;
+    v = json['v'] != null
+        ? json['v'].isNotEmpty
+            ? json['v']
+                .map<ViolationRecord>((e) => ViolationRecord.fromJson(e))
+                .toList()
+            : []
+        : [];
     reg_date = json['reg_date'];
     constructionType = json['constructionType'] != null
         ? ConstructionType.fromJson(json['constructionType'])
@@ -569,6 +587,138 @@ class DayOff {
     data['d_5'] = d_5;
     data['d_6'] = d_6;
 
+    return data;
+  }
+}
+
+class ViolationRecord {
+  ViolationRecord({
+    this.createdTime,
+    this.code,
+    this.constructionAcceptanceId,
+    this.constructionDocumentId,
+    this.describe,
+    this.id,
+    this.image,
+    this.name,
+    this.record_creator,
+    this.result,
+    this.time_end,
+    this.time_start,
+    this.updatedTime,
+    this.violation_list,
+    this.witness,
+  });
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? name;
+  String? witness;
+  String? time_start;
+  String? time_end;
+  String? describe;
+  String? result;
+  List<ConstructionFile>? image;
+  List<ViolationList>? violation_list;
+  String? constructionAcceptanceId;
+  String? constructionDocumentId;
+  String? code;
+  String? record_creator;
+  ViolationRecord.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    name = json['name'];
+    witness = json['witness'];
+    time_start = json['time_start'];
+    time_end = json['time_end'];
+    describe = json['describe'];
+    result = json['result'];
+    constructionAcceptanceId = json['constructionAcceptanceId'];
+    constructionDocumentId = json['constructionDocumentId'];
+    code = json['code'];
+    record_creator = json['record_creator'];
+
+    violation_list = json['violation_list'] != null
+        ? json['violation_list'].isNotEmpty
+            ? json['violation_list']
+                .map<ViolationList>((e) => ViolationList.fromJson(e))
+                .toList()
+            : []
+        : [];
+    image = json['image'] != null
+        ? json['image'].isNotEmpty
+            ? json['image']
+                .map<ConstructionFile>((e) => ConstructionFile.fromJson(e))
+                .toList()
+            : []
+        : [];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['name'] = name;
+    data['witness'] = witness;
+    data['time_start'] = time_start;
+    data['time_end'] = time_end;
+    data['result'] = result;
+    data['constructionAcceptanceId'] = constructionAcceptanceId;
+    data['constructionDocumentId'] = constructionDocumentId;
+    data['code'] = code;
+    data['record_creator'] = record_creator;
+    data['violation_list'] = violation_list != null
+        ? violation_list!.map((e) {
+            return e.toJson();
+          }).toList()
+        : [];
+
+    data['image'] = image != null
+        ? image!.map((e) {
+            return e.toJson();
+          }).toList()
+        : [];
+    return data;
+  }
+}
+
+class ViolationList {
+  ViolationList({
+    this.createdTime,
+    this.defectId,
+    this.order,
+    this.sanctionsManagementId,
+    this.times,
+    this.updatedTime,
+  });
+  String? defectId;
+  String? createdTime;
+  String? updatedTime;
+  int? times;
+  String? sanctionsManagementId;
+  int? order;
+  ViolationList.fromJson(Map<String, dynamic> json) {
+    createdTime = json['createdTime'];
+    updatedTime = json['updatedTime'];
+    defectId = json['defectId'];
+    times = int.tryParse(json['times'].toString()) != null
+        ? int.parse(json['times'].toString())
+        : 0;
+    sanctionsManagementId = json['sanctionsManagementId'];
+    order = int.tryParse(json['order'].toString()) != null
+        ? int.parse(json['order'].toString())
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['createdTime'] = createdTime;
+    data['updatedTime'] = updatedTime;
+    data['defectId'] = defectId;
+    data['times'] = times;
+    data['sanctionsManagementId'] = sanctionsManagementId;
+    data['order'] = order;
     return data;
   }
 }

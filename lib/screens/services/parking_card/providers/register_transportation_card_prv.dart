@@ -71,6 +71,7 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   String? vehicleType;
   String? liceneNum;
   String? regNum;
+  bool autoVaid = false;
 
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
@@ -174,6 +175,8 @@ class RegisterTransportationCardPrv extends ChangeNotifier {
   }
 
   onAddNewTransCard(BuildContext context, bool isRequest) {
+    autoVaid = true;
+
     if (formKey.currentState!.validate() || !isShowLicense) {
       if (isRequest) {
         isSendApproveLoading = true;

@@ -177,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
+        "edit_reg_const": MessageLookupByLibrary.simpleMessage(
+            "Edit construction regitration"),
         "edit_reg_deliver":
             MessageLookupByLibrary.simpleMessage("Edit register delivery"),
         "edit_reg_pet":
@@ -383,6 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not empty front side photo"),
         "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
             "Vehicle type can not be empty"),
+        "not_found": MessageLookupByLibrary.simpleMessage("Not found"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),
         "not_get_otp":
@@ -469,6 +472,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_front_side":
             MessageLookupByLibrary.simpleMessage("Photo front size"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
+        "pick_file_error": MessageLookupByLibrary.simpleMessage(
+            "You can only upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx"),
+        "pick_image_error": MessageLookupByLibrary.simpleMessage(
+            "You can only upload file jpeg, jpg, png"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "project": MessageLookupByLibrary.simpleMessage("Project"),
@@ -683,10 +690,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "vew_records": MessageLookupByLibrary.simpleMessage("View records"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_record": MessageLookupByLibrary.simpleMessage("View record"),
         "violation_record":
             MessageLookupByLibrary.simpleMessage("Violation record"),
+        "violation_records":
+            MessageLookupByLibrary.simpleMessage("Violation records"),
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),

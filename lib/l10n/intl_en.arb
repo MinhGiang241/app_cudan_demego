@@ -456,5 +456,11 @@
   "weight_not_zero":"Weight can not be zero",
   "file_not_support":"Upload file is not supported",
   "success_found":"Found",
-  "image_not_empty":"Image can not be empty"
+  "image_not_empty":"Image can not be empty",
+  "pick_file_error":"You can only upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx",
+  "pick_image_error":"You can only upload file jpeg, jpg, png",
+  "edit_reg_const":"Edit construction regitration",
+  "violation_records":"Violation records",
+  "vew_records":"View records",
+  "not_found":"Not found"
 } 

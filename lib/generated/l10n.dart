@@ -4629,6 +4629,66 @@ class S {
       args: [],
     );
   }
+
+  /// `You can only upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx`
+  String get pick_file_error {
+    return Intl.message(
+      'You can only upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx',
+      name: 'pick_file_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can only upload file jpeg, jpg, png`
+  String get pick_image_error {
+    return Intl.message(
+      'You can only upload file jpeg, jpg, png',
+      name: 'pick_image_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit construction regitration`
+  String get edit_reg_const {
+    return Intl.message(
+      'Edit construction regitration',
+      name: 'edit_reg_const',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Violation records`
+  String get violation_records {
+    return Intl.message(
+      'Violation records',
+      name: 'violation_records',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View records`
+  String get vew_records {
+    return Intl.message(
+      'View records',
+      name: 'vew_records',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not found`
+  String get not_found {
+    return Intl.message(
+      'Not found',
+      name: 'not_found',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

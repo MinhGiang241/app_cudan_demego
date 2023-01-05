@@ -134,7 +134,7 @@ class _PaymentTabState extends State<PaymentTab> {
                   ),
           ),
         ),
-        if (widget.type == "UNPAID")
+        if (widget.type == "UNPAID" && widget.list.isNotEmpty)
           Positioned(
             bottom: 24,
             left: 12,

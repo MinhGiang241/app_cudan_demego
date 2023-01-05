@@ -72,10 +72,11 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
       children: [
         Row(
           children: [
-            Text(
-              widget.label!,
-              style: txtBodySmallRegular(color: grayScaleColorBase),
-            ),
+            if (widget.label != null)
+              Text(
+                widget.label!,
+                style: txtBodySmallRegular(color: grayScaleColorBase),
+              ),
             if (widget.isRequired) hpad(4),
             if (widget.isRequired)
               Text("*", style: txtBodySmallRegular(color: redColorBase))

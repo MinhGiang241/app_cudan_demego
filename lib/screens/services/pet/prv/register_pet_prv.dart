@@ -58,6 +58,19 @@ class RegisterPetPrv extends ChangeNotifier {
   String? validateSex;
   String? validateWeight;
   bool isShow = false;
+  bool autoValid = false;
+  changeSexPet(v) {
+    sexController.text = v;
+    validateSex = null;
+    notifyListeners();
+  }
+
+  changeTypePet(v) {
+    typeController.text = v;
+    validateType = null;
+    notifyListeners();
+  }
+
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
       validateName = null;
@@ -111,6 +124,7 @@ class RegisterPetPrv extends ChangeNotifier {
   }
 
   onSendSummitPet(BuildContext context, bool isRequest) async {
+    autoValid = true;
     FocusScope.of(context).unfocus();
     var c = formKey.currentState!.validate();
     var w = weightController.text.trim();
@@ -161,8 +175,8 @@ class RegisterPetPrv extends ChangeNotifier {
             species: originController.text.trim(),
             subscriberId: context.read<ResidentInfoPrv>().residentId,
             tel: context.read<ResidentInfoPrv>().userInfo!.phone_required,
-            weight: int.tryParse(weightController.text.trim()) != null
-                ? int.parse(weightController.text.trim())
+            weight: double.tryParse(weightController.text.trim()) != null
+                ? double.parse(weightController.text.trim())
                 : 0,
             avt_pet: existedImage + submitImagesPet,
             certificate: exitedCertificateFiles + submitCertificateFiles,

@@ -120,10 +120,16 @@ class _ExtraServiceRegistrationScreenState
                         0;
                   }
                   return Form(
-                    onChanged: () => context
-                        .read<ExtraServiceRegistrationPrv>()
-                        .validate(context),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    onChanged:
+                        context.watch<ExtraServiceRegistrationPrv>().autoValid
+                            ? () => context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .validate(context)
+                            : null,
+                    autovalidateMode:
+                        context.watch<ExtraServiceRegistrationPrv>().autoValid
+                            ? AutovalidateMode.onUserInteraction
+                            : null,
                     key: context.read<ExtraServiceRegistrationPrv>().formKey,
                     child: ListView(
                       padding: const EdgeInsets.symmetric(horizontal: 12),

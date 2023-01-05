@@ -24,6 +24,7 @@ class PickItemPrv extends ChangeNotifier {
   String? validateName;
   String? validatePlace;
   String? validateFoundTime;
+  bool autoValid = false;
   final formKey = GlobalKey<FormState>();
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
@@ -52,6 +53,7 @@ class PickItemPrv extends ChangeNotifier {
   }
 
   submitPick(BuildContext context) {
+    bool autoValid = false;
     isLoading = true;
     validateName = null;
     validatePlace = null;
@@ -78,7 +80,8 @@ class PickItemPrv extends ChangeNotifier {
 
           var loot = LootItem(
             address: placeController.text.trim(),
-            date: foundDate!.toIso8601String(),
+            date: (foundDate!.subtract(const Duration(hours: 7)))
+                .toIso8601String(),
             describe: noteController.text.trim(),
             name: nameController.text.trim(),
             photo: submitImagesLoot,

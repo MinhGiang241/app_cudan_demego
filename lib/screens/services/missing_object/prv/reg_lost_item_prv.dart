@@ -23,7 +23,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
   String? validateName;
   String? validateLostTime;
   final formKey = GlobalKey<FormState>();
-
+  bool autoValid = false;
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
       validateName = null;
@@ -45,6 +45,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
   }
 
   submitRegisterLost(BuildContext context) {
+    autoValid = true;
     isLoading = true;
     validateName = null;
     validateLostTime = null;
@@ -70,7 +71,8 @@ class RegisterLostItemPrv extends ChangeNotifier {
           customer: context.read<ResidentInfoPrv>().userInfo!.info_name,
           describe: noteController.text.trim(),
           image: submitImagesLost,
-          time: lostDate!.toIso8601String(),
+          time:
+              (lostDate!.subtract(const Duration(hours: 7))).toIso8601String(),
           name: nameController.text.trim(),
           phone_number:
               context.read<ResidentInfoPrv>().userInfo!.phone_required,

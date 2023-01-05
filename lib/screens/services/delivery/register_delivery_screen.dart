@@ -76,9 +76,12 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                   : S.of(context).reg_deliver),
           body: Builder(builder: (context) {
             return Form(
-              onChanged: () =>
-                  context.read<RegisterDeliveryPrv>().validate(context),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: context.watch<RegisterDeliveryPrv>().autoValid
+                  ? () => context.read<RegisterDeliveryPrv>().validate(context)
+                  : null,
+              autovalidateMode: context.watch<RegisterDeliveryPrv>().autoValid
+                  ? AutovalidateMode.onUserInteraction
+                  : null,
               key: context.watch<RegisterDeliveryPrv>().formKey,
               child: SafeArea(
                 child: ListView(
@@ -155,52 +158,54 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       ],
                     ),
                     vpad(12),
-                    Row(children: [
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryTextField(
-                          controller: context
-                              .read<RegisterDeliveryPrv>()
-                              .startDateController,
-                          label: S.of(context).date,
-                          hint: "dd/mm/yyyy",
-                          isReadOnly: true,
-                          isRequired: true,
-                          onTap: () {
-                            context
-                                .read<RegisterDeliveryPrv>()
-                                .pickStartDate(context);
-                          },
-                          suffixIcon:
-                              const PrimaryIcon(icons: PrimaryIcons.calendar),
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      hpad(20),
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryTextField(
-                          controller: context
-                              .read<RegisterDeliveryPrv>()
-                              .startHourController,
-                          label: S.of(context).hour,
-                          hint: "hh/mm",
-                          isReadOnly: true,
-                          onTap: () async {
-                            await context
-                                .read<RegisterDeliveryPrv>()
-                                .pickStartHour(context);
-                          },
-                          suffixIcon:
-                              const PrimaryIcon(icons: PrimaryIcons.clock),
-                        ),
-                      ),
-                    ]),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: PrimaryTextField(
+                              controller: context
+                                  .read<RegisterDeliveryPrv>()
+                                  .startDateController,
+                              label: S.of(context).date,
+                              hint: "dd/mm/yyyy",
+                              isReadOnly: true,
+                              isRequired: true,
+                              onTap: () {
+                                context
+                                    .read<RegisterDeliveryPrv>()
+                                    .pickStartDate(context);
+                              },
+                              suffixIcon: const PrimaryIcon(
+                                  icons: PrimaryIcons.calendar),
+                              validator: (v) {
+                                if (v!.isEmpty) {
+                                  return '';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          hpad(20),
+                          Expanded(
+                            flex: 1,
+                            child: PrimaryTextField(
+                              controller: context
+                                  .read<RegisterDeliveryPrv>()
+                                  .startHourController,
+                              label: S.of(context).hour,
+                              hint: "hh/mm",
+                              isReadOnly: true,
+                              onTap: () async {
+                                await context
+                                    .read<RegisterDeliveryPrv>()
+                                    .pickStartHour(context);
+                              },
+                              suffixIcon:
+                                  const PrimaryIcon(icons: PrimaryIcons.clock),
+                            ),
+                          ),
+                        ]),
 
                     vpad(5),
 

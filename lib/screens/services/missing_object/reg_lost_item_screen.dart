@@ -33,9 +33,13 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
             ),
             body: SafeArea(
               child: Form(
-                onChanged: () =>
-                    context.read<RegisterLostItemPrv>().validate(context),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onChanged: context.watch<RegisterLostItemPrv>().autoValid
+                    ? () =>
+                        context.read<RegisterLostItemPrv>().validate(context)
+                    : null,
+                autovalidateMode: context.watch<RegisterLostItemPrv>().autoValid
+                    ? AutovalidateMode.onUserInteraction
+                    : null,
                 key: context.read<RegisterLostItemPrv>().formKey,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 12),

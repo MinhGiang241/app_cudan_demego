@@ -7,6 +7,7 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_physics.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,9 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
           return PrimaryScreen(
             isPadding: false,
             appBar: PrimaryAppbar(
-              title: S.of(context).reg_const,
+              title: isEdit
+                  ? S.of(context).edit_reg_const
+                  : S.of(context).reg_const,
             ),
             body: SafeArea(
                 child: FutureBuilder(
@@ -157,11 +160,18 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                   .onPageChanged,
                               children: <Widget>[
                                 Form(
-                                  onChanged: () => context
-                                      .read<ConstructionRegPrv>()
-                                      .validate1(context),
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
+                                  onChanged: context
+                                          .watch<ConstructionRegPrv>()
+                                          .autoValidStep1
+                                      ? () => context
+                                          .read<ConstructionRegPrv>()
+                                          .validate1(context)
+                                      : null,
+                                  autovalidateMode: context
+                                          .watch<ConstructionRegPrv>()
+                                          .autoValidStep1
+                                      ? AutovalidateMode.onUserInteraction
+                                      : null,
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey1,
@@ -173,10 +183,13 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                     child: Column(
                                       children: [
                                         vpad(12),
-                                        Text(
-                                          S.of(context).cons_info,
-                                          style:
-                                              txtBold(14, grayScaleColorBase),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            S.of(context).cons_info,
+                                            style:
+                                                txtBold(14, grayScaleColorBase),
+                                          ),
                                         ),
                                         vpad(16),
                                         PrimaryDropDown(
@@ -225,13 +238,15 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         PrimaryTextField(
                                           validator: Utils.emptyValidator,
                                           label: S.of(context).reg_date,
+                                          enable: false,
                                           isRequired: true,
                                           isReadOnly: true,
                                           hint: "dd/mm/yyyy",
+                                          background: grayScaleColor4,
                                           onTap: () {
-                                            context
-                                                .read<ConstructionRegPrv>()
-                                                .pickRegDate(context);
+                                            // context
+                                            //     .read<ConstructionRegPrv>()
+                                            //     .pickRegDate(context);
                                           },
                                           suffixIcon: const PrimaryIcon(
                                               icons: PrimaryIcons.calendar),
@@ -245,7 +260,24 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         vpad(16),
                                         PrimaryTextField(
                                           validator: (v) {
+                                            var now = DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day,
+                                                24);
                                             if (v!.isEmpty) {
+                                              return '';
+                                            } else if (context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime !=
+                                                    null &&
+                                                context
+                                                        .read<
+                                                            ConstructionRegPrv>()
+                                                        .startTime!
+                                                        .compareTo(now) <
+                                                    0) {
                                               return '';
                                             } else if (context
                                                         .read<
@@ -299,24 +331,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         vpad(16),
                                         PrimaryTextField(
                                           validator: (v) {
-                                            var now = DateTime(
-                                                DateTime.now().year,
-                                                DateTime.now().month,
-                                                DateTime.now().day,
-                                                24);
                                             if (v!.isEmpty) {
-                                              return '';
-                                            } else if (context
-                                                        .read<
-                                                            ConstructionRegPrv>()
-                                                        .startTime !=
-                                                    null &&
-                                                context
-                                                        .read<
-                                                            ConstructionRegPrv>()
-                                                        .startTime!
-                                                        .compareTo(now) <
-                                                    0) {
                                               return '';
                                             } else if (context
                                                         .read<
@@ -511,11 +526,18 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                   ),
                                 ),
                                 Form(
-                                  onChanged: () => context
-                                      .read<ConstructionRegPrv>()
-                                      .validate2(context),
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
+                                  onChanged: context
+                                          .watch<ConstructionRegPrv>()
+                                          .autoValidStep2
+                                      ? () => context
+                                          .read<ConstructionRegPrv>()
+                                          .validate2(context)
+                                      : null,
+                                  autovalidateMode: context
+                                          .watch<ConstructionRegPrv>()
+                                          .autoValidStep2
+                                      ? AutovalidateMode.onUserInteraction
+                                      : null,
                                   key: context
                                       .read<ConstructionRegPrv>()
                                       .formKey2,
@@ -528,9 +550,13 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                     child: Column(
                                       children: [
                                         vpad(12),
-                                        Text(S.of(context).cons_unit_info,
-                                            style: txtBold(
-                                                14, grayScaleColorBase)),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                              S.of(context).cons_unit_info,
+                                              style: txtBold(
+                                                  14, grayScaleColorBase)),
+                                        ),
                                         vpad(16),
                                         PrimaryTextField(
                                           maxLength: 225,
@@ -563,7 +589,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         ),
                                         vpad(16),
                                         PrimaryTextField(
-                                          maxLength: 225,
+                                          maxLength: 255,
                                           blockSpace: true,
                                           validator: (v) {
                                             if (v!.isEmpty) {
@@ -601,6 +627,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         PrimaryTextField(
                                           blockSpace: true,
                                           blockSpecial: true,
+                                          onlyNum: true,
                                           maxLength: 12,
                                           validator: Utils.emptyValidator,
                                           controller: context
@@ -616,6 +643,11 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         ),
                                         vpad(16),
                                         PrimaryTextField(
+                                          maxLength: 12,
+                                          filter: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'[0-9a-zA-Z]')),
+                                          ],
                                           blockSpace: true,
                                           blockSpecial: true,
                                           validator: Utils.emptyValidator,

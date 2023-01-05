@@ -106,7 +106,7 @@ class _ConstructionRegistrationDetailsScreenState
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reg_date,
-                        content: Utils.dateFormat(reg.create_date ?? "", 1),
+                        content: Utils.dateTimeFormat(reg.create_date ?? "", 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
@@ -157,6 +157,13 @@ class _ConstructionRegistrationDetailsScreenState
                         contentStyle:
                             txtBold(14, genStatusColor(reg.status ?? "")),
                       ),
+                      if (reg.r != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).cancel_reason,
+                          content: reg.r!.name ?? "",
+                          contentStyle: txtBold(14, grayScaleColorBase),
+                        ),
                     ],
                   ),
                 ),

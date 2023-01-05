@@ -181,7 +181,7 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                             ),
                                             TableCell(
                                               child: Text(
-                                                Utils.dateFormat(
+                                                Utils.dateTimeFormat(
                                                     e.reg_date ?? "", 1),
                                                 style: txtMedium(
                                                     12, greenColorBase),
@@ -198,7 +198,7 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                             ),
                                             TableCell(
                                               child: Text(
-                                                Utils.dateFormat(
+                                                Utils.dateTimeFormat(
                                                     e.createdTime ?? "", 1),
                                                 style: txtMedium(
                                                     12, greenColorBase),

@@ -69,6 +69,8 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   String? residentId;
   String? shelfLifeId;
 
+  bool autoValid = false;
+
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
     } else {}
@@ -124,8 +126,10 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
             status: isRequest ? "WAIT" : "NEW",
             apartmentId: selectedApartmentId,
             arisingServiceId: arisingServiceId,
-            registration_date: regDate!.toIso8601String(),
-            expiration_date: expiredDate!.toIso8601String(),
+            registration_date:
+                (regDate!.subtract(const Duration(hours: 7))).toIso8601String(),
+            expiration_date: (expiredDate!.subtract(const Duration(hours: 7)))
+                .toIso8601String(),
             id: id,
             phoneNumber: phoneNumber,
             maximum_day: maxDayPay,
