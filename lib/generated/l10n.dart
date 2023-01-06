@@ -2000,13 +2000,13 @@ class S {
     );
   }
 
-  /// `Remove [{del}] successfully`
-  String success_remove(Object del) {
+  /// `Remove successfully`
+  String get success_remove {
     return Intl.message(
-      'Remove [$del] successfully',
+      'Remove successfully',
       name: 'success_remove',
       desc: '',
-      args: [del],
+      args: [],
     );
   }
 
@@ -2390,13 +2390,13 @@ class S {
     );
   }
 
-  /// `Cancel letter [{cancode}] successfully`
-  String success_can_req(Object cancode) {
+  /// `Cancel letter successfully`
+  String get success_can_req {
     return Intl.message(
-      'Cancel letter [$cancode] successfully',
+      'Cancel letter successfully',
       name: 'success_can_req',
       desc: '',
-      args: [cancode],
+      args: [],
     );
   }
 
@@ -3320,13 +3320,13 @@ class S {
     );
   }
 
-  /// `Make payment successfully for [{billcode}]`
-  String success_payment(Object billcode) {
+  /// `Make payment successfully`
+  String get success_payment {
     return Intl.message(
-      'Make payment successfully for [$billcode]',
+      'Make payment successfully',
       name: 'success_payment',
       desc: '',
-      args: [billcode],
+      args: [],
     );
   }
 
@@ -4685,6 +4685,86 @@ class S {
     return Intl.message(
       'Not found',
       name: 'not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait to find`
+  String get wait_find {
+    return Intl.message(
+      'Wait to find',
+      name: 'wait_find',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pull to load`
+  String get pull_to_load {
+    return Intl.message(
+      'Pull to load',
+      name: 'pull_to_load',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load Failed!Click retry!`
+  String get pull_load_failed {
+    return Intl.message(
+      'Load Failed!Click retry!',
+      name: 'pull_load_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release to load more`
+  String get release_to_load {
+    return Intl.message(
+      'Release to load more',
+      name: 'release_to_load',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more data`
+  String get no_more_data {
+    return Intl.message(
+      'No more data',
+      name: 'no_more_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount type`
+  String get discount_type {
+    return Intl.message(
+      'Discount type',
+      name: 'discount_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Percent`
+  String get percent {
+    return Intl.message(
+      'Percent',
+      name: 'percent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Value`
+  String get value {
+    return Intl.message(
+      'Value',
+      name: 'value',
       desc: '',
       args: [],
     );

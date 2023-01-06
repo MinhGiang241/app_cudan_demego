@@ -14,14 +14,34 @@ class MissingObjectPrv extends ChangeNotifier {
     year ??= DateTime.now().year;
     month ??= DateTime.now().month;
   }
+
+  var initIndex = 0;
   int? initTab;
   int? year;
   int? month;
   List<MissingObject> lostList = [];
   List<LootItem> lootList = [];
+
+  bool isInitHis = true;
+  bool isInitPic = true;
+
+  int filterValuePick = 0;
+  changeStatusListPick(v) {
+    filterValuePick = v;
+    notifyListeners();
+  }
+
+  int filterValueHistory = 0;
+  changeStatusListHistory(v) {
+    filterValueHistory = v;
+    notifyListeners();
+  }
+
   onChooseMonthYear(DateTime v) {
     year = v.year;
     month = v.month;
+    isInitHis = false;
+    isInitPic = false;
     notifyListeners();
   }
 
@@ -58,7 +78,7 @@ class MissingObjectPrv extends ChangeNotifier {
     await APILost.saveLootItem(loot.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,
-          e: S.of(context).success_returned,
+          e: S.of(context).returned,
           onClose: () {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacementNamed(
@@ -80,11 +100,13 @@ class MissingObjectPrv extends ChangeNotifier {
       lostList.clear();
       lootList.clear();
       var phone = context.read<ResidentInfoPrv>().userInfo!.phone_required;
-      var lost = await APILost.getLostItemList(year!, month!, phone ?? "");
+      var lost =
+          await APILost.getLostItemList(year!, month!, phone ?? "", isInitHis);
       for (var i in lost) {
         lostList.add(MissingObject.fromJson(i));
       }
-      var loot = await APILost.getLootItemList(year!, month!, phone ?? "");
+      var loot =
+          await APILost.getLootItemList(year!, month!, phone ?? "", isInitPic);
       for (var i in loot) {
         lootList.add(LootItem.fromJson(i));
       }

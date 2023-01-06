@@ -202,12 +202,12 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
               DateTime(regDate!.year, regDate!.month, regDate!.day + month!);
           break;
         case "Tháng":
-          expiredDate = DateTime(
-              regDate!.year, regDate!.month + month!, regDate!.day - 1);
+          expiredDate =
+              DateTime(regDate!.year, regDate!.month + month!, regDate!.day);
           break;
         case "Năm":
-          expiredDate = DateTime(
-              regDate!.year + month!, regDate!.month, regDate!.day - 1);
+          expiredDate =
+              DateTime(regDate!.year + month!, regDate!.month, regDate!.day);
           break;
         default:
           expiredDate = DateTime(regDate!.year, regDate!.month, regDate!.day);
@@ -261,11 +261,11 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
               break;
             case "Tháng":
               expiredDate = DateTime(
-                  regDate!.year, regDate!.month + month!, regDate!.day - 1);
+                  regDate!.year, regDate!.month + month!, regDate!.day);
               break;
             case "Năm":
               expiredDate = DateTime(
-                  regDate!.year + month!, regDate!.month, regDate!.day - 1);
+                  regDate!.year + month!, regDate!.month, regDate!.day);
               break;
             default:
               expiredDate =

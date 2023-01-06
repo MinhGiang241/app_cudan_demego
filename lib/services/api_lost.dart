@@ -62,21 +62,23 @@ class APILost {
     }
   }
 
-  static Future getLootItemList(int year, int month, String phone) async {
+  static Future getLootItemList(
+      int year, int month, String phone, bool isInit) async {
     var query = '''
-  mutation (\$year:Float,\$month:Float,\$phone:String){
-      response: reception_mobile_find_loot_item_by_phone_and_month (year: \$year,month: \$month,phone: \$phone ) {
-          code
-          message
-          data
-      }
-  }
+  mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
+    response: reception_mobile_find_loot_item_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {
+        code
+        message
+        data
+    }
+}
+        
         
         
 ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"year": year, "month": month, "phone": phone},
+      variables: {"year": year, "month": month, "phone": phone, "init": isInit},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -90,20 +92,22 @@ class APILost {
     }
   }
 
-  static Future getLostItemList(int year, int month, String phone) async {
+  static Future getLostItemList(
+      int year, int month, String phone, bool isInit) async {
     var query = '''
-    mutation (\$year:Float,\$month:Float,\$phone:String){
-        response: reception_mobile_find_lost_items_list_by_phone_and_month (year: \$year,month: \$month,phone: \$phone ) {
-            code
-            message
-            data
-        }
+    mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
+    response: reception_mobile_find_lost_items_list_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {
+        code
+        message
+        data
     }
+}
+        
             
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"year": year, "month": month, "phone": phone},
+      variables: {"year": year, "month": month, "phone": phone, "init": isInit},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

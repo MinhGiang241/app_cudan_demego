@@ -43,13 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(service) => "Service ${service}";
 
-  static String m11(cancode) => "Cancel letter [${cancode}] successfully";
-
-  static String m12(billcode) => "Make payment successfully for [${billcode}]";
-
-  static String m13(del) => "Remove [${del}] successfully";
-
-  static String m14(to) => "We sent otp code to :${to}";
+  static String m11(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -172,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
+        "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
@@ -360,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
         "no_missing_obj": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any missing object"),
+        "no_more_data": MessageLookupByLibrary.simpleMessage("No more data"),
         "no_news": MessageLookupByLibrary.simpleMessage("Don\'t have any news"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Don\'t have any parcel"),
@@ -448,6 +444,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Payment circle can be not empty"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Payment method"),
+        "percent": MessageLookupByLibrary.simpleMessage("Percent"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
         "permission_denied_msg":
@@ -479,6 +476,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "project": MessageLookupByLibrary.simpleMessage("Project"),
+        "pull_load_failed":
+            MessageLookupByLibrary.simpleMessage("Load Failed!Click retry!"),
+        "pull_to_load": MessageLookupByLibrary.simpleMessage("Pull to load"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
@@ -522,6 +522,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Related document image can not empty"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
+        "release_to_load":
+            MessageLookupByLibrary.simpleMessage("Release to load more"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
         "renew_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
             "Renew drawing can not be empty"),
@@ -622,7 +624,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
-        "success_can_req": m11,
+        "success_can_req":
+            MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":
@@ -634,8 +637,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m12,
-        "success_remove": m13,
+        "success_payment":
+            MessageLookupByLibrary.simpleMessage("Make payment successfully"),
+        "success_remove":
+            MessageLookupByLibrary.simpleMessage("Remove successfully"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
         "success_send_letter":
@@ -688,6 +693,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "value": MessageLookupByLibrary.simpleMessage("Value"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vew_records": MessageLookupByLibrary.simpleMessage("View records"),
@@ -700,13 +706,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
+        "wait_find": MessageLookupByLibrary.simpleMessage("Wait to find"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m14,
+        "we_send_to": m11,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),

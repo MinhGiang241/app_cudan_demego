@@ -152,13 +152,13 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                 InfoContentView(
                                   title: "${S.of(context).start_time}:",
                                   content:
-                                      '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 0)}',
+                                      '${(e.start_hour != null ? "${e.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.start_time ?? "", 1)}',
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(
                                   title: "${S.of(context).end_time}:",
                                   content:
-                                      '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 0)}',
+                                      '${(e.end_hour != null ? "${e.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(e.end_time ?? "", 1)}',
                                   contentStyle: txtBold(14, grayScaleColorBase),
                                 ),
                                 InfoContentView(

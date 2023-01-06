@@ -11,15 +11,21 @@ class ParcelListPrv extends ChangeNotifier {
   int month = DateTime.now().month;
   List<Parcel> listWaitParcel = [];
   List<Parcel> listReceiptedParcel = [];
+
+  bool isInit = true;
   onChooseMonthYear(DateTime v) {
     year = v.year;
     month = v.month;
+    isInit = false;
     notifyListeners();
   }
 
   getParcelList(BuildContext context) async {
-    await APIParcel.getParcelList(year, month,
-            context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "")
+    await APIParcel.getParcelList(
+            year,
+            month,
+            context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "",
+            isInit)
         .then((v) {
       listWaitParcel.clear();
       listReceiptedParcel.clear();
@@ -30,6 +36,8 @@ class ParcelListPrv extends ChangeNotifier {
           listWaitParcel.add(Parcel.fromJson(i));
         }
       }
+      listReceiptedParcel.sort((a, b) => b.time_out!.compareTo(a.time_get!));
+      listWaitParcel.sort((a, b) => b.time_get!.compareTo(a.time_get!));
       notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

@@ -10,6 +10,7 @@ import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../../services/api_event.dart';
 import '../../../utils/utils.dart';
+import '../../../widgets/custom_footer_refresh.dart';
 import '../../../widgets/primary_empty_widget.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
@@ -54,6 +55,7 @@ class _EventTabState extends State<EventTab> {
                     child: SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
+                      footer: customFooter(),
                       onRefresh: () {
                         context.read<EventTabPrv>().getEventList(context, true);
                         _refreshController.refreshCompleted();
@@ -81,6 +83,7 @@ class _EventTabState extends State<EventTab> {
                     child: SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
+                      footer: customFooter(),
                       onRefresh: () {
                         context.read<EventTabPrv>().getEventList(context, true);
                         _refreshController.refreshCompleted();

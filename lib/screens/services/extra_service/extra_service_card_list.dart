@@ -205,7 +205,7 @@ class _ExtraServiceCardListScreenState
                           InfoContentView(
                             title: "${S.of(context).reg_date}:",
                             content:
-                                Utils.dateFormat(e.registration_date ?? "", 0),
+                                Utils.dateFormat(e.registration_date ?? "", 1),
                             contentStyle: txtBold(14, grayScaleColorBase),
                           ),
                           InfoContentView(

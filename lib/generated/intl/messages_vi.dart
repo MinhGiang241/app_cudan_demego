@@ -46,14 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(service) => "Dịch vụ ${service}";
 
-  static String m11(cancode) => "Hủy đăng ký phiếu [${cancode}] thành công";
-
-  static String m12(billcode) =>
-      "Bạn đã thanh toán thành công cho [${billcode}]";
-
-  static String m13(del) => "Xóa [${del}] thành công";
-
-  static String m14(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m11(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -171,6 +164,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
+        "discount_type":
+            MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
@@ -250,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fee_paid": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
-        "file_code": MessageLookupByLibrary.simpleMessage("Mã hổ sơ"),
+        "file_code": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "File tải lên không đúng định dạng. Vui lòng tải lại"),
@@ -361,13 +356,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
         "no_missing_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
+        "no_more_data":
+            MessageLookupByLibrary.simpleMessage("Không còn dữ liệu"),
         "no_news": MessageLookupByLibrary.simpleMessage("Không có tin tức nào"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Không có bưu phẩm nào"),
         "no_pet": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký vật nuôi nào"),
-        "no_pick_obj": MessageLookupByLibrary.simpleMessage(
-            "Không có vật phẩm nhặt được nào"),
+        "no_pick_obj":
+            MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký thi công nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
@@ -451,6 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chu kỳ thanh toán không được để trống"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Phương thức thanh toán"),
+        "percent": MessageLookupByLibrary.simpleMessage("Phần trăm"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
         "permission_denied_msg":
@@ -482,6 +480,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
         "project": MessageLookupByLibrary.simpleMessage("Dự án"),
+        "pull_load_failed":
+            MessageLookupByLibrary.simpleMessage("Load thất bại"),
+        "pull_to_load": MessageLookupByLibrary.simpleMessage("Kéo để xem thêm"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
@@ -522,6 +523,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh tài liệu liên quan không được để trống"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
+        "release_to_load":
+            MessageLookupByLibrary.simpleMessage("Thả để xem thêm"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "renew_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
             "Bản vẽ cải tạo không được bỏ trống"),
@@ -621,7 +624,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Bước 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Bước 3"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
-        "success_can_req": m11,
+        "success_can_req": MessageLookupByLibrary.simpleMessage(
+            "Hủy đăng ký phiếu thành công"),
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Thêm mới thành công"),
         "success_edit":
@@ -633,12 +637,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_payment": m12,
-        "success_remove": m13,
+        "success_payment": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã thanh toán thành công "),
+        "success_remove":
+            MessageLookupByLibrary.simpleMessage("Xóa thành công"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
             "Đổi trạng thái đồ thành đã trả thành công"),
         "success_send_letter":
-            MessageLookupByLibrary.simpleMessage("Gửi phiếu thành công"),
+            MessageLookupByLibrary.simpleMessage("Gửi duyệt phiếu thành công"),
         "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_sign_up":
@@ -684,6 +690,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "value": MessageLookupByLibrary.simpleMessage("Giá trị"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "vew_records": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
@@ -696,13 +703,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
+        "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m14,
+        "we_send_to": m11,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
             "Trọng lượng không được quá 15kg"),

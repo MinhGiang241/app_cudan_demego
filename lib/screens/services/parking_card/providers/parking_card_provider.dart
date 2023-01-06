@@ -1,18 +1,11 @@
 import 'package:app_cudan/models/transportation_card.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/parking_card/transport_card_list_screen.dart';
 import 'package:app_cudan/services/api_transportation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/response_parking_card_model.dart';
-import '../../../../services/api_tower.dart';
 import '../../../../utils/utils.dart';
-import '../../../../widgets/primary_button.dart';
-import '../../../../widgets/primary_dialog.dart';
-import '../../../services/gym_card/gym_card_list_screen.dart';
 
 class ParkingCardProvider extends ChangeNotifier {
   //parkingcard
@@ -83,7 +76,7 @@ class ParkingCardProvider extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,
-              e: S.of(context).success_can_req(card.code ?? ''),
+              e: S.of(context).success_can_req,
               onClose: () {
                 Navigator.pushNamedAndRemoveUntil(
                     context,
@@ -144,9 +137,7 @@ class ParkingCardProvider extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S
-                    .of(context)
-                    .success_remove(S.of(context).trans_letter.toLowerCase()),
+                e: S.of(context).success_remove,
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context,

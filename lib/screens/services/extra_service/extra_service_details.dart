@@ -85,8 +85,8 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                           ? "${S.of(context).reg_date} - ${S.of(context).expired_date}"
                           : S.of(context).reg_date,
                       content: (arg.pay != null && arg.pay!.code != "KHONGCO")
-                          ? "${Utils.dateFormat(arg.registration_date ?? "", 0)} - ${Utils.dateFormat(arg.expiration_date ?? "", 0)}"
-                          : Utils.dateFormat(arg.registration_date ?? "", 0),
+                          ? "${Utils.dateFormat(arg.registration_date ?? "", 1)} - ${Utils.dateFormat(arg.expiration_date ?? "", 1)}"
+                          : Utils.dateFormat(arg.registration_date ?? "", 1),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     if (arg.status == "APPROVED")

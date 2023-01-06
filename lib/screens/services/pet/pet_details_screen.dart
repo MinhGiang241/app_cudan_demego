@@ -113,7 +113,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                           if (arg.note != null)
                             InfoContentView(
                               isHorizontal: true,
-                              title: S.of(context).cancel_reason,
+                              title: S.of(context).note,
                               content: arg.note,
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),

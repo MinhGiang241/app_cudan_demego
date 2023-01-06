@@ -26,6 +26,7 @@ class PickItemPrv extends ChangeNotifier {
   String? validateFoundTime;
   bool autoValid = false;
   final formKey = GlobalKey<FormState>();
+
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
       validateName = null;
@@ -53,7 +54,7 @@ class PickItemPrv extends ChangeNotifier {
   }
 
   submitPick(BuildContext context) {
-    bool autoValid = false;
+    autoValid = true;
     isLoading = true;
     validateName = null;
     validatePlace = null;
@@ -76,7 +77,7 @@ class PickItemPrv extends ChangeNotifier {
         }
 
         return uploadImage(context).then((v) {
-          var apartment = context.read<ResidentInfoPrv>().selectedApartment;
+          // var apartment = context.read<ResidentInfoPrv>().selectedApartment;
 
           var loot = LootItem(
             address: placeController.text.trim(),

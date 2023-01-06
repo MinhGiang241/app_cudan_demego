@@ -140,7 +140,7 @@ class ConstructionRegPrv extends ChangeNotifier {
 
   double? fee = 0;
   double? depositFee = 0;
-  int? workday = 0;
+  int? workday;
   int? offday;
 
   validate1(BuildContext context) {
@@ -418,7 +418,7 @@ class ConstructionRegPrv extends ChangeNotifier {
   }
 
   calculateFee() {
-    if (consTypeController.text.isNotEmpty && workday != 0) {
+    if (consTypeController.text.isNotEmpty && workday != null) {
       var type = listConstructionType
           .firstWhere((element) => element.id == consTypeController.text);
       fee = type.c!.cost! * workday!;

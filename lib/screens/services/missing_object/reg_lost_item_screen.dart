@@ -46,7 +46,7 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
                   children: [
                     vpad(24),
                     PrimaryTextField(
-                      maxLength: 225,
+                      maxLength: 255,
                       validateString:
                           context.read<RegisterLostItemPrv>().validateName,
                       controller:

@@ -115,6 +115,13 @@ class PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var own = re.transactions.fold(
+        0.0,
+        (previousValue, element) =>
+            previousValue + (element.payment_amount ?? 0));
+    var money = (re.amount_due ?? 0) * (re.vat ?? 100) / 100 +
+        (re.amount_due ?? 0) -
+        own;
     return PrimaryCard(
       margin: const EdgeInsets.only(bottom: 16, left: 12, right: 12),
       onTap: () {
@@ -147,8 +154,10 @@ class PaymentItem extends StatelessWidget {
                     children: [
                       TableRow(children: [
                         Text('${S.of(context).total_money}:'),
-                        Text(formatCurrency.format(re.amount_due ?? 0),
-                            style: txtLinkSmall()),
+                        isPaid
+                            ? Text(formatCurrency.format(re.amount_due))
+                            : Text(formatCurrency.format(money),
+                                style: txtLinkSmall()),
                       ]),
                       TableRow(children: [
                         Text('${S.of(context).due_bill}:'),
@@ -158,13 +167,6 @@ class PaymentItem extends StatelessWidget {
                       ]),
                     ],
                   )
-                  // Text(formatCurrency.format(re.amount_due ?? 0),
-                  //     // .replaceAll("₫", ""),
-                  //     style: txtLinkSmall()),
-                  // vpad(2),
-                  // Text(
-                  //     '${S.of(context).due_bill}: ${Utils.dateFormat(re.date ?? '', 1)}',
-                  //     style: txtBodyXSmallRegular()),
                 ],
               ),
             ),

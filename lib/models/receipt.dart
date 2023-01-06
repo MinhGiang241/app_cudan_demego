@@ -23,6 +23,7 @@ class Receipt {
     this.content,
     this.discount_money,
     this.discount_percent,
+    this.discount_type,
     this.full_name,
     this.guest_name,
     this.reason,
@@ -56,6 +57,7 @@ class Receipt {
   double? discount_money;
   double? discount_percent;
   double? amount_due;
+  String? discount_type;
   late List<TransactionHistory> transactions;
   late bool isSelected;
 
@@ -75,6 +77,7 @@ class Receipt {
     check = json['check'];
     payer = json['payer'];
     payer_phone = json['payer_phone'];
+    discount_type = json['discount_type'];
     payment = json['payment'];
     type = json['type'];
     reason = json['reason'];
@@ -118,6 +121,7 @@ class Receipt {
     data['check'] = check;
     data['payer'] = payer;
     data['payer_phone'] = payer_phone;
+    data['discount_type'] = discount_type;
     data['payment'] = payment;
     data['type'] = type;
     data['reason'] = reason;
@@ -191,7 +195,7 @@ class TransactionHistory {
     data['amount_owed'] = amount_owed;
     data['date'] = date;
     data['time'] = time;
-    data['expiration_date'] = expiration_date;
+    // data['expiration_date'] = expiration_date;
     return data;
   }
 }

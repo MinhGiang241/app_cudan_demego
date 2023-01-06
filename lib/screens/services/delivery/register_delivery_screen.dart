@@ -54,9 +54,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
           context.read<RegisterDeliveryPrv>().noteController.text =
               delivery.note_reason ?? '';
           context.read<RegisterDeliveryPrv>().startDateController.text =
-              Utils.dateFormat(delivery.start_time ?? '', 0);
+              Utils.dateFormat(delivery.start_time ?? '', -1);
           context.read<RegisterDeliveryPrv>().endDateController.text =
-              Utils.dateFormat(delivery.end_time ?? '', 0);
+              Utils.dateFormat(delivery.end_time ?? '', -1);
           context.read<RegisterDeliveryPrv>().noteController.text =
               delivery.note_reason ?? '';
           if (delivery.start_hour != null) {

@@ -60,13 +60,13 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                         isHorizontal: true,
                         title: S.of(context).start_time,
                         content:
-                            '${(arg.start_hour != null ? "${arg.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
+                            '${(arg.start_hour != null ? "${arg.start_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 1)}',
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).end_time,
                         content:
-                            '${(arg.end_hour != null ? "${arg.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 0)}',
+                            '${(arg.end_hour != null ? "${arg.end_hour!.substring(0, 5)} " : "")}${Utils.dateFormat(arg.end_time ?? "", 1)}',
                       ),
                       InfoContentView(
                         isHorizontal: true,

@@ -200,22 +200,23 @@ class _ConstructionRegistrationLetterTabState
                                               style: txtBold(
                                                   14, grayScaleColorBase)),
                                           vpad(4),
-                                          RichText(
-                                            text: TextSpan(children: [
-                                              TextSpan(
-                                                text:
-                                                    "${S.of(context).reg_date}:  ",
+                                          Wrap(
+                                            children: [
+                                              Text(
+                                                "${S.of(context).reg_date}: ",
                                                 style: txtMedium(
-                                                    14, grayScaleColor2),
+                                                    12, grayScaleColor2),
                                               ),
-                                              TextSpan(
-                                                text: Utils.dateTimeFormat(
-                                                    e.create_date ?? '', 1),
+                                              Text(
+                                                Utils.dateTimeFormat(
+                                                  e.create_date ?? '',
+                                                  1,
+                                                ),
                                                 style: txtMedium(
-                                                    14, greenColorBase),
+                                                    12, greenColorBase),
                                               ),
-                                            ]),
-                                          ),
+                                            ],
+                                          )
                                         ]),
                                   )
                                 ],

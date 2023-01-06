@@ -74,7 +74,16 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
     }
     foundList.sort((a, b) => b.time!.compareTo(a.time ?? ""));
     notFoundList.sort((a, b) => b.time!.compareTo(a.time ?? ""));
-    List<MissingObject> list = notFoundList + foundList;
+    List<MissingObject> list = [];
+    var listValue = context.watch<MissingObjectPrv>().filterValueHistory;
+    if (listValue == 0) {
+      list = notFoundList + foundList;
+    } else if (listValue == 1) {
+      list = foundList;
+    } else {
+      list = notFoundList;
+    }
+
     return SafeArea(
       child: SmartRefresher(
         enablePullDown: true,
@@ -105,23 +114,27 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: PrimaryDropDown(
+                value: context.watch<MissingObjectPrv>().filterValueHistory,
+                onChange:
+                    context.read<MissingObjectPrv>().changeStatusListHistory,
                 selectList: [
                   DropdownMenuItem(
                     value: 0,
                     child: Text(S.of(context).all),
                   ),
                   DropdownMenuItem(
-                    value: 1,
-                    child: Text(S.of(context).found),
+                    value: 2,
+                    child: Text(S.of(context).wait_find),
                   ),
                   DropdownMenuItem(
-                    value: 2,
-                    child: Text(S.of(context).not_found),
+                    value: 1,
+                    child: Text(S.of(context).found),
                   ),
                 ],
               ),
             ),
-            widget.list.isEmpty
+            vpad(12),
+            list.isEmpty
                 ? Expanded(
                     child: PrimaryEmptyWidget(
                       emptyText: S.of(context).no_pick_obj,
@@ -133,7 +146,6 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          vpad(16),
                           ...list.map(
                             (e) => PrimaryCard(
                               onTap: () {

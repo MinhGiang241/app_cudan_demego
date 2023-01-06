@@ -59,6 +59,30 @@ class RegisterPetPrv extends ChangeNotifier {
   String? validateWeight;
   bool isShow = false;
   bool autoValid = false;
+
+  onChangeWeight(v) {
+    if (weightController.text.isNotEmpty &&
+        double.tryParse(weightController.text) == null) {
+      v = null;
+      weightController.clear();
+    } else if ((weightController.text.isNotEmpty &&
+        double.parse(weightController.text) >= 15)) {
+      weightController.text = '15';
+      weightController.selection = TextSelection(
+          baseOffset: weightController.text.length,
+          extentOffset: weightController.text.length);
+    } else if (weightController.text.contains('.') &&
+        weightController.text.split('.').last.length > 2) {
+      weightController.text =
+          ((double.parse(v) * 100).floor() / 100).toStringAsFixed(2);
+      weightController.selection = TextSelection(
+          baseOffset: weightController.text.length,
+          extentOffset: weightController.text.length);
+    }
+
+    notifyListeners();
+  }
+
   changeSexPet(v) {
     sexController.text = v;
     validateSex = null;

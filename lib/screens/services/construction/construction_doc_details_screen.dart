@@ -183,7 +183,7 @@ class _ConstructionDocumentDetailsState
                       ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              isShowRecorg = !isShowRecorg;
+                              isShowRecorg = true;
                             });
                           },
                           child: Text(S.of(context).view_record))

@@ -17,13 +17,24 @@ class PaymentPrv extends ChangeNotifier {
       required this.ctx,
       required this.year,
       required this.month}) {
-    sum = listReceipts.fold(
-        0.0,
-        (a, b) => (a +
-            b.amount_due! +
-            (b.vat! * b.amount_due!) / 100 -
-            b.discount_money! -
-            (b.discount_percent! * b.amount_due!) / 100));
+    sum = listReceipts.fold(0.0, (a, b) {
+      var own = b.transactions.fold(
+          0.0,
+          (previousValue, element) =>
+              previousValue + (element.payment_amount ?? 0));
+      var money = (b.amount_due ?? 0) * (b.vat ?? 100) / 100 +
+          (b.amount_due ?? 0) -
+          own;
+      return (a + money);
+    });
+
+    // var own = re.transactions.fold(
+    //     0.0,
+    //     (previousValue, element) =>
+    //         previousValue + (element.payment_amount ?? 0));
+    // var money = (re.amount_due ?? 0) * (re.vat ?? 100) / 100 +
+    //     (re.amount_due ?? 0) -
+    //     own;
   }
   int year;
   int month;
@@ -46,25 +57,6 @@ class PaymentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  // onTestSend(BuildContext context) async {
-  //   Navigator.pop(context);
-  //   isSendLoading = true;
-  //   notifyListeners();
-  //   await Future.delayed(const Duration(seconds: 2), () {
-  //     isSendLoading = false;
-
-  //     notifyListeners();
-  //   }).then((v) {
-  //     Utils.showSuccessMessage(
-  //         context: ctx,
-  //         e: S.of(ctx).success_payment('co'),
-  //         onClose: () {
-  //           Navigator.pushReplacementNamed(ctx, PaymentListScreen.routeName,
-  //               arguments: {"index": 1, "year": year, "month": month});
-  //         });
-  //   });
-  // }
-
   onSaveReceits(BuildContext context) {
     Navigator.pop(context);
     isSendLoading = true;
@@ -78,7 +70,9 @@ class PaymentPrv extends ChangeNotifier {
       return e.toJson();
     }).toList();
 
-    APIPayment.saveManyPayment(dataReceipts).then((v) {
+    APIPayment.saveManyPayment(dataReceipts)
+        // APIPayment.makePayment(dataReceipts[0])
+        .then((v) {
       var dataHistoryTransaction = listReceipts.map(
         (e) {
           var now = DateTime.now();
@@ -103,7 +97,7 @@ class PaymentPrv extends ChangeNotifier {
       notifyListeners();
       Utils.showSuccessMessage(
           context: ctx,
-          e: S.of(ctx).success_payment(dataReceipts[0]['code'] ?? ''),
+          e: S.of(ctx).success_payment,
           onClose: () {
             Navigator.pushNamedAndRemoveUntil(
                 ctx, PaymentListScreen.routeName, (route) => route.isFirst,

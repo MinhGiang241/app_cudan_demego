@@ -32,7 +32,7 @@ class MissingObectScreen extends StatefulWidget {
 class _MissingObectScreenState extends State<MissingObectScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-  var initIndex = 0;
+
   final RefreshController _refreshHistoryController =
       RefreshController(initialRefresh: false);
   final RefreshController _refreshFoundController =
@@ -44,15 +44,15 @@ class _MissingObectScreenState extends State<MissingObectScreen>
     int? year;
     int? month;
 
-    if (arg != null) {
-      year = arg['year'];
-      month = arg['month'];
-      initIndex = arg['index'];
-    }
-    tabController.index = initIndex;
     return ChangeNotifierProvider(
         create: (context) => MissingObjectPrv(year: year, month: month),
         builder: (context, state) {
+          if (arg != null) {
+            year = arg['year'];
+            month = arg['month'];
+            tabController.index = arg['index'];
+          }
+          tabController.index = context.read<MissingObjectPrv>().initIndex;
           return PrimaryScreen(
               appBar: PrimaryAppbar(
                 leading: BackButton(
@@ -81,7 +81,8 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                                   .read<MissingObjectPrv>()
                                   .onChooseMonthYear(v);
                               setState(() {
-                                initIndex = tabController.index;
+                                context.read<MissingObjectPrv>().initIndex =
+                                    tabController.index;
                               });
                             },
                             pickerModel: CustomMonthPicker(
@@ -137,7 +138,8 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                           message: snapshot.data.toString(),
                           onRetry: () async {
                             setState(() {
-                              initIndex = tabController.index;
+                              context.read<MissingObjectPrv>().initIndex =
+                                  tabController.index;
                             });
                           });
                     }
@@ -156,7 +158,8 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                             refreshController: _refreshHistoryController,
                             onRefresh: () {
                               setState(() {
-                                initIndex = tabController.index;
+                                context.read<MissingObjectPrv>().initIndex =
+                                    tabController.index;
                               });
                             },
                           ),
@@ -170,7 +173,8 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                             refreshController: _refreshFoundController,
                             onRefresh: () {
                               setState(() {
-                                initIndex = tabController.index;
+                                context.read<MissingObjectPrv>().initIndex =
+                                    tabController.index;
                               });
                             },
                           ),

@@ -11,6 +11,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/new.dart';
 import '../../utils/utils.dart';
+import '../../widgets/custom_footer_refresh.dart';
 import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
@@ -67,6 +68,7 @@ class _NewListScreenState extends State<NewListScreen> {
                       return SmartRefresher(
                         enablePullDown: true,
                         enablePullUp: true,
+                        footer: customFooter(),
                         header: WaterDropMaterialHeader(
                             backgroundColor: Theme.of(context).primaryColor),
                         controller: _refreshController,
@@ -93,6 +95,7 @@ class _NewListScreenState extends State<NewListScreen> {
                     return SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
+                      footer: customFooter(),
                       header: WaterDropMaterialHeader(
                           backgroundColor: Theme.of(context).primaryColor),
                       controller: _refreshController,

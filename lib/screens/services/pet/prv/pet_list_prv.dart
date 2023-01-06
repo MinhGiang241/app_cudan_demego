@@ -24,7 +24,7 @@ class PetListPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,
-              e: S.of(context).success_can_req(data.code ?? ""),
+              e: S.of(context).success_can_req,
               onClose: () {
                 Navigator.pushNamedAndRemoveUntil(context,
                     PetListScreen.routeName, ((route) => route.isFirst));
@@ -49,7 +49,7 @@ class PetListPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S.of(context).success_remove(data.code ?? ''),
+                e: S.of(context).success_remove,
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(context,
                       PetListScreen.routeName, ((route) => route.isFirst));

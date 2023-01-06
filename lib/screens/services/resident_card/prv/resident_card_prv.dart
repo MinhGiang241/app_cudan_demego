@@ -64,9 +64,7 @@ class ResidentCardPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S
-                    .of(context)
-                    .success_remove(S.of(context).res_card.toLowerCase()),
+                e: S.of(context).success_remove,
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
@@ -120,7 +118,7 @@ class ResidentCardPrv extends ChangeNotifier {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
-                e: S.of(context).success_can_req(card.code ?? ""),
+                e: S.of(context).success_can_req,
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context,

@@ -10,6 +10,7 @@ import '../../../generated/l10n.dart';
 import '../../../models/bill_model.dart';
 import '../../../models/extra_service.dart';
 import '../../../models/receipt.dart';
+import '../../../widgets/custom_footer_refresh.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_empty_widget.dart';
 

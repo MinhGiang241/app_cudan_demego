@@ -212,7 +212,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                           child: PrimaryTextField(
                             filter: [
                               FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.,]'))
+                                  RegExp(r'[0-9.]'))
                             ],
                             controller:
                                 context.read<RegisterPetPrv>().weightController,
@@ -223,82 +223,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                             hint: S.of(context).weight,
                             keyboardType: TextInputType.number,
                             onChanged: (v) {
-                              if (((double.tryParse(context
-                                                  .read<RegisterPetPrv>()
-                                                  .weightController
-                                                  .text) !=
-                                              null &&
-                                          double.parse(context
-                                                  .read<RegisterPetPrv>()
-                                                  .weightController
-                                                  .text) >=
-                                              15) ||
-                                      double.tryParse(context
-                                              .read<RegisterPetPrv>()
-                                              .weightController
-                                              .text) ==
-                                          null) &&
-                                  context
-                                      .read<RegisterPetPrv>()
-                                      .weightController
-                                      .text
-                                      .isNotEmpty) {
-                                context
-                                    .read<RegisterPetPrv>()
-                                    .weightController
-                                    .text = '15';
-                                context
-                                        .read<RegisterPetPrv>()
-                                        .weightController
-                                        .selection =
-                                    TextSelection(
-                                        baseOffset: context
-                                            .read<RegisterPetPrv>()
-                                            .weightController
-                                            .text
-                                            .length,
-                                        extentOffset: context
-                                            .read<RegisterPetPrv>()
-                                            .weightController
-                                            .text
-                                            .length);
-
-                                setState(() {});
-                              } else if (context
-                                      .read<RegisterPetPrv>()
-                                      .weightController
-                                      .text
-                                      .contains('.') &&
-                                  context
-                                          .read<RegisterPetPrv>()
-                                          .weightController
-                                          .text
-                                          .split('.')
-                                          .last
-                                          .length >
-                                      2) {
-                                context
-                                        .read<RegisterPetPrv>()
-                                        .weightController
-                                        .text =
-                                    ((double.parse(v) * 100).floor() / 100)
-                                        .toStringAsFixed(2);
-                                context
-                                        .read<RegisterPetPrv>()
-                                        .weightController
-                                        .selection =
-                                    TextSelection(
-                                        baseOffset: context
-                                            .read<RegisterPetPrv>()
-                                            .weightController
-                                            .text
-                                            .length,
-                                        extentOffset: context
-                                            .read<RegisterPetPrv>()
-                                            .weightController
-                                            .text
-                                            .length);
-                              }
+                              context.read<RegisterPetPrv>().onChangeWeight(v);
                             },
                             validator: (v) {
                               var w = context
