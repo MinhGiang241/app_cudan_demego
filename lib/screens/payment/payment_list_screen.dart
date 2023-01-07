@@ -27,6 +27,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
+  bool init = true;
   final RefreshController _refreshPayController =
       RefreshController(initialRefresh: false);
   final RefreshController _refreshUnpayController =
@@ -37,7 +38,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    if (arg['index'] != null) {
+    if (arg['index'] != null && init) {
       initIndex = arg['index'];
     }
     tabController.index = initIndex;
@@ -72,6 +73,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                             context.read<PaymentListPrv>().onChooseMonthYear(v);
                             setState(() {
                               initIndex = tabController.index;
+                              init = false;
                             });
                           },
                           pickerModel: CustomMonthPicker(
@@ -129,6 +131,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                         message: snapshot.data.toString(),
                         onRetry: () async {
                           setState(() {});
+                          init = false;
                         });
                   }
                   return SafeArea(
@@ -142,6 +145,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           onRefresh: () {
                             setState(() {
                               initIndex = tabController.index;
+                              init = false;
                             });
                           },
                         ),
@@ -152,6 +156,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                           onRefresh: () {
                             setState(() {
                               initIndex = tabController.index;
+                              init = false;
                             });
                           },
                         ),

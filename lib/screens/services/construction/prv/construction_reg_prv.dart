@@ -46,15 +46,15 @@ class ConstructionRegPrv extends ChangeNotifier {
       emailController.text = existedConReg!.contruction_email ?? "";
       regDate = DateTime.tryParse(existedConReg!.create_date ?? "") != null
           ? DateTime.parse(existedConReg!.create_date!)
-              .add(const Duration(hours: 8))
+              .add(const Duration(hours: 7))
           : null;
       startTime = DateTime.tryParse(existedConReg!.time_start ?? "") != null
           ? DateTime.parse(existedConReg!.time_start!)
-              .add(const Duration(hours: 8))
+              .add(const Duration(hours: 7))
           : null;
       endTime = DateTime.tryParse(existedConReg!.time_end ?? "") != null
           ? DateTime.parse(existedConReg!.time_end!)
-              .add(const Duration(hours: 8))
+              .add(const Duration(hours: 7))
           : null;
       isPaidFee = existedConReg!.isContructionCost ?? false;
       isPaidDeposit = existedConReg!.isDepositFee ?? false;
@@ -63,10 +63,13 @@ class ConstructionRegPrv extends ChangeNotifier {
       workday = existedConReg!.working_day ?? 0;
       offday = existedConReg!.off_day ?? 0;
     } else {
+      initNew = false;
       regDate = DateTime.now();
       regDateController.text = Utils.dateFormat(regDate!.toIso8601String(), 1);
     }
   }
+
+  bool initNew = true;
   bool autoValidStep1 = false;
   bool autoValidStep2 = false;
   final formKey1 = GlobalKey<FormState>();
@@ -198,6 +201,9 @@ class ConstructionRegPrv extends ChangeNotifier {
       await uploadCurrentDrawing(context).then((v) {
         return uploadRenewDrawing(context);
       }).then((v) {
+        if (!initNew) {
+          regDate = DateTime.now();
+        }
         ConstructionRegistration conReg = ConstructionRegistration(
           id: existedConReg != null ? existedConReg!.id : null,
           code: existedConReg != null ? existedConReg!.code : null,

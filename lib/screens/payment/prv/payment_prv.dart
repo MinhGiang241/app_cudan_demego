@@ -27,14 +27,6 @@ class PaymentPrv extends ChangeNotifier {
           own;
       return (a + money);
     });
-
-    // var own = re.transactions.fold(
-    //     0.0,
-    //     (previousValue, element) =>
-    //         previousValue + (element.payment_amount ?? 0));
-    // var money = (re.amount_due ?? 0) * (re.vat ?? 100) / 100 +
-    //     (re.amount_due ?? 0) -
-    //     own;
   }
   int year;
   int month;
@@ -70,9 +62,8 @@ class PaymentPrv extends ChangeNotifier {
       return e.toJson();
     }).toList();
 
-    APIPayment.saveManyPayment(dataReceipts)
-        // APIPayment.makePayment(dataReceipts[0])
-        .then((v) {
+    // APIPayment.saveManyPayment(dataReceipts)
+    APIPayment.makePayment(dataReceipts[0]).then((v) {
       var dataHistoryTransaction = listReceipts.map(
         (e) {
           var now = DateTime.now();

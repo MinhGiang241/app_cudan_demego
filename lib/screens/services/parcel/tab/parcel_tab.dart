@@ -38,126 +38,142 @@ class _ParcelTabState extends State<ParcelTab> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: false,
-        onRefresh: () {
-          // context.read<PaymentListTabPrv>().getEventList(context, true);
-          widget.onRefresh();
-          widget.refreshController.refreshCompleted();
-        },
-        controller: widget.refreshController,
-        header: WaterDropMaterialHeader(
-            backgroundColor: Theme.of(context).primaryColor),
-        onLoading: () {
-          // context
-          //     .read<PaymentListTabPrv>()
-          //     .getEventList(context, false);
-
-          widget.refreshController.loadComplete();
-        },
-        child: Column(
-          children: [
-            vpad(24),
-            context.watch<ParcelListPrv>().isInit
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          S.of(context).all,
-                          style: txtBold(12, grayScaleColor3),
-                        ),
-                        Text(
-                          "${S.of(context).amount}: ${widget.list.length}",
-                          style: txtBold(12, grayScaleColor3),
-                        ),
-                      ],
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${S.of(context).month} ${context.watch<ParcelListPrv>().month},${context.watch<ParcelListPrv>().year}',
-                          style: txtBold(12, grayScaleColor3),
-                        ),
-                        Text(
-                          "${S.of(context).amount}: ${widget.list.length}",
-                          style: txtBold(12, grayScaleColor3),
-                        ),
-                      ],
-                    ),
-                  ),
-            vpad(12),
-            widget.list.isEmpty
-                ? Expanded(
-                    child: PrimaryEmptyWidget(
-                      emptyText: S.of(context).no_parcel,
-                      icons: PrimaryIcons.package,
-                      action: () {},
-                    ),
-                  )
-                : Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ...widget.list.map((e) => PrimaryCard(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, ParcelDetailsScreen.routeName,
-                                    arguments: e);
-                              },
-                              margin: const EdgeInsets.only(
-                                  bottom: 16, left: 12, right: 12),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 14,
-                                  horizontal: 16,
-                                ),
-                                child: Row(children: [
-                                  const PrimaryIcon(
-                                    icons: PrimaryIcons.package,
-                                    style: PrimaryIconStyle.gradient,
-                                    gradients: PrimaryIconGradient.blue,
-                                    size: 32,
-                                    padding: EdgeInsets.all(12),
-                                    color: Colors.white,
-                                  ),
-                                  hpad(16),
-                                  Expanded(
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            e.name ?? "",
-                                            style: txtBold(16),
-                                          ),
-                                          vpad(4),
-                                          Text(
-                                              '${S.of(context).parcel_code}: ${e.code ?? ""}'),
-                                          vpad(4),
-                                          if (widget.type == "WAIT")
-                                            Text(
-                                                '${S.of(context).arrived_date}: ${Utils.dateFormat(e.time_get ?? "", 1)}'),
-                                          if (widget.type == "RECEIPTED")
-                                            Text(
-                                                '${S.of(context).receipt_date}: ${Utils.dateFormat(e.time_out ?? "", 1)}'),
-                                        ]),
-                                  )
-                                ]),
-                              ))),
-                          vpad(80)
-                        ],
+      child: Column(
+        children: [
+          vpad(24),
+          context.watch<ParcelListPrv>().isInit
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        S.of(context).all,
+                        style: txtBold(12, grayScaleColor3),
                       ),
+                      Text(
+                        "${S.of(context).amount}: ${widget.list.length}",
+                        style: txtBold(12, grayScaleColor3),
+                      ),
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${S.of(context).month} ${context.watch<ParcelListPrv>().month},${context.watch<ParcelListPrv>().year}',
+                        style: txtBold(12, grayScaleColor3),
+                      ),
+                      Text(
+                        "${S.of(context).amount}: ${widget.list.length}",
+                        style: txtBold(12, grayScaleColor3),
+                      ),
+                    ],
+                  ),
+                ),
+          vpad(12),
+          widget.list.isEmpty
+              ? Expanded(
+                  child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  onRefresh: () {
+                    // context.read<PaymentListTabPrv>().getEventList(context, true);
+                    widget.onRefresh();
+                    widget.refreshController.refreshCompleted();
+                  },
+                  controller: widget.refreshController,
+                  header: WaterDropMaterialHeader(
+                      backgroundColor: Theme.of(context).primaryColor),
+                  onLoading: () {
+                    // context
+                    //     .read<PaymentListTabPrv>()
+                    //     .getEventList(context, false);
+
+                    widget.refreshController.loadComplete();
+                  },
+                  child: PrimaryEmptyWidget(
+                    emptyText: S.of(context).no_parcel,
+                    icons: PrimaryIcons.package,
+                    action: () {},
+                  ),
+                ))
+              : Expanded(
+                  child: SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    onRefresh: () {
+                      // context.read<PaymentListTabPrv>().getEventList(context, true);
+                      widget.onRefresh();
+                      widget.refreshController.refreshCompleted();
+                    },
+                    controller: widget.refreshController,
+                    header: WaterDropMaterialHeader(
+                        backgroundColor: Theme.of(context).primaryColor),
+                    onLoading: () {
+                      // context
+                      //     .read<PaymentListTabPrv>()
+                      //     .getEventList(context, false);
+
+                      widget.refreshController.loadComplete();
+                    },
+                    child: ListView(
+                      children: [
+                        ...widget.list.map((e) => PrimaryCard(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, ParcelDetailsScreen.routeName,
+                                  arguments: e);
+                            },
+                            margin: const EdgeInsets.only(
+                                bottom: 16, left: 12, right: 12),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 14,
+                                horizontal: 16,
+                              ),
+                              child: Row(children: [
+                                const PrimaryIcon(
+                                  icons: PrimaryIcons.package,
+                                  style: PrimaryIconStyle.gradient,
+                                  gradients: PrimaryIconGradient.blue,
+                                  size: 32,
+                                  padding: EdgeInsets.all(12),
+                                  color: Colors.white,
+                                ),
+                                hpad(16),
+                                Expanded(
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          e.name ?? "",
+                                          style: txtBold(16),
+                                        ),
+                                        vpad(4),
+                                        Text(
+                                            '${S.of(context).parcel_code}: ${e.code ?? ""}'),
+                                        vpad(4),
+                                        if (widget.type == "WAIT")
+                                          Text(
+                                              '${S.of(context).arrived_date}: ${Utils.dateFormat(e.time_get ?? "", 1)}'),
+                                        if (widget.type == "RECEIPTED")
+                                          Text(
+                                              '${S.of(context).receipt_date}: ${Utils.dateFormat(e.time_out ?? "", 1)}'),
+                                      ]),
+                                )
+                              ]),
+                            ))),
+                        vpad(80)
+                      ],
                     ),
                   ),
-          ],
-        ),
+                )
+        ],
       ),
     );
   }

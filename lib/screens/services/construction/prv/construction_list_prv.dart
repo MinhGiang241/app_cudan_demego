@@ -20,7 +20,9 @@ class ConstructionListPrv extends ChangeNotifier {
         title: S.of(context).send_request,
         content: S.of(context).confirm_send_request(data.code ?? ""),
         onConfirm: () {
-          APIConstruction.saveConstructionRegistration(data.toJson()).then((v) {
+          Navigator.pop(context);
+          // APIConstruction.saveConstructionRegistration(data.toJson())
+          APIConstruction.changeStatus(data.toJson()).then((v) {
             ConstructionHistory conHis = ConstructionHistory(
               constructionregistrationId: data.id,
               date: DateTime.now()
@@ -32,7 +34,6 @@ class ConstructionListPrv extends ChangeNotifier {
             );
             return APIConstruction.saveConstructionHistory(conHis.toJson());
           }).then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -43,7 +44,6 @@ class ConstructionListPrv extends ChangeNotifier {
                       (route) => route.isFirst);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -59,7 +59,9 @@ class ConstructionListPrv extends ChangeNotifier {
         title: S.of(context).cancel_request,
         content: S.of(context).confirm_cancel_request(data.code ?? ""),
         onConfirm: () {
-          APIConstruction.saveConstructionRegistration(data.toJson()).then((v) {
+          Navigator.pop(context);
+          // APIConstruction.saveConstructionRegistration(data.toJson())
+          APIConstruction.changeStatus(data.toJson()).then((v) {
             ConstructionHistory conHis = ConstructionHistory(
               constructionregistrationId: data.id,
               date: DateTime.now()
@@ -71,7 +73,6 @@ class ConstructionListPrv extends ChangeNotifier {
             );
             return APIConstruction.saveConstructionHistory(conHis.toJson());
           }).then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_can_req,
@@ -82,7 +83,6 @@ class ConstructionListPrv extends ChangeNotifier {
                       (route) => route.isFirst);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -94,11 +94,11 @@ class ConstructionListPrv extends ChangeNotifier {
         title: S.of(context).delete_letter,
         content: S.of(context).confirm_delete_letter(data.code ?? ""),
         onConfirm: () {
+          Navigator.pop(context);
           APIConstruction.removeConstructionRegistration(data.id ?? "")
               .then((v) {
             return APIConstruction.removeConstructionHistory(data.id ?? "");
           }).then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_remove,
@@ -109,7 +109,6 @@ class ConstructionListPrv extends ChangeNotifier {
                       (route) => route.isFirst);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });

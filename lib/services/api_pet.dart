@@ -60,6 +60,34 @@ response: remove_Pet_dto(_id:\$_id){
     }
   }
 
+  static Future changeStatus(Map<String, dynamic> data) async {
+    var query = '''
+    mutation (\$data:Dictionary){
+    response: pet_mobile_change_status_pet (data: \$data ) {
+        code
+        message
+        data
+        }
+    }
+        
+        
+        ''';
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      "data": data,
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getPetList(String? residentId, String? apartmentId) async {
     var query = '''
     mutation (\$residentId:String,\$apartmentId:String){

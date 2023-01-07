@@ -86,158 +86,161 @@ class _PickedItemTabState extends State<PickedItemTab> {
       list = returnedList;
     }
     return SafeArea(
-      child: SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: false,
-        onRefresh: () {
-          widget.onRefresh();
-          widget.refreshController.refreshCompleted();
-        },
-        controller: widget.refreshController,
-        header: WaterDropMaterialHeader(
-            backgroundColor: Theme.of(context).primaryColor),
-        onLoading: () {
-          widget.refreshController.loadComplete();
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            vpad(12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                S.of(context).status,
-                style: txtBold(12, grayScaleColor2),
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          vpad(12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              S.of(context).status,
+              style: txtBold(12, grayScaleColor2),
             ),
-            vpad(12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: PrimaryDropDown(
-                value: context.watch<MissingObjectPrv>().filterValuePick,
-                onChange: context.read<MissingObjectPrv>().changeStatusListPick,
-                selectList: [
-                  DropdownMenuItem(
-                    value: 0,
-                    child: Text(S.of(context).all),
-                  ),
-                  DropdownMenuItem(
-                    value: 1,
-                    child: Text(S.of(context).wait_return),
-                  ),
-                  DropdownMenuItem(
-                    value: 2,
-                    child: Text(S.of(context).returned),
-                  ),
-                ],
-              ),
+          ),
+          vpad(12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: PrimaryDropDown(
+              value: context.watch<MissingObjectPrv>().filterValuePick,
+              onChange: context.read<MissingObjectPrv>().changeStatusListPick,
+              selectList: [
+                DropdownMenuItem(
+                  value: 0,
+                  child: Text(S.of(context).all),
+                ),
+                DropdownMenuItem(
+                  value: 1,
+                  child: Text(S.of(context).wait_return),
+                ),
+                DropdownMenuItem(
+                  value: 2,
+                  child: Text(S.of(context).returned),
+                ),
+              ],
             ),
-            vpad(12),
-            list.isEmpty
-                ? Expanded(
-                    child: PrimaryEmptyWidget(
-                      emptyText: S.of(context).no_pick_obj,
-                      icons: PrimaryIcons.binoculars,
-                      action: () {},
-                    ),
-                  )
-                : Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ...list.map(
-                            (e) => PrimaryCard(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  LootItemDetailsScreen.routeName,
-                                  arguments: {
-                                    "lost": e,
-                                    "status": e.status,
-                                    "change": widget.changeStatus,
-                                  },
-                                );
+          ),
+          vpad(12),
+          list.isEmpty
+              ? Expanded(
+                  child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  onRefresh: () {
+                    widget.onRefresh();
+                    widget.refreshController.refreshCompleted();
+                  },
+                  controller: widget.refreshController,
+                  header: WaterDropMaterialHeader(
+                      backgroundColor: Theme.of(context).primaryColor),
+                  onLoading: () {
+                    widget.refreshController.loadComplete();
+                  },
+                  child: PrimaryEmptyWidget(
+                    emptyText: S.of(context).no_pick_obj,
+                    icons: PrimaryIcons.binoculars,
+                    action: () {},
+                  ),
+                ))
+              : Expanded(
+                  child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  onRefresh: () {
+                    widget.onRefresh();
+                    widget.refreshController.refreshCompleted();
+                  },
+                  controller: widget.refreshController,
+                  header: WaterDropMaterialHeader(
+                      backgroundColor: Theme.of(context).primaryColor),
+                  onLoading: () {
+                    widget.refreshController.loadComplete();
+                  },
+                  child: ListView(
+                    physics: null,
+                    children: [
+                      ...list.map(
+                        (e) => PrimaryCard(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              LootItemDetailsScreen.routeName,
+                              arguments: {
+                                "lost": e,
+                                "status": e.status,
+                                "change": widget.changeStatus,
                               },
-                              margin: const EdgeInsets.only(
-                                  bottom: 16, left: 12, right: 12),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 14,
-                                  horizontal: 16,
-                                ),
-                                child: Row(children: [
-                                  const PrimaryIcon(
-                                    icons: PrimaryIcons.binoculars,
-                                    style: PrimaryIconStyle.gradient,
-                                    gradients: PrimaryIconGradient.turquoise,
-                                    size: 32,
-                                    padding: EdgeInsets.all(12),
-                                    color: Colors.white,
-                                  ),
-                                  hpad(16),
-                                  Expanded(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        e.name ?? "",
-                                        style: txtBold(16),
-                                      ),
-                                      vpad(4),
-                                      Table(
-                                        textBaseline: TextBaseline.ideographic,
-                                        defaultVerticalAlignment:
-                                            TableCellVerticalAlignment.baseline,
-                                        columnWidths: const {
-                                          0: FlexColumnWidth(3),
-                                          1: FlexColumnWidth(3)
-                                        },
-                                        children: [
-                                          TableRow(children: [
-                                            Text(
-                                                '${S.of(context).found_time}:'),
-                                            Text(
-                                                Utils.dateFormat(
-                                                    e.date ?? '', 1),
-                                                style: txtLinkSmall()),
-                                          ]),
-                                          TableRow(
-                                              children: [vpad(4), vpad(4)]),
-                                          if (widget.type == "FOUND")
-                                            TableRow(children: [
-                                              Text(
-                                                  '${S.of(context).found_place}:'),
-                                              Text(
-                                                e.address ?? "",
-                                              ),
-                                            ]),
-                                          TableRow(
-                                              children: [vpad(4), vpad(4)]),
-                                          TableRow(children: [
-                                            Text('${S.of(context).status}:'),
-                                            Text(
-                                              e.s!.name ?? "",
-                                              style:
-                                                  genLostStyle(e.status ?? ""),
-                                            )
-                                          ]),
-                                        ],
-                                      )
-                                    ],
-                                  ))
-                                ]),
-                              ),
+                            );
+                          },
+                          margin: const EdgeInsets.only(
+                              bottom: 16, left: 12, right: 12),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 14,
+                              horizontal: 16,
                             ),
+                            child: Row(children: [
+                              const PrimaryIcon(
+                                icons: PrimaryIcons.binoculars,
+                                style: PrimaryIconStyle.gradient,
+                                gradients: PrimaryIconGradient.turquoise,
+                                size: 32,
+                                padding: EdgeInsets.all(12),
+                                color: Colors.white,
+                              ),
+                              hpad(16),
+                              Expanded(
+                                  child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    e.name ?? "",
+                                    style: txtBold(16),
+                                  ),
+                                  vpad(4),
+                                  Table(
+                                    textBaseline: TextBaseline.ideographic,
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.baseline,
+                                    columnWidths: const {
+                                      0: FlexColumnWidth(3),
+                                      1: FlexColumnWidth(3)
+                                    },
+                                    children: [
+                                      TableRow(children: [
+                                        Text('${S.of(context).found_time}:'),
+                                        Text(Utils.dateFormat(e.date ?? '', 1),
+                                            style: txtLinkSmall()),
+                                      ]),
+                                      TableRow(children: [vpad(4), vpad(4)]),
+                                      if (widget.type == "FOUND")
+                                        TableRow(children: [
+                                          Text('${S.of(context).found_place}:'),
+                                          Text(
+                                            e.address ?? "",
+                                          ),
+                                        ]),
+                                      TableRow(children: [vpad(4), vpad(4)]),
+                                      TableRow(children: [
+                                        Text('${S.of(context).status}:'),
+                                        Text(
+                                          e.s!.name ?? "",
+                                          style: genLostStyle(e.status ?? ""),
+                                        )
+                                      ]),
+                                    ],
+                                  )
+                                ],
+                              ))
+                            ]),
                           ),
-                          vpad(60),
-                        ],
+                        ),
                       ),
-                    ),
+                      vpad(60),
+                    ],
                   ),
-          ],
-        ),
+                )),
+        ],
       ),
     );
   }

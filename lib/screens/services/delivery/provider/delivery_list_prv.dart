@@ -17,7 +17,8 @@ class DeliveryListPrv extends ChangeNotifier {
         onConfirm: () {
           data.status = 'CANCEL';
           data.reasons = 'NGUOIDUNGHUY';
-          APIDelivery.saveNewDelivery(data.toJson()).then((v) {
+          // APIDelivery.saveNewDelivery(data.toJson())
+          APIDelivery.changeStatus(data.toJson()).then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
@@ -45,7 +46,8 @@ class DeliveryListPrv extends ChangeNotifier {
           content: S.of(context).confirm_send_request(data.code ?? ""),
           context: context,
           onConfirm: () {
-            APIDelivery.saveNewDelivery(data.toJson()).then((v) {
+            // APIDelivery.saveNewDelivery(data.toJson())
+            APIDelivery.changeStatus(data.toJson()).then((v) {
               Navigator.pop(context);
               Utils.showSuccessMessage(
                   context: context,

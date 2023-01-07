@@ -60,8 +60,8 @@ class ResidentCardPrv extends ChangeNotifier {
         title: S.of(context).delete_letter,
         content: S.of(context).confirm_delete_letter(card.code ?? ""),
         onConfirm: () async {
+          Navigator.pop(context);
           await APIResCard.removeResidentCard(card.id ?? "").then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_remove,
@@ -73,7 +73,6 @@ class ResidentCardPrv extends ChangeNotifier {
                       arguments: 1);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -87,8 +86,9 @@ class ResidentCardPrv extends ChangeNotifier {
         content: S.of(context).confirm_send_request(data.code ?? ''),
         context: context,
         onConfirm: () {
-          APIResCard.saveResidentCard(data.toJson()).then((v) {
-            Navigator.pop(context);
+          Navigator.pop(context);
+          // APIResCard.saveResidentCard(data.toJson())
+          APIResCard.changeStatus(data.toJson()).then((v) {
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -100,7 +100,6 @@ class ResidentCardPrv extends ChangeNotifier {
                       arguments: 1);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -114,7 +113,9 @@ class ResidentCardPrv extends ChangeNotifier {
         onConfirm: () {
           card.ticket_status = 'CANCEL';
           card.reasons = 'NGUOIDUNGHUY';
-          APIResCard.saveResidentCard(card.toJson()).then((v) {
+          Navigator.pop(context);
+          // APIResCard.saveResidentCard(card.toJson())
+          APIResCard.changeStatus(card.toJson()).then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,

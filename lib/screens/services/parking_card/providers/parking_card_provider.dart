@@ -43,8 +43,8 @@ class ParkingCardProvider extends ChangeNotifier {
         content: S.of(context).confirm_lock_card(card.code ?? ""),
         context: context,
         onConfirm: () async {
+          Navigator.pop(context);
           APITrans.lockTransportationCard(card.id ?? "").then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_lock_card,
@@ -56,7 +56,6 @@ class ParkingCardProvider extends ChangeNotifier {
                       arguments: 0);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -71,9 +70,10 @@ class ParkingCardProvider extends ChangeNotifier {
       onConfirm: () async {
         card.ticket_status = "CANCEL";
         card.reasons = "NGUOIDUNGHUY";
-        await APITrans.saveTransportationCard(card.toJson()).then(
+        Navigator.pop(context);
+        // await APITrans.saveTransportationCard(card.toJson())
+        await APITrans.changeStatus(card.toJson()).then(
           (v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,
               e: S.of(context).success_can_req,
@@ -87,7 +87,6 @@ class ParkingCardProvider extends ChangeNotifier {
             );
           },
         ).catchError((e) {
-          Navigator.pop(context);
           Utils.showErrorMessage(context, e);
         });
       },
@@ -103,9 +102,9 @@ class ParkingCardProvider extends ChangeNotifier {
         content: S.of(context).confirm_send_request(card.code ?? ""),
         context: context,
         onConfirm: () async {
+          Navigator.pop(context);
           await APITrans.sendToApproveTransportationCard(card.id ?? "")
               .then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -117,7 +116,6 @@ class ParkingCardProvider extends ChangeNotifier {
                       arguments: 1);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -133,8 +131,8 @@ class ParkingCardProvider extends ChangeNotifier {
         content: S.of(context).confirm_delete_letter(card.code ?? ''),
         context: context,
         onConfirm: () async {
+          Navigator.pop(context);
           await APITrans.removeTransportationCard(card.id ?? "").then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_remove,
@@ -146,7 +144,6 @@ class ParkingCardProvider extends ChangeNotifier {
                       arguments: 1);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });

@@ -46,8 +46,9 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
           card.status = 'CANCEL';
           card.cancel_reason = 'NGUOIDUNGHUY';
           card.isMobile = true;
-          APIExtraService.saveRegistrationService(card.toJson()).then((v) {
-            Navigator.pop(context);
+          Navigator.pop(context);
+          // APIExtraService.saveRegistrationService(card.toJson())
+          APIExtraService.changeStatus(card.toJson()).then((v) {
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_can_req,
@@ -63,7 +64,6 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                       });
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -76,8 +76,9 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
         content: S.of(context).confirm_send_request(card.code ?? ""),
         context: context,
         onConfirm: () {
-          APIExtraService.saveRegistrationService(card.toJson()).then((v) {
-            Navigator.pop(context);
+          Navigator.pop(context);
+          // APIExtraService.saveRegistrationService(card.toJson())
+          APIExtraService.changeStatus(card.toJson()).then((v) {
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -94,7 +95,6 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                   );
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -106,9 +106,9 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
         content: S.of(context).confirm_delete_letter(card.code ?? ''),
         context: context,
         onConfirm: () async {
+          Navigator.pop(context);
           await APIExtraService.deleteRegistrationService(card.id ?? '')
               .then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_remove,
@@ -125,7 +125,6 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                   );
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });

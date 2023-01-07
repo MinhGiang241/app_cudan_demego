@@ -19,9 +19,10 @@ class PetListPrv extends ChangeNotifier {
       title: S.of(context).cancel_request,
       content: S.of(context).confirm_cancel_request(data.code ?? ""),
       onConfirm: () {
-        APIPet.savePet(data.toJson()).then(
+        Navigator.pop(context);
+        // APIPet.savePet(data.toJson())
+        APIPet.changeStatus(data.toJson()).then(
           (v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,
               e: S.of(context).success_can_req,
@@ -32,7 +33,6 @@ class PetListPrv extends ChangeNotifier {
             );
           },
         ).catchError((e) {
-          Navigator.pop(context);
           Utils.showErrorMessage(context, e);
         });
       },
@@ -45,8 +45,8 @@ class PetListPrv extends ChangeNotifier {
         title: S.of(context).delete_letter,
         content: S.of(context).confirm_delete_letter(data.code ?? ''),
         onConfirm: () async {
+          Navigator.pop(context);
           await APIPet.deletePet(data.id ?? "").then((v) {
-            Navigator.pop(context);
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_remove,
@@ -55,7 +55,6 @@ class PetListPrv extends ChangeNotifier {
                       PetListScreen.routeName, ((route) => route.isFirst));
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });
@@ -69,8 +68,9 @@ class PetListPrv extends ChangeNotifier {
         title: S.of(context).send_request,
         content: S.of(context).confirm_send_request(data.code ?? ""),
         onConfirm: () {
-          APIPet.savePet(data.toJson()).then((v) {
-            Navigator.pop(context);
+          Navigator.pop(context);
+          // APIPet.savePet(data.toJson())
+          APIPet.changeStatus(data.toJson()).then((v) {
             Utils.showSuccessMessage(
                 context: context,
                 e: S.of(context).success_send_req,
@@ -79,7 +79,6 @@ class PetListPrv extends ChangeNotifier {
                       PetListScreen.routeName, (route) => route.isFirst);
                 });
           }).catchError((e) {
-            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         });

@@ -1,25 +1,17 @@
 import 'dart:io';
-
-// import 'package:graphql/client.dart';
-
-import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
-import 'package:provider/provider.dart';
 
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import '../generated/l10n.dart';
 import '../models/response_file_upload.dart';
-import '../models/response_register.dart';
 import '../models/response.dart';
 import '../services/api_service.dart';
 import '../constants/regex_text.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 import '../utils/error_handler.dart';
-import '../utils/utils.dart';
 
 class APIAuth {
   static Future<oauth2.Client?> signIn({

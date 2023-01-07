@@ -50,7 +50,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               Text(
                 event.title ?? '',
                 style: txtBodyLargeBold(),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
               ),
               vpad(12),
               Text(
