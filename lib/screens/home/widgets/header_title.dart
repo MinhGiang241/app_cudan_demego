@@ -5,6 +5,7 @@ import 'dart:math' as math;
 
 import '../../../constants/constants.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../notification/notification_screen.dart';
 
 class HeaderTitle extends StatelessWidget {
   const HeaderTitle({
@@ -35,9 +36,9 @@ class HeaderTitle extends StatelessWidget {
           icons: PrimaryIcons.bell_outline,
           style: PrimaryIconStyle.gradient,
           color: grayScaleColor2,
-          //badge: "2",
+          badge: "7",
           onTap: () {
-            // Utils.pushScreen(context, const NotificationScreen());
+            Navigator.pushNamed(context, NotificationScreen.routeName);
           }),
     );
   }

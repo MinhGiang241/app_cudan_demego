@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/account/plan_info/plan_info_screen.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userInfo = context.watch<AuthPrv>().userInfo;
+    final userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
     return PrimaryScreen(
       body: ListView(
         children: [
@@ -31,7 +32,7 @@ class AccountScreen extends StatelessWidget {
               child: SizedBox(
                   height: 64,
                   child: Row(children: [
-                    if (userInfo?.avatarLink == null)
+                    if (userInfo?.avatar == null)
                       const CircleAvatar(
                           radius: 32,
                           backgroundColor: grayScaleColor4,
@@ -44,7 +45,7 @@ class AccountScreen extends StatelessWidget {
                         radius: 32,
                         backgroundColor: grayScaleColor4,
                         backgroundImage: CachedNetworkImageProvider(
-                            ApiConstants.baseURL + userInfo!.avatarLink!),
+                            "${ApiConstants.uploadURL}?load=${userInfo?.avatar ?? ""}"),
                       ),
                     hpad(16),
                     Expanded(

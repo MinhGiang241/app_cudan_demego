@@ -73,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Bill name"),
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
+        "birthday_congratulaion":
+            MessageLookupByLibrary.simpleMessage("Birthday Congratulaion"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -232,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
+        "event_notification":
+            MessageLookupByLibrary.simpleMessage("Event_notification"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Existing drawing"),
         "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -266,6 +270,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
+        "general_notification":
+            MessageLookupByLibrary.simpleMessage("General notification"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "happened": MessageLookupByLibrary.simpleMessage("Happened"),
         "happening": MessageLookupByLibrary.simpleMessage("Happenning"),
@@ -338,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "need_support":
             MessageLookupByLibrary.simpleMessage("Need protection support"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
+        "new_resident": MessageLookupByLibrary.simpleMessage("New resident"),
         "news": MessageLookupByLibrary.simpleMessage("News"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
@@ -357,6 +364,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any missing object"),
         "no_more_data": MessageLookupByLibrary.simpleMessage("No more data"),
         "no_news": MessageLookupByLibrary.simpleMessage("Don\'t have any news"),
+        "no_notification": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any notification"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Don\'t have any parcel"),
         "no_pet": MessageLookupByLibrary.simpleMessage(
@@ -396,6 +405,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "notification_type":
+            MessageLookupByLibrary.simpleMessage("Notification type"),
         "object_code": MessageLookupByLibrary.simpleMessage("Object code"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Object details"),
@@ -595,6 +607,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
         "service_bill": MessageLookupByLibrary.simpleMessage("Service bill"),
         "service_name": m10,
+        "service_reflection":
+            MessageLookupByLibrary.simpleMessage("Service_reflection"),
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "sex": MessageLookupByLibrary.simpleMessage("Sex"),
@@ -650,6 +664,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Surface"),
+        "system_notification":
+            MessageLookupByLibrary.simpleMessage("System_notification"),
         "take_place_time":
             MessageLookupByLibrary.simpleMessage("Take place time"),
         "terms_services":

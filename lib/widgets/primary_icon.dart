@@ -11,6 +11,10 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  setting,
+  calendar_block,
+  star,
+  faders,
   plus,
   vnpay,
   paypal,

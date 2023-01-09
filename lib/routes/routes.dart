@@ -18,6 +18,7 @@ import '../screens/event/event_list_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
 import '../screens/news/news_screen.dart';
+import '../screens/notification/notification_screen.dart';
 import '../screens/payment/bill_details_screen.dart';
 import '../screens/payment/payment_list_screen.dart';
 import '../screens/payment/payment_screen.dart';
@@ -292,6 +293,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ConstructionRegScreen(),
+        );
+      case NotificationScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const NotificationScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -77,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chi tiết hóa đơn"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Tên hóa đơn"),
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
+        "birthday_congratulaion":
+            MessageLookupByLibrary.simpleMessage("Chúc mừng sinh nhật"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
         "camera": MessageLookupByLibrary.simpleMessage("Máy ảnh"),
@@ -232,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "event": MessageLookupByLibrary.simpleMessage("Sự kiện"),
         "event_msg": MessageLookupByLibrary.simpleMessage(
             "Theo dõi các sự kiện từng ngày/ tháng"),
+        "event_notification":
+            MessageLookupByLibrary.simpleMessage("Thông báo sự kiện, tin tức"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ hiện trạng"),
         "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -267,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
+        "general_notification":
+            MessageLookupByLibrary.simpleMessage("Thông báo chung"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
         "happened": MessageLookupByLibrary.simpleMessage("Đã diễn ra"),
         "happening": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
@@ -339,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "need_support":
             MessageLookupByLibrary.simpleMessage("Cần bảo vệ hỗ trợ"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
+        "new_resident": MessageLookupByLibrary.simpleMessage("Cư dân mới"),
         "news": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
@@ -359,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_more_data":
             MessageLookupByLibrary.simpleMessage("Không còn dữ liệu"),
         "no_news": MessageLookupByLibrary.simpleMessage("Không có tin tức nào"),
+        "no_notification":
+            MessageLookupByLibrary.simpleMessage("Không có thông báo nào"),
         "no_parcel":
             MessageLookupByLibrary.simpleMessage("Không có bưu phẩm nào"),
         "no_pet": MessageLookupByLibrary.simpleMessage(
@@ -400,6 +409,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Không được nhập toàn số 0"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
+        "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "notification_type":
+            MessageLookupByLibrary.simpleMessage("Loại thông báo"),
         "object_code": MessageLookupByLibrary.simpleMessage("Mã vật phẩm"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết vật phẩm"),
@@ -595,6 +607,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "service_bill":
             MessageLookupByLibrary.simpleMessage("Tiền đăng ký dịch vụ"),
         "service_name": m10,
+        "service_reflection":
+            MessageLookupByLibrary.simpleMessage("Phản hồi dịch vụ"),
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "sex": MessageLookupByLibrary.simpleMessage("Giới tính"),
@@ -650,6 +664,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
+        "system_notification":
+            MessageLookupByLibrary.simpleMessage("Thông báo hệ thống"),
         "take_place_time":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "terms_services":

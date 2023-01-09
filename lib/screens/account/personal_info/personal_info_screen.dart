@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,11 +24,22 @@ class PersonalInfoScreen extends StatefulWidget {
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   @override
   Widget build(BuildContext context) {
-    final userInfo = context.watch<AuthPrv>().userInfo;
+    final userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
     List<InfoContentView> listInfoView = [
       InfoContentView(
           title: S.current.full_name,
-          content: userInfo?.userName ?? "S.of(context).not_update",
+          content: userInfo?.fullName ?? "",
+          contentStyle: userInfo?.fullName != null
+              ? const TextStyle(
+                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
+              : TextStyle(
+                  fontFamily: family,
+                  color: Colors.black.withOpacity(0.3),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600)),
+      InfoContentView(
+          title: S.current.username,
+          content: userInfo?.userName ?? "",
           contentStyle: userInfo?.userName != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
@@ -38,8 +50,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontWeight: FontWeight.w600)),
       InfoContentView(
           title: S.current.phone_num,
-          content: userInfo?.phone ?? "S.of(context).not_update",
-          contentStyle: userInfo?.phone != null
+          content: userInfo?.phone_number ?? "",
+          contentStyle: userInfo?.phone_number != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -48,9 +60,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
       InfoContentView(
-          title: "S.current.id_number",
-          content: userInfo?.cmnd ?? "S.of(context).not_update",
-          contentStyle: userInfo?.cmnd != null
+          title: S.current.email,
+          content: userInfo?.email ?? "",
+          contentStyle: userInfo?.email != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -58,41 +70,31 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
-      InfoContentView(
-          title: "S.current.date_of_birth",
-          content: userInfo?.birthday != null
-              ? Utils.dateFormat(userInfo!.birthday!, 0)
-              : "S.of(context).not_update",
-          contentStyle: userInfo?.birthday != null
-              ? const TextStyle(
-                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
-                  fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600)),
-      InfoContentView(
-          title: " S.current.gender",
-          content: _genderString(context, userInfo?.sex),
-          contentStyle: userInfo?.sex != null
-              ? const TextStyle(
-                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
-                  fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600)),
-      InfoContentView(
-          title: "S.current.country",
-          content: userInfo?.national ?? "S.of(context).not_update",
-          contentStyle: userInfo?.national != null
-              ? const TextStyle(
-                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
-                  fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600)),
+
+      // InfoContentView(
+      //     title: " S.current.gender",
+      //     content: _genderString(context, userInfo?.sex),
+      //     contentStyle: userInfo?.sex != null
+      //         ? const TextStyle(
+      //             fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
+      //         : TextStyle(
+      //             fontFamily: family,
+      //             color: Colors.black.withOpacity(0.3),
+      //             fontSize: 14,
+      //             fontWeight: FontWeight.w600)),
+      // InfoContentView(
+      //     title: "S.current.country",
+      //     content: userInfo?.national ?? "S.of(context).not_update",
+      //     contentStyle: userInfo?.national != null
+      //         ? const TextStyle(
+      //             fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
+      //         : TextStyle(
+      //             fontFamily: family,
+      //             color: Colors.black.withOpacity(0.3),
+      //             fontSize: 14,
+      //             fontWeight: FontWeight.w600),
+
+      //             ),
     ];
     return PrimaryScreen(
       appBar: PrimaryAppbar(title: S.of(context).personal_info),
@@ -117,11 +119,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   child: PrimaryButton(
                 text: S.of(context).edit,
                 onTap: () {
-                  Utils.pushScreen(
-                      context,
-                      EditPersonalInfo(
-                        user: null,
-                      ));
+                  Utils.pushScreen(context, const EditPersonalInfo());
                 },
               )))
         ],

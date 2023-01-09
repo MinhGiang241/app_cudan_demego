@@ -471,6 +471,15 @@
   "no_more_data":"Không còn dữ liệu",
   "discount_type":"Loại chiết khấu",
   "percent":"Phần trăm",
-  "value":"Giá trị"
+  "value":"Giá trị",
+  "notification":"Thông báo",
+  "event_notification":"Thông báo sự kiện, tin tức",
+  "system_notification":"Thông báo hệ thống",
+  "service_reflection":"Phản hồi dịch vụ",
+  "birthday_congratulaion":"Chúc mừng sinh nhật",
+  "new_resident":"Cư dân mới",
+  "notification_type":"Loại thông báo",
+  "no_notification":"Không có thông báo nào",
+  "general_notification":"Thông báo chung"
 }
    

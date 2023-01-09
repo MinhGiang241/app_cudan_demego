@@ -4769,6 +4769,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event_notification`
+  String get event_notification {
+    return Intl.message(
+      'Event_notification',
+      name: 'event_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System_notification`
+  String get system_notification {
+    return Intl.message(
+      'System_notification',
+      name: 'system_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service_reflection`
+  String get service_reflection {
+    return Intl.message(
+      'Service_reflection',
+      name: 'service_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birthday Congratulaion`
+  String get birthday_congratulaion {
+    return Intl.message(
+      'Birthday Congratulaion',
+      name: 'birthday_congratulaion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New resident`
+  String get new_resident {
+    return Intl.message(
+      'New resident',
+      name: 'new_resident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification type`
+  String get notification_type {
+    return Intl.message(
+      'Notification type',
+      name: 'notification_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any notification`
+  String get no_notification {
+    return Intl.message(
+      'Don\'t have any notification',
+      name: 'no_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General notification`
+  String get general_notification {
+    return Intl.message(
+      'General notification',
+      name: 'general_notification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

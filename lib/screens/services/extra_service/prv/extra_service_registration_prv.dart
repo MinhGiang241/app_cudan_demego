@@ -28,7 +28,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     required this.service,
   }) {
     noteController.text = note ?? '';
-    regDateController.text = Utils.dateFormat(regDateString ?? '', 0);
+    regDateController.text = Utils.dateFormat(regDateString ?? '', 1);
     regDate = DateTime.tryParse(regDateString ?? "") != null
         ? DateTime.parse(regDateString!)
         : null;
@@ -36,7 +36,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
         ? DateTime.parse(expiredDateString!)
         : null;
 
-    expiredDateController.text = Utils.dateFormat(expiredDateString ?? '', 0);
+    expiredDateController.text = Utils.dateFormat(expiredDateString ?? '', 1);
     if (payList.isEmpty) {
       maxDayPay = 1;
     } else if (shelfLifeId != null && payList.isNotEmpty) {

@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,11 +15,10 @@ import '../../auth/prv/auth_prv.dart';
 import 'provider/edit_info_provider.dart';
 
 class EditPersonalInfo extends StatelessWidget {
-  final user;
-
-  const EditPersonalInfo({super.key, this.user});
+  const EditPersonalInfo({super.key});
   @override
   Widget build(BuildContext context) {
+    final user = context.read<ResidentInfoPrv>().userInfo!.account;
     return ChangeNotifierProvider(
       create: (context) => EditInfoProvider(user, context.read<AuthPrv>()),
       builder: (context, child) {
@@ -71,7 +71,7 @@ class EditPersonalInfo extends StatelessWidget {
                             radius: 60,
                             backgroundColor: grayScaleColor4,
                             backgroundImage: CachedNetworkImageProvider(
-                                ApiConstants.baseURL + avatarLink),
+                                "${ApiConstants.uploadURL}?load=$avatarLink"),
                           ),
                       if (fileAvatar != null)
                         CircleAvatar(
@@ -105,66 +105,36 @@ class EditPersonalInfo extends StatelessWidget {
                     ),
                     vpad(16),
                     PrimaryTextField(
+                      isReadOnly: true,
+                      enable: false,
+                      background: grayScaleColor4,
                       controller:
-                          context.read<EditInfoProvider>().idNumController,
-                      label: "S.of(context).id_number",
+                          context.read<EditInfoProvider>().userNameController,
+                      label: S.current.username,
                       hint: S.of(context).enter_num,
                     ),
                     vpad(16),
                     PrimaryTextField(
-                      controller: context
-                          .read<EditInfoProvider>()
-                          .dateOfBirthController,
-                      label: "S.of(context).date_of_birth",
-                      hint: "dd/MM/yyyy",
-                      isReadOnly: true,
-                      onTap: () async {
-                        await context
-                            .read<EditInfoProvider>()
-                            .birthDayPicker(context);
-                      },
-                      prefixIcon:
-                          const PrimaryIcon(icons: PrimaryIcons.calendar),
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      // onTap:()async{
-
-                      // },
-                      // onTap: () {
-
-                      // await showMenu(
-                      //   context: context,
-                      //   position: RelativeRect.fromLTRB(100, 100, 100, 100),
-                      //   items: [
-                      //     PopupMenuItem<String>(
-                      //         child: const Text('Doge'), value: 'Doge'),
-                      //     PopupMenuItem<String>(
-                      //         child: const Text('Lion'), value: 'Lion'),
-                      //   ],
-                      //   elevation: 8.0,
-                      // );
-                      // },
                       controller:
-                          context.read<EditInfoProvider>().genderController,
-                      label: " S.of(context).gender",
-                      hint: S.of(context).choices,
-                      isReadOnly: true,
-                      onTap: () async {
-                        await context
-                            .read<EditInfoProvider>()
-                            .selectGender(context);
-                      },
-                      suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+                          context.read<EditInfoProvider>().emailController,
+                      label: S.of(context).email,
+                      hint: S.of(context).enter_email,
                     ),
                     vpad(16),
                     PrimaryTextField(
                       controller:
-                          context.read<EditInfoProvider>().countryController,
-                      label: "S.of(context).country",
-                      hint: " S.of(context).enter_country",
-                      textCapitalization: TextCapitalization.words,
+                          context.read<EditInfoProvider>().phoneController,
+                      label: S.of(context).phone_num,
+                      hint: S.of(context).enter_phone,
                     ),
+                    // vpad(16),
+                    // PrimaryTextField(
+                    //   controller:
+                    //       context.read<EditInfoProvider>().countryController,
+                    //   label: "S.of(context).country",
+                    //   hint: " S.of(context).enter_country",
+                    //   textCapitalization: TextCapitalization.words,
+                    // ),
                   ],
                 ),
               ),

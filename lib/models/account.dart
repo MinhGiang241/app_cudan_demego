@@ -15,6 +15,8 @@ class Account {
   String? code;
   String? residentId;
   String? phone_number;
+  String? fullName;
+  String? avatar;
 
   Account({
     this.code,
@@ -31,6 +33,8 @@ class Account {
     this.type,
     this.updatedTime,
     this.userName,
+    this.fullName,
+    this.avatar,
   });
   Account.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -47,6 +51,8 @@ class Account {
     code = json['code'];
     type = json['type'];
     phone_number = json['phone_number'];
+    fullName = json['fullName'];
+    avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
@@ -64,6 +70,8 @@ class Account {
     data['phone_number'] = phone_number;
     data['type'] = type;
     data['code'] = code;
+    data['fullName'] = fullName;
+    data['avatar'] = avatar;
     return data;
   }
 }

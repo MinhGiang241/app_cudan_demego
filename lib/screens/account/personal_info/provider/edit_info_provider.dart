@@ -14,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 
+import '../../../../models/account.dart';
 import '../../../../models/selection_model.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
@@ -28,6 +29,9 @@ class EditInfoProvider extends ChangeNotifier {
 
   late TextEditingController nameController = TextEditingController();
   late TextEditingController phoneController = TextEditingController();
+  late TextEditingController emailController = TextEditingController();
+  late TextEditingController userNameController = TextEditingController();
+
   late TextEditingController idNumController = TextEditingController();
   late TextEditingController dateOfBirthController = TextEditingController();
   late TextEditingController genderController = TextEditingController();
@@ -39,17 +43,20 @@ class EditInfoProvider extends ChangeNotifier {
 
   AuthPrv authPrv;
 
-  EditInfoProvider(user, this.authPrv) {
-    avatarLink = user?.avatarLink;
-    date = user?.birthday;
-    gender = user?.sex;
-    nameController = TextEditingController(text: user?.userName ?? "");
-    phoneController = TextEditingController(text: user?.phone ?? "");
-    idNumController = TextEditingController(text: user?.cmnd ?? "");
-    dateOfBirthController = TextEditingController(
-        text: date != null ? date!.formatDateTimeHmDMY() : null);
-    genderController = TextEditingController(text: _genderString(gender));
-    countryController = TextEditingController(text: user?.national ?? "");
+  EditInfoProvider(Account? user, this.authPrv) {
+    avatarLink = user?.avatar;
+    // date = user?.birthday;
+    // gender = user?.sex;
+    nameController = TextEditingController(text: user?.fullName ?? "");
+    phoneController = TextEditingController(text: user?.phone_number ?? "");
+    emailController = TextEditingController(text: user?.email ?? "");
+    userNameController = TextEditingController(text: user?.userName ?? "");
+
+    // idNumController = TextEditingController(text: user?.cmnd ?? "");
+    // dateOfBirthController = TextEditingController(
+    //     text: date != null ? date!.formatDateTimeHmDMY() : null);
+    // genderController = TextEditingController(text: _genderString(gender));
+    // countryController = TextEditingController(text: user?.national ?? "");
     notifyListeners();
   }
 

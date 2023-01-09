@@ -470,5 +470,14 @@
   "no_more_data":"No more data",
   "discount_type":"Discount type",
   "percent":"Percent",
-  "value":"Value"
+  "value":"Value",
+  "notification":"Notification",
+  "event_notification":"Event_notification",
+  "system_notification":"System_notification",
+  "service_reflection":"Service_reflection",
+  "birthday_congratulaion":"Birthday Congratulaion",
+  "new_resident":"New resident",
+  "notification_type":"Notification type",
+  "no_notification":"Don't have any notification",
+  "general_notification":"General notification"
 } 
