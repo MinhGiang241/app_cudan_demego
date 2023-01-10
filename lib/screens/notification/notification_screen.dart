@@ -30,17 +30,43 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     var category = [
-      {"title": S.current.all, "icon": PrimaryIcons.bell_fill},
-      {"title": S.current.general_notification, "icon": PrimaryIcons.star},
+      {"title": S.current.all, "icon": PrimaryIcons.bell_fill, "isRead": true},
+      {
+        "title": S.current.general_notification,
+        "icon": PrimaryIcons.star,
+        "isRead": true
+      },
       {
         "title": S.current.event_notification,
-        "icon": PrimaryIcons.calendar_block
+        "icon": PrimaryIcons.calendar_block,
+        "isRead": false
       },
-      {"title": S.current.system_notification, "icon": PrimaryIcons.setting},
-      {"title": S.current.service_reflection, "icon": PrimaryIcons.faders},
-      {"title": S.current.forum, "icon": PrimaryIcons.faders},
-      {"title": S.current.birthday_congratulaion, "icon": PrimaryIcons.faders},
-      {"title": S.current.new_resident, "icon": PrimaryIcons.faders},
+      {
+        "title": S.current.system_notification,
+        "icon": PrimaryIcons.setting,
+        "isRead": true
+      },
+      {
+        "title": S.current.service_reflection,
+        "icon": PrimaryIcons.service_feedback,
+        "isRead": false
+      },
+      {"title": S.current.forum, "icon": PrimaryIcons.detail, "isRead": true},
+      {
+        "title": S.current.birthday_congratulaion,
+        "icon": PrimaryIcons.birthday,
+        "isRead": true
+      },
+      {
+        "title": S.current.new_resident,
+        "icon": PrimaryIcons.new_user,
+        "isRead": false
+      },
+      {
+        "title": S.current.debt,
+        "icon": PrimaryIcons.remind_debt,
+        "isRead": false
+      },
     ];
     onTapFilter() {
       showModalBottomSheet(
@@ -83,17 +109,34 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         children: [
                           PrimaryIcon(
                             icons: e['icon'] as PrimaryIcons,
-                            size: 24,
-                            padding: const EdgeInsets.all(20),
+                            size: 35,
+                            padding: const EdgeInsets.all(16),
                             style: PrimaryIconStyle.round,
                             backgroundColor: primaryColor5,
-                            color: primaryColor4,
+                            color: e['isRead'] == true
+                                ? primaryColor4
+                                : primaryColor1,
                           ),
                           hpad(20),
                           Expanded(
                             child: Text(e['title'] as String,
                                 style: txtBold(14, grayScaleColorBase)),
-                          )
+                          ),
+                          if (e['isRead'] == false)
+                            SizedBox(
+                              height: 60,
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  padding: const EdgeInsets.all(3),
+                                  height: 18,
+                                  width: 18,
+                                  decoration: BoxDecoration(
+                                      gradient: gradientPrimary,
+                                      borderRadius: BorderRadius.circular(9)),
+                                ),
+                              ),
+                            ),
                         ],
                       )),
                 )

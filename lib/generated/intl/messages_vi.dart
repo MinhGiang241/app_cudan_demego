@@ -40,16 +40,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(message) => "Lỗi: ${message}";
 
-  static String m8(nameser) => "Đăng ký dịch vụ ${nameser}";
+  static String m8(numAsset) =>
+      "Danh sách bàn giao có ${numAsset} tài sản không đạt";
 
-  static String m9(eName) => "Bạn đã xác nhận tham gia [${eName}] thành công";
+  static String m9(nameser) => "Đăng ký dịch vụ ${nameser}";
 
-  static String m10(service) => "Dịch vụ ${service}";
+  static String m10(eName) => "Bạn đã xác nhận tham gia [${eName}] thành công";
 
-  static String m11(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m11(service) => "Dịch vụ ${service}";
+
+  static String m12(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept_hand_over":
+            MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "active": MessageLookupByLibrary.simpleMessage("Hoạt động"),
@@ -71,6 +76,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
+        "asset_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách tài sản "),
+        "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
@@ -79,6 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "birthday_congratulaion":
             MessageLookupByLibrary.simpleMessage("Chúc mừng sinh nhật"),
+        "booking": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "booking_hand_over":
+            MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
+        "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
         "camera": MessageLookupByLibrary.simpleMessage("Máy ảnh"),
@@ -112,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": m0,
         "confirm_delete_letter": m1,
         "confirm_delete_service": m2,
+        "confirm_hand_over": MessageLookupByLibrary.simpleMessage(
+            "Bạn chắc chắn muốn xác nhận bàn giao."),
         "confirm_lock_card": m3,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn khóa thẻ xe không?"),
@@ -151,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
         "date": MessageLookupByLibrary.simpleMessage("Ngày"),
+        "debt": MessageLookupByLibrary.simpleMessage("Thu tiền, nhắc nợ"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
         "delete_letter": MessageLookupByLibrary.simpleMessage("Xóa phiếu"),
         "delivery_info":
@@ -236,6 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Theo dõi các sự kiện từng ngày/ tháng"),
         "event_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo sự kiện, tin tức"),
+        "executed": MessageLookupByLibrary.simpleMessage("Đã xử lý"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ hiện trạng"),
         "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -271,9 +287,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
+        "general_info": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
         "general_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo chung"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
+        "hand_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
+        "hand_over": MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
+        "hand_over_asset_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách tài sản bàn giao"),
+        "hand_over_date":
+            MessageLookupByLibrary.simpleMessage("Ngày nhận bàn giao"),
+        "hand_over_employee": MessageLookupByLibrary.simpleMessage(
+            "Nhân viên phụ trách bàn giao"),
+        "hand_over_time":
+            MessageLookupByLibrary.simpleMessage("Giờ nhận bàn giao"),
+        "hand_time": MessageLookupByLibrary.simpleMessage("Giờ nhận"),
         "happened": MessageLookupByLibrary.simpleMessage("Đã diễn ra"),
         "happening": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
         "happening_location":
@@ -328,6 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lost_time_now": MessageLookupByLibrary.simpleMessage(
             "Thời điểm thất lạc không được lớn hơn ngày hiện tại"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
+        "material": MessageLookupByLibrary.simpleMessage("Vật liệu"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -360,6 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có đăng ký chuyển đố nào"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
+        "no_hand_over":
+            MessageLookupByLibrary.simpleMessage("Không có nhận bàn giao nào"),
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
         "no_missing_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
@@ -399,6 +430,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
+        "not_pass": MessageLookupByLibrary.simpleMessage("Không đạt"),
+        "not_pass_list": m8,
+        "not_pass_reason":
+            MessageLookupByLibrary.simpleMessage("Lý do không đạt"),
         "not_read": MessageLookupByLibrary.simpleMessage("Chưa đọc"),
         "not_special_char":
             MessageLookupByLibrary.simpleMessage("Không nhập ký tự đặc biệt"),
@@ -447,6 +482,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "parking_bill": MessageLookupByLibrary.simpleMessage("Tiền gửi xe"),
         "parking_card": MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "participate": MessageLookupByLibrary.simpleMessage("Tham gia"),
+        "pass": MessageLookupByLibrary.simpleMessage("Đạt"),
+        "pass_list": MessageLookupByLibrary.simpleMessage(
+            "Các tài sản đã được bàn giao đầy đủ"),
         "pass_min_length": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu không ít hơn 8 ký tự"),
         "pass_special": MessageLookupByLibrary.simpleMessage(
@@ -517,10 +555,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_pet_list":
             MessageLookupByLibrary.simpleMessage("Danh sách đăng ký vật nuôi"),
         "reg_service": MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ"),
-        "reg_service_a": m8,
+        "reg_service_a": m9,
         "reg_time": MessageLookupByLibrary.simpleMessage("Thời gian đăng ký"),
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
+        "region": MessageLookupByLibrary.simpleMessage("Khu vực"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "register_res_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
@@ -586,7 +625,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_9": MessageLookupByLibrary.simpleMessage(
             "Tài khoản chưa được kích hoạt"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
-        "scuccess_participation": m9,
+        "scuccess_participation": m10,
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
@@ -606,7 +645,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_verify": MessageLookupByLibrary.simpleMessage("Gửi xác thực"),
         "service_bill":
             MessageLookupByLibrary.simpleMessage("Tiền đăng ký dịch vụ"),
-        "service_name": m10,
+        "service_name": m11,
         "service_reflection":
             MessageLookupByLibrary.simpleMessage("Phản hồi dịch vụ"),
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
@@ -719,6 +758,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
+        "wait_execute": MessageLookupByLibrary.simpleMessage("Chờ xử lý"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
@@ -726,7 +766,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m11,
+        "we_send_to": m12,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
             "Trọng lượng không được quá 15kg"),

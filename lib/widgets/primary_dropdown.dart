@@ -113,6 +113,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 child: Column(
                   children: [
                     DropdownButtonFormField<dynamic>(
+                      borderRadius: BorderRadius.circular(12),
                       isDense: widget.isDense,
                       menuMaxHeight: dvHeight(context) / 3,
                       validator: widget.validator,

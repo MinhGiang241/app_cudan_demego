@@ -4859,6 +4859,266 @@ class S {
       args: [],
     );
   }
+
+  /// `Payment, debt remind`
+  String get debt {
+    return Intl.message(
+      'Payment, debt remind',
+      name: 'debt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over`
+  String get hand_over {
+    return Intl.message(
+      'Hand over',
+      name: 'hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait execute`
+  String get wait_execute {
+    return Intl.message(
+      'Wait execute',
+      name: 'wait_execute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Executing`
+  String get executed {
+    return Intl.message(
+      'Executing',
+      name: 'executed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No hand over`
+  String get no_hand_over {
+    return Intl.message(
+      'No hand over',
+      name: 'no_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking`
+  String get booking {
+    return Intl.message(
+      'Booking',
+      name: 'booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking hand over`
+  String get booking_hand_over {
+    return Intl.message(
+      'Booking hand over',
+      name: 'booking_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking history`
+  String get booking_his {
+    return Intl.message(
+      'Booking history',
+      name: 'booking_his',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over date`
+  String get hand_date {
+    return Intl.message(
+      'Hand over date',
+      name: 'hand_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over time`
+  String get hand_time {
+    return Intl.message(
+      'Hand over time',
+      name: 'hand_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over date`
+  String get hand_over_date {
+    return Intl.message(
+      'Hand over date',
+      name: 'hand_over_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over time`
+  String get hand_over_time {
+    return Intl.message(
+      'Hand over time',
+      name: 'hand_over_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over employee`
+  String get hand_over_employee {
+    return Intl.message(
+      'Hand over employee',
+      name: 'hand_over_employee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General information`
+  String get general_info {
+    return Intl.message(
+      'General information',
+      name: 'general_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over asset list`
+  String get hand_over_asset_list {
+    return Intl.message(
+      'Hand over asset list',
+      name: 'hand_over_asset_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not pass reason`
+  String get not_pass_reason {
+    return Intl.message(
+      'Not pass reason',
+      name: 'not_pass_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asset name`
+  String get asset_name {
+    return Intl.message(
+      'Asset name',
+      name: 'asset_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Region`
+  String get region {
+    return Intl.message(
+      'Region',
+      name: 'region',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Material`
+  String get material {
+    return Intl.message(
+      'Material',
+      name: 'material',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pass`
+  String get pass {
+    return Intl.message(
+      'Pass',
+      name: 'pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not pass`
+  String get not_pass {
+    return Intl.message(
+      'Not pass',
+      name: 'not_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept hand over`
+  String get accept_hand_over {
+    return Intl.message(
+      'Accept hand over',
+      name: 'accept_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over list has {numAsset} assets not pass`
+  String not_pass_list(Object numAsset) {
+    return Intl.message(
+      'Hand over list has $numAsset assets not pass',
+      name: 'not_pass_list',
+      desc: '',
+      args: [numAsset],
+    );
+  }
+
+  /// `Are you sure accept to hand over.`
+  String get confirm_hand_over {
+    return Intl.message(
+      'Are you sure accept to hand over.',
+      name: 'confirm_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assets was handed over fully`
+  String get pass_list {
+    return Intl.message(
+      'Assets was handed over fully',
+      name: 'pass_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asset list`
+  String get asset_list {
+    return Intl.message(
+      'Asset list',
+      name: 'asset_list',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

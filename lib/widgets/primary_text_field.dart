@@ -125,10 +125,16 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                   margin: widget.margin,
                   child: TextFormField(
                     onChanged: widget.onChanged,
+                    onFieldSubmitted: widget.controller != null
+                        ? (text) {
+                            widget.controller!.text = text.trim();
+                          }
+                        : null,
                     maxLength: widget.maxLength,
                     onTap: widget.onTap,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: <TextInputFormatter>[
+                      // FilteringTextInputFormatter.deny(RegExp('[ ]')),
                       if (widget.onlyNum)
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                       if (widget.onlyText)
@@ -154,9 +160,12 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     readOnly: widget.isReadOnly,
                     // onTap: onTap,
                     cursorHeight: 15,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     keyboardType: widget.keyboardType,
                     textCapitalization: widget.textCapitalization,
-                    textInputAction: widget.textInputAction,
+                    textInputAction: widget.textInputAction ??
+                        (widget.maxLines! < 2 ? TextInputAction.done : null),
                     style: txtBodySmallBold(color: widget.textColor),
                     cursorColor: primaryColor2,
                     maxLines: widget.maxLines,

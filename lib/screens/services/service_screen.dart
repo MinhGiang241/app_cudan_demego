@@ -20,6 +20,7 @@ import '../../widgets/search_bar.dart';
 import 'construction/construction_list_screen.dart';
 import 'delivery/delivery_list_screen.dart';
 import 'extra_service/extra_service_card_list.dart';
+import 'hand_over/hand_over_screen.dart';
 import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
 import 'service_prv.dart';
@@ -93,6 +94,13 @@ class ServiceScreen extends StatelessWidget {
         "icon": PrimaryIcons.credit_card_alt,
         "title": S.current.follow_ser,
         "navigator": GymCardListScreen.routeName,
+      },
+      {
+        "color": yellowColorBase,
+        "background": gradientYellow,
+        "icon": PrimaryIcons.home,
+        "title": S.current.hand_over,
+        "navigator": HandOverScreen.routeName,
       },
       // {
       //   "color": purpleColorBase,

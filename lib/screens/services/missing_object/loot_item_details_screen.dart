@@ -88,25 +88,25 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
               ]),
           ],
         ),
-        vpad(30),
-        if (arg['status'] == "WAIT_RETURN")
-          PrimaryButton(
-            isLoading: isLoading,
-            text: S.of(context).returned,
-            onTap: () async {
-              if (changeStatus != null) {
-                setState(() {
-                  isLoading = true;
-                });
+        // vpad(30),
+        // if (arg['status'] == "WAIT_RETURN")
+        //   PrimaryButton(
+        //     isLoading: isLoading,
+        //     text: S.of(context).returned,
+        //     onTap: () async {
+        //       if (changeStatus != null) {
+        //         setState(() {
+        //           isLoading = true;
+        //         });
 
-                await changeStatus(context, lootItem);
+        //         await changeStatus(context, lootItem);
 
-                setState(() {
-                  isLoading = false;
-                });
-              }
-            },
-          ),
+        //         setState(() {
+        //           isLoading = false;
+        //         });
+        //       }
+        //     },
+        //   ),
         vpad(50),
       ]),
     );

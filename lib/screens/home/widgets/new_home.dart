@@ -48,7 +48,7 @@ class NewsHome extends StatelessWidget {
         ),
         vpad(16),
         SizedBox(
-          height: 260,
+          height: 250,
           child: ListView.builder(
             itemCount: newList.length,
             clipBehavior: Clip.none,
@@ -69,7 +69,7 @@ class NewsHome extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: dvHeight(context) / 4.3,
+                        height: 170,
                         width: double.infinity,
                         child: PrimaryImageNetwork(
                             canShowPhotoView: false,

@@ -90,62 +90,65 @@ class _SplashScreenState extends State<SplashScreen> {
                       Image.asset(AppImage.illustration,
                           width: dvWidth(context) * 0.8),
                       vpad(24),
-                      SizedBox(
-                        height: 200,
-                        child: AnimatedSwitcher(
-                          duration: const Duration(seconds: 1),
-                          switchInCurve: Curves.easeOutBack,
-                          switchOutCurve: Curves.elasticIn,
-                          transitionBuilder: (child, animate) {
-                            return Center(
-                                child: SlideTransition(
-                              position: animate.drive(Tween<Offset>(
-                                  begin: const Offset(0, 1), end: Offset.zero)),
-                              child: FadeTransition(
-                                  opacity: animate, child: child),
-                            ));
-                          },
-                          child: widget.isUnathen
-                              ? Column(
-                                  children: [
-                                    PrimaryButton(
-                                      text: S.of(context).sign_in,
-                                      width: dvWidth(context) * 0.7,
-                                      buttonType: ButtonType.white,
-                                      textColor: primaryColor1,
-                                      onTap: () {
-                                        // var auth =
-                                        //     context.read<AuthPrv>().authStatus;
-                                        Navigator.of(context)
-                                            .pushNamed(SignInScreen.routeName);
-
-                                        // if (auth == AuthStatus.auth) {
-                                        //   Navigator.of(context)
-                                        //       .pushNamed(HomeScreen.routeName);
-                                        // } else {
-                                        //   Navigator.of(context).pushNamed(
-                                        //       SignInScreen.routeName);
-                                        // }
-                                      },
-                                    ),
-                                    vpad(24),
-                                    PrimaryButton(
-                                      text: S.of(context).create_acc,
-                                      width: dvWidth(context) * 0.7,
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushNamed(SignUpScreen.routeName);
-                                      },
-                                    )
-                                  ],
-                                )
-                              : const PrimaryLoading(),
-                        ),
-                      ),
                     ],
                   ),
                 ),
               ),
+              Positioned(
+                left: dvWidth(context) * 0.1,
+                bottom: dvHeight(context) * .03,
+                child: SizedBox(
+                  height: 150,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(seconds: 1),
+                    switchInCurve: Curves.easeOutBack,
+                    switchOutCurve: Curves.elasticIn,
+                    transitionBuilder: (child, animate) {
+                      return Center(
+                          child: SlideTransition(
+                        position: animate.drive(Tween<Offset>(
+                            begin: const Offset(0, 1), end: Offset.zero)),
+                        child: FadeTransition(opacity: animate, child: child),
+                      ));
+                    },
+                    child: widget.isUnathen
+                        ? Column(
+                            children: [
+                              PrimaryButton(
+                                text: S.of(context).sign_in,
+                                width: dvWidth(context) * 0.8,
+                                buttonType: ButtonType.white,
+                                textColor: primaryColor1,
+                                onTap: () {
+                                  // var auth =
+                                  //     context.read<AuthPrv>().authStatus;
+                                  Navigator.of(context)
+                                      .pushNamed(SignInScreen.routeName);
+
+                                  // if (auth == AuthStatus.auth) {
+                                  //   Navigator.of(context)
+                                  //       .pushNamed(HomeScreen.routeName);
+                                  // } else {
+                                  //   Navigator.of(context).pushNamed(
+                                  //       SignInScreen.routeName);
+                                  // }
+                                },
+                              ),
+                              vpad(24),
+                              PrimaryButton(
+                                text: S.of(context).create_acc,
+                                width: dvWidth(context) * 0.8,
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(SignUpScreen.routeName);
+                                },
+                              )
+                            ],
+                          )
+                        : const PrimaryLoading(),
+                  ),
+                ),
+              )
             ],
           ),
         ),
