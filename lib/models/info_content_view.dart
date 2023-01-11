@@ -43,12 +43,22 @@ genStatus(String status) {
       return S.current.wait_approve;
     case "CANCEL":
       return S.current.cancel;
+    case "HANDING_OVER":
+      return S.current.handing_over;
+    case "WAIT_HAND_OVER":
+      return S.current.wait_hand_over;
+    case "HANDED_OVER":
+      return S.current.handed_over;
+    case "WAIT_EXECUTE":
+      return S.current.wait_execute;
+    case "EXECUTED":
+      return S.current.executed;
     default:
       return '';
   }
 }
 
-genStatusColor(String status) {
+Color genStatusColor(String status) {
   switch (status) {
     case "NEW":
       return grayScaleColor1;
@@ -75,6 +85,16 @@ genStatusColor(String status) {
     case "UNDER_ACCEPTANCE":
       return primaryColorBase;
     case "COMPLETE":
+      return greenColor8;
+    case "HANDING_OVER":
+      return greenColor9;
+    case "WAIT_HAND_OVER":
+      return yellowColor7;
+    case "HANDED_OVER":
+      return greenColor8;
+    case "WAIT_EXECUTE":
+      return yellowColor7;
+    case "EXECUTED":
       return greenColor8;
     default:
       return grayScaleColor1;

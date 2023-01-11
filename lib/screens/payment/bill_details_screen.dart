@@ -3,6 +3,8 @@ import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'dart:collection';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -22,48 +24,89 @@ class BillDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Receipt bill = arg['re'];
+
+    String? payDate;
+    double paid = 0;
+    if (bill.transactions.isNotEmpty) {
+      // var a = bill.transactions[0].createdTime;
+
+      payDate = bill.transactions.map((e) => e.createdTime).reduce((a, e) {
+        if (a!.compareTo(e!) > 0) {
+          return a;
+        } else {
+          return e;
+        }
+      });
+      paid = bill.transactions.fold(0, (a, b) => a += (b.payment_amount ?? 0));
+    }
 
     var listContent = [
       InfoContentView(
         title: S.of(context).bill_name,
-        content: arg['re'].reason,
+        content: bill.reason,
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
         title: S.of(context).bill_code,
-        content: arg['re'].code ?? arg['re'].id,
+        content: bill.code ?? bill.id,
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
-      if (arg['re'].content != null)
+      if (bill.content != null)
         InfoContentView(
           title: S.of(context).content,
-          content: arg['re'].content ?? "",
+          content: bill.content ?? "",
           contentStyle: txtBodySmallBold(color: grayScaleColorBase),
         ),
       InfoContentView(
         title: S.of(context).vat,
-        content: arg['re'].vat != null
-            ? formatCurrency.format(arg['re'].vat).replaceAll("₫", "VND")
+        content: bill.vat != null
+            ? formatCurrency.format(bill.vat).replaceAll("₫", "VND")
             : '0 VND',
+        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+      ),
+      InfoContentView(
+        title: S.of(context).discount,
+        content: bill.discount_type == "Value"
+            ? formatCurrency
+                .format(bill.discount_percent)
+                .replaceAll("₫", "VND")
+            : "${bill.discount_percent} %",
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
         title: S.of(context).to_money,
-        content: arg['re'].amount_due != null
-            ? formatCurrency.format(arg['re'].amount_due).replaceAll("₫", "VND")
+        content: bill.amount_due != null
+            ? formatCurrency.format(bill.amount_due).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
       InfoContentView(
-        title: S.of(context).due_bill,
-        content: Utils.dateFormat(arg['re'].date ?? "", 1),
+        title: S.of(context).paid_payment,
+        content: bill.amount_due != null
+            ? formatCurrency.format(paid).replaceAll("₫", "VND")
+            : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
-      if (arg['re'].transactions.isNotEmpty)
+      InfoContentView(
+        title: S.of(context).need_pay,
+        content: bill.amount_due != null
+            ? formatCurrency
+                .format(bill.amount_due! - paid)
+                .replaceAll("₫", "VND")
+            : '0 VND',
+        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+      ),
+      if (payDate != null)
+        InfoContentView(
+          title: S.of(context).due_bill,
+          content: Utils.dateFormat(bill.date ?? "", 1),
+          contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+        ),
+      if (bill.transactions.isNotEmpty)
         InfoContentView(
           title: S.of(context).pay_date,
-          content:
-              Utils.dateFormat(arg['re'].transactions[0].createdTime ?? "", 1),
+          content: Utils.dateFormat(payDate ?? "", 1),
           contentStyle: txtBodySmallBold(color: grayScaleColorBase),
         ),
     ];
@@ -72,32 +115,34 @@ class BillDetailsScreen extends StatelessWidget {
         title: S.of(context).bill_details,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 28),
-          child: Stack(
-            children: [
-              PrimaryInfoWidget(
-                listInfoView: listContent,
-              ),
-              if (arg['re'].payment_status != "PAID")
-                Positioned(
-                    bottom: 10,
-                    child: PrimaryButton(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          PaymentScreen.routeName,
-                          arguments: {
-                            "list": [arg['re'] as Receipt],
-                            "year": arg['year'],
-                            "month": arg['month']
-                          },
-                        );
-                      },
-                      width: dvWidth(context) - 24,
-                      text: S.of(context).pay,
-                    )),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 28),
+            child: Column(
+              children: [
+                PrimaryInfoWidget(
+                  listInfoView: listContent,
+                ),
+                vpad(20),
+                if (bill.payment_status != "PAID")
+                  PrimaryButton(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        PaymentScreen.routeName,
+                        arguments: {
+                          "list": [bill],
+                          "year": arg['year'],
+                          "month": arg['month']
+                        },
+                      );
+                    },
+                    width: dvWidth(context) - 24,
+                    text: S.of(context).pay,
+                  ),
+                vpad(30)
+              ],
+            ),
           ),
         ),
       ),

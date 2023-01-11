@@ -56,8 +56,8 @@ class _PaymentListScreenState extends State<PaymentListScreen>
               tabController: tabController,
               isTabScrollabel: false,
               tabs: [
-                Tab(text: S.of(context).paid),
                 Tab(text: S.of(context).unpaid),
+                Tab(text: S.of(context).paid),
               ],
               actions: [
                 Padding(

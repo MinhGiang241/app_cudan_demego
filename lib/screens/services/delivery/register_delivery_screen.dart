@@ -37,6 +37,16 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
     return ChangeNotifierProvider(
       create: (context) => RegisterDeliveryPrv(
+          endTime: delivery.end_hour != null
+              ? TimeOfDay(
+                  hour: int.parse(delivery.end_hour!.split(":")[0]),
+                  minute: int.parse(delivery.end_hour!.split(":")[1]))
+              : null,
+          startTime: delivery.start_hour != null
+              ? TimeOfDay(
+                  hour: int.parse(delivery.start_hour!.split(":")[0]),
+                  minute: int.parse(delivery.start_hour!.split(":")[1]))
+              : null,
           startDate: delivery.start_time != null
               ? DateTime.parse(delivery.start_time ?? "")
               : null,

@@ -180,6 +180,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                         //         borderRadius: BorderRadius.circular(12),
                         //         borderSide: BorderSide.none,
                         //       ),
+
                         counterText: '',
                         hintText: widget.hint,
                         hintStyle: txtBodySmallBold(color: grayScaleColor3),
@@ -189,6 +190,8 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                           horizontal: 16,
                         ),
                         prefixIcon: widget.prefixIcon,
+                        suffixIconConstraints:
+                            const BoxConstraints(minHeight: 35, minWidth: 35),
                         suffixIcon: widget.obscureText
                             ? showPass
                                 ? IconButton(

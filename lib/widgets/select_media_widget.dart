@@ -113,36 +113,7 @@ class SelectMediaWidget extends StatelessWidget {
                                 ],
                               )),
                         )
-                  ])
-                  //  ListView.builder(
-                  //   scrollDirection: Axis.horizontal,
-                  //   itemCount: images.length,
-                  //   itemBuilder: (context, index) => Padding(
-                  //     padding: const EdgeInsets.only(right: 14.0),
-                  //     child: Stack(
-                  //       children: [
-                  //         ClipRRect(
-                  //             borderRadius: BorderRadius.circular(8),
-                  //             child: Image.file(images[index])),
-                  //         Positioned(
-                  //           top: 2,
-                  //           right: 2,
-                  //           child: PrimaryIcon(
-                  //             icons: PrimaryIcons.close,
-                  //             style: PrimaryIconStyle.gradient,
-                  //             gradients: PrimaryIconGradient.red,
-                  //             color: Colors.white,
-                  //             padding: const EdgeInsets.all(4),
-                  //             onTap: () {
-                  //               onRemove?.call(index);
-                  //             },
-                  //           ),
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  ),
+                  ])),
             ],
           )
       ],

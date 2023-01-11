@@ -142,6 +142,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ListView(children: [
                         vpad(12),
                         ...arg['list'].map((e) {
+                          double paid = 0;
+                          if (e.transactions.isNotEmpty) {
+                            paid = e.transactions.fold(
+                                0, (a, b) => a += (b.payment_amount ?? 0));
+                          }
                           var listContent = [
                             InfoContentView(
                               title: S.of(context).bill_name,
@@ -187,6 +192,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       .format(e.amount_due)
                                       .replaceAll("₫", "VND")
                                   : "0 VND",
+                              contentStyle: txtBold(13, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: S.of(context).paid_payment,
+                              content: e.amount_due != null
+                                  ? formatCurrency
+                                      .format(paid)
+                                      .replaceAll("₫", "VND")
+                                  : '0 VND',
+                              contentStyle: txtBold(13, grayScaleColorBase),
+                            ),
+                            InfoContentView(
+                              title: S.of(context).need_pay,
+                              content: e.amount_due != null
+                                  ? formatCurrency
+                                      .format(e.amount_due! - paid)
+                                      .replaceAll("₫", "VND")
+                                  : '0 VND',
                               contentStyle: txtBold(13, grayScaleColorBase),
                             ),
                           ];
@@ -357,17 +380,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                       if (context.watch<PaymentPrv>().isSendLoading)
                         Positioned(
-                            child: Container(
-                          width: dvWidth(context),
-                          height: dvHeight(context),
-                          color: grayScaleColor1.withOpacity(0.3),
-                          child: const Center(
-                            child: PrimaryLoading(
-                              width: 50,
-                              height: 50,
+                          child: Container(
+                            width: dvWidth(context),
+                            height: dvHeight(context),
+                            color: grayScaleColor1.withOpacity(0.3),
+                            child: const Center(
+                              child: PrimaryLoading(
+                                width: 50,
+                                height: 50,
+                              ),
                             ),
                           ),
-                        ))
+                        )
                     ],
                   ),
           );

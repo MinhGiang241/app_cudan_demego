@@ -301,6 +301,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "hand_over_time":
             MessageLookupByLibrary.simpleMessage("Hand over time"),
         "hand_time": MessageLookupByLibrary.simpleMessage("Hand over time"),
+        "handed_over": MessageLookupByLibrary.simpleMessage("Handed over"),
+        "handing_over":
+            MessageLookupByLibrary.simpleMessage("Inprocess hand over"),
         "happened": MessageLookupByLibrary.simpleMessage("Happened"),
         "happening": MessageLookupByLibrary.simpleMessage("Happenning"),
         "happening_location":
@@ -370,6 +373,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "You need to choose payment cycle and register date first"),
+        "need_pay": MessageLookupByLibrary.simpleMessage("Need to pay"),
         "need_support":
             MessageLookupByLibrary.simpleMessage("Need protection support"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
@@ -467,6 +471,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_name": MessageLookupByLibrary.simpleMessage("Package Name"),
         "paid": MessageLookupByLibrary.simpleMessage("Paid"),
         "paid_deposit": MessageLookupByLibrary.simpleMessage("deposit paid"),
+        "paid_payment": MessageLookupByLibrary.simpleMessage("Payment paid"),
         "parcel": MessageLookupByLibrary.simpleMessage("Parcel"),
         "parcel_code": MessageLookupByLibrary.simpleMessage("Parcel code"),
         "parcel_details":
@@ -528,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load Failed!Click retry!"),
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Pull to load"),
+        "re_book": MessageLookupByLibrary.simpleMessage("Re book"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
@@ -762,6 +768,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Wait execute"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Wait to find"),
+        "wait_hand_over":
+            MessageLookupByLibrary.simpleMessage("Wait to hand over"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),

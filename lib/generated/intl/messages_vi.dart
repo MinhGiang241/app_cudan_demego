@@ -76,8 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
-        "asset_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách tài sản "),
+        "asset_list": MessageLookupByLibrary.simpleMessage("Danh sách tài sản"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
@@ -302,6 +301,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hand_over_time":
             MessageLookupByLibrary.simpleMessage("Giờ nhận bàn giao"),
         "hand_time": MessageLookupByLibrary.simpleMessage("Giờ nhận"),
+        "handed_over": MessageLookupByLibrary.simpleMessage("Đã bàn giao"),
+        "handing_over": MessageLookupByLibrary.simpleMessage("Đang bàn giao"),
         "happened": MessageLookupByLibrary.simpleMessage("Đã diễn ra"),
         "happening": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
         "happening_location":
@@ -371,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "Bạn cần chọn chu kỳ thanh toán và ngày đăng ký trước"),
+        "need_pay": MessageLookupByLibrary.simpleMessage("Cần thanh toán"),
         "need_support":
             MessageLookupByLibrary.simpleMessage("Cần bảo vệ hỗ trợ"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -470,8 +472,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
             "Thông tin hàng hóa không được để trống"),
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
-        "paid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
+        "paid": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "paid_deposit": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
+        "paid_payment": MessageLookupByLibrary.simpleMessage("Đã đóng"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parcel_code": MessageLookupByLibrary.simpleMessage("Mã bưu phẩm"),
         "parcel_details":
@@ -533,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load thất bại"),
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Kéo để xem thêm"),
+        "re_book": MessageLookupByLibrary.simpleMessage("Đặt lại lịch"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
@@ -741,7 +745,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
-        "unpaid": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Cần thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
@@ -760,6 +764,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Chờ xử lý"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
+        "wait_hand_over": MessageLookupByLibrary.simpleMessage("Chờ bàn giao"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),

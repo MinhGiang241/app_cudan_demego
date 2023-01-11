@@ -26,7 +26,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       this.existedImage = const [],
       this.type = 1,
       this.startDate,
-      this.endDate});
+      this.endDate,
+      this.startTime,
+      this.endTime});
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
   int type = 1;
@@ -57,6 +59,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   DateTime? endDate;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
+
+  TimeOfDay? startTime;
+  TimeOfDay? endTime;
 
   List<File> imagesDelivery = [];
   List<ImageDelivery> existedImage = [];
@@ -103,12 +108,12 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       try {
         var listError = [];
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 0);
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
         // throw (endDate!.compareTo(startDate!) < 0);
         if (startDate == null) {
           listError.add(S.of(context).start_date_not_empty);
         } else if (startDate!.compareTo(now) < 0) {
-          listError.add(S.of(context).start_date_after_now);
+          listError.add(S.of(context).start_date_after_now_equal);
         }
         if (endDate == null) {
           listError.add(S.of(context).end_date_not_empty);
@@ -341,9 +346,11 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
   pickStartHour(BuildContext context) {
     showTimePicker(
-            context: context, initialTime: const TimeOfDay(hour: 0, minute: 0))
+            context: context,
+            initialTime: startTime ?? const TimeOfDay(hour: 0, minute: 0))
         .then((v) {
       if (v != null) {
+        startTime = v;
         startHourController.text = v.format(context);
       }
     });
@@ -374,9 +381,11 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
   pickEndHour(BuildContext context) {
     showTimePicker(
-            context: context, initialTime: const TimeOfDay(hour: 0, minute: 0))
+            context: context,
+            initialTime: endTime ?? const TimeOfDay(hour: 0, minute: 0))
         .then((v) {
       if (v != null) {
+        endTime = v;
         endHourController.text = v.format(context);
       }
     });

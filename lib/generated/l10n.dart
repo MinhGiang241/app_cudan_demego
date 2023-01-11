@@ -5119,6 +5119,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Need to pay`
+  String get need_pay {
+    return Intl.message(
+      'Need to pay',
+      name: 'need_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment paid`
+  String get paid_payment {
+    return Intl.message(
+      'Payment paid',
+      name: 'paid_payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inprocess hand over`
+  String get handing_over {
+    return Intl.message(
+      'Inprocess hand over',
+      name: 'handing_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait to hand over`
+  String get wait_hand_over {
+    return Intl.message(
+      'Wait to hand over',
+      name: 'wait_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Handed over`
+  String get handed_over {
+    return Intl.message(
+      'Handed over',
+      name: 'handed_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Re book`
+  String get re_book {
+    return Intl.message(
+      'Re book',
+      name: 're_book',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

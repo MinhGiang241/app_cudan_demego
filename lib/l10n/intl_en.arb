@@ -505,5 +505,11 @@
   "not_pass_list":"Hand over list has {numAsset} assets not pass",
   "confirm_hand_over":"Are you sure accept to hand over." ,
   "pass_list":"Assets was handed over fully" ,
-  "asset_list":"Asset list"
+  "asset_list":"Asset list",
+  "need_pay":"Need to pay", 
+  "paid_payment":"Payment paid",
+  "handing_over":"Inprocess hand over",
+  "wait_hand_over":"Wait to hand over",
+  "handed_over":"Handed over",
+  "re_book":"Re book"
 } 

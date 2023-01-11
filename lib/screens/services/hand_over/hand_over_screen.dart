@@ -1,15 +1,15 @@
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../service_screen.dart';
+import 'booking_screen.dart';
 import 'prv/hand_over_prv.dart';
 import 'tab/Booking_tab.dart';
+import 'tab/history_tab.dart';
 
 class HandOverScreen extends StatefulWidget {
   const HandOverScreen({super.key});
@@ -44,7 +44,10 @@ class _HandOverScreenState extends State<HandOverScreen>
           ),
           floatingActionButton: FloatingActionButton(
             tooltip: S.of(context).booking_hand_over,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, BookingScreen.routeName,
+                  arguments: {"book": true});
+            },
             backgroundColor: primaryColorBase,
             child: const Icon(
               Icons.add,
@@ -55,7 +58,7 @@ class _HandOverScreenState extends State<HandOverScreen>
             controller: tabController,
             children: [
               BookingTab(),
-              BookingTab(),
+              const HistoryTab(),
             ],
           ),
         );
