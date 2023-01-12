@@ -2,26 +2,33 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/utils.dart';
 
-class AcceptHandOverPrv extends ChangeNotifier {
-  bool generalInfoExpand = false;
-  bool assetListExpand = false;
-
+class GeneralInfoPrv extends ChangeNotifier {
   GlobalKey infoKey = GlobalKey();
+  int initPage = 0;
 
   final TextEditingController handOverDateController = TextEditingController();
   final TextEditingController handOverTimeController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  final PageController pageController = PageController();
 
   String? validateHandOverDate;
   String? validateHandOverTime;
-
   DateTime? handOverDate;
   TimeOfDay? handOverTime;
-
   bool isSendLoading = false;
 
+  toggleAssetExpand(int index) {
+    dataAsset[index]["expand"] = !(dataAsset[index]["expand"] as bool);
+    notifyListeners();
+  }
+
+  onChangePage(int index) {
+    initPage = index;
+    notifyListeners();
+  }
+
   selectItemPass(bool value, int indexAsset, int indexItem) {
-    (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
+    (dataAsset[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
     notifyListeners();
   }
 
@@ -53,22 +60,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
     });
   }
 
-  toggleGeneralInfo() {
-    generalInfoExpand = !generalInfoExpand;
-    notifyListeners();
-  }
-
-  toggleAssetList() {
-    assetListExpand = !assetListExpand;
-    notifyListeners();
-  }
-
-  toggleAssetExpand(int index) {
-    data[index]["expand"] = !(data[index]["expand"] as bool);
-    notifyListeners();
-  }
-
-  var data = [
+  var dataAsset = [
     {
       "id": 1,
       "title": "Nhà vệ sinh",
@@ -84,6 +76,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
           "name": "Bàn trang điểm",
           "amount": 1,
           "pass": false,
+          "material": "Sứ",
         },
         {
           "name": "Bổn rửa mặt",

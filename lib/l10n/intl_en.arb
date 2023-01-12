@@ -511,5 +511,6 @@
   "handing_over":"Inprocess hand over",
   "wait_hand_over":"Wait to hand over",
   "handed_over":"Handed over",
-  "re_book":"Re book"
+  "re_book":"Re book",
+  "asset_detais":"Asset details"
 } 

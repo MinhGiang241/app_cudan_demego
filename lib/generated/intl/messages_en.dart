@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Arrived date"),
+        "asset_detais": MessageLookupByLibrary.simpleMessage("Asset details"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Asset list"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Asset name"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),

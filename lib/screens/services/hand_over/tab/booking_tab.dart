@@ -104,10 +104,8 @@ class _BookingTabState extends State<BookingTab> {
                   margin:
                       const EdgeInsets.only(bottom: 16, left: 12, right: 12),
                   onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      AcceptHandOverScreen.routeName,
-                    );
+                    Navigator.pushNamed(context, BookingScreen.routeName,
+                        arguments: {"book": false});
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

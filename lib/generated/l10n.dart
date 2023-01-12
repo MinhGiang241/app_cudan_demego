@@ -5179,6 +5179,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Asset details`
+  String get asset_detais {
+    return Intl.message(
+      'Asset details',
+      name: 'asset_detais',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

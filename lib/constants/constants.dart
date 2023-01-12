@@ -246,6 +246,35 @@ TextStyle txtBodySmallBold({Color? color}) =>
 TextStyle txtBodyXSmallBold({Color? color}) =>
     TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: color);
 
+TextStyle txtBoldUnderline([double? size, Color? color, double? opacity]) =>
+    TextStyle(
+        decoration: TextDecoration.underline,
+        fontFamily: family,
+        fontSize: size,
+        fontWeight: FontWeight.w700,
+        color: opacity != null ? color!.withOpacity(opacity) : color);
+TextStyle txtMediumUnderline([double? size, Color? color, double? opacity]) =>
+    TextStyle(
+        decoration: TextDecoration.underline,
+        fontFamily: family,
+        fontSize: size,
+        fontWeight: FontWeight.w500,
+        color: opacity != null ? color!.withOpacity(opacity) : color);
+TextStyle txtRegularUnderline([double? size, Color? color, double? opacity]) =>
+    TextStyle(
+        decoration: TextDecoration.underline,
+        fontFamily: family,
+        fontSize: size,
+        fontWeight: FontWeight.w400,
+        color: opacity != null ? color!.withOpacity(opacity) : color);
+TextStyle txtSemiBoldUnderline([double? size, Color? color, double? opacity]) =>
+    TextStyle(
+        decoration: TextDecoration.underline,
+        fontFamily: family,
+        fontSize: size,
+        fontWeight: FontWeight.w600,
+        color: opacity != null ? color!.withOpacity(opacity) : color);
+
 TextStyle txtBold([double? size, Color? color, double? opacity]) => TextStyle(
     fontFamily: family,
     fontSize: size,

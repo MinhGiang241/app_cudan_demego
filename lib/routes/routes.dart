@@ -36,6 +36,7 @@ import '../screens/services/gym_card/add_gym_card_screen.dart';
 import '../screens/services/gym_card/gym_card_list_screen.dart';
 import '../screens/services/hand_over/accept_hand_over_screen.dart';
 import '../screens/services/hand_over/booking_screen.dart';
+import '../screens/services/hand_over/general_info_screen.dart';
 import '../screens/services/hand_over/hand_over_screen.dart';
 import '../screens/services/missing_object/loot_item_details_screen.dart';
 import '../screens/services/missing_object/lost_item_details_screen.dart';
@@ -316,6 +317,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const AcceptHandOverScreen(),
+        );
+      case GeneralInfoScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const GeneralInfoScreen(),
         );
       default:
         return MaterialPageRoute(

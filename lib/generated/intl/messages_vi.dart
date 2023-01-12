@@ -76,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
+        "asset_detais":
+            MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Danh sách tài sản"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),

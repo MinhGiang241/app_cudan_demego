@@ -1,4 +1,5 @@
 import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/screens/services/hand_over/general_info_screen.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -11,6 +12,7 @@ import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
+import '../accept_hand_over_screen.dart';
 import '../booking_screen.dart';
 
 class HistoryTab extends StatefulWidget {
@@ -109,8 +111,22 @@ class _HistoryTabState extends State<HistoryTab> {
                       margin: const EdgeInsets.only(
                           bottom: 16, left: 12, right: 12),
                       onTap: () {
-                        // Navigator.pushNamed(context, BookingScreen.routeName,
-                        //     arguments: {"book": false});
+                        if (e["status"] == "HANDED_OVER") {
+                          Navigator.pushNamed(
+                            context,
+                            AcceptHandOverScreen.routeName,
+                          );
+                        } else if (e["status"] == "WAIT_HAND_OVER") {
+                          Navigator.pushNamed(
+                            context,
+                            GeneralInfoScreen.routeName,
+                          );
+                        } else {
+                          Navigator.pushNamed(
+                            context,
+                            GeneralInfoScreen.routeName,
+                          );
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
