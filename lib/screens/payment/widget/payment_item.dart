@@ -115,13 +115,15 @@ class PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var own = re.transactions.fold(
-        0.0,
-        (previousValue, element) =>
-            previousValue + (element.payment_amount ?? 0));
-    var money =
-        (re.amount_due ?? 0) * (re.vat ?? 0) / 100 + (re.amount_due ?? 0) - own;
+    // var own = re.transactions.fold(
+    //     0.0,
+    //     (previousValue, element) =>
+    //         previousValue + (element.payment_amount ?? 0));
+    // var money =
+    //     (re.amount_due ?? 0) * (re.vat ?? 0) / 100 + (re.amount_due ?? 0) - own;
     var payDate;
+    var paid =
+        re.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
 
     if (re.transactions.isNotEmpty) {
       payDate = re.transactions.map((e) => e.createdTime).reduce((a, e) {
@@ -168,9 +170,11 @@ class PaymentItem extends StatelessWidget {
                             '${!isPaid ? S.of(context).need_pay : S.of(context).pay}:',
                             style: txtRegular(13, grayScaleColorBase)),
                         isPaid
-                            ? Text(formatCurrency.format(re.discount_money),
+                            ? Text(formatCurrency.format(paid),
                                 style: txtLinkSmall())
-                            : Text(formatCurrency.format(money),
+                            : Text(
+                                formatCurrency
+                                    .format(re.discount_money! - paid),
                                 style: txtLinkSmall()),
                       ]),
                       TableRow(children: [
