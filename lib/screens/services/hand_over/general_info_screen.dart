@@ -120,9 +120,6 @@ class GeneralInfoScreen extends StatelessWidget {
                           .entries
                           .map((e) => AssetItem(
                                 region: e.value['title'] as String,
-                                toggleAssetExpand: context
-                                    .read<GeneralInfoPrv>()
-                                    .toggleAssetExpand,
                                 selectPass: context
                                     .watch<GeneralInfoPrv>()
                                     .selectItemPass,

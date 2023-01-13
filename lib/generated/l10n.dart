@@ -3320,13 +3320,13 @@ class S {
     );
   }
 
-  /// `Make payment successfully`
-  String get success_payment {
+  /// `Make payment for {p} successfully`
+  String success_payment(Object p) {
     return Intl.message(
-      'Make payment successfully',
+      'Make payment for $p successfully',
       name: 'success_payment',
       desc: '',
-      args: [],
+      args: [p],
     );
   }
 

@@ -249,9 +249,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                     .selectItemPass,
                                 data: e.value,
                                 index: e.key,
-                                toggleAssetExpand: context
-                                    .read<AcceptHandOverPrv>()
-                                    .toggleAssetExpand,
                               );
                             }),
                             vpad(16),

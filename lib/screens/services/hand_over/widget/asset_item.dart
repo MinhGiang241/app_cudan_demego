@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:io';
+
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_checkbox.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
+import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,6 +17,7 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_dialog.dart';
 import '../prv/accept_hand_over_prv.dart';
+import 'dailog_reason.dart';
 
 class AssetItem extends StatefulWidget {
   const AssetItem(
@@ -20,12 +25,10 @@ class AssetItem extends StatefulWidget {
       required this.data,
       required this.index,
       required this.selectPass,
-      required this.toggleAssetExpand,
       required this.region});
   final data;
   final index;
   final Function(bool, int, int) selectPass;
-  final Function(int) toggleAssetExpand;
   final String region;
 
   @override
@@ -33,6 +36,7 @@ class AssetItem extends StatefulWidget {
 }
 
 class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
+  bool expand = false;
   late AnimationController animationItemController = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 300));
 
@@ -44,6 +48,17 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    addReasonReject(
+      function,
+    ) {
+      Utils.showDialog(
+          context: context,
+          dialog: PrimaryDialog.custom(
+              content: ReasonDailog(
+            function: function,
+          )));
+    }
+
     Animation<double> animationItemDrop = CurvedAnimation(
       parent: animationItemController,
       curve: Curves.easeInOut,
@@ -55,15 +70,16 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
         vpad(12),
         PrimaryCard(
           onTap: () {
-            if (widget.data['expand'] as bool) {
+            if (expand) {
               // isShowAsset = false;
               animationItemController.reverse();
             } else {
               // isShowAsset = true;
               animationItemController.forward();
             }
-
-            return widget.toggleAssetExpand(widget.index);
+            setState(() {
+              expand = !expand;
+            });
           },
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
@@ -81,9 +97,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
               widget.data["title"] as String,
               style: txtRegular(14, grayScaleColorBase),
             ),
-            trailing: Icon((widget.data['expand'] as bool)
-                ? Icons.expand_more
-                : Icons.expand_less),
+            trailing: Icon((expand) ? Icons.expand_more : Icons.expand_less),
           ),
         ),
         SizeTransition(
@@ -171,8 +185,10 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                     width: 20,
                                     child: Checkbox(
                                         onChanged: (v) {
-                                          widget.selectPass(
-                                              false, widget.index, e.key);
+                                          addReasonReject(
+                                            () => widget.selectPass(
+                                                false, widget.index, e.key),
+                                          );
                                         },
                                         value: !e.value['pass'])),
                               ),
@@ -316,8 +332,13 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                       child: PrimaryButton(
                                                     onTap: () {
                                                       Navigator.pop(context);
-                                                      widget.selectPass(false,
-                                                          widget.index, e.key);
+
+                                                      addReasonReject(
+                                                        () => widget.selectPass(
+                                                            false,
+                                                            widget.index,
+                                                            e.key),
+                                                      );
                                                     },
                                                     buttonSize:
                                                         ButtonSize.xsmall,

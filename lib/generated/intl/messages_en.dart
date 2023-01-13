@@ -46,7 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(service) => "Service ${service}";
 
-  static String m12(to) => "We sent otp code to :${to}";
+  static String m12(p) => "Make payment for ${p} successfully";
+
+  static String m13(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -696,8 +698,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment":
-            MessageLookupByLibrary.simpleMessage("Make payment successfully"),
+        "success_payment": m12,
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Remove successfully"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -777,7 +778,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m12,
+        "we_send_to": m13,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),

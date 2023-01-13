@@ -49,7 +49,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(service) => "Dịch vụ ${service}";
 
-  static String m12(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m12(p) => "Bạn đã thanh toán cho ${p} thành công ";
+
+  static String m13(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -474,7 +476,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_items_not_empty": MessageLookupByLibrary.simpleMessage(
             "Thông tin hàng hóa không được để trống"),
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
-        "paid": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "paid": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
         "paid_deposit": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "paid_payment": MessageLookupByLibrary.simpleMessage("Đã đóng"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
@@ -696,8 +698,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_payment": MessageLookupByLibrary.simpleMessage(
-            "Bạn đã thanh toán thành công "),
+        "success_payment": m12,
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Xóa thành công"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -747,7 +748,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
-        "unpaid": MessageLookupByLibrary.simpleMessage("Cần thanh toán"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
@@ -773,7 +774,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m12,
+        "we_send_to": m13,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
             "Trọng lượng không được quá 15kg"),

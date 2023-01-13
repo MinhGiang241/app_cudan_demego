@@ -22,9 +22,7 @@ class PaymentPrv extends ChangeNotifier {
           0.0,
           (previousValue, element) =>
               previousValue + (element.payment_amount ?? 0));
-      var money = (b.amount_due ?? 0) * (b.vat ?? 100) / 100 +
-          (b.amount_due ?? 0) -
-          own;
+      var money = b.discount_money! - own;
       return (a + money);
     });
   }
@@ -69,12 +67,14 @@ class PaymentPrv extends ChangeNotifier {
           var now = DateTime.now();
           var date = DateTime(now.year, now.month, now.day, 17);
           var time = '${now.hour}:${now.minute}';
+          var paid =
+              e.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
           var newTransaction = TransactionHistory(
             receiptsId: e.id,
             amount_money: e.amount_due,
             amount_owed: 0,
             employeeId: e.employeeId,
-            payment_amount: e.amount_due,
+            payment_amount: e.discount_money! - paid,
             date: date.toIso8601String(),
             time: time,
           );
@@ -86,9 +86,11 @@ class PaymentPrv extends ChangeNotifier {
       isSendLoading = false;
 
       notifyListeners();
+      String me =
+          "${listReceipts[0].reason.toString()} ${listReceipts[0].code.toString()}";
       Utils.showSuccessMessage(
           context: ctx,
-          e: S.of(ctx).success_payment,
+          e: S.of(ctx).success_payment(me),
           onClose: () {
             Navigator.pushNamedAndRemoveUntil(
                 ctx, PaymentListScreen.routeName, (route) => route.isFirst,

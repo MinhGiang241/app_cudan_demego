@@ -119,9 +119,20 @@ class PaymentItem extends StatelessWidget {
         0.0,
         (previousValue, element) =>
             previousValue + (element.payment_amount ?? 0));
-    var money = (re.amount_due ?? 0) * (re.vat ?? 100) / 100 +
-        (re.amount_due ?? 0) -
-        own;
+    var money =
+        (re.amount_due ?? 0) * (re.vat ?? 0) / 100 + (re.amount_due ?? 0) - own;
+    var payDate;
+
+    if (re.transactions.isNotEmpty) {
+      payDate = re.transactions.map((e) => e.createdTime).reduce((a, e) {
+        if (a!.compareTo(e!) > 0) {
+          return a;
+        } else {
+          return e;
+        }
+      });
+    }
+
     return PrimaryCard(
       margin: const EdgeInsets.only(bottom: 16, left: 12, right: 12),
       onTap: () {
@@ -132,11 +143,11 @@ class PaymentItem extends StatelessWidget {
         });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
         child: Row(
           children: [
             genIcon(re.type),
-            hpad(16),
+            hpad(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,22 +159,28 @@ class PaymentItem extends StatelessWidget {
                     defaultVerticalAlignment:
                         TableCellVerticalAlignment.baseline,
                     columnWidths: const {
-                      0: FlexColumnWidth(2),
+                      0: FlexColumnWidth(3),
                       1: FlexColumnWidth(3)
                     },
                     children: [
                       TableRow(children: [
-                        Text('${S.of(context).total_money}:'),
+                        Text(
+                            '${!isPaid ? S.of(context).need_pay : S.of(context).pay}:',
+                            style: txtRegular(13, grayScaleColorBase)),
                         isPaid
-                            ? Text(formatCurrency.format(re.amount_due))
+                            ? Text(formatCurrency.format(re.discount_money),
+                                style: txtLinkSmall())
                             : Text(formatCurrency.format(money),
                                 style: txtLinkSmall()),
                       ]),
                       TableRow(children: [
-                        Text('${S.of(context).due_bill}:'),
                         Text(
-                          Utils.dateFormat(re.date ?? '', 1),
-                        ),
+                            '${!isPaid ? S.of(context).due_bill : S.of(context).pay_date}:',
+                            style: txtRegular(13, grayScaleColorBase)),
+                        Text(
+                            Utils.dateFormat(
+                                (!isPaid ? re.date : payDate) ?? '', 1),
+                            style: txtRegular(14, grayScaleColorBase)),
                       ]),
                     ],
                   )
@@ -193,11 +210,11 @@ class PaymentItem extends StatelessWidget {
                         ? const PrimaryIcon(
                             padding: EdgeInsets.zero,
                             icons: PrimaryIcons.check,
-                            size: 32,
+                            size: 26,
                             color: primaryColor3,
                           )
                         : Container(
-                            width: 26,
+                            width: 22,
                             height: 26,
                             decoration: BoxDecoration(
                                 border:

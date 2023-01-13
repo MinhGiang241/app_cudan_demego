@@ -326,7 +326,7 @@
   "total":"Total",
   "payment_method":"Payment method",
   "enter_payment_pass":"Enter payment password",
-  "success_payment":"Make payment successfully",
+  "success_payment":"Make payment for {p} successfully",
   "long":"Long",
   "width":"Width",
   "height":"Height",

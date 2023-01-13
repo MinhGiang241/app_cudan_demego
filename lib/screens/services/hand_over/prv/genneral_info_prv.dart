@@ -17,11 +17,6 @@ class GeneralInfoPrv extends ChangeNotifier {
   TimeOfDay? handOverTime;
   bool isSendLoading = false;
 
-  toggleAssetExpand(int index) {
-    dataAsset[index]["expand"] = !(dataAsset[index]["expand"] as bool);
-    notifyListeners();
-  }
-
   onChangePage(int index) {
     initPage = index;
     notifyListeners();
@@ -64,7 +59,6 @@ class GeneralInfoPrv extends ChangeNotifier {
     {
       "id": 1,
       "title": "Nhà vệ sinh",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",
@@ -89,7 +83,6 @@ class GeneralInfoPrv extends ChangeNotifier {
     {
       "id": 2,
       "title": "Nhà bếp",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",
@@ -114,7 +107,6 @@ class GeneralInfoPrv extends ChangeNotifier {
     {
       "id": 3,
       "title": "Phòng ăn",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",

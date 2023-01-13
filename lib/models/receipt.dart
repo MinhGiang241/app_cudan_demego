@@ -28,6 +28,7 @@ class Receipt {
     this.guest_name,
     this.reason,
     this.vat,
+    this.expiration_date,
     this.code,
     this.transactions = const [],
   });
@@ -42,6 +43,7 @@ class Receipt {
   String? payment_status;
   String? receipts_status;
   String? customer_type;
+  String? expiration_date;
   bool? check;
   String? payer;
   String? payer_phone;
@@ -85,13 +87,14 @@ class Receipt {
     address = json['address'];
     guest_name = json['guest_name'];
     full_name = json['full_name'];
-    vat = json['vat'] != null ? double.parse(json['vat'].toString()) : 0;
+    expiration_date = json['expiration_date'];
+    vat = json['vat'] != null ? double.parse(json['vat'].toString()) : null;
     discount_money = json['discount_money'] != null
         ? double.parse(json['discount_money'].toString())
-        : 0;
+        : null;
     discount_percent = json['discount_percent'] != null
         ? double.parse(json['discount_percent'].toString())
-        : 0;
+        : null;
     amount_due = json['amount_due'] != null
         ? double.parse(json['amount_due'].toString())
         : 0;
@@ -129,6 +132,7 @@ class Receipt {
     data['address'] = address;
     data['guest_name'] = guest_name;
     data['full_name'] = full_name;
+    data['expiration_date'] = expiration_date;
     data['vat'] = vat;
     data['discount_money'] = discount_money;
     data['discount_percent'] = discount_percent;

@@ -63,16 +63,10 @@ class AcceptHandOverPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  toggleAssetExpand(int index) {
-    data[index]["expand"] = !(data[index]["expand"] as bool);
-    notifyListeners();
-  }
-
   var data = [
     {
       "id": 1,
       "title": "Nhà vệ sinh",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",
@@ -96,7 +90,6 @@ class AcceptHandOverPrv extends ChangeNotifier {
     {
       "id": 2,
       "title": "Nhà bếp",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",
@@ -121,7 +114,6 @@ class AcceptHandOverPrv extends ChangeNotifier {
     {
       "id": 3,
       "title": "Phòng ăn",
-      "expand": false,
       "assets": [
         {
           "name": "Bổn rửa mặt",
