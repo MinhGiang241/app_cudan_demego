@@ -3,9 +3,20 @@ import 'package:flutter/material.dart';
 import '../../../../utils/utils.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
+  AcceptHandOverPrv() {
+    for (var i in data) {
+      for (var a in i['assets'] as List) {
+        if (!a['pass']) {
+          a['region'] = i['title'];
+          notPassList.add(a);
+        }
+      }
+    }
+  }
   bool generalInfoExpand = false;
   bool assetListExpand = false;
-
+  bool expandNotPass = false;
+  List notPassList = [];
   GlobalKey infoKey = GlobalKey();
 
   final TextEditingController handOverDateController = TextEditingController();
@@ -19,6 +30,11 @@ class AcceptHandOverPrv extends ChangeNotifier {
   TimeOfDay? handOverTime;
 
   bool isSendLoading = false;
+
+  toggleExpandNotPass() {
+    expandNotPass = !expandNotPass;
+    notifyListeners();
+  }
 
   selectItemPass(bool value, int indexAsset, int indexItem) {
     (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;

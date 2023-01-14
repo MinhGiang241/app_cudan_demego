@@ -113,9 +113,8 @@ class _HistoryTabState extends State<HistoryTab> {
                       onTap: () {
                         if (e["status"] == "HANDED_OVER") {
                           Navigator.pushNamed(
-                            context,
-                            AcceptHandOverScreen.routeName,
-                          );
+                              context, AcceptHandOverScreen.routeName,
+                              arguments: {"status": e['ticket_status']});
                         } else if (e["status"] == "WAIT_HAND_OVER") {
                           Navigator.pushNamed(
                             context,

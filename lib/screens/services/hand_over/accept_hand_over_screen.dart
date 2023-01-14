@@ -14,11 +14,11 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
-import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import 'prv/accept_hand_over_prv.dart';
 import 'widget/asset_item.dart';
+import 'widget/not_pass_widget.dart';
 
 class AcceptHandOverScreen extends StatefulWidget {
   const AcceptHandOverScreen({super.key});
@@ -57,6 +57,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    final status = arg['status'];
     return ChangeNotifierProvider(
       create: (context) => AcceptHandOverPrv(),
       builder: (context, snapshot) {
@@ -251,7 +253,12 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                 index: e.key,
                               );
                             }),
-                            vpad(16),
+                            NotPassWidget(
+                              status: status,
+                              list: context
+                                  .watch<AcceptHandOverPrv>()
+                                  .notPassList,
+                            ),
                           ],
                         )),
                       ),

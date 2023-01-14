@@ -121,7 +121,7 @@ class PaymentItem extends StatelessWidget {
     //         previousValue + (element.payment_amount ?? 0));
     // var money =
     //     (re.amount_due ?? 0) * (re.vat ?? 0) / 100 + (re.amount_due ?? 0) - own;
-    var payDate;
+    String? payDate;
     var paid =
         re.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
 
