@@ -4,11 +4,13 @@ import '../../../../utils/utils.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
   AcceptHandOverPrv() {
-    for (var i in data) {
-      for (var a in i['assets'] as List) {
-        if (!a['pass']) {
-          a['region'] = i['title'];
-          notPassList.add(a);
+    for (var i = 0; i < data.length; ++i) {
+      for (var a = 0; a < (data[i]['assets'] as List).length; a++) {
+        (data[i]['assets'] as List)[a]['region'] = data[i]['title'];
+        (data[i]['assets'] as List)[a]["indexRegion"] = i;
+        (data[i]['assets'] as List)[a]["indexAsset"] = a;
+        if (!(data[i]['assets'] as List)[a]['pass']) {
+          notPassList.add((data[i]['assets'] as List)[a]);
         }
       }
     }
@@ -38,6 +40,14 @@ class AcceptHandOverPrv extends ChangeNotifier {
 
   selectItemPass(bool value, int indexAsset, int indexItem) {
     (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
+    var a = (data[indexAsset]["assets"] as List)[indexItem];
+    if (value && notPassList.contains(a)) {
+      notPassList.remove(a);
+    }
+    if (!value && !notPassList.contains(a)) {
+      notPassList.add(a);
+    }
+
     notifyListeners();
   }
 
@@ -85,17 +95,20 @@ class AcceptHandOverPrv extends ChangeNotifier {
       "title": "Nhà vệ sinh",
       "assets": [
         {
+          "id": "01",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,
           "material": "Sứ",
         },
         {
+          "id": "02",
           "name": "Bàn trang điểm",
           "amount": 1,
           "pass": false,
         },
         {
+          "id": "03",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,
@@ -108,18 +121,21 @@ class AcceptHandOverPrv extends ChangeNotifier {
       "title": "Nhà bếp",
       "assets": [
         {
+          "id": "04",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,
           "material": "Sứ",
         },
         {
+          "id": "05",
           "name": "Bàn trang điểm",
           "amount": 1,
           "pass": false,
           "material": "Sứ",
         },
         {
+          "id": "06",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,
@@ -132,18 +148,21 @@ class AcceptHandOverPrv extends ChangeNotifier {
       "title": "Phòng ăn",
       "assets": [
         {
+          "id": "07",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,
           "material": "Sứ",
         },
         {
+          "id": "08",
           "name": "Bàn trang điểm",
           "amount": 1,
           "pass": false,
           "material": "Sứ",
         },
         {
+          "id": "09",
           "name": "Bổn rửa mặt",
           "amount": 2,
           "pass": true,

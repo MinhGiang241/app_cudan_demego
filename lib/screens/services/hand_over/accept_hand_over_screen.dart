@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/info_content_view.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_icon.dart';
@@ -254,6 +255,12 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                               );
                             }),
                             NotPassWidget(
+                              selectItem:
+                                  (bool value, int indexAsset, int indexItem) =>
+                                      context
+                                          .read<AcceptHandOverPrv>()
+                                          .selectItemPass(
+                                              value, indexAsset, indexItem),
                               status: status,
                               list: context
                                   .watch<AcceptHandOverPrv>()
@@ -273,6 +280,13 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                             style: txtMediumUnderline(13, greenColorBase),
                           ),
                         ),
+                      ),
+                      vpad(16),
+                      PrimaryTextField(
+                        enable: false,
+                        isReadOnly: true,
+                        initialValue: genStatus(status),
+                        textColor: genStatusColor(status),
                       ),
                       vpad(40),
                       PrimaryButton(

@@ -9,15 +9,19 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_dialog.dart';
+import 'dailog_reason.dart';
 
 class NotPassWidget extends StatefulWidget {
   const NotPassWidget({
     super.key,
     required this.list,
     required this.status,
+    required this.selectItem,
   });
-  final list;
+
+  final List list;
   final String status;
+  final Function selectItem;
 
   @override
   State<NotPassWidget> createState() => _NotPassWidgetState();
@@ -28,6 +32,17 @@ class _NotPassWidgetState extends State<NotPassWidget>
   bool expand = false;
   late AnimationController animationItemController = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 300));
+
+  addReasonReject(
+    function,
+  ) {
+    Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.custom(
+            content: ReasonDailog(
+          function: function,
+        )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -225,8 +240,12 @@ class _NotPassWidgetState extends State<NotPassWidget>
                                                         child: PrimaryButton(
                                                       onTap: () {
                                                         Navigator.pop(context);
-                                                        // widget.selectPass(true,
-                                                        //     widget.index, e.key);
+                                                        widget.selectItem(
+                                                            true,
+                                                            e.value[
+                                                                'indexRegion'],
+                                                            e.value[
+                                                                'indexAsset']);
                                                       },
                                                       buttonSize:
                                                           ButtonSize.xsmall,
@@ -240,12 +259,13 @@ class _NotPassWidgetState extends State<NotPassWidget>
                                                       onTap: () {
                                                         Navigator.pop(context);
 
-                                                        // addReasonReject(
-                                                        //   () => widget.selectPass(
-                                                        //       false,
-                                                        //       widget.index,
-                                                        //       e.key),
-                                                        // );
+                                                        addReasonReject(() =>
+                                                            widget.selectItem(
+                                                                false,
+                                                                e.value[
+                                                                    'indexRegion'],
+                                                                e.value[
+                                                                    'indexAsset']));
                                                       },
                                                       buttonSize:
                                                           ButtonSize.xsmall,
