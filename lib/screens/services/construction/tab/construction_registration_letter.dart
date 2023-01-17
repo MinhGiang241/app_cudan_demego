@@ -329,6 +329,7 @@ class _ConstructionRegistrationLetterTabState
                     );
                   },
                 ),
+                vpad(60),
               ],
             ),
           ),

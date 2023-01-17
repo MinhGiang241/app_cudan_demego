@@ -80,7 +80,7 @@ class TransportationLetterListTab extends StatelessWidget {
               },
               child: PrimaryEmptyWidget(
                 emptyText: S.of(context).no_card,
-                icons: PrimaryIcons.identity_bg,
+                icons: PrimaryIcons.car,
                 action: () {
                   // Utils.pushScreen(context, const RegisterParkingCard());
                 },
