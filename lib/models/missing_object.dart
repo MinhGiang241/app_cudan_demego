@@ -4,7 +4,7 @@ import 'status.dart';
 
 class MissingObject {
   MissingObject({
-    this.apartment,
+    this.apartmentId,
     this.code,
     this.createdTime,
     this.customer,
@@ -25,7 +25,7 @@ class MissingObject {
   String? code;
   String? customer;
   String? phone_number;
-  String? apartment;
+  String? apartmentId;
   String? status;
   String? time;
   String? describe;
@@ -41,7 +41,7 @@ class MissingObject {
     code = json['code'];
     customer = json['customer'];
     phone_number = json['phone_number'];
-    apartment = json['apartment'];
+    apartmentId = json['apartmentId'];
     status = json['status'];
     time = json['time'];
     describe = json['describe'];
@@ -65,7 +65,7 @@ class MissingObject {
     data['code'] = code;
     data['customer'] = customer;
     data['phone_number'] = phone_number;
-    data['apartment'] = apartment;
+    data['apartmentId'] = apartmentId;
     data['status'] = status;
     data['time'] = time;
     data['describe'] = describe;
