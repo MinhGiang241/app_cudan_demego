@@ -47,7 +47,10 @@ class ResidentInfoPrv extends ChangeNotifier {
   }
 
   selectApartmentFromHive(int index) {
-    selectedApartment = listOwn[index];
+    if (index <= listOwn.length - 1) {
+      selectedApartment = listOwn[index];
+    }
+
     notifyListeners();
   }
 }
