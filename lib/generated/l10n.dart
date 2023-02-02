@@ -5189,6 +5189,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Customer care`
+  String get customer_care {
+    return Intl.message(
+      'Customer care',
+      name: 'customer_care',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

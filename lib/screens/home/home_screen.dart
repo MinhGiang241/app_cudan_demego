@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -75,19 +76,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Scaffold(
               body: _navigationTab(context),
               bottomNavigationBar: _bottomNavigationBar,
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: Icon(Icons.phone_sharp,
-                    size: 40,
-                    color: primaryColorBase,
-                    shadows: [
-                      Shadow(
-                          offset: const Offset(-2, 2),
-                          color: Colors.black.withOpacity(0.5),
-                          blurRadius: 10.0),
-                    ]),
-              ),
+              floatingActionButton: _selectedIndex == 2
+                  ? null
+                  : FloatingActionButton(
+                      onPressed: () {},
+                      backgroundColor: Colors.white,
+                      child: Icon(Icons.phone_sharp,
+                          size: 40,
+                          color: primaryColorBase,
+                          shadows: [
+                            Shadow(
+                                offset: const Offset(-2, 2),
+                                color: Colors.black.withOpacity(0.5),
+                                blurRadius: 10.0),
+                          ]),
+                    ),
             ),
             if (isLoading)
               const Center(
@@ -138,6 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         );
+      case 2:
+        return const ChatScreen();
       case 3:
         return const AccountScreen();
 

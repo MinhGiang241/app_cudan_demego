@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "51.0.0"
+  _flutterfire_internals:
+    dependency: transitive
+    description:
+      name: _flutterfire_internals
+      sha256: "3ff770dfff04a67b0863dff205a0936784de1b87a5e99b11c693fc10e66a9ce3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.12"
   analyzer:
     dependency: transitive
     description:
@@ -121,6 +129,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      sha256: a851106a2169c15614047b75ea10d0346650352c6669ab482306572aa4ed9a7d
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.1"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      sha256: "1fac512fef2bfe84ca7f372defbd9dd8efb108be96854db9023739a5b2aa9977"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.10.1"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      sha256: "3fd9581c1447b6e8db6d0f19d0140b196a70ecf582bd1f71e7141fe9abf10ddb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   collection:
     dependency: transitive
     description:
@@ -193,6 +225,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0+3"
+  emoji_dialog_picker:
+    dependency: "direct main"
+    description:
+      name: emoji_dialog_picker
+      sha256: "1939c555051e433d521c71cc98128db6a3ba61c822e3305bca7ed2b786cc6fa2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  eva_icons_flutter:
+    dependency: transitive
+    description:
+      name: eva_icons_flutter
+      sha256: "6d48a10b93590ab83eb092bee5adacdeb14f3d83f527a4b9e4092c363d56e2a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -225,6 +273,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.4"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      sha256: c129209ba55f3d4272c89fb4a4994c15bea77fb6de63a82d45fb6bc5c94e4355
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: "5fab93f5b354648efa62e7cc829c90efb68c8796eecf87e0888cae2d5f3accd4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.2"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: "18b35ce111b0a4266abf723c825bcf9d4e2519d13638cc7f06f2a8dd960c75bc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -325,6 +397,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.0+2"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   fwfh_cached_network_image:
     dependency: transitive
     description:
@@ -589,6 +669,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: c33da08e136c3df0190bd5bbe51ae1df4a7d96e7954d1d7249fea2968a72d317
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.0"
   just_audio:
     dependency: transitive
     description:
@@ -965,6 +1053,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  scrollable_positioned_list:
+    dependency: "direct main"
+    description:
+      name: scrollable_positioned_list
+      sha256: ca7fcaa743db712d4f7b1580526f494d0093c77a721a65705ee51fbeac7a2bd3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5"
   sky_engine:
     dependency: transitive
     description: flutter

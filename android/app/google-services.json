@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "474814233890",
+    "firebase_url": "https://giang-fc6c8.firebaseio.com",
+    "project_id": "giang-fc6c8",
+    "storage_bucket": "giang-fc6c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474814233890:android:a498f4d4d6dc36b358f97b",
+        "android_client_info": {
+          "package_name": "com.demego.dev.building_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV9ko7LPa6t3KBfKuHMtVxVbzL-wha4SE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474814233890:android:524f6a923f78625f58f97b",
+        "android_client_info": {
+          "package_name": "com.example.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV9ko7LPa6t3KBfKuHMtVxVbzL-wha4SE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -512,5 +512,6 @@
   "wait_hand_over":"Wait to hand over",
   "handed_over":"Handed over",
   "re_book":"Re book",
-  "asset_detais":"Asset details"
+  "asset_detais":"Asset details",
+  "customer_care":"Customer care"
 } 

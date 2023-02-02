@@ -326,6 +326,8 @@ class ServiceScreen extends StatelessWidget {
                                                   Text(
                                                     e.name ?? "",
                                                     style: txtBold(13),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   )
                                                 ],
                                               ),

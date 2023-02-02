@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,8 +24,8 @@ void main() async {
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
   Paint.enableDithering = true;
-  WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp();
   await Hive.initFlutter();
   await PrfData.open();
   final lang = PrfData.shared.getLanguage();

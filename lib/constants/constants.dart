@@ -39,6 +39,7 @@ const Color grayScaleColor2 = Color(0xff6E7191);
 const Color grayScaleColor3 = Color(0xffA0A3BD);
 const Color grayScaleColor4 = Color(0xffD0D3E5);
 const Color grayScaleColor5 = Color(0xffEFF0F7);
+const Color grayScaleColor6 = Color(0xffF0F2F5);
 
 const Color yellowColorBase = Color(0xffFFBF35);
 const Color yellowColor1 = Color(0xffFFA900);
@@ -302,4 +303,5 @@ class AppImage {
   static const String qltnLogo = "assets/images/qltn_logo.png";
   static const String illustration = "assets/images/illustration.png";
   static const String splashBackground = "assets/images/splash_background.png";
+  static const String receiption = "assets/images/receiption.png";
 }

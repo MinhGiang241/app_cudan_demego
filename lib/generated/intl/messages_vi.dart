@@ -167,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_acc_1": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
+        "customer_care":
+            MessageLookupByLibrary.simpleMessage("Chăm sóc khách hàng"),
         "date": MessageLookupByLibrary.simpleMessage("Ngày"),
         "debt": MessageLookupByLibrary.simpleMessage("Thu tiền, nhắc nợ"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),

@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create an account"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
+        "customer_care": MessageLookupByLibrary.simpleMessage("Customer care"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "debt": MessageLookupByLibrary.simpleMessage("Payment, debt remind"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
