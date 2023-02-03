@@ -513,5 +513,6 @@
   "handed_over":"Handed over",
   "re_book":"Re book",
   "asset_detais":"Asset details",
-  "customer_care":"Customer care"
+  "customer_care":"Customer care",
+  "error":"Something went wrong"
 } 

@@ -71,7 +71,8 @@ dependencies:
   firebase_core: ^2.4.1
   cloud_firestore: ^4.3.1
   scrollable_positioned_list: ^0.3.5
-
+  flutter_feed_reaction: ^0.0.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

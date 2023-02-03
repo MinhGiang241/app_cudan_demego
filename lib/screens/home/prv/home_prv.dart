@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_event.dart';
 import 'package:app_cudan/services/api_new.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../models/event.dart';
 import '../../../models/new.dart';
@@ -30,6 +31,7 @@ class HomePrv extends ChangeNotifier {
   List<New> newResidentList = [];
   List<New> newProjectList = [];
   BuildContext? context;
+  int? messageCount;
 
   HomePrv(ctx) {
     context = ctx;
@@ -39,6 +41,11 @@ class HomePrv extends ChangeNotifier {
     if (event != null) {
       event!.isParticipation = true;
     }
+    notifyListeners();
+  }
+
+  clearMessageBadge() async {
+    messageCount = null;
     notifyListeners();
   }
 
@@ -98,6 +105,13 @@ class HomePrv extends ChangeNotifier {
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
       // ignore: use_build_context_synchronously
+      final fs = FirebaseFirestore.instance;
+      await fs.collection('Messages').get().then((snap) {
+        var data = snap.docs;
+        if (snap.size > 0) {
+          messageCount = snap.size;
+        }
+      });
 
       await APIEvent.getEventList(0, 1, "COMING", accountId ?? "").then((v) {
         if (v.length >= 1) {

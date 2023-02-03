@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -71,11 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
+        var messageCount = context.watch<HomePrv>().messageCount;
         return FutureBuilder(builder: (context, snap) {
           return Stack(alignment: Alignment.center, children: [
             Scaffold(
               body: _navigationTab(context),
-              bottomNavigationBar: _bottomNavigationBar,
+              bottomNavigationBar: _bottomNavigationBar(messageCount),
               floatingActionButton: _selectedIndex == 2
                   ? null
                   : FloatingActionButton(
@@ -142,6 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       case 2:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context.read<HomePrv>().clearMessageBadge();
+        });
         return const ChatScreen();
       case 3:
         return const AccountScreen();
@@ -158,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget get _bottomNavigationBar {
+  Widget _bottomNavigationBar(messageCount) {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
@@ -189,7 +194,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: S.of(context).forum,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.chat_bubble),
+                icon: Badge(
+                  badgeContent: Text(messageCount.toString(),
+                      style: txtBold(10, Colors.white)),
+                  showBadge: messageCount != null,
+                  child: const Icon(Icons.message),
+                ),
+                //  Icon(Icons.chat_bubble),
                 label: S.of(context).message,
               ),
               BottomNavigationBarItem(

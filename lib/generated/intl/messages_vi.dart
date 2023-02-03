@@ -251,6 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_unknown":
             MessageLookupByLibrary.simpleMessage("Lỗi Không xác định"),
         "err_x": m7,
+        "error": MessageLookupByLibrary.simpleMessage("Có lỗi xảy ra"),
         "event": MessageLookupByLibrary.simpleMessage("Sự kiện"),
         "event_msg": MessageLookupByLibrary.simpleMessage(
             "Theo dõi các sự kiện từng ngày/ tháng"),

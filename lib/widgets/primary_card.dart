@@ -13,10 +13,17 @@ class PrimaryCard extends StatelessWidget {
     this.padding,
     this.decoration,
     this.background,
+    this.onLongPress,
+    this.onTapDown,
+    this.onTapCancel,
     this.gradient,
+    this.isShadow = true,
   }) : super(key: key);
   final Widget child;
   final Function()? onTap;
+  final Function()? onLongPress;
+  final Function(TapDownDetails)? onTapDown;
+  final Function()? onTapCancel;
   final BorderRadius? borderRadius;
   final double? height;
   final double? width;
@@ -25,6 +32,7 @@ class PrimaryCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Color? background;
   final Gradient? gradient;
+  final bool isShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +40,6 @@ class PrimaryCard extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       alignment: Alignment.topCenter,
       child: Container(
-        padding: padding,
         margin: margin,
         height: height,
         width: width,
@@ -40,22 +47,29 @@ class PrimaryCard extends StatelessWidget {
             BoxDecoration(
                 gradient: gradient,
                 borderRadius: borderRadius ?? BorderRadius.circular(12),
-                color: background ?? Colors.white,
+                color: background ?? Colors.white.withOpacity(1),
                 border: Border.all(color: Colors.white54, width: 0.5),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 32,
-                    color: shadowColor.withOpacity(0.12),
-                    offset: const Offset(0, 8),
-                  )
-                ]),
-        child: Material(
+                boxShadow: isShadow
+                    ? [
+                        BoxShadow(
+                          blurRadius: 32,
+                          color: shadowColor.withOpacity(0.12),
+                          offset: const Offset(0, 8),
+                        )
+                      ]
+                    : null),
+        child: InkWell(
           borderRadius: borderRadius ?? BorderRadius.circular(12),
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: borderRadius ?? BorderRadius.circular(12),
-            onTap: onTap,
-            child: child,
+          onTap: onTap,
+          onLongPress: onLongPress,
+          onTapDown: onTapDown,
+          onTapCancel: onTapCancel,
+          child: Padding(
+            padding: padding ?? const EdgeInsets.all(0),
+            child: Material(
+                borderRadius: borderRadius ?? BorderRadius.circular(12),
+                color: Colors.transparent,
+                child: child),
           ),
         ),
       ),

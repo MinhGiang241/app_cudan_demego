@@ -21,6 +21,19 @@ class ChatBloc {
 
   final fs = FirebaseFirestore.instance;
 
+  int messageCount = 0;
+
+  bool init = true;
+
+  notInit() {
+    init = false;
+  }
+
+  void setMessageCount(count) {
+    messageCount = count;
+    init = false;
+  }
+
   void scroll(int index) {
     itemScrollController.scrollTo(
         index: index,
@@ -33,20 +46,15 @@ class ChatBloc {
   }
 
   summitedMessage(value, accountId, accountName) async {
-    if (textEditionController.text.isNotEmpty) {
+    if (textEditionController.text.trim().isNotEmpty) {
+      var m = textEditionController.text.trim();
+
+      textEditionController.clear();
       await fs.collection('Messages').doc().set({
-        'message': textEditionController.text.trim(),
+        'message': m,
         'time': DateTime.now(),
         'accountId': accountId,
         "accountName": accountName
-      });
-      textEditionController.clear();
-      await fs.collection('Messages').get().then((snap) {
-        var data = snap.docs;
-        print(data);
-        if (snap.size > 0) {
-          scroll(snap.size - 1);
-        }
       });
     }
   }

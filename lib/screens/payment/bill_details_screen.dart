@@ -3,10 +3,6 @@ import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:collection';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../generated/l10n.dart';
 import '../../models/info_content_view.dart';

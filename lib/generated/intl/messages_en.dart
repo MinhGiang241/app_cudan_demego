@@ -249,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_x": m7,
+        "error": MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),

@@ -46,7 +46,7 @@ class InputChat extends StatelessWidget {
             child: PrimaryCard(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  color: grayScaleColor4),
+                  color: grayScaleColor6),
               child: TextField(
                 onSubmitted: (value) {
                   messageBloc.summitedMessage(value, accountId, accountName);
