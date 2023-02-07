@@ -17,6 +17,7 @@ class PrimaryCard extends StatelessWidget {
     this.onTapDown,
     this.onTapCancel,
     this.gradient,
+    this.constraints,
     this.isShadow = true,
   }) : super(key: key);
   final Widget child;
@@ -33,6 +34,7 @@ class PrimaryCard extends StatelessWidget {
   final Color? background;
   final Gradient? gradient;
   final bool isShadow;
+  final BoxConstraints? constraints;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class PrimaryCard extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       alignment: Alignment.topCenter,
       child: Container(
+        constraints: constraints,
         margin: margin,
         height: height,
         width: width,

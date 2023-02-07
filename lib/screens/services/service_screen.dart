@@ -74,13 +74,13 @@ class ServiceScreen extends StatelessWidget {
         "title": S.current.parcel,
         "navigator": ParcelListScreen.routeName,
       },
-      {
-        "color": greenColor,
-        "background": gradientGreen,
-        "icon": PrimaryIcons.user_detail,
-        "title": S.current.info_reception,
-        "navigator": GymCardListScreen.routeName,
-      },
+      // {
+      //   "color": greenColor,
+      //   "background": gradientGreen,
+      //   "icon": PrimaryIcons.user_detail,
+      //   "title": S.current.info_reception,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
       {
         "color": turquoiseColor,
         "background": gradientTurquoise,
@@ -88,13 +88,13 @@ class ServiceScreen extends StatelessWidget {
         "title": S.current.missing_obj,
         "navigator": MissingObectScreen.routeName,
       },
-      {
-        "color": purpleColorBase,
-        "background": gradientPurple,
-        "icon": PrimaryIcons.credit_card_alt,
-        "title": S.current.follow_ser,
-        "navigator": GymCardListScreen.routeName,
-      },
+      // {
+      //   "color": purpleColorBase,
+      //   "background": gradientPurple,
+      //   "icon": PrimaryIcons.credit_card_alt,
+      //   "title": S.current.follow_ser,
+      //   "navigator": GymCardListScreen.routeName,
+      // },
       {
         "color": yellowColorBase,
         "background": gradientYellow,

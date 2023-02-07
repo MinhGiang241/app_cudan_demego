@@ -78,21 +78,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Scaffold(
               body: _navigationTab(context),
               bottomNavigationBar: _bottomNavigationBar(messageCount),
-              floatingActionButton: _selectedIndex == 2
-                  ? null
-                  : FloatingActionButton(
-                      onPressed: () {},
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.phone_sharp,
-                          size: 40,
-                          color: primaryColorBase,
-                          shadows: [
-                            Shadow(
-                                offset: const Offset(-2, 2),
-                                color: Colors.black.withOpacity(0.5),
-                                blurRadius: 10.0),
-                          ]),
-                    ),
+              // floatingActionButton: _selectedIndex == 2
+              //     ? null
+              //     : FloatingActionButton(
+              //         onPressed: () {},
+              //         backgroundColor: Colors.white,
+              //         child: Icon(Icons.phone_sharp,
+              //             size: 40,
+              //             color: primaryColorBase,
+              //             shadows: [
+              //               Shadow(
+              //                   offset: const Offset(-2, 2),
+              //                   color: Colors.black.withOpacity(0.5),
+              //                   blurRadius: 10.0),
+              //             ]),
+              //       ),
             ),
             if (isLoading)
               const Center(
@@ -130,10 +130,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 vpad(30),
                 const ServicesHome(),
                 vpad(30),
-                const ConvinientServiceHome(),
-                vpad(30),
-                const FeedbackHome(),
-                vpad(30),
+                // const ConvinientServiceHome(),
+                // vpad(30),
+                // const FeedbackHome(),
+                // vpad(30),
                 const EventsHome(),
                 vpad(24),
                 if (context.read<ResidentInfoPrv>().residentId != null)
@@ -143,12 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         );
-      case 2:
+      case 1:
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.read<HomePrv>().clearMessageBadge();
         });
         return const ChatScreen();
-      case 3:
+      case 2:
         return const AccountScreen();
 
       default:
@@ -189,10 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.home),
                 label: S.of(context).home,
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.article),
-                label: S.of(context).forum,
-              ),
+              // BottomNavigationBarItem(
+              //   icon: const Icon(Icons.article),
+              //   label: S.of(context).forum,
+              // ),
               BottomNavigationBarItem(
                 icon: Badge(
                   badgeContent: Text(messageCount.toString(),

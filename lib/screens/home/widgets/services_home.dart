@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../services/delivery/delivery_list_screen.dart';
 import '../../services/gym_card/gym_card_list_screen.dart';
 import '../../services/parking_card/transport_card_list_screen.dart';
+import '../../services/resident_card/resident_card_screen.dart';
 import '../../services/service_screen.dart';
 import 'home_title_widget.dart';
 
@@ -42,14 +44,13 @@ class ServicesHome extends StatelessWidget {
                   child: PrimaryIcon(
                     icons: PrimaryIcons.car,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.blue,
+                    gradients: PrimaryIconGradient.turquoise,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
                       Navigator.pushNamed(
                           context, TransportationCardListScreen.routeName);
-                      // Utils.pushScreen(context, const ParkingCardListScreen());
                     },
                   ),
                 ),
@@ -76,19 +77,20 @@ class ServicesHome extends StatelessWidget {
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.elevator,
+                    icons: PrimaryIcons.inbox,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.pink,
+                    gradients: PrimaryIconGradient.primary,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const ResidentCardListScreen());
+                      Navigator.of(context)
+                          .pushNamed(ResidentCardListScreen.routeName);
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).elevator_card,
+                Text(S.of(context).res_card,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],
@@ -110,21 +112,20 @@ class ServicesHome extends StatelessWidget {
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.gym,
+                    icons: PrimaryIcons.box,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.purple,
+                    gradients: PrimaryIconGradient.yellow,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
                       Navigator.of(context)
-                          .pushNamed(GymCardListScreen.routeName);
-                      // Utils.pushScreen(context, const ServicesTrackingScreen());
+                          .pushNamed(DeliveryListScreen.routeName);
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).gym_card,
+                Text(S.of(context).reg_deliver,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],

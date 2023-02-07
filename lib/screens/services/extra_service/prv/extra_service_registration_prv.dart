@@ -100,7 +100,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       try {
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 0);
         var listError = [];
         if (regDate == null) {
           listError.add(S.of(context).reg_day_not_empty);

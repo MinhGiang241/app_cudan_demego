@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
@@ -31,7 +32,9 @@ class EditPersonalInfo extends StatelessWidget {
               if (!context.watch<EditInfoProvider>().isSaving)
                 TextButton(
                     onPressed: () async {
-                      await context.read<EditInfoProvider>().save(context);
+                      // await context.read<EditInfoProvider>().save(context);
+                      Utils.showErrorMessage(context,
+                          "Tính năng đang nâng cấp , chưa sử dụng được");
                     },
                     child: Text(S.of(context).save,
                         style: txtLinkMedium(color: primaryColorBase)))

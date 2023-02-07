@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../generated/l10n.dart';
@@ -30,11 +31,13 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                 if (!context.watch<ChangePassPrv>().isLoading)
                   TextButton(
                       onPressed: () async {
-                        final phoneNum =
-                            context.read<AuthPrv>().userInfo!.phone!;
-                        await context
-                            .read<ChangePassPrv>()
-                            .changePass(context, phoneNum);
+                        // final phoneNum =
+                        //     context.read<AuthPrv>().userInfo!.phone!;
+                        // await context
+                        //     .read<ChangePassPrv>()
+                        //     .changePass(context, phoneNum);
+                        Utils.showErrorMessage(context,
+                            "Tính năng đang nâng cấp , chưa sử dụng được");
                       },
                       child: Text(S.of(context).save,
                           style: txtLinkMedium(color: primaryColorBase)))

@@ -76,12 +76,12 @@ class AccountScreen extends StatelessWidget {
                       onTap: () {
                         Utils.pushScreen(context, const PersonalInfoScreen());
                       }),
-                  AccountItem(
-                      lable: "S.of(context).plan_info",
-                      icons: PrimaryIcons.home_alt,
-                      onTap: () {
-                        Utils.pushScreen(context, const PlanInfoScreen());
-                      }),
+                  // AccountItem(
+                  //     lable: "S.of(context).plan_info",
+                  //     icons: PrimaryIcons.home_alt,
+                  //     onTap: () {
+                  //       Utils.pushScreen(context, const PlanInfoScreen());
+                  //     }),
                   AccountItem(
                       lable: S.of(context).language,
                       icons: PrimaryIcons.planet,

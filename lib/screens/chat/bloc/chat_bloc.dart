@@ -45,7 +45,7 @@ class ChatBloc {
     textEditionController.text = textEditionController.text + emoji;
   }
 
-  summitedMessage(value, accountId, accountName) async {
+  summitedMessage(accountId, accountName) async {
     if (textEditionController.text.trim().isNotEmpty) {
       var m = textEditionController.text.trim();
 

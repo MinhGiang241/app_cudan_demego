@@ -49,7 +49,7 @@ class InputChat extends StatelessWidget {
                   color: grayScaleColor6),
               child: TextField(
                 onSubmitted: (value) {
-                  messageBloc.summitedMessage(value, accountId, accountName);
+                  messageBloc.summitedMessage(accountId, accountName);
                 },
                 controller: messageBloc.textEditionController,
                 style: txtBodySmallBold(color: grayScaleColorBase),
@@ -76,15 +76,21 @@ class InputChat extends StatelessWidget {
                       child: const Icon(Icons.emoji_emotions_outlined),
                     ),
                   ),
-
-                  //  InkWell(
-                  //   onTap: () {},
-                  //   child: const Icon(Icons.emoji_emotions_outlined),
-                  // ),
                 ),
               ),
             ),
           ),
+          hpad(5),
+          InkWell(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              messageBloc.summitedMessage(accountId, accountName);
+            },
+            child: const Icon(
+              Icons.send,
+              color: grayScaleColorBase,
+            ),
+          )
         ],
       ),
     );

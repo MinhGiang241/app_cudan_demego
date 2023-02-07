@@ -43,9 +43,9 @@ class BillsHome extends StatelessWidget {
                     ],
                   ),
                   child: PrimaryIcon(
-                    icons: PrimaryIcons.dollar,
+                    icons: PrimaryIcons.water,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.green,
+                    gradients: PrimaryIconGradient.purple,
                     color: Colors.white,
                     padding: const EdgeInsets.all(12),
                     size: 32,
@@ -60,7 +60,7 @@ class BillsHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).pay,
+                Text(S.of(context).water,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
               ],
@@ -89,7 +89,12 @@ class BillsHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const BillsScreen());
+                      Navigator.of(context)
+                          .pushNamed(PaymentListScreen.routeName, arguments: {
+                        "year": null,
+                        "month": null,
+                        "index": null
+                      });
                     },
                   ),
                 ),
@@ -123,7 +128,12 @@ class BillsHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      // Utils.pushScreen(context, const StreamScreen());
+                      Navigator.of(context)
+                          .pushNamed(PaymentListScreen.routeName, arguments: {
+                        "year": null,
+                        "month": null,
+                        "index": null
+                      });
                     },
                   ),
                 ),
