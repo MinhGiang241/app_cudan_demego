@@ -725,6 +725,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  loggy:
+    dependency: transitive
+    description:
+      name: loggy
+      sha256: "981e03162bbd3a5a843026f75f73d26e4a0d8aa035ae060456ca7b30dfd1e339"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   matcher:
     dependency: transitive
     description:
@@ -1061,6 +1069,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  rocket_chat_flutter_connector:
+    dependency: "direct main"
+    description:
+      name: rocket_chat_flutter_connector
+      sha256: c2faa576c404b7d03d39b91bfc121994a05b2a3993695ad4720e2d9dfc36c160
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
   rxdart:
     dependency: transitive
     description:

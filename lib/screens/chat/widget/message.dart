@@ -312,23 +312,6 @@ class _MessageState extends State<Message> {
                 ),
               ],
             ),
-          // if (isShow)
-          //   Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 8),
-          //     child: Text(
-          //       widget.isMe ? widget.fullName : S.of(context).customer_care,
-          //       style: txtBodyMediumBold(color: grayScaleColorBase),
-          //     ),
-          //   ),
-          // if (isShow) vpad(2),
-          // if (isShow)
-          //   Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 8),
-          //     child: Text(
-          //       Utils.dateTimeFormat(widget.d.toIso8601String(), 0),
-          //       style: txtBodySmallRegular(color: grayScaleColorBase),
-          //     ),
-          //   ),
           vpad(4)
         ],
       ),

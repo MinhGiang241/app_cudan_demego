@@ -49,7 +49,8 @@ class InputChat extends StatelessWidget {
                   color: grayScaleColor6),
               child: TextField(
                 onSubmitted: (value) {
-                  messageBloc.summitedMessage(accountId, accountName);
+                  // messageBloc.summitedMessage(accountId, accountName);
+                  messageBloc.sendMessage();
                 },
                 controller: messageBloc.textEditionController,
                 style: txtBodySmallBold(color: grayScaleColorBase),
@@ -84,7 +85,8 @@ class InputChat extends StatelessWidget {
           InkWell(
             onTap: () {
               FocusScope.of(context).unfocus();
-              messageBloc.summitedMessage(accountId, accountName);
+              // messageBloc.summitedMessage(accountId, accountName);
+              messageBloc.sendMessage();
             },
             child: const Icon(
               Icons.send,

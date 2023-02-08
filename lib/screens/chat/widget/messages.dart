@@ -14,6 +14,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../constants/api_constant.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/feed_reaction_model.dart';
+import '../../../models/rocket_chat_data.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/emoji_reaction.dart';
 import '../../../widgets/primary_card.dart';
@@ -23,8 +24,9 @@ import '../bloc/chat_bloc.dart';
 import 'message.dart';
 
 class Measages extends StatefulWidget {
-  const Measages({super.key, required this.messageBloc});
+  Measages({super.key, required this.messageBloc, this.messages = const []});
   final ChatBloc messageBloc;
+  List<MessageChat> messages = [];
   @override
   State<Measages> createState() => _MeasagesState();
 }
@@ -37,6 +39,12 @@ class _MeasagesState extends State<Measages> {
     super.dispose();
   }
 
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => widget.messageBloc.scroll(widget.messages.length - 1));
+  }
+
   @override
   Widget build(BuildContext context) {
     var user = context.read<ResidentInfoPrv>().userInfo;
@@ -44,107 +52,43 @@ class _MeasagesState extends State<Measages> {
     var avatar = user.account!.avatar;
     var fullName = user.account!.fullName;
     return SafeArea(
-      child: StreamBuilder(
-          stream: widget.messageBloc.messageStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text(S.of(context).error);
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: PrimaryLoading(),
-              );
-            }
-            if (snapshot.hasData && !widget.messageBloc.init) {
-              if (snapshot.data!.docs.isNotEmpty) {
-                widget.messageBloc.scroll(snapshot.data!.docs.length - 1);
+      child: GestureDetector(
+        onTap: () {
+          changeNotifier.sink.add(false);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ScrollablePositionedList.builder(
+            initialScrollIndex:
+                widget.messages.isNotEmpty ? widget.messages.length - 1 : 0,
+            // shrinkWrap: true,
+            itemCount: widget.messages.length,
+            itemBuilder: (context, index) {
+              // widget.messageBloc.scroll(widget.messages.length - 1);
+              // QueryDocumentSnapshot qs =
+              //     snapshot.data!.docs[index < 0 ? 0 : index];
+              // Timestamp t = qs['time'];
+              // DateTime d = t.toDate();
+
+              widget.messageBloc.setMessageCount(widget.messages.length);
+              if (index != -1) {
+                return Message(
+                  shouldTriggerChange: changeNotifier.stream,
+                  isMe: false,
+                  d: DateTime.now(),
+                  fullName: fullName ?? "",
+                  message: widget.messages[index].msg ?? "",
+                  avatar: avatar,
+                );
+              } else {
+                return vpad(0);
               }
-            }
-
-            return GestureDetector(
-              onTap: () {
-                changeNotifier.sink.add(false);
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: ScrollablePositionedList.builder(
-                  initialScrollIndex: snapshot.data!.docs.isNotEmpty
-                      ? snapshot.data!.docs.length - 1
-                      : 0,
-                  // shrinkWrap: true,
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    // widget.messageBloc.scroll(snapshot.data!.docs.length - 1);
-                    QueryDocumentSnapshot qs =
-                        snapshot.data!.docs[index < 0 ? 0 : index];
-                    Timestamp t = qs['time'];
-                    DateTime d = t.toDate();
-
-                    widget.messageBloc
-                        .setMessageCount(snapshot.data!.docs.length);
-                    return
-
-                        // IntrinsicHeight(
-                        //   child: Portal(
-                        //     child: PortalTarget(
-                        //       visible: true,
-                        //       anchor: Aligned(
-                        //         follower: Alignment.center,
-                        //         target: Alignment.center,
-                        //       ),
-                        //       portalFollower: Padding(
-                        //         padding: EdgeInsets.only(bottom: 12),
-                        //         child: Container(
-                        //           child: Stack(
-                        //             alignment: Alignment.bottomCenter,
-                        //             children: <Widget>[
-                        //               // Box
-                        //               // if (widget.reactions.isNotEmpty) _backgroudBoxBuilder(),
-                        //               // emojies
-                        //               PrimaryCard(
-                        //                 width: 250,
-                        //                 child: Row(children: [
-                        //                   Row(
-                        //                     children: [
-                        //                       Image.asset('assets/emojies/heart.png',
-                        //                           width: 60),
-                        //                       Image.asset('assets/emojies/care.png',
-                        //                           width: 60),
-                        //                       Image.asset('assets/emojies/lol.png',
-                        //                           width: 60),
-                        //                       Image.asset('assets/emojies/sad.png',
-                        //                           width: 60),
-                        //                     ],
-                        //                   ),
-                        //                 ]),
-                        //               )
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       child:
-
-                        // ),
-                        // ),
-                        // );
-
-                        Message(
-                      shouldTriggerChange: changeNotifier.stream,
-                      isMe: accountId == qs['accountId'],
-                      d: d,
-                      fullName: fullName ?? "",
-                      message: qs['message'],
-                      avatar: avatar,
-                    );
-                  },
-                  itemScrollController: widget.messageBloc.itemScrollController,
-                  itemPositionsListener:
-                      widget.messageBloc.itemPositionsListener,
-                ),
-              ),
-            );
-          }),
+            },
+            itemScrollController: widget.messageBloc.itemScrollController,
+            itemPositionsListener: widget.messageBloc.itemPositionsListener,
+          ),
+        ),
+      ),
     );
   }
 }
