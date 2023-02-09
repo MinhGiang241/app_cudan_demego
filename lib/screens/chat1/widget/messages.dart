@@ -51,56 +51,38 @@ class _MeasagesState extends State<Measages> {
     var accountId = user!.account!.id;
     var avatar = user.account!.avatar;
     var fullName = user.account!.fullName;
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => widget.messageBloc.scroll(widget.messages.length - 1));
     return SafeArea(
       child: GestureDetector(
         onTap: () {
           changeNotifier.sink.add(false);
         },
         child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: ListView(
-              controller: widget.messageBloc.scrollController,
-              children: [
-                ...widget.messages.map(
-                  (e) => Message(
-                    shouldTriggerChange: changeNotifier.stream,
-                    isMe: widget.messageBloc.user!.id == e.u!.id,
-                    d: DateTime.now(),
-                    fullName: fullName ?? "",
-                    message: e.msg ?? "",
-                    avatar: avatar,
-                  ),
-                )
-              ],
-            )
-
-            // ScrollablePositionedList.builder(
-            //   initialScrollIndex:
-            //       widget.messages.isNotEmpty ? widget.messages.length - 1 : 0,
-            //   shrinkWrap: true,
-            //   itemCount: widget.messages.length,
-            //   itemBuilder: (context, index) {
-            //     widget.messageBloc.setMessageCount(widget.messages.length);
-            //     if (index != -1) {
-            //       return Message(
-            //         shouldTriggerChange: changeNotifier.stream,
-            //         isMe: widget.messageBloc.user!.id ==
-            //             widget.messages[index].u!.id,
-            //         d: DateTime.now(),
-            //         fullName: fullName ?? "",
-            //         message: widget.messages[index].msg ?? "",
-            //         avatar: avatar,
-            //       );
-            //     } else {
-            //       return vpad(0);
-            //     }
-            //   },
-            //   itemScrollController: widget.messageBloc.itemScrollController,
-            //   itemPositionsListener: widget.messageBloc.itemPositionsListener,
-            // ),
-            ),
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ScrollablePositionedList.builder(
+            initialScrollIndex:
+                widget.messages.isNotEmpty ? widget.messages.length - 1 : 0,
+            shrinkWrap: true,
+            itemCount: widget.messages.length,
+            itemBuilder: (context, index) {
+              widget.messageBloc.setMessageCount(widget.messages.length);
+              if (index != -1) {
+                return Message(
+                  shouldTriggerChange: changeNotifier.stream,
+                  isMe: widget.messageBloc.user!.id ==
+                      widget.messages[index].u!.id,
+                  d: DateTime.now(),
+                  fullName: fullName ?? "",
+                  message: widget.messages[index].msg ?? "",
+                  avatar: avatar,
+                );
+              } else {
+                return vpad(0);
+              }
+            },
+            itemScrollController: widget.messageBloc.itemScrollController,
+            itemPositionsListener: widget.messageBloc.itemPositionsListener,
+          ),
+        ),
       ),
     );
   }

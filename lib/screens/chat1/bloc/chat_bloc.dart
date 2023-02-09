@@ -26,8 +26,7 @@ class ChatBloc {
       .snapshots();
   final TextEditingController textEditionController = TextEditingController();
 
-  // final ItemScrollController itemScrollController = ItemScrollController();
-  ScrollController scrollController = ScrollController();
+  final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
 
@@ -55,11 +54,14 @@ class ChatBloc {
   }
 
   void setMessage(List<MessageChat> m) {
-    messagesList = [...m];
+    messagesList = [...m.reversed];
   }
 
-  void scroll() {
-    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  void scroll(int index) {
+    itemScrollController.scrollTo(
+        index: index,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOutCubic);
   }
 
   selectEmoji(String emoji) {
