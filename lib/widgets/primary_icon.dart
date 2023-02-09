@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:badges/src/badge.dart';
+import 'package:badges/src/badge.dart' as B;
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -143,7 +143,7 @@ class PrimaryIcon extends StatelessWidget {
                 borderRadius: borderRadius ?? BorderRadius.circular(24),
                 child: Padding(
                     padding: padding ?? const EdgeInsets.all(8),
-                    child: Badge(
+                    child: B.Badge(
                       badgeContent:
                           Text(badge ?? "", style: txtBold(10, Colors.white)),
                       showBadge: badge != null,
@@ -163,7 +163,7 @@ class PrimaryIcon extends StatelessWidget {
             child: InkWell(
                 onTap: onTap,
                 borderRadius: borderRadius ?? BorderRadius.circular(24),
-                child: Badge(
+                child: B.Badge(
                   badgeContent:
                       Text(badge ?? "", style: txtBold(10, Colors.white)),
                   showBadge: badge != null,
@@ -197,7 +197,7 @@ class PrimaryIcon extends StatelessWidget {
               borderRadius: borderRadius ?? BorderRadius.circular(24),
               child: Padding(
                 padding: padding ?? const EdgeInsets.all(8),
-                child: Badge(
+                child: B.Badge(
                   badgeContent:
                       Text(badge ?? "", style: txtBold(10, Colors.white)),
                   showBadge: badge != null,

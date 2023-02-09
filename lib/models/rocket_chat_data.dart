@@ -1,14 +1,39 @@
-import 'package:app_cudan/screens/chat/widget/message.dart';
+// ignore_for_file: non_constant_identifier_names
 
 class RocketChatData {
   String? msg;
   String? id;
+  String? collection;
   ResultData? result;
+  MessageChat? result_chat;
+  Fields? fields;
   RocketChatData.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     id = json['id'];
-    result =
-        json['result'] != null ? ResultData.fromJson(json['result']) : null;
+    collection = json['collection'];
+
+    result = json['result'] != null && json['result']['messages'] != null
+        ? ResultData.fromJson(json['result'])
+        : null;
+    result_chat = json['result'] != null && json['result']['msg'] != null
+        ? MessageChat.fromJson(json['result'])
+        : null;
+    fields = json['fields'] != null ? Fields.fromJson(json['fields']) : null;
+  }
+}
+
+class Fields {
+  String? eventName;
+  List<MessageChat>? args;
+  Fields.fromJson(Map<String, dynamic> json) {
+    eventName = json['eventName'];
+    args = json['args'] != null
+        ? json['args'].isNotEmpty
+            ? json['args']
+                .map<MessageChat>((e) => MessageChat.fromJson(e))
+                .toList()
+            : []
+        : [];
   }
 }
 

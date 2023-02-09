@@ -144,7 +144,6 @@ class ApiService {
 
   Future<Map<String, dynamic>> postApi(
       {dynamic data,
-      required BuildContext context,
       required String path,
       bool useToken = true,
       ErrorHandleFunc? onError,

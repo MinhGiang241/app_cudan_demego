@@ -1,5 +1,5 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //   label: S.of(context).forum,
               // ),
               BottomNavigationBarItem(
-                icon: Badge(
+                icon: B.Badge(
                   badgeContent: Text(messageCount.toString(),
                       style: txtBold(10, Colors.white)),
                   showBadge: messageCount != null,

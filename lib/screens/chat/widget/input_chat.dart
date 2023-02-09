@@ -11,8 +11,8 @@ import '../../../widgets/primary_card.dart';
 import '../bloc/chat_bloc.dart';
 
 class InputChat extends StatelessWidget {
-  const InputChat({super.key, required this.fs, required this.messageBloc});
-  final FirebaseFirestore fs;
+  const InputChat({super.key, required this.messageBloc});
+
   final ChatBloc messageBloc;
 
   @override

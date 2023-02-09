@@ -12,6 +12,7 @@ import 'package:rocket_chat_flutter_connector/web_socket/web_socket_service.dart
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../../models/rocket_chat_data.dart';
 import '../custom/custom_websocket_service.dart';
 import 'websocket_connect.dart';
 
@@ -30,7 +31,7 @@ class ChatBloc {
       ItemPositionsListener.create();
 
   final fs = FirebaseFirestore.instance;
-
+  List<MessageChat> messagesList = [];
   int messageCount = 0;
 
   bool init = true;
@@ -42,6 +43,18 @@ class ChatBloc {
   void setMessageCount(count) {
     messageCount = count;
     init = false;
+  }
+
+  void addMessage(MessageChat m) {
+    messagesList.add(m);
+  }
+
+  addAllMessage(List<MessageChat> a) {
+    messagesList.addAll(a);
+  }
+
+  void setMessage(List<MessageChat> m) {
+    messagesList = [...m.reversed];
   }
 
   void scroll(int index) {
@@ -75,7 +88,7 @@ class ChatBloc {
 
   void dispose() {
     _messageController.close();
-    webSocketChannel!.sink.close();
+    // webSocketChannel!.sink.close();
   }
 
   // Rocket chat

@@ -1,0 +1,40 @@
+{
+  "msg": "changed",
+  "collection": "stream-room-messages",
+  "id": "id",
+  "fields": {
+    "eventName": "GENERAL",
+    "args": [
+      {
+        "_id": "nzd4P3wHFcmFoTJXQ",
+        "rid": "GENERAL",
+        "msg": "ss",
+        "ts": {
+          "$date": 1675922783229
+        },
+        "u": {
+          "_id": "8s8DNw6Mufd3ozMaB",
+          "username": "masflex",
+          "name": "Masflex"
+        },
+        "_updatedAt": {
+          "$date": 1675922783278
+        },
+        "urls": [],
+        "mentions": [],
+        "channels": [],
+        "md": [
+          {
+            "type": "PARAGRAPH",
+            "value": [
+              {
+                "type": "PLAIN_TEXT",
+                "value": "ss"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

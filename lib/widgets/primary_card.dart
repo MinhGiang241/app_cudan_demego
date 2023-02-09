@@ -18,6 +18,7 @@ class PrimaryCard extends StatelessWidget {
     this.onTapCancel,
     this.gradient,
     this.constraints,
+    this.border,
     this.isShadow = true,
   }) : super(key: key);
   final Widget child;
@@ -35,6 +36,7 @@ class PrimaryCard extends StatelessWidget {
   final Gradient? gradient;
   final bool isShadow;
   final BoxConstraints? constraints;
+  final BoxBorder? border;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class PrimaryCard extends StatelessWidget {
                 gradient: gradient,
                 borderRadius: borderRadius ?? BorderRadius.circular(12),
                 color: background ?? Colors.white.withOpacity(1),
-                border: Border.all(color: Colors.white54, width: 0.5),
+                border: border ?? Border.all(color: Colors.white54, width: 0.5),
                 boxShadow: isShadow
                     ? [
                         BoxShadow(

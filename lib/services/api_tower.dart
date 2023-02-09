@@ -530,8 +530,10 @@ class APITower {
       "Owner": idUser,
       "ContainedPart": {"ListContentItemId": idBanTin}
     };
-    final data = await ApiService.shared
-        .postApi(path: 'api/content', data: body, context: context);
+    final data = await ApiService.shared.postApi(
+      path: 'api/content',
+      data: body,
+    );
     // print(data);
     return ResponseLike.fromJson(data);
   }
@@ -560,8 +562,10 @@ class APITower {
         "BanTinId": {"Text": idBanTin}
       }
     };
-    final data = await ApiService.shared
-        .postApi(path: 'api/content', data: body, context: context);
+    final data = await ApiService.shared.postApi(
+      path: 'api/content',
+      data: body,
+    );
     // print(data);
     return ResponseCreateComment.fromJson(data);
   }

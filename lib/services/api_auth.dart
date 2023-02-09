@@ -215,10 +215,10 @@ class APIAuth {
         };
         final body = FormData.fromMap(map);
         final data = await ApiService.shared.postApi(
-            path: ApiConstants.uploadURL,
-            data: body,
-            onSendProgress: onSendProgress,
-            context: context);
+          path: ApiConstants.uploadURL,
+          data: body,
+          onSendProgress: onSendProgress,
+        );
         results.add(ResponseFileUpload.fromJson(data));
       }
     }
@@ -238,10 +238,10 @@ class APIAuth {
     final map = {"files": multipartFiles};
     final body = FormData.fromMap(map);
     final data = await ApiService.shared.postApi(
-        path: ApiConstants.uploadURL,
-        data: body,
-        onSendProgress: onSendProgress,
-        context: context);
+      path: ApiConstants.uploadURL,
+      data: body,
+      onSendProgress: onSendProgress,
+    );
     // print(data);
     return ResponseFileUpload.fromJson(data);
   }
