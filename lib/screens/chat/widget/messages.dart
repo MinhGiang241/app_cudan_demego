@@ -23,15 +23,15 @@ import '../../../widgets/primary_screen.dart';
 import '../bloc/chat_bloc.dart';
 import 'message.dart';
 
-class Measages extends StatefulWidget {
-  Measages({super.key, required this.messageBloc, required this.messages});
+class Messages extends StatefulWidget {
+  Messages({super.key, required this.messageBloc, required this.messages});
   final ChatBloc messageBloc;
   final List<MessageChat> messages;
   @override
-  State<Measages> createState() => _MeasagesState();
+  State<Messages> createState() => _MessagesState();
 }
 
-class _MeasagesState extends State<Measages> {
+class _MessagesState extends State<Messages> {
   final changeNotifier = StreamController.broadcast();
   @override
   void dispose() {

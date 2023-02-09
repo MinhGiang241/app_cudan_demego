@@ -145,7 +145,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Column(
       children: [
         Expanded(
-            child: Measages(
+            child: Messages(
           messageBloc: _messageBloc,
           messages: _messageBloc.messagesList,
         )),
