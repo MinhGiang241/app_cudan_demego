@@ -41,8 +41,8 @@ class _MeasagesState extends State<Measages> {
 
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => widget.messageBloc.scroll(widget.messages.length - 1));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => widget.messageBloc.scroll());
   }
 
   @override
@@ -51,8 +51,8 @@ class _MeasagesState extends State<Measages> {
     var accountId = user!.account!.id;
     var avatar = user.account!.avatar;
     var fullName = user.account!.fullName;
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => widget.messageBloc.scroll(widget.messages.length - 1));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => widget.messageBloc.scroll());
     return SafeArea(
       child: GestureDetector(
         onTap: () {
