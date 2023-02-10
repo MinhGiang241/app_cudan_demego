@@ -24,9 +24,15 @@ import '../bloc/chat_bloc.dart';
 import 'message.dart';
 
 class Messages extends StatefulWidget {
-  Messages({super.key, required this.messageBloc, required this.messages});
+  Messages({
+    super.key,
+    required this.messageBloc,
+    required this.messages,
+    required this.messageMap,
+  });
   final ChatBloc messageBloc;
   final List<MessageChat> messages;
+  final Map<String, MessageChat> messageMap;
   @override
   State<Messages> createState() => _MessagesState();
 }
@@ -63,13 +69,17 @@ class _MessagesState extends State<Messages> {
             child: ListView(
               controller: widget.messageBloc.scrollController,
               children: [
-                ...widget.messages.map(
+                ...widget.messageMap.keys.map(
                   (e) => Message(
+                    messageChat: widget.messageMap[e]!,
+                    chatbloc: widget.messageBloc,
+                    emojies: widget.messageMap[e]!.reactions ?? {},
                     shouldTriggerChange: changeNotifier.stream,
-                    isMe: widget.messageBloc.user!.id == e.u!.id,
+                    isMe: widget.messageBloc.user!.id ==
+                        widget.messageMap[e]!.u!.id,
                     d: DateTime.now(),
                     fullName: fullName ?? "",
-                    message: e.msg ?? "",
+                    message: widget.messageMap[e]!.msg ?? "",
                     avatar: avatar,
                   ),
                 )

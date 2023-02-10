@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_cudan/screens/chat/widget/message.dart';
 import 'package:loggy/loggy.dart';
 import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/models/channel.dart';
@@ -7,6 +8,8 @@ import 'package:rocket_chat_flutter_connector/models/room.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+
+import '../../../models/rocket_chat_data.dart';
 
 class CustomWebSocketService {
   WebSocketChannel connectToWebSocket(String url, {required String authToken}) {
@@ -157,6 +160,32 @@ class CustomWebSocketService {
       "params": [
         {"rid": room.id, "msg": message}
       ]
+    };
+    logInfo('🚀🚀 streamNotifyRoom $msg');
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void updateMessageOnRoom(
+    MessageChat message,
+    WebSocketChannel webSocketChannel,
+  ) {
+    Map msg = {
+      "msg": "method",
+      "method": "updateMessage",
+      "id": "42",
+      "params": [message.toJson()]
+    };
+    logInfo('🚀🚀 streamNotifyRoom $msg');
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void setReaction(
+      WebSocketChannel webSocketChannel, String emoji, String messageId) {
+    Map msg = {
+      "msg": "method",
+      "method": "setReaction",
+      "id": "22",
+      "params": [emoji, messageId]
     };
     logInfo('🚀🚀 streamNotifyRoom $msg');
     webSocketChannel.sink.add(jsonEncode(msg));

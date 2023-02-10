@@ -57,6 +57,8 @@ class _HeaderHomeState extends State<HeaderHome> {
     return Column(
       children: [
         Row(
+          textBaseline: TextBaseline.ideographic,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
           children: [
             hpad(21),
             const Icon(
@@ -74,6 +76,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                   Text(
                     userInfo.info_name ?? '',
                     style: txtLinkMedium(),
+                    overflow: TextOverflow.ellipsis,
                   )
               ],
             ),

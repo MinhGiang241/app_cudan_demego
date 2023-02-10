@@ -33,6 +33,7 @@ class ChatBloc {
 
   final fs = FirebaseFirestore.instance;
   List<MessageChat> messagesList = [];
+  Map<String, MessageChat> messagesMap = {};
   int messageCount = 0;
 
   bool init = true;
@@ -48,6 +49,7 @@ class ChatBloc {
 
   void addMessage(MessageChat m) {
     messagesList.add(m);
+    messagesMap[m.id ?? ''] = m;
   }
 
   addAllMessage(List<MessageChat> a) {
@@ -94,6 +96,17 @@ class ChatBloc {
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   User? user;
+
+  void updateChat(MessageChat message, WebSocketChannel socketChannel) {
+    webSocketService.updateMessageOnRoom(
+      message,
+      socketChannel,
+    );
+  }
+
+  void setReaction(String emoji, String messageId) {
+    webSocketService.setReaction(webSocketChannel!, emoji, messageId);
+  }
 
   void sendMessage() {
     if (textEditionController.text.isNotEmpty) {

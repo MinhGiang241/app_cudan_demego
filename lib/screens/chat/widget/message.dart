@@ -1,5 +1,9 @@
-import 'dart:async';
+// ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:app_cudan/models/rocket_chat_data.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
@@ -13,9 +17,10 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
+import '../bloc/chat_bloc.dart';
 
 class Message extends StatefulWidget {
-  const Message({
+  Message({
     super.key,
     required this.isMe,
     required this.fullName,
@@ -23,14 +28,20 @@ class Message extends StatefulWidget {
     this.avatar,
     required this.d,
     required this.shouldTriggerChange,
+    required this.emojies,
+    required this.chatbloc,
+    required this.messageChat,
   });
   final bool isMe;
 
   final String fullName;
   final String message;
+  final MessageChat messageChat;
   final String? avatar;
   final DateTime d;
   final Stream<dynamic> shouldTriggerChange;
+  Map<String, dynamic> emojies;
+  ChatBloc chatbloc;
 
   @override
   State<Message> createState() => _MessageState();
@@ -66,13 +77,37 @@ class _MessageState extends State<Message> {
     }
   }
 
+  addEmoji(String emoji) {
+    setState(() {
+      showVisible = !showVisible;
+    });
+    var updateReaction = jsonDecode(jsonEncode(widget.emojies));
+
+    // if (updateReaction.containsKey(switchEmojiToServer(emoji))) {
+    //   updateReaction[switchEmojiToServer(emoji)]['usernames']
+    //       .add({"userName": widget.chatbloc.user!.username ?? ''});
+    // } else {
+    //   updateReaction[switchEmojiToServer(emoji)] = {
+    //     "usernames": [
+    //       {"userName": widget.chatbloc.user!.username ?? ''}
+    //     ]
+    //   };
+    // }
+
+    // MessageChat updatedChat = widget.messageChat;
+    // updatedChat.reactions = updateReaction;
+    // updatedChat.msg = 'SSSS';
+    widget.chatbloc
+        .setReaction(switchEmojiToServer(emoji), widget.messageChat.id!);
+  }
+
+  removeEmoji(String emoji) {}
+
   @override
   dispose() {
     super.dispose();
     streamSubscription.cancel();
   }
-
-  Map<String, int> emojies = {};
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +135,7 @@ class _MessageState extends State<Message> {
                         hpad(5),
                         GestureDetector(
                             onTap: () {
-                              setState(() {
-                                showVisible = !showVisible;
-                                emojies.containsKey("❤️")
-                                    ? emojies["❤️"] = emojies["❤️"]! + 1
-                                    : emojies["❤️"] = 1;
-                              });
+                              addEmoji("❤️");
                             },
                             child: const Text(
                               "❤️",
@@ -116,12 +146,7 @@ class _MessageState extends State<Message> {
                             ),
                         GestureDetector(
                             onTap: () {
-                              setState(() {
-                                showVisible = !showVisible;
-                                emojies.containsKey("👍")
-                                    ? emojies["👍"] = emojies["👍"]! + 1
-                                    : emojies["👍"] = 1;
-                              });
+                              addEmoji("👍");
                             },
                             child: const Text(
                               "👍",
@@ -132,12 +157,7 @@ class _MessageState extends State<Message> {
                             ),
                         GestureDetector(
                             onTap: () {
-                              setState(() {
-                                showVisible = !showVisible;
-                                emojies.containsKey("👎")
-                                    ? emojies["👎"] = emojies["👎"]! + 1
-                                    : emojies["👎"] = 1;
-                              });
+                              addEmoji("👎");
                             },
                             child: const Text(
                               "👎",
@@ -148,12 +168,7 @@ class _MessageState extends State<Message> {
                             ),
                         GestureDetector(
                             onTap: () {
-                              setState(() {
-                                showVisible = !showVisible;
-                                emojies.containsKey("😆")
-                                    ? emojies["😆"] = emojies["😆"]! + 1
-                                    : emojies["😆"] = 1;
-                              });
+                              addEmoji("😆");
                             },
                             child: const Text(
                               "😆",
@@ -165,12 +180,7 @@ class _MessageState extends State<Message> {
                         EmojiButton(
                           emojiPickerView:
                               EmojiPickerView(onEmojiSelected: (v) {
-                            setState(() {
-                              showVisible = !showVisible;
-                              emojies.containsKey(v)
-                                  ? emojies[v] = emojies[v]! + 1
-                                  : emojies[v] = 1;
-                            });
+                            addEmoji(v);
                           }),
                           child: const Text(
                             "➕",
@@ -243,24 +253,31 @@ class _MessageState extends State<Message> {
                                 left: !widget.isMe ? null : 0,
                                 child: Wrap(
                                   children: [
-                                    ...emojies.entries.map((e) => PrimaryCard(
-                                        border: Border.all(
-                                            color: grayScaleColor4, width: 0.5),
-                                        padding: const EdgeInsets.all(2),
-                                        background: Colors.white,
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              e.key,
-                                              style:
-                                                  const TextStyle(fontSize: 12),
-                                            ),
-                                            if (e.value > 1)
-                                              Text(e.value.toString(),
-                                                  style: txtBold(
-                                                      10, grayScaleColorBase)),
-                                          ],
-                                        )))
+                                    ...widget.emojies.entries.map((e) {
+                                      print(e.value['usernames'].length);
+                                      return PrimaryCard(
+                                          border: Border.all(
+                                              color: grayScaleColor4,
+                                              width: 0.5),
+                                          padding: const EdgeInsets.all(2),
+                                          background: Colors.white,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                switchEmojiFromServer(e.key),
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              if (e.value['usernames'].length >
+                                                  1)
+                                                Text(
+                                                    e.value["usernames"].length
+                                                        .toString(),
+                                                    style: txtBold(10,
+                                                        grayScaleColorBase)),
+                                            ],
+                                          ));
+                                    })
                                   ],
                                 ),
                               )
@@ -312,5 +329,35 @@ class _MessageState extends State<Message> {
         ],
       ),
     );
+  }
+}
+
+switchEmojiFromServer(value) {
+  switch (value) {
+    case ":thumbsup:":
+      return "👍";
+    case ":heart:":
+      return "❤️";
+    case ":thumbsdown:":
+      return "👎";
+    case ":laughing:":
+      return "😆";
+    default:
+      return "🤍";
+  }
+}
+
+switchEmojiToServer(value) {
+  switch (value) {
+    case "👍":
+      return ":thumbsup:";
+    case "❤️":
+      return ":heart:";
+    case "👎":
+      return ":thumbsdown:";
+    case "😆":
+      return ":laughing:";
+    default:
+      return ":volleyball:";
   }
 }

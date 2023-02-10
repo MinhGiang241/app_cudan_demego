@@ -127,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     var data = RocketChatData.fromJson(json.decode(snapshot.data));
     if (data.msg == "changed" && data.fields != null) {
-      _messageBloc.addAllMessage(data.fields!.args ?? []);
+      _messageBloc.addMessage(data.fields!.args![0]);
     }
     // if (data.msg == "result") {
     //   if (data.result != null &&
@@ -146,6 +146,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Expanded(
             child: Messages(
+          messageMap: _messageBloc.messagesMap,
           messageBloc: _messageBloc,
           messages: _messageBloc.messagesList,
         )),

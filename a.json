@@ -1,0 +1,47 @@
+{
+    "msg": "changed",
+    "collection": "stream-room-messages",
+    "id": "id",
+    "fields": {
+        "eventName": "GENERAL",
+        "args": [
+            {
+                "_id": "k4Yqg5jRghoHSF4NT",
+                "rid": "GENERAL",
+                "msg": "bb",
+                "ts": {
+                    "$date": 1676016682557
+                },
+                "u": {
+                    "_id": "TBu4iCbbPPRtRZzkB",
+                    "username": "minhgiang241",
+                    "name": "giang"
+                },
+                "_updatedAt": {
+                    "$date": 1676016781720
+                },
+                "urls": [],
+                "mentions": [],
+                "channels": [],
+                "md": [
+                    {
+                        "type": "PARAGRAPH",
+                        "value": [
+                            {
+                                "type": "PLAIN_TEXT",
+                                "value": "bb"
+                            }
+                        ]
+                    }
+                ],
+                "reactions": {
+                    ":sob:": {
+                        "usernames": [
+                            "masflex"
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
