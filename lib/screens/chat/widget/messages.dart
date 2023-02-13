@@ -1,25 +1,11 @@
 import 'dart:async';
 
-import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:provider/provider.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../constants/api_constant.dart';
-import '../../../generated/l10n.dart';
-import '../../../models/feed_reaction_model.dart';
 import '../../../models/rocket_chat_data.dart';
-import '../../../utils/utils.dart';
-import '../../../widgets/emoji_reaction.dart';
-import '../../../widgets/primary_card.dart';
-import '../../../widgets/primary_loading.dart';
-import '../../../widgets/primary_screen.dart';
 import '../bloc/chat_bloc.dart';
 import 'message.dart';
 
@@ -63,6 +49,7 @@ class _MessagesState extends State<Messages> {
       child: GestureDetector(
         onTap: () {
           changeNotifier.sink.add(false);
+          FocusScope.of(context).unfocus();
         },
         child: Padding(
             padding: const EdgeInsets.only(top: 8.0),

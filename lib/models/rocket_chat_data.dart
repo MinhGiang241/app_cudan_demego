@@ -128,6 +128,7 @@ class Attachments {
   String? image_preview;
   String? image_url;
   String? image_type;
+  String? description;
   int? image_size;
   String? file;
   ImageDimention? image_dimensions;
@@ -140,6 +141,7 @@ class Attachments {
     image_url = json['image_url'];
     image_type = json['image_type'];
     file = json['file'];
+    description = json['description'];
     image_size = json['image_size'];
     image_dimensions = json['image_dimensions'] != null
         ? ImageDimention.fromJson(json['image_dimensions'])

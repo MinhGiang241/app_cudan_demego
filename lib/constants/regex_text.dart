@@ -22,11 +22,7 @@ class RegexText {
   static bool requiredNumber(String value) =>
       RegExp(r"(.*[0-9].*)").hasMatch(value);
 
-  static bool requiredSpecialChar(String value) =>
-      RegExp(
-        r'''(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%*_#?&\[\]\(\)<>`\'+-={}"|\\/]''',
-      ).hasMatch(value) ||
-      RegExp(
-        r'''["]''',
+  static bool requiredSpecialChar(String value) => RegExp(
+        r'''^.*[!@#\$%^&*(),.?"'+=;_\-/\\:{}|<>]+.*$''',
       ).hasMatch(value);
 }

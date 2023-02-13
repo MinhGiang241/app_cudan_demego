@@ -1,18 +1,16 @@
+// ignore_for_file: body_might_complete_normally_catch_error
+
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_chat_flutter_connector/models/authentication.dart';
-import 'package:rocket_chat_flutter_connector/models/channel.dart';
-import 'package:rocket_chat_flutter_connector/models/room.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:rocket_chat_flutter_connector/services/authentication_service.dart';
-import 'package:rocket_chat_flutter_connector/web_socket/web_socket_service.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../../models/rocket_chat_data.dart';
+import '../../../utils/utils.dart';
 import '../custom/custom_websocket_service.dart';
 import 'websocket_connect.dart';
 
@@ -20,10 +18,6 @@ class ChatBloc {
   final StreamController<String> _messageController =
       StreamController<String>();
   Stream<String> get messages => _messageController.stream;
-  final Stream<QuerySnapshot> messageStream = FirebaseFirestore.instance
-      .collection('Messages')
-      .orderBy('time')
-      .snapshots();
   final TextEditingController textEditionController = TextEditingController();
 
   // final ItemScrollController itemScrollController = ItemScrollController();
@@ -31,7 +25,6 @@ class ChatBloc {
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
 
-  final fs = FirebaseFirestore.instance;
   List<MessageChat> messagesList = [];
   Map<String, MessageChat> messagesMap = {};
   int messageCount = 0;
@@ -96,6 +89,7 @@ class ChatBloc {
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   User? user;
+  String? token;
 
   void updateChat(MessageChat message, WebSocketChannel socketChannel) {
     webSocketService.updateMessageOnRoom(
@@ -119,10 +113,16 @@ class ChatBloc {
     }
   }
 
-  Future<Authentication> getAuthentication() async {
+  Future<Authentication> getAuthentication(BuildContext context) async {
     final AuthenticationService authenticationService =
         AuthenticationService(WebsocketConnect.rocketHttpService);
-    return await authenticationService.login(
-        WebsocketConnect.username, WebsocketConnect.password);
+    var authen = await authenticationService
+        .login(WebsocketConnect.username, WebsocketConnect.password)
+        .catchError((e) {
+      Utils.showErrorMessage(context, e.toString());
+    });
+    token = authen.data?.authToken;
+
+    return authen;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';

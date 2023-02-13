@@ -8,16 +8,21 @@ import 'package:badges/badges.dart' as B;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:open_file_plus/open_file_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
+import '../../../widgets/primary_image_netword.dart';
 import '../bloc/chat_bloc.dart';
+import '../bloc/websocket_connect.dart';
 
 class Message extends StatefulWidget {
   Message({
@@ -48,6 +53,7 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
+  var emojiParser = EmojiParser();
   late Stream shouldTriggerChange;
   bool isShow = false;
   bool showVisible = false;
@@ -81,24 +87,8 @@ class _MessageState extends State<Message> {
     setState(() {
       showVisible = !showVisible;
     });
-    var updateReaction = jsonDecode(jsonEncode(widget.emojies));
-
-    // if (updateReaction.containsKey(switchEmojiToServer(emoji))) {
-    //   updateReaction[switchEmojiToServer(emoji)]['usernames']
-    //       .add({"userName": widget.chatbloc.user!.username ?? ''});
-    // } else {
-    //   updateReaction[switchEmojiToServer(emoji)] = {
-    //     "usernames": [
-    //       {"userName": widget.chatbloc.user!.username ?? ''}
-    //     ]
-    //   };
-    // }
-
-    // MessageChat updatedChat = widget.messageChat;
-    // updatedChat.reactions = updateReaction;
-    // updatedChat.msg = 'SSSS';
     widget.chatbloc
-        .setReaction(switchEmojiToServer(emoji), widget.messageChat.id!);
+        .setReaction(emojiParser.getEmoji(emoji).full, widget.messageChat.id!);
   }
 
   removeEmoji(String emoji) {}
@@ -239,12 +229,164 @@ class _MessageState extends State<Message> {
                                     const EdgeInsets.only(top: 2, bottom: 12),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12, vertical: 12),
-                                child: Text(
-                                  widget.message,
-                                  textAlign: widget.isMe
-                                      ? TextAlign.end
-                                      : TextAlign.start,
-                                  style: txtRegular(14, grayScaleColorBase),
+                                child: Column(
+                                  children: [
+                                    if (widget
+                                        .messageChat.attachments!.isNotEmpty)
+                                      Wrap(
+                                        children: [
+                                          ...widget.messageChat.attachments!
+                                              .map(
+                                            (c) => Column(
+                                              mainAxisAlignment: widget.isMe
+                                                  ? MainAxisAlignment.end
+                                                  : MainAxisAlignment.start,
+                                              children: [
+                                                if (c.image_type == null)
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      final cookieManager =
+                                                          WebviewCookieManager();
+                                                      Map<String, String>
+                                                          hCookies = {
+                                                        "rc_token": widget
+                                                                .chatbloc
+                                                                .token ??
+                                                            "",
+                                                        "rc_uid": widget
+                                                                .chatbloc
+                                                                .user!
+                                                                .id ??
+                                                            ""
+                                                      };
+                                                      String cookies = '';
+                                                      int index = 0;
+                                                      final gotCookies =
+                                                          await cookieManager
+                                                              .getCookies(
+                                                                  "https://youtube.com/");
+                                                      for (var item
+                                                          in gotCookies) {
+                                                        hCookies[
+                                                                'Set-Cookie[$index]'] =
+                                                            item.toString();
+                                                        index++;
+
+                                                        print(item);
+                                                      }
+
+                                                      await launchUrl(
+                                                          Uri.parse(
+                                                              "${WebsocketConnect.serverUrl}${c.title_link}?download"),
+                                                          webViewConfiguration:
+                                                              WebViewConfiguration(
+                                                                  headers: {
+                                                                "Cookie":
+                                                                    "SL_G_WPT_TO=en; rc_uid=8s8DNw6Mufd3ozMaB; rc_token=0GE1c8NOZdbHhOw1u2CdZ0nw-_SAowF-FsIogdmsGlr; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1"
+                                                              }));
+                                                    },
+                                                    child: Text(
+                                                      c.title!,
+                                                      textAlign: widget.isMe
+                                                          ? TextAlign.end
+                                                          : TextAlign.start,
+                                                      style: txtRegular(
+                                                          14, primaryColorBase),
+                                                    ),
+                                                  ),
+                                                if (c.image_type != null &&
+                                                    c.image_type!
+                                                        .contains("image"))
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (context,
+                                                                    animation,
+                                                                    secondaryAnimation) =>
+                                                                PhotoViewer(
+                                                                    link:
+                                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                                    listLink: [
+                                                                      "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                                    ],
+                                                                    initIndex:
+                                                                        0,
+                                                                    heroTag:
+                                                                        "tag"),
+                                                            transitionsBuilder:
+                                                                (context,
+                                                                    animation,
+                                                                    secondaryAnimation,
+                                                                    child) {
+                                                              return FadeTransition(
+                                                                opacity:
+                                                                    animation,
+                                                                child: child,
+                                                              );
+                                                            },
+                                                          ));
+                                                    },
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          const CircularProgressIndicator(),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      httpHeaders: {
+                                                        "Authorization":
+                                                            "Bearer ${widget.chatbloc.token}",
+                                                        "X-User-Id": widget
+                                                                .chatbloc
+                                                                .user!
+                                                                .id ??
+                                                            "",
+                                                        "X-Auth-Token": widget
+                                                                .chatbloc
+                                                                .token ??
+                                                            ""
+                                                      },
+                                                    ),
+                                                  ),
+                                                if (c.description != null)
+                                                  Text(
+                                                    c.description!,
+                                                    textAlign: widget.isMe
+                                                        ? TextAlign.end
+                                                        : TextAlign.start,
+                                                    style: txtRegular(
+                                                        14, grayScaleColorBase),
+                                                  )
+                                              ],
+                                            ),
+
+                                            // InkWell(
+                                            //   onTap: () {},
+                                            //   child: Image.memory(
+                                            //     base64Decode(
+                                            //         c.image_preview ?? ""),
+                                            //     width: dvWidth(context) * 0.4,
+                                            //     fit: BoxFit.contain,
+                                            //   ),
+                                            // ),
+                                          )
+                                        ],
+                                      ),
+                                    if (widget.message.isNotEmpty)
+                                      Text(
+                                        widget.message,
+                                        textAlign: widget.isMe
+                                            ? TextAlign.end
+                                            : TextAlign.start,
+                                        style:
+                                            txtRegular(14, grayScaleColorBase),
+                                      ),
+                                  ],
                                 ),
                               ),
                               Positioned(
@@ -264,7 +406,7 @@ class _MessageState extends State<Message> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                switchEmojiFromServer(e.key),
+                                                emojiParser.get(e.key).code,
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -329,35 +471,5 @@ class _MessageState extends State<Message> {
         ],
       ),
     );
-  }
-}
-
-switchEmojiFromServer(value) {
-  switch (value) {
-    case ":thumbsup:":
-      return "👍";
-    case ":heart:":
-      return "❤️";
-    case ":thumbsdown:":
-      return "👎";
-    case ":laughing:":
-      return "😆";
-    default:
-      return "🤍";
-  }
-}
-
-switchEmojiToServer(value) {
-  switch (value) {
-    case "👍":
-      return ":thumbsup:";
-    case "❤️":
-      return ":heart:";
-    case "👎":
-      return ":thumbsdown:";
-    case "😆":
-      return ":laughing:";
-    default:
-      return ":volleyball:";
   }
 }

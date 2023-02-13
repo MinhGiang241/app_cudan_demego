@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
@@ -50,72 +49,77 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PrimaryScreen(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child:
-              CircleAvatar(radius: 32, child: Image.asset(AppImage.receiption)),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: PrimaryScreen(
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: CircleAvatar(
+                radius: 32, child: Image.asset(AppImage.receiption)),
+          ),
+          // centerTitle: false,
+          title: Text(S.of(context).customer_care),
+          backgroundColor: primaryColor4,
         ),
-        // centerTitle: false,
-        title: Text(S.of(context).customer_care),
-        backgroundColor: primaryColor4,
-      ),
-      body: FutureBuilder(
-        future: _messageBloc.getAuthentication(),
-        builder: (context, AsyncSnapshot<Authentication> snapshot) {
-          // if (snapshot.hasError) {
-          //   return PrimaryErrorWidget(
-          //       code: snapshot.hasError ? "err" : "1",
-          //       message: snapshot.data.toString(),
-          //       onRetry: () async {
-          //         setState(() {});
-          //       });
-          // }
-          if (snapshot.hasData) {
+        body: FutureBuilder(
+          future: _messageBloc.getAuthentication(context),
+          builder: (context, AsyncSnapshot<Authentication> snapshot) {
+            if (snapshot.hasError) {
+              return PrimaryErrorWidget(
+                  code: snapshot.hasError ? "err" : "1",
+                  message: snapshot.data.toString(),
+                  onRetry: () async {
+                    setState(() {});
+                  });
+            }
+            if (snapshot.hasData) {
+              print(snapshot);
+              _messageBloc.user = snapshot.data!.data!.me;
+
+              _messageBloc.webSocketChannel = _messageBloc.webSocketService
+                  .connectToWebSocket(WebsocketConnect.webSocketUrl,
+                      authToken: snapshot.data!.data!.authToken!);
+              print(_messageBloc.webSocketChannel);
+              _messageBloc.webSocketService.streamChannelMessagesSubscribe(
+                  _messageBloc.webSocketChannel!, WebsocketConnect.channel);
+              // _messageBloc.webSocketService.streamChannelMessagesUnsubscribe(
+              //     _messageBloc.webSocketChannel!, WebsocketConnect.channel);
+              // _messageBloc.webSocketService.getLastes50Message(
+              //   _messageBloc.webSocketChannel!,
+              //   WebsocketConnect.room,
+              // );
+
+              return StreamBuilder(
+                stream: _messageBloc.webSocketChannel!.stream,
+                builder: (context, snapshot) {
+                  rocket_notification.Notification? notification =
+                      snapshot.hasData
+                          ? rocket_notification.Notification.fromMap(
+                              jsonDecode(snapshot.data))
+                          : null;
+                  print(snapshot);
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.done:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.waiting:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.active:
+                      return _activeStateRender(snapshot);
+                    default:
+                      return const Center(child: PrimaryLoading());
+                  }
+                },
+              );
+            }
             print(snapshot);
-            _messageBloc.user = snapshot.data!.data!.me;
-
-            _messageBloc.webSocketChannel = _messageBloc.webSocketService
-                .connectToWebSocket(WebsocketConnect.webSocketUrl,
-                    authToken: snapshot.data!.data!.authToken!);
-            print(_messageBloc.webSocketChannel);
-            _messageBloc.webSocketService.streamChannelMessagesSubscribe(
-                _messageBloc.webSocketChannel!, WebsocketConnect.channel);
-            // _messageBloc.webSocketService.streamChannelMessagesUnsubscribe(
-            //     _messageBloc.webSocketChannel!, WebsocketConnect.channel);
-            // _messageBloc.webSocketService.getLastes50Message(
-            //   _messageBloc.webSocketChannel!,
-            //   WebsocketConnect.room,
-            // );
-
-            return StreamBuilder(
-              stream: _messageBloc.webSocketChannel!.stream,
-              builder: (context, snapshot) {
-                rocket_notification.Notification? notification =
-                    snapshot.hasData
-                        ? rocket_notification.Notification.fromMap(
-                            jsonDecode(snapshot.data))
-                        : null;
-                print(snapshot);
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    return const Center(child: PrimaryLoading());
-                  case ConnectionState.done:
-                    return const Center(child: PrimaryLoading());
-                  case ConnectionState.waiting:
-                    return const Center(child: PrimaryLoading());
-                  case ConnectionState.active:
-                    return _activeStateRender(snapshot);
-                  default:
-                    return const Center(child: PrimaryLoading());
-                }
-              },
-            );
-          }
-          print(snapshot);
-          return const Center(child: PrimaryLoading());
-        },
+            return const Center(child: PrimaryLoading());
+          },
+        ),
       ),
     );
   }
@@ -129,18 +133,6 @@ class _ChatScreenState extends State<ChatScreen> {
     if (data.msg == "changed" && data.fields != null) {
       _messageBloc.addMessage(data.fields!.args![0]);
     }
-    // if (data.msg == "result") {
-    //   if (data.result != null &&
-    //       data.result!.messages != null &&
-    //       data.result!.messages!.isNotEmpty) {
-    //     _messageBloc.setMessage(data.result!.messages!);
-    //   }
-    //   if (data.result_chat != null &&
-    //       data.result_chat != null &&
-    //       data.result_chat!.msg!.isNotEmpty) {
-    //     _messageBloc.addMessage(data.result_chat!);
-    //   }
-    // }
 
     return Column(
       children: [
