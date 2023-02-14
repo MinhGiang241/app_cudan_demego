@@ -148,7 +148,8 @@ class ApiService {
       bool useToken = true,
       ErrorHandleFunc? onError,
       bool remember = false,
-      OnSendProgress? onSendProgress}) async {
+      OnSendProgress? onSendProgress,
+      Options? op}) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
@@ -164,21 +165,18 @@ class ApiService {
             remember,
           );
           log(client.credentials.accessToken);
-          options = Options(
-            headers: {
-              'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
-            },
-          );
+          if (op == null) {
+            options = Options(
+              headers: {
+                'Authorization': "Bearer ${client.credentials.accessToken}",
+                "Accept": "application/json"
+              },
+            );
+          }
         } else {
           //await client.refreshCredentials();
           log(client.credentials.accessToken);
-          options = Options(
-            headers: {
-              'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
-            },
-          );
+          options = op;
         }
       }
     }

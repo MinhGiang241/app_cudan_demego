@@ -1,6 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
 import 'package:app_cudan/screens/chat/widget/message.dart';
+import 'package:app_cudan/services/api_service.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:loggy/loggy.dart';
 import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/models/channel.dart';
@@ -243,5 +248,42 @@ class CustomWebSocketService {
       ]
     };
     webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void sendUploadFileOnRoom(
+    WebSocketChannel webSocketChannel,
+    Room room,
+    File file,
+    String? desc,
+    token,
+    userId,
+  ) async {
+    var listImageExt = ["jpg", "jpeg", 'png'];
+    var ext = file.path.split('.').last;
+    var contentType = MediaType("file", ext);
+    if (listImageExt.contains(ext)) {
+      contentType = MediaType("image", ext);
+    }
+    final formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(file.path, contentType: contentType),
+      'description': desc
+    });
+
+    var options = Options(
+      headers: {
+        "X-Auth-Token": token,
+        "X-User-Id": userId,
+      },
+    );
+
+    await ApiService.shared
+        .postApi(
+      path: "${WebsocketConnect.serverUrl}/api/v1/rooms.upload/${room.id}",
+      data: formData,
+      op: options,
+    )
+        .then((v) {
+      print(v);
+    });
   }
 }

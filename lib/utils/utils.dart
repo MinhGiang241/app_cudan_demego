@@ -259,7 +259,7 @@ class Utils {
       Permission.storage,
     ]);
     if (p) {
-      List<XFile?>? value = await _filePicker(false, false).catchError((e) {
+      List<XFile?>? value = await filePicker(false, false).catchError((e) {
         showErrorMessage(context, e);
         return null;
       });
@@ -286,7 +286,7 @@ class Utils {
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.camera, color: grayScaleColor2),
                   onTap: () async {
-                    await _imagePicker(isMulti, ImageSource.camera)
+                    await imagePicker(isMulti, ImageSource.camera)
                         .then((value) {
                       if (value != null) {
                         pop(context, value);
@@ -298,8 +298,7 @@ class Utils {
                 icon: const PrimaryIcon(
                     icons: PrimaryIcons.image, color: grayScaleColor2),
                 onTap: () async {
-                  await _imagePicker(isMulti, ImageSource.gallery)
-                      .then((value) {
+                  await imagePicker(isMulti, ImageSource.gallery).then((value) {
                     if (value != null) {
                       pop(context, value);
                     }
@@ -314,7 +313,7 @@ class Utils {
                   icon: const PrimaryIcon(
                       icons: PrimaryIcons.folder_open, color: grayScaleColor2),
                   onTap: () async {
-                    await _filePicker(false, true).then((value) {
+                    await filePicker(false, true).then((value) {
                       if (value != null) {
                         pop(context, value);
                       }
@@ -331,8 +330,7 @@ class Utils {
     }
   }
 
-  static Future<List<XFile?>?> _filePicker(
-      bool isMultiple, bool isImage) async {
+  static Future<List<XFile?>?> filePicker(bool isMultiple, bool isImage) async {
     var allows = [
       'jpg',
       'jpeg',
@@ -389,7 +387,7 @@ class Utils {
     }
   }
 
-  static Future<List<XFile>?> _imagePicker(
+  static Future<List<XFile>?> imagePicker(
       bool isMulti, ImageSource source) async {
     final picker = ImagePicker();
     var allows = [

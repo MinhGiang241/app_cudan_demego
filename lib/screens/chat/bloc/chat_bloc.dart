@@ -1,6 +1,7 @@
 // ignore_for_file: body_might_complete_normally_catch_error
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:rocket_chat_flutter_connector/models/authentication.dart';
@@ -124,5 +125,18 @@ class ChatBloc {
     token = authen.data?.authToken;
 
     return authen;
+  }
+
+  uploadFileOnRoom(
+    File file,
+  ) {
+    webSocketService.sendUploadFileOnRoom(
+        webSocketChannel!,
+        WebsocketConnect.room,
+        file,
+        textEditionController.text.trim(),
+        token,
+        user!.id);
+    textEditionController.clear();
   }
 }

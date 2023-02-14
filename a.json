@@ -1,65 +1,38 @@
 {
-    "msg": "changed",
-    "collection": "stream-room-messages",
-    "id": "id",
-    "fields": {
-        "eventName": "GENERAL",
-        "args": [
+    "message": {
+        "_id": "3QnrMWoLaPS5iArRt",
+        "rid": "GENERAL",
+        "ts": "2023-02-14T08:59:40.035Z",
+        "file": {
+            "_id": "Zt6tWeEtsBXdWPqiQ",
+            "name": "anh-dep-23.jpg",
+            "type": "file/anh-dep-23.jpg"
+        },
+        "files": [
             {
-                "_id": "QmwcB8az7A8irSkyx",
-                "rid": "GENERAL",
-                "ts": {
-                    "$date": 1676256343606
-                },
-                "file": {
-                    "_id": "npC53fLeJMqiDYGGv",
-                    "name": "image_picker1831552531256829919.jpg",
-                    "type": "image/jpeg"
-                },
-                "files": [
-                    {
-                        "_id": "npC53fLeJMqiDYGGv",
-                        "name": "image_picker1831552531256829919.jpg",
-                        "type": "image/jpeg"
-                    },
-                    {
-                        "_id": "hCXXrry8PPn8aJ3tx",
-                        "name": "image_picker1831552531256829919.jpg",
-                        "type": "image/jpeg"
-                    }
-                ],
-                "attachments": [
-                    {
-                        "ts": "1970-01-01T00:00:00.000Z",
-                        "title": "image_picker1831552531256829919.jpg",
-                        "title_link": "/file-upload/npC53fLeJMqiDYGGv/image_picker1831552531256829919.jpg",
-                        "title_link_download": true,
-                        "image_dimensions": {
-                            "width": 219,
-                            "height": 360
-                        },
-                        "image_preview": "/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgABMDASIAAhEBAxEB/8QAGQAAAwADAAAAAAAAAAAAAAAAAAEGBAUH/8QAJRAAAgICAQMDBQAAAAAAAAAAAQIDBAAFERIhMQYiURQjQWGR/8QAFwEAAwEAAAAAAAAAAAAAAAAAAwQFAv/EAB8RAAICAgEFAAAAAAAAAAAAAAABAgMREiEEEzFRgf/aAAwDAQACEQMRAD8A5xrq2xrRlWiMKIeWPPnKbbWdfttBVgEbnZD28jKT1XT1OqRa1ZvqvZ92Vj3B/WQ8u4p690loDqYeOsfnJlvU2RlhfSa3hkha0txLDrIwVge4OGbC9fS1blnmaQyOeTx4wxtTh7DbsVGe1t2cxyyM/wDe2Ze518FRo0msFz0c+OO+S/p/ZSU1cRHpcjucNxsZ5QrTkNx4OKOtuTjk1pzgctmNZGCycAH4wydksM0jH5OGMKnjyE7aP//Z",
-                        "image_url": "/file-upload/hCXXrry8PPn8aJ3tx/image_picker1831552531256829919.jpg",
-                        "image_type": "image/jpeg",
-                        "image_size": 186412,
-                        "type": "file",
-                        "description": "uuuu"
-                    }
-                ],
-                "msg": "",
-                "groupable": false,
-                "u": {
-                    "_id": "8s8DNw6Mufd3ozMaB",
-                    "username": "masflex",
-                    "name": "Masflex"
-                },
-                "_updatedAt": {
-                    "$date": 1676256343650
-                },
-                "urls": [],
-                "mentions": [],
-                "channels": []
+                "_id": "Zt6tWeEtsBXdWPqiQ",
+                "name": "anh-dep-23.jpg",
+                "type": "file/anh-dep-23.jpg"
             }
-        ]
-    }
+        ],
+        "attachments": [
+            {
+                "ts": "1970-01-01T00:00:00.000Z",
+                "title": "anh-dep-23.jpg",
+                "title_link": "/file-upload/Zt6tWeEtsBXdWPqiQ/anh-dep-23.jpg",
+                "title_link_download": true,
+                "type": "file",
+                "description": ""
+            }
+        ],
+        "msg": "",
+        "u": {
+            "_id": "TBu4iCbbPPRtRZzkB",
+            "username": "minhgiang241",
+            "name": "giang"
+        },
+        "_updatedAt": "2023-02-14T08:59:40.085Z",
+        "urls": []
+    },
+    "success": true
 }

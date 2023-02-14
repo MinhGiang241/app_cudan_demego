@@ -76,6 +76,7 @@ dependencies:
   flutter_emoji: ^2.4.0
   flutter_link_previewer: ^3.2.0
   webview_cookie_manager: ^2.0.6
+  http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_test:

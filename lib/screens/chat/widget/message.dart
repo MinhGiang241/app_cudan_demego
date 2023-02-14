@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import 'package:app_cudan/models/rocket_chat_data.dart';
 import 'package:badges/badges.dart' as B;
@@ -259,31 +260,73 @@ class _MessageState extends State<Message> {
                                                                 .id ??
                                                             ""
                                                       };
-                                                      String cookies = '';
-                                                      int index = 0;
-                                                      final gotCookies =
+                                                      // String cookies = '';
+                                                      // int index = 0;
+                                                      // final gotCookies =
+                                                      //     await cookieManager
+                                                      //         .getCookies(
+                                                      //             WebsocketConnect
+                                                      //                 .serverUrl);
+                                                      // for (var item
+                                                      //     in gotCookies) {
+                                                      //   print(item);
+                                                      // }
+                                                      await cookieManager
+                                                          .setCookies([
+                                                        Cookie(
+                                                            "rc_token",
+                                                            widget.chatbloc
+                                                                    .token ??
+                                                                ""),
+                                                        Cookie(
+                                                            "rc_uid",
+                                                            widget.chatbloc
+                                                                    .user!.id ??
+                                                                ""),
+                                                      ],
+                                                              origin:
+                                                                  WebsocketConnect
+                                                                      .serverUrl);
+
+                                                      // OpenFile.open(
+                                                      //     "${WebsocketConnect.serverUrl}${c.title_link}");
+
+                                                      var cookie =
                                                           await cookieManager
                                                               .getCookies(
-                                                                  "https://youtube.com/");
-                                                      for (var item
-                                                          in gotCookies) {
-                                                        hCookies[
-                                                                'Set-Cookie[$index]'] =
-                                                            item.toString();
-                                                        index++;
+                                                                  WebsocketConnect
+                                                                      .serverUrl);
+                                                      print(cookie);
 
-                                                        print(item);
-                                                      }
+                                                      //                                                     String _generateCookieHeader() {
+                                                      //   String cookie1 = "";
+
+                                                      //   for (var key in cookie) {
+                                                      //     if (cookie.length > 0)
+                                                      //       cookie += ";";
+                                                      //     cookie += key + "=" + cookies[key];
+                                                      //   }
+
+                                                      //   return cookie1;
+                                                      // }
 
                                                       await launchUrl(
-                                                          Uri.parse(
-                                                              "${WebsocketConnect.serverUrl}${c.title_link}?download"),
-                                                          webViewConfiguration:
-                                                              WebViewConfiguration(
-                                                                  headers: {
-                                                                "Cookie":
-                                                                    "SL_G_WPT_TO=en; rc_uid=8s8DNw6Mufd3ozMaB; rc_token=0GE1c8NOZdbHhOw1u2CdZ0nw-_SAowF-FsIogdmsGlr; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1"
-                                                              }));
+                                                        Uri.parse(
+                                                            "${WebsocketConnect.serverUrl}${c.title_link}?download"),
+                                                        mode: LaunchMode
+                                                            .platformDefault,
+                                                        webViewConfiguration:
+                                                            WebViewConfiguration(
+                                                          headers: {
+                                                            "Host":
+                                                                "chat.masflex.vn",
+                                                            'Cookie':
+                                                                "rc_token=0GE1c8NOZdbHhOw1u2CdZ0nw-_SAowF-FsIogdmsGlr; rc_uid=8s8DNw6Mufd3ozMaB"
+                                                            // 'Cookie':
+                                                            //     'SL_wptGlobTipTmp=1 ;SL_GWPT_Show_Hide_tmp=1 ;SL_G_WPT_TO=en ;rc_token=${widget.chatbloc.token ?? ""} ; rc_uid=${widget.chatbloc.user!.id ?? ""}'
+                                                          },
+                                                        ),
+                                                      );
                                                     },
                                                     child: Text(
                                                       c.title!,
@@ -298,35 +341,40 @@ class _MessageState extends State<Message> {
                                                     c.image_type!
                                                         .contains("image"))
                                                   InkWell(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                            pageBuilder: (context,
-                                                                    animation,
-                                                                    secondaryAnimation) =>
-                                                                PhotoViewer(
-                                                                    link:
-                                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
-                                                                    listLink: [
-                                                                      "${WebsocketConnect.serverUrl}${c.image_url}"
-                                                                    ],
-                                                                    initIndex:
-                                                                        0,
-                                                                    heroTag:
-                                                                        "tag"),
-                                                            transitionsBuilder:
-                                                                (context,
-                                                                    animation,
-                                                                    secondaryAnimation,
-                                                                    child) {
-                                                              return FadeTransition(
-                                                                opacity:
-                                                                    animation,
-                                                                child: child,
-                                                              );
-                                                            },
-                                                          ));
+                                                    onTap: () async {
+                                                      // await OpenFile.open(
+                                                      //     "${WebsocketConnect.serverUrl}${c.image_url}");
+                                                      launchUrl(Uri.parse(
+                                                          "${WebsocketConnect.serverUrl}${c.image_url}"));
+
+                                                      // Navigator.push(
+                                                      //     context,
+                                                      //     PageRouteBuilder(
+                                                      //       pageBuilder: (context,
+                                                      //               animation,
+                                                      //               secondaryAnimation) =>
+                                                      //           PhotoViewer(
+                                                      //               link:
+                                                      //                   "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                      //               listLink: [
+                                                      //                 "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                      //               ],
+                                                      //               initIndex:
+                                                      //                   0,
+                                                      //               heroTag:
+                                                      //                   "tag"),
+                                                      //       transitionsBuilder:
+                                                      //           (context,
+                                                      //               animation,
+                                                      //               secondaryAnimation,
+                                                      //               child) {
+                                                      //         return FadeTransition(
+                                                      //           opacity:
+                                                      //               animation,
+                                                      //           child: child,
+                                                      //         );
+                                                      //       },
+                                                      //     ));
                                                     },
                                                     child: CachedNetworkImage(
                                                       imageUrl:
@@ -353,7 +401,8 @@ class _MessageState extends State<Message> {
                                                       },
                                                     ),
                                                   ),
-                                                if (c.description != null)
+                                                if (c.description != null &&
+                                                    c.description!.isNotEmpty)
                                                   Text(
                                                     c.description!,
                                                     textAlign: widget.isMe
