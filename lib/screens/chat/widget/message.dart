@@ -2,6 +2,11 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
+import 'dart:ui';
+import 'package:dio/dio.dart';
+import 'package:flowder/flowder.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:app_cudan/models/rocket_chat_data.dart';
@@ -13,8 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:open_file_plus/open_file_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
@@ -24,6 +30,8 @@ import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
 import '../bloc/chat_bloc.dart';
 import '../bloc/websocket_connect.dart';
+
+var dio = Dio();
 
 class Message extends StatefulWidget {
   Message({
@@ -60,6 +68,82 @@ class _MessageState extends State<Message> {
   bool showVisible = false;
   late Offset _tapPosition;
   late StreamSubscription streamSubscription;
+
+  downloadFile(String url, Map<String, String> headers) async {
+    var status = await Permission.storage.request();
+    if (status.isGranted) {
+      final baseStorage = await getExternalStorageDirectory();
+      var taskId = await FlutterDownloader.enqueue(
+        url: url,
+        headers: headers, // optional: header send with url (auth token etc)
+        savedDir: baseStorage!.path,
+        showNotification:
+            true, // show download progress in status bar (for Android)
+        saveInPublicStorage: true,
+        openFileFromNotification:
+            true, // click on notification to open downloaded file (for Android)
+      );
+      // await FlutterDownloader.open(taskId: taskId!);
+    }
+  }
+
+  Future download2(Dio dio, String url, String savePath) async {
+    try {
+      Response response = await dio.get(
+        url,
+        onReceiveProgress: showDownloadProgress,
+        //Received data with List<int>
+        options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 500;
+            },
+            headers: {
+              "Connection": "keep-alive",
+              "Accept-Encoding": "gzip, deflate, br",
+              'Accept':
+                  'text/html,application/xhtml+xml,application/xml,file/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange,file/pdf;',
+              'Host': 'chat.masflex.vn',
+              'Cookie':
+                  "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+            }),
+      );
+      print(response.headers);
+      File file = File(savePath);
+      var raf = file.openSync(mode: FileMode.write);
+      // response.data is List<int> type
+      raf.writeFromSync(response.data);
+      await raf.close();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void showDownloadProgress(received, total) {
+    if (total != -1) {
+      print((received / total * 100).toStringAsFixed(0) + "%");
+    }
+  }
+
+  Future download3(url, String path) async {
+    final downloaderUtils = DownloaderUtils(
+      progressCallback: (current, total) {
+        final progress = (current / total) * 100;
+        print('Downloading: $progress');
+      },
+      file: File(path),
+      progress: ProgressImplementation(),
+      onDone: () => print('Download done'),
+      deleteOnCancel: true,
+    );
+
+    final core = await Flowder.download(url, downloaderUtils);
+    await core.download(url, downloaderUtils);
+  }
+
+  ReceivePort _port = ReceivePort();
+
   @override
   initState() {
     super.initState();
@@ -68,6 +152,35 @@ class _MessageState extends State<Message> {
         showVisible = false;
       });
     });
+    IsolateNameServer.registerPortWithName(
+        _port.sendPort, 'downloader_send_port');
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+    streamSubscription.cancel();
+    super.dispose();
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+      String id, DownloadTaskStatus status, int progress) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
   }
 
   @override
@@ -93,12 +206,6 @@ class _MessageState extends State<Message> {
   }
 
   removeEmoji(String emoji) {}
-
-  @override
-  dispose() {
-    super.dispose();
-    streamSubscription.cancel();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,87 +353,59 @@ class _MessageState extends State<Message> {
                                                 if (c.image_type == null)
                                                   InkWell(
                                                     onTap: () async {
-                                                      final cookieManager =
-                                                          WebviewCookieManager();
-                                                      Map<String, String>
-                                                          hCookies = {
-                                                        "rc_token": widget
-                                                                .chatbloc
-                                                                .token ??
-                                                            "",
-                                                        "rc_uid": widget
-                                                                .chatbloc
-                                                                .user!
-                                                                .id ??
-                                                            ""
-                                                      };
-                                                      // String cookies = '';
-                                                      // int index = 0;
-                                                      // final gotCookies =
-                                                      //     await cookieManager
-                                                      //         .getCookies(
-                                                      //             WebsocketConnect
-                                                      //                 .serverUrl);
-                                                      // for (var item
-                                                      //     in gotCookies) {
-                                                      //   print(item);
-                                                      // }
-                                                      await cookieManager
-                                                          .setCookies([
-                                                        Cookie(
-                                                            "rc_token",
-                                                            widget.chatbloc
-                                                                    .token ??
-                                                                ""),
-                                                        Cookie(
-                                                            "rc_uid",
-                                                            widget.chatbloc
-                                                                    .user!.id ??
-                                                                ""),
-                                                      ],
-                                                              origin:
-                                                                  WebsocketConnect
-                                                                      .serverUrl);
+                                                      await downloadFile(
+                                                          "${WebsocketConnect.serverUrl}${c.title_link}?download",
+                                                          {
+                                                            // "Accept-Encoding":
+                                                            //     "gzip, deflate, br",
 
-                                                      // OpenFile.open(
-                                                      //     "${WebsocketConnect.serverUrl}${c.title_link}");
-
-                                                      var cookie =
-                                                          await cookieManager
-                                                              .getCookies(
-                                                                  WebsocketConnect
-                                                                      .serverUrl);
-                                                      print(cookie);
-
-                                                      //                                                     String _generateCookieHeader() {
-                                                      //   String cookie1 = "";
-
-                                                      //   for (var key in cookie) {
-                                                      //     if (cookie.length > 0)
-                                                      //       cookie += ";";
-                                                      //     cookie += key + "=" + cookies[key];
-                                                      //   }
-
-                                                      //   return cookie1;
-                                                      // }
-
-                                                      await launchUrl(
-                                                        Uri.parse(
-                                                            "${WebsocketConnect.serverUrl}${c.title_link}?download"),
-                                                        mode: LaunchMode
-                                                            .platformDefault,
-                                                        webViewConfiguration:
-                                                            WebViewConfiguration(
-                                                          headers: {
-                                                            "Host":
-                                                                "chat.masflex.vn",
+                                                            'Accept':
+                                                                'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                            'Host':
+                                                                'chat.masflex.vn',
                                                             'Cookie':
-                                                                "rc_token=0GE1c8NOZdbHhOw1u2CdZ0nw-_SAowF-FsIogdmsGlr; rc_uid=8s8DNw6Mufd3ozMaB"
-                                                            // 'Cookie':
-                                                            //     'SL_wptGlobTipTmp=1 ;SL_GWPT_Show_Hide_tmp=1 ;SL_G_WPT_TO=en ;rc_token=${widget.chatbloc.token ?? ""} ; rc_uid=${widget.chatbloc.user!.id ?? ""}'
-                                                          },
-                                                        ),
-                                                      );
+                                                                "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
+                                                            // "sec-ch-ua":
+                                                            //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
+                                                            // "sec-ch-ua-mobile":
+                                                            //     "?0",
+                                                            // "sec-ch-ua-platform":
+                                                            //     '"Windows"',
+                                                            // "Sec-Fetch-Dest":
+                                                            //     "document",
+                                                            // "Sec-Fetch-Mode":
+                                                            //     "navigate",
+                                                            // "Sec-Fetch-Site":
+                                                            //     "none",
+                                                            // "Sec-Fetch-User":
+                                                            //     "?1",
+                                                            // "Upgrade-Insecure-Requests":
+                                                            //     "1",
+                                                            // "User-Agent":
+                                                            //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+                                                          });
+
+                                                      // await launchUrl(
+                                                      //   Uri.parse(
+                                                      //       "${WebsocketConnect.serverUrl}${c.title_link}?download"),
+                                                      //   mode: LaunchMode
+                                                      //       .platformDefault,
+                                                      //   webViewConfiguration:
+                                                      //       WebViewConfiguration(
+                                                      //     headers: {
+                                                      //       "Connection":
+                                                      //           "keep-alive",
+                                                      //       "Accept-Encoding":
+                                                      //           "gzip, deflate, br",
+                                                      //       'Accept':
+                                                      //           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                      //       'Host':
+                                                      //           'chat.masflex.vn',
+                                                      //       'Cookie':
+                                                      //           "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+                                                      //     },
+                                                      //   ),
+                                                      // );
                                                     },
                                                     child: Text(
                                                       c.title!,
@@ -342,39 +421,34 @@ class _MessageState extends State<Message> {
                                                         .contains("image"))
                                                   InkWell(
                                                     onTap: () async {
-                                                      // await OpenFile.open(
-                                                      //     "${WebsocketConnect.serverUrl}${c.image_url}");
-                                                      launchUrl(Uri.parse(
-                                                          "${WebsocketConnect.serverUrl}${c.image_url}"));
-
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     PageRouteBuilder(
-                                                      //       pageBuilder: (context,
-                                                      //               animation,
-                                                      //               secondaryAnimation) =>
-                                                      //           PhotoViewer(
-                                                      //               link:
-                                                      //                   "${WebsocketConnect.serverUrl}${c.image_url}",
-                                                      //               listLink: [
-                                                      //                 "${WebsocketConnect.serverUrl}${c.image_url}"
-                                                      //               ],
-                                                      //               initIndex:
-                                                      //                   0,
-                                                      //               heroTag:
-                                                      //                   "tag"),
-                                                      //       transitionsBuilder:
-                                                      //           (context,
-                                                      //               animation,
-                                                      //               secondaryAnimation,
-                                                      //               child) {
-                                                      //         return FadeTransition(
-                                                      //           opacity:
-                                                      //               animation,
-                                                      //           child: child,
-                                                      //         );
-                                                      //       },
-                                                      //     ));
+                                                      Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (context,
+                                                                    animation,
+                                                                    secondaryAnimation) =>
+                                                                PhotoViewer(
+                                                                    link:
+                                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                                    listLink: [
+                                                                      "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                                    ],
+                                                                    initIndex:
+                                                                        0,
+                                                                    heroTag:
+                                                                        "tag"),
+                                                            transitionsBuilder:
+                                                                (context,
+                                                                    animation,
+                                                                    secondaryAnimation,
+                                                                    child) {
+                                                              return FadeTransition(
+                                                                opacity:
+                                                                    animation,
+                                                                child: child,
+                                                              );
+                                                            },
+                                                          ));
                                                     },
                                                     child: CachedNetworkImage(
                                                       imageUrl:
