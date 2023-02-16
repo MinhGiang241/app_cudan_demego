@@ -2,17 +2,14 @@
 
 import 'dart:async';
 
-import 'package:app_cudan/screens/account/change_pass/change_pass_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/account.dart';
-import '../../../models/response_apartment.dart';
 import '../../../models/resident_info.dart';
 import '../../../models/response_resident_own.dart';
-import '../../../models/response_user.dart';
 import '../../../services/api_auth.dart';
 import '../../../services/api_service.dart';
 import '../../../services/api_tower.dart';
@@ -21,11 +18,9 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dialog.dart';
 import '../../home/home_screen.dart';
-import '../apartment_selection_screen.dart';
 import '../fogot_pass/reset_pass_screen.dart';
 import '../project_selection_screen.dart';
 import '../sign_in_screen.dart';
-import '../verify_otp_screen.dart';
 import 'resident_info_prv.dart';
 
 enum AuthStatus { unknown, auth, unauthen, authRes }
@@ -35,20 +30,13 @@ class AuthPrv extends ChangeNotifier {
 
   Account? account;
 
-  ResponseUser? userInfo;
-
-  ResponseApartment? apartments;
-
-  FloorPlan? selectedApartment;
-
   bool isLoading = false;
 
   bool remember = true;
 
   clearData() {
     account = null;
-    apartments = null;
-    selectedApartment = null;
+
     notifyListeners();
   }
 
@@ -296,26 +284,6 @@ class AuthPrv extends ChangeNotifier {
     }
   }
 
-  Future<void> onSelectApartment(
-      BuildContext context, FloorPlan floorPlan) async {
-    selectedApartment = floorPlan;
-    authStatus = AuthStatus.auth;
-    notifyListeners();
-
-    await PrfData.shared.setFloorPlan(floorPlan).then((value) {
-      Navigator.popUntil(context, (route) => route.isFirst);
-    });
-  }
-
-  Future<void> onChangeApartment(
-      BuildContext context, FloorPlan floorPlan) async {
-    selectedApartment = floorPlan;
-    notifyListeners();
-    await PrfData.shared.setFloorPlan(floorPlan).then((value) {
-      Utils.pop(context);
-    });
-  }
-
   Future<void> onChangePassEvent() async {}
 
   Future<void> onResetPassEvent() async {}
@@ -344,9 +312,7 @@ class AuthPrv extends ChangeNotifier {
                         authStatus = AuthStatus.unauthen;
                         context.read<ResidentInfoPrv>().clearData();
 
-                        context.read<AuthPrv>().userInfo = null;
                         context.read<AuthPrv>().account = null;
-                        context.read<AuthPrv>().apartments = null;
                         context.read<AuthPrv>().clearData();
                         notifyListeners();
                         var acc = await PrfData.shared.getSignInStore();
@@ -383,8 +349,6 @@ class AuthPrv extends ChangeNotifier {
         )).then((value) async {
       if (value != null) {
         if ((value as bool)) {
-          userInfo = null;
-          selectedApartment = null;
           await APIAuth.signOut(context: context).then((value) async {
             authStatus = AuthStatus.unauthen;
             await PrfData.shared.deleteApartment();

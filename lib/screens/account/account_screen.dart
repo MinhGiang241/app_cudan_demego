@@ -1,4 +1,3 @@
-import 'package:app_cudan/screens/account/plan_info/plan_info_screen.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -55,10 +54,7 @@ class AccountScreen extends StatelessWidget {
                           Text(userInfo?.userName ?? "Username",
                               style: txtLinkLarge()),
                           const Spacer(),
-                          Text(
-                              context.read<AuthPrv>().selectedApartment?.name ??
-                                  "",
-                              style: txtBodySmallRegular())
+                          Text("", style: txtBodySmallRegular())
                         ]))
                   ]))),
           vpad(24),

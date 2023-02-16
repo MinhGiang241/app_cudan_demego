@@ -164,22 +164,34 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 content: e.content,
                                 contentStyle: txtBold(13, grayScaleColorBase),
                               ),
-                            if (e.vat != null)
-                              InfoContentView(
-                                title: S.of(context).vat,
-                                content: e.vat != null ? "${e.vat} %" : "0 %",
-                                contentStyle: txtBold(13, grayScaleColorBase),
-                              ),
-                            if (e.discount_percent != null)
-                              InfoContentView(
-                                title: S.of(context).discount,
-                                content: e.discount_type == "Value"
-                                    ? formatCurrency
-                                        .format(e.discount_percent)
-                                        .replaceAll("₫", "VND")
-                                    : "${e.discount_percent} %",
-                                contentStyle: txtBold(13, grayScaleColorBase),
-                              ),
+
+                            InfoContentView(
+                              title: S.of(context).total_bill,
+                              content: e.amount_due != null
+                                  ? formatCurrency
+                                      .format(e.amount_due)
+                                      .replaceAll("₫", "VND")
+                                  : "0 VND",
+                              contentStyle: txtBold(13, grayScaleColorBase),
+                            ),
+                            // if (e.vat != null)
+                            InfoContentView(
+                              title: S.of(context).vat,
+                              content: e.vat != null ? "${e.vat} %" : "0 %",
+                              contentStyle: txtBold(13, grayScaleColorBase),
+                            ),
+                            // if (e.discount_percent != null)
+                            InfoContentView(
+                              title: S.of(context).discount,
+                              content: e.discount_percent != null
+                                  ? e.discount_type == "Value"
+                                      ? formatCurrency
+                                          .format(e.discount_percent)
+                                          .replaceAll("₫", "VND")
+                                      : "${e.discount_percent} %"
+                                  : "0 VND",
+                              contentStyle: txtBold(13, grayScaleColorBase),
+                            ),
                             // InfoContentView(
                             //   title: S.of(context).discount_type,
                             //   content: e.discount_type == "Value"
@@ -188,12 +200,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             //   contentStyle: txtBold(13, grayScaleColorBase),
                             // ),
                             InfoContentView(
-                              title: S.of(context).to_money,
-                              content: e.amount_due != null
+                              title: S.of(context).total_pay,
+                              content: e.discount_money != null
                                   ? formatCurrency
-                                      .format(e.amount_due)
+                                      .format(e.discount_money!)
                                       .replaceAll("₫", "VND")
-                                  : "0 VND",
+                                  : '0 VND',
                               contentStyle: txtBold(13, grayScaleColorBase),
                             ),
                             InfoContentView(

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../utils/utils.dart';
 import '../../../widgets/primary_icon.dart';
-import '../../bills/bills_screen.dart';
-import '../../stream/stream_screen.dart';
 import 'home_title_widget.dart';
 
 class BillsHome extends StatelessWidget {

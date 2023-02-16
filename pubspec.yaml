@@ -77,7 +77,8 @@ dependencies:
   flutter_link_previewer: ^3.2.0
   http_parser: ^4.0.2
   flutter_downloader: ^1.10.1+2
-  flowder: ^0.2.0
+  equatable: ^2.0.5
+
 
 dev_dependencies:
   flutter_test:

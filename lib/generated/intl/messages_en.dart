@@ -124,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": m0,
         "confirm_delete_letter": m1,
         "confirm_delete_service": m2,
+        "confirm_end_chat": MessageLookupByLibrary.simpleMessage(
+            "Do you want to end this conversation."),
         "confirm_hand_over": MessageLookupByLibrary.simpleMessage(
             "Are you sure accept to hand over."),
         "confirm_lock_card": m3,
@@ -210,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "end": MessageLookupByLibrary.simpleMessage("End"),
+        "end_chat": MessageLookupByLibrary.simpleMessage("End conversation!"),
         "end_date": MessageLookupByLibrary.simpleMessage("End date"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
             "End date can not be less than now"),
@@ -270,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file_code": MessageLookupByLibrary.simpleMessage("Document code"),
+        "file_downloading":
+            MessageLookupByLibrary.simpleMessage("File is downloading"),
         "file_info": MessageLookupByLibrary.simpleMessage("File information"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "Upload file is not supported"),
@@ -671,6 +676,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you want to sign out?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
+        "start_chat":
+            MessageLookupByLibrary.simpleMessage("Start conversation!"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start date"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Start date can not be greater than now"),
@@ -729,7 +736,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "to_money": MessageLookupByLibrary.simpleMessage("Money"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
+        "total_bill": MessageLookupByLibrary.simpleMessage("Total bill"),
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
+        "total_pay": MessageLookupByLibrary.simpleMessage("Total payment"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Tranfer in"),
         "tranfer_in_reg":
             MessageLookupByLibrary.simpleMessage("Register tranfer in"),

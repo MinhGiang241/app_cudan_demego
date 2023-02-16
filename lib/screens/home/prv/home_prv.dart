@@ -4,24 +4,12 @@ import 'package:app_cudan/services/api_new.dart';
 
 import '../../../models/event.dart';
 import '../../../models/new.dart';
-import '../../../models/response_bantinduan_list.dart' as btda;
-import '../../../models/response_news_list_model.dart';
-import '../../../models/response_news_list_model.dart' as newlist;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../generated/l10n.dart';
-import '../../../models/response_bantinduan_list.dart';
-import '../../../models/response_news_list_model.dart';
-import '../../../services/api_tower.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/primary_dialog.dart';
-import '../../auth/prv/auth_prv.dart';
 
 class HomePrv extends ChangeNotifier {
-  List<NewsListItems>? newsList;
-  List<BTDAItems>? btdaList;
   Event? event;
   bool isLoading = false;
   bool isResNewsLoading = false;
@@ -31,6 +19,7 @@ class HomePrv extends ChangeNotifier {
   List<New> newProjectList = [];
   BuildContext? context;
   int? messageCount;
+  bool onNavigatorFooter = true;
 
   HomePrv(ctx) {
     context = ctx;
@@ -59,6 +48,10 @@ class HomePrv extends ChangeNotifier {
       // listNews[index].isRead = true;
       notifyListeners();
     }
+  }
+
+  toogleNavigatorFooter() {
+    onNavigatorFooter = !onNavigatorFooter;
   }
 
   Future _initial() async {

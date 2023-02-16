@@ -5,22 +5,17 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:dio/dio.dart';
-import 'package:flowder/flowder.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:app_cudan/models/rocket_chat_data.dart';
-import 'package:badges/badges.dart' as B;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_portal/flutter_portal.dart';
-import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
@@ -73,6 +68,7 @@ class _MessageState extends State<Message> {
     var status = await Permission.storage.request();
     if (status.isGranted) {
       final baseStorage = await getExternalStorageDirectory();
+
       var taskId = await FlutterDownloader.enqueue(
         url: url,
         headers: headers, // optional: header send with url (auth token etc)
@@ -124,22 +120,6 @@ class _MessageState extends State<Message> {
     if (total != -1) {
       print((received / total * 100).toStringAsFixed(0) + "%");
     }
-  }
-
-  Future download3(url, String path) async {
-    final downloaderUtils = DownloaderUtils(
-      progressCallback: (current, total) {
-        final progress = (current / total) * 100;
-        print('Downloading: $progress');
-      },
-      file: File(path),
-      progress: ProgressImplementation(),
-      onDone: () => print('Download done'),
-      deleteOnCancel: true,
-    );
-
-    final core = await Flowder.download(url, downloaderUtils);
-    await core.download(url, downloaderUtils);
   }
 
   ReceivePort _port = ReceivePort();

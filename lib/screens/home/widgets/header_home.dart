@@ -3,29 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/response_apartment.dart';
 import '../../../models/response_resident_own.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
-import '../../auth/prv/auth_prv.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import 'choose_apartment_bottom_sheet.dart';
-
-var fakeApartments = ResponseApartment(
-  apartments: [
-    Apartments(
-      detail: 'detail',
-      floorPlan: [
-        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
-        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
-        FloorPlan(detail: "detail", floorPlan: 1, id: '1', name: 'giang'),
-      ],
-      id: '1',
-      name: 'giang',
-    )
-  ],
-);
 
 class HeaderHome extends StatefulWidget {
   const HeaderHome({
@@ -132,15 +115,6 @@ class _HeaderHomeState extends State<HeaderHome> {
                           color: grayScaleColor2)),
                 ),
               ),
-              // const Spacer(),
-              // PrimaryIcon(
-              //     icons: PrimaryIcons.bell_outline,
-              //     style: PrimaryIconStyle.gradient,
-              //     color: grayScaleColor2,
-              //     //badge: "2",
-              //     onTap: () {
-              //       // Utils.pushScreen(context, const NotificationScreen());
-              //     }),
             ]),
           ),
       ],

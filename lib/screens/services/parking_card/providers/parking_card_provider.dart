@@ -4,12 +4,10 @@ import 'package:app_cudan/services/api_transportation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../generated/l10n.dart';
-import '../../../../models/response_parking_card_model.dart';
 import '../../../../utils/utils.dart';
 
 class ParkingCardProvider extends ChangeNotifier {
   //parkingcard
-  ResponseParkingCardsList? parkingCardsList;
 
   List<TransportationCard> transportationCardList = [];
 
@@ -152,7 +150,6 @@ class ParkingCardProvider extends ChangeNotifier {
 //old
 
   Future retry() async {
-    parkingCardsList = null;
     notifyListeners();
   }
 }

@@ -5209,6 +5209,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Total bill`
+  String get total_bill {
+    return Intl.message(
+      'Total bill',
+      name: 'total_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total payment`
+  String get total_pay {
+    return Intl.message(
+      'Total payment',
+      name: 'total_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File is downloading`
+  String get file_downloading {
+    return Intl.message(
+      'File is downloading',
+      name: 'file_downloading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start conversation!`
+  String get start_chat {
+    return Intl.message(
+      'Start conversation!',
+      name: 'start_chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End conversation!`
+  String get end_chat {
+    return Intl.message(
+      'End conversation!',
+      name: 'end_chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to end this conversation.`
+  String get confirm_end_chat {
+    return Intl.message(
+      'Do you want to end this conversation.',
+      name: 'confirm_end_chat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

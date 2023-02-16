@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../models/response_apartment.dart';
 import '../../services/api_tower.dart';
 import '../../services/prf_data.dart';
 import '../../widgets/primary_card.dart';
@@ -17,11 +16,9 @@ import 'prv/resident_info_prv.dart';
 class ApartmentSeletionScreen extends StatefulWidget {
   const ApartmentSeletionScreen({
     Key? key,
-    this.listProject,
     required this.context,
   }) : super(key: key);
   static const routeName = '/selection';
-  final ResponseApartment? listProject;
   final BuildContext context;
 
   @override

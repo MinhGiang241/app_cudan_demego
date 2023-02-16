@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/response_apartment.dart';
 import '../screens/account/personal_info/personal_info_screen.dart';
 import '../screens/auth/apartment_selection_screen.dart';
 import '../screens/auth/fogot_pass/phone_num_forgot_pass.dart';
@@ -324,11 +323,13 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const GeneralInfoScreen(),
         );
-      case ChatScreen.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (_) => const ChatScreen(),
-        );
+      // case ChatScreen.routeName:
+      //   return MaterialPageRoute(
+      //     settings: routeSetting,
+      //     builder: (context) => ChatScreen(
+      //       ctx: context,
+      //     ),
+      //   );
       default:
         return MaterialPageRoute(
           settings: routeSetting,

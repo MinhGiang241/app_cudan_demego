@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 
 import '../models/resident_info.dart';
-import '../models/response_apartment.dart';
 import '../models/response_resident_own.dart';
 
 @HiveType(typeId: 1, adapterName: "listapartment")
@@ -120,21 +119,6 @@ class PrfData {
           jsonDecode(_listApartmentBox.get(i.toString()))));
     }
     return list;
-  }
-
-  Future<void> setFloorPlan(FloorPlan floorPlan) {
-    return _apartmentBox.put(
-        _floorPlan, jsonEncode(floorPlan.toJson()).toString());
-  }
-
-  FloorPlan? getFLoorPlan() {
-    final data = _apartmentBox.get(_floorPlan);
-
-    if (data != null) {
-      final map = jsonDecode(data);
-      return FloorPlan.fromJson(map);
-    }
-    return null;
   }
 
   Future<void> setToken(String token) async {

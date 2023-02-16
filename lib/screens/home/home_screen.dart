@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ import '../account/account_screen.dart';
 
 import '../auth/prv/auth_prv.dart';
 import '../auth/prv/resident_info_prv.dart';
+import '../chat/bloc/chat_message_bloc.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
 
@@ -78,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Scaffold(
               body: _navigationTab(context),
               bottomNavigationBar: _bottomNavigationBar(messageCount),
+
               // floatingActionButton: _selectedIndex == 2
               //     ? null
               //     : FloatingActionButton(

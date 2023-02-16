@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": m0,
         "confirm_delete_letter": m1,
         "confirm_delete_service": m2,
+        "confirm_end_chat": MessageLookupByLibrary.simpleMessage(
+            "Bạn chắc chắn muốn kết thúc cuộc trò chuyện."),
         "confirm_hand_over": MessageLookupByLibrary.simpleMessage(
             "Bạn chắc chắn muốn xác nhận bàn giao."),
         "confirm_lock_card": m3,
@@ -190,7 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
-        "due_bill": MessageLookupByLibrary.simpleMessage("Hạn đóng"),
+        "due_bill": MessageLookupByLibrary.simpleMessage("Hạn thanh toán"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
         "edit_reg_const":
@@ -210,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
+        "end_chat":
+            MessageLookupByLibrary.simpleMessage("Kết thúc cuộc trò chuyện!"),
         "end_date": MessageLookupByLibrary.simpleMessage("Ngày kết thúc"),
         "end_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
@@ -272,6 +276,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file_code": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
+        "file_downloading":
+            MessageLookupByLibrary.simpleMessage("Đang tải file xuống"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "File tải lên không đúng định dạng. Vui lòng tải lại"),
@@ -481,7 +487,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "package_name": MessageLookupByLibrary.simpleMessage("Tên hàng hóa"),
         "paid": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
         "paid_deposit": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
-        "paid_payment": MessageLookupByLibrary.simpleMessage("Đã đóng"),
+        "paid_payment": MessageLookupByLibrary.simpleMessage("Đã thanh toán"),
         "parcel": MessageLookupByLibrary.simpleMessage("Bưu phẩm"),
         "parcel_code": MessageLookupByLibrary.simpleMessage("Mã bưu phẩm"),
         "parcel_details":
@@ -671,6 +677,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có muốn đăng xuất không ?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
+        "start_chat":
+            MessageLookupByLibrary.simpleMessage("Bắt đầu cuộc trò chuyện!"),
         "start_date": MessageLookupByLibrary.simpleMessage("Ngày bắt đầu"),
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
@@ -730,7 +738,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
         "to_money": MessageLookupByLibrary.simpleMessage("Thành tiền"),
         "total": MessageLookupByLibrary.simpleMessage("Tổng cộng"),
+        "total_bill": MessageLookupByLibrary.simpleMessage("Tổng hóa đơn"),
         "total_money": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
+        "total_pay": MessageLookupByLibrary.simpleMessage("Tổng thanh toán"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Chuyển đồ vào"),
         "tranfer_in_reg":
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ vào"),

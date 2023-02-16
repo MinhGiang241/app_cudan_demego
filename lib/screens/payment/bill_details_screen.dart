@@ -54,26 +54,33 @@ class BillDetailsScreen extends StatelessWidget {
           content: bill.content ?? "",
           contentStyle: txtBodySmallBold(color: grayScaleColorBase),
         ),
-      if (bill.vat != null)
-        InfoContentView(
-          title: S.of(context).vat,
-          content: bill.vat != null ? "${bill.vat} %" : '0 %',
-          contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-        ),
-      if (bill.discount_percent != null)
-        InfoContentView(
-          title: S.of(context).discount,
-          content: bill.discount_type == "Value"
-              ? formatCurrency
-                  .format(bill.discount_percent)
-                  .replaceAll("₫", "VND")
-              : "${bill.discount_percent} %",
-          contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-        ),
       InfoContentView(
-        title: S.of(context).to_money,
-        content: bill.amount_due != null
-            ? formatCurrency.format(bill.amount_due).replaceAll("₫", "VND")
+        title: S.of(context).total_bill,
+        content: formatCurrency.format(bill.amount_due).replaceAll("₫", "VND"),
+        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+      ),
+      // if (bill.vat != null)
+      InfoContentView(
+        title: S.of(context).vat,
+        content: bill.vat != null ? "${bill.vat} %" : '0 %',
+        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+      ),
+      // if (bill.discount_percent != null)
+      InfoContentView(
+        title: S.of(context).discount,
+        content: bill.discount_percent != null
+            ? bill.discount_type == "Value"
+                ? formatCurrency
+                    .format(bill.discount_percent)
+                    .replaceAll("₫", "VND")
+                : "${bill.discount_percent} %"
+            : "0 VND",
+        contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+      ),
+      InfoContentView(
+        title: S.of(context).total_pay,
+        content: bill.discount_money != null
+            ? formatCurrency.format(bill.discount_money!).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
