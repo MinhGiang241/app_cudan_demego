@@ -82,19 +82,22 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ResidentInfoPrv())
       ],
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'DEMEGO',
-          theme: AppTheme.lightTheme(),
-          locale: context.watch<LangPrv>().locale,
-          onGenerateRoute: _appRouter.onGenerateRoute,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
+        return BlocProvider(
+          create: (context) => ChatMessageBloc(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'DEMEGO',
+            theme: AppTheme.lightTheme(),
+            locale: context.watch<LangPrv>().locale,
+            onGenerateRoute: _appRouter.onGenerateRoute,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+          ),
         );
       },
     );

@@ -176,7 +176,16 @@ class ApiService {
         } else {
           //await client.refreshCredentials();
           log(client.credentials.accessToken);
-          options = op;
+          if (op == null) {
+            options = Options(
+              headers: {
+                'Authorization': "Bearer ${client.credentials.accessToken}",
+                "Accept": "application/json"
+              },
+            );
+          } else {
+            options = op;
+          }
         }
       }
     }

@@ -39,26 +39,15 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+// final ChatMessageBloc bloc = ChatMessageBloc();
+
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // static const List<Widget> _widgetOptions = <Widget>[
-  //   Text(
-  //     'Index 0: Home',
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     'Index 1: Business',
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     'Index 2: School',
-  //     style: optionStyle,
-  //   ),
-  // ];
 
   void _onItemTapped(int index) {
+    if (index == 1 && _selectedIndex != index) {
+      context.read<ChatMessageBloc>().getAuthentication(context);
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -75,28 +64,44 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
         var messageCount = context.watch<HomePrv>().messageCount;
-        return FutureBuilder(builder: (context, snap) {
+        return FutureBuilder(
+            // future: context.read<ChatMessageBloc>(),
+            builder: (context, snap) {
           return Stack(alignment: Alignment.center, children: [
             Scaffold(
-              body: _navigationTab(context),
-              bottomNavigationBar: _bottomNavigationBar(messageCount),
+                body: _navigationTab(context),
+                bottomNavigationBar:
+                    context.watch<ChatMessageBloc>().state is ChatMessageStart
+                        ? null
+                        : _bottomNavigationBar(messageCount)
+                //     BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                //   bloc: bloc,
+                //   builder: (context, state) {
+                //     print("hhhhhhh");
+                //     if (state is ChatMessageStart) {
+                //       return vpad(0);
+                //     } else {
+                //       return _bottomNavigationBar(messageCount);
+                //     }
+                //   },
+                // ),
 
-              // floatingActionButton: _selectedIndex == 2
-              //     ? null
-              //     : FloatingActionButton(
-              //         onPressed: () {},
-              //         backgroundColor: Colors.white,
-              //         child: Icon(Icons.phone_sharp,
-              //             size: 40,
-              //             color: primaryColorBase,
-              //             shadows: [
-              //               Shadow(
-              //                   offset: const Offset(-2, 2),
-              //                   color: Colors.black.withOpacity(0.5),
-              //                   blurRadius: 10.0),
-              //             ]),
-              //       ),
-            ),
+                // floatingActionButton: _selectedIndex == 2
+                //     ? null
+                //     : FloatingActionButton(
+                //         onPressed: () {},
+                //         backgroundColor: Colors.white,
+                //         child: Icon(Icons.phone_sharp,
+                //             size: 40,
+                //             color: primaryColorBase,
+                //             shadows: [
+                //               Shadow(
+                //                   offset: const Offset(-2, 2),
+                //                   color: Colors.black.withOpacity(0.5),
+                //                   blurRadius: 10.0),
+                //             ]),
+                //       ),
+                ),
             if (isLoading)
               const Center(
                 child: PrimaryCard(

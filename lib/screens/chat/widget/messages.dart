@@ -7,17 +7,16 @@ import 'package:provider/provider.dart';
 
 import '../../../models/rocket_chat_data.dart';
 import '../bloc/chat_bloc.dart';
+import '../bloc/chat_message_bloc.dart';
 import 'message.dart';
 
 class Messages extends StatefulWidget {
   Messages({
     super.key,
     required this.messageBloc,
-    required this.messages,
     required this.messageMap,
   });
-  final ChatBloc messageBloc;
-  final List<MessageChat> messages;
+  final dynamic messageBloc;
   final Map<String, MessageChat> messageMap;
   @override
   State<Messages> createState() => _MessagesState();

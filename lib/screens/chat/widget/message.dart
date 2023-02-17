@@ -24,6 +24,7 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
 import '../bloc/chat_bloc.dart';
+import '../bloc/chat_message_bloc.dart';
 import '../bloc/websocket_connect.dart';
 
 var dio = Dio();
@@ -50,7 +51,7 @@ class Message extends StatefulWidget {
   final DateTime d;
   final Stream<dynamic> shouldTriggerChange;
   Map<String, dynamic> emojies;
-  ChatBloc chatbloc;
+  dynamic chatbloc;
 
   @override
   State<Message> createState() => _MessageState();
@@ -102,7 +103,7 @@ class _MessageState extends State<Message> {
                   'text/html,application/xhtml+xml,application/xml,file/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange,file/pdf;',
               'Host': 'chat.masflex.vn',
               'Cookie':
-                  "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+                  "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
             }),
       );
       print(response.headers);
@@ -344,7 +345,7 @@ class _MessageState extends State<Message> {
                                                             'Host':
                                                                 'chat.masflex.vn',
                                                             'Cookie':
-                                                                "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
+                                                                "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
                                                             // "sec-ch-ua":
                                                             //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
                                                             // "sec-ch-ua-mobile":
@@ -442,7 +443,7 @@ class _MessageState extends State<Message> {
                                                               Icons.error),
                                                       httpHeaders: {
                                                         "Authorization":
-                                                            "Bearer ${widget.chatbloc.token}",
+                                                            "Bearer ${widget.chatbloc.authToken}",
                                                         "X-User-Id": widget
                                                                 .chatbloc
                                                                 .user!
@@ -450,7 +451,7 @@ class _MessageState extends State<Message> {
                                                             "",
                                                         "X-Auth-Token": widget
                                                                 .chatbloc
-                                                                .token ??
+                                                                .authToken ??
                                                             ""
                                                       },
                                                     ),

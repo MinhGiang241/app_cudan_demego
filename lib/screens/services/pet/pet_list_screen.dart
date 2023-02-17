@@ -98,20 +98,22 @@ class _PetListScreenState extends State<PetListScreen> {
                       setState(() {});
                     });
               } else if (list.isEmpty) {
-                return SmartRefresher(
-                  enablePullDown: true,
-                  enablePullUp: false,
-                  header: WaterDropMaterialHeader(
-                      backgroundColor: Theme.of(context).primaryColor),
-                  controller: _refreshController,
-                  onRefresh: () {
-                    setState(() {});
-                    _refreshController.refreshCompleted();
-                  },
-                  child: PrimaryEmptyWidget(
-                    emptyText: S.of(context).no_pet,
-                    icons: PrimaryIcons.bone,
-                    action: () {},
+                return SafeArea(
+                  child: SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    header: WaterDropMaterialHeader(
+                        backgroundColor: Theme.of(context).primaryColor),
+                    controller: _refreshController,
+                    onRefresh: () {
+                      setState(() {});
+                      _refreshController.refreshCompleted();
+                    },
+                    child: PrimaryEmptyWidget(
+                      emptyText: S.of(context).no_pet,
+                      icons: PrimaryIcons.bone,
+                      action: () {},
+                    ),
                   ),
                 );
               }

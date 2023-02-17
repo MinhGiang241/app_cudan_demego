@@ -129,7 +129,7 @@ class Pet {
         ? avt_pet!.map((e) {
             return e.toJson();
           }).toList()
-        : [];
+        : null;
     data['certificate'] = certificate != null
         ? certificate!.map((e) {
             return e.toJson();

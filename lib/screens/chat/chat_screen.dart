@@ -15,6 +15,7 @@ import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
 
 import '../../generated/l10n.dart';
 import '../../models/rocket_chat_data.dart';
+import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_error_widget.dart';
 import '../home/prv/home_prv.dart';
@@ -33,28 +34,21 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-final ChatBloc _messageBloc = ChatBloc();
-final ChatMessageBloc bloc = ChatMessageBloc();
-
 class _ChatScreenState extends State<ChatScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   FirebaseMessaging().configure(
-  //     onMessage: (Map<String, dynamic> message) async {
-  //       _messageBloc.handleMessage(message['notification']['body']);
-  //     },
-  //   );
-  // }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
-    _messageBloc.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final ChatMessageBloc bloc = context.read<ChatMessageBloc>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -74,16 +68,58 @@ class _ChatScreenState extends State<ChatScreen> {
           bloc: bloc,
           builder: (context, state) {
             if (state is ChatMessageInitial) {
+              state.webSocketChannel = state.webSocketService
+                  .connectToWebSocket(WebsocketConnect.webSocketUrl,
+                      authToken: bloc.authToken);
+              state.webSocketService.getLastes50Message(
+                state.webSocketChannel!,
+                WebsocketConnect.room,
+              );
               return SafeArea(
                   child: Column(
                 children: [
                   Expanded(
-                      child: FutureBuilder(
-                    future: () {
-                      print('dd');
-                    }(),
-                    builder: (context, state) {
-                      return vpad(0);
+                      child: StreamBuilder(
+                    stream: state.webSocketChannel!.stream,
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Center(child: PrimaryLoading());
+                        case ConnectionState.done:
+                          return const Center(child: PrimaryLoading());
+                        case ConnectionState.waiting:
+                          return const Center(child: PrimaryLoading());
+                        case ConnectionState.active:
+                          return _initStateRender(snapshot, state, bloc);
+                        default:
+                          return const Center(child: PrimaryLoading());
+                      }
+                      // print(snapshot);
+                      // if (snapshot.hasError) {
+                      //   return PrimaryErrorWidget(
+                      //       code: snapshot.hasError ? "err" : "1",
+                      //       message: snapshot.data.toString(),
+                      //       onRetry: () async {
+                      //         setState(() {});
+                      //       });
+                      // }
+                      // if (!snapshot.hasData) {
+                      //   if (snapshot.data != null &&
+                      //       json.decode(snapshot.data)['msg'] == 'ping') {
+                      //     print("send pong");
+                      //     state.webSocketService
+                      //         .sendPong(state.webSocketChannel!);
+                      //   }
+                      //   var data =
+                      //       RocketChatData.fromJson(json.decode(snapshot.data));
+                      //   if (data.msg == "changed" && data.fields != null) {
+                      //     state.addAllMessage(data.result!.messages!);
+                      //   }
+                      //   return Messages(
+                      //     messageMap: state.messagesMap,
+                      //     messageBloc: state,
+                      //   );
+                      // }
                     },
                   )),
                   Align(
@@ -113,64 +149,43 @@ class _ChatScreenState extends State<ChatScreen> {
                   vpad(10)
                 ],
               ));
+            } else if (state is ChatMessageGreeting) {
+              return vpad(0);
             } else if (state is ChatMessageStart) {
-              return FutureBuilder(
-                future: _messageBloc.getAuthentication(context),
-                builder: (context, AsyncSnapshot<Authentication> snapshot) {
-                  if (snapshot.hasError) {
-                    return PrimaryErrorWidget(
-                        code: snapshot.hasError ? "err" : "1",
-                        message: snapshot.data.toString(),
-                        onRetry: () async {
-                          setState(() {});
-                        });
-                  }
-                  if (snapshot.hasData) {
-                    print(snapshot);
-                    _messageBloc.user = snapshot.data!.data!.me;
+              state.webSocketChannel = state.webSocketService
+                  .connectToWebSocket(WebsocketConnect.webSocketUrl,
+                      authToken: bloc.authToken);
+              print('authTojen; ${bloc.authToken}');
+              state.webSocketService.streamChannelMessagesSubscribe(
+                state.webSocketChannel!,
+                WebsocketConnect.channel,
+              );
+              // state.webSocketService.getLastes50Message(
+              //   state.webSocketChannel!,
+              //   WebsocketConnect.room,
+              // );
 
-                    _messageBloc.webSocketChannel = _messageBloc
-                        .webSocketService
-                        .connectToWebSocket(WebsocketConnect.webSocketUrl,
-                            authToken: snapshot.data!.data!.authToken!);
-                    print(_messageBloc.webSocketChannel);
-                    _messageBloc.webSocketService
-                        .streamChannelMessagesSubscribe(
-                            _messageBloc.webSocketChannel!,
-                            WebsocketConnect.channel);
-                    // _messageBloc.webSocketService.streamChannelMessagesUnsubscribe(
-                    //     _messageBloc.webSocketChannel!, WebsocketConnect.channel);
-                    // _messageBloc.webSocketService.getLastes50Message(
-                    //   _messageBloc.webSocketChannel!,
-                    //   WebsocketConnect.room,
-                    // );
-
-                    return StreamBuilder(
-                      stream: _messageBloc.webSocketChannel!.stream,
-                      builder: (context, snapshot) {
-                        rocket_notification.Notification? notification =
-                            snapshot.hasData
-                                ? rocket_notification.Notification.fromMap(
-                                    jsonDecode(snapshot.data))
-                                : null;
-                        print(snapshot);
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                            return const Center(child: PrimaryLoading());
-                          case ConnectionState.done:
-                            return const Center(child: PrimaryLoading());
-                          case ConnectionState.waiting:
-                            return const Center(child: PrimaryLoading());
-                          case ConnectionState.active:
-                            return _activeStateRender(snapshot);
-                          default:
-                            return const Center(child: PrimaryLoading());
-                        }
-                      },
-                    );
-                  }
+              return StreamBuilder(
+                stream: state.webSocketChannel!.stream,
+                builder: (context, snapshot) {
+                  rocket_notification.Notification? notification =
+                      snapshot.hasData
+                          ? rocket_notification.Notification.fromMap(
+                              jsonDecode(snapshot.data))
+                          : null;
                   print(snapshot);
-                  return const Center(child: PrimaryLoading());
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.done:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.waiting:
+                      return const Center(child: PrimaryLoading());
+                    case ConnectionState.active:
+                      return _activeStateRender(snapshot, state, bloc);
+                    default:
+                      return const Center(child: PrimaryLoading());
+                  }
                 },
               );
             } else {
@@ -182,23 +197,39 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _activeStateRender(AsyncSnapshot<dynamic> snapshot) {
+  Widget _initStateRender(snapshot, state, bloc) {
+    print(snapshot);
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
-      _messageBloc.webSocketService.sendPong(_messageBloc.webSocketChannel!);
+      state.webSocketService.sendPong(state.webSocketChannel!);
+    }
+    var data = RocketChatData.fromJson(json.decode(snapshot.data));
+
+    if (data.msg == "added") {
+      for (var element in data.result!.messages!) {
+        state.addMessage(MessageChat.fromJson(json.decode(element.toString())));
+      }
+    }
+
+    return vpad(0);
+  }
+
+  Widget _activeStateRender(AsyncSnapshot<dynamic> snapshot, state, bloc) {
+    if (json.decode(snapshot.data)['msg'] == 'ping') {
+      print("send pong");
+      state.webSocketService.sendPong(state.webSocketChannel!);
     }
     var data = RocketChatData.fromJson(json.decode(snapshot.data));
     if (data.msg == "changed" && data.fields != null) {
-      _messageBloc.addMessage(data.fields!.args![0]);
+      state.addMessage(data.fields!.args![0]);
     }
 
     return Column(
       children: [
         Expanded(
             child: Messages(
-          messageMap: _messageBloc.messagesMap,
-          messageBloc: _messageBloc,
-          messages: _messageBloc.messagesList,
+          messageMap: state.messagesMap,
+          messageBloc: state,
         )),
         Align(
           alignment: Alignment.center,
@@ -207,12 +238,20 @@ class _ChatScreenState extends State<ChatScreen> {
               background: grayScaleColor4,
               padding: const EdgeInsets.all(6),
               onTap: () {
-                bloc.add(BackChatMessageInit());
+                Utils.showConfirmMessage(
+                    context: context,
+                    title: S.of(context).end,
+                    content: S.of(context).confirm_end_chat,
+                    onConfirm: () {
+                      Navigator.pop(context);
+                      bloc.add(BackChatMessageInit());
+                    });
+
                 // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
               },
               child: Row(
                 children: [
-                  const Icon(Icons.login),
+                  const Icon(Icons.logout),
                   hpad(10),
                   Text(
                     S.of(context).end_chat,
@@ -224,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
         ),
-        InputChat(messageBloc: _messageBloc),
+        InputChat(messageBloc: state),
         vpad(10)
       ],
     );

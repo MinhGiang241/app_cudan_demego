@@ -20,7 +20,7 @@ import '../bloc/chat_bloc.dart';
 
 class InputChat extends StatefulWidget {
   const InputChat({super.key, required this.messageBloc});
-  final ChatBloc messageBloc;
+  final dynamic messageBloc;
 
   @override
   State<InputChat> createState() => _InputChatState();
