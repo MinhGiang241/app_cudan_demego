@@ -44,9 +44,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     if (index == 1 && _selectedIndex != index) {
-      context.read<ChatMessageBloc>().getAuthentication(context);
+      context.read<ChatMessageBloc>().add(BackChatMessageInit());
     }
     setState(() {
       _selectedIndex = index;
@@ -58,14 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
     // ApiService.shared.getExistClient().then((value) {
     //   log(value!.credentials.accessToken);
     // });
+    context.read<ChatMessageBloc>().getAuthentication(context);
 
     return ChangeNotifierProvider<HomePrv>(
       create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
         var messageCount = context.watch<HomePrv>().messageCount;
+
         return FutureBuilder(
-            // future: context.read<ChatMessageBloc>(),
+            //   future: () async {
+            //   context.read<ChatMessageBloc>().getAuthentication(context);
+            //   await Future.delayed(Duration.zero);
+            // }(),
             builder: (context, snap) {
           return Stack(alignment: Alignment.center, children: [
             Scaffold(

@@ -2,14 +2,12 @@ import 'dart:convert';
 
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
-import 'package:app_cudan/widgets/primary_appbar.dart';
+
 import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
 
@@ -17,11 +15,10 @@ import '../../generated/l10n.dart';
 import '../../models/rocket_chat_data.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
-import '../../widgets/primary_error_widget.dart';
-import '../home/prv/home_prv.dart';
-import 'bloc/chat_bloc.dart';
+
 import 'bloc/websocket_connect.dart';
 import 'widget/input_chat.dart';
+import 'widget/list_message_subject.dart';
 import 'widget/messages.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -75,6 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 state.webSocketChannel!,
                 WebsocketConnect.room,
               );
+
               return SafeArea(
                   child: Column(
                 children: [
@@ -94,32 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         default:
                           return const Center(child: PrimaryLoading());
                       }
-                      // print(snapshot);
-                      // if (snapshot.hasError) {
-                      //   return PrimaryErrorWidget(
-                      //       code: snapshot.hasError ? "err" : "1",
-                      //       message: snapshot.data.toString(),
-                      //       onRetry: () async {
-                      //         setState(() {});
-                      //       });
-                      // }
-                      // if (!snapshot.hasData) {
-                      //   if (snapshot.data != null &&
-                      //       json.decode(snapshot.data)['msg'] == 'ping') {
-                      //     print("send pong");
-                      //     state.webSocketService
-                      //         .sendPong(state.webSocketChannel!);
-                      //   }
-                      //   var data =
-                      //       RocketChatData.fromJson(json.decode(snapshot.data));
-                      //   if (data.msg == "changed" && data.fields != null) {
-                      //     state.addAllMessage(data.result!.messages!);
-                      //   }
-                      //   return Messages(
-                      //     messageMap: state.messagesMap,
-                      //     messageBloc: state,
-                      //   );
-                      // }
                     },
                   )),
                   Align(
@@ -129,7 +101,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         background: grayScaleColor4,
                         padding: const EdgeInsets.all(6),
                         onTap: () {
-                          // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
                           bloc.add(LoadChatMessageStart());
                         },
                         child: Row(
@@ -182,7 +153,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     case ConnectionState.waiting:
                       return const Center(child: PrimaryLoading());
                     case ConnectionState.active:
-                      return _activeStateRender(snapshot, state, bloc);
+                      return _activeStateRender(
+                        snapshot,
+                        state,
+                        bloc,
+                      );
                     default:
                       return const Center(child: PrimaryLoading());
                   }
@@ -205,23 +180,19 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     var data = RocketChatData.fromJson(json.decode(snapshot.data));
 
-    if (data.msg == "added") {
+    if (data.msg == "added" && data.result != null) {
       for (var element in data.result!.messages!) {
         state.addMessage(MessageChat.fromJson(json.decode(element.toString())));
       }
     }
+    if (data.msg == "result" && data.result != null) {
+      var d = data.result!.messages!.reversed.toList();
+      for (var el in d) {
+        // var m = json.decode(element.toString());
+        state.addMessage(el);
+      }
 
-    return vpad(0);
-  }
-
-  Widget _activeStateRender(AsyncSnapshot<dynamic> snapshot, state, bloc) {
-    if (json.decode(snapshot.data)['msg'] == 'ping') {
-      print("send pong");
-      state.webSocketService.sendPong(state.webSocketChannel!);
-    }
-    var data = RocketChatData.fromJson(json.decode(snapshot.data));
-    if (data.msg == "changed" && data.fields != null) {
-      state.addMessage(data.fields!.args![0]);
+      print(state.messagesMap);
     }
 
     return Column(
@@ -231,41 +202,76 @@ class _ChatScreenState extends State<ChatScreen> {
           messageMap: state.messagesMap,
           messageBloc: state,
         )),
-        Align(
-          alignment: Alignment.center,
-          child: IntrinsicWidth(
-            child: PrimaryCard(
-              background: grayScaleColor4,
-              padding: const EdgeInsets.all(6),
-              onTap: () {
-                Utils.showConfirmMessage(
-                    context: context,
-                    title: S.of(context).end,
-                    content: S.of(context).confirm_end_chat,
-                    onConfirm: () {
-                      Navigator.pop(context);
-                      bloc.add(BackChatMessageInit());
-                    });
+      ],
+    );
+  }
 
-                // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
-              },
-              child: Row(
-                children: [
-                  const Icon(Icons.logout),
-                  hpad(10),
-                  Text(
-                    S.of(context).end_chat,
-                    overflow: TextOverflow.ellipsis,
-                    style: txtRegular(14, grayScaleColorBase),
-                  )
-                ],
+  Widget _activeStateRender(
+    AsyncSnapshot<dynamic> snapshot,
+    state,
+    bloc,
+  ) {
+    if (json.decode(snapshot.data)['msg'] == 'ping') {
+      print("send pong");
+      state.webSocketService.sendPong(state.webSocketChannel!);
+    }
+    var data = RocketChatData.fromJson(json.decode(snapshot.data));
+    if (data.msg == "changed" && data.fields != null) {
+      state.addMessage(data.fields!.args![0]);
+    }
+
+    return SafeArea(
+      child: Column(
+        children: [
+          if (state.showGreeting)
+            ListMessageSubject(
+                state: state,
+                toogleGreeting: () {
+                  setState(() {
+                    state.toogleGreeting();
+                  });
+                }),
+          Expanded(
+              child: Messages(
+            messageMap: state.messagesMap,
+            messageBloc: state,
+          )),
+          Align(
+            alignment: Alignment.center,
+            child: IntrinsicWidth(
+              child: PrimaryCard(
+                background: grayScaleColor4,
+                padding: const EdgeInsets.all(6),
+                onTap: () {
+                  Utils.showConfirmMessage(
+                      context: context,
+                      title: S.of(context).end,
+                      content: S.of(context).confirm_end_chat,
+                      onConfirm: () {
+                        Navigator.pop(context);
+                        bloc.add(BackChatMessageInit());
+                      });
+
+                  // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.logout),
+                    hpad(10),
+                    Text(
+                      S.of(context).end_chat,
+                      overflow: TextOverflow.ellipsis,
+                      style: txtRegular(14, grayScaleColorBase),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        InputChat(messageBloc: state),
-        vpad(10)
-      ],
+          if (!state.showGreeting) InputChat(messageBloc: state),
+          vpad(10)
+        ],
+      ),
     );
   }
 }

@@ -10,6 +10,7 @@ class ChatMessageInitial extends ChatMessageState {
     this.user,
     this.authToken,
   });
+
   String? authToken;
   User? user;
   WebSocketChannel? webSocketChannel;
@@ -45,6 +46,11 @@ class ChatMessageStart extends ChatMessageState {
   });
   final String? authToken;
   final User? user;
+  bool showGreeting = true;
+  void toogleGreeting() {
+    showGreeting = !showGreeting;
+  }
+
   StreamController<String> messageController = StreamController();
   // Stream<String> get messages => messageController.stream;
   final TextEditingController textEditionController = TextEditingController();
@@ -101,6 +107,13 @@ class ChatMessageStart extends ChatMessageState {
 
   void setReaction(String emoji, String messageId) {
     webSocketService.setReaction(webSocketChannel!, emoji, messageId);
+  }
+
+  void sendGreetingMessage(String val) {
+    if (val.isNotEmpty) {
+      webSocketService.sendMessageOnRoom(
+          val.trim(), webSocketChannel!, WebsocketConnect.room);
+    }
   }
 
   void sendMessage() {
