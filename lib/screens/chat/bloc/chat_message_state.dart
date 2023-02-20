@@ -26,6 +26,10 @@ class ChatMessageInitial extends ChatMessageState {
     messagesMap[m.id ?? ''] = m;
   }
 
+  void setReaction(String emoji, String messageId) {
+    webSocketService.setReaction(webSocketChannel!, emoji, messageId);
+  }
+
   addAllMessage(List<MessageChat> a) {
     for (var i in a) {
       messagesMap[i.id ?? ""] = i;

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_cudan/constants/constants.dart';
@@ -126,7 +127,6 @@ class _ChatScreenState extends State<ChatScreen> {
               state.webSocketChannel = state.webSocketService
                   .connectToWebSocket(WebsocketConnect.webSocketUrl,
                       authToken: bloc.authToken);
-              print('authTojen; ${bloc.authToken}');
               state.webSocketService.streamChannelMessagesSubscribe(
                 state.webSocketChannel!,
                 WebsocketConnect.channel,
@@ -173,7 +173,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _initStateRender(snapshot, state, bloc) {
-    print(snapshot);
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
       state.webSocketService.sendPong(state.webSocketChannel!);
@@ -191,9 +190,17 @@ class _ChatScreenState extends State<ChatScreen> {
         // var m = json.decode(element.toString());
         state.addMessage(el);
       }
-
-      print(state.messagesMap);
     }
+    if (data.msg == "changed" && data.fields != null) {
+      state.addMessage(data.fields!.args![0]);
+    }
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      state.webSocketService.streamChannelMessagesSubscribe(
+        state.webSocketChannel!,
+        WebsocketConnect.channel,
+      );
+    });
 
     return Column(
       children: [
