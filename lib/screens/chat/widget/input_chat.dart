@@ -1,22 +1,15 @@
 import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/widgets/select_file_widget.dart';
-import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:provider/provider.dart';
-
 import '../../../constants/constants.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_image_netword.dart';
-import '../bloc/chat_bloc.dart';
 
 class InputChat extends StatefulWidget {
   const InputChat({super.key, required this.messageBloc});
@@ -143,18 +136,6 @@ class _InputChatState extends State<InputChat> {
                         });
                       }
                     });
-                    // await Utils.imagePicker(false, ImageSource.camera)
-                    //     .then((value) {
-                    //   if (value != null) {
-                    //     final list =
-                    //         value.map<File>((e) => File(e.path)).toList();
-                    //     setState(() {
-                    //       pickedFile.clear();
-                    //       pickedImages.clear();
-                    //       pickedImages.addAll(list);
-                    //     });
-                    //   }
-                    // });
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(4.0),

@@ -23,8 +23,6 @@ import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
-import '../bloc/chat_bloc.dart';
-import '../bloc/chat_message_bloc.dart';
 import '../bloc/websocket_connect.dart';
 
 var dio = Dio();
@@ -80,7 +78,7 @@ class _MessageState extends State<Message> {
         openFileFromNotification:
             true, // click on notification to open downloaded file (for Android)
       );
-      // await FlutterDownloader.open(taskId: taskId!);
+      await FlutterDownloader.open(taskId: taskId!);
     }
   }
 
@@ -91,20 +89,21 @@ class _MessageState extends State<Message> {
         onReceiveProgress: showDownloadProgress,
         //Received data with List<int>
         options: Options(
-            responseType: ResponseType.bytes,
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! < 500;
-            },
-            headers: {
-              "Connection": "keep-alive",
-              "Accept-Encoding": "gzip, deflate, br",
-              'Accept':
-                  'text/html,application/xhtml+xml,application/xml,file/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange,file/pdf;',
-              'Host': 'chat.masflex.vn',
-              'Cookie':
-                  "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
-            }),
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+          headers: {
+            "Connection": "keep-alive",
+            "Accept-Encoding": "gzip, deflate, br",
+            'Accept':
+                'text/html,application/xhtml+xml,application/xml,file/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange,file/pdf;',
+            'Host': 'chat.masflex.vn',
+            'Cookie':
+                "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+          },
+        ),
       );
       print(response.headers);
       File file = File(savePath);
@@ -335,36 +334,37 @@ class _MessageState extends State<Message> {
                                                   InkWell(
                                                     onTap: () async {
                                                       await downloadFile(
-                                                          "${WebsocketConnect.serverUrl}${c.title_link}?download",
-                                                          {
-                                                            // "Accept-Encoding":
-                                                            //     "gzip, deflate, br",
+                                                        "${WebsocketConnect.serverUrl}${c.title_link}?download",
+                                                        {
+                                                          // "Accept-Encoding":
+                                                          //     "gzip, deflate, br",
 
-                                                            'Accept':
-                                                                'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                                            'Host':
-                                                                'chat.masflex.vn',
-                                                            'Cookie':
-                                                                "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
-                                                            // "sec-ch-ua":
-                                                            //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
-                                                            // "sec-ch-ua-mobile":
-                                                            //     "?0",
-                                                            // "sec-ch-ua-platform":
-                                                            //     '"Windows"',
-                                                            // "Sec-Fetch-Dest":
-                                                            //     "document",
-                                                            // "Sec-Fetch-Mode":
-                                                            //     "navigate",
-                                                            // "Sec-Fetch-Site":
-                                                            //     "none",
-                                                            // "Sec-Fetch-User":
-                                                            //     "?1",
-                                                            // "Upgrade-Insecure-Requests":
-                                                            //     "1",
-                                                            // "User-Agent":
-                                                            //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-                                                          });
+                                                          'Accept':
+                                                              'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                          'Host':
+                                                              'chat.masflex.vn',
+                                                          // 'Cookie':
+                                                          //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
+                                                          // "sec-ch-ua":
+                                                          //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
+                                                          // "sec-ch-ua-mobile":
+                                                          //     "?0",
+                                                          // "sec-ch-ua-platform":
+                                                          //     '"Windows"',
+                                                          // "Sec-Fetch-Dest":
+                                                          //     "document",
+                                                          // "Sec-Fetch-Mode":
+                                                          //     "navigate",
+                                                          // "Sec-Fetch-Site":
+                                                          //     "none",
+                                                          // "Sec-Fetch-User":
+                                                          //     "?1",
+                                                          // "Upgrade-Insecure-Requests":
+                                                          //     "1",
+                                                          // "User-Agent":
+                                                          //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+                                                        },
+                                                      );
 
                                                       // await launchUrl(
                                                       //   Uri.parse(

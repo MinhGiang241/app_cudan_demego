@@ -172,7 +172,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _initStateRender(snapshot, state, bloc) {
+  Widget _initStateRender(snapshot, ChatMessageInitial state, bloc) {
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
       state.webSocketService.sendPong(state.webSocketChannel!);
@@ -215,7 +215,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _activeStateRender(
     AsyncSnapshot<dynamic> snapshot,
-    state,
+    ChatMessageStart state,
     bloc,
   ) {
     if (json.decode(snapshot.data)['msg'] == 'ping') {

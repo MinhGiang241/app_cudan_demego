@@ -250,6 +250,72 @@ class CustomWebSocketService {
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 
+//Live chat
+  void registerGuestChat(WebSocketChannel webSocketChannel, String token,
+      String name, String email) {
+    Map msg = {
+      "msg": "method",
+      "method": "livechat:registerGuest",
+      "params": [
+        {
+          "token": token,
+          "name": name,
+          "email": email,
+          "department": "3jMKjTQJxCDxwxxtx"
+        }
+      ],
+      "id": "5"
+    };
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void sendMessageLiveChat(WebSocketChannel webSocketChannel, String id,
+      String rid, String token, String message) {
+    Map msg = {
+      "msg": "method",
+      "method": "sendMessageLivechat",
+      "params": [
+        {"_id": id, "rid": rid, "msg": message, "token": token}
+      ],
+      "id": "11"
+    };
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void sendOfflineMessage(WebSocketChannel webSocketChannel, String visitorName,
+      String email, String message) {
+    Map msg = {
+      "msg": "method",
+      "method": "livechat:sendOfflineMessage",
+      "params": [
+        {"name": visitorName, "email": email, "message": message}
+      ],
+      "id": "3"
+    };
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  void streamLiveChatRoom(
+      WebSocketChannel webSocketChannel, String visitorToken, String id) {
+    Map msg = {
+      "msg": "sub",
+      "id": id,
+      "name": "stream-room-messages",
+      "params": [
+        "KTZqPAR9DQGxKcxzf",
+        {
+          "useCollection": false,
+          "args": [
+            {"visitorToken": visitorToken}
+          ]
+        }
+      ]
+    };
+    webSocketChannel.sink.add(jsonEncode(msg));
+  }
+
+  //upload File on Room
+
   void sendUploadFileOnRoom(
     WebSocketChannel webSocketChannel,
     Room room,

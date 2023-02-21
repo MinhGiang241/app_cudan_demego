@@ -1,38 +1,12 @@
 {
-    "message": {
-        "_id": "3QnrMWoLaPS5iArRt",
-        "rid": "GENERAL",
-        "ts": "2023-02-14T08:59:40.035Z",
-        "file": {
-            "_id": "Zt6tWeEtsBXdWPqiQ",
-            "name": "anh-dep-23.jpg",
-            "type": "file/anh-dep-23.jpg"
-        },
-        "files": [
-            {
-                "_id": "Zt6tWeEtsBXdWPqiQ",
-                "name": "anh-dep-23.jpg",
-                "type": "file/anh-dep-23.jpg"
-            }
-        ],
-        "attachments": [
-            {
-                "ts": "1970-01-01T00:00:00.000Z",
-                "title": "anh-dep-23.jpg",
-                "title_link": "/file-upload/Zt6tWeEtsBXdWPqiQ/anh-dep-23.jpg",
-                "title_link_download": true,
-                "type": "file",
-                "description": ""
-            }
-        ],
-        "msg": "",
-        "u": {
-            "_id": "TBu4iCbbPPRtRZzkB",
-            "username": "minhgiang241",
-            "name": "giang"
-        },
-        "_updatedAt": "2023-02-14T08:59:40.085Z",
-        "urls": []
-    },
-    "success": true
+    "msg": "method",
+    "method": "livechat:sendOfflineMessage",
+    "params": [
+        {
+            "name": "Visitor Name",
+            "email": "visitor@rocket.chat",
+            "message": "Hello!"
+        }
+    ],
+    "id": "3"
 }

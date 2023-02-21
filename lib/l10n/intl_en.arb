@@ -520,5 +520,7 @@
   "file_downloading": "File is downloading",
   "start_chat": "Start conversation!",
   "end_chat": "End conversation!",
-  "confirm_end_chat": "Do you want to end this conversation."
+  "confirm_end_chat": "Do you want to end this conversation.",
+  "reflex": "Reflection",
+  "resident_reg": "Resident registration"
 }

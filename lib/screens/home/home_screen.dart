@@ -145,8 +145,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 vpad(30),
                 // const ConvinientServiceHome(),
                 // vpad(30),
-                // const FeedbackHome(),
-                // vpad(30),
+                const FeedbackHome(),
+                vpad(30),
                 const EventsHome(),
                 vpad(24),
                 if (context.read<ResidentInfoPrv>().residentId != null)

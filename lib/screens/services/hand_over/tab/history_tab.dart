@@ -1,13 +1,18 @@
 import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/hand_over/general_info_screen.dart';
+import 'package:app_cudan/screens/services/hand_over/prv/hand_over_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../models/hand_over.dart';
+import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
@@ -58,8 +63,12 @@ class _HistoryTabState extends State<HistoryTab> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    List<HandOver> listHandOver = context.read<HandOverPrv>().listHandOver;
     return FutureBuilder(
-      future: () async {}(),
+      future: context
+          .read<HandOverPrv>()
+          .getHandOverHisByResidentId(context, residentId ?? ''),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
@@ -70,7 +79,7 @@ class _HistoryTabState extends State<HistoryTab> {
               onRetry: () async {
                 setState(() {});
               });
-        } else if (list.isEmpty) {
+        } else if (listHandOver.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
@@ -104,18 +113,18 @@ class _HistoryTabState extends State<HistoryTab> {
           child: ListView(
             children: [
               vpad(24),
-              ...list.map((e) {
+              ...listHandOver.map((e) {
                 return Stack(
                   children: [
                     PrimaryCard(
                       margin: const EdgeInsets.only(
                           bottom: 16, left: 12, right: 12),
                       onTap: () {
-                        if (e["status"] == "HANDED_OVER") {
+                        if (e.status == "COMPLETE") {
                           Navigator.pushNamed(
                               context, AcceptHandOverScreen.routeName,
-                              arguments: {"status": e['ticket_status']});
-                        } else if (e["status"] == "WAIT_HAND_OVER") {
+                              arguments: {"status": e.status});
+                        } else if (e.status == "WAIT") {
                           Navigator.pushNamed(
                             context,
                             GeneralInfoScreen.routeName,
@@ -148,7 +157,7 @@ class _HistoryTabState extends State<HistoryTab> {
                             children: [
                               vpad(10),
                               Text(
-                                e['name'] as String,
+                                e.name ?? "",
                                 style: txtBold(16),
                               ),
                               vpad(4),
@@ -164,24 +173,23 @@ class _HistoryTabState extends State<HistoryTab> {
                                   TableRow(children: [
                                     Text('${S.of(context).hand_date}:'),
                                     Text(
-                                      e['hand_date'] as String,
+                                      Utils.dateFormat(
+                                          e.delivery_time ?? '', 1),
                                     ),
                                   ]),
                                   TableRow(children: [vpad(2), vpad(2)]),
                                   TableRow(children: [
                                     Text('${S.of(context).hand_time}:'),
                                     Text(
-                                      e['hand_time'] as String,
+                                      e.appointment_time ?? '',
                                     ),
                                   ]),
                                   TableRow(children: [vpad(2), vpad(2)]),
                                   TableRow(children: [
                                     Text('${S.of(context).status}:'),
-                                    Text(genStatus(e['status'] as String),
-                                        style: txtBold(
-                                            14,
-                                            genStatusColor(
-                                                e['status'] as String)))
+                                    Text(e.s!.name ?? "",
+                                        style: txtBold(14,
+                                            genStatusColor(e.status as String)))
                                   ]),
                                 ],
                               )
@@ -197,13 +205,12 @@ class _HistoryTabState extends State<HistoryTab> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                            color:
-                                (genStatusColor(e['ticket_status'] as String)),
+                            color: (genStatusColor(e.status as String)),
                             borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(8))),
                         child: Text(
-                          genStatus(e['ticket_status'] as String),
+                          e.s!.name ?? "",
                           style: txtSemiBold(12, Colors.white),
                         ),
                       ),

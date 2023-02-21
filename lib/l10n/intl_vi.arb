@@ -521,5 +521,7 @@
   "file_downloading": "Đang tải file xuống",
   "start_chat": "Bắt đầu cuộc trò chuyện!",
   "end_chat": "Kết thúc cuộc trò chuyện!",
-  "confirm_end_chat": "Bạn chắc chắn muốn kết thúc cuộc trò chuyện."
+  "confirm_end_chat": "Bạn chắc chắn muốn kết thúc cuộc trò chuyện.",
+  "reflex": "Phản ánh",
+  "resident_reg": "Đăng ký cư dân"
 }

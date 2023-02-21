@@ -22,6 +22,11 @@ class ChatMessageInitial extends ChatMessageState {
   }
 
   final Map<String, MessageChat> messagesMap = {};
+
+  void registerGuestChat(String token, String name, String email) {
+    webSocketService.registerGuestChat(webSocketChannel!, token, name, email);
+  }
+
   void addMessage(MessageChat m) {
     messagesMap[m.id ?? ''] = m;
   }

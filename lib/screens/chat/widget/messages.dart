@@ -6,8 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/rocket_chat_data.dart';
-import '../bloc/chat_bloc.dart';
-import '../bloc/chat_message_bloc.dart';
 import 'message.dart';
 
 class Messages extends StatefulWidget {
@@ -70,33 +68,7 @@ class _MessagesState extends State<Messages> {
                   ),
                 )
               ],
-            )
-
-            // ScrollablePositionedList.builder(
-            //   initialScrollIndex:
-            //       widget.messages.isNotEmpty ? widget.messages.length - 1 : 0,
-            //   shrinkWrap: true,
-            //   itemCount: widget.messages.length,
-            //   itemBuilder: (context, index) {
-            //     widget.messageBloc.setMessageCount(widget.messages.length);
-            //     if (index != -1) {
-            //       return Message(
-            //         shouldTriggerChange: changeNotifier.stream,
-            //         isMe: widget.messageBloc.user!.id ==
-            //             widget.messages[index].u!.id,
-            //         d: DateTime.now(),
-            //         fullName: fullName ?? "",
-            //         message: widget.messages[index].msg ?? "",
-            //         avatar: avatar,
-            //       );
-            //     } else {
-            //       return vpad(0);
-            //     }
-            //   },
-            //   itemScrollController: widget.messageBloc.itemScrollController,
-            //   itemPositionsListener: widget.messageBloc.itemPositionsListener,
-            // ),
-            ),
+            )),
       ),
     );
   }

@@ -11,6 +11,7 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  avatar,
   setting,
   calendar_block,
   star,

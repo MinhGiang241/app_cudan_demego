@@ -32,42 +32,6 @@ class FeedbackHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: primaryColorBase.withOpacity(0.25),
-                          offset: const Offset(0, 16))
-                    ],
-                  ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.feedback,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.blue,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      // Utils.pushScreen(context, const ParkingCardListScreen());
-                    },
-                  ),
-                ),
-                vpad(12),
-                Text(
-                  S.of(context).feedback,
-                  textAlign: TextAlign.center,
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
                           color: yellowColor.withOpacity(0.25),
                           offset: const Offset(0, 16))
                     ],
@@ -85,9 +49,45 @@ class FeedbackHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).complain,
+                Text(S.of(context).reflex,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase))
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 85,
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          blurStyle: BlurStyle.normal,
+                          spreadRadius: 1,
+                          blurRadius: 24,
+                          color: greenColorBase.withOpacity(0.25),
+                          offset: const Offset(0, 16))
+                    ],
+                  ),
+                  child: PrimaryIcon(
+                    icons: PrimaryIcons.avatar,
+                    style: PrimaryIconStyle.gradient,
+                    gradients: PrimaryIconGradient.green,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(12),
+                    size: 32,
+                    onTap: () {
+                      // Utils.pushScreen(context, const ParkingCardListScreen());
+                    },
+                  ),
+                ),
+                vpad(12),
+                Text(
+                  S.of(context).resident_reg,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),

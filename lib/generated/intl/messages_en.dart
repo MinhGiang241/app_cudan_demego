@@ -549,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
+        "reflex": MessageLookupByLibrary.simpleMessage("Reflection"),
         "reg_code": MessageLookupByLibrary.simpleMessage("Registration code"),
         "reg_const":
             MessageLookupByLibrary.simpleMessage("Registration construction"),
@@ -619,6 +620,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Residence news"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Resident information"),
+        "resident_reg":
+            MessageLookupByLibrary.simpleMessage("Resident registration"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "returned": MessageLookupByLibrary.simpleMessage("Returned"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(

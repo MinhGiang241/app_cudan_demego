@@ -554,6 +554,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
         "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
+        "reflex": MessageLookupByLibrary.simpleMessage("Phản ánh"),
         "reg_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "reg_const": MessageLookupByLibrary.simpleMessage("Đăng ký thi công"),
         "reg_date": MessageLookupByLibrary.simpleMessage("Ngày đăng ký"),
@@ -622,6 +623,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cư dân"),
+        "resident_reg": MessageLookupByLibrary.simpleMessage("Đăng ký cư dân"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
         "returned": MessageLookupByLibrary.simpleMessage("Đã trả"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(

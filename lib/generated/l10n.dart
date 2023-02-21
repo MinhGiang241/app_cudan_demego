@@ -5269,6 +5269,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Reflection`
+  String get reflex {
+    return Intl.message(
+      'Reflection',
+      name: 'reflex',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident registration`
+  String get resident_reg {
+    return Intl.message(
+      'Resident registration',
+      name: 'resident_reg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
