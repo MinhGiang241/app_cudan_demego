@@ -62,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
+        "add_reflection":
+            MessageLookupByLibrary.simpleMessage("Create feedback"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Resister new card"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
@@ -120,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Comming soon"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
+        "complain_reason":
+            MessageLookupByLibrary.simpleMessage("Complain reason"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_cancel_request": m0,
         "confirm_delete_letter": m1,
@@ -169,10 +173,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
         "create_acc_1":
             MessageLookupByLibrary.simpleMessage("Create an account"),
+        "created_date": MessageLookupByLibrary.simpleMessage("Created date"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
         "customer_care": MessageLookupByLibrary.simpleMessage("Customer care"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "date_send": MessageLookupByLibrary.simpleMessage("Send date"),
         "debt": MessageLookupByLibrary.simpleMessage("Payment, debt remind"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delete_letter": MessageLookupByLibrary.simpleMessage("Delete letter"),
@@ -259,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "event_notification":
             MessageLookupByLibrary.simpleMessage("Event_notification"),
         "executed": MessageLookupByLibrary.simpleMessage("Executing"),
+        "executing": MessageLookupByLibrary.simpleMessage("Executing"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Existing drawing"),
         "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -356,6 +363,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "letter_info":
+            MessageLookupByLibrary.simpleMessage("Letter infomation"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Letter code"),
         "letter_status": MessageLookupByLibrary.simpleMessage("Letter status"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
@@ -388,6 +397,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Need protection support"),
         "new_pass": MessageLookupByLibrary.simpleMessage("New Password"),
         "new_resident": MessageLookupByLibrary.simpleMessage("New resident"),
+        "newl": MessageLookupByLibrary.simpleMessage("New"),
         "news": MessageLookupByLibrary.simpleMessage("News"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_acc":
@@ -416,6 +426,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any pet registration"),
         "no_pick_obj": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any picked object"),
+        "no_reflection":
+            MessageLookupByLibrary.simpleMessage("No have any feedback"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any construction registration"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
@@ -539,6 +551,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can only upload file jpeg, jpg, png"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
+        "processing_content":
+            MessageLookupByLibrary.simpleMessage("Processing Content"),
+        "processing_result":
+            MessageLookupByLibrary.simpleMessage("Processing result"),
         "project": MessageLookupByLibrary.simpleMessage("Project"),
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load Failed!Click retry!"),
@@ -549,6 +565,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
+        "reflection_details":
+            MessageLookupByLibrary.simpleMessage("Reflection details"),
+        "reflection_reason":
+            MessageLookupByLibrary.simpleMessage("Reflection reason"),
+        "reflection_reason_not_empty": MessageLookupByLibrary.simpleMessage(
+            "reflection reason can\'t not be empty"),
+        "reflection_type":
+            MessageLookupByLibrary.simpleMessage("Reflection type"),
         "reflex": MessageLookupByLibrary.simpleMessage("Reflection"),
         "reg_code": MessageLookupByLibrary.simpleMessage("Registration code"),
         "reg_const":
@@ -656,6 +680,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),
+        "send_reflection":
+            MessageLookupByLibrary.simpleMessage("Send feedback "),
         "send_request": MessageLookupByLibrary.simpleMessage("Send request"),
         "send_to_email":
             MessageLookupByLibrary.simpleMessage("Send OTP to email"),

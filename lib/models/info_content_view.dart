@@ -53,6 +53,10 @@ genStatus(String status) {
       return S.current.wait_execute;
     case "EXECUTED":
       return S.current.executed;
+    case "COMPLAIN":
+      return S.current.complain;
+    case "FEEDBACK":
+      return S.current.feedback;
     default:
       return '';
   }
@@ -96,6 +100,10 @@ Color genStatusColor(String status) {
       return yellowColor7;
     case "EXECUTED":
       return greenColor8;
+    case "COMPLAIN":
+      return redColorBase;
+    case "FEEDBACK":
+      return yellowColor1;
     default:
       return grayScaleColor1;
   }

@@ -523,5 +523,20 @@
   "end_chat": "Kết thúc cuộc trò chuyện!",
   "confirm_end_chat": "Bạn chắc chắn muốn kết thúc cuộc trò chuyện.",
   "reflex": "Phản ánh",
-  "resident_reg": "Đăng ký cư dân"
+  "resident_reg": "Đăng ký cư dân",
+  "executing": "Đang xử lý",
+  "newl": "Mới",
+  "no_reflection": "Không có biên góp ý hay khiếu nại nào",
+  "created_date": "Ngày tạo",
+  "add_reflection": "Thêm mới phản ánh",
+  "reflection_reason": "Lý do phản ánh",
+  "complain_reason": "Lý do khiếu nại",
+  "send_reflection": "Gửi phản ánh ",
+  "reflection_reason_not_empty": "Lý do phản ánh không được để trống",
+  "letter_info": "Thông tin phiếu",
+  "date_send": "Ngày gửi",
+  "processing_result": "Kết quả xử lý",
+  "processing_content": "Nội dung  xử lý",
+  "reflection_type": "Loại phản ánh",
+  "reflection_details": "Chi tiết phản ánh"
 }

@@ -5289,6 +5289,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Executing`
+  String get executing {
+    return Intl.message(
+      'Executing',
+      name: 'executing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get newl {
+    return Intl.message(
+      'New',
+      name: 'newl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No have any feedback`
+  String get no_reflection {
+    return Intl.message(
+      'No have any feedback',
+      name: 'no_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Created date`
+  String get created_date {
+    return Intl.message(
+      'Created date',
+      name: 'created_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create feedback`
+  String get add_reflection {
+    return Intl.message(
+      'Create feedback',
+      name: 'add_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reflection reason`
+  String get reflection_reason {
+    return Intl.message(
+      'Reflection reason',
+      name: 'reflection_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complain reason`
+  String get complain_reason {
+    return Intl.message(
+      'Complain reason',
+      name: 'complain_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send feedback `
+  String get send_reflection {
+    return Intl.message(
+      'Send feedback ',
+      name: 'send_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `reflection reason can't not be empty`
+  String get reflection_reason_not_empty {
+    return Intl.message(
+      'reflection reason can\'t not be empty',
+      name: 'reflection_reason_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Letter infomation`
+  String get letter_info {
+    return Intl.message(
+      'Letter infomation',
+      name: 'letter_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send date`
+  String get date_send {
+    return Intl.message(
+      'Send date',
+      name: 'date_send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing result`
+  String get processing_result {
+    return Intl.message(
+      'Processing result',
+      name: 'processing_result',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing Content`
+  String get processing_content {
+    return Intl.message(
+      'Processing Content',
+      name: 'processing_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reflection type`
+  String get reflection_type {
+    return Intl.message(
+      'Reflection type',
+      name: 'reflection_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reflection details`
+  String get reflection_details {
+    return Intl.message(
+      'Reflection details',
+      name: 'reflection_details',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

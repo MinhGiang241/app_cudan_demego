@@ -522,5 +522,20 @@
   "end_chat": "End conversation!",
   "confirm_end_chat": "Do you want to end this conversation.",
   "reflex": "Reflection",
-  "resident_reg": "Resident registration"
+  "resident_reg": "Resident registration",
+  "executing": "Executing",
+  "newl": "New",
+  "no_reflection": "No have any feedback",
+  "created_date": "Created date",
+  "add_reflection": "Create feedback",
+  "reflection_reason": "Reflection reason",
+  "complain_reason": "Complain reason",
+  "send_reflection": "Send feedback ",
+  "reflection_reason_not_empty": "reflection reason can't not be empty",
+  "letter_info": "Letter infomation",
+  "date_send": "Send date",
+  "processing_result": "Processing result",
+  "processing_content": "Processing Content",
+  "reflection_type": "Reflection type",
+  "reflection_details": "Reflection details"
 }

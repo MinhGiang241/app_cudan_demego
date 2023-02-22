@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
+        "add_reflection":
+            MessageLookupByLibrary.simpleMessage("Thêm mới phản ánh"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
@@ -123,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Sắp diễn ra"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
+        "complain_reason":
+            MessageLookupByLibrary.simpleMessage("Lý do khiếu nại"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirm_cancel_request": m0,
         "confirm_delete_letter": m1,
@@ -167,11 +171,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
         "create_acc_1": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
+        "created_date": MessageLookupByLibrary.simpleMessage("Ngày tạo"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
         "customer_care":
             MessageLookupByLibrary.simpleMessage("Chăm sóc khách hàng"),
         "date": MessageLookupByLibrary.simpleMessage("Ngày"),
+        "date_send": MessageLookupByLibrary.simpleMessage("Ngày gửi"),
         "debt": MessageLookupByLibrary.simpleMessage("Thu tiền, nhắc nợ"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
         "delete_letter": MessageLookupByLibrary.simpleMessage("Xóa phiếu"),
@@ -262,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "event_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo sự kiện, tin tức"),
         "executed": MessageLookupByLibrary.simpleMessage("Đã xử lý"),
+        "executing": MessageLookupByLibrary.simpleMessage("Đang xử lý"),
         "exist_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ hiện trạng"),
         "existed_drawing_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -358,6 +365,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "letter_info": MessageLookupByLibrary.simpleMessage("Thông tin phiếu"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Mã phiếu"),
         "letter_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phiếu"),
@@ -390,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cần bảo vệ hỗ trợ"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "new_resident": MessageLookupByLibrary.simpleMessage("Cư dân mới"),
+        "newl": MessageLookupByLibrary.simpleMessage("Mới"),
         "news": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "no_acc":
@@ -420,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có đăng ký vật nuôi nào"),
         "no_pick_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
+        "no_reflection": MessageLookupByLibrary.simpleMessage(
+            "Không có biên góp ý hay khiếu nại nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký thi công nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
@@ -545,6 +556,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chỉ có thể upload file jpeg, jpg, png"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
+        "processing_content":
+            MessageLookupByLibrary.simpleMessage("Nội dung  xử lý"),
+        "processing_result":
+            MessageLookupByLibrary.simpleMessage("Kết quả xử lý"),
         "project": MessageLookupByLibrary.simpleMessage("Dự án"),
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load thất bại"),
@@ -554,6 +569,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
         "reflection": MessageLookupByLibrary.simpleMessage("Góc phản ánh"),
+        "reflection_details":
+            MessageLookupByLibrary.simpleMessage("Chi tiết phản ánh"),
+        "reflection_reason":
+            MessageLookupByLibrary.simpleMessage("Lý do phản ánh"),
+        "reflection_reason_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Lý do phản ánh không được để trống"),
+        "reflection_type":
+            MessageLookupByLibrary.simpleMessage("Loại phản ánh"),
         "reflex": MessageLookupByLibrary.simpleMessage("Phản ánh"),
         "reg_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "reg_const": MessageLookupByLibrary.simpleMessage("Đăng ký thi công"),
@@ -657,6 +680,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Gửi mã để đặt lại mật khẩu về"),
+        "send_reflection":
+            MessageLookupByLibrary.simpleMessage("Gửi phản ánh "),
         "send_request": MessageLookupByLibrary.simpleMessage("Gửi duyệt"),
         "send_to_email":
             MessageLookupByLibrary.simpleMessage("Gửi mã về email"),

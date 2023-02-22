@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../services/reflection/reflection_screen.dart';
 import 'home_title_widget.dart';
 
 class FeedbackHome extends StatelessWidget {
@@ -45,6 +46,7 @@ class FeedbackHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       // Utils.pushScreen(context, const ResidentCardListScreen());
+                      Navigator.pushNamed(context, ReflectionScreen.routeName);
                     },
                   ),
                 ),
