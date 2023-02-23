@@ -5439,6 +5439,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Zone`
+  String get zone {
+    return Intl.message(
+      'Zone',
+      name: 'zone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zone type`
+  String get zone_type {
+    return Intl.message(
+      'Zone type',
+      name: 'zone_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident reaction`
+  String get res_reaction {
+    return Intl.message(
+      'Resident reaction',
+      name: 'res_reaction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new reflection successfully`
+  String get success_add_ticket {
+    return Intl.message(
+      'Add new reflection successfully',
+      name: 'success_add_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send reflection successfully`
+  String get success_send_ticket {
+    return Intl.message(
+      'Send reflection successfully',
+      name: 'success_send_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pin`
+  String get pin {
+    return Intl.message(
+      'Pin',
+      name: 'pin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Building`
+  String get building {
+    return Intl.message(
+      'Building',
+      name: 'building',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

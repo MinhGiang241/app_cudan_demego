@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
+        "building": MessageLookupByLibrary.simpleMessage("Building"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -549,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can only upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx"),
         "pick_image_error": MessageLookupByLibrary.simpleMessage(
             "You can only upload file jpeg, jpg, png"),
+        "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "processing_content":
@@ -630,6 +632,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Resident image can not empty"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
+        "res_reaction":
+            MessageLookupByLibrary.simpleMessage("Resident reaction"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Reset password"),
         "reset_pass_success": MessageLookupByLibrary.simpleMessage(
@@ -723,6 +727,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "success_add_ticket": MessageLookupByLibrary.simpleMessage(
+            "Add new reflection successfully"),
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_cr_new":
@@ -745,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send letter successfully"),
         "success_send_req": MessageLookupByLibrary.simpleMessage(
             "Send to approve request letter successfully"),
+        "success_send_ticket": MessageLookupByLibrary.simpleMessage(
+            "Send reflection successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Surface"),
@@ -829,6 +837,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "work_description":
             MessageLookupByLibrary.simpleMessage("Work description"),
         "worker_num": MessageLookupByLibrary.simpleMessage("Worker amount"),
-        "year": MessageLookupByLibrary.simpleMessage("Year")
+        "year": MessageLookupByLibrary.simpleMessage("Year"),
+        "zone": MessageLookupByLibrary.simpleMessage("Zone"),
+        "zone_type": MessageLookupByLibrary.simpleMessage("Zone type")
       };
 }

@@ -29,7 +29,7 @@ String _getStatus(int index) {
     case 0:
       return "ALL";
     case 1:
-      return "WAIT_PROCESS";
+      return "WAIT_PROGRESS";
     case 2:
       return "PROCESSING";
     case 3:
@@ -125,6 +125,13 @@ class _ReflectionTabState extends State<ReflectionTab> {
                               children: [
                                 vpad(10),
                                 Text(
+                                  // (e.ticket_type == "COMPLAIN"
+                                  //         ? e.complainReason != null
+                                  //             ? e.complainReason!.content
+                                  //             : ""
+                                  //         : e.opinionContribute != null
+                                  //             ? e.opinionContribute!.content
+                                  //             : "") ??
                                   e.opinionContribute!.content ?? "",
                                   style: txtBold(16),
                                 ),
@@ -185,7 +192,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
                     ],
                   );
                 }),
-                vpad(40),
+                vpad(80),
               ],
             ));
       },

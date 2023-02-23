@@ -537,5 +537,12 @@
   "processing_result": "Processing result",
   "processing_content": "Processing Content",
   "reflection_type": "Reflection type",
-  "reflection_details": "Reflection details"
+  "reflection_details": "Reflection details",
+  "zone": "Zone",
+  "zone_type": "Zone type",
+  "res_reaction": "Resident reaction",
+  "success_add_ticket": "Add new reflection successfully",
+  "success_send_ticket": "Send reflection successfully",
+  "pin": "Pin",
+  "building": "Building"
 }

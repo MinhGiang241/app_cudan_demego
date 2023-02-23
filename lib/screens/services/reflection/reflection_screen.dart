@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -28,19 +29,24 @@ class _ReflectionScreenState extends State<ReflectionScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 6, vsync: this);
   var initIndex = 0;
+  bool init = true;
   final isDialOpen = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (arg != null && arg['initTab'] != null && init) {
+      initIndex = arg['initTab'];
+    }
     return ChangeNotifierProvider(
       create: (context) => ReflectionPrv(),
       builder: (context, builder) {
-        tabController.index = context.read<ReflectionPrv>().initIndex;
+        tabController.index = initIndex;
         return PrimaryScreen(
             appBar: PrimaryAppbar(
-              // leading: BackButton(
-              //   onPressed: () => Navigator.pushReplacementNamed(
-              //       context, ServiceScreen.routeName),
-              // ),
+              leading: BackButton(
+                onPressed: () => Navigator.pushReplacementNamed(
+                    context, HomeScreen.routeName),
+              ),
               title: S.of(context).reflection,
               tabController: tabController,
               isTabScrollabel: true,
@@ -65,6 +71,7 @@ class _ReflectionScreenState extends State<ReflectionScreen>
                           onConfirm: (v) {
                             context.read<ReflectionPrv>().onChooseMonthYear(v);
                             setState(() {
+                              init = false;
                               initIndex = tabController.index;
                             });
                           },
@@ -89,10 +96,10 @@ class _ReflectionScreenState extends State<ReflectionScreen>
             floatingActionButton: FloatingActionButton(
               tooltip: S.of(context).add_new,
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  CreateReflection.routeName,
-                );
+                Navigator.pushNamed(context, CreateReflection.routeName,
+                    arguments: {
+                      "isEdit": false,
+                    });
               },
               backgroundColor: primaryColorBase,
               child: const Icon(
@@ -132,7 +139,7 @@ class _ReflectionScreenState extends State<ReflectionScreen>
             //       ),
             //     ]),
             body: SafeArea(
-              child: TabBarView(controller: tabController, children: [
+              child: TabBarView(controller: tabController, children: const [
                 ReflectionTab(
                   tabIndex: 0,
                 ),

@@ -29,6 +29,7 @@ var items = data.asMap().entries.map((v) {
 class PrimaryDropDown extends StatefulWidget {
   PrimaryDropDown({
     super.key,
+    this.dropKey,
     this.label,
     this.isRequired = false,
     this.value,
@@ -49,6 +50,7 @@ class PrimaryDropDown extends StatefulWidget {
   final bool isDense;
   final bool isRequired;
   final bool isMultiple;
+  final GlobalKey<FormFieldState>? dropKey;
   final String? Function(dynamic)? validator;
   dynamic value;
   String? validateString;
@@ -113,6 +115,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 child: Column(
                   children: [
                     DropdownButtonFormField<dynamic>(
+                      key: widget.dropKey,
                       borderRadius: BorderRadius.circular(12),
                       isDense: widget.isDense,
                       menuMaxHeight: dvHeight(context) / 3,

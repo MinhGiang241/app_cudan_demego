@@ -526,7 +526,7 @@
   "resident_reg": "Đăng ký cư dân",
   "executing": "Đang xử lý",
   "newl": "Mới",
-  "no_reflection": "Không có biên góp ý hay khiếu nại nào",
+  "no_reflection": "Không có góp ý hay khiếu nại nào",
   "created_date": "Ngày tạo",
   "add_reflection": "Thêm mới phản ánh",
   "reflection_reason": "Lý do phản ánh",
@@ -538,5 +538,12 @@
   "processing_result": "Kết quả xử lý",
   "processing_content": "Nội dung  xử lý",
   "reflection_type": "Loại phản ánh",
-  "reflection_details": "Chi tiết phản ánh"
+  "reflection_details": "Chi tiết phản ánh",
+  "zone": "Khu vực",
+  "zone_type": "Loại khu vực",
+  "res_reaction": "Tương tác cư dân",
+  "success_add_ticket": "Thêm mới phản hồi thành công",
+  "success_send_ticket": "Gửi phản hồi thành công",
+  "pin": "Chốt trực",
+  "building": "Tòa"
 }

@@ -27,6 +27,17 @@ class ChatMessageInitial extends ChatMessageState {
     webSocketService.registerGuestChat(webSocketChannel!, token, name, email);
   }
 
+  void sendMessageLiveChat(
+      String id, String rid, String token, String message) {
+    webSocketService.sendMessageLiveChat(
+        webSocketChannel!, id, rid, token, message);
+  }
+
+  void streamLiveChatRoom(String visitorToken, String id, String param) {
+    webSocketService.streamLiveChatRoom(
+        webSocketChannel!, visitorToken, id, param);
+  }
+
   void addMessage(MessageChat m) {
     messagesMap[m.id ?? ''] = m;
   }

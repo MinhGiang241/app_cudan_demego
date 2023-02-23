@@ -14,7 +14,7 @@ class FeedbackHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeTitleWidget(
-      title: S.of(context).reflection,
+      title: S.of(context).res_reaction,
       onTapShowAll: () {
         // Utils.pushScreen(context, const ListServicesScreen());
       },

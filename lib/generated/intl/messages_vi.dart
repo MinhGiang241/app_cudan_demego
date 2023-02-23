@@ -96,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
+        "building": MessageLookupByLibrary.simpleMessage("Tòa"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
         "camera": MessageLookupByLibrary.simpleMessage("Máy ảnh"),
@@ -430,7 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_pick_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
         "no_reflection": MessageLookupByLibrary.simpleMessage(
-            "Không có biên góp ý hay khiếu nại nào"),
+            "Không có góp ý hay khiếu nại nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký thi công nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
@@ -554,6 +555,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chỉ có thể upload file jpeg, jpg, png, pdf, doc, docx, xls, xlsx"),
         "pick_image_error": MessageLookupByLibrary.simpleMessage(
             "Bạn chỉ có thể upload file jpeg, jpg, png"),
+        "pin": MessageLookupByLibrary.simpleMessage("Chốt trực"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
         "processing_content":
@@ -632,6 +634,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh cư dân không được để trống"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Ảnh cư dân"),
+        "res_reaction":
+            MessageLookupByLibrary.simpleMessage("Tương tác cư dân"),
         "resend": MessageLookupByLibrary.simpleMessage("Gửi lại"),
         "reset_pass": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "reset_pass_success": MessageLookupByLibrary.simpleMessage(
@@ -723,6 +727,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Bước 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Bước 3"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "success_add_ticket": MessageLookupByLibrary.simpleMessage(
+            "Thêm mới phản hồi thành công"),
         "success_can_req": MessageLookupByLibrary.simpleMessage(
             "Hủy đăng ký phiếu thành công"),
         "success_cr_new":
@@ -745,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi duyệt phiếu thành công"),
         "success_send_req":
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
+        "success_send_ticket":
+            MessageLookupByLibrary.simpleMessage("Gửi phản hồi thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
@@ -827,6 +835,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mô tả công việc"),
         "worker_num":
             MessageLookupByLibrary.simpleMessage("Số lượng công nhân"),
-        "year": MessageLookupByLibrary.simpleMessage("Năm")
+        "year": MessageLookupByLibrary.simpleMessage("Năm"),
+        "zone": MessageLookupByLibrary.simpleMessage("Khu vực"),
+        "zone_type": MessageLookupByLibrary.simpleMessage("Loại khu vực")
       };
 }

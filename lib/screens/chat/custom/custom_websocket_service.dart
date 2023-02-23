@@ -261,7 +261,7 @@ class CustomWebSocketService {
           "token": token,
           "name": name,
           "email": email,
-          "department": "3jMKjTQJxCDxwxxtx"
+          // "department": "3jMKjTQJxCDxwxxtx"
         }
       ],
       "id": "5"
@@ -295,14 +295,14 @@ class CustomWebSocketService {
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 
-  void streamLiveChatRoom(
-      WebSocketChannel webSocketChannel, String visitorToken, String id) {
+  void streamLiveChatRoom(WebSocketChannel webSocketChannel,
+      String visitorToken, String id, String param) {
     Map msg = {
       "msg": "sub",
       "id": id,
       "name": "stream-room-messages",
       "params": [
-        "KTZqPAR9DQGxKcxzf",
+        param,
         {
           "useCollection": false,
           "args": [

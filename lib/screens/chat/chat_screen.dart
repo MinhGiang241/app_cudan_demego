@@ -73,6 +73,12 @@ class _ChatScreenState extends State<ChatScreen> {
                 state.webSocketChannel!,
                 WebsocketConnect.room,
               );
+              // state.registerGuestChat(
+              //     "sasdasd", "minhgiang", "minhgiang241@gmail.com");
+              // state.sendMessageLiveChat(
+              //     "sasdasd", "sasdasd", "sasdasd", "message");
+
+              // state.streamLiveChatRoom("sasdasd", "id", "param");
 
               return SafeArea(
                   child: Column(

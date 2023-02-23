@@ -107,7 +107,6 @@ class Reflection {
       'process_content': process_content,
       'priority_level': priority_level,
       'complaintReasonId': complaintReasonId,
-      'opinionContribute': opinionContribute?.toMap(),
       'files': files != null ? files!.map((x) => x.toMap()).toList() : [],
     };
   }
@@ -287,6 +286,7 @@ class ComplainReason {
   String? content;
   String? description;
   String? code;
+  String? display_name;
   ComplainReason({
     this.id,
     this.createdTime,
@@ -294,6 +294,7 @@ class ComplainReason {
     this.content,
     this.description,
     this.code,
+    this.display_name,
   });
 
   Map<String, dynamic> toMap() {
@@ -304,6 +305,7 @@ class ComplainReason {
       'content': content,
       'description': description,
       'code': code,
+      'display_name': display_name,
     };
   }
 
@@ -318,6 +320,8 @@ class ComplainReason {
       description:
           map['description'] != null ? map['description'] as String : null,
       code: map['code'] != null ? map['code'] as String : null,
+      display_name:
+          map['display_name'] != null ? map['display_name'] as String : null,
     );
   }
 
