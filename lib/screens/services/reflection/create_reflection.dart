@@ -1,35 +1,40 @@
-import 'package:app_cudan/screens/services/reflection/prv/reflection_prv.dart';
+import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/models/reflection.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
-import '../../../widgets/select_file_widget.dart';
 import '../../../widgets/select_media_widget.dart';
 import 'prv/create_reflection_prv.dart';
 
 class CreateReflection extends StatelessWidget {
   const CreateReflection({super.key});
   static const routeName = '/reflection/add';
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     var isEdit = arg['isEdit'] ?? false;
+    var status = arg['status'];
+    Reflection? ref = arg['ref'];
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-        title: S.of(context).add_reflection,
+        title: isEdit
+            ? S.of(context).reflection_details
+            : S.of(context).add_reflection,
       ),
       body: ChangeNotifierProvider(
-        create: (context) => CreateReflectionPrv(),
+        create: (context) => CreateReflectionPrv(ref),
         builder: (context, child) {
+          var isUpdate = context.watch<CreateReflectionPrv>().isUpdate;
+
           return FutureBuilder(
               future: context
                   .read<CreateReflectionPrv>()
@@ -88,7 +93,23 @@ class CreateReflection extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     children: [
                       vpad(12),
+                      if (isEdit)
+                        PrimaryTextField(
+                          label: S.of(context).letter_num,
+                          initialValue: ref?.code,
+                          enable: !isEdit,
+                        ),
+                      if (isEdit) vpad(12),
+                      if (isEdit)
+                        PrimaryTextField(
+                          label: S.of(context).date_send,
+                          initialValue:
+                              Utils.dateFormat(ref!.createdTime ?? "", 1),
+                          enable: !isEdit,
+                        ),
+                      if (isEdit) vpad(12),
                       PrimaryDropDown(
+                        enable: isUpdate,
                         isRequired: true,
                         validateString:
                             context.read<CreateReflectionPrv>().validateType,
@@ -102,6 +123,7 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       PrimaryDropDown(
+                        enable: isUpdate,
                         isRequired: true,
                         validateString:
                             context.read<CreateReflectionPrv>().validateReason,
@@ -116,6 +138,7 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       PrimaryTextField(
+                        enable: isUpdate,
                         label: S.of(context).note,
                         hint: S.of(context).note,
                         maxLines: 3,
@@ -124,6 +147,7 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       PrimaryDropDown(
+                        enable: isUpdate,
                         validator: Utils.emptyValidatorDropdown,
                         isRequired: true,
                         validateString: context
@@ -141,6 +165,7 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       PrimaryDropDown(
+                        enable: isUpdate,
                         validator: Utils.emptyValidatorDropdown,
                         validateString:
                             context.watch<CreateReflectionPrv>().validateZone,
@@ -157,6 +182,7 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       SelectMediaWidget(
+                        enable: isUpdate || !isEdit,
                         title: S.of(context).photos,
                         existImages:
                             context.watch<CreateReflectionPrv>().existedImage,
@@ -170,39 +196,87 @@ class CreateReflection extends StatelessWidget {
                             .read<CreateReflectionPrv>()
                             .onSelectImage(context),
                       ),
+                      vpad(12),
+                      if (isEdit)
+                        PrimaryTextField(
+                          textColor: genStatusColor(ref!.status ?? ""),
+                          label: S.of(context).status,
+                          enable: !isEdit,
+                          initialValue: ref.s!.name,
+                        ),
+                      if (isEdit && ref!.cancel_reason != null && ref.r != null)
+                        vpad(12),
+                      if (isEdit && ref!.cancel_reason != null && ref.r != null)
+                        PrimaryTextField(
+                          label: S.of(context).cancel_reason,
+                          enable: !isEdit,
+                          initialValue: ref.r!.name ?? "",
+                        ),
                       vpad(20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          PrimaryButton(
-                            isLoading: context
-                                .watch<CreateReflectionPrv>()
-                                .isAddNewLoading,
-                            buttonSize: ButtonSize.medium,
-                            text: isEdit
-                                ? S.of(context).update
-                                : S.of(context).add_new,
-                            onTap: () {
-                              context
-                                  .read<CreateReflectionPrv>()
-                                  .onSubmit(context, false);
-                            },
-                          ),
-                          PrimaryButton(
-                            isLoading: context
-                                .watch<CreateReflectionPrv>()
-                                .isSendApproveLoading,
-                            buttonSize: ButtonSize.medium,
-                            buttonType: ButtonType.green,
-                            text: S.of(context).send_reflection,
-                            onTap: () {
-                              context
-                                  .read<CreateReflectionPrv>()
-                                  .onSubmit(context, true);
-                            },
-                          ),
-                        ],
-                      ),
+                      if (status == "NEW" || !isEdit)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            PrimaryButton(
+                                buttonType: isEdit
+                                    ? isUpdate
+                                        ? ButtonType.cyan
+                                        : isEdit
+                                            ? ButtonType.yellow
+                                            : ButtonType.yellow
+                                    : null,
+                                isLoading: context
+                                    .watch<CreateReflectionPrv>()
+                                    .isAddNewLoading,
+                                buttonSize: ButtonSize.medium,
+                                text: !isEdit
+                                    ? S.of(context).add_new
+                                    : isUpdate
+                                        ? S.of(context).update
+                                        : S.of(context).edit,
+
+                                // isUpdate
+                                //     ? S.of(context).update
+                                //     : isEdit
+                                //         ? S.of(context).edit
+                                //         : S.of(context).add_new,
+                                onTap: () {
+                                  if (isUpdate) {
+                                    context
+                                        .read<CreateReflectionPrv>()
+                                        .onSubmit(context, false);
+                                  } else {
+                                    context
+                                        .read<CreateReflectionPrv>()
+                                        .enableUpdate();
+                                  }
+                                }),
+                            PrimaryButton(
+                              isLoading: context
+                                  .watch<CreateReflectionPrv>()
+                                  .isSendApproveLoading,
+                              buttonSize: ButtonSize.medium,
+                              buttonType: ButtonType.green,
+                              text: S.of(context).send_reflection,
+                              onTap: () {
+                                context
+                                    .read<CreateReflectionPrv>()
+                                    .onSubmit(context, true);
+                              },
+                            ),
+                          ],
+                        ),
+                      if (status == 'WAIT_PROGRESS')
+                        PrimaryButton(
+                          buttonType: ButtonType.red,
+                          isLoading: context
+                              .watch<CreateReflectionPrv>()
+                              .isCancelLoading,
+                          text: S.of(context).cancel_reflection,
+                          onTap: () => context
+                              .read<CreateReflectionPrv>()
+                              .cancelLetter(context),
+                        ),
                       vpad(40),
                     ],
                   ),

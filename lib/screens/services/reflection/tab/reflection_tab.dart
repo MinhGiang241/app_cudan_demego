@@ -15,6 +15,8 @@ import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
+import '../create_reflection.dart';
+import '../reflection_processed_details.dart';
 
 class ReflectionTab extends StatefulWidget {
   const ReflectionTab({super.key, required this.tabIndex});
@@ -101,8 +103,19 @@ class _ReflectionTabState extends State<ReflectionTab> {
                         margin: const EdgeInsets.only(
                             bottom: 16, left: 12, right: 12),
                         onTap: () {
-                          // Navigator.pushNamed(context, BookingScreen.routeName,
-                          //     arguments: {"book": false});
+                          if (e.status == 'PROCESSED') {
+                            Navigator.pushNamed(
+                                context, ReflectionProcessedDetails.routeName,
+                                arguments: e);
+                          } else {
+                            Navigator.pushNamed(
+                                context, CreateReflection.routeName,
+                                arguments: {
+                                  "isEdit": true,
+                                  "ref": e,
+                                  "status": e.status,
+                                });
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

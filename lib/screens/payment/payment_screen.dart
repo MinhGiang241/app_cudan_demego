@@ -174,24 +174,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   : "0 VND",
                               contentStyle: txtBold(13, grayScaleColorBase),
                             ),
-                            // if (e.vat != null)
-                            InfoContentView(
-                              title: S.of(context).vat,
-                              content: e.vat != null ? "${e.vat} %" : "0 %",
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            // if (e.discount_percent != null)
-                            InfoContentView(
-                              title: S.of(context).discount,
-                              content: e.discount_percent != null
-                                  ? e.discount_type == "Value"
-                                      ? formatCurrency
-                                          .format(e.discount_percent)
-                                          .replaceAll("₫", "VND")
-                                      : "${e.discount_percent} %"
-                                  : "0 VND",
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
+                            if (e.vat != null)
+                              InfoContentView(
+                                title: S.of(context).vat,
+                                content: e.vat != null ? "${e.vat} %" : "0 %",
+                                contentStyle: txtBold(13, grayScaleColorBase),
+                              ),
+                            if (e.discount_percent != null)
+                              InfoContentView(
+                                title: S.of(context).discount,
+                                content: e.discount_percent != null
+                                    ? e.discount_type == "Value"
+                                        ? formatCurrency
+                                            .format(e.discount_percent)
+                                            .replaceAll("₫", "VND")
+                                        : "${e.discount_percent} %"
+                                    : "0 VND",
+                                contentStyle: txtBold(13, grayScaleColorBase),
+                              ),
                             // InfoContentView(
                             //   title: S.of(context).discount_type,
                             //   content: e.discount_type == "Value"

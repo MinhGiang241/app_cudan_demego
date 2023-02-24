@@ -14,6 +14,7 @@ class AppTheme {
         },
       ),
       scaffoldBackgroundColor: backgroundColor,
+      disabledColor: grayScaleColor3,
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,

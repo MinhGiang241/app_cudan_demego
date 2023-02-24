@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../constants/constants.dart';
 
-enum ButtonType { primary, secondary, white, black, yellow, red, green }
+enum ButtonType { primary, secondary, white, black, yellow, red, green, cyan }
 
 enum ButtonSize { large, medium, small, xsmall }
 
@@ -155,6 +155,8 @@ class PrimaryButton extends StatelessWidget {
         return gradientPrimaryRed;
       case ButtonType.green:
         return gradientPrimaryGreen;
+      case ButtonType.cyan:
+        return gradientPrimaryCyan;
       default:
         return gradientPrimary;
     }

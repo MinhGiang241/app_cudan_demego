@@ -544,5 +544,7 @@
   "success_add_ticket": "Add new reflection successfully",
   "success_send_ticket": "Send reflection successfully",
   "pin": "Pin",
-  "building": "Building"
+  "building": "Building",
+  "attachment_file": "Attachment file",
+  "cancel_reflection": "Cancel reflection"
 }

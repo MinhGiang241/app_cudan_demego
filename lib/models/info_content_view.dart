@@ -96,7 +96,7 @@ Color genStatusColor(String status) {
       return yellowColor7;
     case "HANDED_OVER":
       return greenColor8;
-    case "WAIT_EXECUTE":
+    case "WAIT_PROGRESS":
       return yellowColor7;
     case "EXECUTED":
       return greenColor8;
@@ -104,6 +104,10 @@ Color genStatusColor(String status) {
       return redColorBase;
     case "FEEDBACK":
       return yellowColor1;
+    case "PROCESSING":
+      return primaryColor6;
+    case "PROCESSED":
+      return greenColor6;
     default:
       return grayScaleColor1;
   }

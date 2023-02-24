@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:app_cudan/models/reason.dart';
+
 import 'status.dart';
 
 // ignore_for_file: non_constant_identifier_names
@@ -16,6 +18,8 @@ class Reflection {
   String? opinionContributeId;
   String? status;
   String? code;
+  String? opinion_note;
+  String? description;
   String? staff_create;
   String? type_handle;
   bool? isMobile;
@@ -35,12 +39,23 @@ class Reflection {
   String? process_content;
   String? priority_level;
   String? complaintReasonId;
+  String? areaId;
+  String? areaTypeId;
+  String? cancel_reason;
+  Reason? r;
   ComplainReason? complainReason;
   Status? s;
   OpinionContribute? opinionContribute;
   List<FileTicket>? files;
+  List<FileTicket>? document;
   Reflection(
       {this.id,
+      this.r,
+      this.description,
+      this.opinion_note,
+      this.cancel_reason,
+      this.areaId,
+      this.areaTypeId,
       this.complainReason,
       this.complaintReasonId,
       this.createdTime,
@@ -73,6 +88,7 @@ class Reflection {
       this.s,
       this.opinionContribute,
       this.files,
+      this.document,
       this.priority_level});
 
   Map<String, dynamic> toMap() {
@@ -106,8 +122,15 @@ class Reflection {
       'position_handle': position_handle,
       'process_content': process_content,
       'priority_level': priority_level,
+      'areaId': areaId,
+      'areaTypeId': areaTypeId,
+      'cancel_reason': cancel_reason,
+      'opinion_note': opinion_note,
+      'description': description,
       'complaintReasonId': complaintReasonId,
       'files': files != null ? files!.map((x) => x.toMap()).toList() : [],
+      'document':
+          document != null ? document!.map((x) => x.toMap()).toList() : [],
     };
   }
 
@@ -180,8 +203,17 @@ class Reflection {
             ? map['process_content'] as String
             : null,
         priority_level: map['priority_level'] != null
-            ? map['process_content'] as String
+            ? map['priority_level'] as String
             : null,
+        description:
+            map['description'] != null ? map['description'] as String : null,
+        areaId: map['areaId'] != null ? map['areaId'] as String : null,
+        areaTypeId:
+            map['areaTypeId'] != null ? map['areaTypeId'] as String : null,
+        cancel_reason: map['cancel_reason'] != null
+            ? map['cancel_reason'] as String
+            : null,
+        r: map['r'] != null ? Reason.fromJson(map['r']) : null,
         opinionContribute: map['opinionContribute'] != null
             ? OpinionContribute.fromMap(
                 map['opinionContribute'] as Map<String, dynamic>)
@@ -192,6 +224,11 @@ class Reflection {
             : null,
         files: map['files'] != null
             ? map['files']
+                .map<FileTicket>((i) => FileTicket.fromMap(i))
+                .toList()
+            : [],
+        document: map['document'] != null
+            ? map['document']
                 .map<FileTicket>((i) => FileTicket.fromMap(i))
                 .toList()
             : [],

@@ -21,6 +21,7 @@ class SelectMediaWidget extends StatelessWidget {
       this.onRemove,
       this.onRemoveExist,
       this.isDash = true,
+      this.enable = true,
       this.isRequired = false})
       : super(key: key);
   final String? title;
@@ -31,6 +32,7 @@ class SelectMediaWidget extends StatelessWidget {
   final Function(int)? onRemoveExist;
   final bool isRequired;
   final bool isDash;
+  final bool enable;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,7 +40,7 @@ class SelectMediaWidget extends StatelessWidget {
         Row(
           children: [
             DashButton(
-              isDash: isDash,
+              isDash: isDash && enable,
               text: S.of(context).add_photo,
               lable: title,
               isRequired: isRequired,
@@ -66,20 +68,21 @@ class SelectMediaWidget extends StatelessWidget {
                                         path:
                                             '${ApiConstants.uploadURL}/?load=${e.value.id!}',
                                       )),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        onRemoveExist?.call(e.key);
-                                      },
-                                    ),
-                                  )
+                                  if (enable)
+                                    Positioned(
+                                      top: 2,
+                                      right: 2,
+                                      child: PrimaryIcon(
+                                        icons: PrimaryIcons.close,
+                                        style: PrimaryIconStyle.gradient,
+                                        gradients: PrimaryIconGradient.red,
+                                        color: Colors.white,
+                                        padding: const EdgeInsets.all(4),
+                                        onTap: () {
+                                          onRemoveExist?.call(e.key);
+                                        },
+                                      ),
+                                    )
                                 ],
                               )),
                         ),

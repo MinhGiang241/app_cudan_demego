@@ -545,5 +545,7 @@
   "success_add_ticket": "Thêm mới phản hồi thành công",
   "success_send_ticket": "Gửi phản hồi thành công",
   "pin": "Chốt trực",
-  "building": "Tòa"
+  "building": "Tòa",
+  "attachment_file": "Tài liệu đính kèm",
+  "cancel_reflection": "Hủy phản ánh"
 }

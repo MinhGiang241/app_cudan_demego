@@ -43,6 +43,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.isError = false,
     this.isDense = true,
     this.controller,
+    this.enable = true,
   });
   final bool isError;
   final String? label;
@@ -53,6 +54,7 @@ class PrimaryDropDown extends StatefulWidget {
   final GlobalKey<FormFieldState>? dropKey;
   final String? Function(dynamic)? validator;
   dynamic value;
+  bool enable;
   String? validateString;
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
@@ -171,15 +173,17 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                           borderSide: BorderSide.none,
                         ),
                       ),
-                      onChanged: widget.onChange ??
-                          (v) {
-                            if (widget.controller != null) {
-                              widget.controller!.text = v;
-                            }
-                            if (widget.value != null) {
-                              widget.value = v.toString();
-                            }
-                          },
+                      onChanged: widget.enable
+                          ? (widget.onChange) ??
+                              (v) {
+                                if (widget.controller != null) {
+                                  widget.controller!.text = v;
+                                }
+                                if (widget.value != null) {
+                                  widget.value = v.toString();
+                                }
+                              }
+                          : null,
                       items: widget.selectList ?? items,
                     ),
                   ],

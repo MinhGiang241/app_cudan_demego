@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:app_cudan/models/area.dart';
@@ -13,7 +15,30 @@ import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 
 class CreateReflectionPrv extends ChangeNotifier {
-  var existedImage = [];
+  CreateReflectionPrv(this.ref) {
+    if (ref != null) {
+      ticketId = ref!.id;
+      ticketCode = ref!.code;
+      existedImage = ref!.files ?? [];
+      typeController.text = ref!.ticket_type!;
+      reasonController.text = ref!.opinionContributeId ?? "";
+      noteController.text = ref!.description ?? "";
+      zoneTypeController.text = ref!.areaTypeId ?? "";
+      if (ref!.areaTypeId != null) {
+        getListAreaByType(ref!.areaTypeId).then((_) {
+          zoneController.text = ref!.areaId ?? "";
+          notifyListeners();
+        });
+      }
+    } else {
+      isUpdate = true;
+    }
+  }
+  bool isUpdate = false;
+  Reflection? ref;
+  List<FileTicket> existedImage = [];
+  String? ticketId;
+  String? ticketCode;
   List<Area> areas = [];
   List<File> images = [];
   List<FileTicket> submitedImages = [];
@@ -23,6 +48,8 @@ class CreateReflectionPrv extends ChangeNotifier {
   bool autoValid = false;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
+  bool isCancelLoading = false;
+
   final TextEditingController typeController = TextEditingController();
   final TextEditingController reasonController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -33,6 +60,32 @@ class CreateReflectionPrv extends ChangeNotifier {
   String? validateZone;
   String? validateZoneType;
   final GlobalKey<FormFieldState> dropdownKey = GlobalKey<FormFieldState>();
+  enableUpdate() {
+    isUpdate = true;
+    notifyListeners();
+  }
+
+  cancelLetter(BuildContext context) async {
+    isCancelLoading = true;
+    notifyListeners();
+    ref!.status = 'CANCEL';
+    ref!.cancel_reason = 'NGUOIDUNGHUY';
+    APIReflection.changeStatus(ref!.toMap()).then((v) {
+      isCancelLoading = false;
+      Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_can_req,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, ReflectionScreen.routeName, (route) => route.isFirst,
+                arguments: {'initTab': 5});
+          });
+    }).catchError((e) {
+      isCancelLoading = false;
+      Utils.showErrorMessage(context, e);
+    });
+    notifyListeners();
+  }
 
   onSubmit(BuildContext context, bool isSend) async {
     autoValid = true;
@@ -46,6 +99,7 @@ class CreateReflectionPrv extends ChangeNotifier {
           context.read<ResidentInfoPrv>().userInfo!.phone_required;
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var resident_code = context.read<ResidentInfoPrv>().userInfo!.code;
+
       await uploadImage(context);
       // var newOpinion = OpinionContribute(
       //   content: noteController.text.trim(),
@@ -53,6 +107,8 @@ class CreateReflectionPrv extends ChangeNotifier {
       // );
       // await APIReflection.saveOpinionContribute(newOpinion.toMap()).then((v) {
       var newTicket = Reflection(
+        id: ticketId,
+        code: ticketCode,
         apartmentId: apartmentId,
         opinionContributeId: reasonController.text.trim(),
         // complaintReasonId: typeController.text == "COMPLAIN"
@@ -60,25 +116,30 @@ class CreateReflectionPrv extends ChangeNotifier {
         //     : null,
         date:
             DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
-        files: submitedImages,
+        files: submitedImages + existedImage,
         isMobile: true,
         phoneNumber: phoneNumber,
         residentId: residentId,
         status: !isSend ? "NEW" : "WAIT_PROGRESS",
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
+        areaId: zoneController.text.trim(),
+        areaTypeId: zoneTypeController.text.trim(),
+        description: noteController.text.trim(),
       );
       // return
       APIReflection.saveTicket(newTicket.toMap())
           // ;})
           .then((v) {
+        isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         Utils.showSuccessMessage(
             context: context,
             e: isSend
                 ? S.of(context).success_send_ticket
                 : S.of(context).success_add_ticket,
             onClose: () {
-              Navigator.pushNamed(context, ReflectionScreen.routeName,
+              Navigator.pushNamedAndRemoveUntil(
+                  context, ReflectionScreen.routeName, (route) => route.isFirst,
                   arguments: {'initTab': isSend ? 1 : 0});
             });
       }).catchError((e) {
@@ -209,7 +270,7 @@ class CreateReflectionPrv extends ChangeNotifier {
   }
 
   getListAreaByType(type) async {
-    await APIReflection.getListAreaByType(type).then((v) {
+    return await APIReflection.getListAreaByType(type).then((v) {
       areas.clear();
       for (var i in v) {
         areas.add(Area.fromMap(i));

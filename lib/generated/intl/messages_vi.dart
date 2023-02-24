@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Danh sách tài sản"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
+        "attachment_file":
+            MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
@@ -104,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
+        "cancel_reflection":
+            MessageLookupByLibrary.simpleMessage("Hủy phản ánh"),
         "cancel_reg": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_register": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),

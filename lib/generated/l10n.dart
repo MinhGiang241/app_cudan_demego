@@ -5509,6 +5509,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Attachment file`
+  String get attachment_file {
+    return Intl.message(
+      'Attachment file',
+      name: 'attachment_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel reflection`
+  String get cancel_reflection {
+    return Intl.message(
+      'Cancel reflection',
+      name: 'cancel_reflection',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

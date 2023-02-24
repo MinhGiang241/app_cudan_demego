@@ -80,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "asset_detais": MessageLookupByLibrary.simpleMessage("Asset details"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Asset list"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Asset name"),
+        "attachment_file":
+            MessageLookupByLibrary.simpleMessage("Attachment file"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
@@ -98,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "can_not_empty": MessageLookupByLibrary.simpleMessage("Can not empty"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Reject_reason"),
+        "cancel_reflection":
+            MessageLookupByLibrary.simpleMessage("Cancel reflection"),
         "cancel_reg": MessageLookupByLibrary.simpleMessage("Cancel register"),
         "cancel_register":
             MessageLookupByLibrary.simpleMessage("Cancel register"),

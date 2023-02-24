@@ -120,21 +120,24 @@ class _HistoryTabState extends State<HistoryTab> {
                       margin: const EdgeInsets.only(
                           bottom: 16, left: 12, right: 12),
                       onTap: () {
-                        if (e.status == "COMPLETE") {
-                          Navigator.pushNamed(
-                              context, AcceptHandOverScreen.routeName,
-                              arguments: {"status": e.status});
-                        } else if (e.status == "WAIT") {
-                          Navigator.pushNamed(
-                            context,
-                            GeneralInfoScreen.routeName,
-                          );
-                        } else {
-                          Navigator.pushNamed(
-                            context,
-                            GeneralInfoScreen.routeName,
-                          );
-                        }
+                        Navigator.pushNamed(
+                            context, AcceptHandOverScreen.routeName,
+                            arguments: {"status": e.status});
+                        // if (e.status == "COMPLETE") {
+                        //   Navigator.pushNamed(
+                        //       context, AcceptHandOverScreen.routeName,
+                        //       arguments: {"status": e.status});
+                        // } else if (e.status == "WAIT") {
+                        //   Navigator.pushNamed(
+                        //     context,
+                        //     GeneralInfoScreen.routeName,
+                        //   );
+                        // } else {
+                        //   Navigator.pushNamed(
+                        //     context,
+                        //     GeneralInfoScreen.routeName,
+                        //   );
+                        // }
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

@@ -52,6 +52,7 @@ import '../screens/services/pet/pet_details_screen.dart';
 import '../screens/services/pet/pet_list_screen.dart';
 import '../screens/services/pet/register_pet_screen.dart';
 import '../screens/services/reflection/create_reflection.dart';
+import '../screens/services/reflection/reflection_processed_details.dart';
 import '../screens/services/reflection/reflection_screen.dart';
 import '../screens/services/resident_card/register_resident_card.dart';
 import '../screens/services/resident_card/resident_card_details.dart';
@@ -334,6 +335,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const CreateReflection(),
+        );
+      case ReflectionProcessedDetails.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ReflectionProcessedDetails(),
         );
       // case ChatScreen.routeName:
       //   return MaterialPageRoute(

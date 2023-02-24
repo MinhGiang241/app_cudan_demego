@@ -166,7 +166,9 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     textCapitalization: widget.textCapitalization,
                     textInputAction: widget.textInputAction ??
                         (widget.maxLines! < 2 ? TextInputAction.done : null),
-                    style: txtBodySmallBold(color: widget.textColor),
+                    style: txtBodySmallBold(
+                        color:
+                            widget.enable ? widget.textColor : grayScaleColor3),
                     cursorColor: primaryColor2,
                     maxLines: widget.maxLines,
                     decoration: InputDecoration(

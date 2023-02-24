@@ -155,7 +155,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
             help_check: helpCheck,
             image: submitImageDelivery + existedImage,
             residentId: context.read<ResidentInfoPrv>().residentId,
-            status: isRequest ? "WAIT" : "NEW",
+            status: isRequest ? "WAIT_MANAGER" : "NEW",
             type_transfer: type == 1 ? "OUT" : "IN",
             apartmentId:
                 context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
