@@ -30,6 +30,8 @@
 	<string>this app want to call </string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app ưant to upload photos</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Please grant camera access</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
