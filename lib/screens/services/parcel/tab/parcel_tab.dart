@@ -1,12 +1,11 @@
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../models/info_content_view.dart';
 import '../../../../models/parcel.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_empty_widget.dart';
@@ -123,51 +122,77 @@ class _ParcelTabState extends State<ParcelTab> {
                     child: ListView(
                       children: [
                         ...widget.list.map((e) => PrimaryCard(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, ParcelDetailsScreen.routeName,
-                                  arguments: e);
-                            },
-                            margin: const EdgeInsets.only(
-                                bottom: 16, left: 12, right: 12),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 14,
-                                horizontal: 16,
-                              ),
-                              child: Row(children: [
-                                const PrimaryIcon(
-                                  icons: PrimaryIcons.package,
-                                  style: PrimaryIconStyle.gradient,
-                                  gradients: PrimaryIconGradient.blue,
-                                  size: 32,
-                                  padding: EdgeInsets.all(12),
-                                  color: Colors.white,
-                                ),
-                                hpad(16),
-                                Expanded(
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          e.name ?? "",
-                                          style: txtBold(16),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ParcelDetailsScreen.routeName,
+                                    arguments: e);
+                              },
+                              margin: const EdgeInsets.only(
+                                  bottom: 16, left: 12, right: 12),
+                              child: Column(
+                                children: [
+                                  if (widget.type == "RECEIPTED")
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                            color: (genStatusColor(
+                                                e.status as String)),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(12),
+                                                    bottomLeft:
+                                                        Radius.circular(8))),
+                                        child: Text(
+                                          e.s!.name ?? "",
+                                          style: txtSemiBold(12, Colors.white),
                                         ),
-                                        vpad(4),
-                                        Text(
-                                            '${S.of(context).parcel_code}: ${e.code ?? ""}'),
-                                        vpad(4),
-                                        if (widget.type == "WAIT")
-                                          Text(
-                                              '${S.of(context).arrived_date}: ${Utils.dateFormat(e.time_get ?? "", 1)}'),
-                                        if (widget.type == "RECEIPTED")
-                                          Text(
-                                              '${S.of(context).receipt_date}: ${Utils.dateFormat(e.time_out ?? "", 1)}'),
-                                      ]),
-                                )
-                              ]),
-                            ))),
+                                      ),
+                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 2,
+                                      horizontal: 16,
+                                    ),
+                                    child: Row(children: [
+                                      const PrimaryIcon(
+                                        icons: PrimaryIcons.package,
+                                        style: PrimaryIconStyle.gradient,
+                                        gradients: PrimaryIconGradient.blue,
+                                        size: 32,
+                                        padding: EdgeInsets.all(12),
+                                        color: Colors.white,
+                                      ),
+                                      hpad(16),
+                                      Expanded(
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                e.name ?? "",
+                                                style: txtBold(16),
+                                              ),
+                                              vpad(4),
+                                              Text(
+                                                  '${S.of(context).parcel_code}: ${e.code ?? ""}'),
+                                              vpad(4),
+                                              if (widget.type == "WAIT")
+                                                Text(
+                                                    '${S.of(context).arrived_date}: ${Utils.dateTimeFormat(e.time_get ?? "", 1)}'),
+                                              if (widget.type == "RECEIPTED")
+                                                Text(
+                                                    '${S.of(context).receipt_date}: ${Utils.dateTimeFormat(e.time_out ?? "", 1)}'),
+                                            ]),
+                                      )
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                            )),
                         vpad(80)
                       ],
                     ),

@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'status.dart';
+
 class Parcel {
   Parcel({
     this.code,
@@ -15,6 +17,7 @@ class Parcel {
     this.status,
     this.time_get,
     this.time_out,
+    this.s,
     this.updatedTime,
   });
   String? id;
@@ -30,6 +33,7 @@ class Parcel {
   String? describe;
   String? time_out;
   String? staffOutId;
+  Status? s;
   List<ParcelImage>? image;
 
   Parcel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +50,7 @@ class Parcel {
     time_out = json['time_out'];
     describe = json['describe'];
     staffOutId = json['staffOutId'];
+    s = json['s'] != null ? Status.fromJson(json['s']) : null;
     image = json['image'] != null
         ? json['image'].isNotEmpty
             ? json['image']
@@ -71,7 +76,7 @@ class Parcel {
     data['staffOutId'] = staffOutId;
     data['image'] = image != null
         ? image!.map((e) {
-            e.toJson();
+            return e.toJson();
           }).toList()
         : [];
     return data;

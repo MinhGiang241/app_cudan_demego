@@ -3600,11 +3600,21 @@ class S {
     );
   }
 
-  /// `Found`
+  /// `Wait to confirm`
   String get found {
     return Intl.message(
-      'Found',
+      'Wait to confirm',
       name: 'found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmed`
+  String get confirmed {
+    return Intl.message(
+      'Confirmed',
+      name: 'confirmed',
       desc: '',
       args: [],
     );
@@ -5525,6 +5535,246 @@ class S {
     return Intl.message(
       'Cancel reflection',
       name: 'cancel_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted successfully`
+  String get success_accept {
+    return Intl.message(
+      'Accepted successfully',
+      name: 'success_accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add dependent person `
+  String get add_dependent_person {
+    return Intl.message(
+      'Add dependent person ',
+      name: 'add_dependent_person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Relationship with owner`
+  String get relation_with_owner {
+    return Intl.message(
+      'Relationship with owner',
+      name: 'relation_with_owner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register code`
+  String get red_code {
+    return Intl.message(
+      'Register code',
+      name: 'red_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Existed dependent person`
+  String get dependence_has_info {
+    return Intl.message(
+      'Existed dependent person',
+      name: 'dependence_has_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Non-Existed dependent person`
+  String get dependence_not_info {
+    return Intl.message(
+      'Non-Existed dependent person',
+      name: 'dependence_not_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dependent apartment`
+  String get dependent_apartment {
+    return Intl.message(
+      'Dependent apartment',
+      name: 'dependent_apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dependent person`
+  String get dependent_person {
+    return Intl.message(
+      'Dependent person',
+      name: 'dependent_person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You has already add {person} into apartment {build}. Please wait management's approval`
+  String success_add_dependence(Object person, Object build) {
+    return Intl.message(
+      'You has already add $person into apartment $build. Please wait management\'s approval',
+      name: 'success_add_dependence',
+      desc: '',
+      args: [person, build],
+    );
+  }
+
+  /// `General information`
+  String get base_info {
+    return Intl.message(
+      'General information',
+      name: 'base_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other information`
+  String get other_info {
+    return Intl.message(
+      'Other information',
+      name: 'other_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add residence apartment`
+  String get apartment_add_resident {
+    return Intl.message(
+      'Add residence apartment',
+      name: 'apartment_add_resident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issue place`
+  String get place_issue {
+    return Intl.message(
+      'Issue place',
+      name: 'place_issue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message(
+      'Nationality',
+      name: 'nationality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident address`
+  String get resident_address {
+    return Intl.message(
+      'Resident address',
+      name: 'resident_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Province/City`
+  String get prov_city {
+    return Intl.message(
+      'Province/City',
+      name: 'prov_city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Distric/ward`
+  String get ward {
+    return Intl.message(
+      'Distric/ward',
+      name: 'ward',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Education level`
+  String get education_level {
+    return Intl.message(
+      'Education level',
+      name: 'education_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link personal social media`
+  String get social_media {
+    return Intl.message(
+      'Link personal social media',
+      name: 'social_media',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job`
+  String get job {
+    return Intl.message(
+      'Job',
+      name: 'job',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ethnic`
+  String get ethnic {
+    return Intl.message(
+      'Ethnic',
+      name: 'ethnic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident type`
+  String get resident_type {
+    return Intl.message(
+      'Resident type',
+      name: 'resident_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lost time`
+  String get lost_time {
+    return Intl.message(
+      'Lost time',
+      name: 'lost_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success confirm`
+  String get success_confirm {
+    return Intl.message(
+      'Success confirm',
+      name: 'success_confirm',
       desc: '',
       args: [],
     );

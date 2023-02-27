@@ -39,7 +39,7 @@ class DeliveryListPrv extends ChangeNotifier {
       Utils.showErrorMessage(context, S.of(context).item_list_not_empty);
       return;
     } else {
-      data.status = 'WAIT';
+      data.status = 'WAIT_MANAGER';
 
       Utils.showConfirmMessage(
           title: S.of(context).send_request,

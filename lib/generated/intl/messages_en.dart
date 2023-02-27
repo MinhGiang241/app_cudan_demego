@@ -46,9 +46,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(service) => "Service ${service}";
 
-  static String m12(p) => "Make payment for ${p} successfully";
+  static String m12(person, build) =>
+      "You has already add ${person} into apartment ${build}. Please wait management\'s approval";
 
-  static String m13(to) => "We sent otp code to :${to}";
+  static String m13(p) => "Make payment for ${p} successfully";
+
+  static String m14(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -58,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "add_dependent_person":
+            MessageLookupByLibrary.simpleMessage("Add dependent person "),
         "add_file": MessageLookupByLibrary.simpleMessage("Add file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
@@ -71,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
+        "apartment_add_resident":
+            MessageLookupByLibrary.simpleMessage("Add residence apartment"),
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Apartment bill"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -83,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "attachment_file":
             MessageLookupByLibrary.simpleMessage("Attachment file"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
+        "base_info":
+            MessageLookupByLibrary.simpleMessage("General information"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Bill name"),
@@ -146,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_send_request": m5,
+        "confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
         "cons_agree": MessageLookupByLibrary.simpleMessage(
             "You need to agree to comply with the regulations on construction registration"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Construction code"),
@@ -191,6 +201,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tranfer information"),
         "delivery_letter":
             MessageLookupByLibrary.simpleMessage("Delivery_letter"),
+        "dependence_has_info":
+            MessageLookupByLibrary.simpleMessage("Existed dependent person"),
+        "dependence_not_info": MessageLookupByLibrary.simpleMessage(
+            "Non-Existed dependent person"),
+        "dependent_apartment":
+            MessageLookupByLibrary.simpleMessage("Dependent apartment"),
+        "dependent_person":
+            MessageLookupByLibrary.simpleMessage("Dependent person"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "deputy": MessageLookupByLibrary.simpleMessage("Deputy"),
         "deputy_phone": MessageLookupByLibrary.simpleMessage("Phone of deputy"),
@@ -216,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_service_a": m6,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
+        "education_level":
+            MessageLookupByLibrary.simpleMessage("Education level"),
         "elcetric_bill":
             MessageLookupByLibrary.simpleMessage("Electricity bill"),
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
@@ -264,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_x": m7,
         "error": MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "ethnic": MessageLookupByLibrary.simpleMessage("Ethnic"),
         "event": MessageLookupByLibrary.simpleMessage("Event"),
         "event_msg":
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
@@ -299,7 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
-        "found": MessageLookupByLibrary.simpleMessage("Found"),
+        "found": MessageLookupByLibrary.simpleMessage("Wait to confirm"),
         "found_object": MessageLookupByLibrary.simpleMessage("Found object"),
         "found_place": MessageLookupByLibrary.simpleMessage("Found place"),
         "found_time": MessageLookupByLibrary.simpleMessage("Found time"),
@@ -364,6 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalid_data": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "item_list_not_empty":
             MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
+        "job": MessageLookupByLibrary.simpleMessage("Job"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
@@ -378,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
+        "lost_time": MessageLookupByLibrary.simpleMessage("Lost time"),
         "lost_time_now":
             MessageLookupByLibrary.simpleMessage("Lost time not after now day"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
@@ -395,6 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Missing Report"),
         "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
+        "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "You need to choose payment cycle and register date first"),
         "need_pay": MessageLookupByLibrary.simpleMessage("Need to pay"),
@@ -485,6 +509,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Other bill"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Other gender"),
+        "other_info": MessageLookupByLibrary.simpleMessage("Other information"),
         "otp_invalid":
             MessageLookupByLibrary.simpleMessage("OTP code is invalid"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
@@ -555,6 +580,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_image_error": MessageLookupByLibrary.simpleMessage(
             "You can only upload file jpeg, jpg, png"),
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
+        "place_issue": MessageLookupByLibrary.simpleMessage("Issue place"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "processing_content":
@@ -562,6 +588,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "processing_result":
             MessageLookupByLibrary.simpleMessage("Processing result"),
         "project": MessageLookupByLibrary.simpleMessage("Project"),
+        "prov_city": MessageLookupByLibrary.simpleMessage("Province/City"),
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load Failed!Click retry!"),
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Pull to load"),
@@ -570,6 +597,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),
+        "red_code": MessageLookupByLibrary.simpleMessage("Register code"),
         "reflection": MessageLookupByLibrary.simpleMessage("Refection"),
         "reflection_details":
             MessageLookupByLibrary.simpleMessage("Reflection details"),
@@ -619,6 +647,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Related document image can not empty"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
+        "relation_with_owner":
+            MessageLookupByLibrary.simpleMessage("Relationship with owner"),
         "release_to_load":
             MessageLookupByLibrary.simpleMessage("Release to load more"),
         "remember_acc": MessageLookupByLibrary.simpleMessage("Remember me"),
@@ -650,10 +680,13 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Resgiter vehicle card front site  image can not be empty"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
+        "resident_address":
+            MessageLookupByLibrary.simpleMessage("Resident address"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Resident information"),
         "resident_reg":
             MessageLookupByLibrary.simpleMessage("Resident registration"),
+        "resident_type": MessageLookupByLibrary.simpleMessage("Resident type"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "returned": MessageLookupByLibrary.simpleMessage("Returned"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
@@ -712,6 +745,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out_msg":
             MessageLookupByLibrary.simpleMessage("Do you want to sign out?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "social_media":
+            MessageLookupByLibrary.simpleMessage("Link personal social media"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "start_chat":
             MessageLookupByLibrary.simpleMessage("Start conversation!"),
@@ -731,10 +766,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "success_accept":
+            MessageLookupByLibrary.simpleMessage("Accepted successfully"),
+        "success_add_dependence": m12,
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Add new reflection successfully"),
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
+        "success_confirm":
+            MessageLookupByLibrary.simpleMessage("Success confirm"),
         "success_cr_new":
             MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":
@@ -746,7 +786,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m12,
+        "success_payment": m13,
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Remove successfully"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -826,11 +866,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Wait to hand over"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
+        "ward": MessageLookupByLibrary.simpleMessage("Distric/ward"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m13,
+        "we_send_to": m14,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),

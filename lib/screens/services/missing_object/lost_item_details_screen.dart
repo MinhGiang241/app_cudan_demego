@@ -42,6 +42,13 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
       lostItem = arg['lost'];
     }
 
+    var time;
+    if (lostItem.lost_time != null) {
+      time = TimeOfDay(
+          hour: int.parse(lostItem.lost_time!.split(':')[0]),
+          minute: int.parse(lostItem.lost_time!.split(':')[1]));
+    }
+
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).object_details,
@@ -63,7 +70,8 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
             ),
             InfoContentView(
               title: S.of(context).missing_time,
-              content: Utils.dateFormat(lostItem.time ?? "", 1),
+              content:
+                  '${lostItem.lost_time != null ? '${time.hour.toString().padLeft(2, "0")}:${time.minute.toString().padLeft(2, "0")} ' : ""}${Utils.dateFormat(lostItem.time ?? "", 1)}',
               contentStyle: txtBold(14, grayScaleColorBase),
             ),
             if (lostItem.find_time != null)
@@ -92,10 +100,12 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
           ],
         ),
         vpad(30),
-        if (arg['status'] == "NOTFOUND")
+        if (arg['status'] != "ACCEPT")
           PrimaryButton(
             isLoading: isLoading,
-            text: S.of(context).found,
+            text: arg['status'] == 'NOTFOUND'
+                ? S.of(context).found
+                : S.of(context).confirm,
             onTap: () async {
               if (changeStatus != null) {
                 setState(() {

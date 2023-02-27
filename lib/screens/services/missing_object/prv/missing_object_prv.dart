@@ -46,7 +46,7 @@ class MissingObjectPrv extends ChangeNotifier {
   }
 
   saveLostItem(BuildContext context, MissingObject lost) async {
-    lost.status = "FOUND";
+    lost.status = "ACCEPT";
     lost.find_time =
         (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
     // var apartment = context.read<ResidentInfoPrv>()
@@ -54,7 +54,7 @@ class MissingObjectPrv extends ChangeNotifier {
     await APILost.saveLostItem(lost.toJson()).then((v) {
       Utils.showSuccessMessage(
           context: context,
-          e: S.of(context).success_found,
+          e: S.of(context).success_confirm,
           onClose: () {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacementNamed(

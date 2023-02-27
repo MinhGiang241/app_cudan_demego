@@ -87,6 +87,31 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
                       },
                     ),
                     vpad(16),
+                    PrimaryTextField(
+                      validateString:
+                          context.read<RegisterLostItemPrv>().validateLostHour,
+                      controller: context
+                          .read<RegisterLostItemPrv>()
+                          .lostHourController,
+                      label: S.of(context).lost_time,
+                      isRequired: true,
+                      isReadOnly: true,
+                      hint: "hh:mm",
+                      onTap: () {
+                        context
+                            .read<RegisterLostItemPrv>()
+                            .pickLostHour(context);
+                      },
+                      suffixIcon:
+                          const PrimaryIcon(icons: PrimaryIcons.calendar),
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return '';
+                        }
+                        return null;
+                      },
+                    ),
+                    vpad(16),
                     SelectMediaWidget(
                       title: S.of(context).photos,
                       existImages:

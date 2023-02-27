@@ -30,7 +30,7 @@ class ParcelListPrv extends ChangeNotifier {
       listWaitParcel.clear();
       listReceiptedParcel.clear();
       for (var i in v) {
-        if (i['status'] == "YES") {
+        if (i['status'] != "NO") {
           listReceiptedParcel.add(Parcel.fromJson(i));
         } else {
           listWaitParcel.add(Parcel.fromJson(i));

@@ -108,6 +108,14 @@ Color genStatusColor(String status) {
       return primaryColor6;
     case "PROCESSED":
       return greenColor6;
+    case "YES":
+      return yellowColor7;
+    case "FOUND":
+      return yellowColor7;
+    case "NOTFOUND":
+      return redColor9;
+    case "ACCEPT":
+      return greenColorBase;
     default:
       return grayScaleColor1;
   }

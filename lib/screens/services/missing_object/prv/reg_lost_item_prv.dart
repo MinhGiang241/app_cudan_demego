@@ -16,18 +16,22 @@ class RegisterLostItemPrv extends ChangeNotifier {
   List<File> imagesLost = [];
   List<MissingImage> submitImagesLost = [];
   final TextEditingController lostDateController = TextEditingController();
+  final TextEditingController lostHourController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   DateTime? lostDate;
   bool isLoading = false;
   String? validateName;
   String? validateLostTime;
+  String? validateLostHour;
+  TimeOfDay? lostHour;
   final formKey = GlobalKey<FormState>();
   bool autoValid = false;
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
       validateName = null;
       validateLostTime = null;
+      validateLostHour = null;
     } else {
       if (lostDateController.text.isEmpty) {
         validateLostTime = S.of(context).not_blank;
@@ -38,6 +42,11 @@ class RegisterLostItemPrv extends ChangeNotifier {
         validateName = S.of(context).not_blank;
       } else {
         validateName = null;
+      }
+      if (lostHourController.text.isEmpty) {
+        validateLostHour = S.of(context).not_blank;
+      } else {
+        validateLostHour = null;
       }
     }
 
@@ -72,6 +81,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
           customer: context.read<ResidentInfoPrv>().userInfo!.info_name,
           describe: noteController.text.trim(),
           image: submitImagesLost,
+          lost_time: lostHourController.text.trim(),
           time:
               (lostDate!.subtract(const Duration(hours: 7))).toIso8601String(),
           name: nameController.text.trim(),
@@ -97,11 +107,13 @@ class RegisterLostItemPrv extends ChangeNotifier {
           isLoading = false;
           validateName = null;
           validateLostTime = null;
+          validateLostHour = null;
           notifyListeners();
         }).catchError((e) {
           isLoading = false;
           validateName = null;
           validateLostTime = null;
+          validateLostHour = null;
           notifyListeners();
           Utils.showErrorMessage(context, e.toString());
         });
@@ -109,6 +121,8 @@ class RegisterLostItemPrv extends ChangeNotifier {
         isLoading = false;
         validateName = null;
         validateLostTime = null;
+        validateLostTime = null;
+        validateLostHour = null;
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       }
@@ -125,6 +139,11 @@ class RegisterLostItemPrv extends ChangeNotifier {
         validateName = S.of(context).not_blank;
       } else {
         validateName = null;
+      }
+      if (lostHourController.text.isEmpty) {
+        validateLostHour = S.of(context).not_blank;
+      } else {
+        validateLostHour = null;
       }
 
       notifyListeners();
@@ -156,6 +175,19 @@ class RegisterLostItemPrv extends ChangeNotifier {
       if (v != null) {
         lostDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         lostDate = v;
+      }
+    });
+  }
+
+  pickLostHour(BuildContext context) {
+    showTimePicker(
+            context: context,
+            initialTime: lostHour ?? const TimeOfDay(hour: 0, minute: 0))
+        .then((v) {
+      if (v != null) {
+        lostHour = v;
+        lostHourController.text =
+            '${v.hour.toString().padLeft(2, "0")}:${v.minute.toString().padLeft(2, "0")}';
       }
     });
   }

@@ -28,15 +28,22 @@ class _ParcelListScreenState extends State<ParcelListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
+  bool init = true;
   final RefreshController _refreshWaitController =
       RefreshController(initialRefresh: false);
   final RefreshController _refreshReceiptedController =
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (arg != null && arg['initTab'] != null && init) {
+      initIndex = arg['initTab'];
+    }
+
     return ChangeNotifierProvider(
       create: (context) => ParcelListPrv(),
       builder: (context, state) {
+        tabController.index = initIndex;
         return PrimaryScreen(
             appBar: PrimaryAppbar(
               leading: BackButton(
@@ -62,7 +69,9 @@ class _ParcelListScreenState extends State<ParcelListScreen>
                           onChanged: (v) {},
                           onConfirm: (v) {
                             context.read<ParcelListPrv>().onChooseMonthYear(v);
+
                             setState(() {
+                              init = false;
                               initIndex = tabController.index;
                             });
                           },

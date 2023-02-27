@@ -18,6 +18,7 @@ class MissingObject {
     this.time,
     this.name,
     this.updatedTime,
+    this.lost_time,
   });
   String? id;
   String? createdTime;
@@ -32,6 +33,7 @@ class MissingObject {
   String? name;
   String? find_time;
   String? find_place;
+  String? lost_time;
   List<MissingImage>? image;
   Status? s;
   MissingObject.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class MissingObject {
     describe = json['describe'];
     find_time = json['find_time'];
     find_place = json['find_place'];
+    lost_time = json['lost_time'];
     name = json['name'];
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
     image = json['image'] != null
@@ -72,6 +75,7 @@ class MissingObject {
     data['find_time'] = find_time;
     data['find_place'] = find_place;
     data['describe'] = describe;
+    data['lost_time'] = lost_time;
     data['name'] = name;
     data['image'] = image != null
         ? image!.map((e) {

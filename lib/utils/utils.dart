@@ -152,6 +152,7 @@ class Utils {
   static Future<T?> showBottomSelection<T>(
       {required BuildContext context,
       required List<SelectionModel> selections,
+      String? title,
       Function(int)? onSelection}) async {
     return showBottomSheet(
         context: context,
@@ -170,9 +171,13 @@ class Utils {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       vpad(24),
+                      if (title != null)
+                        Text(title,
+                            style: txtLinkSmall(color: grayScaleColor1)),
                       ...List.generate(
                         selections.length,
                         (index) => Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             ItemSelected(
                               text: selectionString(

@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/reg_resident/register_resident_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/constants.dart';
@@ -81,6 +82,8 @@ class FeedbackHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       // Utils.pushScreen(context, const ParkingCardListScreen());
+                      Navigator.pushNamed(
+                          context, RegisterResidentScreen.routeName);
                     },
                   ),
                 ),

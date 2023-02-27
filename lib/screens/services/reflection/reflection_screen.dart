@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -107,39 +109,9 @@ class _ReflectionScreenState extends State<ReflectionScreen>
                 size: 40,
               ),
             ),
-            // SpeedDial(
-            //     icon: (Icons.add),
-            //     activeIcon: Icons.close,
-            //     backgroundColor: primaryColorBase,
-            //     overlayColor: Colors.black,
-            //     overlayOpacity: 0.38,
-            //     spacing: 0,
-            //     spaceBetweenChildren: 0,
-            //     closeManually: false,
-            //     openCloseDial: isDialOpen,
-            //     // animatedIcon: AnimatedIcons.view_list,
-            //     children: [
-            //       SpeedDialChild(
-            //         labelStyle: const TextStyle(color: Colors.white),
-            //         labelBackgroundColor: redColorBase,
-            //         foregroundColor: Colors.white,
-            //         backgroundColor: redColorBase,
-            //         child: const Icon(Icons.feedback),
-            //         label: S.of(context).complain,
-            //         onTap: () {},
-            //       ),
-            //       SpeedDialChild(
-            //         labelStyle: const TextStyle(color: Colors.white),
-            //         labelBackgroundColor: yellowColor1,
-            //         foregroundColor: Colors.white,
-            //         backgroundColor: yellowColor1,
-            //         child: const Icon(Icons.mail),
-            //         label: S.of(context).feedback,
-            //         onTap: () {},
-            //       ),
-            //     ]),
             body: SafeArea(
-              child: TabBarView(controller: tabController, children: const [
+              // ignore: prefer_const_literals_to_create_immutables
+              child: TabBarView(controller: tabController, children: [
                 ReflectionTab(
                   tabIndex: 0,
                 ),

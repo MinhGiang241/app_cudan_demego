@@ -27,7 +27,11 @@ class ItemSelected extends StatelessWidget {
             children: [
               if (icon != null) icon!,
               if (icon != null) hpad(16),
-              Text(text, style: txtLinkSmall(color: grayScaleColor2)),
+              Text(
+                text,
+                style: txtLinkSmall(color: grayScaleColor2),
+                overflow: TextOverflow.ellipsis,
+              ),
               const Spacer(),
               //  if (isSelected)
               AnimatedOpacity(

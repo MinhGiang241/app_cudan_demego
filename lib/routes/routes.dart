@@ -22,6 +22,8 @@ import '../screens/notification/notification_screen.dart';
 import '../screens/payment/bill_details_screen.dart';
 import '../screens/payment/payment_list_screen.dart';
 import '../screens/payment/payment_screen.dart';
+import '../screens/reg_resident/add_new_resident_screen.dart';
+import '../screens/reg_resident/register_resident_screen.dart';
 import '../screens/services/construction/construction_doc_details_screen.dart';
 import '../screens/services/construction/construction_list_screen.dart';
 import '../screens/services/construction/construction_reg_screen.dart';
@@ -340,6 +342,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ReflectionProcessedDetails(),
+        );
+      case RegisterResidentScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const RegisterResidentScreen(),
+        );
+      case AddNewResidentScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const AddNewResidentScreen(),
         );
       // case ChatScreen.routeName:
       //   return MaterialPageRoute(
