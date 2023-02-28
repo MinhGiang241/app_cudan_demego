@@ -3610,6 +3610,16 @@ class S {
     );
   }
 
+  /// `Found`
+  String get i_found {
+    return Intl.message(
+      'Found',
+      name: 'i_found',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Confirmed`
   String get confirmed {
     return Intl.message(
@@ -5775,6 +5785,36 @@ class S {
     return Intl.message(
       'Success confirm',
       name: 'success_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Returned images`
+  String get return_image {
+    return Intl.message(
+      'Returned images',
+      name: 'return_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use elevator`
+  String get use_elevator {
+    return Intl.message(
+      'Use elevator',
+      name: 'use_elevator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet images`
+  String get pet_images {
+    return Intl.message(
+      'Pet images',
+      name: 'pet_images',
       desc: '',
       args: [],
     );

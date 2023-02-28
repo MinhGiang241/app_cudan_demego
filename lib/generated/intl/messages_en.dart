@@ -367,6 +367,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "i_agree": MessageLookupByLibrary.simpleMessage("I agree with"),
         "i_confirm": MessageLookupByLibrary.simpleMessage(
             "I confirm that I will comply with the regulations on construction and will compensate for all losses, complaints, costs incurred from this construction and repair work.See more"),
+        "i_found": MessageLookupByLibrary.simpleMessage("Found"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
             "Identity card back side image can not be empty"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -561,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_agree": MessageLookupByLibrary.simpleMessage(
             "You need to agree to comply with the regulations on pet registration"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Female"),
+        "pet_images": MessageLookupByLibrary.simpleMessage("Pet images"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Pet information"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Male"),
         "pet_name": MessageLookupByLibrary.simpleMessage("Pet name"),
@@ -688,6 +690,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resident registration"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Resident type"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
+        "return_image": MessageLookupByLibrary.simpleMessage("Returned images"),
         "returned": MessageLookupByLibrary.simpleMessage("Returned"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Register successfully, please sign in"),
@@ -846,6 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "use_elevator": MessageLookupByLibrary.simpleMessage("Use elevator"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),

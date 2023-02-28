@@ -83,7 +83,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       InfoContentView(
                           isHorizontal: true,
                           title: S.of(context).letter_status,
-                          content: genStatus(arg.status ?? ''),
+                          content: arg.s?.name ?? "",
                           contentStyle: genContentStyle(arg.status ?? "")),
                       if (arg.image!.isNotEmpty)
                         InfoContentView(
@@ -138,24 +138,57 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
+                  child: Table(
+                    textBaseline: TextBaseline.ideographic,
+                    defaultVerticalAlignment:
+                        TableCellVerticalAlignment.baseline,
+                    columnWidths: const {
+                      0: FlexColumnWidth(1),
+                      1: FlexColumnWidth(1),
+                    },
                     children: [
-                      SizedBox(
-                        width: 22.0,
-                        height: 22.0,
-                        child: Checkbox(
-                          fillColor:
-                              MaterialStateProperty.all(primaryColorBase),
-                          value: arg.help_check,
-                          onChanged: (v) {},
+                      TableRow(children: [
+                        Wrap(
+                          children: [
+                            SizedBox(
+                              width: 22.0,
+                              height: 22.0,
+                              child: Checkbox(
+                                fillColor:
+                                    MaterialStateProperty.all(primaryColorBase),
+                                value: arg.help_check,
+                                onChanged: (v) {},
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Text(S.of(context).need_support,
+                                  style: txtBodySmallRegular(
+                                      color: grayScaleColorBase)),
+                            )
+                          ],
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Text(S.of(context).need_support,
-                            style:
-                                txtBodySmallRegular(color: grayScaleColorBase)),
-                      )
+                        Wrap(
+                          children: [
+                            SizedBox(
+                              width: 22.0,
+                              height: 22.0,
+                              child: Checkbox(
+                                fillColor:
+                                    MaterialStateProperty.all(primaryColorBase),
+                                value: arg.help_check,
+                                onChanged: (v) {},
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Text(S.of(context).use_elevator,
+                                  style: txtBodySmallRegular(
+                                      color: grayScaleColorBase)),
+                            )
+                          ],
+                        ),
+                      ])
                     ],
                   ),
                 ),

@@ -592,9 +592,8 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           maxLength: 255,
                                           blockSpace: true,
                                           validator: (v) {
-                                            if (v!.isEmpty) {
-                                              return '';
-                                            } else if (!RegexText.isEmail(v)) {
+                                            if (v!.isNotEmpty &&
+                                                !RegexText.isEmail(v)) {
                                               return '';
                                             }
                                             return null;
@@ -606,7 +605,6 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                               .watch<ConstructionRegPrv>()
                                               .validateEmail,
                                           label: S.of(context).email,
-                                          isRequired: true,
                                           hint: S.of(context).enter_email,
                                         ),
                                         vpad(16),

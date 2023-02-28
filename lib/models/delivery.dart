@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'status.dart';
+
 class Delivery {
   Delivery(
       {this.id,
@@ -19,7 +21,9 @@ class Delivery {
       this.updatedTime,
       this.image,
       this.end_hour,
+      this.elevator,
       this.isMobile,
+      this.s,
       this.start_hour,
       this.describe});
   String? id;
@@ -38,7 +42,9 @@ class Delivery {
   String? note_reason;
   String? describe;
   String? status;
+  Status? s;
   bool? help_check;
+  bool? elevator;
   bool? isMobile;
   List<ItemDeliver>? item_added_list;
   List<ImageDelivery>? image;
@@ -56,10 +62,12 @@ class Delivery {
     start_hour = json['start_hour'];
     end_hour = json['end_hour'];
     code = json['code'];
+    s = json['s'] != null ? Status.fromJson(json['s']) : null;
     reasons = json['reasons'];
     note_reason = json['note_reason'];
     status = json['status'];
     help_check = json['help_check'];
+    elevator = json['elevator'];
     isMobile = json['isMobile'] ?? false;
     image = json['image'] != null
         ? json['image'].length != 0

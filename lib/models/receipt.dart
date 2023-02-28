@@ -153,12 +153,13 @@ class TransactionHistory {
     this.payment_amount,
     this.receiptsId,
     this.time,
+    this.isMobile,
     this.updatedTime,
   });
   String? id;
   String? createdTime;
   String? updatedTime;
-
+  bool? isMobile;
   String? receiptsId;
   String? employeeId;
   double? amount_money;
@@ -171,6 +172,7 @@ class TransactionHistory {
     id = json['_id'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
+    isMobile = json['isMobile'] ?? false;
 
     receiptsId = json['receiptsId'];
     employeeId = json['employeeId'];
@@ -199,6 +201,7 @@ class TransactionHistory {
     data['amount_owed'] = amount_owed;
     data['date'] = date;
     data['time'] = time;
+    data['isMobile'] = isMobile;
     // data['expiration_date'] = expiration_date;
     return data;
   }

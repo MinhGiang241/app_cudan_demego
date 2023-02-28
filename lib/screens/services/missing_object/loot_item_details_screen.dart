@@ -86,6 +86,17 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
                 ...lootItem.photo!
                     .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
               ]),
+            InfoContentView(
+                title: S.of(context).status,
+                content: lootItem.s!.name,
+                contentStyle:
+                    txtBold(14, genStatusColor(lootItem.status ?? ''))),
+            if (lootItem.return_image != null &&
+                lootItem.return_image!.isNotEmpty)
+              InfoContentView(title: S.of(context).return_image, images: [
+                ...lootItem.return_image!
+                    .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
+              ])
           ],
         ),
         // vpad(30),
@@ -100,7 +111,6 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
         //         });
 
         //         await changeStatus(context, lootItem);
-
         //         setState(() {
         //           isLoading = false;
         //         });

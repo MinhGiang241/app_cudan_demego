@@ -44,6 +44,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   TextEditingController heightController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   bool helpCheck = false;
+  bool useElevator = false;
   String? id;
   String? code;
   String? validateStartDate;
@@ -108,7 +109,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       try {
         var listError = [];
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 0);
         // throw (endDate!.compareTo(startDate!) < 0);
         if (startDate == null) {
           listError.add(S.of(context).start_date_not_empty);
@@ -117,8 +118,6 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         }
         if (endDate == null) {
           listError.add(S.of(context).end_date_not_empty);
-        } else if (endDate!.compareTo(now) < 0) {
-          listError.add(S.of(context).end_date_after_now);
         }
         if (startDate != null && endDate != null) {
           if (endDate!.compareTo(startDate!) < 0) {
@@ -135,6 +134,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
         uploadDeliveryImage(context).then((v) {
           var newDelivery = Delivery(
+            elevator: useElevator,
             code: code,
             phone_number:
                 context.read<ResidentInfoPrv>().userInfo!.phone_required,
@@ -225,6 +225,11 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
   toggleHelpCheck() {
     helpCheck = !helpCheck;
+    notifyListeners();
+  }
+
+  toggleUseElevator() {
+    useElevator = !useElevator;
     notifyListeners();
   }
 

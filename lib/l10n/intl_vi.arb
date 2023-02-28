@@ -344,7 +344,7 @@
   "parcel_info": "Thông tin bưu phẩm",
   "parcel_name": "Tên bưu phẩm",
   "missing_object": "Đồ thất lạc",
-  "found_object": "Vật phẩm nhặt được",
+  "found_object": "Vật phẩm tìm thấy",
   "history_find_obj": "Lịch sử tìm đồ",
   "object_details": "Chi tiết vật phẩm",
   "object_info": "Thông tin vật phẩm",
@@ -356,6 +356,7 @@
   "no_missing_obj": "Không có đồ thất lạc nào",
   "reg_missing_obj": "Đăng ký tìm đồ thất lạc",
   "found": "Chờ xác nhận",
+  "i_found": "Đã tìm thấy",
   "confirmed": "Đã xác nhận",
   "returned": "Đã trả",
   "send_letter": "Gửi phiếu",
@@ -454,7 +455,7 @@
   "existed_drawing_not_empty": "Bản vẽ hiện trạng không được bỏ trống",
   "renew_drawing_not_empty": "Bản vẽ cải tạo không được bỏ trống",
   "cons_agree": "Bạn cần đồng ý tuân thủ quy định về đăng ký thi công",
-  "start_date_after_now_equal": "Ngày bắt đầu phải lớn hơn ngày hiện tại",
+  "start_date_after_now_equal": "Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại",
   "weight_not_zero": "Trọng lượng phải khác không",
   "file_not_support": "File tải lên không đúng định dạng. Vui lòng tải lại",
   "success_found": "Đã tìm thấy",
@@ -572,5 +573,8 @@
   "ethnic": "Dân tộc",
   "resident_type": "Loại cư trú",
   "lost_time": "Giờ thất lạc",
-  "success_confirm": "Xác nhận thành công"
+  "success_confirm": "Xác nhận thành công",
+  "return_image": "Hình ảnh đã trả",
+  "use_elevator": "Dùng thang máy",
+  "pet_images": "Ảnh vật nuôi"
 }

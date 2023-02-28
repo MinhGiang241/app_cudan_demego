@@ -116,6 +116,10 @@ Color genStatusColor(String status) {
       return redColor9;
     case "ACCEPT":
       return greenColorBase;
+    case "WAIT_RETURN":
+      return redColorBase;
+    case "RETURNED":
+      return primaryColor6;
     default:
       return grayScaleColor1;
   }

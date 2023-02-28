@@ -355,6 +355,7 @@
   "no_missing_obj": "Don't have any missing object",
   "reg_missing_obj": "Register find missing object",
   "found": "Wait to confirm",
+  "i_found": "Found",
   "confirmed": "Confirmed",
   "returned": "Returned",
   "send_letter": "Send letter",
@@ -571,5 +572,8 @@
   "ethnic": "Ethnic",
   "resident_type": "Resident type",
   "lost_time": "Lost time",
-  "success_confirm": "Success confirm"
+  "success_confirm": "Success confirm",
+  "return_image": "Returned images",
+  "use_elevator": "Use elevator",
+  "pet_images": "Pet images"
 }

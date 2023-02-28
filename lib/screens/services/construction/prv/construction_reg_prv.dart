@@ -175,9 +175,11 @@ class ConstructionRegPrv extends ChangeNotifier {
     notifyListeners();
     try {
       var resident = context.read<ResidentInfoPrv>().userInfo;
-      var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
-        return e.apartment!.id == selectedApartment;
-      });
+      var apartment = context.read<ResidentInfoPrv>().selectedApartment;
+
+      // context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
+      //   return e.apartment!.id == selectedApartment;
+      // });
       var consType = listConstructionType.firstWhere((e) {
         return e.id == selectedConstype;
       });
@@ -207,7 +209,8 @@ class ConstructionRegPrv extends ChangeNotifier {
         ConstructionRegistration conReg = ConstructionRegistration(
           id: existedConReg != null ? existedConReg!.id : null,
           code: existedConReg != null ? existedConReg!.code : null,
-          apartmentId: selectedApartment,
+          apartmentId:
+              selectedApartment != null ? apartment!.apartmentId : null,
           confirm: isAgree,
           isMobile: true,
           isContructionCost: isPaidFee,
@@ -427,9 +430,18 @@ class ConstructionRegPrv extends ChangeNotifier {
     if (consTypeController.text.isNotEmpty && workday != null) {
       var type = listConstructionType
           .firstWhere((element) => element.id == consTypeController.text);
-      fee = type.c!.cost! * workday!;
+      if (type.c!.chargeFormCost == "PAYINFULL") {
+        fee = type.c!.cost;
+      } else {
+        fee = type.c!.cost! * workday!;
+      }
+      if (type.c!.chargeFormDeposit == "PAYINFULL") {
+        depositController.text = formatCurrency.format(type.c!.depositFee);
+      } else {
+        depositController.text =
+            formatCurrency.format(type.c!.depositFee! * workday!);
+      }
       consFeeController.text = formatCurrency.format(fee);
-      depositController.text = formatCurrency.format(type.c!.depositFee);
       depositFee = type.c!.depositFee;
     }
     notifyListeners();
@@ -553,9 +565,8 @@ class ConstructionRegPrv extends ChangeNotifier {
     } else {
       validateWorkerNum = null;
     }
-    if (emailController.text.trim().isEmpty) {
-      validateEmail = S.current.not_blank;
-    } else if (!RegexText.isEmail(emailController.text.trim())) {
+    if (emailController.text.trim().isNotEmpty &&
+        !RegexText.isEmail(emailController.text.trim())) {
       validateEmail = S.current.not_email;
     } else {
       validateEmail = null;

@@ -104,7 +104,7 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
           PrimaryButton(
             isLoading: isLoading,
             text: arg['status'] == 'NOTFOUND'
-                ? S.of(context).found
+                ? S.of(context).i_found
                 : S.of(context).confirm,
             onTap: () async {
               if (changeStatus != null) {

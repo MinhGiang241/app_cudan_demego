@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
@@ -17,6 +18,7 @@ import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_empty_widget.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
+import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_loading.dart';
 import '../service_screen.dart';
 import 'register_pet_screen.dart';
@@ -156,6 +158,12 @@ class _PetListScreenState extends State<PetListScreen> {
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
+                                title: "${S.of(context).pet_images}:",
+                                images: [
+                                  ...e.avt_pet!.map((i) =>
+                                      "${ApiConstants.uploadURL}?load=${i.id}")
+                                ]),
+                            InfoContentView(
                               title: "${S.of(context).status}:",
                               content: genStatus(e.pet_status ?? ""),
                               contentStyle: txtBold(
@@ -192,6 +200,45 @@ class _PetListScreenState extends State<PetListScreen> {
                                       },
                                       children: [
                                         ...listContent.map<TableRow>((i) {
+                                          if (i.images != null &&
+                                              i.images!.isNotEmpty) {
+                                            return TableRow(children: [
+                                              TableCell(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 20),
+                                                    child: Text(
+                                                      i.title,
+                                                      style: txtMedium(
+                                                          12, grayScaleColor2),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: SingleChildScrollView(
+                                                      child: Row(
+                                                    children: [
+                                                      ...i.images!.map((o) =>
+                                                          PrimaryImageNetwork(
+                                                            path: o,
+                                                            width: 60,
+                                                          ))
+                                                    ],
+                                                  )),
+                                                ),
+                                              )
+                                            ]);
+                                          }
                                           return TableRow(children: [
                                             TableCell(
                                               child: Padding(

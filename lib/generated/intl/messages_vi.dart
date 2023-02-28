@@ -323,7 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
         "found": MessageLookupByLibrary.simpleMessage("Chờ xác nhận"),
         "found_object":
-            MessageLookupByLibrary.simpleMessage("Vật phẩm nhặt được"),
+            MessageLookupByLibrary.simpleMessage("Vật phẩm tìm thấy"),
         "found_place": MessageLookupByLibrary.simpleMessage("Địa điểm thấy"),
         "found_time": MessageLookupByLibrary.simpleMessage("Thời điểm thấy"),
         "free_service":
@@ -368,6 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "i_agree": MessageLookupByLibrary.simpleMessage("Tôi đồng ý tuân thủ"),
         "i_confirm": MessageLookupByLibrary.simpleMessage(
             "Tôi xác nhận sẽ tuân thủ các quy định về thi công và sẽ chịu đền bù mọi tổn thất, khiếu nại, chi phí phát sinh từ công việc xây dựng, sửa chữa này. Xem thêm"),
+        "i_found": MessageLookupByLibrary.simpleMessage("Đã tìm thấy"),
         "identity_back_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh CMND/CCCD/Hộ chiếu mặt sau không được để trống"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -565,6 +566,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_agree": MessageLookupByLibrary.simpleMessage(
             "Bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Cái"),
+        "pet_images": MessageLookupByLibrary.simpleMessage("Ảnh vật nuôi"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Thông tin vật nuôi"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
         "pet_name": MessageLookupByLibrary.simpleMessage("Tên vật nuôi"),
@@ -688,6 +690,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resident_reg": MessageLookupByLibrary.simpleMessage("Đăng ký cư dân"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Loại cư trú"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
+        "return_image": MessageLookupByLibrary.simpleMessage("Hình ảnh đã trả"),
         "returned": MessageLookupByLibrary.simpleMessage("Đã trả"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Đăng ký thành công, vui lòng đăng nhập"),
@@ -752,7 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date_after_now": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
         "start_date_after_now_equal": MessageLookupByLibrary.simpleMessage(
-            "Ngày bắt đầu phải lớn hơn ngày hiện tại"),
+            "Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại"),
         "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được để trống"),
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
@@ -842,6 +845,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
+        "use_elevator": MessageLookupByLibrary.simpleMessage("Dùng thang máy"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "value": MessageLookupByLibrary.simpleMessage("Giá trị"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),

@@ -65,15 +65,18 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
               builder: (context, snapshot) {
                 List<Delivery> newLetter = [];
                 List<Delivery> approvedLetter = [];
-                List<Delivery> waitLetter = [];
+                List<Delivery> waitOwnerLetter = [];
+                List<Delivery> waitManagerLetter = [];
                 List<Delivery> cancelLetter = [];
                 for (var i in context.read<DeliveryListPrv>().listItems) {
                   if (i.status == "NEW") {
                     newLetter.add(i);
                   } else if (i.status == "APPROVED") {
                     approvedLetter.add(i);
-                  } else if (i.status == "WAIT") {
-                    waitLetter.add(i);
+                  } else if (i.status == "WAIT_OWNER") {
+                    waitOwnerLetter.add(i);
+                  } else if (i.status == "WAIT_MANAGER") {
+                    waitManagerLetter.add(i);
                   } else if (i.status == "CANCEL") {
                     cancelLetter.add(i);
                   }
@@ -83,13 +86,18 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
                 approvedLetter
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-                waitLetter
+                waitOwnerLetter
+                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+                waitManagerLetter
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
                 cancelLetter
                     .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-                List<Delivery> list =
-                    newLetter + waitLetter + approvedLetter + cancelLetter;
+                List<Delivery> list = newLetter +
+                    waitOwnerLetter +
+                    waitManagerLetter +
+                    approvedLetter +
+                    cancelLetter;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
@@ -163,7 +171,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen> {
                                 ),
                                 InfoContentView(
                                   title: "${S.of(context).status}:",
-                                  content: genStatus(e.status ?? ''),
+                                  content: e.s!.name ?? '',
                                   contentStyle: txtBold(
                                       14, genStatusColor(e.status ?? '')),
                                 ),

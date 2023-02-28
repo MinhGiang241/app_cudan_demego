@@ -146,6 +146,10 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                       children: [
                         Expanded(
                           child: PrimaryTextField(
+                            filter: [
+                              FilteringTextInputFormatter.deny(
+                                  RegExp(r'''[0123456789]'''))
+                            ],
                             maxLength: 100,
                             controller:
                                 context.read<RegisterPetPrv>().colorController,
@@ -254,6 +258,11 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     SelectMediaWidget(
+                      isDash: context
+                              .watch<RegisterPetPrv>()
+                              .existedImage
+                              .isEmpty &&
+                          context.watch<RegisterPetPrv>().imagesPet.isEmpty,
                       title: S.of(context).photos,
                       existImages: context.watch<RegisterPetPrv>().existedImage,
                       images: context.watch<RegisterPetPrv>().imagesPet,
@@ -297,6 +306,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                           .onSelectReport(context),
                     ),
                     vpad(16),
+
                     Row(
                       children: [
                         SizedBox(

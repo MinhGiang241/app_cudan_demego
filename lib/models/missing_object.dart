@@ -118,6 +118,7 @@ class LootItem {
     this.updatedTime,
     this.photo,
     this.s,
+    this.return_image,
   });
   String? id;
   String? createdTime;
@@ -132,6 +133,7 @@ class LootItem {
   String? name;
   String? time_pay;
   List<MissingImage>? photo;
+  List<MissingImage>? return_image;
   Status? s;
   LootItem.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -150,6 +152,13 @@ class LootItem {
     photo = json['photo'] != null
         ? json['photo'].isNotEmpty
             ? json['photo']
+                .map<MissingImage>((e) => MissingImage.fromJson(e))
+                .toList()
+            : []
+        : [];
+    return_image = json['return_image'] != null
+        ? json['return_image'].isNotEmpty
+            ? json['return_image']
                 .map<MissingImage>((e) => MissingImage.fromJson(e))
                 .toList()
             : []

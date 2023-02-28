@@ -200,6 +200,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                           Expanded(
                             flex: 1,
                             child: PrimaryTextField(
+                              isRequired: true,
                               controller: context
                                   .read<RegisterDeliveryPrv>()
                                   .startHourController,
@@ -268,6 +269,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       Expanded(
                         flex: 1,
                         child: PrimaryTextField(
+                          isRequired: true,
                           controller: context
                               .read<RegisterDeliveryPrv>()
                               .endHourController,
@@ -410,33 +412,76 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       maxLines: 3,
                     ),
                     vpad(16),
-                    Row(
+                    Table(
+                      textBaseline: TextBaseline.ideographic,
+                      defaultVerticalAlignment:
+                          TableCellVerticalAlignment.baseline,
+                      columnWidths: const {
+                        0: FlexColumnWidth(1),
+                        1: FlexColumnWidth(1),
+                      },
                       children: [
-                        SizedBox(
-                          width: 22.0,
-                          height: 22.0,
-                          child: Checkbox(
-                            fillColor:
-                                MaterialStateProperty.all(primaryColorBase),
-                            value:
-                                context.watch<RegisterDeliveryPrv>().helpCheck,
-                            onChanged: (v) {
-                              context
-                                  .read<RegisterDeliveryPrv>()
-                                  .toggleHelpCheck();
-                            },
+                        TableRow(children: [
+                          Wrap(
+                            children: [
+                              SizedBox(
+                                width: 22.0,
+                                height: 22.0,
+                                child: Checkbox(
+                                  fillColor: MaterialStateProperty.all(
+                                      primaryColorBase),
+                                  value: context
+                                      .watch<RegisterDeliveryPrv>()
+                                      .helpCheck,
+                                  onChanged: (v) {
+                                    context
+                                        .read<RegisterDeliveryPrv>()
+                                        .toggleHelpCheck();
+                                  },
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => context
+                                    .read<RegisterDeliveryPrv>()
+                                    .toggleHelpCheck(),
+                                child: Text(S.of(context).need_support,
+                                    style: txtBodySmallRegular(
+                                        color: grayScaleColorBase)),
+                              )
+                            ],
                           ),
-                        ),
-                        InkWell(
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .toggleHelpCheck(),
-                          child: Text(S.of(context).need_support,
-                              style: txtBodySmallRegular(
-                                  color: grayScaleColorBase)),
-                        )
+                          Wrap(
+                            children: [
+                              SizedBox(
+                                width: 22.0,
+                                height: 22.0,
+                                child: Checkbox(
+                                  fillColor: MaterialStateProperty.all(
+                                      primaryColorBase),
+                                  value: context
+                                      .watch<RegisterDeliveryPrv>()
+                                      .useElevator,
+                                  onChanged: (v) {
+                                    context
+                                        .read<RegisterDeliveryPrv>()
+                                        .toggleUseElevator();
+                                  },
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => context
+                                    .read<RegisterDeliveryPrv>()
+                                    .toggleUseElevator(),
+                                child: Text(S.of(context).use_elevator,
+                                    style: txtBodySmallRegular(
+                                        color: grayScaleColorBase)),
+                              )
+                            ],
+                          ),
+                        ])
                       ],
                     ),
+
                     vpad(16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
