@@ -95,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "base_info": MessageLookupByLibrary.simpleMessage("Thông tin cơ bản"),
+        "bill": MessageLookupByLibrary.simpleMessage("Phiếu thu"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết hóa đơn"),

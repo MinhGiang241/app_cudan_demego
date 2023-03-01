@@ -168,6 +168,8 @@ class TransactionHistory {
   String? date;
   String? time;
   String? expiration_date;
+  String? refSchema;
+  String? refId;
   TransactionHistory.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -176,6 +178,8 @@ class TransactionHistory {
 
     receiptsId = json['receiptsId'];
     employeeId = json['employeeId'];
+    refSchema = json['refSchema'];
+    refId = json['refId'];
     amount_money = json['amount_money'] != null
         ? double.parse(json['amount_money'].toString())
         : 0;
@@ -202,7 +206,9 @@ class TransactionHistory {
     data['date'] = date;
     data['time'] = time;
     data['isMobile'] = isMobile;
-    // data['expiration_date'] = expiration_date;
+    data['refSchema'] = refSchema;
+    data['refId'] = refId;
+    data['expiration_date'] = expiration_date;
     return data;
   }
 }

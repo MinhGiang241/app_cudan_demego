@@ -87,7 +87,7 @@ class _ConstructionRegistrationLetterTabState
               onRetry: () async {
                 setState(() {});
               });
-        } else if (widget.list.isEmpty) {
+        } else if (list.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
@@ -276,52 +276,51 @@ class _ConstructionRegistrationLetterTabState
                                   )
                                 ],
                               ),
-                            if (e.status == "NEW")
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  PrimaryButton(
-                                    onTap: () {
-                                      context
-                                          .read<ConstructionListPrv>()
-                                          .sendToApprove(context, e);
-                                    },
-                                    text: S.of(context).send_request,
-                                    buttonSize: ButtonSize.xsmall,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: greenColor7,
-                                    textColor: greenColor8,
-                                  ),
-                                  PrimaryButton(
-                                    onTap: () {
-                                      Navigator.pushNamed(context,
-                                          ConstructionRegScreen.routeName,
-                                          arguments: {
-                                            "isEdit": true,
-                                            "data": e,
-                                          });
-                                    },
-                                    text: S.of(context).edit,
-                                    buttonSize: ButtonSize.xsmall,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: primaryColor5,
-                                    textColor: primaryColorBase,
-                                  ),
-                                  PrimaryButton(
-                                    onTap: () {
-                                      context
-                                          .read<ConstructionListPrv>()
-                                          .deleteLetter(context, e);
-                                    },
-                                    text: S.of(context).delete_letter,
-                                    buttonSize: ButtonSize.xsmall,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: redColor5,
-                                    textColor: redColorBase,
-                                  ),
-                                ],
-                              ),
+                            // if (e.status == "NEW")
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                PrimaryButton(
+                                  onTap: () {
+                                    context
+                                        .read<ConstructionListPrv>()
+                                        .sendToApprove(context, e);
+                                  },
+                                  text: S.of(context).send_request,
+                                  buttonSize: ButtonSize.xsmall,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: greenColor7,
+                                  textColor: greenColor8,
+                                ),
+                                PrimaryButton(
+                                  onTap: () {
+                                    Navigator.pushNamed(context,
+                                        ConstructionRegScreen.routeName,
+                                        arguments: {
+                                          "isEdit": true,
+                                          "data": e,
+                                        });
+                                  },
+                                  text: S.of(context).edit,
+                                  buttonSize: ButtonSize.xsmall,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: primaryColor5,
+                                  textColor: primaryColorBase,
+                                ),
+                                PrimaryButton(
+                                  onTap: () {
+                                    context
+                                        .read<ConstructionListPrv>()
+                                        .deleteLetter(context, e);
+                                  },
+                                  text: S.of(context).delete_letter,
+                                  buttonSize: ButtonSize.xsmall,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: redColor5,
+                                  textColor: redColorBase,
+                                ),
+                              ],
+                            ),
                             vpad(16),
                           ],
                         ),

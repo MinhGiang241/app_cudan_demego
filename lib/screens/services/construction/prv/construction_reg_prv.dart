@@ -1,5 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
+import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_construction.dart';
 import 'package:app_cudan/utils/utils.dart';
@@ -175,11 +178,10 @@ class ConstructionRegPrv extends ChangeNotifier {
     notifyListeners();
     try {
       var resident = context.read<ResidentInfoPrv>().userInfo;
-      var apartment = context.read<ResidentInfoPrv>().selectedApartment;
-
-      // context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
-      //   return e.apartment!.id == selectedApartment;
-      // });
+      var residentId = context.read<ResidentInfoPrv>().residentId;
+      var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
+        return e.apartment!.id == selectedApartment;
+      });
       var consType = listConstructionType.firstWhere((e) {
         return e.id == selectedConstype;
       });
@@ -209,8 +211,7 @@ class ConstructionRegPrv extends ChangeNotifier {
         ConstructionRegistration conReg = ConstructionRegistration(
           id: existedConReg != null ? existedConReg!.id : null,
           code: existedConReg != null ? existedConReg!.code : null,
-          apartmentId:
-              selectedApartment != null ? apartment!.apartmentId : null,
+          apartmentId: selectedApartment != null ? apartment.apartmentId : null,
           confirm: isAgree,
           isMobile: true,
           isContructionCost: isPaidFee,
@@ -247,23 +248,93 @@ class ConstructionRegPrv extends ChangeNotifier {
           //   // resident_relationship: apartment.type,
           contruction_type_name: consType.name ?? "",
         );
-        return APIConstruction.saveConstructionRegistration(conReg.toJson());
-      }).then((v) {
+        ConstructionHistory? conHis;
         if (existedConReg != null) {
-          ConstructionHistory conHis = ConstructionHistory(
+          conHis = ConstructionHistory(
             constructionregistrationId:
                 existedConReg != null ? existedConReg!.id : v["_id"],
             date: DateTime.now()
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
-            residentId: resident!.id,
+            residentId: resident.id,
             person: resident.info_name,
             status: isRequest ? "WAIT_TECHNICAL" : "NEW",
           );
-          return APIConstruction.saveConstructionHistory(conHis.toJson());
+          // return APIConstruction.saveNewConstructionRegistration();
         }
-        return Future.delayed(Duration.zero);
-      }).then((v) {
+        List<Map<String, dynamic>> listReceipt = [];
+
+        if (!isPaidFee && isRequest) {
+          Receipt? receiptFee = Receipt(
+              residentId: residentId,
+              phone: resident.phone_required,
+              discount_money: fee,
+              type: "ContructionCost",
+              payment_status: "UNPAID",
+              amount_due: fee,
+              apartmentId: apartment.apartmentId,
+              check: true,
+              content: "Thanh toán phí thi công",
+              reason: "Thanh toán phí thi công",
+              customer_type: "RESIDENT",
+              full_name: resident.info_name,
+              receipts_status: "NEW",
+              expiration_date: endTime!
+                  .add(const Duration(days: 7))
+                  .subtract(const Duration(hours: 7))
+                  .toIso8601String(),
+              date: DateTime.now()
+                  .subtract(const Duration(hours: 7))
+                  .toIso8601String());
+          listReceipt.add(receiptFee.toJson());
+        }
+
+        if (!isPaidDeposit && isRequest) {
+          Receipt? receiptDeposiy = Receipt(
+            residentId: residentId,
+            phone: resident.phone_required,
+            discount_money: depositFee,
+            type: "DepositFee",
+            payment_status: "UNPAID",
+            amount_due: depositFee,
+            apartmentId: apartment.apartmentId,
+            check: true,
+            reason: "Thanh toán phí đặt cọc thi công",
+            content: "Thanh toán phí đặt cọc thi công",
+            customer_type: "RESIDENT",
+            full_name: resident.info_name,
+            receipts_status: "NEW",
+            expiration_date: endTime!
+                .add(const Duration(days: 7))
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+            date: DateTime.now()
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+          );
+          listReceipt.add(receiptDeposiy.toJson());
+        }
+
+        return APIConstruction.saveNewConstructionRegistration(
+            conReg.toJson(), conHis?.toJson(), listReceipt);
+      })
+          // .then((v) {
+          //   if (existedConReg != null) {
+          //     ConstructionHistory conHis = ConstructionHistory(
+          //       constructionregistrationId:
+          //           existedConReg != null ? existedConReg!.id : v["_id"],
+          //       date: DateTime.now()
+          //           .subtract(const Duration(hours: 7))
+          //           .toIso8601String(),
+          //       residentId: resident!.id,
+          //       person: resident.info_name,
+          //       status: isRequest ? "WAIT_TECHNICAL" : "NEW",
+          //     );
+          //     return APIConstruction.saveConstructionHistory(conHis.toJson());
+          //   }
+          //   return Future.delayed(Duration.zero);
+          // })
+          .then((v) {
         Utils.showSuccessMessage(
             context: context,
             e: isRequest

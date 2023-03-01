@@ -4,20 +4,19 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIConstruction {
-  static Future changeStatus(Map<String, dynamic> data) async {
+  static Future changeStatus(
+      Map<String, dynamic> data, List<Map<String, dynamic>>? receipts) async {
     var query = '''
-        mutation (\$data:Dictionary){
-    response: constructionregistration_mobile_change_status (data: \$data ) {
+        mutation (\$data:Dictionary,\$receipts:Dictionary){
+    response: constructionregistration_mobile_change_status (data: \$data,receipts: \$receipts ) {
         code
         message
         data
-      }
     }
-        
-        
+    }   
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {"data": data});
+    final MutationOptions options = MutationOptions(
+        document: gql(query), variables: {"data": data, "receipts": receipts});
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -269,6 +268,69 @@ class APIConstruction {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {"residentId": residentId, "apartmentId": apartmentId},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveNewConstructionRegistration(
+      Map<String, dynamic> register,
+      Map<String, dynamic>? history,
+      List<Map<String, dynamic>?>? receipt) async {
+    var query = '''
+    mutation (\$history:Dictionary,\$receipt:Dictionary,\$register:Dictionary){
+    response: constructionregistration_mobile_save_construction_registration (history: \$history,receipt: \$receipt,register: \$register ) {
+        code
+        message
+        data
+      }
+    }
+            
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"history": history, "receipt": receipt, "register": register},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getConstructionReceipts(
+      String constructionregistrationId, String? residentId) async {
+    var query = '''
+   mutation (\$constructionregistrationId:String,\$residentId:String){
+    response: constructionregistration_mobile_get_receipts_by_constructionregistrationId (constructionregistrationId: \$constructionregistrationId,residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+           
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "constructionregistrationId": constructionregistrationId,
+        "residentId": residentId
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

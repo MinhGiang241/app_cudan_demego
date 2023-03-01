@@ -22,6 +22,7 @@ import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 import '../../../widgets/timeline_view.dart';
 import '../../payment/widget/payment_item.dart';
+import 'tab/construction_bill_tab.dart';
 
 class ConstructionRegistrationDetailsScreen extends StatefulWidget {
   const ConstructionRegistrationDetailsScreen({super.key});
@@ -35,7 +36,7 @@ class ConstructionRegistrationDetailsScreen extends StatefulWidget {
 class _ConstructionRegistrationDetailsScreenState
     extends State<ConstructionRegistrationDetailsScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 2, vsync: this);
+  late TabController tabController = TabController(length: 3, vsync: this);
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -58,6 +59,7 @@ class _ConstructionRegistrationDetailsScreenState
           isTabScrollabel: false,
           tabs: [
             Tab(text: S.of(context).details),
+            Tab(text: S.of(context).bill),
             Tab(text: S.of(context).history),
           ],
         ),
@@ -327,6 +329,9 @@ class _ConstructionRegistrationDetailsScreenState
                 ),
                 vpad(40),
               ],
+            ),
+            ConstructionBillTab(
+              constructionregistrationId: reg.id ?? "",
             ),
             ConstructionHistoryTab(
               constructionregistrationId: reg.id ?? "",

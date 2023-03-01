@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "base_info":
             MessageLookupByLibrary.simpleMessage("General information"),
+        "bill": MessageLookupByLibrary.simpleMessage("Bill"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Bill name"),

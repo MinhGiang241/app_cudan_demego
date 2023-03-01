@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/receipt.dart';
 import '../../../../utils/utils.dart';
 import '../construction_list_screen.dart';
 
@@ -15,6 +16,61 @@ class ConstructionListPrv extends ChangeNotifier {
   sendToApprove(BuildContext context, ConstructionRegistration data) async {
     data.status = 'WAIT_TECHNICAL';
     data.isMobile = true;
+    List<Map<String, dynamic>> listReceipt = [];
+    var resident = context.read<ResidentInfoPrv>().userInfo;
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
+      return e.apartment!.id == data.apartmentId;
+    });
+    if (data.isContructionCost == false) {
+      Receipt? receiptFee = Receipt(
+          residentId: residentId,
+          phone: resident?.phone_required,
+          discount_money: data.construction_cost,
+          type: "ContructionCost",
+          payment_status: "UNPAID",
+          amount_due: data.construction_cost,
+          apartmentId: apartment.apartmentId,
+          check: true,
+          content: "Thanh toán phí thi công",
+          reason: "Thanh toán phí thi công",
+          customer_type: "RESIDENT",
+          full_name: resident?.info_name,
+          receipts_status: "NEW",
+          expiration_date: DateTime.parse(data.time_end!)
+              .add(const Duration(days: 7))
+              .subtract(const Duration(hours: 7))
+              .toIso8601String(),
+          date: DateTime.now()
+              .subtract(const Duration(hours: 7))
+              .toIso8601String());
+      listReceipt.add(receiptFee.toJson());
+    }
+
+    if (data.isDepositFee == false) {
+      Receipt? receiptDeposiy = Receipt(
+        residentId: residentId,
+        phone: resident?.phone_required,
+        discount_money: data.deposit_fee,
+        type: "DepositFee",
+        payment_status: "UNPAID",
+        amount_due: data.deposit_fee,
+        apartmentId: apartment.apartmentId,
+        check: true,
+        reason: "Thanh toán phí đặt cọc thi công",
+        content: "Thanh toán phí đặt cọc thi công",
+        customer_type: "RESIDENT",
+        full_name: resident?.info_name,
+        receipts_status: "NEW",
+        expiration_date: DateTime.parse(data.time_end!)
+            .add(const Duration(days: 7))
+            .subtract(const Duration(hours: 7))
+            .toIso8601String(),
+        date:
+            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      );
+      listReceipt.add(receiptDeposiy.toJson());
+    }
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).send_request,
@@ -22,7 +78,7 @@ class ConstructionListPrv extends ChangeNotifier {
         onConfirm: () {
           Navigator.pop(context);
           // APIConstruction.saveConstructionRegistration(data.toJson())
-          APIConstruction.changeStatus(data.toJson()).then((v) {
+          APIConstruction.changeStatus(data.toJson(), listReceipt).then((v) {
             ConstructionHistory conHis = ConstructionHistory(
               constructionregistrationId: data.id,
               date: DateTime.now()
@@ -61,7 +117,7 @@ class ConstructionListPrv extends ChangeNotifier {
         onConfirm: () {
           Navigator.pop(context);
           // APIConstruction.saveConstructionRegistration(data.toJson())
-          APIConstruction.changeStatus(data.toJson()).then((v) {
+          APIConstruction.changeStatus(data.toJson(), null).then((v) {
             ConstructionHistory conHis = ConstructionHistory(
               constructionregistrationId: data.id,
               date: DateTime.now()
