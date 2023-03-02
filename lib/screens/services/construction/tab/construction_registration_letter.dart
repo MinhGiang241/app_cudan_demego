@@ -46,25 +46,38 @@ class _ConstructionRegistrationLetterTabState
         List<ConstructionRegistration> waitTechLetter = [];
         List<ConstructionRegistration> waitOwnerLetter = [];
         List<ConstructionRegistration> waitManagerLetter = [];
+        List<ConstructionRegistration> waitLetter = [];
+        List<ConstructionRegistration> waitPayLetter = [];
         List<ConstructionRegistration> cancelLetter = [];
         for (var i in widget.list) {
           if (i.status == "NEW") {
             newLetter.add(i);
           } else if (i.status == "APPROVED") {
             approvedLetter.add(i);
+          } else if (i.status == "WAIT_PAY") {
+            waitPayLetter.add(i);
+          }
+          //  else if (i.status == "WAIT_OWNER") {
+          //   waitOwnerLetter.add(i);
+          // } else if (i.status == "WAIT_TECHNICAL") {
+          //   waitTechLetter.add(i);
+          // } else if (i.status == "WAIT_MANAGER") {
+          //   waitManagerLetter.add(i);
+          // }
+          else if (i.status == "CANCEL") {
+            cancelLetter.add(i);
           } else if (i.status == "WAIT_OWNER") {
             waitOwnerLetter.add(i);
-          } else if (i.status == "WAIT_TECHNICAL") {
-            waitTechLetter.add(i);
-          } else if (i.status == "WAIT_MANAGER") {
-            waitManagerLetter.add(i);
-          } else if (i.status == "CANCEL") {
-            cancelLetter.add(i);
+          } else if (i.status == "WAIT_TECHNICAL" ||
+              i.status == "WAIT_MANAGER") {
+            waitLetter.add(i);
           }
         }
 
         newLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
         approvedLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        waitPayLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
         waitOwnerLetter
             .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
         waitTechLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
@@ -74,8 +87,10 @@ class _ConstructionRegistrationLetterTabState
 
         List<ConstructionRegistration> list = newLetter +
             waitOwnerLetter +
-            waitTechLetter +
-            waitManagerLetter +
+            waitPayLetter +
+            // waitTechLetter +
+            // waitManagerLetter +
+            waitLetter +
             approvedLetter +
             cancelLetter;
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -152,9 +167,16 @@ class _ConstructionRegistrationLetterTabState
                       ),
                       InfoContentView(
                         title: "${S.of(context).status_letter}:",
-                        content: e.s!.name ?? "",
-                        contentStyle:
-                            txtBold(14, genStatusColor(e.status ?? "")),
+                        content: (e.status == "WAIT_TECHNICAL" ||
+                                e.status == "WAIT_MANAGER")
+                            ? S.of(context).wait_approve
+                            : (e.s!.name ?? ""),
+                        contentStyle: txtBold(
+                            14,
+                            (e.status == "WAIT_TECHNICAL" ||
+                                    e.status == "WAIT_MANAGER")
+                                ? greenColor9
+                                : genStatusColor(e.status ?? "")),
                       ),
                     ];
                     return Padding(
@@ -276,51 +298,52 @@ class _ConstructionRegistrationLetterTabState
                                   )
                                 ],
                               ),
-                            // if (e.status == "NEW")
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                PrimaryButton(
-                                  onTap: () {
-                                    context
-                                        .read<ConstructionListPrv>()
-                                        .sendToApprove(context, e);
-                                  },
-                                  text: S.of(context).send_request,
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: greenColor7,
-                                  textColor: greenColor8,
-                                ),
-                                PrimaryButton(
-                                  onTap: () {
-                                    Navigator.pushNamed(context,
-                                        ConstructionRegScreen.routeName,
-                                        arguments: {
-                                          "isEdit": true,
-                                          "data": e,
-                                        });
-                                  },
-                                  text: S.of(context).edit,
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: primaryColor5,
-                                  textColor: primaryColorBase,
-                                ),
-                                PrimaryButton(
-                                  onTap: () {
-                                    context
-                                        .read<ConstructionListPrv>()
-                                        .deleteLetter(context, e);
-                                  },
-                                  text: S.of(context).delete_letter,
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor5,
-                                  textColor: redColorBase,
-                                ),
-                              ],
-                            ),
+                            if (e.status == "NEW")
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  PrimaryButton(
+                                    onTap: () {
+                                      context
+                                          .read<ConstructionListPrv>()
+                                          .sendToApprove(context, e);
+                                    },
+                                    text: S.of(context).send_request,
+                                    buttonSize: ButtonSize.xsmall,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: greenColor7,
+                                    textColor: greenColor8,
+                                  ),
+                                  PrimaryButton(
+                                    onTap: () {
+                                      Navigator.pushNamed(context,
+                                          ConstructionRegScreen.routeName,
+                                          arguments: {
+                                            "isEdit": true,
+                                            "data": e,
+                                          });
+                                    },
+                                    text: S.of(context).edit,
+                                    buttonSize: ButtonSize.xsmall,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: primaryColor5,
+                                    textColor: primaryColorBase,
+                                  ),
+                                  PrimaryButton(
+                                    onTap: () {
+                                      context
+                                          .read<ConstructionListPrv>()
+                                          .deleteLetter(context, e);
+                                    },
+                                    text: S.of(context).delete_letter,
+                                    buttonSize: ButtonSize.xsmall,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: redColor5,
+                                    textColor: redColorBase,
+                                  ),
+                                ],
+                              ),
                             vpad(16),
                           ],
                         ),

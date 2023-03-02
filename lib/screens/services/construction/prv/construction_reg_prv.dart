@@ -9,7 +9,6 @@ import 'package:app_cudan/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../constants/regex_text.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/construction.dart';
@@ -234,7 +233,11 @@ class ConstructionRegPrv extends ChangeNotifier {
           renovation_draw: existedRenewDrawings + uploadedRenewDrawings,
           resident_code: resident!.code,
           resident_identity: resident.identity_card,
-          status: isRequest ? "WAIT_TECHNICAL" : "NEW",
+          status: isRequest
+              ? (apartment.type == "BUY" || apartment.type == "RENT")
+                  ? "WAIT_PAY"
+                  : "WAIT_OWNER"
+              : "NEW",
           working_day: workday,
           worker_num: int.tryParse(workerNumController.text.trim()) != null
               ? int.parse(workerNumController.text.trim())
@@ -258,7 +261,11 @@ class ConstructionRegPrv extends ChangeNotifier {
                 .toIso8601String(),
             residentId: resident.id,
             person: resident.info_name,
-            status: isRequest ? "WAIT_TECHNICAL" : "NEW",
+            status: isRequest
+                ? (apartment.type == "BUY" || apartment.type == "RENT")
+                    ? "WAIT_PAY"
+                    : "WAIT_OWNER"
+                : "NEW",
           );
           // return APIConstruction.saveNewConstructionRegistration();
         }
@@ -268,13 +275,14 @@ class ConstructionRegPrv extends ChangeNotifier {
           Receipt? receiptFee = Receipt(
               residentId: residentId,
               phone: resident.phone_required,
+              refSchema: "ConstructionRegistration",
               discount_money: fee,
               type: "ContructionCost",
               payment_status: "UNPAID",
               amount_due: fee,
               apartmentId: apartment.apartmentId,
               check: true,
-              content: "Thanh toán phí thi công",
+              content: "Thanh toán phí thi công ",
               reason: "Thanh toán phí thi công",
               customer_type: "RESIDENT",
               full_name: resident.info_name,
@@ -294,6 +302,7 @@ class ConstructionRegPrv extends ChangeNotifier {
             residentId: residentId,
             phone: resident.phone_required,
             discount_money: depositFee,
+            refSchema: "ConstructionRegistration",
             type: "DepositFee",
             payment_status: "UNPAID",
             amount_due: depositFee,

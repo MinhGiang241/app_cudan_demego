@@ -332,6 +332,7 @@ class _ConstructionRegistrationDetailsScreenState
             ),
             ConstructionBillTab(
               constructionregistrationId: reg.id ?? "",
+              isPay: reg.status == "WAIT_PAY",
             ),
             ConstructionHistoryTab(
               constructionregistrationId: reg.id ?? "",

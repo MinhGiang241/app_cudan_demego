@@ -14,19 +14,23 @@ class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionDocument> listDocument = [];
 
   sendToApprove(BuildContext context, ConstructionRegistration data) async {
-    data.status = 'WAIT_TECHNICAL';
-    data.isMobile = true;
     List<Map<String, dynamic>> listReceipt = [];
     var resident = context.read<ResidentInfoPrv>().userInfo;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
       return e.apartment!.id == data.apartmentId;
     });
+    var status = (apartment.type == 'BUY' || apartment.type == "RENT")
+        ? 'WAIT_PAY'
+        : "WAIT_OWNER";
+    data.status = status;
+    data.isMobile = true;
     if (data.isContructionCost == false) {
       Receipt? receiptFee = Receipt(
           residentId: residentId,
           phone: resident?.phone_required,
           discount_money: data.construction_cost,
+          refSchema: "ConstructionRegistration",
           type: "ContructionCost",
           payment_status: "UNPAID",
           amount_due: data.construction_cost,
@@ -52,6 +56,7 @@ class ConstructionListPrv extends ChangeNotifier {
         residentId: residentId,
         phone: resident?.phone_required,
         discount_money: data.deposit_fee,
+        refSchema: "ConstructionRegistration",
         type: "DepositFee",
         payment_status: "UNPAID",
         amount_due: data.deposit_fee,
@@ -86,7 +91,7 @@ class ConstructionListPrv extends ChangeNotifier {
                   .toIso8601String(),
               residentId: context.read<ResidentInfoPrv>().residentId,
               person: context.read<ResidentInfoPrv>().userInfo!.info_name,
-              status: "WAIT_TECHNICAL",
+              status: status,
             );
             return APIConstruction.saveConstructionHistory(conHis.toJson());
           }).then((v) {

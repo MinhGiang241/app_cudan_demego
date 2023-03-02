@@ -86,6 +86,8 @@ Color genStatusColor(String status) {
       return redColor9;
     case "WAIT_ACCEPTANCE":
       return yellowColor7;
+    case "WAIT_PAY":
+      return yellowColor7;
     case "UNDER_ACCEPTANCE":
       return primaryColorBase;
     case "COMPLETE":

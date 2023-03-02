@@ -30,6 +30,8 @@ class Receipt {
     this.vat,
     this.expiration_date,
     this.code,
+    this.refId,
+    this.refSchema,
     this.transactions = const [],
   });
   String? id;
@@ -62,6 +64,8 @@ class Receipt {
   String? discount_type;
   late List<TransactionHistory> transactions;
   late bool isSelected;
+  String? refSchema;
+  String? refId;
 
   Receipt.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -87,6 +91,8 @@ class Receipt {
     address = json['address'];
     guest_name = json['guest_name'];
     full_name = json['full_name'];
+    refSchema = json['refSchema'];
+    refId = json['refId'];
     expiration_date = json['expiration_date'];
     vat = json['vat'] != null ? double.parse(json['vat'].toString()) : null;
     discount_money = json['discount_money'] != null
@@ -137,6 +143,8 @@ class Receipt {
     data['discount_money'] = discount_money;
     data['discount_percent'] = discount_percent;
     data['amount_due'] = amount_due;
+    data['refSchema'] = refSchema;
+    data['refId'] = refId;
     return data;
   }
 }
@@ -148,7 +156,6 @@ class TransactionHistory {
     this.createdTime,
     this.date,
     this.employeeId,
-    this.expiration_date,
     this.id,
     this.payment_amount,
     this.receiptsId,
@@ -167,9 +174,7 @@ class TransactionHistory {
   double? amount_owed;
   String? date;
   String? time;
-  String? expiration_date;
-  String? refSchema;
-  String? refId;
+
   TransactionHistory.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -178,8 +183,7 @@ class TransactionHistory {
 
     receiptsId = json['receiptsId'];
     employeeId = json['employeeId'];
-    refSchema = json['refSchema'];
-    refId = json['refId'];
+
     amount_money = json['amount_money'] != null
         ? double.parse(json['amount_money'].toString())
         : 0;
@@ -191,7 +195,6 @@ class TransactionHistory {
         : 0;
     date = json['date'];
     time = json['time'];
-    expiration_date = json['expiration_date'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -206,9 +209,6 @@ class TransactionHistory {
     data['date'] = date;
     data['time'] = time;
     data['isMobile'] = isMobile;
-    data['refSchema'] = refSchema;
-    data['refId'] = refId;
-    data['expiration_date'] = expiration_date;
     return data;
   }
 }

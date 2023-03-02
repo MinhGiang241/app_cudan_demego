@@ -549,7 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mật khẩu phải gồm 1 ký tự đặc biệt"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
-        "pay_date": MessageLookupByLibrary.simpleMessage("Ngày đóng"),
+        "pay_date": MessageLookupByLibrary.simpleMessage("Ngày thanh toán"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(

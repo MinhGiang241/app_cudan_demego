@@ -109,7 +109,9 @@ class AuthPrv extends ChangeNotifier {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
                 if (i['status'] == 'ACTIVE' &&
-                    (i['type'] == 'BUY' || i['type'] == 'RENT')) {
+                    (i['type'] == 'BUY' ||
+                        i['type'] == 'RENT' ||
+                        i['type'] == 'DEPENDENT_HOST')) {
                   context
                       .read<ResidentInfoPrv>()
                       .listOwn
