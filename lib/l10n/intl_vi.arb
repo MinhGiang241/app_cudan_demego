@@ -577,5 +577,7 @@
   "return_image": "Hình ảnh đã trả",
   "use_elevator": "Dùng thang máy",
   "pet_images": "Ảnh vật nuôi",
-  "bill": "Phiếu thu"
+  "bill": "Phiếu thu",
+  "dob": "Ngày sinh",
+  "block": "Phường /xã"
 }

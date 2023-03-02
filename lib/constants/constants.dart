@@ -50,6 +50,7 @@ const Color yellowColor5 = Color(0xffFFF6DA);
 
 const Color yellowColor6 = Color(0xffFFC700);
 const Color yellowColor7 = Color(0xffFF9900);
+const Color yellowColor8 = Color(0xffEFCA07);
 
 const Color purpleColorBase = Color(0xff6C4DDA);
 const Color purpleColor1 = Color(0xff522ED2);

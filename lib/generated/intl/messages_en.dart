@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "birthday_congratulaion":
             MessageLookupByLibrary.simpleMessage("Birthday Congratulaion"),
+        "block": MessageLookupByLibrary.simpleMessage("block /village"),
         "booking": MessageLookupByLibrary.simpleMessage("Booking"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
@@ -219,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
+        "dob": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),

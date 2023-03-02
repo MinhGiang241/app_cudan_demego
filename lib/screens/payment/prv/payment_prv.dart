@@ -55,6 +55,7 @@ class PaymentPrv extends ChangeNotifier {
       e.payer = context.read<ResidentInfoPrv>().userInfo!.info_name ?? "";
       e.payer_phone = context.read<ResidentInfoPrv>().userInfo!.phone;
       e.payment_status = 'PAID';
+      e.receipts_status = 'COMPLETE';
       e.residentId = context.read<ResidentInfoPrv>().residentId;
 
       return e.toJson();

@@ -279,7 +279,7 @@ class _ConstructionRegistrationLetterTabState
                                 ],
                               ),
                             ),
-                            if (e.status == "WAIT_TECHNICAL" ||
+                            if (e.status == "WAIT_PAY" ||
                                 e.status == "WAIT_OWNER")
                               Row(
                                 children: [

@@ -576,5 +576,7 @@
   "return_image": "Returned images",
   "use_elevator": "Use elevator",
   "pet_images": "Pet images",
-  "bill": "Bill"
+  "bill": "Bill",
+  "dob": "Date of birth",
+  "block": "block /village"
 }

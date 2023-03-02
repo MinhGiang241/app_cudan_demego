@@ -5829,6 +5829,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Date of birth`
+  String get dob {
+    return Intl.message(
+      'Date of birth',
+      name: 'dob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `block /village`
+  String get block {
+    return Intl.message(
+      'block /village',
+      name: 'block',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

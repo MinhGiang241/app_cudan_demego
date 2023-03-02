@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "birthday_congratulaion":
             MessageLookupByLibrary.simpleMessage("Chúc mừng sinh nhật"),
+        "block": MessageLookupByLibrary.simpleMessage("Phường /xã"),
         "booking": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
@@ -219,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "discount_type":
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
+        "dob": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn thanh toán"),
