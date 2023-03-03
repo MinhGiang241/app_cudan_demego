@@ -116,4 +116,33 @@ class APIPayment {
       return res.response.data;
     }
   }
+
+  static Future getReceipt(String receiptId) async {
+    var query = '''
+   mutation (\$receiptId:String){
+    response: receipts_mobile_find_receipts_by_id (receiptId: \$receiptId ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+    ''';
+
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      "receiptId": receiptId,
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

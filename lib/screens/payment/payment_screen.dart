@@ -1,3 +1,4 @@
+import 'package:app_cudan/services/api_payment.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_loading.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
@@ -26,6 +28,8 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -45,245 +49,287 @@ class _PaymentScreenState extends State<PaymentScreen> {
               title: S.of(context).pay,
             ),
             body: context.watch<PaymentPrv>().isConfirm
-                ? SafeArea(
-                    child: Column(
-                      children: [
-                        PrimaryCard(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              border: Border.symmetric(
-                                  horizontal: BorderSide(
-                                      width: 1, color: grayScaleColor5))),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 24),
-                          height: 50,
-                          width: dvWidth(context),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${S.of(context).payment_method}:'),
-                              PopupMenuButton(
-                                onSelected: (v) {
-                                  context.read<PaymentPrv>().changeValue(v);
-                                },
-                                child: Row(
-                                  children: [
-                                    if (context.watch<PaymentPrv>().value == 0)
-                                      SvgPicture.asset(
-                                        context.read<PaymentPrv>().link,
-                                        color: Colors.red,
-                                        width: 24,
-                                        height: 20,
-                                      ),
-                                    if (context.watch<PaymentPrv>().value == 1)
-                                      SvgPicture.asset(
-                                        context.read<PaymentPrv>().link1,
-                                        color: Colors.blue,
-                                        width: 24,
-                                        height: 20,
-                                      ),
-                                    const Icon(Icons.expand_more),
-                                  ],
-                                ),
-                                itemBuilder: (_) => [
-                                  PopupMenuItem(
-                                      value: 0,
-                                      child: SvgPicture.asset(
-                                        context.read<PaymentPrv>().link,
-                                        color: Colors.red,
-                                        width: 24,
-                                        height: 20,
-                                      )),
-                                  PopupMenuItem(
-                                      value: 1,
-                                      child: SvgPicture.asset(
-                                        context.read<PaymentPrv>().link1,
-                                        color: Colors.blue,
-                                        width: 24,
-                                        height: 20,
-                                        allowDrawingOutsideViewBox: true,
-                                      )),
+                ? FutureBuilder(
+                    future: () {}(),
+                    builder: (context, snapshot) {
+                      return SafeArea(
+                        child: Column(
+                          children: [
+                            PrimaryCard(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.symmetric(
+                                      horizontal: BorderSide(
+                                          width: 1, color: grayScaleColor5))),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 24),
+                              height: 50,
+                              width: dvWidth(context),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('${S.of(context).payment_method}:'),
+                                  PopupMenuButton(
+                                    onSelected: (v) {
+                                      context.read<PaymentPrv>().changeValue(v);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        if (context.watch<PaymentPrv>().value ==
+                                            0)
+                                          SvgPicture.asset(
+                                            context.read<PaymentPrv>().link,
+                                            color: Colors.red,
+                                            width: 24,
+                                            height: 20,
+                                          ),
+                                        if (context.watch<PaymentPrv>().value ==
+                                            1)
+                                          SvgPicture.asset(
+                                            context.read<PaymentPrv>().link1,
+                                            color: Colors.blue,
+                                            width: 24,
+                                            height: 20,
+                                          ),
+                                        const Icon(Icons.expand_more),
+                                      ],
+                                    ),
+                                    itemBuilder: (_) => [
+                                      PopupMenuItem(
+                                          value: 0,
+                                          child: SvgPicture.asset(
+                                            context.read<PaymentPrv>().link,
+                                            color: Colors.red,
+                                            width: 24,
+                                            height: 20,
+                                          )),
+                                      PopupMenuItem(
+                                          value: 1,
+                                          child: SvgPicture.asset(
+                                            context.read<PaymentPrv>().link1,
+                                            color: Colors.blue,
+                                            width: 24,
+                                            height: 20,
+                                            allowDrawingOutsideViewBox: true,
+                                          )),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
-                          ),
-                        ),
-                        PrimaryCard(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              border: Border.symmetric(
-                                  horizontal: BorderSide(
-                                      width: 1, color: grayScaleColor4))),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 24),
-                          height: 50,
-                          width: dvWidth(context),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "${S.of(context).total}:",
-                                // style: txtRegular(14, grayScaleColorBase),
                               ),
-                              Text(
-                                formatCurrency
-                                    .format(context.read<PaymentPrv>().sum)
-                                    .replaceAll("₫", "VND"),
-                                style: txtBold(14, primaryColorBase),
-                              )
-                            ],
-                          ),
+                            ),
+                            PrimaryCard(
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.symmetric(
+                                      horizontal: BorderSide(
+                                          width: 1, color: grayScaleColor4))),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 24),
+                              height: 50,
+                              width: dvWidth(context),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${S.of(context).total}:",
+                                    // style: txtRegular(14, grayScaleColorBase),
+                                  ),
+                                  Text(
+                                    formatCurrency
+                                        .format(context.read<PaymentPrv>().sum)
+                                        .replaceAll("₫", "VND"),
+                                    style: txtBold(14, primaryColorBase),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
+                      );
+                    })
                 : Stack(
                     children: [
-                      ListView(children: [
-                        vpad(12),
-                        ...arg['list'].map((e) {
-                          double paid = 0;
-                          if (e.transactions.isNotEmpty) {
-                            paid = e.transactions.fold(
-                                0, (a, b) => a += (b.payment_amount ?? 0));
-                          }
-                          var listContent = [
-                            InfoContentView(
-                              title: S.of(context).bill_name,
-                              content: e.reason,
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).bill_code,
-                              content: e.code ?? e.id,
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            if (e.content != null)
-                              InfoContentView(
-                                title: S.of(context).content,
-                                content: e.content,
-                                contentStyle: txtBold(13, grayScaleColorBase),
-                              ),
-
-                            InfoContentView(
-                              title: S.of(context).total_bill,
-                              content: e.amount_due != null
-                                  ? formatCurrency
-                                      .format(e.amount_due)
-                                      .replaceAll("₫", "VND")
-                                  : "0 VND",
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            if (e.vat != null)
-                              InfoContentView(
-                                title: S.of(context).vat,
-                                content: e.vat != null ? "${e.vat} %" : "0 %",
-                                contentStyle: txtBold(13, grayScaleColorBase),
-                              ),
-                            if (e.discount_percent != null)
-                              InfoContentView(
-                                title: S.of(context).discount,
-                                content: e.discount_percent != null
-                                    ? e.discount_type == "Value"
-                                        ? formatCurrency
-                                            .format(e.discount_percent)
-                                            .replaceAll("₫", "VND")
-                                        : "${e.discount_percent} %"
-                                    : "0 VND",
-                                contentStyle: txtBold(13, grayScaleColorBase),
-                              ),
-                            // InfoContentView(
-                            //   title: S.of(context).discount_type,
-                            //   content: e.discount_type == "Value"
-                            //       ? S.of(context).value
-                            //       : S.of(context).percent,
-                            //   contentStyle: txtBold(13, grayScaleColorBase),
-                            // ),
-                            InfoContentView(
-                              title: S.of(context).total_pay,
-                              content: e.discount_money != null
-                                  ? formatCurrency
-                                      .format(e.discount_money!)
-                                      .replaceAll("₫", "VND")
-                                  : '0 VND',
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).paid_payment,
-                              content: e.amount_due != null
-                                  ? formatCurrency
-                                      .format(paid)
-                                      .replaceAll("₫", "VND")
-                                  : '0 VND',
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                            InfoContentView(
-                              title: S.of(context).need_pay,
-                              content: e.discount_money != null
-                                  ? formatCurrency
-                                      .format(e.discount_money! - paid)
-                                      .replaceAll("₫", "VND")
-                                  : '0 VND',
-                              contentStyle: txtBold(13, grayScaleColorBase),
-                            ),
-                          ];
-                          return PrimaryCard(
-                              margin: const EdgeInsets.only(
-                                  bottom: 16, left: 24, right: 24),
-                              padding: const EdgeInsets.only(
-                                  top: 16, left: 12, right: 12),
-                              child: Row(
-                                children: [
-                                  Transform.translate(
-                                    offset: const Offset(0.0, -65),
-                                    child: const PrimaryIcon(
-                                      icons: PrimaryIcons.spreadsheet,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.green,
-                                      size: 32,
-                                      padding: EdgeInsets.all(12),
-                                      color: Colors.white,
-                                    ),
+                      SafeArea(
+                        child: SmartRefresher(
+                            enablePullDown: true,
+                            enablePullUp: false,
+                            header: WaterDropMaterialHeader(
+                                backgroundColor:
+                                    Theme.of(context).primaryColor),
+                            controller: _refreshController,
+                            onRefresh: () async {
+                              var rec = await APIPayment.getReceipt(
+                                  arg['list'][0].id);
+                              setState(() {});
+                              arg['list'][0] = Receipt.fromJson(rec);
+                              _refreshController.refreshCompleted();
+                            },
+                            child: ListView(children: [
+                              vpad(12),
+                              ...arg['list'].map((e) {
+                                double paid = 0;
+                                if (e.transactions.isNotEmpty) {
+                                  paid = e.transactions.fold(0,
+                                      (a, b) => a += (b.payment_amount ?? 0));
+                                }
+                                var listContent = [
+                                  InfoContentView(
+                                    title: S.of(context).bill_name,
+                                    content: e.reason,
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
                                   ),
-                                  Expanded(
-                                    child: Table(
-                                      textBaseline: TextBaseline.ideographic,
-                                      defaultVerticalAlignment:
-                                          TableCellVerticalAlignment.baseline,
-                                      columnWidths: const {
-                                        0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3),
-                                      },
+                                  InfoContentView(
+                                    title: S.of(context).bill_code,
+                                    content: e.code ?? e.id,
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
+                                  ),
+                                  if (e.content != null)
+                                    InfoContentView(
+                                      title: S.of(context).content,
+                                      content: e.content,
+                                      contentStyle:
+                                          txtBold(13, grayScaleColorBase),
+                                    ),
+
+                                  InfoContentView(
+                                    title: S.of(context).total_bill,
+                                    content: e.amount_due != null
+                                        ? formatCurrency
+                                            .format(e.amount_due)
+                                            .replaceAll("₫", "VND")
+                                        : "0 VND",
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
+                                  ),
+                                  if (e.vat != null)
+                                    InfoContentView(
+                                      title: S.of(context).vat,
+                                      content:
+                                          e.vat != null ? "${e.vat} %" : "0 %",
+                                      contentStyle:
+                                          txtBold(13, grayScaleColorBase),
+                                    ),
+                                  if (e.discount_percent != null)
+                                    InfoContentView(
+                                      title: S.of(context).discount,
+                                      content: e.discount_percent != null
+                                          ? e.discount_type == "Value"
+                                              ? formatCurrency
+                                                  .format(e.discount_percent)
+                                                  .replaceAll("₫", "VND")
+                                              : "${e.discount_percent} %"
+                                          : "0 VND",
+                                      contentStyle:
+                                          txtBold(13, grayScaleColorBase),
+                                    ),
+                                  // InfoContentView(
+                                  //   title: S.of(context).discount_type,
+                                  //   content: e.discount_type == "Value"
+                                  //       ? S.of(context).value
+                                  //       : S.of(context).percent,
+                                  //   contentStyle: txtBold(13, grayScaleColorBase),
+                                  // ),
+                                  InfoContentView(
+                                    title: S.of(context).total_pay,
+                                    content: e.discount_money != null
+                                        ? formatCurrency
+                                            .format(e.discount_money!)
+                                            .replaceAll("₫", "VND")
+                                        : '0 VND',
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
+                                  ),
+                                  InfoContentView(
+                                    title: S.of(context).paid_payment,
+                                    content: e.amount_due != null
+                                        ? formatCurrency
+                                            .format(paid)
+                                            .replaceAll("₫", "VND")
+                                        : '0 VND',
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
+                                  ),
+                                  InfoContentView(
+                                    title: S.of(context).need_pay,
+                                    content: e.discount_money != null
+                                        ? formatCurrency
+                                            .format(e.discount_money! - paid)
+                                            .replaceAll("₫", "VND")
+                                        : '0 VND',
+                                    contentStyle:
+                                        txtBold(13, grayScaleColorBase),
+                                  ),
+                                ];
+                                return PrimaryCard(
+                                    margin: const EdgeInsets.only(
+                                        bottom: 16, left: 24, right: 24),
+                                    padding: const EdgeInsets.only(
+                                        top: 16, left: 12, right: 12),
+                                    child: Row(
                                       children: [
-                                        ...listContent.map<TableRow>(
-                                          (e) => TableRow(
+                                        Transform.translate(
+                                          offset: const Offset(0.0, -65),
+                                          child: const PrimaryIcon(
+                                            icons: PrimaryIcons.spreadsheet,
+                                            style: PrimaryIconStyle.gradient,
+                                            gradients:
+                                                PrimaryIconGradient.green,
+                                            size: 32,
+                                            padding: EdgeInsets.all(12),
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Table(
+                                            textBaseline:
+                                                TextBaseline.ideographic,
+                                            defaultVerticalAlignment:
+                                                TableCellVerticalAlignment
+                                                    .baseline,
+                                            columnWidths: const {
+                                              0: FlexColumnWidth(2),
+                                              1: FlexColumnWidth(3),
+                                            },
                                             children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 16, left: 10),
-                                                child: Text(
-                                                  '${e.title}:',
-                                                  style: txtMedium(
-                                                      12, grayScaleColor2),
+                                              ...listContent.map<TableRow>(
+                                                (e) => TableRow(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 16,
+                                                              left: 10),
+                                                      child: Text(
+                                                        '${e.title}:',
+                                                        style: txtMedium(12,
+                                                            grayScaleColor2),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 16),
+                                                      child: Text(
+                                                          e.content ?? "",
+                                                          style:
+                                                              e.contentStyle),
+                                                    )
+                                                  ],
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 16),
-                                                child: Text(e.content ?? "",
-                                                    style: e.contentStyle),
                                               )
                                             ],
                                           ),
-                                        )
+                                        ),
                                       ],
-                                    ),
-                                  ),
-                                ],
-                              ));
-                        }),
-                        vpad(150),
-                      ]),
+                                    ));
+                              }),
+                              vpad(150),
+                            ])),
+                      ),
                       Positioned(
                         bottom: 0,
                         child: Column(

@@ -1,27 +1,18 @@
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
-import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
-import '../../../services/api_construction.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../../widgets/primary_text_field.dart';
-import '../../../widgets/timeline_view.dart';
-import '../../payment/widget/payment_item.dart';
 import 'tab/construction_history_tab.dart';
 
 class ConstructionDocumentDetailsScreen extends StatefulWidget {

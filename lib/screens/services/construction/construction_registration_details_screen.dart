@@ -155,9 +155,16 @@ class _ConstructionRegistrationDetailsScreenState
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).letter_status,
-                        content: reg.s!.name ?? "",
-                        contentStyle:
-                            txtBold(14, genStatusColor(reg.status ?? "")),
+                        content: (reg.status == "WAIT_TECHNICAL" ||
+                                reg.status == "WAIT_MANAGER")
+                            ? S.of(context).wait_approve
+                            : (reg.s!.name ?? ""),
+                        contentStyle: txtBold(
+                            14,
+                            (reg.status == "WAIT_TECHNICAL" ||
+                                    reg.status == "WAIT_MANAGER")
+                                ? greenColor9
+                                : genStatusColor(reg.status ?? "")),
                       ),
                       if (reg.r != null)
                         InfoContentView(
@@ -166,6 +173,22 @@ class _ConstructionRegistrationDetailsScreenState
                           content: reg.r!.name ?? "",
                           contentStyle: txtBold(14, grayScaleColorBase),
                         ),
+                      if (reg.description != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).description,
+                          content: reg.description ?? "",
+                          contentStyle: txtBold(14, grayScaleColorBase),
+                        ),
+                      if (reg.file_cancel != null &&
+                          reg.file_cancel!.isNotEmpty)
+                        InfoContentView(
+                            // isHorizontal: true,
+                            title: S.of(context).additional_file,
+                            files: reg.file_cancel
+
+                            // contentStyle: txtBold(14, grayScaleColorBase),
+                            ),
                     ],
                   ),
                 ),

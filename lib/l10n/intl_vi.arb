@@ -579,5 +579,6 @@
   "pet_images": "Ảnh vật nuôi",
   "bill": "Phiếu thu",
   "dob": "Ngày sinh",
-  "block": "Phường /xã"
+  "block": "Phường /xã",
+  "additional_file": "File/ Ảnh bổ sung"
 }

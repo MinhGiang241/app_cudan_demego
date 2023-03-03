@@ -43,6 +43,7 @@ class ConstructionRegistration {
     this.worker_num,
     this.off_day,
     this.working_day,
+    this.file_cancel,
   });
   String? id;
   String? createdTime;
@@ -85,6 +86,7 @@ class ConstructionRegistration {
   ConstructionType? constructionType;
   List<ConstructionFile>? current_draw;
   List<ConstructionFile>? renovation_draw;
+  List<ConstructionFile>? file_cancel;
 
   ConstructionRegistration.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -152,6 +154,13 @@ class ConstructionRegistration {
                 .toList()
             : []
         : [];
+    file_cancel = json['file_cancel'] != null
+        ? json['file_cancel'].isNotEmpty
+            ? json['file_cancel']
+                .map<ConstructionFile>((e) => ConstructionFile.fromJson(e))
+                .toList()
+            : []
+        : [];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -202,6 +211,11 @@ class ConstructionRegistration {
             return e.toJson();
           }).toList()
         : [];
+    data['file_cancel'] = file_cancel != null
+        ? file_cancel!.map((e) {
+            return e.toJson();
+          }).toList()
+        : null;
     return data;
   }
 }

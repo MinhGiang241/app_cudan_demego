@@ -5,18 +5,22 @@ import 'api_service.dart';
 
 class APIConstruction {
   static Future changeStatus(
-      Map<String, dynamic> data, List<Map<String, dynamic>>? receipts) async {
+      Map<String, dynamic> data,
+      List<Map<String, dynamic>>? receipts,
+      Map<String, dynamic> history) async {
     var query = '''
-        mutation (\$data:Dictionary,\$receipts:Dictionary){
-    response: constructionregistration_mobile_change_status (data: \$data,receipts: \$receipts ) {
+        mutation (\$data:Dictionary,\$receipts:Dictionary,\$history:Dictionary){
+    response: constructionregistration_mobile_change_status (data: \$data,receipts: \$receipts,history: \$history ) {
         code
         message
         data
     }
-    }   
+}
+           
       ''';
     final MutationOptions options = MutationOptions(
-        document: gql(query), variables: {"data": data, "receipts": receipts});
+        document: gql(query),
+        variables: {"data": data, "receipts": receipts, "history": history});
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -331,6 +335,42 @@ class APIConstruction {
         "constructionregistrationId": constructionregistrationId,
         "residentId": residentId
       },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getFixedDateService() async {
+    var query = '''
+   query {
+	response: query_FixedServices_dto {
+		message
+		code
+		data {
+			_id
+			createdTime
+			updatedTime
+			receipt_date
+			cut_service_date
+			payment_reminder {
+				after_date
+			}
+		}
+	}
+}
+           
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create feedback"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Resister new card"),
+        "additional_file":
+            MessageLookupByLibrary.simpleMessage("Additional file"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "al_read": MessageLookupByLibrary.simpleMessage("read"),
         "all": MessageLookupByLibrary.simpleMessage("All"),

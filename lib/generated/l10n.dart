@@ -5849,6 +5849,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Additional file`
+  String get additional_file {
+    return Intl.message(
+      'Additional file',
+      name: 'additional_file',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

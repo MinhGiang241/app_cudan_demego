@@ -120,6 +120,7 @@ class AddNewResidentScreen extends StatelessWidget {
                                 PrimaryTextField(
                                   label: S.of(context).full_name,
                                   isRequired: true,
+                                  hint: S.of(context).full_name,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
@@ -134,21 +135,25 @@ class AddNewResidentScreen extends StatelessWidget {
                                 vpad(12),
                                 PrimaryTextField(
                                   label: S.of(context).dob,
+                                  hint: S.of(context).dob,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
                                   label: S.of(context).cmnd,
+                                  hint: S.of(context).cmnd,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
                                   label: S.of(context).cmnd,
+                                  hint: S.of(context).cmnd,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
                                   label: S.of(context).place_issue,
+                                  hint: S.of(context).place_issue,
                                   isRequired: true,
                                 ),
                                 vpad(12),
@@ -194,7 +199,8 @@ class AddNewResidentScreen extends StatelessWidget {
                                         .read<AddNewResidentPrv>()
                                         .onStep1Next(context);
                                   },
-                                )
+                                ),
+                                vpad(50)
                               ],
                             ),
                           ),

@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thêm mới phản ánh"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
+        "additional_file":
+            MessageLookupByLibrary.simpleMessage("File/ Ảnh bổ sung"),
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
         "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),

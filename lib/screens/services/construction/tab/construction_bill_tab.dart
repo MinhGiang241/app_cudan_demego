@@ -202,13 +202,13 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                               contentStyle:
                                   txtBodySmallBold(color: grayScaleColorBase),
                             ),
-                          if (e.date != null)
-                            InfoContentView(
-                              title: S.of(context).pay_date,
-                              content: Utils.dateFormat(e.date ?? "", 1),
-                              contentStyle:
-                                  txtBodySmallBold(color: grayScaleColorBase),
-                            ),
+                          // if (e.date != null)
+                          //   InfoContentView(
+                          //     title: S.of(context).pay_date,
+                          //     content: Utils.dateFormat(e.date ?? "", 1),
+                          //     contentStyle:
+                          //         txtBodySmallBold(color: grayScaleColorBase),
+                          //   ),
                         ];
                         var date = DateTime.parse(e.date ?? "");
                         return Padding(

@@ -578,5 +578,6 @@
   "pet_images": "Pet images",
   "bill": "Bill",
   "dob": "Date of birth",
-  "block": "block /village"
+  "block": "block /village",
+  "additional_file": "Additional file"
 }

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../constants/regex_text.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/construction.dart';
+import '../../../../models/fiexed_date_service.dart';
 import '../../../../services/api_auth.dart';
 import '../../../payment/widget/payment_item.dart';
 import '../construction_list_screen.dart';
@@ -74,6 +75,7 @@ class ConstructionRegPrv extends ChangeNotifier {
   bool initNew = true;
   bool autoValidStep1 = false;
   bool autoValidStep2 = false;
+  FixedDateService? fixedDateService;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
@@ -222,8 +224,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           deputy_phone: phoneController.text.trim(),
           contruction_add: addressController.text.trim(),
           contruction_email: emailController.text.trim(),
-          create_date:
-              (regDate!.subtract(const Duration(hours: 7))).toIso8601String(),
+          create_date: (regDate!).toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,
           deputy_identity: identityController.text.trim(),
@@ -244,10 +245,8 @@ class ConstructionRegPrv extends ChangeNotifier {
               : null,
           resident_name: resident.info_name,
           resident_phone: resident.phone_required,
-          time_start:
-              (startTime!.subtract(const Duration(hours: 7))).toIso8601String(),
-          time_end:
-              (endTime!.subtract(const Duration(hours: 7))).toIso8601String(),
+          time_start: (startTime!).toIso8601String(),
+          time_end: (endTime!).toIso8601String(),
           //   // resident_relationship: apartment.type,
           contruction_type_name: consType.name ?? "",
         );
@@ -255,11 +254,9 @@ class ConstructionRegPrv extends ChangeNotifier {
         if (existedConReg != null) {
           conHis = ConstructionHistory(
             constructionregistrationId:
-                existedConReg != null ? existedConReg!.id : v["_id"],
-            date: DateTime.now()
-                .subtract(const Duration(hours: 7))
-                .toIso8601String(),
-            residentId: resident.id,
+                existedConReg != null ? existedConReg!.id : null,
+            date: DateTime.now().toIso8601String(),
+            residentId: residentId,
             person: resident.info_name,
             status: isRequest
                 ? (apartment.type == "BUY" || apartment.type == "RENT")
@@ -273,6 +270,7 @@ class ConstructionRegPrv extends ChangeNotifier {
 
         if (!isPaidFee && isRequest) {
           Receipt? receiptFee = Receipt(
+              payment: fixedDateService!.cut_service_date ?? 0,
               residentId: residentId,
               phone: resident.phone_required,
               refSchema: "ConstructionRegistration",
@@ -287,18 +285,19 @@ class ConstructionRegPrv extends ChangeNotifier {
               customer_type: "RESIDENT",
               full_name: resident.info_name,
               receipts_status: "NEW",
-              expiration_date: endTime!
-                  .add(const Duration(days: 7))
-                  .subtract(const Duration(hours: 7))
+              expiration_date: DateTime.now()
+                  .add(Duration(
+                      days: fixedDateService != null
+                          ? fixedDateService!.cut_service_date ?? 0
+                          : 0))
                   .toIso8601String(),
-              date: DateTime.now()
-                  .subtract(const Duration(hours: 7))
-                  .toIso8601String());
+              date: DateTime.now().toIso8601String());
           listReceipt.add(receiptFee.toJson());
         }
 
         if (!isPaidDeposit && isRequest) {
           Receipt? receiptDeposiy = Receipt(
+            payment: fixedDateService!.cut_service_date ?? 0,
             residentId: residentId,
             phone: resident.phone_required,
             discount_money: depositFee,
@@ -313,8 +312,8 @@ class ConstructionRegPrv extends ChangeNotifier {
             customer_type: "RESIDENT",
             full_name: resident.info_name,
             receipts_status: "NEW",
-            expiration_date: endTime!
-                .add(const Duration(days: 7))
+            expiration_date: DateTime.now()
+                .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
             date: DateTime.now()
@@ -323,9 +322,10 @@ class ConstructionRegPrv extends ChangeNotifier {
           );
           listReceipt.add(receiptDeposiy.toJson());
         }
-
+        var dataHis = conHis?.toJson();
+        var dataReg = conReg.toJson();
         return APIConstruction.saveNewConstructionRegistration(
-            conReg.toJson(), conHis?.toJson(), listReceipt);
+            dataReg, dataHis, listReceipt);
       })
           // .then((v) {
           //   if (existedConReg != null) {
@@ -800,10 +800,17 @@ class ConstructionRegPrv extends ChangeNotifier {
       if (v != null) {
         dayoff = DayOff.fromJson(v[0]);
       }
+      getFixedDate();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
     // notifyListeners();
+  }
+
+  getFixedDate() async {
+    return await APIConstruction.getFixedDateService().then((v) {
+      fixedDateService = FixedDateService.fromMap(v[0]);
+    });
   }
 
   onPageChanged(v) {

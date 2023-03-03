@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../constants/api_constant.dart';
 import '../constants/constants.dart';
+import '../generated/l10n.dart';
 import '../models/info_content_view.dart';
 import 'primary_button.dart';
 import 'primary_card.dart';
@@ -33,6 +36,50 @@ class PrimaryInfoWidget extends StatelessWidget {
               Wrap(
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(listInfoView.length, (index) {
+                  if (listInfoView[index].files != null &&
+                      listInfoView[index].files!.isNotEmpty) {
+                    return Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Text(
+                              '${listInfoView[index].title}:',
+                              style: txtMedium(14, grayScaleColor2),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ),
+                        ...listInfoView[index].files!.map(
+                              (e) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchUrl(
+                                      Uri.parse(
+                                          "${ApiConstants.uploadURL}?load=${e.id}"),
+                                      mode: LaunchMode.externalApplication,
+                                    );
+                                  },
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      e.name ?? 'file',
+                                      textAlign: TextAlign.left,
+                                      style: txtMedium(
+                                        14,
+                                        primaryColor6,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                      ],
+                    );
+                  }
                   if (listInfoView[index].isCheckType) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16),

@@ -60,31 +60,32 @@ class PaymentPrv extends ChangeNotifier {
 
       return e.toJson();
     }).toList();
-
+    var dataHistoryTransaction = listReceipts.map(
+      (e) {
+        var now = DateTime.now();
+        var date = DateTime(now.year, now.month, now.day, 17);
+        var time = '${now.hour}:${now.minute}';
+        var paid =
+            e.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
+        var newTransaction = TransactionHistory(
+          isMobile: true,
+          receiptsId: e.id,
+          amount_money: e.amount_due,
+          amount_owed: 0,
+          // employeeId: e.employeeId,
+          payment_amount: e.discount_money! - paid,
+          date: date.toIso8601String(),
+          time: time,
+        );
+        return newTransaction.toJson();
+      },
+    ).toList();
     // APIPayment.saveManyPayment(dataReceipts)
-    APIPayment.makePayment(dataReceipts[0]).then((v) {
-      var dataHistoryTransaction = listReceipts.map(
-        (e) {
-          var now = DateTime.now();
-          var date = DateTime(now.year, now.month, now.day, 17);
-          var time = '${now.hour}:${now.minute}';
-          var paid =
-              e.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
-          var newTransaction = TransactionHistory(
-            isMobile: true,
-            receiptsId: e.id,
-            amount_money: e.amount_due,
-            amount_owed: 0,
-            // employeeId: e.employeeId,
-            payment_amount: e.discount_money! - paid,
-            date: date.toIso8601String(),
-            time: time,
-          );
-          return newTransaction.toJson();
-        },
-      ).toList();
-      return APIPayment.saveHistoryTransaction(dataHistoryTransaction);
-    }).then((v) {
+    APIPayment.makePayment(dataHistoryTransaction[0])
+        // .then((v) {
+        //   return APIPayment.saveHistoryTransaction(dataHistoryTransaction);
+        // })
+        .then((v) {
       isSendLoading = false;
 
       notifyListeners();

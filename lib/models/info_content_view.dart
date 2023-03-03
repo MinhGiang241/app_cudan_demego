@@ -8,6 +8,7 @@ class InfoContentView {
   final String? content;
   final TextStyle contentStyle;
   final List<String>? images;
+  final List<dynamic>? files;
   final List<String>? dateRange;
   final bool isCheckType;
   final bool isCheck;
@@ -19,6 +20,7 @@ class InfoContentView {
       this.rowKey,
       this.content,
       this.images,
+      this.files,
       this.isCheckType = false,
       this.isCheck = false,
       this.isHorizontal = false,

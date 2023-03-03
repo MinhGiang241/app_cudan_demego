@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/fiexed_date_service.dart';
 import '../../../../models/receipt.dart';
 import '../../../../utils/utils.dart';
 import '../construction_list_screen.dart';
@@ -12,6 +13,12 @@ import '../construction_list_screen.dart';
 class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionRegistration> listRegistration = [];
   List<ConstructionDocument> listDocument = [];
+  FixedDateService? fixedDateService;
+  getFixedDate() async {
+    await APIConstruction.getFixedDateService().then((v) {
+      fixedDateService = FixedDateService.fromMap(v[0]);
+    });
+  }
 
   sendToApprove(BuildContext context, ConstructionRegistration data) async {
     List<Map<String, dynamic>> listReceipt = [];
@@ -41,8 +48,8 @@ class ConstructionListPrv extends ChangeNotifier {
           customer_type: "RESIDENT",
           full_name: resident?.info_name,
           receipts_status: "NEW",
-          expiration_date: DateTime.parse(data.time_end!)
-              .add(const Duration(days: 7))
+          expiration_date: DateTime.now()
+              .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
               .subtract(const Duration(hours: 7))
               .toIso8601String(),
           date: DateTime.now()
@@ -68,7 +75,7 @@ class ConstructionListPrv extends ChangeNotifier {
         full_name: resident?.info_name,
         receipts_status: "NEW",
         expiration_date: DateTime.parse(data.time_end!)
-            .add(const Duration(days: 7))
+            .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
             .subtract(const Duration(hours: 7))
             .toIso8601String(),
         date:
@@ -76,6 +83,13 @@ class ConstructionListPrv extends ChangeNotifier {
       );
       listReceipt.add(receiptDeposiy.toJson());
     }
+    ConstructionHistory conHis = ConstructionHistory(
+      constructionregistrationId: data.id,
+      date: DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      residentId: context.read<ResidentInfoPrv>().residentId,
+      person: context.read<ResidentInfoPrv>().userInfo!.info_name,
+      status: status,
+    );
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).send_request,
@@ -83,17 +97,19 @@ class ConstructionListPrv extends ChangeNotifier {
         onConfirm: () {
           Navigator.pop(context);
           // APIConstruction.saveConstructionRegistration(data.toJson())
-          APIConstruction.changeStatus(data.toJson(), listReceipt).then((v) {
-            ConstructionHistory conHis = ConstructionHistory(
-              constructionregistrationId: data.id,
-              date: DateTime.now()
-                  .subtract(const Duration(hours: 7))
-                  .toIso8601String(),
-              residentId: context.read<ResidentInfoPrv>().residentId,
-              person: context.read<ResidentInfoPrv>().userInfo!.info_name,
-              status: status,
-            );
-            return APIConstruction.saveConstructionHistory(conHis.toJson());
+          return APIConstruction.changeStatus(
+                  data.toJson(), listReceipt, conHis.toJson())
+              .then((v) {
+            // ConstructionHistory conHis = ConstructionHistory(
+            //   constructionregistrationId: data.id,
+            //   date: DateTime.now()
+            //       .subtract(const Duration(hours: 7))
+            //       .toIso8601String(),
+            //   residentId: context.read<ResidentInfoPrv>().residentId,
+            //   person: context.read<ResidentInfoPrv>().userInfo!.info_name,
+            //   status: status,
+            // );
+            // return APIConstruction.saveConstructionHistory();
           }).then((v) {
             Utils.showSuccessMessage(
                 context: context,
@@ -115,6 +131,13 @@ class ConstructionListPrv extends ChangeNotifier {
     data.status = 'CANCEL';
     data.cancel_reason = 'NGUOIDUNGHUY';
     data.isMobile = true;
+    ConstructionHistory conHis = ConstructionHistory(
+      constructionregistrationId: data.id,
+      date: DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      residentId: context.read<ResidentInfoPrv>().residentId,
+      person: context.read<ResidentInfoPrv>().userInfo!.info_name,
+      status: "CANCEL",
+    );
     Utils.showConfirmMessage(
         context: context,
         title: S.of(context).cancel_request,
@@ -122,17 +145,9 @@ class ConstructionListPrv extends ChangeNotifier {
         onConfirm: () {
           Navigator.pop(context);
           // APIConstruction.saveConstructionRegistration(data.toJson())
-          APIConstruction.changeStatus(data.toJson(), null).then((v) {
-            ConstructionHistory conHis = ConstructionHistory(
-              constructionregistrationId: data.id,
-              date: DateTime.now()
-                  .subtract(const Duration(hours: 7))
-                  .toIso8601String(),
-              residentId: context.read<ResidentInfoPrv>().residentId,
-              person: context.read<ResidentInfoPrv>().userInfo!.info_name,
-              status: "CANCEL",
-            );
-            return APIConstruction.saveConstructionHistory(conHis.toJson());
+          APIConstruction.changeStatus(data.toJson(), null, conHis.toJson())
+              .then((v) {
+            // return APIConstruction.saveConstructionHistory(conHis.toJson());
           }).then((v) {
             Utils.showSuccessMessage(
                 context: context,
@@ -202,6 +217,7 @@ class ConstructionListPrv extends ChangeNotifier {
         listRegistration.add(ConstructionRegistration.fromJson(i));
       }
       // notifyListeners();
+      getFixedDate();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

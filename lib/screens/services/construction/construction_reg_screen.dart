@@ -393,37 +393,37 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           background: grayScaleColor4,
                                         ),
                                         vpad(16),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 22.0,
-                                              height: 22.0,
-                                              child: Checkbox(
-                                                fillColor:
-                                                    MaterialStateProperty.all(
-                                                        primaryColorBase),
-                                                value: context
-                                                    .watch<ConstructionRegPrv>()
-                                                    .isPaidFee,
-                                                onChanged: (v) {
-                                                  context
-                                                      .read<
-                                                          ConstructionRegPrv>()
-                                                      .toggleFee();
-                                                },
-                                              ),
-                                            ),
-                                            hpad(12),
-                                            Expanded(
-                                              child: Text(
-                                                S.of(context).fee_paid,
-                                                style: txtBold(
-                                                    14, grayScaleColorBase),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        vpad(16),
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 22.0,
+                                        //       height: 22.0,
+                                        //       child: Checkbox(
+                                        //         fillColor:
+                                        //             MaterialStateProperty.all(
+                                        //                 primaryColorBase),
+                                        //         value: context
+                                        //             .watch<ConstructionRegPrv>()
+                                        //             .isPaidFee,
+                                        //         onChanged: (v) {
+                                        //           context
+                                        //               .read<
+                                        //                   ConstructionRegPrv>()
+                                        //               .toggleFee();
+                                        //         },
+                                        //       ),
+                                        //     ),
+                                        //     hpad(12),
+                                        //     Expanded(
+                                        //       child: Text(
+                                        //         S.of(context).fee_paid,
+                                        //         style: txtBold(
+                                        //             14, grayScaleColorBase),
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        // vpad(16),
                                         PrimaryTextField(
                                           controller: context
                                               .read<ConstructionRegPrv>()
@@ -434,37 +434,37 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           background: grayScaleColor4,
                                         ),
                                         vpad(16),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 22.0,
-                                              height: 22.0,
-                                              child: Checkbox(
-                                                fillColor:
-                                                    MaterialStateProperty.all(
-                                                        primaryColorBase),
-                                                value: context
-                                                    .watch<ConstructionRegPrv>()
-                                                    .isPaidDeposit,
-                                                onChanged: (v) {
-                                                  context
-                                                      .read<
-                                                          ConstructionRegPrv>()
-                                                      .toggleDeposit();
-                                                },
-                                              ),
-                                            ),
-                                            hpad(12),
-                                            Expanded(
-                                              child: Text(
-                                                S.of(context).fee_paid,
-                                                style: txtBold(
-                                                    14, grayScaleColorBase),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        vpad(16),
+                                        // Row(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 22.0,
+                                        //       height: 22.0,
+                                        //       child: Checkbox(
+                                        //         fillColor:
+                                        //             MaterialStateProperty.all(
+                                        //                 primaryColorBase),
+                                        //         value: context
+                                        //             .watch<ConstructionRegPrv>()
+                                        //             .isPaidDeposit,
+                                        //         onChanged: (v) {
+                                        //           context
+                                        //               .read<
+                                        //                   ConstructionRegPrv>()
+                                        //               .toggleDeposit();
+                                        //         },
+                                        //       ),
+                                        //     ),
+                                        //     hpad(12),
+                                        //     Expanded(
+                                        //       child: Text(
+                                        //         S.of(context).fee_paid,
+                                        //         style: txtBold(
+                                        //             14, grayScaleColorBase),
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        // vpad(16),
                                         Row(
                                           children: [
                                             Expanded(
