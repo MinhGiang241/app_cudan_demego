@@ -437,7 +437,7 @@
   "address": "Address",
   "deputy": "Deputy",
   "deputy_phone": "Phone of deputy",
-  "cmnd": "CMCD/ CCCD/ Passport",
+  "cmnd": "CMND/ CCCD/ Passport",
   "cons_file_details": "Construction document details",
   "file_code": "Document code",
   "expired_login": "Login session is invalid, please sign in again",
@@ -579,5 +579,8 @@
   "bill": "Bill",
   "dob": "Date of birth",
   "block": "block /village",
-  "additional_file": "Additional file"
+  "additional_file": "Additional file",
+  "pet_image_not_empty": "Pet image can not be empty",
+  "phone_less_10": "Phone nunmber length can not less than 10 character",
+  "edit_reflection": "Edit reflection"
 }

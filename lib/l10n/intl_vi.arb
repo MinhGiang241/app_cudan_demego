@@ -413,7 +413,7 @@
   "cons_day": "Số ngày thi công",
   "off_day": "Số ngày nghỉ",
   "work_description": "Mô tả công việc",
-  "limit_15mb": "Giới hạn mỗi file tải lên không vượt quá 15Mb/file",
+  "limit_15mb": "Giới hạn mỗi file tải lên không vượt quá 15MB/file",
   "i_confirm": "Tôi xác nhận sẽ tuân thủ các quy định về thi công và sẽ chịu đền bù mọi tổn thất, khiếu nại, chi phí phát sinh từ công việc xây dựng, sửa chữa này. Xem thêm",
   "here": "tại đây",
   "cons_drawing": "Bản vẽ thi công",
@@ -436,9 +436,9 @@
   "cons_unit": "Đơn vị thi công",
   "cons_unit_info": "Thông tin đơn vị thi công",
   "address": "Địa chỉ",
-  "deputy": "Người đại dện",
+  "deputy": "Người đại diện",
   "deputy_phone": "SĐT người đại diện",
-  "cmnd": "CMCD/ CCCD/ Hộ chiếu",
+  "cmnd": "CMND/ CCCD/ Hộ chiếu",
   "cons_file_details": "Chi tiết hồ sơ thi công",
   "file_code": "Mã hồ sơ",
   "expired_login": "Phiên đăng nhập hết hạn, hãy đăng nhập lại",
@@ -580,5 +580,8 @@
   "bill": "Phiếu thu",
   "dob": "Ngày sinh",
   "block": "Phường /xã",
-  "additional_file": "File/ Ảnh bổ sung"
+  "additional_file": "File/ Ảnh bổ sung",
+  "pet_image_not_empty": "Hình ảnh vật nuôi không được để trống",
+  "phone_less_10": "Số điện thoại không được nhỏ hơn 10 ký tự",
+  "edit_reflection": "Chỉnh sửa phản ánh"
 }

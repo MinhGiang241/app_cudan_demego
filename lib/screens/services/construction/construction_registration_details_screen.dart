@@ -45,7 +45,9 @@ class _ConstructionRegistrationDetailsScreenState
     if (arg['cons'] != null) {
       reg = arg['cons'];
     }
-    var apartment = context.read<ResidentInfoPrv>().selectedApartment;
+    var listApart = context.read<ResidentInfoPrv>().listOwn;
+    var apartment = listApart
+        .firstWhere((element) => element.apartmentId == reg.apartmentId);
     var surface = '';
     if (apartment != null) {
       surface =

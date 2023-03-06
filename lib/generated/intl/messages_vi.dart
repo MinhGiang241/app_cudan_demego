@@ -136,7 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
-        "cmnd": MessageLookupByLibrary.simpleMessage("CMCD/ CCCD/ Hộ chiếu"),
+        "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
         "code_file": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
@@ -212,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dependent_person":
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc"),
         "deposit": MessageLookupByLibrary.simpleMessage("Đặt cọc"),
-        "deputy": MessageLookupByLibrary.simpleMessage("Người đại dện"),
+        "deputy": MessageLookupByLibrary.simpleMessage("Người đại diện"),
         "deputy_phone":
             MessageLookupByLibrary.simpleMessage("SĐT người đại diện"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
@@ -228,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn thanh toán"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
+        "edit_reflection":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa phản ánh"),
         "edit_reg_const":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký thi công"),
         "edit_reg_deliver":
@@ -403,7 +405,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trạng thái phiếu"),
         "licene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
         "limit_15mb": MessageLookupByLibrary.simpleMessage(
-            "Giới hạn mỗi file tải lên không vượt quá 15Mb/file"),
+            "Giới hạn mỗi file tải lên không vượt quá 15MB/file"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "long": MessageLookupByLibrary.simpleMessage("Dài"),
@@ -571,6 +573,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_agree": MessageLookupByLibrary.simpleMessage(
             "Bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Cái"),
+        "pet_image_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Hình ảnh vật nuôi không được để trống"),
         "pet_images": MessageLookupByLibrary.simpleMessage("Ảnh vật nuôi"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Thông tin vật nuôi"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Đực"),
@@ -581,6 +585,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_type": MessageLookupByLibrary.simpleMessage("Loại vật nuôi"),
         "phone_email":
             MessageLookupByLibrary.simpleMessage("Số điện thoại/ Email"),
+        "phone_less_10": MessageLookupByLibrary.simpleMessage(
+            "Số điện thoại không được nhỏ hơn 10 ký tự"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "photo_back_side": MessageLookupByLibrary.simpleMessage("Ảnh mặt sau"),
         "photo_front_side":

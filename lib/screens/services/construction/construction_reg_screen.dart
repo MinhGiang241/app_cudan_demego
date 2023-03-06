@@ -589,6 +589,8 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         ),
                                         vpad(16),
                                         PrimaryTextField(
+                                          isRequired: true,
+                                          isShow: false,
                                           maxLength: 255,
                                           blockSpace: true,
                                           validator: (v) {
@@ -626,8 +628,12 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           blockSpace: true,
                                           blockSpecial: true,
                                           onlyNum: true,
-                                          maxLength: 12,
-                                          validator: Utils.emptyValidator,
+                                          maxLength: 10,
+                                          validator: (v) {
+                                            if (v!.isEmpty && v.length < 10) {
+                                              return "";
+                                            }
+                                          },
                                           controller: context
                                               .read<ConstructionRegPrv>()
                                               .phoneController,

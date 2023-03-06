@@ -258,6 +258,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     ),
                     vpad(16),
                     SelectMediaWidget(
+                      isRequired: true,
                       isDash: context
                               .watch<RegisterPetPrv>()
                               .existedImage

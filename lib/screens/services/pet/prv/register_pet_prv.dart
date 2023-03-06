@@ -174,6 +174,9 @@ class RegisterPetPrv extends ChangeNotifier {
         if (existedReportFiles.isEmpty && reportFiles.isEmpty) {
           listError.add(S.of(context).report_not_empty);
         }
+        if (imagesPet.isEmpty) {
+          listError.add(S.of(context).pet_image_not_empty);
+        }
         if (listError.isNotEmpty) {
           throw (listError.join(',  '));
         }

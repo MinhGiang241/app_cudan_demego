@@ -13,6 +13,9 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../utils/utils.dart';
+import '../../widgets/primary_icon.dart';
+import '../auth/prv/resident_info_prv.dart';
 import 'prv/add_new_resident_prv.dart';
 
 class AddNewResidentScreen extends StatelessWidget {
@@ -25,6 +28,31 @@ class AddNewResidentScreen extends StatelessWidget {
       create: (_) => AddNewResidentPrv(),
       builder: (context, child) {
         var activeStep = context.watch<AddNewResidentPrv>().activeStep;
+        var listApartmentChoice =
+            context.read<ResidentInfoPrv>().listOwn.map((e) {
+          return DropdownMenuItem(
+            value: e.apartmentId,
+            child: Text(e.apartment?.name! != null
+                ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
+                : e.apartmentId!),
+          );
+        }).toList();
+
+        var listSex = [
+          DropdownMenuItem(
+            value: "MALE",
+            child: Text(S.of(context).male),
+          ),
+          DropdownMenuItem(
+            value: "FEMALE",
+            child: Text(S.of(context).female),
+          ),
+          DropdownMenuItem(
+            value: "OTHER",
+            child: Text(S.of(context).other),
+          ),
+        ];
+
         return PrimaryScreen(
             isPadding: false,
             appBar: PrimaryAppbar(
@@ -32,8 +60,15 @@ class AddNewResidentScreen extends StatelessWidget {
             ),
             body: SafeArea(
               child: FutureBuilder(
-                future: () {}(),
+                future: context.read<AddNewResidentPrv>().preFetchData(context),
                 builder: (context, snapshot) {
+                  var listRelationChoice =
+                      context.watch<AddNewResidentPrv>().relations.map((v) {
+                    return DropdownMenuItem(
+                      value: v.id,
+                      child: Text(v.name ?? ""),
+                    );
+                  }).toList();
                   return Column(children: [
                     Row(
                       children: [
@@ -113,82 +148,197 @@ class AddNewResidentScreen extends StatelessWidget {
                               children: [
                                 vpad(12),
                                 PrimaryDropDown(
+                                  isDense: false,
+                                  selectList: listApartmentChoice,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .apartmentAddController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .apartmentAddValidate,
                                   label: S.of(context).apartment_add_resident,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  validator: Utils.emptyValidator,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .nameController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .nameValidate,
                                   label: S.of(context).full_name,
                                   isRequired: true,
                                   hint: S.of(context).full_name,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  selectList: listRelationChoice,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .relationController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .relationValidate,
                                   label: S.of(context).relation_with_owner,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  selectList: listSex,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .sexController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .sexValidate,
                                   label: S.of(context).sex,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  onTap: () => context
+                                      .read<AddNewResidentPrv>()
+                                      .pickBirthDay(context),
+                                  isReadOnly: true,
+                                  hint: "dd/mm/yyyy",
+                                  suffixIcon: const PrimaryIcon(
+                                      icons: PrimaryIcons.calendar),
+                                  validator: Utils.emptyValidator,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .birthController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .birthValidate,
                                   label: S.of(context).dob,
-                                  hint: S.of(context).dob,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  validator: Utils.emptyValidator,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .identityController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .identityValidate,
                                   label: S.of(context).cmnd,
                                   hint: S.of(context).cmnd,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
-                                  label: S.of(context).cmnd,
-                                  hint: S.of(context).cmnd,
-                                  isRequired: true,
-                                ),
-                                vpad(12),
-                                PrimaryTextField(
+                                  validator: Utils.emptyValidator,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .issuePlaceController,
                                   label: S.of(context).place_issue,
                                   hint: S.of(context).place_issue,
-                                  isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .resTypeController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .resTypeValidate,
                                   label: S.of(context).resident_type,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .provController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .provValidate,
                                   label: S.of(context).prov_city,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .wardController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .wardValidate,
                                   label: S.of(context).ward,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .blockController,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .blockValidate,
                                   label: S.of(context).block,
                                   isRequired: true,
                                 ),
                                 vpad(12),
                                 SelectMediaWidget(
+                                  onSelect: () => context
+                                      .read<AddNewResidentPrv>()
+                                      .onSelectResImages(context),
+                                  existImages: context
+                                      .watch<AddNewResidentPrv>()
+                                      .existedResImages,
+                                  images: context
+                                      .watch<AddNewResidentPrv>()
+                                      .resImages,
+                                  onRemove: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveResImages,
+                                  onRemoveExist: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveExistedResImages,
                                   isRequired: true,
                                   title: S.of(context).res_photo,
                                 ),
                                 vpad(12),
                                 SelectMediaWidget(
+                                  onSelect: () => context
+                                      .read<AddNewResidentPrv>()
+                                      .onSelectIdentityImages(context),
+                                  existImages: context
+                                      .watch<AddNewResidentPrv>()
+                                      .existedIdentityImages,
+                                  images: context
+                                      .watch<AddNewResidentPrv>()
+                                      .identityImages,
+                                  onRemove: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveIdentityImage,
+                                  onRemoveExist: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveExistedIdentityImage,
                                   isRequired: true,
                                   title: S.of(context).identity_photo,
                                 ),
                                 vpad(12),
                                 SelectFileWidget(
-                                  title: S.of(context).add_file,
+                                  onSelect: () => context
+                                      .read<AddNewResidentPrv>()
+                                      .onSelectDocuments(context),
+                                  existFiles: context
+                                      .watch<AddNewResidentPrv>()
+                                      .existedDoccuments,
+                                  files: context
+                                      .watch<AddNewResidentPrv>()
+                                      .documents,
+                                  onRemove: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveDocuments,
+                                  onRemoveExist: context
+                                      .read<AddNewResidentPrv>()
+                                      .onRemoveExistedDocuments,
+                                  title: S.of(context).attachment_file,
                                 ),
                                 vpad(20),
                                 PrimaryButton(

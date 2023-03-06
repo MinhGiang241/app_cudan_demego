@@ -133,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
-        "cmnd": MessageLookupByLibrary.simpleMessage("CMCD/ CCCD/ Passport"),
+        "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
         "code_file": MessageLookupByLibrary.simpleMessage("File code"),
         "code_verify":
             MessageLookupByLibrary.simpleMessage("Verify security code"),
@@ -228,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
+        "edit_reflection":
+            MessageLookupByLibrary.simpleMessage("Edit reflection"),
         "edit_reg_const": MessageLookupByLibrary.simpleMessage(
             "Edit construction regitration"),
         "edit_reg_deliver":
@@ -567,6 +569,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pet_agree": MessageLookupByLibrary.simpleMessage(
             "You need to agree to comply with the regulations on pet registration"),
         "pet_female": MessageLookupByLibrary.simpleMessage("Female"),
+        "pet_image_not_empty":
+            MessageLookupByLibrary.simpleMessage("Pet image can not be empty"),
         "pet_images": MessageLookupByLibrary.simpleMessage("Pet images"),
         "pet_info": MessageLookupByLibrary.simpleMessage("Pet information"),
         "pet_male": MessageLookupByLibrary.simpleMessage("Male"),
@@ -576,6 +580,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pet regulation"),
         "pet_type": MessageLookupByLibrary.simpleMessage("Pet type"),
         "phone_email": MessageLookupByLibrary.simpleMessage("Phone/ Email"),
+        "phone_less_10": MessageLookupByLibrary.simpleMessage(
+            "Phone nunmber length can not less than 10 character"),
         "phone_num": MessageLookupByLibrary.simpleMessage("Phone number"),
         "photo_back_side":
             MessageLookupByLibrary.simpleMessage("Photo back size"),

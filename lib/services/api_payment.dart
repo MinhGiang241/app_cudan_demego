@@ -86,7 +86,7 @@ class APIPayment {
   }
 
   static Future getReceiptsList(
-      String residentId, String apartmentId, int year, int month) async {
+      String? residentId, String? apartmentId, int year, int month) async {
     var query = '''
     mutation (\$residentId:String,\$apartmentId:String,\$year:Float,\$month:Float){
     response: receipts_mobile_get_receipts_by_residentid_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId,year: \$year,month: \$month ) {

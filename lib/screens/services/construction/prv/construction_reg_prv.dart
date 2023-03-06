@@ -68,7 +68,7 @@ class ConstructionRegPrv extends ChangeNotifier {
     } else {
       initNew = false;
       regDate = DateTime.now();
-      regDateController.text = Utils.dateFormat(regDate!.toIso8601String(), 1);
+      regDateController.text = Utils.dateFormat(regDate!.toIso8601String(), 0);
     }
   }
 
@@ -224,7 +224,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           deputy_phone: phoneController.text.trim(),
           contruction_add: addressController.text.trim(),
           contruction_email: emailController.text.trim(),
-          create_date: (regDate!).toIso8601String(),
+          create_date: (regDate)!.toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,
           deputy_identity: identityController.text.trim(),
@@ -245,27 +245,28 @@ class ConstructionRegPrv extends ChangeNotifier {
               : null,
           resident_name: resident.info_name,
           resident_phone: resident.phone_required,
-          time_start: (startTime!).toIso8601String(),
-          time_end: (endTime!).toIso8601String(),
+          time_start:
+              (startTime!.add(const Duration(hours: 7))).toIso8601String(),
+          time_end: (endTime!.add(const Duration(hours: 7))).toIso8601String(),
           //   // resident_relationship: apartment.type,
           contruction_type_name: consType.name ?? "",
         );
         ConstructionHistory? conHis;
-        if (existedConReg != null) {
-          conHis = ConstructionHistory(
-            constructionregistrationId:
-                existedConReg != null ? existedConReg!.id : null,
-            date: DateTime.now().toIso8601String(),
-            residentId: residentId,
-            person: resident.info_name,
-            status: isRequest
-                ? (apartment.type == "BUY" || apartment.type == "RENT")
-                    ? "WAIT_PAY"
-                    : "WAIT_OWNER"
-                : "NEW",
-          );
-          // return APIConstruction.saveNewConstructionRegistration();
-        }
+        // if (existedConReg != null) {
+        conHis = ConstructionHistory(
+          constructionregistrationId:
+              existedConReg != null ? existedConReg!.id : null,
+          date: DateTime.now().toIso8601String(),
+          residentId: residentId,
+          person: resident.info_name,
+          status: isRequest
+              ? (apartment.type == "BUY" || apartment.type == "RENT")
+                  ? "WAIT_PAY"
+                  : "WAIT_OWNER"
+              : "NEW",
+        );
+        // return APIConstruction.saveNewConstructionRegistration();
+        // }
         List<Map<String, dynamic>> listReceipt = [];
 
         if (!isPaidFee && isRequest) {
@@ -322,7 +323,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           );
           listReceipt.add(receiptDeposiy.toJson());
         }
-        var dataHis = conHis?.toJson();
+        var dataHis = conHis.toJson();
         var dataReg = conReg.toJson();
         return APIConstruction.saveNewConstructionRegistration(
             dataReg, dataHis, listReceipt);
@@ -632,6 +633,8 @@ class ConstructionRegPrv extends ChangeNotifier {
     }
     if (phoneController.text.trim().isEmpty) {
       validatePhone = S.current.not_blank;
+    } else if (phoneController.text.trim().length < 10) {
+      validatePhone = S.current.phone_less_10;
     } else {
       validatePhone = null;
     }

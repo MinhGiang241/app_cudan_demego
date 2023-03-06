@@ -39,8 +39,9 @@ class PaymentListPrv extends ChangeNotifier {
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment!.apartmentId;
     var residentId = context.read<ResidentInfoPrv>().residentId;
+    var account = context.read<ResidentInfoPrv>().userInfo!.account;
     APIPayment.getReceiptsList(
-            residentId ?? "", apartmentId ?? '', year!, month!)
+            residentId ?? account?.userName, apartmentId, year!, month!)
         .then((v) {
       listPay.clear();
       listUnpay.clear();
@@ -51,6 +52,17 @@ class PaymentListPrv extends ChangeNotifier {
           listPay.add(Receipt.fromJson(i));
         }
       }
+      listPay.sort((a, b) {
+        var aDate = DateTime.parse(a.date ?? "");
+        var bDate = DateTime.parse(b.date ?? "");
+        var aSameDate = DateTime(aDate.year, aDate.month, aDate.day);
+        var bSameDate = DateTime(bDate.year, bDate.month, bDate.day);
+        var compare = bSameDate.compareTo(aSameDate);
+        if (compare == 0) {
+          return b.createdTime!.compareTo(a.createdTime ?? "");
+        }
+        return compare;
+      });
       notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

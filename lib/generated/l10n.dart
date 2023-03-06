@@ -4430,10 +4430,10 @@ class S {
     );
   }
 
-  /// `CMCD/ CCCD/ Passport`
+  /// `CMND/ CCCD/ Passport`
   String get cmnd {
     return Intl.message(
-      'CMCD/ CCCD/ Passport',
+      'CMND/ CCCD/ Passport',
       name: 'cmnd',
       desc: '',
       args: [],
@@ -5855,6 +5855,36 @@ class S {
     return Intl.message(
       'Additional file',
       name: 'additional_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet image can not be empty`
+  String get pet_image_not_empty {
+    return Intl.message(
+      'Pet image can not be empty',
+      name: 'pet_image_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone nunmber length can not less than 10 character`
+  String get phone_less_10 {
+    return Intl.message(
+      'Phone nunmber length can not less than 10 character',
+      name: 'phone_less_10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit reflection`
+  String get edit_reflection {
+    return Intl.message(
+      'Edit reflection',
+      name: 'edit_reflection',
       desc: '',
       args: [],
     );

@@ -121,7 +121,14 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                       borderRadius: BorderRadius.circular(12),
                       isDense: widget.isDense,
                       menuMaxHeight: dvHeight(context) / 3,
-                      validator: widget.validator,
+                      validator: widget.validator ??
+                          (v) {
+                            if (v != null) {
+                              widget.controller!.text = v;
+                              return null;
+                            }
+                            return '';
+                          },
                       dropdownColor: Colors.white,
                       value: widget.value ??
                           (widget.controller != null
