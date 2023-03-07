@@ -272,7 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email_phone":
             MessageLookupByLibrary.simpleMessage("Nhập SĐT/Email "),
         "enter_identity":
-            MessageLookupByLibrary.simpleMessage("Nhập CMCD/ CCCD/ Hộ chiếu"),
+            MessageLookupByLibrary.simpleMessage("Nhập CMND/ CCCD/ Hộ chiếu"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Nhập số"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
@@ -562,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chu kỳ thanh toán không được để trống"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Phương thức thanh toán"),
+        "per_res": MessageLookupByLibrary.simpleMessage("Thường trú"),
         "percent": MessageLookupByLibrary.simpleMessage("Phần trăm"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
@@ -792,6 +793,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thêm mới thành công"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thành công"),
+        "success_edit_reflection": MessageLookupByLibrary.simpleMessage(
+            "Cập nhật phản ánh thành công"),
         "success_find": MessageLookupByLibrary.simpleMessage(
             "Đổi trạng thái đồ thành đã tìm thấy thành công"),
         "success_found": MessageLookupByLibrary.simpleMessage("Đã tìm thấy"),
@@ -817,6 +820,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông báo hệ thống"),
         "take_place_time":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
+        "temp_res": MessageLookupByLibrary.simpleMessage("Tạm trú"),
+        "temp_res_foreigner": MessageLookupByLibrary.simpleMessage(
+            "Tạm trú cho người nước ngoài"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Điều khoản & dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(

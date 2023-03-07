@@ -449,7 +449,7 @@
   "enter_cons_unit_name": "Nhập tên đơn vị thi công",
   "enter_address": "Nhập địa chỉ",
   "enter_worker_num": "Nhập số công nhân",
-  "enter_identity": "Nhập CMCD/ CCCD/ Hộ chiếu",
+  "enter_identity": "Nhập CMND/ CCCD/ Hộ chiếu",
   "enter_deputy_name": "Nhập tên người đại diện",
   "add_file": "Thêm file",
   "existed_drawing_not_empty": "Bản vẽ hiện trạng không được bỏ trống",
@@ -583,5 +583,9 @@
   "additional_file": "File/ Ảnh bổ sung",
   "pet_image_not_empty": "Hình ảnh vật nuôi không được để trống",
   "phone_less_10": "Số điện thoại không được nhỏ hơn 10 ký tự",
-  "edit_reflection": "Chỉnh sửa phản ánh"
+  "edit_reflection": "Chỉnh sửa phản ánh",
+  "success_edit_reflection": "Cập nhật phản ánh thành công",
+  "temp_res": "Tạm trú",
+  "per_res": "Thường trú",
+  "temp_res_foreigner": "Tạm trú cho người nước ngoài"
 }

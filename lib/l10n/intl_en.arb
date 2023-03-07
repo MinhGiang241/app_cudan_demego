@@ -582,5 +582,9 @@
   "additional_file": "Additional file",
   "pet_image_not_empty": "Pet image can not be empty",
   "phone_less_10": "Phone nunmber length can not less than 10 character",
-  "edit_reflection": "Edit reflection"
+  "edit_reflection": "Edit reflection",
+  "success_edit_reflection": "Update reflection successfully",
+  "temp_res": "Temporary resident",
+  "per_res": "Permanent resident",
+  "temp_res_foreigner": "Temporary resident for foreigner"
 }

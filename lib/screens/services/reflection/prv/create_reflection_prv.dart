@@ -136,7 +136,9 @@ class CreateReflectionPrv extends ChangeNotifier {
             context: context,
             e: isSend
                 ? S.of(context).success_send_ticket
-                : S.of(context).success_add_ticket,
+                : ref != null
+                    ? S.of(context).success_edit_reflection
+                    : S.of(context).success_add_ticket,
             onClose: () {
               Navigator.pushNamedAndRemoveUntil(
                   context, ReflectionScreen.routeName, (route) => route.isFirst,

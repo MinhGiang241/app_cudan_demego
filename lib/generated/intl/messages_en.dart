@@ -558,6 +558,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Payment circle can be not empty"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Payment method"),
+        "per_res": MessageLookupByLibrary.simpleMessage("Permanent resident"),
         "percent": MessageLookupByLibrary.simpleMessage("Percent"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
@@ -793,6 +794,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add new successfully"),
         "success_edit":
             MessageLookupByLibrary.simpleMessage("Edit successfully"),
+        "success_edit_reflection": MessageLookupByLibrary.simpleMessage(
+            "Update reflection successfully"),
         "success_find": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
         "success_found": MessageLookupByLibrary.simpleMessage("Found"),
@@ -818,6 +821,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("System_notification"),
         "take_place_time":
             MessageLookupByLibrary.simpleMessage("Take place time"),
+        "temp_res": MessageLookupByLibrary.simpleMessage("Temporary resident"),
+        "temp_res_foreigner": MessageLookupByLibrary.simpleMessage(
+            "Temporary resident for foreigner"),
         "terms_services":
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(

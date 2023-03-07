@@ -16,7 +16,6 @@ class APIRelation {
           updatedTime
           code
           display_name
-          code
           name
         }
       }

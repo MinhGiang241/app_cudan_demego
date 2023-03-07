@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:app_cudan/services/api_province.dart';
 import 'package:app_cudan/services/api_reflection.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/file_upload.dart';
+import '../../../models/province.dart';
 import '../../../models/relationship.dart';
 import '../../../services/api_relation.dart';
 import '../../../utils/utils.dart';
@@ -15,23 +18,37 @@ class AddNewResidentPrv extends ChangeNotifier {
   bool autoValidStep1 = false;
   bool autoValidStep2 = false;
   List<RelationShip> relations = [];
+  List<Province> provinces = [];
+  List<Distric> districs = [];
+  List<Ward> wards = [];
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final PageController controller = PageController();
 
   DateTime? birthDate;
-  final TextEditingController apartmentAddController = TextEditingController();
+  // final GlobalKey<FormFieldState> districtDropdownKey =
+  //     GlobalKey<FormFieldState>();
+  // final GlobalKey<FormFieldState> wardDropdownKey = GlobalKey<FormFieldState>();
+  // final TextEditingController apartmentAddController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController relationController = TextEditingController();
-  final TextEditingController sexController = TextEditingController();
+  // final TextEditingController relationController = TextEditingController();
+  // final TextEditingController sexController = TextEditingController();
   final TextEditingController birthController = TextEditingController();
   final TextEditingController identityController = TextEditingController();
   final TextEditingController issuePlaceController = TextEditingController();
   final TextEditingController nationalityController = TextEditingController();
-  final TextEditingController resTypeController = TextEditingController();
-  final TextEditingController provController = TextEditingController();
-  final TextEditingController wardController = TextEditingController();
-  final TextEditingController blockController = TextEditingController();
+  // final TextEditingController resTypeController = TextEditingController();
+  // final TextEditingController provController = TextEditingController();
+  // final TextEditingController districtController = TextEditingController();
+  // final TextEditingController wardController = TextEditingController();
+
+  String? apartmentAddValue;
+  String? relationValue;
+  String? sexValue;
+  String? resTypeValue;
+  String? provinceValue;
+  String? districtValue;
+  String? wardValue;
 
   String? apartmentAddValidate;
   String? nameValidate;
@@ -42,8 +59,8 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? nationalityValidate;
   String? resTypeValidate;
   String? provValidate;
+  String? districtValidate;
   String? wardValidate;
-  String? blockValidate;
 
   List<FileUploadModel> existedResImages = [];
   List<FileUploadModel> existedIdentityImages = [];
@@ -127,17 +144,17 @@ class AddNewResidentPrv extends ChangeNotifier {
     relationValidate = null;
     sexValidate = null;
     birthValidate = null;
-    identityValidate;
+    identityValidate = null;
     nationalityValidate = null;
     resTypeValidate = null;
     provValidate = null;
+    districtValidate = null;
     wardValidate = null;
-    blockValidate = null;
     notifyListeners();
   }
 
   genValidStep1() {
-    if (apartmentAddController.text.trim().isEmpty) {
+    if (apartmentAddValue == null) {
       apartmentAddValidate = S.current.not_blank;
     } else {
       apartmentAddValidate = null;
@@ -147,12 +164,12 @@ class AddNewResidentPrv extends ChangeNotifier {
     } else {
       nameValidate = null;
     }
-    if (relationController.text.trim().isEmpty) {
+    if (relationValue == null) {
       relationValidate = S.current.not_blank;
     } else {
       relationValidate = null;
     }
-    if (sexController.text.trim().isEmpty) {
+    if (sexValue == null) {
       sexValidate = S.current.not_blank;
     } else {
       sexValidate = null;
@@ -160,7 +177,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     if (identityController.text.trim().isEmpty) {
       identityValidate = S.current.not_blank;
     } else {
-      birthValidate = null;
+      identityValidate = null;
     }
     if (birthController.text.trim().isEmpty) {
       birthValidate = S.current.not_blank;
@@ -172,47 +189,36 @@ class AddNewResidentPrv extends ChangeNotifier {
     } else {
       nationalityValidate = null;
     }
-    if (resTypeController.text.trim().isEmpty) {
+    if (resTypeValue == null) {
       resTypeValidate = S.current.not_blank;
     } else {
       resTypeValidate = null;
     }
-    if (provController.text.trim().isEmpty) {
+    if (provinceValue == null) {
       provValidate = S.current.not_blank;
     } else {
       provValidate = null;
     }
-    if (wardController.text.trim().isEmpty) {
+    if (districtValue == null) {
+      districtValidate = S.current.not_blank;
+    } else {
+      districtValidate = null;
+    }
+    if (wardValue == null) {
       wardValidate = S.current.not_blank;
     } else {
       wardValidate = null;
-    }
-    if (blockController.text.trim().isEmpty) {
-      blockValidate = S.current.not_blank;
-    } else {
-      blockValidate = null;
     }
     notifyListeners();
   }
 
   validate1(BuildContext context) {
-    FocusScope.of(context).unfocus();
-    autoValidStep1 = true;
     if (formKey1.currentState!.validate()) {
-      isDisableRightCroll = false;
-      notifyListeners();
       clearValidStringStep1();
-      controller
-          .animateToPage(++activeStep,
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.bounceInOut)
-          .then((_) {
-        isDisableRightCroll = true;
-        notifyListeners();
-      });
     } else {
       genValidStep1();
     }
+
     notifyListeners();
   }
 
@@ -243,7 +249,69 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  onChangeProvince(v) async {
+    if (v != null) {
+      if (provinceValue != v) {
+        provinceValue = v;
+
+        districtValue = null;
+        wardValue = null;
+        districs.clear();
+        wards.clear();
+        if (autoValidStep1) {
+          districtValidate = S.current.not_blank;
+        }
+      }
+      await getDistricByProvinceCode(v);
+    }
+
+    notifyListeners();
+  }
+
+  onChangeDistrict(v) async {
+    if (v != null) {
+      districtValidate = null;
+
+      if (districtValue != v) {
+        districtValue = v;
+        wardValue = null;
+        districtValidate = null;
+
+        wards.clear();
+
+        if (autoValidStep1) {
+          wardValidate = S.current.not_blank;
+        }
+      }
+      await getWardscByDistrictCode(v);
+    }
+
+    notifyListeners();
+  }
+
+  getDistricByProvinceCode(code) async {
+    var dataDistric = await APIProvince.getDistric(code);
+    districs.clear();
+    wards.clear();
+    for (var i in dataDistric) {
+      districs.add(Distric.fromMap(i));
+    }
+    districs.sort((a, b) => removeDiacritics(a.name ?? "")
+        .compareTo(removeDiacritics(a.name ?? "")));
+  }
+
+  getWardscByDistrictCode(code) async {
+    var dataWard = await APIProvince.getWards(code);
+    wards.clear();
+    for (var i in dataWard) {
+      wards.add(Ward.fromMap(i));
+    }
+    wards.sort((a, b) => removeDiacritics(a.name ?? "")
+        .compareTo(removeDiacritics(a.name ?? "")));
+  }
+
   pickBirthDay(BuildContext context) {
+    FocusScope.of(context).unfocus();
     Utils.showDatePickers(
       context,
       initDate: DateTime.now(),
@@ -259,13 +327,62 @@ class AddNewResidentPrv extends ChangeNotifier {
     });
   }
 
+  onSellectApartment(v) {
+    apartmentAddValue = v;
+    apartmentAddValidate = null;
+    notifyListeners();
+  }
+
+  onSellectRelation(v) {
+    relationValue = v;
+    relationValidate = null;
+    notifyListeners();
+  }
+
+  onSellectSex(v) {
+    sexValue = v;
+    sexValidate = null;
+    notifyListeners();
+  }
+
+  onSellectType(v) {
+    resTypeValue = v;
+    resTypeValidate = null;
+    notifyListeners();
+  }
+
+  onSellectProvince(v) {
+    provinceValue = v;
+    provValidate = null;
+    notifyListeners();
+  }
+
+  onSellectDistrict(v) {
+    districtValue = v;
+    districtValidate = null;
+    notifyListeners();
+  }
+
+  onSellectWard(v) {
+    wardValue = v;
+    wardValidate = null;
+    notifyListeners();
+  }
+
   preFetchData(BuildContext context) async {
     try {
-      relations.clear();
       var relationData = await APIRelation.preFetchDataRelation();
+      var provinceData = await APIProvince.getProvince();
+      relations.clear();
+      provinces.clear();
       for (var i in relationData) {
         relations.add(RelationShip.fromMap(i));
       }
+      for (var i in provinceData) {
+        provinces.add(Province.fromMap(i));
+      }
+      provinces.sort((a, b) =>
+          removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")));
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }

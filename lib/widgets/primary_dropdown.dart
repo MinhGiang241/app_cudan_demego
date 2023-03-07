@@ -1,3 +1,5 @@
+// ignore_for_file: iterable_contains_unrelated_type
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/container.dart';
@@ -44,6 +46,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.isDense = true,
     this.controller,
     this.enable = true,
+    this.isFull = false,
   });
   final bool isError;
   final String? label;
@@ -51,6 +54,7 @@ class PrimaryDropDown extends StatefulWidget {
   final bool isDense;
   final bool isRequired;
   final bool isMultiple;
+  final bool isFull;
   final GlobalKey<FormFieldState>? dropKey;
   final String? Function(dynamic)? validator;
   dynamic value;
@@ -120,22 +124,49 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                       key: widget.dropKey,
                       borderRadius: BorderRadius.circular(12),
                       isDense: widget.isDense,
-                      menuMaxHeight: dvHeight(context) / 3,
-                      validator: widget.validator ??
-                          (v) {
-                            if (v != null) {
-                              widget.controller!.text = v;
-                              return null;
-                            }
-                            return '';
-                          },
+                      menuMaxHeight: widget.isFull
+                          ? double.infinity
+                          : dvHeight(context) / 3,
+                      validator: widget.isRequired
+                          ? ((widget.validator) ??
+                              (v) {
+                                if (v != null &&
+                                    widget.selectList!.isNotEmpty) {
+                                  widget.controller!.text = v;
+                                  return null;
+                                }
+
+                                return '';
+                              })
+                          : null,
                       dropdownColor: Colors.white,
-                      value: widget.value ??
-                          (widget.controller != null
-                              ? widget.controller!.text.isEmpty
-                                  ? null
-                                  : widget.controller!.text
-                              : null),
+                      value: () {
+                        if (widget.value != null) {
+                          return widget.value;
+                        } else if (widget.controller != null &&
+                            widget.controller!.text.isEmpty) {
+                          return null;
+                        } else if (widget.controller != null &&
+                            widget.controller!.text.isNotEmpty) {
+                          if (widget.selectList!
+                              .contains(widget.controller!.text)) {
+                            return widget.controller!.text;
+                          } else {
+                            widget.controller!.clear();
+                            return null;
+                          }
+                        } else {
+                          return null;
+                        }
+                      }(),
+                      //  widget.value ??
+                      //     (widget.controller != null
+                      //         ? widget.controller!.text.isEmpty
+                      //             ? null
+                      //             : widget.selectList!.isNotEmpty
+                      //                 ? widget.controller!.text
+                      //                 : null
+                      //         : null),
                       // ??
                       //     (widget.selectList!.isNotEmpty
                       //         ? widget.selectList![0].value

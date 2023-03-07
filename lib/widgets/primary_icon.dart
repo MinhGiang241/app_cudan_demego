@@ -11,6 +11,11 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  facebook,
+  zalo,
+  instagram,
+  linkedin,
+  tiktok,
   avatar,
   setting,
   calendar_block,

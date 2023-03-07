@@ -5889,6 +5889,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Update reflection successfully`
+  String get success_edit_reflection {
+    return Intl.message(
+      'Update reflection successfully',
+      name: 'success_edit_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temporary resident`
+  String get temp_res {
+    return Intl.message(
+      'Temporary resident',
+      name: 'temp_res',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permanent resident`
+  String get per_res {
+    return Intl.message(
+      'Permanent resident',
+      name: 'per_res',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temporary resident for foreigner`
+  String get temp_res_foreigner {
+    return Intl.message(
+      'Temporary resident for foreigner',
+      name: 'temp_res_foreigner',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
