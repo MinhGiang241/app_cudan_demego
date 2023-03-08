@@ -139,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
         "code_file": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
+        "college_degree": MessageLookupByLibrary.simpleMessage("Bằng cao đẳng"),
         "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Sắp diễn ra"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
@@ -223,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount_type":
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
         "dob": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
+        "doctor_degree": MessageLookupByLibrary.simpleMessage("Bằng tiến sĩ"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn thanh toán"),
@@ -242,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_trans_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ phương tiện"),
         "education_level":
-            MessageLookupByLibrary.simpleMessage("Trình độ chuyên môn"),
+            MessageLookupByLibrary.simpleMessage("Trình độ học vấn"),
         "elcetric_bill": MessageLookupByLibrary.simpleMessage("Tiền điện"),
         "electricity": MessageLookupByLibrary.simpleMessage("Điện"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
@@ -310,6 +312,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
+        "fa": MessageLookupByLibrary.simpleMessage("Độc thân"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
         "fee_paid": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
@@ -341,6 +344,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "general_info": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
         "general_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo chung"),
+        "go_high_school":
+            MessageLookupByLibrary.simpleMessage("Đang học trung học"),
+        "go_university":
+            MessageLookupByLibrary.simpleMessage("Đang học đại học"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
@@ -361,9 +368,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Địa điểm diễn ra"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản?"),
+        "have_baby": MessageLookupByLibrary.simpleMessage("Đã có con"),
         "height": MessageLookupByLibrary.simpleMessage("cao"),
         "hello": MessageLookupByLibrary.simpleMessage("Xin chào"),
         "here": MessageLookupByLibrary.simpleMessage("tại đây"),
+        "high_school_degree":
+            MessageLookupByLibrary.simpleMessage("Tốt nghiệp trung học"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Lịch sử đăng ký dịch vụ"),
         "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
@@ -413,7 +423,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lost_time_now": MessageLookupByLibrary.simpleMessage(
             "Thời điểm thất lạc không được lớn hơn ngày hiện tại"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
+        "married": MessageLookupByLibrary.simpleMessage("Đã kết hôn"),
+        "master_degree": MessageLookupByLibrary.simpleMessage("Bằng thạc sĩ"),
         "material": MessageLookupByLibrary.simpleMessage("Vật liệu"),
+        "matial_status":
+            MessageLookupByLibrary.simpleMessage("Tình trạng hôn nhân"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -600,6 +614,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pin": MessageLookupByLibrary.simpleMessage("Chốt trực"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Nơi cấp"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
+        "post_graduate":
+            MessageLookupByLibrary.simpleMessage("đang học cao học"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
         "processing_content":
             MessageLookupByLibrary.simpleMessage("Nội dung  xử lý"),
@@ -610,6 +626,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load thất bại"),
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Kéo để xem thêm"),
+        "qualification_level":
+            MessageLookupByLibrary.simpleMessage("Trình độ chuyên môn"),
         "re_book": MessageLookupByLibrary.simpleMessage("Đặt lại lịch"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
@@ -680,6 +698,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh cư dân không được để trống"),
+        "res_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh cư dân không được để trống"),
+        "res_name": MessageLookupByLibrary.simpleMessage("Tên cư dân"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Ảnh cư dân"),
         "res_reaction":
             MessageLookupByLibrary.simpleMessage("Tương tác cư dân"),
@@ -787,6 +808,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thêm mới phản ánh thành công"),
         "success_can_req": MessageLookupByLibrary.simpleMessage(
             "Hủy đăng ký phiếu thành công"),
+        "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
+            "Hủy đăng ký người phụ thuộc thành công"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Xác nhận thành công"),
         "success_cr_new":
@@ -803,6 +826,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
         "success_payment": m13,
+        "success_register_dependence": MessageLookupByLibrary.simpleMessage(
+            "Đăng ký người phụ thuộc thành công"),
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Xóa thành công"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -859,6 +884,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "unkhown": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),

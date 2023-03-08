@@ -586,5 +586,22 @@
   "success_edit_reflection": "Update reflection successfully",
   "temp_res": "Temporary resident",
   "per_res": "Permanent resident",
-  "temp_res_foreigner": "Temporary resident for foreigner"
+  "temp_res_foreigner": "Temporary resident for foreigner",
+  "res_images_not_empty": "Resident images can not be empty",
+  "success_register_dependence": "Register dependent person successfully",
+  "success_cancel_dependence": "Cancel register dependent person successfully",
+  "college_degree": "College degree",
+  "master_degree": "Master degree",
+  "high_school_degree": "High school degree",
+  "post_graduate": "Going master",
+  "go_university": "Going university",
+  "go_high_school": "going high school",
+  "doctor_degree": "Doctor degree",
+  "unkhown": "Unknown",
+  "fa": "Single",
+  "married": "Married",
+  "have_baby": "Have baby",
+  "qualification_level": "Qualification level",
+  "matial_status": "Matial status",
+  "res_name": "Resident name"
 }

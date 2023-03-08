@@ -256,3 +256,91 @@ class Ward {
   factory Ward.fromJson(String source) =>
       Ward.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
+class Ethnic {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? name;
+  String? detail;
+  Ethnic({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.name,
+    this.detail,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'name': name,
+      'detail': detail,
+    };
+  }
+
+  factory Ethnic.fromMap(Map<String, dynamic> map) {
+    return Ethnic(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      detail: map['detail'] != null ? map['detail'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Ethnic.fromJson(String source) =>
+      Ethnic.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class Nationality {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? name;
+  Nationality({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.name,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'name': name,
+    };
+  }
+
+  factory Nationality.fromMap(Map<String, dynamic> map) {
+    return Nationality(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Nationality.fromJson(String source) =>
+      Nationality.fromMap(json.decode(source) as Map<String, dynamic>);
+}

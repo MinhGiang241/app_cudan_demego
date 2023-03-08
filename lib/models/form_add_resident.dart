@@ -3,6 +3,9 @@
 import 'dart:convert';
 
 import 'file_upload.dart';
+import 'relationship.dart';
+import 'response_resident_own.dart';
+import 'status.dart';
 
 class FormAddResidence {
   String? id;
@@ -42,51 +45,62 @@ class FormAddResidence {
   String? zalo;
   String? linkedin;
   String? tiktok;
+  String? status;
+  Status? s;
+  Apartment? a;
+  Building? b;
+  Floor? f;
+  RelationShip? r;
   List<FileUploadModel>? upload;
   List<FileUploadModel>? identity_images;
   List<FileUploadModel>? resident_images;
-  FormAddResidence({
-    this.id,
-    this.createdTime,
-    this.updatedTime,
-    this.code,
-    this.tenantId,
-    this.avatar,
-    this.id_card,
-    this.info_name,
-    this.sex,
-    this.date_birth,
-    this.residence_type,
-    this.phone_required,
-    this.email,
-    this.nationalId,
-    this.identity_card_required,
-    this.place_of_issue_required,
-    this.education,
-    this.qualification,
-    this.job,
-    this.material_status,
-    this.ethnicId,
-    this.permanent_address,
-    this.provinceId,
-    this.districtId,
-    this.wardsId,
-    this.type,
-    this.dependentId,
-    this.relationshipId,
-    this.apartmentId,
-    this.buildingId,
-    this.floorId,
-    this.residentId,
-    this.facebook,
-    this.instagram,
-    this.zalo,
-    this.linkedin,
-    this.tiktok,
-    this.upload,
-    this.identity_images,
-    this.resident_images,
-  });
+  FormAddResidence(
+      {this.id,
+      this.a,
+      this.b,
+      this.f,
+      this.r,
+      this.createdTime,
+      this.updatedTime,
+      this.code,
+      this.tenantId,
+      this.avatar,
+      this.id_card,
+      this.info_name,
+      this.sex,
+      this.date_birth,
+      this.residence_type,
+      this.phone_required,
+      this.email,
+      this.nationalId,
+      this.identity_card_required,
+      this.place_of_issue_required,
+      this.education,
+      this.qualification,
+      this.job,
+      this.material_status,
+      this.ethnicId,
+      this.permanent_address,
+      this.provinceId,
+      this.districtId,
+      this.wardsId,
+      this.type,
+      this.dependentId,
+      this.relationshipId,
+      this.apartmentId,
+      this.buildingId,
+      this.floorId,
+      this.residentId,
+      this.facebook,
+      this.instagram,
+      this.zalo,
+      this.linkedin,
+      this.tiktok,
+      this.upload,
+      this.identity_images,
+      this.resident_images,
+      this.status,
+      this.s});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -127,6 +141,7 @@ class FormAddResidence {
       'zalo': zalo,
       'linkedin': linkedin,
       'tiktok': tiktok,
+      'status': status,
       'upload': upload?.map((x) => x.toMap()).toList(),
       'identity_images': identity_images?.map((x) => x.toMap()).toList(),
       'resident_images': resident_images?.map((x) => x.toMap()).toList(),
@@ -197,27 +212,33 @@ class FormAddResidence {
       zalo: map['zalo'] != null ? map['zalo'] as String : null,
       linkedin: map['linkedin'] != null ? map['linkedin'] as String : null,
       tiktok: map['tiktok'] != null ? map['tiktok'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
       upload: map['upload'] != null
           ? List<FileUploadModel>.from(
-              (map['upload'] as List<int>).map<FileUploadModel?>(
+              (map['upload'] as List<dynamic>).map<FileUploadModel?>(
                 (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       identity_images: map['identity_images'] != null
           ? List<FileUploadModel>.from(
-              (map['identity_images'] as List<int>).map<FileUploadModel?>(
+              (map['identity_images'] as List<dynamic>).map<FileUploadModel?>(
                 (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       resident_images: map['resident_images'] != null
           ? List<FileUploadModel>.from(
-              (map['resident_images'] as List<int>).map<FileUploadModel?>(
+              (map['resident_images'] as List<dynamic>).map<FileUploadModel?>(
                 (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
+      s: map["s"] != null ? Status.fromJson(map['s']) : null,
+      a: map["a"] != null ? Apartment.fromJson(map['a']) : null,
+      b: map["b"] != null ? Building.fromJson(map['b']) : null,
+      f: map["f"] != null ? Floor.fromJson(map['f']) : null,
+      r: map["r"] != null ? RelationShip.fromMap(map['r']) : null,
     );
   }
 

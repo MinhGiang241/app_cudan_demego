@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "code_file": MessageLookupByLibrary.simpleMessage("File code"),
         "code_verify":
             MessageLookupByLibrary.simpleMessage("Verify security code"),
+        "college_degree":
+            MessageLookupByLibrary.simpleMessage("College degree"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Comming soon"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
@@ -223,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
         "dob": MessageLookupByLibrary.simpleMessage("Date of birth"),
+        "doctor_degree": MessageLookupByLibrary.simpleMessage("Doctor degree"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
@@ -308,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Login session is invalid, please sign in again"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
+        "fa": MessageLookupByLibrary.simpleMessage("Single"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "fee_paid": MessageLookupByLibrary.simpleMessage("Fee paid"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
@@ -339,6 +343,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("General information"),
         "general_notification":
             MessageLookupByLibrary.simpleMessage("General notification"),
+        "go_high_school":
+            MessageLookupByLibrary.simpleMessage("going high school"),
+        "go_university":
+            MessageLookupByLibrary.simpleMessage("Going university"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Hand over date"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Hand over"),
@@ -360,9 +368,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Happening location"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
+        "have_baby": MessageLookupByLibrary.simpleMessage("Have baby"),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "here": MessageLookupByLibrary.simpleMessage("tại đây"),
+        "high_school_degree":
+            MessageLookupByLibrary.simpleMessage("High school degree"),
         "his_reg_service":
             MessageLookupByLibrary.simpleMessage("Register service history"),
         "history": MessageLookupByLibrary.simpleMessage("Timeline"),
@@ -412,7 +423,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "lost_time_now":
             MessageLookupByLibrary.simpleMessage("Lost time not after now day"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "married": MessageLookupByLibrary.simpleMessage("Married"),
+        "master_degree": MessageLookupByLibrary.simpleMessage("Master degree"),
         "material": MessageLookupByLibrary.simpleMessage("Material"),
+        "matial_status": MessageLookupByLibrary.simpleMessage("Matial status"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
@@ -596,6 +610,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Issue place"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
+        "post_graduate": MessageLookupByLibrary.simpleMessage("Going master"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "processing_content":
             MessageLookupByLibrary.simpleMessage("Processing Content"),
@@ -606,6 +621,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_load_failed":
             MessageLookupByLibrary.simpleMessage("Load Failed!Click retry!"),
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Pull to load"),
+        "qualification_level":
+            MessageLookupByLibrary.simpleMessage("Qualification level"),
         "re_book": MessageLookupByLibrary.simpleMessage("Re book"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
@@ -679,6 +696,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resident card register"),
         "res_image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Resident image can not empty"),
+        "res_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Resident images can not be empty"),
+        "res_name": MessageLookupByLibrary.simpleMessage("Resident name"),
         "res_photo": MessageLookupByLibrary.simpleMessage("Resident photos"),
         "res_reaction":
             MessageLookupByLibrary.simpleMessage("Resident reaction"),
@@ -788,6 +808,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Add new reflection successfully"),
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
+        "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
+            "Cancel register dependent person successfully"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Success confirm"),
         "success_cr_new":
@@ -804,6 +826,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
         "success_payment": m13,
+        "success_register_dependence": MessageLookupByLibrary.simpleMessage(
+            "Register dependent person successfully"),
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Remove successfully"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -863,6 +887,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "unkhown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),

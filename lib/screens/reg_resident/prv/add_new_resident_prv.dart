@@ -1,46 +1,58 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/reg_resident/add_new_resident_screen.dart';
 import 'package:app_cudan/services/api_province.dart';
 import 'package:app_cudan/services/api_reflection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/file_upload.dart';
+import '../../../models/form_add_resident.dart';
 import '../../../models/province.dart';
 import '../../../models/relationship.dart';
+import '../../../services/api_auth.dart';
 import '../../../services/api_relation.dart';
+import '../../../services/api_resident_add_apartment.dart';
 import '../../../utils/utils.dart';
+import '../register_resident_screen.dart';
 
 class AddNewResidentPrv extends ChangeNotifier {
   int activeStep = 0;
   bool isDisableRightCroll = true;
   bool autoValidStep1 = false;
   bool autoValidStep2 = false;
+  bool isLoading = false;
   List<RelationShip> relations = [];
   List<Province> provinces = [];
   List<Distric> districs = [];
   List<Ward> wards = [];
+  List<Ethnic> ethnics = [];
+  List<Nationality> nationalities = [];
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final PageController controller = PageController();
 
   DateTime? birthDate;
-  // final GlobalKey<FormFieldState> districtDropdownKey =
-  //     GlobalKey<FormFieldState>();
-  // final GlobalKey<FormFieldState> wardDropdownKey = GlobalKey<FormFieldState>();
-  // final TextEditingController apartmentAddController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  // final TextEditingController relationController = TextEditingController();
-  // final TextEditingController sexController = TextEditingController();
   final TextEditingController birthController = TextEditingController();
   final TextEditingController identityController = TextEditingController();
   final TextEditingController issuePlaceController = TextEditingController();
   final TextEditingController nationalityController = TextEditingController();
-  // final TextEditingController resTypeController = TextEditingController();
-  // final TextEditingController provController = TextEditingController();
-  // final TextEditingController districtController = TextEditingController();
-  // final TextEditingController wardController = TextEditingController();
+
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController qualificationController = TextEditingController();
+  final TextEditingController jobController = TextEditingController();
+  final TextEditingController facebookController = TextEditingController();
+  final TextEditingController zaloController = TextEditingController();
+  final TextEditingController instagramController = TextEditingController();
+  final TextEditingController linkedinController = TextEditingController();
+  final TextEditingController tiktokController = TextEditingController();
 
   String? apartmentAddValue;
   String? relationValue;
@@ -49,6 +61,10 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? provinceValue;
   String? districtValue;
   String? wardValue;
+  String? ethnicValue;
+  String? nationalityValue;
+  String? matialStatusValue;
+  String? educationValue;
 
   String? apartmentAddValidate;
   String? nameValidate;
@@ -61,6 +77,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? provValidate;
   String? districtValidate;
   String? wardValidate;
+  String? ethnicValidate;
 
   List<FileUploadModel> existedResImages = [];
   List<FileUploadModel> existedIdentityImages = [];
@@ -153,6 +170,20 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  clearValidStringStep2() {
+    ethnicValidate = null;
+    notifyListeners();
+  }
+
+  genValidStep2() {
+    if (ethnicValue == null) {
+      ethnicValidate = S.current.not_blank;
+    } else {
+      ethnicValidate = null;
+    }
+    notifyListeners();
+  }
+
   genValidStep1() {
     if (apartmentAddValue == null) {
       apartmentAddValidate = S.current.not_blank;
@@ -184,7 +215,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     } else {
       birthValidate = null;
     }
-    if (nationalityController.text.trim().isEmpty) {
+    if (nationalityValue == null) {
       nationalityValidate = S.current.not_blank;
     } else {
       nationalityValidate = null;
@@ -222,7 +253,16 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  validate2(BuildContext context) {}
+  validate2(BuildContext context) {
+    if (formKey2.currentState!.validate()) {
+      clearValidStringStep2();
+    } else {
+      genValidStep2();
+    }
+
+    notifyListeners();
+  }
+
   onPageChanged(v) {
     activeStep = v;
     notifyListeners();
@@ -231,7 +271,9 @@ class AddNewResidentPrv extends ChangeNotifier {
   onStep1Next(BuildContext context) {
     FocusScope.of(context).unfocus();
     autoValidStep1 = true;
-    if (formKey1.currentState!.validate()) {
+
+    if (formKey1.currentState!.validate() &&
+        (resImages.isNotEmpty || existedResImages.isNotEmpty)) {
       isDisableRightCroll = false;
       notifyListeners();
       clearValidStringStep1();
@@ -244,7 +286,91 @@ class AddNewResidentPrv extends ChangeNotifier {
         notifyListeners();
       });
     } else {
+      if (resImages.isEmpty && existedResImages.isEmpty) {
+        Utils.showErrorMessage(context, S.of(context).res_image_not_empty);
+      }
       genValidStep1();
+    }
+    notifyListeners();
+  }
+
+  onSendRequest(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    autoValidStep2 = true;
+    isLoading = true;
+    notifyListeners();
+    if (formKey2.currentState!.validate()) {
+      var apartment = context
+          .read<ResidentInfoPrv>()
+          .listOwn
+          .firstWhere((element) => element.apartmentId == apartmentAddValue);
+      var province =
+          provinces.firstWhere((element) => element.code == provinceValue);
+      var district =
+          districs.firstWhere((element) => element.code == districtValue);
+      var ward = wards.firstWhere((element) => element.code == wardValue);
+      var residentId = context.read<ResidentInfoPrv>().residentId;
+
+      try {
+        await uploadResientImages(context);
+        await uploadIdentityImages(context);
+        await uploadDocument(context);
+
+        FormAddResidence formAddResident = FormAddResidence(
+          apartmentId: apartmentAddValue,
+          buildingId: apartment.buildingId,
+          floorId: apartment.floorId,
+          date_birth:
+              birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
+          provinceId: province.id,
+          districtId: district.id,
+          wardsId: ward.id,
+          residentId: residentId,
+          material_status: matialStatusValue,
+          education: educationValue,
+          email: emailController.text.trim(),
+          info_name: nameController.text.trim(),
+          ethnicId: ethnicValue,
+          identity_card_required: identityController.text.trim(),
+          job: jobController.text.trim(),
+          nationalId: nationalityValue,
+          relationshipId: relationValue,
+          qualification: qualificationController.text.trim(),
+          phone_required: phoneController.text.trim(),
+          resident_images: existedResImages + uploadedResImages,
+          identity_images: existedIdentityImages + uploadedIdentityImages,
+          upload: existedDoccuments + uploadedDocuments,
+          place_of_issue_required: issuePlaceController.text.trim(),
+          residence_type: resTypeValue,
+          sex: sexValue,
+          facebook: facebookController.text.trim(),
+          zalo: zaloController.text.trim(),
+          instagram: instagramController.text.trim(),
+          linkedin: linkedinController.text.trim(),
+          tiktok: tiktokController.text.trim(),
+          status: "NEW",
+        );
+        await APIResidentAddApartment.saveFormResidentAddApartment(
+                formAddResident.toMap())
+            .then((v) {
+          isLoading = false;
+          notifyListeners();
+          Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_register_dependence,
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(context,
+                    RegisterResidentScreen.routeName, (route) => route.isFirst);
+              });
+        });
+      } catch (e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e.toString());
+      }
+    } else {
+      isLoading = false;
+      genValidStep2();
     }
     notifyListeners();
   }
@@ -369,20 +495,100 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  onSellectEthnic(v) {
+    ethnicValue = v;
+    ethnicValidate = null;
+    notifyListeners();
+  }
+
+  onSellectNationality(v) {
+    nationalityValue = v;
+    nationalityValidate = null;
+    notifyListeners();
+  }
+
+  onSellectMatialStatus(v) {
+    matialStatusValue = v;
+    notifyListeners();
+  }
+
+  onSellectEducation(v) {
+    educationValue = v;
+    notifyListeners();
+  }
+
+  Future uploadResientImages(BuildContext context) async {
+    await APIAuth.uploadSingleFile(files: resImages, context: context)
+        .then((v) {
+      if (v.isNotEmpty) {
+        for (var e in v) {
+          uploadedResImages.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
+      }
+    }).catchError((e) {
+      throw (e);
+    });
+  }
+
+  Future uploadIdentityImages(BuildContext context) async {
+    await APIAuth.uploadSingleFile(files: identityImages, context: context)
+        .then((v) {
+      if (v.isNotEmpty) {
+        for (var e in v) {
+          uploadedIdentityImages.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
+      }
+    }).catchError((e) {
+      throw (e);
+    });
+  }
+
+  Future uploadDocument(BuildContext context) async {
+    await APIAuth.uploadSingleFile(files: documents, context: context)
+        .then((v) {
+      if (v.isNotEmpty) {
+        for (var e in v) {
+          uploadedDocuments.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
+      }
+    }).catchError((e) {
+      throw (e);
+    });
+  }
+
   preFetchData(BuildContext context) async {
     try {
       var relationData = await APIRelation.preFetchDataRelation();
       var provinceData = await APIProvince.getProvince();
+      var ethnicData = await APIProvince.getEthnics();
+      var nationalityData = await APIProvince.getNationalities();
       relations.clear();
       provinces.clear();
+      ethnics.clear();
+      nationalities.clear();
       for (var i in relationData) {
         relations.add(RelationShip.fromMap(i));
       }
       for (var i in provinceData) {
         provinces.add(Province.fromMap(i));
       }
+      for (var i in ethnicData) {
+        ethnics.add(Ethnic.fromMap(i));
+      }
+      for (var i in nationalityData) {
+        nationalities.add(Nationality.fromMap(i));
+      }
       provinces.sort((a, b) =>
           removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")));
+      nationalities.sort((a, b) =>
+          removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")));
+      ethnics.sort((a, b) => (a.code!).compareTo((b.code ?? "")));
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }

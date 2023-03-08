@@ -203,19 +203,19 @@ class _ConstructionRegistrationDetailsScreenState
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).cons_unit,
-                        content: reg.contruction_unit,
+                        content: reg.construction_unit,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).address,
-                        content: reg.contruction_add,
+                        content: reg.construction_add,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).email,
-                        content: reg.contruction_email,
+                        content: reg.construction_email,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(

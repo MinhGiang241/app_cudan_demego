@@ -5929,6 +5929,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Resident images can not be empty`
+  String get res_images_not_empty {
+    return Intl.message(
+      'Resident images can not be empty',
+      name: 'res_images_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register dependent person successfully`
+  String get success_register_dependence {
+    return Intl.message(
+      'Register dependent person successfully',
+      name: 'success_register_dependence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel register dependent person successfully`
+  String get success_cancel_dependence {
+    return Intl.message(
+      'Cancel register dependent person successfully',
+      name: 'success_cancel_dependence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `College degree`
+  String get college_degree {
+    return Intl.message(
+      'College degree',
+      name: 'college_degree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Master degree`
+  String get master_degree {
+    return Intl.message(
+      'Master degree',
+      name: 'master_degree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `High school degree`
+  String get high_school_degree {
+    return Intl.message(
+      'High school degree',
+      name: 'high_school_degree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Going master`
+  String get post_graduate {
+    return Intl.message(
+      'Going master',
+      name: 'post_graduate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Going university`
+  String get go_university {
+    return Intl.message(
+      'Going university',
+      name: 'go_university',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `going high school`
+  String get go_high_school {
+    return Intl.message(
+      'going high school',
+      name: 'go_high_school',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor degree`
+  String get doctor_degree {
+    return Intl.message(
+      'Doctor degree',
+      name: 'doctor_degree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unkhown {
+    return Intl.message(
+      'Unknown',
+      name: 'unkhown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Single`
+  String get fa {
+    return Intl.message(
+      'Single',
+      name: 'fa',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Married`
+  String get married {
+    return Intl.message(
+      'Married',
+      name: 'married',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have baby`
+  String get have_baby {
+    return Intl.message(
+      'Have baby',
+      name: 'have_baby',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qualification level`
+  String get qualification_level {
+    return Intl.message(
+      'Qualification level',
+      name: 'qualification_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Matial status`
+  String get matial_status {
+    return Intl.message(
+      'Matial status',
+      name: 'matial_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident name`
+  String get res_name {
+    return Intl.message(
+      'Resident name',
+      name: 'res_name',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

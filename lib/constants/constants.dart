@@ -310,4 +310,9 @@ class AppImage {
   static const String splashBackground = "assets/images/splash_background.png";
   static const String receiption = "assets/images/receiption.png";
   static const String defaultAvatar = "assets/images/default.png";
+  static const String facebook = "assets/images/facebook.png";
+  static const String zalo = "assets/images/zalo.png";
+  static const String instagram = "assets/images/instagram.png";
+  static const String tiktok = "assets/images/tiktok.png";
+  static const String linkedin = "assets/images/linkedin.png";
 }

@@ -6,8 +6,8 @@ import 'api_service.dart';
 class APIRelation {
   static Future preFetchDataRelation() async {
     var query = '''
-    query {
-      response: query_Relationships_dto{
+    query (\$filter:GeneralCollectionFilterInput) {
+      response: query_Relationships_dto (filter:\$filter){
         message
         code 
         data {
@@ -21,7 +21,10 @@ class APIRelation {
       }
     }
 ''';
-    final QueryOptions options = QueryOptions(document: gql(query));
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: const {
+      "filter": {"limit": 1000}
+    });
 
     final results = await ApiService.shared.graphqlQuery(options);
 

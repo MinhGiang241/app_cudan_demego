@@ -41,8 +41,8 @@ class APIReflection {
 
   static Future getComplainReaction() async {
     var query = '''
-        query {
-	response: query_ComplaintReasons_dto{
+        query (\$filter:GeneralCollectionFilterInput) {
+	response: query_ComplaintReasons_dto (filter:\$filter) {
 	message
 	code
 	data {
@@ -58,7 +58,10 @@ class APIReflection {
 }
         
       ''';
-    final QueryOptions options = QueryOptions(document: gql(query));
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: const {
+      "filter": {"limit": 1000}
+    });
 
     final results = await ApiService.shared.graphqlQuery(options);
 
@@ -73,8 +76,8 @@ class APIReflection {
 
   static Future getOpinion() async {
     var query = '''
-            query {
-      response: query_OpinionContributes_dto{
+            query (\$filter:GeneralCollectionFilterInput){
+      response: query_OpinionContributes_dto (filter:\$filter){
       message
       code
       data {
@@ -89,7 +92,10 @@ class APIReflection {
       }
     }
       ''';
-    final QueryOptions options = QueryOptions(document: gql(query));
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: const {
+      "filter": {"limit": 1000}
+    });
 
     final results = await ApiService.shared.graphqlQuery(options);
 

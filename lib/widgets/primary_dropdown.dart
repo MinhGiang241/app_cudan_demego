@@ -124,9 +124,9 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                       key: widget.dropKey,
                       borderRadius: BorderRadius.circular(12),
                       isDense: widget.isDense,
-                      menuMaxHeight: widget.isFull
-                          ? double.infinity
-                          : dvHeight(context) / 3,
+                      // menuMaxHeight: widget.isFull
+                      //     ? double.infinity
+                      //     : dvHeight(context) / 3,
                       validator: widget.isRequired
                           ? ((widget.validator) ??
                               (v) {

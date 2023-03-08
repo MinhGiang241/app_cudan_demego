@@ -86,8 +86,8 @@ class APIExtraService {
 
   static Future getPaymentCycle() async {
     var query = '''
-    query {
-      response: query_PaymentCycles_dto{
+    query (\$filter:GeneralCollectionFilterInput){
+      response: query_PaymentCycles_dto (filter:\$filter){
         code
         message
         data{ 
@@ -104,9 +104,10 @@ class APIExtraService {
     }
     ''';
 
-    final MutationOptions options = MutationOptions(
-      document: gql(query),
-    );
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: const {
+      "filter": {"limit": 1000}
+    });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

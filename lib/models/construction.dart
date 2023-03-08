@@ -12,10 +12,10 @@ class ConstructionRegistration {
     this.confirm,
     this.constructionTypeId,
     this.construction_cost,
-    this.contruction_type_name,
-    this.contruction_add,
-    this.contruction_email,
-    this.contruction_unit,
+    this.construction_type_name,
+    this.construction_add,
+    this.construction_email,
+    this.construction_unit,
     this.create_date,
     this.current_draw,
     this.deposit_fee,
@@ -56,9 +56,9 @@ class ConstructionRegistration {
   String? resident_identity;
   String? resident_relationship;
   String? status;
-  String? contruction_unit;
-  String? contruction_add;
-  String? contruction_email;
+  String? construction_unit;
+  String? construction_add;
+  String? construction_email;
   String? deputy;
   String? deputy_phone;
   String? deputy_identity;
@@ -78,7 +78,7 @@ class ConstructionRegistration {
   String? reason_description;
   String? history_code;
   String? resident_name;
-  String? contruction_type_name;
+  String? construction_type_name;
   String? create_date;
   bool? isMobile;
   Status? s;
@@ -100,9 +100,9 @@ class ConstructionRegistration {
     resident_identity = json['resident_identity'];
     resident_relationship = json['resident_relationship'];
     status = json['status'];
-    contruction_unit = json['contruction_unit'];
-    contruction_add = json['contruction_add'];
-    contruction_email = json['contruction_email'];
+    construction_unit = json['construction_unit'];
+    construction_add = json['construction_add'];
+    construction_email = json['construction_email'];
     deputy = json['deputy'];
     deputy_phone = json['deputy_phone'];
     deputy_identity = json['deputy_identity'];
@@ -132,7 +132,7 @@ class ConstructionRegistration {
     history_code = json['history_code'];
     resident_name = json['resident_name'];
 
-    contruction_type_name = json['contruction_type_name'];
+    construction_type_name = json['construction_type_name'];
     create_date = json['create_date'];
     isMobile = json['isMobile'];
     r = json['r'] != null
@@ -175,9 +175,9 @@ class ConstructionRegistration {
     data['resident_identity'] = resident_identity;
     data['resident_relationship'] = resident_relationship;
     data['status'] = status;
-    data['contruction_unit'] = contruction_unit;
-    data['contruction_add'] = contruction_add;
-    data['contruction_email'] = contruction_email;
+    data['construction_unit'] = construction_unit;
+    data['construction_add'] = construction_add;
+    data['construction_email'] = construction_email;
     data['deputy'] = deputy;
     data['deputy_phone'] = deputy_phone;
     data['deputy_identity'] = deputy_identity;
@@ -196,7 +196,7 @@ class ConstructionRegistration {
     data['reason_description'] = reason_description;
     data['history_code'] = history_code;
     data['resident_name'] = resident_name;
-    data['contruction_type_name'] = contruction_type_name;
+    data['construction_type_name'] = construction_type_name;
     data['create_date'] = create_date;
     data['isMobile'] = isMobile;
     data['off_day'] = off_day;
@@ -281,10 +281,10 @@ class ConstructionDocument {
     this.confirm,
     this.constructionRegistrationId,
     this.construction_cost,
-    this.contructionTypeId,
-    this.contruction_add,
-    this.contruction_email,
-    this.contruction_unit,
+    this.constructionTypeId,
+    this.construction_add,
+    this.construction_email,
+    this.construction_unit,
     this.createdTime,
     this.current_draw,
     this.deposit_fee,
@@ -325,10 +325,10 @@ class ConstructionDocument {
   String? resident_phone;
   String? resident_identity;
   String? resident_relationship;
-  String? contructionTypeId;
-  String? contruction_unit;
-  String? contruction_add;
-  String? contruction_email;
+  String? constructionTypeId;
+  String? construction_unit;
+  String? construction_add;
+  String? construction_email;
   String? deputy;
   String? deputy_phone;
   String? deputy_identity;
@@ -365,10 +365,10 @@ class ConstructionDocument {
     resident_phone = json['resident_phone'];
     resident_identity = json['resident_identity'];
     resident_relationship = json['resident_relationship'];
-    contructionTypeId = json['contructionTypeId'];
-    contruction_unit = json['contruction_unit'];
-    contruction_add = json['contruction_add'];
-    contruction_email = json['contruction_email'];
+    constructionTypeId = json['constructionTypeId'];
+    construction_unit = json['construction_unit'];
+    construction_add = json['construction_add'];
+    construction_email = json['construction_email'];
     deputy = json['deputy'];
     deputy_phone = json['deputy_phone'];
     deputy_identity = json['deputy_identity'];
@@ -431,10 +431,10 @@ class ConstructionDocument {
     data['resident_phone'] = resident_phone;
     data['resident_identity'] = resident_identity;
     data['resident_relationship'] = resident_relationship;
-    data['contructionTypeId'] = contructionTypeId;
-    data['contruction_unit'] = contruction_unit;
-    data['contruction_add'] = contruction_add;
-    data['contruction_email'] = contruction_email;
+    data['constructionTypeId'] = constructionTypeId;
+    data['construction_unit'] = construction_unit;
+    data['construction_add'] = construction_add;
+    data['construction_email'] = construction_email;
     data['deputy'] = deputy;
     data['deputy_phone'] = deputy_phone;
     data['deputy_identity'] = deputy_identity;

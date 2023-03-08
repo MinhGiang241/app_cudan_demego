@@ -45,7 +45,54 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                 : e.apartmentId!),
           );
         }).toList();
-
+        var educationChoices = [
+          DropdownMenuItem(
+            value: "COLLEGNDEGREE",
+            child: Text(S.of(context).college_degree),
+          ),
+          DropdownMenuItem(
+            value: "MASTER'SDEGREE",
+            child: Text(S.of(context).master_degree),
+          ),
+          DropdownMenuItem(
+            value: "PH.D",
+            child: Text(S.of(context).doctor_degree),
+          ),
+          DropdownMenuItem(
+            value: "HIGHSCHOOL",
+            child: Text(S.of(context).high_school_degree),
+          ),
+          DropdownMenuItem(
+            value: "POSTGRADUATE",
+            child: Text(S.of(context).post_graduate),
+          ),
+          DropdownMenuItem(
+            value: "UNIVERSITY",
+            child: Text(S.of(context).go_university),
+          ),
+          DropdownMenuItem(
+            value: "ATTENDING",
+            child: Text(S.of(context).go_high_school),
+          ),
+          DropdownMenuItem(
+            value: "UNKNOWN",
+            child: Text(S.of(context).unkhown),
+          ),
+        ];
+        var matialStatusChoices = [
+          DropdownMenuItem(
+            value: "FA",
+            child: Text(S.of(context).fa),
+          ),
+          DropdownMenuItem(
+            value: "MARRIED",
+            child: Text(S.of(context).married),
+          ),
+          DropdownMenuItem(
+            value: "FA",
+            child: Text(S.of(context).have_baby),
+          ),
+        ];
         var listSex = [
           DropdownMenuItem(
             value: "MALE",
@@ -109,6 +156,20 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                       context.watch<AddNewResidentPrv>().wards.map((e) {
                     return DropdownMenuItem(
                       value: e.code,
+                      child: Text(e.name ?? ""),
+                    );
+                  }).toList();
+                  var listEthnicChoice =
+                      context.watch<AddNewResidentPrv>().ethnics.map((e) {
+                    return DropdownMenuItem(
+                      value: e.id,
+                      child: Text(e.name ?? ""),
+                    );
+                  }).toList();
+                  var listNationalityChoice =
+                      context.watch<AddNewResidentPrv>().nationalities.map((e) {
+                    return DropdownMenuItem(
+                      value: e.id,
                       child: Text(e.name ?? ""),
                     );
                   }).toList();
@@ -293,11 +354,16 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hint: S.of(context).place_issue,
                                 ),
                                 vpad(12),
-                                PrimaryTextField(
-                                  validator: Utils.emptyValidator,
-                                  controller: context
+                                PrimaryDropDown(
+                                  selectList: listNationalityChoice,
+                                  validator: Utils.emptyValidatorDropdown,
+                                  isFull: true,
+                                  value: context
+                                      .watch<AddNewResidentPrv>()
+                                      .nationalityValue,
+                                  onChange: context
                                       .read<AddNewResidentPrv>()
-                                      .nationalityController,
+                                      .onSellectNationality,
                                   validateString: context
                                       .watch<AddNewResidentPrv>()
                                       .nationalityValidate,
@@ -467,45 +533,200 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               PrimaryTextField(
                                 label: S.of(context).phone_num,
                                 hint: S.of(context).phone_num,
+                                controller: context
+                                    .read<AddNewResidentPrv>()
+                                    .phoneController,
                               ),
                               vpad(12),
                               PrimaryTextField(
                                 label: S.of(context).email,
                                 hint: S.of(context).email,
+                                controller: context
+                                    .read<AddNewResidentPrv>()
+                                    .emailController,
                               ),
                               vpad(12),
-                              PrimaryTextField(
+                              PrimaryDropDown(
+                                selectList: educationChoices,
                                 label: S.of(context).education_level,
-                                hint: S.of(context).education_level,
+                                value: context
+                                    .watch<AddNewResidentPrv>()
+                                    .educationValue,
+                                onChange: context
+                                    .read<AddNewResidentPrv>()
+                                    .onSellectEducation,
                               ),
                               vpad(12),
                               PrimaryTextField(
+                                controller: context
+                                    .read<AddNewResidentPrv>()
+                                    .qualificationController,
+                                label: S.of(context).qualification_level,
+                                hint: S.of(context).qualification_level,
+                              ),
+                              vpad(12),
+                              PrimaryDropDown(
+                                selectList: matialStatusChoices,
+                                label: S.of(context).matial_status,
+                                value: context
+                                    .watch<AddNewResidentPrv>()
+                                    .matialStatusValue,
+                                onChange: context
+                                    .read<AddNewResidentPrv>()
+                                    .onSellectMatialStatus,
+                              ),
+                              vpad(12),
+                              PrimaryTextField(
+                                controller: context
+                                    .read<AddNewResidentPrv>()
+                                    .jobController,
                                 label: S.of(context).job,
                                 hint: S.of(context).job,
                               ),
                               vpad(12),
                               PrimaryDropDown(
+                                isFull: true,
+                                isRequired: true,
+                                selectList: listEthnicChoice,
                                 label: S.of(context).ethnic,
                                 hint: S.of(context).ethnic,
+                                value: context
+                                    .watch<AddNewResidentPrv>()
+                                    .ethnicValue,
+                                validateString: context
+                                    .watch<AddNewResidentPrv>()
+                                    .ethnicValidate,
+                                validator: Utils.emptyValidatorDropdown,
                               ),
                               vpad(20),
-                              Text(S.of(context).social_media),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  S.of(context).social_media,
+                                  style: txtBodySmallRegular(
+                                      color: grayScaleColorBase),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              vpad(12),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      AppImage.facebook,
+                                      fit: BoxFit.contain,
+                                      height: 48,
+                                    ),
+                                  ),
+                                  hpad(12),
+                                  Expanded(
+                                      child: PrimaryTextField(
+                                    controller: context
+                                        .read<AddNewResidentPrv>()
+                                        .tiktokController,
+                                  ))
+                                ],
+                              ),
                               vpad(16),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Align(
-                                      alignment: Alignment.center,
-                                      child: PrimaryIcon(
-                                          icons: PrimaryIcons.facebook)),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      AppImage.zalo,
+                                      fit: BoxFit.contain,
+                                      height: 48,
+                                    ),
+                                  ),
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
-                                    label: "",
-                                  ))
+                                          controller: context
+                                              .read<AddNewResidentPrv>()
+                                              .zaloController))
                                 ],
-                              )
+                              ),
+                              vpad(16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      AppImage.instagram,
+                                      fit: BoxFit.contain,
+                                      height: 48,
+                                    ),
+                                  ),
+                                  hpad(12),
+                                  Expanded(
+                                      child: PrimaryTextField(
+                                          controller: context
+                                              .read<AddNewResidentPrv>()
+                                              .instagramController))
+                                ],
+                              ),
+                              vpad(16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      AppImage.linkedin,
+                                      fit: BoxFit.contain,
+                                      height: 48,
+                                    ),
+                                  ),
+                                  hpad(12),
+                                  Expanded(
+                                      child: PrimaryTextField(
+                                          controller: context
+                                              .read<AddNewResidentPrv>()
+                                              .linkedinController))
+                                ],
+                              ),
+                              vpad(16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      AppImage.tiktok,
+                                      fit: BoxFit.contain,
+                                      height: 48,
+                                    ),
+                                  ),
+                                  hpad(12),
+                                  Expanded(
+                                      child: PrimaryTextField(
+                                          controller: context
+                                              .read<AddNewResidentPrv>()
+                                              .tiktokController))
+                                ],
+                              ),
+                              vpad(20),
+                              PrimaryButton(
+                                isLoading: context
+                                    .watch<AddNewResidentPrv>()
+                                    .isLoading,
+                                width: double.infinity,
+                                buttonType: ButtonType.green,
+                                text: S.of(context).send_request,
+                                onTap: () => context
+                                    .read<AddNewResidentPrv>()
+                                    .onSendRequest(context),
+                              ),
+                              vpad(50),
                             ]),
                           ),
                         ),

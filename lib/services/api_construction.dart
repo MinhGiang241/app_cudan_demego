@@ -350,8 +350,8 @@ class APIConstruction {
 
   static Future getFixedDateService() async {
     var query = '''
-   query {
-	response: query_FixedServices_dto {
+   query (\$filter:GeneralCollectionFilterInput){
+	response: query_FixedServices_dto (filter:\$filter) {
 		message
 		code
 		data {
@@ -369,9 +369,10 @@ class APIConstruction {
            
     ''';
 
-    final MutationOptions options = MutationOptions(
-      document: gql(query),
-    );
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: const {
+      "filter": {"limit": 1000}
+    });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

@@ -40,13 +40,13 @@ class ConstructionRegPrv extends ChangeNotifier {
       workDayController.text = existedConReg!.working_day.toString();
       offDayController.text = existedConReg!.off_day.toString();
       describeController.text = existedConReg!.description ?? "";
-      consUnitController.text = existedConReg!.contruction_unit ?? "";
-      addressController.text = existedConReg!.contruction_add ?? "";
+      consUnitController.text = existedConReg!.construction_unit ?? "";
+      addressController.text = existedConReg!.construction_add ?? "";
       deputyController.text = existedConReg!.deputy ?? "";
       phoneController.text = existedConReg!.deputy_phone ?? "";
       identityController.text = existedConReg!.deputy_identity ?? "";
       workerNumController.text = existedConReg!.worker_num.toString();
-      emailController.text = existedConReg!.contruction_email ?? "";
+      emailController.text = existedConReg!.construction_email ?? "";
       regDate = DateTime.tryParse(existedConReg!.create_date ?? "") != null
           ? DateTime.parse(existedConReg!.create_date!)
               .add(const Duration(hours: 7))
@@ -219,11 +219,11 @@ class ConstructionRegPrv extends ChangeNotifier {
           isDepositFee: isPaidDeposit,
           construction_cost: fee,
           constructionTypeId: selectedConstype,
-          contruction_unit: consUnitController.text.trim(),
+          construction_unit: consUnitController.text.trim(),
           deputy: deputyController.text.trim(),
           deputy_phone: phoneController.text.trim(),
-          contruction_add: addressController.text.trim(),
-          contruction_email: emailController.text.trim(),
+          construction_add: addressController.text.trim(),
+          construction_email: emailController.text.trim(),
           create_date: (regDate)!.toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,
@@ -249,7 +249,7 @@ class ConstructionRegPrv extends ChangeNotifier {
               (startTime!.add(const Duration(hours: 7))).toIso8601String(),
           time_end: (endTime!.add(const Duration(hours: 7))).toIso8601String(),
           //   // resident_relationship: apartment.type,
-          contruction_type_name: consType.name ?? "",
+          construction_type_name: consType.name ?? "",
         );
         ConstructionHistory? conHis;
         if (existedConReg != null) {
