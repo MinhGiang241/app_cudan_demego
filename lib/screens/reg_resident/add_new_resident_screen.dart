@@ -676,6 +676,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                    enable: enable,
                                     hint: S.of(context).facebook,
                                     controller: context
                                         .read<AddNewResidentPrv>()
