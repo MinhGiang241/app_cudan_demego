@@ -6,6 +6,7 @@ class ResponseResidentInfo {
   String? id;
   String? createdTime;
   String? updatedTime;
+  String? avatar;
   bool? isLocked;
   bool? isDraft;
   String? code;
@@ -30,6 +31,7 @@ class ResponseResidentInfo {
   String? place_of_issue;
   String? identity_card;
   String? phone;
+  String? m;
   Account? account;
   ResponseResidentInfo(
       {this.code,
@@ -40,6 +42,7 @@ class ResponseResidentInfo {
       this.email,
       this.ethnicId,
       this.id,
+      this.avatar,
       this.identity_card,
       this.identity_card_required,
       this.info_name,
@@ -65,6 +68,7 @@ class ResponseResidentInfo {
     account =
         json['account'] != null ? Account.fromJson(json['account']) : null;
     id = json['_id'];
+    avatar = json['avatar'];
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     isLocked = json['isLocked'];
@@ -91,6 +95,7 @@ class ResponseResidentInfo {
     place_of_issue = json['place_of_issue'];
     identity_card = json['identity_card'];
     phone = json['phone'];
+    phone = json['m'];
   }
 
   Map<String, dynamic> toJson() {
@@ -121,6 +126,7 @@ class ResponseResidentInfo {
     data['place_of_issue'] = place_of_issue;
     data['identity_card'] = identity_card;
     data['phone'] = phone;
+    data['avatar'] = avatar;
     data['account'] = account != null ? account!.toJson() : null;
     return data;
   }

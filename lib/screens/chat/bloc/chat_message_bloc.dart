@@ -49,7 +49,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     var authen = await authenticationService
         .login(WebsocketConnect.username, WebsocketConnect.password)
         .catchError((e) {
-      Utils.showErrorMessage(context, e.toString());
+      // Utils.showErrorMessage(context, e.toString());
     });
     authToken = authen.data?.authToken ?? "";
     user = authen.data!.me;

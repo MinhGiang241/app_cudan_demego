@@ -22,6 +22,48 @@ import '../../../utils/utils.dart';
 import '../register_resident_screen.dart';
 
 class AddNewResidentPrv extends ChangeNotifier {
+  AddNewResidentPrv({
+    this.existedForm,
+  }) {
+    if (existedForm != null) {
+      nameController.text = existedForm!.info_name ?? "";
+      identityController.text = existedForm!.identity_card_required ?? "";
+      birthController.text = Utils.dateFormat(existedForm!.date_birth ?? "", 1);
+      issuePlaceController.text = existedForm!.place_of_issue_required ?? "";
+      phoneController.text = existedForm!.phone_required ?? "";
+      emailController.text = existedForm!.email ?? "";
+      qualificationController.text = existedForm!.qualification ?? "";
+      facebookController.text = existedForm!.facebook ?? "";
+      zaloController.text = existedForm!.zalo ?? "";
+      instagramController.text = existedForm!.instagram ?? "";
+      linkedinController.text = existedForm!.linkedin ?? "";
+      tiktokController.text = existedForm!.tiktok ?? "";
+      apartmentAddValue = existedForm?.apartmentId;
+      relationValue = existedForm?.relationshipId;
+      sexValue = existedForm?.sex;
+      resTypeValue = existedForm?.residence_type;
+      provinceValue = existedForm?.p?.code;
+      getDistricByProvinceCode(existedForm?.p?.code).then((v) {
+        districtValue = existedForm?.d?.code;
+        return getWardscByDistrictCode(districtValue);
+      }).then((v) {
+        wardValue = existedForm?.w?.code;
+      });
+      districtValue = existedForm?.d?.code;
+      wardValue = existedForm?.w?.code;
+      nationalityValue = existedForm?.nationalId;
+      ethnicValue = existedForm?.ethnicId;
+      existedDoccuments = existedForm?.upload ?? [];
+      existedResImages = existedForm?.resident_images ?? [];
+      existedIdentityImages = existedForm?.identity_images ?? [];
+      matialStatusValue = existedForm?.material_status;
+      educationValue = existedForm?.education;
+      qualificationController.text = existedForm?.qualification ?? "";
+    }
+    notifyListeners();
+  }
+
+  FormAddResidence? existedForm;
   int activeStep = 0;
   bool isDisableRightCroll = true;
   bool autoValidStep1 = false;
@@ -42,7 +84,6 @@ class AddNewResidentPrv extends ChangeNotifier {
   final TextEditingController birthController = TextEditingController();
   final TextEditingController identityController = TextEditingController();
   final TextEditingController issuePlaceController = TextEditingController();
-  final TextEditingController nationalityController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -90,6 +131,29 @@ class AddNewResidentPrv extends ChangeNotifier {
   List<FileUploadModel> uploadedResImages = [];
   List<FileUploadModel> uploadedIdentityImages = [];
   List<FileUploadModel> uploadedDocuments = [];
+
+  cancelLetter(BuildContext context) {
+    isLoading = true;
+    notifyListeners();
+    existedForm?.status = "CANCEL";
+    APIResidentAddApartment.changeStatusFormResidentAddApartment(
+            existedForm!.toMap())
+        .then((v) {
+      isLoading = false;
+      notifyListeners();
+      Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_cancel_dependence,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(context,
+                RegisterResidentScreen.routeName, (route) => route.isFirst);
+          });
+    }).catchError((e) {
+      isLoading = false;
+      notifyListeners();
+      Utils.showErrorMessage(context, e);
+    });
+  }
 
   onSelectResImages(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
@@ -321,7 +385,8 @@ class AddNewResidentPrv extends ChangeNotifier {
           buildingId: apartment.buildingId,
           floorId: apartment.floorId,
           date_birth:
-              birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
+              "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
+          // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
           provinceId: province.id,
           districtId: district.id,
           wardsId: ward.id,
@@ -441,7 +506,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     Utils.showDatePickers(
       context,
       initDate: DateTime.now(),
-      startDate: DateTime(DateTime.now().year - 10, 1, 1),
+      startDate: DateTime(DateTime.now().year - 100, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {

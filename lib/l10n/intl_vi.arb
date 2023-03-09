@@ -604,5 +604,15 @@
   "have_baby": "Đã có con",
   "qualification_level": "Trình độ chuyên môn",
   "matial_status": "Tình trạng hôn nhân",
-  "res_name": "Tên cư dân"
+  "res_name": "Tên cư dân",
+  "no_dependence": "Không có phiếu đăng ký người phụ thuộc nào",
+  "facebook": "Facebook",
+  "zalo": "Zalo",
+  "instagram": "Instagram",
+  "linkedin": "Linkedin",
+  "tiktok": "Tiktok",
+  "cancel_letter": "Hủy phiếu",
+  "add_dependent_person_to_apartment": "Thêm người vào căn hộ",
+  "apartment_not_empty": "Căn hộ không được để trống",
+  "resident_not_empty": "cư dân không được để trống"
 }

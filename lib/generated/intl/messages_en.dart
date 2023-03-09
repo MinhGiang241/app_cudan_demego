@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "add_dependent_person":
             MessageLookupByLibrary.simpleMessage("Add dependent person "),
+        "add_dependent_person_to_apartment":
+            MessageLookupByLibrary.simpleMessage("Add person to apartment"),
         "add_file": MessageLookupByLibrary.simpleMessage("Add file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
@@ -82,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add residence apartment"),
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Apartment bill"),
+        "apartment_not_empty":
+            MessageLookupByLibrary.simpleMessage("Apartment can not be empty"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
@@ -112,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "can_not_empty": MessageLookupByLibrary.simpleMessage("Can not empty"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancel_letter": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Reject_reason"),
         "cancel_reflection":
             MessageLookupByLibrary.simpleMessage("Cancel reflection"),
@@ -312,6 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Login session is invalid, please sign in again"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "fa": MessageLookupByLibrary.simpleMessage("Single"),
+        "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "fee_paid": MessageLookupByLibrary.simpleMessage("Fee paid"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
@@ -400,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "info": MessageLookupByLibrary.simpleMessage("Infomation"),
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Information reception"),
+        "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "item_list_not_empty":
@@ -416,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "licene_plate": MessageLookupByLibrary.simpleMessage("Licene plate"),
         "limit_15mb": MessageLookupByLibrary.simpleMessage(
             "The limit for each upload file does not exceed 15MB"),
+        "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
@@ -460,6 +468,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any construction file"),
         "no_delivery":
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
+        "no_dependence": MessageLookupByLibrary.simpleMessage(
+            "Không có phiếu đăng ký người phụ thuộc nào"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
         "no_hand_over": MessageLookupByLibrary.simpleMessage("No hand over"),
@@ -718,6 +728,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resident address"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Resident information"),
+        "resident_not_empty":
+            MessageLookupByLibrary.simpleMessage("Resident can not be empty"),
         "resident_reg":
             MessageLookupByLibrary.simpleMessage("Resident registration"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Resident type"),
@@ -854,6 +866,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registering for a resident account means consenting to "),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
+        "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Time event happening"),
         "time_happening":
@@ -929,6 +942,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Work description"),
         "worker_num": MessageLookupByLibrary.simpleMessage("Worker amount"),
         "year": MessageLookupByLibrary.simpleMessage("Year"),
+        "zalo": MessageLookupByLibrary.simpleMessage("Zalo"),
         "zone": MessageLookupByLibrary.simpleMessage("Zone"),
         "zone_type": MessageLookupByLibrary.simpleMessage("Zone type")
       };

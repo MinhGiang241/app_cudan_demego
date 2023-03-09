@@ -66,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Thêm"),
         "add_dependent_person":
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc "),
+        "add_dependent_person_to_apartment":
+            MessageLookupByLibrary.simpleMessage("Thêm người vào căn hộ"),
         "add_file": MessageLookupByLibrary.simpleMessage("Thêm file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
@@ -85,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Căn hộ thêm cư dân"),
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Tiền phí chung cư"),
+        "apartment_not_empty":
+            MessageLookupByLibrary.simpleMessage("Căn hộ không được để trống"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
@@ -117,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "can_not_empty":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+        "cancel_letter": MessageLookupByLibrary.simpleMessage("Hủy phiếu"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "cancel_reflection":
             MessageLookupByLibrary.simpleMessage("Hủy phản ánh"),
@@ -313,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
         "fa": MessageLookupByLibrary.simpleMessage("Độc thân"),
+        "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
         "fee_paid": MessageLookupByLibrary.simpleMessage("Đã đóng phí"),
         "feedback": MessageLookupByLibrary.simpleMessage("Góp ý"),
@@ -400,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Tiếp nhận thông tin"),
+        "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data":
             MessageLookupByLibrary.simpleMessage("Dữ liệu không hợp lệ"),
@@ -416,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "licene_plate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
         "limit_15mb": MessageLookupByLibrary.simpleMessage(
             "Giới hạn mỗi file tải lên không vượt quá 15MB/file"),
+        "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "long": MessageLookupByLibrary.simpleMessage("Dài"),
@@ -461,6 +469,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có hồ sơ thi công nào"),
         "no_delivery": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký chuyển đố nào"),
+        "no_dependence": MessageLookupByLibrary.simpleMessage(
+            "Không có phiếu đăng ký người phụ thuộc nào"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
         "no_hand_over":
@@ -720,6 +730,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Địa chỉ thường chú"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cư dân"),
+        "resident_not_empty":
+            MessageLookupByLibrary.simpleMessage("cư dân không được để trống"),
         "resident_reg": MessageLookupByLibrary.simpleMessage("Đăng ký cư dân"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Loại cư trú"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
@@ -854,6 +866,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đăng ký tài khoản cư dân đồng nghĩa với việc đồng thuận với "),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
+        "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra sự kiện"),
         "time_happening":
@@ -927,6 +940,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "worker_num":
             MessageLookupByLibrary.simpleMessage("Số lượng công nhân"),
         "year": MessageLookupByLibrary.simpleMessage("Năm"),
+        "zalo": MessageLookupByLibrary.simpleMessage("Zalo"),
         "zone": MessageLookupByLibrary.simpleMessage("Khu vực"),
         "zone_type": MessageLookupByLibrary.simpleMessage("Loại khu vực")
       };

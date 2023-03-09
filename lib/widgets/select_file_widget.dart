@@ -26,6 +26,7 @@ class SelectFileWidget extends StatelessWidget {
     this.onRemoveExist,
     this.isDash = true,
     this.text,
+    this.enable = true,
     this.icon,
     this.isRequired = false,
   });
@@ -39,6 +40,7 @@ class SelectFileWidget extends StatelessWidget {
   final Function(int)? onRemoveExist;
   final bool isRequired;
   final bool isDash;
+  final bool enable;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,7 @@ class SelectFileWidget extends StatelessWidget {
       Row(
         children: [
           DashButton(
-            isDash: isDash,
+            isDash: isDash && enable,
             text: text ?? S.of(context).upload,
             lable: title,
             isRequired: isRequired,
@@ -130,20 +132,21 @@ class SelectFileWidget extends StatelessWidget {
 
                                     //  Image.file(e.value),
                                     ),
-                                Positioned(
-                                  top: 2,
-                                  right: 2,
-                                  child: PrimaryIcon(
-                                    icons: PrimaryIcons.close,
-                                    style: PrimaryIconStyle.gradient,
-                                    gradients: PrimaryIconGradient.red,
-                                    color: Colors.white,
-                                    padding: const EdgeInsets.all(4),
-                                    onTap: () {
-                                      onRemove?.call(e.key);
-                                    },
-                                  ),
-                                )
+                                if (!enable)
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        onRemove?.call(e.key);
+                                      },
+                                    ),
+                                  )
                               ],
                             )),
                       )
@@ -175,18 +178,19 @@ class SelectFileWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      var index = existFiles
-                          .indexWhere((element) => element.id == e.value.id);
-                      onRemoveExist?.call(index);
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                      size: 25,
+                  if (!enable)
+                    IconButton(
+                      onPressed: () {
+                        var index = existFiles
+                            .indexWhere((element) => element.id == e.value.id);
+                        onRemoveExist?.call(index);
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 25,
+                      ),
                     ),
-                  ),
                 ],
               );
             },

@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'file_upload.dart';
+import 'province.dart';
 import 'relationship.dart';
 import 'response_resident_own.dart';
 import 'status.dart';
@@ -51,6 +52,9 @@ class FormAddResidence {
   Building? b;
   Floor? f;
   RelationShip? r;
+  Province? p;
+  Distric? d;
+  Ward? w;
   List<FileUploadModel>? upload;
   List<FileUploadModel>? identity_images;
   List<FileUploadModel>? resident_images;
@@ -60,6 +64,9 @@ class FormAddResidence {
       this.b,
       this.f,
       this.r,
+      this.p,
+      this.d,
+      this.w,
       this.createdTime,
       this.updatedTime,
       this.code,
@@ -239,6 +246,9 @@ class FormAddResidence {
       b: map["b"] != null ? Building.fromJson(map['b']) : null,
       f: map["f"] != null ? Floor.fromJson(map['f']) : null,
       r: map["r"] != null ? RelationShip.fromMap(map['r']) : null,
+      p: map["p"] != null ? Province.fromMap(map['p']) : null,
+      d: map["d"] != null ? Distric.fromMap(map['d']) : null,
+      w: map["w"] != null ? Ward.fromMap(map['w']) : null,
     );
   }
 

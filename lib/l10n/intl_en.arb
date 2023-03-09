@@ -603,5 +603,15 @@
   "have_baby": "Have baby",
   "qualification_level": "Qualification level",
   "matial_status": "Matial status",
-  "res_name": "Resident name"
+  "res_name": "Resident name",
+  "no_dependence": "Không có phiếu đăng ký người phụ thuộc nào",
+  "facebook": "Facebook",
+  "zalo": "Zalo",
+  "instagram": "Instagram",
+  "linkedin": "Linkedin",
+  "tiktok": "Tiktok",
+  "cancel_letter": "Cancel letter",
+  "add_dependent_person_to_apartment": "Add person to apartment",
+  "apartment_not_empty": "Apartment can not be empty",
+  "resident_not_empty": "Resident can not be empty"
 }

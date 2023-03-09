@@ -99,20 +99,21 @@ class SelectMediaWidget extends StatelessWidget {
 
                                       //  Image.file(e.value),
                                       ),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        onRemove?.call(e.key);
-                                      },
-                                    ),
-                                  )
+                                  if (!enable)
+                                    Positioned(
+                                      top: 2,
+                                      right: 2,
+                                      child: PrimaryIcon(
+                                        icons: PrimaryIcons.close,
+                                        style: PrimaryIconStyle.gradient,
+                                        gradients: PrimaryIconGradient.red,
+                                        color: Colors.white,
+                                        padding: const EdgeInsets.all(4),
+                                        onTap: () {
+                                          onRemove?.call(e.key);
+                                        },
+                                      ),
+                                    )
                                 ],
                               )),
                         )

@@ -120,7 +120,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                 final showPass = snapshot.data!;
 
                 return PrimaryCard(
-                  onTap: widget.onTap,
+                  onTap: widget.enable ? widget.onTap : null,
                   background: widget.background,
                   margin: widget.margin,
                   child: TextFormField(
@@ -131,7 +131,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                           }
                         : null,
                     maxLength: widget.maxLength,
-                    onTap: widget.onTap,
+                    onTap: widget.enable ? widget.onTap : null,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: <TextInputFormatter>[
                       // FilteringTextInputFormatter.deny(RegExp('[ ]')),

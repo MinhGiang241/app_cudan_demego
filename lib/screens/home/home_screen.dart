@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // ApiService.shared.getExistClient().then((value) {
     //   log(value!.credentials.accessToken);
     // });
-    context.read<ChatMessageBloc>().getAuthentication(context);
+    // context.read<ChatMessageBloc>().getAuthentication(context);
 
     return ChangeNotifierProvider<HomePrv>(
       create: (context) => HomePrv(context),

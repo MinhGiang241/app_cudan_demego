@@ -6099,6 +6099,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Không có phiếu đăng ký người phụ thuộc nào`
+  String get no_dependence {
+    return Intl.message(
+      'Không có phiếu đăng ký người phụ thuộc nào',
+      name: 'no_dependence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Facebook`
+  String get facebook {
+    return Intl.message(
+      'Facebook',
+      name: 'facebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zalo`
+  String get zalo {
+    return Intl.message(
+      'Zalo',
+      name: 'zalo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instagram`
+  String get instagram {
+    return Intl.message(
+      'Instagram',
+      name: 'instagram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Linkedin`
+  String get linkedin {
+    return Intl.message(
+      'Linkedin',
+      name: 'linkedin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiktok`
+  String get tiktok {
+    return Intl.message(
+      'Tiktok',
+      name: 'tiktok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel letter`
+  String get cancel_letter {
+    return Intl.message(
+      'Cancel letter',
+      name: 'cancel_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add person to apartment`
+  String get add_dependent_person_to_apartment {
+    return Intl.message(
+      'Add person to apartment',
+      name: 'add_dependent_person_to_apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apartment can not be empty`
+  String get apartment_not_empty {
+    return Intl.message(
+      'Apartment can not be empty',
+      name: 'apartment_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident can not be empty`
+  String get resident_not_empty {
+    return Intl.message(
+      'Resident can not be empty',
+      name: 'resident_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

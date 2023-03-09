@@ -13,8 +13,10 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../models/form_add_resident.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_icon.dart';
+import '../../widgets/primary_loading.dart';
 import '../auth/prv/resident_info_prv.dart';
 import 'prv/add_new_resident_prv.dart';
 
@@ -32,12 +34,18 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
   bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    final arg = ModalRoute.of(context)!.settings.arguments as FormAddResidence?;
+    var enable = arg == null;
     return ChangeNotifierProvider(
-      create: (_) => AddNewResidentPrv(),
+      create: (_) => AddNewResidentPrv(existedForm: arg),
       builder: (context, child) {
         var activeStep = context.watch<AddNewResidentPrv>().activeStep;
-        var listApartmentChoice =
-            context.read<ResidentInfoPrv>().listOwn.map((e) {
+        var listApartmentChoice = context
+            .read<ResidentInfoPrv>()
+            .listOwn
+            .where((i) => i.type == "BUY")
+            .map<DropdownMenuItem>((e) {
           return DropdownMenuItem(
             value: e.apartmentId,
             child: Text(e.apartment?.name! != null
@@ -131,6 +139,9 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
               child: FutureBuilder(
                 future: context.read<AddNewResidentPrv>().preFetchData(context),
                 builder: (context, snapshot) {
+                  // if (snapshot.connectionState == ConnectionState.waiting) {
+                  //   return const Center(child: PrimaryLoading());
+                  // }
                   var listRelationChoice =
                       context.watch<AddNewResidentPrv>().relations.map((v) {
                     return DropdownMenuItem(
@@ -223,10 +234,13 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                     ),
                     Expanded(
                         child: PageView(
-                      physics:
-                          context.watch<AddNewResidentPrv>().isDisableRightCroll
+                      physics: enable
+                          ? context
+                                  .watch<AddNewResidentPrv>()
+                                  .isDisableRightCroll
                               ? const LeftBlockedScrollPhysics()
-                              : null,
+                              : null
+                          : null,
                       controller: context.read<AddNewResidentPrv>().controller,
                       onPageChanged:
                           context.read<AddNewResidentPrv>().onPageChanged,
@@ -252,6 +266,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               children: [
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   onChange: context
                                       .read<AddNewResidentPrv>()
                                       .onSellectApartment,
@@ -269,6 +284,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  enable: enable,
                                   validator: Utils.emptyValidator,
                                   controller: context
                                       .read<AddNewResidentPrv>()
@@ -282,6 +298,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   onChange: context
                                       .read<AddNewResidentPrv>()
                                       .onSellectRelation,
@@ -298,6 +315,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   onChange: context
                                       .read<AddNewResidentPrv>()
                                       .onSellectSex,
@@ -314,6 +332,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  enable: enable,
                                   onTap: () => context
                                       .read<AddNewResidentPrv>()
                                       .pickBirthDay(context),
@@ -333,6 +352,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  enable: enable,
                                   validator: Utils.emptyValidator,
                                   controller: context
                                       .read<AddNewResidentPrv>()
@@ -346,6 +366,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryTextField(
+                                  enable: enable,
                                   validator: Utils.emptyValidator,
                                   controller: context
                                       .read<AddNewResidentPrv>()
@@ -355,6 +376,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   selectList: listNationalityChoice,
                                   validator: Utils.emptyValidatorDropdown,
                                   isFull: true,
@@ -373,6 +395,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   onChange: context
                                       .read<AddNewResidentPrv>()
                                       .onSellectType,
@@ -389,6 +412,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   isFull: true,
                                   validator: Utils.emptyValidatorDropdown,
                                   value: context
@@ -406,6 +430,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   validator: Utils.emptyValidatorDropdown,
                                   value: context
                                       .watch<AddNewResidentPrv>()
@@ -423,6 +448,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 PrimaryDropDown(
+                                  enable: enable,
                                   onChange: context
                                       .read<AddNewResidentPrv>()
                                       .onSellectWard,
@@ -440,6 +466,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 SelectMediaWidget(
+                                  enable: enable,
                                   onSelect: () => context
                                       .read<AddNewResidentPrv>()
                                       .onSelectResImages(context),
@@ -460,6 +487,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 SelectMediaWidget(
+                                  enable: enable,
                                   onSelect: () => context
                                       .read<AddNewResidentPrv>()
                                       .onSelectIdentityImages(context),
@@ -479,6 +507,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 ),
                                 vpad(12),
                                 SelectFileWidget(
+                                  enable: enable,
                                   onSelect: () => context
                                       .read<AddNewResidentPrv>()
                                       .onSelectDocuments(context),
@@ -497,15 +526,31 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   title: S.of(context).attachment_file,
                                 ),
                                 vpad(20),
-                                PrimaryButton(
-                                  width: double.infinity,
-                                  text: S.of(context).next,
-                                  onTap: () {
-                                    context
-                                        .read<AddNewResidentPrv>()
-                                        .onStep1Next(context);
-                                  },
-                                ),
+                                if (!(arg != null && arg.status == "CANCEL"))
+                                  PrimaryButton(
+                                    isLoading: context
+                                        .watch<AddNewResidentPrv>()
+                                        .isLoading,
+                                    width: double.infinity,
+                                    buttonType: enable
+                                        ? ButtonType.primary
+                                        : ButtonType.secondary,
+                                    secondaryBackgroundColor:
+                                        enable ? null : redColor4,
+                                    textColor: enable ? null : redColor,
+                                    text: enable
+                                        ? S.of(context).next
+                                        : S.of(context).cancel_letter,
+                                    onTap: enable
+                                        ? () {
+                                            context
+                                                .read<AddNewResidentPrv>()
+                                                .onStep1Next(context);
+                                          }
+                                        : () => context
+                                            .read<AddNewResidentPrv>()
+                                            .cancelLetter(context),
+                                  ),
                                 vpad(50)
                               ],
                             ),
@@ -531,6 +576,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                             child: Column(children: [
                               vpad(12),
                               PrimaryTextField(
+                                enable: enable,
                                 label: S.of(context).phone_num,
                                 hint: S.of(context).phone_num,
                                 controller: context
@@ -539,6 +585,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryTextField(
+                                enable: enable,
                                 label: S.of(context).email,
                                 hint: S.of(context).email,
                                 controller: context
@@ -547,6 +594,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryDropDown(
+                                enable: enable,
                                 selectList: educationChoices,
                                 label: S.of(context).education_level,
                                 value: context
@@ -558,6 +606,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryTextField(
+                                enable: enable,
                                 controller: context
                                     .read<AddNewResidentPrv>()
                                     .qualificationController,
@@ -566,6 +615,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryDropDown(
+                                enable: enable,
                                 selectList: matialStatusChoices,
                                 label: S.of(context).matial_status,
                                 value: context
@@ -577,6 +627,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryTextField(
+                                enable: enable,
                                 controller: context
                                     .read<AddNewResidentPrv>()
                                     .jobController,
@@ -585,6 +636,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               ),
                               vpad(12),
                               PrimaryDropDown(
+                                enable: enable,
                                 isFull: true,
                                 isRequired: true,
                                 selectList: listEthnicChoice,
@@ -624,6 +676,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                    hint: S.of(context).facebook,
                                     controller: context
                                         .read<AddNewResidentPrv>()
                                         .tiktokController,
@@ -646,6 +699,8 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                          enable: enable,
+                                          hint: S.of(context).zalo,
                                           controller: context
                                               .read<AddNewResidentPrv>()
                                               .zaloController))
@@ -667,6 +722,8 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                          enable: enable,
+                                          hint: S.of(context).instagram,
                                           controller: context
                                               .read<AddNewResidentPrv>()
                                               .instagramController))
@@ -688,6 +745,8 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                          enable: enable,
+                                          hint: S.of(context).linkedin,
                                           controller: context
                                               .read<AddNewResidentPrv>()
                                               .linkedinController))
@@ -709,23 +768,37 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   hpad(12),
                                   Expanded(
                                       child: PrimaryTextField(
+                                          enable: enable,
+                                          hint: S.of(context).tiktok,
                                           controller: context
                                               .read<AddNewResidentPrv>()
                                               .tiktokController))
                                 ],
                               ),
                               vpad(20),
-                              PrimaryButton(
-                                isLoading: context
-                                    .watch<AddNewResidentPrv>()
-                                    .isLoading,
-                                width: double.infinity,
-                                buttonType: ButtonType.green,
-                                text: S.of(context).send_request,
-                                onTap: () => context
-                                    .read<AddNewResidentPrv>()
-                                    .onSendRequest(context),
-                              ),
+                              if (!(arg != null && arg.status == "CANCEL"))
+                                PrimaryButton(
+                                  isLoading: context
+                                      .watch<AddNewResidentPrv>()
+                                      .isLoading,
+                                  width: double.infinity,
+                                  buttonType: enable
+                                      ? ButtonType.green
+                                      : ButtonType.secondary,
+                                  secondaryBackgroundColor:
+                                      enable ? null : redColor4,
+                                  textColor: enable ? null : redColor,
+                                  text: enable
+                                      ? S.of(context).send_request
+                                      : S.of(context).cancel_letter,
+                                  onTap: enable
+                                      ? () => context
+                                          .read<AddNewResidentPrv>()
+                                          .onSendRequest(context)
+                                      : () => context
+                                          .read<AddNewResidentPrv>()
+                                          .cancelLetter(context),
+                                ),
                               vpad(50),
                             ]),
                           ),

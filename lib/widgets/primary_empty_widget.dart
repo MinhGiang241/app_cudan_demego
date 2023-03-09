@@ -32,7 +32,11 @@ class PrimaryEmptyWidget extends StatelessWidget {
             color: primaryColor4,
           ),
           vpad(16),
-          Text(emptyText, style: txtLinkSmall(color: grayScaleColor2)),
+          Text(
+            emptyText,
+            style: txtLinkSmall(color: grayScaleColor2),
+            textAlign: TextAlign.center,
+          ),
           vpad(16),
           if (buttonText != null)
             PrimaryButton(
