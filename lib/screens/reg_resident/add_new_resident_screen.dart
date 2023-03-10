@@ -12,7 +12,9 @@ import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_phys
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
+import '../../constants/regex_text.dart';
 import '../../generated/l10n.dart';
+import '../../models/dependence_sign_up.dart';
 import '../../models/form_add_resident.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_icon.dart';
@@ -35,7 +37,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final arg = ModalRoute.of(context)!.settings.arguments as FormAddResidence?;
+    final arg = ModalRoute.of(context)!.settings.arguments as DependenceSignUp?;
     var enable = arg == null;
     return ChangeNotifierProvider(
       create: (_) => AddNewResidentPrv(existedForm: arg),
@@ -97,7 +99,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
             child: Text(S.of(context).married),
           ),
           DropdownMenuItem(
-            value: "FA",
+            value: "BABY",
             child: Text(S.of(context).have_baby),
           ),
         ];
@@ -411,6 +413,20 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   isRequired: true,
                                 ),
                                 vpad(12),
+                                PrimaryTextField(
+                                  enable: enable,
+                                  validator: Utils.emptyValidator,
+                                  label: S.of(context).per_res_address,
+                                  hint: S.of(context).per_res_address,
+                                  controller: context
+                                      .read<AddNewResidentPrv>()
+                                      .perResController,
+                                  isRequired: true,
+                                  validateString: context
+                                      .watch<AddNewResidentPrv>()
+                                      .perResValidate,
+                                ),
+                                vpad(12),
                                 PrimaryDropDown(
                                   enable: enable,
                                   isFull: true,
@@ -576,6 +592,8 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                             child: Column(children: [
                               vpad(12),
                               PrimaryTextField(
+                                onlyNum: true,
+                                keyboardType: TextInputType.number,
                                 enable: enable,
                                 label: S.of(context).phone_num,
                                 hint: S.of(context).phone_num,
@@ -586,6 +604,15 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                               vpad(12),
                               PrimaryTextField(
                                 enable: enable,
+                                validateString: context
+                                    .watch<AddNewResidentPrv>()
+                                    .emailValidate,
+                                validator: (v) {
+                                  if (v!.isNotEmpty && !RegexText.isEmail(v)) {
+                                    return '';
+                                  }
+                                  return null;
+                                },
                                 label: S.of(context).email,
                                 hint: S.of(context).email,
                                 controller: context

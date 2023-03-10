@@ -1,4 +1,3 @@
-import 'package:app_cudan/models/form_add_resident.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
@@ -9,8 +8,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../models/dependence_sign_up.dart';
 import '../../models/info_content_view.dart';
-import '../../models/selection_model.dart';
 import '../../utils/utils.dart';
 import '../../widgets/item_selected.dart';
 import '../../widgets/primary_bottom_sheet.dart';
@@ -123,12 +122,12 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                             // init = false;
                           });
                     }
-                    List<FormAddResidence> listData =
+                    List<DependenceSignUp> listData =
                         context.watch<RegisterResidentPrv>().listForm;
 
-                    List<FormAddResidence> listApproved = [];
-                    List<FormAddResidence> listNew = [];
-                    List<FormAddResidence> listCancel = [];
+                    List<DependenceSignUp> listApproved = [];
+                    List<DependenceSignUp> listNew = [];
+                    List<DependenceSignUp> listCancel = [];
 
                     for (var i in listData) {
                       if (i.status == "NEW") {
@@ -252,7 +251,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                         ),
                                         InfoContentView(
                                           title: "${S.of(context).reg_code}:",
-                                          content: e.code,
+                                          content: e.ticket_code,
                                           contentStyle:
                                               txtBold(14, grayScaleColorBase),
                                         ),
@@ -325,7 +324,8 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                                   ],
                                                 ),
                                               ),
-                                              if (e.status == "NEW")
+                                              if (e.status == "NEW" ||
+                                                  e.status == "WAIT")
                                                 Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,

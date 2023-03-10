@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../models/dependence_sign_up.dart';
 import '../../../utils/utils.dart';
 import '../register_resident_screen.dart';
 
 class RegisterResidentPrv extends ChangeNotifier {
-  List<FormAddResidence> listForm = [];
+  List<DependenceSignUp> listForm = [];
   String? sellectedApartment;
   onChangeApartment(v) {
     sellectedApartment = v;
@@ -22,17 +23,18 @@ class RegisterResidentPrv extends ChangeNotifier {
         .then((v) {
       listForm.clear();
       for (var i in v) {
-        listForm.add(FormAddResidence.fromMap(i));
+        listForm.add(DependenceSignUp.fromMap(i));
       }
     });
   }
 
-  cancelLetter(BuildContext context, FormAddResidence data) async {
+  cancelLetter(BuildContext context, DependenceSignUp data) async {
     data.status = 'CANCEL';
+    data.reasons = 'NGUOIDUNGHUY';
     await Utils.showConfirmMessage(
         title: S.of(context).cancel_letter,
         context: context,
-        content: S.of(context).confirm_cancel_request(data.code ?? ""),
+        content: S.of(context).confirm_cancel_request(data.ticket_code ?? ""),
         onConfirm: () async {
           await APIResidentAddApartment.changeStatusFormResidentAddApartment(
                   data.toMap())

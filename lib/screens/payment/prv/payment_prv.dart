@@ -8,6 +8,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../models/extra_service.dart';
 import '../../../widgets/primary_card.dart';
 import '../payment_list_screen.dart';
 
@@ -36,6 +37,11 @@ class PaymentPrv extends ChangeNotifier {
   late double sum;
   var isSendLoading = false;
   BuildContext ctx;
+
+  setPayment(list) {
+    listReceipts = [Receipt.fromJson(list)];
+    notifyListeners();
+  }
 
   changeValue(v) {
     value = v;

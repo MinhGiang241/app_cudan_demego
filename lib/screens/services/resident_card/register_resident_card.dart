@@ -23,9 +23,9 @@ class RegisterResidentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
 
-    var isEdit = arg['isEdit'];
+    var isEdit = arg == null ? false : arg['isEdit'];
     ResidentCard card = ResidentCard();
     if (isEdit) {
       card = arg['data'];

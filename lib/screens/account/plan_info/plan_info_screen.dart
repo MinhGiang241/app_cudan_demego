@@ -15,26 +15,26 @@ class PlanInfoScreen extends StatefulWidget {
 
 class _PlanInfoScreenState extends State<PlanInfoScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 2, vsync: this);
+  late TabController tabController = TabController(length: 4, vsync: this);
   @override
   Widget build(BuildContext context) {
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-        title: 'S.of(context).plan_info',
+        title: S.of(context).plan_info,
         tabController: tabController,
         // isTabScrollable: false,
         tabs: [
-          Tab(text: 'S.of(context).plan'),
-          Tab(text: 'S.of(context).residence_info'),
-          // Tab(text: S.of(context).bill_history),
-          // Tab(text: S.of(context).noti_history)
+          Tab(text: S.of(context).surface),
+          Tab(text: S.of(context).resident_info),
+          Tab(text: S.of(context).bill_history),
+          Tab(text: S.of(context).noti_history),
         ],
       ),
-      body: TabBarView(controller: tabController, children: const [
-        PlanInfoTab(),
-        RecidentInfoTab(),
-        // Container(),
-        // Container(),
+      body: TabBarView(controller: tabController, children: [
+        const PlanInfoTab(),
+        const ResidentInfoTab(),
+        Container(),
+        Container(),
       ]),
     );
   }

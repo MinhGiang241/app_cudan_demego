@@ -1,32 +1,64 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_tower.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../models/response_resident_own.dart';
 import '../../../../models/response_thecudan_list.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../r_card/r_card_info.dart';
 
-class RecidentInfoTab extends StatelessWidget {
-  const RecidentInfoTab({
+class ResidentInfoTab extends StatelessWidget {
+  const ResidentInfoTab({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        vpad(24),
-        const RecidentInfoItem(
-          isShowInit: true,
-        ),
-        const RecidentInfoItem(
-          isShowInit: false,
-        )
-      ],
-    );
+    List<ResponseResidentOwn> listResOwn = [];
+    var apartmentId =
+        context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
+    return FutureBuilder(future: () async {
+      listResOwn.clear();
+      await APITower.getResidentOwnInfo(apartmentId).then((v) {
+        for (var i in v) {
+          listResOwn.add(ResponseResidentOwn.fromJson(i));
+        }
+      });
+    }(), builder: (context, snapshot) {
+      return ListView(
+        children: [
+          vpad(24),
+          ...listResOwn.asMap().entries.map((e) {
+            return RecidentInfoItem(
+              isShowInit: e.key == 0,
+              own: e.value,
+            );
+          }),
+        ],
+      );
+    });
+  }
+}
+
+genDependentType(String? v) {
+  switch (v) {
+    case "BUY":
+      return S.current.buyer;
+    case "RENT":
+      return S.current.renter;
+    case "DEPENDENT_HOST":
+      return S.current.dependent_host;
+    case "DEPENDENT_RENT":
+      return S.current.dependent_rent;
+    default:
+      return S.current.unkhown;
   }
 }
 
@@ -37,11 +69,13 @@ class RecidentInfoItem extends StatefulWidget {
     this.header,
     this.hide,
     this.show,
+    required this.own,
   }) : super(key: key);
   final bool isShowInit;
   final Widget? header;
   final Widget? hide;
   final Widget? show;
+  final ResponseResidentOwn own;
 
   @override
   State<RecidentInfoItem> createState() => _RecidentInfoItemState();
@@ -95,7 +129,10 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             widget.header ??
-                                Text("Nguyễn Văn A", style: txtMedium()),
+                                Text(
+                                  widget.own.resident?.info_name ?? "",
+                                  style: txtMedium(),
+                                ),
                             if (!isShow)
                               widget.hide ??
                                   Column(
@@ -103,14 +140,18 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
                                       vpad(8),
                                       Row(
                                         children: [
-                                          Text("QH với chủ hộ:",
+                                          Text(
+                                              '${S.of(context).relation_owner}:',
                                               style: txtRegular(
                                                   12, grayScaleColor2)),
                                           hpad(4),
-                                          Text(
-                                            "Chủ sở hữu",
-                                            style:
-                                                txtRegular(12, grayScaleColor1),
+                                          Expanded(
+                                            child: Text(
+                                              genDependentType(widget.own.type),
+                                              style: txtRegular(
+                                                  12, grayScaleColor1),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           )
                                         ],
                                       ),
@@ -125,14 +166,20 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
                                       vpad(16),
                                       Row(children: [
                                         Expanded(
-                                          child: Text("QH với chủ hộ",
+                                          flex: 1,
+                                          child: Text(
+                                              '${S.of(context).relation_owner}:',
                                               style: txtMedium(
                                                   14, grayScaleColor2)),
                                         ),
                                         hpad(16),
-                                        Text("Chủ sở hữu",
-                                            style: txtLinkSmall(
-                                                color: grayScaleColorBase))
+                                        Flexible(
+                                          flex: 1,
+                                          child: Text(
+                                              genDependentType(widget.own.type),
+                                              style: txtLinkSmall(
+                                                  color: grayScaleColorBase)),
+                                        )
                                       ]),
                                     ],
                                   ),
@@ -155,7 +202,7 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
                                             child: Column(
                                               children: [
                                                 Row(children: [
-                                                  Text("Thẻ cư dân",
+                                                  Text("Thẻ cư dân:",
                                                       style: txtMedium(
                                                           14, grayScaleColor2)),
                                                   const Spacer(),

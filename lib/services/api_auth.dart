@@ -311,4 +311,40 @@ class APIAuth {
       return (res.response.data);
     }
   }
+
+  static Future changePassword(
+    String oldPass,
+    String newPass,
+    String confirmNewPass,
+    String? accountId,
+  ) async {
+    var mutation = '''
+     mutation (\$oldPass:String,\$newPass:String,\$confirmNewPass:String,\$accountId:String){
+    response: authorization_mobile_change_password (oldPass: \$oldPass,newPass: \$newPass,confirmNewPass: \$confirmNewPass,accountId:\$accountId ) {
+        code
+        message
+        data
+    }
+    }
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(mutation),
+      variables: {
+        "oldPass": oldPass,
+        "newPass": newPass,
+        "confirmNewPass": confirmNewPass,
+        "accountId": accountId,
+      },
+    );
+
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    var res = ResponseModule.fromJson(data);
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return (res.response.data);
+    }
+  }
 }

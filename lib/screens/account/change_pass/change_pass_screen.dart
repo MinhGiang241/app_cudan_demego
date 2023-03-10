@@ -1,3 +1,5 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,36 +23,35 @@ class ChangePassScreen extends StatefulWidget {
 class _ChangePassScreenState extends State<ChangePassScreen> {
   @override
   Widget build(BuildContext context) {
+    var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
     return ChangeNotifierProvider<ChangePassPrv>(
         create: (context) => ChangePassPrv(),
         builder: (context, snapshot) {
           return PrimaryScreen(
             appBar: PrimaryAppbar(
-              // title:  S.of(context).change_pass,
-              actions: [
-                if (!context.watch<ChangePassPrv>().isLoading)
-                  TextButton(
-                      onPressed: () async {
-                        // final phoneNum =
-                        //     context.read<AuthPrv>().userInfo!.phone!;
-                        // await context
-                        //     .read<ChangePassPrv>()
-                        //     .changePass(context, phoneNum);
-                        Utils.showErrorMessage(context,
-                            "Tính năng đang nâng cấp , chưa sử dụng được");
-                      },
-                      child: Text(S.of(context).save,
-                          style: txtLinkMedium(color: primaryColorBase)))
-                else
-                  const SizedBox(
-                    width: 64,
-                    child: Center(
-                        child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: PrimaryLoading(height: 20, width: 20),
-                    )),
-                  ),
-              ],
+              title: S.of(context).change_pass,
+              // actions: [
+              //   if (!context.watch<ChangePassPrv>().isLoading)
+              //     TextButton(
+              //         onPressed: () async {
+              //           // final phoneNum =
+              //           //     context.read<AuthPrv>().userInfo!.phone!;
+              //           await context
+              //               .read<ChangePassPrv>()
+              //               .changePass(context, accountId);
+              //         },
+              //         child: Text(S.of(context).save,
+              //             style: txtLinkMedium(color: primaryColorBase)))
+              //   else
+              //     const SizedBox(
+              //       width: 64,
+              //       child: Center(
+              //           child: Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 10),
+              //         child: PrimaryLoading(height: 20, width: 20),
+              //       )),
+              //     ),
+              // ],
             ),
             body: ListView(
               children: [
@@ -58,6 +59,12 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Form(
+                    onChanged: () =>
+                        context.read<ChangePassPrv>().validate(context),
+                    autovalidateMode:
+                        context.watch<ChangePassPrv>().autoValidate
+                            ? AutovalidateMode.onUserInteraction
+                            : null,
                     key: context.read<ChangePassPrv>().formKey,
                     child: Column(
                       children: [
@@ -120,7 +127,18 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                               }
                               return null;
                             }),
-                        vpad(16)
+                        vpad(30),
+                        PrimaryButton(
+                          onTap: () async {
+                            await context
+                                .read<ChangePassPrv>()
+                                .changePass(context, accountId);
+                          },
+                          width: double.infinity,
+                          isLoading: context.watch<ChangePassPrv>().isLoading,
+                          text: S.of(context).change_pass,
+                        ),
+                        vpad(40)
                       ],
                     ),
                   ),

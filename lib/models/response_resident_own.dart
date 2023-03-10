@@ -132,8 +132,12 @@ class Apartment {
   String? apartment_status;
   String? apartmentTypeId;
   String? status;
+  Building? b;
+  Floor? f;
   Apartment({
     this.code,
+    this.f,
+    this.b,
     this.createdTime,
     this.id,
     this.isDraft,
@@ -168,6 +172,8 @@ class Apartment {
     apartment_status = json['apartment_status'];
     apartmentTypeId = json['apartmentTypeId'];
     status = json['status'];
+    b = json['b'] != null ? Building.fromJson(json['b']) : null;
+    f = json['f'] != null ? Floor.fromJson(json['f']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -178,7 +178,7 @@ class SelectFileWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (!enable)
+                  if (enable)
                     IconButton(
                       onPressed: () {
                         var index = existFiles

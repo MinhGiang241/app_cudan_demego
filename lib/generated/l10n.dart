@@ -4320,10 +4320,10 @@ class S {
     );
   }
 
-  /// `Surface`
+  /// `Plan`
   String get surface {
     return Intl.message(
-      'Surface',
+      'Plan',
       name: 'surface',
       desc: '',
       args: [],
@@ -6195,6 +6195,176 @@ class S {
     return Intl.message(
       'Resident can not be empty',
       name: 'resident_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plan infomation`
+  String get plan_info {
+    return Intl.message(
+      'Plan infomation',
+      name: 'plan_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bill history`
+  String get bill_history {
+    return Intl.message(
+      'Bill history',
+      name: 'bill_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lịch sử thông báo`
+  String get noti_history {
+    return Intl.message(
+      'Lịch sử thông báo',
+      name: 'noti_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abbreviation`
+  String get abrv {
+    return Intl.message(
+      'Abbreviation',
+      name: 'abrv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message(
+      'Area',
+      name: 'area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free resident card`
+  String get free_res_card {
+    return Intl.message(
+      'Free resident card',
+      name: 'free_res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issued resident card`
+  String get issue_res_card {
+    return Intl.message(
+      'Issued resident card',
+      name: 'issue_res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card`
+  String get card_unit {
+    return Intl.message(
+      'Card',
+      name: 'card_unit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card`
+  String get card_unit2 {
+    return Intl.message(
+      'Card',
+      name: 'card_unit2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plan name`
+  String get plan_name {
+    return Intl.message(
+      'Plan name',
+      name: 'plan_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permanent resident address`
+  String get per_res_address {
+    return Intl.message(
+      'Permanent resident address',
+      name: 'per_res_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Renter`
+  String get renter {
+    return Intl.message(
+      'Renter',
+      name: 'renter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Owner`
+  String get buyer {
+    return Intl.message(
+      'Owner',
+      name: 'buyer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dependent host`
+  String get dependent_host {
+    return Intl.message(
+      'Dependent host',
+      name: 'dependent_host',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dependent rent`
+  String get dependent_rent {
+    return Intl.message(
+      'Dependent rent',
+      name: 'dependent_rent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Relation with owner`
+  String get relation_owner {
+    return Intl.message(
+      'Relation with owner',
+      name: 'relation_owner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password successfully`
+  String get success_change_pass {
+    return Intl.message(
+      'Change password successfully',
+      name: 'success_change_pass',
       desc: '',
       args: [],
     );

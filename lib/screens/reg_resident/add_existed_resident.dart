@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../models/dependence_sign_up.dart';
 import '../../models/file_upload.dart';
 import '../../models/form_add_resident.dart';
 import '../../models/resident_info.dart';
@@ -45,7 +46,8 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         throw (listError.join(', '));
       }
 
-      FormAddResidence formAddResident = FormAddResidence(
+      DependenceSignUp formAddResident = DependenceSignUp(
+        full_name: residentValue?.info_name,
         apartmentId: apartmentValue?.apartmentId,
         buildingId: apartmentValue?.buildingId,
         floorId: apartmentValue?.floorId,
@@ -53,11 +55,11 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         provinceId: residentValue?.provinceId,
         districtId: residentValue?.districtId,
         wardsId: residentValue?.wardsId,
-        residentId: residentId,
+        residentId: residentValue?.id,
         material_status: residentValue?.material_status,
         education: residentValue?.education,
         email: residentValue?.email,
-        info_name: residentValue?.email,
+        info_name: residentValue?.info_name,
         ethnicId: residentValue?.ethnicId,
         identity_card_required: residentValue?.identity_card,
         job: residentValue?.job,
@@ -65,7 +67,11 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         relationshipId: residentValue?.m,
         qualification: residentValue?.qualification,
         phone_required: residentValue?.phone_required,
-        resident_images: residentValue?.avatar != null
+        dependentId: residentId,
+        sent_date: DateTime.now().toIso8601String(),
+        type:
+            apartmentValue?.type == "BUY" ? "DEPENDENT_HOST" : "DEPENDENT_RENT",
+        avatar: residentValue?.avatar != null
             ? [
                 FileUploadModel(
                     id: residentValue?.avatar!, name: residentValue?.avatar!)
@@ -73,7 +79,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
             : null,
         // identity_images: existedIdentityImages + uploadedIdentityImages,
         // upload: existedDoccuments + uploadedDocuments,
-        place_of_issue_required: residentValue?.place_of_issue_required,
+        place_of_issue: residentValue?.place_of_issue_required,
         residence_type: residentValue?.residence_type,
         sex: residentValue?.sex,
         // facebook: facebookController.text.trim(),
@@ -81,7 +87,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         // instagram: instagramController.text.trim(),
         // linkedin: linkedinController.text.trim(),
         // tiktok: tiktokController.text.trim(),
-        status: "NEW",
+        status: "WAIT",
       );
       await APIResidentAddApartment.saveFormResidentAddApartment(
               formAddResident.toMap())

@@ -3,8 +3,6 @@ import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -49,106 +47,107 @@ class _PaymentScreenState extends State<PaymentScreen> {
               title: S.of(context).pay,
             ),
             body: context.watch<PaymentPrv>().isConfirm
-                ? FutureBuilder(
-                    future: () {}(),
-                    builder: (context, snapshot) {
-                      return SafeArea(
-                        child: Column(
-                          children: [
-                            PrimaryCard(
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.symmetric(
-                                      horizontal: BorderSide(
-                                          width: 1, color: grayScaleColor5))),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 24),
-                              height: 50,
-                              width: dvWidth(context),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('${S.of(context).payment_method}:'),
-                                  PopupMenuButton(
-                                    onSelected: (v) {
-                                      context.read<PaymentPrv>().changeValue(v);
-                                    },
-                                    child: Row(
-                                      children: [
-                                        if (context.watch<PaymentPrv>().value ==
-                                            0)
-                                          SvgPicture.asset(
-                                            context.read<PaymentPrv>().link,
-                                            color: Colors.red,
-                                            width: 24,
-                                            height: 20,
-                                          ),
-                                        if (context.watch<PaymentPrv>().value ==
-                                            1)
-                                          SvgPicture.asset(
-                                            context.read<PaymentPrv>().link1,
-                                            color: Colors.blue,
-                                            width: 24,
-                                            height: 20,
-                                          ),
-                                        const Icon(Icons.expand_more),
-                                      ],
-                                    ),
-                                    itemBuilder: (_) => [
-                                      PopupMenuItem(
-                                          value: 0,
-                                          child: SvgPicture.asset(
-                                            context.read<PaymentPrv>().link,
-                                            color: Colors.red,
-                                            width: 24,
-                                            height: 20,
-                                          )),
-                                      PopupMenuItem(
-                                          value: 1,
-                                          child: SvgPicture.asset(
-                                            context.read<PaymentPrv>().link1,
-                                            color: Colors.blue,
-                                            width: 24,
-                                            height: 20,
-                                            allowDrawingOutsideViewBox: true,
-                                          )),
+                ? FutureBuilder(future: () async {
+                    // await APIPayment.getReceipt(arg['list'][0]['_id'])
+                    //     .then((v) {
+                    //   context.read<PaymentPrv>().setPayment(v);
+                    // });
+                  }(), builder: (context, snapshot) {
+                    return SafeArea(
+                      child: Column(
+                        children: [
+                          PrimaryCard(
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                border: Border.symmetric(
+                                    horizontal: BorderSide(
+                                        width: 1, color: grayScaleColor5))),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 24),
+                            height: 50,
+                            width: dvWidth(context),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('${S.of(context).payment_method}:'),
+                                PopupMenuButton(
+                                  onSelected: (v) {
+                                    context.read<PaymentPrv>().changeValue(v);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      if (context.watch<PaymentPrv>().value ==
+                                          0)
+                                        SvgPicture.asset(
+                                          context.read<PaymentPrv>().link,
+                                          color: Colors.red,
+                                          width: 24,
+                                          height: 20,
+                                        ),
+                                      if (context.watch<PaymentPrv>().value ==
+                                          1)
+                                        SvgPicture.asset(
+                                          context.read<PaymentPrv>().link1,
+                                          color: Colors.blue,
+                                          width: 24,
+                                          height: 20,
+                                        ),
+                                      const Icon(Icons.expand_more),
                                     ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            PrimaryCard(
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.symmetric(
-                                      horizontal: BorderSide(
-                                          width: 1, color: grayScaleColor4))),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 24),
-                              height: 50,
-                              width: dvWidth(context),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${S.of(context).total}:",
-                                    // style: txtRegular(14, grayScaleColorBase),
                                   ),
-                                  Text(
-                                    formatCurrency
-                                        .format(context.read<PaymentPrv>().sum)
-                                        .replaceAll("₫", "VND"),
-                                    style: txtBold(14, primaryColorBase),
-                                  )
-                                ],
-                              ),
+                                  itemBuilder: (_) => [
+                                    PopupMenuItem(
+                                        value: 0,
+                                        child: SvgPicture.asset(
+                                          context.read<PaymentPrv>().link,
+                                          color: Colors.red,
+                                          width: 24,
+                                          height: 20,
+                                        )),
+                                    PopupMenuItem(
+                                        value: 1,
+                                        child: SvgPicture.asset(
+                                          context.read<PaymentPrv>().link1,
+                                          color: Colors.blue,
+                                          width: 24,
+                                          height: 20,
+                                          allowDrawingOutsideViewBox: true,
+                                        )),
+                                  ],
+                                )
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    })
+                          ),
+                          PrimaryCard(
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                border: Border.symmetric(
+                                    horizontal: BorderSide(
+                                        width: 1, color: grayScaleColor4))),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 24),
+                            height: 50,
+                            width: dvWidth(context),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${S.of(context).total}:",
+                                  // style: txtRegular(14, grayScaleColorBase),
+                                ),
+                                Text(
+                                  formatCurrency
+                                      .format(context.read<PaymentPrv>().sum)
+                                      .replaceAll("₫", "VND"),
+                                  style: txtBold(14, primaryColorBase),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  })
                 : Stack(
                     children: [
                       SafeArea(
@@ -160,10 +159,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     Theme.of(context).primaryColor),
                             controller: _refreshController,
                             onRefresh: () async {
-                              var rec = await APIPayment.getReceipt(
-                                  arg['list'][0].id);
+                              await APIPayment.getReceipt(arg['list'][0].id)
+                                  .then((v) {
+                                context.read<PaymentPrv>().setPayment(v);
+                              });
+
                               setState(() {});
-                              arg['list'][0] = Receipt.fromJson(rec);
+
                               _refreshController.refreshCompleted();
                             },
                             child: ListView(children: [

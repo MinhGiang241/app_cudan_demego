@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "abrv": MessageLookupByLibrary.simpleMessage("Ký hiệu"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
@@ -92,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
+        "area": MessageLookupByLibrary.simpleMessage("Diện tích"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
         "asset_detais":
             MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết hóa đơn"),
+        "bill_history": MessageLookupByLibrary.simpleMessage("Lịch sử hóa đơn"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Tên hóa đơn"),
         "bills": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "birthday_congratulaion":
@@ -115,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
+        "buyer": MessageLookupByLibrary.simpleMessage("Chủ sở hữu"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
         "camera": MessageLookupByLibrary.simpleMessage("Máy ảnh"),
@@ -130,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
+        "card_unit": MessageLookupByLibrary.simpleMessage("Thẻ"),
+        "card_unit2": MessageLookupByLibrary.simpleMessage("Cái"),
         "cat": MessageLookupByLibrary.simpleMessage("Mèo"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Giấy chứng nhận tiêm phòng dại"),
@@ -215,8 +221,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc mới"),
         "dependent_apartment":
             MessageLookupByLibrary.simpleMessage("Căn hộ thêm phụ thuộc"),
+        "dependent_host":
+            MessageLookupByLibrary.simpleMessage("Phụ thuộc người mua"),
         "dependent_person":
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc"),
+        "dependent_rent":
+            MessageLookupByLibrary.simpleMessage("Phụ thuộc người thuê"),
         "deposit": MessageLookupByLibrary.simpleMessage("Đặt cọc"),
         "deputy": MessageLookupByLibrary.simpleMessage("Người đại diện"),
         "deputy_phone":
@@ -342,6 +352,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vật phẩm tìm thấy"),
         "found_place": MessageLookupByLibrary.simpleMessage("Địa điểm thấy"),
         "found_time": MessageLookupByLibrary.simpleMessage("Thời điểm thấy"),
+        "free_res_card":
+            MessageLookupByLibrary.simpleMessage("Thẻ cư dân miễn phí"),
         "free_service":
             MessageLookupByLibrary.simpleMessage("Dịch vụ không tính phí"),
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
@@ -410,6 +422,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data":
             MessageLookupByLibrary.simpleMessage("Dữ liệu không hợp lệ"),
+        "issue_res_card":
+            MessageLookupByLibrary.simpleMessage("Thẻ cư dân miễn phí đã cấp"),
         "item_list_not_empty": MessageLookupByLibrary.simpleMessage(
             "Danh sách chuyển đồ không được để trống"),
         "job": MessageLookupByLibrary.simpleMessage("Nghề nghiệp"),
@@ -530,6 +544,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Không được nhập toàn số 0"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
+        "noti_history":
+            MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Loại thông báo"),
@@ -587,6 +603,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Phương thức thanh toán"),
         "per_res": MessageLookupByLibrary.simpleMessage("Thường trú"),
+        "per_res_address":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ thường chú"),
         "percent": MessageLookupByLibrary.simpleMessage("Phần trăm"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
@@ -623,6 +641,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chỉ có thể upload file jpeg, jpg, png"),
         "pin": MessageLookupByLibrary.simpleMessage("Chốt trực"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Nơi cấp"),
+        "plan_info": MessageLookupByLibrary.simpleMessage("Thông tin mặt bằng"),
+        "plan_name": MessageLookupByLibrary.simpleMessage("Tên mặt bằng"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "post_graduate":
             MessageLookupByLibrary.simpleMessage("đang học cao học"),
@@ -690,6 +710,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh tài liệu liên quan không được để trống"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
+        "relation_owner": MessageLookupByLibrary.simpleMessage("QH với chủ hộ"),
         "relation_with_owner":
             MessageLookupByLibrary.simpleMessage("Quan hệ với chủ hộ"),
         "release_to_load":
@@ -699,6 +720,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bản vẽ cải tạo không được bỏ trống"),
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ cải tạo"),
+        "renter": MessageLookupByLibrary.simpleMessage("Người thuê"),
         "report_not_empty": MessageLookupByLibrary.simpleMessage(
             "Biên bản không được để trống"),
         "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
@@ -822,6 +844,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hủy đăng ký phiếu thành công"),
         "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
             "Hủy đăng ký người phụ thuộc thành công"),
+        "success_change_pass":
+            MessageLookupByLibrary.simpleMessage("Đổi mật khẩu thành công"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Xác nhận thành công"),
         "success_cr_new":

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/reg_resident/add_new_resident_screen.dart';
 import 'package:app_cudan/services/api_province.dart';
@@ -11,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../models/dependence_sign_up.dart';
 import '../../../models/file_upload.dart';
-import '../../../models/form_add_resident.dart';
 import '../../../models/province.dart';
 import '../../../models/relationship.dart';
 import '../../../services/api_auth.dart';
@@ -29,7 +30,7 @@ class AddNewResidentPrv extends ChangeNotifier {
       nameController.text = existedForm!.info_name ?? "";
       identityController.text = existedForm!.identity_card_required ?? "";
       birthController.text = Utils.dateFormat(existedForm!.date_birth ?? "", 1);
-      issuePlaceController.text = existedForm!.place_of_issue_required ?? "";
+      issuePlaceController.text = existedForm!.place_of_issue ?? "";
       phoneController.text = existedForm!.phone_required ?? "";
       emailController.text = existedForm!.email ?? "";
       qualificationController.text = existedForm!.qualification ?? "";
@@ -43,6 +44,7 @@ class AddNewResidentPrv extends ChangeNotifier {
       sexValue = existedForm?.sex;
       resTypeValue = existedForm?.residence_type;
       provinceValue = existedForm?.p?.code;
+      perResController.text = existedForm?.permanent_address ?? "";
       getDistricByProvinceCode(existedForm?.p?.code).then((v) {
         districtValue = existedForm?.d?.code;
         return getWardscByDistrictCode(districtValue);
@@ -54,8 +56,8 @@ class AddNewResidentPrv extends ChangeNotifier {
       nationalityValue = existedForm?.nationalId;
       ethnicValue = existedForm?.ethnicId;
       existedDoccuments = existedForm?.upload ?? [];
-      existedResImages = existedForm?.resident_images ?? [];
-      existedIdentityImages = existedForm?.identity_images ?? [];
+      existedResImages = existedForm?.avatar ?? [];
+      existedIdentityImages = existedForm?.id_card ?? [];
       matialStatusValue = existedForm?.material_status;
       educationValue = existedForm?.education;
       qualificationController.text = existedForm?.qualification ?? "";
@@ -63,7 +65,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  FormAddResidence? existedForm;
+  DependenceSignUp? existedForm;
   int activeStep = 0;
   bool isDisableRightCroll = true;
   bool autoValidStep1 = false;
@@ -84,6 +86,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   final TextEditingController birthController = TextEditingController();
   final TextEditingController identityController = TextEditingController();
   final TextEditingController issuePlaceController = TextEditingController();
+  final TextEditingController perResController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -119,6 +122,8 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? districtValidate;
   String? wardValidate;
   String? ethnicValidate;
+  String? perResValidate;
+  String? emailValidate;
 
   List<FileUploadModel> existedResImages = [];
   List<FileUploadModel> existedIdentityImages = [];
@@ -236,6 +241,7 @@ class AddNewResidentPrv extends ChangeNotifier {
 
   clearValidStringStep2() {
     ethnicValidate = null;
+    emailValidate = null;
     notifyListeners();
   }
 
@@ -244,6 +250,12 @@ class AddNewResidentPrv extends ChangeNotifier {
       ethnicValidate = S.current.not_blank;
     } else {
       ethnicValidate = null;
+    }
+    if (emailController.text.trim().isNotEmpty &&
+        !RegexText.isEmail(emailController.text.trim())) {
+      emailValidate = S.current.not_email;
+    } else {
+      emailValidate = null;
     }
     notifyListeners();
   }
@@ -303,6 +315,11 @@ class AddNewResidentPrv extends ChangeNotifier {
       wardValidate = S.current.not_blank;
     } else {
       wardValidate = null;
+    }
+    if (perResController.text.trim().isEmpty) {
+      perResValidate = S.current.not_blank;
+    } else {
+      perResValidate = null;
     }
     notifyListeners();
   }
@@ -380,41 +397,44 @@ class AddNewResidentPrv extends ChangeNotifier {
         await uploadIdentityImages(context);
         await uploadDocument(context);
 
-        FormAddResidence formAddResident = FormAddResidence(
-          apartmentId: apartmentAddValue,
-          buildingId: apartment.buildingId,
-          floorId: apartment.floorId,
-          date_birth:
-              "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
-          // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
-          provinceId: province.id,
-          districtId: district.id,
-          wardsId: ward.id,
-          residentId: residentId,
-          material_status: matialStatusValue,
-          education: educationValue,
-          email: emailController.text.trim(),
-          info_name: nameController.text.trim(),
-          ethnicId: ethnicValue,
-          identity_card_required: identityController.text.trim(),
-          job: jobController.text.trim(),
-          nationalId: nationalityValue,
-          relationshipId: relationValue,
-          qualification: qualificationController.text.trim(),
-          phone_required: phoneController.text.trim(),
-          resident_images: existedResImages + uploadedResImages,
-          identity_images: existedIdentityImages + uploadedIdentityImages,
-          upload: existedDoccuments + uploadedDocuments,
-          place_of_issue_required: issuePlaceController.text.trim(),
-          residence_type: resTypeValue,
-          sex: sexValue,
-          facebook: facebookController.text.trim(),
-          zalo: zaloController.text.trim(),
-          instagram: instagramController.text.trim(),
-          linkedin: linkedinController.text.trim(),
-          tiktok: tiktokController.text.trim(),
-          status: "NEW",
-        );
+        DependenceSignUp formAddResident = DependenceSignUp(
+            full_name: nameController.text.trim(),
+            apartmentId: apartmentAddValue,
+            buildingId: apartment.buildingId,
+            floorId: apartment.floorId,
+            permanent_address: perResController.text.trim(),
+            date_birth:
+                "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
+            // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
+            provinceId: province.id,
+            districtId: district.id,
+            wardsId: ward.id,
+            dependentId: residentId,
+            material_status: matialStatusValue,
+            education: educationValue,
+            email: emailController.text.trim(),
+            info_name: nameController.text.trim(),
+            ethnicId: ethnicValue,
+            identity_card_required: identityController.text.trim(),
+            job: jobController.text.trim(),
+            nationalId: nationalityValue,
+            relationshipId: relationValue,
+            qualification: qualificationController.text.trim(),
+            phone_required: phoneController.text.trim(),
+            avatar: existedResImages + uploadedResImages,
+            id_card: existedIdentityImages + uploadedIdentityImages,
+            upload: existedDoccuments + uploadedDocuments,
+            place_of_issue: issuePlaceController.text.trim(),
+            residence_type: resTypeValue,
+            sex: sexValue,
+            facebook: facebookController.text.trim(),
+            zalo: zaloController.text.trim(),
+            instagram: instagramController.text.trim(),
+            linkedin: linkedinController.text.trim(),
+            tiktok: tiktokController.text.trim(),
+            status: "WAIT",
+            type:
+                apartment.type == "BUY" ? "DEPENDENT_HOST" : "DEPENDENT_RENT");
         await APIResidentAddApartment.saveFormResidentAddApartment(
                 formAddResident.toMap())
             .then((v) {

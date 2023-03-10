@@ -6,15 +6,15 @@ import 'api_service.dart';
 class APIResidentAddApartment {
   static Future saveFormResidentAddApartment(Map<String, dynamic> data) async {
     var query = '''
-     mutation (\$data: FormAddNewResidentApartmentInputDto) {
-    response : save_FormAddNewResidentApartment_dto(data: \$data){
-    message
-    	code
-    	data {
-    		_id
-    	}
-      }
-      }
+    mutation (\$data:DependentSignUpInputDto){
+response: save_DependentSignUp_dto(data:\$data){
+	message
+	code
+	data {
+		_id
+	}
+}
+}
 
       ''';
 

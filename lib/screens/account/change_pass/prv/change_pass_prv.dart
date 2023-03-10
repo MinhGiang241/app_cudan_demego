@@ -1,3 +1,5 @@
+import 'package:app_cudan/screens/home/home_screen.dart';
+
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 import '../../../../utils/utils.dart';
@@ -17,14 +19,78 @@ class ChangePassPrv extends ChangeNotifier {
   String? validateCNewPass;
 
   bool isLoading = false;
+  bool autoValidate = false;
 
-  changePass(BuildContext context, String phoneNum) async {
-    if (formKey.currentState!.validate()) {
+  genValidate() {
+    if (currentPassController.text.isEmpty) {
+      validateCurrentPass = S.current.not_blank; // S.current.can_not_be_empty;
+    } else {
       validateCurrentPass = null;
+    }
+
+    if (newPassController.text.isEmpty) {
+      validateNewPass = S.current.not_blank; //S.current.can_not_be_empty;
+    } else {
       validateNewPass = null;
+    }
+
+    if (cNewPassController.text.isEmpty) {
+      validateCNewPass = S.current.not_blank; // S.current.can_not_be_empty;
+    } else if (cNewPassController.text != newPassController.text) {
+      validateCNewPass = S.current.rgstr_code_2; //S.current.rgstr_code_2;
+    } else {
       validateCNewPass = null;
+    }
+    notifyListeners();
+  }
+
+  clearValidate() {
+    validateCurrentPass = null;
+    validateNewPass = null;
+    validateCNewPass = null;
+    notifyListeners();
+  }
+
+  validate(BuildContext context) {
+    if (autoValidate) {
+      if (formKey.currentState!.validate()) {
+        clearValidate();
+      } else {
+        genValidate();
+      }
+    }
+
+    notifyListeners();
+  }
+
+  changePass(BuildContext context, String? accountId) async {
+    FocusScope.of(context).unfocus();
+    autoValidate = true;
+    notifyListeners();
+    if (formKey.currentState!.validate()) {
       isLoading = true;
-      // notifyListeners();
+
+      clearValidate();
+      await APIAuth.changePassword(
+              currentPassController.text.trim(),
+              newPassController.text.trim(),
+              cNewPassController.text.trim(),
+              accountId)
+          .then((v) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_change_pass,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeScreen.routeName, (route) => route.isFirst);
+            });
+      }).catchError((e) {
+        isLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
+      });
       // await APIAuth.changePass(
       //         context: context,
       //         phoneNum: phoneNum,
@@ -58,26 +124,7 @@ class ChangePassPrv extends ChangeNotifier {
       // }
       // });
     } else {
-      if (currentPassController.text.isEmpty) {
-        validateCurrentPass = ""; // S.of(context).can_not_be_empty;
-      } else {
-        validateCurrentPass = null;
-      }
-
-      if (newPassController.text.isEmpty) {
-        validateNewPass = ""; //S.of(context).can_not_be_empty;
-      } else {
-        validateNewPass = null;
-      }
-
-      if (cNewPassController.text.isEmpty) {
-        validateCNewPass = ""; // S.of(context).can_not_be_empty;
-      } else if (cNewPassController.text != newPassController.text) {
-        validateCNewPass = ""; //S.of(context).rgstr_code_2;
-      } else {
-        validateCNewPass = null;
-      }
-      notifyListeners();
+      genValidate();
     }
   }
 }

@@ -99,7 +99,7 @@ class SelectMediaWidget extends StatelessWidget {
 
                                       //  Image.file(e.value),
                                       ),
-                                  if (!enable)
+                                  if (enable)
                                     Positioned(
                                       top: 2,
                                       right: 2,

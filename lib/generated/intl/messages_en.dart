@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "abrv": MessageLookupByLibrary.simpleMessage("Abbreviation"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Accept hand over"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
+        "area": MessageLookupByLibrary.simpleMessage("Area"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Arrived date"),
         "asset_detais": MessageLookupByLibrary.simpleMessage("Asset details"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Asset list"),
@@ -101,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bill": MessageLookupByLibrary.simpleMessage("Bill"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
+        "bill_history": MessageLookupByLibrary.simpleMessage("Bill history"),
         "bill_name": MessageLookupByLibrary.simpleMessage("Bill name"),
         "bills": MessageLookupByLibrary.simpleMessage("Bill"),
         "birthday_congratulaion":
@@ -111,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
+        "buyer": MessageLookupByLibrary.simpleMessage("Owner"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
@@ -126,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
+        "card_unit": MessageLookupByLibrary.simpleMessage("Card"),
+        "card_unit2": MessageLookupByLibrary.simpleMessage("Card"),
         "cat": MessageLookupByLibrary.simpleMessage("Cat"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Certification of rabies vaccination"),
@@ -218,8 +224,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Non-Existed dependent person"),
         "dependent_apartment":
             MessageLookupByLibrary.simpleMessage("Dependent apartment"),
+        "dependent_host":
+            MessageLookupByLibrary.simpleMessage("Dependent host"),
         "dependent_person":
             MessageLookupByLibrary.simpleMessage("Dependent person"),
+        "dependent_rent":
+            MessageLookupByLibrary.simpleMessage("Dependent rent"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "deputy": MessageLookupByLibrary.simpleMessage("Deputy"),
         "deputy_phone": MessageLookupByLibrary.simpleMessage("Phone of deputy"),
@@ -341,6 +351,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "found_object": MessageLookupByLibrary.simpleMessage("Found object"),
         "found_place": MessageLookupByLibrary.simpleMessage("Found place"),
         "found_time": MessageLookupByLibrary.simpleMessage("Found time"),
+        "free_res_card":
+            MessageLookupByLibrary.simpleMessage("Free resident card"),
         "free_service": MessageLookupByLibrary.simpleMessage("Free service"),
         "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -409,6 +421,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data": MessageLookupByLibrary.simpleMessage("Invalid date"),
+        "issue_res_card":
+            MessageLookupByLibrary.simpleMessage("Issued resident card"),
         "item_list_not_empty":
             MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
         "job": MessageLookupByLibrary.simpleMessage("Job"),
@@ -526,6 +540,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "noti_history":
+            MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Notification type"),
@@ -583,6 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Payment method"),
         "per_res": MessageLookupByLibrary.simpleMessage("Permanent resident"),
+        "per_res_address":
+            MessageLookupByLibrary.simpleMessage("Permanent resident address"),
         "percent": MessageLookupByLibrary.simpleMessage("Percent"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
@@ -619,6 +637,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can only upload file jpeg, jpg, png"),
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Issue place"),
+        "plan_info": MessageLookupByLibrary.simpleMessage("Plan infomation"),
+        "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "post_graduate": MessageLookupByLibrary.simpleMessage("Going master"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
@@ -688,6 +708,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Related document image can not empty"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
+        "relation_owner":
+            MessageLookupByLibrary.simpleMessage("Relation with owner"),
         "relation_with_owner":
             MessageLookupByLibrary.simpleMessage("Relationship with owner"),
         "release_to_load":
@@ -697,6 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Renew drawing can not be empty"),
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Renewal drawing"),
+        "renter": MessageLookupByLibrary.simpleMessage("Renter"),
         "report_not_empty":
             MessageLookupByLibrary.simpleMessage("Report is not empty"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
@@ -822,6 +845,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
             "Cancel register dependent person successfully"),
+        "success_change_pass": MessageLookupByLibrary.simpleMessage(
+            "Change password successfully"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Success confirm"),
         "success_cr_new":
@@ -852,7 +877,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send reflection successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
-        "surface": MessageLookupByLibrary.simpleMessage("Surface"),
+        "surface": MessageLookupByLibrary.simpleMessage("Plan"),
         "system_notification":
             MessageLookupByLibrary.simpleMessage("System_notification"),
         "take_place_time":

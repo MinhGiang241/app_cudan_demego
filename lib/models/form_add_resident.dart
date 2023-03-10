@@ -8,7 +8,7 @@ import 'relationship.dart';
 import 'response_resident_own.dart';
 import 'status.dart';
 
-class FormAddResidence {
+class FormAddResidences {
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -58,7 +58,7 @@ class FormAddResidence {
   List<FileUploadModel>? upload;
   List<FileUploadModel>? identity_images;
   List<FileUploadModel>? resident_images;
-  FormAddResidence(
+  FormAddResidences(
       {this.id,
       this.a,
       this.b,
@@ -155,8 +155,8 @@ class FormAddResidence {
     };
   }
 
-  factory FormAddResidence.fromMap(Map<String, dynamic> map) {
-    return FormAddResidence(
+  factory FormAddResidences.fromMap(Map<String, dynamic> map) {
+    return FormAddResidences(
       id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
@@ -254,6 +254,6 @@ class FormAddResidence {
 
   String toJson() => json.encode(toMap());
 
-  factory FormAddResidence.fromJson(String source) =>
-      FormAddResidence.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FormAddResidences.fromJson(String source) =>
+      FormAddResidences.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -15,6 +15,7 @@ import '../auth/prv/auth_prv.dart';
 import 'change_pass/change_pass_screen.dart';
 import 'language/language_screen.dart';
 import 'personal_info/personal_info_screen.dart';
+import 'plan_info/plan_info_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -72,12 +73,12 @@ class AccountScreen extends StatelessWidget {
                       onTap: () {
                         Utils.pushScreen(context, const PersonalInfoScreen());
                       }),
-                  // AccountItem(
-                  //     lable: "S.of(context).plan_info",
-                  //     icons: PrimaryIcons.home_alt,
-                  //     onTap: () {
-                  //       Utils.pushScreen(context, const PlanInfoScreen());
-                  //     }),
+                  AccountItem(
+                      lable: S.of(context).plan_info,
+                      icons: PrimaryIcons.home_alt,
+                      onTap: () {
+                        Utils.pushScreen(context, const PlanInfoScreen());
+                      }),
                   AccountItem(
                       lable: S.of(context).language,
                       icons: PrimaryIcons.planet,

@@ -56,4 +56,64 @@ class APITower {
       return res.response.data;
     }
   }
+
+  static Future getPlanInfo(String? apartmentId) async {
+    var query = '''
+    mutation (\$apartmentId:String){
+    response: apartment_mobile_get_apartment_info_by_Id (apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+        
+
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "apartmentId": apartmentId,
+      },
+    );
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getResidentOwnInfo(String? apartmentId) async {
+    var query = '''
+   mutation (\$apartmentId:String){
+    response: owninfo_mobile_find_owninfo_by_apartment_Id (apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+        
+
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "apartmentId": apartmentId,
+      },
+    );
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }
