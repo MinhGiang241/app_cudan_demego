@@ -631,5 +631,6 @@
   "dependent_host": "Phụ thuộc người mua",
   "dependent_rent": "Phụ thuộc người thuê",
   "relation_owner": "QH với chủ hộ",
-  "success_change_pass": "Đổi mật khẩu thành công"
+  "success_change_pass": "Đổi mật khẩu thành công",
+  "relation_not_empty": "Mối quan hệ không được để trống"
 }

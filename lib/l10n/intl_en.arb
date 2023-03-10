@@ -630,5 +630,6 @@
   "dependent_host": "Dependent host",
   "dependent_rent": "Dependent rent",
   "relation_owner": "Relation with owner",
-  "success_change_pass": "Change password successfully"
+  "success_change_pass": "Change password successfully",
+  "relation_not_empty": "Relationship can not be empty"
 }

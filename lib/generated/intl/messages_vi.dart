@@ -710,6 +710,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh tài liệu liên quan không được để trống"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh giấy tờ liên quan"),
+        "relation_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Mối quan hệ không được để trống"),
         "relation_owner": MessageLookupByLibrary.simpleMessage("QH với chủ hộ"),
         "relation_with_owner":
             MessageLookupByLibrary.simpleMessage("Quan hệ với chủ hộ"),

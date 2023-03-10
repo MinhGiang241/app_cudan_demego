@@ -12,8 +12,10 @@ import '../../generated/l10n.dart';
 import '../../models/dependence_sign_up.dart';
 import '../../models/file_upload.dart';
 import '../../models/form_add_resident.dart';
+import '../../models/relationship.dart';
 import '../../models/resident_info.dart';
 import '../../models/response_resident_own.dart';
+import '../../services/api_relation.dart';
 import '../../utils/utils.dart';
 import 'register_resident_screen.dart';
 
@@ -27,9 +29,11 @@ class AddExistedResident extends StatefulWidget {
 class _AddExistedResidentState extends State<AddExistedResident> {
   ResponseResidentOwn? apartmentValue;
   ResponseResidentInfo? residentValue;
+  String? relationValue;
   String? apartmentValidate;
   String? residentValidate;
   List<ResponseResidentInfo> listRes = [];
+  List<RelationShip> relations = [];
   bool isLoading = false;
   final formKey = GlobalKey<FormState>();
   onSubmit(BuildContext context) async {
@@ -41,6 +45,9 @@ class _AddExistedResidentState extends State<AddExistedResident> {
       }
       if (residentValue == null) {
         listError.add(S.current.resident_not_empty);
+      }
+      if (relationValue == null) {
+        listError.add(S.current.relation_not_empty);
       }
       if (listError.isNotEmpty) {
         throw (listError.join(', '));
@@ -64,7 +71,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         identity_card_required: residentValue?.identity_card,
         job: residentValue?.job,
         nationalId: residentValue?.nationalId,
-        relationshipId: residentValue?.m,
+        relationshipId: relationValue,
         qualification: residentValue?.qualification,
         phone_required: residentValue?.phone_required,
         dependentId: residentId,
@@ -129,7 +136,19 @@ class _AddExistedResidentState extends State<AddExistedResident> {
           listRes.add(ResponseResidentInfo.fromJson(i));
         }
       });
+      await APIRelation.preFetchDataRelation().then((v) {
+        relations.clear();
+        for (var i in v) {
+          relations.add(RelationShip.fromMap(i));
+        }
+      });
     }(), builder: (context, snapshot) {
+      var listRelationChoice = relations.map((v) {
+        return DropdownMenuItem(
+          value: v.id,
+          child: Text(v.name ?? ""),
+        );
+      }).toList();
       var listResChoice = listRes.map((v) {
         return DropdownMenuItem(
           value: v,
@@ -163,15 +182,41 @@ class _AddExistedResidentState extends State<AddExistedResident> {
               isRequired: true,
               label: S.of(context).dependent_person,
             ),
-            vpad(16),
-            PrimaryButton(
-              isLoading: isLoading,
-              buttonSize: ButtonSize.medium,
-              text: S.of(context).confirm,
-              onTap: () async {
-                Navigator.pop(context);
-                await onSubmit(context);
+            vpad(12),
+            PrimaryDropDown(
+              onChange: (v) {
+                if (v != null) {
+                  relationValue = v;
+                }
               },
+              selectList: listRelationChoice,
+              isRequired: true,
+              label: S.of(context).relation_with_owner,
+            ),
+            vpad(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                PrimaryButton(
+                  buttonSize: ButtonSize.medium,
+                  text: S.of(context).close,
+                  buttonType: ButtonType.secondary,
+                  secondaryBackgroundColor: redColor4,
+                  textColor: redColor,
+                  onTap: () async {
+                    Navigator.pop(context);
+                  },
+                ),
+                PrimaryButton(
+                  isLoading: isLoading,
+                  buttonSize: ButtonSize.medium,
+                  text: S.of(context).confirm,
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await onSubmit(context);
+                  },
+                ),
+              ],
             )
           ],
         ),

@@ -6369,6 +6369,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Relationship can not be empty`
+  String get relation_not_empty {
+    return Intl.message(
+      'Relationship can not be empty',
+      name: 'relation_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

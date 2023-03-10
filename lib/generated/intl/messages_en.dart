@@ -708,6 +708,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Related document image can not empty"),
         "related_photo":
             MessageLookupByLibrary.simpleMessage("Related document photos"),
+        "relation_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Relationship can not be empty"),
         "relation_owner":
             MessageLookupByLibrary.simpleMessage("Relation with owner"),
         "relation_with_owner":
