@@ -347,4 +347,66 @@ class APIAuth {
       return (res.response.data);
     }
   }
+
+  static Future saveAccount(
+    Map<String, dynamic> dat,
+  ) async {
+    var mutation = '''
+    mutation (\$data: AccountInputDto){
+	response:save_Account_dto(data:\$data){
+		message
+		code
+		data {
+			_id
+		}
+    }
+  }
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(mutation),
+      variables: {
+        "data": dat,
+      },
+    );
+
+    final data = await ApiService.shared.mutationhqlQuery(options);
+    var res = ResponseModule.fromJson(data);
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return (res.response.data);
+    }
+  }
+
+  static Future sendOtpAddMoreEmail(String email) async {
+    var sendOtp = '''
+  mutation (\$email:String){
+    response: authorization_mobile_send_OTP_add_email (email: \$email ) {
+        code
+        message
+        data
+    }
+}
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(sendOtp),
+      variables: {
+        "email": email,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

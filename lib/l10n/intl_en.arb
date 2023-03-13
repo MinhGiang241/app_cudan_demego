@@ -631,5 +631,9 @@
   "dependent_rent": "Dependent rent",
   "relation_owner": "Relation with owner",
   "success_change_pass": "Change password successfully",
-  "relation_not_empty": "Relationship can not be empty"
+  "relation_not_empty": "Relationship can not be empty",
+  "add_email": "Add email",
+  "email_not_empty": "Email can not be empty",
+  "success_add_email": "Add email successfully",
+  "possessed_apartment": "Possessed apartments"
 }

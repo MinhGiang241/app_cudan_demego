@@ -79,10 +79,15 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         type:
             apartmentValue?.type == "BUY" ? "DEPENDENT_HOST" : "DEPENDENT_RENT",
         avatar: residentValue?.avatar != null
-            ? [
-                FileUploadModel(
-                    id: residentValue?.avatar!, name: residentValue?.avatar!)
-              ]
+            ? residentValue?.avatar.runtimeType.toString() == "List<dynamic>"
+                ? residentValue?.avatar
+                    .map<FileUploadModel>((v) => FileUploadModel.fromMap(v))
+                    .toList()
+                : [
+                    FileUploadModel(
+                        id: residentValue?.avatar!,
+                        name: residentValue?.avatar!)
+                  ]
             : null,
         // identity_images: existedIdentityImages + uploadedIdentityImages,
         // upload: existedDoccuments + uploadedDocuments,

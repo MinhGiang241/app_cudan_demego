@@ -1,4 +1,8 @@
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_auth.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +16,7 @@ import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/auth_prv.dart';
 import 'edit_personal_info.dart';
+import 'otp_add_email_screen.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
   const PersonalInfoScreen({Key? key}) : super(key: key);
@@ -22,11 +27,13 @@ class PersonalInfoScreen extends StatefulWidget {
 }
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
+  final TextEditingController emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
+    var userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
     List<InfoContentView> listInfoView = [
       InfoContentView(
+          isHorizontal: true,
           title: S.current.full_name,
           content: userInfo?.fullName ?? "",
           contentStyle: userInfo?.fullName != null
@@ -38,6 +45,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
       InfoContentView(
+          isHorizontal: true,
           title: S.current.username,
           content: userInfo?.userName ?? "",
           contentStyle: userInfo?.userName != null
@@ -49,6 +57,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
       InfoContentView(
+          isHorizontal: true,
           title: S.current.phone_num,
           content: userInfo?.phone_number ?? "",
           contentStyle: userInfo?.phone_number != null
@@ -59,10 +68,115 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
+
       InfoContentView(
+          isHorizontal: true,
           title: S.current.email,
+          widget: userInfo?.email == null
+              ? InkWell(
+                  onTap: () {
+                    Utils.showDialog(
+                        context: context,
+                        dialog: PrimaryDialog.custom(
+                          title: S.of(context).add_email,
+                          content: Column(children: [
+                            PrimaryTextField(
+                              controller: emailcontroller,
+                              isRequired: true,
+                              label: S.of(context).email,
+                              hint: S.of(context).email,
+                            ),
+                            vpad(16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                PrimaryButton(
+                                  text: S.of(context).close,
+                                  buttonSize: ButtonSize.medium,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: redColor4,
+                                  textColor: redColorBase,
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                PrimaryButton(
+                                  buttonSize: ButtonSize.medium,
+                                  text: S.of(context).add,
+                                  onTap: () async {
+                                    if (emailcontroller.text.trim().isEmpty) {
+                                      Utils.showErrorMessage(context,
+                                          S.of(context).email_not_empty);
+                                    } else if (!RegexText.isEmail(
+                                        emailcontroller.text.trim())) {
+                                      Utils.showErrorMessage(
+                                          context, S.of(context).not_email);
+                                    } else {
+                                      Navigator.pop(context);
+                                      var user = userInfo;
+                                      // user?.email = emailcontroller.text.trim();
+                                      Utils.showBottomSheet(
+                                          context: context,
+                                          child: OtpAddEmailScreen(
+                                              acc: user!,
+                                              email:
+                                                  emailcontroller.text.trim()));
+                                      // APIAuth.saveAccount(user!.toJson())
+                                      //     .then((v) {
+                                      //   Utils.showSuccessMessage(
+                                      //       context: context,
+                                      //       e: S.of(context).success_add_email,
+                                      //       onClose: () {
+                                      //         // setState(() {
+                                      //         context
+                                      //             .read<ResidentInfoPrv>()
+                                      //             .userInfo!
+                                      //             .account = user;
+                                      //         // });
+                                      //         Navigator.pop(context);
+                                      //       });
+                                      // }).catchError((e) {
+                                      //   Utils.showErrorMessage(context, e);
+                                      // });
+                                    }
+                                    // Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            )
+                          ]),
+                        ));
+                  },
+                  child: Text(
+                    S.current.add,
+                    style: const TextStyle(
+                        fontFamily: family,
+                        color: primaryColorBase,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ))
+              : null,
           content: userInfo?.email ?? "",
           contentStyle: userInfo?.email != null
+              ? const TextStyle(
+                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
+              : TextStyle(
+                  fontFamily: family,
+                  color: Colors.black.withOpacity(0.3),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600)),
+      InfoContentView(
+          isHorizontal: true,
+          title: S.current.possessed_apartment,
+          content: context.read<ResidentInfoPrv>().listOwn.isNotEmpty
+              ? context
+                  .read<ResidentInfoPrv>()
+                  .listOwn
+                  .where((c) => c.type == "BUY")
+                  .length
+                  .toString()
+              : "0",
+          contentStyle: userInfo?.phone_number != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -111,17 +225,17 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
               vpad(100)
             ],
           ),
-          Positioned(
-              bottom: 24,
-              left: 12,
-              right: 12,
-              child: SafeArea(
-                  child: PrimaryButton(
-                text: S.of(context).edit,
-                onTap: () {
-                  Utils.pushScreen(context, const EditPersonalInfo());
-                },
-              )))
+          // Positioned(
+          //     bottom: 24,
+          //     left: 12,
+          //     right: 12,
+          //     child: SafeArea(
+          //         child: PrimaryButton(
+          //       text: S.of(context).edit,
+          //       onTap: () {
+          //         Utils.pushScreen(context, const EditPersonalInfo());
+          //       },
+          //     )))
         ],
       ),
     );

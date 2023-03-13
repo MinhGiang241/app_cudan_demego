@@ -52,31 +52,33 @@ class PrimaryInfoWidget extends StatelessWidget {
                           ),
                         ),
                         ...listInfoView[index].files!.map(
-                              (e) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await launchUrl(
-                                      Uri.parse(
-                                          "${ApiConstants.uploadURL}?load=${e.id}"),
-                                      mode: LaunchMode.externalApplication,
-                                    );
-                                  },
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      e.name ?? 'file',
-                                      textAlign: TextAlign.left,
-                                      style: txtMedium(
-                                        14,
-                                        primaryColor6,
-                                      ),
+                          (e) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchUrl(
+                                    Uri.parse(
+                                        "${ApiConstants.uploadURL}?load=${e.id}"),
+                                    mode: LaunchMode.externalApplication,
+                                  );
+                                },
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    e.name ?? 'file',
+                                    textAlign: TextAlign.left,
+                                    style: txtMedium(
+                                      14,
+                                      primaryColor6,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
+                            );
+                          },
+                        ),
                       ],
                     );
                   }
@@ -123,11 +125,17 @@ class PrimaryInfoWidget extends StatelessWidget {
                             child: Text("${listInfoView[index].title}:",
                                 style: txtMedium(14, grayScaleColor2)),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: Text(listInfoView[index].content ?? "",
-                                style: listInfoView[index].contentStyle),
-                          ),
+                          if (listInfoView[index].widget != null)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: listInfoView[index].widget!,
+                            ),
+                          if (listInfoView[index].widget == null)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: Text(listInfoView[index].content ?? "",
+                                  style: listInfoView[index].contentStyle),
+                            ),
                         ])
                       ],
                     );

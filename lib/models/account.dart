@@ -17,6 +17,7 @@ class Account {
   String? phone_number;
   String? fullName;
   String? avatar;
+  String? passwordHash;
 
   Account({
     this.code,
@@ -35,6 +36,7 @@ class Account {
     this.userName,
     this.fullName,
     this.avatar,
+    this.passwordHash,
   });
   Account.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -53,6 +55,7 @@ class Account {
     phone_number = json['phone_number'];
     fullName = json['fullName'];
     avatar = json['avatar'];
+    passwordHash = json['passwordHash'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,12 +63,11 @@ class Account {
     data['_id'] = id;
     data['createdTime'] = createdTime;
     data['updatedTime'] = updatedTime;
-    data['isLocked'] = isLocked;
-    data['isDraft'] = isDraft;
     data['residentId'] = residentId;
     data['isRoot'] = isRoot;
     data['userName'] = userName;
     data['password'] = password;
+    data['passwordHash'] = passwordHash;
     data['email'] = email;
     data['phone_number'] = phone_number;
     data['type'] = type;

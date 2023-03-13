@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:app_cudan/utils/convert_date_time.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -20,7 +19,6 @@ import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/item_selected.dart';
 import '../../../../widgets/primary_bottom_sheet.dart';
-import '../../../../widgets/primary_dialog.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../auth/prv/auth_prv.dart';
 

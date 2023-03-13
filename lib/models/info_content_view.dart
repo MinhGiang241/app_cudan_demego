@@ -14,6 +14,7 @@ class InfoContentView {
   final bool isCheck;
   final bool isHorizontal;
   final String? rowKey;
+  final Widget? widget;
 
   InfoContentView(
       {required this.title,
@@ -24,6 +25,7 @@ class InfoContentView {
       this.isCheckType = false,
       this.isCheck = false,
       this.isHorizontal = false,
+      this.widget,
       this.dateRange,
       this.contentStyle = const TextStyle(
           fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)});

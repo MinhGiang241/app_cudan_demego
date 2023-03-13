@@ -40,13 +40,31 @@ class AccountScreen extends StatelessWidget {
                             Icons.person,
                             size: 40,
                           ))
-                    else
+                    else if (userInfo?.avatar.runtimeType.toString() !=
+                        "List<dynamic>")
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: grayScaleColor4,
                         backgroundImage: CachedNetworkImageProvider(
                             "${ApiConstants.uploadURL}?load=${userInfo?.avatar ?? ""}"),
-                      ),
+                      )
+                    else if (userInfo?.avatar.runtimeType.toString() ==
+                            "List<dynamic>" &&
+                        (userInfo?.avatar as List).isNotEmpty)
+                      CircleAvatar(
+                        radius: 32,
+                        backgroundColor: grayScaleColor4,
+                        backgroundImage: CachedNetworkImageProvider(
+                            "${ApiConstants.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}"),
+                      )
+                    else
+                      const CircleAvatar(
+                          radius: 32,
+                          backgroundColor: grayScaleColor4,
+                          child: Icon(
+                            Icons.person,
+                            size: 40,
+                          )),
                     hpad(16),
                     Expanded(
                         child: Column(

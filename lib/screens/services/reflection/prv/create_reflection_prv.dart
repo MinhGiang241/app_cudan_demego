@@ -195,6 +195,7 @@ class CreateReflectionPrv extends ChangeNotifier {
       validateReason = null;
 
       reasonController.text = v;
+      print(reasonController.text);
     }
     notifyListeners();
   }

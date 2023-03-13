@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add dependent person "),
         "add_dependent_person_to_apartment":
             MessageLookupByLibrary.simpleMessage("Add person to apartment"),
+        "add_email": MessageLookupByLibrary.simpleMessage("Add email"),
         "add_file": MessageLookupByLibrary.simpleMessage("Add file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
@@ -266,6 +267,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Elevator card"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "email_not_empty":
+            MessageLookupByLibrary.simpleMessage("Email can not be empty"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "end": MessageLookupByLibrary.simpleMessage("End"),
         "end_chat": MessageLookupByLibrary.simpleMessage("End conversation!"),
@@ -640,6 +643,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_info": MessageLookupByLibrary.simpleMessage("Plan infomation"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
+        "possessed_apartment":
+            MessageLookupByLibrary.simpleMessage("Possessed apartments"),
         "post_graduate": MessageLookupByLibrary.simpleMessage("Going master"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
         "processing_content":
@@ -841,6 +846,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_accept":
             MessageLookupByLibrary.simpleMessage("Accepted successfully"),
         "success_add_dependence": m12,
+        "success_add_email":
+            MessageLookupByLibrary.simpleMessage("Add email successfully"),
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Add new reflection successfully"),
         "success_can_req":

@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc "),
         "add_dependent_person_to_apartment":
             MessageLookupByLibrary.simpleMessage("Thêm người vào căn hộ"),
+        "add_email": MessageLookupByLibrary.simpleMessage("Thêm email"),
         "add_file": MessageLookupByLibrary.simpleMessage("Thêm file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
@@ -264,6 +265,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "electricity": MessageLookupByLibrary.simpleMessage("Điện"),
         "elevator_card": MessageLookupByLibrary.simpleMessage("Thẻ thang máy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "email_not_empty":
+            MessageLookupByLibrary.simpleMessage("Email không được để trống"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "end_chat":
@@ -610,8 +613,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
         "permission_denied_msg":
             MessageLookupByLibrary.simpleMessage("Bạn chưa cấp quyền ứng dụng"),
-        "personal_info":
-            MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
+        "personal_info": MessageLookupByLibrary.simpleMessage("Hồ sơ cá nhân"),
         "pet": MessageLookupByLibrary.simpleMessage("Vật nuôi"),
         "pet_agree": MessageLookupByLibrary.simpleMessage(
             "Bạn cần đồng ý tuân thủ quy định về đăng ký vật nuôi"),
@@ -644,6 +646,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_info": MessageLookupByLibrary.simpleMessage("Thông tin mặt bằng"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Tên mặt bằng"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
+        "possessed_apartment":
+            MessageLookupByLibrary.simpleMessage("Căn hộ sở hữu"),
         "post_graduate":
             MessageLookupByLibrary.simpleMessage("đang học cao học"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
@@ -840,6 +844,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_accept":
             MessageLookupByLibrary.simpleMessage("Xác nhận thành công"),
         "success_add_dependence": m12,
+        "success_add_email":
+            MessageLookupByLibrary.simpleMessage("Thêm email thành công"),
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Thêm mới phản ánh thành công"),
         "success_can_req": MessageLookupByLibrary.simpleMessage(

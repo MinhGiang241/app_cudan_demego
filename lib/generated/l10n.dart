@@ -6379,6 +6379,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Add email`
+  String get add_email {
+    return Intl.message(
+      'Add email',
+      name: 'add_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email can not be empty`
+  String get email_not_empty {
+    return Intl.message(
+      'Email can not be empty',
+      name: 'email_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add email successfully`
+  String get success_add_email {
+    return Intl.message(
+      'Add email successfully',
+      name: 'success_add_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Possessed apartments`
+  String get possessed_apartment {
+    return Intl.message(
+      'Possessed apartments',
+      name: 'possessed_apartment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

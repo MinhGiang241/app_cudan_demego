@@ -28,7 +28,7 @@
   "resend": "Gửi lại",
   "verify": "Xác thực",
   "home": "Trang chủ",
-  "personal_info": "Thông tin cá nhân",
+  "personal_info": "Hồ sơ cá nhân",
   "language": "Ngôn ngữ",
   "change_pass": "Đổi mật khẩu",
   "sign_out": "Đăng xuất",
@@ -632,5 +632,9 @@
   "dependent_rent": "Phụ thuộc người thuê",
   "relation_owner": "QH với chủ hộ",
   "success_change_pass": "Đổi mật khẩu thành công",
-  "relation_not_empty": "Mối quan hệ không được để trống"
+  "relation_not_empty": "Mối quan hệ không được để trống",
+  "add_email": "Thêm email",
+  "email_not_empty": "Email không được để trống",
+  "success_add_email": "Thêm email thành công",
+  "possessed_apartment": "Căn hộ sở hữu"
 }

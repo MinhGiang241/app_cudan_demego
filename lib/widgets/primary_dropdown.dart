@@ -149,10 +149,11 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                         } else if (widget.controller != null &&
                             widget.controller!.text.isNotEmpty) {
                           if (widget.selectList!
+                              .map((s) => s.value)
                               .contains(widget.controller!.text)) {
                             return widget.controller!.text;
                           } else {
-                            widget.controller!.clear();
+                            // widget.controller!.clear();
                             return null;
                           }
                         } else {

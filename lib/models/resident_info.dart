@@ -6,7 +6,7 @@ class ResponseResidentInfo {
   String? id;
   String? createdTime;
   String? updatedTime;
-  String? avatar;
+  dynamic avatar;
   bool? isLocked;
   bool? isDraft;
   String? code;
@@ -69,6 +69,7 @@ class ResponseResidentInfo {
         json['account'] != null ? Account.fromJson(json['account']) : null;
     id = json['_id'];
     avatar = json['avatar'];
+
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];
     isLocked = json['isLocked'];
