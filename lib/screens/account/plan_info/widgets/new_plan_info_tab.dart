@@ -386,8 +386,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                 );
                               }),
                             vpad(12),
-                            Positioned(
-                                child: Center(
+                            Center(
                               child: AnimatedBuilder(
                                   animation: animationController,
                                   builder: (context, child) => Transform.rotate(
@@ -403,7 +402,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                       Icons.keyboard_arrow_down_rounded,
                                     ),
                                   )),
-                            ))
+                            )
                           ],
                         );
                       }),

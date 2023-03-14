@@ -8,11 +8,13 @@ class HomeTitleWidget extends StatelessWidget {
     Key? key,
     required this.title,
     this.child,
+    this.isAll = true,
     this.onTapShowAll,
   }) : super(key: key);
 
   final String title;
   final Widget? child;
+  final bool isAll;
   final Function()? onTapShowAll;
 
   @override
@@ -24,13 +26,14 @@ class HomeTitleWidget extends StatelessWidget {
           children: [
             Text(title, style: txtLinkSmall(color: grayScaleColor2)),
             const Spacer(),
-            // InkWell(
-            //   borderRadius: BorderRadius.circular(5),
-            //   onTap: onTapShowAll,
-            //   child: Text(S.of(context).all,
-            //       style: txtLinkSmall(color: grayScaleColor2)
-            //           .copyWith(decoration: TextDecoration.underline)),
-            // ),
+            if (isAll)
+              InkWell(
+                borderRadius: BorderRadius.circular(5),
+                onTap: onTapShowAll,
+                child: Text(S.of(context).all,
+                    style: txtLinkSmall(color: grayScaleColor2)
+                        .copyWith(decoration: TextDecoration.underline)),
+              ),
           ],
         ),
         vpad(16),
