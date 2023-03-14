@@ -113,14 +113,25 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                           context, S.of(context).not_email);
                                     } else {
                                       Navigator.pop(context);
-                                      var user = userInfo;
-                                      // user?.email = emailcontroller.text.trim();
                                       Utils.showBottomSheet(
                                           context: context,
                                           child: OtpAddEmailScreen(
-                                              acc: user!,
+                                              acc: userInfo!,
                                               email:
                                                   emailcontroller.text.trim()));
+                                      // await APIAuth.sendOtpAddMoreEmail(
+                                      //         emailcontroller.text.trim())
+                                      //     .then((v) {
+                                      //   Utils.showBottomSheet(
+                                      //       context: context,
+                                      //       child: OtpAddEmailScreen(
+                                      //           acc: userInfo!,
+                                      //           email: emailcontroller.text
+                                      //               .trim()));
+                                      // }).catchError((e) {
+                                      //   Utils.showErrorMessage(context, e);
+                                      // });
+
                                       // APIAuth.saveAccount(user!.toJson())
                                       //     .then((v) {
                                       //   Utils.showSuccessMessage(

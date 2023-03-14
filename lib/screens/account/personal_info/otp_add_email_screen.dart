@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app_cudan/constants/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,11 +12,12 @@ import '../../../generated/l10n.dart';
 import '../../../models/account.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
+import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_screen.dart';
 import 'provider/otp_add_email_prv.dart';
 
 class OtpAddEmailScreen extends StatefulWidget {
-  OtpAddEmailScreen({super.key, required this.acc, required this.email});
+  const OtpAddEmailScreen({super.key, required this.acc, required this.email});
   final Account acc;
   final String email;
 
@@ -137,6 +139,17 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                     ],
                   );
                 }),
+            vpad(32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: PrimaryButton(
+                isLoading: context.watch<OtpAddEmailPrv>().isLoading,
+                text: S.of(context).next,
+                onTap: () {
+                  context.read<OtpAddEmailPrv>().verify(context);
+                },
+              ),
+            )
           ],
         )),
       ),

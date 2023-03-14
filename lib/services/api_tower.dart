@@ -87,23 +87,21 @@ class APITower {
     }
   }
 
-  static Future getResidentOwnInfo(String? apartmentId) async {
+  static Future getResidentOwnInfo(String? residentId) async {
     var query = '''
-   mutation (\$apartmentId:String){
-    response: owninfo_mobile_find_owninfo_by_apartment_Id (apartmentId: \$apartmentId ) {
-        code
-        message
-        data
+    mutation (\$residentId:String){
+        response: owninfo_mobile_find_dependent_resident_apartmentList (residentId: \$residentId ) {
+            code
+            message
+            data
+        }
     }
-}
-        
-
   ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
-        "apartmentId": apartmentId,
+        "residentId": residentId,
       },
     );
     final results = await ApiService.shared.mutationhqlQuery(options);

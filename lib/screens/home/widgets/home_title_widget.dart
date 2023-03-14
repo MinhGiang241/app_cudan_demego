@@ -24,13 +24,13 @@ class HomeTitleWidget extends StatelessWidget {
           children: [
             Text(title, style: txtLinkSmall(color: grayScaleColor2)),
             const Spacer(),
-            InkWell(
-              borderRadius: BorderRadius.circular(5),
-              onTap: onTapShowAll,
-              child: Text(S.of(context).all,
-                  style: txtLinkSmall(color: grayScaleColor2)
-                      .copyWith(decoration: TextDecoration.underline)),
-            ),
+            // InkWell(
+            //   borderRadius: BorderRadius.circular(5),
+            //   onTap: onTapShowAll,
+            //   child: Text(S.of(context).all,
+            //       style: txtLinkSmall(color: grayScaleColor2)
+            //           .copyWith(decoration: TextDecoration.underline)),
+            // ),
           ],
         ),
         vpad(16),

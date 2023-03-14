@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_register":
             MessageLookupByLibrary.simpleMessage("Cancel register"),
         "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
+        "card_list": MessageLookupByLibrary.simpleMessage("Card list"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
         "card_unit": MessageLookupByLibrary.simpleMessage("Card"),
@@ -174,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_send_request": m5,
         "confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
+        "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
+            "resident confirmed by manager department"),
         "cons_agree": MessageLookupByLibrary.simpleMessage(
             "You need to agree to comply with the regulations on construction registration"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Construction code"),
@@ -456,6 +459,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Maximum payment date can not be empty"),
+        "member_num": MessageLookupByLibrary.simpleMessage("Menber number"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Missing object"),
@@ -490,6 +494,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_event":
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
         "no_hand_over": MessageLookupByLibrary.simpleMessage("No hand over"),
+        "no_home":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any apartment"),
         "no_letter":
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
         "no_missing_obj": MessageLookupByLibrary.simpleMessage(
@@ -699,6 +705,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
+        "registed_resident":
+            MessageLookupByLibrary.simpleMessage("Registed resident"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
         "register_res_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),

@@ -409,4 +409,36 @@ class APIAuth {
       return res.response.data;
     }
   }
+
+  static Future verifyOtpAddMoreEmail(String email, String accountId) async {
+    var sendOtp = '''
+mutation (\$email:String,\$accountId:String){
+    response: authorization_mobile_verify_add_email (email: \$email,accountId: \$accountId ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(sendOtp),
+      variables: {
+        "email": email,
+        "accountId": accountId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

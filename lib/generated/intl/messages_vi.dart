@@ -133,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_reg": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_register": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
+        "card_list": MessageLookupByLibrary.simpleMessage("Danh sách thẻ"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),
         "card_unit": MessageLookupByLibrary.simpleMessage("Thẻ"),
@@ -175,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
         "confirm_send_request": m5,
         "confirmed": MessageLookupByLibrary.simpleMessage("Đã xác nhận"),
+        "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
+            "Cư dân đã được xác nhận bởi BQL"),
         "cons_agree": MessageLookupByLibrary.simpleMessage(
             "Bạn cần đồng ý tuân thủ quy định về đăng ký thi công"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
@@ -457,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số ngày thanh toán tối đa"),
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Số ngày thanh toán tối đa không được để trống"),
+        "member_num": MessageLookupByLibrary.simpleMessage("Số thành viên"),
         "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "minutes": MessageLookupByLibrary.simpleMessage("Biên bản"),
         "missing_obj": MessageLookupByLibrary.simpleMessage("Đồ thất lạc"),
@@ -492,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
         "no_hand_over":
             MessageLookupByLibrary.simpleMessage("Không có nhận bàn giao nào"),
+        "no_home": MessageLookupByLibrary.simpleMessage("Không có căn hộ nào"),
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
         "no_missing_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
@@ -700,6 +705,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
         "region": MessageLookupByLibrary.simpleMessage("Khu vực"),
+        "registed_resident":
+            MessageLookupByLibrary.simpleMessage("Cư dân đã đăng ký"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
         "register_res_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),

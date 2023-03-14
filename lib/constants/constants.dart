@@ -83,6 +83,8 @@ const Color greenColor5 = Color(0xffDAF5F3);
 const Color greenColor6 = Color(0xff00C950);
 const Color greenColor8 = Color(0xff4CAF50);
 const Color greenColor9 = Color(0xff4090BD);
+const Color greenColor10 = Color(0xff4CAF50);
+
 Color greenColor7 = const Color(0xff31DE14).withOpacity(0.38);
 
 const Color pinkColorBase = Color(0xffFF4E98);
@@ -132,6 +134,7 @@ final gradientPrimaryYellow = LinearGradient(colors: [
 
 const Color blueColor = Color(0xff466FFF);
 const Color blueColor2 = Color(0xff4975FF);
+const Color blueColor3 = Color(0xff2AA3E7);
 const Color turquoiseColor = Color(0xff00BCE5);
 const Color greenColor = Color(0xff23D2C3);
 const Color pinkColor = Color(0xffFF4E98);

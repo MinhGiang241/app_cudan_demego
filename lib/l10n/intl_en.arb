@@ -635,5 +635,10 @@
   "add_email": "Add email",
   "email_not_empty": "Email can not be empty",
   "success_add_email": "Add email successfully",
-  "possessed_apartment": "Possessed apartments"
+  "possessed_apartment": "Possessed apartments",
+  "registed_resident": "Registed resident",
+  "confirmed_by_manager_resident": "resident confirmed by manager department",
+  "member_num": "Menber number",
+  "no_home": "Don't have any apartment",
+  "card_list": "Card list"
 }

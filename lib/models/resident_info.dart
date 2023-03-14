@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'account.dart';
+import 'relationship.dart';
 
 class ResponseResidentInfo {
   String? id;
@@ -32,6 +33,7 @@ class ResponseResidentInfo {
   String? identity_card;
   String? phone;
   String? m;
+  RelationShip? re;
   Account? account;
   ResponseResidentInfo(
       {this.code,
@@ -61,6 +63,7 @@ class ResponseResidentInfo {
       this.residence_type,
       this.sex,
       this.updatedTime,
+      this.re,
       this.wardsId,
       this.account});
 
@@ -69,6 +72,7 @@ class ResponseResidentInfo {
         json['account'] != null ? Account.fromJson(json['account']) : null;
     id = json['_id'];
     avatar = json['avatar'];
+    re = json['re'] != null ? RelationShip.fromMap(json['re']) : null;
 
     createdTime = json['createdTime'];
     updatedTime = json['updatedTime'];

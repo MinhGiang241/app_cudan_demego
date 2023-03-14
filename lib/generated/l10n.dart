@@ -6419,6 +6419,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Registed resident`
+  String get registed_resident {
+    return Intl.message(
+      'Registed resident',
+      name: 'registed_resident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `resident confirmed by manager department`
+  String get confirmed_by_manager_resident {
+    return Intl.message(
+      'resident confirmed by manager department',
+      name: 'confirmed_by_manager_resident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Menber number`
+  String get member_num {
+    return Intl.message(
+      'Menber number',
+      name: 'member_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any apartment`
+  String get no_home {
+    return Intl.message(
+      'Don\'t have any apartment',
+      name: 'no_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card list`
+  String get card_list {
+    return Intl.message(
+      'Card list',
+      name: 'card_list',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

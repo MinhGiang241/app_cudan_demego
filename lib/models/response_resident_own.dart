@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:app_cudan/models/relationship.dart';
+
 import 'resident_info.dart';
 
 class ResponseResidentOwn {
@@ -18,6 +20,8 @@ class ResponseResidentOwn {
   ResponseResidentInfo? resident;
   Apartment? apartment;
   Floor? floor;
+  RelationShip? r;
+  String? relationshipId;
 
   ResponseResidentOwn({
     this.apartmentId,
@@ -32,6 +36,8 @@ class ResponseResidentOwn {
     this.type,
     this.updatedTime,
     this.apartment,
+    this.relationshipId,
+    this.r,
   });
 
   ResponseResidentOwn.fromJson(Map<String, dynamic> json) {
@@ -46,6 +52,8 @@ class ResponseResidentOwn {
     apartmentId = json['apartmentId'];
     type = json['type'];
     status = json['status'];
+    relationshipId = json['relationshipId'];
+    r = json['r'] != null ? RelationShip.fromMap(json['r']) : null;
     building =
         json['building'] != null ? Building.fromJson(json['building']) : null;
     resident = json['resident'] != null

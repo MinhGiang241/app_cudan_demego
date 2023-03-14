@@ -94,7 +94,7 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                   ],
                 ),
                 Positioned(
-                  bottom: 240,
+                  bottom: 40,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: PrimaryButton(

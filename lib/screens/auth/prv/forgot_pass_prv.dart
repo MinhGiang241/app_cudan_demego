@@ -58,7 +58,9 @@ class ForgotPassPrv extends ChangeNotifier {
               ));
           if (data != null) {}
         },
-      );
+      ).catchError((e) {
+        Utils.showErrorMessage(context, e);
+      });
     }
   }
 
