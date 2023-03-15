@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart';
 
+import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../models/selection_model.dart';
@@ -667,5 +670,29 @@ class Utils {
       return '';
     }
     return null;
+  }
+
+  static downloadFile({String? url, Map<String, String>? headers}) async {
+    var status = await Permission.storage.request();
+    if (status.isGranted) {
+      final baseStorage = await getExternalStorageDirectory();
+
+      var taskId = await FlutterDownloader.enqueue(
+        url: url ?? '',
+        headers: headers ??
+            {
+              'Accept':
+                  'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jpg,image/jpeg,image/png,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+              // 'Host': ApiConstants.host,
+            }, // optional: header send with url (auth token etc)
+        savedDir: baseStorage!.path,
+        showNotification:
+            true, // show download progress in status bar (for Android)
+        saveInPublicStorage: true,
+        openFileFromNotification:
+            true, // click on notification to open downloaded file (for Android)
+      );
+      await FlutterDownloader.open(taskId: taskId!);
+    }
   }
 }
