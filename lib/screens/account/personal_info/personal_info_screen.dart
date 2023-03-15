@@ -14,8 +14,6 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../auth/prv/auth_prv.dart';
-import 'edit_personal_info.dart';
 import 'otp_add_email_screen.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
@@ -105,32 +103,39 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   text: S.of(context).add,
                                   onTap: () async {
                                     if (emailcontroller.text.trim().isEmpty) {
-                                      Utils.showErrorMessage(context,
-                                          S.of(context).email_not_empty);
-                                    } else if (!RegexText.isEmail(
-                                        emailcontroller.text.trim())) {
                                       Utils.showErrorMessage(
-                                          context, S.of(context).not_email);
+                                        context,
+                                        S.of(context).email_not_empty,
+                                      );
+                                    } else if (!RegexText.isEmail(
+                                      emailcontroller.text.trim(),
+                                    )) {
+                                      Utils.showErrorMessage(
+                                        context,
+                                        S.of(context).not_email,
+                                      );
                                     } else {
                                       Navigator.pop(context);
-                                      Utils.showBottomSheet(
+                                      // Utils.showBottomSheet(
+                                      //   context: context,
+                                      //   child: OtpAddEmailScreen(
+                                      //     acc: userInfo!,
+                                      //     email: emailcontroller.text.trim(),
+                                      //   ),
+                                      // );
+                                      await APIAuth.sendOtpAddMoreEmail(
+                                        emailcontroller.text.trim(),
+                                      ).then((v) {
+                                        Utils.showBottomSheet(
                                           context: context,
                                           child: OtpAddEmailScreen(
-                                              acc: userInfo!,
-                                              email:
-                                                  emailcontroller.text.trim()));
-                                      // await APIAuth.sendOtpAddMoreEmail(
-                                      //         emailcontroller.text.trim())
-                                      //     .then((v) {
-                                      //   Utils.showBottomSheet(
-                                      //       context: context,
-                                      //       child: OtpAddEmailScreen(
-                                      //           acc: userInfo!,
-                                      //           email: emailcontroller.text
-                                      //               .trim()));
-                                      // }).catchError((e) {
-                                      //   Utils.showErrorMessage(context, e);
-                                      // });
+                                            acc: userInfo!,
+                                            email: emailcontroller.text.trim(),
+                                          ),
+                                        );
+                                      }).catchError((e) {
+                                        Utils.showErrorMessage(context, e);
+                                      });
 
                                       // APIAuth.saveAccount(user!.toJson())
                                       //     .then((v) {

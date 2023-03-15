@@ -28,34 +28,34 @@ class ConstructionRegPrv extends ChangeNotifier {
       surfaceController.text = existedConReg!.apartmentId ?? '';
       consTypeController.text = existedConReg!.constructionTypeId ?? '';
       regDateController.text =
-          Utils.dateFormat(existedConReg!.create_date ?? "", 1);
+          Utils.dateFormat(existedConReg!.create_date ?? '', 1);
       startTimeController.text =
-          Utils.dateFormat(existedConReg!.time_start ?? "", 1);
+          Utils.dateFormat(existedConReg!.time_start ?? '', 1);
       endTimeController.text =
-          Utils.dateFormat(existedConReg!.time_end ?? "", 1);
+          Utils.dateFormat(existedConReg!.time_end ?? '', 1);
       consFeeController.text =
           formatCurrency.format(existedConReg!.construction_cost ?? 0);
       depositController.text =
           formatCurrency.format(existedConReg!.deposit_fee ?? 0);
       workDayController.text = existedConReg!.working_day.toString();
       offDayController.text = existedConReg!.off_day.toString();
-      describeController.text = existedConReg!.description ?? "";
-      consUnitController.text = existedConReg!.construction_unit ?? "";
-      addressController.text = existedConReg!.construction_add ?? "";
-      deputyController.text = existedConReg!.deputy ?? "";
-      phoneController.text = existedConReg!.deputy_phone ?? "";
-      identityController.text = existedConReg!.deputy_identity ?? "";
+      describeController.text = existedConReg!.description ?? '';
+      consUnitController.text = existedConReg!.construction_unit ?? '';
+      addressController.text = existedConReg!.construction_add ?? '';
+      deputyController.text = existedConReg!.deputy ?? '';
+      phoneController.text = existedConReg!.deputy_phone ?? '';
+      identityController.text = existedConReg!.deputy_identity ?? '';
       workerNumController.text = existedConReg!.worker_num.toString();
-      emailController.text = existedConReg!.construction_email ?? "";
-      regDate = DateTime.tryParse(existedConReg!.create_date ?? "") != null
+      emailController.text = existedConReg!.construction_email ?? '';
+      regDate = DateTime.tryParse(existedConReg!.create_date ?? '') != null
           ? DateTime.parse(existedConReg!.create_date!)
               .add(const Duration(hours: 7))
           : null;
-      startTime = DateTime.tryParse(existedConReg!.time_start ?? "") != null
+      startTime = DateTime.tryParse(existedConReg!.time_start ?? '') != null
           ? DateTime.parse(existedConReg!.time_start!)
               .add(const Duration(hours: 7))
           : null;
-      endTime = DateTime.tryParse(existedConReg!.time_end ?? "") != null
+      endTime = DateTime.tryParse(existedConReg!.time_end ?? '') != null
           ? DateTime.parse(existedConReg!.time_end!)
               .add(const Duration(hours: 7))
           : null;
@@ -224,7 +224,9 @@ class ConstructionRegPrv extends ChangeNotifier {
           deputy_phone: phoneController.text.trim(),
           construction_add: addressController.text.trim(),
           construction_email: emailController.text.trim(),
-          create_date: (regDate)!.toIso8601String(),
+          create_date: existedConReg != null
+              ? (regDate!.subtract(const Duration(hours: 7))).toIso8601String()
+              : (regDate!).toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,
           deputy_identity: identityController.text.trim(),
@@ -235,10 +237,10 @@ class ConstructionRegPrv extends ChangeNotifier {
           resident_code: resident!.code,
           resident_identity: resident.identity_card,
           status: isRequest
-              ? (apartment.type == "BUY" || apartment.type == "RENT")
-                  ? "WAIT_PAY"
-                  : "WAIT_OWNER"
-              : "NEW",
+              ? (apartment.type == 'BUY' || apartment.type == 'RENT')
+                  ? 'WAIT_PAY'
+                  : 'WAIT_OWNER'
+              : 'NEW',
           working_day: workday,
           worker_num: int.tryParse(workerNumController.text.trim()) != null
               ? int.parse(workerNumController.text.trim())
@@ -249,7 +251,7 @@ class ConstructionRegPrv extends ChangeNotifier {
               (startTime!.add(const Duration(hours: 7))).toIso8601String(),
           time_end: (endTime!.add(const Duration(hours: 7))).toIso8601String(),
           //   // resident_relationship: apartment.type,
-          construction_type_name: consType.name ?? "",
+          construction_type_name: consType.name ?? '',
         );
         ConstructionHistory? conHis;
         if (existedConReg != null) {
@@ -260,10 +262,10 @@ class ConstructionRegPrv extends ChangeNotifier {
             residentId: residentId,
             person: resident.info_name,
             status: isRequest
-                ? (apartment.type == "BUY" || apartment.type == "RENT")
-                    ? "WAIT_PAY"
-                    : "WAIT_OWNER"
-                : "NEW",
+                ? (apartment.type == 'BUY' || apartment.type == 'RENT')
+                    ? 'WAIT_PAY'
+                    : 'WAIT_OWNER'
+                : 'NEW',
           );
           // return APIConstruction.saveNewConstructionRegistration();
         }
@@ -274,18 +276,18 @@ class ConstructionRegPrv extends ChangeNotifier {
               payment: fixedDateService!.cut_service_date ?? 0,
               residentId: residentId,
               phone: resident.phone_required,
-              refSchema: "ConstructionRegistration",
+              refSchema: 'ConstructionRegistration',
               discount_money: fee,
-              type: "ContructionCost",
-              payment_status: "UNPAID",
+              type: 'ContructionCost',
+              payment_status: 'UNPAID',
               amount_due: fee,
               apartmentId: apartment.apartmentId,
               check: true,
-              content: "Thanh toán phí thi công ",
-              reason: "Thanh toán phí thi công",
-              customer_type: "RESIDENT",
+              content: 'Thanh toán phí thi công ',
+              reason: 'Thanh toán phí thi công',
+              customer_type: 'RESIDENT',
               full_name: resident.info_name,
-              receipts_status: "NEW",
+              receipts_status: 'NEW',
               expiration_date: DateTime.now()
                   .add(Duration(
                       days: fixedDateService != null
@@ -302,17 +304,17 @@ class ConstructionRegPrv extends ChangeNotifier {
             residentId: residentId,
             phone: resident.phone_required,
             discount_money: depositFee,
-            refSchema: "ConstructionRegistration",
-            type: "DepositFee",
-            payment_status: "UNPAID",
+            refSchema: 'ConstructionRegistration',
+            type: 'DepositFee',
+            payment_status: 'UNPAID',
             amount_due: depositFee,
             apartmentId: apartment.apartmentId,
             check: true,
-            reason: "Thanh toán phí đặt cọc thi công",
-            content: "Thanh toán phí đặt cọc thi công",
-            customer_type: "RESIDENT",
+            reason: 'Thanh toán phí đặt cọc thi công',
+            content: 'Thanh toán phí đặt cọc thi công',
+            customer_type: 'RESIDENT',
             full_name: resident.info_name,
-            receipts_status: "NEW",
+            receipts_status: 'NEW',
             expiration_date: DateTime.now()
                 .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
                 .subtract(const Duration(hours: 7))
@@ -511,12 +513,12 @@ class ConstructionRegPrv extends ChangeNotifier {
     if (consTypeController.text.isNotEmpty && workday != null) {
       var type = listConstructionType
           .firstWhere((element) => element.id == consTypeController.text);
-      if (type.c!.chargeFormCost == "PAYINFULL") {
+      if (type.c!.chargeFormCost == 'PAYINFULL') {
         fee = type.c!.cost;
       } else {
         fee = type.c!.cost! * workday!;
       }
-      if (type.c!.chargeFormDeposit == "PAYINFULL") {
+      if (type.c!.chargeFormDeposit == 'PAYINFULL') {
         depositController.text = formatCurrency.format(type.c!.depositFee);
       } else {
         depositController.text =
@@ -640,6 +642,8 @@ class ConstructionRegPrv extends ChangeNotifier {
     }
     if (identityController.text.trim().isEmpty) {
       validateIdentity = S.current.not_blank;
+    } else if (identityController.text.trim().length < 9) {
+      validateIdentity = S.current.cmnd_length_9;
     } else {
       validateIdentity = null;
     }
@@ -750,13 +754,13 @@ class ConstructionRegPrv extends ChangeNotifier {
         }
       }
       var dataOff = {
-        "d_0": d_0,
-        "d_1": d_1,
-        "d_2": d_2,
-        "d_3": d_3,
-        "d_4": d_4,
-        "d_5": d_5,
-        "d_6": d_6,
+        'd_0': d_0,
+        'd_1': d_1,
+        'd_2': d_2,
+        'd_3': d_3,
+        'd_4': d_4,
+        'd_5': d_5,
+        'd_6': d_6,
       };
       // print("$d_1 $d_2 $d_3 $d_4 $d_5 $d_6 $d_0");
 

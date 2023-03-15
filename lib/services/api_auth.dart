@@ -65,7 +65,7 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -86,8 +86,8 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
-        "userName": userName,
-        "newPassword": newPassword,
+        'userName': userName,
+        'newPassword': newPassword,
       },
     );
 
@@ -96,7 +96,7 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -118,7 +118,7 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(findAccountQuery),
       variables: {
-        "phone": phone,
+        'phone': phone,
       },
     );
 
@@ -127,7 +127,7 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -148,8 +148,8 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
-        "otp": otp,
-        "sendTo": sendTo,
+        'otp': otp,
+        'sendTo': sendTo,
       },
     );
 
@@ -158,7 +158,7 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -178,7 +178,7 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(sendOtp),
       variables: {
-        "mailTo": email,
+        'mailTo': email,
       },
     );
 
@@ -187,7 +187,7 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -210,8 +210,8 @@ class APIAuth {
         }
         final mpf = await MultipartFile.fromFile(files[i].path);
         final map = {
-          "file": [mpf],
-          "name": files[i].path.split('/').last
+          'file': [mpf],
+          'name': files[i].path.split('/').last
         };
         final body = FormData.fromMap(map);
         final data = await ApiService.shared.postApi(
@@ -235,7 +235,7 @@ class APIAuth {
       multipartFiles.add(mpf);
     }
 
-    final map = {"files": multipartFiles};
+    final map = {'files': multipartFiles};
     final body = FormData.fromMap(map);
     final data = await ApiService.shared.postApi(
       path: ApiConstants.uploadURL,
@@ -259,7 +259,7 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
-        "email": email,
+        'email': email,
       },
     );
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -295,11 +295,11 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(mutationCreateResidentAccount),
       variables: {
-        "user": user,
-        "name": name,
-        "email": email,
-        "password": passWord,
-        "confirmPassword": confirmPassword
+        'user': user,
+        'name': name,
+        'email': email,
+        'password': passWord,
+        'confirmPassword': confirmPassword
       },
     );
 
@@ -332,10 +332,10 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(mutation),
       variables: {
-        "oldPass": oldPass,
-        "newPass": newPass,
-        "confirmNewPass": confirmNewPass,
-        "accountId": accountId,
+        'oldPass': oldPass,
+        'newPass': newPass,
+        'confirmNewPass': confirmNewPass,
+        'accountId': accountId,
       },
     );
 
@@ -367,7 +367,7 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(mutation),
       variables: {
-        "data": dat,
+        'data': dat,
       },
     );
 
@@ -395,7 +395,7 @@ class APIAuth {
     final MutationOptions options = MutationOptions(
       document: gql(sendOtp),
       variables: {
-        "email": email,
+        'email': email,
       },
     );
 
@@ -404,16 +404,20 @@ class APIAuth {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
   }
 
-  static Future verifyOtpAddMoreEmail(String email, String accountId) async {
+  static Future verifyOtpAddMoreEmail(
+    String email,
+    String accountId,
+    String otp,
+  ) async {
     var sendOtp = '''
-mutation (\$email:String,\$accountId:String){
-    response: authorization_mobile_verify_add_email (email: \$email,accountId: \$accountId ) {
+mutation (\$email:String,\$accountId:String,\$otp:String){
+    response: authorization_mobile_verify_add_email (email: \$email,accountId: \$accountId,otp: \$otp ) {
         code
         message
         data
@@ -426,8 +430,9 @@ mutation (\$email:String,\$accountId:String){
     final MutationOptions options = MutationOptions(
       document: gql(sendOtp),
       variables: {
-        "email": email,
-        "accountId": accountId,
+        'email': email,
+        'accountId': accountId,
+        'otp': otp,
       },
     );
 
@@ -436,7 +441,7 @@ mutation (\$email:String,\$accountId:String){
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }

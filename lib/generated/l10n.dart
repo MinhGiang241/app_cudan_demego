@@ -6469,6 +6469,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Cancel reflection successfully`
+  String get success_cancel_reflection {
+    return Intl.message(
+      'Cancel reflection successfully',
+      name: 'success_cancel_reflection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not less than 9 characters`
+  String get cmnd_length_9 {
+    return Intl.message(
+      'Not less than 9 characters',
+      name: 'cmnd_length_9',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

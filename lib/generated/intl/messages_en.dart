@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
+        "cmnd_length_9":
+            MessageLookupByLibrary.simpleMessage("Not less than 9 characters"),
         "code_file": MessageLookupByLibrary.simpleMessage("File code"),
         "code_verify":
             MessageLookupByLibrary.simpleMessage("Verify security code"),
@@ -862,6 +864,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
             "Cancel register dependent person successfully"),
+        "success_cancel_reflection": MessageLookupByLibrary.simpleMessage(
+            "Cancel reflection successfully"),
         "success_change_pass": MessageLookupByLibrary.simpleMessage(
             "Change password successfully"),
         "success_confirm":

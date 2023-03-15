@@ -131,6 +131,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                           ? ((widget.validator) ??
                               (v) {
                                 if (v != null &&
+                                    widget.controller != null &&
                                     widget.selectList!.isNotEmpty) {
                                   widget.controller!.text = v;
                                   return null;

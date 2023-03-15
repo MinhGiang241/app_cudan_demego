@@ -5,8 +5,6 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_screen.dart';
 import 'widgets/card_list_tab.dart';
 import 'widgets/new_plan_info_tab.dart';
-import 'widgets/plan_info_tab.dart';
-import 'widgets/recident_info_tab.dart';
 
 class PlanInfoScreen extends StatefulWidget {
   const PlanInfoScreen({Key? key}) : super(key: key);
@@ -33,12 +31,16 @@ class _PlanInfoScreenState extends State<PlanInfoScreen>
           // Tab(text: S.of(context).noti_history),
         ],
       ),
-      body: TabBarView(controller: tabController, children: [
-        // const PlanInfoTab(),
-        // const ResidentInfoTab(),
-        const NewPlanInfoTab(),
-        const CardListTab(),
-      ]),
+      // ignore: prefer_const_literals_to_create_immutables
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          // const PlanInfoTab(),
+          // const ResidentInfoTab(),
+          const NewPlanInfoTab(),
+          const CardListTab(),
+        ],
+      ),
     );
   }
 }

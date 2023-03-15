@@ -115,7 +115,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? relationValidate;
   String? sexValidate;
   String? birthValidate;
-  String? identityValidate;
+  // String? identityValidate;
   String? nationalityValidate;
   String? resTypeValidate;
   String? provValidate;
@@ -230,7 +230,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     relationValidate = null;
     sexValidate = null;
     birthValidate = null;
-    identityValidate = null;
+    // identityValidate = null;
     nationalityValidate = null;
     resTypeValidate = null;
     provValidate = null;
@@ -281,11 +281,11 @@ class AddNewResidentPrv extends ChangeNotifier {
     } else {
       sexValidate = null;
     }
-    if (identityController.text.trim().isEmpty) {
-      identityValidate = S.current.not_blank;
-    } else {
-      identityValidate = null;
-    }
+    // if (identityController.text.trim().isEmpty) {
+    //   identityValidate = S.current.not_blank;
+    // } else {
+    //   identityValidate = null;
+    // }
     if (birthController.text.trim().isEmpty) {
       birthValidate = S.current.not_blank;
     } else {

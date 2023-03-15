@@ -7,6 +7,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/extra_service.dart';
 import '../../../models/service_registration.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_error_widget.dart';
@@ -70,7 +71,7 @@ class _ExtraServiceRegistrationScreenState
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return PrimaryErrorWidget(
-                      code: snapshot.hasError ? "err" : "1",
+                      code: snapshot.hasError ? 'err' : '1',
                       message: snapshot.data.toString(),
                       onRetry: () async {
                         setState(() {});
@@ -136,6 +137,10 @@ class _ExtraServiceRegistrationScreenState
                       children: [
                         vpad(20),
                         PrimaryDropDown(
+                          validateString: context
+                              .watch<ExtraServiceRegistrationPrv>()
+                              .apartValidate,
+                          validator: Utils.emptyValidatorDropdown,
                           isDense: false,
                           isRequired: true,
                           label: S.of(context).apartment,
@@ -157,8 +162,12 @@ class _ExtraServiceRegistrationScreenState
                             .payList
                             .isNotEmpty)
                           PrimaryDropDown(
+                            validateString: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .shelfValidate,
+                            validator: Utils.emptyValidatorDropdown,
                             value: context
-                                .read<ExtraServiceRegistrationPrv>()
+                                .watch<ExtraServiceRegistrationPrv>()
                                 .shelfLifeId,
                             isRequired: true,
                             label: S.of(context).payment_circle,
@@ -175,8 +184,11 @@ class _ExtraServiceRegistrationScreenState
                           controller: context
                               .read<ExtraServiceRegistrationPrv>()
                               .regDateController,
+                          validateString: context
+                              .watch<ExtraServiceRegistrationPrv>()
+                              .regDateValidate,
                           label: S.of(context).reg_date,
-                          hint: "dd/mm/yyyy",
+                          hint: 'dd/mm/yyyy',
                           isReadOnly: true,
                           isRequired: true,
                           onTap: () {
@@ -186,17 +198,17 @@ class _ExtraServiceRegistrationScreenState
                           },
                           suffixIcon:
                               const PrimaryIcon(icons: PrimaryIcons.calendar),
-                          // validator: (v) {
-                          //   if (v!.isEmpty) {
-                          //     return '';
-                          //   }
-                          //   return null;
-                          // },
+                          validator: (v) {
+                            if (v!.isEmpty) {
+                              return '';
+                            }
+                            return null;
+                          },
                         ),
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                "KHONGCO" ||
+                                'KHONGCO' ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
@@ -205,7 +217,7 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                "KHONGCO" ||
+                                'KHONGCO' ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
@@ -217,7 +229,7 @@ class _ExtraServiceRegistrationScreenState
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .expiredDateController,
                             label: S.of(context).expired_date,
-                            hint: "dd/mm/yyyy",
+                            hint: 'dd/mm/yyyy',
                             isReadOnly: true,
                             isRequired: true,
                             onTap: () => context
@@ -235,7 +247,7 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                "KHONGCO" ||
+                                'KHONGCO' ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
@@ -244,15 +256,19 @@ class _ExtraServiceRegistrationScreenState
                         if (!(context
                                     .watch<ExtraServiceRegistrationPrv>()
                                     .codeCycle ==
-                                "KHONGCO" ||
+                                'KHONGCO' ||
                             context
                                 .watch<ExtraServiceRegistrationPrv>()
                                 .payList
                                 .isEmpty))
                           PrimaryDropDown(
                             isRequired: true,
+                            validateString: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .maxDayValidate,
+                            validator: Utils.emptyValidatorDropdown,
                             value: context
-                                .read<ExtraServiceRegistrationPrv>()
+                                .watch<ExtraServiceRegistrationPrv>()
                                 .maxDayPay,
                             label: S.of(context).max_day_pay,
                             selectList: maxDayPayList,

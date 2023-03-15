@@ -16,14 +16,14 @@ class RegisterPetPrv extends ChangeNotifier {
     this.existedPet,
   }) {
     isAgree = existedPet!.check ?? false;
-    nameController.text = existedPet!.pet_name ?? "";
-    typeController.text = existedPet!.pet_type ?? "";
-    colorController.text = existedPet!.color ?? "";
+    nameController.text = existedPet!.pet_name ?? '';
+    typeController.text = existedPet!.pet_type ?? '';
+    colorController.text = existedPet!.color ?? '';
     originController.text = existedPet!.species ?? '';
     sexController.text = existedPet!.sex ?? '';
     weightController.text =
         existedPet!.weight != null ? existedPet!.weight.toString() : '';
-    descriptionController.text = existedPet!.describe ?? "";
+    descriptionController.text = existedPet!.describe ?? '';
     isAgree = existedPet!.check ?? true;
     existedImage = existedPet!.avt_pet ?? [];
     exitedCertificateFiles = existedPet!.certificate ?? [];
@@ -69,8 +69,9 @@ class RegisterPetPrv extends ChangeNotifier {
         double.parse(weightController.text) >= 15)) {
       weightController.text = '15';
       weightController.selection = TextSelection(
-          baseOffset: weightController.text.length,
-          extentOffset: weightController.text.length);
+        baseOffset: weightController.text.length,
+        extentOffset: weightController.text.length,
+      );
     } else if (weightController.text.contains('.') &&
         weightController.text.split('.').last.length > 2) {
       weightController.text =
@@ -174,7 +175,7 @@ class RegisterPetPrv extends ChangeNotifier {
         if (existedReportFiles.isEmpty && reportFiles.isEmpty) {
           listError.add(S.of(context).report_not_empty);
         }
-        if (imagesPet.isEmpty) {
+        if ([...existedImage, ...submitImagesPet].isEmpty) {
           listError.add(S.of(context).pet_image_not_empty);
         }
         if (listError.isNotEmpty) {
@@ -196,7 +197,7 @@ class RegisterPetPrv extends ChangeNotifier {
             color: colorController.text.trim(),
             describe: descriptionController.text.trim(),
             pet_name: nameController.text.trim(),
-            pet_status: isRequest ? "WAIT" : "NEW",
+            pet_status: isRequest ? 'WAIT' : 'NEW',
             sex: sexController.text.trim(),
             pet_type: typeController.text.trim(),
             species: originController.text.trim(),

@@ -43,74 +43,82 @@ class _ReflectionScreenState extends State<ReflectionScreen>
       builder: (context, builder) {
         tabController.index = initIndex;
         return PrimaryScreen(
-            appBar: PrimaryAppbar(
-              leading: BackButton(
-                onPressed: () => Navigator.pushReplacementNamed(
-                    context, HomeScreen.routeName),
+          appBar: PrimaryAppbar(
+            leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                HomeScreen.routeName,
               ),
-              title: S.of(context).reflection,
-              tabController: tabController,
-              isTabScrollabel: true,
-              tabs: [
-                Tab(text: S.of(context).all),
-                Tab(text: S.of(context).wait_execute),
-                Tab(text: S.of(context).executing),
-                Tab(text: S.of(context).executed),
-                Tab(text: S.of(context).newl),
-                Tab(text: S.of(context).cancel),
-              ],
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Center(
-                    child: PrimaryIcon(
-                      icons: PrimaryIcons.filter,
-                      onTap: () {
-                        DatePicker.showPicker(
-                          context,
-                          onChanged: (v) {},
-                          onConfirm: (v) {
-                            context.read<ReflectionPrv>().onChooseMonthYear(v);
-                            setState(() {
-                              init = false;
-                              initIndex = tabController.index;
-                            });
-                          },
-                          pickerModel: CustomMonthPicker(
-                              minTime: DateTime(DateTime.now().year - 10, 1, 1),
-                              maxTime:
-                                  DateTime(DateTime.now().year + 10, 12, 31),
-                              currentTime: DateTime(
-                                  context.read<ReflectionPrv>().year ??
-                                      DateTime.now().year,
-                                  context.read<ReflectionPrv>().month ??
-                                      DateTime.now().month,
-                                  1),
-                              locale: LocaleType.vi),
-                        );
-                      },
-                    ),
+            ),
+            title: S.of(context).reflection,
+            tabController: tabController,
+            isTabScrollabel: true,
+            tabs: [
+              Tab(text: S.of(context).all),
+              Tab(text: S.of(context).wait_execute),
+              Tab(text: S.of(context).executing),
+              Tab(text: S.of(context).executed),
+              Tab(text: S.of(context).newl),
+              Tab(text: S.of(context).cancel),
+            ],
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Center(
+                  child: PrimaryIcon(
+                    icons: PrimaryIcons.filter,
+                    onTap: () {
+                      DatePicker.showPicker(
+                        context,
+                        onChanged: (v) {},
+                        onConfirm: (v) {
+                          context.read<ReflectionPrv>().onChooseMonthYear(v);
+                          setState(() {
+                            init = false;
+                            initIndex = tabController.index;
+                          });
+                        },
+                        pickerModel: CustomMonthPicker(
+                          minTime: DateTime(DateTime.now().year - 10, 1, 1),
+                          maxTime: DateTime(DateTime.now().year + 10, 12, 31),
+                          currentTime: DateTime(
+                            context.read<ReflectionPrv>().year ??
+                                DateTime.now().year,
+                            context.read<ReflectionPrv>().month ??
+                                DateTime.now().month,
+                            1,
+                          ),
+                          locale: LocaleType.vi,
+                        ),
+                      );
+                    },
                   ),
-                )
-              ],
+                ),
+              )
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            tooltip: S.of(context).add_new,
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                CreateReflection.routeName,
+                arguments: {
+                  'isEdit': false,
+                },
+              );
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
             ),
-            floatingActionButton: FloatingActionButton(
-              tooltip: S.of(context).add_new,
-              onPressed: () {
-                Navigator.pushNamed(context, CreateReflection.routeName,
-                    arguments: {
-                      "isEdit": false,
-                    });
-              },
-              backgroundColor: primaryColorBase,
-              child: const Icon(
-                Icons.add,
-                size: 40,
-              ),
-            ),
-            body: SafeArea(
-              // ignore: prefer_const_literals_to_create_immutables
-              child: TabBarView(controller: tabController, children: [
+          ),
+          body: SafeArea(
+            // ignore: prefer_const_literals_to_create_immutables
+            child: TabBarView(
+              controller: tabController,
+              children: [
                 ReflectionTab(
                   tabIndex: 0,
                 ),
@@ -129,8 +137,10 @@ class _ReflectionScreenState extends State<ReflectionScreen>
                 ReflectionTab(
                   tabIndex: 5,
                 ),
-              ]),
-            ));
+              ],
+            ),
+          ),
+        );
       },
     );
   }

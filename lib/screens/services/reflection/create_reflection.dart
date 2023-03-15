@@ -46,7 +46,7 @@ class CreateReflection extends StatelessWidget {
                       context.read<CreateReflectionPrv>().areas.map((e) {
                     return DropdownMenuItem(
                       value: e.id,
-                      child: Text(e.name ?? ""),
+                      child: Text(e.name ?? ''),
                     );
                   }).toList();
                   // var listChoiceReason =
@@ -60,27 +60,27 @@ class CreateReflection extends StatelessWidget {
                       context.read<CreateReflectionPrv>().listOpinion.map((e) {
                     return DropdownMenuItem(
                       value: e.id,
-                      child: Text(e.content ?? ""),
+                      child: Text(e.content ?? ''),
                     );
                   }).toList();
 
                   var listType = [
                     DropdownMenuItem(
-                      value: "COMPLAIN",
+                      value: 'COMPLAIN',
                       child: Text(S.of(context).complain),
                     ),
                     DropdownMenuItem(
-                      value: "FEEDBACK",
+                      value: 'FEEDBACK',
                       child: Text(S.of(context).feedback),
                     )
                   ];
                   var listAreaType = [
                     DropdownMenuItem(
-                      value: "PIN",
+                      value: 'PIN',
                       child: Text(S.of(context).pin),
                     ),
                     DropdownMenuItem(
-                      value: "BUILDING",
+                      value: 'BUILDING',
                       child: Text(S.of(context).building),
                     )
                   ];
@@ -106,7 +106,7 @@ class CreateReflection extends StatelessWidget {
                           PrimaryTextField(
                             label: S.of(context).date_send,
                             initialValue:
-                                Utils.dateFormat(ref!.createdTime ?? "", 1),
+                                Utils.dateFormat(ref!.createdTime ?? '', 1),
                             enable: !isEdit,
                           ),
                         if (isEdit) vpad(12),
@@ -145,12 +145,12 @@ class CreateReflection extends StatelessWidget {
                         PrimaryTextField(
                           maxLength: 550,
                           enable: isUpdate,
-                          label: S.of(context).note,
-                          hint: S.of(context).note,
+                          label: S.of(context).description,
+                          hint: S.of(context).description,
                           maxLines: 3,
                           controller: context
                               .read<CreateReflectionPrv>()
-                              .noteController,
+                              .describeController,
                         ),
                         vpad(12),
                         PrimaryDropDown(
@@ -207,25 +207,26 @@ class CreateReflection extends StatelessWidget {
                         vpad(12),
                         if (isEdit)
                           PrimaryTextField(
-                            textColor: genStatusColor(ref!.status ?? ""),
+                            textColor: genStatusColor(ref!.status ?? ''),
                             label: S.of(context).status,
                             enable: !isEdit,
                             initialValue: ref.s!.name,
+                            textStyle: txtBold(14, genStatusColor(status)),
                           ),
-                        if (isEdit &&
-                            ref!.cancel_reason != null &&
-                            ref.r != null)
-                          vpad(12),
-                        if (isEdit &&
-                            ref!.cancel_reason != null &&
-                            ref.r != null)
-                          PrimaryTextField(
-                            label: S.of(context).cancel_reason,
-                            enable: !isEdit,
-                            initialValue: ref.r!.name ?? "",
-                          ),
+                        // if (isEdit &&
+                        //     ref!.cancel_reason != null &&
+                        //     ref.r != null)
+                        //   vpad(12),
+                        // if (isEdit &&
+                        //     ref!.cancel_reason != null &&
+                        //     ref.r != null)
+                        //   PrimaryTextField(
+                        //     label: S.of(context).cancel_reason,
+                        //     enable: !isEdit,
+                        //     initialValue: ref.r!.name ?? '',
+                        //   ),
                         vpad(20),
-                        if (status == "NEW" || !isEdit)
+                        if (status == 'NEW' || !isEdit)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [

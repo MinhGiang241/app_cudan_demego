@@ -650,11 +650,19 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           maxLength: 12,
                                           filter: [
                                             FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9a-zA-Z]')),
+                                              RegExp(r'[0-9a-zA-Z]'),
+                                            ),
                                           ],
                                           blockSpace: true,
                                           blockSpecial: true,
-                                          validator: Utils.emptyValidator,
+                                          validator: (v) {
+                                            if (v!.isEmpty) {
+                                              return '';
+                                            } else if (v.length < 9) {
+                                              return '';
+                                            }
+                                            return null;
+                                          },
                                           controller: context
                                               .read<ConstructionRegPrv>()
                                               .identityController,

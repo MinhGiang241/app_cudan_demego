@@ -640,5 +640,7 @@
   "confirmed_by_manager_resident": "resident confirmed by manager department",
   "member_num": "Menber number",
   "no_home": "Don't have any apartment",
-  "card_list": "Card list"
+  "card_list": "Card list",
+  "success_cancel_reflection": "Cancel reflection successfully",
+  "cmnd_length_9": "Not less than 9 characters"
 }

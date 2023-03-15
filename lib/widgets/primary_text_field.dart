@@ -10,40 +10,40 @@ import '../generated/l10n.dart';
 import 'primary_card.dart';
 
 class PrimaryTextField extends StatefulWidget {
-  PrimaryTextField({
-    super.key,
-    this.label,
-    this.initialValue,
-    this.hint,
-    this.controller,
-    this.obscureText = false,
-    this.isReadOnly = false,
-    this.onTap,
-    this.keyboardType,
-    this.textCapitalization = TextCapitalization.none,
-    this.textInputAction,
-    this.validator,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.enable = true,
-    this.isRequired = false,
-    this.maxLines = 1,
-    this.autoFocus = false,
-    this.validateString,
-    this.margin,
-    this.background,
-    this.textColor,
-    this.textAlign,
-    this.maxLength,
-    this.onChanged,
-    this.filter = const [],
-    this.blockSpace = false,
-    this.blockSpecial = false,
-    this.onlyText = false,
-    this.isShow = true,
-    this.onlyNum = false,
-  });
-
+  PrimaryTextField(
+      {super.key,
+      this.label,
+      this.initialValue,
+      this.hint,
+      this.controller,
+      this.obscureText = false,
+      this.isReadOnly = false,
+      this.onTap,
+      this.keyboardType,
+      this.textCapitalization = TextCapitalization.none,
+      this.textInputAction,
+      this.validator,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.enable = true,
+      this.isRequired = false,
+      this.maxLines = 1,
+      this.autoFocus = false,
+      this.validateString,
+      this.margin,
+      this.background,
+      this.textColor,
+      this.textAlign,
+      this.maxLength,
+      this.onChanged,
+      this.filter = const [],
+      this.blockSpace = false,
+      this.blockSpecial = false,
+      this.onlyText = false,
+      this.isShow = true,
+      this.onlyNum = false,
+      this.textStyle});
+  final TextStyle? textStyle;
   final String? label;
   final String? initialValue;
   final String? hint;
@@ -166,9 +166,11 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     textCapitalization: widget.textCapitalization,
                     textInputAction: widget.textInputAction ??
                         (widget.maxLines! < 2 ? TextInputAction.done : null),
-                    style: txtBodySmallBold(
-                        color:
-                            widget.enable ? widget.textColor : grayScaleColor3),
+                    style: widget.textStyle ??
+                        txtBodySmallBold(
+                            color: widget.enable
+                                ? widget.textColor
+                                : grayScaleColor3),
                     cursorColor: primaryColor2,
                     maxLines: widget.maxLines,
                     decoration: InputDecoration(

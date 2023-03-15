@@ -22,7 +22,7 @@ class CreateReflectionPrv extends ChangeNotifier {
       existedImage = ref!.files ?? [];
       typeController.text = ref!.ticket_type!;
       reasonController.text = ref!.opinionContributeId ?? "";
-      noteController.text = ref!.description ?? "";
+      describeController.text = ref!.description ?? "";
       zoneTypeController.text = ref!.areaTypeId ?? "";
       if (ref!.areaTypeId != null) {
         getListAreaByType(ref!.areaTypeId).then((_) {
@@ -52,7 +52,7 @@ class CreateReflectionPrv extends ChangeNotifier {
 
   final TextEditingController typeController = TextEditingController();
   final TextEditingController reasonController = TextEditingController();
-  final TextEditingController noteController = TextEditingController();
+  final TextEditingController describeController = TextEditingController();
   final TextEditingController zoneController = TextEditingController();
   final TextEditingController zoneTypeController = TextEditingController();
   String? validateType;
@@ -73,13 +73,17 @@ class CreateReflectionPrv extends ChangeNotifier {
     APIReflection.changeStatus(ref!.toMap()).then((v) {
       isCancelLoading = false;
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_can_req,
-          onClose: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, ReflectionScreen.routeName, (route) => route.isFirst,
-                arguments: {'initTab': 5});
-          });
+        context: context,
+        e: S.of(context).success_cancel_reflection,
+        onClose: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            ReflectionScreen.routeName,
+            (route) => route.isFirst,
+            arguments: {'initTab': 5},
+          );
+        },
+      );
     }).catchError((e) {
       isCancelLoading = false;
       Utils.showErrorMessage(context, e);
@@ -125,7 +129,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         ticket_type: typeController.text.trim(),
         areaId: zoneController.text.trim(),
         areaTypeId: zoneTypeController.text.trim(),
-        description: noteController.text.trim(),
+        description: describeController.text.trim(),
       );
       // return
       APIReflection.saveTicket(newTicket.toMap())

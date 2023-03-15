@@ -41,147 +41,157 @@ class _ExtraServiceCardListScreenState
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     final service = arg['service'];
-    final y = arg["year"];
-    final m = arg["month"];
+    final y = arg['year'];
+    final m = arg['month'];
     return ChangeNotifierProvider(
       create: (context) =>
           ExtraServiceCardListPrv(extraService: service, year: y, month: m),
       builder: (context, child) {
         return PrimaryScreen(
-            appBar: PrimaryAppbar(
-              leading: BackButton(
-                  onPressed: () => Navigator.pushReplacementNamed(
-                      context, ServiceScreen.routeName)),
-              title: S.of(context).service_name(
-                  service.name != null ? service.name!.toLowerCase() : ''),
-            ),
-            floatingActionButton: FloatingActionButton(
-              tooltip: S.of(context).reg_service,
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, ExtraServiceRegistrationScreen.routeName,
-                    arguments: {
-                      "service": service,
-                      "isEdit": false,
-                      "name": service.name != null
-                          ? service.name!.toLowerCase()
-                          : '',
-                      "serviceId": service.id
-                    });
-              },
-              backgroundColor: primaryColorBase,
-              child: const Icon(
-                Icons.add,
-                size: 40,
+          appBar: PrimaryAppbar(
+            leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                ServiceScreen.routeName,
               ),
             ),
-            body: FutureBuilder(
-              future: context
-                  .read<ExtraServiceCardListPrv>()
-                  .getRegisterExtraServiceList(
-                      context,
-                      context.read<ResidentInfoPrv>().residentId ?? '',
-                      service.id ?? ""),
-              builder: (context, snapshot) {
-                List<ServiceRegistration> newLetter = [];
-                List<ServiceRegistration> approvedLetter = [];
-                List<ServiceRegistration> waitLetter = [];
-                List<ServiceRegistration> cancelLetter = [];
-                for (var i
-                    in context.read<ExtraServiceCardListPrv>().listCard) {
-                  if (i.status == "NEW") {
-                    newLetter.add(i);
-                  } else if (i.status == "APPROVED") {
-                    approvedLetter.add(i);
-                  } else if (i.status == "WAIT") {
-                    waitLetter.add(i);
-                  } else if (i.status == "CANCEL") {
-                    cancelLetter.add(i);
-                  }
+            title: S.of(context).service_name(
+                  service.name != null ? service.name!.toLowerCase() : '',
+                ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            tooltip: S.of(context).reg_service,
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                ExtraServiceRegistrationScreen.routeName,
+                arguments: {
+                  'service': service,
+                  'isEdit': false,
+                  'name':
+                      service.name != null ? service.name!.toLowerCase() : '',
+                  'serviceId': service.id
+                },
+              );
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
+          ),
+          body: FutureBuilder(
+            future: context
+                .read<ExtraServiceCardListPrv>()
+                .getRegisterExtraServiceList(
+                  context,
+                  context.read<ResidentInfoPrv>().residentId ?? '',
+                  service.id ?? '',
+                ),
+            builder: (context, snapshot) {
+              List<ServiceRegistration> newLetter = [];
+              List<ServiceRegistration> approvedLetter = [];
+              List<ServiceRegistration> waitLetter = [];
+              List<ServiceRegistration> cancelLetter = [];
+              for (var i in context.read<ExtraServiceCardListPrv>().listCard) {
+                if (i.status == 'NEW') {
+                  newLetter.add(i);
+                } else if (i.status == 'APPROVED') {
+                  approvedLetter.add(i);
+                } else if (i.status == 'WAIT') {
+                  waitLetter.add(i);
+                } else if (i.status == 'CANCEL') {
+                  cancelLetter.add(i);
                 }
+              }
 
-                newLetter
-                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-                approvedLetter
-                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-                waitLetter
-                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-                cancelLetter
-                    .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-                List<ServiceRegistration> list =
-                    newLetter + waitLetter + approvedLetter + cancelLetter;
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: PrimaryLoading());
-                } else if (snapshot.connectionState == ConnectionState.none) {
-                  return PrimaryErrorWidget(
-                      code: snapshot.hasError ? "err" : "1",
-                      message: snapshot.data.toString(),
-                      onRetry: () async {
-                        setState(() {});
-                      });
-                } else if (list.isEmpty) {
-                  return SafeArea(
-                    child: SmartRefresher(
-                      enablePullDown: true,
-                      enablePullUp: false,
-                      header: WaterDropMaterialHeader(
-                          backgroundColor: Theme.of(context).primaryColor),
-                      controller: _refreshController,
-                      onRefresh: () {
-                        setState(() {});
-                        _refreshController.refreshCompleted();
-                      },
-                      child: Column(
-                        children: [
-                          vpad(24),
-                          ChooseMonthYear(
-                            title: S.of(context).his_reg_service,
-                            selectMonthAndYear: (year, month) {
-                              Provider.of<ExtraServiceCardListPrv>(context,
-                                      listen: false)
-                                  .chooseMonthYear(year, month);
-                              setState(() {});
-                            },
-                            year: context.watch<ExtraServiceCardListPrv>().year,
-                            month:
-                                context.watch<ExtraServiceCardListPrv>().month,
-                          ),
-                          Expanded(
-                            child: PrimaryEmptyWidget(
-                              emptyText: S.of(context).no_service_regitration,
-                              // buttonText: S.of(context).add_trans_card,
-                              icons: PrimaryIcons.service_feedback,
-                              action: () {
-                                // Utils.pushScreen(context, const RegisterParkingCard());
-                              },
-                            ),
-                          ),
-                          vpad(100),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-
+              newLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              approvedLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              waitLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              cancelLetter
+                  .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+              List<ServiceRegistration> list =
+                  newLetter + waitLetter + approvedLetter + cancelLetter;
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: PrimaryLoading());
+              } else if (snapshot.connectionState == ConnectionState.none) {
+                return PrimaryErrorWidget(
+                  code: snapshot.hasError ? 'err' : '1',
+                  message: snapshot.data.toString(),
+                  onRetry: () async {
+                    setState(() {});
+                  },
+                );
+              } else if (list.isEmpty) {
                 return SafeArea(
                   child: SmartRefresher(
                     enablePullDown: true,
                     enablePullUp: false,
                     header: WaterDropMaterialHeader(
-                        backgroundColor: Theme.of(context).primaryColor),
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
                     controller: _refreshController,
                     onRefresh: () {
                       setState(() {});
                       _refreshController.refreshCompleted();
                     },
-                    child: ListView(children: [
+                    child: Column(
+                      children: [
+                        vpad(24),
+                        ChooseMonthYear(
+                          title: S.of(context).his_reg_service,
+                          selectMonthAndYear: (year, month) {
+                            Provider.of<ExtraServiceCardListPrv>(
+                              context,
+                              listen: false,
+                            ).chooseMonthYear(year, month);
+                            setState(() {});
+                          },
+                          year: context.watch<ExtraServiceCardListPrv>().year,
+                          month: context.watch<ExtraServiceCardListPrv>().month,
+                        ),
+                        Expanded(
+                          child: PrimaryEmptyWidget(
+                            emptyText: S.of(context).no_service_regitration,
+                            // buttonText: S.of(context).add_trans_card,
+                            icons: PrimaryIcons.service_feedback,
+                            action: () {
+                              // Utils.pushScreen(context, const RegisterParkingCard());
+                            },
+                          ),
+                        ),
+                        vpad(100),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              return SafeArea(
+                child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  header: WaterDropMaterialHeader(
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  controller: _refreshController,
+                  onRefresh: () {
+                    setState(() {});
+                    _refreshController.refreshCompleted();
+                  },
+                  child: ListView(
+                    children: [
                       vpad(24),
                       ChooseMonthYear(
                         title: S.of(context).his_reg_service,
                         selectMonthAndYear: (year, month) {
-                          Provider.of<ExtraServiceCardListPrv>(context,
-                                  listen: false)
-                              .chooseMonthYear(year, month);
+                          Provider.of<ExtraServiceCardListPrv>(
+                            context,
+                            listen: false,
+                          ).chooseMonthYear(year, month);
                           setState(() {});
                         },
                         year: context.watch<ExtraServiceCardListPrv>().year,
@@ -191,28 +201,28 @@ class _ExtraServiceCardListScreenState
                       ...list.map((e) {
                         var listContent = [
                           InfoContentView(
-                            title: "${S.of(context).reg_code}:",
+                            title: '${S.of(context).reg_code}:',
                             content: e.code,
                             contentStyle: txtBold(14, primaryColor1),
                           ),
                           if (e.pay != null && e.pay!.type_time != null)
                             InfoContentView(
-                              title: "${S.of(context).payment_circle}:",
+                              title: '${S.of(context).payment_circle}:',
                               content:
                                   "${e.pay!.use_time != null ? "${e.pay!.use_time} " : ""}${e.pay!.type_time}",
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                           InfoContentView(
-                            title: "${S.of(context).reg_date}:",
+                            title: '${S.of(context).reg_date}:',
                             content:
-                                Utils.dateFormat(e.registration_date ?? "", 1),
+                                Utils.dateFormat(e.registration_date ?? '', 1),
                             contentStyle: txtBold(14, grayScaleColorBase),
                           ),
                           InfoContentView(
-                            title: "${S.of(context).status}:",
-                            content: genStatus(e.status ?? ""),
+                            title: '${S.of(context).status}:',
+                            content: genStatus(e.status ?? ''),
                             contentStyle:
-                                txtBold(14, genStatusColor(e.status ?? "")),
+                                txtBold(14, genStatusColor(e.status ?? '')),
                           ),
                         ];
                         return Padding(
@@ -224,15 +234,18 @@ class _ExtraServiceCardListScreenState
                           child: PrimaryCard(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, ExtraServiceDetailsScreen.routeName,
-                                  arguments: e);
+                                context,
+                                ExtraServiceDetailsScreen.routeName,
+                                arguments: e,
+                              );
                             },
                             child: Column(
                               children: [
                                 vpad(12),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
+                                    horizontal: 16,
+                                  ),
                                   child: Table(
                                     textBaseline: TextBaseline.ideographic,
                                     defaultVerticalAlignment:
@@ -243,28 +256,35 @@ class _ExtraServiceCardListScreenState
                                     },
                                     children: [
                                       ...listContent.map<TableRow>((i) {
-                                        return TableRow(children: [
-                                          TableCell(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 16),
-                                              child: Text(
-                                                i.title,
-                                                style: txtMedium(
-                                                    12, grayScaleColor2),
+                                        return TableRow(
+                                          children: [
+                                            TableCell(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 16,
+                                                ),
+                                                child: Text(
+                                                  i.title,
+                                                  style: txtMedium(
+                                                    12,
+                                                    grayScaleColor2,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          TableCell(
-                                            child: Text(i.content ?? "",
-                                                style: i.contentStyle),
-                                          )
-                                        ]);
+                                            TableCell(
+                                              child: Text(
+                                                i.content ?? '',
+                                                style: i.contentStyle,
+                                              ),
+                                            )
+                                          ],
+                                        );
                                       })
                                     ],
                                   ),
                                 ),
-                                if (e.status == "WAIT")
+                                if (e.status == 'WAIT')
                                   Row(
                                     children: [
                                       hpad(16),
@@ -282,7 +302,7 @@ class _ExtraServiceCardListScreenState
                                       )
                                     ],
                                   ),
-                                if (e.status == "NEW")
+                                if (e.status == 'NEW')
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -302,20 +322,20 @@ class _ExtraServiceCardListScreenState
                                       PrimaryButton(
                                         onTap: () {
                                           Navigator.pushNamed(
-                                              context,
-                                              ExtraServiceRegistrationScreen
-                                                  .routeName,
-                                              arguments: {
-                                                "service": service,
-                                                "isEdit": true,
-                                                "name": service.name != null
-                                                    ? service.name!
-                                                        .toLowerCase()
-                                                    : '',
-                                                "serviceId": service.id,
-                                                "data": e
-                                                // "data": arg,
-                                              });
+                                            context,
+                                            ExtraServiceRegistrationScreen
+                                                .routeName,
+                                            arguments: {
+                                              'service': service,
+                                              'isEdit': true,
+                                              'name': service.name != null
+                                                  ? service.name!.toLowerCase()
+                                                  : '',
+                                              'serviceId': service.id,
+                                              'data': e
+                                              // "data": arg,
+                                            },
+                                          );
                                         },
                                         text: S.of(context).edit,
                                         buttonSize: ButtonSize.xsmall,
@@ -344,11 +364,13 @@ class _ExtraServiceCardListScreenState
                         );
                       }),
                       vpad(60)
-                    ]),
+                    ],
                   ),
-                );
-              },
-            ));
+                ),
+              );
+            },
+          ),
+        );
       },
     );
   }

@@ -55,14 +55,19 @@ class OtpAddEmailPrv extends ChangeNotifier {
   verify(BuildContext context) async {
     var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
 
-    await APIAuth.verifyOtpAddMoreEmail(email, accountId!).then((v) {
+    await APIAuth.verifyOtpAddMoreEmail(
+      email,
+      accountId!,
+      otpController.text.trim(),
+    ).then((v) {
       context.read<ResidentInfoPrv>().userInfo?.account?.email = email;
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_add_email,
-          onClose: () {
-            Navigator.of(context).popUntil((route) => route.isFirst);
-          });
+        context: context,
+        e: S.of(context).success_add_email,
+        onClose: () {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        },
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

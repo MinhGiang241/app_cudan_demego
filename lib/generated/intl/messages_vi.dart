@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
+        "cmnd_length_9":
+            MessageLookupByLibrary.simpleMessage("Không được ít hơn 9 ký tự"),
         "code_file": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "college_degree": MessageLookupByLibrary.simpleMessage("Bằng cao đẳng"),
@@ -612,7 +614,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phương thức thanh toán"),
         "per_res": MessageLookupByLibrary.simpleMessage("Thường trú"),
         "per_res_address":
-            MessageLookupByLibrary.simpleMessage("Địa chỉ thường chú"),
+            MessageLookupByLibrary.simpleMessage("Địa chỉ thường trú"),
         "percent": MessageLookupByLibrary.simpleMessage("Phần trăm"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
@@ -762,7 +764,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
         "resident_address":
-            MessageLookupByLibrary.simpleMessage("Địa chỉ thường chú"),
+            MessageLookupByLibrary.simpleMessage("Địa chỉ thường trú"),
         "resident_info":
             MessageLookupByLibrary.simpleMessage("Thông tin cư dân"),
         "resident_not_empty":
@@ -859,6 +861,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hủy đăng ký phiếu thành công"),
         "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
             "Hủy đăng ký người phụ thuộc thành công"),
+        "success_cancel_reflection":
+            MessageLookupByLibrary.simpleMessage("Hủy phản ánh thành công"),
         "success_change_pass":
             MessageLookupByLibrary.simpleMessage("Đổi mật khẩu thành công"),
         "success_confirm":

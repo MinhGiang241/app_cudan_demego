@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:graphql/client.dart';
 
 import '../models/response.dart';
@@ -18,7 +20,7 @@ class APIPayment {
   ''';
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {
-      "data": data,
+      'data': data,
     });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -26,7 +28,7 @@ class APIPayment {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -44,7 +46,7 @@ class APIPayment {
   ''';
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {
-      "data": data,
+      'data': data,
     });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -52,7 +54,7 @@ class APIPayment {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -71,7 +73,7 @@ class APIPayment {
 
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {
-      "data": data,
+      'data': data,
     });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -79,31 +81,34 @@ class APIPayment {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
   }
 
-  static Future getReceiptsList(
-      String? residentId, String? apartmentId, int year, int month) async {
+  static Future getReceiptsList(String? residentId, String? apartmentId,
+      int year, int month, String phone) async {
     var query = '''
-    mutation (\$residentId:String,\$apartmentId:String,\$year:Float,\$month:Float){
-    response: receipts_mobile_get_receipts_by_residentid_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId,year: \$year,month: \$month ) {
+   
+    mutation (\$residentId:String,\$apartmentId:String,\$year:Float,\$month:Float,\$phone:String){
+    response: receipts_mobile_get_receipts_by_residentid_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId,year: \$year,month: \$month,phone: \$phone ) {
         code
         message
         data
     }
-    }
+}
+        
         
     ''';
 
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {
-      "residentId": residentId,
-      "apartmentId": apartmentId,
-      "year": year,
-      "month": month,
+      'residentId': residentId,
+      'apartmentId': apartmentId,
+      'year': year,
+      'month': month,
+      'phone': phone,
     });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -111,7 +116,7 @@ class APIPayment {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
@@ -132,7 +137,7 @@ class APIPayment {
 
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {
-      "receiptId": receiptId,
+      'receiptId': receiptId,
     });
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -140,7 +145,7 @@ class APIPayment {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }

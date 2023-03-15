@@ -19,8 +19,11 @@ import '../construction_registration_details_screen.dart';
 import '../prv/construction_list_prv.dart';
 
 class ConstructionRegistrationLetterTab extends StatefulWidget {
-  ConstructionRegistrationLetterTab(
-      {super.key, required this.getList, required this.list});
+  ConstructionRegistrationLetterTab({
+    super.key,
+    required this.getList,
+    required this.list,
+  });
   List<ConstructionRegistration> list = [];
   Function(BuildContext) getList;
 
@@ -47,11 +50,11 @@ class _ConstructionRegistrationLetterTabState
         List<ConstructionRegistration> waitPayLetter = [];
         List<ConstructionRegistration> cancelLetter = [];
         for (var i in widget.list) {
-          if (i.status == "NEW") {
+          if (i.status == 'NEW') {
             newLetter.add(i);
-          } else if (i.status == "APPROVED") {
+          } else if (i.status == 'APPROVED') {
             approvedLetter.add(i);
-          } else if (i.status == "WAIT_PAY") {
+          } else if (i.status == 'WAIT_PAY') {
             waitPayLetter.add(i);
           }
           //  else if (i.status == "WAIT_OWNER") {
@@ -61,12 +64,12 @@ class _ConstructionRegistrationLetterTabState
           // } else if (i.status == "WAIT_MANAGER") {
           //   waitManagerLetter.add(i);
           // }
-          else if (i.status == "CANCEL") {
+          else if (i.status == 'CANCEL') {
             cancelLetter.add(i);
-          } else if (i.status == "WAIT_OWNER") {
+          } else if (i.status == 'WAIT_OWNER') {
             waitOwnerLetter.add(i);
-          } else if (i.status == "WAIT_TECHNICAL" ||
-              i.status == "WAIT_MANAGER") {
+          } else if (i.status == 'WAIT_TECHNICAL' ||
+              i.status == 'WAIT_MANAGER') {
             waitLetter.add(i);
           }
         }
@@ -94,18 +97,20 @@ class _ConstructionRegistrationLetterTabState
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
           return PrimaryErrorWidget(
-              code: snapshot.hasError ? "err" : "1",
-              message: snapshot.data.toString(),
-              onRetry: () async {
-                setState(() {});
-              });
+            code: snapshot.hasError ? 'err' : '1',
+            message: snapshot.data.toString(),
+            onRetry: () async {
+              setState(() {});
+            },
+          );
         } else if (list.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
               header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               controller: _refreshController,
               onRefresh: () {
                 setState(() {});
@@ -124,7 +129,8 @@ class _ConstructionRegistrationLetterTabState
             enablePullDown: true,
             enablePullUp: false,
             header: WaterDropMaterialHeader(
-                backgroundColor: Theme.of(context).primaryColor),
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
             controller: _refreshController,
             onRefresh: () {
               setState(() {});
@@ -137,43 +143,44 @@ class _ConstructionRegistrationLetterTabState
                   (e) {
                     var listContent = [
                       InfoContentView(
-                        title: "${S.of(context).cons_code}:",
+                        title: '${S.of(context).cons_code}:',
                         content: e.code,
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
-                        title: "${S.of(context).start_date}:",
-                        content: Utils.dateFormat(e.time_start ?? "", 1),
+                        title: '${S.of(context).start_date}:',
+                        content: Utils.dateFormat(e.time_start ?? '', 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
-                        title: "${S.of(context).end_date}:",
-                        content: Utils.dateFormat(e.time_end ?? "", 1),
+                        title: '${S.of(context).end_date}:',
+                        content: Utils.dateFormat(e.time_end ?? '', 1),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
-                        title: "${S.of(context).cons_fee}:",
+                        title: '${S.of(context).cons_fee}:',
                         content:
                             formatCurrency.format(e.construction_cost ?? 0),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
-                        title: "${S.of(context).deposit}:",
+                        title: '${S.of(context).deposit}:',
                         content: formatCurrency.format(e.deposit_fee ?? 0),
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
                       InfoContentView(
-                        title: "${S.of(context).status_letter}:",
-                        content: (e.status == "WAIT_TECHNICAL" ||
-                                e.status == "WAIT_MANAGER")
+                        title: '${S.of(context).status_letter}:',
+                        content: (e.status == 'WAIT_TECHNICAL' ||
+                                e.status == 'WAIT_MANAGER')
                             ? S.of(context).wait_approve
-                            : (e.s!.name ?? ""),
+                            : (e.s!.name ?? ''),
                         contentStyle: txtBold(
-                            14,
-                            (e.status == "WAIT_TECHNICAL" ||
-                                    e.status == "WAIT_MANAGER")
-                                ? greenColor9
-                                : genStatusColor(e.status ?? "")),
+                          14,
+                          (e.status == 'WAIT_TECHNICAL' ||
+                                  e.status == 'WAIT_MANAGER')
+                              ? greenColor9
+                              : genStatusColor(e.status ?? ''),
+                        ),
                       ),
                     ];
                     return Padding(
@@ -188,7 +195,7 @@ class _ConstructionRegistrationLetterTabState
                             context,
                             ConstructionRegistrationDetailsScreen.routeName,
                             arguments: {
-                              "cons": e,
+                              'cons': e,
                             },
                           );
                         },
@@ -196,7 +203,11 @@ class _ConstructionRegistrationLetterTabState
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 16, right: 16),
+                                top: 10,
+                                bottom: 10,
+                                left: 16,
+                                right: 16,
+                              ),
                               child: Row(
                                 children: [
                                   const PrimaryIcon(
@@ -210,33 +221,42 @@ class _ConstructionRegistrationLetterTabState
                                   hpad(20),
                                   Expanded(
                                     child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(e.constructionType!.name ?? "",
-                                              style: txtBold(
-                                                  14, grayScaleColorBase)),
-                                          vpad(4),
-                                          Wrap(
-                                            children: [
-                                              Text(
-                                                "${S.of(context).reg_date}: ",
-                                                style: txtMedium(
-                                                    12, grayScaleColor2),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          e.constructionType!.name ?? '',
+                                          style: txtBold(
+                                            14,
+                                            grayScaleColorBase,
+                                          ),
+                                        ),
+                                        vpad(4),
+                                        Wrap(
+                                          children: [
+                                            Text(
+                                              '${S.of(context).reg_date}: ',
+                                              style: txtMedium(
+                                                12,
+                                                grayScaleColor2,
                                               ),
-                                              Text(
-                                                Utils.dateTimeFormat(
-                                                  e.create_date ?? '',
-                                                  1,
-                                                ),
-                                                style: txtMedium(
-                                                    12, greenColorBase),
+                                            ),
+                                            Text(
+                                              Utils.dateTimeFormat(
+                                                e.create_date ?? '',
+                                                1,
                                               ),
-                                            ],
-                                          )
-                                        ]),
+                                              style: txtMedium(
+                                                12,
+                                                greenColorBase,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
@@ -255,29 +275,36 @@ class _ConstructionRegistrationLetterTabState
                                 },
                                 children: [
                                   ...listContent.map<TableRow>((i) {
-                                    return TableRow(children: [
-                                      TableCell(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 16),
-                                          child: Text(
-                                            i.title,
-                                            style:
-                                                txtMedium(12, grayScaleColor2),
+                                    return TableRow(
+                                      children: [
+                                        TableCell(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: 16,
+                                            ),
+                                            child: Text(
+                                              i.title,
+                                              style: txtMedium(
+                                                12,
+                                                grayScaleColor2,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      TableCell(
-                                        child: Text(i.content ?? "",
-                                            style: i.contentStyle),
-                                      )
-                                    ]);
+                                        TableCell(
+                                          child: Text(
+                                            i.content ?? '',
+                                            style: i.contentStyle,
+                                          ),
+                                        )
+                                      ],
+                                    );
                                   })
                                 ],
                               ),
                             ),
-                            if (e.status == "WAIT_PAY" ||
-                                e.status == "WAIT_OWNER")
+                            if (e.status == 'WAIT_PAY' ||
+                                e.status == 'WAIT_OWNER')
                               Row(
                                 children: [
                                   hpad(16),
@@ -295,7 +322,7 @@ class _ConstructionRegistrationLetterTabState
                                   )
                                 ],
                               ),
-                            if (e.status == "NEW")
+                            if (e.status == 'NEW')
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -314,12 +341,14 @@ class _ConstructionRegistrationLetterTabState
                                   ),
                                   PrimaryButton(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          ConstructionRegScreen.routeName,
-                                          arguments: {
-                                            "isEdit": true,
-                                            "data": e,
-                                          });
+                                      Navigator.pushNamed(
+                                        context,
+                                        ConstructionRegScreen.routeName,
+                                        arguments: {
+                                          'isEdit': true,
+                                          'data': e,
+                                        },
+                                      );
                                     },
                                     text: S.of(context).edit,
                                     buttonSize: ButtonSize.xsmall,

@@ -193,7 +193,7 @@ class ConstructionListPrv extends ChangeNotifier {
   getContructionDocumentList(BuildContext context) async {
     await APIConstruction.getConstructionDocumentList(
             context.read<ResidentInfoPrv>().residentId ?? "",
-            context.read<ResidentInfoPrv>().selectedApartment!.apartmentId ??
+            context.read<ResidentInfoPrv>().selectedApartment?.apartmentId ??
                 "")
         .then((v) {
       listDocument.clear();

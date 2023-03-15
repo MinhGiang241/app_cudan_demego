@@ -564,7 +564,7 @@
   "apartment_add_resident": "Căn hộ thêm cư dân",
   "place_issue": "Nơi cấp",
   "nationality": "Quốc tịch",
-  "resident_address": "Địa chỉ thường chú",
+  "resident_address": "Địa chỉ thường trú",
   "prov_city": "Tỉnh/Thành phố",
   "ward": "Quận/Huyện",
   "education_level": "Trình độ học vấn",
@@ -625,7 +625,7 @@
   "card_unit": "Thẻ",
   "card_unit2": "Cái",
   "plan_name": "Tên mặt bằng",
-  "per_res_address": "Địa chỉ thường chú",
+  "per_res_address": "Địa chỉ thường trú",
   "renter": "Người thuê",
   "buyer": "Chủ sở hữu",
   "dependent_host": "Phụ thuộc người mua",
@@ -641,5 +641,7 @@
   "confirmed_by_manager_resident": "Cư dân đã được xác nhận bởi BQL",
   "member_num": "Số thành viên",
   "no_home": "Không có căn hộ nào",
-  "card_list": "Danh sách thẻ"
+  "card_list": "Danh sách thẻ",
+  "success_cancel_reflection": "Hủy phản ánh thành công",
+  "cmnd_length_9": "Không được ít hơn 9 ký tự"
 }

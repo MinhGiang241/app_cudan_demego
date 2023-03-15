@@ -29,19 +29,19 @@ class ReflectionTab extends StatefulWidget {
 String _getStatus(int index) {
   switch (index) {
     case 0:
-      return "ALL";
+      return 'ALL';
     case 1:
-      return "WAIT_PROGRESS";
+      return 'WAIT_PROGRESS';
     case 2:
-      return "PROCESSING";
+      return 'PROCESSING';
     case 3:
-      return "PROCESSED";
+      return 'PROCESSED';
     case 4:
-      return "NEW";
+      return 'NEW';
     case 5:
-      return "CANCEL";
+      return 'CANCEL';
     default:
-      return "ALL";
+      return 'ALL';
   }
 }
 
@@ -56,24 +56,26 @@ class _ReflectionTabState extends State<ReflectionTab> {
     return FutureBuilder(
       future: context
           .read<ReflectionPrv>()
-          .getReflection(context, status, residentId ?? ""),
+          .getReflection(context, status, residentId ?? ''),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
           return PrimaryErrorWidget(
-              code: snapshot.hasError ? "err" : "1",
-              message: snapshot.data.toString(),
-              onRetry: () async {
-                setState(() {});
-              });
+            code: snapshot.hasError ? 'err' : '1',
+            message: snapshot.data.toString(),
+            onRetry: () async {
+              setState(() {});
+            },
+          );
         } else if (listReflection.isEmpty) {
           return SmartRefresher(
             controller: refreshController,
             enablePullDown: true,
             enablePullUp: false,
             header: WaterDropMaterialHeader(
-                backgroundColor: Theme.of(context).primaryColor),
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
             onRefresh: () {
               setState(() {});
             },
@@ -85,129 +87,159 @@ class _ReflectionTabState extends State<ReflectionTab> {
           );
         }
         return SmartRefresher(
-            controller: refreshController,
-            enablePullDown: true,
-            enablePullUp: false,
-            header: WaterDropMaterialHeader(
-                backgroundColor: Theme.of(context).primaryColor),
-            onRefresh: () {
-              setState(() {});
-            },
-            child: ListView(
-              children: [
-                vpad(12),
-                ...listReflection.map((e) {
-                  return Stack(
-                    children: [
-                      PrimaryCard(
-                        margin: const EdgeInsets.only(
-                            bottom: 16, left: 12, right: 12),
-                        onTap: () {
-                          if (e.status == 'PROCESSED') {
-                            Navigator.pushNamed(
-                                context, ReflectionProcessedDetails.routeName,
-                                arguments: e);
-                          } else {
-                            Navigator.pushNamed(
-                                context, CreateReflection.routeName,
-                                arguments: {
-                                  "isEdit": true,
-                                  "ref": e,
-                                  "status": e.status,
-                                });
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 14,
-                            horizontal: 16,
-                          ),
-                          child: Row(children: [
-                            const PrimaryIcon(
-                              icons: PrimaryIcons.mail,
+          controller: refreshController,
+          enablePullDown: true,
+          enablePullUp: false,
+          header: WaterDropMaterialHeader(
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+          onRefresh: () {
+            setState(() {});
+          },
+          child: ListView(
+            children: [
+              vpad(12),
+              ...listReflection.map((e) {
+                return Stack(
+                  children: [
+                    PrimaryCard(
+                      margin: const EdgeInsets.only(
+                        bottom: 16,
+                        left: 12,
+                        right: 12,
+                      ),
+                      onTap: () {
+                        if (e.status == 'PROCESSED') {
+                          Navigator.pushNamed(
+                            context,
+                            ReflectionProcessedDetails.routeName,
+                            arguments: e,
+                          );
+                        } else {
+                          Navigator.pushNamed(
+                            context,
+                            CreateReflection.routeName,
+                            arguments: {
+                              'isEdit': true,
+                              'ref': e,
+                              'status': e.status,
+                            },
+                          );
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 16,
+                        ),
+                        child: Row(
+                          children: [
+                            PrimaryIcon(
+                              icons: e.ticket_type == 'COMPLAIN'
+                                  ? PrimaryIcons.mail
+                                  : PrimaryIcons.feedback,
                               style: PrimaryIconStyle.gradient,
                               gradients: PrimaryIconGradient.yellow,
                               size: 32,
-                              padding: EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(12),
                               color: Colors.white,
                             ),
                             hpad(16),
                             Expanded(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                vpad(10),
-                                Text(
-                                  // (e.ticket_type == "COMPLAIN"
-                                  //         ? e.complainReason != null
-                                  //             ? e.complainReason!.content
-                                  //             : ""
-                                  //         : e.opinionContribute != null
-                                  //             ? e.opinionContribute!.content
-                                  //             : "") ??
-                                  e.opinionContribute!.content ?? "",
-                                  style: txtBold(16),
-                                ),
-                                vpad(4),
-                                Table(
-                                  textBaseline: TextBaseline.ideographic,
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.baseline,
-                                  columnWidths: const {
-                                    0: FlexColumnWidth(2),
-                                    1: FlexColumnWidth(2)
-                                  },
-                                  children: [
-                                    TableRow(children: [
-                                      Text('${S.of(context).created_date}:'),
-                                      Text(
-                                        Utils.dateFormat(e.date ?? "", 1),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  vpad(10),
+                                  Text(
+                                    // (e.ticket_type == "COMPLAIN"
+                                    //         ? e.complainReason != null
+                                    //             ? e.complainReason!.content
+                                    //             : ""
+                                    //         : e.opinionContribute != null
+                                    //             ? e.opinionContribute!.content
+                                    //             : "") ??
+                                    e.opinionContribute!.content ?? '',
+                                    style: txtBold(16),
+                                  ),
+                                  vpad(4),
+                                  Table(
+                                    textBaseline: TextBaseline.ideographic,
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.baseline,
+                                    columnWidths: const {
+                                      0: FlexColumnWidth(2),
+                                      1: FlexColumnWidth(2)
+                                    },
+                                    children: [
+                                      TableRow(
+                                        children: [
+                                          Text(
+                                            '${S.of(context).created_date}:',
+                                          ),
+                                          Text(
+                                            Utils.dateFormat(e.date ?? '', 1),
+                                          ),
+                                        ],
                                       ),
-                                    ]),
-                                    TableRow(children: [vpad(2), vpad(2)]),
-                                    TableRow(children: [
-                                      Text('${S.of(context).letter_num}:'),
-                                      Text(
-                                        e.code ?? "",
+                                      TableRow(children: [vpad(2), vpad(2)]),
+                                      TableRow(
+                                        children: [
+                                          Text('${S.of(context).letter_num}:'),
+                                          Text(
+                                            e.code ?? '',
+                                          ),
+                                        ],
                                       ),
-                                    ]),
-                                    TableRow(children: [vpad(2), vpad(2)]),
-                                    TableRow(children: [
-                                      Text('${S.of(context).status}:'),
-                                      Text(e.s!.name ?? "",
-                                          style: txtBold(14,
-                                              genStatusColor(e.status ?? "")))
-                                    ]),
-                                  ],
-                                )
-                              ],
-                            ))
-                          ]),
+                                      TableRow(children: [vpad(2), vpad(2)]),
+                                      TableRow(
+                                        children: [
+                                          Text('${S.of(context).status}:'),
+                                          Text(
+                                            e.s!.name ?? '',
+                                            style: txtBold(
+                                              14,
+                                              genStatusColor(e.status ?? ''),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 4),
-                          decoration: BoxDecoration(
-                              color: (genStatusColor(e.ticket_type as String)),
-                              borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(12),
-                                  bottomLeft: Radius.circular(8))),
-                          child: Text(
-                            genStatus(e.ticket_type ?? ""),
-                            style: txtSemiBold(12, Colors.white),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: (genStatusColor(e.ticket_type as String)),
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(8),
                           ),
                         ),
+                        child: Text(
+                          genStatus(e.ticket_type ?? ''),
+                          style: txtSemiBold(12, Colors.white),
+                        ),
                       ),
-                    ],
-                  );
-                }),
-                vpad(80),
-              ],
-            ));
+                    ),
+                  ],
+                );
+              }),
+              vpad(80),
+            ],
+          ),
+        );
       },
     );
   }
