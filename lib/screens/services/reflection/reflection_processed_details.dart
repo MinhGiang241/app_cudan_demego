@@ -1,10 +1,13 @@
+import 'dart:isolate';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:app_cudan/models/reflection.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/api_constant.dart';
@@ -56,14 +59,45 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
         Tween<double>(begin: 0, end: pi).animate(animationInfoController);
     rotateResultAnimation =
         Tween<double>(begin: 0, end: pi).animate(animationResultController);
+
+    IsolateNameServer.registerPortWithName(
+      _port.sendPort,
+      'downloader_send_port',
+    );
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
   }
 
   @override
   void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
     animationInfoController.dispose();
     animationResultController.dispose();
     super.dispose();
   }
+
+  ReceivePort _port = ReceivePort();
 
   bool isShowInfo = true;
   bool isShowResult = true;
@@ -202,7 +236,8 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             Text(
                               S.of(context).photos,
                               style: txtBodySmallRegular(
-                                  color: grayScaleColorBase),
+                                color: grayScaleColorBase,
+                              ),
                             ),
                           if (arg.files!.isNotEmpty) vpad(12),
                           if (arg.files!.isNotEmpty)
@@ -282,6 +317,13 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             enable: false,
                           ),
                           vpad(12),
+                          PrimaryTextField(
+                            maxLines: 3,
+                            label: S.of(context).note,
+                            initialValue: arg.result_note ?? '',
+                            enable: false,
+                          ),
+                          vpad(12),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -294,12 +336,15 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           ...arg.document!.map(
                             (e) => InkWell(
                               onTap: () async {
-                                await launchUrl(
-                                  Uri.parse(
-                                    '${ApiConstants.uploadURL}?load=${e.id}',
-                                  ),
-                                  mode: LaunchMode.externalApplication,
+                                await Utils.downloadFile(
+                                  url: '${ApiConstants.uploadURL}?load=${e.id}',
                                 );
+                                // await launchUrl(
+                                //   Uri.parse(
+                                //     '${ApiConstants.uploadURL}?load=${e.id}',
+                                //   ),
+                                //   mode: LaunchMode.externalApplication,
+                                // );
                               },
                               child: Align(
                                 alignment: Alignment.centerLeft,

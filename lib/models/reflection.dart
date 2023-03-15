@@ -11,6 +11,7 @@ class Reflection {
   String? createdTime;
   String? updatedTime;
   String? ticket_type;
+  String? result_note;
   String? date;
   String? apartmentId;
   String? residentId;
@@ -48,48 +49,50 @@ class Reflection {
   OpinionContribute? opinionContribute;
   List<FileTicket>? files;
   List<FileTicket>? document;
-  Reflection(
-      {this.id,
-      this.r,
-      this.description,
-      this.opinion_note,
-      this.cancel_reason,
-      this.areaId,
-      this.areaTypeId,
-      this.complainReason,
-      this.complaintReasonId,
-      this.createdTime,
-      this.updatedTime,
-      this.ticket_type,
-      this.date,
-      this.apartmentId,
-      this.residentId,
-      this.phoneNumber,
-      this.opinionContributeId,
-      this.status,
-      this.code,
-      this.staff_create,
-      this.type_handle,
-      this.isMobile,
-      this.department_asignment,
-      this.department_division,
-      this.employee_asignment,
-      this.employee_division,
-      this.resident_code,
-      this.employee_division_form,
-      this.employee_division_userName,
-      this.position_asignment,
-      this.position_division,
-      this.position_division_form,
-      this.employee_handle,
-      this.employee_handle_userName,
-      this.position_handle,
-      this.process_content,
-      this.s,
-      this.opinionContribute,
-      this.files,
-      this.document,
-      this.priority_level});
+  Reflection({
+    this.id,
+    this.r,
+    this.result_note,
+    this.description,
+    this.opinion_note,
+    this.cancel_reason,
+    this.areaId,
+    this.areaTypeId,
+    this.complainReason,
+    this.complaintReasonId,
+    this.createdTime,
+    this.updatedTime,
+    this.ticket_type,
+    this.date,
+    this.apartmentId,
+    this.residentId,
+    this.phoneNumber,
+    this.opinionContributeId,
+    this.status,
+    this.code,
+    this.staff_create,
+    this.type_handle,
+    this.isMobile,
+    this.department_asignment,
+    this.department_division,
+    this.employee_asignment,
+    this.employee_division,
+    this.resident_code,
+    this.employee_division_form,
+    this.employee_division_userName,
+    this.position_asignment,
+    this.position_division,
+    this.position_division_form,
+    this.employee_handle,
+    this.employee_handle_userName,
+    this.position_handle,
+    this.process_content,
+    this.s,
+    this.opinionContribute,
+    this.files,
+    this.document,
+    this.priority_level,
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -98,6 +101,7 @@ class Reflection {
       'updatedTime': updatedTime,
       'ticket_type': ticket_type,
       'date': date,
+      'result_note': result_note,
       'apartmentId': apartmentId,
       'residentId': residentId,
       'phoneNumber': phoneNumber,
@@ -136,103 +140,104 @@ class Reflection {
 
   factory Reflection.fromMap(Map<String, dynamic> map) {
     return Reflection(
-        id: map['_id'] != null ? map['_id'] as String : null,
-        createdTime:
-            map['createdTime'] != null ? map['createdTime'] as String : null,
-        updatedTime:
-            map['updatedTime'] != null ? map['updatedTime'] as String : null,
-        ticket_type:
-            map['ticket_type'] != null ? map['ticket_type'] as String : null,
-        date: map['date'] != null ? map['date'] as String : null,
-        apartmentId:
-            map['apartmentId'] != null ? map['apartmentId'] as String : null,
-        residentId:
-            map['residentId'] != null ? map['residentId'] as String : null,
-        phoneNumber:
-            map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
-        opinionContributeId: map['opinionContributeId'] != null
-            ? map['opinionContributeId'] as String
-            : null,
-        status: map['status'] != null ? map['status'] as String : null,
-        code: map['code'] != null ? map['code'] as String : null,
-        staff_create:
-            map['staff_create'] != null ? map['staff_create'] as String : null,
-        type_handle:
-            map['type_handle'] != null ? map['type_handle'] as String : null,
-        isMobile: map['isMobile'] != null ? map['isMobile'] as bool : null,
-        department_asignment: map['department_asignment'] != null
-            ? map['department_asignment'] as String
-            : null,
-        department_division: map['department_division'] != null
-            ? map['department_division'] as String
-            : null,
-        employee_asignment: map['employee_asignment'] != null
-            ? map['employee_asignment'] as String
-            : null,
-        employee_division: map['employee_division'] != null
-            ? map['employee_division'] as String
-            : null,
-        resident_code: map['resident_code'] != null
-            ? map['resident_code'] as String
-            : null,
-        employee_division_form: map['employee_division_form'] != null
-            ? map['employee_division_form'] as String
-            : null,
-        employee_division_userName: map['employee_division_userName'] != null
-            ? map['employee_division_userName'] as String
-            : null,
-        position_asignment: map['position_asignment'] != null
-            ? map['position_asignment'] as String
-            : null,
-        position_division: map['position_division'] != null
-            ? map['position_division'] as String
-            : null,
-        position_division_form: map['position_division_form'] != null
-            ? map['position_division_form'] as String
-            : null,
-        employee_handle: map['employee_handle'] != null
-            ? map['employee_handle'] as String
-            : null,
-        employee_handle_userName: map['employee_handle_userName'] != null
-            ? map['employee_handle_userName'] as String
-            : null,
-        position_handle: map['position_handle'] != null
-            ? map['position_handle'] as String
-            : null,
-        process_content: map['process_content'] != null
-            ? map['process_content'] as String
-            : null,
-        priority_level: map['priority_level'] != null
-            ? map['priority_level'] as String
-            : null,
-        description:
-            map['description'] != null ? map['description'] as String : null,
-        areaId: map['areaId'] != null ? map['areaId'] as String : null,
-        areaTypeId:
-            map['areaTypeId'] != null ? map['areaTypeId'] as String : null,
-        cancel_reason: map['cancel_reason'] != null
-            ? map['cancel_reason'] as String
-            : null,
-        r: map['r'] != null ? Reason.fromJson(map['r']) : null,
-        opinionContribute: map['opinionContribute'] != null
-            ? OpinionContribute.fromMap(
-                map['opinionContribute'] as Map<String, dynamic>)
-            : null,
-        complainReason: map['complainReason'] != null
-            ? ComplainReason.fromMap(
-                map['complainReason'] as Map<String, dynamic>)
-            : null,
-        files: map['files'] != null
-            ? map['files']
-                .map<FileTicket>((i) => FileTicket.fromMap(i))
-                .toList()
-            : [],
-        document: map['document'] != null
-            ? map['document']
-                .map<FileTicket>((i) => FileTicket.fromMap(i))
-                .toList()
-            : [],
-        s: map['s'] != null ? Status.fromJson(map['s']) : null);
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      ticket_type:
+          map['ticket_type'] != null ? map['ticket_type'] as String : null,
+      date: map['date'] != null ? map['date'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      phoneNumber:
+          map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
+      opinionContributeId: map['opinionContributeId'] != null
+          ? map['opinionContributeId'] as String
+          : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      staff_create:
+          map['staff_create'] != null ? map['staff_create'] as String : null,
+      type_handle:
+          map['type_handle'] != null ? map['type_handle'] as String : null,
+      isMobile: map['isMobile'] != null ? map['isMobile'] as bool : null,
+      department_asignment: map['department_asignment'] != null
+          ? map['department_asignment'] as String
+          : null,
+      department_division: map['department_division'] != null
+          ? map['department_division'] as String
+          : null,
+      employee_asignment: map['employee_asignment'] != null
+          ? map['employee_asignment'] as String
+          : null,
+      employee_division: map['employee_division'] != null
+          ? map['employee_division'] as String
+          : null,
+      resident_code:
+          map['resident_code'] != null ? map['resident_code'] as String : null,
+      employee_division_form: map['employee_division_form'] != null
+          ? map['employee_division_form'] as String
+          : null,
+      employee_division_userName: map['employee_division_userName'] != null
+          ? map['employee_division_userName'] as String
+          : null,
+      position_asignment: map['position_asignment'] != null
+          ? map['position_asignment'] as String
+          : null,
+      position_division: map['position_division'] != null
+          ? map['position_division'] as String
+          : null,
+      position_division_form: map['position_division_form'] != null
+          ? map['position_division_form'] as String
+          : null,
+      employee_handle: map['employee_handle'] != null
+          ? map['employee_handle'] as String
+          : null,
+      employee_handle_userName: map['employee_handle_userName'] != null
+          ? map['employee_handle_userName'] as String
+          : null,
+      position_handle: map['position_handle'] != null
+          ? map['position_handle'] as String
+          : null,
+      process_content: map['process_content'] != null
+          ? map['process_content'] as String
+          : null,
+      priority_level: map['priority_level'] != null
+          ? map['priority_level'] as String
+          : null,
+      result_note:
+          map['result_note'] != null ? map['result_note'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      areaId: map['areaId'] != null ? map['areaId'] as String : null,
+      areaTypeId:
+          map['areaTypeId'] != null ? map['areaTypeId'] as String : null,
+      cancel_reason:
+          map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
+      r: map['r'] != null ? Reason.fromJson(map['r']) : null,
+      opinionContribute: map['opinionContribute'] != null
+          ? OpinionContribute.fromMap(
+              map['opinionContribute'] as Map<String, dynamic>,
+            )
+          : null,
+      complainReason: map['complainReason'] != null
+          ? ComplainReason.fromMap(
+              map['complainReason'] as Map<String, dynamic>,
+            )
+          : null,
+      files: map['files'] != null
+          ? map['files'].map<FileTicket>((i) => FileTicket.fromMap(i)).toList()
+          : [],
+      document: map['document'] != null
+          ? map['document']
+              .map<FileTicket>((i) => FileTicket.fromMap(i))
+              .toList()
+          : [],
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
+    );
   }
 
   String toJson() => json.encode(toMap());

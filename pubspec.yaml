@@ -81,6 +81,7 @@ dependencies:
   loggy: ^2.0.3
   smooth_page_indicator: ^1.0.1
   diacritic: ^0.1.3
+  json_dynamic_widget: ^5.1.6+1
 
 dev_dependencies:
   flutter_test:

@@ -82,46 +82,6 @@ class _MessageState extends State<Message> {
     }
   }
 
-  Future download2(Dio dio, String url, String savePath) async {
-    try {
-      Response response = await dio.get(
-        url,
-        onReceiveProgress: showDownloadProgress,
-        //Received data with List<int>
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          validateStatus: (status) {
-            return status! < 500;
-          },
-          headers: {
-            "Connection": "keep-alive",
-            "Accept-Encoding": "gzip, deflate, br",
-            'Accept':
-                'text/html,application/xhtml+xml,application/xml,file/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange,file/pdf;',
-            'Host': 'chat.masflex.vn',
-            'Cookie':
-                "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
-          },
-        ),
-      );
-      print(response.headers);
-      File file = File(savePath);
-      var raf = file.openSync(mode: FileMode.write);
-      // response.data is List<int> type
-      raf.writeFromSync(response.data);
-      await raf.close();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void showDownloadProgress(received, total) {
-    if (total != -1) {
-      print((received / total * 100).toStringAsFixed(0) + "%");
-    }
-  }
-
   ReceivePort _port = ReceivePort();
 
   @override
@@ -140,7 +100,7 @@ class _MessageState extends State<Message> {
       int progress = data[2];
 
       if (status == DownloadTaskStatus.complete) {
-        print("Download complete");
+        print('Download complete');
       }
       setState(() {});
     });

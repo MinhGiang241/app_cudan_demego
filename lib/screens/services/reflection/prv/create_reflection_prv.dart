@@ -21,12 +21,12 @@ class CreateReflectionPrv extends ChangeNotifier {
       ticketCode = ref!.code;
       existedImage = ref!.files ?? [];
       typeController.text = ref!.ticket_type!;
-      reasonController.text = ref!.opinionContributeId ?? "";
-      describeController.text = ref!.description ?? "";
-      zoneTypeController.text = ref!.areaTypeId ?? "";
+      reasonController.text = ref!.opinionContributeId ?? '';
+      describeController.text = ref!.description ?? '';
+      zoneTypeController.text = ref!.areaTypeId ?? '';
       if (ref!.areaTypeId != null) {
         getListAreaByType(ref!.areaTypeId).then((_) {
-          zoneController.text = ref!.areaId ?? "";
+          zoneController.text = ref!.areaId ?? '';
           notifyListeners();
         });
       }
@@ -124,7 +124,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         isMobile: true,
         phoneNumber: phoneNumber,
         residentId: residentId,
-        status: !isSend ? "NEW" : "WAIT_PROGRESS",
+        status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
         areaId: zoneController.text.trim(),
@@ -137,17 +137,21 @@ class CreateReflectionPrv extends ChangeNotifier {
           .then((v) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         Utils.showSuccessMessage(
-            context: context,
-            e: isSend
-                ? S.of(context).success_send_ticket
-                : ref != null
-                    ? S.of(context).success_edit_reflection
-                    : S.of(context).success_add_ticket,
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, ReflectionScreen.routeName, (route) => route.isFirst,
-                  arguments: {'initTab': isSend ? 1 : 0});
-            });
+          context: context,
+          e: isSend
+              ? S.of(context).success_send_ticket
+              : ref != null
+                  ? S.of(context).success_edit_reflection
+                  : S.of(context).success_add_ticket,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              ReflectionScreen.routeName,
+              (route) => route.isFirst,
+              arguments: {'initTab': isSend ? 1 : 4},
+            );
+          },
+        );
       }).catchError((e) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         Utils.showErrorMessage(context, e);
