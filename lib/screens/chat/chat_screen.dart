@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
 
 import 'package:app_cudan/widgets/primary_loading.dart';
@@ -56,7 +58,9 @@ class _ChatScreenState extends State<ChatScreen> {
           leading: Padding(
             padding: const EdgeInsets.all(4.0),
             child: CircleAvatar(
-                radius: 32, child: Image.asset(AppImage.receiption)),
+              radius: 32,
+              child: Image.asset(AppImage.receiption),
+            ),
           ),
           // centerTitle: false,
           title: Text(S.of(context).customer_care),
@@ -66,73 +70,90 @@ class _ChatScreenState extends State<ChatScreen> {
           bloc: bloc,
           builder: (context, state) {
             if (state is ChatMessageInitial) {
-              state.webSocketChannel = state.webSocketService
-                  .connectToWebSocket(WebsocketConnect.webSocketUrl,
-                      authToken: bloc.authToken);
-              state.webSocketService.getLastes50Message(
-                state.webSocketChannel!,
-                WebsocketConnect.room,
+              state.webSocketChannel =
+                  state.webSocketService.connectToWebSocketLiveChat(
+                WebsocketConnect.webSocketUrl,
               );
-              // state.registerGuestChat(
-              //     "sasdasd", "minhgiang", "minhgiang241@gmail.com");
-              // state.sendMessageLiveChat(
-              //     "sasdasd", "sasdasd", "sasdasd", "message");
+              // state.webSocketService.getLastes50Message(
+              //   state.webSocketChannel!,
+              //   WebsocketConnect.room,
+              // );
 
-              // state.streamLiveChatRoom("sasdasd", "id", "param");
+              // state.webSocketChannel =
+              //     state.webSocketService.connectToWebSocket(
+              //   WebsocketConnect.webSocketUrl,
+              //   authToken: bloc.authToken,
+              // );
+              // state.registerGuestChat(
+              //   "token",
+              //   "minhgiang2",
+              //   "minhgiang241@gmail.com",
+              // );
+              // state.getInitialDataLive();
+              var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+              var roomId =
+                  context.read<ResidentInfoPrv>().userInfo?.account?.id;
+              state.senMessageLiveChat('1', token, token, "message");
+              state.streamLiveChatRoom(token!, token, roomId!);
 
               return SafeArea(
-                  child: Column(
-                children: [
-                  Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
                       child: StreamBuilder(
-                    stream: state.webSocketChannel!.stream,
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                          return const Center(child: PrimaryLoading());
-                        case ConnectionState.done:
-                          return const Center(child: PrimaryLoading());
-                        case ConnectionState.waiting:
-                          return const Center(child: PrimaryLoading());
-                        case ConnectionState.active:
-                          return _initStateRender(snapshot, state, bloc);
-                        default:
-                          return const Center(child: PrimaryLoading());
-                      }
-                    },
-                  )),
-                  Align(
-                    alignment: Alignment.center,
-                    child: IntrinsicWidth(
-                      child: PrimaryCard(
-                        background: grayScaleColor4,
-                        padding: const EdgeInsets.all(6),
-                        onTap: () {
-                          bloc.add(LoadChatMessageStart());
+                        stream: state.webSocketChannel!.stream,
+                        builder: (context, snapshot) {
+                          log(snapshot.toString());
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                              return const Center(child: PrimaryLoading());
+                            case ConnectionState.done:
+                              return const Center(child: PrimaryLoading());
+                            case ConnectionState.waiting:
+                              return const Center(child: PrimaryLoading());
+                            case ConnectionState.active:
+                              return _initStateRender(snapshot, state, bloc);
+                            default:
+                              return const Center(child: PrimaryLoading());
+                          }
                         },
-                        child: Row(
-                          children: [
-                            const Icon(Icons.login),
-                            hpad(10),
-                            Text(
-                              S.of(context).start_chat,
-                              overflow: TextOverflow.ellipsis,
-                              style: txtRegular(14, grayScaleColorBase),
-                            )
-                          ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicWidth(
+                        child: PrimaryCard(
+                          background: grayScaleColor4,
+                          padding: const EdgeInsets.all(6),
+                          onTap: () {
+                            bloc.add(LoadChatMessageStart());
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(Icons.login),
+                              hpad(10),
+                              Text(
+                                S.of(context).start_chat,
+                                overflow: TextOverflow.ellipsis,
+                                style: txtRegular(14, grayScaleColorBase),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  vpad(10)
-                ],
-              ));
+                    vpad(10)
+                  ],
+                ),
+              );
             } else if (state is ChatMessageGreeting) {
               return vpad(0);
             } else if (state is ChatMessageStart) {
-              state.webSocketChannel = state.webSocketService
-                  .connectToWebSocket(WebsocketConnect.webSocketUrl,
-                      authToken: bloc.authToken);
+              state.webSocketChannel =
+                  state.webSocketService.connectToWebSocket(
+                WebsocketConnect.webSocketUrl,
+                authToken: bloc.authToken,
+              );
               state.webSocketService.streamChannelMessagesSubscribe(
                 state.webSocketChannel!,
                 WebsocketConnect.channel,
@@ -148,9 +169,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   rocket_notification.Notification? notification =
                       snapshot.hasData
                           ? rocket_notification.Notification.fromMap(
-                              jsonDecode(snapshot.data))
+                              jsonDecode(snapshot.data),
+                            )
                           : null;
-                  print(snapshot);
+
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                       return const Center(child: PrimaryLoading());
@@ -201,20 +223,21 @@ class _ChatScreenState extends State<ChatScreen> {
       state.addMessage(data.fields!.args![0]);
     }
 
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      state.webSocketService.streamChannelMessagesSubscribe(
-        state.webSocketChannel!,
-        WebsocketConnect.channel,
-      );
-    });
+    // Timer.periodic(const Duration(seconds: 1), (timer) {
+    //   state.webSocketService.streamChannelMessagesSubscribe(
+    //     state.webSocketChannel!,
+    //     WebsocketConnect.channel,
+    //   );
+    // });
 
     return Column(
       children: [
         Expanded(
-            child: Messages(
-          messageMap: state.messagesMap,
-          messageBloc: state,
-        )),
+          child: Messages(
+            messageMap: state.messagesMap,
+            messageBloc: state,
+          ),
+        ),
       ],
     );
   }
@@ -238,17 +261,19 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           if (state.showGreeting)
             ListMessageSubject(
-                state: state,
-                toogleGreeting: () {
-                  setState(() {
-                    state.toogleGreeting();
-                  });
-                }),
+              state: state,
+              toogleGreeting: () {
+                setState(() {
+                  state.toogleGreeting();
+                });
+              },
+            ),
           Expanded(
-              child: Messages(
-            messageMap: state.messagesMap,
-            messageBloc: state,
-          )),
+            child: Messages(
+              messageMap: state.messagesMap,
+              messageBloc: state,
+            ),
+          ),
           Align(
             alignment: Alignment.center,
             child: IntrinsicWidth(
@@ -257,13 +282,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 padding: const EdgeInsets.all(6),
                 onTap: () {
                   Utils.showConfirmMessage(
-                      context: context,
-                      title: S.of(context).end,
-                      content: S.of(context).confirm_end_chat,
-                      onConfirm: () {
-                        Navigator.pop(context);
-                        bloc.add(BackChatMessageInit());
-                      });
+                    context: context,
+                    title: S.of(context).end,
+                    content: S.of(context).confirm_end_chat,
+                    onConfirm: () {
+                      Navigator.pop(context);
+                      bloc.add(BackChatMessageInit());
+                    },
+                  );
 
                   // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
                 },

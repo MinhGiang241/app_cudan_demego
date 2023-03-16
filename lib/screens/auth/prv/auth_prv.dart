@@ -63,27 +63,32 @@ class AuthPrv extends ChangeNotifier {
   }
 
   Future<void> onSignIn(
-      BuildContext context, String account, String pass) async {
+    BuildContext context,
+    String account,
+    String pass,
+  ) async {
     isLoading = true;
     notifyListeners();
 
     onError(String va) {
       Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.error(
-              // msg: '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
-              msg: va.contains("host")
-                  ? S.of(context).err_conn
-                  : '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}'));
+        context: context,
+        dialog: PrimaryDialog.error(
+          // msg: '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
+          msg: va.contains('host')
+              ? S.of(context).err_conn
+              : '${S.of(context).incorrect_usn_pass} ${S.of(context).retry}',
+        ),
+      );
     }
 
     await APIAuth.signIn(
-            context: context,
-            username: account,
-            password: pass,
-            remember: remember,
-            onError: onError)
-        .then((value) async {
+      context: context,
+      username: account,
+      password: pass,
+      remember: remember,
+      onError: onError,
+    ).then((value) async {
       if (value != null) {
         authStatus = AuthStatus.auth;
 
@@ -104,8 +109,8 @@ class AuthPrv extends ChangeNotifier {
                     ? context.read<ResidentInfoPrv>().userInfo!.id
                     : null;
             await APITower.getUserOwnInfo(
-                    context.read<ResidentInfoPrv>().residentId ?? "")
-                .then((v) async {
+              context.read<ResidentInfoPrv>().residentId ?? '',
+            ).then((v) async {
               context.read<ResidentInfoPrv>().listOwn.clear();
               v.forEach((i) {
                 if (i['status'] == 'ACTIVE' &&
@@ -139,7 +144,9 @@ class AuthPrv extends ChangeNotifier {
                 );
               } else {
                 Navigator.pushReplacementNamed(
-                    context, ProjectSelectionScreen.routeName);
+                  context,
+                  ProjectSelectionScreen.routeName,
+                );
               }
 
               // Navigator.of(context)
@@ -237,44 +244,53 @@ class AuthPrv extends ChangeNotifier {
     });
   }
 
-  Future<void> onCreateAccount(BuildContext context, String user, String name,
-      String email, String pass, String cPass) async {
+  Future<void> onCreateAccount(
+    BuildContext context,
+    String user,
+    String name,
+    String email,
+    String pass,
+    String cPass,
+  ) async {
     await APIAuth.createResidentAccount(
-            context: context,
-            user: user,
-            name: name,
-            email: email,
-            passWord: pass,
-            confirmPassword: cPass)
-        .then((value) {
+      context: context,
+      user: user,
+      name: name,
+      email: email,
+      passWord: pass,
+      confirmPassword: cPass,
+    ).then((value) {
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_sign_up,
-          onClose: () {
-            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-          });
+        context: context,
+        e: S.of(context).success_sign_up,
+        onClose: () {
+          Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+        },
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
   }
 
   Future<void> onVerify(
-      BuildContext context,
-      String name,
-      String mail,
-      String phone,
-      String otp,
-      bool isFogotPass,
-      bool isPhone,
-      Function verify) async {
+    BuildContext context,
+    String name,
+    String mail,
+    String phone,
+    String otp,
+    bool isFogotPass,
+    bool isPhone,
+    Function verify,
+  ) async {
     if (isFogotPass) {
       await APIAuth.verifyOtp(otp, isPhone ? phone : mail).then((v) {
         Utils.pushScreen(
-            context,
-            ResetPassScreen(
-              user: name,
-              token: '',
-            ));
+          context,
+          ResetPassScreen(
+            user: name,
+            token: '',
+          ),
+        );
       }).catchError((e) {
         Utils.showErrorMessage(context, e);
       });
@@ -292,63 +308,65 @@ class AuthPrv extends ChangeNotifier {
 
   Future<void> onSignOut(BuildContext context) async {
     Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.custom(
-          title: S.of(context).sign_out,
-          content: Column(
-            children: [
-              Text(S.of(context).sign_out_msg),
-              vpad(16),
-              Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      text: S.of(context).sign_out,
-                      buttonSize: ButtonSize.small,
-                      isFit: true,
-                      buttonType: ButtonType.secondary,
-                      secondaryBackgroundColor: redColor2,
-                      onTap: () async {
-                        Utils.pop(context, true);
-                        await APIAuth.signOut(context: context);
-                        authStatus = AuthStatus.unauthen;
-                        context.read<ResidentInfoPrv>().clearData();
+      context: context,
+      dialog: PrimaryDialog.custom(
+        title: S.of(context).sign_out,
+        content: Column(
+          children: [
+            Text(S.of(context).sign_out_msg),
+            vpad(16),
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButton(
+                    text: S.of(context).sign_out,
+                    buttonSize: ButtonSize.small,
+                    isFit: true,
+                    buttonType: ButtonType.secondary,
+                    secondaryBackgroundColor: redColor2,
+                    onTap: () async {
+                      Utils.pop(context, true);
+                      await APIAuth.signOut(context: context);
+                      authStatus = AuthStatus.unauthen;
+                      context.read<ResidentInfoPrv>().clearData();
 
-                        context.read<AuthPrv>().account = null;
-                        context.read<AuthPrv>().clearData();
-                        notifyListeners();
-                        var acc = await PrfData.shared.getSignInStore();
+                      context.read<AuthPrv>().account = null;
+                      context.read<AuthPrv>().clearData();
+                      notifyListeners();
+                      var acc = await PrfData.shared.getSignInStore();
 
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            SignInScreen.routeName,
-                            ((route) => route.isCurrent),
-                            arguments: {
-                              'fromSignout': true,
-                              "c": acc != null ? acc['acc'] : null,
-                              "p": acc != null ? acc['pass'] : null,
-                            });
-                      },
-                    ),
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        SignInScreen.routeName,
+                        ((route) => route.isCurrent),
+                        arguments: {
+                          'fromSignout': true,
+                          'c': acc != null ? acc['acc'] : null,
+                          'p': acc != null ? acc['pass'] : null,
+                        },
+                      );
+                    },
                   ),
-                  hpad(24),
-                  Expanded(
-                    child: PrimaryButton(
-                      isFit: true,
-                      text: S.of(context).cancel,
-                      buttonSize: ButtonSize.small,
-                      buttonType: ButtonType.secondary,
-                      secondaryBackgroundColor: primaryColor3,
-                      textColor: Colors.white,
-                      onTap: () {
-                        Utils.pop(context);
-                      },
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        )).then((value) async {
+                ),
+                hpad(24),
+                Expanded(
+                  child: PrimaryButton(
+                    isFit: true,
+                    text: S.of(context).cancel,
+                    buttonSize: ButtonSize.small,
+                    buttonType: ButtonType.secondary,
+                    secondaryBackgroundColor: primaryColor3,
+                    textColor: Colors.white,
+                    onTap: () {
+                      Utils.pop(context);
+                    },
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    ).then((value) async {
       if (value != null) {
         if ((value as bool)) {
           await APIAuth.signOut(context: context).then((value) async {

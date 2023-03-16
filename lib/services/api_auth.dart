@@ -38,11 +38,12 @@ class APIAuth {
     }
 
     return await ApiService.shared.getClient(
-        username: user,
-        password: password,
-        onError: onError,
-        context: context,
-        remember: remember);
+      username: user,
+      password: password,
+      onError: onError,
+      context: context,
+      remember: remember,
+    );
   }
 
   static getAccountInfo() async {

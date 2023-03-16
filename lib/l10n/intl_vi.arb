@@ -643,5 +643,9 @@
   "no_home": "Không có căn hộ nào",
   "card_list": "Danh sách thẻ",
   "success_cancel_reflection": "Hủy phản ánh thành công",
-  "cmnd_length_9": "Không được ít hơn 9 ký tự"
+  "cmnd_length_9": "Không được ít hơn 9 ký tự",
+  "not_greater_than_today": "Không lớn hơn ngày hiện tại",
+  "registered_card": "Thẻ đã đăng ký",
+  "confirmed_card": "Thẻ được xác nhận bởi BQL",
+  "select_card_type": "Chọn loại thẻ"
 }

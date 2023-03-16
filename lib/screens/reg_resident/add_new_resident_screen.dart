@@ -347,7 +347,25 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                     suffixIcon: const PrimaryIcon(
                                       icons: PrimaryIcons.calendar,
                                     ),
-                                    validator: Utils.emptyValidator,
+                                    validator: (v) {
+                                      var now = DateTime.now();
+                                      var today = DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        24,
+                                      );
+                                      if (v!.isEmpty) {
+                                        return '';
+                                      } else if (context
+                                              .read<AddNewResidentPrv>()
+                                              .birthDate!
+                                              .compareTo(today) >
+                                          0) {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
                                     controller: context
                                         .read<AddNewResidentPrv>()
                                         .birthController,

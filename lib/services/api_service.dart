@@ -36,12 +36,13 @@ class ApiService {
 
   final _graphqlLink = HttpLink(ApiConstants.baseURL);
 
-  Future<oauth2.Client?> getClient(
-      {required BuildContext context,
-      required String username,
-      required String password,
-      bool remember = false,
-      ErrorHandleFunc? onError}) async {
+  Future<oauth2.Client?> getClient({
+    required BuildContext context,
+    required String username,
+    required String password,
+    bool remember = false,
+    ErrorHandleFunc? onError,
+  }) async {
     userName = username;
     passWord = password;
 
@@ -57,8 +58,12 @@ class ApiService {
     }
   }
 
-  Future<oauth2.Client?> _getCre(String username, String password,
-      ErrorHandleFunc? onError, remember) async {
+  Future<oauth2.Client?> _getCre(
+    String username,
+    String password,
+    ErrorHandleFunc? onError,
+    remember,
+  ) async {
     final authorizationEndpoint = Uri.parse(tokenEndpointUrl);
     try {
       final cli = await oauth2.resourceOwnerPasswordGrant(
@@ -142,14 +147,15 @@ class ApiService {
     return client!.credentials.accessToken;
   }
 
-  Future<Map<String, dynamic>> postApi(
-      {dynamic data,
-      required String path,
-      bool useToken = true,
-      ErrorHandleFunc? onError,
-      bool remember = false,
-      OnSendProgress? onSendProgress,
-      Options? op}) async {
+  Future<Map<String, dynamic>> postApi({
+    dynamic data,
+    required String path,
+    bool useToken = true,
+    ErrorHandleFunc? onError,
+    bool remember = false,
+    OnSendProgress? onSendProgress,
+    Options? op,
+  }) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
@@ -190,8 +196,12 @@ class ApiService {
       }
     }
     try {
-      final response = await _dio.post(path,
-          data: data, options: options, onSendProgress: onSendProgress);
+      final response = await _dio.post(
+        path,
+        data: data,
+        options: options,
+        onSendProgress: onSendProgress,
+      );
       // print(data);
       return {"data": response.toString(), "name": data.fields[0].value};
     } on DioError catch (e) {
@@ -212,12 +222,13 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> getApi(
-      {required String path,
-      bool useToken = true,
-      bool remember = false,
-      Map<String, dynamic>? params,
-      ErrorHandleFunc? onError}) async {
+  Future<Map<String, dynamic>> getApi({
+    required String path,
+    bool useToken = true,
+    bool remember = false,
+    Map<String, dynamic>? params,
+    ErrorHandleFunc? onError,
+  }) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();
@@ -272,14 +283,15 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> deleteApi(
-      {dynamic data,
-      required String path,
-      required BuildContext context,
-      bool useToken = true,
-      bool remember = false,
-      ErrorHandleFunc? onError,
-      OnSendProgress? onSendProgress}) async {
+  Future<Map<String, dynamic>> deleteApi({
+    dynamic data,
+    required String path,
+    required BuildContext context,
+    bool useToken = true,
+    bool remember = false,
+    ErrorHandleFunc? onError,
+    OnSendProgress? onSendProgress,
+  }) async {
     Options? options;
     if (useToken) {
       var client = await getExistClient();

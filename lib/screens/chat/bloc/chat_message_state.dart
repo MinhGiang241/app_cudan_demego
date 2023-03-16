@@ -11,6 +11,7 @@ class ChatMessageInitial extends ChatMessageState {
     this.authToken,
   });
 
+  @override
   String? authToken;
   User? user;
   WebSocketChannel? webSocketChannel;
@@ -27,15 +28,44 @@ class ChatMessageInitial extends ChatMessageState {
     webSocketService.registerGuestChat(webSocketChannel!, token, name, email);
   }
 
-  void sendMessageLiveChat(
-      String id, String rid, String token, String message) {
+  void getInitialDataLive() {
+    webSocketService.getInitialDataLive(
+      webSocketChannel!,
+    );
+  }
+
+  void senMessageLiveChat(id, rid, token, message) {
     webSocketService.sendMessageLiveChat(
-        webSocketChannel!, id, rid, token, message);
+      webSocketChannel!,
+      id,
+      rid,
+      token,
+      message,
+    );
+  }
+
+  void sendMessageLiveChat(
+    String id,
+    String rid,
+    String token,
+    String message,
+  ) {
+    webSocketService.sendMessageLiveChat(
+      webSocketChannel!,
+      id,
+      rid,
+      token,
+      message,
+    );
   }
 
   void streamLiveChatRoom(String visitorToken, String id, String param) {
     webSocketService.streamLiveChatRoom(
-        webSocketChannel!, visitorToken, id, param);
+      webSocketChannel!,
+      visitorToken,
+      id,
+      param,
+    );
   }
 
   void addMessage(MessageChat m) {
@@ -132,7 +162,10 @@ class ChatMessageStart extends ChatMessageState {
   void sendGreetingMessage(String val) {
     if (val.isNotEmpty) {
       webSocketService.sendMessageOnRoom(
-          val.trim(), webSocketChannel!, WebsocketConnect.room);
+        val.trim(),
+        webSocketChannel!,
+        WebsocketConnect.room,
+      );
     }
   }
 
@@ -142,7 +175,10 @@ class ChatMessageStart extends ChatMessageState {
       //     webSocketChannel!, WebsocketConnect.channel);
 
       webSocketService.sendMessageOnRoom(
-          textEditionController.text, webSocketChannel!, WebsocketConnect.room);
+        textEditionController.text,
+        webSocketChannel!,
+        WebsocketConnect.room,
+      );
       textEditionController.clear();
     }
   }
@@ -151,12 +187,13 @@ class ChatMessageStart extends ChatMessageState {
     File file,
   ) {
     webSocketService.sendUploadFileOnRoom(
-        webSocketChannel!,
-        WebsocketConnect.room,
-        file,
-        textEditionController.text.trim(),
-        authToken,
-        user!.id);
+      webSocketChannel!,
+      WebsocketConnect.room,
+      file,
+      textEditionController.text.trim(),
+      authToken,
+      user!.id,
+    );
     textEditionController.clear();
   }
 }

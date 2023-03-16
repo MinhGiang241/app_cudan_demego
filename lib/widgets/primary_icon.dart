@@ -151,7 +151,7 @@ class PrimaryIcon extends StatelessWidget {
                     padding: padding ?? const EdgeInsets.all(8),
                     child: B.Badge(
                       badgeContent:
-                          Text(badge ?? "", style: txtBold(10, Colors.white)),
+                          Text(badge ?? '', style: txtBold(10, Colors.white)),
                       showBadge: badge != null,
                       child: SvgPicture.asset(
                         _assetName(),
@@ -171,7 +171,7 @@ class PrimaryIcon extends StatelessWidget {
                 borderRadius: borderRadius ?? BorderRadius.circular(24),
                 child: B.Badge(
                   badgeContent:
-                      Text(badge ?? "", style: txtBold(10, Colors.white)),
+                      Text(badge ?? '', style: txtBold(10, Colors.white)),
                   showBadge: badge != null,
                   child: SvgPicture.asset(
                     _assetName(),
@@ -205,7 +205,7 @@ class PrimaryIcon extends StatelessWidget {
                 padding: padding ?? const EdgeInsets.all(8),
                 child: B.Badge(
                   badgeContent:
-                      Text(badge ?? "", style: txtBold(10, Colors.white)),
+                      Text(badge ?? '', style: txtBold(10, Colors.white)),
                   showBadge: badge != null,
                   child: SvgPicture.asset(
                     _assetName(),
@@ -222,7 +222,7 @@ class PrimaryIcon extends StatelessWidget {
   }
 
   String _assetName() {
-    return "assets/icons/${icons.name}.svg";
+    return 'assets/icons/${icons.name}.svg';
   }
 
   Color _gradientWhite() {

@@ -179,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
         "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
             "resident confirmed by manager department"),
+        "confirmed_card": MessageLookupByLibrary.simpleMessage(
+            "Card confirmed by manager department"),
         "cons_agree": MessageLookupByLibrary.simpleMessage(
             "You need to agree to comply with the regulations on construction registration"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Construction code"),
@@ -537,6 +539,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Not found account Information"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
+        "not_greater_than_today":
+            MessageLookupByLibrary.simpleMessage("Not greater than today"),
         "not_pass": MessageLookupByLibrary.simpleMessage("Not pass"),
         "not_pass_list": m8,
         "not_pass_reason":
@@ -714,6 +718,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
+        "registered_card":
+            MessageLookupByLibrary.simpleMessage("Registered card"),
         "regulations": MessageLookupByLibrary.simpleMessage("regulations"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
@@ -801,6 +807,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_project":
             MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "select_card_type":
+            MessageLookupByLibrary.simpleMessage("Select card type"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Select construction type"),
         "select_surface":

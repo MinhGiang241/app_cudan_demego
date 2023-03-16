@@ -57,9 +57,12 @@ class _SignInScreenState extends State<SignInScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: BackButton(
-            onPressed: () => Navigator.pushReplacementNamed(
-                context, SplashScreen.routeName,
-                arguments: true)),
+          onPressed: () => Navigator.pushReplacementNamed(
+            context,
+            SplashScreen.routeName,
+            arguments: true,
+          ),
+        ),
       ),
       body: Form(
         key: context.read<SingInPrv>().formKey,
@@ -68,27 +71,37 @@ class _SignInScreenState extends State<SignInScreen> {
           children: [
             vpad(24 + topSafePad(context) + appbarHeight(context)),
             Center(
-                child: Text(S.of(context).wellcome_back,
-                    style: txtDisplayMedium())),
+              child: Text(
+                S.of(context).wellcome_back,
+                style: txtDisplayMedium(),
+              ),
+            ),
             vpad(15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(S.of(context).no_acc,
-                    style: txtMedium(14, grayScaleColor2)),
+                Text(
+                  S.of(context).no_acc,
+                  style: txtMedium(14, grayScaleColor2),
+                ),
                 hpad(14),
                 InkWell(
-                    onTap: () {
-                      if (widget.isFromSignUp) {
-                        Utils.pop(context);
-                      } else {
-                        Utils.pushScreen(
-                            context, const SignUpScreen(isFromSignIn: true));
-                      }
-                    },
-                    borderRadius: BorderRadius.circular(5),
-                    child: Text(S.of(context).sign_up,
-                        style: txtLinkSmall(color: primaryColorBase)))
+                  onTap: () {
+                    if (widget.isFromSignUp) {
+                      Utils.pop(context);
+                    } else {
+                      Utils.pushScreen(
+                        context,
+                        const SignUpScreen(isFromSignIn: true),
+                      );
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(5),
+                  child: Text(
+                    S.of(context).sign_up,
+                    style: txtLinkSmall(color: primaryColorBase),
+                  ),
+                )
               ],
             ),
             vpad(34),
@@ -178,16 +191,17 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   vpad(32),
                   PrimaryButton(
-                      onTap: () async {
-                        FocusScope.of(context).unfocus();
-                        return await context.read<SingInPrv>().signIn(context);
+                    onTap: () async {
+                      FocusScope.of(context).unfocus();
+                      return await context.read<SingInPrv>().signIn(context);
 
-                        // Navigator.pushNamed(
-                        //     context, ApartmentSeletionScreen.routeName);
-                      },
-                      text: S.of(context).sign_in,
-                      isLoading: context.watch<SingInPrv>().isLoading,
-                      width: double.infinity)
+                      // Navigator.pushNamed(
+                      //     context, ApartmentSeletionScreen.routeName);
+                    },
+                    text: S.of(context).sign_in,
+                    isLoading: context.watch<SingInPrv>().isLoading,
+                    width: double.infinity,
+                  )
                 ],
               ),
             )

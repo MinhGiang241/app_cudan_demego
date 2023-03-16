@@ -261,6 +261,13 @@ class AddNewResidentPrv extends ChangeNotifier {
   }
 
   genValidStep1() {
+    var now = DateTime.now();
+    var today = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      24,
+    );
     if (apartmentAddValue == null) {
       apartmentAddValidate = S.current.not_blank;
     } else {
@@ -286,8 +293,11 @@ class AddNewResidentPrv extends ChangeNotifier {
     // } else {
     //   identityValidate = null;
     // }
+
     if (birthController.text.trim().isEmpty) {
       birthValidate = S.current.not_blank;
+    } else if (birthDate!.compareTo(today) > 0) {
+      birthValidate = S.current.not_greater_than_today;
     } else {
       birthValidate = null;
     }
@@ -464,7 +474,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     if (v != null) {
       if (provinceValue != v) {
         provinceValue = v;
-
+        provValidate = null;
         districtValue = null;
         wardValue = null;
         districs.clear();

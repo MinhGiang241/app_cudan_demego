@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
+import 'package:app_cudan/services/api_auth.dart';
 import 'package:app_cudan/services/api_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
@@ -27,21 +29,47 @@ part 'chat_message_state.dart';
 class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   ChatMessageBloc() : super(ChatMessageInitial()) {
     on<LoadChatMessageStart>((event, emit) async {
-      emit(ChatMessageStart(
-        user: user,
-        authToken: authToken,
-      ));
+      emit(
+        ChatMessageStart(
+          user: user,
+          authToken: authToken,
+        ),
+      );
     });
     on<BackChatMessageInit>((event, emit) async {
-      emit(ChatMessageInitial(
-        user: user,
-        authToken: authToken,
-      ));
+      emit(
+        ChatMessageInitial(
+          user: user,
+          authToken: authToken,
+        ),
+      );
     });
   }
+  var _dio = Dio();
 
   String authToken = '';
   User? user;
+
+  Future createVisitor(context, email, token, phone, name) async {
+    await _dio.post(
+      '${WebsocketConnect.serverUrl}/api/v1/livechat/visitor',
+      data: {
+        "visitor": {
+          "name": name,
+          // "email": email,
+          "token": token,
+          "phone": phone,
+          "customFields": [
+            {"key": "address", "value": "Rocket.Chat street", "overwrite": true}
+          ]
+        }
+      },
+    ).then((v) {
+      print(v);
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   Future getAuthentication(context) async {
     final AuthenticationService authenticationService =

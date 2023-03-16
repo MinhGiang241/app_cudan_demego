@@ -58,7 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
     // ApiService.shared.getExistClient().then((value) {
     //   log(value!.credentials.accessToken);
     // });
-    // context.read<ChatMessageBloc>().getAuthentication(context);
+    var email = context.read<ResidentInfoPrv>().userInfo?.account?.email;
+    var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.userName;
+    var name = context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+    context
+        .read<ChatMessageBloc>()
+        .createVisitor(context, email, token, phone, name);
 
     return ChangeNotifierProvider<HomePrv>(
       create: (context) => HomePrv(context),
@@ -67,57 +73,61 @@ class _HomeScreenState extends State<HomeScreen> {
         var messageCount = context.watch<HomePrv>().messageCount;
 
         return FutureBuilder(
-            //   future: () async {
-            //   context.read<ChatMessageBloc>().getAuthentication(context);
-            //   await Future.delayed(Duration.zero);
-            // }(),
-            builder: (context, snap) {
-          return Stack(alignment: Alignment.center, children: [
-            Scaffold(
-                body: _navigationTab(context),
-                bottomNavigationBar:
-                    context.watch<ChatMessageBloc>().state is ChatMessageStart
-                        ? null
-                        : _bottomNavigationBar(messageCount)
-                //     BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                //   bloc: bloc,
-                //   builder: (context, state) {
-                //     print("hhhhhhh");
-                //     if (state is ChatMessageStart) {
-                //       return vpad(0);
-                //     } else {
-                //       return _bottomNavigationBar(messageCount);
-                //     }
-                //   },
-                // ),
+          future: () async {
+            // context.read<ChatMessageBloc>().getAuthentication(context);
+            // await Future.delayed(Duration.zero);
+          }(),
+          builder: (context, snap) {
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                Scaffold(
+                  body: _navigationTab(context),
+                  bottomNavigationBar:
+                      context.watch<ChatMessageBloc>().state is ChatMessageStart
+                          ? null
+                          : _bottomNavigationBar(messageCount),
+                  //     BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                  //   bloc: bloc,
+                  //   builder: (context, state) {
+                  //     print("hhhhhhh");
+                  //     if (state is ChatMessageStart) {
+                  //       return vpad(0);
+                  //     } else {
+                  //       return _bottomNavigationBar(messageCount);
+                  //     }
+                  //   },
+                  // ),
 
-                // floatingActionButton: _selectedIndex == 2
-                //     ? null
-                //     : FloatingActionButton(
-                //         onPressed: () {},
-                //         backgroundColor: Colors.white,
-                //         child: Icon(Icons.phone_sharp,
-                //             size: 40,
-                //             color: primaryColorBase,
-                //             shadows: [
-                //               Shadow(
-                //                   offset: const Offset(-2, 2),
-                //                   color: Colors.black.withOpacity(0.5),
-                //                   blurRadius: 10.0),
-                //             ]),
-                //       ),
+                  // floatingActionButton: _selectedIndex == 2
+                  //     ? null
+                  //     : FloatingActionButton(
+                  //         onPressed: () {},
+                  //         backgroundColor: Colors.white,
+                  //         child: Icon(Icons.phone_sharp,
+                  //             size: 40,
+                  //             color: primaryColorBase,
+                  //             shadows: [
+                  //               Shadow(
+                  //                   offset: const Offset(-2, 2),
+                  //                   color: Colors.black.withOpacity(0.5),
+                  //                   blurRadius: 10.0),
+                  //             ]),
+                  //       ),
                 ),
-            if (isLoading)
-              const Center(
-                child: PrimaryCard(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: PrimaryLoading(),
-                  ),
-                ),
-              )
-          ]);
-        });
+                if (isLoading)
+                  const Center(
+                    child: PrimaryCard(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: PrimaryLoading(),
+                      ),
+                    ),
+                  )
+              ],
+            );
+          },
+        );
 
         // _navigationTab(context);
       },
@@ -208,8 +218,10 @@ class _HomeScreenState extends State<HomeScreen> {
               // ),
               BottomNavigationBarItem(
                 icon: B.Badge(
-                  badgeContent: Text(messageCount.toString(),
-                      style: txtBold(10, Colors.white)),
+                  badgeContent: Text(
+                    messageCount.toString(),
+                    style: txtBold(10, Colors.white),
+                  ),
                   showBadge: messageCount != null,
                   child: const Icon(Icons.message),
                 ),

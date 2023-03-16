@@ -28,117 +28,137 @@ class AccountScreen extends StatelessWidget {
         children: [
           vpad(60),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: SizedBox(
-                  height: 64,
-                  child: Row(children: [
-                    if (userInfo?.avatar == null)
-                      const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: grayScaleColor4,
-                          child: Icon(
-                            Icons.person,
-                            size: 40,
-                          ))
-                    else if (userInfo?.avatar.runtimeType.toString() !=
-                        "List<dynamic>")
-                      CircleAvatar(
-                        radius: 32,
-                        backgroundColor: grayScaleColor4,
-                        backgroundImage: CachedNetworkImageProvider(
-                            "${ApiConstants.uploadURL}?load=${userInfo?.avatar ?? ""}"),
-                      )
-                    else if (userInfo?.avatar.runtimeType.toString() ==
-                            "List<dynamic>" &&
-                        (userInfo?.avatar as List).isNotEmpty)
-                      CircleAvatar(
-                        radius: 32,
-                        backgroundColor: grayScaleColor4,
-                        backgroundImage: CachedNetworkImageProvider(
-                            "${ApiConstants.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}"),
-                      )
-                    else
-                      const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: grayScaleColor4,
-                          child: Icon(
-                            Icons.person,
-                            size: 40,
-                          )),
-                    hpad(16),
-                    Expanded(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Text(userInfo?.userName ?? "Username",
-                              style: txtLinkLarge()),
-                          const Spacer(),
-                          Text("", style: txtBodySmallRegular())
-                        ]))
-                  ]))),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: SizedBox(
+              height: 64,
+              child: Row(
+                children: [
+                  if (userInfo?.avatar == null)
+                    const CircleAvatar(
+                      radius: 32,
+                      backgroundColor: grayScaleColor4,
+                      child: Icon(
+                        Icons.person,
+                        size: 40,
+                      ),
+                    )
+                  else if (userInfo?.avatar.runtimeType.toString() !=
+                      "List<dynamic>")
+                    CircleAvatar(
+                      radius: 32,
+                      backgroundColor: grayScaleColor4,
+                      backgroundImage: CachedNetworkImageProvider(
+                        "${ApiConstants.uploadURL}?load=${userInfo?.avatar ?? ""}",
+                      ),
+                    )
+                  else if (userInfo?.avatar.runtimeType.toString() ==
+                          "List<dynamic>" &&
+                      (userInfo?.avatar as List).isNotEmpty)
+                    CircleAvatar(
+                      radius: 32,
+                      backgroundColor: grayScaleColor4,
+                      backgroundImage: CachedNetworkImageProvider(
+                        "${ApiConstants.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}",
+                      ),
+                    )
+                  else
+                    const CircleAvatar(
+                      radius: 32,
+                      backgroundColor: grayScaleColor4,
+                      child: Icon(
+                        Icons.person,
+                        size: 40,
+                      ),
+                    ),
+                  hpad(16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          userInfo?.userName ?? "Username",
+                          style: txtLinkLarge(),
+                        ),
+                        const Spacer(),
+                        Text("", style: txtBodySmallRegular())
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           vpad(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: PrimaryCard(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AccountItem(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AccountItem(
                       lable: S.of(context).personal_info,
                       icons: PrimaryIcons.user_circle_outline,
                       onTap: () {
                         Utils.pushScreen(context, const PersonalInfoScreen());
-                      }),
-                  AccountItem(
+                      },
+                    ),
+                    AccountItem(
                       lable: S.of(context).plan_info,
                       icons: PrimaryIcons.home_alt,
                       onTap: () {
                         Utils.pushScreen(context, const PlanInfoScreen());
-                      }),
-                  AccountItem(
+                      },
+                    ),
+                    AccountItem(
                       lable: S.of(context).language,
                       icons: PrimaryIcons.planet,
                       onTap: () {
                         Utils.pushScreen(context, const LanguageScreen());
-                      }),
-                  AccountItem(
+                      },
+                    ),
+                    AccountItem(
                       lable: S.of(context).terms_services,
                       icons: PrimaryIcons.news,
                       onTap: () {
                         launchUrlString("https://www.apple.com/");
-                      }),
-                  AccountItem(
+                      },
+                    ),
+                    AccountItem(
                       lable: S.of(context).change_pass,
                       icons: PrimaryIcons.lock,
                       onTap: () {
                         Utils.pushScreen(context, const ChangePassScreen());
-                      }),
-                  AccountItem(
+                      },
+                    ),
+                    AccountItem(
                       lable: S.of(context).sign_out,
                       icons: PrimaryIcons.log_out,
                       onTap: () {
                         context.read<AuthPrv>().onSignOut(context);
-                      }),
-                  vpad(8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: FutureBuilder<String>(
+                      },
+                    ),
+                    vpad(8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: FutureBuilder<String>(
                         future: Utils.getVersion(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             return const SizedBox.shrink();
                           }
                           return Text(
-                              "${S.of(context).app_version} ${snapshot.data}",
-                              style:
-                                  txtBodySmallRegular(color: grayScaleColor2));
-                        }),
-                  )
-                ],
+                            "${S.of(context).app_version} ${snapshot.data}",
+                            style: txtBodySmallRegular(color: grayScaleColor2),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
-            )),
+            ),
           ),
           vpad(kBottomNavigationBarHeight + 30)
         ],

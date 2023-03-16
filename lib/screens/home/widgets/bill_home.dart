@@ -16,8 +16,10 @@ class BillsHome extends StatelessWidget {
     return HomeTitleWidget(
       title: S.of(context).bills,
       onTapShowAll: () {
-        Navigator.of(context).pushNamed(PaymentListScreen.routeName,
-            arguments: {"year": null, "month": null, "index": null});
+        Navigator.of(context).pushNamed(
+          PaymentListScreen.routeName,
+          arguments: {'year': null, 'month': null, 'index': null},
+        );
         // Utils.pushScreen(context, const BillsScreen());
       },
       child: Row(
@@ -32,11 +34,12 @@ class BillsHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: greenColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: purpleColorBase.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -47,19 +50,19 @@ class BillsHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(PaymentListScreen.routeName, arguments: {
-                        "year": null,
-                        "month": null,
-                        "index": null
-                      });
+                      Navigator.of(context).pushNamed(
+                        PaymentListScreen.routeName,
+                        arguments: {'year': null, 'month': null, 'index': null},
+                      );
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).water,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).water,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -71,11 +74,12 @@ class BillsHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: yellowColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: yellowColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -86,19 +90,19 @@ class BillsHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(PaymentListScreen.routeName, arguments: {
-                        "year": null,
-                        "month": null,
-                        "index": null
-                      });
+                      Navigator.of(context).pushNamed(
+                        PaymentListScreen.routeName,
+                        arguments: {'year': null, 'month': null, 'index': null},
+                      );
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).electricity,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).electricity,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -110,11 +114,12 @@ class BillsHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: greenColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: greenColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -125,19 +130,19 @@ class BillsHome extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(PaymentListScreen.routeName, arguments: {
-                        "year": null,
-                        "month": null,
-                        "index": null
-                      });
+                      Navigator.of(context).pushNamed(
+                        PaymentListScreen.routeName,
+                        arguments: {'year': null, 'month': null, 'index': null},
+                      );
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).internet,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).internet,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),

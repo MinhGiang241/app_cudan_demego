@@ -18,7 +18,7 @@ class APIEvent {
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"data": data},
+      variables: {'data': data},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -26,14 +26,18 @@ class APIEvent {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }
   }
 
   static Future getEventList(
-      int skip, int limit, String type, String accountId) async {
+    int skip,
+    int limit,
+    String type,
+    String accountId,
+  ) async {
     var query = '''
   mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String){
     response: event_mobile_get_event_list (limit: \$limit,skip: \$skip,type: \$type,accountId: \$accountId ) {
@@ -48,10 +52,10 @@ class APIEvent {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
-        "skip": skip,
-        "limit": limit,
-        "type": type,
-        "accountId": accountId,
+        'skip': skip,
+        'limit': limit,
+        'type': type,
+        'accountId': accountId,
       },
     );
 
@@ -60,7 +64,7 @@ class APIEvent {
     var res = ResponseModule.fromJson(results);
 
     if (res.response.code != 0) {
-      throw (res.response.message ?? "");
+      throw (res.response.message ?? '');
     } else {
       return res.response.data;
     }

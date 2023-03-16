@@ -49,11 +49,12 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
               return const Center(child: PrimaryLoading());
             } else if (snapshot.hasError) {
               return PrimaryErrorWidget(
-                  code: snapshot.hasError ? "err" : "1",
-                  message: snapshot.data.toString(),
-                  onRetry: () async {
-                    setState(() {});
-                  });
+                code: snapshot.hasError ? "err" : "1",
+                message: snapshot.data.toString(),
+                onRetry: () async {
+                  setState(() {});
+                },
+              );
             }
             // if (listResOwn.isEmpty) {
             //   return SmartRefresher(
@@ -79,47 +80,55 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
                 Row(
                   children: [
                     Expanded(
-                        flex: 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              S.of(context).registed_resident,
-                              style: txtBold(14, grayScaleColorBase),
-                              textAlign: TextAlign.start,
-                            ),
-                            vpad(6),
-                            Text(
-                              S.of(context).confirmed_by_manager_resident,
-                              style: txtRegular(14, grayScaleColorBase),
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
-                        )),
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            S.of(context).registed_resident,
+                            style: txtBold(14, grayScaleColorBase),
+                            textAlign: TextAlign.start,
+                          ),
+                          vpad(6),
+                          Text(
+                            S.of(context).confirmed_by_manager_resident,
+                            style: txtRegular(14, grayScaleColorBase),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                    ),
                     hpad(5),
                     Expanded(
-                        flex: 1,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    side: const BorderSide(
-                                        color: primaryColorBase, width: 2))),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              side: const BorderSide(
+                                color: primaryColorBase,
+                                width: 2,
+                              ),
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, AddNewResidentScreen.routeName);
-                          },
-                          child: Text(
-                            S.of(context).add,
-                            style: txtMedium(14, primaryColorBase),
-                          ),
-                        ))
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AddNewResidentScreen.routeName,
+                          );
+                        },
+                        child: Text(
+                          S.of(context).add,
+                          style: txtMedium(14, primaryColorBase),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 listResOwn.isEmpty
@@ -128,7 +137,8 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
                           enablePullDown: true,
                           enablePullUp: false,
                           header: WaterDropMaterialHeader(
-                              backgroundColor: Theme.of(context).primaryColor),
+                            backgroundColor: Theme.of(context).primaryColor,
+                          ),
                           controller: _refreshController,
                           onRefresh: () {
                             setState(() {});
@@ -146,7 +156,8 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
                           enablePullDown: true,
                           enablePullUp: false,
                           header: WaterDropMaterialHeader(
-                              backgroundColor: Theme.of(context).primaryColor),
+                            backgroundColor: Theme.of(context).primaryColor,
+                          ),
                           controller: _refreshController,
                           onRefresh: () async {
                             setState(() {});
@@ -197,7 +208,9 @@ class RRecidentInfoItem extends StatefulWidget {
 class _RRecidentInfoItemState extends State<RRecidentInfoItem>
     with TickerProviderStateMixin {
   late AnimationController animationController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 300));
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
   late Animation<double> rotateAnimation;
   bool isShow = false;
   final StreamController<bool> showController = StreamController<bool>();
@@ -215,210 +228,252 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
     return Padding(
       padding: const EdgeInsets.only(left: 0, right: 0, bottom: 16),
       child: PrimaryCard(
-          onTap: () {
-            if (isShow) {
-              isShow = false;
-              animationController.reverse();
-            } else {
-              isShow = true;
-              animationController.forward();
-            }
-            showController.add(isShow);
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    child: Padding(
+        onTap: () {
+          if (isShow) {
+            isShow = false;
+            animationController.reverse();
+          } else {
+            isShow = true;
+            animationController.forward();
+          }
+          showController.add(isShow);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: StreamBuilder<bool>(
-                      initialData: widget.isShowInit,
-                      stream: showController.stream,
-                      builder: (context, snapshot) {
-                        final isShow = snapshot.data ?? false;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            widget.header ??
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        "${widget.own.apartment?.name} - ${widget.own.floor?.name} - ${widget.own.building?.name}",
-                                        style: txtMedium(),
+                    initialData: widget.isShowInit,
+                    stream: showController.stream,
+                    builder: (context, snapshot) {
+                      final isShow = snapshot.data ?? false;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          widget.header ??
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      "${widget.own.apartment?.name} - ${widget.own.floor?.name} - ${widget.own.building?.name}",
+                                      style: txtMedium(),
+                                    ),
+                                  ),
+                                  hpad(10),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      genStatus(
+                                        widget.own.ownInfo?.status ?? "",
+                                      ),
+                                      style: txtLinkSmall(
+                                        color: greenColorBase,
                                       ),
                                     ),
-                                    hpad(10),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                          genStatus(
-                                              widget.own.ownInfo?.status ?? ""),
-                                          style: txtLinkSmall(
-                                              color: greenColorBase)),
-                                    )
+                                  )
+                                ],
+                              ),
+                          if (!isShow)
+                            widget.hide ??
+                                Column(
+                                  children: [
+                                    vpad(8),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            '${S.of(context).area}:',
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            "${widget.own.apartment?.area} m2",
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor1,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    vpad(5),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            '${S.of(context).member_num}:',
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            widget.own.residents!.length
+                                                .toString(),
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor1,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
-                            if (!isShow)
-                              widget.hide ??
-                                  Column(
-                                    children: [
-                                      vpad(8),
-                                      Row(
-                                        children: [
-                                          Text('${S.of(context).area}:',
-                                              style: txtRegular(
-                                                  12, grayScaleColor2)),
-                                          const Spacer(),
-                                          Expanded(
-                                            child: Text(
-                                              "${widget.own.apartment?.area} m2",
-                                              style: txtRegular(
-                                                  12, grayScaleColor1),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      vpad(5),
-                                      Row(
-                                        children: [
-                                          Text('${S.of(context).member_num}:',
-                                              style: txtRegular(
-                                                  12, grayScaleColor2)),
-                                          const Spacer(),
-                                          Expanded(
-                                            child: Text(
-                                              widget.own.residents!.length
-                                                  .toString(),
-                                              style: txtRegular(
-                                                  12, grayScaleColor1),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                            if (isShow)
-                              widget.show ??
-                                  Column(
-                                    children: [
-                                      vpad(16),
-                                      const Divider(),
-                                      // vpad(16),
-                                      // Row(children: [
-                                      //   Expanded(
-                                      //     flex: 1,
-                                      //     child: Text(
-                                      //         '${S.of(context).relation_owner}:',
-                                      //         style: txtMedium(
-                                      //             14, grayScaleColor2)),
-                                      //   ),
-                                      //   hpad(16),
-                                      //   Flexible(
-                                      //     flex: 1,
-                                      //     child: Text(
-                                      //         genDependentType(
-                                      //             widget.own.ownInfo?.type),
-                                      //         style: txtLinkSmall(
-                                      //             color: grayScaleColorBase)),
-                                      //   )
-                                      // ]),
-                                    ],
-                                  ),
-                            if (isShow && widget.show == null)
-                              ...List.generate(
-                                  widget.own.residents?.length ?? 0, (index) {
-                                var a = widget.own.residents?[index].re;
-                                var o = widget.own.ownInfo;
-                                return Column(
+                          if (isShow)
+                            widget.show ??
+                                Column(
                                   children: [
-                                    // vpad(16),
-                                    // const Divider(),
                                     vpad(16),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Column(
-                                        children: [
-                                          Row(children: [
-                                            Text("${S.of(context).full_name}:",
-                                                style: txtMedium(
-                                                    14, grayScaleColor2)),
-                                            const Spacer(),
-                                            Text(
-                                                widget.own.residents?[index]
-                                                        .info_name ??
-                                                    "",
-                                                style: txtLinkSmall(
-                                                    color: grayScaleColorBase))
-                                          ]),
-                                          vpad(5),
-                                          Row(children: [
-                                            Text(
-                                                "${S.of(context).relation_owner}:",
-                                                style: txtMedium(
-                                                    14, grayScaleColor2)),
-                                            const Spacer(),
-                                            Text(
-                                                a != null
-                                                    ? a.name ?? ""
-                                                    : genDependentType(o?.type),
-                                                style: txtLinkSmall(
-                                                    color: grayScaleColorBase))
-                                          ]),
-                                          vpad(5),
-                                          const Divider(),
-                                          // Row(children: [
-                                          //   Text("0XXXXXXXXX",
-                                          //       style: txtMedium(14)),
-                                          //   const Spacer(),
-                                          //   const Icon(Icons
-                                          //       .chevron_right_rounded)
-                                          // ]),
-                                        ],
-                                      ),
-                                    )
+                                    const Divider(),
+                                    // vpad(16),
+                                    // Row(children: [
+                                    //   Expanded(
+                                    //     flex: 1,
+                                    //     child: Text(
+                                    //         '${S.of(context).relation_owner}:',
+                                    //         style: txtMedium(
+                                    //             14, grayScaleColor2)),
+                                    //   ),
+                                    //   hpad(16),
+                                    //   Flexible(
+                                    //     flex: 1,
+                                    //     child: Text(
+                                    //         genDependentType(
+                                    //             widget.own.ownInfo?.type),
+                                    //         style: txtLinkSmall(
+                                    //             color: grayScaleColorBase)),
+                                    //   )
+                                    // ]),
                                   ],
-                                );
-                              }),
-                            vpad(12),
-                            Center(
-                              child: AnimatedBuilder(
-                                  animation: animationController,
-                                  builder: (context, child) => Transform.rotate(
-                                        angle: rotateAnimation.value,
-                                        child: child,
-                                      ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: yellowColor,
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                    child: const Icon(
-                                      Icons.keyboard_arrow_down_rounded,
+                                ),
+                          if (isShow && widget.show == null)
+                            ...List.generate(widget.own.residents?.length ?? 0,
+                                (index) {
+                              var a = widget.own.residents?[index].re;
+                              var o = widget.own.ownInfo;
+                              return Column(
+                                children: [
+                                  // vpad(16),
+                                  // const Divider(),
+                                  vpad(16),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${S.of(context).full_name}:",
+                                              style: txtMedium(
+                                                14,
+                                                grayScaleColor2,
+                                              ),
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              widget.own.residents?[index]
+                                                      .info_name ??
+                                                  "",
+                                              style: txtLinkSmall(
+                                                color: grayScaleColorBase,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        vpad(5),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${S.of(context).relation_owner}:",
+                                              style: txtMedium(
+                                                14,
+                                                grayScaleColor2,
+                                              ),
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              a != null
+                                                  ? a.name ?? ""
+                                                  : genDependentType(o?.type),
+                                              style: txtLinkSmall(
+                                                color: grayScaleColorBase,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        vpad(5),
+                                        const Divider(),
+                                        // Row(children: [
+                                        //   Text("0XXXXXXXXX",
+                                        //       style: txtMedium(14)),
+                                        //   const Spacer(),
+                                        //   const Icon(Icons
+                                        //       .chevron_right_rounded)
+                                        // ]),
+                                      ],
                                     ),
-                                  )),
-                            )
-                          ],
-                        );
-                      }),
-                )),
-                // Padding(
-                //     padding: const EdgeInsets.all(10.0),
-                //     child: AnimatedBuilder(
-                //         animation: animationController,
-                //         builder: (context, child) => Transform.rotate(
-                //               angle: rotateAnimation.value,
-                //               child: child,
-                //             ),
-                //         child: const Icon(Icons.keyboard_arrow_down_rounded)))
-              ],
-            ),
-          )),
+                                  )
+                                ],
+                              );
+                            }),
+                          vpad(12),
+                          Center(
+                            child: AnimatedBuilder(
+                              animation: animationController,
+                              builder: (context, child) => Transform.rotate(
+                                angle: rotateAnimation.value,
+                                child: child,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: yellowColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+              // Padding(
+              //     padding: const EdgeInsets.all(10.0),
+              //     child: AnimatedBuilder(
+              //         animation: animationController,
+              //         builder: (context, child) => Transform.rotate(
+              //               angle: rotateAnimation.value,
+              //               child: child,
+              //             ),
+              //         child: const Icon(Icons.keyboard_arrow_down_rounded)))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

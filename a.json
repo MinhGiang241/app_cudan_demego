@@ -1,6 +1,6 @@
 {
     "msg": "method",
-    "method": "livechat:sendOfflineMessage",
+    "method": "livechat:getInitialData",
     "params": [
         {
             "name": "Visitor Name",

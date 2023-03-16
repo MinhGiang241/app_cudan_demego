@@ -6489,6 +6489,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Not greater than today`
+  String get not_greater_than_today {
+    return Intl.message(
+      'Not greater than today',
+      name: 'not_greater_than_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registered card`
+  String get registered_card {
+    return Intl.message(
+      'Registered card',
+      name: 'registered_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card confirmed by manager department`
+  String get confirmed_card {
+    return Intl.message(
+      'Card confirmed by manager department',
+      name: 'confirmed_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select card type`
+  String get select_card_type {
+    return Intl.message(
+      'Select card type',
+      name: 'select_card_type',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -180,6 +180,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmed": MessageLookupByLibrary.simpleMessage("Đã xác nhận"),
         "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
             "Cư dân đã được xác nhận bởi BQL"),
+        "confirmed_card":
+            MessageLookupByLibrary.simpleMessage("Thẻ được xác nhận bởi BQL"),
         "cons_agree": MessageLookupByLibrary.simpleMessage(
             "Bạn cần đồng ý tuân thủ quy định về đăng ký thi công"),
         "cons_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
@@ -540,6 +542,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không tìm thấy thông tin tài khoản"),
         "not_get_otp":
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
+        "not_greater_than_today":
+            MessageLookupByLibrary.simpleMessage("Không lớn hơn ngày hiện tại"),
         "not_pass": MessageLookupByLibrary.simpleMessage("Không đạt"),
         "not_pass_list": m8,
         "not_pass_reason":
@@ -714,6 +718,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
+        "registered_card":
+            MessageLookupByLibrary.simpleMessage("Thẻ đã đăng ký"),
         "regulations": MessageLookupByLibrary.simpleMessage("quy định"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
@@ -799,6 +805,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_project":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm dự án"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
+        "select_card_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại thẻ"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),

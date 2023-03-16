@@ -33,9 +33,9 @@ class _RegisterTransportationCardState
     extends State<RegisterTransportationCard> {
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
 
-    var isEdit = arg['isEdit'];
+    var isEdit = arg != null ? arg['isEdit'] : false;
     TransportationCard card = TransportationCard();
     if (isEdit) {
       card = arg['data'];

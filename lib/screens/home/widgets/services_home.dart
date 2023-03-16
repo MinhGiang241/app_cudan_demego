@@ -34,11 +34,12 @@ class ServicesHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: primaryColorBase.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: turquoiseColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -50,14 +51,18 @@ class ServicesHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       Navigator.pushNamed(
-                          context, TransportationCardListScreen.routeName);
+                        context,
+                        TransportationCardListScreen.routeName,
+                      );
                     },
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).parking_card,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).parking_card,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -69,11 +74,12 @@ class ServicesHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: pinkColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: primaryColorBase.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -90,9 +96,11 @@ class ServicesHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).res_card,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).res_card,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -104,11 +112,12 @@ class ServicesHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: purpleColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: yellowColorBase.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -125,9 +134,11 @@ class ServicesHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).reg_deliver,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).reg_deliver,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),

@@ -26,9 +26,12 @@ class EventTabPrv extends ChangeNotifier {
     } else {
       skip += 5;
     }
-    await APIEvent.getEventList(skip, limit, type,
-            context.read<ResidentInfoPrv>().userInfo!.account!.id ?? "")
-        .then(
+    await APIEvent.getEventList(
+      skip,
+      limit,
+      type,
+      context.read<ResidentInfoPrv>().userInfo!.account!.id ?? '',
+    ).then(
       (values) {
         for (var i in values) {
           listEvent.add(Event.fromJson(i));
@@ -43,16 +46,19 @@ class EventTabPrv extends ChangeNotifier {
   Future participateEvent(BuildContext context, Event e) async {
     Navigator.pop(context);
     var paticipation = EventParticipation(
-        accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
-        eventId: e.id,
-        event_for: e.event_for,
-        residentId: context.read<ResidentInfoPrv>().residentId);
+      accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
+      eventId: e.id,
+      event_for: e.event_for,
+      residentId: context.read<ResidentInfoPrv>().residentId,
+    );
 
     await APIEvent.participateEvent(paticipation.toJson()).then((v) {
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).scuccess_participation(
-              e.title != null ? e.title!.toLowerCase() : ""));
+        context: context,
+        e: S.of(context).scuccess_participation(
+              e.title != null ? e.title!.toLowerCase() : '',
+            ),
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

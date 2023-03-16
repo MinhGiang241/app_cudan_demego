@@ -642,5 +642,9 @@
   "no_home": "Don't have any apartment",
   "card_list": "Card list",
   "success_cancel_reflection": "Cancel reflection successfully",
-  "cmnd_length_9": "Not less than 9 characters"
+  "cmnd_length_9": "Not less than 9 characters",
+  "not_greater_than_today": "Not greater than today",
+  "registered_card": "Registered card",
+  "confirmed_card": "Card confirmed by manager department",
+  "select_card_type": "Select card type"
 }
