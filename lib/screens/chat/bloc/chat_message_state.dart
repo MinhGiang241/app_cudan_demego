@@ -49,6 +49,13 @@ class ChatMessageInitial extends ChatMessageState {
     );
   }
 
+  Future openNewRoomLiveChat(String roomId) async {
+    return await webSocketService.openNewRoomLiveChat(
+      webSocketChannel!,
+      roomId,
+    );
+  }
+
   void streamLiveChatRoom(String visitorToken, String id, String param) {
     webSocketService.streamLiveChatRoom(
       webSocketChannel!,
@@ -77,7 +84,7 @@ class ChatMessageInitial extends ChatMessageState {
       print(v);
       if (v['messages'] != null) {
         messagesMap.clear();
-        for (var i in v['messages']) {
+        for (var i in v['messages'].reversed) {
           var me = MessageChat.fromJson(i);
           // print(i);
           messagesMap[me.id ?? ""] = me;

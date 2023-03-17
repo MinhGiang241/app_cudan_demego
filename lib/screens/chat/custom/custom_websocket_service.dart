@@ -392,6 +392,21 @@ class CustomWebSocketService {
   }
 
   //upload File on Room
+  openNewRoomLiveChat(
+    WebSocketChannel webSocketChannel,
+    String roomId,
+  ) async {
+    return await ApiService.shared.getApi(
+      path: '${WebsocketConnect.serverUrl}/api/v1/livechat/room',
+      params: {
+        "token": roomId,
+      },
+    ).then((v) {
+      print(v);
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   void sendUploadFileOnRoom(
     WebSocketChannel webSocketChannel,

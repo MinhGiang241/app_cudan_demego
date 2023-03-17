@@ -74,29 +74,17 @@ class _ChatScreenState extends State<ChatScreen> {
                   state.webSocketService.connectToWebSocketLiveChat(
                 WebsocketConnect.webSocketUrl,
               );
-              // state.webSocketService.getLastes50Message(
-              //   state.webSocketChannel!,
-              //   WebsocketConnect.room,
-              // );
 
-              // state.webSocketChannel =
-              //     state.webSocketService.connectToWebSocket(
-              //   WebsocketConnect.webSocketUrl,
-              //   authToken: bloc.authToken,
-              // );
-              // state.registerGuestChat(
-              //   "token",
-              //   "minhgiang2",
-              //   "minhgiang241@gmail.com",
-              // );
-              // state.getInitialDataLive();
               var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
               var roomId =
                   context.read<ResidentInfoPrv>().userInfo?.account?.id;
 
               return FutureBuilder(
                 future: () async {
-                  await state.loadLiveChatHistory(roomId);
+                  var room = await state.openNewRoomLiveChat(roomId!);
+                  var his = await state.loadLiveChatHistory(roomId);
+                  print(room);
+                  print(his);
                 }(),
                 builder: (context, sn) {
                   if (sn.connectionState == ConnectionState.waiting) {
