@@ -93,7 +93,6 @@ class _ChatScreenState extends State<ChatScreen> {
               var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
               var roomId =
                   context.read<ResidentInfoPrv>().userInfo?.account?.id;
-              // state.sendMessageLiveChat('1', token!, token, "message");
 
               return FutureBuilder(
                 future: () async {
@@ -192,6 +191,7 @@ class _ChatScreenState extends State<ChatScreen> {
               return StreamBuilder(
                 stream: state.webSocketChannel!.stream,
                 builder: (context, snapshot) {
+                  print(snapshot);
                   rocket_notification.Notification? notification =
                       snapshot.hasData
                           ? rocket_notification.Notification.fromMap(
