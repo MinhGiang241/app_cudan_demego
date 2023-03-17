@@ -142,17 +142,21 @@ class AddNewResidentPrv extends ChangeNotifier {
     notifyListeners();
     existedForm?.status = "CANCEL";
     APIResidentAddApartment.changeStatusFormResidentAddApartment(
-            existedForm!.toMap())
-        .then((v) {
+      existedForm!.toMap(),
+    ).then((v) {
       isLoading = false;
       notifyListeners();
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_cancel_dependence,
-          onClose: () {
-            Navigator.pushNamedAndRemoveUntil(context,
-                RegisterResidentScreen.routeName, (route) => route.isFirst);
-          });
+        context: context,
+        e: S.of(context).success_cancel_dependence,
+        onClose: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RegisterResidentScreen.routeName,
+            (route) => route.isFirst,
+          );
+        },
+      );
     }).catchError((e) {
       isLoading = false;
       notifyListeners();
@@ -369,9 +373,11 @@ class AddNewResidentPrv extends ChangeNotifier {
       notifyListeners();
       clearValidStringStep1();
       controller
-          .animateToPage(++activeStep,
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.bounceInOut)
+          .animateToPage(
+        ++activeStep,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.bounceInOut,
+      )
           .then((_) {
         isDisableRightCroll = true;
         notifyListeners();
@@ -408,55 +414,59 @@ class AddNewResidentPrv extends ChangeNotifier {
         await uploadDocument(context);
 
         DependenceSignUp formAddResident = DependenceSignUp(
-            full_name: nameController.text.trim(),
-            apartmentId: apartmentAddValue,
-            buildingId: apartment.buildingId,
-            floorId: apartment.floorId,
-            permanent_address: perResController.text.trim(),
-            date_birth:
-                "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
-            // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
-            provinceId: province.id,
-            districtId: district.id,
-            wardsId: ward.id,
-            dependentId: residentId,
-            material_status: matialStatusValue,
-            education: educationValue,
-            email: emailController.text.trim(),
-            info_name: nameController.text.trim(),
-            ethnicId: ethnicValue,
-            identity_card_required: identityController.text.trim(),
-            job: jobController.text.trim(),
-            nationalId: nationalityValue,
-            relationshipId: relationValue,
-            qualification: qualificationController.text.trim(),
-            phone_required: phoneController.text.trim(),
-            avatar: existedResImages + uploadedResImages,
-            id_card: existedIdentityImages + uploadedIdentityImages,
-            upload: existedDoccuments + uploadedDocuments,
-            place_of_issue: issuePlaceController.text.trim(),
-            residence_type: resTypeValue,
-            sex: sexValue,
-            facebook: facebookController.text.trim(),
-            zalo: zaloController.text.trim(),
-            instagram: instagramController.text.trim(),
-            linkedin: linkedinController.text.trim(),
-            tiktok: tiktokController.text.trim(),
-            status: "WAIT",
-            type:
-                apartment.type == "BUY" ? "DEPENDENT_HOST" : "DEPENDENT_RENT");
+          full_name: nameController.text.trim(),
+          apartmentId: apartmentAddValue,
+          buildingId: apartment.buildingId,
+          floorId: apartment.floorId,
+          permanent_address: perResController.text.trim(),
+          date_birth:
+              "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
+          // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
+          provinceId: province.id,
+          districtId: district.id,
+          wardsId: ward.id,
+          dependentId: residentId,
+          material_status: matialStatusValue,
+          education: educationValue,
+          email: emailController.text.trim(),
+          info_name: nameController.text.trim(),
+          ethnicId: ethnicValue,
+          identity_card_required: identityController.text.trim(),
+          job: jobController.text.trim(),
+          nationalId: nationalityValue,
+          relationshipId: relationValue,
+          qualification: qualificationController.text.trim(),
+          phone_required: phoneController.text.trim(),
+          avatar: existedResImages + uploadedResImages,
+          id_card: existedIdentityImages + uploadedIdentityImages,
+          upload: existedDoccuments + uploadedDocuments,
+          place_of_issue: issuePlaceController.text.trim(),
+          residence_type: resTypeValue,
+          sex: sexValue,
+          facebook: facebookController.text.trim(),
+          zalo: zaloController.text.trim(),
+          instagram: instagramController.text.trim(),
+          linkedin: linkedinController.text.trim(),
+          tiktok: tiktokController.text.trim(),
+          status: "WAIT",
+          type: apartment.type == "BUY" ? "DEPENDENT_HOST" : "DEPENDENT_RENT",
+        );
         await APIResidentAddApartment.saveFormResidentAddApartment(
-                formAddResident.toMap())
-            .then((v) {
+          formAddResident.toMap(),
+        ).then((v) {
           isLoading = false;
           notifyListeners();
           Utils.showSuccessMessage(
-              context: context,
-              e: S.of(context).success_register_dependence,
-              onClose: () {
-                Navigator.pushNamedAndRemoveUntil(context,
-                    RegisterResidentScreen.routeName, (route) => route.isFirst);
-              });
+            context: context,
+            e: S.of(context).success_register_dependence,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RegisterResidentScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
         });
       } catch (e) {
         isLoading = false;
@@ -517,8 +527,10 @@ class AddNewResidentPrv extends ChangeNotifier {
     for (var i in dataDistric) {
       districs.add(Distric.fromMap(i));
     }
-    districs.sort((a, b) => removeDiacritics(a.name ?? "")
-        .compareTo(removeDiacritics(a.name ?? "")));
+    districs.sort(
+      (a, b) => removeDiacritics(a.name ?? "")
+          .compareTo(removeDiacritics(a.name ?? "")),
+    );
   }
 
   getWardscByDistrictCode(code) async {
@@ -527,8 +539,10 @@ class AddNewResidentPrv extends ChangeNotifier {
     for (var i in dataWard) {
       wards.add(Ward.fromMap(i));
     }
-    wards.sort((a, b) => removeDiacritics(a.name ?? "")
-        .compareTo(removeDiacritics(a.name ?? "")));
+    wards.sort(
+      (a, b) => removeDiacritics(a.name ?? "")
+          .compareTo(removeDiacritics(a.name ?? "")),
+    );
   }
 
   pickBirthDay(BuildContext context) {
@@ -679,10 +693,14 @@ class AddNewResidentPrv extends ChangeNotifier {
       for (var i in nationalityData) {
         nationalities.add(Nationality.fromMap(i));
       }
-      provinces.sort((a, b) =>
-          removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")));
-      nationalities.sort((a, b) =>
-          removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")));
+      provinces.sort(
+        (a, b) =>
+            removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")),
+      );
+      nationalities.sort(
+        (a, b) =>
+            removeDiacritics(a.name!).compareTo(removeDiacritics(b.name ?? "")),
+      );
       ethnics.sort((a, b) => (a.code!).compareTo((b.code ?? "")));
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());

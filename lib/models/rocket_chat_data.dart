@@ -85,10 +85,10 @@ class MessageChat {
             ? json['md'].map<Md>((e) => Md.fromJson(e)).toList()
             : []
         : [];
-    ts = json['ts'] != null ? Ts.fromJson(json['ts']) : null;
-    updatedAt = json['_updatedAt'] != null
-        ? UpdatedAt.fromJson(json['_updatedAt'])
-        : null;
+    // ts = json['ts'] != null ? Ts.fromJson(json['ts']) : null;
+    // updatedAt = json['_updatedAt'] != null
+    //     ? UpdatedAt.fromJson(json['_updatedAt'])
+    //     : null;
     attachments = json['attachments'] != null
         ? json['attachments'].isNotEmpty
             ? json['attachments']

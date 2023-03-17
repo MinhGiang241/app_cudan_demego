@@ -65,6 +65,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         }
       },
     ).then((v) {
+      user = User.fromMap(v.data['visitor']);
       print(v);
     }).catchError((e) {
       print(e);

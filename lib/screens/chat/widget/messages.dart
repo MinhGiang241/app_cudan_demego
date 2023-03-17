@@ -49,26 +49,27 @@ class _MessagesState extends State<Messages> {
           FocusScope.of(context).unfocus();
         },
         child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: ListView(
-              controller: widget.messageBloc.scrollController,
-              children: [
-                ...widget.messageMap.keys.map(
-                  (e) => Message(
-                    messageChat: widget.messageMap[e]!,
-                    chatbloc: widget.messageBloc,
-                    emojies: widget.messageMap[e]!.reactions ?? {},
-                    shouldTriggerChange: changeNotifier.stream,
-                    isMe: widget.messageBloc.user!.id ==
-                        widget.messageMap[e]!.u!.id,
-                    d: DateTime.now(),
-                    fullName: fullName ?? "",
-                    message: widget.messageMap[e]!.msg ?? "",
-                    avatar: avatar,
-                  ),
-                )
-              ],
-            )),
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ListView(
+            controller: widget.messageBloc.scrollController,
+            children: [
+              ...widget.messageMap.keys.map(
+                (e) => Message(
+                  messageChat: widget.messageMap[e]!,
+                  chatbloc: widget.messageBloc,
+                  emojies: widget.messageMap[e]!.reactions ?? {},
+                  shouldTriggerChange: changeNotifier.stream,
+                  isMe: widget.messageBloc.user!.id ==
+                      widget.messageMap[e]!.u!.id,
+                  d: DateTime.now(),
+                  fullName: fullName ?? "",
+                  message: widget.messageMap[e]!.msg ?? "",
+                  avatar: avatar,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

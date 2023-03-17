@@ -152,7 +152,9 @@ class _InputChatState extends State<InputChat> {
                   child: TextField(
                     onSubmitted: (value) {
                       // messageBloc.summitedMessage(accountId, accountName);
-                      widget.messageBloc.sendMessage();
+                      var roomId =
+                          context.read<ResidentInfoPrv>().userInfo?.account?.id;
+                      widget.messageBloc.sendMessage(roomId);
                     },
                     controller: widget.messageBloc.textEditionController,
                     style: txtBodySmallBold(color: grayScaleColorBase),
@@ -186,14 +188,18 @@ class _InputChatState extends State<InputChat> {
               hpad(5),
               InkWell(
                 onTap: () {
+                  var roomId =
+                      context.read<ResidentInfoPrv>().userInfo?.account?.id;
                   FocusScope.of(context).unfocus();
                   // messageBloc.summitedMessage(accountId, accountName);
                   if (pickedFile.isEmpty && pickedImages.isEmpty) {
-                    widget.messageBloc.sendMessage();
+                    widget.messageBloc.sendMessage(roomId);
                   } else {
                     var uploads = pickedFile + pickedImages;
-
-                    widget.messageBloc.uploadFileOnRoom(uploads[0]);
+                    var token =
+                        context.read<ResidentInfoPrv>().userInfo?.account?.id;
+                    widget.messageBloc
+                        .sendUploadFileOnLiveChat(uploads[0], token, token);
                     setState(() {
                       pickedFile.clear();
                       pickedImages.clear();

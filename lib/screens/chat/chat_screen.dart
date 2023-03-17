@@ -93,71 +93,78 @@ class _ChatScreenState extends State<ChatScreen> {
               var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
               var roomId =
                   context.read<ResidentInfoPrv>().userInfo?.account?.id;
-              state.senMessageLiveChat('1', token, token, "message");
+              // state.sendMessageLiveChat('1', token!, token, "message");
               state.streamLiveChatRoom(token!, token, roomId!);
 
-              return SafeArea(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: StreamBuilder(
-                        stream: state.webSocketChannel!.stream,
-                        builder: (context, snapshot) {
-                          log(snapshot.toString());
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.none:
-                              return const Center(child: PrimaryLoading());
-                            case ConnectionState.done:
-                              return const Center(child: PrimaryLoading());
-                            case ConnectionState.waiting:
-                              return const Center(child: PrimaryLoading());
-                            case ConnectionState.active:
-                              return _initStateRender(snapshot, state, bloc);
-                            default:
-                              return const Center(child: PrimaryLoading());
-                          }
-                        },
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: IntrinsicWidth(
-                        child: PrimaryCard(
-                          background: grayScaleColor4,
-                          padding: const EdgeInsets.all(6),
-                          onTap: () {
-                            bloc.add(LoadChatMessageStart());
-                          },
-                          child: Row(
-                            children: [
-                              const Icon(Icons.login),
-                              hpad(10),
-                              Text(
-                                S.of(context).start_chat,
-                                overflow: TextOverflow.ellipsis,
-                                style: txtRegular(14, grayScaleColorBase),
-                              )
-                            ],
+              return FutureBuilder(
+                future: () {
+                  state.loadLiveChatHistory(roomId);
+                }(),
+                builder: (context, sn) {
+                  return SafeArea(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: StreamBuilder(
+                            stream: state.webSocketChannel!.stream,
+                            builder: (context, snapshot) {
+                              log(snapshot.toString());
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                  return const Center(child: PrimaryLoading());
+                                case ConnectionState.done:
+                                  return const Center(child: PrimaryLoading());
+                                case ConnectionState.waiting:
+                                  return const Center(child: PrimaryLoading());
+                                case ConnectionState.active:
+                                  return _initStateRender(
+                                      snapshot, state, bloc);
+                                default:
+                                  return const Center(child: PrimaryLoading());
+                              }
+                            },
                           ),
                         ),
-                      ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: IntrinsicWidth(
+                            child: PrimaryCard(
+                              background: grayScaleColor4,
+                              padding: const EdgeInsets.all(6),
+                              onTap: () {
+                                bloc.add(LoadChatMessageStart());
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.login),
+                                  hpad(10),
+                                  Text(
+                                    S.of(context).start_chat,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: txtRegular(14, grayScaleColorBase),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        vpad(10)
+                      ],
                     ),
-                    vpad(10)
-                  ],
-                ),
+                  );
+                },
               );
             } else if (state is ChatMessageGreeting) {
               return vpad(0);
             } else if (state is ChatMessageStart) {
               state.webSocketChannel =
-                  state.webSocketService.connectToWebSocket(
+                  state.webSocketService.connectToWebSocketLiveChat(
                 WebsocketConnect.webSocketUrl,
-                authToken: bloc.authToken,
               );
-              state.webSocketService.streamChannelMessagesSubscribe(
-                state.webSocketChannel!,
-                WebsocketConnect.channel,
-              );
+              var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+              var roomId =
+                  context.read<ResidentInfoPrv>().userInfo?.account?.id;
+              state.streamLiveChatRoom(token!, token, roomId!);
               // state.webSocketService.getLastes50Message(
               //   state.webSocketChannel!,
               //   WebsocketConnect.room,

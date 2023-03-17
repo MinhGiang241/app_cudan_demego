@@ -34,16 +34,6 @@ class ChatMessageInitial extends ChatMessageState {
     );
   }
 
-  void senMessageLiveChat(id, rid, token, message) {
-    webSocketService.sendMessageLiveChat(
-      webSocketChannel!,
-      id,
-      rid,
-      token,
-      message,
-    );
-  }
-
   void sendMessageLiveChat(
     String id,
     String rid,
@@ -80,6 +70,20 @@ class ChatMessageInitial extends ChatMessageState {
     for (var i in a) {
       messagesMap[i.id ?? ""] = i;
     }
+  }
+
+  void loadLiveChatHistory(roomId) async {
+    await webSocketService.loadLiveChatHistory(roomId).then((v) {
+      print(v);
+      if (v['messages'] != null) {
+        messagesMap.clear();
+        for (var i in v['messages']) {
+          var me = MessageChat.fromJson(i);
+          // print(i);
+          messagesMap[me.id ?? ""] = me;
+        }
+      }
+    });
   }
 }
 
@@ -169,30 +173,65 @@ class ChatMessageStart extends ChatMessageState {
     }
   }
 
-  void sendMessage() {
+  void sendMessage(String rid) {
     if (textEditionController.text.isNotEmpty) {
       // webSocketService.sendMessageOnChannel(textEditionController.text,
       //     webSocketChannel!, WebsocketConnect.channel);
-
-      webSocketService.sendMessageOnRoom(
-        textEditionController.text,
+      print('text:${textEditionController.text.trim()}');
+      webSocketService.sendMessageLiveChat(
         webSocketChannel!,
-        WebsocketConnect.room,
+        "id",
+        rid,
+        rid,
+        textEditionController.text.trim(),
       );
       textEditionController.clear();
     }
   }
 
-  uploadFileOnRoom(
-    File file,
+  void sendMessageLiveChat(
+    String id,
+    String rid,
+    String token,
+    String message,
   ) {
+    webSocketService.sendMessageLiveChat(
+      webSocketChannel!,
+      id,
+      rid,
+      token,
+      message,
+    );
+  }
+
+  void streamLiveChatRoom(String visitorToken, String id, String param) {
+    webSocketService.streamLiveChatRoom(
+      webSocketChannel!,
+      visitorToken,
+      id,
+      param,
+    );
+  }
+
+  uploadFileOnRoom(File file, token) {
     webSocketService.sendUploadFileOnRoom(
       webSocketChannel!,
       WebsocketConnect.room,
       file,
       textEditionController.text.trim(),
-      authToken,
+      token,
       user!.id,
+    );
+    textEditionController.clear();
+  }
+
+  sendUploadFileOnLiveChat(File file, token, roomId) {
+    webSocketService.sendUploadFileOnLiveChat(
+      webSocketChannel!,
+      roomId,
+      file,
+      textEditionController.text.trim(),
+      token,
     );
     textEditionController.clear();
   }

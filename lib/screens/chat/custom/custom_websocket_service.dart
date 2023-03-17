@@ -332,7 +332,12 @@ class CustomWebSocketService {
       'msg': 'method',
       'method': 'sendMessageLivechat',
       'params': [
-        {'_id': id, 'rid': rid, 'msg': message, 'token': token}
+        {
+          '_id': DateTime.now().millisecondsSinceEpoch.toString(),
+          'rid': rid,
+          'msg': message,
+          'token': token
+        }
       ],
       'id': '11'
     };
@@ -379,6 +384,13 @@ class CustomWebSocketService {
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 
+  loadLiveChatHistory(String roomId) async {
+    return await ApiService.shared.getApi(
+        path:
+            '${WebsocketConnect.serverUrl}/api/v1/livechat/messages.history/$roomId',
+        params: {"token": roomId});
+  }
+
   //upload File on Room
 
   void sendUploadFileOnRoom(
@@ -410,6 +422,41 @@ class CustomWebSocketService {
     await ApiService.shared
         .postApi(
       path: '${WebsocketConnect.serverUrl}/api/v1/rooms.upload/${room.id}',
+      data: formData,
+      op: options,
+    )
+        .then((v) {
+      print(v);
+    });
+  }
+
+  void sendUploadFileOnLiveChat(
+    WebSocketChannel webSocketChannel,
+    String roomId,
+    File file,
+    String? desc,
+    token,
+  ) async {
+    var listImageExt = ['jpg', 'jpeg', 'png'];
+    var ext = file.path.split('.').last;
+    var contentType = MediaType('file', ext);
+    if (listImageExt.contains(ext)) {
+      contentType = MediaType('image', ext);
+    }
+    final formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(file.path, contentType: contentType),
+      'description': desc
+    });
+
+    var options = Options(
+      headers: {
+        'x-visitor-token': token,
+      },
+    );
+
+    await ApiService.shared
+        .postApi(
+      path: '${WebsocketConnect.serverUrl}/api/v1/livechat/upload/$roomId',
       data: formData,
       op: options,
     )

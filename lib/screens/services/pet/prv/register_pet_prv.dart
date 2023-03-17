@@ -77,8 +77,9 @@ class RegisterPetPrv extends ChangeNotifier {
       weightController.text =
           ((double.parse(v) * 100).floor() / 100).toStringAsFixed(2);
       weightController.selection = TextSelection(
-          baseOffset: weightController.text.length,
-          extentOffset: weightController.text.length);
+        baseOffset: weightController.text.length,
+        extentOffset: weightController.text.length,
+      );
     }
 
     notifyListeners();
@@ -175,7 +176,7 @@ class RegisterPetPrv extends ChangeNotifier {
         if (existedReportFiles.isEmpty && reportFiles.isEmpty) {
           listError.add(S.of(context).report_not_empty);
         }
-        if ([...existedImage, ...submitImagesPet].isEmpty) {
+        if ([...existedImage, ...imagesPet].isEmpty) {
           listError.add(S.of(context).pet_image_not_empty);
         }
         if (listError.isNotEmpty) {
@@ -213,16 +214,20 @@ class RegisterPetPrv extends ChangeNotifier {
           return APIPet.savePet(newPet.toJson());
         }).then((v) {
           Utils.showSuccessMessage(
-              context: context,
-              e: isRequest
-                  ? S.of(context).success_send_req
-                  : existedPet!.id != null
-                      ? S.of(context).success_edit
-                      : S.of(context).success_cr_new,
-              onClose: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, PetListScreen.routeName, (route) => route.isFirst);
-              });
+            context: context,
+            e: isRequest
+                ? S.of(context).success_send_req
+                : existedPet!.id != null
+                    ? S.of(context).success_edit
+                    : S.of(context).success_cr_new,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                PetListScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
           isSendApproveLoading = false;
           isAddNewLoading = false;
           validateName = null;

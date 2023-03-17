@@ -304,7 +304,8 @@ class _ConstructionRegistrationLetterTabState
                               ),
                             ),
                             if (e.status == 'WAIT_PAY' ||
-                                e.status == 'WAIT_OWNER')
+                                e.status == 'WAIT_OWNER' ||
+                                e.status == 'WAIT_TECHNICAL')
                               Row(
                                 children: [
                                   hpad(16),
