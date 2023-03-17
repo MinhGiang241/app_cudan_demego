@@ -94,64 +94,83 @@ class _ChatScreenState extends State<ChatScreen> {
               var roomId =
                   context.read<ResidentInfoPrv>().userInfo?.account?.id;
               // state.sendMessageLiveChat('1', token!, token, "message");
-              state.streamLiveChatRoom(token!, token, roomId!);
 
               return FutureBuilder(
-                future: () {
-                  state.loadLiveChatHistory(roomId);
+                future: () async {
+                  await state.loadLiveChatHistory(roomId);
                 }(),
                 builder: (context, sn) {
-                  return SafeArea(
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: StreamBuilder(
-                            stream: state.webSocketChannel!.stream,
-                            builder: (context, snapshot) {
-                              log(snapshot.toString());
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.none:
-                                  return const Center(child: PrimaryLoading());
-                                case ConnectionState.done:
-                                  return const Center(child: PrimaryLoading());
-                                case ConnectionState.waiting:
-                                  return const Center(child: PrimaryLoading());
-                                case ConnectionState.active:
-                                  return _initStateRender(
-                                      snapshot, state, bloc);
-                                default:
-                                  return const Center(child: PrimaryLoading());
-                              }
-                            },
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: IntrinsicWidth(
-                            child: PrimaryCard(
-                              background: grayScaleColor4,
-                              padding: const EdgeInsets.all(6),
-                              onTap: () {
-                                bloc.add(LoadChatMessageStart());
+                  if (sn.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: PrimaryLoading(),
+                    );
+                  }
+                  if (sn.connectionState == ConnectionState.done) {
+                    state.streamLiveChatRoom(token!, token, roomId!);
+                    return SafeArea(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: StreamBuilder(
+                              stream: state.webSocketChannel!.stream,
+                              builder: (context, snapshot) {
+                                log(snapshot.toString());
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    return const Center(
+                                      child: PrimaryLoading(),
+                                    );
+                                  case ConnectionState.done:
+                                    return const Center(
+                                      child: PrimaryLoading(),
+                                    );
+                                  case ConnectionState.waiting:
+                                    return const Center(
+                                      child: PrimaryLoading(),
+                                    );
+                                  case ConnectionState.active:
+                                    return _initStateRender(
+                                      snapshot,
+                                      state,
+                                      bloc,
+                                    );
+                                  default:
+                                    return const Center(
+                                      child: PrimaryLoading(),
+                                    );
+                                }
                               },
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.login),
-                                  hpad(10),
-                                  Text(
-                                    S.of(context).start_chat,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: txtRegular(14, grayScaleColorBase),
-                                  )
-                                ],
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: IntrinsicWidth(
+                              child: PrimaryCard(
+                                background: grayScaleColor4,
+                                padding: const EdgeInsets.all(6),
+                                onTap: () {
+                                  bloc.add(LoadChatMessageStart());
+                                },
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.login),
+                                    hpad(10),
+                                    Text(
+                                      S.of(context).start_chat,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: txtRegular(14, grayScaleColorBase),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        vpad(10)
-                      ],
-                    ),
-                  );
+                          vpad(10)
+                        ],
+                      ),
+                    );
+                  }
+                  return Text("0 có 1 cái gif car");
                 },
               );
             } else if (state is ChatMessageGreeting) {

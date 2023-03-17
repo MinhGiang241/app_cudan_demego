@@ -72,7 +72,7 @@ class ChatMessageInitial extends ChatMessageState {
     }
   }
 
-  void loadLiveChatHistory(roomId) async {
+  Future loadLiveChatHistory(roomId) async {
     await webSocketService.loadLiveChatHistory(roomId).then((v) {
       print(v);
       if (v['messages'] != null) {
