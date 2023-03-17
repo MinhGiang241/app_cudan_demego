@@ -55,7 +55,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       '${WebsocketConnect.serverUrl}/api/v1/livechat/visitor',
       data: {
         "visitor": {
-          "name": name,
+          "name": name ?? phone,
           // "email": email,
           "token": token,
           "phone": phone,
