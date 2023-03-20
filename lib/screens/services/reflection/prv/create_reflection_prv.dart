@@ -215,7 +215,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         zoneTypeController.text = v;
         zoneController.clear();
 
-        dropdownKey.currentState!.reset();
+        // dropdownKey.currentState!.reset();
 
         areas.clear();
         if (autoValid) {

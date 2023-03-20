@@ -41,7 +41,7 @@ class OtpAddEmailPrv extends ChangeNotifier {
   resend(BuildContext context) async {
     isResending = true;
     notifyListeners();
-    await APIAuth.sendOtpAddMoreEmail(email).then((v) {
+    await APIAuth.sendOtpAddMoreEmail(email, false).then((v) {
       Utils.showSuccessMessage(context: context, e: S.of(context).success_opt);
 
       second = 30;

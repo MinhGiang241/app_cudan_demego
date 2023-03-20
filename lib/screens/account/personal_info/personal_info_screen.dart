@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_auth.dart';
@@ -116,16 +118,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                       );
                                     } else {
                                       Navigator.pop(context);
-                                      // Utils.showBottomSheet(
-                                      //   context: context,
-                                      //   child: OtpAddEmailScreen(
-                                      //     acc: userInfo!,
-                                      //     email: emailcontroller.text.trim(),
-                                      //   ),
-                                      // );
                                       await APIAuth.sendOtpAddMoreEmail(
-                                        emailcontroller.text.trim(),
-                                      ).then((v) {
+                                              emailcontroller.text.trim(), true)
+                                          .then((v) {
                                         Utils.showBottomSheet(
                                           context: context,
                                           child: OtpAddEmailScreen(
@@ -136,26 +131,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                       }).catchError((e) {
                                         Utils.showErrorMessage(context, e);
                                       });
-
-                                      // APIAuth.saveAccount(user!.toJson())
-                                      //     .then((v) {
-                                      //   Utils.showSuccessMessage(
-                                      //       context: context,
-                                      //       e: S.of(context).success_add_email,
-                                      //       onClose: () {
-                                      //         // setState(() {
-                                      //         context
-                                      //             .read<ResidentInfoPrv>()
-                                      //             .userInfo!
-                                      //             .account = user;
-                                      //         // });
-                                      //         Navigator.pop(context);
-                                      //       });
-                                      // }).catchError((e) {
-                                      //   Utils.showErrorMessage(context, e);
-                                      // });
                                     }
-                                    // Navigator.pop(context);
                                   },
                                 ),
                               ],
@@ -171,7 +147,94 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ))
-              : null,
+              : Wrap(children: [
+                  Text(
+                    userInfo?.email ?? " dsfdfsdfd dsdasdds",
+                    style: const TextStyle(
+                        fontFamily: family,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  hpad(5),
+                  InkWell(
+                    onTap: () {
+                      Utils.showDialog(
+                          context: context,
+                          dialog: PrimaryDialog.custom(
+                            title: S.of(context).change_email,
+                            content: Column(children: [
+                              PrimaryTextField(
+                                controller: emailcontroller,
+                                isRequired: true,
+                                label: S.of(context).email,
+                                hint: S.of(context).email,
+                              ),
+                              vpad(16),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  PrimaryButton(
+                                    text: S.of(context).close,
+                                    buttonSize: ButtonSize.medium,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: redColor4,
+                                    textColor: redColorBase,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  PrimaryButton(
+                                    buttonSize: ButtonSize.medium,
+                                    text: S.of(context).change,
+                                    onTap: () async {
+                                      if (emailcontroller.text.trim().isEmpty) {
+                                        Utils.showErrorMessage(
+                                          context,
+                                          S.of(context).email_not_empty,
+                                        );
+                                      } else if (!RegexText.isEmail(
+                                        emailcontroller.text.trim(),
+                                      )) {
+                                        Utils.showErrorMessage(
+                                          context,
+                                          S.of(context).not_email,
+                                        );
+                                      } else {
+                                        Navigator.pop(context);
+                                        await APIAuth.sendOtpAddMoreEmail(
+                                                emailcontroller.text.trim(),
+                                                false)
+                                            .then((v) {
+                                          Utils.showBottomSheet(
+                                            context: context,
+                                            child: OtpAddEmailScreen(
+                                              acc: userInfo!,
+                                              email:
+                                                  emailcontroller.text.trim(),
+                                            ),
+                                          );
+                                        }).catchError((e) {
+                                          Utils.showErrorMessage(context, e);
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                            ]),
+                          ));
+                    },
+                    child: Text(
+                      S.current.change_email,
+                      style: const TextStyle(
+                          fontFamily: family,
+                          color: primaryColorBase,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )
+                ]),
           content: userInfo?.email ?? "",
           contentStyle: userInfo?.email != null
               ? const TextStyle(

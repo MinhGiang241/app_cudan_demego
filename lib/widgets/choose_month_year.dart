@@ -14,14 +14,15 @@ class ChooseMonthYear extends StatefulWidget {
   final int month;
   final Function selectMonthAndYear;
   String? title;
-  ChooseMonthYear(
-      {super.key,
-      this.onRefresh,
-      this.selectedDate,
-      this.title,
-      required this.selectMonthAndYear,
-      required this.year,
-      required this.month});
+  ChooseMonthYear({
+    super.key,
+    this.onRefresh,
+    this.selectedDate,
+    this.title,
+    required this.selectMonthAndYear,
+    required this.year,
+    required this.month,
+  });
   @override
   _ChooseMonthYearState createState() => _ChooseMonthYearState();
 }
@@ -47,10 +48,11 @@ class _ChooseMonthYearState extends State<ChooseMonthYear> {
               widget.selectMonthAndYear(v.year, v.month);
             },
             pickerModel: CustomMonthPicker(
-                minTime: DateTime(DateTime.now().year - 10, 1, 1),
-                maxTime: DateTime(DateTime.now().year + 10, 12, 31),
-                currentTime: DateTime(widget.year, widget.month, 1),
-                locale: LocaleType.vi),
+              minTime: DateTime(DateTime.now().year - 10, 1, 1),
+              maxTime: DateTime(DateTime.now().year + 10, 12, 31),
+              currentTime: DateTime(widget.year, widget.month, 1),
+              locale: LocaleType.vi,
+            ),
           );
         },
         child: Column(
@@ -69,21 +71,23 @@ class _ChooseMonthYearState extends State<ChooseMonthYear> {
               ),
             if (widget.title != null) vpad(12),
             PrimaryCard(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${S.of(context).month}: ${widget.month} - ${widget.year}',
-                          style: txtBodySmallBold(color: grayScaleColorBase),
-                          textAlign: TextAlign.left,
-                        ),
-                        const Icon(Icons.expand_more)
-                      ]),
-                )),
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${S.of(context).month}: ${widget.month} - ${widget.year}',
+                      style: txtBodySmallBold(color: grayScaleColorBase),
+                      textAlign: TextAlign.left,
+                    ),
+                    const Icon(Icons.expand_more)
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -92,16 +96,17 @@ class _ChooseMonthYearState extends State<ChooseMonthYear> {
 }
 
 class CustomMonthPicker extends DatePickerModel {
-  CustomMonthPicker(
-      {DateTime? currentTime,
-      DateTime? minTime,
-      DateTime? maxTime,
-      LocaleType? locale})
-      : super(
-            locale: locale,
-            minTime: minTime,
-            maxTime: maxTime,
-            currentTime: currentTime);
+  CustomMonthPicker({
+    DateTime? currentTime,
+    DateTime? minTime,
+    DateTime? maxTime,
+    LocaleType? locale,
+  }) : super(
+          locale: locale,
+          minTime: minTime,
+          maxTime: maxTime,
+          currentTime: currentTime,
+        );
 
   @override
   List<int> layoutProportions() {

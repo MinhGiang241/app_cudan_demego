@@ -6529,6 +6529,256 @@ class S {
       args: [],
     );
   }
+
+  /// `Chart`
+  String get chart {
+    return Intl.message(
+      'Chart',
+      name: 'chart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electricity index`
+  String get elec_index {
+    return Intl.message(
+      'Electricity index',
+      name: 'elec_index',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electricity details`
+  String get elec_details {
+    return Intl.message(
+      'Electricity details',
+      name: 'elec_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Biểu đồ điện năng tiêu thụ`
+  String get elect_consume_chart {
+    return Intl.message(
+      'Biểu đồ điện năng tiêu thụ',
+      name: 'elect_consume_chart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-01`
+  String get th01 {
+    return Intl.message(
+      'M-01',
+      name: 'th01',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-02`
+  String get th02 {
+    return Intl.message(
+      'M-02',
+      name: 'th02',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-03`
+  String get th03 {
+    return Intl.message(
+      'M-03',
+      name: 'th03',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-04`
+  String get th04 {
+    return Intl.message(
+      'M-04',
+      name: 'th04',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-05`
+  String get th05 {
+    return Intl.message(
+      'M-05',
+      name: 'th05',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-07`
+  String get th06 {
+    return Intl.message(
+      'M-07',
+      name: 'th06',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-08`
+  String get th08 {
+    return Intl.message(
+      'M-08',
+      name: 'th08',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-09`
+  String get th09 {
+    return Intl.message(
+      'M-09',
+      name: 'th09',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-10`
+  String get th10 {
+    return Intl.message(
+      'M-10',
+      name: 'th10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-11`
+  String get th11 {
+    return Intl.message(
+      'M-11',
+      name: 'th11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M-12`
+  String get th12 {
+    return Intl.message(
+      'M-12',
+      name: 'th12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid Bill from {f} to {t}`
+  String bill_from_to(Object f, Object t) {
+    return Intl.message(
+      'Paid Bill from $f to $t',
+      name: 'bill_from_to',
+      desc: '',
+      args: [f, t],
+    );
+  }
+
+  /// `Meter code`
+  String get meter_code {
+    return Intl.message(
+      'Meter code',
+      name: 'meter_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New index`
+  String get new_index {
+    return Intl.message(
+      'New index',
+      name: 'new_index',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old index`
+  String get old_index {
+    return Intl.message(
+      'Old index',
+      name: 'old_index',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consume electricity (kWh)`
+  String get consume_elec {
+    return Intl.message(
+      'Consume electricity (kWh)',
+      name: 'consume_elec',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unit price (VNĐ)`
+  String get unit_price {
+    return Intl.message(
+      'Unit price (VNĐ)',
+      name: 'unit_price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To money (VNĐ)`
+  String get to_money_vnd {
+    return Intl.message(
+      'To money (VNĐ)',
+      name: 'to_money_vnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total money payment`
+  String get total_money_pay {
+    return Intl.message(
+      'Total money payment',
+      name: 'total_money_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Email`
+  String get change_email {
+    return Intl.message(
+      'Change Email',
+      name: 'change_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change`
+  String get change {
+    return Intl.message(
+      'Change',
+      name: 'change',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

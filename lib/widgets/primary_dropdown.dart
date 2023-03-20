@@ -1,15 +1,20 @@
 // ignore_for_file: iterable_contains_unrelated_type
 
+import 'package:app_cudan/widgets/primary_button.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
+import '../utils/utils.dart';
 import 'primary_card.dart';
 
 var data = [
@@ -62,7 +67,7 @@ class PrimaryDropDown extends StatefulWidget {
   String? validateString;
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
-  final List<String>? selectMultileList;
+  final List<Map<String, dynamic>>? selectMultileList;
   TextEditingController? controller = TextEditingController();
 
   @override
@@ -72,6 +77,7 @@ class PrimaryDropDown extends StatefulWidget {
 class _PrimaryDropDownState extends State<PrimaryDropDown> {
   int indexSelected = 1;
   List<String> selectedList = [];
+  MultiSelectController<dynamic>? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -92,31 +98,158 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
         ),
         if (widget.label != null) vpad(8),
         widget.isMultiple
-            ? MultiSelectDialogField(
-                validator: widget.validator,
-                title: Text(S.of(context).select),
-                selectedColor: secondaryColorBase,
-                buttonText: Text(
-                  widget.hint ?? "--${S.of(context).select}--",
-                  overflow: TextOverflow.ellipsis,
-                ),
-                buttonIcon: const Icon(Icons.arrow_drop_down),
-                searchHint: '--${S.of(context).select}--',
-                searchHintStyle: txtBodySmallBold(color: grayScaleColor3),
-                onConfirm: (v) {
-                  selectedList = v;
-                },
-                items: widget.selectMultileList != null
-                    ? widget.selectMultileList!
-                        .map((e) => MultiSelectItem(e, e))
-                        .toList()
-                    : data.map((e) => MultiSelectItem(e, e)).toList(),
-                decoration: BoxDecoration(
-                  // border: Border.all(color: BorderSide.none),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
+            ? PrimaryTextField(
+                isReadOnly: true,
+                hint: '--${S.of(context).select}--',
+                suffixIcon: const Icon(Icons.playlist_add_check),
+                onTap: widget.selectMultileList!.isEmpty
+                    ? null
+                    : () async {
+                        await Utils.showDialog(
+                          context: context,
+                          dialog: Dialog(
+                            alignment: Alignment.center,
+                            // margin:
+                            //     EdgeInsets.symmetric(horizontal: 200, vertical: 200),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(24)),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (widget.label != null)
+                                    Text(
+                                      widget.label!,
+                                      style: txtDisplayMedium(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  vpad(10),
+                                  Flexible(
+                                    child: MultiSelectCheckList(
+                                      isMaxSelectableWithPerpetualSelects: true,
+                                      // maxSelectableCount: 5,
+                                      textStyles: const MultiSelectTextStyles(
+                                        selectedTextStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      itemsDecoration: MultiSelectDecorations(
+                                        selectedDecoration: BoxDecoration(
+                                          color: Colors.indigo.withOpacity(0.8),
+                                        ),
+                                      ),
+                                      listViewSettings: ListViewSettings(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        separatorBuilder: (context, index) =>
+                                            const Divider(
+                                          height: 0,
+                                        ),
+                                      ),
+                                      controller: _controller,
+                                      items: List.generate(
+                                        widget.selectMultileList!.length,
+                                        (index) => CheckListCard(
+                                          value:
+                                              widget.selectMultileList![index]
+                                                  ['value'],
+                                          title: Text(
+                                            widget.selectMultileList![index]
+                                                ['title'],
+                                          ),
+                                          subtitle:
+                                              widget.selectMultileList![index]
+                                                          ['subtitle'] !=
+                                                      null
+                                                  ? Text(
+                                                      widget.selectMultileList![
+                                                          index]['title'],
+                                                    )
+                                                  : null,
+                                          selectedColor: Colors.white,
+                                          checkColor: Colors.indigo,
+                                          // selected: index == 3,
+                                          // enabled: !(index == 5),
+                                          checkBoxBorderSide: const BorderSide(
+                                            color: Colors.blue,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                        ),
+                                      ),
+                                      onChange:
+                                          (allSelectedItems, selectedItem) {},
+                                    ),
+                                  ),
+                                  vpad(10),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      hpad(10),
+                                      PrimaryButton(
+                                        buttonType: ButtonType.secondary,
+                                        secondaryBackgroundColor: redColor4,
+                                        textColor: redColor1,
+                                        buttonSize: ButtonSize.medium,
+                                        text: S.of(context).close,
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      hpad(20),
+                                      PrimaryButton(
+                                        buttonSize: ButtonSize.medium,
+                                        text: S.of(context).confirm,
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      hpad(10),
+                                    ],
+                                  ),
+                                  vpad(20),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
               )
+
+            // MultiSelectDialogField(
+            //     validator: widget.validator,
+            //     title: Text(S.of(context).select),
+            //     selectedColor: secondaryColorBase,
+            //     buttonText: Text(
+            //       widget.hint ?? "--${S.of(context).select}--",
+            //       overflow: TextOverflow.ellipsis,
+            //     ),
+            //     buttonIcon: const Icon(Icons.arrow_drop_down),
+            //     searchHint: '--${S.of(context).select}--',
+            //     searchHintStyle: txtBodySmallBold(color: grayScaleColor3),
+            //     onConfirm: (v) {
+            //       selectedList = v;
+            //     },
+            //     items: widget.selectMultileList != null
+            //         ? widget.selectMultileList!
+            //             .map((e) => MultiSelectItem(e, e))
+            //             .toList()
+            //         : data.map((e) => MultiSelectItem(e, e)).toList(),
+            //     decoration: BoxDecoration(
+            //       // border: Border.all(color: BorderSide.none),
+            //       color: Colors.white,
+            //       borderRadius: BorderRadius.circular(12),
+            //     ),
+            //   )
             : PrimaryCard(
                 child: Column(
                   children: [
@@ -198,16 +331,19 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                         fillColor: Colors.white,
                         hintStyle: txtBodySmallBold(color: grayScaleColor3),
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 12),
+                          vertical: 12,
+                          horizontal: 12,
+                        ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
                               const BorderSide(color: primaryColor2, width: 2),
                         ),
                         errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: redColor2, width: 2)),
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              const BorderSide(color: redColor2, width: 2),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -263,7 +399,8 @@ class DropdownFormField<T> extends FormField<T> {
 
             return InputDecorator(
               decoration: effectiveDecoration.copyWith(
-                  errorText: field.hasError ? field.errorText : null),
+                errorText: field.hasError ? field.errorText : null,
+              ),
               isEmpty: field.value == '' || field.value == null,
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<T>(

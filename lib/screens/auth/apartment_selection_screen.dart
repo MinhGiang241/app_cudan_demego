@@ -4,12 +4,10 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../services/api_tower.dart';
 import '../../services/prf_data.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
-import '../../widgets/primary_text_field.dart';
 import '../home/home_screen.dart';
 import 'prv/resident_info_prv.dart';
 
@@ -55,21 +53,27 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
-              onPressed: () {
-                context.read<AuthPrv>().onSignOut(context);
-              },
-              icon: const Icon(Icons.logout)),
+            onPressed: () {
+              context.read<AuthPrv>().onSignOut(context);
+            },
+            icon: const Icon(Icons.logout),
+          ),
           hpad(12)
         ],
       ),
       body: Column(
         children: [
-          vpad(24 +
-              AppBar().preferredSize.height +
-              MediaQuery.of(context).padding.top),
+          vpad(
+            24 +
+                AppBar().preferredSize.height +
+                MediaQuery.of(context).padding.top,
+          ),
           Center(
-              child: Text(S.of(context).choose_an_apartment,
-                  style: txtDisplayMedium())),
+            child: Text(
+              S.of(context).choose_an_apartment,
+              style: txtDisplayMedium(),
+            ),
+          ),
           vpad(36),
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -84,16 +88,17 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
           // ),
           // vpad(16),
           Expanded(
-              child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-            children: [
-              // ...widget.listProject!.apartments!
-              // ...listProject.map((e) => Text(e)),
-              vpad(12),
-              Text(arg, style: txtBold(14, grayScaleColorBase)),
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              children: [
+                // ...widget.listProject!.apartments!
+                // ...listProject.map((e) => Text(e)),
+                vpad(12),
+                Text(arg, style: txtBold(14, grayScaleColorBase)),
 
-              vpad(12),
-              ...listOwn.asMap().entries.map((e) => PrimaryCard(
+                vpad(12),
+                ...listOwn.asMap().entries.map(
+                      (e) => PrimaryCard(
                         onTap: () async {
                           context.read<AuthPrv>().authStatus = AuthStatus.auth;
                           widget.context
@@ -102,91 +107,98 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                           await PrfData.shared.setApartments(e.key);
 
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              HomeScreen.routeName, (route) => route.isCurrent);
+                            HomeScreen.routeName,
+                            (route) => route.isCurrent,
+                          );
                         },
                         margin: const EdgeInsets.only(bottom: 16),
                         child: Padding(
                           padding: const EdgeInsets.all(15),
                           child: ListTile(
-                              leading: const PrimaryIcon(
-                                icons: PrimaryIcons.home_smile,
-                                color: primaryColor4,
-                                backgroundColor: primaryColor5,
-                                style: PrimaryIconStyle.round,
-                                padding: EdgeInsets.all(12),
-                              ),
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(e.value.building?.name ?? '',
-                                      style: txtLinkSmall()),
-                                  vpad(4),
-                                  Text(
-                                      '${e.value.apartment?.name ?? ''} - ${e.value.floor?.name ?? ''}',
-                                      style: txtBodySmallBold()),
-                                  // vpad(4),
-                                  // Text('Thông tin thêm',
-                                  //     style: txtBodySmallRegular()),
-                                ],
-                              )),
+                            leading: const PrimaryIcon(
+                              icons: PrimaryIcons.home_smile,
+                              color: primaryColor4,
+                              backgroundColor: primaryColor5,
+                              style: PrimaryIconStyle.round,
+                              padding: EdgeInsets.all(12),
+                            ),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  e.value.building?.name ?? '',
+                                  style: txtLinkSmall(),
+                                ),
+                                vpad(4),
+                                Text(
+                                  '${e.value.apartment?.name ?? ''} - ${e.value.floor?.name ?? ''}',
+                                  style: txtBodySmallBold(),
+                                ),
+                                // vpad(4),
+                                // Text('Thông tin thêm',
+                                //     style: txtBodySmallRegular()),
+                              ],
+                            ),
+                          ),
                         ),
-                      )
+                      ),
 
-                  // Text(e.apartment?.name ?? ""),
-                  ),
-              // .map<Widget>((e) => Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text(e.building?.name ?? "", style: txtLinkMedium()),
-              //         Text(e.building?.code ?? "", style: txtBodySmallBold()),
-              //         vpad(12),
-              //         ...e.a!
-              //             .map<Widget>((e) => Padding(
-              //                   padding: const EdgeInsets.only(bottom: 16),
-              //                   child: PrimaryCard(
-              //                     onTap: () {
-              //                       Navigator.of(context)
-              //                           .pushNamedAndRemoveUntil(
-              //                               HomeScreen.routeName,
-              //                               (route) => false);
-              //                       // context
-              //                       //     .read<AuthPrv>()
-              //                       //     .onSelectApartment(context, e);
-              //                     },
-              //                     child: Padding(
-              //                       padding: const EdgeInsets.all(15),
-              //                       child: Row(
-              //                         children: [
-              //                           const PrimaryIcon(
-              //                             icons: PrimaryIcons.home_smile,
-              //                             color: primaryColor4,
-              //                             backgroundColor: primaryColor5,
-              //                             style: PrimaryIconStyle.round,
-              //                             padding: EdgeInsets.all(12),
-              //                           ),
-              //                           hpad(16),
-              //                           Column(
-              //                             crossAxisAlignment:
-              //                                 CrossAxisAlignment.start,
-              //                             children: [
-              //                               Text(e.name ?? "",
-              //                                   style: txtLinkSmall()),
-              //                               vpad(4),
-              //                               Text(e.detail ?? "",
-              //                                   style: txtBodySmallBold()),
-              //                             ],
-              //                           )
-              //                         ],
-              //                       ),
-              //                     ),
-              //                   ),
-              //                 ))
-              //             .toList()
-              //       ],
-              //     )),
-              vpad(50)
-            ],
-          )),
+                      // Text(e.apartment?.name ?? ""),
+                    ),
+                // .map<Widget>((e) => Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         Text(e.building?.name ?? "", style: txtLinkMedium()),
+                //         Text(e.building?.code ?? "", style: txtBodySmallBold()),
+                //         vpad(12),
+                //         ...e.a!
+                //             .map<Widget>((e) => Padding(
+                //                   padding: const EdgeInsets.only(bottom: 16),
+                //                   child: PrimaryCard(
+                //                     onTap: () {
+                //                       Navigator.of(context)
+                //                           .pushNamedAndRemoveUntil(
+                //                               HomeScreen.routeName,
+                //                               (route) => false);
+                //                       // context
+                //                       //     .read<AuthPrv>()
+                //                       //     .onSelectApartment(context, e);
+                //                     },
+                //                     child: Padding(
+                //                       padding: const EdgeInsets.all(15),
+                //                       child: Row(
+                //                         children: [
+                //                           const PrimaryIcon(
+                //                             icons: PrimaryIcons.home_smile,
+                //                             color: primaryColor4,
+                //                             backgroundColor: primaryColor5,
+                //                             style: PrimaryIconStyle.round,
+                //                             padding: EdgeInsets.all(12),
+                //                           ),
+                //                           hpad(16),
+                //                           Column(
+                //                             crossAxisAlignment:
+                //                                 CrossAxisAlignment.start,
+                //                             children: [
+                //                               Text(e.name ?? "",
+                //                                   style: txtLinkSmall()),
+                //                               vpad(4),
+                //                               Text(e.detail ?? "",
+                //                                   style: txtBodySmallBold()),
+                //                             ],
+                //                           )
+                //                         ],
+                //                       ),
+                //                     ),
+                //                   ),
+                //                 ))
+                //             .toList()
+                //       ],
+                //     )),
+                vpad(50)
+              ],
+            ),
+          ),
         ],
       ),
     );

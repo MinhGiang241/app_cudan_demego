@@ -44,10 +44,10 @@ class CreateReflection extends StatelessWidget {
                 builder: (context, state) {
                   var listZone =
                       context.read<CreateReflectionPrv>().areas.map((e) {
-                    return DropdownMenuItem(
-                      value: e.id,
-                      child: Text(e.name ?? ''),
-                    );
+                    return {
+                      "title": e.name ?? '',
+                      "value": e.id,
+                    };
                   }).toList();
                   // var listChoiceReason =
                   //     context.read<CreateReflectionPrv>().listReasons.map((e) {
@@ -172,21 +172,23 @@ class CreateReflection extends StatelessWidget {
                         ),
                         vpad(12),
                         PrimaryDropDown(
+                          isMultiple: true,
+                          selectMultileList: listZone,
                           enable: isUpdate,
                           validator: Utils.emptyValidatorDropdown,
                           validateString:
                               context.watch<CreateReflectionPrv>().validateZone,
                           isRequired: true,
-                          onChange:
-                              context.read<CreateReflectionPrv>().onSelectZone,
+                          // onChange:
+                          //     context.read<CreateReflectionPrv>().onSelectZone,
                           dropKey:
                               context.read<CreateReflectionPrv>().dropdownKey,
-                          selectList: listZone,
+                          // selectList: listZone,
                           label: S.of(context).zone,
                           hint: S.of(context).zone,
-                          controller: context
-                              .read<CreateReflectionPrv>()
-                              .zoneController,
+                          // controller: context
+                          //     .read<CreateReflectionPrv>()
+                          //     .zoneController,
                         ),
                         vpad(12),
                         SelectMediaWidget(

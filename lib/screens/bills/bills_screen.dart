@@ -39,7 +39,7 @@ class _BillsScreenState extends State<BillsScreen>
             tabController: tabController,
             isTabScrollabel: false,
             tabs: [
-              Tab(text: ' S.of(context).unpaid'),
+              Tab(text: " S.of(context).g"),
               Tab(text: 'S.of(context).paid'),
             ],
             actions: [

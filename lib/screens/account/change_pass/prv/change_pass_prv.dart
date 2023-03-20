@@ -1,3 +1,6 @@
+// ignore_for_file: require_trailing_commas
+
+import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:app_cudan/screens/home/home_screen.dart';
 
 import '../../../../services/api_auth.dart';
