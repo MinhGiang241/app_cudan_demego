@@ -40,7 +40,7 @@ class Reflection {
   String? process_content;
   String? priority_level;
   String? complaintReasonId;
-  String? areaId;
+  List<dynamic>? areaId;
   String? areaTypeId;
   String? cancel_reason;
   Reason? r;
@@ -212,7 +212,7 @@ class Reflection {
           map['result_note'] != null ? map['result_note'] as String : null,
       description:
           map['description'] != null ? map['description'] as String : null,
-      areaId: map['areaId'] != null ? map['areaId'] as String : null,
+      areaId: map['areaId'] != null ? map['areaId'] as List<dynamic> : null,
       areaTypeId:
           map['areaTypeId'] != null ? map['areaTypeId'] as String : null,
       cancel_reason:

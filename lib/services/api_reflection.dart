@@ -18,7 +18,7 @@ class APIReflection {
         data
       }
     }
-        
+
       ''';
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {

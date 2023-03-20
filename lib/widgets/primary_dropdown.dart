@@ -14,6 +14,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
+import '../models/multi_select_view_model.dart';
 import '../utils/utils.dart';
 import 'primary_card.dart';
 
@@ -44,7 +45,8 @@ class PrimaryDropDown extends StatefulWidget {
     this.selectList,
     this.isMultiple = false,
     this.validator,
-    this.selectMultileList,
+    this.selectMultileList = const [],
+    this.selectedMultileList = const [],
     this.hint,
     this.validateString,
     this.isError = false,
@@ -52,6 +54,9 @@ class PrimaryDropDown extends StatefulWidget {
     this.controller,
     this.enable = true,
     this.isFull = false,
+    this.isShow = false,
+    this.maxSellect,
+    this.onSelectMulti,
   });
   final bool isError;
   final String? label;
@@ -60,6 +65,7 @@ class PrimaryDropDown extends StatefulWidget {
   final bool isRequired;
   final bool isMultiple;
   final bool isFull;
+  final bool isShow;
   final GlobalKey<FormFieldState>? dropKey;
   final String? Function(dynamic)? validator;
   dynamic value;
@@ -67,7 +73,10 @@ class PrimaryDropDown extends StatefulWidget {
   String? validateString;
   Function(dynamic)? onChange;
   final List<DropdownMenuItem>? selectList;
-  final List<Map<String, dynamic>>? selectMultileList;
+  final List<MultiSelectViewModel>? selectMultileList;
+  final List<MultiSelectViewModel>? selectedMultileList;
+  final int? maxSellect;
+  final Function(List<dynamic>, dynamic)? onSelectMulti;
   TextEditingController? controller = TextEditingController();
 
   @override
@@ -97,274 +106,251 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
           ],
         ),
         if (widget.label != null) vpad(8),
-        widget.isMultiple
-            ? PrimaryTextField(
-                isReadOnly: true,
-                hint: '--${S.of(context).select}--',
-                suffixIcon: const Icon(Icons.playlist_add_check),
-                onTap: widget.selectMultileList!.isEmpty
-                    ? null
-                    : () async {
-                        await Utils.showDialog(
-                          context: context,
-                          dialog: Dialog(
-                            alignment: Alignment.center,
-                            // margin:
-                            //     EdgeInsets.symmetric(horizontal: 200, vertical: 200),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(24)),
-                            ),
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
+        if (widget.isMultiple)
+          PrimaryTextField(
+            validator: widget.validator,
+            isRequired: widget.isRequired,
+            isShow: widget.isShow,
+            // validateString: widget.validateString,
+            isReadOnly: true,
+            hint: '--${S.of(context).select}--',
+            suffixIcon: const Icon(Icons.playlist_add_check),
+            onTap: widget.selectMultileList!.isEmpty || !widget.enable
+                ? null
+                : () async {
+                    await Utils.showDialog(
+                      context: context,
+                      dialog: Dialog(
+                        alignment: Alignment.center,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(24)),
+                        ),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (widget.label != null)
+                                Text(
+                                  widget.label!,
+                                  style: txtDisplayMedium(),
+                                  textAlign: TextAlign.center,
+                                ),
+                              vpad(10),
+                              Flexible(
+                                child: MultiSelectCheckList(
+                                  isMaxSelectableWithPerpetualSelects: true,
+                                  maxSelectableCount: widget.maxSellect ??
+                                      widget.selectMultileList!.length,
+                                  textStyles: const MultiSelectTextStyles(
+                                    selectedTextStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  itemsDecoration: MultiSelectDecorations(
+                                    selectedDecoration: BoxDecoration(
+                                      color: purpleColor7.withOpacity(0.8),
+                                    ),
+                                  ),
+                                  listViewSettings: ListViewSettings(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    separatorBuilder: (context, index) =>
+                                        const Divider(
+                                      height: 0,
+                                    ),
+                                  ),
+                                  controller: _controller,
+                                  items: List.generate(
+                                    widget.selectMultileList!.length,
+                                    (index) => CheckListCard(
+                                      contentPadding: EdgeInsets.zero,
+                                      selected: widget.selectMultileList![index]
+                                              .isSelected ??
+                                          false,
+                                      value: widget
+                                          .selectMultileList![index].value,
+                                      title: Text(
+                                        widget.selectMultileList![index].title!,
+                                      ),
+                                      subtitle: widget.selectMultileList![index]
+                                                  .subTitle !=
+                                              null
+                                          ? Text(
+                                              widget.selectMultileList![index]
+                                                  .subTitle!,
+                                            )
+                                          : null,
+                                      selectedColor: Colors.white,
+                                      checkColor: primaryColorBase,
+                                      checkBoxBorderSide: const BorderSide(
+                                        color: Colors.blue,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                    ),
+                                  ),
+                                  onChange: (allSelectedItems, selectedItem) {
+                                    var a =
+                                        widget.selectMultileList!.firstWhere(
+                                      ((element) =>
+                                          element.value == selectedItem),
+                                    );
+                                    setState(() {
+                                      a.isSelected = !a.isSelected!;
+                                    });
+
+                                    widget.onSelectMulti!(
+                                      allSelectedItems,
+                                      selectedItem,
+                                    );
+                                  },
+                                ),
+                              ),
+                              vpad(10),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  if (widget.label != null)
-                                    Text(
-                                      widget.label!,
-                                      style: txtDisplayMedium(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  vpad(10),
-                                  Flexible(
-                                    child: MultiSelectCheckList(
-                                      isMaxSelectableWithPerpetualSelects: true,
-                                      // maxSelectableCount: 5,
-                                      textStyles: const MultiSelectTextStyles(
-                                        selectedTextStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      itemsDecoration: MultiSelectDecorations(
-                                        selectedDecoration: BoxDecoration(
-                                          color: Colors.indigo.withOpacity(0.8),
-                                        ),
-                                      ),
-                                      listViewSettings: ListViewSettings(
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        separatorBuilder: (context, index) =>
-                                            const Divider(
-                                          height: 0,
-                                        ),
-                                      ),
-                                      controller: _controller,
-                                      items: List.generate(
-                                        widget.selectMultileList!.length,
-                                        (index) => CheckListCard(
-                                          value:
-                                              widget.selectMultileList![index]
-                                                  ['value'],
-                                          title: Text(
-                                            widget.selectMultileList![index]
-                                                ['title'],
-                                          ),
-                                          subtitle:
-                                              widget.selectMultileList![index]
-                                                          ['subtitle'] !=
-                                                      null
-                                                  ? Text(
-                                                      widget.selectMultileList![
-                                                          index]['title'],
-                                                    )
-                                                  : null,
-                                          selectedColor: Colors.white,
-                                          checkColor: Colors.indigo,
-                                          // selected: index == 3,
-                                          // enabled: !(index == 5),
-                                          checkBoxBorderSide: const BorderSide(
-                                            color: Colors.blue,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                        ),
-                                      ),
-                                      onChange:
-                                          (allSelectedItems, selectedItem) {},
-                                    ),
+                                  hpad(10),
+                                  PrimaryButton(
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: redColor4,
+                                    textColor: redColor1,
+                                    buttonSize: ButtonSize.medium,
+                                    text: S.of(context).close,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
                                   ),
-                                  vpad(10),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      hpad(10),
-                                      PrimaryButton(
-                                        buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: redColor4,
-                                        textColor: redColor1,
-                                        buttonSize: ButtonSize.medium,
-                                        text: S.of(context).close,
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      hpad(20),
-                                      PrimaryButton(
-                                        buttonSize: ButtonSize.medium,
-                                        text: S.of(context).confirm,
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      hpad(10),
-                                    ],
+                                  hpad(20),
+                                  PrimaryButton(
+                                    buttonSize: ButtonSize.medium,
+                                    text: S.of(context).confirm,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
                                   ),
-                                  vpad(20),
+                                  hpad(10),
                                 ],
                               ),
-                            ),
+                              vpad(20),
+                            ],
                           ),
-                        );
-                      },
+                        ),
+                      ),
+                    );
+                  },
+          ),
+        if (widget.isMultiple) vpad(5),
+        if (widget.isMultiple)
+          Wrap(
+            children: [
+              ...widget.selectMultileList!.map(
+                (e) {
+                  if (e.isSelected ?? false) {
+                    return Chip(
+                      label: Text(e.title ?? ""),
+                      backgroundColor: greenColor4,
+                    );
+                  } else {
+                    return hpad(0);
+                  }
+                },
               )
+            ],
+          ),
+        if (!widget.isMultiple)
+          PrimaryCard(
+            child: Column(
+              children: [
+                DropdownButtonFormField<dynamic>(
+                  key: widget.dropKey,
+                  borderRadius: BorderRadius.circular(12),
+                  isDense: widget.isDense,
+                  validator: widget.isRequired
+                      ? ((widget.validator) ??
+                          (v) {
+                            if (v != null &&
+                                widget.controller != null &&
+                                widget.selectList!.isNotEmpty) {
+                              widget.controller!.text = v;
+                              return null;
+                            }
 
-            // MultiSelectDialogField(
-            //     validator: widget.validator,
-            //     title: Text(S.of(context).select),
-            //     selectedColor: secondaryColorBase,
-            //     buttonText: Text(
-            //       widget.hint ?? "--${S.of(context).select}--",
-            //       overflow: TextOverflow.ellipsis,
-            //     ),
-            //     buttonIcon: const Icon(Icons.arrow_drop_down),
-            //     searchHint: '--${S.of(context).select}--',
-            //     searchHintStyle: txtBodySmallBold(color: grayScaleColor3),
-            //     onConfirm: (v) {
-            //       selectedList = v;
-            //     },
-            //     items: widget.selectMultileList != null
-            //         ? widget.selectMultileList!
-            //             .map((e) => MultiSelectItem(e, e))
-            //             .toList()
-            //         : data.map((e) => MultiSelectItem(e, e)).toList(),
-            //     decoration: BoxDecoration(
-            //       // border: Border.all(color: BorderSide.none),
-            //       color: Colors.white,
-            //       borderRadius: BorderRadius.circular(12),
-            //     ),
-            //   )
-            : PrimaryCard(
-                child: Column(
-                  children: [
-                    DropdownButtonFormField<dynamic>(
-                      key: widget.dropKey,
-                      borderRadius: BorderRadius.circular(12),
-                      isDense: widget.isDense,
-                      // menuMaxHeight: widget.isFull
-                      //     ? double.infinity
-                      //     : dvHeight(context) / 3,
-                      validator: widget.isRequired
-                          ? ((widget.validator) ??
-                              (v) {
-                                if (v != null &&
-                                    widget.controller != null &&
-                                    widget.selectList!.isNotEmpty) {
-                                  widget.controller!.text = v;
-                                  return null;
-                                }
-
-                                return '';
-                              })
-                          : null,
-                      dropdownColor: Colors.white,
-                      value: () {
-                        if (widget.value != null) {
-                          return widget.value;
-                        } else if (widget.controller != null &&
-                            widget.controller!.text.isEmpty) {
-                          return null;
-                        } else if (widget.controller != null &&
-                            widget.controller!.text.isNotEmpty) {
-                          if (widget.selectList!
-                              .map((s) => s.value)
-                              .contains(widget.controller!.text)) {
-                            return widget.controller!.text;
-                          } else {
-                            // widget.controller!.clear();
-                            return null;
-                          }
-                        } else {
-                          return null;
-                        }
-                      }(),
-                      //  widget.value ??
-                      //     (widget.controller != null
-                      //         ? widget.controller!.text.isEmpty
-                      //             ? null
-                      //             : widget.selectList!.isNotEmpty
-                      //                 ? widget.controller!.text
-                      //                 : null
-                      //         : null),
-                      // ??
-                      //     (widget.selectList!.isNotEmpty
-                      //         ? widget.selectList![0].value
-                      //         : null),
-                      isExpanded: true,
-                      // value: items[indexSelected],
-                      // dropdownColor: Colors.black,
-                      hint: Text(
-                        "--${S.of(context).select}--",
-                        overflow: TextOverflow.ellipsis,
-                        style: txtBodySmallBold(color: grayScaleColor3),
-                      ),
-                      style: txtBodySmallBold(color: grayScaleColorBase),
-                      decoration: InputDecoration(
-                        errorStyle: const TextStyle(fontSize: 0, height: 0),
-                        // enabledBorder: widget.validateString != null
-                        //     ? OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(12),
-                        //         borderSide: const BorderSide(
-                        //             color: redColor2, width: 2),
-                        //       )
-                        //     : OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(12),
-                        //         borderSide: BorderSide.none,
-                        //       ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintStyle: txtBodySmallBold(color: grayScaleColor3),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 12,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              const BorderSide(color: primaryColor2, width: 2),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              const BorderSide(color: redColor2, width: 2),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      onChanged: widget.enable
-                          ? (widget.onChange) ??
-                              (v) {
-                                if (widget.controller != null) {
-                                  widget.controller!.text = v;
-                                }
-                                if (widget.value != null) {
-                                  widget.value = v.toString();
-                                }
-                              }
-                          : null,
-                      items: widget.selectList ?? items,
+                            return '';
+                          })
+                      : null,
+                  dropdownColor: Colors.white,
+                  value: () {
+                    if (widget.value != null) {
+                      return widget.value;
+                    } else if (widget.controller != null &&
+                        widget.controller!.text.isEmpty) {
+                      return null;
+                    } else if (widget.controller != null &&
+                        widget.controller!.text.isNotEmpty) {
+                      if (widget.selectList!
+                          .map((s) => s.value)
+                          .contains(widget.controller!.text)) {
+                        return widget.controller!.text;
+                      } else {
+                        // widget.controller!.clear();
+                        return null;
+                      }
+                    } else {
+                      return null;
+                    }
+                  }(),
+                  isExpanded: true,
+                  hint: Text(
+                    "--${S.of(context).select}--",
+                    overflow: TextOverflow.ellipsis,
+                    style: txtBodySmallBold(color: grayScaleColor3),
+                  ),
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                  decoration: InputDecoration(
+                    errorStyle: const TextStyle(fontSize: 0, height: 0),
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintStyle: txtBodySmallBold(color: grayScaleColor3),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 12,
                     ),
-                  ],
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          const BorderSide(color: primaryColor2, width: 2),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: redColor2, width: 2),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  onChanged: widget.enable
+                      ? (widget.onChange) ??
+                          (v) {
+                            if (widget.controller != null) {
+                              widget.controller!.text = v;
+                            }
+                            if (widget.value != null) {
+                              widget.value = v.toString();
+                            }
+                          }
+                      : null,
+                  items: widget.selectList ?? items,
                 ),
-              ),
+              ],
+            ),
+          ),
         if (widget.validateString != null)
           Padding(
             padding: const EdgeInsets.only(top: 4.0, left: 4),

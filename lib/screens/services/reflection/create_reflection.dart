@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/multi_select_view_model.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/select_media_widget.dart';
@@ -42,13 +43,6 @@ class CreateReflection extends StatelessWidget {
                     .read<CreateReflectionPrv>()
                     .getReflectionReason(context),
                 builder: (context, state) {
-                  var listZone =
-                      context.read<CreateReflectionPrv>().areas.map((e) {
-                    return {
-                      "title": e.name ?? '',
-                      "value": e.id,
-                    };
-                  }).toList();
                   // var listChoiceReason =
                   //     context.read<CreateReflectionPrv>().listReasons.map((e) {
                   //   return DropdownMenuItem(
@@ -86,6 +80,11 @@ class CreateReflection extends StatelessWidget {
                   ];
                   return SafeArea(
                       child: Form(
+                    onChanged: context.watch<CreateReflectionPrv>().autoValid
+                        ? () => context
+                            .read<CreateReflectionPrv>()
+                            .onChangeFormValid(context)
+                        : null,
                     autovalidateMode:
                         context.watch<CreateReflectionPrv>().autoValid
                             ? AutovalidateMode.onUserInteraction
@@ -146,7 +145,9 @@ class CreateReflection extends StatelessWidget {
                           maxLength: 550,
                           enable: isUpdate,
                           label: S.of(context).description,
-                          hint: S.of(context).description,
+                          hint: (isEdit && !isUpdate)
+                              ? ""
+                              : S.of(context).description,
                           maxLines: 3,
                           controller: context
                               .read<CreateReflectionPrv>()
@@ -173,22 +174,29 @@ class CreateReflection extends StatelessWidget {
                         vpad(12),
                         PrimaryDropDown(
                           isMultiple: true,
-                          selectMultileList: listZone,
+                          selectMultileList:
+                              context.read<CreateReflectionPrv>().listZone,
                           enable: isUpdate,
-                          validator: Utils.emptyValidatorDropdown,
+                          validator: (v) {
+                            if (context
+                                .read<CreateReflectionPrv>()
+                                .zoneValueList
+                                .isEmpty) {
+                              return '';
+                            }
+                            return null;
+                          },
                           validateString:
                               context.watch<CreateReflectionPrv>().validateZone,
                           isRequired: true,
-                          // onChange:
-                          //     context.read<CreateReflectionPrv>().onSelectZone,
+                          onSelectMulti:
+                              context.read<CreateReflectionPrv>().onSelectMulti,
+
                           dropKey:
                               context.read<CreateReflectionPrv>().dropdownKey,
                           // selectList: listZone,
                           label: S.of(context).zone,
                           hint: S.of(context).zone,
-                          // controller: context
-                          //     .read<CreateReflectionPrv>()
-                          //     .zoneController,
                         ),
                         vpad(12),
                         SelectMediaWidget(

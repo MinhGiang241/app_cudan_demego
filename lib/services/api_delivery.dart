@@ -13,7 +13,7 @@ class APIDelivery {
         data
     }
 }
-        
+
     ''';
 
     final MutationOptions options = MutationOptions(

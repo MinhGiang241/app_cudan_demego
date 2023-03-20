@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/multi_select_view_model.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 
@@ -26,7 +27,14 @@ class CreateReflectionPrv extends ChangeNotifier {
       zoneTypeController.text = ref!.areaTypeId ?? '';
       if (ref!.areaTypeId != null) {
         getListAreaByType(ref!.areaTypeId).then((_) {
-          zoneController.text = ref!.areaId ?? '';
+          // zoneController.text = ref!.areaId ?? [];
+          zoneValueList = ref!.areaId ?? [];
+          for (var i in listZone) {
+            if (zoneValueList.contains(i.value)) {
+              i.isSelected = true;
+            }
+          }
+          print(listZone);
           notifyListeners();
         });
       }
@@ -39,7 +47,7 @@ class CreateReflectionPrv extends ChangeNotifier {
   List<FileTicket> existedImage = [];
   String? ticketId;
   String? ticketCode;
-  List<Area> areas = [];
+  // List<Area> areas = [];
   List<File> images = [];
   List<FileTicket> submitedImages = [];
   var formKey = GlobalKey<FormState>();
@@ -59,11 +67,28 @@ class CreateReflectionPrv extends ChangeNotifier {
   String? validateReason;
   String? validateZone;
   String? validateZoneType;
+
   final GlobalKey<FormFieldState> dropdownKey = GlobalKey<FormFieldState>();
   enableUpdate() {
     isUpdate = true;
     notifyListeners();
   }
+
+  List<MultiSelectViewModel> listZone = [];
+  List<dynamic> zoneValueList = [];
+
+  onSelectMulti(List<dynamic> slectedList, dynamic sdelectedValue) {
+    zoneValueList = slectedList;
+    if (zoneValueList.isEmpty) {
+      validateZone = S.current.not_blank;
+    } else {
+      validateZone = null;
+    }
+
+    notifyListeners();
+  }
+
+  onChangeFormValid(BuildContext context) {}
 
   cancelLetter(BuildContext context) async {
     isCancelLoading = true;
@@ -127,7 +152,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
-        areaId: zoneController.text.trim(),
+        areaId: zoneValueList.map((e) => e.toString()).toList(),
         areaTypeId: zoneTypeController.text.trim(),
         description: describeController.text.trim(),
       );
@@ -217,7 +242,8 @@ class CreateReflectionPrv extends ChangeNotifier {
 
         // dropdownKey.currentState!.reset();
 
-        areas.clear();
+        zoneValueList.clear();
+        listZone.clear();
         if (autoValid) {
           validateZone = S.current.not_blank;
         }
@@ -282,9 +308,13 @@ class CreateReflectionPrv extends ChangeNotifier {
 
   getListAreaByType(type) async {
     return await APIReflection.getListAreaByType(type).then((v) {
-      areas.clear();
+      zoneValueList.clear();
+      listZone.clear();
       for (var i in v) {
-        areas.add(Area.fromMap(i));
+        var a = Area.fromMap(i);
+        listZone.add(
+          MultiSelectViewModel(title: a.name, isSelected: false, value: a.id),
+        );
       }
     });
   }
