@@ -85,13 +85,15 @@ class PaymentPrv extends ChangeNotifier {
         var time = '${now.hour}:${now.minute}';
         var paid =
             e.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
+        double a = (e.discount_money! - paid);
+        print(a);
         var newTransaction = TransactionHistory(
           isMobile: true,
           receiptsId: e.id,
           amount_money: e.amount_due,
           amount_owed: 0,
           // employeeId: e.employeeId,
-          payment_amount: e.discount_money! - paid,
+          payment_amount: sum,
           date: date.toIso8601String(),
           time: time,
         );
