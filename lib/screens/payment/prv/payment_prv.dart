@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
@@ -13,11 +15,12 @@ import '../../../widgets/primary_card.dart';
 import '../payment_list_screen.dart';
 
 class PaymentPrv extends ChangeNotifier {
-  PaymentPrv(
-      {required this.listReceipts,
-      required this.ctx,
-      required this.year,
-      required this.month}) {
+  PaymentPrv({
+    required this.listReceipts,
+    required this.ctx,
+    required this.year,
+    required this.month,
+  }) {
     sum = listReceipts.fold(0.0, (a, b) {
       var own = b.transactions.fold(
           0.0,
@@ -35,11 +38,20 @@ class PaymentPrv extends ChangeNotifier {
   var value = 0;
   var isConfirm = false;
   late double sum;
+
   var isSendLoading = false;
   BuildContext ctx;
 
   setPayment(list) {
     listReceipts = [Receipt.fromJson(list)];
+    sum = listReceipts.fold(0.0, (a, b) {
+      var own = b.transactions.fold(
+          0.0,
+          (previousValue, element) =>
+              previousValue + (element.payment_amount ?? 0));
+      var money = b.discount_money! - own;
+      return (a + money);
+    });
     notifyListeners();
   }
 

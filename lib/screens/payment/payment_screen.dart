@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:app_cudan/services/api_payment.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
@@ -48,10 +50,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             body: context.watch<PaymentPrv>().isConfirm
                 ? FutureBuilder(future: () async {
-                    // await APIPayment.getReceipt(arg['list'][0]['_id'])
-                    //     .then((v) {
-                    //   context.read<PaymentPrv>().setPayment(v);
-                    // });
+                    await APIPayment.getReceipt(arg['list'][0].id).then((v) {
+                      context.read<PaymentPrv>().setPayment(v);
+                    });
                   }(), builder: (context, snapshot) {
                     return SafeArea(
                       child: Column(
@@ -170,7 +171,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             },
                             child: ListView(children: [
                               vpad(12),
-                              ...arg['list'].map((e) {
+                              ...context
+                                  .read<PaymentPrv>()
+                                  .listReceipts
+                                  .map((e) {
                                 double paid = 0;
                                 if (e.transactions.isNotEmpty) {
                                   paid = e.transactions.fold(0,

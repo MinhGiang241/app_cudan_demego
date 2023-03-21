@@ -30,6 +30,8 @@ class AddNewResidentPrv extends ChangeNotifier {
       nameController.text = existedForm!.info_name ?? "";
       identityController.text = existedForm!.identity_card_required ?? "";
       birthController.text = Utils.dateFormat(existedForm!.date_birth ?? "", 1);
+      birthDate = DateTime.parse(existedForm!.date_birth ?? "")
+          .add(const Duration(hours: 7));
       issuePlaceController.text = existedForm!.place_of_issue ?? "";
       phoneController.text = existedForm!.phone_required ?? "";
       emailController.text = existedForm!.email ?? "";
@@ -115,7 +117,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? relationValidate;
   String? sexValidate;
   String? birthValidate;
-  // String? identityValidate;
+  String? identityValidate;
   String? nationalityValidate;
   String? resTypeValidate;
   String? provValidate;
@@ -234,8 +236,9 @@ class AddNewResidentPrv extends ChangeNotifier {
     relationValidate = null;
     sexValidate = null;
     birthValidate = null;
-    // identityValidate = null;
+    identityValidate = null;
     nationalityValidate = null;
+    perResValidate = null;
     resTypeValidate = null;
     provValidate = null;
     districtValidate = null;
@@ -292,15 +295,16 @@ class AddNewResidentPrv extends ChangeNotifier {
     } else {
       sexValidate = null;
     }
-    // if (identityController.text.trim().isEmpty) {
-    //   identityValidate = S.current.not_blank;
-    // } else {
-    //   identityValidate = null;
-    // }
+    if (identityController.text.trim().isNotEmpty &&
+        identityController.text.trim().length < 9) {
+      identityValidate = S.current.cmnd_length_9;
+    } else {
+      identityValidate = null;
+    }
 
     if (birthController.text.trim().isEmpty) {
       birthValidate = S.current.not_blank;
-    } else if (birthDate!.compareTo(today) > 0) {
+    } else if (birthDate!.compareTo(today) >= 0) {
       birthValidate = S.current.not_greater_than_today;
     } else {
       birthValidate = null;
@@ -412,6 +416,9 @@ class AddNewResidentPrv extends ChangeNotifier {
         await uploadResientImages(context);
         await uploadIdentityImages(context);
         await uploadDocument(context);
+        var dateString =
+            (birthDate!.subtract(const Duration(hours: 7))).toIso8601String();
+        //"${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T10:00:00.000+0000";
 
         DependenceSignUp formAddResident = DependenceSignUp(
           full_name: nameController.text.trim(),
@@ -419,8 +426,7 @@ class AddNewResidentPrv extends ChangeNotifier {
           buildingId: apartment.buildingId,
           floorId: apartment.floorId,
           permanent_address: perResController.text.trim(),
-          date_birth:
-              "${birthDate?.year}-${birthDate?.month.toString().padLeft(2, '0')}-${birthDate?.day.toString().padLeft(2, '0')}T17:00:00.000+0000",
+          date_birth: dateString,
           // birthDate!.subtract(const Duration(hours: 7)).toIso8601String(),
           provinceId: province.id,
           districtId: district.id,
@@ -549,7 +555,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     FocusScope.of(context).unfocus();
     Utils.showDatePickers(
       context,
-      initDate: DateTime.now(),
+      initDate: birthDate ?? DateTime.now(),
       startDate: DateTime(DateTime.now().year - 100, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {

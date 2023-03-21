@@ -25,8 +25,6 @@ var data = [
   'Lựa chọn 4',
 ];
 
-var text = ['1', '2', '3', '4'];
-
 var items = data.asMap().entries.map((v) {
   return DropdownMenuItem(
     value: v.key,

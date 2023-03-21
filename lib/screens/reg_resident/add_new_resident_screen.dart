@@ -360,7 +360,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                       } else if (context
                                               .read<AddNewResidentPrv>()
                                               .birthDate!
-                                              .compareTo(today) >
+                                              .compareTo(today) >=
                                           0) {
                                         return '';
                                       }
@@ -377,15 +377,23 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   ),
                                   vpad(12),
                                   PrimaryTextField(
+                                    validator: (v) {
+                                      if (v!.isNotEmpty && v.length < 9) {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
                                     onlyText: true,
+                                    isShow: false,
+                                    isRequired: true,
                                     maxLength: 12,
                                     enable: enable,
                                     controller: context
                                         .read<AddNewResidentPrv>()
                                         .identityController,
-                                    // validateString: context
-                                    //     .watch<AddNewResidentPrv>()
-                                    //     .identityValidate,
+                                    validateString: context
+                                        .watch<AddNewResidentPrv>()
+                                        .identityValidate,
                                     label: S.of(context).cmnd,
                                     hint: S.of(context).cmnd,
                                   ),
