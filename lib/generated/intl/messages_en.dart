@@ -621,6 +621,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Assets was handed over fully"),
         "pass_min_length": MessageLookupByLibrary.simpleMessage(
             "Password length can not less than 8 letter"),
+        "pass_not_same": MessageLookupByLibrary.simpleMessage(
+            "New password can not be same old password"),
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -896,7 +898,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_cancel_reflection": MessageLookupByLibrary.simpleMessage(
             "Cancel reflection successfully"),
         "success_change_pass": MessageLookupByLibrary.simpleMessage(
-            "Change password successfully"),
+            "Change password successfully, please re log in with new password"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Success confirm"),
         "success_cr_new":

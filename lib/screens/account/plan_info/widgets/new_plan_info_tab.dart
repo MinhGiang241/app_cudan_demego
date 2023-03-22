@@ -243,19 +243,18 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
     var apartOwn = listOwn[ownInfoApartIndex];
 
     var resList = widget.own.residents!.where((e) {
-      // if (apartOwn.type == "RENT" || apartOwn.type == "BUY") {
-      //   return true;
-      // } else
-      // if (e.type == 'RENT' || e.type == 'BUY') {
-      //   return true;
-      // }
+      if (apartOwn.type == "RENT" || apartOwn.type == "BUY") {
+        return true;
+      } else if (e.type == 'RENT' || e.type == 'BUY') {
+        return true;
+      }
       if (e.id == res) {
         return true;
       }
       return false;
     }).toList();
 
-    print(resList);
+    var resRelate = widget.own.residents!.firstWhere((e) => e.id == res);
     return Padding(
       padding: const EdgeInsets.only(left: 0, right: 0, bottom: 16),
       child: PrimaryCard(
@@ -303,7 +302,9 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                         apartOwn.status ?? "",
                                       ),
                                       style: txtLinkSmall(
-                                        color: greenColorBase,
+                                        color: genStatusColor(
+                                          apartOwn.status ?? "",
+                                        ),
                                       ),
                                     ),
                                   )
@@ -331,6 +332,36 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                           flex: 1,
                                           child: Text(
                                             "${widget.own.apartment?.area} m2",
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor1,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    vpad(5),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            '${S.of(context).relation_with_owner}:',
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            resRelate.re?.name ??
+                                                genDependentType(
+                                                  resRelate.type,
+                                                ),
                                             style: txtRegular(
                                               12,
                                               grayScaleColor1,
@@ -398,17 +429,11 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                   ],
                                 ),
                           if (isShow && widget.show == null)
-                            ...List.generate(resList.length ?? 0, (index) {
-                              var a = resList[index].re;
+                            ...List.generate(resList.length, (index) {
                               var r = resList[index];
-                              var o = widget.own.ownInfo;
 
                               var render = Column(
                                 children: [
-                                  Text(r.id ?? "null"),
-                                  Text(res ?? "null"),
-                                  // vpad(16),
-                                  // const Divider(),
                                   vpad(16),
                                   InkWell(
                                     onTap: () {},
@@ -425,9 +450,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                             ),
                                             const Spacer(),
                                             Text(
-                                              widget.own.residents?[index]
-                                                      .info_name ??
-                                                  "",
+                                              resList[index].info_name ?? "",
                                               style: txtLinkSmall(
                                                 color: grayScaleColorBase,
                                               ),
@@ -446,12 +469,11 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                             ),
                                             const Spacer(),
                                             Text(
-                                              r.type ?? "",
-                                              // r.re != null
-                                              //     ? r.re?.name ?? ""
-                                              //     : genDependentType(
-                                              //         r.type ?? "",
-                                              //       ),
+                                              r.re != null
+                                                  ? r.re?.name ?? ""
+                                                  : genDependentType(
+                                                      r.type ?? "",
+                                                    ),
                                               style: txtLinkSmall(
                                                 color: grayScaleColorBase,
                                               ),
@@ -460,28 +482,12 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                         ),
                                         vpad(5),
                                         const Divider(),
-                                        // Row(children: [
-                                        //   Text("0XXXXXXXXX",
-                                        //       style: txtMedium(14)),
-                                        //   const Spacer(),
-                                        //   const Icon(Icons
-                                        //       .chevron_right_rounded)
-                                        // ]),
                                       ],
                                     ),
                                   )
                                 ],
                               );
                               return render;
-                              // if ((r!.type == "RENT" || r.type == 'BUY')) {
-                              //   return render;
-                              // } else if ((r.type == "DEPENDENT_RENT" ||
-                              //         r.type == 'DEPENDENT_BUY') &&
-                              //     r.id == res) {
-                              //   return render;
-                              // } else {
-                              //   return vpad(0);
-                              // }
                             }),
                           vpad(12),
                           Center(
@@ -508,15 +514,6 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                   ),
                 ),
               ),
-              // Padding(
-              //     padding: const EdgeInsets.all(10.0),
-              //     child: AnimatedBuilder(
-              //         animation: animationController,
-              //         builder: (context, child) => Transform.rotate(
-              //               angle: rotateAnimation.value,
-              //               child: child,
-              //             ),
-              //         child: const Icon(Icons.keyboard_arrow_down_rounded)))
             ],
           ),
         ),

@@ -6360,11 +6360,21 @@ class S {
     );
   }
 
-  /// `Change password successfully`
+  /// `Change password successfully, please re log in with new password`
   String get success_change_pass {
     return Intl.message(
-      'Change password successfully',
+      'Change password successfully, please re log in with new password',
       name: 'success_change_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password can not be same old password`
+  String get pass_not_same {
+    return Intl.message(
+      'New password can not be same old password',
+      name: 'pass_not_same',
       desc: '',
       args: [],
     );

@@ -624,6 +624,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Các tài sản đã được bàn giao đầy đủ"),
         "pass_min_length": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu không ít hơn 8 ký tự"),
+        "pass_not_same": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu mới phải khác mật khảu cũ"),
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu phải gồm 1 ký tự đặc biệt"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
@@ -892,8 +894,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hủy đăng ký người phụ thuộc thành công"),
         "success_cancel_reflection":
             MessageLookupByLibrary.simpleMessage("Hủy phản ánh thành công"),
-        "success_change_pass":
-            MessageLookupByLibrary.simpleMessage("Đổi mật khẩu thành công"),
+        "success_change_pass": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu mới đã được cập nhật thành công. Vui lòng đăng nhập bằng mật khẩu mới"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Xác nhận thành công"),
         "success_cr_new":

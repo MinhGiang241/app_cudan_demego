@@ -126,6 +126,10 @@ Color genStatusColor(String status) {
       return redColorBase;
     case "RETURNED":
       return primaryColor6;
+    case "ACTIVE":
+      return primaryColorBase;
+    case "INACTIVE":
+      return redColorBase;
     default:
       return grayScaleColor1;
   }
