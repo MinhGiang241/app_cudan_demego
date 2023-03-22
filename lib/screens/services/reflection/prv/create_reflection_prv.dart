@@ -91,28 +91,36 @@ class CreateReflectionPrv extends ChangeNotifier {
   onChangeFormValid(BuildContext context) {}
 
   cancelLetter(BuildContext context) async {
-    isCancelLoading = true;
-    notifyListeners();
     ref!.status = 'CANCEL';
     ref!.cancel_reason = 'NGUOIDUNGHUY';
-    APIReflection.changeStatus(ref!.toMap()).then((v) {
-      isCancelLoading = false;
-      Utils.showSuccessMessage(
-        context: context,
-        e: S.of(context).success_cancel_reflection,
-        onClose: () {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            ReflectionScreen.routeName,
-            (route) => route.isFirst,
-            arguments: {'initTab': 5},
+    Utils.showConfirmMessage(
+      title: S.of(context).cancel_reflection,
+      context: context,
+      content: S.of(context).confirm_can_reflection(ref?.code ?? ""),
+      onConfirm: () {
+        isCancelLoading = true;
+        notifyListeners();
+        APIReflection.changeStatus(ref!.toMap()).then((v) {
+          isCancelLoading = false;
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_cancel_reflection,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ReflectionScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {'initTab': 5},
+              );
+            },
           );
-        },
-      );
-    }).catchError((e) {
-      isCancelLoading = false;
-      Utils.showErrorMessage(context, e);
-    });
+        }).catchError((e) {
+          isCancelLoading = false;
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+
     notifyListeners();
   }
 
@@ -161,6 +169,7 @@ class CreateReflectionPrv extends ChangeNotifier {
           // ;})
           .then((v) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
+        notifyListeners();
         Utils.showSuccessMessage(
           context: context,
           e: isSend

@@ -6779,6 +6779,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to cancel {rCode}`
+  String confirm_can_reflection(Object rCode) {
+    return Intl.message(
+      'Do you want to cancel $rCode',
+      name: 'confirm_can_reflection',
+      desc: '',
+      args: [rCode],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -671,5 +671,6 @@
   "to_money_vnd": "To money (VNĐ)",
   "total_money_pay": "Total money payment",
   "change_email": "Change Email",
-  "change": "Change"
+  "change": "Change",
+  "confirm_can_reflection": "Do you want to cancel {rCode}"
 }

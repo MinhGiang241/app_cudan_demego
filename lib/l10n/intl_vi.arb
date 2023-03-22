@@ -672,5 +672,6 @@
   "to_money_vnd": "Thành tiền (VNĐ)",
   "total_money_pay": "Tổng cộng tiền thanh toán",
   "change_email": "Đổi email",
-  "change": "Đổi"
+  "change": "Đổi",
+  "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}"
 }
