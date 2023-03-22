@@ -6789,6 +6789,16 @@ class S {
       args: [rCode],
     );
   }
+
+  /// `Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi`
+  String get send_email_wait {
+    return Intl.message(
+      'Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi',
+      name: 'send_email_wait',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

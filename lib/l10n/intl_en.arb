@@ -672,5 +672,6 @@
   "total_money_pay": "Total money payment",
   "change_email": "Change Email",
   "change": "Change",
-  "confirm_can_reflection": "Do you want to cancel {rCode}"
+  "confirm_can_reflection": "Do you want to cancel {rCode}",
+  "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"
 }

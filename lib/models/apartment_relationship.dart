@@ -6,7 +6,7 @@ import 'resident_info.dart';
 
 class ApartmentRelationship {
   String? id;
-  ResponseResidentOwn? ownInfo;
+  List<ResponseResidentOwn>? ownInfo;
   List<ResponseResidentInfo>? residents;
   Apartment? apartment;
   Building? building;
@@ -23,7 +23,7 @@ class ApartmentRelationship {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       '_id': id,
-      'ownInfo': ownInfo?.toJson(),
+      'ownInfo': ownInfo?.map((x) => x.toJson()).toList(),
       'residents': residents?.map((x) => x.toJson()).toList(),
       'apartment': apartment?.toJson(),
       'building': building?.toJson(),
@@ -33,9 +33,13 @@ class ApartmentRelationship {
 
   factory ApartmentRelationship.fromMap(Map<String, dynamic> map) {
     return ApartmentRelationship(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       ownInfo: map['ownInfo'] != null
-          ? ResponseResidentOwn.fromJson(map['ownInfo'] as Map<String, dynamic>)
+          ? List<ResponseResidentOwn>.from(
+              (map['ownInfo'] as List<dynamic>).map<ResponseResidentOwn?>(
+                (x) => ResponseResidentOwn.fromJson(x as Map<String, dynamic>),
+              ),
+            )
           : null,
       residents: map['residents'] != null
           ? List<ResponseResidentInfo>.from(

@@ -832,6 +832,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select construction type"),
         "select_surface":
             MessageLookupByLibrary.simpleMessage("Select surface"),
+        "send_email_wait": MessageLookupByLibrary.simpleMessage(
+            "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),

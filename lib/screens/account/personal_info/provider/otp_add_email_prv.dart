@@ -65,7 +65,8 @@ class OtpAddEmailPrv extends ChangeNotifier {
         context: context,
         e: S.of(context).success_add_email,
         onClose: () {
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          int count = 0;
+          Navigator.of(context).popUntil((_) => ++count >= 2);
         },
       );
     }).catchError((e) {

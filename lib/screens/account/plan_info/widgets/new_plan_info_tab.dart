@@ -74,6 +74,10 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
             //     ),
             //   );
             // }
+            var listAll = context
+                .read<ResidentInfoPrv>()
+                .listOwn
+                .where((e) => e.status == "BUY" || e.status == "RENT");
             return Column(
               children: [
                 vpad(12),
@@ -100,35 +104,36 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
                       ),
                     ),
                     hpad(5),
-                    Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: const BorderSide(
-                                color: primaryColorBase,
-                                width: 2,
+                    if (listAll.isNotEmpty)
+                      Expanded(
+                        flex: 1,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                side: const BorderSide(
+                                  color: primaryColorBase,
+                                  width: 2,
+                                ),
                               ),
                             ),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
                           ),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AddNewResidentScreen.routeName,
+                            );
+                          },
+                          child: Text(
+                            S.of(context).add,
+                            style: txtMedium(14, primaryColorBase),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AddNewResidentScreen.routeName,
-                          );
-                        },
-                        child: Text(
-                          S.of(context).add,
-                          style: txtMedium(14, primaryColorBase),
-                        ),
-                      ),
-                    )
+                      )
                   ],
                 ),
                 listResOwn.isEmpty
@@ -225,6 +230,32 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
 
   @override
   Widget build(BuildContext context) {
+    var res = context.read<ResidentInfoPrv>().residentId;
+    var listOwn = context.read<ResidentInfoPrv>().listOwnAll;
+    var listO = context.read<ResidentInfoPrv>().listOwn;
+    var idListOwn = listO.map(
+      (i) => i.apartmentId,
+    );
+    var a = widget.own.residents!;
+    var ownInfoApartIndex = listOwn.indexWhere(
+      (element) => element.apartmentId == widget.own.apartment?.id,
+    );
+    var apartOwn = listOwn[ownInfoApartIndex];
+
+    var resList = widget.own.residents!.where((e) {
+      // if (apartOwn.type == "RENT" || apartOwn.type == "BUY") {
+      //   return true;
+      // } else
+      // if (e.type == 'RENT' || e.type == 'BUY') {
+      //   return true;
+      // }
+      if (e.id == res) {
+        return true;
+      }
+      return false;
+    }).toList();
+
+    print(resList);
     return Padding(
       padding: const EdgeInsets.only(left: 0, right: 0, bottom: 16),
       child: PrimaryCard(
@@ -269,7 +300,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                     flex: 1,
                                     child: Text(
                                       genStatus(
-                                        widget.own.ownInfo?.status ?? "",
+                                        apartOwn.status ?? "",
                                       ),
                                       style: txtLinkSmall(
                                         color: greenColorBase,
@@ -367,12 +398,15 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                   ],
                                 ),
                           if (isShow && widget.show == null)
-                            ...List.generate(widget.own.residents?.length ?? 0,
-                                (index) {
-                              var a = widget.own.residents?[index].re;
+                            ...List.generate(resList.length ?? 0, (index) {
+                              var a = resList[index].re;
+                              var r = resList[index];
                               var o = widget.own.ownInfo;
-                              return Column(
+
+                              var render = Column(
                                 children: [
+                                  Text(r.id ?? "null"),
+                                  Text(res ?? "null"),
                                   // vpad(16),
                                   // const Divider(),
                                   vpad(16),
@@ -412,9 +446,12 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                             ),
                                             const Spacer(),
                                             Text(
-                                              a != null
-                                                  ? a.name ?? ""
-                                                  : genDependentType(o?.type),
+                                              r.type ?? "",
+                                              // r.re != null
+                                              //     ? r.re?.name ?? ""
+                                              //     : genDependentType(
+                                              //         r.type ?? "",
+                                              //       ),
                                               style: txtLinkSmall(
                                                 color: grayScaleColorBase,
                                               ),
@@ -435,6 +472,16 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                   )
                                 ],
                               );
+                              return render;
+                              // if ((r!.type == "RENT" || r.type == 'BUY')) {
+                              //   return render;
+                              // } else if ((r.type == "DEPENDENT_RENT" ||
+                              //         r.type == 'DEPENDENT_BUY') &&
+                              //     r.id == res) {
+                              //   return render;
+                              // } else {
+                              //   return vpad(0);
+                              // }
                             }),
                           vpad(12),
                           Center(

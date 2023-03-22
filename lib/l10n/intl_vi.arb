@@ -673,5 +673,6 @@
   "total_money_pay": "Tổng cộng tiền thanh toán",
   "change_email": "Đổi email",
   "change": "Đổi",
-  "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}"
+  "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}",
+  "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"
 }

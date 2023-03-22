@@ -33,39 +33,42 @@ class ResponseResidentInfo {
   String? identity_card;
   String? phone;
   String? m;
+  String? type;
   RelationShip? re;
   Account? account;
-  ResponseResidentInfo(
-      {this.code,
-      this.createdTime,
-      this.date_birth,
-      this.districtId,
-      this.education,
-      this.email,
-      this.ethnicId,
-      this.id,
-      this.avatar,
-      this.identity_card,
-      this.identity_card_required,
-      this.info_name,
-      this.isDraft,
-      this.isLocked,
-      this.job,
-      this.material_status,
-      this.nationalId,
-      this.permanent_address,
-      this.phone,
-      this.phone_required,
-      this.place_of_issue,
-      this.place_of_issue_required,
-      this.provinceId,
-      this.qualification,
-      this.residence_type,
-      this.sex,
-      this.updatedTime,
-      this.re,
-      this.wardsId,
-      this.account});
+  ResponseResidentInfo({
+    this.code,
+    this.createdTime,
+    this.date_birth,
+    this.districtId,
+    this.education,
+    this.email,
+    this.ethnicId,
+    this.id,
+    this.avatar,
+    this.identity_card,
+    this.identity_card_required,
+    this.info_name,
+    this.isDraft,
+    this.isLocked,
+    this.job,
+    this.material_status,
+    this.nationalId,
+    this.permanent_address,
+    this.phone,
+    this.phone_required,
+    this.place_of_issue,
+    this.place_of_issue_required,
+    this.provinceId,
+    this.qualification,
+    this.residence_type,
+    this.sex,
+    this.updatedTime,
+    this.re,
+    this.wardsId,
+    this.account,
+    this.type,
+  });
 
   ResponseResidentInfo.fromJson(Map<String, dynamic> json) {
     account =
@@ -100,7 +103,8 @@ class ResponseResidentInfo {
     place_of_issue = json['place_of_issue'];
     identity_card = json['identity_card'];
     phone = json['phone'];
-    phone = json['m'];
+    m = json['m'];
+    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {

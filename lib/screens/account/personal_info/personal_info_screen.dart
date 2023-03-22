@@ -30,13 +30,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final TextEditingController emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
+    var userInfo = context.watch<ResidentInfoPrv>().userInfo!;
     List<InfoContentView> listInfoView = [
       InfoContentView(
           isHorizontal: true,
           title: S.current.full_name,
-          content: userInfo?.fullName ?? "",
-          contentStyle: userInfo?.fullName != null
+          content: userInfo.account?.fullName ?? userInfo.info_name ?? "",
+          contentStyle: userInfo.account?.fullName != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -44,23 +44,23 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
-      InfoContentView(
-          isHorizontal: true,
-          title: S.current.username,
-          content: userInfo?.userName ?? "",
-          contentStyle: userInfo?.userName != null
-              ? const TextStyle(
-                  fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
-                  fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600)),
+      // InfoContentView(
+      //     isHorizontal: true,
+      //     title: S.current.username,
+      //     content: userInfo.account?.userName ?? "",
+      //     contentStyle: userInfo.account?.userName != null
+      //         ? const TextStyle(
+      //             fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
+      //         : TextStyle(
+      //             fontFamily: family,
+      //             color: Colors.black.withOpacity(0.3),
+      //             fontSize: 14,
+      //             fontWeight: FontWeight.w600)),
       InfoContentView(
           isHorizontal: true,
           title: S.current.phone_num,
-          content: userInfo?.phone_number ?? "",
-          contentStyle: userInfo?.phone_number != null
+          content: userInfo.account?.phone_number ?? "",
+          contentStyle: userInfo.account?.phone_number != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -72,7 +72,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       InfoContentView(
           isHorizontal: true,
           title: S.current.email,
-          widget: userInfo?.email == null
+          widget: userInfo.account?.email == null
               ? InkWell(
                   onTap: () {
                     Utils.showDialog(
@@ -124,7 +124,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         Utils.showBottomSheet(
                                           context: context,
                                           child: OtpAddEmailScreen(
-                                            acc: userInfo!,
+                                            acc: userInfo.account!,
                                             email: emailcontroller.text.trim(),
                                           ),
                                         );
@@ -149,7 +149,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   ))
               : Wrap(children: [
                   Text(
-                    userInfo?.email ?? " dsfdfsdfd dsdasdds",
+                    userInfo.email ?? "",
                     style: const TextStyle(
                         fontFamily: family,
                         fontSize: 14,
@@ -161,7 +161,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       Utils.showDialog(
                           context: context,
                           dialog: PrimaryDialog.custom(
-                            title: S.of(context).change_email,
+                            title: S.of(context).edit,
                             content: Column(children: [
                               PrimaryTextField(
                                 controller: emailcontroller,
@@ -171,8 +171,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               ),
                               vpad(16),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   PrimaryButton(
                                     text: S.of(context).close,
@@ -186,7 +188,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   ),
                                   PrimaryButton(
                                     buttonSize: ButtonSize.medium,
-                                    text: S.of(context).change,
+                                    text: S.of(context).update,
                                     onTap: () async {
                                       if (emailcontroller.text.trim().isEmpty) {
                                         Utils.showErrorMessage(
@@ -202,18 +204,41 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         );
                                       } else {
                                         Navigator.pop(context);
+                                        ScaffoldMessenger.of(context)
+                                            .hideCurrentSnackBar();
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            backgroundColor: primaryColorBase,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            content: Text(
+                                                S.of(context).send_email_wait),
+                                          ),
+                                        );
                                         await APIAuth.sendOtpAddMoreEmail(
                                                 emailcontroller.text.trim(),
                                                 false)
                                             .then((v) {
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
                                           Utils.showBottomSheet(
                                             context: context,
-                                            child: OtpAddEmailScreen(
-                                              acc: userInfo!,
-                                              email:
-                                                  emailcontroller.text.trim(),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 30),
+                                              child: OtpAddEmailScreen(
+                                                acc: userInfo.account!,
+                                                email:
+                                                    emailcontroller.text.trim(),
+                                              ),
                                             ),
                                           );
+                                          emailcontroller.clear();
                                         }).catchError((e) {
                                           Utils.showErrorMessage(context, e);
                                         });
@@ -226,7 +251,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           ));
                     },
                     child: Text(
-                      S.current.change_email,
+                      S.current.update,
                       style: const TextStyle(
                           fontFamily: family,
                           color: primaryColorBase,
@@ -235,8 +260,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     ),
                   )
                 ]),
-          content: userInfo?.email ?? "",
-          contentStyle: userInfo?.email != null
+          content: userInfo.email ?? "",
+          contentStyle: userInfo.email != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -255,7 +280,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   .length
                   .toString()
               : "0",
-          contentStyle: userInfo?.phone_number != null
+          contentStyle: userInfo.account?.phone_number != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(

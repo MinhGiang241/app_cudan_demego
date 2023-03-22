@@ -112,7 +112,12 @@ class AuthPrv extends ChangeNotifier {
               context.read<ResidentInfoPrv>().residentId ?? '',
             ).then((v) async {
               context.read<ResidentInfoPrv>().listOwn.clear();
+              context.read<ResidentInfoPrv>().listOwnAll.clear();
               v.forEach((i) {
+                context
+                    .read<ResidentInfoPrv>()
+                    .listOwnAll
+                    .add(ResponseResidentOwn.fromJson(i));
                 if (i['status'] == 'ACTIVE' &&
                     (i['type'] == 'BUY' ||
                         i['type'] == 'RENT' ||

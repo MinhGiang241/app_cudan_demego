@@ -829,6 +829,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
+        "send_email_wait": MessageLookupByLibrary.simpleMessage(
+            "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Gửi mã để đặt lại mật khẩu về"),

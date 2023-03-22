@@ -10,6 +10,7 @@ class ResidentInfoPrv extends ChangeNotifier {
   bool isLoading = false;
   ResponseResidentInfo? userInfo;
   List<ResponseResidentOwn> listOwn = [];
+  List<ResponseResidentOwn> listOwnAll = [];
   ResponseResidentOwn? selectedApartment;
   String? residentId;
 
@@ -18,18 +19,26 @@ class ResidentInfoPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  addListOwnAll(i) {
+    listOwnAll.add(ResponseResidentOwn.fromJson(i));
+    notifyListeners();
+  }
+
   clearData() {
     userInfo = null;
     listOwn.clear();
+    listOwnAll.clear();
     selectedApartment = null;
     residentId = null;
   }
 
   clearListOwn() {
-    // selectedApartment = null;
-    // residentId = null;
-    // userInfo = null;
     listOwn.clear();
+    notifyListeners();
+  }
+
+  clearListOwnAll() {
+    listOwnAll.clear();
     notifyListeners();
   }
 
