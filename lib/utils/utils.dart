@@ -672,9 +672,24 @@ class Utils {
     return null;
   }
 
-  static downloadFile({String? url, Map<String, String>? headers}) async {
+  static downloadFile({
+    String? url,
+    Map<String, String>? headers,
+    BuildContext? context,
+  }) async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
+      ScaffoldMessenger.of(context!).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 1),
+          backgroundColor: primaryColorBase,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          content: Text(S.current.file_downloading),
+        ),
+      );
       final baseStorage = await getExternalStorageDirectory();
 
       var taskId = await FlutterDownloader.enqueue(

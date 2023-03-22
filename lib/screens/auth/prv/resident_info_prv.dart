@@ -42,15 +42,21 @@ class ResidentInfoPrv extends ChangeNotifier {
 
   selectApartment(MapEntry<int, ResponseResidentOwn> select) async {
     selectedApartment = select.value;
-    PrfData.shared.setApartments(select.key);
+    PrfData.shared.setApartments(select.value.apartmentId ?? "");
     notifyListeners();
   }
 
-  selectApartmentFromHive(int index) {
-    if (index <= listOwn.length - 1) {
-      selectedApartment = listOwn[index];
+  selectApartmentFromHive(String? id) {
+    if (id == null) {
+      return -1;
+    }
+    var aPartIndex = listOwn.indexWhere((element) => element.apartmentId == id);
+
+    if (aPartIndex != -1) {
+      selectedApartment = listOwn[aPartIndex];
     }
 
     notifyListeners();
+    return aPartIndex;
   }
 }

@@ -43,7 +43,9 @@ class PaymentPrv extends ChangeNotifier {
   BuildContext ctx;
 
   setPayment(list) {
+    // if (list['transactions'].length != listReceipts[0].transactions.length) {}
     listReceipts = [Receipt.fromJson(list)];
+
     sum = listReceipts.fold(0.0, (a, b) {
       var own = b.transactions.fold(
           0.0,
@@ -93,7 +95,7 @@ class PaymentPrv extends ChangeNotifier {
           amount_money: e.amount_due,
           amount_owed: 0,
           // employeeId: e.employeeId,
-          payment_amount: sum,
+          payment_amount: a,
           date: date.toIso8601String(),
           time: time,
         );

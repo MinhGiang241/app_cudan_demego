@@ -111,7 +111,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
             isShow: widget.isShow,
             // validateString: widget.validateString,
             isReadOnly: true,
-            hint: '--${S.of(context).select}--',
+            hint: widget.hint ?? '--${S.of(context).select}--',
             suffixIcon: const Icon(Icons.playlist_add_check),
             onTap: widget.selectMultileList!.isEmpty || !widget.enable
                 ? null
@@ -305,7 +305,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                   }(),
                   isExpanded: true,
                   hint: Text(
-                    "--${S.of(context).select}--",
+                    widget.hint ?? "--${S.of(context).select}--",
                     overflow: TextOverflow.ellipsis,
                     style: txtBodySmallBold(color: grayScaleColor3),
                   ),

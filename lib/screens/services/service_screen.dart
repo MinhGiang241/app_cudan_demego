@@ -140,8 +140,9 @@ class ServiceScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 leading: BackButton(
-                    onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
-                        HomeScreen.routeName, (route) => route.isCurrent)),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
+                      HomeScreen.routeName, (route) => route.isCurrent),
+                ),
               ),
               body: FutureBuilder(
                   future: context.read<ServicePrv>().getExtraService(context),

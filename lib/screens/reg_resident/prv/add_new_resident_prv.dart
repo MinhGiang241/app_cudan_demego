@@ -143,6 +143,7 @@ class AddNewResidentPrv extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     existedForm?.status = "CANCEL";
+    existedForm?.reasons = "NGUOIDUNGHUY";
     APIResidentAddApartment.changeStatusFormResidentAddApartment(
       existedForm!.toMap(),
     ).then((v) {

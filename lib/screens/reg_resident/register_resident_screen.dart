@@ -204,6 +204,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                 horizontal: 12,
                               ),
                               child: PrimaryDropDown(
+                                hint: S.of(context).all,
                                 isDense: false,
                                 value: context
                                     .watch<RegisterResidentPrv>()

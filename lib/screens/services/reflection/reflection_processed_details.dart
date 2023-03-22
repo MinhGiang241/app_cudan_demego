@@ -8,12 +8,14 @@ import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
+import '../../../models/multi_select_view_model.dart';
 import '../../../services/api_reflection.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_image_netword.dart';
@@ -50,7 +52,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
       child: Text(S.current.building),
     )
   ];
-  List<DropdownMenuItem<dynamic>> listZoneChoice = [];
+  List<MultiSelectViewModel> listZoneChoice = [];
 
   @override
   void initState() {
@@ -124,11 +126,16 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
             listZoneChoice.clear();
             for (var i in v) {
               var a = Area.fromMap(i);
+              var s = MultiSelectViewModel(
+                value: a.id,
+                title: a.name,
+                isSelected: false,
+              );
+              if (arg.areaId!.contains(i["_id"])) {
+                s.isSelected = true;
+              }
               listZoneChoice.add(
-                DropdownMenuItem(
-                  value: a.id,
-                  child: Text(a.name ?? ''),
-                ),
+                s,
               );
             }
           });
@@ -219,6 +226,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           ),
                           vpad(12),
                           PrimaryDropDown(
+                            hint: '',
                             selectList: listAreaType,
                             label: S.of(context).zone_type,
                             value: arg.areaTypeId,
@@ -226,7 +234,9 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           ),
                           vpad(12),
                           PrimaryDropDown(
-                            selectList: listZoneChoice,
+                            hint: '',
+                            isMultiple: true,
+                            selectMultileList: listZoneChoice,
                             label: S.of(context).zone,
                             value: arg.areaId,
                             enable: false,
@@ -338,6 +348,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                               onTap: () async {
                                 await Utils.downloadFile(
                                   url: '${ApiConstants.uploadURL}?load=${e.id}',
+                                  context: context,
                                 );
                                 // await launchUrl(
                                 //   Uri.parse(

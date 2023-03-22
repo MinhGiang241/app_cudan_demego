@@ -50,9 +50,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             body: context.watch<PaymentPrv>().isConfirm
                 ? FutureBuilder(future: () async {
-                    await APIPayment.getReceipt(arg['list'][0].id).then((v) {
-                      context.read<PaymentPrv>().setPayment(v);
-                    });
+                    // await APIPayment.getReceipt(arg['list'][0].id).then((v) {
+                    //   context.read<PaymentPrv>().setPayment(v);
+                    // });
                   }(), builder: (context, snapshot) {
                     return SafeArea(
                       child: Column(

@@ -63,25 +63,20 @@ class PrfData {
     return await _apartmentBox.deleteAll([_floorPlan, _apartment]);
   }
 
-  Future<void> setApartments(int index) {
-    return _apartmentBox.put(_apartment, (index).toString());
+  Future<void> setApartments(String id) async {
+    return await _apartmentBox.put(_apartment, id);
   }
 
-  Future<int?> getApartments() async {
+  Future<String?> getApartments() async {
     final data = await _apartmentBox.get(_apartment);
-
-    if (data != null) {
-      if (int.tryParse(data) != null) {
-        return int.parse(data);
-      }
-      return null;
-    }
-    return null;
+    return data;
   }
 
   Future<void> setResident(ResponseResidentInfo resident) {
     return __residentBox.put(
-        _resident, jsonEncode(resident.toJson()).toString());
+      _resident,
+      jsonEncode(resident.toJson()).toString(),
+    );
   }
 
   ResponseResidentInfo? getResident() {

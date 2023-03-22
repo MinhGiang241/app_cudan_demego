@@ -104,7 +104,8 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                           widget.context
                               .read<ResidentInfoPrv>()
                               .selectedApartment = e.value;
-                          await PrfData.shared.setApartments(e.key);
+                          await PrfData.shared
+                              .setApartments(e.value.apartmentId ?? "");
 
                           Navigator.of(context).pushNamedAndRemoveUntil(
                             HomeScreen.routeName,
