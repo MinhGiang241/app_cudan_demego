@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_single_quotes
 
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/account/personal_info/personal_info_screen.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ import 'provider/otp_add_email_prv.dart';
 class OtpAddEmailScreen extends StatefulWidget {
   const OtpAddEmailScreen({super.key, required this.acc, required this.email});
   final Account acc;
-  final String email;
+  final TextEditingController email;
 
   @override
   State<OtpAddEmailScreen> createState() => _OtpAddEmailScreenState();
@@ -24,7 +26,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => OtpAddEmailPrv(email: widget.email),
+      create: (context) => OtpAddEmailPrv(email: widget.email.text.trim()),
       builder: (context, snapshot) => PrimaryScreen(
         appBar: AppBar(backgroundColor: Colors.transparent),
         body: SafeArea(
@@ -49,7 +51,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                     ),
                     vpad(24),
                     Text(
-                      S.of(context).we_send_to(widget.email),
+                      S.of(context).we_send_to(widget.email.text.trim()),
                       style: txtMedium(14, grayScaleColor2),
                       textAlign: TextAlign.center,
                     ),
@@ -156,7 +158,9 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                   isLoading: context.watch<OtpAddEmailPrv>().isLoading,
                   text: S.of(context).next,
                   onTap: () {
-                    context.read<OtpAddEmailPrv>().verify(context);
+                    context.read<OtpAddEmailPrv>().verify(context).then((v) {
+                      widget.email.clear();
+                    });
                   },
                 ),
               )

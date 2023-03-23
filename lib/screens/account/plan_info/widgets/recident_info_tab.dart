@@ -24,26 +24,29 @@ class ResidentInfoTab extends StatelessWidget {
     List<ResponseResidentOwn> listResOwn = [];
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-    return FutureBuilder(future: () async {
-      listResOwn.clear();
-      await APITower.getResidentOwnInfo(apartmentId).then((v) {
-        for (var i in v) {
-          listResOwn.add(ResponseResidentOwn.fromJson(i));
-        }
-      });
-    }(), builder: (context, snapshot) {
-      return ListView(
-        children: [
-          vpad(24),
-          ...listResOwn.asMap().entries.map((e) {
-            return RecidentInfoItem(
-              isShowInit: e.key == 0,
-              own: e.value,
-            );
-          }),
-        ],
-      );
-    });
+    return FutureBuilder(
+      future: () async {
+        listResOwn.clear();
+        await APITower.getResidentOwnInfo(apartmentId).then((v) {
+          for (var i in v) {
+            listResOwn.add(ResponseResidentOwn.fromJson(i));
+          }
+        });
+      }(),
+      builder: (context, snapshot) {
+        return ListView(
+          children: [
+            vpad(24),
+            ...listResOwn.asMap().entries.map((e) {
+              return RecidentInfoItem(
+                isShowInit: e.key == 0,
+                own: e.value,
+              );
+            }),
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -84,7 +87,9 @@ class RecidentInfoItem extends StatefulWidget {
 class _RecidentInfoItemState extends State<RecidentInfoItem>
     with TickerProviderStateMixin {
   late AnimationController animationController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 300));
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
   late Animation<double> rotateAnimation;
   bool isShow = false;
   final StreamController<bool> showController = StreamController<bool>();
@@ -102,144 +107,176 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
       child: PrimaryCard(
-          onTap: () {
-            if (isShow) {
-              isShow = false;
-              animationController.reverse();
-            } else {
-              isShow = true;
-              animationController.forward();
-            }
-            showController.add(isShow);
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    child: Padding(
+        onTap: () {
+          if (isShow) {
+            isShow = false;
+            animationController.reverse();
+          } else {
+            isShow = true;
+            animationController.forward();
+          }
+          showController.add(isShow);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: StreamBuilder<bool>(
-                      initialData: widget.isShowInit,
-                      stream: showController.stream,
-                      builder: (context, snapshot) {
-                        final isShow = snapshot.data ?? false;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            widget.header ??
-                                Text(
-                                  widget.own.resident?.info_name ?? "",
-                                  style: txtMedium(),
-                                ),
-                            if (!isShow)
-                              widget.hide ??
-                                  Column(
-                                    children: [
-                                      vpad(8),
-                                      Row(
-                                        children: [
-                                          Text(
-                                              '${S.of(context).relation_owner}:',
-                                              style: txtRegular(
-                                                  12, grayScaleColor2)),
-                                          hpad(4),
-                                          Expanded(
-                                            child: Text(
-                                              genDependentType(widget.own.type),
-                                              style: txtRegular(
-                                                  12, grayScaleColor1),
-                                              overflow: TextOverflow.ellipsis,
+                    initialData: widget.isShowInit,
+                    stream: showController.stream,
+                    builder: (context, snapshot) {
+                      final isShow = snapshot.data ?? false;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          widget.header ??
+                              Text(
+                                widget.own.resident?.info_name ?? "",
+                                style: txtMedium(),
+                              ),
+                          if (!isShow)
+                            widget.hide ??
+                                Column(
+                                  children: [
+                                    vpad(8),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${S.of(context).relation_owner}:',
+                                          style: txtRegular(
+                                            12,
+                                            grayScaleColor2,
+                                          ),
+                                        ),
+                                        hpad(4),
+                                        Expanded(
+                                          child: Text(
+                                            genDependentType(widget.own.type),
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor1,
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                            if (isShow)
-                              widget.show ??
-                                  Column(
-                                    children: [
-                                      vpad(16),
-                                      const Divider(),
-                                      vpad(16),
-                                      Row(children: [
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                          if (isShow)
+                            widget.show ??
+                                Column(
+                                  children: [
+                                    vpad(16),
+                                    const Divider(),
+                                    vpad(16),
+                                    Row(
+                                      children: [
                                         Expanded(
                                           flex: 1,
                                           child: Text(
-                                              '${S.of(context).relation_owner}:',
-                                              style: txtMedium(
-                                                  14, grayScaleColor2)),
+                                            '${S.of(context).relation_owner}:',
+                                            style: txtMedium(
+                                              14,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
                                         ),
                                         hpad(16),
                                         Flexible(
                                           flex: 1,
                                           child: Text(
-                                              genDependentType(widget.own.type),
-                                              style: txtLinkSmall(
-                                                  color: grayScaleColorBase)),
-                                        )
-                                      ]),
-                                    ],
-                                  ),
-                            if (isShow && widget.show == null)
-                              ...List.generate(
-                                  2,
-                                  (index) => Column(
-                                        children: [
-                                          vpad(16),
-                                          const Divider(),
-                                          vpad(16),
-                                          InkWell(
-                                            onTap: () {
-                                              Utils.pushScreen(
-                                                  context,
-                                                  RecidentCardInfo(
-                                                    items: TheCuDanItems(),
-                                                  ));
-                                            },
-                                            child: Column(
-                                              children: [
-                                                Row(children: [
-                                                  Text("Thẻ cư dân:",
-                                                      style: txtMedium(
-                                                          14, grayScaleColor2)),
-                                                  const Spacer(),
-                                                  Text("Hoạt động",
-                                                      style: txtLinkSmall(
-                                                          color:
-                                                              greenColorBase))
-                                                ]),
-                                                vpad(8),
-                                                Row(children: [
-                                                  Text("0XXXXXXXXX",
-                                                      style: txtMedium(14)),
-                                                  const Spacer(),
-                                                  const Icon(Icons
-                                                      .chevron_right_rounded)
-                                                ]),
-                                              ],
+                                            genDependentType(widget.own.type),
+                                            style: txtLinkSmall(
+                                              color: grayScaleColorBase,
                                             ),
-                                          )
-                                        ],
-                                      ))
-                          ],
-                        );
-                      }),
-                )),
-                Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: AnimatedBuilder(
-                        animation: animationController,
-                        builder: (context, child) => Transform.rotate(
-                              angle: rotateAnimation.value,
-                              child: child,
-                            ),
-                        child: const Icon(Icons.keyboard_arrow_down_rounded)))
-              ],
-            ),
-          )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                          if (isShow && widget.show == null)
+                            ...List.generate(
+                              2,
+                              (index) => Column(
+                                children: [
+                                  vpad(16),
+                                  const Divider(),
+                                  vpad(16),
+                                  InkWell(
+                                    onTap: () {
+                                      Utils.pushScreen(
+                                        context,
+                                        RecidentCardInfo(
+                                          items: TheCuDanItems(),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Thẻ cư dân:",
+                                              style: txtMedium(
+                                                14,
+                                                grayScaleColor2,
+                                              ),
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              "Hoạt động",
+                                              style: txtLinkSmall(
+                                                color: greenColorBase,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        vpad(8),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "0XXXXXXXXX",
+                                              style: txtMedium(14),
+                                            ),
+                                            const Spacer(),
+                                            const Icon(
+                                              Icons.chevron_right_rounded,
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: AnimatedBuilder(
+                  animation: animationController,
+                  builder: (context, child) => Transform.rotate(
+                    angle: rotateAnimation.value,
+                    child: child,
+                  ),
+                  child: const Icon(Icons.keyboard_arrow_down_rounded),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

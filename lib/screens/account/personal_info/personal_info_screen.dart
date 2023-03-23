@@ -44,18 +44,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
-      // InfoContentView(
-      //     isHorizontal: true,
-      //     title: S.current.username,
-      //     content: userInfo.account?.userName ?? "",
-      //     contentStyle: userInfo.account?.userName != null
-      //         ? const TextStyle(
-      //             fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-      //         : TextStyle(
-      //             fontFamily: family,
-      //             color: Colors.black.withOpacity(0.3),
-      //             fontSize: 14,
-      //             fontWeight: FontWeight.w600)),
       InfoContentView(
           isHorizontal: true,
           title: S.current.phone_num,
@@ -63,9 +51,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           contentStyle: userInfo.account?.phone_number != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
+              : const TextStyle(
                   fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
 
@@ -125,7 +112,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                           context: context,
                                           child: OtpAddEmailScreen(
                                             acc: userInfo.account!,
-                                            email: emailcontroller.text.trim(),
+                                            email: emailcontroller,
                                           ),
                                         );
                                       }).catchError((e) {
@@ -149,7 +136,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   ))
               : Wrap(children: [
                   Text(
-                    userInfo.email ?? "",
+                    userInfo.account?.email ?? "",
                     style: const TextStyle(
                         fontFamily: family,
                         fontSize: 14,
@@ -188,7 +175,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   ),
                                   PrimaryButton(
                                     buttonSize: ButtonSize.medium,
-                                    text: S.of(context).update,
+                                    text: userInfo.account?.email == null
+                                        ? S.current.add_email
+                                        : S.of(context).update,
                                     onTap: () async {
                                       if (emailcontroller.text.trim().isEmpty) {
                                         Utils.showErrorMessage(
@@ -233,12 +222,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                                   top: 30),
                                               child: OtpAddEmailScreen(
                                                 acc: userInfo.account!,
-                                                email:
-                                                    emailcontroller.text.trim(),
+                                                email: emailcontroller,
                                               ),
                                             ),
                                           );
-                                          emailcontroller.clear();
                                         }).catchError((e) {
                                           Utils.showErrorMessage(context, e);
                                         });
@@ -251,7 +238,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           ));
                     },
                     child: Text(
-                      S.current.update,
+                      userInfo.account?.email == null
+                          ? S.current.add
+                          : S.current.update,
                       style: const TextStyle(
                           fontFamily: family,
                           color: primaryColorBase,
@@ -260,8 +249,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     ),
                   )
                 ]),
-          content: userInfo.email ?? "",
-          contentStyle: userInfo.email != null
+          content: userInfo.account?.email ?? "",
+          contentStyle: userInfo.account?.email != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
               : TextStyle(
@@ -329,17 +318,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
               vpad(100)
             ],
           ),
-          // Positioned(
-          //     bottom: 24,
-          //     left: 12,
-          //     right: 12,
-          //     child: SafeArea(
-          //         child: PrimaryButton(
-          //       text: S.of(context).edit,
-          //       onTap: () {
-          //         Utils.pushScreen(context, const EditPersonalInfo());
-          //       },
-          //     )))
         ],
       ),
     );

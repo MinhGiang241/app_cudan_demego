@@ -60,7 +60,7 @@ class OtpAddEmailPrv extends ChangeNotifier {
       accountId!,
       otpController.text.trim(),
     ).then((v) {
-      context.read<ResidentInfoPrv>().userInfo?.account?.email = email;
+      context.read<ResidentInfoPrv>().setEmail(email);
       Utils.showSuccessMessage(
         context: context,
         e: S.of(context).success_add_email,

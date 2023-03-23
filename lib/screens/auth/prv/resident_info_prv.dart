@@ -24,6 +24,11 @@ class ResidentInfoPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  setEmail(String email) {
+    userInfo?.account?.email = email;
+    notifyListeners();
+  }
+
   clearData() {
     userInfo = null;
     listOwn.clear();
