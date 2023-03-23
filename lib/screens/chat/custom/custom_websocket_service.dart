@@ -384,11 +384,19 @@ class CustomWebSocketService {
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 
+  Future closeLiveChatRoom(String rid, String visitorToken) async {
+    return await ApiService.shared.postApi(
+      path: '${WebsocketConnect.serverUrl}/api/v1/livechat/room.close',
+      data: {"rid": rid, "token": visitorToken},
+    );
+  }
+
   loadLiveChatHistory(String roomId) async {
     return await ApiService.shared.getApi(
-        path:
-            '${WebsocketConnect.serverUrl}/api/v1/livechat/messages.history/$roomId',
-        params: {"token": roomId});
+      path:
+          '${WebsocketConnect.serverUrl}/api/v1/livechat/messages.history/$roomId',
+      params: {"token": roomId},
+    );
   }
 
   //upload File on Room

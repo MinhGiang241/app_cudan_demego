@@ -9,10 +9,11 @@ class ChatMessageInitial extends ChatMessageState {
   ChatMessageInitial({
     this.user,
     this.authToken,
+    required this.visitorToken,
   });
 
-  @override
   String? authToken;
+  String visitorToken;
   User? user;
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
@@ -25,7 +26,8 @@ class ChatMessageInitial extends ChatMessageState {
   final Map<String, MessageChat> messagesMap = {};
 
   void registerGuestChat(String token, String name, String email) {
-    webSocketService.registerGuestChat(webSocketChannel!, token, name, email);
+    webSocketService.registerGuestChat(
+        webSocketChannel!, visitorToken, name, email);
   }
 
   void getInitialDataLive() {
@@ -44,7 +46,7 @@ class ChatMessageInitial extends ChatMessageState {
       webSocketChannel!,
       id,
       rid,
-      token,
+      visitorToken,
       message,
     );
   }
@@ -54,6 +56,11 @@ class ChatMessageInitial extends ChatMessageState {
       webSocketChannel!,
       roomId,
     );
+  }
+
+  bool init = true;
+  setNotInit() {
+    init = false;
   }
 
   void streamLiveChatRoom(String visitorToken, String id, String param) {
@@ -79,6 +86,8 @@ class ChatMessageInitial extends ChatMessageState {
     }
   }
 
+  Future closeLiveChatRoom() async {}
+
   Future loadLiveChatHistory(roomId) async {
     await webSocketService.loadLiveChatHistory(roomId).then((v) {
       print(v);
@@ -100,12 +109,16 @@ class ChatMessageGreeting extends ChatMessageState {
   User? user;
 }
 
+bool init = true;
+
 class ChatMessageStart extends ChatMessageState {
   ChatMessageStart({
     this.user,
     this.authToken,
+    required this.visitorToken,
   });
   final String? authToken;
+  final String visitorToken;
   final User? user;
   bool showGreeting = true;
   void toogleGreeting() {
@@ -114,6 +127,7 @@ class ChatMessageStart extends ChatMessageState {
 
   StreamController<String> messageController = StreamController();
   // Stream<String> get messages => messageController.stream;
+
   final TextEditingController textEditionController = TextEditingController();
 
   // final ItemScrollController itemScrollController = ItemScrollController();
@@ -170,12 +184,26 @@ class ChatMessageStart extends ChatMessageState {
     webSocketService.setReaction(webSocketChannel!, emoji, messageId);
   }
 
-  void sendGreetingMessage(String val) {
-    if (val.isNotEmpty) {
-      webSocketService.sendMessageOnRoom(
-        val.trim(),
+  void closeChatRoom(String rid) {
+    webSocketService.closeLiveChatRoom(rid, visitorToken);
+  }
+
+  genUniqueId() {
+    return uuid.v4();
+  }
+
+  closeLiveChat(String rid) {
+    webSocketService.closeLiveChatRoom(rid, visitorToken);
+  }
+
+  void sendGreetingMessage(String rid, String token, String message) {
+    if (message.isNotEmpty) {
+      webSocketService.sendMessageLiveChat(
         webSocketChannel!,
-        WebsocketConnect.room,
+        genUniqueId(),
+        rid,
+        visitorToken,
+        message,
       );
     }
   }
@@ -187,7 +215,7 @@ class ChatMessageStart extends ChatMessageState {
       print('text:${textEditionController.text.trim()}');
       webSocketService.sendMessageLiveChat(
         webSocketChannel!,
-        "id",
+        genUniqueId(),
         rid,
         rid,
         textEditionController.text.trim(),
@@ -206,7 +234,7 @@ class ChatMessageStart extends ChatMessageState {
       webSocketChannel!,
       id,
       rid,
-      token,
+      visitorToken,
       message,
     );
   }
@@ -238,7 +266,7 @@ class ChatMessageStart extends ChatMessageState {
       roomId,
       file,
       textEditionController.text.trim(),
-      token,
+      visitorToken,
     );
     textEditionController.clear();
   }

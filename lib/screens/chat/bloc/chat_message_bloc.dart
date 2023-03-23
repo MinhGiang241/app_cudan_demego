@@ -10,29 +10,28 @@ import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:loggy/loggy.dart';
-import 'package:meta/meta.dart';
-import 'package:rocket_chat_flutter_connector/exceptions/exception.dart';
-import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:rocket_chat_flutter_connector/services/authentication_service.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../../models/rocket_chat_data.dart';
-import '../../../utils/utils.dart';
 import '../custom/custom_websocket_service.dart';
 
 part 'chat_message_event.dart';
 part 'chat_message_state.dart';
 
+var uuid = const Uuid();
+
 class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
-  ChatMessageBloc() : super(ChatMessageInitial()) {
+  ChatMessageBloc() : super(ChatMessageInitial(visitorToken: '')) {
     on<LoadChatMessageStart>((event, emit) async {
       emit(
         ChatMessageStart(
           user: user,
           authToken: authToken,
+          visitorToken: visitorToken,
         ),
       );
     });
@@ -41,14 +40,16 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         ChatMessageInitial(
           user: user,
           authToken: authToken,
+          visitorToken: visitorToken,
         ),
       );
     });
   }
-  var _dio = Dio();
+  final _dio = Dio();
 
   String authToken = '';
   User? user;
+  String visitorToken = uuid.v4();
 
   Future createVisitor(context, email, token, phone, name) async {
     await _dio.post(
@@ -57,7 +58,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         "visitor": {
           "name": name ?? phone,
           // "email": email,
-          "token": token,
+          "token": visitorToken,
           "phone": phone,
           "customFields": [
             {"key": "address", "value": "Rocket.Chat street", "overwrite": true}

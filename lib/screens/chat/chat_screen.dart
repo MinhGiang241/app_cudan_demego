@@ -157,7 +157,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     );
                   }
-                  return Text("0 có 1 cái gif car");
+                  return vpad(0);
                 },
               );
             } else if (state is ChatMessageGreeting) {
@@ -261,6 +261,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ChatMessageStart state,
     bloc,
   ) {
+    var dataJson = json.decode(snapshot.data);
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
       state.webSocketService.sendPong(state.webSocketChannel!);
@@ -300,8 +301,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     title: S.of(context).end,
                     content: S.of(context).confirm_end_chat,
                     onConfirm: () {
+                      var rid =
+                          context.read<ResidentInfoPrv>().userInfo?.account?.id;
                       Navigator.pop(context);
                       bloc.add(BackChatMessageInit());
+                      state.closeChatRoom(rid!);
                     },
                   );
 
