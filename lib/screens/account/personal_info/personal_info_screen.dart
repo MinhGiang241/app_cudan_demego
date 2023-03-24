@@ -240,7 +240,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     child: Text(
                       userInfo.account?.email == null
                           ? S.current.add
-                          : S.current.update,
+                          : S.current.edit,
                       style: const TextStyle(
                           fontFamily: family,
                           color: primaryColorBase,
