@@ -22,6 +22,7 @@ class OtpAddEmailPrv extends ChangeNotifier {
   bool isResending = false;
   int second = 30;
   bool isLoading = false;
+  bool isRendLoading = false;
   late Timer timer;
   _startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
@@ -40,14 +41,22 @@ class OtpAddEmailPrv extends ChangeNotifier {
 
   resend(BuildContext context) async {
     isResending = true;
+    isRendLoading = true;
     notifyListeners();
-    await APIAuth.sendOtpAddMoreEmail(email, false).then((v) {
+    await APIAuth.sendOtpAddMoreEmail(
+      email,
+      false,
+      context.read<ResidentInfoPrv>().userInfo?.account?.id ?? "",
+    ).then((v) {
       Utils.showSuccessMessage(context: context, e: S.of(context).success_opt);
+      isRendLoading = false;
 
       second = 30;
       notifyListeners();
       _startTimer();
     }).catchError((e) {
+      isRendLoading = false;
+      notifyListeners();
       Utils.showErrorMessage(context, e);
     });
   }

@@ -46,7 +46,7 @@ class _CardListTabState extends State<CardListTab> {
                     vpad(6),
                     Text(
                       S.of(context).confirmed_card,
-                      style: txtRegular(14, grayScaleColorBase),
+                      style: txtRegular(12, grayScaleColorBase),
                       textAlign: TextAlign.start,
                     ),
                   ],

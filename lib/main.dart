@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';

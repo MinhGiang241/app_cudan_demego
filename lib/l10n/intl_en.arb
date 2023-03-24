@@ -631,7 +631,7 @@
   "dependent_rent": "Dependent rent",
   "relation_owner": "Relation with owner",
   "success_change_pass": "Change password successfully, please re log in with new password",
-  "pass_not_same":"New password can not be same old password",
+  "pass_not_same": "New password can not be same old password",
   "relation_not_empty": "Relationship can not be empty",
   "add_email": "Add email",
   "email_not_empty": "Email can not be empty",
@@ -674,5 +674,6 @@
   "change_email": "Change Email",
   "change": "Change",
   "confirm_can_reflection": "Do you want to cancel {rCode}",
-  "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"
+  "send_email_wait": "System is sending to your email, please wait",
+  "email_not_same": "New email is not same to old email"
 }

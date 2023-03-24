@@ -115,7 +115,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                         style: txtMedium(14, grayScaleColor2),
                       ),
                       hpad(12),
-                      context.watch<OtpAddEmailPrv>().isResending
+                      context.watch<OtpAddEmailPrv>().isRendLoading
                           ? const SizedBox(
                               height: 20,
                               width: 20,
@@ -135,7 +135,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                                   color: (second <= 0 ||
                                           context
                                               .watch<OtpAddEmailPrv>()
-                                              .isResending)
+                                              .isRendLoading)
                                       ? primaryColorBase
                                       : primaryColor4,
                                 ),

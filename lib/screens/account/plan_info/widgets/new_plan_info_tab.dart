@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/apartment_relationship.dart';
+import '../../../../models/response_resident_own.dart';
 import '../../../../services/api_tower.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
@@ -39,8 +40,23 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
             var residentId = context.read<ResidentInfoPrv>().residentId;
             listResOwn.clear();
             await APITower.getResidentOwnInfo(residentId).then((v) {
+              context.read<ResidentInfoPrv>().listOwnAll.clear();
+              context.read<ResidentInfoPrv>().listOwn.clear();
               for (var i in v) {
+                var a = ApartmentRelationship.fromMap(i);
                 listResOwn.add(ApartmentRelationship.fromMap(i));
+                for (var e in a.ownInfo!) {
+                  context
+                      .read<ResidentInfoPrv>()
+                      .listOwnAll
+                      .add(ResponseResidentOwn.fromJson(e.toJson()));
+                  if (e.status == "ACTIVE") {
+                    context
+                        .read<ResidentInfoPrv>()
+                        .listOwn
+                        .add(ResponseResidentOwn.fromJson(e.toJson()));
+                  }
+                }
               }
             });
           }(),
@@ -77,7 +93,7 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
             var listAll = context
                 .read<ResidentInfoPrv>()
                 .listOwn
-                .where((e) => e.status == "BUY" || e.status == "RENT");
+                .where((e) => e.type == "BUY" || e.type == "RENT");
             return Column(
               children: [
                 vpad(12),
@@ -97,7 +113,7 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
                           vpad(6),
                           Text(
                             S.of(context).confirmed_by_manager_resident,
-                            style: txtRegular(14, grayScaleColorBase),
+                            style: txtRegular(12, grayScaleColorBase),
                             textAlign: TextAlign.start,
                           ),
                         ],
@@ -243,9 +259,25 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
     var apartOwn = listOwn[ownInfoApartIndex];
 
     var resList = widget.own.residents!.where((e) {
+      var p = widget.own.ownInfo
+          ?.firstWhere((element) => element.residentId == e.id);
+      if (apartOwn.status == "INACTIVE") {
+        if (e.id == context.read<ResidentInfoPrv>().residentId) {
+          return true;
+        }
+
+        if ((e.type == 'RENT' || e.type == 'BUY') &&
+            p != null &&
+            p.status == "ACTIVE") {
+          return true;
+        }
+        return false;
+      }
       if (apartOwn.type == "RENT" || apartOwn.type == "BUY") {
         return true;
-      } else if (e.type == 'RENT' || e.type == 'BUY') {
+      } else if ((e.type == 'RENT' || e.type == 'BUY') &&
+          p != null &&
+          p.status == "ACTIVE") {
         return true;
       }
       if (e.id == res) {
@@ -390,9 +422,9 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                           child: Text(
                                             widget.own.residents!.length
                                                 .toString(),
-                                            style: txtRegular(
+                                            style: txtBold(
                                               12,
-                                              grayScaleColor1,
+                                              yellowColor7,
                                             ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -452,8 +484,8 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                             Text(
                                               resList[index].info_name ?? "",
                                               style: txtLinkSmall(
-                                                color: grayScaleColorBase,
-                                              ),
+                                                  // color: grayScaleColorBase,
+                                                  ),
                                             )
                                           ],
                                         ),

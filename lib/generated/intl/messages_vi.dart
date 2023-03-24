@@ -290,6 +290,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_not_empty":
             MessageLookupByLibrary.simpleMessage("Email không được để trống"),
+        "email_not_same": MessageLookupByLibrary.simpleMessage(
+            "Email mới không được trùng với email cũ"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "end_chat":
@@ -383,7 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "free_service":
             MessageLookupByLibrary.simpleMessage("Dịch vụ không tính phí"),
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
-        "full_name": MessageLookupByLibrary.simpleMessage("Họ và Tên"),
+        "full_name": MessageLookupByLibrary.simpleMessage("Họ và tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
         "general_info": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
         "general_notification":

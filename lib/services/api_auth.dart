@@ -381,10 +381,14 @@ class APIAuth {
     }
   }
 
-  static Future sendOtpAddMoreEmail(String email, bool isNew) async {
+  static Future sendOtpAddMoreEmail(
+    String email,
+    bool isNew,
+    String accountId,
+  ) async {
     var sendOtp = '''
- mutation (\$email:String,\$isNew:Boolean){
-    response: authorization_mobile_send_OTP_add_email (email: \$email,isNew: \$isNew ) {
+mutation (\$email:String,\$isNew:Boolean,\$accountId:String){
+    response: authorization_mobile_send_OTP_add_email (email: \$email,isNew: \$isNew,accountId: \$accountId ) {
         code
         message
         data
@@ -392,11 +396,16 @@ class APIAuth {
 }
         
         
+        
   ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(sendOtp),
-      variables: {'email': email, "isNew": isNew},
+      variables: {
+        'email': email,
+        "isNew": isNew,
+        "accountId": accountId,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

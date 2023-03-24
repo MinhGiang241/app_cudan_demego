@@ -37,7 +37,7 @@ class ChangePassPrv extends ChangeNotifier {
 
     if (newPassController.text.isEmpty) {
       validateNewPass = S.current.not_blank; //S.current.can_not_be_empty;
-    } else if (currentPassController.text.trim() !=
+    } else if (currentPassController.text.trim() ==
         newPassController.text.trim()) {
       validateNewPass = S.current.pass_not_same;
     } else {

@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

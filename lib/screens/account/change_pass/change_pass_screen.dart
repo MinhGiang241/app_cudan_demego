@@ -98,7 +98,7 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                         validator: (v) {
                           if (v!.isEmpty) {
                             return "";
-                          } else if (v !=
+                          } else if (v ==
                               context
                                   .read<ChangePassPrv>()
                                   .currentPassController

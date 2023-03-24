@@ -15,7 +15,7 @@
   "create_acc": "Đăng ký tài khoản",
   "create_acc_1": "Tạo tài khoản",
   "have_acc": "Bạn đã có tài khoản?",
-  "full_name": "Họ và Tên",
+  "full_name": "Họ và tên",
   "enter_name": "Nhập họ và tên",
   "enter_username": "Nhập tên tài khoản",
   "confirm_pass": "Nhập lại mật khẩu",
@@ -632,7 +632,7 @@
   "dependent_rent": "Phụ thuộc người thuê",
   "relation_owner": "QH với chủ hộ",
   "success_change_pass": "Mật khẩu mới đã được cập nhật thành công. Vui lòng đăng nhập bằng mật khẩu mới",
-  "pass_not_same":"Mật khẩu mới phải khác mật khảu cũ",
+  "pass_not_same": "Mật khẩu mới phải khác mật khảu cũ",
   "relation_not_empty": "Mối quan hệ không được để trống",
   "add_email": "Thêm email",
   "email_not_empty": "Email không được để trống",
@@ -675,5 +675,6 @@
   "change_email": "Đổi email",
   "change": "Đổi",
   "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}",
-  "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"
+  "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi",
+  "email_not_same": "Email mới không được trùng với email cũ"
 }

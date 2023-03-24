@@ -292,6 +292,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_not_empty":
             MessageLookupByLibrary.simpleMessage("Email can not be empty"),
+        "email_not_same": MessageLookupByLibrary.simpleMessage(
+            "New email is not same to old email"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "end": MessageLookupByLibrary.simpleMessage("End"),
         "end_chat": MessageLookupByLibrary.simpleMessage("End conversation!"),
@@ -835,7 +837,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_surface":
             MessageLookupByLibrary.simpleMessage("Select surface"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
-            "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
+            "System is sending to your email, please wait"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),

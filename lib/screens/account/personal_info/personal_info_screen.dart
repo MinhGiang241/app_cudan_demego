@@ -39,9 +39,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           contentStyle: userInfo.account?.fullName != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)
-              : TextStyle(
+              : const TextStyle(
                   fontFamily: family,
-                  color: Colors.black.withOpacity(0.3),
                   fontSize: 14,
                   fontWeight: FontWeight.w600)),
       InfoContentView(
@@ -106,13 +105,25 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                     } else {
                                       Navigator.pop(context);
                                       await APIAuth.sendOtpAddMoreEmail(
-                                              emailcontroller.text.trim(), true)
+                                              emailcontroller.text.trim(),
+                                              true,
+                                              context
+                                                      .read<ResidentInfoPrv>()
+                                                      .userInfo
+                                                      ?.account
+                                                      ?.id ??
+                                                  "")
                                           .then((v) {
                                         Utils.showBottomSheet(
                                           context: context,
-                                          child: OtpAddEmailScreen(
-                                            acc: userInfo.account!,
-                                            email: emailcontroller,
+                                          child: Container(
+                                            color: (backgroundColor),
+                                            padding:
+                                                const EdgeInsets.only(top: 30),
+                                            child: OtpAddEmailScreen(
+                                              acc: userInfo.account!,
+                                              email: emailcontroller,
+                                            ),
                                           ),
                                         );
                                       }).catchError((e) {
@@ -191,6 +202,16 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                           context,
                                           S.of(context).not_email,
                                         );
+                                      } else if (emailcontroller.text.trim() ==
+                                          context
+                                              .read<ResidentInfoPrv>()
+                                              .userInfo
+                                              ?.account
+                                              ?.email) {
+                                        Utils.showErrorMessage(
+                                          context,
+                                          S.of(context).email_not_same,
+                                        );
                                       } else {
                                         Navigator.pop(context);
                                         ScaffoldMessenger.of(context)
@@ -211,13 +232,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         );
                                         await APIAuth.sendOtpAddMoreEmail(
                                                 emailcontroller.text.trim(),
-                                                false)
+                                                false,
+                                                context
+                                                        .read<ResidentInfoPrv>()
+                                                        .userInfo
+                                                        ?.account
+                                                        ?.id ??
+                                                    "")
                                             .then((v) {
                                           ScaffoldMessenger.of(context)
                                               .hideCurrentSnackBar();
                                           Utils.showBottomSheet(
                                             context: context,
-                                            child: Padding(
+                                            child: Container(
+                                              color: backgroundColor,
                                               padding: const EdgeInsets.only(
                                                   top: 30),
                                               child: OtpAddEmailScreen(

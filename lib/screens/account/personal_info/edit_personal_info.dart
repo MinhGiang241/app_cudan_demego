@@ -31,21 +31,27 @@ class EditPersonalInfo extends StatelessWidget {
             actions: [
               if (!context.watch<EditInfoProvider>().isSaving)
                 TextButton(
-                    onPressed: () async {
-                      // await context.read<EditInfoProvider>().save(context);
-                      Utils.showErrorMessage(context,
-                          "Tính năng đang nâng cấp , chưa sử dụng được");
-                    },
-                    child: Text(S.of(context).save,
-                        style: txtLinkMedium(color: primaryColorBase)))
+                  onPressed: () async {
+                    // await context.read<EditInfoProvider>().save(context);
+                    Utils.showErrorMessage(
+                      context,
+                      "Tính năng đang nâng cấp , chưa sử dụng được",
+                    );
+                  },
+                  child: Text(
+                    S.of(context).save,
+                    style: txtLinkMedium(color: primaryColorBase),
+                  ),
+                )
               else
                 const SizedBox(
                   width: 64,
                   child: Center(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: PrimaryLoading(height: 20, width: 20),
-                  )),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: PrimaryLoading(height: 20, width: 20),
+                    ),
+                  ),
                 )
             ],
           ),
@@ -63,18 +69,20 @@ class EditPersonalInfo extends StatelessWidget {
                       if (fileAvatar == null)
                         if (avatarLink == null)
                           const CircleAvatar(
-                              radius: 60,
-                              backgroundColor: grayScaleColor4,
-                              child: Icon(
-                                Icons.person,
-                                size: 80,
-                              ))
+                            radius: 60,
+                            backgroundColor: grayScaleColor4,
+                            child: Icon(
+                              Icons.person,
+                              size: 80,
+                            ),
+                          )
                         else
                           CircleAvatar(
                             radius: 60,
                             backgroundColor: grayScaleColor4,
                             backgroundImage: CachedNetworkImageProvider(
-                                "${ApiConstants.uploadURL}?load=$avatarLink"),
+                              "${ApiConstants.uploadURL}?load=$avatarLink",
+                            ),
                           ),
                       if (fileAvatar != null)
                         CircleAvatar(
@@ -83,15 +91,16 @@ class EditPersonalInfo extends StatelessWidget {
                           backgroundImage: FileImage(fileAvatar),
                         ),
                       Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: PrimaryIcon(
-                            icons: PrimaryIcons.camera,
-                            padding: const EdgeInsets.all(6),
-                            style: PrimaryIconStyle.gradient,
-                            gradients: PrimaryIconGradient.white,
-                            borderRadius: BorderRadius.circular(50),
-                          ))
+                        bottom: 0,
+                        right: 0,
+                        child: PrimaryIcon(
+                          icons: PrimaryIcons.camera,
+                          padding: const EdgeInsets.all(6),
+                          style: PrimaryIconStyle.gradient,
+                          gradients: PrimaryIconGradient.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      )
                     ],
                   ),
                 ),

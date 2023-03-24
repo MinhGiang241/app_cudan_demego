@@ -230,7 +230,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                               ...list.map((e) {
                                 var listContent = [
                                   InfoContentView(
-                                    title: '${S.of(context).apartment}:',
+                                    title: '${S.of(context).apartment}',
                                     content:
                                         '${e.a!.name} - ${e.f!.name} - ${e.b!.name}',
                                     contentStyle:

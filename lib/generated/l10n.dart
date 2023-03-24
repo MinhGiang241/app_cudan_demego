@@ -6800,11 +6800,21 @@ class S {
     );
   }
 
-  /// `Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi`
+  /// `System is sending to your email, please wait`
   String get send_email_wait {
     return Intl.message(
-      'Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi',
+      'System is sending to your email, please wait',
       name: 'send_email_wait',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New email is not same to old email`
+  String get email_not_same {
+    return Intl.message(
+      'New email is not same to old email',
+      name: 'email_not_same',
       desc: '',
       args: [],
     );
