@@ -668,7 +668,7 @@
   "meter_code": "Mã công tơ",
   "new_index": "Chỉ số mới",
   "old_index": "Chỉ số cũ",
-  "consume_elec": "Điện năng tiêu thụ (kWh)",
+  "consume_elec": "Điện năng tiêu thụ",
   "unit_price": "Đơn giá (VNĐ)",
   "to_money_vnd": "Thành tiền (VNĐ)",
   "total_money_pay": "Tổng cộng tiền thanh toán",
@@ -676,5 +676,6 @@
   "change": "Đổi",
   "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}",
   "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi",
-  "email_not_same": "Email mới không được trùng với email cũ"
+  "email_not_same": "Email mới không được trùng với email cũ",
+  "consumed_elec_details": "Chi tiết điện năng tiêu thụ"
 }

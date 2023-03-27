@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/electricity/electricity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -352,6 +353,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const AddNewResidentScreen(),
+        );
+      case ElectricityScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ElectricityScreen(),
         );
       // case ChatScreen.routeName:
       //   return MaterialPageRoute(

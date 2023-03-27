@@ -667,7 +667,7 @@
   "meter_code": "Meter code",
   "new_index": "New index",
   "old_index": "Old index",
-  "consume_elec": "Consume electricity (kWh)",
+  "consume_elec": "Consume electricity",
   "unit_price": "Unit price (VNĐ)",
   "to_money_vnd": "To money (VNĐ)",
   "total_money_pay": "Total money payment",
@@ -675,5 +675,6 @@
   "change": "Change",
   "confirm_can_reflection": "Do you want to cancel {rCode}",
   "send_email_wait": "System is sending to your email, please wait",
-  "email_not_same": "New email is not same to old email"
+  "email_not_same": "New email is not same to old email",
+  "consumed_elec_details": "Consumed electricity details"
 }

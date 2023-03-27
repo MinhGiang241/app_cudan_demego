@@ -6730,10 +6730,10 @@ class S {
     );
   }
 
-  /// `Consume electricity (kWh)`
+  /// `Consume electricity`
   String get consume_elec {
     return Intl.message(
-      'Consume electricity (kWh)',
+      'Consume electricity',
       name: 'consume_elec',
       desc: '',
       args: [],
@@ -6815,6 +6815,16 @@ class S {
     return Intl.message(
       'New email is not same to old email',
       name: 'email_not_same',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consumed electricity details`
+  String get consumed_elec_details {
+    return Intl.message(
+      'Consumed electricity details',
+      name: 'consumed_elec_details',
       desc: '',
       args: [],
     );

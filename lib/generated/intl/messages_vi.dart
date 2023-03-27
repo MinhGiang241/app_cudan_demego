@@ -215,7 +215,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin đơn vị thi công"),
         "construction": MessageLookupByLibrary.simpleMessage("Thi công"),
         "consume_elec":
-            MessageLookupByLibrary.simpleMessage("Điện năng tiêu thụ (kWh)"),
+            MessageLookupByLibrary.simpleMessage("Điện năng tiêu thụ"),
+        "consumed_elec_details":
+            MessageLookupByLibrary.simpleMessage("Chi tiết điện năng tiêu thụ"),
         "content": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),

@@ -217,7 +217,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Construction unit information"),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
         "consume_elec":
-            MessageLookupByLibrary.simpleMessage("Consume electricity (kWh)"),
+            MessageLookupByLibrary.simpleMessage("Consume electricity"),
+        "consumed_elec_details": MessageLookupByLibrary.simpleMessage(
+            "Consumed electricity details"),
         "content": MessageLookupByLibrary.simpleMessage("Content"),
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
