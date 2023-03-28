@@ -6829,6 +6829,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Legend`
+  String get legend {
+    return Intl.message(
+      'Legend',
+      name: 'legend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tổng cộng tiền thanh toán`
+  String get total_money_to_pay {
+    return Intl.message(
+      'Tổng cộng tiền thanh toán',
+      name: 'total_money_to_pay',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

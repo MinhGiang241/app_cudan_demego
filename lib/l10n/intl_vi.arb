@@ -677,5 +677,7 @@
   "confirm_can_reflection": "Bạn chắc chắn muốn hủy phản ánh {rCode}",
   "send_email_wait": "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi",
   "email_not_same": "Email mới không được trùng với email cũ",
-  "consumed_elec_details": "Chi tiết điện năng tiêu thụ"
+  "consumed_elec_details": "Chi tiết điện năng tiêu thụ",
+  "legend": "Ghi chú",
+  "total_money_to_pay": "Total money payment"
 }

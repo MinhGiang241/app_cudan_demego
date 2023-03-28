@@ -42,7 +42,10 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
         var listApartmentChoice = context
             .read<ResidentInfoPrv>()
             .listOwn
-            .where((i) => i.type == 'BUY')
+            .where(
+              (i) => ((i.type == 'BUY' || i.type == 'RENT') &&
+                  i.status == 'ACTIVE'),
+            )
             .map<DropdownMenuItem>((e) {
           return DropdownMenuItem(
             value: e.apartmentId,
@@ -53,6 +56,14 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
             ),
           );
         }).toList();
+        print(listApartmentChoice);
+        // if (!listApartmentChoice
+        //     .map(
+        //       (e) => e.value,
+        //     )
+        //     .contains(arg?.apartmentId)) {
+        //   listApartmentChoice = [];
+        // }
         var educationChoices = [
           DropdownMenuItem(
             value: 'COLLEGNDEGREE',

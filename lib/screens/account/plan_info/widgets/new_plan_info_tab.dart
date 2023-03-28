@@ -44,17 +44,19 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
               context.read<ResidentInfoPrv>().listOwn.clear();
               for (var i in v) {
                 var a = ApartmentRelationship.fromMap(i);
+
                 listResOwn.add(ApartmentRelationship.fromMap(i));
                 for (var e in a.ownInfo!) {
-                  context
-                      .read<ResidentInfoPrv>()
-                      .listOwnAll
-                      .add(ResponseResidentOwn.fromJson(e.toJson()));
-                  if (e.status == "ACTIVE") {
-                    context
-                        .read<ResidentInfoPrv>()
-                        .listOwn
-                        .add(ResponseResidentOwn.fromJson(e.toJson()));
+                  var apr = ResponseResidentOwn.fromJson(e.toJson());
+                  apr.apartment = a.apartment;
+                  apr.building = a.building;
+                  apr.floor = a.floor;
+                  if (e.residentId == residentId) {
+                    context.read<ResidentInfoPrv>().listOwnAll.add(apr);
+                  }
+
+                  if (e.status == "ACTIVE" && e.residentId == residentId) {
+                    context.read<ResidentInfoPrv>().listOwn.add(apr);
                   }
                 }
               }
@@ -90,10 +92,10 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
             //     ),
             //   );
             // }
-            var listAll = context
-                .read<ResidentInfoPrv>()
-                .listOwn
-                .where((e) => e.type == "BUY" || e.type == "RENT");
+            var listAll = context.read<ResidentInfoPrv>().listOwn.where(
+                  (e) => (e.type == "BUY" ||
+                      e.type == "RENT" && e.status == 'ACTIVE'),
+                );
             return Column(
               children: [
                 vpad(12),
@@ -254,8 +256,11 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
     );
     var a = widget.own.residents!;
     var ownInfoApartIndex = listOwn.indexWhere(
-      (element) => element.apartmentId == widget.own.apartment?.id,
+      (element) {
+        return (element.apartmentId == widget.own.apartment?.id);
+      },
     );
+
     var apartOwn = listOwn[ownInfoApartIndex];
 
     var resList = widget.own.residents!.where((e) {
@@ -403,34 +408,42 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                         )
                                       ],
                                     ),
-                                    vpad(5),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            '${S.of(context).member_num}:',
-                                            style: txtRegular(
-                                              12,
-                                              grayScaleColor2,
+                                    // Text(apartOwn.type ?? ''),
+                                    // Text(apartOwn.apartmentId ?? ''),
+                                    // Text(widget.own.apartment!.id ?? ''),
+                                    // Text(apartOwn.status ?? ''),
+                                    if (apartOwn.type == "RENT" ||
+                                        apartOwn.type == "BUY")
+                                      vpad(5),
+                                    if (apartOwn.type == "RENT" ||
+                                        apartOwn.type == "BUY")
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${S.of(context).member_num}:',
+                                              style: txtRegular(
+                                                12,
+                                                grayScaleColor2,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            widget.own.residents!.length
-                                                .toString(),
-                                            style: txtBold(
-                                              12,
-                                              yellowColor7,
+                                          const Spacer(),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              widget.own.residents!.length
+                                                  .toString(),
+                                              style: txtBold(
+                                                12,
+                                                yellowColor7,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                          )
+                                        ],
+                                      ),
                                   ],
                                 ),
                           if (isShow)

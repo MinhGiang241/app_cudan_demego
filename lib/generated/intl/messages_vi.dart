@@ -460,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "legend": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "letter_info": MessageLookupByLibrary.simpleMessage("Thông tin phiếu"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Mã phiếu"),
         "letter_status":
@@ -969,6 +970,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "total_money": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
+        "total_money_to_pay":
+            MessageLookupByLibrary.simpleMessage("Total money payment"),
         "total_pay": MessageLookupByLibrary.simpleMessage("Tổng thanh toán"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Chuyển đồ vào"),
         "tranfer_in_reg":

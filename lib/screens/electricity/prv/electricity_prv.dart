@@ -7,8 +7,19 @@ import '../../../services/api_electricity.dart';
 
 class ElectricityPrv extends ChangeNotifier {
   int year = DateTime.now().year;
+  int month = DateTime.now().month;
   List<Indicator> listIndicatorCurrentYear = [];
   List<Indicator> listIndicatorLastYear = [];
+
+  onChooseMonthYear(DateTime v) {
+    year = v.year;
+    notifyListeners();
+  }
+
+  onChooseMonthBill(DateTime v) {
+    month = v.month;
+    notifyListeners();
+  }
 
   Future getIndicatorByYear(BuildContext context) async {
     var apartmentId =

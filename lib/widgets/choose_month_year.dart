@@ -14,11 +14,13 @@ class ChooseMonthYear extends StatefulWidget {
   final int month;
   final Function selectMonthAndYear;
   String? title;
+  List<int>? custom;
   ChooseMonthYear({
     super.key,
     this.onRefresh,
     this.selectedDate,
     this.title,
+    this.custom,
     required this.selectMonthAndYear,
     required this.year,
     required this.month,
@@ -52,6 +54,7 @@ class _ChooseMonthYearState extends State<ChooseMonthYear> {
               maxTime: DateTime(DateTime.now().year + 10, 12, 31),
               currentTime: DateTime(widget.year, widget.month, 1),
               locale: LocaleType.vi,
+              custom: widget.custom,
             ),
           );
         },
@@ -101,15 +104,17 @@ class CustomMonthPicker extends DatePickerModel {
     DateTime? minTime,
     DateTime? maxTime,
     LocaleType? locale,
+    this.custom,
   }) : super(
-          locale: locale,
+          locale: LocaleType.vi,
           minTime: minTime,
           maxTime: maxTime,
           currentTime: currentTime,
         );
+  List<int>? custom;
 
   @override
   List<int> layoutProportions() {
-    return [1, 1, 0];
+    return custom ?? [1, 1, 0];
   }
 }

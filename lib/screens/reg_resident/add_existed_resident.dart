@@ -40,7 +40,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
     var listApartment = context
         .read<ResidentInfoPrv>()
         .listOwn
-        .where((i) => i.type == "BUY")
+        .where((i) => (i.type == "BUY" || i.type == 'RENT'))
         .map(
           (e) => DropdownMenuItem(
             value: e,

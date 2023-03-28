@@ -26,6 +26,8 @@ class RegisterResidentPrv extends ChangeNotifier {
       for (var i in v) {
         listForm.add(DependenceSignUp.fromMap(i));
       }
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
   }
 

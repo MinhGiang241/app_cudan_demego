@@ -460,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "legend": MessageLookupByLibrary.simpleMessage("Legend"),
         "letter_info":
             MessageLookupByLibrary.simpleMessage("Letter infomation"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Letter code"),
@@ -971,6 +972,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Total money payment"),
+        "total_money_to_pay":
+            MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
         "total_pay": MessageLookupByLibrary.simpleMessage("Total payment"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Tranfer in"),
         "tranfer_in_reg":

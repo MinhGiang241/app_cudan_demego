@@ -861,6 +861,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  merge_table:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "1.0.1"
+      resolved-ref: "601208545e366db54fde7dbe8ef650d4d05b0b7d"
+      url: "https://github.com/juniorise/merge_table.git"
+    source: git
+    version: "0.0.1"
   meta:
     dependency: transitive
     description:

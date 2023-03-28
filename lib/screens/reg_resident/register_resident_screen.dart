@@ -159,7 +159,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                 var listApartmentChoice = context
                     .read<ResidentInfoPrv>()
                     .listOwn
-                    .where((e) => e.type == 'BUY')
+                    .where((e) => (e.type == 'BUY' || e.type == 'RENT'))
                     .map(
                       (i) => DropdownMenuItem(
                         value: i.apartmentId,

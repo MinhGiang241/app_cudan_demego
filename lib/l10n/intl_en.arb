@@ -676,5 +676,7 @@
   "confirm_can_reflection": "Do you want to cancel {rCode}",
   "send_email_wait": "System is sending to your email, please wait",
   "email_not_same": "New email is not same to old email",
-  "consumed_elec_details": "Consumed electricity details"
+  "consumed_elec_details": "Consumed electricity details",
+  "legend": "Legend",
+  "total_money_to_pay": "Tổng cộng tiền thanh toán"
 }

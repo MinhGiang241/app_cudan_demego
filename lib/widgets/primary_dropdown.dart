@@ -265,87 +265,98 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
           PrimaryCard(
             child: Column(
               children: [
-                DropdownButtonFormField<dynamic>(
-                  key: widget.dropKey,
-                  borderRadius: BorderRadius.circular(12),
-                  isDense: widget.isDense,
-                  validator: widget.isRequired
-                      ? ((widget.validator) ??
-                          (v) {
-                            if (v != null &&
-                                widget.controller != null &&
-                                widget.selectList!.isNotEmpty) {
-                              widget.controller!.text = v;
+                !widget.selectList!
+                            .map((e) => e.value)
+                            .contains(widget.value) &&
+                        widget.value != null
+                    ? PrimaryTextField(
+                        enable: false,
+                        initialValue:
+                            widget.value ?? "--${S.of(context).select}--",
+                        suffixIcon: const Icon(Icons.expand_more),
+                      )
+                    : DropdownButtonFormField<dynamic>(
+                        key: widget.dropKey,
+                        borderRadius: BorderRadius.circular(12),
+                        isDense: widget.isDense,
+                        validator: widget.isRequired
+                            ? ((widget.validator) ??
+                                (v) {
+                                  if (v != null &&
+                                      widget.controller != null &&
+                                      widget.selectList!.isNotEmpty) {
+                                    widget.controller!.text = v;
+                                    return null;
+                                  }
+
+                                  return '';
+                                })
+                            : null,
+                        dropdownColor: Colors.white,
+                        value: () {
+                          if (widget.value != null) {
+                            return widget.value;
+                          } else if (widget.controller != null &&
+                              widget.controller!.text.isEmpty) {
+                            return null;
+                          } else if (widget.controller != null &&
+                              widget.controller!.text.isNotEmpty) {
+                            if (widget.selectList!
+                                .map((s) => s.value)
+                                .contains(widget.controller!.text)) {
+                              return widget.controller!.text;
+                            } else {
+                              // widget.controller!.clear();
                               return null;
                             }
-
-                            return '';
-                          })
-                      : null,
-                  dropdownColor: Colors.white,
-                  value: () {
-                    if (widget.value != null) {
-                      return widget.value;
-                    } else if (widget.controller != null &&
-                        widget.controller!.text.isEmpty) {
-                      return null;
-                    } else if (widget.controller != null &&
-                        widget.controller!.text.isNotEmpty) {
-                      if (widget.selectList!
-                          .map((s) => s.value)
-                          .contains(widget.controller!.text)) {
-                        return widget.controller!.text;
-                      } else {
-                        // widget.controller!.clear();
-                        return null;
-                      }
-                    } else {
-                      return null;
-                    }
-                  }(),
-                  isExpanded: true,
-                  hint: Text(
-                    widget.hint ?? "--${S.of(context).select}--",
-                    overflow: TextOverflow.ellipsis,
-                    style: txtBodySmallBold(color: grayScaleColor3),
-                  ),
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                  decoration: InputDecoration(
-                    errorStyle: const TextStyle(fontSize: 0, height: 0),
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintStyle: txtBodySmallBold(color: grayScaleColor3),
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 12,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: primaryColor2, width: 2),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: redColor2, width: 2),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  onChanged: widget.enable
-                      ? (widget.onChange) ??
-                          (v) {
-                            if (widget.controller != null) {
-                              widget.controller!.text = v;
-                            }
-                            if (widget.value != null) {
-                              widget.value = v.toString();
-                            }
+                          } else {
+                            return null;
                           }
-                      : null,
-                  items: widget.selectList ?? items,
-                ),
+                        }(),
+                        isExpanded: true,
+                        hint: Text(
+                          widget.hint ?? "--${S.of(context).select}--",
+                          overflow: TextOverflow.ellipsis,
+                          style: txtBodySmallBold(color: grayScaleColor3),
+                        ),
+                        style: txtBodySmallBold(color: grayScaleColorBase),
+                        decoration: InputDecoration(
+                          errorStyle: const TextStyle(fontSize: 0, height: 0),
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintStyle: txtBodySmallBold(color: grayScaleColor3),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 12,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                                color: primaryColor2, width: 2),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: redColor2, width: 2),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                        onChanged: widget.enable
+                            ? (widget.onChange) ??
+                                (v) {
+                                  if (widget.controller != null) {
+                                    widget.controller!.text = v;
+                                  }
+                                  if (widget.value != null) {
+                                    widget.value = v.toString();
+                                  }
+                                }
+                            : null,
+                        items: widget.selectList ?? items,
+                      ),
               ],
             ),
           ),
