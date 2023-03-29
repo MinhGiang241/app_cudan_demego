@@ -45,7 +45,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                 child: Column(
                   children: [
                     Text(
-                      S.of(context).otp_msg,
+                      S.of(context).otp_msg_email,
                       style: txtMedium(14, grayScaleColor2),
                       textAlign: TextAlign.center,
                     ),

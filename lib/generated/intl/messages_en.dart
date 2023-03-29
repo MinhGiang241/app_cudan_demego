@@ -601,6 +601,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("OTP code is invalid"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication."),
+        "otp_msg_email": MessageLookupByLibrary.simpleMessage(
+            "We have sent OTP code to your registered email. Please enter the OTP code to perform authentication."),
+        "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
+            "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
         "package": MessageLookupByLibrary.simpleMessage("Package"),
         "package_info":

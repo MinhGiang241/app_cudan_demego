@@ -25,6 +25,8 @@
   "otp_verify": "OTP verify",
   "code_verify": "Verify security code",
   "otp_msg": "We have sent OTP code to your registered phone number or email. Please enter the OTP code to perform authentication.",
+  "otp_msg_email": "We have sent OTP code to your registered email. Please enter the OTP code to perform authentication.",
+  "otp_msg_phone": "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.",
   "not_get_otp": "Did not receive OTP?",
   "resend": "Resend",
   "verify": "Verify",

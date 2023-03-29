@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
-  static String m0(f, t) => "Kỳ hóa đơn từ ${f} to ${t}";
+  static String m0(f, t) => "Kỳ hóa đơn từ ${f} tới ${t}";
 
   static String m1(rCode) => "Bạn chắc chắn muốn hủy phản ánh ${rCode}";
 
@@ -604,6 +604,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mã OTP không hợp lệ"),
         "otp_msg": MessageLookupByLibrary.simpleMessage(
             "Vui lòng kiểm tra điện thoại hoặc email để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
+        "otp_msg_email": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng kiểm tra email để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
+        "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
         "package": MessageLookupByLibrary.simpleMessage("Hàng hóa"),
         "package_info":

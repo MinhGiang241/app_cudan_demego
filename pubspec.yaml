@@ -85,10 +85,7 @@ dependencies:
   flutter_multi_select_items: ^0.4.2
   uuid: ^3.0.7
   syncfusion_flutter_charts: ^21.1.35
-  merge_table:
-    git:
-      url: https://github.com/juniorise/merge_table.git
-      ref: 1.0.1
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

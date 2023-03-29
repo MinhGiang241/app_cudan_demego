@@ -310,6 +310,26 @@ class S {
     );
   }
 
+  /// `We have sent OTP code to your registered email. Please enter the OTP code to perform authentication.`
+  String get otp_msg_email {
+    return Intl.message(
+      'We have sent OTP code to your registered email. Please enter the OTP code to perform authentication.',
+      name: 'otp_msg_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.`
+  String get otp_msg_phone {
+    return Intl.message(
+      'We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication.',
+      name: 'otp_msg_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Did not receive OTP?`
   String get not_get_otp {
     return Intl.message(
