@@ -79,6 +79,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
             .entries
             .fold(0.0, (a, b) => a + b.value * elecFeeTo[b.key]);
         var vat = totalMoney * 1.0;
+        var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
@@ -297,7 +298,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   ),
                                   genCell(
                                       text: formatter
-                                          .format(totalMoney)
+                                          .format(totalMoneyVat)
                                           .toString()),
                                 ],
                               ),

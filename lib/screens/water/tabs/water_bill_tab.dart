@@ -78,6 +78,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
             .entries
             .fold(0.0, (a, b) => a + b.value * waterTo[b.key]);
         var vat = totalMoney * 1.0;
+        var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
@@ -299,8 +300,9 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     flex: 4,
                                   ),
                                   genCell(
-                                    text:
-                                        formatter.format(totalMoney).toString(),
+                                    text: formatter
+                                        .format(totalMoneyVat)
+                                        .toString(),
                                   ),
                                 ],
                               ),
