@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
+import 'package:app_cudan/screens/water/water_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -358,6 +359,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ElectricityScreen(),
+        );
+      case WaterScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const WaterScreen(),
         );
       // case ChatScreen.routeName:
       //   return MaterialPageRoute(

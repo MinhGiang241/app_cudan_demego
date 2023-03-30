@@ -681,5 +681,11 @@
   "email_not_same": "Email mới không được trùng với email cũ",
   "consumed_elec_details": "Chi tiết điện năng tiêu thụ",
   "legend": "Ghi chú",
-  "total_money_to_pay": "Total money payment"
+  "total_money_to_pay": "Tổng cộng tiền thanh toán",
+  "wait_pay": "Chờ thanh toán",
+  "consumed_water_detail": "Chi tiết lượng nước tiêu thụ",
+  "consumed_water_detail1": "Chi tiết lượng nước sử dụng",
+  "details_bill": "Hóa đơn chi tiết",
+  "total_consumed_water_month": "Tổng lượng nước thiêu thụ tháng {month}/{year}",
+  "consumed_water": "Lượng nước tiêu thụ"
 }

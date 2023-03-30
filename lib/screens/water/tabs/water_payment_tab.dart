@@ -17,15 +17,16 @@ import '../../../models/info_content_view.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../home/home_screen.dart';
 import '../../payment/widget/payment_item.dart';
+import '../prv/water_prv.dart';
 
-class ElectricityPaymentTab extends StatefulWidget {
-  const ElectricityPaymentTab({super.key});
+class WaterPaymentTab extends StatefulWidget {
+  const WaterPaymentTab({super.key});
 
   @override
-  State<ElectricityPaymentTab> createState() => _ElectricityPaymentTabState();
+  State<WaterPaymentTab> createState() => _WaterPaymentTabState();
 }
 
-class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
+class _WaterPaymentTabState extends State<WaterPaymentTab> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -33,7 +34,7 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: () async {
-        await context.read<ElectricityPrv>().getReceiptByYear(context);
+        await context.read<WaterPrv>().getReceiptByYear(context);
       }(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -49,7 +50,7 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
             },
           );
         }
-        List<Receipt> listReceipt = context.watch<ElectricityPrv>().listReceipt;
+        List<Receipt> listReceipt = context.watch<WaterPrv>().listReceipt;
         if (listReceipt.isEmpty) {
           return SmartRefresher(
             enablePullDown: true,

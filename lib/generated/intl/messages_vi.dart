@@ -58,7 +58,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m15(p) => "Bạn đã thanh toán cho ${p} thành công ";
 
-  static String m16(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m16(month, year) =>
+      "Tổng lượng nước thiêu thụ tháng ${month}/${year}";
+
+  static String m17(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -218,6 +221,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Điện năng tiêu thụ"),
         "consumed_elec_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết điện năng tiêu thụ"),
+        "consumed_water":
+            MessageLookupByLibrary.simpleMessage("Lượng nước tiêu thụ"),
+        "consumed_water_detail": MessageLookupByLibrary.simpleMessage(
+            "Chi tiết lượng nước tiêu thụ"),
+        "consumed_water_detail1":
+            MessageLookupByLibrary.simpleMessage("Chi tiết lượng nước sử dụng"),
         "content": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
@@ -255,6 +264,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "detail_view": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
         "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
+        "details_bill":
+            MessageLookupByLibrary.simpleMessage("Hóa đơn chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "discount_type":
@@ -971,11 +982,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thành tiền (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Tổng cộng"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Tổng hóa đơn"),
+        "total_consumed_water_month": m16,
         "total_money": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
         "total_money_to_pay":
-            MessageLookupByLibrary.simpleMessage("Total money payment"),
+            MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
         "total_pay": MessageLookupByLibrary.simpleMessage("Tổng thanh toán"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Chuyển đồ vào"),
         "tranfer_in_reg":
@@ -1020,6 +1032,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_execute": MessageLookupByLibrary.simpleMessage("Chờ xử lý"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
         "wait_hand_over": MessageLookupByLibrary.simpleMessage("Chờ bàn giao"),
+        "wait_pay": MessageLookupByLibrary.simpleMessage("Chờ thanh toán"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
         "ward": MessageLookupByLibrary.simpleMessage("Quận/Huyện"),
@@ -1027,7 +1040,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m16,
+        "we_send_to": m17,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
             "Trọng lượng không được quá 15kg"),

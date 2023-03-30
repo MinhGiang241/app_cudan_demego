@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app_cudan/screens/electricity/tabs/electric_payment_tab.dart';
+import 'package:app_cudan/screens/water/prv/water_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
-import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -14,31 +12,31 @@ import '../../generated/l10n.dart';
 import '../../widgets/choose_month_year.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
-import 'prv/electricity_prv.dart';
-import 'tabs/comsummed_electricity.dart';
-import 'tabs/electricity_bill.dart';
+import 'tabs/consummed_water_tab.dart';
+import 'tabs/water_bill_tab.dart';
+import 'tabs/water_payment_tab.dart';
 
-class ElectricityScreen extends StatefulWidget {
-  const ElectricityScreen({super.key});
-  static const routeName = "/electricity";
+class WaterScreen extends StatefulWidget {
+  const WaterScreen({super.key});
+  static const routeName = "/water";
 
   @override
-  State<ElectricityScreen> createState() => _ElectricityScreenState();
+  State<WaterScreen> createState() => _WaterScreenState();
 }
 
-class _ElectricityScreenState extends State<ElectricityScreen>
+class _WaterScreenState extends State<WaterScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 3, vsync: this);
-  var initIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ElectricityPrv(),
+      create: (context) => WaterPrv(),
       builder: (context, snapshot) {
         return PrimaryScreen(
           isPadding: false,
           appBar: PrimaryAppbar(
-            title: S.of(context).consume_elec,
+            title: S.of(context).consumed_water,
             tabController: tabController,
             isTabScrollabel: false,
             tabs: [
@@ -57,9 +55,8 @@ class _ElectricityScreenState extends State<ElectricityScreen>
                         context,
                         onChanged: (v) {},
                         onConfirm: (v) {
-                          context.read<ElectricityPrv>().onChooseMonthYear(v);
+                          context.read<WaterPrv>().onChooseMonthYear(v);
                           setState(() {
-                            initIndex = tabController.index;
                             // init = false;
                           });
                           /* Navigator.of(context).pop(); */
@@ -68,7 +65,7 @@ class _ElectricityScreenState extends State<ElectricityScreen>
                           minTime: DateTime(DateTime.now().year - 40, 1, 1),
                           maxTime: DateTime(DateTime.now().year, 12, 31),
                           currentTime: DateTime(
-                            context.read<ElectricityPrv>().year,
+                            context.read<WaterPrv>().year,
                             1,
                             1,
                           ),
@@ -86,9 +83,9 @@ class _ElectricityScreenState extends State<ElectricityScreen>
             child: TabBarView(
               controller: tabController,
               children: [
-                ConsummedElectricityTab(),
-                ElectricityBillTab(),
-                ElectricityPaymentTab(),
+                ConsummedWaterTab(),
+                WaterBillTab(),
+                WaterPaymentTab(),
               ],
             ),
           ),

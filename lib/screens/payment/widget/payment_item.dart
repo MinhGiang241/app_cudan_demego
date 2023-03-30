@@ -106,11 +106,17 @@ class PaymentItem extends StatelessWidget {
     this.isPaid = false,
     this.isSelected = false,
     this.onSelect,
+    this.onTap,
+    this.widget,
+    this.canSelect = true,
     required this.re,
   }) : super(key: key);
   final bool isPaid;
   final bool isSelected;
   final Function()? onSelect;
+  final Function()? onTap;
+  final Widget? widget;
+  final bool? canSelect;
   Receipt re;
 
   @override
@@ -137,99 +143,122 @@ class PaymentItem extends StatelessWidget {
 
     return PrimaryCard(
       margin: const EdgeInsets.only(bottom: 16, left: 12, right: 12),
-      onTap: () {
-        Navigator.pushNamed(context, BillDetailsScreen.routeName, arguments: {
-          "re": re,
-          "year": context.read<PaymentListPrv>().year,
-          "month": context.read<PaymentListPrv>().month
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-        child: Row(
-          children: [
-            genIcon(re.type),
-            hpad(12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(re.reason ?? "", style: txtLinkSmall()),
-                  vpad(2),
-                  Table(
-                    textBaseline: TextBaseline.ideographic,
-                    defaultVerticalAlignment:
-                        TableCellVerticalAlignment.baseline,
-                    columnWidths: const {
-                      0: FlexColumnWidth(3),
-                      1: FlexColumnWidth(3)
-                    },
+      onTap: onTap ??
+          () {
+            Navigator.pushNamed(
+              context,
+              BillDetailsScreen.routeName,
+              arguments: {
+                "re": re,
+                "year": context.read<PaymentListPrv>().year,
+                "month": context.read<PaymentListPrv>().month
+              },
+            );
+          },
+      child: Column(
+        children: [
+          if (widget != null) widget!,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+            child: Row(
+              children: [
+                genIcon(re.type),
+                hpad(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TableRow(children: [
-                        Text(
-                            '${!isPaid ? S.of(context).need_pay : S.of(context).pay}:',
-                            style: txtRegular(13, grayScaleColorBase)),
-                        isPaid
-                            ? Text(formatCurrency.format(paid),
-                                style: txtLinkSmall())
-                            : Text(
-                                formatCurrency
-                                    .format(re.discount_money! - paid),
-                                style: txtLinkSmall()),
-                      ]),
-                      TableRow(children: [
-                        Text(
-                            '${!isPaid ? S.of(context).due_bill : S.of(context).pay_date}:',
-                            style: txtRegular(13, grayScaleColorBase)),
-                        Text(
-                            Utils.dateFormat(
-                                (!isPaid ? re.date : payDate) ?? '', 1),
-                            style: txtRegular(14, grayScaleColorBase)),
-                      ]),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            if (!isPaid)
-              InkWell(
-                onTap: onSelect,
-                borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 250),
-                    switchInCurve: Curves.easeOutBack,
-                    transitionBuilder: (child, animation) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: ScaleTransition(
-                          scale: animation,
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: re.isSelected
-                        ? const PrimaryIcon(
-                            padding: EdgeInsets.zero,
-                            icons: PrimaryIcons.check,
-                            size: 26,
-                            color: primaryColor3,
-                          )
-                        : Container(
-                            width: 22,
-                            height: 26,
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 3, color: primaryColor3),
-                                shape: BoxShape.circle),
+                      Text(re.reason ?? "", style: txtLinkSmall()),
+                      vpad(2),
+                      Table(
+                        textBaseline: TextBaseline.ideographic,
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.baseline,
+                        columnWidths: const {
+                          0: FlexColumnWidth(3),
+                          1: FlexColumnWidth(3)
+                        },
+                        children: [
+                          TableRow(
+                            children: [
+                              Text(
+                                '${!isPaid ? S.of(context).need_pay : S.of(context).pay}:',
+                                style: txtRegular(13, grayScaleColorBase),
+                              ),
+                              isPaid
+                                  ? Text(
+                                      formatCurrency.format(paid),
+                                      style: txtLinkSmall(),
+                                    )
+                                  : Text(
+                                      formatCurrency
+                                          .format(re.discount_money! - paid),
+                                      style: txtLinkSmall(),
+                                    ),
+                            ],
                           ),
+                          TableRow(
+                            children: [
+                              Text(
+                                '${!isPaid ? S.of(context).due_bill : S.of(context).pay_date}:',
+                                style: txtRegular(13, grayScaleColorBase),
+                              ),
+                              Text(
+                                Utils.dateFormat(
+                                  (!isPaid ? re.date : payDate) ?? '',
+                                  1,
+                                ),
+                                style: txtRegular(14, grayScaleColorBase),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              ),
-          ],
-        ),
+                if (!isPaid && canSelect!)
+                  InkWell(
+                    onTap: onSelect,
+                    borderRadius: BorderRadius.circular(20),
+                    child: SizedBox(
+                      width: 32,
+                      height: 32,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        switchInCurve: Curves.easeOutBack,
+                        transitionBuilder: (child, animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: ScaleTransition(
+                              scale: animation,
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: re.isSelected
+                            ? const PrimaryIcon(
+                                padding: EdgeInsets.zero,
+                                icons: PrimaryIcons.check,
+                                size: 26,
+                                color: primaryColor3,
+                              )
+                            : Container(
+                                width: 22,
+                                height: 26,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 3, color: primaryColor3),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -61,6 +61,8 @@ genStatus(String status) {
       return S.current.complain;
     case "FEEDBACK":
       return S.current.feedback;
+    case "UNPAID":
+      return S.current.wait_pay;
     default:
       return '';
   }
@@ -130,6 +132,8 @@ Color genStatusColor(String status) {
       return primaryColorBase;
     case "INACTIVE":
       return redColorBase;
+    case "UNPAID":
+      return yellowColor7;
     default:
       return grayScaleColor1;
   }

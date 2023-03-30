@@ -55,7 +55,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m15(p) => "Make payment for ${p} successfully";
 
-  static String m16(to) => "We sent otp code to :${to}";
+  static String m16(month, year) =>
+      "Total consumed water month ${month}/${year}";
+
+  static String m17(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -220,6 +223,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Consume electricity"),
         "consumed_elec_details": MessageLookupByLibrary.simpleMessage(
             "Consumed electricity details"),
+        "consumed_water":
+            MessageLookupByLibrary.simpleMessage("Consumed water"),
+        "consumed_water_detail":
+            MessageLookupByLibrary.simpleMessage("Consumed water detail"),
+        "consumed_water_detail1":
+            MessageLookupByLibrary.simpleMessage("Consumed water detail"),
         "content": MessageLookupByLibrary.simpleMessage("Content"),
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
@@ -257,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "detail_view": MessageLookupByLibrary.simpleMessage("Details view"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
+        "details_bill": MessageLookupByLibrary.simpleMessage("Details bill"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
@@ -973,11 +983,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("To money (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Total bill"),
+        "total_consumed_water_month": m16,
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Total money payment"),
         "total_money_to_pay":
-            MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
+            MessageLookupByLibrary.simpleMessage("Total money need to pay"),
         "total_pay": MessageLookupByLibrary.simpleMessage("Total payment"),
         "tranfer_in": MessageLookupByLibrary.simpleMessage("Tranfer in"),
         "tranfer_in_reg":
@@ -1026,6 +1037,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_find": MessageLookupByLibrary.simpleMessage("Wait to find"),
         "wait_hand_over":
             MessageLookupByLibrary.simpleMessage("Wait to hand over"),
+        "wait_pay": MessageLookupByLibrary.simpleMessage("Wait to pay"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
         "ward": MessageLookupByLibrary.simpleMessage("Distric/ward"),
@@ -1033,7 +1045,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m16,
+        "we_send_to": m17,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),

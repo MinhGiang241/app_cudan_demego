@@ -47,13 +47,13 @@ class _PaymentTabState extends State<PaymentTab> {
             enablePullDown: true,
             enablePullUp: false,
             onRefresh: () {
-              // context.read<PaymentListTabPrv>().getEventList(context, true);
               widget.onRefresh!();
               widget.refreshController.refreshCompleted();
             },
             controller: widget.refreshController,
             header: WaterDropMaterialHeader(
-                backgroundColor: Theme.of(context).primaryColor),
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
             onLoading: () {
               // context
               //     .read<PaymentListTabPrv>()
@@ -68,20 +68,27 @@ class _PaymentTabState extends State<PaymentTab> {
                       vpad(24),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12, bottom: 12, right: 12),
+                          left: 12,
+                          bottom: 12,
+                          right: 12,
+                        ),
                         child: Text(
                           "${S.of(context).bills}:",
                           style: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontFamily: family,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: grayScaleColorBase),
+                            decoration: TextDecoration.underline,
+                            fontFamily: family,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: grayScaleColorBase,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12, bottom: 12, right: 12),
+                          left: 12,
+                          bottom: 12,
+                          right: 12,
+                        ),
                         child: Text(
                           "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
                           style: txtBold(14, grayScaleColorBase),
@@ -102,20 +109,27 @@ class _PaymentTabState extends State<PaymentTab> {
                       vpad(24),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12, bottom: 12, right: 12),
+                          left: 12,
+                          bottom: 12,
+                          right: 12,
+                        ),
                         child: Text(
                           "${S.of(context).bills}:",
                           style: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontFamily: family,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: grayScaleColorBase),
+                            decoration: TextDecoration.underline,
+                            fontFamily: family,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: grayScaleColorBase,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12, bottom: 12, right: 12),
+                          left: 12,
+                          bottom: 12,
+                          right: 12,
+                        ),
                         child: Text(
                           "${S.of(context).month} ${context.watch<PaymentListPrv>().month.toString()}, ${context.watch<PaymentListPrv>().year.toString()}",
                           style: txtBold(14, grayScaleColorBase),

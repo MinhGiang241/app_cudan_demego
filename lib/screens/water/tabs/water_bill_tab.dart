@@ -1,8 +1,7 @@
-// ignore_for_file: require_trailing_commas
-
-import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -14,24 +13,25 @@ import '../../../utils/utils.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_error_widget.dart';
+import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
-import '../prv/electricity_prv.dart';
+import '../prv/water_prv.dart';
 
-class ElectricityBillTab extends StatefulWidget {
-  const ElectricityBillTab({super.key});
+class WaterBillTab extends StatefulWidget {
+  const WaterBillTab({super.key});
 
   @override
-  State<ElectricityBillTab> createState() => _ElectricityBillTabState();
+  State<WaterBillTab> createState() => _WaterBillTabState();
 }
 
-class _ElectricityBillTabState extends State<ElectricityBillTab> {
+class _WaterBillTabState extends State<WaterBillTab> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   var formatter = NumberFormat('#,###,###');
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: context.read<ElectricityPrv>().getDataBill(context),
+      future: context.read<WaterPrv>().getDataBill(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -46,38 +46,37 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
             },
           );
         }
-        var lastIndicator = context.read<ElectricityPrv>().indicatorLastMonth;
-        var currentIndicator =
-            context.read<ElectricityPrv>().indicatorCurrentMonth;
+        var lastIndicator = context.read<WaterPrv>().indicatorLastMonth;
+        var currentIndicator = context.read<WaterPrv>().indicatorCurrentMonth;
         double totalIndex = currentIndicator?.electricity_head ??
             0.0 - (lastIndicator?.electricity_head ?? 0.0);
         var list = [];
 
         double index = totalIndex;
-        var elecFee = context.read<ElectricityPrv>().electricFee?.electric_fee;
-        List<double> elecFeeTo = elecFee?.map((e) => e.to!).toList() ?? [];
-        elecFeeTo.sort((a, b) => a.compareTo(b));
-        for (var i in elecFeeTo) {
+        var waterFee = context.read<WaterPrv>().waterFee?.water_fee;
+        List<double> waterTo = waterFee?.map((e) => e.to!).toList() ?? [];
+        waterTo.sort((a, b) => a.compareTo(b));
+        for (var i in waterTo) {
           index = index - i;
           if (index < 0) {
             list.add(index + i);
             break;
-          } else if (i == elecFeeTo.last) {
+          } else if (i == waterTo.last) {
             list.add(index + i);
             break;
           } else {
             list.add(i);
           }
         }
-        var month = context.watch<ElectricityPrv>().month;
-        var year = context.watch<ElectricityPrv>().year;
+        var month = context.watch<WaterPrv>().month;
+        var year = context.watch<WaterPrv>().year;
 
         var startMonth = DateTime(year, month, 1);
         var endMonth = DateTime(year, month + 1, 0);
         var totalMoney = list
             .asMap()
             .entries
-            .fold(0.0, (a, b) => a + b.value * elecFeeTo[b.key]);
+            .fold(0.0, (a, b) => a + b.value * waterTo[b.key]);
         var vat = totalMoney * 1.0;
         return SmartRefresher(
           enablePullDown: true,
@@ -113,15 +112,15 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                           context,
                           onChanged: (v) {},
                           onConfirm: (v) {
-                            context.read<ElectricityPrv>().onChooseMonthBill(v);
+                            context.read<WaterPrv>().onChooseMonthBill(v);
                             setState(() {});
                           },
                           pickerModel: CustomMonthPicker(
                             minTime: DateTime(DateTime.now().year - 40, 1, 1),
                             maxTime: DateTime(DateTime.now().year, 12, 31),
                             currentTime: DateTime(
-                              context.read<ElectricityPrv>().year,
-                              context.read<ElectricityPrv>().month,
+                              context.read<WaterPrv>().year,
+                              context.read<WaterPrv>().month,
                               1,
                             ),
                             custom: [0, 1, 0],
@@ -162,11 +161,12 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                   ),
                                   Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        '${formatter.format(totalIndex)} kWh',
-                                        style: txtBold(14, redColorBase),
-                                      ))
+                                    flex: 1,
+                                    child: Text(
+                                      '${formatter.format(totalIndex)} m3',
+                                      style: txtBold(14, redColorBase),
+                                    ),
+                                  )
                                 ],
                               ),
                               vpad(12),
@@ -180,13 +180,14 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                   ),
                                   Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        '12345678',
-                                        style: txtBold(
-                                          14,
-                                        ),
-                                      ))
+                                    flex: 1,
+                                    child: Text(
+                                      '12345678',
+                                      style: txtBold(
+                                        14,
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                               vpad(12),
@@ -205,7 +206,8 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     height: 80,
                                   ),
                                   genCell(
-                                    text: "${S.of(context).consume_elec} (kWh)",
+                                    text:
+                                        "${S.of(context).consumed_water} (m3)",
                                     flex: 1,
                                     style: txtRegular(12, primaryColorBase),
                                     height: 80,
@@ -264,13 +266,13 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(elecFee![index].price)
+                                          .format(waterFee![index].price)
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            list[index] * elecFee[index].price,
+                                            list[index] * waterFee[index].price,
                                           )
                                           .toString(),
                                     ),
@@ -285,7 +287,8 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   ),
                                   genCell(text: "10%"),
                                   genCell(
-                                      text: formatter.format(vat).toString()),
+                                    text: formatter.format(vat).toString(),
+                                  ),
                                 ],
                               ),
                               Row(
@@ -296,9 +299,9 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     flex: 4,
                                   ),
                                   genCell(
-                                      text: formatter
-                                          .format(totalMoney)
-                                          .toString()),
+                                    text:
+                                        formatter.format(totalMoney).toString(),
+                                  ),
                                 ],
                               ),
                               vpad(20),
@@ -345,12 +348,6 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
             maxLines: 4,
             style: style ?? txtRegular(12, grayScaleColorBase),
           ),
-          // Text(
-          //   text,
-
-          //   style: style ?? txtRegular(12, grayScaleColorBase),
-          //   // overflow: TextOverflow.ellipsis,
-          // ),
         ),
       ),
     );

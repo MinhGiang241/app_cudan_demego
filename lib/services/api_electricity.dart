@@ -41,6 +41,43 @@ class APIElectricity {
     }
   }
 
+  static Future getWaterFee() async {
+    var query = '''
+    query {
+	response : query_WaterFees_dto {
+		message
+		code
+		data {
+			_id
+			createdTime
+			updatedTime
+			fixed_price,
+			water_fee {
+				from
+				to
+				price
+			}
+			message
+		}
+	}
+}
+    ''';
+
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+    );
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getIndicatorByYear(String? apartmentId, int year) async {
     var query = '''
         mutation (\$apartmentId:String,\$year:Float){

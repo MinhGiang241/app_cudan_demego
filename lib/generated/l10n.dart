@@ -6860,11 +6860,71 @@ class S {
     );
   }
 
-  /// `Tổng cộng tiền thanh toán`
+  /// `Total money need to pay`
   String get total_money_to_pay {
     return Intl.message(
-      'Tổng cộng tiền thanh toán',
+      'Total money need to pay',
       name: 'total_money_to_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait to pay`
+  String get wait_pay {
+    return Intl.message(
+      'Wait to pay',
+      name: 'wait_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consumed water detail`
+  String get consumed_water_detail {
+    return Intl.message(
+      'Consumed water detail',
+      name: 'consumed_water_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consumed water detail`
+  String get consumed_water_detail1 {
+    return Intl.message(
+      'Consumed water detail',
+      name: 'consumed_water_detail1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details bill`
+  String get details_bill {
+    return Intl.message(
+      'Details bill',
+      name: 'details_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total consumed water month {month}/{year}`
+  String total_consumed_water_month(Object month, Object year) {
+    return Intl.message(
+      'Total consumed water month $month/$year',
+      name: 'total_consumed_water_month',
+      desc: '',
+      args: [month, year],
+    );
+  }
+
+  /// `Consumed water`
+  String get consumed_water {
+    return Intl.message(
+      'Consumed water',
+      name: 'consumed_water',
       desc: '',
       args: [],
     );

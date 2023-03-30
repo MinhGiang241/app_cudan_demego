@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: file_names, non_constant_identifier_names
 
-class ElectricFee {
+class WaterFee {
   String? id;
   String? createdTime;
   String? updatedTime;
   double? fixed_price;
   String? message;
-  List<ElectricFeeDetail>? electric_fee;
-  ElectricFee({
+  List<WaterFeeDetail>? water_fee;
+  WaterFee({
     this.id,
     this.createdTime,
     this.updatedTime,
     this.fixed_price,
     this.message,
-    this.electric_fee,
+    this.water_fee,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,12 +25,12 @@ class ElectricFee {
       'updatedTime': updatedTime,
       'fixed_price': fixed_price,
       'message': message,
-      'electric_fee': electric_fee?.map((x) => x.toMap()).toList(),
+      'electric_fee': water_fee?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory ElectricFee.fromMap(Map<String, dynamic> map) {
-    return ElectricFee(
+  factory WaterFee.fromMap(Map<String, dynamic> map) {
+    return WaterFee(
       id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
@@ -40,10 +40,10 @@ class ElectricFee {
           ? double.parse(map['fixed_price'].toString())
           : null,
       message: map['message'] != null ? map['message'] as String : null,
-      electric_fee: map['electric_fee'] != null
-          ? List<ElectricFeeDetail>.from(
-              (map['electric_fee'] as List<dynamic>).map<ElectricFeeDetail?>(
-                (x) => ElectricFeeDetail.fromMap(x as Map<String, dynamic>),
+      water_fee: map['water_fee'] != null
+          ? List<WaterFeeDetail>.from(
+              (map['water_fee'] as List<dynamic>).map<WaterFeeDetail?>(
+                (x) => WaterFeeDetail.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
@@ -52,17 +52,17 @@ class ElectricFee {
 
   String toJson() => json.encode(toMap());
 
-  factory ElectricFee.fromJson(String source) =>
-      ElectricFee.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory WaterFee.fromJson(String source) =>
+      WaterFee.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
-class ElectricFeeDetail {
+class WaterFeeDetail {
   String? createdTime;
   String? updatedTime;
   double? from;
   double? to;
   double? price;
-  ElectricFeeDetail({
+  WaterFeeDetail({
     this.createdTime,
     this.updatedTime,
     this.from,
@@ -80,8 +80,8 @@ class ElectricFeeDetail {
     };
   }
 
-  factory ElectricFeeDetail.fromMap(Map<String, dynamic> map) {
-    return ElectricFeeDetail(
+  factory WaterFeeDetail.fromMap(Map<String, dynamic> map) {
+    return WaterFeeDetail(
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:
@@ -100,6 +100,6 @@ class ElectricFeeDetail {
 
   String toJson() => json.encode(toMap());
 
-  factory ElectricFeeDetail.fromJson(String source) =>
-      ElectricFeeDetail.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory WaterFeeDetail.fromJson(String source) =>
+      WaterFeeDetail.fromMap(json.decode(source) as Map<String, dynamic>);
 }

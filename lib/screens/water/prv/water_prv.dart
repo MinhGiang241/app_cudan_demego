@@ -1,6 +1,4 @@
-import 'package:app_cudan/models/electric_fee.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/services/api_payment.dart';
+import 'package:app_cudan/models/waterFee.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,16 +6,17 @@ import '../../../models/indicator.dart';
 import '../../../models/receipt.dart';
 import '../../../services/api_electricity.dart';
 import '../../../utils/utils.dart';
+import '../../auth/prv/resident_info_prv.dart';
 
-class ElectricityPrv extends ChangeNotifier {
-  int year = DateTime.now().year;
-  int month = DateTime.now().month;
+class WaterPrv extends ChangeNotifier {
+  var year = DateTime.now().year;
+  var month = DateTime.now().month;
   List<Indicator> listIndicatorCurrentYear = [];
   List<Indicator> listIndicatorLastYear = [];
-  ElectricFee? electricFee;
   Indicator? indicatorLastMonth;
   Indicator? indicatorCurrentMonth;
   List<Receipt> listReceipt = [];
+  WaterFee? waterFee;
 
   onChooseMonthYear(DateTime v) {
     year = v.year;
@@ -29,12 +28,22 @@ class ElectricityPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future getWatweFeeConfig() async {
+    await APIElectricity.getWaterFee().then((value) {
+      if (value != null && value.isNotEmpty) {
+        waterFee = WaterFee.fromMap(value[0]);
+      } else {
+        waterFee = null;
+      }
+    });
+  }
+
   Future getReceiptByYear(BuildContext context) async {
     var apartmentId = context.read<ResidentInfoPrv>().selectedApartment?.id;
-    var residentId = context.read<ResidentInfoPrv>().residentId;
+    // var residentId = context.read<ResidentInfoPrv>().residentId;
     // APIPayment.getReceiptsList(residentId, apartmentId, 2023, 3, '')
 
-    APIElectricity.getReceiptByYear(apartmentId, year, true).then((v) {
+    APIElectricity.getReceiptByYear(apartmentId, year, false).then((v) {
       listReceipt.clear();
       for (var i in v) {
         listReceipt.add(Receipt.fromJson(i));
@@ -43,16 +52,6 @@ class ElectricityPrv extends ChangeNotifier {
     }).catchError((e) {
       Utils.showErrorMessage(context, e.toString());
     });
-  }
-
-  Future getDataBill(BuildContext context) async {
-    try {
-      var apartmentId = context.read<ResidentInfoPrv>().selectedApartment?.id;
-      await getIndicatorMonth(apartmentId);
-      await getElectricFeeConfig();
-    } catch (e) {
-      Utils.showErrorMessage(context, e.toString());
-    }
   }
 
   Future getIndicatorMonth(String? apartmentId) async {
@@ -65,14 +64,24 @@ class ElectricityPrv extends ChangeNotifier {
     });
   }
 
-  Future getElectricFeeConfig() async {
-    await APIElectricity.getElectricFee().then((value) {
+  Future getWaterFeeConfig() async {
+    await APIElectricity.getWaterFee().then((value) {
       if (value != null && value.isNotEmpty) {
-        electricFee = ElectricFee.fromMap(value[0]);
+        waterFee = WaterFee.fromMap(value[0]);
       } else {
-        electricFee = null;
+        waterFee = null;
       }
     });
+  }
+
+  Future getDataBill(BuildContext context) async {
+    try {
+      var apartmentId = context.read<ResidentInfoPrv>().selectedApartment?.id;
+      await getIndicatorMonth(apartmentId);
+      await getWaterFeeConfig();
+    } catch (e) {
+      Utils.showErrorMessage(context, e.toString());
+    }
   }
 
   Future getIndicatorByYear(BuildContext context) async {

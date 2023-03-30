@@ -5,6 +5,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../electricity/electricity_screen.dart';
+import '../../water/water_screen.dart';
 import 'home_title_widget.dart';
 
 class BillsHome extends StatelessWidget {
@@ -52,7 +53,7 @@ class BillsHome extends StatelessWidget {
                     size: 32,
                     onTap: () {
                       Navigator.of(context).pushNamed(
-                        PaymentListScreen.routeName,
+                        WaterScreen.routeName,
                         arguments: {'year': null, 'month': null, 'index': null},
                       );
                     },
