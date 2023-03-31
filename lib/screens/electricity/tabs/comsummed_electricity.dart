@@ -51,11 +51,11 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
         var dataLast = {};
         var dataCurent = {};
         for (var i in context.read<ElectricityPrv>().listIndicatorLastYear) {
-          dataLast[i.month.toString()] = i.electricity_head;
+          dataLast[i.month.toString()] = i.electricity_consumption;
         }
 
         for (var i in context.read<ElectricityPrv>().listIndicatorCurrentYear) {
-          dataCurent[i.month.toString()] = i.electricity_head;
+          dataCurent[i.month.toString()] = i.electricity_consumption;
         }
 
         List<ChartDataViewModel> dataCharLast = [

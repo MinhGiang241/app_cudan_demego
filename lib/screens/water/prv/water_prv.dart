@@ -39,7 +39,8 @@ class WaterPrv extends ChangeNotifier {
   }
 
   Future getReceiptByYear(BuildContext context) async {
-    var apartmentId = context.read<ResidentInfoPrv>().selectedApartment?.id;
+    var apartmentId =
+        context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
     // var residentId = context.read<ResidentInfoPrv>().residentId;
     // APIPayment.getReceiptsList(residentId, apartmentId, 2023, 3, '')
 
@@ -58,7 +59,7 @@ class WaterPrv extends ChangeNotifier {
     await APIElectricity.getMonthElectricIndicator(apartmentId, year, month)
         .then((v) {
       indicatorLastMonth =
-          v['current'] != null ? Indicator.fromMap(v['last']) : null;
+          v['last'] != null ? Indicator.fromMap(v['last']) : null;
       indicatorCurrentMonth =
           v['current'] != null ? Indicator.fromMap(v['current']) : null;
     });
@@ -76,7 +77,8 @@ class WaterPrv extends ChangeNotifier {
 
   Future getDataBill(BuildContext context) async {
     try {
-      var apartmentId = context.read<ResidentInfoPrv>().selectedApartment?.id;
+      var apartmentId =
+          context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
       await getIndicatorMonth(apartmentId);
       await getWaterFeeConfig();
     } catch (e) {

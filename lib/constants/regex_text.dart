@@ -4,7 +4,7 @@ class RegexText {
   static bool vietNameseChar(String value) => RegExp(
         r'[àÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]',
       ).hasMatch(value);
-  static bool onlyZero(String value) => RegExp(r'[1-9]').hasMatch(value);
+  static bool onlyZero(String value) => RegExp(r'^0+$').hasMatch(value);
 
   static bool minMaxString({required String value, int? min, int? max}) =>
       RegExp("^.{$min,$max}\$").hasMatch(value);

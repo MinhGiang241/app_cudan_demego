@@ -48,8 +48,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
         }
         var lastIndicator = context.read<WaterPrv>().indicatorLastMonth;
         var currentIndicator = context.read<WaterPrv>().indicatorCurrentMonth;
-        double totalIndex = currentIndicator?.electricity_head ??
-            0.0 - (lastIndicator?.electricity_head ?? 0.0);
+        double totalIndex = currentIndicator?.water_consumption ?? 0;
         var list = [];
 
         double index = totalIndex;
@@ -73,11 +72,12 @@ class _WaterBillTabState extends State<WaterBillTab> {
 
         var startMonth = DateTime(year, month, 1);
         var endMonth = DateTime(year, month + 1, 0);
-        var totalMoney = list
-            .asMap()
-            .entries
-            .fold(0.0, (a, b) => a + b.value * waterTo[b.key]);
-        var vat = totalMoney * 1.0;
+        var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
+          var price = waterFee![b.key].price ?? 0;
+
+          return a + b.value * price;
+        });
+        var vat = totalMoney * 0.1;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -164,7 +164,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      '${formatter.format(totalIndex)} m3',
+                                      '${formatter.format(currentIndicator?.water_consumption ?? 0)} m3',
                                       style: txtBold(14, redColorBase),
                                     ),
                                   )
@@ -232,22 +232,22 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                   genCell(
                                     text: formatter
                                         .format(
-                                          lastIndicator?.electricity_head ?? 0,
+                                          currentIndicator?.water_head ?? 0,
                                         )
                                         .toString(),
                                   ),
                                   genCell(
                                     text: formatter
                                         .format(
-                                          currentIndicator?.electricity_head ??
+                                          currentIndicator?.water_last ?? 0,
+                                        )
+                                        .toString(),
+                                  ),
+                                  genCell(
+                                    text: formatter
+                                        .format(
+                                          currentIndicator?.water_consumption ??
                                               0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          totalIndex,
                                         )
                                         .toString(),
                                   ),

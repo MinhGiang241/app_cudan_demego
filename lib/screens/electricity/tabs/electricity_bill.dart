@@ -49,8 +49,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
         var lastIndicator = context.read<ElectricityPrv>().indicatorLastMonth;
         var currentIndicator =
             context.read<ElectricityPrv>().indicatorCurrentMonth;
-        double totalIndex = currentIndicator?.electricity_head ??
-            0.0 - (lastIndicator?.electricity_head ?? 0.0);
+        double totalIndex = currentIndicator?.electricity_consumption ?? 0;
         var list = [];
 
         double index = totalIndex;
@@ -59,7 +58,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
         elecFeeTo.sort((a, b) => a.compareTo(b));
         for (var i in elecFeeTo) {
           index = index - i;
-          if (index < 0) {
+          if (index <= 0) {
             list.add(index + i);
             break;
           } else if (i == elecFeeTo.last) {
@@ -74,11 +73,11 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
 
         var startMonth = DateTime(year, month, 1);
         var endMonth = DateTime(year, month + 1, 0);
-        var totalMoney = list
-            .asMap()
-            .entries
-            .fold(0.0, (a, b) => a + b.value * elecFeeTo[b.key]);
-        var vat = totalMoney * 1.0;
+        var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
+          var price = elecFee![b.key].price ?? 0;
+          return a + b.value * price;
+        });
+        var vat = totalMoney * 0.1;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -165,7 +164,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   Expanded(
                                       flex: 1,
                                       child: Text(
-                                        '${formatter.format(totalIndex)} kWh',
+                                        '${formatter.format(currentIndicator?.electricity_consumption ?? 0)} kWh',
                                         style: txtBold(14, redColorBase),
                                       ))
                                 ],
@@ -230,13 +229,6 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   genCell(
                                     text: formatter
                                         .format(
-                                          lastIndicator?.electricity_head ?? 0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
                                           currentIndicator?.electricity_head ??
                                               0,
                                         )
@@ -245,7 +237,17 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   genCell(
                                     text: formatter
                                         .format(
-                                          totalIndex,
+                                          currentIndicator?.electricity_last ??
+                                              0,
+                                        )
+                                        .toString(),
+                                  ),
+                                  genCell(
+                                    text: formatter
+                                        .format(
+                                          currentIndicator
+                                                  ?.electricity_consumption ??
+                                              0,
                                         )
                                         .toString(),
                                   ),

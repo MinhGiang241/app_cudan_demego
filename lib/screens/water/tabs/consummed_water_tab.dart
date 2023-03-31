@@ -52,11 +52,11 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
         var dataLast = {};
         var dataCurent = {};
         for (var i in context.read<WaterPrv>().listIndicatorLastYear) {
-          dataLast[i.month.toString()] = i.water_head;
+          dataLast[i.month.toString()] = i.water_consumption;
         }
 
         for (var i in context.read<WaterPrv>().listIndicatorCurrentYear) {
-          dataCurent[i.month.toString()] = i.water_head;
+          dataCurent[i.month.toString()] = i.water_consumption;
         }
 
         List<ChartDataViewModel> dataCharLast = [

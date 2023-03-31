@@ -11,7 +11,11 @@ class Indicator {
   String? employeeId;
   String? phone;
   double? electricity_head;
+  double? electricity_last;
+  double? electricity_consumption;
   double? water_head;
+  double? water_last;
+  double? water_consumption;
   int? year;
   int? month;
   bool? latch;
@@ -19,6 +23,10 @@ class Indicator {
   String? phone_number;
   Indicator({
     this.id,
+    this.electricity_last,
+    this.electricity_consumption,
+    this.water_last,
+    this.water_consumption,
     this.createdTime,
     this.updatedTime,
     this.residentId,
@@ -49,7 +57,11 @@ class Indicator {
       'month': month,
       'latch': latch,
       'owner_name': owner_name,
+      'electricity_consumption': electricity_consumption,
       'phone_number': phone_number,
+      'electricity_last': electricity_last,
+      'water_last': water_last,
+      'water_consumption': water_consumption,
     };
   }
 
@@ -71,8 +83,23 @@ class Indicator {
           double.tryParse(map['electricity_head'].toString()) != null
               ? double.parse(map['electricity_head'].toString())
               : null,
+      electricity_consumption:
+          double.tryParse(map['electricity_consumption'].toString()) != null
+              ? double.parse(map['electricity_consumption'].toString())
+              : null,
+      electricity_last:
+          double.tryParse(map['electricity_last'].toString()) != null
+              ? double.parse(map['electricity_last'].toString())
+              : null,
       water_head: double.tryParse(map['water_head'].toString()) != null
           ? double.parse(map['water_head'].toString())
+          : null,
+      water_consumption:
+          double.tryParse(map['water_consumption'].toString()) != null
+              ? double.parse(map['water_consumption'].toString())
+              : null,
+      water_last: double.tryParse(map['water_last'].toString()) != null
+          ? double.parse(map['water_last'].toString())
           : null,
       year: int.tryParse(map['year'].toString()) != null
           ? int.parse(map['year'].toString())
