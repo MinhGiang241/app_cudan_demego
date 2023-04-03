@@ -9,11 +9,13 @@ class ChatMessageInitial extends ChatMessageState {
   ChatMessageInitial({
     this.user,
     this.authToken,
+    this.roomId,
     required this.visitorToken,
   });
 
   String? authToken;
   String visitorToken;
+  String? roomId;
   User? user;
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
@@ -45,17 +47,22 @@ class ChatMessageInitial extends ChatMessageState {
     webSocketService.sendMessageLiveChat(
       webSocketChannel!,
       id,
-      rid,
+      roomId ?? rid,
       visitorToken,
       message,
     );
   }
 
-  Future openNewRoomLiveChat(String roomId) async {
+  Future openNewRoomLiveChat(String token) async {
     return await webSocketService.openNewRoomLiveChat(
       webSocketChannel!,
-      roomId,
+      token,
+      null,
     );
+  }
+
+  setRoomId(String? rId) {
+    roomId = rId;
   }
 
   bool init = true;
@@ -67,7 +74,7 @@ class ChatMessageInitial extends ChatMessageState {
     webSocketService.streamLiveChatRoom(
       webSocketChannel!,
       visitorToken,
-      id,
+      roomId ?? id,
       param,
     );
   }

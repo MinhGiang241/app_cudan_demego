@@ -82,8 +82,11 @@ class _ChatScreenState extends State<ChatScreen> {
               return FutureBuilder(
                 future: () async {
                   var room = await state.openNewRoomLiveChat(roomId!);
-                  var his = await state.loadLiveChatHistory(roomId);
-                  print(room);
+                  state.setRoomId(room?['room']?['_id']);
+                  var his =
+                      await state.loadLiveChatHistory(room?['room']?['_id']);
+
+                  print(state.roomId);
                   print(his);
                 }(),
                 builder: (context, sn) {

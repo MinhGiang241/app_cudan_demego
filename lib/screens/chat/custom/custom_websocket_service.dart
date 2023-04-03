@@ -402,16 +402,15 @@ class CustomWebSocketService {
   //upload File on Room
   openNewRoomLiveChat(
     WebSocketChannel webSocketChannel,
-    String roomId,
+    String token,
+    String? rId,
   ) async {
     return await ApiService.shared.getApi(
       path: '${WebsocketConnect.serverUrl}/api/v1/livechat/room',
       params: {
-        "token": roomId,
+        "token": token,
       },
-    ).then((v) {
-      print(v);
-    }).catchError((e) {
+    ).catchError((e) {
       print(e);
     });
   }

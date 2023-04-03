@@ -58,6 +58,9 @@ class ElectricityPrv extends ChangeNotifier {
   }
 
   Future getIndicatorMonth(String? apartmentId) async {
+    indicatorLastMonth = null;
+    indicatorCurrentMonth = null;
+
     await APIElectricity.getMonthElectricIndicator(apartmentId, year, month)
         .then((v) {
       indicatorLastMonth =
@@ -82,6 +85,7 @@ class ElectricityPrv extends ChangeNotifier {
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
     await APIElectricity.getIndicatorByYear(apartmentId, year).then((v) {
       listIndicatorCurrentYear.clear();
+      listIndicatorLastYear.clear();
       for (var i in v['current']) {
         listIndicatorCurrentYear.add(Indicator.fromMap(i));
       }
