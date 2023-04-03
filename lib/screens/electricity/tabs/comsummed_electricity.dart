@@ -89,19 +89,21 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
             setState(() {});
             _refreshController.refreshCompleted();
           },
-          child: Column(
-            children: [
-              // vpad(30),
-              // Center(
-              //   child: Text(
-              //     S.of(context).consumed_elec_details,
-              //     style: txtBold(14, primaryColorBase),
-              //   ),
-              // ),
-              vpad(30),
-              Expanded(
-                child: SizedBox(
-                  height: 20,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // vpad(30),
+                // Center(
+                //   child: Text(
+                //     S.of(context).consumed_elec_details,
+                //     style: txtBold(14, primaryColorBase),
+                //   ),
+                // ),
+                vpad(30),
+                // Expanded(
+                //   child:
+                SizedBox(
+                  height: 800,
                   child: SfCartesianChart(
                     borderWidth: 0,
                     margin: EdgeInsets.symmetric(
@@ -119,6 +121,8 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                       title: LegendTitle(
                         text: S.of(context).legend,
                       ),
+                      toggleSeriesVisibility: false,
+                      shouldAlwaysShowScrollbar: true,
                     ),
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <ChartSeries<ChartDataViewModel, String>>[
@@ -152,9 +156,10 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                     ],
                   ),
                 ),
-              ),
-              vpad(20)
-            ],
+                // ),
+                vpad(20)
+              ],
+            ),
           ),
         );
       },

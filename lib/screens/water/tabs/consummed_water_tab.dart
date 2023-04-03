@@ -90,12 +90,14 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
             setState(() {});
             _refreshController.refreshCompleted();
           },
-          child: Column(
-            children: [
-              vpad(30),
-              Expanded(
-                child: SizedBox(
-                  height: 20,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                vpad(30),
+                // Expanded(
+                //   child:
+                SizedBox(
+                  height: 800,
                   child: SfCartesianChart(
                     borderWidth: 0,
                     margin: const EdgeInsets.symmetric(
@@ -113,6 +115,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                       title: LegendTitle(
                         text: S.of(context).legend,
                       ),
+                      toggleSeriesVisibility: false,
                     ),
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <ChartSeries<ChartDataViewModel, String>>[
@@ -145,9 +148,10 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     ],
                   ),
                 ),
-              ),
-              vpad(20),
-            ],
+                // ),
+                vpad(20),
+              ],
+            ),
           ),
         );
       },
