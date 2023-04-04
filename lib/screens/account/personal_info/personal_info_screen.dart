@@ -187,7 +187,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   PrimaryButton(
                                     buttonSize: ButtonSize.medium,
                                     text: userInfo.account?.email == null
-                                        ? S.current.add_email
+                                        ? S.current.add_new
                                         : S.of(context).update,
                                     onTap: () async {
                                       if (emailcontroller.text.trim().isEmpty) {

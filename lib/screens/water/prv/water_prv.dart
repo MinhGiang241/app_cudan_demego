@@ -9,8 +9,16 @@ import '../../../utils/utils.dart';
 import '../../auth/prv/resident_info_prv.dart';
 
 class WaterPrv extends ChangeNotifier {
-  var year = DateTime.now().year;
-  var month = DateTime.now().month;
+  int year = DateTime(
+    DateTime.now().year,
+    DateTime.now().month - 1,
+    DateTime.now().day,
+  ).year;
+  int month = DateTime(
+    DateTime.now().year,
+    DateTime.now().month - 1,
+    DateTime.now().day,
+  ).month;
   List<Indicator> listIndicatorCurrentYear = [];
   List<Indicator> listIndicatorLastYear = [];
   Indicator? indicatorLastMonth;

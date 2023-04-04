@@ -23,6 +23,16 @@ class ConsummedWaterTab extends StatefulWidget {
 
 class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
   late TooltipBehavior _tooltipBehavior;
+  final _selectionBehaviorLast = SelectionBehavior(
+    selectedColor: yellowColor7,
+    unselectedColor: yellowColor7.withOpacity(0.2),
+    enable: true,
+  );
+  final _selectionBehaviorCurrent = SelectionBehavior(
+    selectedColor: primaryColor7,
+    unselectedColor: primaryColor7.withOpacity(0.2),
+    enable: true,
+  );
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -99,6 +109,8 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                 SizedBox(
                   height: 800,
                   child: SfCartesianChart(
+                    selectionGesture: ActivationMode.singleTap,
+                    selectionType: SelectionType.point,
                     borderWidth: 0,
                     margin: const EdgeInsets.symmetric(
                       horizontal: 14,
@@ -120,6 +132,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
+                        selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
                         // spacing: 10,
                         color: yellowColor7,
@@ -133,6 +146,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                         dataLabelSettings: DataLabelSettings(isVisible: true),
                       ),
                       BarSeries<ChartDataViewModel, String>(
+                        selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,
                         borderRadius: BorderRadius.circular(12),
                         color: primaryColor7,

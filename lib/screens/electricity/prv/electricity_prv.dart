@@ -10,8 +10,16 @@ import '../../../services/api_electricity.dart';
 import '../../../utils/utils.dart';
 
 class ElectricityPrv extends ChangeNotifier {
-  int year = DateTime.now().year;
-  int month = DateTime.now().month;
+  int year = DateTime(
+    DateTime.now().year,
+    DateTime.now().month - 1,
+    DateTime.now().day,
+  ).year;
+  int month = DateTime(
+    DateTime.now().year,
+    DateTime.now().month - 1,
+    DateTime.now().day,
+  ).month;
   List<Indicator> listIndicatorCurrentYear = [];
   List<Indicator> listIndicatorLastYear = [];
   ElectricFee? electricFee;

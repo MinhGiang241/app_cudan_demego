@@ -22,6 +22,14 @@ class ConsummedElectricityTab extends StatefulWidget {
 
 class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
   late TooltipBehavior _tooltipBehavior;
+  final _selectionBehaviorLast = SelectionBehavior(
+      selectedColor: yellowColor7,
+      unselectedColor: yellowColor7.withOpacity(0.2),
+      enable: true);
+  final _selectionBehaviorCurrent = SelectionBehavior(
+      selectedColor: primaryColor7,
+      unselectedColor: primaryColor7.withOpacity(0.2),
+      enable: true);
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -105,6 +113,8 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                 SizedBox(
                   height: 800,
                   child: SfCartesianChart(
+                    // selectionGesture: ActivationMode.singleTap,
+
                     borderWidth: 0,
                     margin: EdgeInsets.symmetric(
                       horizontal: 14,
@@ -124,9 +134,13 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                       toggleSeriesVisibility: false,
                       shouldAlwaysShowScrollbar: true,
                     ),
+                    selectionType: SelectionType.point,
+                    crosshairBehavior: CrosshairBehavior(
+                        enable: true, lineColor: primaryColor7),
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
+                          selectionBehavior: _selectionBehaviorLast,
                           borderRadius: BorderRadius.circular(12),
                           // spacing: 10,
                           color: yellowColor7,
@@ -141,6 +155,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                           dataLabelSettings:
                               DataLabelSettings(isVisible: true)),
                       BarSeries<ChartDataViewModel, String>(
+                          selectionBehavior: _selectionBehaviorCurrent,
                           // spacing: 10,
                           borderRadius: BorderRadius.circular(12),
                           color: primaryColor7,

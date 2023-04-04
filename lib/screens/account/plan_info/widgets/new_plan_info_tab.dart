@@ -412,11 +412,13 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                     // Text(apartOwn.apartmentId ?? ''),
                                     // Text(widget.own.apartment!.id ?? ''),
                                     // Text(apartOwn.status ?? ''),
-                                    if (apartOwn.type == "RENT" ||
-                                        apartOwn.type == "BUY")
+                                    if ((apartOwn.type == "RENT" ||
+                                            apartOwn.type == "BUY") &&
+                                        apartOwn.status == "ACTIVE")
                                       vpad(5),
-                                    if (apartOwn.type == "RENT" ||
-                                        apartOwn.type == "BUY")
+                                    if ((apartOwn.type == "RENT" ||
+                                            apartOwn.type == "BUY") &&
+                                        apartOwn.status == "ACTIVE")
                                       Row(
                                         children: [
                                           Expanded(
