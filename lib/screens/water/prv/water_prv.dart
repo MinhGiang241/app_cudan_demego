@@ -107,5 +107,6 @@ class WaterPrv extends ChangeNotifier {
         listIndicatorLastYear.add(Indicator.fromMap(i));
       }
     });
+    notifyListeners();
   }
 }

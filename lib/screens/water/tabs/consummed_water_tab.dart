@@ -61,11 +61,11 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
 
         var dataLast = {};
         var dataCurent = {};
-        for (var i in context.read<WaterPrv>().listIndicatorLastYear) {
+        for (var i in context.watch<WaterPrv>().listIndicatorLastYear) {
           dataLast[i.month.toString()] = i.water_consumption;
         }
 
-        for (var i in context.read<WaterPrv>().listIndicatorCurrentYear) {
+        for (var i in context.watch<WaterPrv>().listIndicatorCurrentYear) {
           dataCurent[i.month.toString()] = i.water_consumption;
         }
 
@@ -129,9 +129,14 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                       ),
                       toggleSeriesVisibility: false,
                     ),
-                    tooltipBehavior: TooltipBehavior(enable: true),
+                    tooltipBehavior: TooltipBehavior(
+                      enable: true,
+                      duration: 1000,
+                      opacity: 0.7,
+                    ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
+                        initialSelectedDataIndexes: [-1],
                         selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
                         // spacing: 10,
@@ -143,9 +148,17 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                             sales.num,
                         name: (context.watch<WaterPrv>().year - 1).toString(),
                         // Enable data label
-                        dataLabelSettings: DataLabelSettings(isVisible: true),
+                        dataLabelSettings: DataLabelSettings(
+                          isVisible: true,
+                          showZeroValue: false,
+                          textStyle: txtBold(12, yellowColor7),
+                          showCumulativeValues: true,
+                        ),
                       ),
                       BarSeries<ChartDataViewModel, String>(
+                        initialSelectedDataIndexes: [
+                          context.read<WaterPrv>().month - 1
+                        ],
                         selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,
                         borderRadius: BorderRadius.circular(12),
@@ -157,7 +170,11 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                             sales.num,
                         name: context.watch<WaterPrv>().year.toString(),
                         // Enable data label
-                        dataLabelSettings: DataLabelSettings(isVisible: true),
+                        dataLabelSettings: DataLabelSettings(
+                          isVisible: true,
+                          showZeroValue: false,
+                          textStyle: txtBold(12, primaryColor7),
+                        ),
                       ),
                     ],
                   ),

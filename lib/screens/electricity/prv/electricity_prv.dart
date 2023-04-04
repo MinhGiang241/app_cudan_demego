@@ -101,5 +101,6 @@ class ElectricityPrv extends ChangeNotifier {
         listIndicatorLastYear.add(Indicator.fromMap(i));
       }
     });
+    notifyListeners();
   }
 }
