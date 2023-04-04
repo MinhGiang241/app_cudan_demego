@@ -24,10 +24,12 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
   late TooltipBehavior _tooltipBehavior;
   final _selectionBehaviorLast = SelectionBehavior(
       selectedColor: yellowColor7,
+      toggleSelection: false,
       unselectedColor: yellowColor7.withOpacity(0.2),
       enable: true);
   final _selectionBehaviorCurrent = SelectionBehavior(
       selectedColor: primaryColor7,
+      toggleSelection: false,
       unselectedColor: primaryColor7.withOpacity(0.2),
       enable: true);
   final RefreshController _refreshController =
@@ -127,7 +129,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                       ),
                       toggleSeriesVisibility: false,
                     ),
-                    selectionType: SelectionType.point,
+                    selectionType: SelectionType.cluster,
 
                     tooltipBehavior: TooltipBehavior(
                       enable: true,
@@ -136,7 +138,9 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
-                        initialSelectedDataIndexes: [-1],
+                        initialSelectedDataIndexes: [
+                          context.read<ElectricityPrv>().month - 1
+                        ],
                         selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
                         // spacing: 10,

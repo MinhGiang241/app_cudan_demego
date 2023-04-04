@@ -25,11 +25,13 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
   late TooltipBehavior _tooltipBehavior;
   final _selectionBehaviorLast = SelectionBehavior(
     selectedColor: yellowColor7,
+    toggleSelection: false,
     unselectedColor: yellowColor7.withOpacity(0.2),
     enable: true,
   );
   final _selectionBehaviorCurrent = SelectionBehavior(
     selectedColor: primaryColor7,
+    toggleSelection: false,
     unselectedColor: primaryColor7.withOpacity(0.2),
     enable: true,
   );
@@ -110,7 +112,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                   height: 800,
                   child: SfCartesianChart(
                     selectionGesture: ActivationMode.singleTap,
-                    selectionType: SelectionType.point,
+                    selectionType: SelectionType.cluster,
                     borderWidth: 0,
                     margin: const EdgeInsets.symmetric(
                       horizontal: 14,
@@ -136,7 +138,9 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
-                        initialSelectedDataIndexes: [-1],
+                        initialSelectedDataIndexes: [
+                          context.read<WaterPrv>().month - 1
+                        ],
                         selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
                         // spacing: 10,
