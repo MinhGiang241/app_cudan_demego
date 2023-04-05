@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
-  static String m0(f, t) => "Kỳ hóa đơn từ ${f} tới ${t}";
+  static String m0(f, t) => "Kỳ hóa đơn từ ${f} đến ${t}";
 
   static String m1(rCode) => "Bạn chắc chắn muốn hủy phản ánh ${rCode}";
 
@@ -512,7 +512,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "need_pay": MessageLookupByLibrary.simpleMessage("Cần thanh toán"),
         "need_support":
             MessageLookupByLibrary.simpleMessage("Cần bảo vệ hỗ trợ"),
-        "new_index": MessageLookupByLibrary.simpleMessage("Chỉ số mới"),
+        "new_index": MessageLookupByLibrary.simpleMessage("Chỉ số cuối kì"),
         "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "new_resident": MessageLookupByLibrary.simpleMessage("Cư dân mới"),
         "newl": MessageLookupByLibrary.simpleMessage("Mới"),
@@ -606,7 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "of_building_management":
             MessageLookupByLibrary.simpleMessage("của ban quản lý tòa nhà"),
         "off_day": MessageLookupByLibrary.simpleMessage("Số ngày nghỉ"),
-        "old_index": MessageLookupByLibrary.simpleMessage("Chỉ số cũ"),
+        "old_index": MessageLookupByLibrary.simpleMessage("Chỉ số đầu kì"),
         "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "other_bill": MessageLookupByLibrary.simpleMessage("Tiền khác"),
         "other_gender": MessageLookupByLibrary.simpleMessage("Giới tính khác"),

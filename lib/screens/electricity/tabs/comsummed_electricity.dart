@@ -138,6 +138,9 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
+                        dataLabelMapper: (datum, index) {
+                          return ('${datum.num?.toStringAsFixed(0)}');
+                        },
                         initialSelectedDataIndexes: [
                           context.read<ElectricityPrv>().month - 1
                         ],
@@ -160,6 +163,9 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                         ),
                       ),
                       BarSeries<ChartDataViewModel, String>(
+                        dataLabelMapper: (datum, index) {
+                          return ('${datum.num?.toStringAsFixed(0)}');
+                        },
                         initialSelectedDataIndexes: [
                           context.read<ElectricityPrv>().month - 1
                         ],

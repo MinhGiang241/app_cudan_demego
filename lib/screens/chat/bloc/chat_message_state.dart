@@ -75,7 +75,7 @@ class ChatMessageInitial extends ChatMessageState {
       webSocketChannel!,
       visitorToken,
       roomId ?? id,
-      param,
+      roomId ?? param,
     );
   }
 
@@ -95,8 +95,8 @@ class ChatMessageInitial extends ChatMessageState {
 
   Future closeLiveChatRoom() async {}
 
-  Future loadLiveChatHistory(roomId) async {
-    await webSocketService.loadLiveChatHistory(roomId).then((v) {
+  Future loadLiveChatHistory(roomId, token) async {
+    await webSocketService.loadLiveChatHistory(roomId, token).then((v) {
       print(v);
       if (v['messages'] != null) {
         messagesMap.clear();
@@ -122,14 +122,20 @@ class ChatMessageStart extends ChatMessageState {
   ChatMessageStart({
     this.user,
     this.authToken,
+    this.roomId,
     required this.visitorToken,
   });
   final String? authToken;
   final String visitorToken;
+  String? roomId;
   final User? user;
   bool showGreeting = true;
   void toogleGreeting() {
     showGreeting = !showGreeting;
+  }
+
+  setRoomId(String? rId) {
+    roomId = rId;
   }
 
   StreamController<String> messageController = StreamController();
@@ -208,14 +214,14 @@ class ChatMessageStart extends ChatMessageState {
       webSocketService.sendMessageLiveChat(
         webSocketChannel!,
         genUniqueId(),
-        rid,
+        roomId ?? rid,
         visitorToken,
         message,
       );
     }
   }
 
-  void sendMessage(String rid) {
+  void sendMessage(String token) {
     if (textEditionController.text.isNotEmpty) {
       // webSocketService.sendMessageOnChannel(textEditionController.text,
       //     webSocketChannel!, WebsocketConnect.channel);
@@ -223,8 +229,8 @@ class ChatMessageStart extends ChatMessageState {
       webSocketService.sendMessageLiveChat(
         webSocketChannel!,
         genUniqueId(),
-        rid,
-        rid,
+        roomId ?? token,
+        token,
         textEditionController.text.trim(),
       );
       textEditionController.clear();
@@ -240,7 +246,7 @@ class ChatMessageStart extends ChatMessageState {
     webSocketService.sendMessageLiveChat(
       webSocketChannel!,
       id,
-      rid,
+      roomId ?? token,
       visitorToken,
       message,
     );
@@ -250,8 +256,8 @@ class ChatMessageStart extends ChatMessageState {
     webSocketService.streamLiveChatRoom(
       webSocketChannel!,
       visitorToken,
-      id,
-      param,
+      roomId ?? id,
+      roomId ?? param,
     );
   }
 
@@ -267,10 +273,10 @@ class ChatMessageStart extends ChatMessageState {
     textEditionController.clear();
   }
 
-  sendUploadFileOnLiveChat(File file, token, roomId) {
+  sendUploadFileOnLiveChat(File file, token, rid) {
     webSocketService.sendUploadFileOnLiveChat(
       webSocketChannel!,
-      roomId,
+      roomId ?? rid,
       file,
       textEditionController.text.trim(),
       visitorToken,

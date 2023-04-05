@@ -15,6 +15,7 @@ import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
+import '../../../models/info_content_view.dart';
 import '../../../models/multi_select_view_model.dart';
 import '../../../services/api_reflection.dart';
 import '../../../utils/utils.dart';
@@ -241,7 +242,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             value: arg.areaId,
                             enable: false,
                           ),
-                          vpad(12),
+                          if (arg.files!.isNotEmpty) vpad(12),
                           if (arg.files!.isNotEmpty)
                             Text(
                               S.of(context).photos,
@@ -272,7 +273,17 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                                   ],
                                 ),
                               ),
-                            )
+                            ),
+                          vpad(12),
+                          PrimaryTextField(
+                            textColor: genStatusColor(arg.status ?? ''),
+                            label: S.of(context).status,
+                            enable: false,
+                            initialValue: arg.s!.name,
+                            textStyle:
+                                txtBold(14, genStatusColor(arg.status ?? "")),
+                          ),
+                          vpad(12),
                         ],
                       ),
                     ),

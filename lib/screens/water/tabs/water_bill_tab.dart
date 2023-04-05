@@ -77,7 +77,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
 
           return a + b.value * price;
         });
-        var vat = totalMoney * 0.1;
+        var vat = totalMoney * 0;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -164,7 +164,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      '${formatter.format(currentIndicator?.water_consumption ?? 0)} m3',
+                                      '${formatter.format(currentIndicator?.water_consumption ?? 0)} m³',
                                       style: txtBold(14, redColorBase),
                                     ),
                                   )
@@ -192,120 +192,143 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                 ],
                               ),
                               vpad(12),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: S.of(context).new_index,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: S.of(context).old_index,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text:
-                                        "${S.of(context).consumed_water} (m3)",
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: S.of(context).unit_price,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: '${S.of(context).to_money} (VNĐ)',
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator?.water_head ?? 0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator?.water_last ?? 0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator?.water_consumption ??
-                                              0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(text: ""),
-                                  genCell(text: ""),
-                                ],
-                              ),
-                              ...List.generate(
-                                list.length,
-                                (index) => Row(
+                              if (context
+                                      .watch<WaterPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
                                   children: [
-                                    genCell(text: '', flex: 2),
                                     genCell(
-                                      text: formatter
-                                          .format(list[index])
-                                          .toString(),
+                                      text: S.of(context).new_index,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
                                     ),
                                     genCell(
+                                      text: S.of(context).old_index,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text:
+                                          "${S.of(context).consumed_water} (m³)",
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text: S.of(context).unit_price,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text: '${S.of(context).to_money} (VNĐ)',
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                  ],
+                                ),
+                              if (context
+                                      .watch<WaterPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
                                       text: formatter
-                                          .format(waterFee![index].price)
+                                          .format(
+                                            currentIndicator?.water_head ?? 0,
+                                          )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            list[index] * waterFee[index].price,
+                                            currentIndicator?.water_last ?? 0,
                                           )
+                                          .toString(),
+                                    ),
+                                    genCell(
+                                      text: formatter
+                                          .format(
+                                            currentIndicator
+                                                    ?.water_consumption ??
+                                                0,
+                                          )
+                                          .toString(),
+                                    ),
+                                    genCell(text: ""),
+                                    genCell(text: ""),
+                                  ],
+                                ),
+                              if (context
+                                      .watch<WaterPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                ...List.generate(
+                                  list.length,
+                                  (index) => Row(
+                                    children: [
+                                      genCell(text: '', flex: 2),
+                                      genCell(
+                                        text: formatter
+                                            .format(list[index])
+                                            .toString(),
+                                      ),
+                                      genCell(
+                                        text: formatter
+                                            .format(waterFee![index].price)
+                                            .toString(),
+                                      ),
+                                      genCell(
+                                        text: formatter
+                                            .format(
+                                              list[index] *
+                                                  waterFee[index].price,
+                                            )
+                                            .toString(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              if (context
+                                      .watch<WaterPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text: "${S.of(context).vat}:",
+                                      flex: 3,
+                                      align: Alignment.centerRight,
+                                    ),
+                                    genCell(text: "0%"),
+                                    genCell(
+                                      text: formatter.format(vat).toString(),
+                                    ),
+                                  ],
+                                ),
+                              if (context
+                                      .watch<WaterPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text:
+                                          "${S.of(context).total_money_to_pay}:",
+                                      flex: 4,
+                                    ),
+                                    genCell(
+                                      text: formatter
+                                          .format(totalMoneyVat)
                                           .toString(),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: "${S.of(context).vat}:",
-                                    flex: 3,
-                                  ),
-                                  genCell(text: "10%"),
-                                  genCell(
-                                    text: formatter.format(vat).toString(),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text:
-                                        "${S.of(context).total_money_to_pay}:",
-                                    flex: 4,
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(totalMoneyVat)
-                                        .toString(),
-                                  ),
-                                ],
-                              ),
                               vpad(20),
                             ],
                           ),
@@ -328,6 +351,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
     TextStyle? style,
     BoxBorder? border,
     double? height,
+    AlignmentGeometry? align,
   }) {
     return Expanded(
       flex: flex ?? 1,
@@ -344,11 +368,16 @@ class _WaterBillTabState extends State<WaterBillTab> {
               ),
         ),
         child: Align(
-          alignment: Alignment.center,
+          alignment: align ?? Alignment.center,
           child: AutoSizeText(
             text,
             maxLines: 4,
-            style: style ?? txtRegular(12, grayScaleColorBase),
+            style: style ??
+                txtRegular(
+                  12,
+                  grayScaleColorBase,
+                ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

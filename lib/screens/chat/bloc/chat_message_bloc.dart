@@ -32,6 +32,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
           user: user,
           authToken: authToken,
           visitorToken: visitorToken,
+          roomId: event.roomId,
         ),
       );
     });

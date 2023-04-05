@@ -121,7 +121,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     // primaryYAxis:
                     //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
                     title: ChartTitle(
-                      text: '${S.of(context).consumed_water_detail1} (m3)',
+                      text: '${S.of(context).consumed_water_detail1} (m³)',
                       textStyle: txtBold(14, primaryColorBase),
                     ),
                     legend: Legend(
@@ -138,6 +138,9 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
                       BarSeries<ChartDataViewModel, String>(
+                        dataLabelMapper: (datum, index) {
+                          return ('${datum.num?.toStringAsFixed(0)}');
+                        },
                         initialSelectedDataIndexes: [
                           context.read<WaterPrv>().month - 1
                         ],
@@ -163,6 +166,9 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                         initialSelectedDataIndexes: [
                           context.read<WaterPrv>().month - 1
                         ],
+                        dataLabelMapper: (datum, index) {
+                          return ('${datum.num?.toStringAsFixed(0)}');
+                        },
                         selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,
                         borderRadius: BorderRadius.circular(12),

@@ -391,11 +391,11 @@ class CustomWebSocketService {
     );
   }
 
-  loadLiveChatHistory(String roomId) async {
+  loadLiveChatHistory(String roomId, String token) async {
     return await ApiService.shared.getApi(
       path:
           '${WebsocketConnect.serverUrl}/api/v1/livechat/messages.history/$roomId',
-      params: {"token": roomId},
+      params: {"token": token},
     );
   }
 

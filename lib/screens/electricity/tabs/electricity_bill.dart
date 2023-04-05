@@ -77,7 +77,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
           var price = elecFee![b.key].price ?? 0;
           return a + b.value * price;
         });
-        var vat = totalMoney * 0.1;
+        var vat = totalMoney * 0;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -189,121 +189,150 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                       ))
                                 ],
                               ),
-                              vpad(12),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: S.of(context).new_index,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: S.of(context).old_index,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: "${S.of(context).consume_elec} (kWh)",
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: S.of(context).unit_price,
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                  genCell(
-                                    text: '${S.of(context).to_money} (VNĐ)',
-                                    flex: 1,
-                                    style: txtRegular(12, primaryColorBase),
-                                    height: 80,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator?.electricity_head ??
-                                              0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator?.electricity_last ??
-                                              0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(
-                                    text: formatter
-                                        .format(
-                                          currentIndicator
-                                                  ?.electricity_consumption ??
-                                              0,
-                                        )
-                                        .toString(),
-                                  ),
-                                  genCell(text: ""),
-                                  genCell(text: ""),
-                                ],
-                              ),
-                              ...List.generate(
-                                list.length,
-                                (index) => Row(
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                vpad(12),
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
                                   children: [
-                                    genCell(text: '', flex: 2),
                                     genCell(
-                                      text: formatter
-                                          .format(list[index])
-                                          .toString(),
+                                      text: S.of(context).new_index,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
                                     ),
                                     genCell(
+                                      text: S.of(context).old_index,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text:
+                                          "${S.of(context).consume_elec} (kWh)",
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text: S.of(context).unit_price,
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                    genCell(
+                                      text: '${S.of(context).to_money} (VNĐ)',
+                                      flex: 1,
+                                      style: txtRegular(12, primaryColorBase),
+                                      height: 80,
+                                    ),
+                                  ],
+                                ),
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
                                       text: formatter
-                                          .format(elecFee![index].price)
+                                          .format(
+                                            currentIndicator
+                                                    ?.electricity_head ??
+                                                0,
+                                          )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            list[index] * elecFee[index].price,
+                                            currentIndicator
+                                                    ?.electricity_last ??
+                                                0,
                                           )
                                           .toString(),
                                     ),
+                                    genCell(
+                                      text: formatter
+                                          .format(
+                                            currentIndicator
+                                                    ?.electricity_consumption ??
+                                                0,
+                                          )
+                                          .toString(),
+                                    ),
+                                    genCell(text: ""),
+                                    genCell(text: ""),
                                   ],
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text: "${S.of(context).vat}:",
-                                    flex: 3,
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                ...List.generate(
+                                  list.length,
+                                  (index) => Row(
+                                    children: [
+                                      genCell(text: '', flex: 2),
+                                      genCell(
+                                        text: formatter
+                                            .format(list[index])
+                                            .toString(),
+                                      ),
+                                      genCell(
+                                        text: formatter
+                                            .format(elecFee![index].price)
+                                            .toString(),
+                                      ),
+                                      genCell(
+                                        text: formatter
+                                            .format(
+                                              list[index] *
+                                                  elecFee[index].price,
+                                            )
+                                            .toString(),
+                                      ),
+                                    ],
                                   ),
-                                  genCell(text: "10%"),
-                                  genCell(
-                                      text: formatter.format(vat).toString()),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  genCell(
-                                    text:
-                                        "${S.of(context).total_money_to_pay}:",
-                                    flex: 4,
-                                  ),
-                                  genCell(
-                                      text: formatter
-                                          .format(totalMoneyVat)
-                                          .toString()),
-                                ],
-                              ),
+                                ),
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text: "${S.of(context).vat}:  ",
+                                      flex: 3,
+                                      align: Alignment.centerRight,
+                                    ),
+                                    genCell(text: "0%"),
+                                    genCell(
+                                        text: formatter.format(vat).toString()),
+                                  ],
+                                ),
+                              if (context
+                                      .watch<ElectricityPrv>()
+                                      .indicatorCurrentMonth !=
+                                  null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text:
+                                          "${S.of(context).total_money_to_pay}:",
+                                      flex: 4,
+                                    ),
+                                    genCell(
+                                        text: formatter
+                                            .format(totalMoneyVat)
+                                            .toString()),
+                                  ],
+                                ),
                               vpad(20),
                             ],
                           ),
@@ -326,6 +355,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
     TextStyle? style,
     BoxBorder? border,
     double? height,
+    AlignmentGeometry? align,
   }) {
     return Expanded(
       flex: flex ?? 1,
@@ -342,11 +372,12 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
               ),
         ),
         child: Align(
-          alignment: Alignment.center,
+          alignment: align ?? Alignment.center,
           child: AutoSizeText(
             text,
             maxLines: 4,
             style: style ?? txtRegular(12, grayScaleColorBase),
+            textAlign: TextAlign.center,
           ),
           // Text(
           //   text,
