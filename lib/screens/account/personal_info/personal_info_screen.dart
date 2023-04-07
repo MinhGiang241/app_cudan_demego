@@ -4,6 +4,7 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_auth.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +89,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                 ),
                                 PrimaryButton(
                                   buttonSize: ButtonSize.medium,
-                                  text: S.of(context).add,
+                                  text: S.of(context).add_new,
                                   onTap: () async {
                                     if (emailcontroller.text.trim().isEmpty) {
                                       Utils.showErrorMessage(
@@ -123,6 +124,11 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                             child: OtpAddEmailScreen(
                                               acc: userInfo.account!,
                                               email: emailcontroller,
+                                              isAddNew:
+                                                  userInfo.account?.email ==
+                                                          null
+                                                      ? true
+                                                      : false,
                                             ),
                                           ),
                                         );
@@ -145,13 +151,15 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ))
-              : Wrap(children: [
-                  Text(
-                    userInfo.account?.email ?? "",
-                    style: const TextStyle(
-                        fontFamily: family,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
+              : Row(children: [
+                  Expanded(
+                    child: Text(
+                      userInfo.account?.email ?? "",
+                      style: const TextStyle(
+                          fontFamily: family,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                   hpad(5),
                   InkWell(
@@ -187,7 +195,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   PrimaryButton(
                                     buttonSize: ButtonSize.medium,
                                     text: userInfo.account?.email == null
-                                        ? S.current.add_new
+                                        ? S.of(context).add_new
                                         : S.of(context).update,
                                     onTap: () async {
                                       if (emailcontroller.text.trim().isEmpty) {
@@ -214,22 +222,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         );
                                       } else {
                                         Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .hideCurrentSnackBar();
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            duration:
-                                                const Duration(seconds: 1),
-                                            backgroundColor: primaryColorBase,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            content: Text(
-                                                S.of(context).send_email_wait),
-                                          ),
-                                        );
+                                        Utils.showSnackBar(context,
+                                            S.of(context).send_email_wait);
                                         await APIAuth.sendOtpAddMoreEmail(
                                                 emailcontroller.text.trim(),
                                                 false,
@@ -251,6 +245,11 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                               child: OtpAddEmailScreen(
                                                 acc: userInfo.account!,
                                                 email: emailcontroller,
+                                                isAddNew:
+                                                    userInfo.account?.email ==
+                                                            null
+                                                        ? true
+                                                        : false,
                                               ),
                                             ),
                                           );
@@ -265,16 +264,21 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             ]),
                           ));
                     },
-                    child: Text(
-                      userInfo.account?.email == null
-                          ? S.current.add
-                          : S.current.edit,
-                      style: const TextStyle(
-                          fontFamily: family,
-                          color: primaryColorBase,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: userInfo.account?.email == null
+                        ? Text(
+                            userInfo.account?.email == null
+                                ? S.current.add
+                                : S.current.edit,
+                            style: const TextStyle(
+                                fontFamily: family,
+                                color: primaryColorBase,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          )
+                        : const Icon(
+                            Icons.edit,
+                            color: primaryColorBase,
+                          ),
                   )
                 ]),
           content: userInfo.account?.email ?? "",

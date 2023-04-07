@@ -61,7 +61,7 @@ class OtpAddEmailPrv extends ChangeNotifier {
     });
   }
 
-  verify(BuildContext context) async {
+  verify(BuildContext context, bool isAddNew) async {
     var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
 
     await APIAuth.verifyOtpAddMoreEmail(
@@ -72,7 +72,9 @@ class OtpAddEmailPrv extends ChangeNotifier {
       context.read<ResidentInfoPrv>().setEmail(email);
       Utils.showSuccessMessage(
         context: context,
-        e: S.of(context).success_add_email,
+        e: isAddNew
+            ? S.of(context).success_add_email
+            : S.of(context).success_update_email,
         onClose: () {
           int count = 0;
           Navigator.of(context).popUntil((_) => ++count >= 2);

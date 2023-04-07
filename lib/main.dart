@@ -77,6 +77,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ChangeNotifierProxyProvider(create: create, update: update)
         ChangeNotifierProvider(
           create: (context) => AuthPrv()..start(context),
         ),
@@ -87,6 +88,14 @@ class MyApp extends StatelessWidget {
         return BlocProvider(
           create: (context) => ChatMessageBloc(),
           child: MaterialApp(
+            builder: (context, child) {
+              final mediaQueryData = MediaQuery.of(context);
+              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+                child: child!,
+              );
+            },
             debugShowCheckedModeBanner: false,
             title: 'DEMEGO',
             theme: AppTheme.lightTheme(),

@@ -183,7 +183,6 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                   .verify(context, widget.isForgotPass, () {});
                               // Utils.pushScreen(
                               //     context, ResetPassScreen(phone: '', token: ''));
-
                             } else {
                               context.read<VerifyOTPPrv>().verify(
                                   context, widget.isForgotPass, widget.verify!);

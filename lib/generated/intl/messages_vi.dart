@@ -946,6 +946,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi phản ánh thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
+        "success_update_email":
+            MessageLookupByLibrary.simpleMessage("Cập nhật email thành công"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
         "system_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo hệ thống"),

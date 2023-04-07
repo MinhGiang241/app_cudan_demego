@@ -97,7 +97,6 @@ class ChatMessageInitial extends ChatMessageState {
 
   Future loadLiveChatHistory(roomId, token) async {
     await webSocketService.loadLiveChatHistory(roomId, token).then((v) {
-      print(v);
       if (v['messages'] != null) {
         messagesMap.clear();
         for (var i in v['messages'].reversed) {
@@ -215,7 +214,7 @@ class ChatMessageStart extends ChatMessageState {
         webSocketChannel!,
         genUniqueId(),
         roomId ?? rid,
-        visitorToken,
+        token,
         message,
       );
     }

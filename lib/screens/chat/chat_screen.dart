@@ -11,6 +11,7 @@ import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
 
@@ -35,6 +36,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   @override
   void initState() {
     super.initState();
@@ -97,13 +100,20 @@ class _ChatScreenState extends State<ChatScreen> {
 
                   state.streamLiveChatRoom(token!, token, roomId!);
                   return SafeArea(
-                    child: Column(
+                    child:
+                        // Column(
+                        //   children: [
+                        //     Expanded(child: Text("sasaslsllas")),
+                        //   ],
+                        // )
+                        Column(
                       children: [
                         Expanded(
                           child: StreamBuilder(
                             stream: state.webSocketChannel!.stream,
                             builder: (context, snapshot) {
                               log(snapshot.toString());
+
                               switch (snapshot.connectionState) {
                                 case ConnectionState.none:
                                   return const Center(
@@ -122,6 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     snapshot,
                                     state,
                                     bloc,
+                                    token,
                                   );
                                 default:
                                   return const Center(
@@ -215,7 +226,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _initStateRender(snapshot, ChatMessageInitial state, bloc) {
+  Widget _initStateRender(snapshot, ChatMessageInitial state, bloc, token) {
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
       state.webSocketService.sendPong(state.webSocketChannel!);
@@ -250,15 +261,14 @@ class _ChatScreenState extends State<ChatScreen> {
     //   );
     // });
 
-    return Column(
-      children: [
-        Expanded(
-          child: Messages(
-            messageMap: state.messagesMap,
-            messageBloc: state,
-          ),
-        ),
-      ],
+    return Messages(
+      refreshController: _refreshController,
+      messageMap: state.messagesMap,
+      messageBloc: state,
+      onRefresh: () {
+        state.loadLiveChatHistory(state.roomId, token);
+        _refreshController.refreshCompleted();
+      },
     );
   }
 
@@ -294,6 +304,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           Expanded(
             child: Messages(
+              refreshController: _refreshController,
               messageMap: state.messagesMap,
               messageBloc: state,
             ),

@@ -948,6 +948,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send reflection successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
+        "success_update_email":
+            MessageLookupByLibrary.simpleMessage("Update email successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Plan"),
         "system_notification":
             MessageLookupByLibrary.simpleMessage("System_notification"),

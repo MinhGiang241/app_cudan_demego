@@ -40,8 +40,10 @@ class _HeaderHomeState extends State<HeaderHome> {
     return Column(
       children: [
         Row(
-          textBaseline: TextBaseline.ideographic,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
+          // textBaseline: TextBaseline.ideographic,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.baseline,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             hpad(21),
             const Icon(

@@ -4,18 +4,23 @@ import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../models/rocket_chat_data.dart';
 import 'message.dart';
 
 class Messages extends StatefulWidget {
-  Messages({
+  const Messages({
     super.key,
     required this.messageBloc,
     required this.messageMap,
+    required this.refreshController,
+    this.onRefresh,
   });
+  final RefreshController refreshController;
   final dynamic messageBloc;
   final Map<String, MessageChat> messageMap;
+  final void Function()? onRefresh;
   @override
   State<Messages> createState() => _MessagesState();
 }
@@ -28,6 +33,7 @@ class _MessagesState extends State<Messages> {
     super.dispose();
   }
 
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance
@@ -50,6 +56,11 @@ class _MessagesState extends State<Messages> {
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),
+          // child: SmartRefresher(
+          //   enablePullDown: true,
+          //   enablePullUp: false,
+          //   controller: widget.refreshController,
+          //   onRefresh: widget.onRefresh,
           child: ListView(
             controller: widget.messageBloc.scrollController,
             children: [
@@ -69,6 +80,7 @@ class _MessagesState extends State<Messages> {
               )
             ],
           ),
+          // ),
         ),
       ),
     );

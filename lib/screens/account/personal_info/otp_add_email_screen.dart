@@ -14,9 +14,15 @@ import '../../../widgets/primary_screen.dart';
 import 'provider/otp_add_email_prv.dart';
 
 class OtpAddEmailScreen extends StatefulWidget {
-  const OtpAddEmailScreen({super.key, required this.acc, required this.email});
+  const OtpAddEmailScreen({
+    super.key,
+    required this.acc,
+    required this.email,
+    required this.isAddNew,
+  });
   final Account acc;
   final TextEditingController email;
+  final bool isAddNew;
 
   @override
   State<OtpAddEmailScreen> createState() => _OtpAddEmailScreenState();
@@ -158,7 +164,10 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                   isLoading: context.watch<OtpAddEmailPrv>().isLoading,
                   text: S.of(context).next,
                   onTap: () {
-                    context.read<OtpAddEmailPrv>().verify(context).then((v) {
+                    context
+                        .read<OtpAddEmailPrv>()
+                        .verify(context, widget.isAddNew)
+                        .then((v) {
                       widget.email.clear();
                     });
                   },

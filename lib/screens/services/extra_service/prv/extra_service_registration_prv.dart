@@ -277,17 +277,18 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
 
   onTapExpiredDate(BuildContext context) {
     if (month == null || regDateController.text.isEmpty) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 1),
-          backgroundColor: primaryColorBase,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          content: Text(S.of(context).need_choose_cylce_regdate),
-        ),
-      );
+      Utils.showSnackBar(context, S.of(context).need_choose_cylce_regdate);
+      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     duration: const Duration(seconds: 1),
+      //     backgroundColor: primaryColorBase,
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(12),
+      //     ),
+      //     content: Text(S.of(context).need_choose_cylce_regdate),
+      //   ),
+      // );
     }
   }
 

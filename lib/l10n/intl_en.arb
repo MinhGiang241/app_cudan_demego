@@ -638,6 +638,7 @@
   "add_email": "Add email",
   "email_not_empty": "Email can not be empty",
   "success_add_email": "Add email successfully",
+  "success_update_email": "Update email successfully",
   "possessed_apartment": "Possessed apartments",
   "registed_resident": "Registed resident",
   "confirmed_by_manager_resident": "resident confirmed by manager department",

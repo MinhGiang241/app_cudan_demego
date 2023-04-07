@@ -6440,6 +6440,16 @@ class S {
     );
   }
 
+  /// `Update email successfully`
+  String get success_update_email {
+    return Intl.message(
+      'Update email successfully',
+      name: 'success_update_email',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Possessed apartments`
   String get possessed_apartment {
     return Intl.message(

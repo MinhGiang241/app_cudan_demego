@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:convert';
+
 class Receipt {
   Receipt({
     this.apartmentId,
@@ -33,6 +35,9 @@ class Receipt {
     this.refId,
     this.refSchema,
     this.transactions = const [],
+    this.fee_config,
+    this.month_indicator,
+    this.year_indicator,
   });
   String? id;
   String? createdTime;
@@ -66,6 +71,9 @@ class Receipt {
   late bool isSelected;
   String? refSchema;
   String? refId;
+  int? month_indicator;
+  int? year_indicator;
+  FeeDetail? fee_config;
 
   Receipt.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -104,6 +112,15 @@ class Receipt {
     amount_due = json['amount_due'] != null
         ? double.parse(json['amount_due'].toString())
         : 0;
+    month_indicator = json['month_indicator'] != null
+        ? int.parse(json['month_indicator'].toString())
+        : 0;
+    year_indicator = json['year_indicator'] != null
+        ? int.parse(json['year_indicator'].toString())
+        : 0;
+    fee_config = json['transactions'] != null
+        ? FeeDetail.fromMap(json['transactions'])
+        : null;
     transactions = json['transactions'] != null
         ? json['transactions'].isNotEmpty
             ? json['transactions']
@@ -145,6 +162,9 @@ class Receipt {
     data['amount_due'] = amount_due;
     data['refSchema'] = refSchema;
     data['refId'] = refId;
+    data['fee_config'] = fee_config?.toMap();
+    data['month_indicator'] = month_indicator;
+    data['year_indicator'] = year_indicator;
     return data;
   }
 }
@@ -211,4 +231,52 @@ class TransactionHistory {
     data['isMobile'] = isMobile;
     return data;
   }
+}
+
+class FeeDetail {
+  String? createdTime;
+  String? updatedTime;
+  double? from;
+  double? to;
+  double? price;
+  FeeDetail({
+    this.createdTime,
+    this.updatedTime,
+    this.from,
+    this.to,
+    this.price,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'from': from,
+      'to': to,
+      'price': price,
+    };
+  }
+
+  factory FeeDetail.fromMap(Map<String, dynamic> map) {
+    return FeeDetail(
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      from: double.tryParse(map['from'].toString()) != null
+          ? double.parse(map['from'].toString())
+          : null,
+      to: double.tryParse(map['to'].toString()) != null
+          ? double.parse(map['to'].toString())
+          : null,
+      price: double.tryParse(map['price'].toString()) != null
+          ? double.parse(map['price'].toString())
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FeeDetail.fromJson(String source) =>
+      FeeDetail.fromMap(json.decode(source) as Map<String, dynamic>);
 }

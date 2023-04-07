@@ -86,6 +86,7 @@ dependencies:
   uuid: ^3.0.7
   syncfusion_flutter_charts: ^21.1.35
   auto_size_text: ^3.0.0
+  top_snackbar_flutter: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:

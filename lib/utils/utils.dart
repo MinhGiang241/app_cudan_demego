@@ -10,6 +10,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../constants/api_constant.dart';
 import '../constants/constants.dart';
@@ -606,56 +607,57 @@ class Utils {
       String content = '',
       Function()? onConfirm}) {
     Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.custom(
-          // customIcons: const PrimaryIcon(
-          //   icons: PrimaryIcons.alert,
-          //   color: Colors.white,
-          //   style: PrimaryIconStyle.gradient,
-          //   gradients: PrimaryIconGradient.yellow,
-          //   size: 32,
-          //   padding: EdgeInsets.all(12),
-          // ),
-          title: title,
-          content: Column(
-            children: [
-              Text(
-                content,
-                style: txtBodySmallRegular(),
-                textAlign: TextAlign.center,
-              ),
-              vpad(24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  PrimaryButton(
-                    width: 120,
-                    text: S.of(context).cancel,
-                    buttonSize: ButtonSize.small,
-                    buttonType: ButtonType.red,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  PrimaryButton(
-                    width: 120,
-                    text: S.of(context).confirm,
-                    buttonSize: ButtonSize.small,
-                    buttonType: ButtonType.primary,
-                    onTap: () {
-                      if (onConfirm == null) {
-                        Navigator.of(context).pop();
-                      } else {
-                        onConfirm();
-                      }
-                    },
-                  )
-                ],
-              ),
-              vpad(12),
-            ],
-          ),
-        ));
+      context: context,
+      dialog: PrimaryDialog.custom(
+        // customIcons: const PrimaryIcon(
+        //   icons: PrimaryIcons.alert,
+        //   color: Colors.white,
+        //   style: PrimaryIconStyle.gradient,
+        //   gradients: PrimaryIconGradient.yellow,
+        //   size: 32,
+        //   padding: EdgeInsets.all(12),
+        // ),
+        title: title,
+        content: Column(
+          children: [
+            Text(
+              content,
+              style: txtBodySmallRegular(),
+              textAlign: TextAlign.center,
+            ),
+            vpad(24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                PrimaryButton(
+                  width: 120,
+                  text: S.of(context).cancel,
+                  buttonSize: ButtonSize.small,
+                  buttonType: ButtonType.red,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                PrimaryButton(
+                  width: 120,
+                  text: S.of(context).confirm,
+                  buttonSize: ButtonSize.small,
+                  buttonType: ButtonType.primary,
+                  onTap: () {
+                    if (onConfirm == null) {
+                      Navigator.of(context).pop();
+                    } else {
+                      onConfirm();
+                    }
+                  },
+                )
+              ],
+            ),
+            vpad(12),
+          ],
+        ),
+      ),
+    );
   }
 
   static String? emptyValidator(v) {
@@ -672,6 +674,45 @@ class Utils {
     return null;
   }
 
+  static showSnackBar(BuildContext context, String title) {
+    showTopSnackBar(
+      Overlay.of(context),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: DefaultTextStyle(
+          style: txtRegular(14, Colors.white),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+      animationDuration: const Duration(milliseconds: 1000),
+      displayDuration: const Duration(milliseconds: 1500),
+    );
+
+    // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     behavior: SnackBarBehavior.floating,
+    //     margin: EdgeInsets.only(
+    //         bottom: MediaQuery.of(context).size.height - 100,
+    //         right: 20,
+    //         left: 20),
+    //     duration: const Duration(seconds: 1),
+    //     backgroundColor: primaryColorBase,
+    //     shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.circular(12),
+    //     ),
+    //     content: Text(title),
+    //   ),
+    // );
+  }
+
   static downloadFile({
     String? url,
     Map<String, String>? headers,
@@ -679,17 +720,7 @@ class Utils {
   }) async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
-      ScaffoldMessenger.of(context!).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 1),
-          backgroundColor: primaryColorBase,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          content: Text(S.current.file_downloading),
-        ),
-      );
+      showSnackBar(context!, S.current.file_downloading);
       final baseStorage = await getExternalStorageDirectory();
 
       var taskId = await FlutterDownloader.enqueue(

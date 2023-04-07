@@ -9,20 +9,21 @@ enum ButtonType { primary, secondary, white, black, yellow, red, green, cyan }
 enum ButtonSize { large, medium, small, xsmall }
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton(
-      {super.key,
-      this.text,
-      this.onTap,
-      this.margin,
-      this.secondaryBackgroundColor,
-      this.textColor,
-      this.buttonType,
-      this.buttonSize,
-      this.width,
-      this.icon,
-      this.isRectangle = false,
-      this.isFit = false,
-      this.isLoading = false});
+  const PrimaryButton({
+    super.key,
+    this.text,
+    this.onTap,
+    this.margin,
+    this.secondaryBackgroundColor,
+    this.textColor,
+    this.buttonType,
+    this.buttonSize,
+    this.width,
+    this.icon,
+    this.isRectangle = false,
+    this.isFit = false,
+    this.isLoading = false,
+  });
 
   final String? text;
   final Function()? onTap;
@@ -43,9 +44,10 @@ class PrimaryButton extends StatelessWidget {
       width: width,
       margin: margin,
       decoration: BoxDecoration(
-          color: _backgroundColor(buttonType ?? ButtonType.primary),
-          gradient: _gradientColor(buttonType ?? ButtonType.primary),
-          borderRadius: isRectangle ? null : BorderRadius.circular(28)),
+        color: _backgroundColor(buttonType ?? ButtonType.primary),
+        gradient: _gradientColor(buttonType ?? ButtonType.primary),
+        borderRadius: isRectangle ? null : BorderRadius.circular(28),
+      ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -71,12 +73,16 @@ class PrimaryButton extends StatelessWidget {
                                     child: CircularProgressIndicator(
                                       color: textColor ?? Colors.white,
                                       strokeWidth: 3,
-                                    ))
-                                : Text(text ?? "",
+                                    ),
+                                  )
+                                : Text(
+                                    text ?? "",
                                     softWrap: true,
                                     style: _txtStyle(
-                                        buttonSize ?? ButtonSize.large),
-                                    textAlign: TextAlign.center),
+                                      buttonSize ?? ButtonSize.large,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                           )
                         : isLoading
                             ? SizedBox(
@@ -85,7 +91,8 @@ class PrimaryButton extends StatelessWidget {
                                 child: CircularProgressIndicator(
                                   color: textColor ?? Colors.white,
                                   strokeWidth: 3,
-                                ))
+                                ),
+                              )
                             : Text(
                                 text ?? "",
                                 style:
