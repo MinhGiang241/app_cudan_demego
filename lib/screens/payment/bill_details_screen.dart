@@ -21,7 +21,6 @@ class BillDetailsScreen extends StatelessWidget {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     Receipt bill = arg['re'];
-
     String? payDate;
     double paid = 0;
     if (bill.transactions.isNotEmpty) {
@@ -137,7 +136,8 @@ class BillDetailsScreen extends StatelessWidget {
                         arguments: {
                           "list": [bill],
                           "year": arg['year'],
-                          "month": arg['month']
+                          "month": arg['month'],
+                          "navigate": arg['navigate']
                         },
                       );
                     },

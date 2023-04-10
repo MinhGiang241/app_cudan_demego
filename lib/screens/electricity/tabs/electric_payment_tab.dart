@@ -103,6 +103,7 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
                     ),
                     vpad(8),
                     PaymentItem(
+                      navigate: context.read<ElectricityPrv>().navigate,
                       canSelect: false,
                       widget: e.payment_status == "UNPAID"
                           ? Align(
@@ -137,7 +138,8 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
                           arguments: {
                             "re": e,
                             "year": date.year,
-                            "month": date.month
+                            "month": date.month,
+                            "navigate": context.read<ElectricityPrv>().navigate,
                           },
                         );
                       },

@@ -1,6 +1,4 @@
-import 'package:app_cudan/models/extra_service.dart';
 import 'package:app_cudan/models/receipt.dart';
-import 'package:app_cudan/screens/electricity/prv/electricity_prv.dart';
 import 'package:app_cudan/screens/payment/bill_details_screen.dart';
 import 'package:app_cudan/widgets/primary_empty_widget.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
@@ -15,7 +13,6 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../widgets/primary_error_widget.dart';
-import '../../home/home_screen.dart';
 import '../../payment/widget/payment_item.dart';
 import '../prv/water_prv.dart';
 
@@ -138,7 +135,8 @@ class _WaterPaymentTabState extends State<WaterPaymentTab> {
                           arguments: {
                             "re": e,
                             "year": date.year,
-                            "month": date.month
+                            "month": date.month,
+                            "navigate": context.read<WaterPrv>().navigate,
                           },
                         );
                       },

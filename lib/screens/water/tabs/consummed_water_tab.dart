@@ -142,7 +142,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                           return ('${datum.num?.toStringAsFixed(0)}');
                         },
                         initialSelectedDataIndexes: [
-                          context.read<WaterPrv>().month - 1
+                          context.read<WaterPrv>().month! - 1
                         ],
                         selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
@@ -153,7 +153,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                             sales.title,
                         yValueMapper: (ChartDataViewModel sales, _) =>
                             sales.num,
-                        name: (context.watch<WaterPrv>().year - 1).toString(),
+                        name: (context.watch<WaterPrv>().year! - 1).toString(),
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(
                           isVisible: true,
@@ -164,7 +164,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                       ),
                       BarSeries<ChartDataViewModel, String>(
                         initialSelectedDataIndexes: [
-                          context.read<WaterPrv>().month - 1
+                          context.read<WaterPrv>().month! - 1
                         ],
                         dataLabelMapper: (datum, index) {
                           return ('${datum.num?.toStringAsFixed(0)}');

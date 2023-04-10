@@ -37,11 +37,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     return ChangeNotifierProvider(
         create: (context) => PaymentPrv(
-              listReceipts: arg['list'],
-              ctx: context,
-              year: arg['year'],
-              month: arg['month'],
-            ),
+            listReceipts: arg['list'],
+            ctx: context,
+            year: arg['year'],
+            month: arg['month'],
+            navigate: arg['navigate']),
         builder: (context, state) {
           return PrimaryScreen(
             isPadding: false,

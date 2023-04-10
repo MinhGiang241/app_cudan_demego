@@ -108,6 +108,7 @@ class PaymentItem extends StatelessWidget {
     this.onSelect,
     this.onTap,
     this.widget,
+    this.navigate,
     this.canSelect = true,
     required this.re,
   }) : super(key: key);
@@ -115,6 +116,7 @@ class PaymentItem extends StatelessWidget {
   final bool isSelected;
   final Function()? onSelect;
   final Function()? onTap;
+  final Function? navigate;
   final Widget? widget;
   final bool? canSelect;
   Receipt re;
@@ -151,7 +153,8 @@ class PaymentItem extends StatelessWidget {
               arguments: {
                 "re": re,
                 "year": context.read<PaymentListPrv>().year,
-                "month": context.read<PaymentListPrv>().month
+                "month": context.read<PaymentListPrv>().month,
+                "navigate": navigate
               },
             );
           },

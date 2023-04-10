@@ -1,4 +1,4 @@
-// ignore_for_file: require_trailing_commas
+// ignore_for_file: require_trailing_commas, prefer_typing_uninitialized_variables
 
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/receipt.dart';
@@ -20,6 +20,7 @@ class PaymentPrv extends ChangeNotifier {
     required this.ctx,
     required this.year,
     required this.month,
+    this.navigate,
   }) {
     sum = listReceipts.fold(0.0, (a, b) {
       var own = b.transactions.fold(
@@ -29,10 +30,13 @@ class PaymentPrv extends ChangeNotifier {
       var money = b.discount_money! - own;
       return (a + money);
     });
+    residentId = ctx.read<ResidentInfoPrv>().residentId;
+    res = ctx.read<ResidentInfoPrv>().userInfo;
   }
   int year;
   int month;
   List<Receipt> listReceipts = [];
+  Function? navigate;
   var link = "assets/icons/vnpay.svg";
   var link1 = "assets/icons/paypal.svg";
   var value = 0;
@@ -67,19 +71,21 @@ class PaymentPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  var residentId;
+  var res;
   onSaveReceits(BuildContext context) {
     Navigator.pop(context);
     isSendLoading = true;
     notifyListeners();
-    var dataReceipts = listReceipts.map((e) {
-      e.payer = context.read<ResidentInfoPrv>().userInfo!.info_name ?? "";
-      e.payer_phone = context.read<ResidentInfoPrv>().userInfo!.phone;
-      e.payment_status = 'PAID';
-      e.receipts_status = 'COMPLETE';
-      e.residentId = context.read<ResidentInfoPrv>().residentId;
+    // var dataReceipts = listReceipts.map((e) {
+    //   e.payer = res?.info_name ?? "";
+    //   e.payer_phone = res?.phone;
+    //   e.payment_status = 'PAID';
+    //   e.receipts_status = 'COMPLETE';
+    //   e.residentId = residentId;
 
-      return e.toJson();
-    }).toList();
+    //   return e.toJson();
+    // }).toList();
     var dataHistoryTransaction = listReceipts.map(
       (e) {
         var now = DateTime.now();
@@ -116,11 +122,15 @@ class PaymentPrv extends ChangeNotifier {
       Utils.showSuccessMessage(
           context: ctx,
           e: S.of(ctx).success_payment(me),
-          onClose: () {
-            Navigator.pushNamedAndRemoveUntil(
-                ctx, PaymentListScreen.routeName, (route) => route.isFirst,
-                arguments: {"index": 1, "year": year, "month": month});
-          });
+          onClose: navigate != null
+              ? () {
+                  navigate!(ctx);
+                }
+              : () {
+                  Navigator.pushNamedAndRemoveUntil(ctx,
+                      PaymentListScreen.routeName, (route) => route.isFirst,
+                      arguments: {"index": 1, "year": year, "month": month});
+                });
     }).catchError((e) {
       isSendLoading = false;
       notifyListeners();

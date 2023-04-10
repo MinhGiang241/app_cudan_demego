@@ -73,7 +73,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
         var month = context.watch<WaterPrv>().month;
         var year = context.watch<WaterPrv>().year;
 
-        var startMonth = DateTime(year, month, 1);
+        var startMonth = DateTime(year!, month!, 1);
         var endMonth = DateTime(year, month + 1, 0);
         var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
           var price = waterFee![b.key].price ?? 0;
@@ -123,8 +123,8 @@ class _WaterBillTabState extends State<WaterBillTab> {
                             minTime: DateTime(DateTime.now().year - 40, 1, 1),
                             maxTime: DateTime(DateTime.now().year, 12, 31),
                             currentTime: DateTime(
-                              context.read<WaterPrv>().year,
-                              context.read<WaterPrv>().month,
+                              context.read<WaterPrv>().year!,
+                              context.read<WaterPrv>().month!,
                               1,
                             ),
                             custom: [0, 1, 0],

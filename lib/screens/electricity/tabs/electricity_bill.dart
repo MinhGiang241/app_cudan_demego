@@ -73,7 +73,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
         var month = context.watch<ElectricityPrv>().month;
         var year = context.watch<ElectricityPrv>().year;
 
-        var startMonth = DateTime(year, month, 1);
+        var startMonth = DateTime(year!, month!, 1);
         var endMonth = DateTime(year, month + 1, 0);
         var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
           var price = elecFee![b.key].price ?? 0;
@@ -122,8 +122,8 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                             minTime: DateTime(DateTime.now().year - 40, 1, 1),
                             maxTime: DateTime(DateTime.now().year, 12, 31),
                             currentTime: DateTime(
-                              context.read<ElectricityPrv>().year,
-                              context.read<ElectricityPrv>().month,
+                              context.read<ElectricityPrv>().year!,
+                              context.read<ElectricityPrv>().month!,
                               1,
                             ),
                             custom: [0, 1, 0],

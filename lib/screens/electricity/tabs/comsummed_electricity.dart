@@ -142,7 +142,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                           return ('${datum.num?.toStringAsFixed(0)}');
                         },
                         initialSelectedDataIndexes: [
-                          context.read<ElectricityPrv>().month - 1
+                          context.read<ElectricityPrv>().month! - 1
                         ],
                         selectionBehavior: _selectionBehaviorLast,
                         borderRadius: BorderRadius.circular(12),
@@ -153,7 +153,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                             sales.title,
                         yValueMapper: (ChartDataViewModel sales, _) =>
                             sales.num,
-                        name: (context.watch<ElectricityPrv>().year - 1)
+                        name: (context.watch<ElectricityPrv>().year! - 1)
                             .toString(),
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(
@@ -167,7 +167,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                           return ('${datum.num?.toStringAsFixed(0)}');
                         },
                         initialSelectedDataIndexes: [
-                          context.read<ElectricityPrv>().month - 1
+                          context.read<ElectricityPrv>().month! - 1
                         ],
                         selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,

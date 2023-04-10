@@ -27,12 +27,17 @@ class WaterScreen extends StatefulWidget {
 class _WaterScreenState extends State<WaterScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 3, vsync: this);
-
+  var initIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (arg != null && arg['init'] != null) {
+      initIndex = arg['init'];
+    }
     return ChangeNotifierProvider(
-      create: (context) => WaterPrv(),
+      create: (context) => WaterPrv(year: arg?['year'], month: arg?['month']),
       builder: (context, snapshot) {
+        tabController.index = initIndex;
         return PrimaryScreen(
           isPadding: false,
           appBar: PrimaryAppbar(
@@ -65,7 +70,7 @@ class _WaterScreenState extends State<WaterScreen>
                           minTime: DateTime(DateTime.now().year - 40, 1, 1),
                           maxTime: DateTime(DateTime.now().year, 12, 31),
                           currentTime: DateTime(
-                            context.read<WaterPrv>().year,
+                            context.read<WaterPrv>().year!,
                             1,
                             1,
                           ),
