@@ -107,19 +107,22 @@ class APIElectricity {
     }
   }
 
-  static Future getMonthElectricIndicator(
+  static Future getMonthReceiptMonth(
     String? apartmentId,
     int year,
     int month,
+    bool isElectric,
   ) async {
     var query = '''
-         mutation (\$apartmentId:String,\$year:Float,\$month:Float){
-    response: indicator_mobile_get_indicator_by_month (apartmentId: \$apartmentId,year: \$year,month: \$month ) {
+        mutation (\$apartmentId:String,\$year:Float,\$month:Float,\$isElectric:Boolean){
+    response: indicator_mobile_get_indicator_by_month (apartmentId: \$apartmentId,year: \$year,month: \$month,isElectric: \$isElectric ) {
         code
         message
         data
     }
 }
+        
+        
         
     ''';
 
@@ -129,6 +132,7 @@ class APIElectricity {
         "apartmentId": apartmentId,
         "month": month,
         "year": year,
+        "isElectric": isElectric
       },
     );
 

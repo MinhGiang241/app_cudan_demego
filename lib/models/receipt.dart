@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'indicator.dart';
+
 class Receipt {
   Receipt({
     this.apartmentId,
@@ -38,6 +40,7 @@ class Receipt {
     this.fee_config,
     this.month_indicator,
     this.year_indicator,
+    this.indicator,
   });
   String? id;
   String? createdTime;
@@ -73,7 +76,8 @@ class Receipt {
   String? refId;
   int? month_indicator;
   int? year_indicator;
-  FeeDetail? fee_config;
+  dynamic fee_config;
+  Indicator? indicator;
 
   Receipt.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -118,9 +122,9 @@ class Receipt {
     year_indicator = json['year_indicator'] != null
         ? int.parse(json['year_indicator'].toString())
         : 0;
-    fee_config = json['transactions'] != null
-        ? FeeDetail.fromMap(json['transactions'])
-        : null;
+    fee_config = json['fee_config'];
+    indicator =
+        json['indicator'] != null ? Indicator.fromMap(json['indicator']) : null;
     transactions = json['transactions'] != null
         ? json['transactions'].isNotEmpty
             ? json['transactions']

@@ -95,7 +95,7 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${S.of(context).month}  ${date.month}, ${date.year}",
+                          "${S.of(context).month}  ${e.month_indicator}, ${e.year_indicator}",
                           style: txtBold(12, grayScaleColor2),
                           textAlign: TextAlign.start,
                         ),

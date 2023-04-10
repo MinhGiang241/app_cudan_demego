@@ -26,6 +26,7 @@ class ElectricityPrv extends ChangeNotifier {
   Indicator? indicatorLastMonth;
   Indicator? indicatorCurrentMonth;
   List<Receipt> listReceipt = [];
+  Receipt? receiptMonth;
 
   onChooseMonthYear(DateTime v) {
     year = v.year;
@@ -58,23 +59,21 @@ class ElectricityPrv extends ChangeNotifier {
     try {
       var apartmentId =
           context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-      await getIndicatorMonth(apartmentId);
-      await getElectricFeeConfig();
+      await getReceiptMonth(apartmentId);
+      // await getElectricFeeConfig();
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }
   }
 
-  Future getIndicatorMonth(String? apartmentId) async {
-    indicatorLastMonth = null;
-    indicatorCurrentMonth = null;
+  Future getReceiptMonth(String? apartmentId) async {
+    receiptMonth = null;
 
-    await APIElectricity.getMonthElectricIndicator(apartmentId, year, month)
+    await APIElectricity.getMonthReceiptMonth(apartmentId, year, month, true)
         .then((v) {
-      indicatorLastMonth =
-          v['last'] != null ? Indicator.fromMap(v['last']) : null;
-      indicatorCurrentMonth =
-          v['current'] != null ? Indicator.fromMap(v['current']) : null;
+      if (v != null) {
+        receiptMonth = Receipt.fromJson(v);
+      }
     });
   }
 

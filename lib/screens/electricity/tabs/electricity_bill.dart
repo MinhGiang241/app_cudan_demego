@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/electric_fee.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_card.dart';
@@ -46,14 +47,15 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
             },
           );
         }
-        var lastIndicator = context.read<ElectricityPrv>().indicatorLastMonth;
-        var currentIndicator =
-            context.read<ElectricityPrv>().indicatorCurrentMonth;
-        double totalIndex = currentIndicator?.electricity_consumption ?? 0;
+        var receipt = context.watch<ElectricityPrv>().receiptMonth;
+        var indi = receipt?.indicator;
+        double totalIndex = indi?.electricity_consumption ?? 0;
         var list = [];
 
         double index = totalIndex;
-        var elecFee = context.read<ElectricityPrv>().electricFee?.electric_fee;
+        var elecFeeConfig =
+            receipt != null ? ElectricFee.fromMap(receipt.fee_config) : null;
+        var elecFee = elecFeeConfig?.electric_fee;
         List<double> elecFeeTo = elecFee?.map((e) => e.to!).toList() ?? [];
         elecFeeTo.sort((a, b) => a.compareTo(b));
         for (var i in elecFeeTo) {
@@ -77,7 +79,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
           var price = elecFee![b.key].price ?? 0;
           return a + b.value * price;
         });
-        var vat = totalMoney * 0;
+        var vat = totalMoney * (receipt?.vat ?? 0);
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -164,7 +166,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   Expanded(
                                       flex: 1,
                                       child: Text(
-                                        '${formatter.format(currentIndicator?.electricity_consumption ?? 0)} kWh',
+                                        '${formatter.format(indi?.electricity_consumption ?? 0)} kWh',
                                         style: txtBold(14, redColorBase),
                                       ))
                                 ],
@@ -189,15 +191,8 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                       ))
                                 ],
                               ),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
-                                vpad(12),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null) vpad(12),
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
@@ -233,36 +228,27 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                   ],
                                 ),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator
-                                                    ?.electricity_head ??
-                                                0,
+                                            indi?.electricity_head ?? 0,
                                           )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator
-                                                    ?.electricity_last ??
-                                                0,
+                                            indi?.electricity_last ?? 0,
                                           )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator
-                                                    ?.electricity_consumption ??
-                                                0,
+                                            indi?.electricity_consumption ?? 0,
                                           )
                                           .toString(),
                                     ),
@@ -270,10 +256,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     genCell(text: ""),
                                   ],
                                 ),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 ...List.generate(
                                   list.length,
                                   (index) => Row(
@@ -300,10 +283,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ],
                                   ),
                                 ),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
@@ -311,15 +291,14 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                       flex: 3,
                                       align: Alignment.centerRight,
                                     ),
-                                    genCell(text: "0%"),
+                                    genCell(
+                                        text:
+                                            "${formatter.format(receipt.vat ?? 0)}%"),
                                     genCell(
                                         text: formatter.format(vat).toString()),
                                   ],
                                 ),
-                              if (context
-                                      .watch<ElectricityPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(

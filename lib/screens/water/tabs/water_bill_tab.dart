@@ -9,6 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/waterFee.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_card.dart';
@@ -46,13 +47,15 @@ class _WaterBillTabState extends State<WaterBillTab> {
             },
           );
         }
-        var lastIndicator = context.read<WaterPrv>().indicatorLastMonth;
-        var currentIndicator = context.read<WaterPrv>().indicatorCurrentMonth;
-        double totalIndex = currentIndicator?.water_consumption ?? 0;
-        var list = [];
+        var receipt = context.watch<WaterPrv>().receiptMonth;
+        var indi = receipt?.indicator;
 
+        double totalIndex = indi?.water_consumption ?? 0;
+        var list = [];
+        var waterFeeConfig =
+            receipt != null ? WaterFee.fromMap(receipt.fee_config) : null;
         double index = totalIndex;
-        var waterFee = context.read<WaterPrv>().waterFee?.water_fee;
+        var waterFee = waterFeeConfig?.water_fee;
         List<double> waterTo = waterFee?.map((e) => e.to!).toList() ?? [];
         waterTo.sort((a, b) => a.compareTo(b));
         for (var i in waterTo) {
@@ -77,7 +80,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
 
           return a + b.value * price;
         });
-        var vat = totalMoney * 0;
+        var vat = totalMoney * (receipt?.vat ?? 0);
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
@@ -164,7 +167,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      '${formatter.format(currentIndicator?.water_consumption ?? 0)} m³',
+                                      '${formatter.format(indi?.water_consumption ?? 0)} m³',
                                       style: txtBold(14, redColorBase),
                                     ),
                                   )
@@ -192,10 +195,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                 ],
                               ),
                               vpad(12),
-                              if (context
-                                      .watch<WaterPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
@@ -231,32 +231,27 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ),
                                   ],
                                 ),
-                              if (context
-                                      .watch<WaterPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator?.water_head ?? 0,
+                                            indi?.water_head ?? 0,
                                           )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator?.water_last ?? 0,
+                                            indi?.water_last ?? 0,
                                           )
                                           .toString(),
                                     ),
                                     genCell(
                                       text: formatter
                                           .format(
-                                            currentIndicator
-                                                    ?.water_consumption ??
-                                                0,
+                                            indi?.water_consumption ?? 0,
                                           )
                                           .toString(),
                                     ),
@@ -264,10 +259,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     genCell(text: ""),
                                   ],
                                 ),
-                              if (context
-                                      .watch<WaterPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 ...List.generate(
                                   list.length,
                                   (index) => Row(
@@ -294,10 +286,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ],
                                   ),
                                 ),
-                              if (context
-                                      .watch<WaterPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
@@ -305,16 +294,15 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                       flex: 3,
                                       align: Alignment.centerRight,
                                     ),
-                                    genCell(text: "0%"),
+                                    genCell(
+                                        text:
+                                            "${formatter.format(receipt.vat ?? 0)}%"),
                                     genCell(
                                       text: formatter.format(vat).toString(),
                                     ),
                                   ],
                                 ),
-                              if (context
-                                      .watch<WaterPrv>()
-                                      .indicatorCurrentMonth !=
-                                  null)
+                              if (receipt != null)
                                 Row(
                                   children: [
                                     genCell(
