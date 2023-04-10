@@ -25,12 +25,12 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
   final _selectionBehaviorLast = SelectionBehavior(
       selectedColor: yellowColor7,
       toggleSelection: false,
-      unselectedColor: yellowColor7.withOpacity(0.2),
+      unselectedColor: yellowColor7.withOpacity(0.1),
       enable: true);
   final _selectionBehaviorCurrent = SelectionBehavior(
       selectedColor: primaryColor7,
       toggleSelection: false,
-      unselectedColor: primaryColor7.withOpacity(0.2),
+      unselectedColor: primaryColor7.withOpacity(0.1),
       enable: true);
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -101,13 +101,15 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
             _refreshController.refreshCompleted();
           },
           child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Column(
               children: [
                 vpad(30),
                 // Expanded(
                 //   child:
                 SizedBox(
-                  height: 800,
+                  height: dvHeight(context) - 200,
+                  width: 850,
                   child: SfCartesianChart(
                     // selectionGesture: ActivationMode.singleTap,
 
@@ -115,7 +117,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                     margin: EdgeInsets.symmetric(
                       horizontal: 14,
                     ),
-                    primaryXAxis: CategoryAxis(labelStyle: txtRegular(14)),
+                    primaryXAxis: CategoryAxis(labelStyle: txtRegular(12)),
                     // primaryYAxis:
                     //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
                     title: ChartTitle(
@@ -137,32 +139,32 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                       opacity: 0.7,
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
-                      BarSeries<ChartDataViewModel, String>(
-                        dataLabelMapper: (datum, index) {
-                          return ('${datum.num?.toStringAsFixed(0)}');
-                        },
-                        initialSelectedDataIndexes: [
-                          context.read<ElectricityPrv>().month! - 1
-                        ],
-                        selectionBehavior: _selectionBehaviorLast,
-                        borderRadius: BorderRadius.circular(12),
-                        // spacing: 10,
-                        color: yellowColor7,
-                        dataSource: dataCharLast,
-                        xValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.title,
-                        yValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.num,
-                        name: (context.watch<ElectricityPrv>().year! - 1)
-                            .toString(),
-                        // Enable data label
-                        dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                          showZeroValue: false,
-                          textStyle: txtBold(12, yellowColor7),
-                        ),
-                      ),
-                      BarSeries<ChartDataViewModel, String>(
+                      // BarSeries<ChartDataViewModel, String>(
+                      //   dataLabelMapper: (datum, index) {
+                      //     return ('${datum.num?.toStringAsFixed(0)}');
+                      //   },
+                      //   initialSelectedDataIndexes: [
+                      //     context.read<ElectricityPrv>().month! - 1
+                      //   ],
+                      //   selectionBehavior: _selectionBehaviorLast,
+                      //   borderRadius: BorderRadius.circular(12),
+                      //   // spacing: 10,
+                      //   color: yellowColor7,
+                      //   dataSource: dataCharLast,
+                      //   xValueMapper: (ChartDataViewModel sales, _) =>
+                      //       sales.title,
+                      //   yValueMapper: (ChartDataViewModel sales, _) =>
+                      //       sales.num,
+                      //   name: (context.watch<ElectricityPrv>().year! - 1)
+                      //       .toString(),
+                      //   // Enable data label
+                      //   dataLabelSettings: DataLabelSettings(
+                      //     isVisible: true,
+                      //     showZeroValue: false,
+                      //     textStyle: txtBold(12, yellowColor7),
+                      //   ),
+                      // ),
+                      ColumnSeries<ChartDataViewModel, String>(
                         dataLabelMapper: (datum, index) {
                           return ('${datum.num?.toStringAsFixed(0)}');
                         },
@@ -171,13 +173,13 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                         ],
                         selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,
-                        borderRadius: BorderRadius.circular(12),
+                        // borderRadius: BorderRadius.circular(12),
                         color: primaryColor7,
                         dataSource: dataCharCurrent,
-                        xValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.title,
                         yValueMapper: (ChartDataViewModel sales, _) =>
                             sales.num,
+                        xValueMapper: (ChartDataViewModel sales, _) =>
+                            sales.title,
                         name: context.watch<ElectricityPrv>().year.toString(),
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(

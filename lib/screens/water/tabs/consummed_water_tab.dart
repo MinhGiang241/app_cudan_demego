@@ -26,13 +26,13 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
   final _selectionBehaviorLast = SelectionBehavior(
     selectedColor: yellowColor7,
     toggleSelection: false,
-    unselectedColor: yellowColor7.withOpacity(0.2),
+    unselectedColor: yellowColor7.withOpacity(0.1),
     enable: true,
   );
   final _selectionBehaviorCurrent = SelectionBehavior(
     selectedColor: primaryColor7,
     toggleSelection: false,
-    unselectedColor: primaryColor7.withOpacity(0.2),
+    unselectedColor: primaryColor7.withOpacity(0.1),
     enable: true,
   );
   final RefreshController _refreshController =
@@ -103,21 +103,23 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
             _refreshController.refreshCompleted();
           },
           child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Column(
               children: [
                 vpad(30),
                 // Expanded(
                 //   child:
                 SizedBox(
-                  height: 800,
+                  height: dvHeight(context) - 200,
+                  width: 850,
                   child: SfCartesianChart(
-                    selectionGesture: ActivationMode.singleTap,
-                    selectionType: SelectionType.cluster,
+                    //selectionGesture: ActivationMode.singleTap,
+                    //selectionType: SelectionType.cluster,
                     borderWidth: 0,
                     margin: const EdgeInsets.symmetric(
                       horizontal: 14,
                     ),
-                    primaryXAxis: CategoryAxis(labelStyle: txtRegular(14)),
+                    primaryXAxis: CategoryAxis(labelStyle: txtRegular(12)),
                     // primaryYAxis:
                     //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
                     title: ChartTitle(
@@ -137,32 +139,32 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                       opacity: 0.7,
                     ),
                     series: <ChartSeries<ChartDataViewModel, String>>[
-                      BarSeries<ChartDataViewModel, String>(
-                        dataLabelMapper: (datum, index) {
-                          return ('${datum.num?.toStringAsFixed(0)}');
-                        },
-                        initialSelectedDataIndexes: [
-                          context.read<WaterPrv>().month! - 1
-                        ],
-                        selectionBehavior: _selectionBehaviorLast,
-                        borderRadius: BorderRadius.circular(12),
-                        // spacing: 10,
-                        color: yellowColor7,
-                        dataSource: dataCharLast,
-                        xValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.title,
-                        yValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.num,
-                        name: (context.watch<WaterPrv>().year! - 1).toString(),
-                        // Enable data label
-                        dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                          showZeroValue: false,
-                          textStyle: txtBold(12, yellowColor7),
-                          showCumulativeValues: true,
-                        ),
-                      ),
-                      BarSeries<ChartDataViewModel, String>(
+                      // BarSeries<ChartDataViewModel, String>(
+                      //   dataLabelMapper: (datum, index) {
+                      //     return ('${datum.num?.toStringAsFixed(0)}');
+                      //   },
+                      //   initialSelectedDataIndexes: [
+                      //     context.read<WaterPrv>().month! - 1
+                      //   ],
+                      //   selectionBehavior: _selectionBehaviorLast,
+                      //   borderRadius: BorderRadius.circular(12),
+                      //   // spacing: 10,
+                      //   color: yellowColor7,
+                      //   dataSource: dataCharLast,
+                      //   xValueMapper: (ChartDataViewModel sales, _) =>
+                      //       sales.title,
+                      //   yValueMapper: (ChartDataViewModel sales, _) =>
+                      //       sales.num,
+                      //   name: (context.watch<WaterPrv>().year! - 1).toString(),
+                      //   // Enable data label
+                      //   dataLabelSettings: DataLabelSettings(
+                      //     isVisible: true,
+                      //     showZeroValue: false,
+                      //     textStyle: txtBold(12, yellowColor7),
+                      //     showCumulativeValues: true,
+                      //   ),
+                      // ),
+                      ColumnSeries<ChartDataViewModel, String>(
                         initialSelectedDataIndexes: [
                           context.read<WaterPrv>().month! - 1
                         ],
@@ -171,13 +173,13 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                         },
                         selectionBehavior: _selectionBehaviorCurrent,
                         // spacing: 10,
-                        borderRadius: BorderRadius.circular(12),
+                        // borderRadius: BorderRadius.circular(12),
                         color: primaryColor7,
                         dataSource: dataCharCurrent,
-                        xValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.title,
                         yValueMapper: (ChartDataViewModel sales, _) =>
                             sales.num,
+                        xValueMapper: (ChartDataViewModel sales, _) =>
+                            sales.title,
                         name: context.watch<WaterPrv>().year.toString(),
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(
