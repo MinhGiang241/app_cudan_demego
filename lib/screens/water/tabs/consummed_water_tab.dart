@@ -46,6 +46,11 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
 
   @override
   Widget build(BuildContext context) {
+    var month = context.read<WaterPrv>().month;
+    final ScrollController _scrollController = ScrollController(
+      initialScrollOffset: (850 / 12) * (month! - 4),
+      keepScrollOffset: true,
+    );
     return FutureBuilder(
       future: context.read<WaterPrv>().getIndicatorByYear(context),
       builder: (context, snapshot) {
@@ -103,6 +108,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
             _refreshController.refreshCompleted();
           },
           child: SingleChildScrollView(
+            controller: _scrollController,
             scrollDirection: Axis.horizontal,
             child: Column(
               children: [

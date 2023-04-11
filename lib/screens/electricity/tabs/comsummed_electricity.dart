@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../constants/constants.dart';
@@ -22,6 +23,7 @@ class ConsummedElectricityTab extends StatefulWidget {
 
 class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
   late TooltipBehavior _tooltipBehavior;
+
   final _selectionBehaviorLast = SelectionBehavior(
       selectedColor: yellowColor7,
       toggleSelection: false,
@@ -39,10 +41,19 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
   void initState() {
     _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) =>
+    //     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+    //         duration: const Duration(milliseconds: 500),
+    //         curve: Curves.easeOut));
   }
 
   @override
   Widget build(BuildContext context) {
+    var month = context.read<ElectricityPrv>().month;
+    final ScrollController _scrollController = ScrollController(
+      initialScrollOffset: (850 / 12) * (month! - 4),
+      keepScrollOffset: true,
+    );
     return FutureBuilder(
       future: context.read<ElectricityPrv>().getIndicatorByYear(context),
       builder: (context, snapshot) {
@@ -101,6 +112,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
             _refreshController.refreshCompleted();
           },
           child: SingleChildScrollView(
+            controller: _scrollController,
             scrollDirection: Axis.horizontal,
             child: Column(
               children: [
