@@ -751,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_time": MessageLookupByLibrary.simpleMessage("Thời gian đăng ký"),
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
+        "reg_transport_card":
+            MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
         "region": MessageLookupByLibrary.simpleMessage("Khu vực"),
         "registed_resident":
             MessageLookupByLibrary.simpleMessage("Cư dân đã đăng ký"),
@@ -1009,6 +1011,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_list":
             MessageLookupByLibrary.simpleMessage("Danh sách chuyển đồ"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
+        "transport_card":
+            MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Đơn giá (VNĐ)"),

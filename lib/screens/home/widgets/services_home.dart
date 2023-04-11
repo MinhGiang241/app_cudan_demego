@@ -4,7 +4,6 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../services/delivery/delivery_list_screen.dart';
-import '../../services/gym_card/gym_card_list_screen.dart';
 import '../../services/parking_card/transport_card_list_screen.dart';
 import '../../services/resident_card/resident_card_screen.dart';
 import '../../services/service_screen.dart';

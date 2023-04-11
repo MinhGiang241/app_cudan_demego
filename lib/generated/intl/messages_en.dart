@@ -750,6 +750,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_time": MessageLookupByLibrary.simpleMessage("Time registration"),
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
+        "reg_transport_card": MessageLookupByLibrary.simpleMessage(
+            "Register transportation card"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
         "registed_resident":
             MessageLookupByLibrary.simpleMessage("Registed resident"),
@@ -1012,6 +1014,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation type"),
         "transfer_list": MessageLookupByLibrary.simpleMessage("Transfer list"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Transfer type"),
+        "transport_card":
+            MessageLookupByLibrary.simpleMessage("Transportation card"),
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),

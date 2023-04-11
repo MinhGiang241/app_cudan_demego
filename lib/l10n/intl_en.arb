@@ -687,5 +687,7 @@
   "consumed_water_detail1": "Consumed water detail",
   "details_bill": "Details bill",
   "total_consumed_water_month": "Total consumed water month {month}/{year}",
-  "consumed_water": "Consumed water"
+  "consumed_water": "Consumed water",
+  "transport_card": "Transportation card",
+  "reg_transport_card": "Register transportation card"
 }

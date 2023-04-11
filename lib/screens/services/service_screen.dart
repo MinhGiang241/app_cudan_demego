@@ -1,5 +1,4 @@
 import 'package:app_cudan/screens/home/home_screen.dart';
-import 'package:app_cudan/screens/services/gym_card/gym_card_list_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
 import 'package:app_cudan/screens/services/pet/pet_list_screen.dart';
@@ -24,6 +23,7 @@ import 'hand_over/hand_over_screen.dart';
 import 'parking_card/transport_card_list_screen.dart';
 import 'resident_card/resident_card_screen.dart';
 import 'service_prv.dart';
+import 'transport_card/transport_card_screen.dart.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -44,7 +44,7 @@ class ServiceScreen extends StatelessWidget {
         "background": gradientTurquoise,
         "icon": PrimaryIcons.car_bg,
         "title": S.current.parking_card,
-        "navigator": TransportationCardListScreen.routeName,
+        "navigator": TransportCardScreen.routeName,
       },
       {
         "color": greenColorBase,

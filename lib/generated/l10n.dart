@@ -6939,6 +6939,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Transportation card`
+  String get transport_card {
+    return Intl.message(
+      'Transportation card',
+      name: 'transport_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register transportation card`
+  String get reg_transport_card {
+    return Intl.message(
+      'Register transportation card',
+      name: 'reg_transport_card',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

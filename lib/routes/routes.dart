@@ -36,8 +36,6 @@ import '../screens/services/delivery/register_delivery_screen.dart';
 import '../screens/services/extra_service/extra_service_card_list.dart';
 import '../screens/services/extra_service/extra_service_details.dart';
 import '../screens/services/extra_service/extra_service_registration_screen.dart';
-import '../screens/services/gym_card/add_gym_card_screen.dart';
-import '../screens/services/gym_card/gym_card_list_screen.dart';
 import '../screens/services/hand_over/accept_hand_over_screen.dart';
 import '../screens/services/hand_over/booking_screen.dart';
 import '../screens/services/hand_over/general_info_screen.dart';
@@ -62,6 +60,8 @@ import '../screens/services/resident_card/register_resident_card.dart';
 import '../screens/services/resident_card/resident_card_details.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
 import '../screens/services/service_screen.dart';
+import '../screens/services/transport_card/add_new_transport_card.dart';
+import '../screens/services/transport_card/transport_card_screen.dart.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -130,16 +130,7 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const ServiceScreen(),
         );
-      case GymCardListScreen.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (_) => const GymCardListScreen(),
-        );
-      case AddGymCardScreen.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (_) => const AddGymCardScreen(),
-        );
+
       case TransportationCardListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
@@ -365,6 +356,17 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const WaterScreen(),
         );
+      case TransportCardScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const TransportCardScreen(),
+        );
+      case AddNewTransportCardScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const AddNewTransportCardScreen(),
+        );
+
       // case ChatScreen.routeName:
       //   return MaterialPageRoute(
       //     settings: routeSetting,

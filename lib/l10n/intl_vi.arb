@@ -688,5 +688,7 @@
   "consumed_water_detail1": "Chi tiết lượng nước sử dụng",
   "details_bill": "Hóa đơn chi tiết",
   "total_consumed_water_month": "Tổng lượng nước thiêu thụ tháng {month}/{year}",
-  "consumed_water": "Lượng nước tiêu thụ"
+  "consumed_water": "Lượng nước tiêu thụ",
+  "transport_card": "Thẻ phương tiện",
+  "reg_transport_card": "Đăng ký thẻ phương tiện"
 }
