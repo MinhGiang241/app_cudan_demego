@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create feedback"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Resister new card"),
+        "add_transport": MessageLookupByLibrary.simpleMessage("Add transport"),
         "additional_file":
             MessageLookupByLibrary.simpleMessage("Additional file"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
@@ -123,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
+        "building_regulation":
+            MessageLookupByLibrary.simpleMessage("Building regulation"),
         "buyer": MessageLookupByLibrary.simpleMessage("Owner"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Re-enter new password"),
@@ -182,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_lock_card": m5,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Do you want to lock transportation card?"),
+        "confirm_obey_regulation":
+            MessageLookupByLibrary.simpleMessage("Confirm obey regulation"),
         "confirm_par_ques_event": m6,
         "confirm_participate_event":
             MessageLookupByLibrary.simpleMessage("Confirm participate event"),
@@ -459,6 +464,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Information reception"),
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
+        "intergrate_existed_resident_card":
+            MessageLookupByLibrary.simpleMessage(
+                "Intergrate into existed resident card"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "issue_res_card":
@@ -593,6 +601,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Notification type"),
+        "num_seat": MessageLookupByLibrary.simpleMessage("Seat amount"),
         "object_code": MessageLookupByLibrary.simpleMessage("Object code"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Object details"),
@@ -1014,8 +1023,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation type"),
         "transfer_list": MessageLookupByLibrary.simpleMessage("Transfer list"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Transfer type"),
+        "transport": MessageLookupByLibrary.simpleMessage("Transportation"),
         "transport_card":
             MessageLookupByLibrary.simpleMessage("Transportation card"),
+        "transport_info":
+            MessageLookupByLibrary.simpleMessage("Transportation information"),
+        "transport_list":
+            MessageLookupByLibrary.simpleMessage("Transportation list"),
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
@@ -1025,6 +1039,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Use elevator"),
+        "used_expired_date":
+            MessageLookupByLibrary.simpleMessage("Expired_date"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),

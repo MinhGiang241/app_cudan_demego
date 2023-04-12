@@ -6959,6 +6959,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Transportation list`
+  String get transport_list {
+    return Intl.message(
+      'Transportation list',
+      name: 'transport_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Intergrate into existed resident card`
+  String get intergrate_existed_resident_card {
+    return Intl.message(
+      'Intergrate into existed resident card',
+      name: 'intergrate_existed_resident_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm obey regulation`
+  String get confirm_obey_regulation {
+    return Intl.message(
+      'Confirm obey regulation',
+      name: 'confirm_obey_regulation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Building regulation`
+  String get building_regulation {
+    return Intl.message(
+      'Building regulation',
+      name: 'building_regulation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation`
+  String get transport {
+    return Intl.message(
+      'Transportation',
+      name: 'transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seat amount`
+  String get num_seat {
+    return Intl.message(
+      'Seat amount',
+      name: 'num_seat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired_date`
+  String get used_expired_date {
+    return Intl.message(
+      'Expired_date',
+      name: 'used_expired_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add transport`
+  String get add_transport {
+    return Intl.message(
+      'Add transport',
+      name: 'add_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation information`
+  String get transport_info {
+    return Intl.message(
+      'Transportation information',
+      name: 'transport_info',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -690,5 +690,14 @@
   "total_consumed_water_month": "Tổng lượng nước thiêu thụ tháng {month}/{year}",
   "consumed_water": "Lượng nước tiêu thụ",
   "transport_card": "Thẻ phương tiện",
-  "reg_transport_card": "Đăng ký thẻ phương tiện"
+  "reg_transport_card": "Đăng ký thẻ phương tiện",
+  "transport_list": "Danh sách phương tiện",
+  "intergrate_existed_resident_card": "Tích hợp vào thẻ cư dân có sẵn",
+  "confirm_obey_regulation": "Xác nhận tuân thủ quy định của tòa nhà",
+  "building_regulation": "Quy định vể gửi xe của tòa nhà",
+  "transport": "Phương tiện",
+  "num_seat": "Sồ chỗ ngồi",
+  "used_expired_date": "Thời hạn sử dụng",
+  "add_transport": "Thêm phương tiện",
+  "transport_info": "Thông tin phương tiện"
 }

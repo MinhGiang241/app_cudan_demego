@@ -1,6 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, require_trailing_commas
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:app_cudan/models/reason.dart';
+
+import 'file_upload.dart';
+import 'status.dart';
 
 class TransportationCard {
   TransportationCard(
@@ -169,4 +175,351 @@ class OtherImage {
     data['name'] = name;
     return data;
   }
+}
+
+// TransportCard update
+
+class TransportCard {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? residentId;
+  String? name_resident;
+  List<TransportItem>? transports_list;
+  bool? isMobile;
+  String? registration_date;
+  bool? integrated;
+  String? residentCardId;
+  bool? confirmation;
+  String? registration_date_filter;
+  String? rules;
+  String? code;
+  String? name;
+  String? apartmentId;
+  String? address_apartment;
+  String? ticket_status;
+  String? reasons;
+  String? address;
+  String? phone_number;
+  String? identity;
+  String? note_reason;
+  String? card_type;
+  // More
+  Reason? r;
+  Status? s;
+  TransportCard({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.residentId,
+    this.name_resident,
+    this.transports_list,
+    this.isMobile,
+    this.registration_date,
+    this.integrated,
+    this.residentCardId,
+    this.confirmation,
+    this.registration_date_filter,
+    this.rules,
+    this.code,
+    this.name,
+    this.apartmentId,
+    this.address_apartment,
+    this.ticket_status,
+    this.reasons,
+    this.address,
+    this.phone_number,
+    this.identity,
+    this.note_reason,
+    this.card_type,
+    this.r,
+    this.s,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'residentId': residentId,
+      'name_resident': name_resident,
+      'transports_list': transports_list?.map((x) => x.toMap()).toList(),
+      'isMobile': isMobile,
+      'registration_date': registration_date,
+      'integrated': integrated,
+      'residentCardId': residentCardId,
+      'confirmation': confirmation,
+      'registration_date_filter': registration_date_filter,
+      'rules': rules,
+      'code': code,
+      'name': name,
+      'apartmentId': apartmentId,
+      'address_apartment': address_apartment,
+      'ticket_status': ticket_status,
+      'reasons': reasons,
+      'address': address,
+      'phone_number': phone_number,
+      'identity': identity,
+      'note_reason': note_reason,
+      'card_type': card_type,
+    };
+  }
+
+  factory TransportCard.fromMap(Map<String, dynamic> map) {
+    return TransportCard(
+      id: map['id'] != null ? map['id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      name_resident:
+          map['name_resident'] != null ? map['name_resident'] as String : null,
+      transports_list: map['transports_list'] != null
+          ? List<TransportItem>.from(
+              (map['transports_list'] as List<dynamic>).map<TransportItem?>(
+                (x) => TransportItem.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      isMobile: map['isMobile'] != null ? map['isMobile'] as bool : null,
+      registration_date: map['registration_date'] != null
+          ? map['registration_date'] as String
+          : null,
+      integrated: map['integrated'] != null ? map['integrated'] as bool : null,
+      residentCardId: map['residentCardId'] != null
+          ? map['residentCardId'] as String
+          : null,
+      confirmation:
+          map['confirmation'] != null ? map['confirmation'] as bool : null,
+      registration_date_filter: map['registration_date_filter'] != null
+          ? map['registration_date_filter'] as String
+          : null,
+      rules: map['rules'] != null ? map['rules'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      address_apartment: map['address_apartment'] != null
+          ? map['address_apartment'] as String
+          : null,
+      ticket_status:
+          map['ticket_status'] != null ? map['ticket_status'] as String : null,
+      reasons: map['reasons'] != null ? map['reasons'] as String : null,
+      address: map['address'] != null ? map['address'] as String : null,
+      phone_number:
+          map['phone_number'] != null ? map['phone_number'] as String : null,
+      identity: map['identity'] != null ? map['identity'] as String : null,
+      note_reason:
+          map['note_reason'] != null ? map['note_reason'] as String : null,
+      card_type: map['card_type'] != null ? map['card_type'] as String : null,
+      r: map['r'] != null
+          ? Reason.fromJson(map['r'] as Map<String, dynamic>)
+          : null,
+      s: map['s'] != null
+          ? Status.fromJson(map['s'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TransportCard.fromJson(String source) =>
+      TransportCard.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class TransportItem {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? picture;
+  String? status;
+  String? expire_date;
+  String? residentId;
+  String? manageCardId;
+  String? code_seri;
+  double? cost;
+  int? vehicle_amount;
+  String? apartmentId;
+  String? identity;
+  String? vehicleTypeId;
+  String? number_plate;
+  String? registration_number;
+  String? shelfLifeId;
+  String? type;
+  FileUploadModel? registration_image;
+  FileUploadModel? vehicle_image;
+  FileUploadModel? identity_image;
+  // More
+  VehicleType? vehicleType;
+  ShelfLife? shelfLife;
+  TransportItem({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.picture,
+    this.status,
+    this.expire_date,
+    this.residentId,
+    this.manageCardId,
+    this.code_seri,
+    this.cost,
+    this.vehicle_amount,
+    this.apartmentId,
+    this.identity,
+    this.vehicleTypeId,
+    this.number_plate,
+    this.registration_number,
+    this.shelfLifeId,
+    this.type,
+    this.registration_image,
+    this.vehicle_image,
+    this.identity_image,
+    this.vehicleType,
+    this.shelfLife,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'picture': picture,
+      'status': status,
+      'expire_date': expire_date,
+      'residentId': residentId,
+      'manageCardId': manageCardId,
+      'code_seri': code_seri,
+      'cost': cost,
+      'vehicle_amount': vehicle_amount,
+      'apartmentId': apartmentId,
+      'identity': identity,
+      'vehicleTypeId': vehicleTypeId,
+      'number_plate': number_plate,
+      'registration_number': registration_number,
+      'shelfLifeId': shelfLifeId,
+      'type': type,
+      'registration_image': registration_image?.toMap(),
+      'vehicle_image': vehicle_image?.toMap(),
+      'identity_image': identity_image?.toMap(),
+    };
+  }
+
+  factory TransportItem.fromMap(Map<String, dynamic> map) {
+    return TransportItem(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      picture: map['picture'] != null ? map['picture'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      expire_date:
+          map['expire_date'] != null ? map['expire_date'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      manageCardId:
+          map['manageCardId'] != null ? map['manageCardId'] as String : null,
+      code_seri: map['code_seri'] != null ? map['code_seri'] as String : null,
+      cost: map['cost'] != null ? map['cost'] as double : null,
+      vehicle_amount:
+          map['vehicle_amount'] != null ? map['vehicle_amount'] as int : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      identity: map['identity'] != null ? map['identity'] as String : null,
+      vehicleTypeId:
+          map['vehicleTypeId'] != null ? map['vehicleTypeId'] as String : null,
+      number_plate:
+          map['number_plate'] != null ? map['number_plate'] as String : null,
+      registration_number: map['registration_number'] != null
+          ? map['registration_number'] as String
+          : null,
+      shelfLifeId:
+          map['shelfLifeId'] != null ? map['shelfLifeId'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      registration_image: map['registration_image'] != null
+          ? FileUploadModel.fromMap(
+              map['registration_image'] as Map<String, dynamic>)
+          : null,
+      vehicle_image: map['vehicle_image'] != null
+          ? FileUploadModel.fromMap(
+              map['vehicle_image'] as Map<String, dynamic>)
+          : null,
+      identity_image: map['identity_image'] != null
+          ? FileUploadModel.fromMap(
+              map['identity_image'] as Map<String, dynamic>)
+          : null,
+      vehicleType: map['vehicleType'] != null
+          ? VehicleType.fromJson(map['vehicleType'] as Map<String, dynamic>)
+          : null,
+      shelfLife: map['SshelfLife'] != null
+          ? ShelfLife.fromMap(map['SshelfLife'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TransportItem.fromJson(String source) =>
+      TransportItem.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class ShelfLife {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? use_time;
+  String? describe;
+  String? type_time;
+  String? time;
+  int? order;
+  ShelfLife({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.use_time,
+    this.describe,
+    this.type_time,
+    this.time,
+    this.order,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'use_time': use_time,
+      'describe': describe,
+      'type_time': type_time,
+      'time': time,
+      'order': order,
+    };
+  }
+
+  factory ShelfLife.fromMap(Map<String, dynamic> map) {
+    return ShelfLife(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      use_time: map['use_time'] != null ? map['use_time'] as String : null,
+      describe: map['describe'] != null ? map['describe'] as String : null,
+      type_time: map['type_time'] != null ? map['type_time'] as String : null,
+      time: map['time'] != null ? map['time'] as String : null,
+      order:
+          int.tryParse(map['order']) != null ? int.parse(map['order']) : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ShelfLife.fromJson(String source) =>
+      ShelfLife.fromMap(json.decode(source) as Map<String, dynamic>);
 }

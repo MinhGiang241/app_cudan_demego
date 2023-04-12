@@ -4,10 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_physics.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../widgets/dash_button.dart';
+import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 
@@ -30,17 +33,52 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
           title: S.of(context).reg_transport_card,
         ),
         body: SafeArea(
-          child: Form(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    vpad(12),
-                  ],
+          child: PageView(
+            controller: context.read<AddNewTransportCardPrv>().pageController,
+            onPageChanged: context.read<AddNewTransportCardPrv>().onPageChanged,
+            physics: context.watch<AddNewTransportCardPrv>().isDisableRightCroll
+                ? const LeftBlockedScrollPhysics()
+                : null,
+            children: [
+              Form(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        vpad(12),
+                        Row(
+                          children: [
+                            DashButton(
+                              text: S.of(context).add_transport,
+                              lable: S.of(context).transport_list,
+                              isRequired: true,
+                              icon: const PrimaryIcon(
+                                icons: PrimaryIcons.add_to_queue,
+                              ),
+                              onTap: () {
+                                return context
+                                    .read<AddNewTransportCardPrv>()
+                                    .addTransport();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SingleChildScrollView(
+                child: Form(
+                  child: Column(
+                    children: [
+                      vpad(12),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

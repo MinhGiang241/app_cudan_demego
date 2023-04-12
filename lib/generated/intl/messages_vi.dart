@@ -85,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thêm mới phản ánh"),
         "add_trans_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ mới"),
+        "add_transport":
+            MessageLookupByLibrary.simpleMessage("Thêm phương tiện"),
         "additional_file":
             MessageLookupByLibrary.simpleMessage("File/ Ảnh bổ sung"),
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
@@ -127,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
+        "building_regulation": MessageLookupByLibrary.simpleMessage(
+            "Quy định vể gửi xe của tòa nhà"),
         "buyer": MessageLookupByLibrary.simpleMessage("Chủ sở hữu"),
         "c_new_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
@@ -183,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_lock_card": m5,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn khóa thẻ xe không?"),
+        "confirm_obey_regulation": MessageLookupByLibrary.simpleMessage(
+            "Xác nhận tuân thủ quy định của tòa nhà"),
         "confirm_par_ques_event": m6,
         "confirm_participate_event":
             MessageLookupByLibrary.simpleMessage("Xác nhận tham gia sự kiện"),
@@ -460,6 +466,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "info_reception":
             MessageLookupByLibrary.simpleMessage("Tiếp nhận thông tin"),
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
+        "intergrate_existed_resident_card":
+            MessageLookupByLibrary.simpleMessage(
+                "Tích hợp vào thẻ cư dân có sẵn"),
         "internet": MessageLookupByLibrary.simpleMessage("Internet"),
         "invalid_data":
             MessageLookupByLibrary.simpleMessage("Dữ liệu không hợp lệ"),
@@ -597,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Loại thông báo"),
+        "num_seat": MessageLookupByLibrary.simpleMessage("Sồ chỗ ngồi"),
         "object_code": MessageLookupByLibrary.simpleMessage("Mã vật phẩm"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết vật phẩm"),
@@ -1011,8 +1021,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_list":
             MessageLookupByLibrary.simpleMessage("Danh sách chuyển đồ"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),
+        "transport": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "transport_card":
             MessageLookupByLibrary.simpleMessage("Thẻ phương tiện"),
+        "transport_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
+        "transport_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách phương tiện"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Đơn giá (VNĐ)"),
@@ -1021,6 +1036,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Dùng thang máy"),
+        "used_expired_date":
+            MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "value": MessageLookupByLibrary.simpleMessage("Giá trị"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),

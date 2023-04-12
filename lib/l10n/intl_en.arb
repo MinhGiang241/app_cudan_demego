@@ -689,5 +689,14 @@
   "total_consumed_water_month": "Total consumed water month {month}/{year}",
   "consumed_water": "Consumed water",
   "transport_card": "Transportation card",
-  "reg_transport_card": "Register transportation card"
+  "reg_transport_card": "Register transportation card",
+  "transport_list": "Transportation list",
+  "intergrate_existed_resident_card": "Intergrate into existed resident card",
+  "confirm_obey_regulation": "Confirm obey regulation",
+  "building_regulation": "Building regulation",
+  "transport": "Transportation",
+  "num_seat": "Seat amount",
+  "used_expired_date": "Expired_date",
+  "add_transport": "Add transport",
+  "transport_info": "Transportation information"
 }
