@@ -76,4 +76,99 @@ class APITransport {
       return res.response.data;
     }
   }
+
+  static Future getTransportationType() async {
+    var query = '''
+    query  {
+      response :query_Vehicles_dto {
+        message
+        code
+        data {
+          _id
+          name
+          display_name
+          code
+          createdTime
+          updatedTime
+        }
+      }
+    }''';
+
+    final QueryOptions options = QueryOptions(document: gql(query));
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getShelfLife() async {
+    var query = '''
+   query {
+	response: query_ShelfLifes_dto{
+		code 
+		message
+		data {
+			_id
+			createdTime
+			updatedTime
+			code
+			use_time
+			describe
+			type_time
+			time
+			order
+		}
+	}
+}
+''';
+
+    final QueryOptions options = QueryOptions(document: gql(query));
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveTransportLetter(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+     mutation (\$data:Dictionary){
+    response: card_mobile_save_transport_card_letter (data: \$data ) {
+        code
+        message
+        data
+      }
+    }      
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

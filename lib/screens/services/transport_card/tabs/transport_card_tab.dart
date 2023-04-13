@@ -149,12 +149,16 @@ class _TransportCardTabState extends State<TransportCardTab> {
                     //     contentStyle: txtBold(14),
                     //   ),
                     InfoContentView(
-                      title: S.of(context).status,
-                      content: genStatus(list[index].status ?? ''),
+                      title: S.of(context).transport,
+                      content: list[index]
+                          .t
+                          ?.transports_list
+                          ?.map((o) => o.vehicleType?.name)
+                          .join(", "),
                       contentStyle: txtBold(
                         14,
                         genStatusColor(
-                          list[index].status ?? '',
+                          list[index].s?.name ?? "",
                         ),
                       ),
                     ),
@@ -182,9 +186,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: list[index].status == "ACTIVE"
-                                    ? greenColorBase
-                                    : pinkColorBase,
+                                color: genStatusColor(list[index].status ?? ""),
                                 borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(12),
                                   bottomLeft: Radius.circular(8),
@@ -194,7 +196,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                 // list[index].card_status == "ACTIVE"
                                 //     ? S.of(context).active
                                 //     :
-                                S.of(context).lock,
+                                list[index].s?.name ?? "",
                                 style: txtSemiBold(12, Colors.white),
                               ),
                             ),
@@ -238,65 +240,65 @@ class _TransportCardTabState extends State<TransportCardTab> {
                               ],
                             ),
                           ),
-                          if (list[index].status == "WAIT")
+                          if (list[index].status != "CANCEL")
                             Row(
                               children: [
                                 hpad(12),
                                 PrimaryButton(
                                   buttonSize: ButtonSize.small,
                                   buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor4,
-                                  textColor: redColor,
-                                  text: S.of(context).cancel_register,
+                                  secondaryBackgroundColor: primaryColor5,
+                                  textColor: primaryColor1,
+                                  text: S.of(context).report_lost,
                                   onTap: () {
                                     // return cancelRegister(list[index]);
                                   },
                                 ),
                               ],
                             ),
-                          if (list[index].status == "NEW")
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: greenColor7,
-                                  text: S.of(context).send_request,
-                                  textColor: greenColor8,
-                                  onTap: () {
-                                    // sendRequest(list[index]);
-                                  },
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: primaryColor5,
-                                  text: S.of(context).edit,
-                                  textColor: primaryColor1,
-                                  onTap: () {
-                                    //   Navigator.pushNamed(
-                                    //       context,
-                                    //       RegisterTransportationCard
-                                    //           .routeName,
-                                    //       arguments: {
-                                    //         "isEdit": true,
-                                    //         "data": list[index]
-                                    //       },);
-                                  },
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor4,
-                                  textColor: redColor,
-                                  text: S.of(context).delete_letter,
-                                  onTap: () {
-                                    // return deleteLetter(list[index]);
-                                  },
-                                ),
-                              ],
-                            ),
+                          // if (list[index].status == "NEW")
+                          //   Row(
+                          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //     children: [
+                          //       PrimaryButton(
+                          //         buttonSize: ButtonSize.xsmall,
+                          //         buttonType: ButtonType.secondary,
+                          //         secondaryBackgroundColor: greenColor7,
+                          //         text: S.of(context).send_request,
+                          //         textColor: greenColor8,
+                          //         onTap: () {
+                          //           // sendRequest(list[index]);
+                          //         },
+                          //       ),
+                          //       PrimaryButton(
+                          //         buttonSize: ButtonSize.xsmall,
+                          //         buttonType: ButtonType.secondary,
+                          //         secondaryBackgroundColor: primaryColor5,
+                          //         text: S.of(context).edit,
+                          //         textColor: primaryColor1,
+                          //         onTap: () {
+                          //           //   Navigator.pushNamed(
+                          //           //       context,
+                          //           //       RegisterTransportationCard
+                          //           //           .routeName,
+                          //           //       arguments: {
+                          //           //         "isEdit": true,
+                          //           //         "data": list[index]
+                          //           //       },);
+                          //         },
+                          //       ),
+                          //       PrimaryButton(
+                          //         buttonSize: ButtonSize.xsmall,
+                          //         buttonType: ButtonType.secondary,
+                          //         secondaryBackgroundColor: redColor4,
+                          //         textColor: redColor,
+                          //         text: S.of(context).delete_letter,
+                          //         onTap: () {
+                          //           // return deleteLetter(list[index]);
+                          //         },
+                          //       ),
+                          //     ],
+                          //   ),
                           vpad(12)
                         ],
                       ),

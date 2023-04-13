@@ -148,6 +148,19 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                     //     contentStyle: txtBold(14),
                     //   ),
                     InfoContentView(
+                      title: S.of(context).transport,
+                      content: list[index]
+                          .transports_list
+                          ?.map((o) => o.vehicleType?.name)
+                          .join(", "),
+                      contentStyle: txtBold(
+                        14,
+                        genStatusColor(
+                          list[index].s?.name ?? "",
+                        ),
+                      ),
+                    ),
+                    InfoContentView(
                       title: S.of(context).status,
                       content: genStatus(list[index].ticket_status ?? ''),
                       contentStyle: txtBold(

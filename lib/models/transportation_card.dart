@@ -207,6 +207,7 @@ class TransportCard {
   // More
   Reason? r;
   Status? s;
+
   TransportCard({
     this.id,
     this.createdTime,
@@ -341,6 +342,7 @@ class TransportItem {
   String? code_seri;
   double? cost;
   int? vehicle_amount;
+  int? seats;
   String? apartmentId;
   String? identity;
   String? vehicleTypeId;
@@ -348,9 +350,11 @@ class TransportItem {
   String? registration_number;
   String? shelfLifeId;
   String? type;
-  FileUploadModel? registration_image;
-  FileUploadModel? vehicle_image;
-  FileUploadModel? identity_image;
+  List<FileUploadModel>? registration_image;
+  List<FileUploadModel>? vehicle_image;
+  List<FileUploadModel>? identity_image;
+  List<FileUploadModel>? registration_image_front;
+  List<FileUploadModel>? registration_image_back;
   // More
   VehicleType? vehicleType;
   ShelfLife? shelfLife;
@@ -378,6 +382,9 @@ class TransportItem {
     this.identity_image,
     this.vehicleType,
     this.shelfLife,
+    this.seats,
+    this.registration_image_front,
+    this.registration_image_back,
   });
 
   Map<String, dynamic> toMap() {
@@ -400,9 +407,14 @@ class TransportItem {
       'registration_number': registration_number,
       'shelfLifeId': shelfLifeId,
       'type': type,
-      'registration_image': registration_image?.toMap(),
-      'vehicle_image': vehicle_image?.toMap(),
-      'identity_image': identity_image?.toMap(),
+      'seats': seats,
+      'registration_image': registration_image?.map((x) => x.toMap()).toList(),
+      'vehicle_image': vehicle_image?.map((x) => x.toMap()).toList(),
+      'identity_image': identity_image?.map((x) => x.toMap()).toList(),
+      'registration_image_front':
+          registration_image_front?.map((x) => x.toMap()).toList(),
+      'registration_image_back':
+          registration_image_back?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -423,8 +435,12 @@ class TransportItem {
           map['manageCardId'] != null ? map['manageCardId'] as String : null,
       code_seri: map['code_seri'] != null ? map['code_seri'] as String : null,
       cost: map['cost'] != null ? map['cost'] as double : null,
-      vehicle_amount:
-          map['vehicle_amount'] != null ? map['vehicle_amount'] as int : null,
+      vehicle_amount: int.tryParse(map['vehicle_amount'].toString()) != null
+          ? int.parse(map['vehicle_amount'].toString())
+          : null,
+      seats: int.tryParse(map['seats'].toString()) != null
+          ? int.parse(map['seats'].toString())
+          : null,
       apartmentId:
           map['apartmentId'] != null ? map['apartmentId'] as String : null,
       identity: map['identity'] != null ? map['identity'] as String : null,
@@ -439,16 +455,42 @@ class TransportItem {
           map['shelfLifeId'] != null ? map['shelfLifeId'] as String : null,
       type: map['type'] != null ? map['type'] as String : null,
       registration_image: map['registration_image'] != null
-          ? FileUploadModel.fromMap(
-              map['registration_image'] as Map<String, dynamic>)
+          ? List<FileUploadModel>.from(
+              (map['registration_image'] as List<dynamic>)
+                  .map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
           : null,
       vehicle_image: map['vehicle_image'] != null
-          ? FileUploadModel.fromMap(
-              map['vehicle_image'] as Map<String, dynamic>)
+          ? List<FileUploadModel>.from(
+              (map['vehicle_image'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
           : null,
       identity_image: map['identity_image'] != null
-          ? FileUploadModel.fromMap(
-              map['identity_image'] as Map<String, dynamic>)
+          ? List<FileUploadModel>.from(
+              (map['identity_image'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      registration_image_front: map['registration_image_front'] != null
+          ? List<FileUploadModel>.from(
+              (map['registration_image_front'] as List<dynamic>)
+                  .map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      registration_image_back: map['registration_image_back'] != null
+          ? List<FileUploadModel>.from(
+              (map['registration_image_back'] as List<dynamic>)
+                  .map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
           : null,
       vehicleType: map['vehicleType'] != null
           ? VehicleType.fromJson(map['vehicleType'] as Map<String, dynamic>)
@@ -470,7 +512,7 @@ class ShelfLife {
   String? createdTime;
   String? updatedTime;
   String? code;
-  String? use_time;
+  int? use_time;
   String? describe;
   String? type_time;
   String? time;
@@ -509,12 +551,15 @@ class ShelfLife {
       updatedTime:
           map['updatedTime'] != null ? map['updatedTime'] as String : null,
       code: map['code'] != null ? map['code'] as String : null,
-      use_time: map['use_time'] != null ? map['use_time'] as String : null,
+      use_time: int.tryParse(map['use_time'].toString()) != null
+          ? int.parse(map['use_time'].toString())
+          : null,
       describe: map['describe'] != null ? map['describe'] as String : null,
       type_time: map['type_time'] != null ? map['type_time'] as String : null,
       time: map['time'] != null ? map['time'] as String : null,
-      order:
-          int.tryParse(map['order']) != null ? int.parse(map['order']) : null,
+      order: int.tryParse(map['order'].toString()) != null
+          ? int.parse(map['order'].toString())
+          : null,
     );
   }
 

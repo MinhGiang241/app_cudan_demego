@@ -7049,6 +7049,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Add new transportation`
+  String get add_new_transport {
+    return Intl.message(
+      'Add new transportation',
+      name: 'add_new_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation register number`
+  String get trans_reg_num {
+    return Intl.message(
+      'Transportation register number',
+      name: 'trans_reg_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation images`
+  String get trans_images {
+    return Intl.message(
+      'Transportation images',
+      name: 'trans_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report lost`
+  String get report_lost {
+    return Intl.message(
+      'Report lost',
+      name: 'report_lost',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

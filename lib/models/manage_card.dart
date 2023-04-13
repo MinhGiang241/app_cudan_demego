@@ -4,6 +4,9 @@
 import 'dart:convert';
 
 import 'package:app_cudan/models/file_upload.dart';
+import 'package:app_cudan/models/transportation_card.dart';
+
+import 'status.dart';
 
 class ManageCard {
   String? id;
@@ -38,6 +41,11 @@ class ManageCard {
   String? month_filter;
   String? user;
   String? rules;
+
+  //more
+  Status? s;
+  TransportCard? t;
+
   ManageCard({
     this.id,
     this.createdTime,
@@ -71,6 +79,8 @@ class ManageCard {
     this.month_filter,
     this.user,
     this.rules,
+    this.s,
+    this.t,
   });
 
   Map<String, dynamic> toMap() {
@@ -183,6 +193,12 @@ class ManageCard {
           map['month_filter'] != null ? map['month_filter'] as String : null,
       user: map['user'] != null ? map['user'] as String : null,
       rules: map['rules'] != null ? map['rules'] as String : null,
+      s: map['s'] != null
+          ? Status.fromJson(map['s'] as Map<String, dynamic>)
+          : null,
+      t: map['t'] != null
+          ? TransportCard.fromMap(map['t'] as Map<String, dynamic>)
+          : null,
     );
   }
 

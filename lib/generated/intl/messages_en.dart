@@ -76,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_email": MessageLookupByLibrary.simpleMessage("Add email"),
         "add_file": MessageLookupByLibrary.simpleMessage("Add file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Add new"),
+        "add_new_transport":
+            MessageLookupByLibrary.simpleMessage("Add new transportation"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_reflection":
@@ -794,6 +796,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Renewal drawing"),
         "renter": MessageLookupByLibrary.simpleMessage("Renter"),
+        "report_lost": MessageLookupByLibrary.simpleMessage("Report lost"),
         "report_not_empty":
             MessageLookupByLibrary.simpleMessage("Report is not empty"),
         "res_card": MessageLookupByLibrary.simpleMessage("Residence card"),
@@ -1015,10 +1018,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation card details"),
         "trans_cer":
             MessageLookupByLibrary.simpleMessage("Registration certificate"),
+        "trans_images":
+            MessageLookupByLibrary.simpleMessage("Transportation images"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Transportation information"),
         "trans_letter":
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
+        "trans_reg_num": MessageLookupByLibrary.simpleMessage(
+            "Transportation register number"),
         "trans_type":
             MessageLookupByLibrary.simpleMessage("Transportation type"),
         "transfer_list": MessageLookupByLibrary.simpleMessage("Transfer list"),

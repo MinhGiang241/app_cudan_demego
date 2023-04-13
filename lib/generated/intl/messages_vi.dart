@@ -79,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_email": MessageLookupByLibrary.simpleMessage("Thêm email"),
         "add_file": MessageLookupByLibrary.simpleMessage("Thêm file"),
         "add_new": MessageLookupByLibrary.simpleMessage("Thêm mới"),
+        "add_new_transport":
+            MessageLookupByLibrary.simpleMessage("Thêm mới phương tiện"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
         "add_reflection":
@@ -795,6 +797,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "renewal_drawing":
             MessageLookupByLibrary.simpleMessage("Bản vẽ cải tạo"),
         "renter": MessageLookupByLibrary.simpleMessage("Người thuê"),
+        "report_lost": MessageLookupByLibrary.simpleMessage("Báo mất"),
         "report_not_empty": MessageLookupByLibrary.simpleMessage(
             "Biên bản không được để trống"),
         "res_card": MessageLookupByLibrary.simpleMessage("Thẻ cư dân"),
@@ -1013,10 +1016,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "trans_card_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết thẻ phương tiện"),
         "trans_cer": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
+        "trans_images": MessageLookupByLibrary.simpleMessage("Ảnh phương tiện"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
         "trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe"),
+        "trans_reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký xe"),
         "trans_type": MessageLookupByLibrary.simpleMessage("Loại phương tiện"),
         "transfer_list":
             MessageLookupByLibrary.simpleMessage("Danh sách chuyển đồ"),

@@ -134,6 +134,11 @@ Color genStatusColor(String status) {
       return redColorBase;
     case "UNPAID":
       return yellowColor7;
+    case "ACTIVED":
+      return greenColorBase;
+    case "INACTIVED":
+      return redColor3;
+
     default:
       return grayScaleColor1;
   }

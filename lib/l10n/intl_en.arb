@@ -698,5 +698,9 @@
   "num_seat": "Seat amount",
   "used_expired_date": "Expired_date",
   "add_transport": "Add transport",
-  "transport_info": "Transportation information"
+  "transport_info": "Transportation information",
+  "add_new_transport": "Add new transportation",
+  "trans_reg_num": "Transportation register number",
+  "trans_images": "Transportation images",
+  "report_lost": "Report lost"
 }

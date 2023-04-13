@@ -199,15 +199,16 @@ class APIAuth {
     return await ApiService.shared.deleteCre();
   }
 
-  static Future<List<ResponseFileUpload>> uploadSingleFile(
-      {required List<File> files,
-      OnSendProgress? onSendProgress,
-      required BuildContext context}) async {
+  static Future<List<ResponseFileUpload>> uploadSingleFile({
+    required List<File> files,
+    OnSendProgress? onSendProgress,
+    BuildContext? context,
+  }) async {
     List<ResponseFileUpload> results = [];
     if (files.isNotEmpty) {
       for (var i = 0; i < files.length; i++) {
         if (files[i].lengthSync() >= 15728640) {
-          throw (S.of(context).not_upload_15mb);
+          throw (S.current.not_upload_15mb);
         }
         final mpf = await MultipartFile.fromFile(files[i].path);
         final map = {

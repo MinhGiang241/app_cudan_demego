@@ -11,6 +11,8 @@ import '../constants/constants.dart';
 enum PrimaryIconStyle { none, round, gradient }
 
 enum PrimaryIcons {
+  bike,
+  bicycle,
   facebook,
   zalo,
   instagram,

@@ -699,5 +699,9 @@
   "num_seat": "Sồ chỗ ngồi",
   "used_expired_date": "Thời hạn sử dụng",
   "add_transport": "Thêm phương tiện",
-  "transport_info": "Thông tin phương tiện"
+  "transport_info": "Thông tin phương tiện",
+  "add_new_transport": "Thêm mới phương tiện",
+  "trans_reg_num": "Số đăng ký xe",
+  "trans_images": "Ảnh phương tiện",
+  "report_lost": "Báo mất"
 }

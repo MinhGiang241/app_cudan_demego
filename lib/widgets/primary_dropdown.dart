@@ -265,7 +265,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
           PrimaryCard(
             child: Column(
               children: [
-                !widget.selectList!
+                !(widget.selectList ?? [])
                             .map((e) => e.value)
                             .contains(widget.value) &&
                         widget.value != null
