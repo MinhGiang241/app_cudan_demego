@@ -7089,6 +7089,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to report missing card {code}?`
+  String confirm_missing_report(Object code) {
+    return Intl.message(
+      'Do you want to report missing card $code?',
+      name: 'confirm_missing_report',
+      desc: '',
+      args: [code],
+    );
+  }
+
+  /// `When report missing card , your card will be cancelled. if you want continue use service you need to register new card`
+  String get when_missing {
+    return Intl.message(
+      'When report missing card , your card will be cancelled. if you want continue use service you need to register new card',
+      name: 'when_missing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report missing report successfully`
+  String get success_report_missing {
+    return Intl.message(
+      'Report missing report successfully',
+      name: 'success_report_missing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report missing card`
+  String get report_missing_card {
+    return Intl.message(
+      'Report missing card',
+      name: 'report_missing_card',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

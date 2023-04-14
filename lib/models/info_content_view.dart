@@ -138,7 +138,8 @@ Color genStatusColor(String status) {
       return greenColorBase;
     case "INACTIVED":
       return redColor3;
-
+    case "LOST":
+      return redColor9;
     default:
       return grayScaleColor1;
   }

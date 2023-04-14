@@ -703,5 +703,9 @@
   "add_new_transport": "Thêm mới phương tiện",
   "trans_reg_num": "Số đăng ký xe",
   "trans_images": "Ảnh phương tiện",
-  "report_lost": "Báo mất"
+  "report_lost": "Báo mất",
+  "confirm_missing_report": "Bạn có chắc chắn muốn báo mất thẻ xe {code} không?",
+  "when_missing": "Khi báo mất thẻ của bạn sẽ bị hủy.Nếu muốn tiếp tục sử dụng dịch vụ, bạn cần đăng ký thẻ mới.",
+  "success_report_missing": "Report missing report successfully",
+  "report_missing_card": "Báo mất thẻ xe"
 }

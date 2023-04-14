@@ -268,7 +268,7 @@ class TransportCard {
 
   factory TransportCard.fromMap(Map<String, dynamic> map) {
     return TransportCard(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:

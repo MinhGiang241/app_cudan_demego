@@ -702,5 +702,9 @@
   "add_new_transport": "Add new transportation",
   "trans_reg_num": "Transportation register number",
   "trans_images": "Transportation images",
-  "report_lost": "Report lost"
+  "report_lost": "Report lost",
+  "confirm_missing_report": "Do you want to report missing card {code}?",
+  "when_missing": "When report missing card , your card will be cancelled. if you want continue use service you need to register new card",
+  "success_report_missing": "Report missing report successfully",
+  "report_missing_card": "Report missing card"
 }

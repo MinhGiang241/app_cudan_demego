@@ -257,7 +257,9 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                                   textColor: redColor,
                                   text: S.of(context).cancel_register,
                                   onTap: () {
-                                    // return cancelRegister(list[index]);
+                                    context
+                                        .read<TransportCardPrv>()
+                                        .cancelLetter(context, list[index]);
                                   },
                                 ),
                               ],
@@ -273,6 +275,9 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                                   text: S.of(context).send_request,
                                   textColor: greenColor8,
                                   onTap: () {
+                                    context
+                                        .read<TransportCardPrv>()
+                                        .sendApprove(context, list[index]);
                                     // sendRequest(list[index]);
                                   },
                                 ),
@@ -301,6 +306,9 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                                   text: S.of(context).delete_letter,
                                   onTap: () {
                                     // return deleteLetter(list[index]);
+                                    context
+                                        .read<TransportCardPrv>()
+                                        .deleteLetter(context, list[index]);
                                   },
                                 ),
                               ],

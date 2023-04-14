@@ -386,7 +386,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
       );
 
       await APITransport.saveTransportLetter(letter.toMap()).then((v) {
-        isSend ? isSendApproveLoading = true : isAddNewLoading = true;
+        isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(
           context: context,
@@ -397,12 +397,13 @@ class AddNewTransportCardPrv extends ChangeNotifier {
             context,
             TransportCardScreen.routeName,
             (route) => route.isFirst,
+            arguments: 1,
           ),
         );
       });
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
-      isSend ? isSendApproveLoading = true : isAddNewLoading = true;
+      isSend ? isSendApproveLoading = false : isAddNewLoading = false;
       notifyListeners();
     }
   }

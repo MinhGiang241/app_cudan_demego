@@ -119,7 +119,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                   var listContent = [
                     InfoContentView(
                       title: S.of(context).card_num,
-                      content: list[index].id,
+                      content: list[index].serial_lot,
                       contentStyle: txtBold(16, primaryColor1),
                     ),
                     InfoContentView(
@@ -240,7 +240,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                               ],
                             ),
                           ),
-                          if (list[index].status != "CANCEL")
+                          if (list[index].status != "OST")
                             Row(
                               children: [
                                 hpad(12),
@@ -251,6 +251,9 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                   textColor: primaryColor1,
                                   text: S.of(context).report_lost,
                                   onTap: () {
+                                    context
+                                        .read<TransportCardPrv>()
+                                        .missingReport(context, list[index]);
                                     // return cancelRegister(list[index]);
                                   },
                                 ),

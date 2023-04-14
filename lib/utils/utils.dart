@@ -601,11 +601,13 @@ class Utils {
         ));
   }
 
-  static showConfirmMessage(
-      {required BuildContext context,
-      String title = '',
-      String content = '',
-      Function()? onConfirm}) {
+  static showConfirmMessage({
+    required BuildContext context,
+    String title = '',
+    String content = '',
+    Function()? onConfirm,
+    Widget? child,
+  }) {
     Utils.showDialog(
       context: context,
       dialog: PrimaryDialog.custom(
@@ -625,6 +627,7 @@ class Utils {
               style: txtBodySmallRegular(),
               textAlign: TextAlign.center,
             ),
+            if (child != null) child,
             vpad(24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
