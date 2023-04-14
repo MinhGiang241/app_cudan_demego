@@ -297,11 +297,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký chuyển đồ"),
         "edit_reg_pet":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa đăng ký vật nuôi"),
+        "edit_reg_transport": MessageLookupByLibrary.simpleMessage(
+            "Chỉnh sửa đăng ký thẻ phương tiện"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ cư dân"),
         "edit_service_a": m9,
         "edit_trans_card":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa thẻ phương tiện"),
+        "edit_transport":
+            MessageLookupByLibrary.simpleMessage("Sửa phương tiện"),
         "education_level":
             MessageLookupByLibrary.simpleMessage("Trình độ học vấn"),
         "elcetric_bill": MessageLookupByLibrary.simpleMessage("Tiền điện"),
@@ -343,6 +347,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập SĐT/Email "),
         "enter_identity":
             MessageLookupByLibrary.simpleMessage("Nhập CMND/ CCCD/ Hộ chiếu"),
+        "enter_license_num":
+            MessageLookupByLibrary.simpleMessage("Nhập biển số xe"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Nhập họ và tên"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Nhập số"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
@@ -352,6 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập số điện thoại"),
         "enter_phone_email": MessageLookupByLibrary.simpleMessage(
             "Nhập số điện thoại hoặc email"),
+        "enter_reg_num":
+            MessageLookupByLibrary.simpleMessage("Nhập số đăng ký xe"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
         "enter_worker_num":
@@ -495,6 +503,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "limit_15mb": MessageLookupByLibrary.simpleMessage(
             "Giới hạn mỗi file tải lên không vượt quá 15MB/file"),
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
+        "list_transport":
+            MessageLookupByLibrary.simpleMessage("Danh sách phương tiện"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "long": MessageLookupByLibrary.simpleMessage("Dài"),
@@ -613,6 +623,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Loại thông báo"),
         "num_seat": MessageLookupByLibrary.simpleMessage("Sồ chỗ ngồi"),
+        "num_seat_not_zero": MessageLookupByLibrary.simpleMessage(
+            "Số chỗ ngồi không được bằng 0"),
         "object_code": MessageLookupByLibrary.simpleMessage("Mã vật phẩm"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết vật phẩm"),
@@ -765,8 +777,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_service": MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ"),
         "reg_service_a": m12,
         "reg_time": MessageLookupByLibrary.simpleMessage("Thời gian đăng ký"),
-        "reg_trans_photos":
-            MessageLookupByLibrary.simpleMessage("Đăng ký xe (2 mặt)"),
+        "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
+            "Ảnh đăng ký xe (ảnh chụp 2 mặt)"),
         "reg_transport_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
         "region": MessageLookupByLibrary.simpleMessage("Khu vực"),
@@ -871,7 +883,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn loại thẻ"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
+        "select_expire": MessageLookupByLibrary.simpleMessage("Chọn thời hạn"),
+        "select_seat_num":
+            MessageLookupByLibrary.simpleMessage("Chọn số chỗ ngồi"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
+        "select_transport":
+            MessageLookupByLibrary.simpleMessage("Chọn phương tiện"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),
@@ -983,17 +1000,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Điều khoản & dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản cư dân đồng nghĩa với việc đồng thuận với "),
-        "th01": MessageLookupByLibrary.simpleMessage("Th01"),
-        "th02": MessageLookupByLibrary.simpleMessage("Th02"),
-        "th03": MessageLookupByLibrary.simpleMessage("Th03"),
-        "th04": MessageLookupByLibrary.simpleMessage("Th04"),
-        "th05": MessageLookupByLibrary.simpleMessage("Th05"),
-        "th06": MessageLookupByLibrary.simpleMessage("Th07"),
-        "th08": MessageLookupByLibrary.simpleMessage("Th08"),
-        "th09": MessageLookupByLibrary.simpleMessage("Th09"),
-        "th10": MessageLookupByLibrary.simpleMessage("Th10"),
-        "th11": MessageLookupByLibrary.simpleMessage("Th11"),
-        "th12": MessageLookupByLibrary.simpleMessage("Th12"),
+        "th01": MessageLookupByLibrary.simpleMessage("Tháng 1"),
+        "th02": MessageLookupByLibrary.simpleMessage("Tháng 2"),
+        "th03": MessageLookupByLibrary.simpleMessage("Tháng 3"),
+        "th04": MessageLookupByLibrary.simpleMessage("Tháng 4"),
+        "th05": MessageLookupByLibrary.simpleMessage("Tháng 5"),
+        "th06": MessageLookupByLibrary.simpleMessage("Tháng 6"),
+        "th07": MessageLookupByLibrary.simpleMessage("Tháng 7"),
+        "th08": MessageLookupByLibrary.simpleMessage("Tháng 8"),
+        "th09": MessageLookupByLibrary.simpleMessage("Tháng 9"),
+        "th10": MessageLookupByLibrary.simpleMessage("Tháng 10"),
+        "th11": MessageLookupByLibrary.simpleMessage("Tháng 11"),
+        "th12": MessageLookupByLibrary.simpleMessage("Tháng 12"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
@@ -1021,9 +1039,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "tranfer_out_reg":
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ ra"),
         "trans_card": MessageLookupByLibrary.simpleMessage("Thẻ xe"),
-        "trans_card_details":
-            MessageLookupByLibrary.simpleMessage("Chi tiết thẻ phương tiện"),
+        "trans_card_details": MessageLookupByLibrary.simpleMessage(
+            "Chi tiết Đăng ký thẻ phương tiện"),
         "trans_cer": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
+        "trans_details":
+            MessageLookupByLibrary.simpleMessage("Chi tiết phương tiện"),
         "trans_images": MessageLookupByLibrary.simpleMessage("Ảnh phương tiện"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
@@ -1041,6 +1061,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
         "transport_list":
             MessageLookupByLibrary.simpleMessage("Danh sách phương tiện"),
+        "transport_reg": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Đơn giá (VNĐ)"),

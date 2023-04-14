@@ -23,6 +23,20 @@ class ConsummedWaterTab extends StatefulWidget {
 
 class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
   late TooltipBehavior _tooltipBehavior;
+  var monthList = [
+    S.current.th01,
+    S.current.th02,
+    S.current.th03,
+    S.current.th04,
+    S.current.th05,
+    S.current.th06,
+    S.current.th07,
+    S.current.th08,
+    S.current.th09,
+    S.current.th10,
+    S.current.th11,
+    S.current.th12,
+  ];
   final _selectionBehaviorLast = SelectionBehavior(
     selectedColor: yellowColor7,
     toggleSelection: false,
@@ -90,7 +104,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
           ...List.generate(
             12,
             (index) => ChartDataViewModel(
-              title: "${S.of(context).month} ${(index + 1).toString()}",
+              title: monthList[index],
               num: dataCurent[(index + 1).toString()] ?? 0,
             ),
           )

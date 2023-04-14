@@ -166,21 +166,21 @@ genOrder(String status) {
 
 genContentStyle(String content) {
   switch (content) {
-    case "ACTIVE":
-      return txtBold(14, yellowColor);
-    case "INACTIVE":
-      return txtBold(14, redColor2);
-    case "LOCK":
-      return txtBold(14, pinkColorBase);
-    case "APPROVED":
-      return txtBold(14, greenColor6);
-    case "NEW":
-      return txtBold(14, grayScaleColor1);
-    case "WAIT":
-      return txtBold(14, primaryColor1);
-    case "CANCEL":
-      return txtBold(14, redColorBase);
+    // case "ACTIVE":
+    //   return txtBold(14, yellowColor);
+    // case "INACTIVE":
+    //   return txtBold(14, redColor2);
+    // case "LOCK":
+    //   return txtBold(14, pinkColorBase);
+    // case "APPROVED":
+    //   return txtBold(14, greenColor6);
+    // case "NEW":
+    //   return txtBold(14, grayScaleColor1);
+    // case "WAIT":
+    //   return txtBold(14, primaryColor1);
+    // case "CANCEL":
+    //   return txtBold(14, redColorBase);
     default:
-      return txtRegular(14);
+      return txtBold(14, genStatusColor(content));
   }
 }

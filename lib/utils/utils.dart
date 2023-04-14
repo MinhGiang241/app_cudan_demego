@@ -744,4 +744,22 @@ class Utils {
       await FlutterDownloader.open(taskId: taskId!);
     }
   }
+
+  static String replaceInputVietChar(String v) {
+    v = v.replaceAll(RegExp('[à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ]'), 'a');
+    v = v.replaceAll(RegExp('[è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ]'), 'e');
+    v = v.replaceAll(RegExp('[ì|í|ị|ỉ|ĩ]'), 'i');
+    v = v.replaceAll(RegExp('[ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ]'), 'o');
+    v = v.replaceAll(RegExp('[ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ]'), 'u');
+    v = v.replaceAll(RegExp('[ỳ|ý|ỵ|ỷ|ỹ]'), 'y');
+    v = v.replaceAll(RegExp('[đ]'), 'd');
+    v = v.replaceAll(RegExp('[À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ]'), 'A');
+    v = v.replaceAll(RegExp('[È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ]'), 'E');
+    v = v.replaceAll(RegExp('[Ì|Í|Ị|Ỉ|Ĩ]'), 'I');
+    v = v.replaceAll(RegExp('[Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ]'), 'O');
+    v = v.replaceAll(RegExp('[Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ]'), 'U');
+    v = v.replaceAll(RegExp('[Ỳ|Ý|Ỵ|Ỷ|Ỹ]'), 'Y');
+    v = v.replaceAll(RegExp('[Đ]'), 'D');
+    return v;
+  }
 }

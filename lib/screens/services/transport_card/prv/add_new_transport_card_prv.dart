@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:app_cudan/models/file_upload.dart';
@@ -15,6 +17,14 @@ import '../../../../utils/utils.dart';
 import '../transport_card_screen.dart.dart';
 
 class AddNewTransportCardPrv extends ChangeNotifier {
+  AddNewTransportCardPrv({this.existedTransport}) {
+    if (existedTransport != null) {
+      id = existedTransport?.id;
+      isIntergate = existedTransport?.integrated ?? false;
+      isObey = existedTransport?.confirmation ?? false;
+      transportList = existedTransport?.transports_list ?? [];
+    }
+  }
   int activeStep = 0;
   final PageController pageController = PageController();
   bool isDisableCroll = true;
@@ -26,6 +36,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   bool autoValid = false;
   bool isShowLicense = true;
   final formKey = GlobalKey<FormState>();
+
+  TransportCard? existedTransport;
+  String? id;
 
   final TextEditingController liceneController = TextEditingController();
   final TextEditingController seatNumController = TextEditingController();
@@ -40,20 +53,82 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   String? transTypeValue;
   String? expiredValue;
 
-  List<File> imageFileFront = [];
-  List<File> imageFileBack = [];
+  List<File> imageFileRes = [];
   List<File> otherImages = [];
   List<FileUploadModel> otherExistedImages = [];
-  List<FileUploadModel> frontExistedImages = [];
-  List<FileUploadModel> backExistedImages = [];
+  List<FileUploadModel> resExistedImages = [];
   List<FileUploadModel> otherUploadedImages = [];
-  List<FileUploadModel> frontUploadedImages = [];
-  List<FileUploadModel> backUploadedImages = [];
+  List<FileUploadModel> resUploadedImages = [];
 
   List<VehicleType> transTypeList = [];
   List<ShelfLife> shelfLifeList = [];
 
   List<TransportItem> transportList = [];
+  TransportItem? itemEdit;
+  int? indexEdit;
+
+  formValidation() {
+    if (formKey.currentState != null && formKey.currentState!.validate()) {
+      clearValidStringStep();
+    } else {
+      genValidString();
+    }
+  }
+
+  clearValidStringStep() {
+    validateLicene = null;
+    validateSeat = null;
+    validateTrans = null;
+    validateReg = null;
+    validateExpire = null;
+    notifyListeners();
+  }
+
+  onTapEditTransport(TransportItem item, int index) {
+    itemEdit = item;
+    indexEdit = index;
+    notifyListeners();
+    addTransport();
+    transTypeValue = transTypeList
+        .firstWhere(
+          (i) => i.id == item.vehicleTypeId,
+        )
+        .code;
+    if (transTypeValue == "BICYCLE") {
+      isShowLicense = false;
+      regNumController.clear();
+      liceneController.clear();
+      notifyListeners();
+    }
+
+    resExistedImages =
+        List<FileUploadModel>.from(item.registration_image ?? []);
+    otherExistedImages = List<FileUploadModel>.from(item.vehicle_image ?? []);
+    seatNumController.text = item.seats != null ? item.seats.toString() : '';
+    liceneController.text = item.number_plate ?? '';
+    regNumController.text = item.registration_number ?? "";
+    expiredValue = item.shelfLifeId;
+    notifyListeners();
+  }
+
+  String? numSeatValidate(String? v) {
+    if (seatNumController.text.trim().isEmpty) {
+      return '';
+    } else if (int.tryParse(seatNumController.text.trim()) != null &&
+        int.parse(seatNumController.text.trim()) == 0) {
+      return '';
+    }
+    return null;
+  }
+
+  onChangedLicenseNum(String? v) {
+    if (v != null) {
+      liceneController.text = Utils.replaceInputVietChar(v).toUpperCase();
+
+      liceneController.selection =
+          TextSelection.collapsed(offset: liceneController.text.length);
+    }
+  }
 
   onPageChanged(v) {
     activeStep = v;
@@ -95,6 +170,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   addTransport() {
     isDisableCroll = false;
     notifyListeners();
+
     pageController
         .animateToPage(
       ++activeStep,
@@ -102,12 +178,19 @@ class AddNewTransportCardPrv extends ChangeNotifier {
       curve: Curves.bounceInOut,
     )
         .then((v) {
+      if (itemEdit == null) {
+        clearAddForm();
+      }
+      clearValidStringStep();
       isDisableCroll = true;
       notifyListeners();
     });
   }
 
-  backStepScreen() {
+  backStepScreen(BuildContext context) {
+    FocusScope.of(context).unfocus();
+
+    clearAddForm();
     isDisableCroll = false;
     notifyListeners();
     pageController
@@ -155,22 +238,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     }
   }
 
-  onSelectFrontPhoto(BuildContext context) async {
+  onSelectResPhoto(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
-        imageFileFront.addAll(list);
-
-        notifyListeners();
-      }
-    });
-  }
-
-  onSelectBackPhoto(BuildContext context) async {
-    await Utils.selectImage(context, false).then((value) {
-      if (value != null) {
-        final list = value.map<File>((e) => File(e.path)).toList();
-        imageFileBack.addAll(list);
+        imageFileRes.addAll(list);
 
         notifyListeners();
       }
@@ -188,13 +260,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     });
   }
 
-  onRemoveFront(int index) {
-    imageFileFront.removeAt(index);
-    notifyListeners();
-  }
-
-  onRemoveBack(int index) {
-    imageFileBack.removeAt(index);
+  onRemoveResImage(int index) {
+    imageFileRes.removeAt(index);
     notifyListeners();
   }
 
@@ -203,13 +270,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  onRemoveExistFront(int index) {
-    frontExistedImages.removeAt(index);
-    notifyListeners();
-  }
-
-  onRemoveExistBack(int index) {
-    backExistedImages.removeAt(index);
+  onRemoveExistRes(int index) {
+    resExistedImages.removeAt(index);
     notifyListeners();
   }
 
@@ -218,13 +280,13 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future uploadFront() async {
+  Future uploadResImages() async {
     await APIAuth.uploadSingleFile(
-      files: imageFileFront,
+      files: imageFileRes,
     ).then((v) {
       if (v.isNotEmpty) {
         for (var e in v) {
-          frontUploadedImages.add(
+          resUploadedImages.add(
             FileUploadModel(id: e.data, name: e.name),
           );
         }
@@ -250,22 +312,6 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     });
   }
 
-  Future uploadBack() async {
-    await APIAuth.uploadSingleFile(
-      files: imageFileBack,
-    ).then((v) {
-      if (v.isNotEmpty) {
-        for (var e in v) {
-          backUploadedImages.add(
-            FileUploadModel(id: e.data, name: e.name),
-          );
-        }
-      }
-    }).catchError((e) {
-      throw (e);
-    });
-  }
-
   clearAddForm() {
     // formKey.currentState.initState();
     validateLicene = null;
@@ -273,14 +319,28 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     validateSeat = null;
     validateLicene = null;
     validateExpire = null;
+    validateTrans = null;
 
     transTypeValue = null;
     expiredValue = null;
 
+    isShowLicense = true;
+    autoValid = false;
+    isAddTransLoading = false;
+
+    indexEdit = null;
+    itemEdit = null;
+    otherExistedImages.clear();
+    otherImages.clear();
+    otherUploadedImages.clear();
+    resExistedImages.clear();
+    resUploadedImages.clear();
+    imageFileRes.clear();
+    formKey.currentState!.reset();
+
     regNumController.clear();
     seatNumController.clear();
     liceneController.clear();
-    isShowLicense = true;
     notifyListeners();
   }
 
@@ -292,6 +352,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     }
     if (seatNumController.text.trim().isEmpty) {
       validateSeat = S.current.not_blank;
+    } else if (int.tryParse(seatNumController.text.trim()) != null &&
+        int.parse(seatNumController.text.trim()) == 0) {
+      validateSeat = S.current.num_seat_not_zero;
     } else {
       validateSeat = null;
     }
@@ -314,20 +377,19 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   }
 
   onAddTransport(BuildContext context) async {
+    autoValid = true;
+    isAddTransLoading = true;
+    notifyListeners();
+
     try {
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartmentId =
           context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
 
-      await uploadFront();
-      await uploadBack();
-      await uploadOther();
-      autoValid = true;
-      isAddTransLoading = true;
-      notifyListeners();
-
       if (formKey.currentState!.validate()) {
-        genValidString();
+        await uploadResImages();
+        await uploadOther();
+        clearValidStringStep();
         var vehicleTypeId = transTypeList
             .firstWhere((element) => element.code == transTypeValue)
             .id;
@@ -338,24 +400,27 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           shelfLifeId: expiredValue,
           vehicleTypeId: vehicleTypeId,
           registration_number: regNumController.text.trim(),
-          registration_image: frontUploadedImages +
-              frontExistedImages +
-              backUploadedImages +
-              backUploadedImages,
-          registration_image_front: frontUploadedImages + frontExistedImages,
-          registration_image_back: backUploadedImages + backUploadedImages,
+          registration_image:
+              resExistedImages + resUploadedImages + otherExistedImages,
           seats: int.parse(seatNumController.text.trim()),
+          vehicle_image: otherExistedImages + otherUploadedImages,
         );
+        if (indexEdit != null) {
+          transportList[indexEdit!] = transportItem;
+        } else {
+          transportList.add(transportItem);
+        }
 
-        transportList.add(transportItem);
+        autoValid = false;
+        isAddTransLoading = false;
         notifyListeners();
+
+        backStepScreen(context);
       } else {
+        isAddTransLoading = false;
+        notifyListeners();
         genValidString();
       }
-      autoValid = false;
-      isAddTransLoading = false;
-      clearAddForm();
-      backStepScreen();
     } catch (e) {
       autoValid = false;
       isAddTransLoading = false;
@@ -364,16 +429,16 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     }
   }
 
-  onSendSubmit(BuildContext context, bool isSend) async {
-    var apartmentId =
-        context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
+  onSendSubmit(BuildContext context, bool isSend, bool isEdit) async {
+    var apartment = context.read<ResidentInfoPrv>().selectedApartment;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var residentInfo = context.read<ResidentInfoPrv>().userInfo;
     isSend ? isSendApproveLoading = true : isAddNewLoading = true;
     notifyListeners();
     try {
       TransportCard letter = TransportCard(
-        apartmentId: apartmentId,
+        id: id,
+        apartmentId: apartment?.apartmentId,
         residentId: residentId,
         phone_number: residentInfo?.account?.phone_number,
         confirmation: isObey,
@@ -382,7 +447,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         name_resident: residentInfo?.info_name,
         ticket_status: isSend ? "WAIT" : "NEW",
         transports_list: transportList,
-        name: residentInfo?.account?.fullName,
+        name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
+        registration_date: existedTransport?.registration_date ??
+            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+        address:
+            "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
       );
 
       await APITransport.saveTransportLetter(letter.toMap()).then((v) {
@@ -392,7 +461,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           context: context,
           e: isSend
               ? S.of(context).success_send_letter
-              : S.of(context).success_cr_new,
+              : isEdit
+                  ? S.of(context).success_edit
+                  : S.of(context).success_cr_new,
           onClose: () => Navigator.pushNamedAndRemoveUntil(
             context,
             TransportCardScreen.routeName,

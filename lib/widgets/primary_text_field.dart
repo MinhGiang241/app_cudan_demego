@@ -36,6 +36,7 @@ class PrimaryTextField extends StatefulWidget {
       this.textAlign,
       this.maxLength,
       this.onChanged,
+      this.onlyTextNotVietChar = false,
       this.filter = const [],
       this.blockSpace = false,
       this.blockSpecial = false,
@@ -66,6 +67,7 @@ class PrimaryTextField extends StatefulWidget {
   final bool blockSpecial;
   final bool onlyText;
   final bool onlyNum;
+  final bool onlyTextNotVietChar;
   final String? validateString;
   final Color? background;
   final Color? textColor;
@@ -135,6 +137,9 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     textAlign: widget.textAlign ?? TextAlign.start,
                     inputFormatters: <TextInputFormatter>[
                       // FilteringTextInputFormatter.deny(RegExp('[ ]')),
+                      if (widget.onlyTextNotVietChar)
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9a-zA-Z]')),
                       if (widget.onlyNum)
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                       if (widget.onlyText)

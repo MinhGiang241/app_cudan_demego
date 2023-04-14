@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/services/transport_card/manage_card_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,6 +16,7 @@ import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../../../auth/prv/resident_info_prv.dart';
 import '../prv/transport_card_prv.dart';
+import '../transport_letter_details_screen.dart';
 
 class TransportCardTab extends StatefulWidget {
   const TransportCardTab({super.key});
@@ -171,10 +173,12 @@ class _TransportCardTabState extends State<TransportCardTab> {
                     ),
                     child: PrimaryCard(
                       onTap: () {
-                        // Navigator.of(context).pushNamed(
-                        //   TransportationCardDetails.routeName,
-                        //   arguments: {"card": list[index]},
-                        // );
+                        Navigator.of(context).pushNamed(
+                          ManageCardDetailsScreen.routeName,
+                          arguments: {
+                            "card": list[index],
+                          },
+                        );
                       },
                       child: Column(
                         children: [

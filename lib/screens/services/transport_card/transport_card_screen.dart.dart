@@ -21,7 +21,7 @@ import 'tabs/transport_letter_tab.dart';
 
 class TransportCardScreen extends StatefulWidget {
   const TransportCardScreen({super.key});
-  static const routeName = '/transport_card';
+  static const routeName = '/transport/add';
 
   @override
   State<TransportCardScreen> createState() => _TransportCardScreenState();

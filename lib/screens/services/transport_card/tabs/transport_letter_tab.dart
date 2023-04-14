@@ -17,6 +17,8 @@ import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../../../auth/prv/resident_info_prv.dart';
+import '../add_new_transport_card.dart';
+import '../transport_letter_details_screen.dart';
 
 class TransportLetterTab extends StatefulWidget {
   TransportLetterTab({super.key});
@@ -179,10 +181,16 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                     ),
                     child: PrimaryCard(
                       onTap: () {
-                        // Navigator.of(context).pushNamed(
-                        //   TransportationCardDetails.routeName,
-                        //   arguments: {"card": list[index]},
-                        // );
+                        Navigator.of(context).pushNamed(
+                          TransportLetterDetailsScreen.routeName,
+                          arguments: {
+                            "card": list[index],
+                            "sendRequest":
+                                context.read<TransportCardPrv>().sendApprove,
+                            "cancel":
+                                context.read<TransportCardPrv>().cancelLetter
+                          },
+                        );
                       },
                       child: Column(
                         children: [
@@ -288,14 +296,14 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                                   text: S.of(context).edit,
                                   textColor: primaryColor1,
                                   onTap: () {
-                                    //   Navigator.pushNamed(
-                                    //       context,
-                                    //       RegisterTransportationCard
-                                    //           .routeName,
-                                    //       arguments: {
-                                    //         "isEdit": true,
-                                    //         "data": list[index]
-                                    //       },);
+                                    Navigator.pushNamed(
+                                      context,
+                                      AddNewTransportCardScreen.routeName,
+                                      arguments: {
+                                        "isEdit": true,
+                                        "data": list[index],
+                                      },
+                                    );
                                   },
                                 ),
                                 PrimaryButton(

@@ -295,11 +295,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edit register delivery"),
         "edit_reg_pet":
             MessageLookupByLibrary.simpleMessage("Edit registration pet"),
+        "edit_reg_transport": MessageLookupByLibrary.simpleMessage(
+            "Edit transportation registration"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
         "edit_service_a": m9,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
+        "edit_transport":
+            MessageLookupByLibrary.simpleMessage("Edit transportation"),
         "education_level":
             MessageLookupByLibrary.simpleMessage("Education level"),
         "elcetric_bill":
@@ -340,6 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter email /phone"),
         "enter_identity":
             MessageLookupByLibrary.simpleMessage("Enter identity"),
+        "enter_license_num":
+            MessageLookupByLibrary.simpleMessage("Enter license number"),
         "enter_name": MessageLookupByLibrary.simpleMessage("Enter name"),
         "enter_num": MessageLookupByLibrary.simpleMessage("Enter Number"),
         "enter_pas": MessageLookupByLibrary.simpleMessage("Enter password"),
@@ -349,6 +355,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "enter_phone_email":
             MessageLookupByLibrary.simpleMessage("Enter phone number or email"),
+        "enter_reg_num":
+            MessageLookupByLibrary.simpleMessage("Enter registration number"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "enter_worker_num":
@@ -492,6 +500,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "limit_15mb": MessageLookupByLibrary.simpleMessage(
             "The limit for each upload file does not exceed 15MB"),
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
+        "list_transport":
+            MessageLookupByLibrary.simpleMessage("Transportation list"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
@@ -607,6 +617,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Notification type"),
         "num_seat": MessageLookupByLibrary.simpleMessage("Seat amount"),
+        "num_seat_not_zero":
+            MessageLookupByLibrary.simpleMessage("Seat number can not be zero"),
         "object_code": MessageLookupByLibrary.simpleMessage("Object code"),
         "object_details":
             MessageLookupByLibrary.simpleMessage("Object details"),
@@ -870,8 +882,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select card type"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Select construction type"),
+        "select_expire":
+            MessageLookupByLibrary.simpleMessage("Select expired time"),
+        "select_seat_num":
+            MessageLookupByLibrary.simpleMessage("Select number seat"),
         "select_surface":
             MessageLookupByLibrary.simpleMessage("Select surface"),
+        "select_transport":
+            MessageLookupByLibrary.simpleMessage("Select transport"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "System is sending to your email, please wait"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
@@ -983,17 +1001,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Registering for a resident account means consenting to "),
-        "th01": MessageLookupByLibrary.simpleMessage("M-01"),
-        "th02": MessageLookupByLibrary.simpleMessage("M-02"),
-        "th03": MessageLookupByLibrary.simpleMessage("M-03"),
-        "th04": MessageLookupByLibrary.simpleMessage("M-04"),
-        "th05": MessageLookupByLibrary.simpleMessage("M-05"),
-        "th06": MessageLookupByLibrary.simpleMessage("M-07"),
-        "th08": MessageLookupByLibrary.simpleMessage("M-08"),
-        "th09": MessageLookupByLibrary.simpleMessage("M-09"),
-        "th10": MessageLookupByLibrary.simpleMessage("M-10"),
-        "th11": MessageLookupByLibrary.simpleMessage("M-11"),
-        "th12": MessageLookupByLibrary.simpleMessage("M-12"),
+        "th01": MessageLookupByLibrary.simpleMessage("Jan"),
+        "th02": MessageLookupByLibrary.simpleMessage("Fed"),
+        "th03": MessageLookupByLibrary.simpleMessage("Mar"),
+        "th04": MessageLookupByLibrary.simpleMessage("Apr"),
+        "th05": MessageLookupByLibrary.simpleMessage("May"),
+        "th06": MessageLookupByLibrary.simpleMessage("Jun"),
+        "th07": MessageLookupByLibrary.simpleMessage("Jul"),
+        "th08": MessageLookupByLibrary.simpleMessage("Aug"),
+        "th09": MessageLookupByLibrary.simpleMessage("Sep"),
+        "th10": MessageLookupByLibrary.simpleMessage("Oct"),
+        "th11": MessageLookupByLibrary.simpleMessage("Nov"),
+        "th12": MessageLookupByLibrary.simpleMessage("Dec"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
@@ -1025,6 +1044,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation card details"),
         "trans_cer":
             MessageLookupByLibrary.simpleMessage("Registration certificate"),
+        "trans_details":
+            MessageLookupByLibrary.simpleMessage("Transportation details"),
         "trans_images":
             MessageLookupByLibrary.simpleMessage("Transportation images"),
         "trans_info":
@@ -1044,6 +1065,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation information"),
         "transport_list":
             MessageLookupByLibrary.simpleMessage("Transportation list"),
+        "transport_reg":
+            MessageLookupByLibrary.simpleMessage("Transport registration"),
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),

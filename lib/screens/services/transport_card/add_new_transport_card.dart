@@ -1,6 +1,7 @@
 import 'package:app_cudan/screens/services/transport_card/prv/add_new_transport_card_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/transportation_card.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/dash_button.dart';
 import '../../../widgets/primary_button.dart';
@@ -33,14 +35,25 @@ class AddNewTransportCardScreen extends StatefulWidget {
 class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+
+    var isEdit = arg != null ? arg['isEdit'] : false;
+    TransportCard card = TransportCard();
+    if (isEdit) {
+      card = arg['data'];
+    }
     return ChangeNotifierProvider(
-      create: (_) => AddNewTransportCardPrv(),
+      create: (_) => AddNewTransportCardPrv(existedTransport: card),
       builder: (context, snapshot) {
         return PrimaryScreen(
           appBar: PrimaryAppbar(
-            title: context.read<AddNewTransportCardPrv>().activeStep == 0
-                ? S.of(context).reg_transport_card
-                : S.of(context).add_new_transport,
+            title: context.watch<AddNewTransportCardPrv>().activeStep == 0
+                ? isEdit
+                    ? S.of(context).edit_reg_transport
+                    : S.of(context).reg_transport_card
+                : context.read<AddNewTransportCardPrv>().itemEdit != null
+                    ? S.of(context).edit_transport
+                    : S.of(context).add_new_transport,
             leading: BackButton(
               onPressed: () {
                 context.read<AddNewTransportCardPrv>().activeStep == 0
@@ -49,7 +62,9 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                         TransportCardScreen.routeName,
                         // arguments: true,
                       )
-                    : context.read<AddNewTransportCardPrv>().backStepScreen();
+                    : context
+                        .read<AddNewTransportCardPrv>()
+                        .backStepScreen(context);
               },
             ),
           ),
@@ -75,9 +90,10 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     child: Text('${e.use_time} ${e.type_time}'),
                   );
                 }).toList();
+
                 return PageView(
                   controller:
-                      context.read<AddNewTransportCardPrv>().pageController,
+                      context.watch<AddNewTransportCardPrv>().pageController,
                   onPageChanged:
                       context.read<AddNewTransportCardPrv>().onPageChanged,
                   physics:
@@ -117,9 +133,10 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .entries
                                   .map(
                                 (e) {
-                                  var trans = vehicleTypeList.firstWhere(
-                                      (i) => i.id == e.value.vehicleTypeId);
-                                  var expired = shelfLifeList.firstWhere(
+                                  var trans = vehicleTypeList.firstWhereOrNull(
+                                    (i) => i.id == e.value.vehicleTypeId,
+                                  );
+                                  var expired = shelfLifeList.firstWhereOrNull(
                                     (i) => i.id == e.value.shelfLifeId,
                                   );
                                   return Padding(
@@ -145,9 +162,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       key: UniqueKey(),
                                       child: PrimaryCard(
                                         onTap: () {
-                                          // context
-                                          //     .read<AddNewTransportCardPrv>()
-                                          //     .addPackage(context, e);
+                                          context
+                                              .read<AddNewTransportCardPrv>()
+                                              .onTapEditTransport(
+                                                e.value,
+                                                e.key,
+                                              );
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -157,7 +177,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                           child: Row(
                                             children: [
                                               PrimaryIcon(
-                                                icons: genTransIcon(trans.code),
+                                                icons:
+                                                    genTransIcon(trans?.code),
                                                 style:
                                                     PrimaryIconStyle.gradient,
                                                 gradients:
@@ -174,25 +195,29 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${S.of(context).transport}: ${trans.name}',
+                                                      '${S.of(context).transport}: ${trans?.name}',
                                                       style: txtLinkSmall(),
                                                     ),
                                                     vpad(2),
-                                                    if (trans.code != "BICYCLE")
+                                                    if (trans?.code !=
+                                                        "BICYCLE")
                                                       Text(
                                                         '${S.of(context).licene_plate}: ${e.value.number_plate}',
                                                         style:
                                                             txtBodyXSmallRegular(),
                                                       ),
-                                                    if (trans.code != "BICYCLE")
+                                                    if (trans?.code !=
+                                                        "BICYCLE")
                                                       vpad(2),
-                                                    if (trans.code != "BICYCLE")
+                                                    if (trans?.code !=
+                                                        "BICYCLE")
                                                       Text(
                                                         "${S.of(context).reg_num}: ${e.value.registration_number ?? ""}",
                                                         style:
                                                             txtBodyXSmallRegular(),
                                                       ),
-                                                    if (trans.code != "BICYCLE")
+                                                    if (trans?.code !=
+                                                        "BICYCLE")
                                                       vpad(2),
                                                     Text(
                                                       "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
@@ -201,7 +226,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                                     ),
                                                     vpad(2),
                                                     Text(
-                                                      "${S.of(context).used_expired_date}: ${expired.use_time} ${expired.type_time}",
+                                                      "${S.of(context).used_expired_date}: ${expired?.use_time} ${expired?.type_time}",
                                                       style:
                                                           txtBodyXSmallRegular(),
                                                     ),
@@ -292,14 +317,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                         .watch<AddNewTransportCardPrv>()
                                         .isAddNewLoading,
                                     buttonSize: ButtonSize.medium,
-                                    text:
-                                        // isEdit
-                                        //     ? S.of(context).update
-                                        // :
-                                        S.of(context).add_new,
+                                    text: isEdit
+                                        ? S.of(context).update
+                                        : S.of(context).add_new,
                                     onTap: () => context
                                         .read<AddNewTransportCardPrv>()
-                                        .onSendSubmit(context, false),
+                                        .onSendSubmit(context, false, isEdit),
                                   ),
                                   PrimaryButton(
                                     isLoading: context
@@ -310,7 +333,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                     text: S.of(context).send_request,
                                     onTap: () => context
                                         .read<AddNewTransportCardPrv>()
-                                        .onSendSubmit(context, true),
+                                        .onSendSubmit(context, true, isEdit),
                                   ),
                                 ],
                               ),
@@ -322,6 +345,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     ),
                     SingleChildScrollView(
                       child: Form(
+                        onChanged:
+                            context.watch<AddNewTransportCardPrv>().autoValid
+                                ? context
+                                    .read<AddNewTransportCardPrv>()
+                                    .formValidation
+                                : null,
                         autovalidateMode:
                             context.watch<AddNewTransportCardPrv>().autoValid
                                 ? AutovalidateMode.onUserInteraction
@@ -344,6 +373,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                               ),
                               vpad(12),
                               PrimaryDropDown(
+                                hint: S.of(context).select_transport,
                                 value: context
                                     .read<AddNewTransportCardPrv>()
                                     .transTypeValue,
@@ -360,10 +390,13 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                               ),
                               vpad(12),
                               PrimaryTextField(
+                                hint: S.of(context).select_seat_num,
                                 controller: context
-                                    .read<AddNewTransportCardPrv>()
+                                    .watch<AddNewTransportCardPrv>()
                                     .seatNumController,
-                                validator: Utils.emptyValidator,
+                                validator: context
+                                    .watch<AddNewTransportCardPrv>()
+                                    .numSeatValidate,
                                 validateString: context
                                     .watch<AddNewTransportCardPrv>()
                                     .validateSeat,
@@ -380,8 +413,14 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)
                                 PrimaryTextField(
-                                  controller: context
+                                  blockSpace: true,
+                                  onChanged: context
                                       .read<AddNewTransportCardPrv>()
+                                      .onChangedLicenseNum,
+                                  maxLength: 9,
+                                  hint: S.of(context).enter_license_num,
+                                  controller: context
+                                      .watch<AddNewTransportCardPrv>()
                                       .liceneController,
                                   validator: Utils.emptyValidator,
                                   validateString: context
@@ -400,8 +439,13 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)
                                 PrimaryTextField(
+                                  blockSpace: true,
+                                  onlyNum: true,
+                                  maxLength: 6,
+                                  keyboardType: TextInputType.number,
+                                  hint: S.of(context).enter_reg_num,
                                   controller: context
-                                      .read<AddNewTransportCardPrv>()
+                                      .watch<AddNewTransportCardPrv>()
                                       .regNumController,
                                   validator: Utils.emptyValidator,
                                   validateString: context
@@ -412,6 +456,10 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 ),
                               vpad(12),
                               PrimaryDropDown(
+                                hint: S.of(context).select_expire,
+                                validateString: context
+                                    .watch<AddNewTransportCardPrv>()
+                                    .validateExpire,
                                 selectList: shelfLifeListChoices,
                                 value: context
                                     .read<AddNewTransportCardPrv>()
@@ -444,7 +492,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    S.of(context).reg_trans_photos,
+                                    S.of(context).transport_reg,
                                     style: txtBodySmallBold(
                                       color: grayScaleColorBase,
                                     ),
@@ -462,49 +510,21 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   isRequired: true,
                                   existImages: context
                                       .watch<AddNewTransportCardPrv>()
-                                      .frontExistedImages,
+                                      .resExistedImages,
                                   images: context
                                       .watch<AddNewTransportCardPrv>()
-                                      .imageFileFront,
-                                  title: S.of(context).photo_front_side,
+                                      .imageFileRes,
+                                  title: S.of(context).reg_trans_photos,
                                   onRemove: context
                                       .read<AddNewTransportCardPrv>()
-                                      .onRemoveFront,
+                                      .onRemoveResImage,
                                   onRemoveExist: context
                                       .read<AddNewTransportCardPrv>()
-                                      .onRemoveExistFront,
+                                      .onRemoveExistRes,
                                   onSelect: () {
                                     context
                                         .read<AddNewTransportCardPrv>()
-                                        .onSelectFrontPhoto(context);
-                                  },
-                                ),
-                              if (context
-                                  .watch<AddNewTransportCardPrv>()
-                                  .isShowLicense)
-                                vpad(12),
-                              if (context
-                                  .watch<AddNewTransportCardPrv>()
-                                  .isShowLicense)
-                                SelectMediaWidget(
-                                  existImages: context
-                                      .watch<AddNewTransportCardPrv>()
-                                      .backExistedImages,
-                                  isRequired: true,
-                                  onRemoveExist: context
-                                      .read<AddNewTransportCardPrv>()
-                                      .onRemoveExistBack,
-                                  images: context
-                                      .watch<AddNewTransportCardPrv>()
-                                      .imageFileBack,
-                                  title: S.of(context).photo_back_side,
-                                  onRemove: context
-                                      .read<AddNewTransportCardPrv>()
-                                      .onRemoveBack,
-                                  onSelect: () {
-                                    context
-                                        .read<AddNewTransportCardPrv>()
-                                        .onSelectBackPhoto(context);
+                                        .onSelectResPhoto(context);
                                   },
                                 ),
                               vpad(12),
@@ -535,7 +555,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 isLoading: context
                                     .watch<AddNewTransportCardPrv>()
                                     .isAddTransLoading,
-                                text: S.of(context).add_new,
+                                text: context
+                                            .watch<AddNewTransportCardPrv>()
+                                            .itemEdit !=
+                                        null
+                                    ? S.of(context).update
+                                    : S.of(context).add_new,
                                 onTap: () => context
                                     .read<AddNewTransportCardPrv>()
                                     .onAddTransport(context),

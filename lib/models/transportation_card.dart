@@ -4,6 +4,7 @@
 import 'dart:convert';
 
 import 'package:app_cudan/models/reason.dart';
+import 'package:app_cudan/models/response_resident_own.dart';
 
 import 'file_upload.dart';
 import 'status.dart';
@@ -207,6 +208,7 @@ class TransportCard {
   // More
   Reason? r;
   Status? s;
+  Apartment? a;
 
   TransportCard({
     this.id,
@@ -235,6 +237,7 @@ class TransportCard {
     this.card_type,
     this.r,
     this.s,
+    this.a,
   });
 
   Map<String, dynamic> toMap() {
@@ -321,6 +324,9 @@ class TransportCard {
       s: map['s'] != null
           ? Status.fromJson(map['s'] as Map<String, dynamic>)
           : null,
+      a: map['a'] != null
+          ? Apartment.fromJson(map['a'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -353,8 +359,6 @@ class TransportItem {
   List<FileUploadModel>? registration_image;
   List<FileUploadModel>? vehicle_image;
   List<FileUploadModel>? identity_image;
-  List<FileUploadModel>? registration_image_front;
-  List<FileUploadModel>? registration_image_back;
   // More
   VehicleType? vehicleType;
   ShelfLife? shelfLife;
@@ -383,8 +387,6 @@ class TransportItem {
     this.vehicleType,
     this.shelfLife,
     this.seats,
-    this.registration_image_front,
-    this.registration_image_back,
   });
 
   Map<String, dynamic> toMap() {
@@ -411,10 +413,6 @@ class TransportItem {
       'registration_image': registration_image?.map((x) => x.toMap()).toList(),
       'vehicle_image': vehicle_image?.map((x) => x.toMap()).toList(),
       'identity_image': identity_image?.map((x) => x.toMap()).toList(),
-      'registration_image_front':
-          registration_image_front?.map((x) => x.toMap()).toList(),
-      'registration_image_back':
-          registration_image_back?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -472,22 +470,6 @@ class TransportItem {
       identity_image: map['identity_image'] != null
           ? List<FileUploadModel>.from(
               (map['identity_image'] as List<dynamic>).map<FileUploadModel?>(
-                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      registration_image_front: map['registration_image_front'] != null
-          ? List<FileUploadModel>.from(
-              (map['registration_image_front'] as List<dynamic>)
-                  .map<FileUploadModel?>(
-                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      registration_image_back: map['registration_image_back'] != null
-          ? List<FileUploadModel>.from(
-              (map['registration_image_back'] as List<dynamic>)
-                  .map<FileUploadModel?>(
                 (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
               ),
             )

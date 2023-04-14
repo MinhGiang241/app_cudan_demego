@@ -6610,110 +6610,120 @@ class S {
     );
   }
 
-  /// `M-01`
+  /// `Jan`
   String get th01 {
     return Intl.message(
-      'M-01',
+      'Jan',
       name: 'th01',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-02`
+  /// `Fed`
   String get th02 {
     return Intl.message(
-      'M-02',
+      'Fed',
       name: 'th02',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-03`
+  /// `Mar`
   String get th03 {
     return Intl.message(
-      'M-03',
+      'Mar',
       name: 'th03',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-04`
+  /// `Apr`
   String get th04 {
     return Intl.message(
-      'M-04',
+      'Apr',
       name: 'th04',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-05`
+  /// `May`
   String get th05 {
     return Intl.message(
-      'M-05',
+      'May',
       name: 'th05',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-07`
+  /// `Jun`
   String get th06 {
     return Intl.message(
-      'M-07',
+      'Jun',
       name: 'th06',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-08`
+  /// `Jul`
+  String get th07 {
+    return Intl.message(
+      'Jul',
+      name: 'th07',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aug`
   String get th08 {
     return Intl.message(
-      'M-08',
+      'Aug',
       name: 'th08',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-09`
+  /// `Sep`
   String get th09 {
     return Intl.message(
-      'M-09',
+      'Sep',
       name: 'th09',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-10`
+  /// `Oct`
   String get th10 {
     return Intl.message(
-      'M-10',
+      'Oct',
       name: 'th10',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-11`
+  /// `Nov`
   String get th11 {
     return Intl.message(
-      'M-11',
+      'Nov',
       name: 'th11',
       desc: '',
       args: [],
     );
   }
 
-  /// `M-12`
+  /// `Dec`
   String get th12 {
     return Intl.message(
-      'M-12',
+      'Dec',
       name: 'th12',
       desc: '',
       args: [],
@@ -7125,6 +7135,116 @@ class S {
     return Intl.message(
       'Report missing card',
       name: 'report_missing_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transport registration`
+  String get transport_reg {
+    return Intl.message(
+      'Transport registration',
+      name: 'transport_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select transport`
+  String get select_transport {
+    return Intl.message(
+      'Select transport',
+      name: 'select_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select number seat`
+  String get select_seat_num {
+    return Intl.message(
+      'Select number seat',
+      name: 'select_seat_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter license number`
+  String get enter_license_num {
+    return Intl.message(
+      'Enter license number',
+      name: 'enter_license_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter registration number`
+  String get enter_reg_num {
+    return Intl.message(
+      'Enter registration number',
+      name: 'enter_reg_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select expired time`
+  String get select_expire {
+    return Intl.message(
+      'Select expired time',
+      name: 'select_expire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seat number can not be zero`
+  String get num_seat_not_zero {
+    return Intl.message(
+      'Seat number can not be zero',
+      name: 'num_seat_not_zero',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit transportation`
+  String get edit_transport {
+    return Intl.message(
+      'Edit transportation',
+      name: 'edit_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit transportation registration`
+  String get edit_reg_transport {
+    return Intl.message(
+      'Edit transportation registration',
+      name: 'edit_reg_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation list`
+  String get list_transport {
+    return Intl.message(
+      'Transportation list',
+      name: 'list_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation details`
+  String get trans_details {
+    return Intl.message(
+      'Transportation details',
+      name: 'trans_details',
       desc: '',
       args: [],
     );
