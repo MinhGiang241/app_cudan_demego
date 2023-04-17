@@ -334,6 +334,61 @@ class TransportCard {
 
   factory TransportCard.fromJson(String source) =>
       TransportCard.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  TransportCard copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? residentId,
+    String? name_resident,
+    List<TransportItem>? transports_list,
+    bool? isMobile,
+    String? registration_date,
+    bool? integrated,
+    String? residentCardId,
+    bool? confirmation,
+    String? registration_date_filter,
+    String? rules,
+    String? code,
+    String? name,
+    String? apartmentId,
+    String? address_apartment,
+    String? ticket_status,
+    String? reasons,
+    String? address,
+    String? phone_number,
+    String? identity,
+    String? note_reason,
+    String? card_type,
+  }) {
+    return TransportCard(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      residentId: residentId ?? this.residentId,
+      name_resident: name_resident ?? this.name_resident,
+      transports_list: transports_list ?? this.transports_list,
+      isMobile: isMobile ?? this.isMobile,
+      registration_date: registration_date ?? this.registration_date,
+      integrated: integrated ?? this.integrated,
+      residentCardId: residentCardId ?? this.residentCardId,
+      confirmation: confirmation ?? this.confirmation,
+      registration_date_filter:
+          registration_date_filter ?? this.registration_date_filter,
+      rules: rules ?? this.rules,
+      code: code ?? this.code,
+      name: name ?? this.name,
+      apartmentId: apartmentId ?? this.apartmentId,
+      address_apartment: address_apartment ?? this.address_apartment,
+      ticket_status: ticket_status ?? this.ticket_status,
+      reasons: reasons ?? this.reasons,
+      address: address ?? this.address,
+      phone_number: phone_number ?? this.phone_number,
+      identity: identity ?? this.identity,
+      note_reason: note_reason ?? this.note_reason,
+      card_type: card_type ?? this.card_type,
+    );
+  }
 }
 
 class TransportItem {
@@ -450,7 +505,7 @@ class TransportItem {
           ? map['registration_number'] as String
           : null,
       shelfLifeId:
-          map['shelfLifeId'] != null ? map['shelfLifeId'] as String : null,
+          map['shelfLifeId'] != null ? (map['shelfLifeId']) as String : null,
       type: map['type'] != null ? map['type'] as String : null,
       registration_image: map['registration_image'] != null
           ? List<FileUploadModel>.from(
@@ -477,8 +532,8 @@ class TransportItem {
       vehicleType: map['vehicleType'] != null
           ? VehicleType.fromJson(map['vehicleType'] as Map<String, dynamic>)
           : null,
-      shelfLife: map['SshelfLife'] != null
-          ? ShelfLife.fromMap(map['SshelfLife'] as Map<String, dynamic>)
+      shelfLife: map['shelfLife'] != null
+          ? ShelfLife.fromMap(map['shelfLife'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -487,6 +542,60 @@ class TransportItem {
 
   factory TransportItem.fromJson(String source) =>
       TransportItem.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  TransportItem copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? picture,
+    String? status,
+    String? expire_date,
+    String? residentId,
+    String? manageCardId,
+    String? code_seri,
+    double? cost,
+    int? vehicle_amount,
+    int? seats,
+    String? apartmentId,
+    String? identity,
+    String? vehicleTypeId,
+    String? number_plate,
+    String? registration_number,
+    String? shelfLifeId,
+    String? type,
+    List<FileUploadModel>? registration_image,
+    List<FileUploadModel>? vehicle_image,
+    List<FileUploadModel>? identity_image,
+    VehicleType? vehicleType,
+    ShelfLife? shelfLife,
+  }) {
+    return TransportItem(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      picture: picture ?? this.picture,
+      status: status ?? this.status,
+      expire_date: expire_date ?? this.expire_date,
+      residentId: residentId ?? this.residentId,
+      manageCardId: manageCardId ?? this.manageCardId,
+      code_seri: code_seri ?? this.code_seri,
+      cost: cost ?? this.cost,
+      vehicle_amount: vehicle_amount ?? this.vehicle_amount,
+      seats: seats ?? this.seats,
+      apartmentId: apartmentId ?? this.apartmentId,
+      identity: identity ?? this.identity,
+      vehicleTypeId: vehicleTypeId ?? this.vehicleTypeId,
+      number_plate: number_plate ?? this.number_plate,
+      registration_number: registration_number ?? this.registration_number,
+      shelfLifeId: shelfLifeId ?? this.shelfLifeId,
+      type: type ?? this.type,
+      registration_image: registration_image ?? this.registration_image,
+      vehicle_image: vehicle_image ?? this.vehicle_image,
+      identity_image: identity_image ?? this.identity_image,
+      vehicleType: vehicleType ?? this.vehicleType,
+      shelfLife: shelfLife ?? this.shelfLife,
+    );
+  }
 }
 
 class ShelfLife {
@@ -549,4 +658,75 @@ class ShelfLife {
 
   factory ShelfLife.fromJson(String source) =>
       ShelfLife.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class FormRenewalTransport {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? shelfLifeId;
+  String? expire_date;
+  String? renewal_date;
+  String? expire_date_old;
+  List<TransportItem>? transports_list;
+  String? listTransportId;
+  FormRenewalTransport({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.shelfLifeId,
+    this.expire_date,
+    this.renewal_date,
+    this.expire_date_old,
+    this.transports_list,
+    this.listTransportId,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'shelfLifeId': shelfLifeId,
+      'expire_date': expire_date,
+      'renewal_date': renewal_date,
+      'expire_date_old': expire_date_old,
+      'transports_list': transports_list?.map((x) => x.toMap()).toList(),
+      'listTransportId': listTransportId,
+    };
+  }
+
+  factory FormRenewalTransport.fromMap(Map<String, dynamic> map) {
+    return FormRenewalTransport(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      shelfLifeId:
+          map['shelfLifeId'] != null ? map['shelfLifeId'] as String : null,
+      expire_date:
+          map['expire_date'] != null ? map['expire_date'] as String : null,
+      renewal_date:
+          map['renewal_date'] != null ? map['renewal_date'] as String : null,
+      expire_date_old: map['expire_date_old'] != null
+          ? map['expire_date_old'] as String
+          : null,
+      transports_list: map['transports_list'] != null
+          ? List<TransportItem>.from(
+              (map['transports_list'] as List<dynamic>).map<TransportItem?>(
+                (x) => TransportItem.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      listTransportId: map['listTransportId'] != null
+          ? map['listTransportId'] as String
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FormRenewalTransport.fromJson(String source) =>
+      FormRenewalTransport.fromMap(json.decode(source) as Map<String, dynamic>);
 }

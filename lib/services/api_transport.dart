@@ -143,21 +143,24 @@ class APITransport {
 
   static Future saveTransportLetter(
     Map<String, dynamic> data,
+    bool isUncontrol,
   ) async {
     var query = '''
-     mutation (\$data:Dictionary){
-    response: card_mobile_save_transport_card_letter (data: \$data ) {
+     mutation (\$data:Dictionary,\$isUncontrol:Boolean){
+    response: card_mobile_save_transport_card_letter (data: \$data,isUncontrol: \$isUncontrol ) {
         code
         message
         data
-      }
-    }      
+    }
+}
+        
     ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
         "data": data,
+        "isUncontrol": isUncontrol,
       },
     );
 
@@ -295,6 +298,81 @@ mutation(\$data:ManageCardInputDto){
       variables: {
         "data": data,
       },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveExtendForm(Map<String, dynamic> data) async {
+    var query = '''
+mutation (\$data:FormRenewalTransportInputDto ){
+	response: save_FormRenewalTransport_dto(data:\$data){
+		code
+		message
+		data{
+			_id
+			shelfLifeId
+			expire_date
+			renewal_date
+			expire_date_old
+			listTransportId
+			transports_list {
+				_id
+				vehicleTypeId
+				seats
+				number_plate
+				registration_number
+				vehicle_amount
+				current_date
+				expire_date
+				cost
+			}
+		}
+	}
+}
+''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveTransportationCard(data) async {
+    var query = '''
+          mutation (\$data: TransportCardInputDto){
+      response: save_TransportCard_dto(data:\$data){
+        data {
+          _id
+        }
+        message
+        code
+      }
+    }
+      ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"data": data},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

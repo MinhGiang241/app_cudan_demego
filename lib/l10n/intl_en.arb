@@ -178,6 +178,7 @@
   "this_trans_letter": "Transportation letter",
   "trans_card": "Transportation card",
   "trans_card_details": "Transportation card details",
+  "trans_reg_card_details": "Transportation registration card details",
   "resident_info": "Resident information",
   "trans_info": "Transportation information",
   "trans_type": "Transportation type",
@@ -718,5 +719,19 @@
   "edit_transport": "Edit transportation",
   "edit_reg_transport": "Edit transportation registration",
   "list_transport": "Transportation list",
-  "trans_details": "Transportation details"
+  "trans_details": "Transportation details",
+  "trans_status": "Transportation status",
+  "cancel_transport": "Cancel transport",
+  "confirm_cancel_trans": "Do you want to cancel transport {plate}?",
+  "success_cancel_trans": "Cancel transport successfully",
+  "succees_extend_trans": "Extend transportation successfully",
+  "expired_date_old": "Old expired date ",
+  "expired_date_new": "New expired date",
+  "expired_date_create": "extended expired date",
+  "add_extend_request_successfull": "Add new extend request successfully",
+  "trans_card_atleast_1": "Card must have at least 1 transportation",
+  "can_trans": "Cancel transportation card",
+  "confirm_can_trans_card": "Do you want to cancel transportation card?",
+  "success_can_trans_card": "Cancel transportation card successfully",
+  "lock_reason": "Lock reason"
 }

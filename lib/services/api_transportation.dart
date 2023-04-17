@@ -35,6 +35,35 @@ class APITrans {
     }
   }
 
+  static Future getManageCarById(String? id) async {
+    var query = '''
+    mutation (\$cardId:String){
+    response: card_mobile_get_card_by_id (cardId: \$cardId ) {
+        code
+        message
+        data
+    }
+}
+        
+            
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"cardId": id},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future lockTransportationCard(String id) async {
     var query = '''
     mutation (\$_id:String,\$status:String){

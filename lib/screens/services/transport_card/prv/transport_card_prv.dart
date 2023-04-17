@@ -14,6 +14,35 @@ class TransportCardPrv extends ChangeNotifier {
   List<TransportCard> letterList = [];
   List<ManageCard> cardList = [];
 
+  Future cancelTransportCard(BuildContext context, ManageCard card) async {
+    card.status = "LOCK";
+    card.reasons = 'NGUOIDUNGKHOA';
+    Utils.showConfirmMessage(
+      title: S.of(context).can_trans,
+      content: S.of(context).confirm_can_trans_card,
+      context: context,
+      onConfirm: () async {
+        Navigator.pop(context);
+        await APITransport.saveManageCard(card.toMap()).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_can_trans_card,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                TransportCardScreen.routeName,
+                (route) => route.isFirst,
+                arguments: 0,
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+  }
+
   Future getTransportCardList(BuildContext context) async {
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var apartmentId =

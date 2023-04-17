@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../screens/account/personal_info/personal_info_screen.dart';
 import '../screens/auth/apartment_selection_screen.dart';
 import '../screens/auth/fogot_pass/phone_num_forgot_pass.dart';
-import '../screens/auth/fogot_pass/reset_pass_screen.dart';
 import '../screens/auth/project_selection_screen.dart';
 import '../screens/auth/prv/auth_prv.dart';
 import '../screens/auth/prv/sign_in_prv.dart';
@@ -14,7 +13,6 @@ import '../screens/auth/prv/sign_up_prv.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
-import '../screens/chat/chat_screen.dart';
 import '../screens/event/event_details_screen.dart';
 import '../screens/event/event_list_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -47,9 +45,6 @@ import '../screens/services/missing_object/pick_item_screen.dart';
 import '../screens/services/missing_object/reg_lost_item_screen.dart';
 import '../screens/services/parcel/parcel_detail_screen.dart';
 import '../screens/services/parcel/parcel_list_screen.dart';
-import '../screens/services/parking_card/register_parking_card.dart';
-import '../screens/services/parking_card/transport_card_list_screen.dart';
-import '../screens/services/parking_card/transportation_details_screen.dart';
 import '../screens/services/pet/pet_details_screen.dart';
 import '../screens/services/pet/pet_list_screen.dart';
 import '../screens/services/pet/register_pet_screen.dart';
@@ -61,6 +56,7 @@ import '../screens/services/resident_card/resident_card_details.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
 import '../screens/services/service_screen.dart';
 import '../screens/services/transport_card/add_new_transport_card.dart';
+import '../screens/services/transport_card/extend_card_screen.dart';
 import '../screens/services/transport_card/manage_card_details_screen.dart';
 import '../screens/services/transport_card/transport_details_screen.dart';
 import '../screens/services/transport_card/transport_card_screen.dart.dart';
@@ -134,21 +130,6 @@ class AppRoutes {
           builder: (_) => const ServiceScreen(),
         );
 
-      case TransportationCardListScreen.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (context) => TransportationCardListScreen(ctx: context),
-        );
-      case TransportationCardDetails.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (_) => const TransportationCardDetails(),
-        );
-      case RegisterTransportationCard.routeName:
-        return MaterialPageRoute(
-          settings: routeSetting,
-          builder: (_) => const RegisterTransportationCard(),
-        );
       case ResidentCardListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
@@ -383,6 +364,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ManageCardDetailsScreen(),
+        );
+      case ExtendCardScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ExtendCardScreen(),
         );
 
       // case ChatScreen.routeName:

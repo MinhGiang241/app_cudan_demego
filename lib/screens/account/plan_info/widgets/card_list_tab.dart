@@ -13,8 +13,8 @@ import '../../../../widgets/primary_bottom_sheet.dart';
 import '../../../../widgets/primary_dialog.dart';
 import '../../../reg_resident/add_existed_resident.dart';
 import '../../../reg_resident/add_new_resident_screen.dart';
-import '../../../services/parking_card/register_parking_card.dart';
 import '../../../services/resident_card/register_resident_card.dart';
+import '../../../services/transport_card/transport_card_screen.dart.dart';
 
 class CardListTab extends StatefulWidget {
   const CardListTab({super.key});
@@ -107,7 +107,7 @@ class _CardListTabState extends State<CardListTab> {
                                 Navigator.pop(context);
                                 Navigator.pushNamed(
                                   context,
-                                  RegisterTransportationCard.routeName,
+                                  TransportCardScreen.routeName,
                                 );
                               },
                             ),

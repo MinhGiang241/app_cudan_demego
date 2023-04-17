@@ -122,20 +122,12 @@ class _TransportCardTabState extends State<TransportCardTab> {
                     InfoContentView(
                       title: S.of(context).card_num,
                       content: list[index].serial_lot,
-                      contentStyle: txtBold(16, primaryColor1),
+                      contentStyle: txtBold(16, purpleColorBase),
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
-                      content: context
-                                  .watch<ResidentInfoPrv>()
-                                  .userInfo!
-                                  .info_name !=
-                              null
-                          ? context
-                              .watch<ResidentInfoPrv>()
-                              .userInfo!
-                              .info_name!
-                              .toUpperCase()
+                      content: list[index].t?.name != null
+                          ? list[index].t?.name?.toUpperCase()
                           : '',
                       contentStyle: txtBold(14),
                     ),
@@ -177,6 +169,9 @@ class _TransportCardTabState extends State<TransportCardTab> {
                           ManageCardDetailsScreen.routeName,
                           arguments: {
                             "card": list[index],
+                            "cancel": context
+                                .read<TransportCardPrv>()
+                                .cancelTransportCard,
                           },
                         );
                       },
@@ -185,6 +180,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Container(
+                              width: 100,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
                                 vertical: 4,
@@ -202,6 +198,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                 //     :
                                 list[index].s?.name ?? "",
                                 style: txtSemiBold(12, Colors.white),
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

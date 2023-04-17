@@ -393,6 +393,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         var vehicleTypeId = transTypeList
             .firstWhere((element) => element.code == transTypeValue)
             .id;
+        // var shelf =
+        //     shelfLifeList.firstWhere((element) => element.id == expiredValue);
+
         TransportItem transportItem = TransportItem(
           residentId: residentId,
           apartmentId: apartmentId,
@@ -437,6 +440,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     notifyListeners();
     try {
       TransportCard letter = TransportCard(
+        address_apartment:
+            "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
         id: id,
         apartmentId: apartment?.apartmentId,
         residentId: residentId,
@@ -447,6 +452,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         name_resident: residentInfo?.info_name,
         ticket_status: isSend ? "WAIT" : "NEW",
         transports_list: transportList,
+        card_type: residentId != null ? "RESIDENT" : "CUSTOMER",
         name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
         registration_date: existedTransport?.registration_date ??
             DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
@@ -454,7 +460,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
             "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
       );
 
-      await APITransport.saveTransportLetter(letter.toMap()).then((v) {
+      await APITransport.saveTransportLetter(letter.toMap(), false).then((v) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(

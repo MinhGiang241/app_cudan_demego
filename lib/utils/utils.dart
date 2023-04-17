@@ -630,10 +630,11 @@ class Utils {
             if (child != null) child,
             vpad(24),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 PrimaryButton(
-                  width: 120,
+                  width: 100,
                   text: S.of(context).cancel,
                   buttonSize: ButtonSize.small,
                   buttonType: ButtonType.red,
@@ -642,7 +643,7 @@ class Utils {
                   },
                 ),
                 PrimaryButton(
-                  width: 120,
+                  width: 100,
                   text: S.of(context).confirm,
                   buttonSize: ButtonSize.small,
                   buttonType: ButtonType.primary,

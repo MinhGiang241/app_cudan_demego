@@ -40,7 +40,7 @@ class _TransportLetterDetailsScreenState
     var cancel = arg['cancel'] as Function;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-        title: S.of(context).trans_card_details,
+        title: S.of(context).trans_reg_card_details,
         tabController: tabController,
         isTabScrollabel: false,
         tabs: [
@@ -201,28 +201,6 @@ class _TransportLetterDetailsScreenState
                     onTap: () {},
                     child: Text(
                       S.of(context).intergrate_existed_resident_card,
-                      style: txtRegular(14, grayScaleColorBase),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )
-                ],
-              ),
-              vpad(16),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Checkbox(
-                      activeColor: primaryColorBase,
-                      value: card.confirmation,
-                      onChanged: (v) {},
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      S.of(context).confirm_obey_regulation,
                       style: txtRegular(14, grayScaleColorBase),
                       overflow: TextOverflow.ellipsis,
                     ),

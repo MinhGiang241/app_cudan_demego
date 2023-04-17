@@ -1840,6 +1840,16 @@ class S {
     );
   }
 
+  /// `Transportation registration card details`
+  String get trans_reg_card_details {
+    return Intl.message(
+      'Transportation registration card details',
+      name: 'trans_reg_card_details',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Resident information`
   String get resident_info {
     return Intl.message(
@@ -7245,6 +7255,146 @@ class S {
     return Intl.message(
       'Transportation details',
       name: 'trans_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation status`
+  String get trans_status {
+    return Intl.message(
+      'Transportation status',
+      name: 'trans_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel transport`
+  String get cancel_transport {
+    return Intl.message(
+      'Cancel transport',
+      name: 'cancel_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel transport {plate}?`
+  String confirm_cancel_trans(Object plate) {
+    return Intl.message(
+      'Do you want to cancel transport $plate?',
+      name: 'confirm_cancel_trans',
+      desc: '',
+      args: [plate],
+    );
+  }
+
+  /// `Cancel transport successfully`
+  String get success_cancel_trans {
+    return Intl.message(
+      'Cancel transport successfully',
+      name: 'success_cancel_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extend transportation successfully`
+  String get succees_extend_trans {
+    return Intl.message(
+      'Extend transportation successfully',
+      name: 'succees_extend_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old expired date `
+  String get expired_date_old {
+    return Intl.message(
+      'Old expired date ',
+      name: 'expired_date_old',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New expired date`
+  String get expired_date_new {
+    return Intl.message(
+      'New expired date',
+      name: 'expired_date_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `extended expired date`
+  String get expired_date_create {
+    return Intl.message(
+      'extended expired date',
+      name: 'expired_date_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new extend request successfully`
+  String get add_extend_request_successfull {
+    return Intl.message(
+      'Add new extend request successfully',
+      name: 'add_extend_request_successfull',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card must have at least 1 transportation`
+  String get trans_card_atleast_1 {
+    return Intl.message(
+      'Card must have at least 1 transportation',
+      name: 'trans_card_atleast_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel transportation card`
+  String get can_trans {
+    return Intl.message(
+      'Cancel transportation card',
+      name: 'can_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel transportation card?`
+  String get confirm_can_trans_card {
+    return Intl.message(
+      'Do you want to cancel transportation card?',
+      name: 'confirm_can_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel transportation card successfully`
+  String get success_can_trans_card {
+    return Intl.message(
+      'Cancel transportation card successfully',
+      name: 'success_can_trans_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lock reason`
+  String get lock_reason {
+    return Intl.message(
+      'Lock reason',
+      name: 'lock_reason',
       desc: '',
       args: [],
     );

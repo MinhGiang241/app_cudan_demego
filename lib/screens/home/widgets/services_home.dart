@@ -4,9 +4,9 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../services/delivery/delivery_list_screen.dart';
-import '../../services/parking_card/transport_card_list_screen.dart';
 import '../../services/resident_card/resident_card_screen.dart';
 import '../../services/service_screen.dart';
+import '../../services/transport_card/transport_card_screen.dart.dart';
 import 'home_title_widget.dart';
 
 class ServicesHome extends StatelessWidget {
@@ -51,7 +51,7 @@ class ServicesHome extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        TransportationCardListScreen.routeName,
+                        TransportCardScreen.routeName,
                       );
                     },
                   ),

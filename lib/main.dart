@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             builder: (context, child) {
               final mediaQueryData = MediaQuery.of(context);
-              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
+              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.0);
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
                 child: child!,
