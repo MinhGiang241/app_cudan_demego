@@ -54,6 +54,7 @@ import '../screens/services/reflection/reflection_screen.dart';
 import '../screens/services/resident_card/register_resident_card.dart';
 import '../screens/services/resident_card/resident_card_details.dart';
 import '../screens/services/resident_card/resident_card_screen.dart';
+import '../screens/services/resident_card/resident_letter_details .dart';
 import '../screens/services/service_screen.dart';
 import '../screens/services/transport_card/add_new_transport_card.dart';
 import '../screens/services/transport_card/extend_card_screen.dart';
@@ -369,6 +370,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ExtendCardScreen(),
+        );
+      case ResidentLetterDetails.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ResidentLetterDetails(),
         );
 
       // case ChatScreen.routeName:

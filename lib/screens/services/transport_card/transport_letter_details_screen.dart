@@ -197,12 +197,14 @@ class _TransportLetterDetailsScreenState
                       onChanged: (v) {},
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      S.of(context).intergrate_existed_resident_card,
-                      style: txtRegular(14, grayScaleColorBase),
-                      overflow: TextOverflow.ellipsis,
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {},
+                      child: Text(
+                        S.of(context).intergrate_existed_resident_card,
+                        style: txtRegular(14, grayScaleColorBase),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   )
                 ],
@@ -213,7 +215,7 @@ class _TransportLetterDetailsScreenState
                   isLoading: false,
                   buttonSize: ButtonSize.medium,
                   buttonType: ButtonType.red,
-                  text: S.of(context).cancel,
+                  text: S.of(context).reg_cancel,
                   onTap: () {
                     cancel(context, card);
                   },

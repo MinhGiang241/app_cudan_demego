@@ -696,6 +696,7 @@
   "intergrate_existed_resident_card": "Intergrate into existed resident card",
   "confirm_obey_regulation": "Confirm obey regulation",
   "building_regulation": "Building regulation",
+  "building_regulation_trans": "Building regulation about transportation",
   "transport": "Transportation",
   "num_seat": "Seat amount",
   "used_expired_date": "Expired_date",
@@ -709,6 +710,8 @@
   "when_missing": "When report missing card , your card will be cancelled. if you want continue use service you need to register new card",
   "success_report_missing": "Report missing report successfully",
   "report_missing_card": "Report missing card",
+  "report_missing_card_res": "Report missing card",
+  "confirm_missing_report_res": "Do you want to report missing card {code}?",
   "transport_reg": "Transport registration",
   "select_transport": "Select transport",
   "select_seat_num": "Select number seat",
@@ -732,6 +735,12 @@
   "trans_card_atleast_1": "Card must have at least 1 transportation",
   "can_trans": "Cancel transportation card",
   "confirm_can_trans_card": "Do you want to cancel transportation card?",
+  "can_trans_res": "Cancel resident card",
+  "confirm_can_trans_card_res": "Do you want to cancel resident card?",
   "success_can_trans_card": "Cancel transportation card successfully",
-  "lock_reason": "Lock reason"
+  "success_can_res_card": "Cancel resident card successfully",
+  "lock_reason": "Lock reason",
+  "reg_cancel": "Cancel registration",
+  "cmnd_photos": "Identity photos",
+  "resident_letter_details": "Resident registration details"
 }

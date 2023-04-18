@@ -7020,6 +7020,16 @@ class S {
     );
   }
 
+  /// `Building regulation about transportation`
+  String get building_regulation_trans {
+    return Intl.message(
+      'Building regulation about transportation',
+      name: 'building_regulation_trans',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Transportation`
   String get transport {
     return Intl.message(
@@ -7147,6 +7157,26 @@ class S {
       name: 'report_missing_card',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Report missing card`
+  String get report_missing_card_res {
+    return Intl.message(
+      'Report missing card',
+      name: 'report_missing_card_res',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to report missing card {code}?`
+  String confirm_missing_report_res(Object code) {
+    return Intl.message(
+      'Do you want to report missing card $code?',
+      name: 'confirm_missing_report_res',
+      desc: '',
+      args: [code],
     );
   }
 
@@ -7380,6 +7410,26 @@ class S {
     );
   }
 
+  /// `Cancel resident card`
+  String get can_trans_res {
+    return Intl.message(
+      'Cancel resident card',
+      name: 'can_trans_res',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel resident card?`
+  String get confirm_can_trans_card_res {
+    return Intl.message(
+      'Do you want to cancel resident card?',
+      name: 'confirm_can_trans_card_res',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancel transportation card successfully`
   String get success_can_trans_card {
     return Intl.message(
@@ -7390,11 +7440,51 @@ class S {
     );
   }
 
+  /// `Cancel resident card successfully`
+  String get success_can_res_card {
+    return Intl.message(
+      'Cancel resident card successfully',
+      name: 'success_can_res_card',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Lock reason`
   String get lock_reason {
     return Intl.message(
       'Lock reason',
       name: 'lock_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel registration`
+  String get reg_cancel {
+    return Intl.message(
+      'Cancel registration',
+      name: 'reg_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity photos`
+  String get cmnd_photos {
+    return Intl.message(
+      'Identity photos',
+      name: 'cmnd_photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident registration details`
+  String get resident_letter_details {
+    return Intl.message(
+      'Resident registration details',
+      name: 'resident_letter_details',
       desc: '',
       args: [],
     );

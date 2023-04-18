@@ -1,6 +1,8 @@
+import 'package:app_cudan/screens/services/resident_card/prv/resident_card_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
@@ -13,6 +15,7 @@ import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../register_resident_card.dart';
 import '../resident_card_details.dart';
+import '../resident_letter_details .dart';
 
 class ResidentLetterTab extends StatelessWidget {
   ResidentLetterTab({
@@ -67,7 +70,8 @@ class ResidentLetterTab extends StatelessWidget {
               enablePullDown: true,
               enablePullUp: false,
               header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               controller: _refreshController,
               onLoading: () {
                 _refreshController.loadComplete();
@@ -93,7 +97,8 @@ class ResidentLetterTab extends StatelessWidget {
                   enablePullDown: true,
                   enablePullUp: false,
                   header: WaterDropMaterialHeader(
-                      backgroundColor: Theme.of(context).primaryColor),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
                   controller: _refreshController,
                   onRefresh: () {
                     onRefresh();
@@ -109,7 +114,7 @@ class ResidentLetterTab extends StatelessWidget {
                             InfoContentView(
                               title: S.of(context).card_num,
                               content: list[index].code,
-                              contentStyle: txtBold(16, primaryColor1),
+                              contentStyle: txtBold(16, purpleColorBase),
                             ),
                             InfoContentView(
                               title: S.of(context).full_name,
@@ -124,9 +129,9 @@ class ResidentLetterTab extends StatelessWidget {
                               contentStyle: txtBold(16, grayScaleColorBase),
                             ),
                             InfoContentView(
-                              title: S.of(context).apartment,
+                              title: S.of(context).address,
                               content: list[index].apartment != null
-                                  ? "${list[index].apartment!.name}, ${list[index].floor!.name}, ${list[index].building!.name}"
+                                  ? "${list[index].apartment?.name ?? ""}, ${list[index].apartment?.f?.name ?? ""}, ${list[index].apartment?.b?.name ?? ""}"
                                   : "",
                               contentStyle: txtBold(16, grayScaleColorBase),
                             ),
@@ -135,19 +140,32 @@ class ResidentLetterTab extends StatelessWidget {
                               content:
                                   genStatus(list[index].ticket_status ?? ''),
                               contentStyle: txtBold(
-                                  14,
-                                  genStatusColor(
-                                      list[index].ticket_status ?? '')),
+                                14,
+                                genStatusColor(
+                                  list[index].ticket_status ?? '',
+                                ),
+                              ),
                             ),
                           ];
                           return Padding(
                             padding: const EdgeInsets.only(
-                                left: 12, right: 12, bottom: 16),
+                              left: 12,
+                              right: 12,
+                              bottom: 16,
+                            ),
                             child: PrimaryCard(
                               onTap: () {
                                 Navigator.of(context).pushNamed(
-                                  ResidentCardDetails.routeName,
-                                  arguments: {"card": list[index]},
+                                  ResidentLetterDetails.routeName,
+                                  arguments: {
+                                    "card": list[index],
+                                    'cancel': context
+                                        .read<ResidentCardPrv>()
+                                        .cancelLetter,
+                                    'send': context
+                                        .read<ResidentCardPrv>()
+                                        .sendRequest
+                                  },
                                 );
                               },
                               child: Column(
@@ -155,7 +173,8 @@ class ResidentLetterTab extends StatelessWidget {
                                   vpad(16),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                      horizontal: 16,
+                                    ),
                                     child: Table(
                                       textBaseline: TextBaseline.ideographic,
                                       defaultVerticalAlignment:
@@ -171,13 +190,18 @@ class ResidentLetterTab extends StatelessWidget {
                                               Text(
                                                 "${e.title}:",
                                                 style: txtMedium(
-                                                    12, grayScaleColor2),
+                                                  12,
+                                                  grayScaleColor2,
+                                                ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    bottom: 16),
-                                                child: Text(e.content ?? "",
-                                                    style: e.contentStyle),
+                                                  bottom: 16,
+                                                ),
+                                                child: Text(
+                                                  e.content ?? "",
+                                                  style: e.contentStyle,
+                                                ),
                                               )
                                             ],
                                           ),
@@ -221,12 +245,14 @@ class ResidentLetterTab extends StatelessWidget {
                                           text: S.of(context).edit,
                                           textColor: primaryColor1,
                                           onTap: () {
-                                            Navigator.pushNamed(context,
-                                                RegisterResidentCard.routeName,
-                                                arguments: {
-                                                  "isEdit": true,
-                                                  "data": list[index]
-                                                });
+                                            Navigator.pushNamed(
+                                              context,
+                                              RegisterResidentCard.routeName,
+                                              arguments: {
+                                                "isEdit": true,
+                                                "data": list[index]
+                                              },
+                                            );
                                           },
                                         ),
                                         PrimaryButton(

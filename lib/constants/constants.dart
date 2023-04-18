@@ -132,6 +132,10 @@ final gradientPrimaryYellow = LinearGradient(colors: [
   const Color(0xffFFA900).withOpacity(0.9),
   const Color(0xffFFBE34).withOpacity(0.9),
 ], begin: Alignment.topLeft, end: Alignment.bottomRight);
+final gradientPrimaryOrange = LinearGradient(colors: [
+  const Color(0xffFF9900).withOpacity(0.9),
+  const Color(0xffFF9900).withOpacity(0.7),
+], begin: Alignment.topLeft, end: Alignment.bottomRight);
 
 const Color blueColor = Color(0xff466FFF);
 const Color blueColor2 = Color(0xff4975FF);

@@ -2,7 +2,10 @@
 
 import 'dart:io';
 
+import 'package:app_cudan/models/file_upload.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/resident_card.dart';
@@ -14,91 +17,100 @@ import '../resident_card_screen.dart';
 class RegisterResidentCardPrv extends ChangeNotifier {
   RegisterResidentCardPrv({
     this.id,
-    this.imageUrlFront,
-    this.imageUrlBack,
-    this.otherImage,
     this.residentId,
     this.apartmentId,
-    this.imageUrlResident,
     this.code,
-  });
+    this.existCard,
+  }) {
+    if (existCard != null) {
+      identityImageExisted = [...(existCard?.identity_image ?? [])];
+      residentImageExisted = [...(existCard?.resident_image ?? [])];
+      otherImageExisted = [...(existCard?.other_image ?? [])];
+      confirm = existCard?.confirmation ?? false;
+    }
+  }
+
+  ResidentCard? existCard;
 
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
   String? id;
   String? code;
-  String? imageUrlFront;
-  String? imageUrlBack;
-  String? otherImage;
+
   String? residentId;
   String? apartmentId;
-  String? imageUrlResident;
-  List<File> imageFileFront = [];
-  List<File> imageFileBack = [];
-  List<File> residentImageFile = [];
-  List<File> otherImageFile = [];
 
-  onSubmitCard(BuildContext context, bool isRequest) {
-    if (isRequest) {
-      isSendApproveLoading = true;
-    } else {
-      isAddNewLoading = true;
-    }
+  bool confirm = false;
+
+  List<File> identityImageFiles = [];
+  List<File> residentImageFiles = [];
+  List<File> otherImageFiles = [];
+
+  List<FileUploadModel> identityImageExisted = [];
+  List<FileUploadModel> residentImageExisted = [];
+  List<FileUploadModel> otherImageExisted = [];
+
+  List<FileUploadModel> identityImageUploaded = [];
+  List<FileUploadModel> residentImageUploaded = [];
+  List<FileUploadModel> otherImageUploaded = [];
+
+  toggleConfirm(v) {
+    confirm = !confirm;
+    notifyListeners();
+  }
+
+  onSubmitCard(BuildContext context, bool isRequest) async {
+    var relationship =
+        context.read<ResidentInfoPrv>().selectedApartment?.relationshipId;
+    isRequest ? isSendApproveLoading = true : isAddNewLoading = true;
+
     notifyListeners();
 
     try {
       var listError = [];
-      if (imageUrlFront == null && imageFileFront.isEmpty) {
-        listError.add(S.of(context).identity_front_not_empty);
-      }
-      if (imageUrlBack == null && imageFileBack.isEmpty) {
-        listError.add(S.of(context).identity_back_not_empty);
-      }
 
       if (listError.isNotEmpty) {
         throw (listError.join(', '));
       }
 
-      uploadFrontPhoto(context).then((v) async {
-        return uploadBackPhoto(context);
-      }).then((v) {
-        return uploadResPhoto(context);
-      }).then((v) {
-        return uploadOtherImage(context);
-      }).then((v) {
-        var newCard = ResidentCard(
-            isMobile: true,
-            id: id,
-            code: code,
-            apartmentId: apartmentId,
-            residentId: residentId,
-            identity_image_front: imageUrlFront,
-            identity_image_back: imageUrlBack,
-            other_image: otherImage,
-            resident_image: imageUrlResident,
-            ticket_status: isRequest ? "WAIT" : "NEW");
-        // if (isRequest && newCard.identity_image_front == null) {
-        //   throw (S.of(context).not_empty_front);
-        // }
-        // if (isRequest && newCard.identity_image_back == null) {
-        //   throw (S.of(context).not_empty_back);
-        // }
-        var data = newCard.toJson();
+      await uploadIdentity();
+      await uploadRes();
+      await uploadOther();
 
-        return APIResCard.saveResidentCard(data);
-      }).then((v) async {
+      var newCard = ResidentCard(
+        isMobile: true,
+        id: id,
+        code: code,
+        apartmentId: apartmentId,
+        residentId: residentId,
+        ticket_status: isRequest ? "WAIT" : "NEW",
+        confirmation: confirm,
+        other_image: otherImageExisted + otherImageUploaded,
+        resident_image: residentImageExisted + residentImageUploaded,
+        identity_image: identityImageExisted + identityImageUploaded,
+        relationship: relationship,
+        registration_date:
+            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      );
+      var data = newCard.toMap();
+
+      return APIResCard.saveResidentCard(data).then((v) async {
         await Utils.showSuccessMessage(
-            context: context,
-            e: isRequest
-                ? S.of(context).success_send_req
-                : id != null
-                    ? S.of(context).success_edit
-                    : S.of(context).success_cr_new,
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(context,
-                  ResidentCardListScreen.routeName, (route) => route.isFirst,
-                  arguments: 1);
-            });
+          context: context,
+          e: isRequest
+              ? S.of(context).success_send_req
+              : id != null
+                  ? S.of(context).success_edit
+                  : S.of(context).success_cr_new,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              ResidentCardListScreen.routeName,
+              (route) => route.isFirst,
+              arguments: 1,
+            );
+          },
+        );
         isAddNewLoading = false;
         isSendApproveLoading = false;
         notifyListeners();
@@ -112,41 +124,45 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       isAddNewLoading = false;
       isSendApproveLoading = false;
       notifyListeners();
-      notifyListeners();
       Utils.showErrorMessage(context, e.toString());
     }
   }
 
-  onRemoveFront(int index) {
-    imageFileFront.removeAt(index);
-    notifyListeners();
-  }
-
-  onSelectFrontPhoto(BuildContext context) async {
-    await Utils.selectImage(context, false).then((value) {
-      if (value != null) {
-        final list = value.map<File>((e) => File(e.path)).toList();
-        imageFileFront.addAll(list);
-        notifyListeners();
-      }
-    });
-  }
-
-  onRemoveBack(int index) {
-    imageFileBack.removeAt(index);
+  onRemoveIdentity(int index) {
+    identityImageFiles.removeAt(index);
     notifyListeners();
   }
 
   onRemoveRes(int index) {
-    residentImageFile.removeAt(index);
+    residentImageFiles.removeAt(index);
     notifyListeners();
   }
 
-  onSelectBackPhoto(BuildContext context) async {
+  onRemoveOtherImage(int index) {
+    otherImageFiles.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistIdentity(int index) {
+    identityImageExisted.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistRes(int index) {
+    residentImageExisted.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistOtherImage(int index) {
+    otherImageExisted.removeAt(index);
+    notifyListeners();
+  }
+
+  onSelectIdentity(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
-        imageFileBack.addAll(list);
+        identityImageFiles.addAll(list);
         notifyListeners();
       }
     });
@@ -156,96 +172,66 @@ class RegisterResidentCardPrv extends ChangeNotifier {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
-        residentImageFile.addAll(list);
+        residentImageFiles.addAll(list);
         notifyListeners();
       }
     });
-  }
-
-  onRemoveOtherImage(int index) {
-    otherImageFile.removeAt(index);
-    notifyListeners();
   }
 
   onSelectOtherImage(BuildContext context) async {
     await Utils.selectImage(context, false).then((value) {
       if (value != null) {
         final list = value.map<File>((e) => File(e.path)).toList();
-        otherImageFile.addAll(list);
+        otherImageFiles.addAll(list);
         notifyListeners();
       }
     });
   }
 
-  onRemoveUrlImage(BuildContext context, int choice) {
-    if (choice == 0) {
-      imageUrlResident = null;
-    } else if (choice == 1) {
-      imageUrlFront = null;
-    } else if (choice == 2) {
-      imageUrlBack = null;
-    } else {
-      otherImage = null;
-    }
-    notifyListeners();
-  }
-
-  uploadFrontPhoto(BuildContext context) async {
-    notifyListeners();
-    await APIAuth.uploadSingleFile(files: imageFileFront, context: context)
-        .then((v) {
+  Future uploadIdentity() async {
+    await APIAuth.uploadSingleFile(
+      files: identityImageFiles,
+    ).then((v) {
       if (v.isNotEmpty) {
-        imageUrlFront = v[0].data;
+        for (var e in v) {
+          identityImageUploaded.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
       }
-
-      notifyListeners();
     }).catchError((e) {
-      notifyListeners();
       throw (e);
     });
   }
 
-  uploadBackPhoto(BuildContext context) async {
-    notifyListeners();
-    await APIAuth.uploadSingleFile(files: imageFileBack, context: context)
-        .then((v) {
+  Future uploadRes() async {
+    await APIAuth.uploadSingleFile(
+      files: residentImageFiles,
+    ).then((v) {
       if (v.isNotEmpty) {
-        imageUrlBack = v[0].data;
+        for (var e in v) {
+          residentImageUploaded.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
       }
-
-      notifyListeners();
     }).catchError((e) {
-      notifyListeners();
       throw (e);
     });
   }
 
-  uploadResPhoto(BuildContext context) async {
-    notifyListeners();
-    await APIAuth.uploadSingleFile(files: residentImageFile, context: context)
-        .then((v) {
+  Future uploadOther() async {
+    await APIAuth.uploadSingleFile(
+      files: otherImageFiles,
+    ).then((v) {
       if (v.isNotEmpty) {
-        imageUrlResident = v[0].data;
+        for (var e in v) {
+          otherImageUploaded.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
       }
-
-      notifyListeners();
     }).catchError((e) {
-      notifyListeners();
-      throw (e);
-    });
-  }
-
-  uploadOtherImage(BuildContext context) async {
-    notifyListeners();
-    await APIAuth.uploadSingleFile(files: otherImageFile, context: context)
-        .then((v) {
-      if (v.isNotEmpty) {
-        otherImage = v[0].data;
-      }
-
-      notifyListeners();
-    }).catchError((e) {
-      notifyListeners();
       throw (e);
     });
   }

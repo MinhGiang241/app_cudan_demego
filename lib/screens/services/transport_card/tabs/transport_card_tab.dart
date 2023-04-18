@@ -241,7 +241,8 @@ class _TransportCardTabState extends State<TransportCardTab> {
                               ],
                             ),
                           ),
-                          if (list[index].status != "OST")
+                          if (list[index].status != "LOST" ||
+                              list[index].status != "DESTROY")
                             Row(
                               children: [
                                 hpad(12),
@@ -260,49 +261,6 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                 ),
                               ],
                             ),
-                          // if (list[index].status == "NEW")
-                          //   Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //     children: [
-                          //       PrimaryButton(
-                          //         buttonSize: ButtonSize.xsmall,
-                          //         buttonType: ButtonType.secondary,
-                          //         secondaryBackgroundColor: greenColor7,
-                          //         text: S.of(context).send_request,
-                          //         textColor: greenColor8,
-                          //         onTap: () {
-                          //           // sendRequest(list[index]);
-                          //         },
-                          //       ),
-                          //       PrimaryButton(
-                          //         buttonSize: ButtonSize.xsmall,
-                          //         buttonType: ButtonType.secondary,
-                          //         secondaryBackgroundColor: primaryColor5,
-                          //         text: S.of(context).edit,
-                          //         textColor: primaryColor1,
-                          //         onTap: () {
-                          //           //   Navigator.pushNamed(
-                          //           //       context,
-                          //           //       RegisterTransportationCard
-                          //           //           .routeName,
-                          //           //       arguments: {
-                          //           //         "isEdit": true,
-                          //           //         "data": list[index]
-                          //           //       },);
-                          //         },
-                          //       ),
-                          //       PrimaryButton(
-                          //         buttonSize: ButtonSize.xsmall,
-                          //         buttonType: ButtonType.secondary,
-                          //         secondaryBackgroundColor: redColor4,
-                          //         textColor: redColor,
-                          //         text: S.of(context).delete_letter,
-                          //         onTap: () {
-                          //           // return deleteLetter(list[index]);
-                          //         },
-                          //       ),
-                          //     ],
-                          //   ),
                           vpad(12)
                         ],
                       ),

@@ -38,123 +38,120 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
+  var init = true;
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as int?;
 
-    if (arg != null) {
+    if (arg != null && init) {
       initIndex = arg;
     }
     tabController.index = initIndex;
 
     void _onRefresh() {
       setState(() {
+        init = false;
         initIndex = tabController.index;
       });
     }
 
     return ChangeNotifierProvider(
-        create: (context) => ResidentCardPrv(),
-        builder: (context, state) {
-          return PrimaryScreen(
-              appBar: PrimaryAppbar(
-                leading: BackButton(
-                    onPressed: () => Navigator.pushReplacementNamed(
-                        context, ServiceScreen.routeName)),
-                title: S.of(context).res_card,
-                tabController: tabController,
-                isTabScrollabel: false,
-                tabs: [
-                  Tab(text: S.of(context).card_status),
-                  Tab(text: S.of(context).letter_status),
-                ],
+      create: (context) => ResidentCardPrv(),
+      builder: (context, state) {
+        return PrimaryScreen(
+          appBar: PrimaryAppbar(
+            leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                ServiceScreen.routeName,
               ),
-              floatingActionButton: FloatingActionButton(
-                tooltip: S.of(context).register_res_card,
-                onPressed: () {
-                  Navigator.pushNamed(context, RegisterResidentCard.routeName,
-                      arguments: {"isEdit": false});
-                },
-                backgroundColor: primaryColorBase,
-                child: const Icon(
-                  Icons.add,
-                  size: 40,
+            ),
+            title: S.of(context).res_card,
+            tabController: tabController,
+            isTabScrollabel: false,
+            tabs: [
+              Tab(text: S.of(context).card_status),
+              Tab(text: S.of(context).letter_status),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            tooltip: S.of(context).register_res_card,
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RegisterResidentCard.routeName,
+                arguments: {"isEdit": false},
+              );
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
+          ),
+          body: FutureBuilder(
+            future: context.read<ResidentCardPrv>().getData(
+                  context,
                 ),
-              ),
-              body: FutureBuilder(
-                future: context
-                    .read<ResidentCardPrv>()
-                    .getResidentCardByResidentId(context,
-                        context.read<ResidentInfoPrv>().residentId ?? ""),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: PrimaryLoading());
-                  } else if (snapshot.connectionState == ConnectionState.none) {
-                    return PrimaryErrorWidget(
-                        code: snapshot.hasError ? "err" : "1",
-                        message: snapshot.data.toString(),
-                        onRetry: () async {
-                          setState(() {});
-                        });
-                  } else {
-                    List<ResidentCard> resCardList = [];
-                    List<ResidentCard> resCardLetter = [];
-
-                    context.read<ResidentCardPrv>().resCardList.forEach((e) {
-                      if (e.ticket_status == 'APPROVED') {
-                        resCardList.add(e);
-                      } else {
-                        resCardLetter.add(e);
-                      }
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: PrimaryLoading());
+              } else if (snapshot.connectionState == ConnectionState.none) {
+                return PrimaryErrorWidget(
+                  code: snapshot.hasError ? "err" : "1",
+                  message: snapshot.data.toString(),
+                  onRetry: () async {
+                    setState(() {
+                      init = false;
                     });
-
-                    return TabBarView(
-                      controller: tabController,
-                      children: [
-                        ResidentCardTab(
-                            onRefresh: _onRefresh,
-                            extend: () =>
-                                context.read<ResidentCardPrv>().extend(context),
-                            missingReport: () => context
-                                .read<ResidentCardPrv>()
-                                .missingReport(context),
-                            lockCard: (ResidentCard card) => context
-                                .read<ResidentCardPrv>()
-                                .lockCard(context, card),
-                            residentId:
-                                context.read<ResidentInfoPrv>().residentId,
-                            cardList: resCardList),
-                        ResidentLetterTab(
-                            onRefresh: _onRefresh,
-                            edit: () => context
-                                .read<ResidentCardPrv>()
-                                .editLetter(context),
-                            sendRequest: (ResidentCard data) => context
-                                .read<ResidentCardPrv>()
-                                .sendRequest(context, data),
-                            deleteLetter: (ResidentCard card) => context
-                                .read<ResidentCardPrv>()
-                                .deleteLetter(context, card),
-                            cancelRegister: (ResidentCard card) => context
-                                .read<ResidentCardPrv>()
-                                .cancelLetter(context, card),
-                            residentId:
-                                context.read<ResidentInfoPrv>().residentId,
-                            cardList: resCardLetter
-                            // ..sort(
-                            //   (a, b) =>
-                            //       (b.updatedTime!).compareTo(a.updatedTime!),
-                            // )
-                            // ..sort((a, b) =>
-                            //     genOrder(a.ticket_status ?? "") -
-                            //     genOrder(b.ticket_status ?? "")),
-                            ),
-                      ],
-                    );
-                  }
-                },
-              ));
-        });
+                  },
+                );
+              }
+              return TabBarView(
+                controller: tabController,
+                children: [
+                  ResidentCardTab(
+                    onRefresh: _onRefresh,
+                    extend: () =>
+                        context.read<ResidentCardPrv>().extend(context),
+                    cancel: context.read<ResidentCardPrv>().cancelResCard,
+                    missingReport:
+                        context.read<ResidentCardPrv>().missingReport,
+                    lockCard: (ResidentCard card) =>
+                        context.read<ResidentCardPrv>().lockCard(context, card),
+                    residentId: context.read<ResidentInfoPrv>().residentId,
+                    cardList: context.watch<ResidentCardPrv>().manageCardList,
+                  ),
+                  ResidentLetterTab(
+                    onRefresh: _onRefresh,
+                    edit: () =>
+                        context.read<ResidentCardPrv>().editLetter(context),
+                    sendRequest: (ResidentCard data) => context
+                        .read<ResidentCardPrv>()
+                        .sendRequest(context, data),
+                    deleteLetter: (ResidentCard card) => context
+                        .read<ResidentCardPrv>()
+                        .deleteLetter(context, card),
+                    cancelRegister: (ResidentCard card) => context
+                        .read<ResidentCardPrv>()
+                        .cancelLetter(context, card),
+                    residentId: context.read<ResidentInfoPrv>().residentId,
+                    cardList: context.watch<ResidentCardPrv>().resCardList,
+                    // ..sort(
+                    //   (a, b) =>
+                    //       (b.updatedTime!).compareTo(a.updatedTime!),
+                    // )
+                    // ..sort((a, b) =>
+                    //     genOrder(a.ticket_status ?? "") -
+                    //     genOrder(b.ticket_status ?? "")),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -178,13 +175,16 @@ class PrimaryRadio extends StatelessWidget {
         child: Row(
           children: [
             Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        width: isSelected ? 5 : 2,
-                        color: isSelected ? primaryColorBase : primaryColor4))),
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  width: isSelected ? 5 : 2,
+                  color: isSelected ? primaryColorBase : primaryColor4,
+                ),
+              ),
+            ),
             hpad(16),
             Text(
               title,

@@ -34,359 +34,142 @@ class RegisterResidentCard extends StatelessWidget {
       create: (context) => RegisterResidentCardPrv(
         code: card.code,
         id: card.id,
-        imageUrlFront: card.identity_image_front,
-        imageUrlBack: card.identity_image_back,
-        otherImage: card.other_image,
-        imageUrlResident: card.resident_image,
         residentId: context.read<ResidentInfoPrv>().residentId,
         apartmentId: card.apartmentId ??
             context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
+        existCard: card,
       ),
       builder: (context, state) {
-        var listApartmentChoice =
-            context.read<ResidentInfoPrv>().listOwn.map((e) {
-          return DropdownMenuItem(
-            value: e.apartmentId,
-            child: Text(e.apartment?.name! != null
-                ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-                : e.apartmentId!),
-          );
-        }).toList();
+        // var listApartmentChoice =
+        //     context.read<ResidentInfoPrv>().listOwn.map((e) {
+        //   return DropdownMenuItem(
+        //     value: e.apartmentId,
+        //     child: Text(e.apartment?.name! != null
+        //         ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
+        //         : e.apartmentId!),
+        //   );
+        // }).toList();
         return PrimaryScreen(
           appBar: PrimaryAppbar(
-              title: isEdit
-                  ? S.of(context).edit_res_card
-                  : S.of(context).register_res_card),
+            title: isEdit
+                ? S.of(context).edit_res_card
+                : S.of(context).register_res_card,
+          ),
           body: SafeArea(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               children: [
-                vpad(20),
-                PrimaryDropDown(
-                  isDense: false,
-                  onChange: (v) {
-                    context.read<RegisterResidentCardPrv>().apartmentId = v;
-                  },
-                  label: S.of(context).apartment,
-                  selectList: listApartmentChoice,
+                // PrimaryDropDown(
+                //   isDense: false,
+                //   onChange: (v) {
+                //     context.read<RegisterResidentCardPrv>().apartmentId = v;
+                //   },
+                //   label: S.of(context).apartment,
+                //   selectList: listApartmentChoice,
+                //   isRequired: true,
+                //   value: context.read<RegisterResidentCardPrv>().apartmentId,
+                // ),
+
+                vpad(16),
+
+                SelectMediaWidget(
                   isRequired: true,
-                  value: context.read<RegisterResidentCardPrv>().apartmentId,
+                  existImages: context
+                      .watch<RegisterResidentCardPrv>()
+                      .identityImageExisted,
+                  images: context
+                      .watch<RegisterResidentCardPrv>()
+                      .identityImageFiles,
+                  title: S.of(context).cmnd_photos,
+                  onRemove:
+                      context.read<RegisterResidentCardPrv>().onRemoveIdentity,
+                  onRemoveExist: context
+                      .read<RegisterResidentCardPrv>()
+                      .onRemoveExistIdentity,
+                  onSelect: () {
+                    context
+                        .read<RegisterResidentCardPrv>()
+                        .onSelectIdentity(context);
+                  },
                 ),
                 vpad(16),
-                Text(
-                  S.of(context).photos,
-                  style: txtBodySmallRegular(color: grayScaleColorBase),
+
+                SelectMediaWidget(
+                  isRequired: true,
+                  images: context
+                      .watch<RegisterResidentCardPrv>()
+                      .residentImageFiles,
+                  existImages: context
+                      .watch<RegisterResidentCardPrv>()
+                      .residentImageExisted,
+                  onRemoveExist:
+                      context.read<RegisterResidentCardPrv>().onRemoveExistRes,
+                  title: S.of(context).res_photo,
+                  onRemove: context.read<RegisterResidentCardPrv>().onRemoveRes,
+                  onSelect: () {
+                    context
+                        .read<RegisterResidentCardPrv>()
+                        .onSelectResPhoto(context);
+                  },
+                ),
+                vpad(16),
+
+                SelectMediaWidget(
+                  isRequired: true,
+                  existImages: context
+                      .watch<RegisterResidentCardPrv>()
+                      .otherImageExisted,
+                  onRemoveExist: context
+                      .read<RegisterResidentCardPrv>()
+                      .onRemoveExistOtherImage,
+                  images:
+                      context.watch<RegisterResidentCardPrv>().otherImageFiles,
+                  title: S.of(context).related_photo,
+                  onRemove: context
+                      .read<RegisterResidentCardPrv>()
+                      .onRemoveOtherImage,
+                  onSelect: () {
+                    context
+                        .read<RegisterResidentCardPrv>()
+                        .onSelectOtherImage(context);
+                  },
                 ),
                 vpad(16),
                 Row(
                   children: [
-                    Text(
-                      S.of(context).identity_photo,
-                      style: txtBodySmallRegular(color: grayScaleColorBase),
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Checkbox(
+                        activeColor: primaryColorBase,
+                        value: context.watch<RegisterResidentCardPrv>().confirm,
+                        onChanged: context
+                            .read<RegisterResidentCardPrv>()
+                            .toggleConfirm,
+                      ),
                     ),
-                    Text(
-                      " *",
-                      style: txtBodySmallRegular(color: redColor1),
-                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () => context
+                            .read<RegisterResidentCardPrv>()
+                            .toggleConfirm(true),
+                        child: Text(
+                          S.of(context).confirm_obey_regulation,
+                          style: txtRegular(14, grayScaleColorBase),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 vpad(16),
-                if (isEdit &&
-                    context.watch<RegisterResidentCardPrv>().imageUrlFront !=
-                        null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.of(context).front_side,
-                        style: txtBodySmallRegular(color: grayScaleColorBase),
-                      ),
-                      vpad(12),
-                      SizedBox(
-                        height: 116,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        canShowPhotoView: true,
-                                        path:
-                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlFront!}',
-                                      )),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        context
-                                            .read<RegisterResidentCardPrv>()
-                                            .onRemoveUrlImage(context, 1);
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                Text(
+                  S.of(context).building_regulation.toUpperCase(),
+                  style: txtBold(
+                    14,
+                    primaryColorBase,
                   ),
-                if (!isEdit ||
-                    (isEdit &&
-                        context
-                                .watch<RegisterResidentCardPrv>()
-                                .imageUrlFront ==
-                            null))
-                  SelectMediaWidget(
-                    isDash: context
-                            .watch<RegisterResidentCardPrv>()
-                            .imageFileFront
-                            .isNotEmpty
-                        ? false
-                        : true,
-                    images:
-                        context.watch<RegisterResidentCardPrv>().imageFileFront,
-                    title: S.of(context).front_side,
-                    onRemove:
-                        context.read<RegisterResidentCardPrv>().onRemoveFront,
-                    onSelect: () {
-                      context
-                          .read<RegisterResidentCardPrv>()
-                          .onSelectFrontPhoto(context);
-                    },
-                  ),
-                vpad(16),
-                if (isEdit &&
-                    context.watch<RegisterResidentCardPrv>().imageUrlBack !=
-                        null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.of(context).back_side,
-                        style: txtBodySmallRegular(color: grayScaleColorBase),
-                      ),
-                      vpad(12),
-                      SizedBox(
-                        height: 116,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        canShowPhotoView: true,
-                                        path:
-                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlBack!}',
-                                      )),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        context
-                                            .read<RegisterResidentCardPrv>()
-                                            .onRemoveUrlImage(context, 2);
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                if (!isEdit ||
-                    (isEdit &&
-                        context.watch<RegisterResidentCardPrv>().imageUrlBack ==
-                            null))
-                  SelectMediaWidget(
-                    isDash: context
-                            .watch<RegisterResidentCardPrv>()
-                            .imageFileBack
-                            .isNotEmpty
-                        ? false
-                        : true,
-                    images:
-                        context.watch<RegisterResidentCardPrv>().imageFileBack,
-                    title: S.of(context).back_side,
-                    onRemove:
-                        context.read<RegisterResidentCardPrv>().onRemoveBack,
-                    onSelect: () {
-                      context
-                          .read<RegisterResidentCardPrv>()
-                          .onSelectBackPhoto(context);
-                    },
-                  ),
-                vpad(16),
-                if (isEdit &&
-                    context.watch<RegisterResidentCardPrv>().imageUrlResident !=
-                        null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.of(context).res_photo,
-                        style: txtBodySmallRegular(color: grayScaleColorBase),
-                      ),
-                      vpad(12),
-                      SizedBox(
-                        height: 116,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        canShowPhotoView: true,
-                                        path:
-                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().imageUrlResident!}',
-                                      )),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        context
-                                            .read<RegisterResidentCardPrv>()
-                                            .onRemoveUrlImage(context, 0);
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                if (!isEdit ||
-                    (isEdit &&
-                        context
-                                .watch<RegisterResidentCardPrv>()
-                                .imageUrlResident ==
-                            null))
-                  SelectMediaWidget(
-                    isDash: context
-                            .watch<RegisterResidentCardPrv>()
-                            .residentImageFile
-                            .isNotEmpty
-                        ? false
-                        : true,
-                    images: context
-                        .watch<RegisterResidentCardPrv>()
-                        .residentImageFile,
-                    title: S.of(context).res_photo,
-                    onRemove:
-                        context.read<RegisterResidentCardPrv>().onRemoveRes,
-                    onSelect: () {
-                      context
-                          .read<RegisterResidentCardPrv>()
-                          .onSelectResPhoto(context);
-                    },
-                  ),
-                vpad(16),
-                if (isEdit &&
-                    context.watch<RegisterResidentCardPrv>().otherImage != null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.of(context).related_photo,
-                        style: txtBodySmallRegular(color: grayScaleColorBase),
-                      ),
-                      vpad(12),
-                      SizedBox(
-                        height: 116,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        canShowPhotoView: true,
-                                        path:
-                                            '${ApiConstants.uploadURL}/?load=${context.watch<RegisterResidentCardPrv>().otherImage!}',
-                                      )),
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: PrimaryIcon(
-                                      icons: PrimaryIcons.close,
-                                      style: PrimaryIconStyle.gradient,
-                                      gradients: PrimaryIconGradient.red,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      onTap: () {
-                                        context
-                                            .read<RegisterResidentCardPrv>()
-                                            .onRemoveUrlImage(context, 3);
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                if (!isEdit ||
-                    (isEdit &&
-                        context.watch<RegisterResidentCardPrv>().otherImage ==
-                            null))
-                  SelectMediaWidget(
-                    isDash: context
-                            .watch<RegisterResidentCardPrv>()
-                            .otherImageFile
-                            .isNotEmpty
-                        ? false
-                        : true,
-                    images:
-                        context.watch<RegisterResidentCardPrv>().otherImageFile,
-                    title: S.of(context).related_photo,
-                    onRemove: context
-                        .read<RegisterResidentCardPrv>()
-                        .onRemoveOtherImage,
-                    onSelect: () {
-                      context
-                          .read<RegisterResidentCardPrv>()
-                          .onSelectOtherImage(context);
-                    },
-                  ),
+                ),
                 vpad(36),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -421,6 +204,7 @@ class RegisterResidentCard extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 vpad(MediaQuery.of(context).padding.bottom + 24)
               ],
             ),

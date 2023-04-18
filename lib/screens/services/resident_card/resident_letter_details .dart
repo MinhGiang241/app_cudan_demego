@@ -7,7 +7,6 @@ import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
-import '../../../models/manage_card.dart';
 import '../../../models/resident_card.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
@@ -16,16 +15,17 @@ import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
 import '../../auth/prv/resident_info_prv.dart';
+import 'register_resident_card.dart';
 
-class ResidentCardDetails extends StatefulWidget {
-  const ResidentCardDetails({super.key});
-  static const routeName = '/residence-card/details';
+class ResidentLetterDetails extends StatefulWidget {
+  const ResidentLetterDetails({super.key});
+  static const routeName = '/residence/letter-details';
 
   @override
-  State<ResidentCardDetails> createState() => _ResidentCardDetailsState();
+  State<ResidentLetterDetails> createState() => _ResidentLetterDetailsState();
 }
 
-class _ResidentCardDetailsState extends State<ResidentCardDetails>
+class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
 
@@ -33,11 +33,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    var card = arg['card'] as ManageCard;
-    var cancel = arg['lockCard'];
+    var card = arg['card'] as ResidentCard;
+    Function lockCard = arg['cancel'] as Function;
+    Function send = arg['send'] as Function;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-        title: S.of(context).res_card_details,
+        title: S.of(context).resident_letter_details,
         tabController: tabController,
         isTabScrollabel: false,
         tabs: [
@@ -58,32 +59,33 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).letter_num,
-                      content: card.serial_lot,
+                      content: card.code,
                       contentStyle: txtBold(16, purpleColorBase),
                     ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).full_name,
-                      content: card.re?.info_name ?? '',
+                      content: card.resident?.info_name ?? '',
                       contentStyle: txtBold(16),
                     ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).address,
                       content:
-                          '${card.res_card?.apartment?.name ?? ""} - ${card.res_card?.apartment?.f?.name ?? ''} - ${card.res_card?.apartment?.b?.name}',
+                          '${card.apartment?.name ?? ""} - ${card.apartment?.f?.name ?? ''} - ${card.apartment?.b?.name}',
                       contentStyle: txtBold(14),
                     ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).phone_num,
-                      content: card.re?.phone_required ?? card.re?.phone,
+                      content:
+                          card.resident?.phone_required ?? card.resident?.phone,
                     ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).reg_date,
                       content: Utils.dateFormat(
-                        card.res_card?.createdTime ?? "",
+                        card.createdTime ?? "",
                         1,
                       ),
                     ),
@@ -91,7 +93,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       isHorizontal: true,
                       title: S.of(context).letter_status,
                       content: card.s?.name ?? '',
-                      contentStyle: genContentStyle(card.status ?? ""),
+                      contentStyle: genContentStyle(card.ticket_status ?? ""),
                     ),
                     if (card.r != null)
                       InfoContentView(
@@ -141,13 +143,40 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                 ),
               ),
               vpad(24),
-              if (card.status != "LOCK" && card.status != "DESTROY")
+              if (card.ticket_status == "NEW")
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    PrimaryButton(
+                      text: S.of(context).edit,
+                      buttonType: ButtonType.orange,
+                      buttonSize: ButtonSize.medium,
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          RegisterResidentCard.routeName,
+                          arguments: {"isEdit": true, "data": card},
+                        );
+                      },
+                    ),
+                    PrimaryButton(
+                      text: S.of(context).send_request,
+                      buttonType: ButtonType.green,
+                      buttonSize: ButtonSize.medium,
+                      secondaryBackgroundColor: redColor5,
+                      onTap: () {
+                        send(context, card);
+                      },
+                    )
+                  ],
+                ),
+              if (card.ticket_status == "WAIT")
                 PrimaryButton(
-                  width: double.infinity,
-                  text: S.of(context).cancel,
+                  text: S.of(context).cancel_request,
                   buttonType: ButtonType.red,
+                  buttonSize: ButtonSize.medium,
                   onTap: () {
-                    cancel(context, card);
+                    lockCard(context, card);
                   },
                 ),
               vpad(kBottomNavigationBarHeight),

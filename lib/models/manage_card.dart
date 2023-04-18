@@ -5,8 +5,10 @@ import 'dart:convert';
 
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/reason.dart';
+import 'package:app_cudan/models/resident_card.dart';
 import 'package:app_cudan/models/transportation_card.dart';
 
+import 'resident_info.dart';
 import 'status.dart';
 
 class ManageCard {
@@ -47,6 +49,8 @@ class ManageCard {
   Status? s;
   TransportCard? t;
   Reason? r;
+  ResponseResidentInfo? re;
+  ResidentCard? res_card;
 
   ManageCard({
     this.id,
@@ -84,6 +88,8 @@ class ManageCard {
     this.s,
     this.t,
     this.r,
+    this.re,
+    this.res_card,
   });
 
   Map<String, dynamic> toMap() {
@@ -204,6 +210,12 @@ class ManageCard {
           : null,
       r: map['r'] != null
           ? Reason.fromJson(map['r'] as Map<String, dynamic>)
+          : null,
+      re: map['re'] != null
+          ? ResponseResidentInfo.fromJson(map['re'] as Map<String, dynamic>)
+          : null,
+      res_card: map['res_card'] != null
+          ? ResidentCard.fromMap(map['res_card'] as Map<String, dynamic>)
           : null,
     );
   }

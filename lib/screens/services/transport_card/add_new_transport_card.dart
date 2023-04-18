@@ -257,16 +257,19 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                           .toggleIntergate,
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: () => context
-                                        .read<AddNewTransportCardPrv>()
-                                        .toggleIntergate(true),
-                                    child: Text(
-                                      S
-                                          .of(context)
-                                          .intergrate_existed_resident_card,
-                                      style: txtRegular(14, grayScaleColorBase),
-                                      overflow: TextOverflow.ellipsis,
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () => context
+                                          .read<AddNewTransportCardPrv>()
+                                          .toggleIntergate(true),
+                                      child: Text(
+                                        S
+                                            .of(context)
+                                            .intergrate_existed_resident_card,
+                                        style:
+                                            txtRegular(14, grayScaleColorBase),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -287,21 +290,27 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                           .toggleObey,
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: () => context
-                                        .read<AddNewTransportCardPrv>()
-                                        .toggleObey(true),
-                                    child: Text(
-                                      S.of(context).confirm_obey_regulation,
-                                      style: txtRegular(14, grayScaleColorBase),
-                                      overflow: TextOverflow.ellipsis,
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () => context
+                                          .read<AddNewTransportCardPrv>()
+                                          .toggleObey(true),
+                                      child: Text(
+                                        S.of(context).confirm_obey_regulation,
+                                        style:
+                                            txtRegular(14, grayScaleColorBase),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                                   )
                                 ],
                               ),
                               vpad(12),
                               Text(
-                                S.of(context).building_regulation.toUpperCase(),
+                                S
+                                    .of(context)
+                                    .building_regulation_trans
+                                    .toUpperCase(),
                                 style: txtBold(
                                   14,
                                   primaryColorBase,

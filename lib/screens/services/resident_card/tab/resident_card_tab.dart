@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
+import '../../../../models/manage_card.dart';
 import '../../../../models/resident_card.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
@@ -21,13 +22,15 @@ class ResidentCardTab extends StatelessWidget {
     required this.extend,
     required this.lockCard,
     required this.missingReport,
+    required this.cancel,
     required this.onRefresh,
   });
 
-  final List<ResidentCard> cardList;
+  final List<ManageCard> cardList;
   String? residentId;
   Function() extend;
-  Function() missingReport;
+  Function missingReport;
+  Function cancel;
   Function(ResidentCard) lockCard;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -35,20 +38,32 @@ class ResidentCardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var activeCard = [];
-    var inactiveCard = [];
+    List<ManageCard> active = [];
+    List<ManageCard> inActive = [];
+    List<ManageCard> lock = [];
+    List<ManageCard> lost = [];
+    List<ManageCard> destroy = [];
     for (var i in cardList) {
-      if (i.card_status == 'ACTIVE') {
-        activeCard.add(i);
-      } else {
-        inactiveCard.add(i);
+      if (i.status == "ACTIVED") {
+        active.add(i);
+      } else if (i.status == "INACTIVED") {
+        inActive.add(i);
+      } else if (i.status == "LOCK") {
+        lock.add(i);
+      } else if (i.status == "LOST") {
+        lost.add(i);
+      } else if (i.status == "DESTROY") {
+        destroy.add(i);
       }
     }
 
-    activeCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
-    inactiveCard.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    active.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    inActive.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    lock.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    lost.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+    destroy.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-    var list = activeCard + inactiveCard;
+    List<ManageCard> list = active + inActive + lock + lost + destroy;
 
     return (list.isEmpty)
         ? SafeArea(
@@ -56,7 +71,8 @@ class ResidentCardTab extends StatelessWidget {
               enablePullDown: true,
               enablePullUp: false,
               header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               controller: _refreshController,
               onLoading: () {
                 _refreshController.loadComplete();
@@ -75,153 +91,177 @@ class ResidentCardTab extends StatelessWidget {
               ),
             ),
           )
-        : Stack(children: [
-            SafeArea(
-              child: SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: false,
-                header: WaterDropMaterialHeader(
-                    backgroundColor: Theme.of(context).primaryColor),
-                controller: _refreshController,
-                onLoading: () {
-                  _refreshController.loadComplete();
-                  // _refreshController.refreshCompleted();
-                },
-                onRefresh: () {
-                  onRefresh();
-                  _refreshController.refreshCompleted();
-                },
-                child: ListView(children: [
-                  vpad(24),
-                  ...List.generate(list.length, (index) {
-                    var listContent = [
-                      InfoContentView(
-                        title: S.of(context).card_num,
-                        content: list[index].code,
-                        contentStyle: txtBold(16, primaryColor1),
-                      ),
-                      InfoContentView(
-                        title: S.of(context).full_name,
-                        content: list[index].resident != null
-                            ? list[index].resident!.info_name != null
-                                ? list[index].resident!.info_name!.toUpperCase()
-                                : ''
-                            : "",
-                        contentStyle: txtBold(16, grayScaleColorBase),
-                      ),
-                      InfoContentView(
-                        title: S.of(context).apartment,
-                        content: list[index].apartment != null
-                            ? "${list[index].apartment!.name}, ${list[index].floor!.name}, ${list[index].building!.name}"
-                            : "",
-                        contentStyle: txtBold(16, grayScaleColorBase),
-                      ),
-                    ];
-
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          left: 12, right: 12, bottom: 16),
-                      child: PrimaryCard(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            ResidentCardDetails.routeName,
-                            arguments: {
-                              "card": list[index],
-                              "lockCard": () => lockCard(list[index])
-                            },
-                          );
-                        },
-                        child: Column(children: [
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                  color: list[index].card_status == "ACTIVE"
-                                      ? greenColorBase
-                                      : redColor2,
-                                  borderRadius: const BorderRadius.only(
-                                      topRight: Radius.circular(12),
-                                      bottomLeft: Radius.circular(8))),
-                              child: Text(
-                                list[index].card_status == "ACTIVE"
-                                    ? S.of(context).active
-                                    : S.of(context).lock,
-                                style: txtSemiBold(12, Colors.white),
-                              ),
-                            ),
+        : Stack(
+            children: [
+              SafeArea(
+                child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  header: WaterDropMaterialHeader(
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  controller: _refreshController,
+                  onLoading: () {
+                    _refreshController.loadComplete();
+                    // _refreshController.refreshCompleted();
+                  },
+                  onRefresh: () {
+                    onRefresh();
+                    _refreshController.refreshCompleted();
+                  },
+                  child: ListView(
+                    children: [
+                      vpad(24),
+                      ...List.generate(list.length, (index) {
+                        var listContent = [
+                          InfoContentView(
+                            title: S.of(context).card_num,
+                            content: list[index].serial_lot,
+                            contentStyle: txtBold(16, primaryColor1),
                           ),
-                          vpad(16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Table(
-                              textBaseline: TextBaseline.ideographic,
-                              defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.baseline,
-                              columnWidths: const {
-                                0: FlexColumnWidth(2),
-                                1: FlexColumnWidth(3)
-                              },
+                          InfoContentView(
+                            title: S.of(context).full_name,
+                            content: list[index].re != null
+                                ? list[index].re!.info_name != null
+                                    ? list[index].re!.info_name!.toUpperCase()
+                                    : ''
+                                : "",
+                            contentStyle: txtBold(16, grayScaleColorBase),
+                          ),
+                          InfoContentView(
+                            title: S.of(context).address,
+                            content: list[index].res_card?.apartment != null
+                                ? "${list[index].res_card?.apartment!.name ?? ""}, ${list[index].res_card?.apartment?.f?.name ?? ""}, ${list[index].res_card?.apartment?.b?.name}"
+                                : "",
+                            contentStyle: txtBold(16, grayScaleColorBase),
+                          ),
+                        ];
+
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                            right: 12,
+                            bottom: 16,
+                          ),
+                          child: PrimaryCard(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                ResidentCardDetails.routeName,
+                                arguments: {
+                                  "card": list[index],
+                                  "lockCard": cancel
+                                },
+                              );
+                            },
+                            child: Column(
                               children: [
-                                ...listContent.map<TableRow>(
-                                  (e) => TableRow(
-                                    children: [
-                                      Text(
-                                        '${e.title}:',
-                                        style: txtMedium(12, grayScaleColor2),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: genStatusColor(
+                                        list[index].status ?? "",
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 16),
-                                        child: Text(e.content ?? "",
-                                            style: e.contentStyle),
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(12),
+                                        bottomLeft: Radius.circular(8),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      list[index].s?.name ?? "",
+                                      style: txtSemiBold(12, Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                vpad(16),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: Table(
+                                    textBaseline: TextBaseline.ideographic,
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.baseline,
+                                    columnWidths: const {
+                                      0: FlexColumnWidth(2),
+                                      1: FlexColumnWidth(3)
+                                    },
+                                    children: [
+                                      ...listContent.map<TableRow>(
+                                        (e) => TableRow(
+                                          children: [
+                                            Text(
+                                              '${e.title}:',
+                                              style: txtMedium(
+                                                12,
+                                                grayScaleColor2,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                bottom: 16,
+                                              ),
+                                              child: Text(
+                                                e.content ?? "",
+                                                style: e.contentStyle,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
-                                )
+                                ),
+                                if (list[index].status != "LOST" ||
+                                    list[index].status != "DESTROY")
+                                  Row(
+                                    children: [
+                                      hpad(12),
+                                      PrimaryButton(
+                                        buttonSize: ButtonSize.xsmall,
+                                        buttonType: ButtonType.secondary,
+                                        secondaryBackgroundColor: primaryColor5,
+                                        text: S.of(context).missing_report,
+                                        textColor: primaryColor1,
+                                        onTap: () {
+                                          missingReport(context, list[index]);
+                                        },
+                                      ),
+                                      // PrimaryButton(
+                                      //   buttonSize: ButtonSize.xsmall,
+                                      //   buttonType: ButtonType.secondary,
+                                      //   secondaryBackgroundColor: yellowColor4,
+                                      //   text: S.of(context).extend,
+                                      //   textColor: yellowColor1,
+                                      //   onTap: () {},
+                                      // ),
+
+                                      // PrimaryButton(
+                                      //   buttonSize: ButtonSize.xsmall,
+                                      //   buttonType: ButtonType.secondary,
+                                      //   secondaryBackgroundColor: redColor4,
+                                      //   textColor: redColor,
+                                      //   text: S.of(context).lock_card,
+                                      //   // onTap: () => lockCard(list[index]),
+                                      // ),
+                                    ],
+                                  ),
+                                vpad(12)
                               ],
                             ),
                           ),
-                          if (list[index].card_status == "ACTIVE")
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: yellowColor4,
-                                  text: S.of(context).extend,
-                                  textColor: yellowColor1,
-                                  onTap: () {},
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: primaryColor5,
-                                  text: S.of(context).missing_report,
-                                  textColor: primaryColor1,
-                                  onTap: () {},
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor4,
-                                  textColor: redColor,
-                                  text: S.of(context).lock_card,
-                                  onTap: () => lockCard(list[index]),
-                                ),
-                              ],
-                            ),
-                          vpad(12)
-                        ]),
-                      ),
-                    );
-                  }),
-                  vpad(60)
-                ]),
+                        );
+                      }),
+                      vpad(60)
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ]);
+            ],
+          );
   }
 }

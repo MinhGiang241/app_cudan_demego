@@ -287,18 +287,21 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                             onChanged: (v) {},
                           ),
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            S.of(context).intergrate_existed_resident_card,
-                            style: txtRegular(14, grayScaleColorBase),
-                            overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              S.of(context).intergrate_existed_resident_card,
+                              style: txtRegular(14, grayScaleColorBase),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         )
                       ],
                     ),
-                    if (card.status != "CANCEL") vpad(30),
-                    if (card.status != "CANCEL")
+                    if (card.status != "LOCK" && card.status != "DESTROY")
+                      vpad(30),
+                    if (card.status != "LOCK" && card.status != "DESTROY")
                       PrimaryButton(
                         isLoading: false,
                         buttonSize: ButtonSize.medium,
