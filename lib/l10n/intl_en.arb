@@ -742,5 +742,16 @@
   "lock_reason": "Lock reason",
   "reg_cancel": "Cancel registration",
   "cmnd_photos": "Identity photos",
-  "resident_letter_details": "Resident registration details"
+  "resident_letter_details": "Resident registration details",
+  "my_letter": "My letter",
+  "wait_confirm_letter": "Wait confirm letter",
+  "refuse": "refuse",
+  "refuse_letter": "Refuse letter",
+  "confirm_refuse_letter": "Do you want to refuse letter [{code}] ?",
+  "success_refuse_letter": "Refuse letter successfully",
+  "confirm_accept_letter": "Do you want to accept letter [{code}] ?",
+  "success_accept_letter": "Accept letter successfully",
+  "reason_refuse": "Refuse reason",
+  "enter_reason_refuse": "Enter refuse reason",
+  "owner_refuse": "Owner refuse"
 }

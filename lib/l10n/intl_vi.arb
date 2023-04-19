@@ -726,7 +726,7 @@
   "trans_details": "Chi tiết phương tiện",
   "trans_status": "Trạng thái phương tiện",
   "cancel_transport": "Hủy phương tiện",
-  "confirm_cancel_trans": "Bạn có chắc chắn hủy phương tiện {plate} không?",
+  "confirm_cancel_trans": "Bạn có chắc chắn hủy phương tiện [{plate}] không?",
   "success_cancel_trans": "Hủy phương tiện thành công",
   "succees_extend_trans": "Gia hạn phương tiện thành công",
   "expired_date_old": "Ngày hết hạn hiện tại",
@@ -743,5 +743,16 @@
   "lock_reason": "Lý do khóa",
   "reg_cancel": "Hủy đăng ký",
   "cmnd_photos": "Ảnh CMND / CCCD / Hộ chiếu",
-  "resident_letter_details": "Chi tiết phiếu đăng ký thẻ cư dân"
+  "resident_letter_details": "Chi tiết phiếu đăng ký thẻ cư dân",
+  "my_letter": "Phiếu của tôi",
+  "wait_confirm_letter": "Phiếu chờ xác nhận",
+  "refuse": "Từ chối",
+  "refuse_letter": "Từ chối phiếu",
+  "confirm_refuse_letter": "Bạn có chắc chắn muốn từ chối phiếu [{code}] không?",
+  "success_refuse_letter": "Từ chối phiếu thành công",
+  "confirm_accept_letter": "Bạn có chắc chắn muốn xác nhận phiếu [{code}] không?",
+  "success_accept_letter": "Xác nhận phiếu thành công",
+  "reason_refuse": "Lý do từ chối",
+  "enter_reason_refuse": "Nhập lý do từ chối",
+  "owner_refuse": "Chủ hộ từ chối"
 }

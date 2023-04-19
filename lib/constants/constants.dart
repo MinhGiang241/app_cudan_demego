@@ -82,6 +82,7 @@ const Color greenColor4 = Color(0xff9FF2EB);
 const Color greenColor5 = Color(0xffDAF5F3);
 
 const Color greenColor6 = Color(0xff00C950);
+const Color greenColor11 = Color(0xff7AED7F);
 const Color greenColor8 = Color(0xff4CAF50);
 const Color greenColor9 = Color(0xff4090BD);
 const Color greenColor10 = Color(0xff4CAF50);

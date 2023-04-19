@@ -7489,6 +7489,116 @@ class S {
       args: [],
     );
   }
+
+  /// `My letter`
+  String get my_letter {
+    return Intl.message(
+      'My letter',
+      name: 'my_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait confirm letter`
+  String get wait_confirm_letter {
+    return Intl.message(
+      'Wait confirm letter',
+      name: 'wait_confirm_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `refuse`
+  String get refuse {
+    return Intl.message(
+      'refuse',
+      name: 'refuse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refuse letter`
+  String get refuse_letter {
+    return Intl.message(
+      'Refuse letter',
+      name: 'refuse_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to refuse letter [{code}] ?`
+  String confirm_refuse_letter(Object code) {
+    return Intl.message(
+      'Do you want to refuse letter [$code] ?',
+      name: 'confirm_refuse_letter',
+      desc: '',
+      args: [code],
+    );
+  }
+
+  /// `Refuse letter successfully`
+  String get success_refuse_letter {
+    return Intl.message(
+      'Refuse letter successfully',
+      name: 'success_refuse_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to accept letter [{code}] ?`
+  String confirm_accept_letter(Object code) {
+    return Intl.message(
+      'Do you want to accept letter [$code] ?',
+      name: 'confirm_accept_letter',
+      desc: '',
+      args: [code],
+    );
+  }
+
+  /// `Accept letter successfully`
+  String get success_accept_letter {
+    return Intl.message(
+      'Accept letter successfully',
+      name: 'success_accept_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refuse reason`
+  String get reason_refuse {
+    return Intl.message(
+      'Refuse reason',
+      name: 'reason_refuse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter refuse reason`
+  String get enter_reason_refuse {
+    return Intl.message(
+      'Enter refuse reason',
+      name: 'enter_reason_refuse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Owner refuse`
+  String get owner_refuse {
+    return Intl.message(
+      'Owner refuse',
+      name: 'owner_refuse',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,31 +1,37 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'reason.dart';
+import 'resident_info.dart';
+import 'response_resident_own.dart';
 import 'status.dart';
 
 class Delivery {
-  Delivery(
-      {this.id,
-      this.apartmentId,
-      this.code,
-      this.createdTime,
-      this.end_time,
-      this.help_check,
-      this.item_added_list,
-      this.note_reason,
-      this.phone_number,
-      this.reasons,
-      this.residentId,
-      this.start_time,
-      this.status,
-      this.type_transfer,
-      this.updatedTime,
-      this.image,
-      this.end_hour,
-      this.elevator,
-      this.isMobile,
-      this.s,
-      this.start_hour,
-      this.describe});
+  Delivery({
+    this.id,
+    this.apartmentId,
+    this.code,
+    this.createdTime,
+    this.end_time,
+    this.help_check,
+    this.item_added_list,
+    this.note_reason,
+    this.phone_number,
+    this.reasons,
+    this.residentId,
+    this.start_time,
+    this.status,
+    this.type_transfer,
+    this.updatedTime,
+    this.image,
+    this.end_hour,
+    this.elevator,
+    this.isMobile,
+    this.s,
+    this.start_hour,
+    this.re,
+    this.describe,
+    this.a,
+  });
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -46,6 +52,9 @@ class Delivery {
   bool? help_check;
   bool? elevator;
   bool? isMobile;
+  ResponseResidentInfo? re;
+  Reason? r;
+  Apartment? a;
   List<ItemDeliver>? item_added_list;
   List<ImageDelivery>? image;
   Delivery.fromJson(Map<String, dynamic> json) {
@@ -83,6 +92,9 @@ class Delivery {
                 .toList()
             : []
         : [];
+    re = json['re'] != null ? ResponseResidentInfo.fromJson(json['re']) : null;
+    r = json['r'] != null ? Reason.fromJson(json['r']) : null;
+    a = json['a'] != null ? Apartment.fromJson(json['a']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -114,12 +126,13 @@ class Delivery {
 }
 
 class ItemDeliver {
-  ItemDeliver(
-      {this.createdTime,
-      this.dimension,
-      this.item_name,
-      this.updatedTime,
-      this.weight});
+  ItemDeliver({
+    this.createdTime,
+    this.dimension,
+    this.item_name,
+    this.updatedTime,
+    this.weight,
+  });
   String? createdTime;
   String? updatedTime;
   String? item_name;
