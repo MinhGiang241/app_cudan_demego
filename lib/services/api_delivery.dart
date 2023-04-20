@@ -91,22 +91,21 @@ class APIDelivery {
     }
   }
 
-  static Future saveNewDelivery(Map<String, dynamic> data) async {
+  static Future saveNewDelivery(Map<String, dynamic> data, bool isEdit) async {
     var query = '''
-  mutation (\$data:TransferItemsInputDto) {
-    response: save_TransferItems_dto(data:\$data){
-      message
-      code
-      data {
-        _id
-      }
+ mutation (\$data:Dictionary,\$isEdit:Boolean){
+    response: transfer_mobile_save_tranferItems (data: \$data,isEdit: \$isEdit ) {
+        code
+        message
+        data
     }
-  }
+}
+        
   ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"data": data},
+      variables: {"data": data, "isEdit": isEdit},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

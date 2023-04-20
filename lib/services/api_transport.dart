@@ -144,15 +144,17 @@ class APITransport {
   static Future saveTransportLetter(
     Map<String, dynamic> data,
     bool isUncontrol,
+    bool isEdit,
   ) async {
     var query = '''
-     mutation (\$data:Dictionary,\$isUncontrol:Boolean){
-    response: card_mobile_save_transport_card_letter (data: \$data,isUncontrol: \$isUncontrol ) {
+    mutation (\$data:Dictionary,\$isUncontrol:Boolean,\$isEdit:Boolean){
+    response: card_mobile_save_transport_card_letter (data: \$data,isUncontrol: \$isUncontrol,isEdit: \$isEdit ) {
         code
         message
         data
     }
 }
+        
         
     ''';
 
@@ -161,6 +163,7 @@ class APITransport {
       variables: {
         "data": data,
         "isUncontrol": isUncontrol,
+        "isEdit": isEdit,
       },
     );
 

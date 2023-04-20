@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../models/letter_history.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/resident_card.dart';
 import '../../../../models/response_thecudan_list.dart';
+import '../../../../services/api_history.dart';
 import '../../../../services/api_resident_card.dart';
 import '../../../../services/api_tower.dart';
 import '../../../../services/api_transport.dart';
@@ -74,6 +76,15 @@ class ResidentCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
+          var his = CardHistory(
+            action: "Báo mất",
+            content: "Người dùng báo mất thẻ",
+            manageCardId: card.id,
+            perform_date: DateTime.now()
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+          );
+          APIHistory.saveHistoryCard(his.toMap());
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_report_missing,
@@ -87,34 +98,6 @@ class ResidentCardPrv extends ChangeNotifier {
             },
           );
         }).catchError((e) {
-          Utils.showErrorMessage(context, e);
-        });
-      },
-    );
-  }
-
-  lockCard(BuildContext context, ResidentCard card) {
-    Utils.showConfirmMessage(
-      context: context,
-      title: S.of(context).lock_card,
-      content: S.of(context).confirm_lock_card(card.code ?? ""),
-      onConfirm: () async {
-        card.ticket_status = "INACTIVE";
-        APIResCard.saveResidentCard(card.toJson()).then((v) {
-          Navigator.pop(context);
-          Utils.showSuccessMessage(
-            context: context,
-            e: S.of(context).success_lock_card,
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                ResidentCardListScreen.routeName,
-                (route) => route.isFirst,
-              );
-            },
-          );
-        }).catchError((e) {
-          Navigator.pop(context);
           Utils.showErrorMessage(context, e);
         });
       },
@@ -161,6 +144,15 @@ class ResidentCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
+          var his = CardHistory(
+            action: "Khóa thẻ",
+            content: "Người dùng khóa thẻ",
+            manageCardId: card.id,
+            perform_date: DateTime.now()
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+          );
+          APIHistory.saveHistoryCard(his.toMap());
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_can_res_card,

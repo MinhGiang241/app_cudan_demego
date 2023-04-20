@@ -117,8 +117,6 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
                     cancel: context.read<ResidentCardPrv>().cancelResCard,
                     missingReport:
                         context.read<ResidentCardPrv>().missingReport,
-                    lockCard: (ResidentCard card) =>
-                        context.read<ResidentCardPrv>().lockCard(context, card),
                     residentId: context.read<ResidentInfoPrv>().residentId,
                     cardList: context.watch<ResidentCardPrv>().manageCardList,
                   ),

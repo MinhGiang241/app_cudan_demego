@@ -1,9 +1,12 @@
+import 'package:app_cudan/models/letter_history.dart';
+import 'package:app_cudan/services/api_history.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../models/timeline_model.dart';
 import '../../../models/transportation_card.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
@@ -29,6 +32,7 @@ class TransportLetterDetailsScreen extends StatefulWidget {
 class _TransportLetterDetailsScreenState
     extends State<TransportLetterDetailsScreen> with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
+  List<LetterHistory> historyList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -251,14 +255,46 @@ class _TransportLetterDetailsScreenState
               vpad(kBottomNavigationBarHeight),
             ],
           ),
-          ListView(
-            children: [
-              vpad(24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: TimeLineView(),
-              )
-            ],
+          FutureBuilder(
+            future: () async {
+              APIHistory.getHistoryLetter(card.id, 'transportcard').then((v) {
+                if (v != null) {
+                  historyList.clear();
+                  for (var i in v) {
+                    historyList.add(LetterHistory.fromMap(i));
+                  }
+                }
+                historyList.sort(
+                  (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+                );
+                if (mounted) {
+                  setState(() {});
+                }
+              });
+            }(),
+            builder: (context, snpshot) {
+              return ListView(
+                children: [
+                  vpad(24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TimeLineView(
+                      content: historyList
+                          .map(
+                            (i) => TimelineModel(
+                              date: i.perform_date,
+                              title: i.content,
+                              subTitle: i.new_status != null
+                                  ? '${S.of(context).status}: ${i.ns?.name}'
+                                  : null,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                ],
+              );
+            },
           )
         ],
       ),

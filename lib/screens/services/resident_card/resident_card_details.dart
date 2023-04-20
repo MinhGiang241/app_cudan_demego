@@ -7,8 +7,11 @@ import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../models/letter_history.dart';
 import '../../../models/manage_card.dart';
 import '../../../models/resident_card.dart';
+import '../../../models/timeline_model.dart';
+import '../../../services/api_history.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -28,7 +31,7 @@ class ResidentCardDetails extends StatefulWidget {
 class _ResidentCardDetailsState extends State<ResidentCardDetails>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-
+  List<CardHistory> historyList = [];
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -153,14 +156,44 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
               vpad(kBottomNavigationBarHeight),
             ],
           ),
-          ListView(
-            children: [
-              vpad(24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: TimeLineView(),
-              )
-            ],
+          FutureBuilder(
+            future: () async {
+              await APIHistory.getHistoryCard(card.id).then((v) {
+                if (v != null) {
+                  historyList.clear();
+                  for (var i in v) {
+                    historyList.add(CardHistory.fromMap(i));
+                  }
+                }
+                historyList.sort(
+                  (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+                );
+                if (mounted) {
+                  setState(() {});
+                }
+              });
+            }(),
+            builder: (context, snapshot) {
+              return ListView(
+                children: [
+                  vpad(24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TimeLineView(
+                      content: historyList
+                          .map(
+                            (i) => TimelineModel(
+                              date: i.perform_date,
+                              title: i.content,
+                              subTitle: i.action,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                ],
+              );
+            },
           )
         ],
       ),

@@ -94,7 +94,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       );
       var data = newCard.toMap();
 
-      return APIResCard.saveResidentCard(data).then((v) async {
+      return APIResCard.saveResidentCard(data, id != null).then((v) async {
         await Utils.showSuccessMessage(
           context: context,
           e: isRequest

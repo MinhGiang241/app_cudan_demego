@@ -460,7 +460,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
             "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
       );
 
-      await APITransport.saveTransportLetter(letter.toMap(), false).then((v) {
+      await APITransport.saveTransportLetter(letter.toMap(), false, id != null)
+          .then((v) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(

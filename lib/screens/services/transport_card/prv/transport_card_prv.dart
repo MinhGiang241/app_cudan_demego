@@ -1,5 +1,7 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/models/letter_history.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_history.dart';
 import 'package:app_cudan/services/api_transport.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +26,15 @@ class TransportCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
+          var his = CardHistory(
+            action: "Khóa thẻ",
+            content: "Người dùng khóa thẻ",
+            manageCardId: card.id,
+            perform_date: DateTime.now()
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+          );
+          APIHistory.saveHistoryCard(his.toMap());
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_can_trans_card,
@@ -55,8 +66,6 @@ class TransportCardPrv extends ChangeNotifier {
       for (var i in v) {
         cardList.add(ManageCard.fromMap(i));
       }
-
-      notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
@@ -171,6 +180,7 @@ class TransportCardPrv extends ChangeNotifier {
 
   missingReport(BuildContext context, ManageCard card) async {
     card.status = "LOST";
+    card.reasons = 'BAOMAT';
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card,
       content: S.of(context).confirm_missing_report(card.serial_lot ?? ""),
@@ -188,6 +198,15 @@ class TransportCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
+          var his = CardHistory(
+            action: "Báo mất",
+            content: "Người dùng báo mất thẻ",
+            manageCardId: card.id,
+            perform_date: DateTime.now()
+                .subtract(const Duration(hours: 7))
+                .toIso8601String(),
+          );
+          APIHistory.saveHistoryCard(his.toMap());
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_report_missing,

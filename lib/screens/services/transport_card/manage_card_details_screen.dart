@@ -10,6 +10,9 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../models/letter_history.dart';
+import '../../../models/timeline_model.dart';
+import '../../../services/api_history.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -35,6 +38,7 @@ class ManageCardDetailsScreen extends StatefulWidget {
 class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
+
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -321,7 +325,19 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                 vpad(24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TimeLineView(),
+                  child: TimeLineView(
+                    content: context
+                        .watch<ManageCardDetailsPrv>()
+                        .historyList
+                        .map(
+                          (i) => TimelineModel(
+                            date: i.perform_date,
+                            title: i.content,
+                            subTitle: i.action,
+                          ),
+                        )
+                        .toList(),
+                  ),
                 )
               ],
             )

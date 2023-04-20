@@ -20,7 +20,6 @@ class ResidentCardTab extends StatelessWidget {
     required this.cardList,
     this.residentId,
     required this.extend,
-    required this.lockCard,
     required this.missingReport,
     required this.cancel,
     required this.onRefresh,
@@ -31,7 +30,7 @@ class ResidentCardTab extends StatelessWidget {
   Function() extend;
   Function missingReport;
   Function cancel;
-  Function(ResidentCard) lockCard;
+
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   Function() onRefresh;

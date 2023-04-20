@@ -239,7 +239,7 @@ TextStyle txtLinkXSmall({Color? color}) => TextStyle(
     color: color);
 TextStyle txtLinkXXSmall({Color? color}) => TextStyle(
     fontFamily: family,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: FontWeight.w600,
     color: color);
 

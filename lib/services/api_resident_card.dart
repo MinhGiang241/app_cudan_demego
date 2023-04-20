@@ -61,21 +61,22 @@ class APIResCard {
     }
   }
 
-  static Future saveResidentCard(data) async {
+  static Future saveResidentCard(Map<String, dynamic> data, bool isEdit) async {
     var query = '''
-        mutation (\$data:ResidentCardInputDto){
-    response:	save_ResidentCard_dto(data:\$data){
-      code
-      message
-      data {
-        _id
-      }
+    mutation (\$data:Dictionary,\$isEdit:Boolean){
+    response: resident_mobile_save_resident_card (data: \$data,isEdit: \$isEdit ) {
+        code
+        message
+        data
     }
-    }
+}
+        
+        
+        
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"data": data},
+      variables: {"data": data, "isEdit": isEdit},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

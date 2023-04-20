@@ -99,6 +99,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   onSendSummitDelivery(BuildContext context, bool isRequest) {
     autoValid = true;
     FocusScope.of(context).unfocus();
+    var selectedApartment = context.read<ResidentInfoPrv>().selectedApartment;
 
     if (formKey.currentState!.validate()) {
       if (isRequest) {
@@ -160,14 +161,19 @@ class RegisterDeliveryPrv extends ChangeNotifier {
             help_check: helpCheck,
             image: submitImageDelivery + existedImage,
             residentId: context.read<ResidentInfoPrv>().residentId,
-            status: isRequest ? "WAIT_MANAGER" : "NEW",
+            status: isRequest
+                ? (selectedApartment?.type == "BUY" ||
+                        selectedApartment?.type == "RENT")
+                    ? "WAIT_MANAGER"
+                    : "WAIT_OWNER"
+                : "NEW",
             type_transfer: type == 1 ? "OUT" : "IN",
             apartmentId:
                 context.read<ResidentInfoPrv>().selectedApartment!.apartmentId,
           );
 
           var data = newDelivery.toJson();
-          return APIDelivery.saveNewDelivery(data);
+          return APIDelivery.saveNewDelivery(data, id != null);
         }).then((v) async {
           await Utils.showSuccessMessage(
             context: context,

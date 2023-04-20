@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/letter_history.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/transportation_card.dart';
+import '../../../../services/api_history.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../services/api_transportation.dart';
 import '../../../../utils/utils.dart';
@@ -12,6 +14,20 @@ class ManageCardDetailsPrv extends ChangeNotifier {
   ManageCardDetailsPrv(this.cancel);
   ManageCard card = ManageCard();
   Function? cancel;
+  List<CardHistory> historyList = [];
+  Future getHistoryCard() async {
+    APIHistory.getHistoryCard(card.id).then((v) {
+      if (v != null) {
+        historyList.clear();
+        for (var i in v) {
+          historyList.add(CardHistory.fromMap(i));
+        }
+      }
+      historyList.sort(
+        (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+      );
+    });
+  }
 
   Future getManageCardById(BuildContext context, String? id) async {
     return APITrans.getManageCarById(id).then((v) {
@@ -38,8 +54,11 @@ class ManageCardDetailsPrv extends ChangeNotifier {
           transportCard?.transports_list =
               List.from(listTransport..removeAt(index));
           Navigator.pop(context);
-          await APITransport.saveTransportLetter(transportCard!.toMap(), true)
-              .then((v) {
+          await APITransport.saveTransportLetter(
+            transportCard!.toMap(),
+            true,
+            true,
+          ).then((v) {
             Utils.showSuccessMessage(
               context: context,
               e: S.of(context).success_cancel_trans,
