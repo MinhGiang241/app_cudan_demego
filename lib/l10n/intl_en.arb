@@ -753,5 +753,7 @@
   "success_accept_letter": "Accept letter successfully",
   "reason_refuse": "Refuse reason",
   "enter_reason_refuse": "Enter refuse reason",
-  "owner_refuse": "Owner refuse"
+  "owner_refuse": "Owner refuse",
+  "cancel_card": "Cancel card",
+  "not_extend_inactive_card": "Can not extend transport in inactive card"
 }

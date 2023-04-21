@@ -719,6 +719,7 @@ class Utils {
 
   static downloadFile({
     String? url,
+    String? id,
     Map<String, String>? headers,
     BuildContext? context,
   }) async {
@@ -728,7 +729,7 @@ class Utils {
       final baseStorage = await getExternalStorageDirectory();
 
       var taskId = await FlutterDownloader.enqueue(
-        url: url ?? '',
+        url: url ?? "${ApiConstants.uploadURL}?load=$id ",
         headers: headers ??
             {
               'Accept':

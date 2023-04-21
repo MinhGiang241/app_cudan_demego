@@ -11,6 +11,7 @@ import '../../../../generated/l10n.dart';
 import '../../../../models/resident_card.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../services/api_resident_card.dart';
+import '../../../../services/api_rules.dart';
 import '../../../../utils/utils.dart';
 import '../resident_card_screen.dart';
 
@@ -26,7 +27,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       identityImageExisted = [...(existCard?.identity_image ?? [])];
       residentImageExisted = [...(existCard?.resident_image ?? [])];
       otherImageExisted = [...(existCard?.other_image ?? [])];
-      confirm = existCard?.confirmation ?? false;
+      confirm = existCard?.confirmation ?? true;
     }
   }
 
@@ -40,7 +41,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   String? residentId;
   String? apartmentId;
 
-  bool confirm = false;
+  bool confirm = true;
 
   List<File> identityImageFiles = [];
   List<File> residentImageFiles = [];
@@ -53,6 +54,22 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   List<FileUploadModel> identityImageUploaded = [];
   List<FileUploadModel> residentImageUploaded = [];
   List<FileUploadModel> otherImageUploaded = [];
+
+  List<FileUploadModel> rulesFiles = [];
+
+  getRuleFiles() async {
+    await APIRule.getListRulesFiles('transportcard').then((v) {
+      if (v != null) {
+        rulesFiles.clear();
+        for (var i in v) {
+          rulesFiles.add(FileUploadModel.fromMap(i));
+        }
+        rulesFiles.sort(
+          (a, b) => a.id!.compareTo(b.id!),
+        );
+      }
+    });
+  }
 
   toggleConfirm(v) {
     confirm = !confirm;

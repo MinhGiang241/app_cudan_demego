@@ -1,8 +1,7 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:app_cudan/screens/services/transport_card/prv/transport_card_prv.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -119,23 +118,14 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                 (index) {
                   var listContent = [
                     InfoContentView(
-                      title: S.of(context).card_num,
+                      title: S.of(context).letter_num,
                       content: list[index].code,
                       contentStyle: txtBold(16, primaryColor1),
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
-                      content: context
-                                  .watch<ResidentInfoPrv>()
-                                  .userInfo!
-                                  .info_name !=
-                              null
-                          ? context
-                              .watch<ResidentInfoPrv>()
-                              .userInfo!
-                              .info_name!
-                              .toUpperCase()
-                          : '',
+                      content:
+                          list[index].name_resident ?? list[index].name ?? "",
                       contentStyle: txtBold(14),
                     ),
                     // InfoContentView(
@@ -154,7 +144,7 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                       content: list[index]
                           .transports_list
                           ?.map((o) => o.vehicleType?.name)
-                          .join(", "),
+                          .join("/ "),
                       contentStyle: txtBold(
                         14,
                         genStatusColor(

@@ -153,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "can_trans_res":
             MessageLookupByLibrary.simpleMessage("Cancel resident card"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancel_card": MessageLookupByLibrary.simpleMessage("Cancel card"),
         "cancel_letter": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Reject_reason"),
         "cancel_reflection":
@@ -628,6 +629,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not empty front side photo"),
         "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
             "Vehicle type can not be empty"),
+        "not_extend_inactive_card": MessageLookupByLibrary.simpleMessage(
+            "Can not extend transport in inactive card"),
         "not_found": MessageLookupByLibrary.simpleMessage("Not found"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Not found account Information"),

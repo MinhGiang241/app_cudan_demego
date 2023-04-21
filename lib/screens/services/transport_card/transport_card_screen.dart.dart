@@ -1,17 +1,11 @@
 // ignore_for_file: implementation_imports, prefer_const_constructors
 
-import 'package:app_cudan/screens/reg_resident/add_new_resident_screen.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
-import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../widgets/primary_error_widget.dart';
-import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
 import 'add_new_transport_card.dart';
@@ -44,12 +38,6 @@ class _TransportCardScreenState extends State<TransportCardScreen>
       initIndex = arg;
     }
     tabController.index = initIndex;
-
-    void onRefresh() {
-      setState(() {
-        initIndex = tabController.index;
-      });
-    }
 
     return ChangeNotifierProvider(
       create: (context) => TransportCardPrv(),

@@ -58,9 +58,11 @@ class TransportCardPrv extends ChangeNotifier {
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
     await APITransport.getTransportCardList(
       residentId,
       apartmentId,
+      userInfo?.account?.phone_number ?? userInfo?.account?.userName,
     ).then((v) {
       cardList.clear();
       for (var i in v) {
@@ -75,9 +77,15 @@ class TransportCardPrv extends ChangeNotifier {
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-    await APITransport.getTransportLetterList(residentId, apartmentId, true)
-        .then((v) {
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
+    await APITransport.getTransportLetterList(
+      residentId,
+      apartmentId,
+      true,
+      userInfo?.account?.phone_number ?? userInfo?.account?.userName,
+    ).then((v) {
       letterList.clear();
+
       for (var i in v) {
         letterList.add(TransportCard.fromMap(i));
       }

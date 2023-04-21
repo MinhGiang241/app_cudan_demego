@@ -112,7 +112,7 @@ class ResidentLetterTab extends StatelessWidget {
                         (index) {
                           var listContent = [
                             InfoContentView(
-                              title: S.of(context).card_num,
+                              title: S.of(context).letter_num,
                               content: list[index].code,
                               contentStyle: txtBold(16, purpleColorBase),
                             ),
@@ -260,7 +260,7 @@ class ResidentLetterTab extends StatelessWidget {
                                           buttonType: ButtonType.secondary,
                                           secondaryBackgroundColor: redColor4,
                                           textColor: redColor,
-                                          text: S.of(context).delete_letter,
+                                          text: S.of(context).delete,
                                           onTap: () => deleteLetter(
                                             list[index],
                                           ),

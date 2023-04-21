@@ -16,6 +16,7 @@ import '../../../../models/delivery.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
+import '../../../../widgets/primary_screen.dart';
 
 class RegisterDeliveryPrv extends ChangeNotifier {
   RegisterDeliveryPrv({
@@ -500,261 +501,270 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       builder: (context) {
         // autoValid1 = false;
         return StatefulBuilder(
-          builder: (context, setState) => Form(
-            onChanged: autoValid1
-                ? () {
-                    validate1();
-                    setState(() {});
-                  }
-                : null,
-            autovalidateMode:
-                autoValid1 ? AutovalidateMode.onUserInteraction : null,
-            key: formKey1,
-            child: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-              },
-              child: Column(
-                children: [
-                  vpad(40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          builder: (context, setState) => PrimaryScreen(
+            isPadding: false,
+            body: SingleChildScrollView(
+              child: Form(
+                onChanged: autoValid1
+                    ? () {
+                        validate1();
+                        setState(() {});
+                      }
+                    : null,
+                autovalidateMode:
+                    autoValid1 ? AutovalidateMode.onUserInteraction : null,
+                key: formKey1,
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                  },
+                  child: Column(
                     children: [
-                      BackButton(
-                        onPressed: () {
-                          setState(() {
-                            weightController.text = '';
-                            packageNameController.text = '';
-                            dimentionController.text = '';
-                            longController.text = '';
-                            widthController.text = '';
-                            heightController.text = '';
-                            validateDimention = null;
-                            validateLong = null;
-                            validateWidth = null;
-                            validateHeight = null;
-                            validateWeight = null;
-                            validatePackageName = null;
-                            notifyListeners();
-                          });
+                      vpad(40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BackButton(
+                            onPressed: () {
+                              setState(() {
+                                weightController.text = '';
+                                packageNameController.text = '';
+                                dimentionController.text = '';
+                                longController.text = '';
+                                widthController.text = '';
+                                heightController.text = '';
+                                validateDimention = null;
+                                validateLong = null;
+                                validateWidth = null;
+                                validateHeight = null;
+                                validateWeight = null;
+                                validatePackageName = null;
+                                notifyListeners();
+                              });
 
-                          Navigator.pop(context);
-                        },
+                              Navigator.pop(context);
+                            },
+                          ),
+                          Text(
+                            item != null
+                                ? S.of(context).edit_package
+                                : S.of(context).add_package,
+                            style: txtBodyLargeBold(color: grayScaleColorBase),
+                            textAlign: TextAlign.center,
+                          ),
+                          hpad(50)
+                        ],
                       ),
-                      Text(
-                        item != null
-                            ? S.of(context).edit_package
-                            : S.of(context).add_package,
-                        style: txtBodyLargeBold(color: grayScaleColorBase),
-                        textAlign: TextAlign.center,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Column(
+                          // padding: const EdgeInsets.symmetric(horizontal: 24),
+                          children: [
+                            vpad(16),
+                            PrimaryTextField(
+                              blockSpecial: true,
+                              maxLength: 100,
+                              validateString: validatePackageName,
+                              controller: packageNameController,
+                              label: S.of(context).package_name,
+                              isRequired: true,
+                              hint: S.of(context).package_name,
+                              validator: (v) {
+                                if (v!.trim().isEmpty) {
+                                  return '';
+                                }
+
+                                return null;
+                              },
+                            ),
+                            vpad(16),
+                            PrimaryTextField(
+                              maxLength: 100,
+                              blockSpace: true,
+                              validateString: validateWeight,
+                              controller: weightController,
+                              label: '${S.of(context).weight} (kg)',
+                              isRequired: true,
+                              hint: '${S.of(context).weight} (kg)',
+                              keyboardType: TextInputType.number,
+                              validator: (v) {
+                                if (v!.trim().isEmpty) {
+                                  return '';
+                                } else if (RegexText.onlyZero(v.trim())) {
+                                  return '';
+                                }
+                                return null;
+                              },
+                            ),
+                            vpad(16),
+                            Row(
+                              children: [
+                                Text('${S.of(context).dimention} (cm)'),
+                                Text(
+                                  '*',
+                                  style:
+                                      txtBodySmallRegular(color: redColorBase),
+                                )
+                              ],
+                            ),
+                            vpad(16),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: PrimaryTextField(
+                                    isRequired: true,
+                                    isShow: false,
+                                    validateString: validateLong,
+                                    keyboardType: TextInputType.number,
+                                    controller: longController,
+                                    label: S.of(context).long,
+                                    maxLength: 100,
+                                    blockSpace: true,
+                                    validator: (v) {
+                                      if (v!.isEmpty) {
+                                        return '';
+                                      }
+
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                hpad(24),
+                                Expanded(
+                                  child: PrimaryTextField(
+                                    isRequired: true,
+                                    isShow: false,
+                                    validateString: validateWidth,
+                                    keyboardType: TextInputType.number,
+                                    controller: widthController,
+                                    label: S.of(context).width,
+                                    maxLength: 100,
+                                    blockSpace: true,
+                                    validator: (v) {
+                                      if (v!.isEmpty) {
+                                        return '';
+                                      }
+
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                hpad(24),
+                                Expanded(
+                                  child: PrimaryTextField(
+                                    isRequired: true,
+                                    isShow: false,
+                                    validateString: validateHeight,
+                                    keyboardType: TextInputType.number,
+                                    controller: heightController,
+                                    label: S.of(context).height,
+                                    maxLength: 100,
+                                    blockSpace: true,
+                                    validator: (v) {
+                                      if (v!.isEmpty) {
+                                        return '';
+                                      }
+
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // PrimaryTextField(
+                            //   maxLength: 100,
+                            //   blockSpace: true,
+                            //   validateString: validateDimention,
+                            //   controller: dimentionController,
+                            //   label: '${S.of(context).dimention} (cm)',
+                            //   isRequired: true,
+                            //   hint: S.of(context).l_w_e,
+                            //   validator: (v) {
+                            //     if (v!.isEmpty) {
+                            //       return '';
+                            //     } else if (!RegexText.onlyZero(v.trim())) {
+                            //       return '';
+                            //     } else if (RegexText.vietNameseChar(v.trim())) {
+                            //       return '';
+                            //     }
+                            //     return null;
+                            //   },
+                            // ),
+                            vpad(30),
+                            PrimaryButton(
+                              width: dvWidth(context) - 48,
+                              text: item != null
+                                  ? S.of(context).edit
+                                  : S.of(context).add,
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                autoValid1 = true;
+                                if (formKey1.currentState!.validate()) {
+                                  if (item != null) {
+                                    onEditPackage(context, item.key);
+                                  } else {
+                                    onAddPackage(context);
+                                  }
+                                  autoValid1 = false;
+                                  // formKey1.currentState!.dispose();
+                                  Navigator.pop(context);
+                                } else {
+                                  if (packageNameController.text
+                                      .trim()
+                                      .isEmpty) {
+                                    validatePackageName =
+                                        S.of(context).not_blank;
+                                  } else {
+                                    validatePackageName = null;
+                                  }
+                                  if (weightController.text.trim().isEmpty) {
+                                    validateWeight = S.of(context).not_blank;
+                                  } else if (RegexText.onlyZero(
+                                    weightController.text.trim(),
+                                  )) {
+                                    validateWeight = S.of(context).not_zero;
+                                  } else {
+                                    validateWeight = null;
+                                  }
+                                  if (longController.text.trim().isEmpty) {
+                                    validateLong = S.of(context).not_blank;
+                                  } else {
+                                    validateLong = null;
+                                  }
+                                  if (widthController.text.trim().isEmpty) {
+                                    validateWidth = S.of(context).not_blank;
+                                  } else {
+                                    validateWidth = null;
+                                  }
+                                  if (heightController.text.trim().isEmpty) {
+                                    validateHeight = S.of(context).not_blank;
+                                  } else {
+                                    validateHeight = null;
+                                  }
+                                  // if (dimentionController.text.trim().isEmpty) {
+                                  //   validateDimention = S.of(context).not_blank;
+                                  // } else if (!RegexText.onlyZero(
+                                  //     dimentionController.text.trim())) {
+                                  //   validateDimention = S.of(context).not_dimention;
+                                  // } else if (RegexText.vietNameseChar(
+                                  //     dimentionController.text.trim())) {
+                                  //   validateDimention = S.of(context).not_vietnamese;
+                                  // } else {
+                                  //   validateDimention = null;
+                                  // }
+                                  setState(() {});
+                                  notifyListeners();
+                                }
+                              },
+                            ),
+                            vpad(16),
+                          ],
+                        ),
                       ),
-                      hpad(50)
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      // padding: const EdgeInsets.symmetric(horizontal: 24),
-                      children: [
-                        vpad(16),
-                        PrimaryTextField(
-                          blockSpecial: true,
-                          maxLength: 100,
-                          validateString: validatePackageName,
-                          controller: packageNameController,
-                          label: S.of(context).package_name,
-                          isRequired: true,
-                          hint: S.of(context).package_name,
-                          validator: (v) {
-                            if (v!.trim().isEmpty) {
-                              return '';
-                            }
-
-                            return null;
-                          },
-                        ),
-                        vpad(16),
-                        PrimaryTextField(
-                          maxLength: 100,
-                          blockSpace: true,
-                          validateString: validateWeight,
-                          controller: weightController,
-                          label: '${S.of(context).weight} (kg)',
-                          isRequired: true,
-                          hint: '${S.of(context).weight} (kg)',
-                          keyboardType: TextInputType.number,
-                          validator: (v) {
-                            if (v!.trim().isEmpty) {
-                              return '';
-                            } else if (RegexText.onlyZero(v.trim())) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        vpad(16),
-                        Row(
-                          children: [
-                            Text('${S.of(context).dimention} (cm)'),
-                            Text(
-                              '*',
-                              style: txtBodySmallRegular(color: redColorBase),
-                            )
-                          ],
-                        ),
-                        vpad(16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: PrimaryTextField(
-                                isRequired: true,
-                                isShow: false,
-                                validateString: validateLong,
-                                keyboardType: TextInputType.number,
-                                controller: longController,
-                                label: S.of(context).long,
-                                maxLength: 100,
-                                blockSpace: true,
-                                validator: (v) {
-                                  if (v!.isEmpty) {
-                                    return '';
-                                  }
-
-                                  return null;
-                                },
-                              ),
-                            ),
-                            hpad(24),
-                            Expanded(
-                              child: PrimaryTextField(
-                                isRequired: true,
-                                isShow: false,
-                                validateString: validateWidth,
-                                keyboardType: TextInputType.number,
-                                controller: widthController,
-                                label: S.of(context).width,
-                                maxLength: 100,
-                                blockSpace: true,
-                                validator: (v) {
-                                  if (v!.isEmpty) {
-                                    return '';
-                                  }
-
-                                  return null;
-                                },
-                              ),
-                            ),
-                            hpad(24),
-                            Expanded(
-                              child: PrimaryTextField(
-                                isRequired: true,
-                                isShow: false,
-                                validateString: validateHeight,
-                                keyboardType: TextInputType.number,
-                                controller: heightController,
-                                label: S.of(context).height,
-                                maxLength: 100,
-                                blockSpace: true,
-                                validator: (v) {
-                                  if (v!.isEmpty) {
-                                    return '';
-                                  }
-
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        // PrimaryTextField(
-                        //   maxLength: 100,
-                        //   blockSpace: true,
-                        //   validateString: validateDimention,
-                        //   controller: dimentionController,
-                        //   label: '${S.of(context).dimention} (cm)',
-                        //   isRequired: true,
-                        //   hint: S.of(context).l_w_e,
-                        //   validator: (v) {
-                        //     if (v!.isEmpty) {
-                        //       return '';
-                        //     } else if (!RegexText.onlyZero(v.trim())) {
-                        //       return '';
-                        //     } else if (RegexText.vietNameseChar(v.trim())) {
-                        //       return '';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-                        vpad(30),
-                        PrimaryButton(
-                          width: dvWidth(context) - 48,
-                          text: item != null
-                              ? S.of(context).edit
-                              : S.of(context).add,
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            autoValid1 = true;
-                            if (formKey1.currentState!.validate()) {
-                              if (item != null) {
-                                onEditPackage(context, item.key);
-                              } else {
-                                onAddPackage(context);
-                              }
-                              autoValid1 = false;
-                              // formKey1.currentState!.dispose();
-                              Navigator.pop(context);
-                            } else {
-                              if (packageNameController.text.trim().isEmpty) {
-                                validatePackageName = S.of(context).not_blank;
-                              } else {
-                                validatePackageName = null;
-                              }
-                              if (weightController.text.trim().isEmpty) {
-                                validateWeight = S.of(context).not_blank;
-                              } else if (RegexText.onlyZero(
-                                weightController.text.trim(),
-                              )) {
-                                validateWeight = S.of(context).not_zero;
-                              } else {
-                                validateWeight = null;
-                              }
-                              if (longController.text.trim().isEmpty) {
-                                validateLong = S.of(context).not_blank;
-                              } else {
-                                validateLong = null;
-                              }
-                              if (widthController.text.trim().isEmpty) {
-                                validateWidth = S.of(context).not_blank;
-                              } else {
-                                validateWidth = null;
-                              }
-                              if (heightController.text.trim().isEmpty) {
-                                validateHeight = S.of(context).not_blank;
-                              } else {
-                                validateHeight = null;
-                              }
-                              // if (dimentionController.text.trim().isEmpty) {
-                              //   validateDimention = S.of(context).not_blank;
-                              // } else if (!RegexText.onlyZero(
-                              //     dimentionController.text.trim())) {
-                              //   validateDimention = S.of(context).not_dimention;
-                              // } else if (RegexText.vietNameseChar(
-                              //     dimentionController.text.trim())) {
-                              //   validateDimention = S.of(context).not_vietnamese;
-                              // } else {
-                              //   validateDimention = null;
-                              // }
-                              setState(() {});
-                              notifyListeners();
-                            }
-                          },
-                        ),
-                        vpad(16),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

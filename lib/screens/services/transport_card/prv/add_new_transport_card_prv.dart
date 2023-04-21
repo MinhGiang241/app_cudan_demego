@@ -3,15 +3,14 @@
 import 'dart:io';
 
 import 'package:app_cudan/models/file_upload.dart';
-import 'package:app_cudan/models/manage_card.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/services/resident_card/prv/resident_card_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/transportation_card.dart';
 import '../../../../services/api_auth.dart';
+import '../../../../services/api_rules.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../utils/utils.dart';
 import '../transport_card_screen.dart.dart';
@@ -21,7 +20,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     if (existedTransport != null) {
       id = existedTransport?.id;
       isIntergate = existedTransport?.integrated ?? false;
-      isObey = existedTransport?.confirmation ?? false;
+      isObey = existedTransport?.confirmation ?? true;
       transportList = existedTransport?.transports_list ?? [];
     }
   }
@@ -32,11 +31,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   bool isSendApproveLoading = false;
   bool isAddTransLoading = false;
   bool isIntergate = false;
-  bool isObey = false;
+  bool isObey = true;
   bool autoValid = false;
   bool isShowLicense = true;
   final formKey = GlobalKey<FormState>();
-
+  List<FileUploadModel> rulesFiles = [];
   TransportCard? existedTransport;
   String? id;
 
@@ -66,6 +65,52 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   List<TransportItem> transportList = [];
   TransportItem? itemEdit;
   int? indexEdit;
+
+  getRuleFiles() async {
+    await APIRule.getListRulesFiles('transportcard').then((v) {
+      if (v != null) {
+        rulesFiles.clear();
+        for (var i in v) {
+          rulesFiles.add(FileUploadModel.fromMap(i));
+        }
+        rulesFiles.sort(
+          (a, b) => a.id!.compareTo(b.id!),
+        );
+      }
+    });
+  }
+
+  genExpireDate() {
+    DateTime expireDate;
+    DateTime now = DateTime.now();
+    var shelf =
+        shelfLifeList.firstWhere((element) => element.id == expiredValue);
+
+    if (shelf.type_time?.toLowerCase() == 'tháng') {
+      expireDate = DateTime(
+        now.year,
+        now.month + (shelf.use_time ?? 0),
+        now.day,
+      );
+    } else if (shelf.type_time?.toLowerCase() == 'năm') {
+      expireDate = DateTime(
+        now.year + (shelf.use_time ?? 0),
+        now.month,
+        now.day,
+      );
+    } else if (shelf.type_time?.toLowerCase() == 'ngày') {
+      expireDate = DateTime(
+        now.year,
+        now.month,
+        now.day + (shelf.use_time ?? 0),
+      );
+    } else {
+      expireDate = now;
+    }
+    var text = expireDate.toIso8601String();
+
+    return text;
+  }
 
   formValidation() {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
@@ -136,8 +181,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   }
 
   Future getInitData(BuildContext context) async {
-    await getShelfLife();
-    await getTransportType();
+    await getShelfLife().then((v) {
+      return getTransportType();
+    }).then((v) {
+      return getRuleFiles();
+    });
   }
 
   Future getShelfLife() async {
@@ -397,6 +445,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         //     shelfLifeList.firstWhere((element) => element.id == expiredValue);
 
         TransportItem transportItem = TransportItem(
+          expire_date: genExpireDate(),
           residentId: residentId,
           apartmentId: apartmentId,
           number_plate: liceneController.text.trim(),
@@ -445,7 +494,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         id: id,
         apartmentId: apartment?.apartmentId,
         residentId: residentId,
-        phone_number: residentInfo?.account?.phone_number,
+        phone_number: residentId != null
+            ? residentInfo?.phone_required
+            : residentInfo?.account?.phone_number,
         confirmation: isObey,
         integrated: isIntergate,
         isMobile: true,
@@ -456,8 +507,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
         registration_date: existedTransport?.registration_date ??
             DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
-        address:
-            "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
+        address: residentId != null
+            ? "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}"
+            : 'Khách vãng lai không có nhập địa chỉ, ',
       );
 
       await APITransport.saveTransportLetter(letter.toMap(), false, id != null)

@@ -7599,6 +7599,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Cancel card`
+  String get cancel_card {
+    return Intl.message(
+      'Cancel card',
+      name: 'cancel_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can not extend transport in inactive card`
+  String get not_extend_inactive_card {
+    return Intl.message(
+      'Can not extend transport in inactive card',
+      name: 'not_extend_inactive_card',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

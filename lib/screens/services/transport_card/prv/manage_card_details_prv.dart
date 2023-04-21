@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/list_transport.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../generated/l10n.dart';
@@ -8,15 +9,27 @@ import '../../../../services/api_history.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../services/api_transportation.dart';
 import '../../../../utils/utils.dart';
-import '../manage_card_details_screen.dart';
 
 class ManageCardDetailsPrv extends ChangeNotifier {
   ManageCardDetailsPrv(this.cancel);
   ManageCard card = ManageCard();
   Function? cancel;
   List<CardHistory> historyList = [];
-  Future getHistoryCard() async {
-    APIHistory.getHistoryCard(card.id).then((v) {
+  List<ListTransport> listTranspost = [];
+  Future getListTransport(String? id) async {
+    await APITransport.getListTransportByManageCardId(id).then((v) {
+      listTranspost.clear();
+      if (v != null) {
+        for (var i in v) {
+          listTranspost.add(ListTransport.fromMap(i));
+        }
+      }
+      print(listTranspost);
+    });
+  }
+
+  Future getHistoryCard(id) async {
+    await APIHistory.getHistoryCard(id).then((v) {
       if (v != null) {
         historyList.clear();
         for (var i in v) {
@@ -32,6 +45,7 @@ class ManageCardDetailsPrv extends ChangeNotifier {
   Future getManageCardById(BuildContext context, String? id) async {
     return APITrans.getManageCarById(id).then((v) {
       card = ManageCard.fromMap(v);
+      return getListTransport(id);
     });
   }
 

@@ -1,7 +1,6 @@
 import 'package:app_cudan/models/letter_history.dart';
 import 'package:app_cudan/services/api_history.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -16,8 +15,8 @@ import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
-import '../../auth/prv/resident_info_prv.dart';
 import 'add_new_transport_card.dart';
+import 'transport_details_letter_screen.dart';
 import 'transport_details_screen.dart';
 
 class TransportLetterDetailsScreen extends StatefulWidget {
@@ -75,11 +74,16 @@ class _TransportLetterDetailsScreenState
                       content: card.name_resident ?? card.name ?? "",
                       contentStyle: txtBold(14),
                     ),
+                    if (card.card_type != 'CUSTOMER')
+                      InfoContentView(
+                        isHorizontal: true,
+                        title: S.of(context).address,
+                        content: card.address ?? "",
+                      ),
                     InfoContentView(
-                      isHorizontal: true,
-                      title: S.of(context).address,
-                      content: card.address ?? "",
-                    ),
+                        isHorizontal: true,
+                        title: S.of(context).phone_num,
+                        content: card.phone_number ?? ""),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).reg_date,
@@ -128,7 +132,7 @@ class _TransportLetterDetailsScreenState
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        TransportDetailsScreen.routeName,
+                        TransportDetailsLetterScreen.routeName,
                         arguments: {"item": e.value},
                       );
                     },
@@ -230,6 +234,7 @@ class _TransportLetterDetailsScreenState
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     PrimaryButton(
+                      buttonType: ButtonType.orange,
                       isLoading: false,
                       buttonSize: ButtonSize.medium,
                       text: S.of(context).edit,

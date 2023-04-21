@@ -1,13 +1,14 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:app_cudan/screens/services/transport_card/prv/add_new_transport_card_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:horizontal_blocked_scroll_physics/horizontal_blocked_scroll_physics.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -33,6 +34,48 @@ class AddNewTransportCardScreen extends StatefulWidget {
 }
 
 class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    IsolateNameServer.registerPortWithName(
+      _port.sendPort,
+      'downloader_send_port',
+    );
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
+    super.dispose();
+  }
+
+  ReceivePort _port = ReceivePort();
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
@@ -60,7 +103,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     ? Navigator.pushReplacementNamed(
                         context,
                         TransportCardScreen.routeName,
-                        // arguments: true,
+                        arguments: 1,
                       )
                     : context
                         .read<AddNewTransportCardPrv>()
@@ -83,6 +126,9 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     child: Text(e.name ?? e.id!),
                   );
                 }).toList();
+
+                var ruleFiles =
+                    context.watch<AddNewTransportCardPrv>().rulesFiles;
 
                 var shelfLifeListChoices = shelfLifeList.map((e) {
                   return DropdownMenuItem(
@@ -125,7 +171,11 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   ),
                                 ],
                               ),
-                              vpad(12),
+                              if (context
+                                  .watch<AddNewTransportCardPrv>()
+                                  .transportList
+                                  .isNotEmpty)
+                                vpad(12),
                               ...context
                                   .watch<AddNewTransportCardPrv>()
                                   .transportList
@@ -316,6 +366,24 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   primaryColorBase,
                                 ),
                               ),
+                              if (ruleFiles.isNotEmpty) vpad(12),
+                              ...ruleFiles.map(
+                                (v) => InkWell(
+                                  onTap: () {
+                                    Utils.downloadFile(
+                                      context: context,
+                                      id: v.id,
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      v.name ?? "",
+                                      style: txtRegular(13, primaryColorBase),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               vpad(30),
                               Row(
                                 mainAxisAlignment:
@@ -483,12 +551,19 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                               vpad(12),
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text(
-                                  S.of(context).photos,
-                                  style: txtBodySmallBold(
-                                    color: grayScaleColorBase,
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: S.of(context).photos,
+                                        style: txtBold(12, grayScaleColorBase),
+                                      ),
+                                      TextSpan(
+                                        text: " *",
+                                        style: txtBold(12, redColorBase),
+                                      ),
+                                    ],
                                   ),
-                                  textAlign: TextAlign.left,
                                 ),
                               ),
                               if (context
@@ -516,7 +591,6 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)
                                 SelectMediaWidget(
-                                  isRequired: true,
                                   existImages: context
                                       .watch<AddNewTransportCardPrv>()
                                       .resExistedImages,
@@ -538,7 +612,6 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 ),
                               vpad(12),
                               SelectMediaWidget(
-                                isRequired: true,
                                 existImages: context
                                     .watch<AddNewTransportCardPrv>()
                                     .otherExistedImages,

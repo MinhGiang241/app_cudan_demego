@@ -7,16 +7,13 @@ import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
 import '../../../../models/manage_card.dart';
-import '../../../../models/transportation_card.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
-import '../../../auth/prv/resident_info_prv.dart';
 import '../prv/transport_card_prv.dart';
-import '../transport_letter_details_screen.dart';
 
 class TransportCardTab extends StatefulWidget {
   const TransportCardTab({super.key});
@@ -54,6 +51,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
         List<ManageCard> lock = [];
         List<ManageCard> lost = [];
         List<ManageCard> destroy = [];
+
         for (var i in cardList) {
           if (i.status == "ACTIVED") {
             active.add(i);
@@ -148,7 +146,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                           .t
                           ?.transports_list
                           ?.map((o) => o.vehicleType?.name)
-                          .join(", "),
+                          .join("/ "),
                       contentStyle: txtBold(
                         14,
                         genStatusColor(
@@ -241,7 +239,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                               ],
                             ),
                           ),
-                          if (list[index].status != "LOST" ||
+                          if (list[index].status != "LOST" &&
                               list[index].status != "DESTROY")
                             Row(
                               children: [

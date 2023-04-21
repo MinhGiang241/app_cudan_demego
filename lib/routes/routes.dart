@@ -59,6 +59,7 @@ import '../screens/services/service_screen.dart';
 import '../screens/services/transport_card/add_new_transport_card.dart';
 import '../screens/services/transport_card/extend_card_screen.dart';
 import '../screens/services/transport_card/manage_card_details_screen.dart';
+import '../screens/services/transport_card/transport_details_letter_screen.dart';
 import '../screens/services/transport_card/transport_details_screen.dart';
 import '../screens/services/transport_card/transport_card_screen.dart.dart';
 import '../screens/services/transport_card/transport_letter_details_screen.dart';
@@ -375,6 +376,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const ResidentLetterDetails(),
+        );
+      case TransportDetailsLetterScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const TransportDetailsLetterScreen(),
         );
 
       // case ChatScreen.routeName:

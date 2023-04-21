@@ -1,8 +1,8 @@
+import 'package:app_cudan/models/list_transport.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +30,7 @@ class _ExtendCardScreenState extends State<ExtendCardScreen> {
     var card = arg['card'] as ManageCard;
     var index = arg['index'] as int;
     var cancel = arg['cancel'] as Function;
+    var item = arg['item'] as ListTransport;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).extend,
@@ -50,7 +51,7 @@ class _ExtendCardScreenState extends State<ExtendCardScreen> {
         create: (_) => ExtendTransportPrv(
           card: card,
           index: index,
-          item: card.t?.transports_list?[index],
+          item: item,
           cancel: cancel,
         ),
         builder: (context, snapshot) {
@@ -61,7 +62,7 @@ class _ExtendCardScreenState extends State<ExtendCardScreen> {
                   context.read<ExtendTransportPrv>().shelfLifeList.map((e) {
                 return DropdownMenuItem(
                   value: e.id,
-                  child: Text('${e.use_time} ${e.type_time}'),
+                  child: Text('${e.use_time ?? ""} ${e.type_time ?? ""}'),
                 );
               }).toList();
               return SafeArea(

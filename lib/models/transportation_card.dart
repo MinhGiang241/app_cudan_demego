@@ -532,8 +532,8 @@ class TransportItem {
       vehicleType: map['vehicleType'] != null
           ? VehicleType.fromJson(map['vehicleType'] as Map<String, dynamic>)
           : null,
-      shelfLife: map['shelfLife'] != null
-          ? ShelfLife.fromMap(map['shelfLife'] as Map<String, dynamic>)
+      shelfLife: map['shelflife'] != null
+          ? ShelfLife.fromMap(map['shelflife'] as Map<String, dynamic>)
           : null,
     );
   }

@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/list_transport.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/transportation_card.dart';
 import '../../../../services/api_transport.dart';
@@ -16,13 +17,13 @@ class ExtendTransportPrv extends ChangeNotifier {
     this.cancel,
   }) {
     if (card != null) {
-      expireValue = item?.shelfLifeId;
+      // expireValue = item?.shelfLifeId;
       oldExpireController.text = Utils.dateFormat(item?.expire_date ?? "", 1);
       extendController.text =
           Utils.dateFormat(DateTime.now().toIso8601String(), 1);
     }
   }
-  TransportItem? item;
+  ListTransport? item;
   final formKey = GlobalKey<FormState>();
   bool autoValid = false;
   DateTime? regDate;
@@ -69,23 +70,23 @@ class ExtendTransportPrv extends ChangeNotifier {
 
     if (shelf.type_time?.toLowerCase() == 'tháng') {
       newExpireDate = DateTime(
-        regDate!.year,
-        regDate!.month + (shelf.use_time ?? 0),
-        regDate!.day,
+        expireDate!.year,
+        expireDate!.month + (shelf.use_time ?? 0),
+        expireDate!.day,
       );
     }
     if (shelf.type_time?.toLowerCase() == 'năm') {
       newExpireDate = DateTime(
-        regDate!.year + (shelf.use_time ?? 0),
-        regDate!.month,
-        regDate!.day,
+        expireDate!.year + (shelf.use_time ?? 0),
+        expireDate!.month,
+        expireDate!.day,
       );
     }
     if (shelf.type_time?.toLowerCase() == 'ngày') {
       newExpireDate = DateTime(
-        regDate!.year,
-        regDate!.month,
-        regDate!.day + (shelf.use_time ?? 0),
+        expireDate!.year,
+        expireDate!.month,
+        expireDate!.day + (shelf.use_time ?? 0),
       );
     }
     newExpireController.text =
@@ -103,31 +104,32 @@ class ExtendTransportPrv extends ChangeNotifier {
         v.forEach((e) {
           shelfLifeList.add(ShelfLife.fromMap(e));
         });
+        expireDate = DateTime.parse(item!.expire_date ?? "");
 
-        var shelf =
-            shelfLifeList.firstWhere((element) => element.id == expireValue);
-        regDate = DateTime.parse(card?.registration_date ?? '');
-        if (shelf.type_time?.toLowerCase() == 'tháng') {
-          expireDate = DateTime(
-            regDate!.year,
-            regDate!.month + (shelf.use_time ?? 0),
-            regDate!.day,
-          );
-        }
-        if (shelf.type_time?.toLowerCase() == 'năm') {
-          expireDate = DateTime(
-            regDate!.year + (shelf.use_time ?? 0),
-            regDate!.month,
-            regDate!.day,
-          );
-        }
-        if (shelf.type_time?.toLowerCase() == 'ngày') {
-          expireDate = DateTime(
-            regDate!.year,
-            regDate!.month,
-            regDate!.day + (shelf.use_time ?? 0),
-          );
-        }
+        // ShelfLife? shelf =
+        //     shelfLifeList.firstWhere((element) => element.id == expireValue, );
+        // regDate = DateTime.parse(card?.registration_date ?? '');
+        // if (shelf.type_time?.toLowerCase() == 'tháng') {
+        //   expireDate = DateTime(
+        //     regDate!.year,
+        //     regDate!.month + (shelf.use_time ?? 0),
+        //     regDate!.day,
+        //   );
+        // }
+        // if (shelf.type_time?.toLowerCase() == 'năm') {
+        //   expireDate = DateTime(
+        //     regDate!.year + (shelf.use_time ?? 0),
+        //     regDate!.month,
+        //     regDate!.day,
+        //   );
+        // }
+        // if (shelf.type_time?.toLowerCase() == 'ngày') {
+        //   expireDate = DateTime(
+        //     regDate!.year,
+        //     regDate!.month,
+        //     regDate!.day + (shelf.use_time ?? 0),
+        //   );
+        // }
         oldExpireController.text =
             Utils.dateFormat(expireDate!.toIso8601String(), 0);
 

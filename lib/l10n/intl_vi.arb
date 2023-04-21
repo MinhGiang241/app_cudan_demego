@@ -178,7 +178,7 @@
   "this_trans_letter": "Phiếu đăng ký xe này",
   "trans_card": "Thẻ xe",
   "trans_card_details": "Chi tiết thẻ phương tiện",
-  "trans_reg_card_details": "Chi tiết Đăng ký phương tiện",
+  "trans_reg_card_details": "Chi tiết đăng ký phương tiện",
   "resident_info": "Thông tin cư dân",
   "trans_info": "Thông tin phương tiện",
   "trans_type": "Loại phương tiện",
@@ -754,5 +754,7 @@
   "success_accept_letter": "Xác nhận phiếu thành công",
   "reason_refuse": "Lý do từ chối",
   "enter_reason_refuse": "Nhập lý do từ chối",
-  "owner_refuse": "Chủ hộ từ chối"
+  "owner_refuse": "Chủ hộ từ chối",
+  "cancel_card": "Hủy thẻ",
+  "not_extend_inactive_card": "Thẻ đang bị khóa không thể gia hạn, vui lòng liên hệ BQL để đăng ký lại thẻ"
 }

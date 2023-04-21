@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "can_trans": MessageLookupByLibrary.simpleMessage("Hủy thẻ xe"),
         "can_trans_res": MessageLookupByLibrary.simpleMessage("Hủy thẻ cư dân"),
         "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+        "cancel_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
         "cancel_letter": MessageLookupByLibrary.simpleMessage("Hủy phiếu"),
         "cancel_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
         "cancel_reflection":
@@ -636,6 +637,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không để trống hình ảnh mặt trước"),
         "not_empty_vehicle_type": MessageLookupByLibrary.simpleMessage(
             "Loại phương tiện không được để trống"),
+        "not_extend_inactive_card": MessageLookupByLibrary.simpleMessage(
+            "Thẻ đang bị khóa không thể gia hạn, vui lòng liên hệ BQL để đăng ký lại thẻ"),
         "not_found": MessageLookupByLibrary.simpleMessage("Chưa tìm thấy"),
         "not_found_account": MessageLookupByLibrary.simpleMessage(
             "Không tìm thấy thông tin tài khoản"),
@@ -1113,7 +1116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe"),
         "trans_reg_card_details": MessageLookupByLibrary.simpleMessage(
-            "Chi tiết Đăng ký phương tiện"),
+            "Chi tiết đăng ký phương tiện"),
         "trans_reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký xe"),
         "trans_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phương tiện"),

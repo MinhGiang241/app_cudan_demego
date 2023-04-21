@@ -92,7 +92,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     ),
                     InfoContentView(
                       isHorizontal: true,
-                      title: S.of(context).letter_status,
+                      title: S.of(context).card_status,
                       content: card.s?.name ?? '',
                       contentStyle: genContentStyle(card.status ?? ""),
                     ),

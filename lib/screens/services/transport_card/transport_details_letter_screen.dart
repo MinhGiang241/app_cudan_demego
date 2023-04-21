@@ -10,21 +10,23 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 
-class TransportDetailsScreen extends StatefulWidget {
-  const TransportDetailsScreen({super.key});
-  static const routeName = '/transport/details-transport';
+class TransportDetailsLetterScreen extends StatefulWidget {
+  const TransportDetailsLetterScreen({super.key});
+  static const routeName = '/transport/details-transport-letter';
 
   @override
-  State<TransportDetailsScreen> createState() => _TransportDetailsScreenState();
+  State<TransportDetailsLetterScreen> createState() =>
+      _TransportDetailsLetterScreenState();
 }
 
-class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
+class _TransportDetailsLetterScreenState
+    extends State<TransportDetailsLetterScreen> {
   @override
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    var item = arg['item'] as dynamic;
+    var item = arg['item'] as TransportItem;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).trans_details,
@@ -40,20 +42,20 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                 InfoContentView(
                   isHorizontal: true,
                   title: S.of(context).transport,
-                  content: item.v?.name ?? "",
+                  content: item.vehicleType?.name ?? "",
                 ),
                 InfoContentView(
                   isHorizontal: true,
                   title: S.of(context).num_seat,
                   content: item.seats.toString(),
                 ),
-                if (item.v?.code != 'BICYCLE')
+                if (item.vehicleType?.code != 'BICYCLE')
                   InfoContentView(
                     isHorizontal: true,
                     title: S.of(context).licene_plate,
                     content: item.number_plate,
                   ),
-                if (item.v?.code != 'BICYCLE')
+                if (item.vehicleType?.code != 'BICYCLE')
                   InfoContentView(
                     isHorizontal: true,
                     title: S.of(context).reg_num,
@@ -62,7 +64,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                 InfoContentView(
                   isHorizontal: true,
                   title: S.of(context).used_expired_date,
-                  content: '${item.sh?.use_time} ${item.sh?.type_time}',
+                  content:
+                      '${item.shelfLife?.use_time} ${item.shelfLife?.type_time}',
                 ),
                 if (item.registration_image != null &&
                     item.registration_image!.isNotEmpty)
@@ -70,7 +73,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                     // isHorizontal: true,
                     images: (item.registration_image ?? [])
                         .map<String>(
-                            (e) => "${ApiConstants.uploadURL}?load=${e.id}")
+                          (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        )
                         .toList(),
                     title: S.of(context).reg_trans_photos,
                   ),
@@ -80,7 +84,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                     // isHorizontal: true,
                     images: (item.vehicle_image ?? [])
                         .map<String>(
-                            (e) => "${ApiConstants.uploadURL}?load=${e.id}")
+                          (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        )
                         .toList(),
                     title: S.of(context).trans_images,
                   ),

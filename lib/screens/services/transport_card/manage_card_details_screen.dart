@@ -1,18 +1,12 @@
 import 'package:app_cudan/models/manage_card.dart';
 import 'package:app_cudan/screens/services/transport_card/transport_details_screen.dart';
-import 'package:app_cudan/services/api_transportation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
-import '../../../models/letter_history.dart';
 import '../../../models/timeline_model.dart';
-import '../../../services/api_history.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -77,7 +71,10 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                   .read<ManageCardDetailsPrv>()
                   .getManageCardById(context, card.id),
               builder: (context, snapshot) {
+                var listTranspost =
+                    context.watch<ManageCardDetailsPrv>().listTranspost;
                 var loadedCard = context.watch<ManageCardDetailsPrv>().card;
+
                 return ListView(
                   children: [
                     vpad(24),
@@ -99,10 +96,18 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                 card.t?.name_resident ?? card.t?.name ?? "",
                             contentStyle: txtBold(14),
                           ),
+                          if (card.card_type != 'CUSTOMER')
+                            InfoContentView(
+                              isHorizontal: true,
+                              title: S.of(context).address,
+                              content: card.t?.address ?? "",
+                            ),
                           InfoContentView(
                             isHorizontal: true,
-                            title: S.of(context).address,
-                            content: card.t?.address ?? "",
+                            title: S.of(context).phone_num,
+                            content: card.phone_number ??
+                                card.re?.phone_required ??
+                                card.re?.phone,
                           ),
                           InfoContentView(
                             isHorizontal: true,
@@ -114,7 +119,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           ),
                           InfoContentView(
                             isHorizontal: true,
-                            title: S.of(context).letter_status,
+                            title: S.of(context).card_status,
                             content: card.s?.name ?? "",
                             contentStyle: genContentStyle(card.status ?? ""),
                           ),
@@ -145,10 +150,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       ),
                     ),
                     vpad(16),
-                    ...(loadedCard.t?.transports_list ?? [])
-                        .asMap()
-                        .entries
-                        .map((e) {
+                    ...(listTranspost).asMap().entries.map((e) {
                       var isExpired = e.value.expire_date == null
                           ? true
                           : DateTime.parse(e.value.expire_date ?? "")
@@ -179,7 +181,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                   children: [
                                     PrimaryIcon(
                                       icons: genTransIcon(
-                                        e.value.vehicleType?.code,
+                                        e.value.v?.code,
                                       ),
                                       style: PrimaryIconStyle.gradient,
                                       gradients: PrimaryIconGradient.yellow,
@@ -194,27 +196,23 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '${S.of(context).transport}: ${e.value.vehicleType?.name}',
+                                            '${S.of(context).transport}: ${e.value.v?.name}',
                                             style: txtLinkSmall(),
                                           ),
                                           vpad(2),
-                                          if (e.value.vehicleType?.code !=
-                                              "BICYCLE")
+                                          if (e.value.v?.code != "BICYCLE")
                                             Text(
                                               '${S.of(context).licene_plate}: ${e.value.number_plate ?? ""}',
                                               style: txtBodyXSmallRegular(),
                                             ),
-                                          if (e.value.vehicleType?.code !=
-                                              "BICYCLE")
+                                          if (e.value.v?.code != "BICYCLE")
                                             vpad(2),
-                                          if (e.value.vehicleType?.code !=
-                                              "BICYCLE")
+                                          if (e.value.v?.code != "BICYCLE")
                                             Text(
                                               "${S.of(context).reg_num}: ${e.value.registration_number ?? ""}",
                                               style: txtBodyXSmallRegular(),
                                             ),
-                                          if (e.value.vehicleType?.code !=
-                                              "BICYCLE")
+                                          if (e.value.v?.code != "BICYCLE")
                                             vpad(2),
                                           Text(
                                             "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
@@ -222,7 +220,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                           ),
                                           vpad(2),
                                           Text(
-                                            "${S.of(context).used_expired_date}: ${e.value.shelfLife?.use_time} ${e.value.shelfLife?.type_time}",
+                                            "${S.of(context).used_expired_date}: ${e.value.sh?.use_time} ${e.value.sh?.type_time}",
                                             style: txtBodyXSmallRegular(),
                                           ),
                                           Text(
@@ -235,82 +233,96 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                   ],
                                 ),
                                 vpad(5),
-                                Row(
-                                  children: [
-                                    PrimaryButton(
-                                      isLoading: false,
-                                      buttonSize: ButtonSize.xsmall,
-                                      buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: yellowColor4,
-                                      textColor: yellowColorBase,
-                                      text: S.of(context).extend,
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                          context,
-                                          ExtendCardScreen.routeName,
-                                          arguments: {
-                                            "card": loadedCard,
-                                            "index": e.key,
-                                            "cancel": cancel,
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    hpad(10),
-                                    PrimaryButton(
-                                      isLoading: false,
-                                      buttonSize: ButtonSize.xsmall,
-                                      buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: redColor4,
-                                      textColor: redColorBase,
-                                      text: S.of(context).cancel,
-                                      onTap: () {
-                                        context
-                                            .read<ManageCardDetailsPrv>()
-                                            .cancelTranport(context, e.key);
-                                        setState(() {});
-                                      },
-                                    ),
-                                  ],
-                                )
+                                if (loadedCard.status == "ACTIVED")
+                                  Row(
+                                    children: [
+                                      PrimaryButton(
+                                        isLoading: false,
+                                        buttonSize: ButtonSize.xsmall,
+                                        buttonType: ButtonType.secondary,
+                                        secondaryBackgroundColor: yellowColor4,
+                                        textColor: yellowColorBase,
+                                        text: S.of(context).extend,
+                                        onTap: () {
+                                          if (loadedCard.status != "ACTIVED") {
+                                            Utils.showErrorMessage(
+                                              context,
+                                              S
+                                                  .of(context)
+                                                  .not_extend_inactive_card,
+                                            );
+                                          } else {
+                                            Navigator.pushNamed(
+                                              context,
+                                              ExtendCardScreen.routeName,
+                                              arguments: {
+                                                "card": loadedCard,
+                                                "index": e.key,
+                                                "cancel": cancel,
+                                                "item": e.value,
+                                              },
+                                            );
+                                          }
+                                        },
+                                      ),
+                                      hpad(10),
+                                      PrimaryButton(
+                                        isLoading: false,
+                                        buttonSize: ButtonSize.xsmall,
+                                        buttonType: ButtonType.secondary,
+                                        secondaryBackgroundColor: redColor4,
+                                        textColor: redColorBase,
+                                        text: S.of(context).cancel,
+                                        onTap: () {
+                                          context
+                                              .read<ManageCardDetailsPrv>()
+                                              .cancelTranport(context, e.key);
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ],
+                                  )
                               ],
                             ),
                           ),
                         ),
                       );
                     }),
-                    vpad(16),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Checkbox(
-                            activeColor: primaryColorBase,
-                            value: card.integrated,
-                            onChanged: (v) {},
-                          ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {},
-                            child: Text(
-                              S.of(context).intergrate_existed_resident_card,
-                              style: txtRegular(14, grayScaleColorBase),
-                              overflow: TextOverflow.ellipsis,
+                    if (card.card_type != 'CUSTOMER') vpad(16),
+                    if (card.card_type != 'CUSTOMER')
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: Checkbox(
+                              activeColor: primaryColorBase,
+                              value: card.integrated,
+                              onChanged: (v) {},
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    if (card.status != "LOCK" && card.status != "DESTROY")
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Text(
+                                S.of(context).intergrate_existed_resident_card,
+                                style: txtRegular(14, grayScaleColorBase),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    if (card.status != "LOST" && card.status != "DESTROY")
                       vpad(30),
-                    if (card.status != "LOCK" && card.status != "DESTROY")
+                    if ((card.status != "LOST" && card.status != "DESTROY") &&
+                        (card.status != "CANCEL" &&
+                            card.r?.code == 'NGUOIDUNGHUY'))
                       PrimaryButton(
                         isLoading: false,
                         buttonSize: ButtonSize.medium,
                         buttonType: ButtonType.red,
-                        text: S.of(context).cancel,
+                        text: S.of(context).cancel_card,
                         onTap: () {
                           cancel(context, card);
                         },
@@ -320,26 +332,32 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                 );
               },
             ),
-            ListView(
-              children: [
-                vpad(24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TimeLineView(
-                    content: context
-                        .watch<ManageCardDetailsPrv>()
-                        .historyList
-                        .map(
-                          (i) => TimelineModel(
-                            date: i.perform_date,
-                            title: i.content,
-                            subTitle: i.action,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-              ],
+            FutureBuilder(
+              future:
+                  context.read<ManageCardDetailsPrv>().getHistoryCard(card.id),
+              builder: (context, snapshot) {
+                return ListView(
+                  children: [
+                    vpad(24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: TimeLineView(
+                        content: context
+                            .watch<ManageCardDetailsPrv>()
+                            .historyList
+                            .map(
+                              (i) => TimelineModel(
+                                date: i.perform_date,
+                                title: i.content,
+                                subTitle: i.action,
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    )
+                  ],
+                );
+              },
             )
           ],
         ),

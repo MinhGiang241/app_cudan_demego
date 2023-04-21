@@ -50,19 +50,20 @@ class PrimaryCard extends StatelessWidget {
         width: width,
         decoration: decoration ??
             BoxDecoration(
-                gradient: gradient,
-                borderRadius: borderRadius ?? BorderRadius.circular(12),
-                color: background ?? Colors.white.withOpacity(1),
-                border: border ?? Border.all(color: Colors.white54, width: 0.5),
-                boxShadow: isShadow
-                    ? [
-                        BoxShadow(
-                          blurRadius: 32,
-                          color: shadowColor.withOpacity(0.12),
-                          offset: const Offset(0, 8),
-                        )
-                      ]
-                    : null),
+              gradient: gradient,
+              borderRadius: borderRadius ?? BorderRadius.circular(12),
+              color: background ?? Colors.white.withOpacity(1),
+              border: border ?? Border.all(color: Colors.white54, width: 0.5),
+              boxShadow: isShadow
+                  ? [
+                      BoxShadow(
+                        blurRadius: 32,
+                        color: shadowColor.withOpacity(0.12),
+                        offset: const Offset(0, 8),
+                      )
+                    ]
+                  : null,
+            ),
         child: InkWell(
           borderRadius: borderRadius ?? BorderRadius.circular(12),
           onTap: onTap,
@@ -72,9 +73,10 @@ class PrimaryCard extends StatelessWidget {
           child: Padding(
             padding: padding ?? const EdgeInsets.all(0),
             child: Material(
-                borderRadius: borderRadius ?? BorderRadius.circular(12),
-                color: Colors.transparent,
-                child: child),
+              borderRadius: borderRadius ?? BorderRadius.circular(12),
+              color: Colors.transparent,
+              child: child,
+            ),
           ),
         ),
       ),

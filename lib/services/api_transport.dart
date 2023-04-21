@@ -7,15 +7,17 @@ class APITransport {
   static Future getTransportCardList(
     String? residentId,
     String? apartmentId,
+    String? phone,
   ) async {
     var query = '''
-    mutation (\$residentId:String,\$apartmentId:String){
-    response: card_mobile_get_transport_card_list_by_residentId_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId ) {
+    mutation (\$residentId:String,\$apartmentId:String,\$phone:String){
+    response: card_mobile_get_transport_card_list_by_residentId_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId,phone: \$phone ) {
         code
         message
         data
     }
 }
+        
         
         
         
@@ -26,6 +28,7 @@ class APITransport {
       variables: {
         "residentId": residentId,
         "apartmentId": apartmentId,
+        "phone": phone,
       },
     );
 
@@ -44,15 +47,17 @@ class APITransport {
     String? residentId,
     String? apartmentId,
     bool isLetter,
+    String? phone,
   ) async {
     var query = '''
-     mutation (\$residentId:String,\$apartmentId:String,\$isLetter:Boolean){
-    response: vehicle_mobile_get_transportation_card_list_by_residentId (residentId: \$residentId,apartmentId: \$apartmentId,isLetter: \$isLetter ) {
+   mutation (\$residentId:String,\$apartmentId:String,\$isLetter:Boolean,\$phone:String){
+    response: vehicle_mobile_get_transportation_card_list_by_residentId (residentId: \$residentId,apartmentId: \$apartmentId,isLetter: \$isLetter,phone: \$phone ) {
         code
         message
         data
     }
 }
+        
         
         
     ''';
@@ -62,7 +67,8 @@ class APITransport {
       variables: {
         "residentId": residentId,
         "apartmentId": apartmentId,
-        "isLetter": isLetter
+        "isLetter": isLetter,
+        "phone": phone
       },
     );
 
@@ -117,7 +123,6 @@ class APITransport {
 			_id
 			createdTime
 			updatedTime
-			code
 			use_time
 			describe
 			type_time
@@ -376,6 +381,34 @@ mutation (\$data:FormRenewalTransportInputDto ){
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {"data": data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getListTransportByManageCardId(String? managecardId) async {
+    var query = '''
+         mutation (\$managecardId:String){
+    response: card_mobile_get_list_transport_by_managecardId (managecardId: \$managecardId ) {
+        code
+        message
+        data
+    }
+}
+        
+      ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"managecardId": managecardId},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
