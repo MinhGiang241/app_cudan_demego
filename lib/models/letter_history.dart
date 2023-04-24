@@ -102,6 +102,8 @@ class CardHistory {
   String? content;
   String? person;
   String? manageCardId;
+  String? status;
+  Status? s;
   CardHistory({
     this.id,
     this.createdTime,
@@ -112,6 +114,8 @@ class CardHistory {
     this.content,
     this.person,
     this.manageCardId,
+    this.status,
+    this.s,
   });
 
   Map<String, dynamic> toMap() {
@@ -125,6 +129,7 @@ class CardHistory {
       'content': content,
       'person': person,
       'manageCardId': manageCardId,
+      'status': status,
     };
   }
 
@@ -144,6 +149,8 @@ class CardHistory {
       person: map['person'] != null ? map['person'] as String : null,
       manageCardId:
           map['manageCardId'] != null ? map['manageCardId'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
     );
   }
 

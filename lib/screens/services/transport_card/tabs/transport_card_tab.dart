@@ -1,3 +1,5 @@
+import 'package:app_cudan/models/resident_card.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/transport_card/manage_card_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -126,7 +128,17 @@ class _TransportCardTabState extends State<TransportCardTab> {
                       title: S.of(context).full_name,
                       content: list[index].t?.name != null
                           ? list[index].t?.name?.toUpperCase()
-                          : '',
+                          : list[index].re?.info_name ??
+                              context
+                                  .read<ResidentInfoPrv>()
+                                  .userInfo
+                                  ?.info_name ??
+                              context
+                                  .read<ResidentInfoPrv>()
+                                  .userInfo
+                                  ?.account
+                                  ?.fullName ??
+                              '',
                       contentStyle: txtBold(14),
                     ),
                     // InfoContentView(
@@ -146,7 +158,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                           .t
                           ?.transports_list
                           ?.map((o) => o.vehicleType?.name)
-                          .join("/ "),
+                          .join(" / "),
                       contentStyle: txtBold(
                         14,
                         genStatusColor(

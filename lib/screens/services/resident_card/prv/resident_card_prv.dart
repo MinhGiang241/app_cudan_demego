@@ -59,6 +59,7 @@ class ResidentCardPrv extends ChangeNotifier {
   extend(BuildContext context) {}
   missingReport(BuildContext context, ManageCard card) async {
     card.status = "LOST";
+    card.reasons = 'BAOMAT';
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card_res,
       content: S.of(context).confirm_missing_report_res(card.serial_lot ?? ""),
@@ -77,6 +78,7 @@ class ResidentCardPrv extends ChangeNotifier {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
           var his = CardHistory(
+            status: "LOST",
             action: "Báo mất",
             content: "Người dùng báo mất thẻ",
             manageCardId: card.id,
@@ -145,6 +147,7 @@ class ResidentCardPrv extends ChangeNotifier {
         Navigator.pop(context);
         await APITransport.saveManageCard(card.toMap()).then((v) {
           var his = CardHistory(
+            status: "LOCK",
             action: "Khóa thẻ",
             content: "Người dùng khóa thẻ",
             manageCardId: card.id,

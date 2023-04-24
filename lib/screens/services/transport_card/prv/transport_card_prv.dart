@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/list_transport.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/transportation_card.dart';
 import '../../../../utils/utils.dart';
@@ -16,16 +17,20 @@ class TransportCardPrv extends ChangeNotifier {
   List<TransportCard> letterList = [];
   List<ManageCard> cardList = [];
 
-  Future cancelTransportCard(BuildContext context, ManageCard card) async {
+  Future cancelTransportCard(
+    BuildContext context,
+    ManageCard card,
+  ) async {
     card.status = "LOCK";
     card.reasons = 'NGUOIDUNGKHOA';
+
     Utils.showConfirmMessage(
       title: S.of(context).can_trans,
       content: S.of(context).confirm_can_trans_card,
       context: context,
       onConfirm: () async {
         Navigator.pop(context);
-        await APITransport.saveManageCard(card.toMap()).then((v) {
+        await APITransport.lockManageCard(card.toMap()).then((v) {
           var his = CardHistory(
             action: "Khóa thẻ",
             content: "Người dùng khóa thẻ",

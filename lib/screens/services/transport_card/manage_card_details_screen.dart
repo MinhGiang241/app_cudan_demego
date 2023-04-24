@@ -15,6 +15,7 @@ import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
+import '../../auth/prv/resident_info_prv.dart';
 import 'add_new_transport_card.dart';
 import 'extend_card_screen.dart';
 import 'prv/manage_card_details_prv.dart';
@@ -86,28 +87,44 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).card_num,
-                            content: card.serial_lot,
+                            content: loadedCard.serial_lot,
                             contentStyle: txtBold(16, purpleColorBase),
                           ),
                           InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).full_name,
-                            content:
-                                card.t?.name_resident ?? card.t?.name ?? "",
+                            content: loadedCard.t?.re?.info_name ??
+                                context
+                                    .read<ResidentInfoPrv>()
+                                    .userInfo
+                                    ?.info_name ??
+                                context
+                                    .read<ResidentInfoPrv>()
+                                    .userInfo
+                                    ?.account
+                                    ?.fullName ??
+                                "",
                             contentStyle: txtBold(14),
                           ),
-                          if (card.card_type != 'CUSTOMER')
+                          if (loadedCard.card_type != 'CUSTOMER')
                             InfoContentView(
                               isHorizontal: true,
                               title: S.of(context).address,
-                              content: card.t?.address ?? "",
+                              content:
+                                  ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
                             ),
                           InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).phone_num,
-                            content: card.phone_number ??
-                                card.re?.phone_required ??
-                                card.re?.phone,
+                            content: loadedCard.phone_number ??
+                                loadedCard.t?.re?.phone_required ??
+                                loadedCard.t?.re?.phone,
+                          ),
+                          InfoContentView(
+                            isHorizontal: true,
+                            title: S.of(context).reg_letter_num,
+                            content: loadedCard.t?.code ?? '',
+                            contentStyle: txtBold(16, purpleColorBase),
                           ),
                           InfoContentView(
                             isHorizontal: true,
@@ -120,20 +137,20 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           InfoContentView(
                             isHorizontal: true,
                             title: S.of(context).card_status,
-                            content: card.s?.name ?? "",
+                            content: loadedCard.s?.name ?? "",
                             contentStyle: genContentStyle(card.status ?? ""),
                           ),
                           if (card.r != null)
                             InfoContentView(
                               isHorizontal: true,
                               title: S.of(context).lock_reason,
-                              content: card.r?.name ?? "",
+                              content: loadedCard.r?.name ?? "",
                             ),
-                          if (card.note_reason != null)
+                          if (loadedCard.note_reason != null)
                             InfoContentView(
                               isHorizontal: true,
                               title: S.of(context).note,
-                              content: card.note_reason,
+                              content: loadedCard.note_reason,
                             ),
                         ],
                       ),
@@ -224,7 +241,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                             style: txtBodyXSmallRegular(),
                                           ),
                                           Text(
-                                            "${S.of(context).trans_status}: ${isExpired ? S.of(context).lock : S.of(context).active}",
+                                            "${S.of(context).trans_status}: ${e.value.s?.name ?? ""}",
                                             style: txtBodyXSmallRegular(),
                                           ),
                                         ],
@@ -276,7 +293,11 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                         onTap: () {
                                           context
                                               .read<ManageCardDetailsPrv>()
-                                              .cancelTranport(context, e.key);
+                                              .cancelTranport(
+                                                context,
+                                                e.key,
+                                                e.value.id,
+                                              );
                                           setState(() {});
                                         },
                                       ),
@@ -313,11 +334,15 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           )
                         ],
                       ),
-                    if (card.status != "LOST" && card.status != "DESTROY")
+                    if ((card.status != "LOCK" &&
+                            card.r?.code != 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST" &&
+                        (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
                       vpad(30),
-                    if ((card.status != "LOST" && card.status != "DESTROY") &&
-                        (card.status != "CANCEL" &&
-                            card.r?.code == 'NGUOIDUNGHUY'))
+                    if ((card.status != "LOCK" &&
+                            card.r?.code != 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST" &&
+                        (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
                       PrimaryButton(
                         isLoading: false,
                         buttonSize: ButtonSize.medium,
@@ -350,6 +375,9 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                 date: i.perform_date,
                                 title: i.content,
                                 subTitle: i.action,
+                                color: i.status != null
+                                    ? genStatusColor(i.status ?? "")
+                                    : null,
                               ),
                             )
                             .toList(),

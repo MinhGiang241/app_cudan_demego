@@ -84,6 +84,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     ),
                     InfoContentView(
                       isHorizontal: true,
+                      title: S.of(context).reg_letter_num,
+                      content: card.res_card?.code ?? '',
+                      contentStyle: txtBold(16, purpleColorBase),
+                    ),
+                    InfoContentView(
+                      isHorizontal: true,
                       title: S.of(context).reg_date,
                       content: Utils.dateFormat(
                         card.res_card?.createdTime ?? "",
@@ -100,9 +106,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reject_reason,
-                        content: card.note_reason != null
-                            ? card.note_reason ?? ""
-                            : '',
+                        content: card.r?.name != null ? card.r?.name ?? "" : '',
                       ),
                     if (card.note_reason != null)
                       InfoContentView(
@@ -143,11 +147,16 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                   ],
                 ),
               ),
-              vpad(24),
-              if (card.status != "LOCK" && card.status != "DESTROY")
+              if ((card.status != "LOCK" && card.r?.code != 'NGUOIDUNGKHOA') &&
+                  card.status != "LOST" &&
+                  (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
+                vpad(24),
+              if ((card.status != "LOCK" && card.r?.code != 'NGUOIDUNGKHOA') &&
+                  card.status != "LOST" &&
+                  (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
                 PrimaryButton(
                   width: double.infinity,
-                  text: S.of(context).cancel,
+                  text: S.of(context).cancel_card,
                   buttonType: ButtonType.red,
                   onTap: () {
                     cancel(context, card);
@@ -186,6 +195,9 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                               date: i.perform_date,
                               title: i.content,
                               subTitle: i.action,
+                              color: i.status != null
+                                  ? genStatusColor(i.status ?? "")
+                                  : null,
                             ),
                           )
                           .toList(),

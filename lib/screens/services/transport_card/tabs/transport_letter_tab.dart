@@ -91,7 +91,7 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
               _refreshController.refreshCompleted();
             },
             child: PrimaryEmptyWidget(
-              emptyText: S.of(context).no_card,
+              emptyText: S.of(context).no_letter,
               icons: PrimaryIcons.car,
               action: () {
                 // Utils.pushScreen(context, const RegisterParkingCard());
@@ -124,8 +124,16 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
-                      content:
-                          list[index].name_resident ?? list[index].name ?? "",
+                      content: list[index].name_resident ??
+                          list[index].name ??
+                          list[index].re?.info_name ??
+                          context.read<ResidentInfoPrv>().userInfo?.info_name ??
+                          context
+                              .read<ResidentInfoPrv>()
+                              .userInfo
+                              ?.account
+                              ?.fullName ??
+                          "",
                       contentStyle: txtBold(14),
                     ),
                     // InfoContentView(
@@ -144,9 +152,9 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                       content: list[index]
                           .transports_list
                           ?.map((o) => o.vehicleType?.name)
-                          .join("/ "),
+                          .join(" / "),
                       contentStyle: txtBold(
-                        14,
+                        12,
                         genStatusColor(
                           list[index].s?.name ?? "",
                         ),
@@ -156,7 +164,7 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                       title: S.of(context).status,
                       content: genStatus(list[index].ticket_status ?? ''),
                       contentStyle: txtBold(
-                        14,
+                        12,
                         genStatusColor(
                           list[index].ticket_status ?? '',
                         ),
@@ -301,7 +309,7 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                                   buttonType: ButtonType.secondary,
                                   secondaryBackgroundColor: redColor4,
                                   textColor: redColor,
-                                  text: S.of(context).delete_letter,
+                                  text: S.of(context).delete,
                                   onTap: () {
                                     // return deleteLetter(list[index]);
                                     context

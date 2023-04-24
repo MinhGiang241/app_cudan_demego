@@ -809,6 +809,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registration date can be not empty"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Register delivery"),
+        "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Registered image must be at least 2 photo"),
+        "reg_letter_num":
+            MessageLookupByLibrary.simpleMessage("Registration letter code"),
         "reg_missing_obj": MessageLookupByLibrary.simpleMessage(
             "Register find missing object"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Register number"),
@@ -1050,6 +1054,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send reflection successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
+        "success_update":
+            MessageLookupByLibrary.simpleMessage("Update successfully"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Update email successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Plan"),
@@ -1113,6 +1119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation details"),
         "trans_images":
             MessageLookupByLibrary.simpleMessage("Transportation images"),
+        "trans_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Transport image not be empty"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Transportation information"),
         "trans_letter":

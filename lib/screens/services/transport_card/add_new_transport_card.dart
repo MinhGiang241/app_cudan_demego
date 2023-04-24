@@ -148,6 +148,20 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                           : null,
                   children: [
                     Form(
+                      // onChanged:
+                      //     context.watch<AddNewTransportCardPrv>().autoValid
+                      //         ? context
+                      //             .read<AddNewTransportCardPrv>()
+                      //             .formValidationCustomer
+                      //         : null,
+                      // autovalidateMode: context
+                      //         .watch<AddNewTransportCardPrv>()
+                      //         .autoValidCustomer
+                      //     ? AutovalidateMode.onUserInteraction
+                      //     : null,
+                      // key: context
+                      //     .read<AddNewTransportCardPrv>()
+                      //     .formKeyCustomer,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         child: SingleChildScrollView(

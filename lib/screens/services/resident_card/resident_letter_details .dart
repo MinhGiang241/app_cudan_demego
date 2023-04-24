@@ -217,6 +217,9 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                               subTitle: i.new_status != null
                                   ? '${S.of(context).status}: ${i.ns?.name}'
                                   : null,
+                              color: i.new_status != null
+                                  ? genStatusColor(i.new_status ?? '')
+                                  : null,
                             ),
                           )
                           .toList(),

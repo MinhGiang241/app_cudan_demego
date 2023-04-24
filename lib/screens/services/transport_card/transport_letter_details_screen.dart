@@ -1,6 +1,7 @@
 import 'package:app_cudan/models/letter_history.dart';
 import 'package:app_cudan/services/api_history.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -15,6 +16,7 @@ import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
+import '../../auth/prv/resident_info_prv.dart';
 import 'add_new_transport_card.dart';
 import 'transport_details_letter_screen.dart';
 import 'transport_details_screen.dart';
@@ -71,19 +73,31 @@ class _TransportLetterDetailsScreenState
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).full_name,
-                      content: card.name_resident ?? card.name ?? "",
+                      content: card.name_resident ??
+                          card.name ??
+                          card.re?.info_name ??
+                          context.read<ResidentInfoPrv>().userInfo?.info_name ??
+                          context
+                              .read<ResidentInfoPrv>()
+                              .userInfo
+                              ?.account
+                              ?.fullName ??
+                          "",
                       contentStyle: txtBold(14),
                     ),
                     if (card.card_type != 'CUSTOMER')
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).address,
-                        content: card.address ?? "",
+                        content: card.address ??
+                            ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
                       ),
                     InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).phone_num,
-                        content: card.phone_number ?? ""),
+                      isHorizontal: true,
+                      title: S.of(context).phone_num,
+                      content:
+                          card.phone_number ?? card.re?.phone_required ?? "",
+                    ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).reg_date,
@@ -287,6 +301,9 @@ class _TransportLetterDetailsScreenState
                       content: historyList
                           .map(
                             (i) => TimelineModel(
+                              color: i.new_status != null
+                                  ? genStatusColor(i.new_status ?? "")
+                                  : null,
                               date: i.perform_date,
                               title: i.content,
                               subTitle: i.new_status != null

@@ -116,7 +116,7 @@ class ResidentCardTab extends StatelessWidget {
                           InfoContentView(
                             title: S.of(context).card_num,
                             content: list[index].serial_lot,
-                            contentStyle: txtBold(16, primaryColor1),
+                            contentStyle: txtBold(14, primaryColor1),
                           ),
                           InfoContentView(
                             title: S.of(context).full_name,
@@ -125,14 +125,14 @@ class ResidentCardTab extends StatelessWidget {
                                     ? list[index].re!.info_name!.toUpperCase()
                                     : ''
                                 : "",
-                            contentStyle: txtBold(16, grayScaleColorBase),
+                            contentStyle: txtBold(14),
                           ),
                           InfoContentView(
                             title: S.of(context).address,
                             content: list[index].res_card?.apartment != null
                                 ? "${list[index].res_card?.apartment!.name ?? ""}, ${list[index].res_card?.apartment?.f?.name ?? ""}, ${list[index].res_card?.apartment?.b?.name}"
                                 : "",
-                            contentStyle: txtBold(16, grayScaleColorBase),
+                            contentStyle: txtBold(12),
                           ),
                         ];
 
@@ -215,7 +215,7 @@ class ResidentCardTab extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (list[index].status != "LOST" ||
+                                if (list[index].status != "LOST" &&
                                     list[index].status != "DESTROY")
                                   Row(
                                     children: [

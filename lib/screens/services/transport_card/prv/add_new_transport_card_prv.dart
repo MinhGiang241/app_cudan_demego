@@ -22,6 +22,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
       isIntergate = existedTransport?.integrated ?? false;
       isObey = existedTransport?.confirmation ?? true;
       transportList = existedTransport?.transports_list ?? [];
+      code = existedTransport?.code;
     }
   }
   int activeStep = 0;
@@ -33,11 +34,14 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   bool isIntergate = false;
   bool isObey = true;
   bool autoValid = false;
+  bool autoValidCustomer = false;
   bool isShowLicense = true;
   final formKey = GlobalKey<FormState>();
+  final formKeyCustomer = GlobalKey<FormState>();
   List<FileUploadModel> rulesFiles = [];
   TransportCard? existedTransport;
   String? id;
+  String? code;
 
   final TextEditingController liceneController = TextEditingController();
   final TextEditingController seatNumController = TextEditingController();
@@ -113,6 +117,14 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   }
 
   formValidation() {
+    if (formKey.currentState != null && formKey.currentState!.validate()) {
+      clearValidStringStep();
+    } else {
+      genValidString();
+    }
+  }
+
+  formValidationCustomer() {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
       clearValidStringStep();
     } else {
@@ -438,6 +450,22 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         await uploadResImages();
         await uploadOther();
         clearValidStringStep();
+
+        var listError = [];
+        var vehicleImages = otherExistedImages + otherUploadedImages;
+        var regImages = resExistedImages + resUploadedImages;
+        if (regImages.length < 2 && transTypeValue != "BICYCLE") {
+          listError.add(S.of(context).reg_images_not_empty);
+        }
+        if (vehicleImages.isEmpty) {
+          listError.add(S.of(context).trans_images_not_empty);
+        }
+
+        if (listError.isNotEmpty) {
+          var textError = listError.join('. ');
+          throw (textError);
+        }
+
         var vehicleTypeId = transTypeList
             .firstWhere((element) => element.code == transTypeValue)
             .id;
@@ -452,8 +480,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           shelfLifeId: expiredValue,
           vehicleTypeId: vehicleTypeId,
           registration_number: regNumController.text.trim(),
-          registration_image:
-              resExistedImages + resUploadedImages + otherExistedImages,
+          registration_image: resExistedImages + resUploadedImages,
           seats: int.parse(seatNumController.text.trim()),
           vehicle_image: otherExistedImages + otherUploadedImages,
         );
@@ -492,11 +519,13 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         address_apartment:
             "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
         id: id,
+        code: code,
         apartmentId: apartment?.apartmentId,
         residentId: residentId,
         phone_number: residentId != null
             ? residentInfo?.phone_required
-            : residentInfo?.account?.phone_number,
+            : residentInfo?.account?.phone_number ??
+                residentInfo?.account?.userName,
         confirmation: isObey,
         integrated: isIntergate,
         isMobile: true,
@@ -521,7 +550,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           e: isSend
               ? S.of(context).success_send_letter
               : isEdit
-                  ? S.of(context).success_edit
+                  ? S.of(context).success_update
                   : S.of(context).success_cr_new,
           onClose: () => Navigator.pushNamedAndRemoveUntil(
             context,

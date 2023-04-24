@@ -755,5 +755,9 @@
   "enter_reason_refuse": "Enter refuse reason",
   "owner_refuse": "Owner refuse",
   "cancel_card": "Cancel card",
-  "not_extend_inactive_card": "Can not extend transport in inactive card"
+  "not_extend_inactive_card": "Can not extend transport in inactive card",
+  "trans_images_not_empty": "Transport image not be empty",
+  "reg_images_not_empty": "Registered image must be at least 2 photo",
+  "success_update": "Update successfully",
+  "reg_letter_num": "Registration letter code"
 }

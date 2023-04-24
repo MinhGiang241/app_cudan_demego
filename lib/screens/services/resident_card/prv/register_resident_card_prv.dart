@@ -117,7 +117,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
           e: isRequest
               ? S.of(context).success_send_req
               : id != null
-                  ? S.of(context).success_edit
+                  ? S.of(context).success_update
                   : S.of(context).success_cr_new,
           onClose: () {
             Navigator.pushNamedAndRemoveUntil(
@@ -134,6 +134,9 @@ class RegisterResidentCardPrv extends ChangeNotifier {
       }).catchError((e) {
         isAddNewLoading = false;
         isSendApproveLoading = false;
+        residentImageUploaded.clear();
+        identityImageUploaded.clear();
+        otherImageUploaded.clear();
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       });

@@ -145,23 +145,28 @@ class ExtendTransportPrv extends ChangeNotifier {
     autoValid = true;
     notifyListeners();
     if (formKey.currentState!.validate()) {
-      var formRenew = FormRenewalTransport(
-        expire_date:
-            newExpireDate?.subtract(const Duration(hours: 7)).toIso8601String(),
-        expire_date_old:
-            expireDate?.subtract(const Duration(hours: 7)).toIso8601String(),
-        shelfLifeId: expireValue,
-        listTransportId: item?.id,
-        renewal_date:
-            regDate?.subtract(const Duration(hours: 7)).toIso8601String(),
-        // transports_list: card?.t?.transports_list
-      );
-      await APITransport.saveExtendForm(formRenew.toMap()).then((v) {
+      // var formRenew = FormRenewalTransport(
+      //   expire_date:
+      //       newExpireDate?.subtract(const Duration(hours: 7)).toIso8601String(),
+      //   expire_date_old:
+      //       expireDate?.subtract(const Duration(hours: 7)).toIso8601String(),
+      //   shelfLifeId: expireValue,
+      //   listTransportId: item?.id,
+      //   renewal_date:
+      //       regDate?.subtract(const Duration(hours: 7)).toIso8601String(),
+      //   // transports_list: card?.t?.transports_list
+      // );
+
+      item?.expire_date =
+          newExpireDate?.subtract(const Duration(hours: 7)).toIso8601String();
+      item?.shelfLifeId = expireValue;
+
+      await APITransport.saveListTransport(item?.toMap()).then((v) {
         isLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(
           context: context,
-          e: S.of(context).add_extend_request_successfull,
+          e: S.of(context).succees_extend_trans,
           onClose: () {
             Navigator.pushReplacementNamed(
               context,

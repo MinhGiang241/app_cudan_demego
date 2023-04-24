@@ -115,27 +115,50 @@ class APITransport {
 
   static Future getShelfLife() async {
     var query = '''
-   query {
-	response: query_ShelfLifes_dto{
-		code 
-		message
-		data {
-			_id
-			createdTime
-			updatedTime
-			use_time
-			describe
-			type_time
-			time
-			order
-		}
-	}
+  mutation {
+    response: card_mobile_list_shelfLife_transport  {
+        code
+        message
+        data
+    }
 }
+        
 ''';
 
     final QueryOptions options = QueryOptions(document: gql(query));
 
     final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future deleteListTransport(String? id) async {
+    var query = '''
+  mutation (\$id:String){
+    response: card_mobile_remove_lissTransort (id: \$id ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "id": id,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
 
     var res = ResponseModule.fromJson(results);
 
@@ -169,6 +192,43 @@ class APITransport {
         "data": data,
         "isUncontrol": isUncontrol,
         "isEdit": isEdit,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveListTransport(
+    Map<String, dynamic>? data,
+  ) async {
+    var query = '''
+
+mutation (\$data:ListTransportInputDto ){
+	response: save_ListTransport_dto(data:\$data){
+		message
+		code
+		data {
+			_id
+		}
+	}
+}
+        
+        
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
       },
     );
 
@@ -305,6 +365,35 @@ mutation(\$data:ManageCardInputDto){
       document: gql(query),
       variables: {
         "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future lockManageCard(Map<String, dynamic> card) async {
+    var query = '''
+mutation (\$card:Dictionary){
+    response: card_mobile_lock_transport_card (card: \$card ) {
+        code
+        message
+        data
+    }
+}
+        
+''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "card": card,
       },
     );
 

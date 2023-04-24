@@ -24,7 +24,7 @@ class ManageCardDetailsPrv extends ChangeNotifier {
           listTranspost.add(ListTransport.fromMap(i));
         }
       }
-      print(listTranspost);
+      notifyListeners();
     });
   }
 
@@ -49,7 +49,7 @@ class ManageCardDetailsPrv extends ChangeNotifier {
     });
   }
 
-  Future cancelTranport(BuildContext context, int index) async {
+  Future cancelTranport(BuildContext context, int index, String? id) async {
     List<TransportItem>? listTransport =
         (card.t?.transports_list ?? []).map((e) => e.copyWith()).toList();
     try {
@@ -68,11 +68,7 @@ class ManageCardDetailsPrv extends ChangeNotifier {
           transportCard?.transports_list =
               List.from(listTransport..removeAt(index));
           Navigator.pop(context);
-          await APITransport.saveTransportLetter(
-            transportCard!.toMap(),
-            true,
-            true,
-          ).then((v) {
+          await APITransport.deleteListTransport(id).then((v) {
             Utils.showSuccessMessage(
               context: context,
               e: S.of(context).success_cancel_trans,
@@ -89,6 +85,8 @@ class ManageCardDetailsPrv extends ChangeNotifier {
                 // );
               },
             );
+            listTranspost.removeAt(index);
+            notifyListeners();
           }).catchError((e) {
             Utils.showErrorMessage(context, e);
           });

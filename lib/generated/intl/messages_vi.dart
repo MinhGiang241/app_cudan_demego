@@ -814,6 +814,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngày đăng ký không được để trống"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ"),
+        "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh"),
+        "reg_letter_num":
+            MessageLookupByLibrary.simpleMessage("Mã phiếu đăng ký"),
         "reg_missing_obj":
             MessageLookupByLibrary.simpleMessage("Đăng ký tìm đồ thất lạc"),
         "reg_num": MessageLookupByLibrary.simpleMessage("Số đăng ký"),
@@ -1050,6 +1054,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi phản ánh thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
+        "success_update":
+            MessageLookupByLibrary.simpleMessage("Cập nhật thành công"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Cập nhật email thành công"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
@@ -1111,6 +1117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trans_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết phương tiện"),
         "trans_images": MessageLookupByLibrary.simpleMessage("Ảnh phương tiện"),
+        "trans_images_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Ảnh phương tiện không được để trống"),
         "trans_info":
             MessageLookupByLibrary.simpleMessage("Thông tin phương tiện"),
         "trans_letter":

@@ -21,15 +21,19 @@ class TimeLineView extends StatelessWidget {
             startConnectorBuilder: (context, i) {
               return SolidLineConnector(
                 thickness: 2,
-                color: i == 0 ? Colors.transparent : grayScaleColor3,
+                color: content[i].color ??
+                    (i == 0 ? Colors.transparent : grayScaleColor3),
               );
             },
             endConnectorBuilder: (context, i) => SolidLineConnector(
               thickness: 2,
-              color: i == 9 ? Colors.transparent : grayScaleColor3,
+              color: content[i].color ??
+                  (i == 9 ? Colors.transparent : grayScaleColor3),
             ),
-            indicatorBuilder: (context, i) =>
-                DotIndicator(color: i == 0 ? yellowColor1 : greenColorBase),
+            indicatorBuilder: (context, i) => DotIndicator(
+              color:
+                  content[i].color ?? (i == 0 ? yellowColor1 : greenColorBase),
+            ),
             indicatorPositionBuilder: (context, i) => 0,
             nodePositionBuilder: (context, i) {
               return 0.3;
@@ -38,17 +42,19 @@ class TimeLineView extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10, bottom: 16),
               child: content.isNotEmpty
                   ? Text(
-                      Utils.dateFormat(content[index].date ?? "", 1),
+                      Utils.dateTimeFormat(content[index].date ?? "", 1),
                       style: txtRegular(
                         10,
-                        index == 0 ? yellowColor1 : greenColorBase,
+                        content[index].color ??
+                            (index == 0 ? yellowColor1 : greenColorBase),
                       ),
                     )
                   : Text(
                       '20/04\n11:00',
                       style: txtRegular(
                         10,
-                        index == 0 ? yellowColor1 : greenColorBase,
+                        content[index].color ??
+                            (index == 0 ? yellowColor1 : greenColorBase),
                       ),
                     ),
             ),
@@ -61,22 +67,30 @@ class TimeLineView extends StatelessWidget {
                         if (index != 0)
                           Text(
                             content[index].title ?? "",
-                            style: txtLinkXSmall(color: greenColorBase),
+                            style: txtLinkXSmall(
+                              color: content[index].color ?? greenColorBase,
+                            ),
                           ),
                         if (index != 0 && content[index].subTitle != null)
                           Text(
                             content[index].subTitle ?? "",
-                            style: txtLinkXXSmall(color: greenColorBase),
+                            style: txtLinkXXSmall(
+                              color: content[index].color ?? greenColorBase,
+                            ),
                           ),
                         if (index == 0)
                           Text(
                             content[index].title ?? "",
-                            style: txtLinkXSmall(color: yellowColor1),
+                            style: txtLinkXSmall(
+                              color: content[index].color ?? yellowColor1,
+                            ),
                           ),
                         if (index == 0 && content[index].subTitle != null)
                           Text(
                             content[index].subTitle ?? "",
-                            style: txtLinkXXSmall(color: yellowColor1),
+                            style: txtLinkXXSmall(
+                              color: content[index].color ?? yellowColor1,
+                            ),
                           )
                       ]
                     : [

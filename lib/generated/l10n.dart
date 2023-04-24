@@ -7619,6 +7619,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Transport image not be empty`
+  String get trans_images_not_empty {
+    return Intl.message(
+      'Transport image not be empty',
+      name: 'trans_images_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registered image must be at least 2 photo`
+  String get reg_images_not_empty {
+    return Intl.message(
+      'Registered image must be at least 2 photo',
+      name: 'reg_images_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update successfully`
+  String get success_update {
+    return Intl.message(
+      'Update successfully',
+      name: 'success_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration letter code`
+  String get reg_letter_num {
+    return Intl.message(
+      'Registration letter code',
+      name: 'reg_letter_num',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

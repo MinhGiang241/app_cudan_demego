@@ -82,7 +82,7 @@ class ResidentLetterTab extends StatelessWidget {
                 _refreshController.refreshCompleted();
               },
               child: PrimaryEmptyWidget(
-                emptyText: S.of(context).no_card,
+                emptyText: S.of(context).no_letter,
                 icons: PrimaryIcons.identity_bg,
                 action: () {
                   // Utils.pushScreen(context, const RegisterParkingCard());
@@ -114,7 +114,7 @@ class ResidentLetterTab extends StatelessWidget {
                             InfoContentView(
                               title: S.of(context).letter_num,
                               content: list[index].code,
-                              contentStyle: txtBold(16, purpleColorBase),
+                              contentStyle: txtBold(14, purpleColorBase),
                             ),
                             InfoContentView(
                               title: S.of(context).full_name,
@@ -126,21 +126,21 @@ class ResidentLetterTab extends StatelessWidget {
                                           .toUpperCase()
                                       : ''
                                   : "",
-                              contentStyle: txtBold(16, grayScaleColorBase),
+                              contentStyle: txtBold(14),
                             ),
                             InfoContentView(
                               title: S.of(context).address,
                               content: list[index].apartment != null
                                   ? "${list[index].apartment?.name ?? ""}, ${list[index].apartment?.f?.name ?? ""}, ${list[index].apartment?.b?.name ?? ""}"
                                   : "",
-                              contentStyle: txtBold(16, grayScaleColorBase),
+                              contentStyle: txtBold(12),
                             ),
                             InfoContentView(
                               title: S.of(context).status,
                               content:
                                   genStatus(list[index].ticket_status ?? ''),
                               contentStyle: txtBold(
-                                14,
+                                12,
                                 genStatusColor(
                                   list[index].ticket_status ?? '',
                                 ),

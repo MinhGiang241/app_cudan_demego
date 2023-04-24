@@ -756,5 +756,9 @@
   "enter_reason_refuse": "Nhập lý do từ chối",
   "owner_refuse": "Chủ hộ từ chối",
   "cancel_card": "Hủy thẻ",
-  "not_extend_inactive_card": "Thẻ đang bị khóa không thể gia hạn, vui lòng liên hệ BQL để đăng ký lại thẻ"
+  "not_extend_inactive_card": "Thẻ đang bị khóa không thể gia hạn, vui lòng liên hệ BQL để đăng ký lại thẻ",
+  "trans_images_not_empty": "Ảnh phương tiện không được để trống",
+  "reg_images_not_empty": "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh",
+  "success_update": "Cập nhật thành công",
+  "reg_letter_num": "Mã phiếu đăng ký"
 }
