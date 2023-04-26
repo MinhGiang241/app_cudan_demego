@@ -29,7 +29,11 @@ class ChatMessageInitial extends ChatMessageState {
 
   void registerGuestChat(String token, String name, String email) {
     webSocketService.registerGuestChat(
-        webSocketChannel!, visitorToken, name, email);
+      webSocketChannel!,
+      visitorToken,
+      name,
+      email,
+    );
   }
 
   void getInitialDataLive() {
@@ -84,7 +88,12 @@ class ChatMessageInitial extends ChatMessageState {
   }
 
   void setReaction(String emoji, String messageId) {
-    webSocketService.setReaction(webSocketChannel!, emoji, messageId);
+    webSocketService.setReaction(
+      webSocketChannel!,
+      emoji,
+      messageId,
+      visitorToken,
+    );
   }
 
   addAllMessage(List<MessageChat> a) {
@@ -193,7 +202,12 @@ class ChatMessageStart extends ChatMessageState {
   }
 
   void setReaction(String emoji, String messageId) {
-    webSocketService.setReaction(webSocketChannel!, emoji, messageId);
+    webSocketService.setReaction(
+      webSocketChannel!,
+      emoji,
+      messageId,
+      visitorToken,
+    );
   }
 
   void closeChatRoom(String rid) {

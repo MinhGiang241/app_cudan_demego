@@ -1,32 +1,20 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:provider/provider.dart';
-
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-
-import '../../services/prf_data.dart';
 import '../../widgets/primary_card.dart';
-
 import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
-
-import '../auth/prv/auth_prv.dart';
 import '../auth/prv/resident_info_prv.dart';
 import '../chat/bloc/chat_message_bloc.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
-
-import 'widgets/convinent_service_home.dart';
 import 'widgets/event_home.dart';
-
 import 'widgets/feedback_home.dart';
 import 'widgets/header_home.dart';
 import 'widgets/header_title.dart';
-
 import 'widgets/new_home.dart';
 import 'widgets/project_info_home.dart';
 import 'widgets/services_home.dart';

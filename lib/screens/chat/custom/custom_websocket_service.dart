@@ -55,6 +55,7 @@ class CustomWebSocketService {
   WebSocketChannel connectToWebSocketLiveChat(String url) {
     WebSocketChannel webSocketChannel = IOWebSocketChannel.connect(url);
     _sendConnectRequest(webSocketChannel);
+
     return webSocketChannel;
   }
 
@@ -214,12 +215,17 @@ class CustomWebSocketService {
     WebSocketChannel webSocketChannel,
     String emoji,
     String messageId,
+    String token,
   ) {
     Map msg = {
       'msg': 'method',
       'method': 'setReaction',
       'id': '22',
-      'params': [emoji, messageId]
+      'params': [
+        emoji,
+        messageId,
+        true,
+      ]
     };
     logInfo('🚀🚀 streamNotifyRoom $msg');
     webSocketChannel.sink.add(jsonEncode(msg));

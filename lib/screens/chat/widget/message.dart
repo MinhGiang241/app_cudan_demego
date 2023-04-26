@@ -161,374 +161,362 @@ class _MessageState extends State<Message> {
         crossAxisAlignment:
             widget.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Portal(
-            child: PortalTarget(
-              // closeDuration: const Duration(milliseconds: 200),
-              visible: showVisible,
-              anchor: const Aligned(
-                follower: Alignment.center,
-                target: Alignment.center,
-              ),
-              portalFollower: PrimaryCard(
-                borderRadius: BorderRadius.circular(24),
-                width: dvWidth(context) * 0.7,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    hpad(5),
-                    GestureDetector(
-                      onTap: () {
-                        addEmoji("❤️");
-                      },
-                      child: const Text(
-                        "❤️",
-                        style: TextStyle(fontSize: 25),
+          // Portal(
+          //   child: PortalTarget(
+          //     // closeDuration: const Duration(milliseconds: 200),
+          //     visible: showVisible,
+          //     anchor: const Aligned(
+          //       follower: Alignment.center,
+          //       target: Alignment.center,
+          //     ),
+          //     portalFollower: PrimaryCard(
+          //       borderRadius: BorderRadius.circular(24),
+          //       width: dvWidth(context) * 0.7,
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           hpad(5),
+          //           GestureDetector(
+          //             onTap: () {
+          //               addEmoji("❤️");
+          //             },
+          //             child: const Text(
+          //               "❤️",
+          //               style: TextStyle(fontSize: 25),
+          //             ),
+          //           ),
+          //           GestureDetector(
+          //             onTap: () {
+          //               addEmoji("👍");
+          //             },
+          //             child: const Text(
+          //               "👍",
+          //               style: TextStyle(fontSize: 25),
+          //             ),
+          //           ),
+          //           GestureDetector(
+          //             onTap: () {
+          //               addEmoji("👎");
+          //             },
+          //             child: const Text(
+          //               "👎",
+          //               style: TextStyle(fontSize: 25),
+          //             ),
+          //           ),
+          //           GestureDetector(
+          //             onTap: () {
+          //               addEmoji("😆");
+          //             },
+          //             child: const Text(
+          //               "😆",
+          //               style: TextStyle(fontSize: 25),
+          //             ),
+          //           ),
+          //           EmojiButton(
+          //             emojiPickerView: EmojiPickerView(
+          //               onEmojiSelected: (v) {
+          //                 addEmoji(v);
+          //               },
+          //             ),
+          //             child: const Text(
+          //               "➕",
+          //               style: TextStyle(fontSize: 25),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          // child:
+          SizedBox(
+            width: dvWidth(context),
+            child: Align(
+              alignment:
+                  widget.isMe ? Alignment.centerRight : Alignment.centerLeft,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.end,
+                children: [
+                  if (!widget.isMe)
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      child: CircleAvatar(
+                        radius: 10,
+                        backgroundImage: AssetImage(AppImage.receiption),
                       ),
-                      // Image.asset('assets/emojies/sad.png',
-                      //     width: 35),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        addEmoji("👍");
-                      },
-                      child: const Text(
-                        "👍",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      // Image.asset('assets/emojies/heart.png',
-                      //     width: 35),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        addEmoji("👎");
-                      },
-                      child: const Text(
-                        "👎",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      // Image.asset('assets/emojies/care.png',
-                      //     width: 35),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        addEmoji("😆");
-                      },
-                      child: const Text(
-                        "😆",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      // Image.asset('assets/emojies/lol.png',
-                      //     width: 35),
-                    ),
-                    EmojiButton(
-                      emojiPickerView: EmojiPickerView(
-                        onEmojiSelected: (v) {
-                          addEmoji(v);
-                        },
-                      ),
-                      child: const Text(
-                        "➕",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              child: SizedBox(
-                width: dvWidth(context),
-                child: Align(
-                  alignment: widget.isMe
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.end,
+                  if (!widget.isMe) hpad(2),
+                  Stack(
                     children: [
-                      // if (widget.isMe && widget.message.length < 14)
-                      //   hpad(120),
-                      if (!widget.isMe)
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 12.0),
-                          child: CircleAvatar(
-                            radius: 10,
-                            backgroundImage: AssetImage(AppImage.receiption),
-                          ),
+                      PrimaryCard(
+                        isShadow: false,
+                        onTap: () {
+                          setState(() {
+                            isShow = !isShow;
+                          });
+                        },
+                        onTapDown: (TapDownDetails details) {
+                          _tapPosition = details.globalPosition;
+                        },
+                        onLongPress: () async {
+                          setState(() {
+                            showVisible = !showVisible;
+                          });
+                        },
+                        borderRadius: BorderRadius.circular(24),
+                        background:
+                            widget.isMe ? primaryColor4 : grayScaleColor4,
+                        // width: dvWidth(context) * 0.7,
+                        constraints: BoxConstraints(
+                          minWidth: 40,
+                          maxWidth: dvWidth(context) * 0.7,
                         ),
-                      if (!widget.isMe) hpad(2),
-                      Stack(
-                        children: [
-                          PrimaryCard(
-                            isShadow: false,
-                            onTap: () {
-                              setState(() {
-                                isShow = !isShow;
-                              });
-                            },
-                            onTapDown: (TapDownDetails details) {
-                              _tapPosition = details.globalPosition;
-                            },
-                            onLongPress: () async {
-                              setState(() {
-                                showVisible = !showVisible;
-                              });
-                            },
-                            borderRadius: BorderRadius.circular(24),
-                            background:
-                                widget.isMe ? primaryColor4 : grayScaleColor4,
-                            // width: dvWidth(context) * 0.7,
-                            constraints: BoxConstraints(
-                              minWidth: 40,
-                              maxWidth: dvWidth(context) * 0.7,
-                            ),
-                            margin: const EdgeInsets.only(top: 2, bottom: 12),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 12,
-                            ),
-                            child: Column(
-                              children: [
-                                if (widget.messageChat.attachments!.isNotEmpty)
-                                  Wrap(
-                                    children: [
-                                      ...widget.messageChat.attachments!.map(
-                                        (c) => Column(
-                                          mainAxisAlignment: widget.isMe
-                                              ? MainAxisAlignment.end
-                                              : MainAxisAlignment.start,
-                                          children: [
-                                            if (c.image_type == null)
-                                              InkWell(
-                                                onTap: () async {
-                                                  await downloadFile(
-                                                    "${WebsocketConnect.serverUrl}${c.title_link}?download",
-                                                    {
-                                                      // "Accept-Encoding":
-                                                      //     "gzip, deflate, br",
-
-                                                      'Accept':
-                                                          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                                      'Host': 'chat.masflex.vn',
-                                                      // 'Cookie':
-                                                      //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
-                                                      // "sec-ch-ua":
-                                                      //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
-                                                      // "sec-ch-ua-mobile":
-                                                      //     "?0",
-                                                      // "sec-ch-ua-platform":
-                                                      //     '"Windows"',
-                                                      // "Sec-Fetch-Dest":
-                                                      //     "document",
-                                                      // "Sec-Fetch-Mode":
-                                                      //     "navigate",
-                                                      // "Sec-Fetch-Site":
-                                                      //     "none",
-                                                      // "Sec-Fetch-User":
-                                                      //     "?1",
-                                                      // "Upgrade-Insecure-Requests":
-                                                      //     "1",
-                                                      // "User-Agent":
-                                                      //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-                                                    },
-                                                  );
-
-                                                  // await launchUrl(
-                                                  //   Uri.parse(
-                                                  //       "${WebsocketConnect.serverUrl}${c.title_link}?download"),
-                                                  //   mode: LaunchMode
-                                                  //       .platformDefault,
-                                                  //   webViewConfiguration:
-                                                  //       WebViewConfiguration(
-                                                  //     headers: {
-                                                  //       "Connection":
-                                                  //           "keep-alive",
-                                                  //       "Accept-Encoding":
-                                                  //           "gzip, deflate, br",
-                                                  //       'Accept':
-                                                  //           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                                  //       'Host':
-                                                  //           'chat.masflex.vn',
-                                                  //       'Cookie':
-                                                  //           "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
-                                                  //     },
-                                                  //   ),
-                                                  // );
-                                                },
-                                                child: Text(
-                                                  c.title!,
-                                                  textAlign: widget.isMe
-                                                      ? TextAlign.end
-                                                      : TextAlign.start,
-                                                  style: txtRegular(
-                                                    14,
-                                                    primaryColorBase,
-                                                  ),
-                                                ),
-                                              ),
-                                            if (c.image_type != null &&
-                                                c.image_type!.contains("image"))
-                                              InkWell(
-                                                onTap: () async {
-                                                  Navigator.push(
-                                                    context,
-                                                    PageRouteBuilder(
-                                                      pageBuilder: (
-                                                        context,
-                                                        animation,
-                                                        secondaryAnimation,
-                                                      ) =>
-                                                          PhotoViewer(
-                                                        link:
-                                                            "${WebsocketConnect.serverUrl}${c.image_url}",
-                                                        listLink: [
-                                                          "${WebsocketConnect.serverUrl}${c.image_url}"
-                                                        ],
-                                                        initIndex: 0,
-                                                        heroTag: "tag",
-                                                      ),
-                                                      transitionsBuilder: (
-                                                        context,
-                                                        animation,
-                                                        secondaryAnimation,
-                                                        child,
-                                                      ) {
-                                                        return FadeTransition(
-                                                          opacity: animation,
-                                                          child: child,
-                                                        );
-                                                      },
-                                                    ),
-                                                  );
-                                                },
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      "${WebsocketConnect.serverUrl}${c.image_url}",
-                                                  placeholder: (
-                                                    context,
-                                                    url,
-                                                  ) =>
-                                                      const CircularProgressIndicator(),
-                                                  errorWidget: (
-                                                    context,
-                                                    url,
-                                                    error,
-                                                  ) =>
-                                                      const Icon(
-                                                    Icons.error,
-                                                  ),
-                                                  httpHeaders: {
-                                                    "Authorization":
-                                                        "Bearer ${widget.chatbloc.authToken}",
-                                                    "X-User-Id": widget.chatbloc
-                                                            .user!.id ??
-                                                        "",
-                                                    "X-Auth-Token": widget
-                                                            .chatbloc
-                                                            .authToken ??
-                                                        ""
-                                                  },
-                                                ),
-                                              ),
-                                            if (c.description != null &&
-                                                c.description!.isNotEmpty)
-                                              Text(
-                                                c.description!,
-                                                textAlign: widget.isMe
-                                                    ? TextAlign.end
-                                                    : TextAlign.start,
-                                                style: txtRegular(
-                                                  14,
-                                                  grayScaleColorBase,
-                                                ),
-                                              )
-                                          ],
-                                        ),
-
-                                        // InkWell(
-                                        //   onTap: () {},
-                                        //   child: Image.memory(
-                                        //     base64Decode(
-                                        //         c.image_preview ?? ""),
-                                        //     width: dvWidth(context) * 0.4,
-                                        //     fit: BoxFit.contain,
-                                        //   ),
-                                        // ),
-                                      )
-                                    ],
-                                  ),
-                                if (widget.message.isNotEmpty)
-                                  Text(
-                                    widget.message,
-                                    textAlign: widget.isMe
-                                        ? TextAlign.end
-                                        : TextAlign.start,
-                                    style: txtRegular(14, grayScaleColorBase),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: widget.isMe ? null : 0,
-                            left: !widget.isMe ? null : 0,
-                            child: Wrap(
-                              children: [
-                                ...widget.emojies.entries.map((e) {
-                                  print(e.value['usernames'].length);
-                                  return PrimaryCard(
-                                    border: Border.all(
-                                      color: grayScaleColor4,
-                                      width: 0.5,
-                                    ),
-                                    padding: const EdgeInsets.all(2),
-                                    background: Colors.white,
-                                    child: Row(
+                        margin: const EdgeInsets.only(top: 2, bottom: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
+                        child: Column(
+                          children: [
+                            if (widget.messageChat.attachments!.isNotEmpty)
+                              Wrap(
+                                children: [
+                                  ...widget.messageChat.attachments!.map(
+                                    (c) => Column(
+                                      mainAxisAlignment: widget.isMe
+                                          ? MainAxisAlignment.end
+                                          : MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          emojiParser.get(e.key).code,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        if (e.value['usernames'].length > 1)
-                                          Text(
-                                            e.value["usernames"].length
-                                                .toString(),
-                                            style: txtBold(
-                                              10,
-                                              grayScaleColorBase,
+                                        if (c.image_type == null)
+                                          InkWell(
+                                            onTap: () async {
+                                              await downloadFile(
+                                                "${WebsocketConnect.serverUrl}${c.title_link}?download",
+                                                {
+                                                  // "Accept-Encoding":
+                                                  //     "gzip, deflate, br",
+
+                                                  'Accept':
+                                                      'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                  'Host': 'chat.masflex.vn',
+                                                  // 'Cookie':
+                                                  //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
+                                                  // "sec-ch-ua":
+                                                  //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
+                                                  // "sec-ch-ua-mobile":
+                                                  //     "?0",
+                                                  // "sec-ch-ua-platform":
+                                                  //     '"Windows"',
+                                                  // "Sec-Fetch-Dest":
+                                                  //     "document",
+                                                  // "Sec-Fetch-Mode":
+                                                  //     "navigate",
+                                                  // "Sec-Fetch-Site":
+                                                  //     "none",
+                                                  // "Sec-Fetch-User":
+                                                  //     "?1",
+                                                  // "Upgrade-Insecure-Requests":
+                                                  //     "1",
+                                                  // "User-Agent":
+                                                  //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+                                                },
+                                              );
+
+                                              // await launchUrl(
+                                              //   Uri.parse(
+                                              //       "${WebsocketConnect.serverUrl}${c.title_link}?download"),
+                                              //   mode: LaunchMode
+                                              //       .platformDefault,
+                                              //   webViewConfiguration:
+                                              //       WebViewConfiguration(
+                                              //     headers: {
+                                              //       "Connection":
+                                              //           "keep-alive",
+                                              //       "Accept-Encoding":
+                                              //           "gzip, deflate, br",
+                                              //       'Accept':
+                                              //           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                              //       'Host':
+                                              //           'chat.masflex.vn',
+                                              //       'Cookie':
+                                              //           "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+                                              //     },
+                                              //   ),
+                                              // );
+                                            },
+                                            child: Text(
+                                              c.title!,
+                                              textAlign: widget.isMe
+                                                  ? TextAlign.end
+                                                  : TextAlign.start,
+                                              style: txtRegular(
+                                                14,
+                                                primaryColorBase,
+                                              ),
                                             ),
                                           ),
+                                        if (c.image_type != null &&
+                                            c.image_type!.contains("image"))
+                                          InkWell(
+                                            onTap: () async {
+                                              Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (
+                                                    context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                  ) =>
+                                                      PhotoViewer(
+                                                    link:
+                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                    listLink: [
+                                                      "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                    ],
+                                                    initIndex: 0,
+                                                    heroTag: "tag",
+                                                  ),
+                                                  transitionsBuilder: (
+                                                    context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child,
+                                                  ) {
+                                                    return FadeTransition(
+                                                      opacity: animation,
+                                                      child: child,
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  "${WebsocketConnect.serverUrl}${c.image_url}",
+                                              placeholder: (
+                                                context,
+                                                url,
+                                              ) =>
+                                                  const CircularProgressIndicator(),
+                                              errorWidget: (
+                                                context,
+                                                url,
+                                                error,
+                                              ) =>
+                                                  const Icon(
+                                                Icons.error,
+                                              ),
+                                              httpHeaders: {
+                                                "Authorization":
+                                                    "Bearer ${widget.chatbloc.authToken}",
+                                                "X-User-Id":
+                                                    widget.chatbloc.user!.id ??
+                                                        "",
+                                                "X-Auth-Token":
+                                                    widget.chatbloc.authToken ??
+                                                        ""
+                                              },
+                                            ),
+                                          ),
+                                        if (c.description != null &&
+                                            c.description!.isNotEmpty)
+                                          Text(
+                                            c.description!,
+                                            textAlign: widget.isMe
+                                                ? TextAlign.end
+                                                : TextAlign.start,
+                                            style: txtRegular(
+                                              14,
+                                              grayScaleColorBase,
+                                            ),
+                                          )
                                       ],
                                     ),
-                                  );
-                                })
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      // if (!widget.isMe && widget.message.length < 14)
-                      //   hpad(120),
-                      if (widget.isMe) hpad(2),
-                      if (widget.isMe)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
-                          child: CircleAvatar(
-                            radius: 10,
-                            backgroundImage: widget.avatar != null
-                                ? CachedNetworkImageProvider(
-                                    "${ApiConstants.uploadURL}?load=${widget.avatar}",
+
+                                    // InkWell(
+                                    //   onTap: () {},
+                                    //   child: Image.memory(
+                                    //     base64Decode(
+                                    //         c.image_preview ?? ""),
+                                    //     width: dvWidth(context) * 0.4,
+                                    //     fit: BoxFit.contain,
+                                    //   ),
+                                    // ),
                                   )
-                                : const AssetImage(
-                                    AppImage.defaultAvatar,
-                                  ) as ImageProvider,
-                          ),
+                                ],
+                              ),
+                            if (widget.message.isNotEmpty)
+                              Text(
+                                widget.message,
+                                textAlign: widget.isMe
+                                    ? TextAlign.end
+                                    : TextAlign.start,
+                                style: txtRegular(14, grayScaleColorBase),
+                              ),
+                          ],
                         ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: widget.isMe ? null : 0,
+                        left: !widget.isMe ? null : 0,
+                        child: Wrap(
+                          children: [
+                            ...widget.emojies.entries.map((e) {
+                              print(e.value['usernames'].length);
+                              return PrimaryCard(
+                                border: Border.all(
+                                  color: grayScaleColor4,
+                                  width: 0.5,
+                                ),
+                                padding: const EdgeInsets.all(2),
+                                background: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      emojiParser.get(e.key).code,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    if (e.value['usernames'].length > 1)
+                                      Text(
+                                        e.value["usernames"].length.toString(),
+                                        style: txtBold(
+                                          10,
+                                          grayScaleColorBase,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              );
+                            })
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                ),
+                  // if (!widget.isMe && widget.message.length < 14)
+                  //   hpad(120),
+                  if (widget.isMe) hpad(2),
+                  if (widget.isMe)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: CircleAvatar(
+                        radius: 10,
+                        backgroundImage: widget.avatar != null
+                            ? CachedNetworkImageProvider(
+                                "${ApiConstants.uploadURL}?load=${widget.avatar}",
+                              )
+                            : const AssetImage(
+                                AppImage.defaultAvatar,
+                              ) as ImageProvider,
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
+          //   ),
+          // ),
           if (isShow)
             Row(
               mainAxisAlignment:
