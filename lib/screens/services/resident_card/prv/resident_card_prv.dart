@@ -7,10 +7,8 @@ import '../../../../generated/l10n.dart';
 import '../../../../models/letter_history.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/resident_card.dart';
-import '../../../../models/response_thecudan_list.dart';
 import '../../../../services/api_history.dart';
 import '../../../../services/api_resident_card.dart';
-import '../../../../services/api_tower.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../utils/utils.dart';
 import '../resident_card_screen.dart';
@@ -25,10 +23,11 @@ class ResidentCardPrv extends ChangeNotifier {
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartmentId =
           context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-      await getResidentCardByResidentId(residentId, apartmentId);
-      await getManageCardList(residentId, apartmentId);
+      await getResidentCardByResidentId(residentId, apartmentId).then((v) {
+        getManageCardList(residentId, apartmentId);
+      });
 
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }
@@ -52,14 +51,11 @@ class ResidentCardPrv extends ChangeNotifier {
         manageCardList.add(ManageCard.fromMap(i));
       }
       notifyListeners();
-      print(manageCardList);
     });
   }
 
   extend(BuildContext context) {}
   missingReport(BuildContext context, ManageCard card) async {
-    card.status = "LOST";
-    card.reasons = 'BAOMAT';
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card_res,
       content: S.of(context).confirm_missing_report_res(card.serial_lot ?? ""),
@@ -76,7 +72,11 @@ class ResidentCardPrv extends ChangeNotifier {
       ),
       onConfirm: () async {
         Navigator.pop(context);
-        await APITransport.saveManageCard(card.toMap()).then((v) {
+
+        var submitCard = card.copyWith();
+        submitCard.status = "LOST";
+        submitCard.reasons = 'BAOMAT';
+        await APITransport.saveManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
             status: "LOST",
             action: "Báo mất",
@@ -137,15 +137,16 @@ class ResidentCardPrv extends ChangeNotifier {
   }
 
   Future cancelResCard(BuildContext context, ManageCard card) async {
-    card.status = "LOCK";
-    card.reasons = 'NGUOIDUNGKHOA';
     Utils.showConfirmMessage(
       title: S.of(context).can_trans_res,
       content: S.of(context).confirm_can_trans_card_res,
       context: context,
       onConfirm: () async {
         Navigator.pop(context);
-        await APITransport.saveManageCard(card.toMap()).then((v) {
+        var submitCard = card.copyWith();
+        submitCard.status = "LOCK";
+        submitCard.reasons = 'NGUOIDUNGKHOA';
+        await APITransport.saveManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
             status: "LOCK",
             action: "Khóa thẻ",
@@ -178,15 +179,16 @@ class ResidentCardPrv extends ChangeNotifier {
   editLetter(BuildContext context) {}
 
   sendRequest(BuildContext context, ResidentCard data) {
-    data.ticket_status = 'WAIT';
     Utils.showConfirmMessage(
       title: S.of(context).send_request,
       content: S.of(context).confirm_send_request(data.code ?? ''),
       context: context,
       onConfirm: () {
+        var submitData = data.copyWith();
+        submitData.ticket_status = 'WAIT';
         Navigator.pop(context);
         // APIResCard.saveResidentCard(data.toJson())
-        APIResCard.changeStatus(data.toMap()).then((v) {
+        APIResCard.changeStatus(submitData.toMap()).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_send_req,
@@ -212,11 +214,12 @@ class ResidentCardPrv extends ChangeNotifier {
       title: S.of(context).cancel_request,
       content: S.of(context).confirm_cancel_request(card.code ?? ""),
       onConfirm: () {
-        card.ticket_status = 'CANCEL';
-        card.reasons = 'NGUOIDUNGHUY';
+        var submitCard = card.copyWith();
+        submitCard.ticket_status = 'CANCEL';
+        submitCard.reasons = 'NGUOIDUNGHUY';
 
         // APIResCard.saveResidentCard(card.toJson())
-        APIResCard.changeStatus(card.toMap()).then((v) {
+        APIResCard.changeStatus(submitCard.toMap()).then((v) {
           Navigator.pop(context);
           Utils.showSuccessMessage(
             context: context,

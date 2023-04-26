@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -85,14 +86,23 @@ class PrimaryButton extends StatelessWidget {
                                       strokeWidth: 3,
                                     ),
                                   )
-                                : Text(
+                                : AutoSizeText(
                                     text ?? "",
-                                    softWrap: true,
                                     style: _txtStyle(
                                       buttonSize ?? ButtonSize.large,
                                     ),
+                                    maxLines: 1,
                                     textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
+                            //  Text(
+                            //     text ?? "",
+                            //     softWrap: true,
+                            //     style: _txtStyle(
+                            //       buttonSize ?? ButtonSize.large,
+                            //     ),
+                            //     textAlign: TextAlign.center,
+                            //   ),
                           )
                         : isLoading
                             ? SizedBox(
@@ -103,11 +113,14 @@ class PrimaryButton extends StatelessWidget {
                                   strokeWidth: 3,
                                 ),
                               )
-                            : Text(
+                            : AutoSizeText(
                                 text ?? "",
-                                style:
-                                    _txtStyle(buttonSize ?? ButtonSize.large),
+                                style: _txtStyle(
+                                  buttonSize ?? ButtonSize.large,
+                                ),
+                                maxLines: 1,
                                 textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
                               ),
                   )
               ],

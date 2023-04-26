@@ -382,18 +382,21 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                               ),
                               if (ruleFiles.isNotEmpty) vpad(12),
                               ...ruleFiles.map(
-                                (v) => InkWell(
-                                  onTap: () {
-                                    Utils.downloadFile(
-                                      context: context,
-                                      id: v.id,
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Text(
-                                      v.name ?? "",
-                                      style: txtRegular(13, primaryColorBase),
+                                (v) => Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Utils.downloadFile(
+                                        context: context,
+                                        id: v.id,
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(bottom: 5),
+                                      child: Text(
+                                        v.name ?? "",
+                                        style: txtRegular(13, primaryColorBase),
+                                      ),
                                     ),
                                   ),
                                 ),

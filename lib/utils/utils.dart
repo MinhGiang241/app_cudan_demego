@@ -63,22 +63,35 @@ class Utils {
 
   static Future<T?> pushReplacement<T>(BuildContext context, Widget widget) =>
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (c) => widget));
+        context,
+        MaterialPageRoute(builder: (c) => widget),
+      );
 
-  static Future<T?> pushAndRemoveUntil<T>(BuildContext context, Widget widget,
-          bool Function(Route<dynamic>) predicate) =>
+  static Future<T?> pushAndRemoveUntil<T>(
+    BuildContext context,
+    Widget widget,
+    bool Function(Route<dynamic>) predicate,
+  ) =>
       Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (c) => widget), predicate);
+        context,
+        MaterialPageRoute(builder: (c) => widget),
+        predicate,
+      );
 
   static Future<T?> pushRemoveAll<T>(BuildContext context, Widget widget) =>
       Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (c) => widget), (route) => false);
+        context,
+        MaterialPageRoute(builder: (c) => widget),
+        (route) => false,
+      );
 
   static pop<T extends Object?>(BuildContext context, [T? result]) =>
       Navigator.pop(context, result);
 
-  static Future<T?> showBottomSheet<T>(
-      {required BuildContext context, required Widget child}) {
+  static Future<T?> showBottomSheet<T>({
+    required BuildContext context,
+    required Widget child,
+  }) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -153,14 +166,16 @@ class Utils {
     //     locale: Intl.getCurrentLocale(), allowFromNow: true);
   }
 
-  static Future<T?> showBottomSelection<T>(
-      {required BuildContext context,
-      required List<SelectionModel> selections,
-      String? title,
-      Function(int)? onSelection}) async {
+  static Future<T?> showBottomSelection<T>({
+    required BuildContext context,
+    required List<SelectionModel> selections,
+    String? title,
+    Function(int)? onSelection,
+  }) async {
     return showBottomSheet(
-        context: context,
-        child: StatefulBuilder(builder: (context, setState) {
+      context: context,
+      child: StatefulBuilder(
+        builder: (context, setState) {
           return RepaintBoundary(
             child: DraggableScrollableSheet(
               maxChildSize: (dvHeight(context) -
@@ -169,48 +184,55 @@ class Utils {
                   dvHeight(context),
               builder: (context, scrollController) {
                 return PrimaryBottomSheet(
-                    child: SingleChildScrollView(
-                  controller: scrollController,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      vpad(24),
-                      if (title != null)
-                        Text(title,
-                            style: txtLinkSmall(color: grayScaleColor1)),
-                      ...List.generate(
-                        selections.length,
-                        (index) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ItemSelected(
-                              text: selectionString(
-                                  context, selections[index].title),
-                              icon: selections[index].icon,
-                              onTap: () async {
-                                onSelection?.call(index);
-                                setState(() {});
-                                await Future.delayed(
-                                  const Duration(milliseconds: 300),
-                                  () {
-                                    pop(context);
-                                  },
-                                );
-                              },
-                              isSelected: selections[index].isSelected,
-                            ),
-                            const Divider(height: 1)
-                          ],
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        vpad(24),
+                        if (title != null)
+                          Text(
+                            title,
+                            style: txtLinkSmall(color: grayScaleColor1),
+                          ),
+                        ...List.generate(
+                          selections.length,
+                          (index) => Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ItemSelected(
+                                text: selectionString(
+                                  context,
+                                  selections[index].title,
+                                ),
+                                icon: selections[index].icon,
+                                onTap: () async {
+                                  onSelection?.call(index);
+                                  setState(() {});
+                                  await Future.delayed(
+                                    const Duration(milliseconds: 300),
+                                    () {
+                                      pop(context);
+                                    },
+                                  );
+                                },
+                                isSelected: selections[index].isSelected,
+                              ),
+                              const Divider(height: 1)
+                            ],
+                          ),
                         ),
-                      ),
-                      vpad(bottomSafePad(context) + 24)
-                    ],
+                        vpad(bottomSafePad(context) + 24)
+                      ],
+                    ),
                   ),
-                ));
+                );
               },
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 
   static String selectionString(BuildContext context, String title) {
@@ -262,8 +284,11 @@ class Utils {
   //           dialog);
   // }
 
-  static Future<List<XFile?>?> selectFile(BuildContext context, bool isMulti,
-      {bool isFile = false}) async {
+  static Future<List<XFile?>?> selectFile(
+    BuildContext context,
+    bool isMulti, {
+    bool isFile = false,
+  }) async {
     final bool p = await requestPermistion(context, [
       Permission.storage,
     ]);
@@ -278,34 +303,43 @@ class Utils {
     }
   }
 
-  static Future<List<XFile>?> selectImage(BuildContext context, bool isMulti,
-      {bool isFile = false}) async {
+  static Future<List<XFile>?> selectImage(
+    BuildContext context,
+    bool isMulti, {
+    bool isFile = false,
+  }) async {
     final bool p = await requestPermistion(
-        context, [Permission.camera, Permission.photos]);
+      context,
+      [Permission.camera, Permission.photos],
+    );
     if (p) {
       return await Utils.showBottomSheet(
-          context: context,
-          child: PrimaryBottomSheet(
-              child: Column(
+        context: context,
+        child: PrimaryBottomSheet(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               vpad(24),
               ItemSelected(
-                  text: S.current.camera,
-                  icon: const PrimaryIcon(
-                      icons: PrimaryIcons.camera, color: grayScaleColor2),
-                  onTap: () async {
-                    await imagePicker(isMulti, ImageSource.camera)
-                        .then((value) {
-                      if (value != null) {
-                        pop(context, value);
-                      }
-                    });
-                  }),
+                text: S.current.camera,
+                icon: const PrimaryIcon(
+                  icons: PrimaryIcons.camera,
+                  color: grayScaleColor2,
+                ),
+                onTap: () async {
+                  await imagePicker(isMulti, ImageSource.camera).then((value) {
+                    if (value != null) {
+                      pop(context, value);
+                    }
+                  });
+                },
+              ),
               ItemSelected(
                 text: S.current.gallery,
                 icon: const PrimaryIcon(
-                    icons: PrimaryIcons.image, color: grayScaleColor2),
+                  icons: PrimaryIcons.image,
+                  color: grayScaleColor2,
+                ),
                 onTap: () async {
                   await imagePicker(isMulti, ImageSource.gallery).then((value) {
                     if (value != null) {
@@ -320,7 +354,9 @@ class Utils {
                 ItemSelected(
                   text: S.current.file_selection,
                   icon: const PrimaryIcon(
-                      icons: PrimaryIcons.folder_open, color: grayScaleColor2),
+                    icons: PrimaryIcons.folder_open,
+                    color: grayScaleColor2,
+                  ),
                   onTap: () async {
                     await filePicker(false, true).then((value) {
                       if (value != null) {
@@ -333,7 +369,9 @@ class Utils {
                 ),
               vpad(bottomSafePad(context) + 24)
             ],
-          )));
+          ),
+        ),
+      );
     } else {
       return null;
     }
@@ -397,7 +435,9 @@ class Utils {
   }
 
   static Future<List<XFile>?> imagePicker(
-      bool isMulti, ImageSource source) async {
+    bool isMulti,
+    ImageSource source,
+  ) async {
     final picker = ImagePicker();
     var allows = [
       'jpg',
@@ -423,7 +463,9 @@ class Utils {
   }
 
   static Future<bool> requestPermistion(
-      BuildContext context, List<Permission> permissions) async {
+    BuildContext context,
+    List<Permission> permissions,
+  ) async {
     final value = await permissions.request();
     bool permanentlyDenied = false;
     for (var element in permissions) {
@@ -433,49 +475,52 @@ class Utils {
     }
     if (permanentlyDenied) {
       await showDialog(
-          context: context,
-          dialog: PrimaryDialog.custom(
-            title: S.current.permission_denied,
-            content: Column(
-              children: [
-                Text(S.current.permission_denied_msg),
-                vpad(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    PrimaryButton(
-                      text: S.current.cancel,
-                      buttonSize: ButtonSize.medium,
-                      buttonType: ButtonType.secondary,
-                      textColor: primaryColorBase,
-                      onTap: () {
-                        pop(context);
-                      },
-                    ),
-                    PrimaryButton(
-                      text: S.current.setting,
-                      buttonSize: ButtonSize.medium,
-                      onTap: () {
-                        openAppSettings();
-                      },
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ));
+        context: context,
+        dialog: PrimaryDialog.custom(
+          title: S.current.permission_denied,
+          content: Column(
+            children: [
+              Text(S.current.permission_denied_msg),
+              vpad(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PrimaryButton(
+                    text: S.current.cancel,
+                    buttonSize: ButtonSize.medium,
+                    buttonType: ButtonType.secondary,
+                    textColor: primaryColorBase,
+                    onTap: () {
+                      pop(context);
+                    },
+                  ),
+                  PrimaryButton(
+                    text: S.current.setting,
+                    buttonSize: ButtonSize.medium,
+                    onTap: () {
+                      openAppSettings();
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      );
       return false;
     } else {
       return true;
     }
   }
 
-  static showDatePickers(BuildContext context,
-      {Function(DateTime)? onChange,
-      Function(DateTime)? onDone,
-      DateTime? initDate,
-      DateTime? startDate,
-      DateTime? endDate}) async {
+  static showDatePickers(
+    BuildContext context, {
+    Function(DateTime)? onChange,
+    Function(DateTime)? onDone,
+    DateTime? initDate,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
     FocusScope.of(context).unfocus();
     if (Platform.isIOS) {
       return await showDatePicker(
@@ -561,44 +606,52 @@ class Utils {
 
   static showConnectionError(BuildContext context) {
     Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.error(
-          msg: S.of(context).err_conn,
-        ));
+      context: context,
+      dialog: PrimaryDialog.error(
+        msg: S.of(context).err_conn,
+      ),
+    );
   }
 
   static showErrorMessage(BuildContext context, String e) {
     if (e == 'RELOGIN') {
       Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.error(
-            msg: S.of(context).err_x(S.of(context).expired_login),
-            onClose: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  SignInScreen.routeName, ((route) => route.isCurrent),
-                  arguments: {});
-            },
-          ));
+        context: context,
+        dialog: PrimaryDialog.error(
+          msg: S.of(context).err_x(S.of(context).expired_login),
+          onClose: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              SignInScreen.routeName,
+              ((route) => route.isCurrent),
+              arguments: {},
+            );
+          },
+        ),
+      );
     } else {
       Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.error(
-            msg: S.of(context).err_x(e),
-          ));
+        context: context,
+        dialog: PrimaryDialog.error(
+          msg: S.of(context).err_x(e),
+        ),
+      );
     }
   }
 
   static showSuccessMessage(
       // BuildContext context, String e, Function()? onClose
-      {required BuildContext context,
-      required String e,
-      Function()? onClose}) {
+      {
+    required BuildContext context,
+    required String e,
+    Function()? onClose,
+  }) {
     Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.success(
-          msg: e,
-          onClose: onClose,
-        ));
+      context: context,
+      dialog: PrimaryDialog.success(
+        msg: e,
+        onClose: onClose,
+      ),
+    );
   }
 
   static showConfirmMessage({
@@ -633,28 +686,33 @@ class Utils {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                PrimaryButton(
-                  width: 100,
-                  text: S.of(context).cancel,
-                  buttonSize: ButtonSize.small,
-                  buttonType: ButtonType.red,
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                Expanded(
+                  flex: 8,
+                  child: PrimaryButton(
+                    text: S.of(context).cancel,
+                    buttonSize: ButtonSize.small,
+                    buttonType: ButtonType.red,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
-                PrimaryButton(
-                  width: 100,
-                  text: S.of(context).confirm,
-                  buttonSize: ButtonSize.small,
-                  buttonType: ButtonType.primary,
-                  onTap: () {
-                    if (onConfirm == null) {
-                      Navigator.of(context).pop();
-                    } else {
-                      onConfirm();
-                    }
-                  },
-                )
+                Expanded(flex: 1, child: hpad(0)),
+                Expanded(
+                  flex: 8,
+                  child: PrimaryButton(
+                    text: S.of(context).confirm,
+                    buttonSize: ButtonSize.small,
+                    buttonType: ButtonType.primary,
+                    onTap: () {
+                      if (onConfirm == null) {
+                        Navigator.of(context).pop();
+                      } else {
+                        onConfirm();
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
             vpad(12),

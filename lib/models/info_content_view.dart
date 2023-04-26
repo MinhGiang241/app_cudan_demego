@@ -142,6 +142,8 @@ Color genStatusColor(String status) {
       return redColor9;
     case "LOCK":
       return yellowColor7;
+    case "DESTROY":
+      return yellowColor7;
     default:
       return grayScaleColor1;
   }

@@ -334,15 +334,17 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           )
                         ],
                       ),
-                    if ((card.status != "LOCK" &&
-                            card.r?.code != 'NGUOIDUNGKHOA') &&
-                        card.status != "LOST" &&
-                        (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
+                    if (!(card.status == "LOCK" &&
+                            card.r?.code == 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST"
+                    //  && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+                    )
                       vpad(30),
-                    if ((card.status != "LOCK" &&
-                            card.r?.code != 'NGUOIDUNGKHOA') &&
-                        card.status != "LOST" &&
-                        (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
+                    if (!(card.status == "LOCK" &&
+                            card.r?.code == 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST"
+                    // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+                    )
                       PrimaryButton(
                         isLoading: false,
                         buttonSize: ButtonSize.medium,

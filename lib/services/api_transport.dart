@@ -43,6 +43,37 @@ class APITransport {
     }
   }
 
+  static Future reportMissingTransportCard(
+    Map<String, dynamic>? data,
+  ) async {
+    var query = '''
+    mutation (\$data:Dictionary){
+    response: card_mobile_missing_report_transport_card (data: \$data ) {
+        code
+        message
+        data
+    }
+}     
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getTransportLetterList(
     String? residentId,
     String? apartmentId,

@@ -137,8 +137,7 @@ class ResidentLetterTab extends StatelessWidget {
                             ),
                             InfoContentView(
                               title: S.of(context).status,
-                              content:
-                                  genStatus(list[index].ticket_status ?? ''),
+                              content: list[index].s?.name ?? "",
                               contentStyle: txtBold(
                                 12,
                                 genStatusColor(

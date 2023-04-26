@@ -258,6 +258,11 @@ class ManageCard {
     String? month_filter,
     String? user,
     String? rules,
+    Status? s,
+    TransportCard? t,
+    Reason? r,
+    ResponseResidentInfo? re,
+    ResidentCard? res_card,
   }) {
     return ManageCard(
       id: id ?? this.id,
@@ -292,6 +297,11 @@ class ManageCard {
       month_filter: month_filter ?? this.month_filter,
       user: user ?? this.user,
       rules: rules ?? this.rules,
+      s: s ?? this.s,
+      t: t ?? this.t,
+      r: r ?? this.r,
+      re: re ?? this.re,
+      res_card: res_card ?? this.res_card,
     );
   }
 }

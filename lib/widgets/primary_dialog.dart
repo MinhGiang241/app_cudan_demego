@@ -9,16 +9,17 @@ import 'primary_icon.dart';
 enum DialogType { success, error, alert, custom }
 
 class CustomDialog extends StatelessWidget {
-  const CustomDialog(
-      {super.key,
-      this.title = '',
-      this.msg,
-      this.code,
-      this.content,
-      this.useBackground = false,
-      this.onClose,
-      this.customIcons,
-      this.type = DialogType.custom});
+  const CustomDialog({
+    super.key,
+    this.title = '',
+    this.msg,
+    this.code,
+    this.content,
+    this.useBackground = false,
+    this.onClose,
+    this.customIcons,
+    this.type = DialogType.custom,
+  });
 
   final String? title;
   final String? msg;
@@ -34,7 +35,8 @@ class CustomDialog extends StatelessWidget {
     return Center(
       child: Dialog(
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(24))),
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+        ),
         elevation: 0,
         insetAnimationCurve: Curves.bounceInOut,
         insetPadding: const EdgeInsets.all(40),
@@ -49,65 +51,66 @@ class CustomDialog extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    vpad(24),
-                    if (type == DialogType.custom && customIcons != null)
-                      customIcons!,
-                    if (type != DialogType.custom)
-                      PrimaryIcon(
-                        icons: type == DialogType.success
-                            ? PrimaryIcons.check
-                            : PrimaryIcons.error,
-                        color: Colors.white,
-                        style: PrimaryIconStyle.gradient,
-                        gradients: type == DialogType.success
-                            ? PrimaryIconGradient.green
-                            : PrimaryIconGradient.red,
-                        size: 32,
-                        padding: const EdgeInsets.all(12),
-                      ),
-                    if (type != DialogType.custom) vpad(16),
-                    if (type == DialogType.custom && customIcons != null)
-                      vpad(16),
-                    if (title != null)
-                      Text(
-                        _title(),
-                        style: txtDisplayMedium(),
-                        textAlign: TextAlign.center,
-                      ),
-                    if (title != null) vpad(16),
-                    if (type != DialogType.custom)
-                      code == null
-                          ? Text(
-                              msg ?? "",
-                              style: txtBodySmallRegular(),
-                              textAlign: TextAlign.center,
-                            )
-                          : Text(
-                              errorCodeToString(context, code),
-                              style: txtBodySmallRegular(),
-                              textAlign: TextAlign.center,
-                            ),
-                    if (type != DialogType.custom) vpad(20),
-                    if (type != DialogType.custom)
-                      PrimaryButton(
-                        text: S.of(context).close,
-                        buttonSize: ButtonSize.medium,
-                        onTap: () {
-                          Navigator.pop(context);
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  vpad(24),
+                  if (type == DialogType.custom && customIcons != null)
+                    customIcons!,
+                  if (type != DialogType.custom)
+                    PrimaryIcon(
+                      icons: type == DialogType.success
+                          ? PrimaryIcons.check
+                          : PrimaryIcons.error,
+                      color: Colors.white,
+                      style: PrimaryIconStyle.gradient,
+                      gradients: type == DialogType.success
+                          ? PrimaryIconGradient.green
+                          : PrimaryIconGradient.red,
+                      size: 32,
+                      padding: const EdgeInsets.all(12),
+                    ),
+                  if (type != DialogType.custom) vpad(16),
+                  if (type == DialogType.custom && customIcons != null)
+                    vpad(16),
+                  if (title != null)
+                    Text(
+                      _title(),
+                      style: txtDisplayMedium(),
+                      textAlign: TextAlign.center,
+                    ),
+                  if (title != null) vpad(16),
+                  if (type != DialogType.custom)
+                    code == null
+                        ? Text(
+                            msg ?? "",
+                            style: txtBodySmallRegular(),
+                            textAlign: TextAlign.center,
+                          )
+                        : Text(
+                            errorCodeToString(context, code),
+                            style: txtBodySmallRegular(),
+                            textAlign: TextAlign.center,
+                          ),
+                  if (type != DialogType.custom) vpad(20),
+                  if (type != DialogType.custom)
+                    PrimaryButton(
+                      text: S.of(context).close,
+                      buttonSize: ButtonSize.medium,
+                      onTap: () {
+                        Navigator.pop(context);
 
-                          if (onClose != null) {
-                            onClose!();
-                          }
+                        if (onClose != null) {
+                          onClose!();
+                        }
 
-                          // Navigator.pop(context);
-                        },
-                      ),
-                    if (content != null) content!,
-                    vpad(24),
-                  ]),
+                        // Navigator.pop(context);
+                      },
+                    ),
+                  if (content != null) content!,
+                  vpad(24),
+                ],
+              ),
             ),
           ),
         ),

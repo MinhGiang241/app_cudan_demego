@@ -145,4 +145,53 @@ class ResidentCard {
 
   factory ResidentCard.fromJson(String source) =>
       ResidentCard.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ResidentCard copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? apartmentId,
+    String? residentId,
+    String? reasons,
+    bool? isMobile,
+    String? code,
+    String? ticket_status,
+    String? note_reason,
+    String? relationship,
+    String? registration_date,
+    bool? confirmation,
+    List<FileUploadModel>? identity_image,
+    List<FileUploadModel>? resident_image,
+    List<FileUploadModel>? other_image,
+    String? regisrtation_date_filter,
+    ResponseResidentInfo? resident,
+    Apartment? apartment,
+    Status? s,
+    Reason? r,
+  }) {
+    return ResidentCard(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      apartmentId: apartmentId ?? this.apartmentId,
+      residentId: residentId ?? this.residentId,
+      reasons: reasons ?? this.reasons,
+      isMobile: isMobile ?? this.isMobile,
+      code: code ?? this.code,
+      ticket_status: ticket_status ?? this.ticket_status,
+      note_reason: note_reason ?? this.note_reason,
+      relationship: relationship ?? this.relationship,
+      registration_date: registration_date ?? this.registration_date,
+      confirmation: confirmation ?? this.confirmation,
+      identity_image: identity_image ?? this.identity_image,
+      resident_image: resident_image ?? this.resident_image,
+      other_image: other_image ?? this.other_image,
+      regisrtation_date_filter:
+          regisrtation_date_filter ?? this.regisrtation_date_filter,
+      resident: resident ?? this.resident,
+      apartment: apartment ?? this.apartment,
+      s: s ?? this.s,
+      r: r ?? this.r,
+    );
+  }
 }

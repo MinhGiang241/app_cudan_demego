@@ -18,9 +18,14 @@ class ExtendTransportPrv extends ChangeNotifier {
   }) {
     if (card != null) {
       // expireValue = item?.shelfLifeId;
-      oldExpireController.text = Utils.dateFormat(item?.expire_date ?? "", 1);
-      extendController.text =
-          Utils.dateFormat(DateTime.now().toIso8601String(), 1);
+      if (DateTime.tryParse(item?.expire_date ?? "") != null) {
+        var oldDate =
+            DateTime.parse(item!.expire_date!).add(const Duration(hours: 7));
+        oldExpireController.text =
+            Utils.dateFormat(oldDate.toIso8601String(), 1);
+        extendController.text =
+            Utils.dateFormat(DateTime.now().toIso8601String(), 1);
+      }
     }
   }
   ListTransport? item;
@@ -104,7 +109,8 @@ class ExtendTransportPrv extends ChangeNotifier {
         v.forEach((e) {
           shelfLifeList.add(ShelfLife.fromMap(e));
         });
-        expireDate = DateTime.parse(item!.expire_date ?? "");
+        expireDate = DateTime.parse(item!.expire_date ?? "")
+            .add(const Duration(hours: 7));
 
         // ShelfLife? shelf =
         //     shelfLifeList.firstWhere((element) => element.id == expireValue, );
@@ -178,15 +184,10 @@ class ExtendTransportPrv extends ChangeNotifier {
             );
           },
         );
-      }).catchError((e) {
-        isLoading = false;
-        notifyListeners();
-        Utils.showErrorMessage(context, e);
       });
     } else {
       isLoading = false;
       genValidString();
-      notifyListeners();
     }
   }
 }

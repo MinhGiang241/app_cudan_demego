@@ -102,12 +102,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       content: card.s?.name ?? '',
                       contentStyle: genContentStyle(card.status ?? ""),
                     ),
-                    if (card.r != null)
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).reject_reason,
-                        content: card.r?.name != null ? card.r?.name ?? "" : '',
-                      ),
+                    // if (card.r != null)
+                    //   InfoContentView(
+                    //     isHorizontal: true,
+                    //     title: S.of(context).reject_reason,
+                    //     content: card.r?.name != null ? card.r?.name ?? "" : '',
+                    //   ),
                     if (card.note_reason != null)
                       InfoContentView(
                         isHorizontal: true,
@@ -147,21 +147,24 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                   ],
                 ),
               ),
-              if ((card.status != "LOCK" && card.r?.code != 'NGUOIDUNGKHOA') &&
-                  card.status != "LOST" &&
-                  (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
-                vpad(24),
-              if ((card.status != "LOCK" && card.r?.code != 'NGUOIDUNGKHOA') &&
-                  card.status != "LOST" &&
-                  (card.status != "LOCK" && card.status != "KHOAVIPHAM"))
-                PrimaryButton(
-                  width: double.infinity,
-                  text: S.of(context).cancel_card,
-                  buttonType: ButtonType.red,
-                  onTap: () {
-                    cancel(context, card);
-                  },
-                ),
+              // if (!(card.status == "LOCK" && card.r?.code == 'NGUOIDUNGKHOA') &&
+              //     card.status != "LOST"
+              // // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+              // )
+              //   vpad(24),
+              // if (!(card.status == "LOCK" && card.r?.code == 'NGUOIDUNGKHOA') &&
+              //     card.status != "LOST"
+              // // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+
+              // )
+              //   PrimaryButton(
+              //     width: double.infinity,
+              //     text: S.of(context).cancel_card,
+              //     buttonType: ButtonType.red,
+              //     onTap: () {
+              //       cancel(context, card);
+              //     },
+              //   ),
               vpad(kBottomNavigationBarHeight),
             ],
           ),

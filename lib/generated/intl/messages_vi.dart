@@ -421,7 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_date_create":
             MessageLookupByLibrary.simpleMessage("Ngày gia hạn"),
         "expired_date_new":
-            MessageLookupByLibrary.simpleMessage("Ngày hết hạn hiện mới"),
+            MessageLookupByLibrary.simpleMessage("Ngày hết hạn mới"),
         "expired_date_old":
             MessageLookupByLibrary.simpleMessage("Ngày hết hạn hiện tại"),
         "expired_login": MessageLookupByLibrary.simpleMessage(
@@ -665,7 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "notification_type":
             MessageLookupByLibrary.simpleMessage("Loại thông báo"),
-        "num_seat": MessageLookupByLibrary.simpleMessage("Sồ chỗ ngồi"),
+        "num_seat": MessageLookupByLibrary.simpleMessage("Số chỗ ngồi"),
         "num_seat_not_zero": MessageLookupByLibrary.simpleMessage(
             "Số chỗ ngồi không được bằng 0"),
         "object_code": MessageLookupByLibrary.simpleMessage("Mã vật phẩm"),

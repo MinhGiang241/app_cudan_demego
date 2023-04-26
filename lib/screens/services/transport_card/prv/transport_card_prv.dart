@@ -21,16 +21,16 @@ class TransportCardPrv extends ChangeNotifier {
     BuildContext context,
     ManageCard card,
   ) async {
-    card.status = "LOCK";
-    card.reasons = 'NGUOIDUNGKHOA';
-
     Utils.showConfirmMessage(
       title: S.of(context).can_trans,
       content: S.of(context).confirm_can_trans_card,
       context: context,
       onConfirm: () async {
         Navigator.pop(context);
-        await APITransport.lockManageCard(card.toMap()).then((v) {
+        var submitCard = card.copyWith();
+        submitCard.status = "LOCK";
+        submitCard.reasons = 'NGUOIDUNGKHOA';
+        await APITransport.lockManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
             action: "Khóa thẻ",
             content: "Người dùng khóa thẻ",
@@ -135,11 +135,12 @@ class TransportCardPrv extends ChangeNotifier {
       title: S.of(context).cancel_request,
       content: S.of(context).confirm_cancel_request(card.code ?? ""),
       onConfirm: () async {
-        card.ticket_status = "CANCEL";
-        card.reasons = "NGUOIDUNGHUY";
+        var submitCard = card.copyWith();
+        submitCard.ticket_status = "CANCEL";
+        submitCard.reasons = "NGUOIDUNGHUY";
         Navigator.pop(context);
         // await APITrans.saveTransportationCard(card.toJson())
-        await APITransport.changeStatus(card.toMap()).then(
+        await APITransport.changeStatus(submitCard.toMap()).then(
           (v) {
             Utils.showSuccessMessage(
               context: context,
@@ -192,8 +193,6 @@ class TransportCardPrv extends ChangeNotifier {
   }
 
   missingReport(BuildContext context, ManageCard card) async {
-    card.status = "LOST";
-    card.reasons = 'BAOMAT';
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card,
       content: S.of(context).confirm_missing_report(card.serial_lot ?? ""),
@@ -210,7 +209,12 @@ class TransportCardPrv extends ChangeNotifier {
       ),
       onConfirm: () async {
         Navigator.pop(context);
-        await APITransport.saveManageCard(card.toMap()).then((v) {
+        var submitCard = card.copyWith();
+
+        submitCard.status = "LOST";
+        submitCard.reasons = 'BAOMAT';
+        await APITransport.reportMissingTransportCard(submitCard.toMap())
+            .then((v) {
           var his = CardHistory(
             action: "Báo mất",
             content: "Người dùng báo mất thẻ",
