@@ -5,8 +5,10 @@ abstract class ChatMessageEvent {}
 
 @immutable
 class LoadChatMessageStart extends ChatMessageEvent {
-  LoadChatMessageStart({this.roomId});
+  LoadChatMessageStart({this.roomId, this.visitorToken, this.webSocketChannel});
   String? roomId;
+  WebSocketChannel? webSocketChannel;
+  String? visitorToken;
 }
 
 @immutable

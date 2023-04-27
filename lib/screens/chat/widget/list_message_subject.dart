@@ -89,11 +89,14 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                                 .account
                                 ?.id;
                             widget.toogleGreeting();
-                            widget.state.sendGreetingMessage(
-                              accountId,
-                              accountId,
-                              sublist[index].name,
-                            );
+                            Future.delayed(const Duration(milliseconds: 10))
+                                .then((_) {
+                              widget.state.sendGreetingMessage(
+                                accountId,
+                                accountId,
+                                sublist[index].name,
+                              );
+                            });
                           },
                           child: Container(
                             decoration: BoxDecoration(

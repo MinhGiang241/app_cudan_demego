@@ -31,8 +31,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         ChatMessageStart(
           user: user,
           authToken: authToken,
-          visitorToken: visitorToken,
+          visitorToken: event.visitorToken ?? "",
           roomId: event.roomId,
+          webSocketChannel: event.webSocketChannel,
         ),
       );
     });

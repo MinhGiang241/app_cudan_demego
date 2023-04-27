@@ -116,6 +116,22 @@ class ChatMessageInitial extends ChatMessageState {
       }
     });
   }
+
+  genUniqueId() {
+    return uuid.v4();
+  }
+
+  void sendStartMessage(String? token, String message) {
+    if (message.isNotEmpty) {
+      webSocketService.sendMessageLiveChat(
+        webSocketChannel!,
+        genUniqueId(),
+        roomId ?? '',
+        token ?? "",
+        message,
+      );
+    }
+  }
 }
 
 class ChatMessageGreeting extends ChatMessageState {
@@ -132,11 +148,12 @@ class ChatMessageStart extends ChatMessageState {
     this.authToken,
     this.roomId,
     required this.visitorToken,
+    this.webSocketChannel,
   });
   final String? authToken;
-  final String visitorToken;
+  String visitorToken;
   String? roomId;
-  final User? user;
+  User? user;
   bool showGreeting = true;
   void toogleGreeting() {
     showGreeting = !showGreeting;
@@ -229,6 +246,18 @@ class ChatMessageStart extends ChatMessageState {
         genUniqueId(),
         roomId ?? rid,
         token,
+        message,
+      );
+    }
+  }
+
+  void sendStartMessage(String? token, String message) {
+    if (message.isNotEmpty) {
+      webSocketService.sendMessageLiveChat(
+        webSocketChannel!,
+        genUniqueId(),
+        roomId ?? '',
+        token ?? "",
         message,
       );
     }

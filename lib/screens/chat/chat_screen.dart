@@ -150,8 +150,15 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: const EdgeInsets.all(6),
                               onTap: () {
                                 bloc.add(
-                                  LoadChatMessageStart(roomId: state.roomId),
+                                  LoadChatMessageStart(
+                                    roomId: state.roomId,
+                                  ),
                                 );
+                                Future.delayed(
+                                  const Duration(milliseconds: 100),
+                                ).then((v) {
+                                  state.sendStartMessage(token, "Bắt đầu");
+                                });
                               },
                               child: Row(
                                 children: [
@@ -277,6 +284,8 @@ class _ChatScreenState extends State<ChatScreen> {
     ChatMessageStart state,
     bloc,
   ) {
+    var accountId = context.read<ResidentInfoPrv>().userInfo!.account?.id;
+
     var dataJson = json.decode(snapshot.data);
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
