@@ -284,7 +284,7 @@ class _TransportLetterDetailsScreenState
                   }
                 }
                 historyList.sort(
-                  (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+                  (a, b) => a.perform_date!.compareTo(b.perform_date ?? ""),
                 );
                 if (mounted) {
                   setState(() {});

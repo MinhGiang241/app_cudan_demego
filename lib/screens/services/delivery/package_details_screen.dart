@@ -342,7 +342,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                   }
                 }
                 historyList.sort(
-                  (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+                  (a, b) => a.perform_date!.compareTo(b.perform_date ?? ""),
                 );
                 if (mounted) {
                   setState(() {});
@@ -363,6 +363,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                               title: i.content,
                               subTitle: i.new_status != null
                                   ? '${S.of(context).status}: ${i.ns?.name}'
+                                  : null,
+                              color: i.new_status != null
+                                  ? genStatusColor(i.new_status ?? "")
                                   : null,
                             ),
                           )

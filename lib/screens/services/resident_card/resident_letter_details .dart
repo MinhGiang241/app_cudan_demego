@@ -102,9 +102,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reject_reason,
-                        content: card.note_reason != null
-                            ? card.note_reason ?? ""
-                            : '',
+                        content: card.r?.name != null ? card.r?.name ?? "" : '',
                       ),
                     if (card.note_reason != null)
                       InfoContentView(
@@ -195,7 +193,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                   }
                 }
                 historyList.sort(
-                  (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
+                  (a, b) => a.perform_date!.compareTo(b.perform_date ?? ""),
                 );
                 if (mounted) {
                   setState(() {});

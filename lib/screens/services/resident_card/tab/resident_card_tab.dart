@@ -62,7 +62,7 @@ class ResidentCardTab extends StatelessWidget {
     lost.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
     destroy.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-    List<ManageCard> list = active + inActive + lock + lost + destroy;
+    List<ManageCard> list = active + lock + lost + inActive + destroy;
 
     return (list.isEmpty)
         ? SafeArea(
