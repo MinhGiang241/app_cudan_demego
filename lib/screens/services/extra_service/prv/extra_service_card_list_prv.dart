@@ -54,14 +54,15 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
                 e: S.of(context).success_can_req,
                 onClose: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      ExtraServiceCardListScreen.routeName,
-                      (route) => route.isFirst,
-                      arguments: {
-                        "service": extraService,
-                        "year": year,
-                        "month": month,
-                      });
+                    context,
+                    ExtraServiceCardListScreen.routeName,
+                    (route) => route.isFirst,
+                    arguments: {
+                      "service": extraService,
+                      "year": year,
+                      "month": month,
+                    },
+                  );
                 });
           }).catchError((e) {
             Utils.showErrorMessage(context, e);

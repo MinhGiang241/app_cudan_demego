@@ -40,27 +40,29 @@ class _ExtraServiceRegistrationScreenState
     }
     return ChangeNotifierProvider(
       create: (context) => ExtraServiceRegistrationPrv(
-          payList: service.pay ?? [],
-          code: isEdit ? regService.code : null,
-          service: service,
-          shelfLifeId: isEdit ? regService.shelfLifeId : null,
-          maxDayPay: isEdit ? regService.maximum_day : null,
-          id: isEdit ? regService.id : null,
-          note: isEdit ? regService.note : null,
-          regDateString: isEdit ? regService.registration_date : null,
-          expiredDateString: isEdit ? regService.expiration_date : null,
-          residentId: context.read<ResidentInfoPrv>().residentId,
-          phoneNumber: regService.phoneNumber ??
-              context.read<ResidentInfoPrv>().userInfo!.phone_required!,
-          selectedApartmentId: regService.apartmentId ??
-              context.read<ResidentInfoPrv>().selectedApartment!.apartmentId!,
-          arisingServiceId: arg['serviceId']),
+        payList: service.pay ?? [],
+        code: isEdit ? regService.code : null,
+        service: service,
+        shelfLifeId: isEdit ? regService.shelfLifeId : null,
+        maxDayPay: isEdit ? regService.maximum_day : null,
+        id: isEdit ? regService.id : null,
+        note: isEdit ? regService.note : null,
+        regDateString: isEdit ? regService.registration_date : null,
+        expiredDateString: isEdit ? regService.expiration_date : null,
+        residentId: context.read<ResidentInfoPrv>().residentId,
+        phoneNumber: regService.phoneNumber ??
+            context.read<ResidentInfoPrv>().userInfo!.phone_required!,
+        selectedApartmentId: regService.apartmentId ??
+            context.read<ResidentInfoPrv>().selectedApartment!.apartmentId!,
+        arisingServiceId: arg['serviceId'],
+      ),
       builder: ((context, child) {
         return PrimaryScreen(
           appBar: PrimaryAppbar(
-              title: isEdit
-                  ? S.of(context).edit_service_a(arg['name'])
-                  : S.of(context).reg_service_a(arg['name'])),
+            title: isEdit
+                ? S.of(context).edit_service_a(arg['name'])
+                : S.of(context).reg_service_a(arg['name']),
+          ),
           body: SafeArea(
             child: FutureBuilder(
               future: context
@@ -71,19 +73,22 @@ class _ExtraServiceRegistrationScreenState
                   return const Center(child: PrimaryLoading());
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return PrimaryErrorWidget(
-                      code: snapshot.hasError ? 'err' : '1',
-                      message: snapshot.data.toString(),
-                      onRetry: () async {
-                        setState(() {});
-                      });
+                    code: snapshot.hasError ? 'err' : '1',
+                    message: snapshot.data.toString(),
+                    onRetry: () async {
+                      setState(() {});
+                    },
+                  );
                 } else {
                   var listApartmentChoice =
                       context.read<ResidentInfoPrv>().listOwn.map((e) {
                     return DropdownMenuItem(
                       value: e.apartmentId,
-                      child: Text(e.apartment?.name! != null
-                          ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-                          : e.apartmentId!),
+                      child: Text(
+                        e.apartment?.name! != null
+                            ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
+                            : e.apartmentId!,
+                      ),
                     );
                   }).toList();
 
@@ -91,18 +96,21 @@ class _ExtraServiceRegistrationScreenState
                       ? service.pay!.map((e) {
                           return DropdownMenuItem(
                             value: e.id,
-                            child: Text(e.type_time != null
-                                ? "${e.use_time != null ? "${e.use_time} " : ""}${e.type_time}"
-                                : e.code!),
+                            child: Text(
+                              e.type_time != null
+                                  ? "${e.use_time != null ? "${e.use_time} " : ""}${e.type_time}"
+                                  : e.code!,
+                            ),
                           );
                         }).toList()
                       : null;
                   var maxDayPayList = List.generate(
-                      30,
-                      (index) => DropdownMenuItem(
-                            value: index + 1,
-                            child: Text((index + 1).toString()),
-                          ));
+                    30,
+                    (index) => DropdownMenuItem(
+                      value: index + 1,
+                      child: Text((index + 1).toString()),
+                    ),
+                  );
                   if (isEdit &&
                       context
                           .read<ExtraServiceRegistrationPrv>()
@@ -112,8 +120,9 @@ class _ExtraServiceRegistrationScreenState
                         context
                             .read<ExtraServiceRegistrationPrv>()
                             .payList
-                            .firstWhere((element) =>
-                                element.id == regService.shelfLifeId);
+                            .firstWhere(
+                              (element) => element.id == regService.shelfLifeId,
+                            );
                     context.read<ExtraServiceRegistrationPrv>().month = context
                             .read<ExtraServiceRegistrationPrv>()
                             .chosenCycle!

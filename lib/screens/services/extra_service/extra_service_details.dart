@@ -5,7 +5,10 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../models/letter_history.dart';
 import '../../../models/service_registration.dart';
+import '../../../models/timeline_model.dart';
+import '../../../services/api_history.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -24,25 +27,26 @@ class ExtraServiceDetailsScreen extends StatefulWidget {
 class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-
+  List<LetterHistory> historyList = [];
   @override
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as ServiceRegistration;
     return PrimaryScreen(
-        appBar: PrimaryAppbar(
-          title: S.of(context).details,
-          tabController: tabController,
-          isTabScrollabel: false,
-          tabs: [
-            Tab(text: S.of(context).details),
-            Tab(text: S.of(context).history),
-          ],
-        ),
-        body: TabBarView(
-          controller: tabController,
-          children: [
-            ListView(children: [
+      appBar: PrimaryAppbar(
+        title: S.of(context).details,
+        tabController: tabController,
+        isTabScrollabel: false,
+        tabs: [
+          Tab(text: S.of(context).details),
+          Tab(text: S.of(context).history),
+        ],
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          ListView(
+            children: [
               vpad(24),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -111,17 +115,55 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                   ],
                 ),
               )
-            ]),
-            ListView(
-              children: [
-                vpad(24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TimeLineView(),
-                )
-              ],
-            )
-          ],
-        ));
+            ],
+          ),
+          FutureBuilder(
+            future: () async {
+              APIHistory.getHistoryLetter(arg.id, 'serviceregistration')
+                  .then((v) {
+                if (v != null) {
+                  historyList.clear();
+                  for (var i in v) {
+                    historyList.add(LetterHistory.fromMap(i));
+                  }
+                }
+                historyList.sort(
+                  (a, b) => a.perform_date!.compareTo(b.perform_date ?? ""),
+                );
+                if (mounted) {
+                  setState(() {});
+                }
+              });
+            }(),
+            builder: (context, snapshot) {
+              return ListView(
+                children: [
+                  vpad(24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TimeLineView(
+                      content: historyList
+                          .map(
+                            (i) => TimelineModel(
+                              date: i.perform_date,
+                              title: i.content,
+                              subTitle: i.new_status != null
+                                  ? '${S.of(context).status}: ${i.ns?.name}'
+                                  : null,
+                              color: i.new_status != null
+                                  ? genStatusColor(i.new_status ?? "")
+                                  : null,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                ],
+              );
+            },
+          )
+        ],
+      ),
+    );
   }
 }

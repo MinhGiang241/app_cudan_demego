@@ -32,22 +32,26 @@ response: remove_Pet_dto(_id:\$_id){
     }
   }
 
-  static Future savePet(data) async {
+  static Future savePet(data, isEdit) async {
     var query = '''
-    mutation (\$data: PetInputDto){
-	response: save_Pet_dto(data: \$data){
-		message
-		code
-		data {
-			_id
-        }
-      }
+ mutation (\$data:Dictionary,\$isEdit:Boolean){
+    response: pet_mobile_save_pet (data: \$data,isEdit: \$isEdit ) {
+        code
+        message
+        data
     }
+}
+        
+        
+        
         ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+        "isEdit": isEdit,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

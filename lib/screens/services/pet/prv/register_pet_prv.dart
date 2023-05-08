@@ -211,7 +211,7 @@ class RegisterPetPrv extends ChangeNotifier {
             certificate: exitedCertificateFiles + submitCertificateFiles,
             report: existedReportFiles + submitReportFiles,
           );
-          return APIPet.savePet(newPet.toJson());
+          return APIPet.savePet(newPet.toJson(), existedPet?.id != null);
         }).then((v) {
           Utils.showSuccessMessage(
             context: context,

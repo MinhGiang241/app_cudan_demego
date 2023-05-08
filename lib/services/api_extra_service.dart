@@ -57,21 +57,22 @@ class APIExtraService {
     }
   }
 
-  static Future saveRegistrationService(data) async {
+  static Future saveRegistrationService(data, isEdit) async {
     var query = '''
-    mutation (\$data:ServiceRegistrationInputDto){
-      response:save_ServiceRegistration_dto(data:\$data){
-        message
+   mutation (\$data:Dictionary,\$isEdit:Boolean){
+    response: arisingservice_mobile_save_ServiceRegistration (data: \$data,isEdit: \$isEdit ) {
         code
-        data{
-          _id
-        }
-      }
+        message
+        data
     }
+}
+        
     ''';
 
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {"data": data});
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"data": data, "isEdit": isEdit},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -84,30 +85,22 @@ class APIExtraService {
     }
   }
 
-  static Future getPaymentCycle() async {
+  static Future getPaymentCycle(serviceId) async {
     var query = '''
-    query (\$filter:GeneralCollectionFilterInput){
-      response: query_PaymentCycles_dto (filter:\$filter){
+    mutation (\$serviceId:String){
+    response: arisingservice_mobile_get_sheflife_list (serviceId: \$serviceId ) {
         code
         message
-        data{ 
-        _id
-          display_name,
-          updatedTime
-          createdTime
-          name
-          isValue
-          month
-          code
-        }
-      }
+        data
     }
+}
+        
     ''';
 
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"serviceId": serviceId},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

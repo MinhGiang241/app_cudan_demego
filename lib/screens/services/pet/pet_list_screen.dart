@@ -158,16 +158,21 @@ class _PetListScreenState extends State<PetListScreen> {
                               contentStyle: txtBold(14, grayScaleColorBase),
                             ),
                             InfoContentView(
-                                title: "${S.of(context).pet_images}:",
-                                images: [
-                                  ...e.avt_pet!.map((i) =>
-                                      "${ApiConstants.uploadURL}?load=${i.id}")
-                                ]),
+                              title: "${S.of(context).pet_images}:",
+                              images: [
+                                ...e.avt_pet!.map(
+                                  (i) =>
+                                      "${ApiConstants.uploadURL}?load=${i.id}",
+                                )
+                              ],
+                            ),
                             InfoContentView(
                               title: "${S.of(context).status}:",
                               content: genStatus(e.pet_status ?? ""),
                               contentStyle: txtBold(
-                                  14, genStatusColor(e.pet_status ?? "")),
+                                14,
+                                genStatusColor(e.pet_status ?? ""),
+                              ),
                             ),
                           ];
                           return Padding(

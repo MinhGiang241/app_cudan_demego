@@ -1,5 +1,6 @@
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/service_registration.dart';
+import 'package:app_cudan/models/transportation_card.dart';
 import 'package:app_cudan/services/api_extra_service.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -45,6 +46,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     }
   }
   List<Pay> payList;
+  List<ShelfLife> shelfLifeList = [];
   final TextEditingController regDateController = TextEditingController();
   final TextEditingController expiredDateController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -185,8 +187,10 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
           note: noteController.text.trim(),
         );
 
-        await APIExtraService.saveRegistrationService(registerService.toJson())
-            .then((e) {
+        await APIExtraService.saveRegistrationService(
+          registerService.toJson(),
+          id != null,
+        ).then((e) {
           if (isRequest) {
             isSendApproveLoading = false;
           } else {
@@ -351,15 +355,13 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   getPaymentCycle(BuildContext context) async {
-    // await APIExtraService.getPaymentCycle().then((v) {
-    //   payList.clear();
-    //   for (var i in v) {
-    //     if (i['isValue']) {
-    //       payList.add(Pay.fromJson(i));
-    //     }
-    //   }
-    // }).catchError((e) {
-    //   Utils.showErrorMessage(context, e);
-    // });
+    await APIExtraService.getPaymentCycle(arisingServiceId).then((v) {
+      shelfLifeList.clear();
+      for (var i in v) {
+        shelfLifeList.add(ShelfLife.fromMap(i));
+      }
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
   }
 }
