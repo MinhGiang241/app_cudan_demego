@@ -42,11 +42,12 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                   title: S.of(context).transport,
                   content: item.v?.name ?? "",
                 ),
-                InfoContentView(
-                  isHorizontal: true,
-                  title: S.of(context).num_seat,
-                  content: item.seats.toString(),
-                ),
+                if (item.v?.code != 'BICYCLE')
+                  InfoContentView(
+                    isHorizontal: true,
+                    title: S.of(context).num_seat,
+                    content: item.seats.toString(),
+                  ),
                 if (item.v?.code != 'BICYCLE')
                   InfoContentView(
                     isHorizontal: true,

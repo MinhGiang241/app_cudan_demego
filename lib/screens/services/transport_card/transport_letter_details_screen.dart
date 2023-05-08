@@ -19,7 +19,6 @@ import '../../../widgets/timeline_view.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import 'add_new_transport_card.dart';
 import 'transport_details_letter_screen.dart';
-import 'transport_details_screen.dart';
 
 class TransportLetterDetailsScreen extends StatefulWidget {
   const TransportLetterDetailsScreen({super.key});
@@ -85,13 +84,24 @@ class _TransportLetterDetailsScreenState
                           "",
                       contentStyle: txtBold(14),
                     ),
-                    if (card.card_type != 'CUSTOMER')
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).address,
-                        content: card.address ??
-                            ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
-                      ),
+                    // if (card.card_type != 'CUSTOMER')
+                    InfoContentView(
+                      isHorizontal: true,
+                      title: S.of(context).address,
+                      content: card.address ??
+                          ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
+                    ),
+
+                    // InfoContentView(
+                    //   isHorizontal: true,
+                    //   title: S.of(context).address,
+                    //   content: card.address,
+                    // ),
+                    InfoContentView(
+                      isHorizontal: true,
+                      title: S.of(context).cmnd,
+                      content: card.identity,
+                    ),
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).phone_num,
@@ -189,10 +199,11 @@ class _TransportLetterDetailsScreenState
                                   ),
                                 if (e.value.vehicleType?.code != "BICYCLE")
                                   vpad(2),
-                                Text(
-                                  "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
-                                  style: txtBodyXSmallRegular(),
-                                ),
+                                if (e.value.vehicleType?.code != "BICYCLE")
+                                  Text(
+                                    "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
+                                    style: txtBodyXSmallRegular(),
+                                  ),
                                 vpad(2),
                                 Text(
                                   "${S.of(context).used_expired_date}: ${e.value.shelfLife?.use_time} ${e.value.shelfLife?.type_time}",

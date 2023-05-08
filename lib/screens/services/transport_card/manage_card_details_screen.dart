@@ -107,13 +107,23 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                             "",
                         contentStyle: txtBold(14),
                       ),
-                      if (loadedCard.card_type != 'CUSTOMER')
-                        InfoContentView(
-                          isHorizontal: true,
-                          title: S.of(context).address,
-                          content:
-                              ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
-                        ),
+                      // if (loadedCard.card_type != 'CUSTOMER')
+                      //   InfoContentView(
+                      //     isHorizontal: true,
+                      //     title: S.of(context).address,
+                      //     content:
+                      //         ("${context.read<ResidentInfoPrv>().selectedApartment?.apartment?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.floor?.name ?? ""} - ${context.read<ResidentInfoPrv>().selectedApartment?.building?.name ?? ""}"),
+                      //   ),
+                      InfoContentView(
+                        isHorizontal: true,
+                        title: S.of(context).address,
+                        content: loadedCard.t?.address,
+                      ),
+                      InfoContentView(
+                        isHorizontal: true,
+                        title: S.of(context).cmnd,
+                        content: loadedCard.t?.identity,
+                      ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).phone_num,
@@ -131,7 +141,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                         isHorizontal: true,
                         title: S.of(context).reg_date,
                         content: Utils.dateFormat(
-                          card.registration_date ?? "",
+                          loadedCard.registration_date ?? "",
                           1,
                         ),
                       ),
@@ -230,10 +240,11 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                           style: txtBodyXSmallRegular(),
                                         ),
                                       if (e.value.v?.code != "BICYCLE") vpad(2),
-                                      Text(
-                                        "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
-                                        style: txtBodyXSmallRegular(),
-                                      ),
+                                      if (e.value.v?.code != "BICYCLE")
+                                        Text(
+                                          "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
+                                          style: txtBodyXSmallRegular(),
+                                        ),
                                       vpad(2),
                                       Text(
                                         "${S.of(context).used_expired_date}: ${e.value.sh?.use_time} ${e.value.sh?.type_time}",

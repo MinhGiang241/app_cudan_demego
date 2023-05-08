@@ -7659,6 +7659,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Register information`
+  String get register_info {
+    return Intl.message(
+      'Register information',
+      name: 'register_info',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

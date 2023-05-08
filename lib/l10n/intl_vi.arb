@@ -760,5 +760,6 @@
   "trans_images_not_empty": "Ảnh phương tiện không được để trống",
   "reg_images_not_empty": "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh",
   "success_update": "Cập nhật thành công",
-  "reg_letter_num": "Mã phiếu đăng ký"
+  "reg_letter_num": "Mã phiếu đăng ký",
+  "register_info": "Thông tin người đăng ký"
 }

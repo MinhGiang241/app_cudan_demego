@@ -837,6 +837,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "registed_resident":
             MessageLookupByLibrary.simpleMessage("Cư dân đã đăng ký"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
+        "register_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin người đăng ký"),
         "register_res_card":
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ cư dân"),
         "register_trans_card":

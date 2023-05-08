@@ -44,11 +44,12 @@ class _TransportDetailsLetterScreenState
                   title: S.of(context).transport,
                   content: item.vehicleType?.name ?? "",
                 ),
-                InfoContentView(
-                  isHorizontal: true,
-                  title: S.of(context).num_seat,
-                  content: item.seats.toString(),
-                ),
+                if (item.seats != null)
+                  InfoContentView(
+                    isHorizontal: true,
+                    title: S.of(context).num_seat,
+                    content: item.seats.toString(),
+                  ),
                 if (item.vehicleType?.code != 'BICYCLE')
                   InfoContentView(
                     isHorizontal: true,

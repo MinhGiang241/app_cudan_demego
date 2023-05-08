@@ -3,6 +3,7 @@
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/transport_card/prv/add_new_transport_card_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
@@ -79,7 +80,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-
+    var isResident = context.read<ResidentInfoPrv>().residentId == null;
     var isEdit = arg != null ? arg['isEdit'] : false;
     TransportCard card = TransportCard();
     if (isEdit) {
@@ -148,25 +149,104 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                           : null,
                   children: [
                     Form(
-                      // onChanged:
-                      //     context.watch<AddNewTransportCardPrv>().autoValid
-                      //         ? context
-                      //             .read<AddNewTransportCardPrv>()
-                      //             .formValidationCustomer
-                      //         : null,
-                      // autovalidateMode: context
-                      //         .watch<AddNewTransportCardPrv>()
-                      //         .autoValidCustomer
-                      //     ? AutovalidateMode.onUserInteraction
-                      //     : null,
-                      // key: context
-                      //     .read<AddNewTransportCardPrv>()
-                      //     .formKeyCustomer,
+                      onChanged: context
+                              .watch<AddNewTransportCardPrv>()
+                              .autoValidCustomer
+                          ? context
+                              .read<AddNewTransportCardPrv>()
+                              .formValidationCustomer
+                          : null,
+                      autovalidateMode: context
+                              .watch<AddNewTransportCardPrv>()
+                              .autoValidCustomer
+                          ? AutovalidateMode.onUserInteraction
+                          : null,
+                      key: context
+                          .read<AddNewTransportCardPrv>()
+                          .formKeyCustomer,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
+                              if (isResident) vpad(12),
+                              if (isResident)
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    S.of(context).register_info,
+                                    style: txtBodySmallBold(
+                                      color: grayScaleColorBase,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              if (isResident) vpad(12),
+                              if (isResident)
+                                PrimaryTextField(
+                                  maxLength: 255,
+                                  controller: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .cAddressController,
+                                  label: S.of(context).address,
+                                  hint: S.of(context).address,
+                                  isRequired: true,
+                                  validator: Utils.emptyValidator,
+                                  validateString: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .cValidateAddress,
+                                ),
+                              if (isResident) vpad(12),
+                              if (isResident)
+                                PrimaryTextField(
+                                  maxLength: 12,
+                                  onlyText: true,
+                                  controller: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .cIdentityController,
+                                  label: S.of(context).cmnd,
+                                  hint: S.of(context).cmnd,
+                                  isRequired: true,
+                                  validator: (v) {
+                                    if (v!.isEmpty) {
+                                      return '';
+                                    } else if (v.length < 9) {
+                                      return '';
+                                    }
+                                    return null;
+                                  },
+                                  validateString: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .cValidateIdentity,
+                                ),
+                              if (isResident) vpad(12),
+                              if (isResident)
+                                PrimaryTextField(
+                                  enable: false,
+                                  initialValue: context
+                                          .read<ResidentInfoPrv>()
+                                          .userInfo
+                                          ?.account
+                                          ?.phone_number ??
+                                      context
+                                          .read<ResidentInfoPrv>()
+                                          .userInfo
+                                          ?.account
+                                          ?.userName,
+                                  maxLength: 10,
+                                  // controller: context
+                                  //     .read<AddNewTransportCardPrv>()
+                                  //     .cPhoneController,
+                                  label: S.of(context).phone_num,
+                                  hint: S.of(context).phone_num,
+                                  isRequired: true,
+                                  keyboardType: TextInputType.number,
+                                  onlyNum: true,
+                                  validator: Utils.emptyValidator,
+                                  // validateString: context
+                                  //     .watch<AddNewTransportCardPrv>()
+                                  //     .cValidatePhone,
+                                ),
                               vpad(12),
                               Row(
                                 children: [
@@ -283,11 +363,13 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                                     if (trans?.code !=
                                                         "BICYCLE")
                                                       vpad(2),
-                                                    Text(
-                                                      "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
-                                                      style:
-                                                          txtBodyXSmallRegular(),
-                                                    ),
+                                                    if (trans?.code !=
+                                                        "BICYCLE")
+                                                      Text(
+                                                        "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
+                                                        style:
+                                                            txtBodyXSmallRegular(),
+                                                      ),
                                                     vpad(2),
                                                     Text(
                                                       "${S.of(context).used_expired_date}: ${expired?.use_time} ${expired?.type_time}",
@@ -482,23 +564,29 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 label: S.of(context).transport,
                                 isRequired: true,
                               ),
-                              vpad(12),
-                              PrimaryTextField(
-                                hint: S.of(context).select_seat_num,
-                                controller: context
-                                    .watch<AddNewTransportCardPrv>()
-                                    .seatNumController,
-                                validator: context
-                                    .watch<AddNewTransportCardPrv>()
-                                    .numSeatValidate,
-                                validateString: context
-                                    .watch<AddNewTransportCardPrv>()
-                                    .validateSeat,
-                                label: S.of(context).num_seat,
-                                isRequired: true,
-                                keyboardType: TextInputType.number,
-                                onlyNum: true,
-                              ),
+                              if (context
+                                  .watch<AddNewTransportCardPrv>()
+                                  .isShowLicense)
+                                vpad(12),
+                              if (context
+                                  .watch<AddNewTransportCardPrv>()
+                                  .isShowLicense)
+                                PrimaryTextField(
+                                  hint: S.of(context).select_seat_num,
+                                  controller: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .seatNumController,
+                                  validator: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .numSeatValidate,
+                                  validateString: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .validateSeat,
+                                  label: S.of(context).num_seat,
+                                  isRequired: true,
+                                  keyboardType: TextInputType.number,
+                                  onlyNum: true,
+                                ),
                               if (context
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)

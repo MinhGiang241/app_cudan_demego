@@ -23,6 +23,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
       isObey = existedTransport?.confirmation ?? true;
       transportList = existedTransport?.transports_list ?? [];
       code = existedTransport?.code;
+      cAddressController.text = existedTransport?.address ?? '';
+      cIdentityController.text = existedTransport?.identity ?? "";
     }
   }
   int activeStep = 0;
@@ -69,6 +71,43 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   List<TransportItem> transportList = [];
   TransportItem? itemEdit;
   int? indexEdit;
+
+  final TextEditingController cAddressController = TextEditingController();
+  final TextEditingController cIdentityController = TextEditingController();
+  final TextEditingController cPhoneController = TextEditingController();
+
+  String? cValidateAddress;
+  String? cValidateIdentity;
+  String? cValidatePhone;
+
+  genCValidate() {
+    if (cAddressController.text.isEmpty) {
+      cValidateAddress = S.current.not_blank;
+    } else {
+      cValidateAddress = null;
+    }
+    if (cIdentityController.text.isEmpty) {
+      cValidateIdentity = S.current.not_blank;
+    } else if (cIdentityController.text.length < 9) {
+      cValidateIdentity = S.current.cmnd_length_9;
+    } else {
+      cValidateIdentity = null;
+    }
+    if (cPhoneController.text.isEmpty) {
+      cValidatePhone = S.current.not_blank;
+    } else {
+      cValidatePhone = null;
+    }
+    notifyListeners();
+  }
+
+  clearCValidate() {
+    cValidateAddress = null;
+    cValidateIdentity = null;
+    cValidatePhone = null;
+
+    notifyListeners();
+  }
 
   getRuleFiles() async {
     await APIRule.getListRulesFiles('transportcard').then((v) {
@@ -125,11 +164,13 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   }
 
   formValidationCustomer() {
-    if (formKey.currentState != null && formKey.currentState!.validate()) {
-      clearValidStringStep();
+    if (formKeyCustomer.currentState != null &&
+        (formKey.currentState?.validate() ?? false)) {
+      clearCValidate();
     } else {
-      genValidString();
+      genCValidate();
     }
+    notifyListeners();
   }
 
   clearValidStringStep() {
@@ -440,7 +481,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     autoValid = true;
     isAddTransLoading = true;
     notifyListeners();
-
+    // var isResident = context.read<ResidentInfoPrv>().residentId == null;
     try {
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartmentId =
@@ -481,7 +522,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           vehicleTypeId: vehicleTypeId,
           registration_number: regNumController.text.trim(),
           registration_image: resExistedImages + resUploadedImages,
-          seats: int.parse(seatNumController.text.trim()),
+          seats: int.tryParse(seatNumController.text.trim()) != null
+              ? int.parse(seatNumController.text.trim())
+              : null,
           vehicle_image: otherExistedImages + otherUploadedImages,
         );
         if (indexEdit != null) {
@@ -513,53 +556,70 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var residentInfo = context.read<ResidentInfoPrv>().userInfo;
     isSend ? isSendApproveLoading = true : isAddNewLoading = true;
+    autoValidCustomer = true;
     notifyListeners();
     try {
-      TransportCard letter = TransportCard(
-        address_apartment:
-            "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
-        id: id,
-        code: code,
-        apartmentId: apartment?.apartmentId,
-        residentId: residentId,
-        phone_number: residentId != null
-            ? residentInfo?.phone_required
-            : residentInfo?.account?.phone_number ??
-                residentInfo?.account?.userName,
-        confirmation: isObey,
-        integrated: isIntergate,
-        isMobile: true,
-        name_resident: residentInfo?.info_name,
-        ticket_status: isSend ? "WAIT" : "NEW",
-        transports_list: transportList,
-        card_type: residentId != null ? "RESIDENT" : "CUSTOMER",
-        name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
-        registration_date: existedTransport?.registration_date ??
-            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
-        address: residentId != null
-            ? "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}"
-            : 'Khách vãng lai không có nhập địa chỉ, ',
-      );
+      if (formKeyCustomer.currentState != null &&
+          (formKeyCustomer.currentState?.validate() ?? false)) {
+        clearCValidate();
 
-      await APITransport.saveTransportLetter(letter.toMap(), false, id != null)
-          .then((v) {
-        isSend ? isSendApproveLoading = false : isAddNewLoading = false;
-        notifyListeners();
-        Utils.showSuccessMessage(
-          context: context,
-          e: isSend
-              ? S.of(context).success_send_letter
-              : isEdit
-                  ? S.of(context).success_update
-                  : S.of(context).success_cr_new,
-          onClose: () => Navigator.pushNamedAndRemoveUntil(
-            context,
-            TransportCardScreen.routeName,
-            (route) => route.isFirst,
-            arguments: 1,
-          ),
+        TransportCard letter = TransportCard(
+          address_apartment:
+              "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}",
+          id: id,
+          code: code,
+          apartmentId: apartment?.apartmentId,
+          residentId: residentId,
+          phone_number: residentId != null
+              ? residentInfo?.phone_required
+              : residentInfo?.account?.phone_number ??
+                  residentInfo?.account?.userName,
+          confirmation: isObey,
+          integrated: isIntergate,
+          isMobile: true,
+          name_resident: residentInfo?.info_name,
+          ticket_status: isSend ? "WAIT" : "NEW",
+          transports_list: transportList,
+          card_type: residentId != null ? "RESIDENT" : "CUSTOMER",
+          name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
+          registration_date: existedTransport?.registration_date ??
+              DateTime.now()
+                  .subtract(const Duration(hours: 7))
+                  .toIso8601String(),
+          identity: residentId == null
+              ? cIdentityController.text.trim()
+              : residentInfo?.identity_card_required,
+          address: residentId != null
+              ? "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}"
+              : cAddressController.text.trim(),
         );
-      });
+
+        await APITransport.saveTransportLetter(
+          letter.toMap(),
+          false,
+          id != null,
+        ).then((v) {
+          isSend ? isSendApproveLoading = false : isAddNewLoading = false;
+          notifyListeners();
+          Utils.showSuccessMessage(
+            context: context,
+            e: isSend
+                ? S.of(context).success_send_letter
+                : isEdit
+                    ? S.of(context).success_update
+                    : S.of(context).success_cr_new,
+            onClose: () => Navigator.pushNamedAndRemoveUntil(
+              context,
+              TransportCardScreen.routeName,
+              (route) => route.isFirst,
+              arguments: 1,
+            ),
+          );
+        });
+      } else {
+        isSend ? isSendApproveLoading = false : isAddNewLoading = false;
+        genCValidate();
+      }
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
       isSend ? isSendApproveLoading = false : isAddNewLoading = false;

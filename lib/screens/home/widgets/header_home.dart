@@ -71,7 +71,9 @@ class _HeaderHomeState extends State<HeaderHome> {
             ],
           ),
         ),
-        vpad(30),
+       if (Provider.of<ResidentInfoPrv>(context, listen: false)
+            .listOwn
+            .isNotEmpty) vpad(30),
         if (Provider.of<ResidentInfoPrv>(context, listen: false)
             .listOwn
             .isNotEmpty)
