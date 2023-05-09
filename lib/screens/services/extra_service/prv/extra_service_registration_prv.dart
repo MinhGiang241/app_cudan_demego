@@ -31,13 +31,14 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     noteController.text = note ?? '';
     regDateController.text = Utils.dateFormat(regDateString ?? '', 1);
     regDate = DateTime.tryParse(regDateString ?? '') != null
-        ? DateTime.parse(regDateString!)
+        ? DateTime.parse(regDateString!).add(const Duration(hours: 7))
         : null;
     expiredDate = DateTime.tryParse(expiredDateString ?? '') != null
-        ? DateTime.parse(expiredDateString!)
+        ? DateTime.parse(expiredDateString!).add(const Duration(hours: 7))
         : null;
 
-    expiredDateController.text = Utils.dateFormat(expiredDateString ?? '', 1);
+    expiredDateController.text =
+        Utils.dateFormat(expiredDate?.toIso8601String() ?? '', 1);
     if (payList.isEmpty) {
       maxDayPay = 1;
     } else if (shelfLifeId != null && payList.isNotEmpty) {
@@ -167,6 +168,9 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
           throw (listError.join(',  '));
         }
 
+        var expiredDateString =
+            (expiredDate!.subtract(const Duration(hours: 7))).toIso8601String();
+
         var registerService = ServiceRegistration(
           people: residentId != null ? 'resident' : 'quest',
           residentId: residentId,
@@ -178,8 +182,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
           registration_date: id != null
               ? (regDate!.subtract(const Duration(hours: 7))).toIso8601String()
               : (regDate!).toIso8601String(),
-          expiration_date: (expiredDate!.subtract(const Duration(hours: 7)))
-              .toIso8601String(),
+          expiration_date: expiredDateString,
           id: id,
           phoneNumber: phoneNumber,
           maximum_day: maxDayPay,
