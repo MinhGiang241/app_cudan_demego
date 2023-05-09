@@ -9,16 +9,14 @@ import '../../../../generated/l10n.dart';
 import '../../../../models/delivery.dart';
 import '../../../../models/info_content_view.dart';
 import '../../../../utils/utils.dart';
-import '../../../../widgets/primary_appbar.dart';
+
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
-import '../../../../widgets/primary_screen.dart';
-import '../../../auth/prv/resident_info_prv.dart';
-import '../../service_screen.dart';
+
 import '../package_details_screen.dart';
 import '../provider/delivery_list_prv.dart';
 import '../register_delivery_screen.dart';
@@ -153,15 +151,13 @@ class _MyLettersTabsState extends State<MyLettersTabs> {
                       ),
                       InfoContentView(
                         title: "${S.of(context).status}:",
-                        content: (e.status == 'WAIT_OWNER' ||
-                                e.status == "WAIT_MANAGER")
+                        content: (e.status == "WAIT_MANAGER")
                             ? S.of(context).wait_approve
                             : e.s!.name ?? '',
                         contentStyle: txtBold(
                           14,
                           genStatusColor(
-                            (e.status == 'WAIT_OWNER' ||
-                                    e.status == "WAIT_MANAGER")
+                            (e.status == "WAIT_MANAGER")
                                 ? 'WAIT'
                                 : e.status ?? '',
                           ),

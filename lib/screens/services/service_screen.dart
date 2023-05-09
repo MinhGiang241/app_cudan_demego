@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/account/plan_info/widgets/recident_info_tab.dart';
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../auth/prv/resident_info_prv.dart';
 import 'construction/construction_list_screen.dart';
 import 'delivery/delivery_list_screen.dart';
 import 'extra_service/extra_service_card_list.dart';
@@ -26,6 +28,7 @@ class ServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isRes = context.read<ResidentInfoPrv>().residentId != null;
     var data = [
       {
         "color": primaryColorBase,
@@ -55,13 +58,14 @@ class ServiceScreen extends StatelessWidget {
         "title": S.current.construction,
         "navigator": ConstructionListScreen.routeName,
       },
-      {
-        "color": yellowColorBase,
-        "background": gradientYellow,
-        "icon": PrimaryIcons.box,
-        "title": S.current.reg_deliver,
-        "navigator": DeliveryListScreen.routeName,
-      },
+      if (isRes)
+        {
+          "color": yellowColorBase,
+          "background": gradientYellow,
+          "icon": PrimaryIcons.box,
+          "title": S.current.reg_deliver,
+          "navigator": DeliveryListScreen.routeName,
+        },
       {
         "color": primaryColorBase,
         "background": gradientBlue,

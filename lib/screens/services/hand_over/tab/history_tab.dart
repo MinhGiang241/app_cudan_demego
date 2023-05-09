@@ -74,18 +74,20 @@ class _HistoryTabState extends State<HistoryTab> {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
           return PrimaryErrorWidget(
-              code: snapshot.hasError ? "err" : "1",
-              message: snapshot.data.toString(),
-              onRetry: () async {
-                setState(() {});
-              });
+            code: snapshot.hasError ? "err" : "1",
+            message: snapshot.data.toString(),
+            onRetry: () async {
+              setState(() {});
+            },
+          );
         } else if (listHandOver.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
               header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               controller: _refreshController,
               onRefresh: () {
                 setState(() {});
@@ -100,131 +102,159 @@ class _HistoryTabState extends State<HistoryTab> {
           );
         }
         return SafeArea(
-            child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: false,
-          header: WaterDropMaterialHeader(
-              backgroundColor: Theme.of(context).primaryColor),
-          controller: _refreshController,
-          onRefresh: () {
-            setState(() {});
-            _refreshController.refreshCompleted();
-          },
-          child: ListView(
-            children: [
-              vpad(24),
-              ...listHandOver.map((e) {
-                return Stack(
-                  children: [
-                    PrimaryCard(
-                      margin: const EdgeInsets.only(
-                          bottom: 16, left: 12, right: 12),
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, AcceptHandOverScreen.routeName,
-                            arguments: {"status": e.status});
-                        // if (e.status == "COMPLETE") {
-                        //   Navigator.pushNamed(
-                        //       context, AcceptHandOverScreen.routeName,
-                        //       arguments: {"status": e.status});
-                        // } else if (e.status == "WAIT") {
-                        //   Navigator.pushNamed(
-                        //     context,
-                        //     GeneralInfoScreen.routeName,
-                        //   );
-                        // } else {
-                        //   Navigator.pushNamed(
-                        //     context,
-                        //     GeneralInfoScreen.routeName,
-                        //   );
-                        // }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 14,
-                          horizontal: 16,
+          child: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: false,
+            header: WaterDropMaterialHeader(
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+            controller: _refreshController,
+            onRefresh: () {
+              setState(() {});
+              _refreshController.refreshCompleted();
+            },
+            child: ListView(
+              children: [
+                vpad(24),
+                ...listHandOver.map((e) {
+                  return Stack(
+                    children: [
+                      PrimaryCard(
+                        margin: const EdgeInsets.only(
+                          bottom: 16,
+                          left: 12,
+                          right: 12,
                         ),
-                        child: Row(children: [
-                          const PrimaryIcon(
-                            icons: PrimaryIcons.home,
-                            style: PrimaryIconStyle.gradient,
-                            gradients: PrimaryIconGradient.yellow,
-                            size: 32,
-                            padding: EdgeInsets.all(12),
-                            color: Colors.white,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            AcceptHandOverScreen.routeName,
+                            arguments: {"status": e.status},
+                          );
+                          // if (e.status == "COMPLETE") {
+                          //   Navigator.pushNamed(
+                          //       context, AcceptHandOverScreen.routeName,
+                          //       arguments: {"status": e.status});
+                          // } else if (e.status == "WAIT") {
+                          //   Navigator.pushNamed(
+                          //     context,
+                          //     GeneralInfoScreen.routeName,
+                          //   );
+                          // } else {
+                          //   Navigator.pushNamed(
+                          //     context,
+                          //     GeneralInfoScreen.routeName,
+                          //   );
+                          // }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 14,
+                            horizontal: 16,
                           ),
-                          hpad(16),
-                          Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              vpad(10),
-                              Text(
-                                e.name ?? "",
-                                style: txtBold(16),
+                              const PrimaryIcon(
+                                icons: PrimaryIcons.home,
+                                style: PrimaryIconStyle.gradient,
+                                gradients: PrimaryIconGradient.yellow,
+                                size: 32,
+                                padding: EdgeInsets.all(12),
+                                color: Colors.white,
                               ),
-                              vpad(4),
-                              Table(
-                                textBaseline: TextBaseline.ideographic,
-                                defaultVerticalAlignment:
-                                    TableCellVerticalAlignment.baseline,
-                                columnWidths: const {
-                                  0: FlexColumnWidth(2),
-                                  1: FlexColumnWidth(2)
-                                },
-                                children: [
-                                  TableRow(children: [
-                                    Text('${S.of(context).hand_date}:'),
+                              hpad(16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    vpad(10),
                                     Text(
-                                      Utils.dateFormat(
-                                          e.delivery_time ?? '', 1),
+                                      e.apartmentId ?? "",
+                                      style: txtBold(16),
                                     ),
-                                  ]),
-                                  TableRow(children: [vpad(2), vpad(2)]),
-                                  TableRow(children: [
-                                    Text('${S.of(context).hand_time}:'),
-                                    Text(
-                                      e.appointment_time ?? '',
-                                    ),
-                                  ]),
-                                  TableRow(children: [vpad(2), vpad(2)]),
-                                  TableRow(children: [
-                                    Text('${S.of(context).status}:'),
-                                    Text(e.s!.name ?? "",
-                                        style: txtBold(14,
-                                            genStatusColor(e.status as String)))
-                                  ]),
-                                ],
+                                    vpad(4),
+                                    Table(
+                                      textBaseline: TextBaseline.ideographic,
+                                      defaultVerticalAlignment:
+                                          TableCellVerticalAlignment.baseline,
+                                      columnWidths: const {
+                                        0: FlexColumnWidth(2),
+                                        1: FlexColumnWidth(2)
+                                      },
+                                      children: [
+                                        TableRow(
+                                          children: [
+                                            Text('${S.of(context).hand_date}:'),
+                                            Text(
+                                              Utils.dateFormat(
+                                                e.apartmentId ?? '',
+                                                1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        TableRow(children: [vpad(2), vpad(2)]),
+                                        TableRow(
+                                          children: [
+                                            Text('${S.of(context).hand_time}:'),
+                                            Text(
+                                              e.apartmentId ?? '',
+                                            ),
+                                          ],
+                                        ),
+                                        TableRow(children: [vpad(2), vpad(2)]),
+                                        TableRow(
+                                          children: [
+                                            Text('${S.of(context).status}:'),
+                                            Text(
+                                              e.apartmentId ?? "",
+                                              style: txtBold(
+                                                14,
+                                                genStatusColor(
+                                                  e.status as String,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               )
                             ],
-                          ))
-                        ]),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                            color: (genStatusColor(e.status as String)),
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(12),
-                                bottomLeft: Radius.circular(8))),
-                        child: Text(
-                          e.s!.name ?? "",
-                          style: txtSemiBold(12, Colors.white),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                );
-              }),
-              vpad(60)
-            ],
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: (genStatusColor(e.status as String)),
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            e.apartmentId ?? "",
+                            style: txtSemiBold(12, Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+                vpad(60)
+              ],
+            ),
           ),
-        ));
+        );
       },
     );
   }

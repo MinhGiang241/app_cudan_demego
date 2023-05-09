@@ -1,4 +1,6 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -103,44 +105,46 @@ class ServicesHome extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurStyle: BlurStyle.normal,
-                        spreadRadius: 1,
-                        blurRadius: 24,
-                        color: yellowColorBase.withOpacity(0.25),
-                        offset: const Offset(0, 16),
+          context.read<ResidentInfoPrv>().residentId == null
+              ? hpad(85)
+              : SizedBox(
+                  width: 85,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              blurStyle: BlurStyle.normal,
+                              spreadRadius: 1,
+                              blurRadius: 24,
+                              color: yellowColorBase.withOpacity(0.25),
+                              offset: const Offset(0, 16),
+                            )
+                          ],
+                        ),
+                        child: PrimaryIcon(
+                          icons: PrimaryIcons.box,
+                          style: PrimaryIconStyle.gradient,
+                          gradients: PrimaryIconGradient.yellow,
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(12),
+                          size: 32,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DeliveryListScreen.routeName);
+                          },
+                        ),
+                      ),
+                      vpad(12),
+                      Text(
+                        S.of(context).reg_deliver,
+                        textAlign: TextAlign.center,
+                        style: txtBodySmallBold(color: grayScaleColorBase),
                       )
                     ],
                   ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.box,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.yellow,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(DeliveryListScreen.routeName);
-                    },
-                  ),
                 ),
-                vpad(12),
-                Text(
-                  S.of(context).reg_deliver,
-                  textAlign: TextAlign.center,
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                )
-              ],
-            ),
-          ),
         ],
       ),
     );

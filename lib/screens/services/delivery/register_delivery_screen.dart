@@ -37,28 +37,32 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
     return ChangeNotifierProvider(
       create: (context) => RegisterDeliveryPrv(
-          endTime: delivery.end_hour != null
-              ? TimeOfDay(
-                  hour: int.parse(delivery.end_hour!.split(":")[0]),
-                  minute: int.parse(delivery.end_hour!.split(":")[1]))
-              : null,
-          startTime: delivery.start_hour != null
-              ? TimeOfDay(
-                  hour: int.parse(delivery.start_hour!.split(":")[0]),
-                  minute: int.parse(delivery.start_hour!.split(":")[1]))
-              : null,
-          startDate: delivery.start_time != null
-              ? DateTime.parse(delivery.start_time ?? "")
-              : null,
-          endDate: delivery.end_time != null
-              ? DateTime.parse(delivery.end_time ?? "")
-              : null,
-          code: delivery.code,
-          id: delivery.id,
-          existedImage: delivery.image ?? [],
-          helpCheck: delivery.help_check ?? false,
-          packageItems: delivery.item_added_list ?? [],
-          type: delivery.type_transfer == "IN" ? 2 : 1),
+        endTime: delivery.end_hour != null
+            ? TimeOfDay(
+                hour: int.parse(delivery.end_hour!.split(":")[0]),
+                minute: int.parse(delivery.end_hour!.split(":")[1]),
+              )
+            : null,
+        startTime: delivery.start_hour != null
+            ? TimeOfDay(
+                hour: int.parse(delivery.start_hour!.split(":")[0]),
+                minute: int.parse(delivery.start_hour!.split(":")[1]),
+              )
+            : null,
+        startDate: delivery.start_time != null
+            ? DateTime.parse(delivery.start_time ?? "")
+            : null,
+        endDate: delivery.end_time != null
+            ? DateTime.parse(delivery.end_time ?? "")
+            : null,
+        code: delivery.code,
+        id: delivery.id,
+        existedImage: delivery.image ?? [],
+        helpCheck: delivery.help_check ?? false,
+        useElevator: delivery.elevator ?? false,
+        packageItems: delivery.item_added_list ?? [],
+        type: delivery.type_transfer == "IN" ? 2 : 1,
+      ),
       builder: ((context, child) {
         if (isEdit) {
           context.read<RegisterDeliveryPrv>().noteController.text =
@@ -81,45 +85,49 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
         return PrimaryScreen(
           appBar: PrimaryAppbar(
-              title: isEdit
-                  ? S.of(context).edit_reg_deliver
-                  : S.of(context).reg_deliver),
-          body: Builder(builder: (context) {
-            return Form(
-              onChanged: context.watch<RegisterDeliveryPrv>().autoValid
-                  ? () => context.read<RegisterDeliveryPrv>().validate(context)
-                  : null,
-              autovalidateMode: context.watch<RegisterDeliveryPrv>().autoValid
-                  ? AutovalidateMode.onUserInteraction
-                  : null,
-              key: context.watch<RegisterDeliveryPrv>().formKey,
-              child: SafeArea(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  children: [
-                    vpad(20),
-                    Row(
-                      children: [
-                        Text(
-                          S.of(context).transfer_type,
-                          style: txtBodySmallRegular(color: grayScaleColorBase),
-                        ),
-                        Text(
-                          ' *',
-                          style: txtBodySmallRegular(color: redColor1),
-                        )
-                      ],
-                    ),
-                    vpad(16),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .selectTransferType(1),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
+            title: isEdit
+                ? S.of(context).edit_reg_deliver
+                : S.of(context).reg_deliver,
+          ),
+          body: Builder(
+            builder: (context) {
+              return Form(
+                onChanged: context.watch<RegisterDeliveryPrv>().autoValid
+                    ? () =>
+                        context.read<RegisterDeliveryPrv>().validate(context)
+                    : null,
+                autovalidateMode: context.watch<RegisterDeliveryPrv>().autoValid
+                    ? AutovalidateMode.onUserInteraction
+                    : null,
+                key: context.watch<RegisterDeliveryPrv>().formKey,
+                child: SafeArea(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    children: [
+                      vpad(20),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).transfer_type,
+                            style:
+                                txtBodySmallRegular(color: grayScaleColorBase),
+                          ),
+                          Text(
+                            ' *',
+                            style: txtBodySmallRegular(color: redColor1),
+                          )
+                        ],
+                      ),
+                      vpad(16),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () => context
+                                .read<RegisterDeliveryPrv>()
+                                .selectTransferType(1),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
                                 color:
                                     context.watch<RegisterDeliveryPrv>().type ==
                                             1
@@ -128,18 +136,19 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                 border:
                                     Border.all(width: 2, color: primaryColor3),
                                 shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Text(S.of(context).tranfer_out),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(S.of(context).tranfer_out),
+                            ),
                           ),
-                        ),
-                        hpad(30),
-                        InkWell(
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .selectTransferType(2),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
+                          hpad(30),
+                          InkWell(
+                            onTap: () => context
+                                .read<RegisterDeliveryPrv>()
+                                .selectTransferType(2),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
                                 color:
                                     context.watch<RegisterDeliveryPrv>().type ==
                                             2
@@ -148,27 +157,29 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                 border:
                                     Border.all(width: 2, color: primaryColor3),
                                 shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Text(S.of(context).tranfer_in),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(S.of(context).tranfer_in),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    vpad(16),
-                    Row(
-                      children: [
-                        Text(
-                          S.of(context).start_time,
-                          style: txtBodySmallRegular(color: grayScaleColorBase),
-                        ),
-                        Text(
-                          '  *',
-                          style: txtBodySmallRegular(color: redColor1),
-                        )
-                      ],
-                    ),
-                    vpad(12),
-                    Row(
+                        ],
+                      ),
+                      vpad(16),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).start_time,
+                            style:
+                                txtBodySmallRegular(color: grayScaleColorBase),
+                          ),
+                          Text(
+                            '  *',
+                            style: txtBodySmallRegular(color: redColor1),
+                          )
+                        ],
+                      ),
+                      vpad(12),
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
@@ -187,7 +198,8 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                     .pickStartDate(context);
                               },
                               suffixIcon: const PrimaryIcon(
-                                  icons: PrimaryIcons.calendar),
+                                icons: PrimaryIcons.calendar,
+                              ),
                               validator: (v) {
                                 if (v!.isEmpty) {
                                   return '';
@@ -216,143 +228,153 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                   const PrimaryIcon(icons: PrimaryIcons.clock),
                             ),
                           ),
-                        ]),
-
-                    vpad(5),
-
-                    Text(
-                      context.watch<RegisterDeliveryPrv>().validateStartDate ??
-                          '',
-                      style: txtBodySmallRegular(color: redColorBase),
-                    ),
-                    vpad(5),
-                    Row(
-                      children: [
-                        Text(
-                          S.of(context).end_time,
-                          style: txtBodySmallRegular(color: grayScaleColorBase),
-                        ),
-                        Text(
-                          ' *',
-                          style: txtBodySmallRegular(color: redColor1),
-                        )
-                      ],
-                    ),
-                    vpad(12),
-                    Row(children: [
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryTextField(
-                          controller: context
-                              .read<RegisterDeliveryPrv>()
-                              .endDateController,
-                          label: S.of(context).date,
-                          hint: "dd/mm/yyyy",
-                          isReadOnly: true,
-                          isRequired: true,
-                          onTap: () {
-                            context
-                                .read<RegisterDeliveryPrv>()
-                                .pickEndDate(context);
-                          },
-                          suffixIcon:
-                              const PrimaryIcon(icons: PrimaryIcons.calendar),
-                          validator: (v) {
-                            if (v!.isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
+                        ],
                       ),
-                      hpad(20),
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryTextField(
-                          isRequired: true,
-                          controller: context
-                              .read<RegisterDeliveryPrv>()
-                              .endHourController,
-                          label: S.of(context).hour,
-                          hint: "hh/mm",
-                          isReadOnly: true,
-                          onTap: () async {
-                            await context
-                                .read<RegisterDeliveryPrv>()
-                                .pickEndHour(context);
-                          },
-                          suffixIcon:
-                              const PrimaryIcon(icons: PrimaryIcons.clock),
-                        ),
-                      ),
-                    ]),
 
-                    vpad(5),
-                    // if (context.watch<RegisterDeliveryPrv>().validateEndDate !=
-                    //     null)
-                    Text(
-                      context.watch<RegisterDeliveryPrv>().validateEndDate ??
-                          "",
-                      style: txtBodySmallRegular(color: redColorBase),
-                    ),
-                    vpad(5),
-                    SelectMediaWidget(
-                      title: S.of(context).photos,
-                      existImages:
-                          context.watch<RegisterDeliveryPrv>().existedImage,
-                      images:
-                          context.watch<RegisterDeliveryPrv>().imagesDelivery,
-                      onRemove: context
-                          .read<RegisterDeliveryPrv>()
-                          .onRemoveImageDelivery,
-                      onRemoveExist: context
-                          .read<RegisterDeliveryPrv>()
-                          .removeExistedImages,
-                      onSelect: () => context
-                          .read<RegisterDeliveryPrv>()
-                          .onSelectImageDelivery(context),
-                    ),
-                    vpad(16),
-                    Row(
-                      children: [
-                        DashButton(
-                          text: S.of(context).add_package,
-                          lable: S.of(context).package_info,
-                          isRequired: true,
-                          icon: const PrimaryIcon(
-                              icons: PrimaryIcons.add_to_queue),
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .addPackage(context, null),
-                        ),
-                      ],
-                    ),
-                    vpad(16),
-                    ...context
-                        .watch<RegisterDeliveryPrv>()
-                        .packageItems
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: Dismissible(
-                              direction: DismissDirection.endToStart,
-                              background: Container(
-                                color: secondaryColorBase,
-                                child: const Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(Icons.delete,
-                                      color: Colors.white, size: 50),
-                                ),
-                              ),
-                              onDismissed: (direction) {
+                      vpad(5),
+
+                      Text(
+                        context
+                                .watch<RegisterDeliveryPrv>()
+                                .validateStartDate ??
+                            '',
+                        style: txtBodySmallRegular(color: redColorBase),
+                      ),
+                      vpad(5),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).end_time,
+                            style:
+                                txtBodySmallRegular(color: grayScaleColorBase),
+                          ),
+                          Text(
+                            ' *',
+                            style: txtBodySmallRegular(color: redColor1),
+                          )
+                        ],
+                      ),
+                      vpad(12),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: PrimaryTextField(
+                              controller: context
+                                  .read<RegisterDeliveryPrv>()
+                                  .endDateController,
+                              label: S.of(context).date,
+                              hint: "dd/mm/yyyy",
+                              isReadOnly: true,
+                              isRequired: true,
+                              onTap: () {
                                 context
                                     .read<RegisterDeliveryPrv>()
-                                    .removeItemPackage(e.key);
+                                    .pickEndDate(context);
                               },
-                              key: UniqueKey(),
-                              child: PrimaryCard(
+                              suffixIcon: const PrimaryIcon(
+                                  icons: PrimaryIcons.calendar),
+                              validator: (v) {
+                                if (v!.isEmpty) {
+                                  return '';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          hpad(20),
+                          Expanded(
+                            flex: 1,
+                            child: PrimaryTextField(
+                              isRequired: true,
+                              controller: context
+                                  .read<RegisterDeliveryPrv>()
+                                  .endHourController,
+                              label: S.of(context).hour,
+                              hint: "hh/mm",
+                              isReadOnly: true,
+                              onTap: () async {
+                                await context
+                                    .read<RegisterDeliveryPrv>()
+                                    .pickEndHour(context);
+                              },
+                              suffixIcon:
+                                  const PrimaryIcon(icons: PrimaryIcons.clock),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      vpad(5),
+                      // if (context.watch<RegisterDeliveryPrv>().validateEndDate !=
+                      //     null)
+                      Text(
+                        context.watch<RegisterDeliveryPrv>().validateEndDate ??
+                            "",
+                        style: txtBodySmallRegular(color: redColorBase),
+                      ),
+                      vpad(5),
+                      SelectMediaWidget(
+                        title: S.of(context).photos,
+                        existImages:
+                            context.watch<RegisterDeliveryPrv>().existedImage,
+                        images:
+                            context.watch<RegisterDeliveryPrv>().imagesDelivery,
+                        onRemove: context
+                            .read<RegisterDeliveryPrv>()
+                            .onRemoveImageDelivery,
+                        onRemoveExist: context
+                            .read<RegisterDeliveryPrv>()
+                            .removeExistedImages,
+                        onSelect: () => context
+                            .read<RegisterDeliveryPrv>()
+                            .onSelectImageDelivery(context),
+                      ),
+                      vpad(16),
+                      Row(
+                        children: [
+                          DashButton(
+                            text: S.of(context).add_package,
+                            lable: S.of(context).package_info,
+                            isRequired: true,
+                            icon: const PrimaryIcon(
+                              icons: PrimaryIcons.add_to_queue,
+                            ),
+                            onTap: () => context
+                                .read<RegisterDeliveryPrv>()
+                                .addPackage(context, null),
+                          ),
+                        ],
+                      ),
+                      vpad(16),
+                      ...context
+                          .watch<RegisterDeliveryPrv>()
+                          .packageItems
+                          .asMap()
+                          .entries
+                          .map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: Dismissible(
+                                direction: DismissDirection.endToStart,
+                                background: Container(
+                                  color: secondaryColorBase,
+                                  child: const Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                                onDismissed: (direction) {
+                                  context
+                                      .read<RegisterDeliveryPrv>()
+                                      .removeItemPackage(e.key);
+                                },
+                                key: UniqueKey(),
+                                child: PrimaryCard(
                                   onTap: () {
                                     context
                                         .read<RegisterDeliveryPrv>()
@@ -360,7 +382,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 16),
+                                      vertical: 14,
+                                      horizontal: 16,
+                                    ),
                                     child: Row(
                                       children: [
                                         const PrimaryIcon(
@@ -377,146 +401,166 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(e.value.item_name ?? '',
-                                                  style: txtLinkSmall()),
+                                              Text(
+                                                e.value.item_name ?? '',
+                                                style: txtLinkSmall(),
+                                              ),
                                               vpad(2),
                                               Text(
-                                                  e.value.weight != null
-                                                      ? '${S.of(context).weight} (kg): ${e.value.weight.toString()}'
-                                                      : '',
-                                                  style:
-                                                      txtBodyXSmallRegular()),
+                                                e.value.weight != null
+                                                    ? '${S.of(context).weight} (kg): ${e.value.weight.toString()}'
+                                                    : '',
+                                                style: txtBodyXSmallRegular(),
+                                              ),
                                               vpad(2),
                                               Text(
-                                                  e.value.dimension != null
-                                                      ? '${S.of(context).dimention} (cm): ${e.value.dimension}'
-                                                      : '',
-                                                  style:
-                                                      txtBodyXSmallRegular()),
+                                                e.value.dimension != null
+                                                    ? '${S.of(context).dimention} (cm): ${e.value.dimension}'
+                                                    : '',
+                                                style: txtBodyXSmallRegular(),
+                                              ),
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                    vpad(16),
-                    PrimaryTextField(
-                      hint: S.of(context).description,
-                      maxLength: 500,
-                      controller:
-                          context.read<RegisterDeliveryPrv>().noteController,
-                      label: S.of(context).description,
-                      maxLines: 3,
-                    ),
-                    vpad(16),
-                    Table(
-                      textBaseline: TextBaseline.ideographic,
-                      defaultVerticalAlignment:
-                          TableCellVerticalAlignment.baseline,
-                      columnWidths: const {
-                        0: FlexColumnWidth(1),
-                        1: FlexColumnWidth(1),
-                      },
-                      children: [
-                        TableRow(children: [
-                          Wrap(
+                      vpad(16),
+                      PrimaryTextField(
+                        hint: S.of(context).note,
+                        maxLength: 500,
+                        controller:
+                            context.read<RegisterDeliveryPrv>().noteController,
+                        label: S.of(context).note,
+                        maxLines: 3,
+                      ),
+                      vpad(16),
+                      Table(
+                        textBaseline: TextBaseline.ideographic,
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.baseline,
+                        columnWidths: const {
+                          0: FlexColumnWidth(1),
+                          1: FlexColumnWidth(1),
+                        },
+                        children: [
+                          TableRow(
                             children: [
-                              SizedBox(
-                                width: 22.0,
-                                height: 22.0,
-                                child: Checkbox(
-                                  fillColor: MaterialStateProperty.all(
-                                      primaryColorBase),
-                                  value: context
-                                      .watch<RegisterDeliveryPrv>()
-                                      .helpCheck,
-                                  onChanged: (v) {
-                                    context
-                                        .read<RegisterDeliveryPrv>()
-                                        .toggleHelpCheck();
-                                  },
-                                ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 22.0,
+                                    height: 22.0,
+                                    child: Checkbox(
+                                      fillColor: MaterialStateProperty.all(
+                                        primaryColorBase,
+                                      ),
+                                      value: context
+                                          .watch<RegisterDeliveryPrv>()
+                                          .helpCheck,
+                                      onChanged: (v) {
+                                        context
+                                            .read<RegisterDeliveryPrv>()
+                                            .toggleHelpCheck();
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () => context
+                                          .read<RegisterDeliveryPrv>()
+                                          .toggleHelpCheck(),
+                                      child: Text(
+                                        S.of(context).need_support,
+                                        style: txtBodySmallRegular(
+                                          color: grayScaleColorBase,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
-                              InkWell(
-                                onTap: () => context
-                                    .read<RegisterDeliveryPrv>()
-                                    .toggleHelpCheck(),
-                                child: Text(S.of(context).need_support,
-                                    style: txtBodySmallRegular(
-                                        color: grayScaleColorBase)),
-                              )
-                            ],
-                          ),
-                          Wrap(
-                            children: [
-                              SizedBox(
-                                width: 22.0,
-                                height: 22.0,
-                                child: Checkbox(
-                                  fillColor: MaterialStateProperty.all(
-                                      primaryColorBase),
-                                  value: context
-                                      .watch<RegisterDeliveryPrv>()
-                                      .useElevator,
-                                  onChanged: (v) {
-                                    context
-                                        .read<RegisterDeliveryPrv>()
-                                        .toggleUseElevator();
-                                  },
-                                ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 22.0,
+                                    height: 22.0,
+                                    child: Checkbox(
+                                      fillColor: MaterialStateProperty.all(
+                                        primaryColorBase,
+                                      ),
+                                      value: context
+                                          .watch<RegisterDeliveryPrv>()
+                                          .useElevator,
+                                      onChanged: (v) {
+                                        context
+                                            .read<RegisterDeliveryPrv>()
+                                            .toggleUseElevator();
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () => context
+                                          .read<RegisterDeliveryPrv>()
+                                          .toggleUseElevator(),
+                                      child: Text(
+                                        S.of(context).use_elevator,
+                                        style: txtBodySmallRegular(
+                                          color: grayScaleColorBase,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
-                              InkWell(
-                                onTap: () => context
-                                    .read<RegisterDeliveryPrv>()
-                                    .toggleUseElevator(),
-                                child: Text(S.of(context).use_elevator,
-                                    style: txtBodySmallRegular(
-                                        color: grayScaleColorBase)),
-                              )
                             ],
-                          ),
-                        ])
-                      ],
-                    ),
+                          )
+                        ],
+                      ),
 
-                    vpad(16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        PrimaryButton(
-                          isLoading: context
-                              .watch<RegisterDeliveryPrv>()
-                              .isAddNewLoading,
-                          buttonSize: ButtonSize.medium,
-                          text: isEdit
-                              ? S.of(context).update
-                              : S.of(context).add_new,
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .onSendSummitDelivery(context, false),
-                        ),
-                        PrimaryButton(
-                          isLoading: context
-                              .watch<RegisterDeliveryPrv>()
-                              .isSendApproveLoading,
-                          buttonType: ButtonType.green,
-                          buttonSize: ButtonSize.medium,
-                          text: S.of(context).send_request,
-                          onTap: () => context
-                              .read<RegisterDeliveryPrv>()
-                              .onSendSummitDelivery(context, true),
-                        ),
-                      ],
-                    ),
-                    vpad(24),
-                  ],
+                      vpad(16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          PrimaryButton(
+                            isLoading: context
+                                .watch<RegisterDeliveryPrv>()
+                                .isAddNewLoading,
+                            buttonSize: ButtonSize.medium,
+                            text: isEdit
+                                ? S.of(context).update
+                                : S.of(context).add_new,
+                            onTap: () => context
+                                .read<RegisterDeliveryPrv>()
+                                .onSendSummitDelivery(context, false),
+                          ),
+                          PrimaryButton(
+                            isLoading: context
+                                .watch<RegisterDeliveryPrv>()
+                                .isSendApproveLoading,
+                            buttonType: ButtonType.green,
+                            buttonSize: ButtonSize.medium,
+                            text: S.of(context).send_request,
+                            onTap: () => context
+                                .read<RegisterDeliveryPrv>()
+                                .onSendSummitDelivery(context, true),
+                          ),
+                        ],
+                      ),
+                      vpad(24),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            },
+          ),
         );
       }),
     );

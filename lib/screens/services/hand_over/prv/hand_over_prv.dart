@@ -7,7 +7,7 @@ import '../../../../utils/utils.dart';
 class HandOverPrv extends ChangeNotifier {
   List<HandOver> listHandOver = [];
   getHandOverHisByResidentId(BuildContext context, String residentId) async {
-    await APIHandOver.getHandOverHistory(residentId).then((v) {
+    await APIHandOver.getHandOverList(residentId).then((v) {
       listHandOver.clear();
       for (var i in v) {
         listHandOver.add(HandOver.fromJson(i));

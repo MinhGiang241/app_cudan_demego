@@ -19,6 +19,7 @@ class DeliveryListPrv extends ChangeNotifier {
   TextEditingController reasonController = TextEditingController();
 
   refuseLetter(BuildContext context, Delivery data) {
+    var copyData = data.copyWith();
     Utils.showConfirmMessage(
       context: context,
       title: S.of(context).refuse_letter,
@@ -71,11 +72,11 @@ class DeliveryListPrv extends ChangeNotifier {
                       buttonSize: ButtonSize.small,
                       onTap: () async {
                         Navigator.pop(context);
-                        data.status = "CANCEL";
-                        data.reasons = 'CHUHOTUCHOI';
-                        data.note_reason = reasonController.text;
-                        data.describe = reasonController.text;
-                        APIDelivery.changeStatus(data.toJson()).then((v) {
+                        copyData.status = "CANCEL";
+                        copyData.reasons = 'CHUHOTUCHOI';
+                        copyData.note_reason = reasonController.text;
+                        copyData.describe = reasonController.text;
+                        APIDelivery.changeStatus(copyData.toJson()).then((v) {
                           Utils.showSuccessMessage(
                             context: context,
                             e: S.of(context).success_refuse_letter,
@@ -104,13 +105,14 @@ class DeliveryListPrv extends ChangeNotifier {
   }
 
   acceptLetter(BuildContext context, Delivery data) {
+    var copyData = data.copyWith();
     Utils.showConfirmMessage(
       context: context,
       title: S.of(context).confirm,
       content: S.of(context).confirm_accept_letter(data.code ?? ""),
       onConfirm: () {
-        data.status = 'WAIT_MANAGER';
-        APIDelivery.changeStatus(data.toJson()).then((v) {
+        copyData.status = 'WAIT_MANAGER';
+        APIDelivery.changeStatus(copyData.toJson()).then((v) {
           Navigator.pop(context);
           Utils.showSuccessMessage(
             context: context,
@@ -132,15 +134,16 @@ class DeliveryListPrv extends ChangeNotifier {
   }
 
   cancelRequetsAprrove(BuildContext context, Delivery data) {
+    var copyData = data.copyWith();
     Utils.showConfirmMessage(
       context: context,
       title: S.of(context).cancel_request,
       content: S.of(context).confirm_cancel_request(data.code ?? ""),
       onConfirm: () {
-        data.status = 'CANCEL';
-        data.reasons = 'NGUOIDUNGHUY';
+        copyData.status = 'CANCEL';
+        copyData.reasons = 'NGUOIDUNGHUY';
         // APIDelivery.saveNewDelivery(data.toJson())
-        APIDelivery.changeStatus(data.toJson()).then((v) {
+        APIDelivery.changeStatus(copyData.toJson()).then((v) {
           Navigator.pop(context);
           Utils.showSuccessMessage(
             context: context,
@@ -162,11 +165,17 @@ class DeliveryListPrv extends ChangeNotifier {
   }
 
   sendToApprove(BuildContext context, Delivery data) {
+    var copyData = data.copyWith();
     if (data.item_added_list == null || data.item_added_list!.isEmpty) {
       Utils.showErrorMessage(context, S.of(context).item_list_not_empty);
       return;
     } else {
-      data.status = 'WAIT_MANAGER';
+      if (context.read<ResidentInfoPrv>().selectedApartment?.type == "BUY" ||
+          context.read<ResidentInfoPrv>().selectedApartment?.type == "RENT") {
+        copyData.status = 'WAIT_MANAGER';
+      } else {
+        copyData.status = 'WAIT_OWNER';
+      }
 
       Utils.showConfirmMessage(
         title: S.of(context).send_request,
@@ -174,7 +183,7 @@ class DeliveryListPrv extends ChangeNotifier {
         context: context,
         onConfirm: () {
           // APIDelivery.saveNewDelivery(data.toJson())
-          APIDelivery.changeStatus(data.toJson()).then((v) {
+          APIDelivery.changeStatus(copyData.toJson()).then((v) {
             Navigator.pop(context);
             Utils.showSuccessMessage(
               context: context,

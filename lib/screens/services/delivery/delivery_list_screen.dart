@@ -1,29 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/delivery/tabs/my_letters-tabs.dart';
 import 'package:app_cudan/screens/services/delivery/tabs/wait_confirm_letter_tabs.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
-import 'package:app_cudan/widgets/primary_button.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/delivery.dart';
-import '../../../models/info_content_view.dart';
-import '../../../utils/utils.dart';
-import '../../../widgets/primary_card.dart';
-import '../../../widgets/primary_empty_widget.dart';
-import '../../../widgets/primary_error_widget.dart';
-import '../../../widgets/primary_icon.dart';
-import '../../../widgets/primary_loading.dart';
+
 import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
-import 'package_details_screen.dart';
+
 import 'provider/delivery_list_prv.dart';
 import 'register_delivery_screen.dart';
 

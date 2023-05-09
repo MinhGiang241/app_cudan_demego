@@ -116,8 +116,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                       isHorizontal: true,
                       title: S.of(context).letter_status,
                       content: !isOwner
-                          ? (card.status == "WAIT_OWNER" ||
-                                  card.status == "WAIT_MANAGER")
+                          ? (card.status == "WAIT_MANAGER")
                               ? S.of(context).wait_approve
                               : card.s?.name ?? ""
                           : card.status == 'WAIT_MANAGER'
@@ -125,8 +124,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                               : card.s?.name ?? "",
                       contentStyle: genContentStyle(
                         !isOwner
-                            ? (card.status == "WAIT_OWNER" ||
-                                    card.status == "WAIT_MANAGER")
+                            ? (card.status == "WAIT_MANAGER")
                                 ? "WAIT"
                                 : card.status ?? ""
                             : card.status == "WAIT_MANAGER"
@@ -173,6 +171,16 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                 title: S.of(context).package_name,
                                 content: e.item_name,
                               ),
+                              if (e.color != null)
+                                InfoContentView(
+                                  title: S.of(context).color,
+                                  content: e.color,
+                                ),
+                              if (e.amount != null)
+                                InfoContentView(
+                                  title: S.of(context).amount,
+                                  content: e.amount.toString(),
+                                ),
                               InfoContentView(
                                 title: '${S.of(context).weight} (kg)',
                                 content: e.weight.toString(),
@@ -181,6 +189,11 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                 title: '${S.of(context).dimention} (cm)',
                                 content: e.dimension,
                               ),
+                              if (e.describe != null)
+                                InfoContentView(
+                                  title: S.of(context).description,
+                                  content: e.describe,
+                                ),
                             ],
                           ),
                           vpad(16),
@@ -239,7 +252,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                               child: Checkbox(
                                 fillColor:
                                     MaterialStateProperty.all(primaryColorBase),
-                                value: card.help_check,
+                                value: card.elevator,
                                 onChanged: (v) {},
                               ),
                             ),
@@ -362,10 +375,14 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                               date: i.perform_date,
                               title: i.content,
                               subTitle: i.new_status != null
-                                  ? '${S.of(context).status}: ${i.ns?.name}'
+                                  ? '${S.of(context).status}: ${i.new_status == "WAIT_MANAGER" ? S.of(context).wait_approve : (i.ns?.name)}'
                                   : null,
                               color: i.new_status != null
-                                  ? genStatusColor(i.new_status ?? "")
+                                  ? genStatusColor(
+                                      i.new_status == "WAIT_MANAGER"
+                                          ? "WAIT"
+                                          : i.new_status ?? "",
+                                    )
                                   : null,
                             ),
                           )

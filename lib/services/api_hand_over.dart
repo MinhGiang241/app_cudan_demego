@@ -4,14 +4,13 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIHandOver {
-  static Future getHandOverHistory(String residentId) async {
+  static Future getHandOverList(String residentId) async {
     var query = '''
       mutation (\$residentId:String){
-    response: handover_mobile_get_hand_over_by_residentId (residentId: \$residentId ) {
+    response: handover_mobile_get_handover_list_by_residentId (residentId: \$residentId ) {
         code
         message
         data
-    }
     }
     ''';
 
