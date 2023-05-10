@@ -215,8 +215,8 @@ class _MyLettersTabsState extends State<MyLettersTabs> {
                                 defaultVerticalAlignment:
                                     TableCellVerticalAlignment.baseline,
                                 columnWidths: const {
-                                  0: FlexColumnWidth(4),
-                                  1: FlexColumnWidth(6)
+                                  0: FlexColumnWidth(9),
+                                  1: FlexColumnWidth(12)
                                 },
                                 children: [
                                   ...listContent.map<TableRow>((i) {

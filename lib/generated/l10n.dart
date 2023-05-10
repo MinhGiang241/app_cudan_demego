@@ -2250,6 +2250,16 @@ class S {
     );
   }
 
+  /// `Add package need transfer`
+  String get add_package_need_transfer {
+    return Intl.message(
+      'Add package need transfer',
+      name: 'add_package_need_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Package`
   String get package {
     return Intl.message(
@@ -7665,6 +7675,26 @@ class S {
     return Intl.message(
       'Register information',
       name: 'register_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note cancel reason`
+  String get note_can_reason {
+    return Intl.message(
+      'Note cancel reason',
+      name: 'note_can_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer rules`
+  String get tranfer_rule {
+    return Intl.message(
+      'Transfer rules',
+      name: 'tranfer_rule',
       desc: '',
       args: [],
     );

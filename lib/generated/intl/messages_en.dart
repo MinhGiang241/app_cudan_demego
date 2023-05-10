@@ -92,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new_transport":
             MessageLookupByLibrary.simpleMessage("Add new transportation"),
         "add_package": MessageLookupByLibrary.simpleMessage("Add package"),
+        "add_package_need_transfer":
+            MessageLookupByLibrary.simpleMessage("Add package need transfer"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_reflection":
             MessageLookupByLibrary.simpleMessage("Create feedback"),
@@ -652,6 +654,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Not enter only zero!"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "note_can_reason":
+            MessageLookupByLibrary.simpleMessage("Note cancel reason"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
@@ -1109,6 +1113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tranfer_out": MessageLookupByLibrary.simpleMessage("Tranfer out"),
         "tranfer_out_reg":
             MessageLookupByLibrary.simpleMessage("Register tranfer out"),
+        "tranfer_rule": MessageLookupByLibrary.simpleMessage("Transfer rules"),
         "trans_card":
             MessageLookupByLibrary.simpleMessage("Transportation card"),
         "trans_card_atleast_1": MessageLookupByLibrary.simpleMessage(

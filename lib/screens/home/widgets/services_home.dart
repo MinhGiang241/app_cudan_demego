@@ -105,7 +105,8 @@ class ServicesHome extends StatelessWidget {
               ],
             ),
           ),
-          context.read<ResidentInfoPrv>().residentId == null
+          context.read<ResidentInfoPrv>().residentId == null ||
+                  context.read<ResidentInfoPrv>().selectedApartment == null
               ? hpad(85)
               : SizedBox(
                   width: 85,

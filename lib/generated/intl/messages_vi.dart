@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new_transport":
             MessageLookupByLibrary.simpleMessage("Thêm mới phương tiện"),
         "add_package": MessageLookupByLibrary.simpleMessage("Thêm hàng hóa"),
+        "add_package_need_transfer": MessageLookupByLibrary.simpleMessage(
+            "Thêm hàng hóa cần vận chuyển"),
         "add_photo": MessageLookupByLibrary.simpleMessage("Thêm hình ảnh"),
         "add_reflection":
             MessageLookupByLibrary.simpleMessage("Thêm mới phản ánh"),
@@ -660,6 +662,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "not_zero":
             MessageLookupByLibrary.simpleMessage("Không được nhập toàn số 0"),
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
+        "note_can_reason":
+            MessageLookupByLibrary.simpleMessage("Ghi chú lý do hủy"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
@@ -1110,6 +1114,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tranfer_out": MessageLookupByLibrary.simpleMessage("Chuyển đồ ra"),
         "tranfer_out_reg":
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ ra"),
+        "tranfer_rule":
+            MessageLookupByLibrary.simpleMessage("Quy định chuyển đồ"),
         "trans_card": MessageLookupByLibrary.simpleMessage("Thẻ xe"),
         "trans_card_atleast_1": MessageLookupByLibrary.simpleMessage(
             "Thẻ phải có ít nhất 1 phương tiện"),

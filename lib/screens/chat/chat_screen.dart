@@ -302,6 +302,13 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Column(
         children: [
+          Expanded(
+            child: Messages(
+              refreshController: _refreshController,
+              messageMap: state.messagesMap,
+              messageBloc: state,
+            ),
+          ),
           if (state.showGreeting)
             ListMessageSubject(
               state: state,
@@ -311,13 +318,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 });
               },
             ),
-          Expanded(
-            child: Messages(
-              refreshController: _refreshController,
-              messageMap: state.messagesMap,
-              messageBloc: state,
-            ),
-          ),
           Align(
             alignment: Alignment.center,
             child: IntrinsicWidth(

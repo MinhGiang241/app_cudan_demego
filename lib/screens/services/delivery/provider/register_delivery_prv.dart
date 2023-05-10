@@ -4,6 +4,7 @@ import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/delivery/delivery_list_screen.dart';
 import 'package:app_cudan/services/api_delivery.dart';
+import 'package:app_cudan/services/api_rules.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../constants/regex_text.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/delivery.dart';
+import '../../../../models/file_upload.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
@@ -61,6 +63,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   String? validateLong;
   String? validateWidth;
   String? validateHeight;
+  String? validateStartHour;
+  String? validateEndHour;
 
   String? validateQuantity;
 
@@ -77,6 +81,21 @@ class RegisterDeliveryPrv extends ChangeNotifier {
   List<ItemDeliver> packageItems = [];
   List<ImageDelivery> submitImageDelivery = [];
   bool autoValid = false;
+  List<FileUploadModel> rulesFiles = [];
+  Future getRule(BuildContext context) async {
+    await APIRule.getListRulesFiles("transferitems").then((v) {
+      if (v != null) {
+        rulesFiles.clear();
+        for (var i in v) {
+          rulesFiles.add(FileUploadModel.fromMap(i));
+        }
+        rulesFiles.sort(
+          (a, b) => a.id!.compareTo(b.id!),
+        );
+      }
+    });
+  }
+
   validate(BuildContext context) {
     if (formKey.currentState!.validate()) {
       validateStartDate = null;
@@ -87,6 +106,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       validateLong = null;
       validateWidth = null;
       validateHeight = null;
+      validateStartHour = null;
+      validateEndHour = null;
     } else {
       if (startDateController.text.isEmpty) {
         validateStartDate = "${S.of(context).date}: ${S.of(context).not_blank}";
@@ -97,6 +118,16 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         validateEndDate = "${S.of(context).date}: ${S.of(context).not_blank}";
       } else {
         validateEndDate = null;
+      }
+      if (startHourController.text.isEmpty) {
+        validateStartHour = "${S.of(context).hour}: ${S.of(context).not_blank}";
+      } else {
+        validateStartHour = null;
+      }
+      if (endHourController.text.isEmpty) {
+        validateEndHour = "${S.of(context).hour}: ${S.of(context).not_blank}";
+      } else {
+        validateEndHour = null;
       }
     }
 
@@ -147,15 +178,15 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
         uploadDeliveryImage(context).then((v) {
           var st =
-              startDate!.subtract(const Duration(hours: 7)).toIso8601String();
+              startDate!.subtract(const Duration(hours: 0)).toIso8601String();
           var et =
-              endDate!.subtract(const Duration(hours: 7)).toIso8601String();
+              endDate!.subtract(const Duration(hours: 0)).toIso8601String();
           var newDelivery = Delivery(
             elevator: useElevator,
             code: code,
             phone_number:
                 context.read<ResidentInfoPrv>().userInfo!.phone_required,
-            describe: noteController.text.trim(),
+            describe: describleController.text.trim(),
             item_added_list: (packageItems.isNotEmpty) ? packageItems : null,
             start_time: st,
             end_time: et,
@@ -215,6 +246,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           validateLong = null;
           validateWidth = null;
           validateHeight = null;
+          validateStartHour = null;
+          validateEndHour = null;
           notifyListeners();
           Utils.showErrorMessage(context, e.toString());
         });
@@ -229,6 +262,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         validateLong = null;
         validateWidth = null;
         validateHeight = null;
+        validateStartHour = null;
+        validateEndHour = null;
         notifyListeners();
         Utils.showErrorMessage(context, e.toString());
       }
@@ -242,6 +277,16 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         validateEndDate = "${S.of(context).date}: ${S.of(context).not_blank}";
       } else {
         validateEndDate = null;
+      }
+      if (startHourController.text.isEmpty) {
+        validateStartHour = "${S.of(context).hour}: ${S.of(context).not_blank}";
+      } else {
+        validateStartHour = null;
+      }
+      if (endHourController.text.isEmpty) {
+        validateEndHour = "${S.of(context).hour}: ${S.of(context).not_blank}";
+      } else {
+        validateEndHour = null;
       }
       notifyListeners();
     }
@@ -285,7 +330,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           : 0,
       item_name: packageNameController.text.trim(),
       color: colorController.text.trim(),
-      describe: describleController.text.trim(),
+      describe: noteController.text.trim(),
       amount: int.tryParse(quantityController.text.trim()) != null
           ? int.parse(quantityController.text.trim())
           : null,
@@ -303,6 +348,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     heightController.text = '';
     quantityController.text = '';
     describleController.text = '';
+    noteController.text = '';
     colorController.text = '';
     validateDimention = null;
     validateLong = null;
@@ -322,7 +368,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
             : 0,
         item_name: packageNameController.text.trim(),
         color: colorController.text.trim(),
-        describe: describleController.text.trim(),
+        describe: noteController.text.trim(),
         amount: int.tryParse(quantityController.text.trim()) != null
             ? int.parse(quantityController.text.trim())
             : null,
@@ -401,7 +447,9 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     ).then((v) {
       if (v != null) {
         startTime = v;
+        validateStartHour = null;
         startHourController.text = v.format(context);
+        notifyListeners();
       }
     });
   }
@@ -437,6 +485,8 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       if (v != null) {
         endTime = v;
         endHourController.text = v.format(context);
+        validateEndHour = null;
+        notifyListeners();
       }
     });
   }
@@ -489,6 +539,10 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       }
       if (quantityController.text.trim().isEmpty) {
         validateQuantity = S.current.not_blank;
+      } else if (RegexText.onlyZero(
+        quantityController.text.trim(),
+      )) {
+        validateQuantity = S.current.not_zero;
       } else {
         validateQuantity = null;
       }
@@ -514,7 +568,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
 
       colorController.text = item.value.color.toString();
       quantityController.text = item.value.amount.toString();
-      describleController.text = item.value.describe.toString();
+      noteController.text = item.value.describe.toString();
 
       packageNameController.text = item.value.item_name.toString();
       dimentionController.text = item.value.dimension.toString();
@@ -527,6 +581,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       validateHeight = null;
       validateWeight = null;
       validatePackageName = null;
+      validateQuantity = null;
       autoValid1 = false;
       notifyListeners();
     }
@@ -560,6 +615,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                           colorController.text = '';
                           quantityController.text = '';
                           describleController.text = '';
+                          noteController.text = '';
                           validateQuantity = null;
                           validateDimention = null;
                           validateDimention = null;
@@ -576,14 +632,17 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                         Navigator.pop(context);
                       },
                     ),
-                    Text(
-                      item != null
-                          ? S.of(context).edit_package
-                          : S.of(context).add_package,
-                      style: txtBodyLargeBold(color: grayScaleColorBase),
-                      textAlign: TextAlign.center,
+                    Expanded(
+                      child: Text(
+                        item != null
+                            ? S.of(context).edit_package
+                            : S.of(context).add_package_need_transfer,
+                        style: txtBold(15, grayScaleColorBase),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    hpad(50)
+                    hpad(30)
                   ],
                 ),
                 Expanded(
@@ -655,6 +714,10 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                           validator: (v) {
                                             if (v!.trim().isEmpty) {
                                               return '';
+                                            } else if (RegexText.onlyZero(
+                                              v.trim(),
+                                            )) {
+                                              return '';
                                             }
                                             return null;
                                           },
@@ -664,6 +727,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                   ),
                                   vpad(12),
                                   PrimaryTextField(
+                                    onlyNum: true,
                                     maxLength: 100,
                                     blockSpace: true,
                                     validateString: validateWeight,
@@ -700,6 +764,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                     children: [
                                       Expanded(
                                         child: PrimaryTextField(
+                                          onlyNum: true,
                                           isRequired: true,
                                           isShow: false,
                                           validateString: validateLong,
@@ -720,6 +785,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                       hpad(24),
                                       Expanded(
                                         child: PrimaryTextField(
+                                          onlyNum: true,
                                           isRequired: true,
                                           isShow: false,
                                           validateString: validateWidth,
@@ -740,6 +806,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                       hpad(24),
                                       Expanded(
                                         child: PrimaryTextField(
+                                          onlyNum: true,
                                           isRequired: true,
                                           isShow: false,
                                           validateString: validateHeight,
@@ -765,7 +832,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                     maxLength: 250,
                                     label: S.of(context).description,
                                     hint: S.of(context).description,
-                                    controller: describleController,
+                                    controller: noteController,
                                   ),
                                   vpad(30),
                                   PrimaryButton(
@@ -836,6 +903,11 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                             .isEmpty) {
                                           validateQuantity =
                                               S.of(context).not_blank;
+                                        } else if (RegexText.onlyZero(
+                                          quantityController.text.trim(),
+                                        )) {
+                                          validateQuantity =
+                                              S.of(context).not_zero;
                                         } else {
                                           validateQuantity = null;
                                         }

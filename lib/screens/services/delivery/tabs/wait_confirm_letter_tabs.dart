@@ -56,6 +56,14 @@ class _WaitConfirmLetterTabState extends State<WaitConfirmLetterTab> {
             cancelLetter.add(i);
           }
         }
+        newLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        approvedLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        waitOwnerLetter
+            .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        waitManagerLetter
+            .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
         List<Delivery> list = newLetter +
             waitOwnerLetter +
             waitManagerLetter +
@@ -196,8 +204,8 @@ class _WaitConfirmLetterTabState extends State<WaitConfirmLetterTab> {
                               defaultVerticalAlignment:
                                   TableCellVerticalAlignment.baseline,
                               columnWidths: const {
-                                0: FlexColumnWidth(4),
-                                1: FlexColumnWidth(6)
+                                0: FlexColumnWidth(9),
+                                1: FlexColumnWidth(12)
                               },
                               children: [
                                 ...listContent.map<TableRow>((i) {

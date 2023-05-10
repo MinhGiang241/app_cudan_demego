@@ -219,6 +219,7 @@
   "end_time": "End time",
   "cancel_reg": "Cancel register",
   "add_package": "Add package",
+  "add_package_need_transfer": "Add package need transfer",
   "package": "Package",
   "package_info": "Package infomation",
   "date": "Date",
@@ -760,5 +761,7 @@
   "reg_images_not_empty": "Registered image must be at least 2 photo",
   "success_update": "Update successfully",
   "reg_letter_num": "Registration letter code",
-  "register_info": "Register information"
+  "register_info": "Register information",
+  "note_can_reason": "Note cancel reason",
+  "tranfer_rule": "Transfer rules"
 }

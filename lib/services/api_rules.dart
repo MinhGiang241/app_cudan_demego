@@ -32,4 +32,34 @@ class APIRule {
       return res.response.data;
     }
   }
+
+  static Future getListRulesWebFiles(String? function_name) async {
+    var query = '''
+    mutation (\$function_name:String){
+    response: constructionrule_get_rules (function_name: \$function_name ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+        
+      ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {"function_name": function_name},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

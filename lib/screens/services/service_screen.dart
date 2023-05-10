@@ -28,7 +28,8 @@ class ServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isRes = context.read<ResidentInfoPrv>().residentId != null;
+    bool isRes = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     var data = [
       {
         "color": primaryColorBase,

@@ -20,88 +20,87 @@ class DeliveryListPrv extends ChangeNotifier {
 
   refuseLetter(BuildContext context, Delivery data) {
     var copyData = data.copyWith();
-    Utils.showConfirmMessage(
+    // Utils.showConfirmMessage(
+    //   context: context,
+    //   title: S.of(context).refuse_letter,
+    //   content: S.of(context).confirm_refuse_letter(data.code ?? ""),
+    //   onConfirm: () {
+    reasonController.clear();
+    // Navigator.pop(context);
+    Utils.showDialog(
       context: context,
-      title: S.of(context).refuse_letter,
-      content: S.of(context).confirm_refuse_letter(data.code ?? ""),
-      onConfirm: () {
-        reasonController.clear();
-        Navigator.pop(context);
-        Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.custom(
-            // title: S.of(context).refuse_letter,
-            content: Column(
+      dialog: PrimaryDialog.custom(
+        // title: S.of(context).refuse_letter,
+        content: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                S.of(context).refuse_letter,
+                style: txtBold(14),
+              ),
+            ),
+            vpad(12),
+            PrimaryTextField(
+              label: S.of(context).reason_refuse,
+              enable: false,
+              initialValue: S.of(context).owner_refuse,
+            ),
+            vpad(12),
+            PrimaryTextField(
+              controller: reasonController,
+              maxLines: 3,
+              label: S.of(context).note,
+              hint: S.of(context).note,
+            ),
+            vpad(12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    S.of(context).refuse_letter,
-                    style: txtBold(14),
-                  ),
+                PrimaryButton(
+                  width: 80,
+                  text: S.of(context).cancel,
+                  buttonType: ButtonType.red,
+                  buttonSize: ButtonSize.small,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                vpad(12),
-                PrimaryTextField(
-                  label: S.of(context).reason_refuse,
-                  enable: false,
-                  initialValue: S.of(context).owner_refuse,
-                ),
-                vpad(12),
-                PrimaryTextField(
-                  controller: reasonController,
-                  maxLines: 3,
-                  label: S.of(context).note,
-                  hint: S.of(context).note,
-                ),
-                vpad(12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PrimaryButton(
-                      width: 80,
-                      text: S.of(context).cancel,
-                      buttonType: ButtonType.red,
-                      buttonSize: ButtonSize.small,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    PrimaryButton(
-                      text: S.of(context).confirm,
-                      buttonType: ButtonType.primary,
-                      buttonSize: ButtonSize.small,
-                      onTap: () async {
-                        Navigator.pop(context);
-                        copyData.status = "CANCEL";
-                        copyData.reasons = 'CHUHOTUCHOI';
-                        copyData.note_reason = reasonController.text;
-                        copyData.describe = reasonController.text;
-                        APIDelivery.changeStatus(copyData.toJson()).then((v) {
-                          Utils.showSuccessMessage(
-                            context: context,
-                            e: S.of(context).success_refuse_letter,
-                            onClose: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                DeliveryListScreen.routeName,
-                                (route) => route.isFirst,
-                                arguments: 1,
-                              );
-                            },
+                PrimaryButton(
+                  text: S.of(context).confirm,
+                  buttonType: ButtonType.primary,
+                  buttonSize: ButtonSize.small,
+                  onTap: () async {
+                    Navigator.pop(context);
+                    copyData.status = "CANCEL";
+                    copyData.reasons = 'CHUHOTUCHOI';
+                    copyData.note_reason = reasonController.text;
+                    APIDelivery.changeStatus(copyData.toJson()).then((v) {
+                      Utils.showSuccessMessage(
+                        context: context,
+                        e: S.of(context).success_refuse_letter,
+                        onClose: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            DeliveryListScreen.routeName,
+                            (route) => route.isFirst,
+                            arguments: 1,
                           );
-                        }).catchError((e) {
-                          Utils.showErrorMessage(context, e);
-                        });
-                      },
-                    )
-                  ],
+                        },
+                      );
+                    }).catchError((e) {
+                      Utils.showErrorMessage(context, e);
+                    });
+                  },
                 )
               ],
-            ),
-          ),
-        );
-      },
+            )
+          ],
+        ),
+      ),
     );
+    //   },
+    // );
   }
 
   acceptLetter(BuildContext context, Delivery data) {
@@ -166,6 +165,7 @@ class DeliveryListPrv extends ChangeNotifier {
 
   sendToApprove(BuildContext context, Delivery data) {
     var copyData = data.copyWith();
+    copyData.isMobile = true;
     if (data.item_added_list == null || data.item_added_list!.isEmpty) {
       Utils.showErrorMessage(context, S.of(context).item_list_not_empty);
       return;

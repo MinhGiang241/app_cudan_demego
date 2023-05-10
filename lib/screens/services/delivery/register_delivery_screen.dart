@@ -1,7 +1,11 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -26,6 +30,47 @@ class RegisterDelivery extends StatefulWidget {
 }
 
 class _RegisterDeliveryState extends State<RegisterDelivery> {
+  ReceivePort port = ReceivePort();
+  @override
+  void initState() {
+    super.initState();
+
+    IsolateNameServer.registerPortWithName(
+      port.sendPort,
+      'downloader_send_port',
+    );
+    port.listen((dynamic data) {
+      // String id = data[0];
+      DownloadTaskStatus status = data[1];
+      // int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
@@ -64,15 +109,16 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
         type: delivery.type_transfer == "IN" ? 2 : 1,
       ),
       builder: ((context, child) {
+        var ruleFiles = context.watch<RegisterDeliveryPrv>().rulesFiles;
         if (isEdit) {
           context.read<RegisterDeliveryPrv>().noteController.text =
               delivery.note_reason ?? '';
           context.read<RegisterDeliveryPrv>().startDateController.text =
-              Utils.dateFormat(delivery.start_time ?? '', -1);
+              Utils.dateFormat(delivery.start_time ?? '', 1);
           context.read<RegisterDeliveryPrv>().endDateController.text =
-              Utils.dateFormat(delivery.end_time ?? '', -1);
-          context.read<RegisterDeliveryPrv>().noteController.text =
-              delivery.note_reason ?? '';
+              Utils.dateFormat(delivery.end_time ?? '', 1);
+          context.read<RegisterDeliveryPrv>().describleController.text =
+              delivery.describe ?? '';
           if (delivery.start_hour != null) {
             context.read<RegisterDeliveryPrv>().startHourController.text =
                 delivery.start_hour!.substring(0, 5);
@@ -89,8 +135,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                 ? S.of(context).edit_reg_deliver
                 : S.of(context).reg_deliver,
           ),
-          body: Builder(
-            builder: (context) {
+          body: FutureBuilder(
+            future: context.read<RegisterDeliveryPrv>().getRule(context),
+            builder: (context, snapshot) {
               return Form(
                 onChanged: context.watch<RegisterDeliveryPrv>().autoValid
                     ? () =>
@@ -185,6 +232,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                           Expanded(
                             flex: 1,
                             child: PrimaryTextField(
+                              validateString: context
+                                  .watch<RegisterDeliveryPrv>()
+                                  .validateStartDate,
                               controller: context
                                   .read<RegisterDeliveryPrv>()
                                   .startDateController,
@@ -213,6 +263,10 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                             flex: 1,
                             child: PrimaryTextField(
                               isRequired: true,
+                              validateString: context
+                                  .watch<RegisterDeliveryPrv>()
+                                  .validateStartHour,
+                              validator: Utils.emptyValidator,
                               controller: context
                                   .read<RegisterDeliveryPrv>()
                                   .startHourController,
@@ -233,13 +287,13 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
                       vpad(5),
 
-                      Text(
-                        context
-                                .watch<RegisterDeliveryPrv>()
-                                .validateStartDate ??
-                            '',
-                        style: txtBodySmallRegular(color: redColorBase),
-                      ),
+                      // Text(
+                      //   context
+                      //           .watch<RegisterDeliveryPrv>()
+                      //           .validateStartDate ??
+                      //       '',
+                      //   style: txtBodySmallRegular(color: redColorBase),
+                      // ),
                       vpad(5),
                       Row(
                         children: [
@@ -256,10 +310,14 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       ),
                       vpad(12),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             flex: 1,
                             child: PrimaryTextField(
+                              validateString: context
+                                  .watch<RegisterDeliveryPrv>()
+                                  .validateEndDate,
                               controller: context
                                   .read<RegisterDeliveryPrv>()
                                   .endDateController,
@@ -273,7 +331,8 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                     .pickEndDate(context);
                               },
                               suffixIcon: const PrimaryIcon(
-                                  icons: PrimaryIcons.calendar),
+                                icons: PrimaryIcons.calendar,
+                              ),
                               validator: (v) {
                                 if (v!.isEmpty) {
                                   return '';
@@ -286,6 +345,10 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                           Expanded(
                             flex: 1,
                             child: PrimaryTextField(
+                              validateString: context
+                                  .watch<RegisterDeliveryPrv>()
+                                  .validateEndHour,
+                              validator: Utils.emptyValidator,
                               isRequired: true,
                               controller: context
                                   .read<RegisterDeliveryPrv>()
@@ -308,11 +371,11 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       vpad(5),
                       // if (context.watch<RegisterDeliveryPrv>().validateEndDate !=
                       //     null)
-                      Text(
-                        context.watch<RegisterDeliveryPrv>().validateEndDate ??
-                            "",
-                        style: txtBodySmallRegular(color: redColorBase),
-                      ),
+                      // Text(
+                      //   context.watch<RegisterDeliveryPrv>().validateEndDate ??
+                      //       "",
+                      //   style: txtBodySmallRegular(color: redColorBase),
+                      // ),
                       vpad(5),
                       SelectMediaWidget(
                         title: S.of(context).photos,
@@ -376,9 +439,9 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                 key: UniqueKey(),
                                 child: PrimaryCard(
                                   onTap: () {
-                                    context
-                                        .read<RegisterDeliveryPrv>()
-                                        .addPackage(context, e);
+                                    // context
+                                    //     .read<RegisterDeliveryPrv>()
+                                    //     .addPackage(context, e);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -419,6 +482,13 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                                     : '',
                                                 style: txtBodyXSmallRegular(),
                                               ),
+                                              vpad(2),
+                                              Text(
+                                                e.value.amount != null
+                                                    ? '${S.of(context).amount}: ${e.value.amount}'
+                                                    : '',
+                                                style: txtBodyXSmallRegular(),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -433,11 +503,39 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                       PrimaryTextField(
                         hint: S.of(context).note,
                         maxLength: 500,
-                        controller:
-                            context.read<RegisterDeliveryPrv>().noteController,
+                        controller: context
+                            .read<RegisterDeliveryPrv>()
+                            .describleController,
                         label: S.of(context).note,
                         maxLines: 3,
                       ),
+                      vpad(16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          S.of(context).tranfer_rule,
+                          style: txtBold(14, grayScaleColorBase),
+                        ),
+                      ),
+                      if (ruleFiles.isNotEmpty) vpad(16),
+                      if (ruleFiles.isNotEmpty)
+                        ...ruleFiles.map(
+                          (v) => InkWell(
+                            onTap: () {
+                              Utils.downloadFile(
+                                context: context,
+                                id: v.id,
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                v.name ?? "",
+                                style: txtRegular(13, primaryColorBase),
+                              ),
+                            ),
+                          ),
+                        ),
                       vpad(16),
                       Table(
                         textBaseline: TextBaseline.ideographic,

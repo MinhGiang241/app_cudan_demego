@@ -219,6 +219,7 @@
   "end_time": "Thời gian kết thúc",
   "cancel_reg": "Hủy đăng ký",
   "add_package": "Thêm hàng hóa",
+  "add_package_need_transfer": "Thêm hàng hóa cần vận chuyển",
   "package_info": "Thông tin hàng hóa",
   "package": "Hàng hóa",
   "date": "Ngày",
@@ -761,5 +762,7 @@
   "reg_images_not_empty": "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh",
   "success_update": "Cập nhật thành công",
   "reg_letter_num": "Mã phiếu đăng ký",
-  "register_info": "Thông tin người đăng ký"
+  "register_info": "Thông tin người đăng ký",
+  "note_can_reason": "Ghi chú lý do hủy",
+  "tranfer_rule": "Quy định chuyển đồ"
 }
