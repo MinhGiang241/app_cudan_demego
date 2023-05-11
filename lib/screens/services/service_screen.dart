@@ -31,13 +31,14 @@ class ServiceScreen extends StatelessWidget {
     bool isRes = context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     var data = [
-      {
-        "color": primaryColorBase,
-        "background": gradientBlue,
-        "icon": PrimaryIcons.inbox,
-        "title": S.current.res_card,
-        "navigator": ResidentCardListScreen.routeName,
-      },
+      if (isRes)
+        {
+          "color": primaryColorBase,
+          "background": gradientBlue,
+          "icon": PrimaryIcons.inbox,
+          "title": S.current.res_card,
+          "navigator": ResidentCardListScreen.routeName,
+        },
       {
         "color": turquoiseColor,
         "background": gradientTurquoise,

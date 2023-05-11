@@ -7,17 +7,17 @@ import '../../../../models/hand_over.dart';
 import '../../../../utils/utils.dart';
 
 class HandOverPrv extends ChangeNotifier {
-  List<HandOver> listHandOver = [];
-  Future getHandOverHisByResidentId(
+  List<AppointmentSchedule> listHandOverSchedule = [];
+  Future getHandOverBookingByResidentId(
     BuildContext context,
   ) async {
     var residentId = context.read<ResidentInfoPrv>().residentId;
-    await APIHandOver.getHandOverList(residentId).then((v) {
-      listHandOver.clear();
+    await APIHandOver.getApointmentScheduleList(residentId).then((v) {
+      listHandOverSchedule.clear();
       for (var i in v) {
-        listHandOver.add(HandOver.fromJson(i));
+        listHandOverSchedule.add(AppointmentSchedule.fromMap(i));
       }
-      print(listHandOver);
+      print(listHandOverSchedule);
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

@@ -201,6 +201,10 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                               if (!isResident) vpad(12),
                               if (!isResident)
                                 PrimaryTextField(
+                                  onChanged: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .onChangedIdentity,
+                                  blockSpace: true,
                                   maxLength: 12,
                                   onlyText: true,
                                   controller: context
@@ -210,9 +214,9 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   hint: S.of(context).cmnd,
                                   isRequired: true,
                                   validator: (v) {
-                                    if (v!.isEmpty) {
+                                    if (v!.trim().isEmpty) {
                                       return '';
-                                    } else if (v.length < 9) {
+                                    } else if (v.trim().length < 9) {
                                       return '';
                                     }
                                     return null;
@@ -636,7 +640,9 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   controller: context
                                       .watch<AddNewTransportCardPrv>()
                                       .regNumController,
-                                  validator: Utils.emptyValidator,
+                                  validator: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .regValidate,
                                   validateString: context
                                       .watch<AddNewTransportCardPrv>()
                                       .validateReg,
@@ -725,6 +731,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 ),
                               vpad(12),
                               SelectMediaWidget(
+                                isRequired: true,
                                 existImages: context
                                     .watch<AddNewTransportCardPrv>()
                                     .otherExistedImages,

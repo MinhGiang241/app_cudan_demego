@@ -28,9 +28,11 @@ class BookingScreen extends StatelessWidget {
     var listApartmentChoice = context.read<ResidentInfoPrv>().listOwn.map((e) {
       return DropdownMenuItem(
         value: e.apartmentId,
-        child: Text(e.apartment?.name! != null
-            ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-            : e.apartmentId!),
+        child: Text(
+          e.apartment?.name! != null
+              ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
+              : e.apartmentId!,
+        ),
       );
     }).toList();
     return ChangeNotifierProvider(
@@ -42,65 +44,66 @@ class BookingScreen extends StatelessWidget {
           ),
           body: SafeArea(
             child: SingleChildScrollView(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Column(
-                children: [
-                  vpad(16),
-                  PrimaryDropDown(
-                    isDense: false,
-                    label: S.of(context).surface,
-                    isRequired: true,
-                    selectList: listApartmentChoice,
-                  ),
-                  vpad(16),
-                  PrimaryTextField(
-                    validator: Utils.emptyValidator,
-                    label: S.of(context).hand_over_date,
-                    isRequired: true,
-                    isReadOnly: true,
-                    hint: "dd/mm/yyyy",
-                    onTap: () =>
-                        context.read<BookingPrv>().pickHandOverDate(context),
-                    suffixIcon: const PrimaryIcon(icons: PrimaryIcons.calendar),
-                    controller:
-                        context.read<BookingPrv>().handOverDateController,
-                    validateString:
-                        context.watch<BookingPrv>().validateHandOverDate,
-                  ),
-                  vpad(16),
-                  PrimaryTextField(
-                    validator: Utils.emptyValidator,
-                    label: S.of(context).hand_over_time,
-                    isReadOnly: true,
-                    isRequired: true,
-                    onTap: () =>
-                        context.read<BookingPrv>().pickHandOverTime(context),
-                    suffixIcon: const PrimaryIcon(icons: PrimaryIcons.clock),
-                    hint: "hh/mm",
-                    controller:
-                        context.read<BookingPrv>().handOverTimeController,
-                    validateString:
-                        context.watch<BookingPrv>().validateHandOverTime,
-                  ),
-                  vpad(16),
-                  PrimaryTextField(
-                    label: S.of(context).note,
-                    maxLines: 3,
-                    controller: context.read<BookingPrv>().noteController,
-                  ),
-                  if (!isBook) vpad(16),
-                  if (!isBook)
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Column(
+                  children: [
+                    vpad(16),
+                    PrimaryDropDown(
+                      isDense: false,
+                      label: S.of(context).surface,
+                      isRequired: true,
+                      selectList: listApartmentChoice,
+                    ),
+                    vpad(16),
                     PrimaryTextField(
+                      validator: Utils.emptyValidator,
+                      label: S.of(context).hand_over_date,
+                      isRequired: true,
+                      isReadOnly: true,
+                      hint: "dd/mm/yyyy",
+                      onTap: () =>
+                          context.read<BookingPrv>().pickHandOverDate(context),
+                      suffixIcon:
+                          const PrimaryIcon(icons: PrimaryIcons.calendar),
+                      controller:
+                          context.read<BookingPrv>().handOverDateController,
+                      validateString:
+                          context.watch<BookingPrv>().validateHandOverDate,
+                    ),
+                    vpad(16),
+                    PrimaryTextField(
+                      validator: Utils.emptyValidator,
+                      label: S.of(context).hand_over_time,
+                      isReadOnly: true,
+                      isRequired: true,
+                      onTap: () =>
+                          context.read<BookingPrv>().pickHandOverTime(context),
+                      suffixIcon: const PrimaryIcon(icons: PrimaryIcons.clock),
+                      hint: "hh/mm",
+                      controller:
+                          context.read<BookingPrv>().handOverTimeController,
+                      validateString:
+                          context.watch<BookingPrv>().validateHandOverTime,
+                    ),
+                    // vpad(16),
+                    // PrimaryTextField(
+                    //   label: S.of(context).note,
+                    //   maxLines: 3,
+                    //   controller: context.read<BookingPrv>().noteController,
+                    // ),
+                    if (!isBook) vpad(16),
+                    if (!isBook)
+                      PrimaryTextField(
                         label: S.of(context).status,
                         enable: false,
                         isReadOnly: true,
                         initialValue: "Đã duyệt",
-                        textColor: greenColorBase
+                        textColor: greenColorBase,
                         // controller: context.read<BookingPrv>().noteController,
-                        ),
-                  vpad(30),
-                  PrimaryButton(
+                      ),
+                    vpad(30),
+                    PrimaryButton(
                       width: dvWidth(context) - 48,
                       isFit: true,
                       isLoading: context.watch<BookingPrv>().isSendLoading,
@@ -109,11 +112,13 @@ class BookingScreen extends StatelessWidget {
                       text: isBook
                           ? S.of(context).send_request
                           : S.of(context).re_book,
-                      onTap: () {}),
-                  vpad(40)
-                ],
+                      onTap: () {},
+                    ),
+                    vpad(40)
+                  ],
+                ),
               ),
-            )),
+            ),
           ),
         );
       },

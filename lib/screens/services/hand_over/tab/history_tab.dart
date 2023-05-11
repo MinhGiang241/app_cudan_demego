@@ -63,9 +63,10 @@ class _HistoryTabState extends State<HistoryTab> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
-    List<HandOver> listHandOver = context.read<HandOverPrv>().listHandOver;
+    List<AppointmentSchedule> listHandOver =
+        context.read<HandOverPrv>().listHandOverSchedule;
     return FutureBuilder(
-      future: context.read<HandOverPrv>().getHandOverHisByResidentId(
+      future: context.read<HandOverPrv>().getHandOverBookingByResidentId(
             context,
           ),
       builder: (context, snapshot) {

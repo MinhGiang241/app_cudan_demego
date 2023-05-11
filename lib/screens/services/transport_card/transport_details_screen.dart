@@ -6,6 +6,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/transportation_card.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
@@ -62,6 +63,11 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                   ),
                 InfoContentView(
                   isHorizontal: true,
+                  title: S.of(context).expired_date,
+                  content: Utils.dateFormat(item.expire_date ?? "", 1),
+                ),
+                InfoContentView(
+                  isHorizontal: true,
                   title: S.of(context).used_expired_date,
                   content: '${item.sh?.use_time} ${item.sh?.type_time}',
                 ),
@@ -71,7 +77,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                     // isHorizontal: true,
                     images: (item.registration_image ?? [])
                         .map<String>(
-                            (e) => "${ApiConstants.uploadURL}?load=${e.id}")
+                          (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        )
                         .toList(),
                     title: S.of(context).reg_trans_photos,
                   ),

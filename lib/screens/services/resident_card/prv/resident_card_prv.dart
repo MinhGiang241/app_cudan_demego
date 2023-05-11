@@ -144,11 +144,11 @@ class ResidentCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         var submitCard = card.copyWith();
-        submitCard.status = "LOCK";
+        submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
         await APITransport.saveManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
-            status: "LOCK",
+            status: "DESTROY",
             action: "Khóa thẻ",
             content: "Người dùng khóa thẻ",
             manageCardId: card.id,

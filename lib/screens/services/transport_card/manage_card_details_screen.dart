@@ -245,11 +245,11 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                           "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
                                           style: txtBodyXSmallRegular(),
                                         ),
-                                      vpad(2),
-                                      Text(
-                                        "${S.of(context).used_expired_date}: ${e.value.sh?.use_time} ${e.value.sh?.type_time}",
-                                        style: txtBodyXSmallRegular(),
-                                      ),
+                                      // vpad(2),
+                                      // Text(
+                                      //   "${S.of(context).used_expired_date}: ${e.value.sh?.use_time} ${e.value.sh?.type_time}",
+                                      //   style: txtBodyXSmallRegular(),
+                                      // ),
                                       vpad(2),
                                       Text(
                                         "${S.of(context).expired_date}: ${Utils.dateFormat(e.value.expire_date ?? "", 1)}",
@@ -350,13 +350,13 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       )
                     ],
                   ),
-                if (!(card.status == "LOCK" &&
+                if (!(card.status == "DESTROY" &&
                         card.r?.code == 'NGUOIDUNGKHOA') &&
                     card.status != "LOST"
                 //  && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
                 )
                   vpad(30),
-                if (!(card.status == "LOCK" &&
+                if (!(card.status == "DESTROY" &&
                         card.r?.code == 'NGUOIDUNGKHOA') &&
                     card.status != "LOST"
                 // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
@@ -367,7 +367,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                     buttonType: ButtonType.red,
                     text: S.of(context).cancel_card,
                     onTap: () {
-                      cancel(context, card);
+                      cancel(context, loadedCard);
                     },
                   ),
                 vpad(40),

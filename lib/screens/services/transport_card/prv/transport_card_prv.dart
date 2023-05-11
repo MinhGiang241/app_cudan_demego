@@ -28,9 +28,10 @@ class TransportCardPrv extends ChangeNotifier {
       onConfirm: () async {
         Navigator.pop(context);
         var submitCard = card.copyWith();
-        submitCard.status = "LOCK";
+        submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
-        await APITransport.lockManageCard(submitCard.toMap()).then((v) {
+        var d = submitCard.toMap();
+        await APITransport.lockManageCard(d).then((v) {
           var his = CardHistory(
             action: "Khóa thẻ",
             content: "Người dùng khóa thẻ",

@@ -90,6 +90,17 @@ class _TransportDetailsLetterScreenState
                         .toList(),
                     title: S.of(context).trans_images,
                   ),
+                if (item.identity_image != null &&
+                    item.identity_image!.isNotEmpty)
+                  InfoContentView(
+                    // isHorizontal: true,
+                    images: (item.identity_image ?? [])
+                        .map<String>(
+                          (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        )
+                        .toList(),
+                    title: S.of(context).cmnd_images,
+                  ),
               ],
             ),
           )

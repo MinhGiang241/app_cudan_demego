@@ -204,6 +204,11 @@ class _TransportLetterDetailsScreenState
                                     "${S.of(context).num_seat}: ${e.value.seats ?? ""}",
                                     style: txtBodyXSmallRegular(),
                                   ),
+                                // vpad(2),
+                                // Text(
+                                //   "${S.of(context).expired_date}: ${Utils.dateFormat(e.value.expire_date ?? "", 1)}",
+                                //   style: txtBodyXSmallRegular(),
+                                // ),
                                 vpad(2),
                                 Text(
                                   "${S.of(context).used_expired_date}: ${e.value.shelfLife?.use_time} ${e.value.shelfLife?.type_time}",

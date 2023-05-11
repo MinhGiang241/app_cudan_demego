@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
@@ -85,19 +86,19 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   String? cValidatePhone;
 
   genCValidate() {
-    if (cAddressController.text.isEmpty) {
+    if (cAddressController.text.trim().isEmpty) {
       cValidateAddress = S.current.not_blank;
     } else {
       cValidateAddress = null;
     }
-    if (cIdentityController.text.isEmpty) {
+    if (cIdentityController.text.trim().isEmpty) {
       cValidateIdentity = S.current.not_blank;
-    } else if (cIdentityController.text.length < 9) {
+    } else if (cIdentityController.text.trim().length < 9) {
       cValidateIdentity = S.current.cmnd_length_9;
     } else {
       cValidateIdentity = null;
     }
-    if (cPhoneController.text.isEmpty) {
+    if (cPhoneController.text.trim().isEmpty) {
       cValidatePhone = S.current.not_blank;
     } else {
       cValidatePhone = null;
@@ -220,6 +221,17 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     } else if (int.tryParse(seatNumController.text.trim()) != null &&
         int.parse(seatNumController.text.trim()) == 0) {
       return '';
+    } else if (RegexText.onlyZero(seatNumController.text.trim())) {
+      return '';
+    }
+    return null;
+  }
+
+  String? regValidate(String? v) {
+    if (regNumController.text.trim().isEmpty) {
+      return '';
+    } else if (RegexText.onlyZero(regNumController.text.trim())) {
+      return '';
     }
     return null;
   }
@@ -230,6 +242,15 @@ class AddNewTransportCardPrv extends ChangeNotifier {
 
       liceneController.selection =
           TextSelection.collapsed(offset: liceneController.text.length);
+    }
+  }
+
+  onChangedIdentity(String? v) {
+    if (v != null) {
+      cIdentityController.text = Utils.replaceInputVietChar(v).toUpperCase();
+
+      cIdentityController.selection =
+          TextSelection.collapsed(offset: cIdentityController.text.length);
     }
   }
 
@@ -493,6 +514,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   genValidString() {
     if (regNumController.text.trim().isEmpty) {
       validateReg = S.current.not_blank;
+    } else if (RegexText.onlyZero(regNumController.text.trim())) {
+      validateReg = S.current.not_zero;
     } else {
       validateReg = null;
     }
@@ -501,6 +524,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     } else if (int.tryParse(seatNumController.text.trim()) != null &&
         int.parse(seatNumController.text.trim()) == 0) {
       validateSeat = S.current.num_seat_not_zero;
+    } else if (RegexText.onlyZero(seatNumController.text.trim())) {
+      validateSeat = S.current.not_zero;
     } else {
       validateSeat = null;
     }
@@ -534,9 +559,6 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
 
       if (formKey.currentState!.validate()) {
-        await uploadResImages();
-        await uploadOther();
-        await uploadCusIdentity();
         clearValidStringStep();
 
         var listError = [];
@@ -557,6 +579,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           var textError = listError.join('. ');
           throw (textError);
         }
+        await uploadResImages();
+        await uploadOther();
+        await uploadCusIdentity();
 
         var vehicleTypeId = transTypeList
             .firstWhere((element) => element.code == transTypeValue)

@@ -723,7 +723,7 @@ class Utils {
   }
 
   static String? emptyValidator(v) {
-    if (v!.isEmpty) {
+    if (v.trim()!.isEmpty) {
       return '';
     }
     return null;

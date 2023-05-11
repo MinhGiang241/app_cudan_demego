@@ -147,12 +147,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
               ],
             ),
           ),
-          if (!(card.status == "LOCK" && card.r?.code == 'NGUOIDUNGKHOA') &&
+          if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
               card.status != "LOST"
           // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
           )
             vpad(24),
-          if (!(card.status == "LOCK" && card.r?.code == 'NGUOIDUNGKHOA') &&
+          if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
               card.status != "LOST"
           // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
 

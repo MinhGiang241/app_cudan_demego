@@ -18,6 +18,8 @@ class ServicesHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isRes = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     return HomeTitleWidget(
       title: S.of(context).services,
       onTapShowAll: () {
@@ -67,44 +69,46 @@ class ServicesHome extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurStyle: BlurStyle.normal,
-                        spreadRadius: 1,
-                        blurRadius: 24,
-                        color: primaryColorBase.withOpacity(0.25),
-                        offset: const Offset(0, 16),
+          !isRes
+              ? hpad(85)
+              : SizedBox(
+                  width: 85,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              blurStyle: BlurStyle.normal,
+                              spreadRadius: 1,
+                              blurRadius: 24,
+                              color: primaryColorBase.withOpacity(0.25),
+                              offset: const Offset(0, 16),
+                            )
+                          ],
+                        ),
+                        child: PrimaryIcon(
+                          icons: PrimaryIcons.inbox,
+                          style: PrimaryIconStyle.gradient,
+                          gradients: PrimaryIconGradient.primary,
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(12),
+                          size: 32,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(ResidentCardListScreen.routeName);
+                          },
+                        ),
+                      ),
+                      vpad(12),
+                      Text(
+                        S.of(context).res_card,
+                        textAlign: TextAlign.center,
+                        style: txtBodySmallBold(color: grayScaleColorBase),
                       )
                     ],
                   ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.inbox,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.primary,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(ResidentCardListScreen.routeName);
-                    },
-                  ),
                 ),
-                vpad(12),
-                Text(
-                  S.of(context).res_card,
-                  textAlign: TextAlign.center,
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                )
-              ],
-            ),
-          ),
           context.read<ResidentInfoPrv>().residentId == null ||
                   context.read<ResidentInfoPrv>().selectedApartment == null
               ? hpad(85)
