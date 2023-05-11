@@ -44,9 +44,9 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
       'downloader_send_port',
     );
     _port.listen((dynamic data) {
-      String id = data[0];
+      // String id = data[0];
       DownloadTaskStatus status = data[1];
-      int progress = data[2];
+      // int progress = data[2];
 
       if (status == DownloadTaskStatus.complete) {
         print("Download complete");
@@ -75,12 +75,13 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
     super.dispose();
   }
 
-  ReceivePort _port = ReceivePort();
+  final ReceivePort _port = ReceivePort();
 
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    var isResident = context.read<ResidentInfoPrv>().residentId == null;
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     var isEdit = arg != null ? arg['isEdit'] : false;
     TransportCard card = TransportCard();
     if (isEdit) {
@@ -169,8 +170,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              if (isResident) vpad(12),
-                              if (isResident)
+                              if (!isResident) vpad(12),
+                              if (!isResident)
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
@@ -181,8 +182,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
-                              if (isResident) vpad(12),
-                              if (isResident)
+                              if (!isResident) vpad(12),
+                              if (!isResident)
                                 PrimaryTextField(
                                   maxLength: 255,
                                   controller: context
@@ -196,8 +197,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       .watch<AddNewTransportCardPrv>()
                                       .cValidateAddress,
                                 ),
-                              if (isResident) vpad(12),
-                              if (isResident)
+                              if (!isResident) vpad(12),
+                              if (!isResident)
                                 PrimaryTextField(
                                   maxLength: 12,
                                   onlyText: true,
@@ -219,8 +220,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       .watch<AddNewTransportCardPrv>()
                                       .cValidateIdentity,
                                 ),
-                              if (isResident) vpad(12),
-                              if (isResident)
+                              if (!isResident) vpad(12),
+                              if (!isResident)
                                 PrimaryTextField(
                                   enable: false,
                                   initialValue: context
@@ -306,12 +307,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       key: UniqueKey(),
                                       child: PrimaryCard(
                                         onTap: () {
-                                          context
-                                              .read<AddNewTransportCardPrv>()
-                                              .onTapEditTransport(
-                                                e.value,
-                                                e.key,
-                                              );
+                                          // context
+                                          //     .read<AddNewTransportCardPrv>()
+                                          //     .onTapEditTransport(
+                                          //       e.value,
+                                          //       e.key,
+                                          //     );
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -696,6 +697,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)
                                 SelectMediaWidget(
+                                  isRequired: true,
                                   existImages: context
                                       .watch<AddNewTransportCardPrv>()
                                       .resExistedImages,
@@ -736,6 +738,29 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       .onSelectOtherPhoto(context);
                                 },
                               ),
+                              if (!isResident) vpad(12),
+                              if (!isResident)
+                                SelectMediaWidget(
+                                  isRequired: true,
+                                  existImages: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .cusExistedIdentity,
+                                  onRemoveExist: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .onRemoveExistedCusIdentity,
+                                  images: context
+                                      .watch<AddNewTransportCardPrv>()
+                                      .cusIdentity,
+                                  title: S.of(context).cmnd_images,
+                                  onRemove: context
+                                      .read<AddNewTransportCardPrv>()
+                                      .onRemoveCusIdentity,
+                                  onSelect: () {
+                                    context
+                                        .read<AddNewTransportCardPrv>()
+                                        .onSelectCusIdentityPhoto(context);
+                                  },
+                                ),
                               vpad(30),
                               PrimaryButton(
                                 width: double.infinity,

@@ -187,6 +187,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
+        "cmnd_images":
+            MessageLookupByLibrary.simpleMessage("Identity images (2 sides)"),
+        "cmnd_images_not_less_2": MessageLookupByLibrary.simpleMessage(
+            "Identity images at less 2 Images"),
         "cmnd_length_9":
             MessageLookupByLibrary.simpleMessage("Not less than 9 characters"),
         "cmnd_photos": MessageLookupByLibrary.simpleMessage("Identity photos"),

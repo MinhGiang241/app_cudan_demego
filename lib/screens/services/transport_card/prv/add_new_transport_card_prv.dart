@@ -65,6 +65,10 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   List<FileUploadModel> otherUploadedImages = [];
   List<FileUploadModel> resUploadedImages = [];
 
+  List<File> cusIdentity = [];
+  List<FileUploadModel> cusExistedIdentity = [];
+  List<FileUploadModel> cusUploadedIdentity = [];
+
   List<VehicleType> transTypeList = [];
   List<ShelfLife> shelfLifeList = [];
 
@@ -202,6 +206,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     resExistedImages =
         List<FileUploadModel>.from(item.registration_image ?? []);
     otherExistedImages = List<FileUploadModel>.from(item.vehicle_image ?? []);
+    cusExistedIdentity = List<FileUploadModel>.from(item.identity_image ?? []);
     seatNumController.text = item.seats != null ? item.seats.toString() : '';
     liceneController.text = item.number_plate ?? '';
     regNumController.text = item.registration_number ?? "";
@@ -361,6 +366,17 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     });
   }
 
+  onSelectCusIdentityPhoto(BuildContext context) async {
+    await Utils.selectImage(context, false).then((value) {
+      if (value != null) {
+        final list = value.map<File>((e) => File(e.path)).toList();
+        cusIdentity.addAll(list);
+
+        notifyListeners();
+      }
+    });
+  }
+
   onRemoveResImage(int index) {
     imageFileRes.removeAt(index);
     notifyListeners();
@@ -378,6 +394,16 @@ class AddNewTransportCardPrv extends ChangeNotifier {
 
   onRemoveExistOther(int index) {
     otherExistedImages.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveExistedCusIdentity(int index) {
+    cusExistedIdentity.removeAt(index);
+    notifyListeners();
+  }
+
+  onRemoveCusIdentity(int index) {
+    cusIdentity.removeAt(index);
     notifyListeners();
   }
 
@@ -413,6 +439,22 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     });
   }
 
+  Future uploadCusIdentity() async {
+    await APIAuth.uploadSingleFile(
+      files: cusIdentity,
+    ).then((v) {
+      if (v.isNotEmpty) {
+        for (var e in v) {
+          cusUploadedIdentity.add(
+            FileUploadModel(id: e.data, name: e.name),
+          );
+        }
+      }
+    }).catchError((e) {
+      throw (e);
+    });
+  }
+
   clearAddForm() {
     // formKey.currentState.initState();
     validateLicene = null;
@@ -435,8 +477,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     otherImages.clear();
     otherUploadedImages.clear();
     resExistedImages.clear();
+    cusExistedIdentity.clear();
     resUploadedImages.clear();
+    cusUploadedIdentity.clear();
     imageFileRes.clear();
+    cusIdentity.clear();
     formKey.currentState!.reset();
 
     regNumController.clear();
@@ -481,7 +526,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     autoValid = true;
     isAddTransLoading = true;
     notifyListeners();
-    // var isResident = context.read<ResidentInfoPrv>().residentId == null;
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     try {
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartmentId =
@@ -490,13 +536,18 @@ class AddNewTransportCardPrv extends ChangeNotifier {
       if (formKey.currentState!.validate()) {
         await uploadResImages();
         await uploadOther();
+        await uploadCusIdentity();
         clearValidStringStep();
 
         var listError = [];
         var vehicleImages = otherExistedImages + otherUploadedImages;
         var regImages = resExistedImages + resUploadedImages;
+        var cusImages = cusExistedIdentity + cusUploadedIdentity;
         if (regImages.length < 2 && transTypeValue != "BICYCLE") {
           listError.add(S.of(context).reg_images_not_empty);
+        }
+        if (cusImages.length < 2 && !isResident) {
+          listError.add(S.of(context).cmnd_images_not_less_2);
         }
         if (vehicleImages.isEmpty) {
           listError.add(S.of(context).trans_images_not_empty);
@@ -526,6 +577,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
               ? int.parse(seatNumController.text.trim())
               : null,
           vehicle_image: otherExistedImages + otherUploadedImages,
+          identity_image: cusExistedIdentity + cusUploadedIdentity,
         );
         if (indexEdit != null) {
           transportList[indexEdit!] = transportItem;

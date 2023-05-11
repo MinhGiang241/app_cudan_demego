@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/response_resident_own.dart';
-import '../../../../models/response_thecudan_list.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../r_card/r_card_info.dart';
@@ -212,9 +211,7 @@ class _RecidentInfoItemState extends State<RecidentInfoItem>
                                     onTap: () {
                                       Utils.pushScreen(
                                         context,
-                                        RecidentCardInfo(
-                                          items: TheCuDanItems(),
-                                        ),
+                                        RecidentCardInfo(),
                                       );
                                     },
                                     child: Column(

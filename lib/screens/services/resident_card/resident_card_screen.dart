@@ -1,24 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/info_content_view.dart';
 import '../../../models/resident_card.dart';
-import '../../../models/response_thecudan_list.dart';
-import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
-import '../../../widgets/primary_button.dart';
-import '../../../widgets/primary_card.dart';
-import '../../../widgets/primary_empty_widget.dart';
 import '../../../widgets/primary_error_widget.dart';
-import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../account/r_card/r_card_info.dart';
-import '../../account/r_card/register_r_card.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import '../service_screen.dart';
 import 'prv/resident_card_prv.dart';

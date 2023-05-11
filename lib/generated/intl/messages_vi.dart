@@ -193,6 +193,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
+        "cmnd_images": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMT/CCCD (ảnh chụp 2 mặt)"),
+        "cmnd_images_not_less_2": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMT/CCCD phải ít nhất 2 ảnh"),
         "cmnd_length_9":
             MessageLookupByLibrary.simpleMessage("Không được ít hơn 9 ký tự"),
         "cmnd_photos":

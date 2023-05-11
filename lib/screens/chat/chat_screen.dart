@@ -155,7 +155,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 );
                                 Future.delayed(
-                                  const Duration(milliseconds: 100),
+                                  const Duration(milliseconds: 400),
                                 ).then((v) {
                                   state.sendStartMessage(token, "Bắt đầu");
                                 });

@@ -7699,6 +7699,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Identity images (2 sides)`
+  String get cmnd_images {
+    return Intl.message(
+      'Identity images (2 sides)',
+      name: 'cmnd_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity images at less 2 Images`
+  String get cmnd_images_not_less_2 {
+    return Intl.message(
+      'Identity images at less 2 Images',
+      name: 'cmnd_images_not_less_2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

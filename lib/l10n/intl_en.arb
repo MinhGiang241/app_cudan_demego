@@ -763,5 +763,7 @@
   "reg_letter_num": "Registration letter code",
   "register_info": "Register information",
   "note_can_reason": "Note cancel reason",
-  "tranfer_rule": "Transfer rules"
+  "tranfer_rule": "Transfer rules",
+  "cmnd_images": "Identity images (2 sides)",
+  "cmnd_images_not_less_2": "Identity images at less 2 Images"
 }

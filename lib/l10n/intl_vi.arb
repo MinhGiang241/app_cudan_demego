@@ -764,5 +764,7 @@
   "reg_letter_num": "Mã phiếu đăng ký",
   "register_info": "Thông tin người đăng ký",
   "note_can_reason": "Ghi chú lý do hủy",
-  "tranfer_rule": "Quy định chuyển đồ"
+  "tranfer_rule": "Quy định chuyển đồ",
+  "cmnd_images": "Ảnh CMT/CCCD (ảnh chụp 2 mặt)",
+  "cmnd_images_not_less_2": "Ảnh CMT/CCCD phải ít nhất 2 ảnh"
 }
