@@ -250,6 +250,12 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                         "${S.of(context).used_expired_date}: ${e.value.sh?.use_time} ${e.value.sh?.type_time}",
                                         style: txtBodyXSmallRegular(),
                                       ),
+                                      vpad(2),
+                                      Text(
+                                        "${S.of(context).expired_date}: ${Utils.dateFormat(e.value.expire_date ?? "", 1)}",
+                                        style: txtBodyXSmallRegular(),
+                                      ),
+                                      vpad(2),
                                       Text(
                                         "${S.of(context).trans_status}: ${e.value.s?.name ?? ""}",
                                         style: txtBodyXSmallRegular(),

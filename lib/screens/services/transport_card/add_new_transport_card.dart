@@ -9,6 +9,7 @@ import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
@@ -307,12 +308,12 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                       key: UniqueKey(),
                                       child: PrimaryCard(
                                         onTap: () {
-                                          // context
-                                          //     .read<AddNewTransportCardPrv>()
-                                          //     .onTapEditTransport(
-                                          //       e.value,
-                                          //       e.key,
-                                          //     );
+                                          context
+                                              .read<AddNewTransportCardPrv>()
+                                              .onTapEditTransport(
+                                                e.value,
+                                                e.key,
+                                              );
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -597,6 +598,11 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .isShowLicense)
                                 PrimaryTextField(
                                   blockSpace: true,
+                                  filter: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9a-zA-Z-]'),
+                                    )
+                                  ],
                                   onChanged: context
                                       .read<AddNewTransportCardPrv>()
                                       .onChangedLicenseNum,

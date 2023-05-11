@@ -51,6 +51,7 @@ class ManageCard {
   Reason? r;
   ResponseResidentInfo? re;
   ResidentCard? res_card;
+  List<TransportItem>? l;
 
   ManageCard({
     this.id,
@@ -90,6 +91,7 @@ class ManageCard {
     this.r,
     this.re,
     this.res_card,
+    this.l,
   });
 
   Map<String, dynamic> toMap() {
@@ -216,6 +218,13 @@ class ManageCard {
           : null,
       res_card: map['res_card'] != null
           ? ResidentCard.fromMap(map['res_card'] as Map<String, dynamic>)
+          : null,
+      l: map['l'] != null
+          ? List<TransportItem>.from(
+              (map['l'] as List<dynamic>).map<TransportItem?>(
+                (x) => TransportItem.fromMap(x as Map<String, dynamic>),
+              ),
+            )
           : null,
     );
   }

@@ -116,20 +116,20 @@ class _ExtendCardScreenState extends State<ExtendCardScreen> {
                           PrimaryTextField(
                             controller: context
                                 .read<ExtendTransportPrv>()
-                                .newExpireController,
+                                .extendController,
                             isRequired: true,
-                            label: S.of(context).expired_date_new,
+                            label: S.of(context).expired_date_create,
                             enable: false,
-                            textColor: Colors.black,
                           ),
                           vpad(12),
                           PrimaryTextField(
                             controller: context
                                 .read<ExtendTransportPrv>()
-                                .extendController,
+                                .newExpireController,
                             isRequired: true,
-                            label: S.of(context).expired_date_create,
+                            label: S.of(context).expired_date_new,
                             enable: false,
+                            textColor: Colors.black,
                           ),
                           vpad(30),
                           PrimaryButton(

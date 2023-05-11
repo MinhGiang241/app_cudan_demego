@@ -3,12 +3,10 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:app_cudan/models/delivery.dart';
-import 'package:app_cudan/screens/account/plan_info/widgets/recident_info_tab.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_rules.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
@@ -26,7 +24,6 @@ import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/timeline_view.dart';
-import '../transport_card/add_new_transport_card.dart';
 import 'register_delivery_screen.dart';
 
 class PackageDetailScreen extends StatefulWidget {

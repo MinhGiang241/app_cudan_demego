@@ -155,10 +155,9 @@ class _TransportCardTabState extends State<TransportCardTab> {
                     InfoContentView(
                       title: S.of(context).transport,
                       content: list[index]
-                          .t
-                          ?.transports_list
+                          .l
                           ?.map((o) => o.vehicleType?.name)
-                          .join(" / "),
+                          .join("/ "),
                       contentStyle: txtBold(
                         14,
                         genStatusColor(

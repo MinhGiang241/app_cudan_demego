@@ -477,10 +477,10 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     otherImages.clear();
     otherUploadedImages.clear();
     resExistedImages.clear();
-    cusExistedIdentity.clear();
-    resUploadedImages.clear();
-    cusUploadedIdentity.clear();
     imageFileRes.clear();
+    resUploadedImages.clear();
+    cusExistedIdentity.clear();
+    cusUploadedIdentity.clear();
     cusIdentity.clear();
     formKey.currentState!.reset();
 

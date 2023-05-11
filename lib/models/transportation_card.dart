@@ -492,7 +492,9 @@ class TransportItem {
       manageCardId:
           map['manageCardId'] != null ? map['manageCardId'] as String : null,
       code_seri: map['code_seri'] != null ? map['code_seri'] as String : null,
-      cost: map['cost'] != null ? map['cost'] as double : null,
+      cost: double.tryParse(map['cost'].toString()) != null
+          ? double.parse(map['cost'].toString())
+          : null,
       vehicle_amount: int.tryParse(map['vehicle_amount'].toString()) != null
           ? int.parse(map['vehicle_amount'].toString())
           : null,

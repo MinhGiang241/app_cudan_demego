@@ -541,4 +541,36 @@ mutation (\$data:FormRenewalTransportInputDto ){
       return res.response.data;
     }
   }
+
+  static Future renewDateTransport(
+    List<dynamic>? transportIds,
+    String? shelflifeId,
+    bool isRenew,
+  ) async {
+    var query = '''
+   mutation (\$transportIds:Dictionary,\$shelflifeId:String,\$isRenew:Boolean){
+    response: vehicle_vehicle_renewal_date (transportIds: \$transportIds,shelflifeId: \$shelflifeId,isRenew: \$isRenew )
+}
+        
+      ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "transportIds": transportIds,
+        "shelflifeId": shelflifeId,
+        "isRenew": isRenew
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

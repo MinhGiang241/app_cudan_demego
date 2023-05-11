@@ -1,6 +1,10 @@
 import 'dart:convert';
 
 import 'package:app_cudan/models/file_upload.dart';
+import 'package:app_cudan/models/reason.dart';
+import 'package:app_cudan/models/response_resident_own.dart';
+
+import 'status.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file= public_member_api_docs, sort_constructors_first
@@ -464,5 +468,158 @@ class HandOverStatus {
     order = int.tryParse(map['order'].toString()) != null
         ? int.parse(map['order'].toString())
         : null;
+  }
+}
+
+class AppointmentSchedule {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? time;
+  String? customersId;
+  String? apartmentId;
+  String? apartment_type;
+  String? status;
+  String? resident_phone;
+  String? email;
+  String? apartmentTypeId;
+  String? date;
+  String? hour;
+  // String? month;
+  String? cancel_reason;
+  String? cancel_note;
+
+  //add
+  Status? s;
+  Reason? r;
+  Apartment? a;
+
+  AppointmentSchedule({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.time,
+    this.customersId,
+    this.apartmentId,
+    this.apartment_type,
+    this.status,
+    this.resident_phone,
+    this.email,
+    this.apartmentTypeId,
+    this.date,
+    this.hour,
+    this.cancel_reason,
+    this.cancel_note,
+    this.s,
+    this.r,
+    this.a,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'time': time,
+      'customersId': customersId,
+      'apartmentId': apartmentId,
+      'apartment_type': apartment_type,
+      'status': status,
+      'resident_phone': resident_phone,
+      'email': email,
+      'apartmentTypeId': apartmentTypeId,
+      'date': date,
+      'hour': hour,
+      'cancel_reason': cancel_reason,
+      'cancel_note': cancel_note,
+    };
+  }
+
+  factory AppointmentSchedule.fromMap(Map<String, dynamic> map) {
+    return AppointmentSchedule(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      time: map['time'] != null ? map['time'] as String : null,
+      customersId:
+          map['customersId'] != null ? map['customersId'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      apartment_type: map['apartment_type'] != null
+          ? map['apartment_type'] as String
+          : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      resident_phone: map['resident_phone'] != null
+          ? map['resident_phone'] as String
+          : null,
+      email: map['email'] != null ? map['email'] as String : null,
+      apartmentTypeId: map['apartmentTypeId'] != null
+          ? map['apartmentTypeId'] as String
+          : null,
+      date: map['date'] != null ? map['date'] as String : null,
+      hour: map['hour'] != null ? map['hour'] as String : null,
+      cancel_reason:
+          map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
+      cancel_note:
+          map['cancel_note'] != null ? map['cancel_note'] as String : null,
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
+      r: map['r'] != null ? Reason.fromJson(map['r']) : null,
+      a: map['a'] != null ? Apartment.fromJson(map['a']) : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory AppointmentSchedule.fromJson(String source) =>
+      AppointmentSchedule.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  AppointmentSchedule copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? time,
+    String? customersId,
+    String? apartmentId,
+    String? apartment_type,
+    String? status,
+    String? resident_phone,
+    String? email,
+    String? apartmentTypeId,
+    String? date,
+    String? hour,
+    String? cancel_reason,
+    String? cancel_note,
+    Status? s,
+    Reason? r,
+    Apartment? a,
+  }) {
+    return AppointmentSchedule(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      time: time ?? this.time,
+      customersId: customersId ?? this.customersId,
+      apartmentId: apartmentId ?? this.apartmentId,
+      apartment_type: apartment_type ?? this.apartment_type,
+      status: status ?? this.status,
+      resident_phone: resident_phone ?? this.resident_phone,
+      email: email ?? this.email,
+      apartmentTypeId: apartmentTypeId ?? this.apartmentTypeId,
+      date: date ?? this.date,
+      hour: hour ?? this.hour,
+      cancel_reason: cancel_reason ?? this.cancel_reason,
+      cancel_note: cancel_note ?? this.cancel_note,
+      s: s ?? this.s,
+      r: r ?? this.r,
+      a: a ?? this.a,
+    );
   }
 }

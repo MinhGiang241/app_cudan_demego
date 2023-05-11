@@ -152,7 +152,7 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                       content: list[index]
                           .transports_list
                           ?.map((o) => o.vehicleType?.name)
-                          .join(" / "),
+                          .join("/ "),
                       contentStyle: txtBold(
                         12,
                         genStatusColor(

@@ -167,7 +167,11 @@ class ExtendTransportPrv extends ChangeNotifier {
           newExpireDate?.subtract(const Duration(hours: 7)).toIso8601String();
       item?.shelfLifeId = expireValue;
 
-      await APITransport.saveListTransport(item?.toMap()).then((v) {
+      await APITransport.renewDateTransport(
+        [item?.toMap()],
+        item?.shelfLifeId,
+        true,
+      ).then((v) {
         isLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(
@@ -184,6 +188,11 @@ class ExtendTransportPrv extends ChangeNotifier {
             );
           },
         );
+      }).catchError((e) {
+        isLoading = false;
+
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
       });
     } else {
       isLoading = false;

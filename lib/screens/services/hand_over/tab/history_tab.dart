@@ -63,12 +63,11 @@ class _HistoryTabState extends State<HistoryTab> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
-    var residentId = context.read<ResidentInfoPrv>().residentId;
     List<HandOver> listHandOver = context.read<HandOverPrv>().listHandOver;
     return FutureBuilder(
-      future: context
-          .read<HandOverPrv>()
-          .getHandOverHisByResidentId(context, residentId ?? ''),
+      future: context.read<HandOverPrv>().getHandOverHisByResidentId(
+            context,
+          ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
