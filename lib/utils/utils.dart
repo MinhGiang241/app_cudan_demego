@@ -130,7 +130,7 @@ class Utils {
   }
 
   static String dateFormat(String date, int choice, [String? format]) {
-    if (date.isEmpty) {
+    if (date.isEmpty || DateTime.tryParse(date) == null) {
       return "";
     }
     DateTime dateTime = DateTime.parse(date);

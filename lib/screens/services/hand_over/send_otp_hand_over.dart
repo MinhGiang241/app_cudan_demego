@@ -1,36 +1,42 @@
 // ignore_for_file: prefer_single_quotes
 
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../models/account.dart';
+import '../../../models/hand_over.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_screen.dart';
-import 'provider/otp_add_email_prv.dart';
+import 'prv/otp_booking_prv.dart';
 
-class OtpAddEmailScreen extends StatefulWidget {
-  const OtpAddEmailScreen({
+class OtpBookingScreen extends StatefulWidget {
+  static const routeName = '/handover-otp';
+  const OtpBookingScreen({
     super.key,
-    required this.acc,
-    required this.email,
-    required this.isAddNew,
   });
-  final Account acc;
-  final TextEditingController email;
-  final bool isAddNew;
 
   @override
-  State<OtpAddEmailScreen> createState() => _OtpAddEmailScreenState();
+  State<OtpBookingScreen> createState() => _OtpBookingScreenState();
 }
 
-class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
+class _OtpBookingScreenState extends State<OtpBookingScreen> {
   @override
   Widget build(BuildContext context) {
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    var schedule = arg['data'] as AppointmentSchedule;
+    var name = arg['apart'] as String;
+
+    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
     return ChangeNotifierProvider(
-      create: (context) => OtpAddEmailPrv(email: widget.email.text.trim()),
+      create: (context) => OtpBookingPrv(
+        schedule: schedule,
+        apartmentName: name,
+      ),
       builder: (context, snapshot) => PrimaryScreen(
         appBar: AppBar(backgroundColor: Colors.transparent),
         body: SafeArea(
@@ -49,13 +55,13 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                 child: Column(
                   children: [
                     Text(
-                      S.of(context).otp_msg_email,
+                      S.of(context).otp_msg_phone,
                       style: txtMedium(14, grayScaleColor2),
                       textAlign: TextAlign.center,
                     ),
                     vpad(24),
                     Text(
-                      S.of(context).we_send_to(widget.email.text.trim()),
+                      S.of(context).we_send_to(phone ?? ""),
                       style: txtMedium(14, grayScaleColor2),
                       textAlign: TextAlign.center,
                     ),
@@ -64,14 +70,14 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
               ),
               vpad(24),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: PinCodeTextField(
-                  controller: context.read<OtpAddEmailPrv>().otpController,
+                  controller: context.read<OtpBookingPrv>().otpController,
                   appContext: context,
                   length: 6,
                   onTap: () {},
                   onChanged: (v) {
-                    context.read<OtpAddEmailPrv>().offTextError();
+                    context.read<OtpBookingPrv>().offTextError();
                   },
                   autoFocus: true,
                   animationType: AnimationType.fade,
@@ -91,13 +97,13 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                     inactiveFillColor: Colors.white,
                   ),
                   errorAnimationController:
-                      context.read<OtpAddEmailPrv>().errorAnimationController,
+                      context.read<OtpBookingPrv>().errorAnimationController,
                   enableActiveFill: true,
                   animationDuration: const Duration(milliseconds: 300),
                 ),
               ),
               vpad(14),
-              if (context.watch<OtpAddEmailPrv>().otpValidate != null)
+              if (context.watch<OtpBookingPrv>().otpValidate != null)
                 Center(
                   child: Text(
                     S.of(context).otp_invalid,
@@ -108,7 +114,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
               StreamBuilder<int>(
                 initialData: 30,
                 stream:
-                    context.read<OtpAddEmailPrv>().timeResendController.stream,
+                    context.read<OtpBookingPrv>().timeResendController.stream,
                 builder: (context, snapshot) {
                   final second = snapshot.data ?? 30;
                   return Row(
@@ -119,7 +125,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                         style: txtMedium(14, grayScaleColor2),
                       ),
                       hpad(12),
-                      context.watch<OtpAddEmailPrv>().isSendLoading
+                      context.watch<OtpBookingPrv>().isSendLoading
                           ? const SizedBox(
                               height: 20,
                               width: 20,
@@ -129,7 +135,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                               onTap: () async {
                                 if (second <= 0) {
                                   await context
-                                      .read<OtpAddEmailPrv>()
+                                      .read<OtpBookingPrv>()
                                       .resend(context);
                                 }
                               },
@@ -138,7 +144,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                                 style: txtLinkSmall(
                                   color: (second <= 0 ||
                                           context
-                                              .watch<OtpAddEmailPrv>()
+                                              .watch<OtpBookingPrv>()
                                               .isSendLoading)
                                       ? primaryColorBase
                                       : primaryColor4,
@@ -159,15 +165,15 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: PrimaryButton(
-                  isLoading: context.watch<OtpAddEmailPrv>().isLoading,
+                  isLoading: context.watch<OtpBookingPrv>().isLoading,
                   text: S.of(context).next,
                   onTap: () {
                     context
-                        .read<OtpAddEmailPrv>()
-                        .verify(context, widget.isAddNew)
-                        .then((v) {
-                      widget.email.clear();
-                    });
+                        .read<OtpBookingPrv>()
+                        .verify(
+                          context,
+                        )
+                        .then((v) {});
                   },
                 ),
               )

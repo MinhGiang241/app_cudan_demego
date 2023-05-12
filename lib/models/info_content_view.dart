@@ -68,7 +68,7 @@ genStatus(String status) {
   }
 }
 
-Color genStatusColor(String status) {
+Color genStatusColor(String? status) {
   switch (status) {
     case "NEW":
       return grayScaleColor1;

@@ -494,6 +494,7 @@ class AppointmentSchedule {
   Status? s;
   Reason? r;
   Apartment? a;
+  Customer? c;
 
   AppointmentSchedule({
     this.id,
@@ -515,6 +516,7 @@ class AppointmentSchedule {
     this.s,
     this.r,
     this.a,
+    this.c,
   });
 
   Map<String, dynamic> toMap() {
@@ -571,6 +573,7 @@ class AppointmentSchedule {
       s: map['s'] != null ? Status.fromJson(map['s']) : null,
       r: map['r'] != null ? Reason.fromJson(map['r']) : null,
       a: map['a'] != null ? Apartment.fromJson(map['a']) : null,
+      c: map['c'] != null ? Customer.fromMap(map['c']) : null,
     );
   }
 
@@ -622,4 +625,141 @@ class AppointmentSchedule {
       a: a ?? this.a,
     );
   }
+}
+
+class Customer {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? info_name;
+  String? sex;
+  String? date_birth;
+  String? nationalId;
+  String? phone_required;
+  String? email;
+  String? date_range;
+  String? place_of_issue_required;
+  String? identity_card_required;
+  String? permanent_address;
+  String? provinceId;
+  String? districtId;
+  String? wardsId;
+  String? address;
+  String? address_provinceId;
+  String? address_districtId;
+  String? address_wardsId;
+  String? buyer_account_number;
+  String? buyer_the_bank;
+  Customer({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.info_name,
+    this.sex,
+    this.date_birth,
+    this.nationalId,
+    this.phone_required,
+    this.email,
+    this.date_range,
+    this.place_of_issue_required,
+    this.identity_card_required,
+    this.permanent_address,
+    this.provinceId,
+    this.districtId,
+    this.wardsId,
+    this.address,
+    this.address_provinceId,
+    this.address_districtId,
+    this.address_wardsId,
+    this.buyer_account_number,
+    this.buyer_the_bank,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'info_name': info_name,
+      'sex': sex,
+      'date_birth': date_birth,
+      'nationalId': nationalId,
+      'phone_required': phone_required,
+      'email': email,
+      'date_range': date_range,
+      'place_of_issue_required': place_of_issue_required,
+      'identity_card_required': identity_card_required,
+      'permanent_address': permanent_address,
+      'provinceId': provinceId,
+      'districtId': districtId,
+      'wardsId': wardsId,
+      'address': address,
+      'address_provinceId': address_provinceId,
+      'address_districtId': address_districtId,
+      'address_wardsId': address_wardsId,
+      'buyer_account_number': buyer_account_number,
+      'buyer_the_bank': buyer_the_bank,
+    };
+  }
+
+  factory Customer.fromMap(Map<String, dynamic> map) {
+    return Customer(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      info_name: map['info_name'] != null ? map['info_name'] as String : null,
+      sex: map['sex'] != null ? map['sex'] as String : null,
+      date_birth:
+          map['date_birth'] != null ? map['date_birth'] as String : null,
+      nationalId:
+          map['nationalId'] != null ? map['nationalId'] as String : null,
+      phone_required: map['phone_required'] != null
+          ? map['phone_required'] as String
+          : null,
+      email: map['email'] != null ? map['email'] as String : null,
+      date_range:
+          map['date_range'] != null ? map['date_range'] as String : null,
+      place_of_issue_required: map['place_of_issue_required'] != null
+          ? map['place_of_issue_required'] as String
+          : null,
+      identity_card_required: map['identity_card_required'] != null
+          ? map['identity_card_required'] as String
+          : null,
+      permanent_address: map['permanent_address'] != null
+          ? map['permanent_address'] as String
+          : null,
+      provinceId:
+          map['provinceId'] != null ? map['provinceId'] as String : null,
+      districtId:
+          map['districtId'] != null ? map['districtId'] as String : null,
+      wardsId: map['wardsId'] != null ? map['wardsId'] as String : null,
+      address: map['address'] != null ? map['address'] as String : null,
+      address_provinceId: map['address_provinceId'] != null
+          ? map['address_provinceId'] as String
+          : null,
+      address_districtId: map['address_districtId'] != null
+          ? map['address_districtId'] as String
+          : null,
+      address_wardsId: map['address_wardsId'] != null
+          ? map['address_wardsId'] as String
+          : null,
+      buyer_account_number: map['buyer_account_number'] != null
+          ? map['buyer_account_number'] as String
+          : null,
+      buyer_the_bank: map['buyer_the_bank'] != null
+          ? map['buyer_the_bank'] as String
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Customer.fromJson(String source) =>
+      Customer.fromMap(json.decode(source) as Map<String, dynamic>);
 }

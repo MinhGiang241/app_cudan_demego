@@ -1,21 +1,26 @@
 import 'dart:async';
 
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/hand_over.dart';
 import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
+import '../../../auth/prv/resident_info_prv.dart';
+import '../hand_over_screen.dart';
 
-class OtpAddEmailPrv extends ChangeNotifier {
-  OtpAddEmailPrv({required this.email}) {
+class OtpBookingPrv extends ChangeNotifier {
+  OtpBookingPrv({required this.schedule, required this.apartmentName}) {
     _startTimer();
   }
+
   final TextEditingController otpController = TextEditingController();
-  final String email;
+  late AppointmentSchedule schedule;
   String? otpValidate;
+  String apartmentName;
   StreamController<ErrorAnimationType> errorAnimationController =
       StreamController.broadcast();
   StreamController<int> timeResendController = StreamController.broadcast();
@@ -44,7 +49,7 @@ class OtpAddEmailPrv extends ChangeNotifier {
     isSendLoading = true;
     notifyListeners();
     await APIAuth.sendOtpAddMoreEmail(
-      email,
+      "email",
       false,
       context.read<ResidentInfoPrv>().userInfo?.account?.id ?? "",
     ).then((v) {
@@ -61,31 +66,40 @@ class OtpAddEmailPrv extends ChangeNotifier {
     });
   }
 
-  verify(BuildContext context, bool isAddNew) async {
+  verify(
+    BuildContext context,
+  ) async {
     if (otpController.text.isEmpty || otpController.text.length < 6) {
       _onError();
     } else {
-      var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
-
-      await APIAuth.verifyOtpAddMoreEmail(
-        email,
-        accountId!,
-        otpController.text.trim(),
-      ).then((v) {
-        context.read<ResidentInfoPrv>().setEmail(email);
-        Utils.showSuccessMessage(
-          context: context,
-          e: isAddNew
-              ? S.of(context).success_add_email
-              : S.of(context).success_update_email,
-          onClose: () {
-            int count = 0;
-            Navigator.of(context).popUntil((_) => ++count >= 2);
-          },
-        );
-      }).catchError((e) {
-        Utils.showErrorMessage(context, e);
-      });
+      // var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+      if (otpController.text == '000000') {
+        isSendLoading = true;
+        notifyListeners();
+        APIHandOver.saveApointmentScheduleList(schedule.copyWith().toMap())
+            .then((v) {
+          isSendLoading = false;
+          notifyListeners();
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_book_schedule(apartmentName),
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                HandOverScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "init": 0,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          isSendLoading = false;
+          notifyListeners();
+          Utils.showErrorMessage(context, e);
+        });
+      }
     }
   }
 

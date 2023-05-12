@@ -8,6 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
@@ -56,6 +57,7 @@ class _BookingTabState extends State<BookingTab> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    var listSchedule = context.watch<HandOverPrv>().listHandOverSchedule;
     return FutureBuilder(
       future:
           context.read<HandOverPrv>().getHandOverBookingByResidentId(context),
@@ -70,7 +72,7 @@ class _BookingTabState extends State<BookingTab> {
               setState(() {});
             },
           );
-        } else if (list.isEmpty) {
+        } else if (listSchedule.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
@@ -106,7 +108,7 @@ class _BookingTabState extends State<BookingTab> {
             child: ListView(
               children: [
                 vpad(24),
-                ...list.map((e) {
+                ...listSchedule.map((e) {
                   return PrimaryCard(
                     margin:
                         const EdgeInsets.only(bottom: 16, left: 12, right: 12),
@@ -114,7 +116,7 @@ class _BookingTabState extends State<BookingTab> {
                       Navigator.pushNamed(
                         context,
                         BookingScreen.routeName,
-                        arguments: {"book": false},
+                        arguments: {"book": false, "schedule": e},
                       );
                     },
                     child: Padding(
@@ -139,7 +141,7 @@ class _BookingTabState extends State<BookingTab> {
                               children: [
                                 vpad(10),
                                 Text(
-                                  e['name'] as String,
+                                  "${e.a?.name}-${e.a?.f?.name}-${e.a?.b?.name}",
                                   style: txtBold(16),
                                 ),
                                 vpad(4),
@@ -156,7 +158,7 @@ class _BookingTabState extends State<BookingTab> {
                                       children: [
                                         Text('${S.of(context).hand_date}:'),
                                         Text(
-                                          e['hand_date'] as String,
+                                          Utils.dateFormat(e.date ?? "", 1),
                                         ),
                                       ],
                                     ),
@@ -165,7 +167,7 @@ class _BookingTabState extends State<BookingTab> {
                                       children: [
                                         Text('${S.of(context).hand_time}:'),
                                         Text(
-                                          e['hand_time'] as String,
+                                          e.hour ?? "",
                                         ),
                                       ],
                                     ),
@@ -174,11 +176,12 @@ class _BookingTabState extends State<BookingTab> {
                                       children: [
                                         Text('${S.of(context).status}:'),
                                         Text(
-                                          genStatus(e['status'] as String),
+                                          e.s?.name ?? '',
                                           style: txtBold(
                                             14,
                                             genStatusColor(
-                                                e['status'] as String),
+                                              e.status,
+                                            ),
                                           ),
                                         )
                                       ],

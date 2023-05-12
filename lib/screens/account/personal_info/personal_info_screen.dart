@@ -77,66 +77,73 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                PrimaryButton(
-                                  text: S.of(context).close,
-                                  buttonSize: ButtonSize.medium,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor4,
-                                  textColor: redColorBase,
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.medium,
-                                  text: S.of(context).add_new,
-                                  onTap: () async {
-                                    if (emailcontroller.text.trim().isEmpty) {
-                                      Utils.showErrorMessage(
-                                        context,
-                                        S.of(context).email_not_empty,
-                                      );
-                                    } else if (!RegexText.isEmail(
-                                      emailcontroller.text.trim(),
-                                    )) {
-                                      Utils.showErrorMessage(
-                                        context,
-                                        S.of(context).not_email,
-                                      );
-                                    } else {
+                                Expanded(
+                                  flex: 10,
+                                  child: PrimaryButton(
+                                    text: S.of(context).close,
+                                    buttonSize: ButtonSize.small,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: redColor4,
+                                    textColor: redColorBase,
+                                    onTap: () {
                                       Navigator.pop(context);
-                                      await APIAuth.sendOtpAddMoreEmail(
-                                              emailcontroller.text.trim(),
-                                              true,
-                                              context
-                                                      .read<ResidentInfoPrv>()
-                                                      .userInfo
-                                                      ?.account
-                                                      ?.id ??
-                                                  "")
-                                          .then((v) {
-                                        Utils.showBottomSheet(
-                                          context: context,
-                                          child: Container(
-                                            color: (backgroundColor),
-                                            padding:
-                                                const EdgeInsets.only(top: 30),
-                                            child: OtpAddEmailScreen(
-                                              acc: userInfo.account!,
-                                              email: emailcontroller,
-                                              isAddNew:
-                                                  userInfo.account?.email ==
-                                                          null
-                                                      ? true
-                                                      : false,
-                                            ),
-                                          ),
+                                    },
+                                  ),
+                                ),
+                                Expanded(flex: 1, child: hpad(0)),
+                                Expanded(
+                                  flex: 10,
+                                  child: PrimaryButton(
+                                    buttonSize: ButtonSize.small,
+                                    text: S.of(context).add_new,
+                                    onTap: () async {
+                                      if (emailcontroller.text.trim().isEmpty) {
+                                        Utils.showErrorMessage(
+                                          context,
+                                          S.of(context).email_not_empty,
                                         );
-                                      }).catchError((e) {
-                                        Utils.showErrorMessage(context, e);
-                                      });
-                                    }
-                                  },
+                                      } else if (!RegexText.isEmail(
+                                        emailcontroller.text.trim(),
+                                      )) {
+                                        Utils.showErrorMessage(
+                                          context,
+                                          S.of(context).not_email,
+                                        );
+                                      } else {
+                                        Navigator.pop(context);
+                                        await APIAuth.sendOtpAddMoreEmail(
+                                                emailcontroller.text.trim(),
+                                                true,
+                                                context
+                                                        .read<ResidentInfoPrv>()
+                                                        .userInfo
+                                                        ?.account
+                                                        ?.id ??
+                                                    "")
+                                            .then((v) {
+                                          Utils.showBottomSheet(
+                                            context: context,
+                                            child: Container(
+                                              color: (backgroundColor),
+                                              padding: const EdgeInsets.only(
+                                                  top: 30),
+                                              child: OtpAddEmailScreen(
+                                                acc: userInfo.account!,
+                                                email: emailcontroller,
+                                                isAddNew:
+                                                    userInfo.account?.email ==
+                                                            null
+                                                        ? true
+                                                        : false,
+                                              ),
+                                            ),
+                                          );
+                                        }).catchError((e) {
+                                          Utils.showErrorMessage(context, e);
+                                        });
+                                      }
+                                    },
+                                  ),
                                 ),
                               ],
                             )

@@ -7719,6 +7719,86 @@ class S {
       args: [],
     );
   }
+
+  /// `You booked handover schedule successfully for apartment [{name}] .Please wait to building management department approve.`
+  String success_book_schedule(Object name) {
+    return Intl.message(
+      'You booked handover schedule successfully for apartment [$name] .Please wait to building management department approve.',
+      name: 'success_book_schedule',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Cancel schedule`
+  String get can_schedule {
+    return Intl.message(
+      'Cancel schedule',
+      name: 'can_schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change schedule`
+  String get change_schedule {
+    return Intl.message(
+      'Change schedule',
+      name: 'change_schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to change schedule of handover, old  schedule for apartment [{name}] will be cancel?`
+  String confirm_change_schedule(Object name) {
+    return Intl.message(
+      'Do you want to change schedule of handover, old  schedule for apartment [$name] will be cancel?',
+      name: 'confirm_change_schedule',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `New schedule`
+  String get new_schedule {
+    return Intl.message(
+      'New schedule',
+      name: 'new_schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel handover schedule`
+  String get can_schedule_hand_over {
+    return Intl.message(
+      'Cancel handover schedule',
+      name: 'can_schedule_hand_over',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel schedule of handover for apartment [{name}] ?`
+  String confirm_can_schedule(Object name) {
+    return Intl.message(
+      'Do you want to cancel schedule of handover for apartment [$name] ?',
+      name: 'confirm_can_schedule',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Cancel schedule of handover for apartment [{name}] successfully`
+  String success_can_schedule(Object name) {
+    return Intl.message(
+      'Cancel schedule of handover for apartment [$name] successfully',
+      name: 'success_can_schedule',
+      desc: '',
+      args: [name],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

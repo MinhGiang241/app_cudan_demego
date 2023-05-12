@@ -38,6 +38,7 @@ import '../screens/services/hand_over/accept_hand_over_screen.dart';
 import '../screens/services/hand_over/booking_screen.dart';
 import '../screens/services/hand_over/general_info_screen.dart';
 import '../screens/services/hand_over/hand_over_screen.dart';
+import '../screens/services/hand_over/send_otp_hand_over.dart';
 import '../screens/services/missing_object/loot_item_details_screen.dart';
 import '../screens/services/missing_object/lost_item_details_screen.dart';
 import '../screens/services/missing_object/missing_object_screen.dart';
@@ -381,6 +382,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const TransportDetailsLetterScreen(),
+        );
+      case OtpBookingScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const OtpBookingScreen(),
         );
 
       // case ChatScreen.routeName:

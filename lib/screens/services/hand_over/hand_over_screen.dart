@@ -25,14 +25,21 @@ class _HandOverScreenState extends State<HandOverScreen>
   var initIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final arg =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     return ChangeNotifierProvider(
       create: (context) => HandOverPrv(),
       builder: (context, builder) {
+        if (arg != null && arg['init'] != null) {
+          tabController.index = arg['init'];
+        }
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             leading: BackButton(
               onPressed: () => Navigator.pushReplacementNamed(
-                  context, ServiceScreen.routeName),
+                context,
+                ServiceScreen.routeName,
+              ),
             ),
             title: S.of(context).hand_over,
             tabController: tabController,
@@ -45,8 +52,11 @@ class _HandOverScreenState extends State<HandOverScreen>
           floatingActionButton: FloatingActionButton(
             tooltip: S.of(context).booking_hand_over,
             onPressed: () {
-              Navigator.pushNamed(context, BookingScreen.routeName,
-                  arguments: {"book": true});
+              Navigator.pushNamed(
+                context,
+                BookingScreen.routeName,
+                arguments: {"book": true},
+              );
             },
             backgroundColor: primaryColorBase,
             child: const Icon(

@@ -1,3 +1,5 @@
+import 'package:app_cudan/models/hand_over.dart';
+import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
@@ -25,101 +27,188 @@ class BookingScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     bool isBook = arg['book'] ?? true;
-    var listApartmentChoice = context.read<ResidentInfoPrv>().listOwn.map((e) {
-      return DropdownMenuItem(
-        value: e.apartmentId,
-        child: Text(
-          e.apartment?.name! != null
-              ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-              : e.apartmentId!,
-        ),
-      );
-    }).toList();
+    AppointmentSchedule? schedule = arg['schedule'];
     return ChangeNotifierProvider(
-      create: (context) => BookingPrv(),
+      create: (context) => BookingPrv(
+        schedule: schedule,
+      ),
       builder: (context, builder) {
-        return PrimaryScreen(
-          appBar: PrimaryAppbar(
-            title: S.of(context).booking_hand_over,
-          ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  children: [
-                    vpad(16),
-                    PrimaryDropDown(
-                      isDense: false,
-                      label: S.of(context).surface,
-                      isRequired: true,
-                      selectList: listApartmentChoice,
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      validator: Utils.emptyValidator,
-                      label: S.of(context).hand_over_date,
-                      isRequired: true,
-                      isReadOnly: true,
-                      hint: "dd/mm/yyyy",
-                      onTap: () =>
-                          context.read<BookingPrv>().pickHandOverDate(context),
-                      suffixIcon:
-                          const PrimaryIcon(icons: PrimaryIcons.calendar),
-                      controller:
-                          context.read<BookingPrv>().handOverDateController,
-                      validateString:
-                          context.watch<BookingPrv>().validateHandOverDate,
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      validator: Utils.emptyValidator,
-                      label: S.of(context).hand_over_time,
-                      isReadOnly: true,
-                      isRequired: true,
-                      onTap: () =>
-                          context.read<BookingPrv>().pickHandOverTime(context),
-                      suffixIcon: const PrimaryIcon(icons: PrimaryIcons.clock),
-                      hint: "hh/mm",
-                      controller:
-                          context.read<BookingPrv>().handOverTimeController,
-                      validateString:
-                          context.watch<BookingPrv>().validateHandOverTime,
-                    ),
-                    // vpad(16),
-                    // PrimaryTextField(
-                    //   label: S.of(context).note,
-                    //   maxLines: 3,
-                    //   controller: context.read<BookingPrv>().noteController,
-                    // ),
-                    if (!isBook) vpad(16),
-                    if (!isBook)
-                      PrimaryTextField(
-                        label: S.of(context).status,
-                        enable: false,
-                        isReadOnly: true,
-                        initialValue: "Đã duyệt",
-                        textColor: greenColorBase,
-                        // controller: context.read<BookingPrv>().noteController,
+        return FutureBuilder(
+          future: context.read<BookingPrv>().getApartmentListContract(context),
+          builder: (context, snapshot) {
+            var listApartmentChoice =
+                context.read<BookingPrv>().apartmentList.map((e) {
+              return DropdownMenuItem(
+                value: e.id,
+                child: Text('${e.name} - ${e.f?.name} - ${e.b?.name}'),
+              );
+            }).toList();
+            return PrimaryScreen(
+              appBar: PrimaryAppbar(
+                title: S.of(context).booking_hand_over,
+              ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Form(
+                      onChanged: context.watch<BookingPrv>().autoValid
+                          ? () => context.read<BookingPrv>().validate(context)
+                          : null,
+                      autovalidateMode: context.watch<BookingPrv>().autoValid
+                          ? AutovalidateMode.onUserInteraction
+                          : null,
+                      key: context.read<BookingPrv>().formKey,
+                      child: Column(
+                        children: [
+                          vpad(16),
+                          PrimaryDropDown(
+                            enable: isBook,
+                            value: context.watch<BookingPrv>().apartmentValue,
+                            onChange:
+                                context.read<BookingPrv>().onChangeApartment,
+                            isDense: false,
+                            label: S.of(context).surface,
+                            isRequired: true,
+                            selectList: listApartmentChoice,
+                            validateString:
+                                context.watch<BookingPrv>().validateApartment,
+                            validator: Utils.emptyValidatorDropdown,
+                          ),
+                          vpad(16),
+                          PrimaryTextField(
+                            enable: isBook,
+                            validator: Utils.emptyValidator,
+                            label: S.of(context).hand_over_date,
+                            isRequired: true,
+                            isReadOnly: true,
+                            hint: "dd/mm/yyyy",
+                            onTap: () => context
+                                .read<BookingPrv>()
+                                .pickHandOverDate(context),
+                            suffixIcon:
+                                const PrimaryIcon(icons: PrimaryIcons.calendar),
+                            controller: context
+                                .read<BookingPrv>()
+                                .handOverDateController,
+                            validateString: context
+                                .watch<BookingPrv>()
+                                .validateHandOverDate,
+                          ),
+                          vpad(16),
+                          PrimaryTextField(
+                            enable: isBook,
+                            validator: Utils.emptyValidator,
+                            label: S.of(context).hand_over_time,
+                            isReadOnly: true,
+                            isRequired: true,
+                            onTap: () => context
+                                .read<BookingPrv>()
+                                .pickHandOverTime(context),
+                            suffixIcon:
+                                const PrimaryIcon(icons: PrimaryIcons.clock),
+                            hint: "hh/mm",
+                            controller: context
+                                .read<BookingPrv>()
+                                .handOverTimeController,
+                            validateString: context
+                                .watch<BookingPrv>()
+                                .validateHandOverTime,
+                          ),
+                          // vpad(16),
+                          // PrimaryTextField(
+                          //   label: S.of(context).note,
+                          //   maxLines: 3,
+                          //   controller: context.read<BookingPrv>().noteController,
+                          // ),
+                          if (!isBook) vpad(16),
+                          if (!isBook)
+                            PrimaryTextField(
+                              label: S.of(context).status,
+                              enable: false,
+                              isReadOnly: true,
+                              initialValue: schedule?.s?.name,
+                              textColor: genStatusColor(schedule?.status),
+                              textStyle:
+                                  txtBold(14, genStatusColor(schedule?.status)),
+                              // controller: context.read<BookingPrv>().noteController,
+                            ),
+                          if (!isBook && schedule?.cancel_reason != null)
+                            vpad(16),
+                          if (!isBook && schedule?.cancel_reason != null)
+                            PrimaryTextField(
+                              label: S.of(context).cancel_reason,
+                              enable: false,
+                              isReadOnly: true,
+                              initialValue: schedule?.r?.name,
+                              // textColor: genStatusColor(schedule?.status),
+                              // textStyle:
+                              //     txtBold(14, genStatusColor(schedule?.status)),
+                              // controller: context.read<BookingPrv>().noteController,
+                            ),
+                          vpad(30),
+                          Row(
+                            children: [
+                              if (!isBook && schedule?.status != "CANCEL")
+                                Expanded(
+                                  flex: 10,
+                                  child: PrimaryButton(
+                                    isFit: true,
+                                    isLoading: context
+                                        .watch<BookingPrv>()
+                                        .isSendLoading,
+                                    buttonType: ButtonType.red,
+                                    buttonSize: ButtonSize.medium,
+                                    text: S.of(context).can_schedule,
+                                    onTap: () {
+                                      return context
+                                          .read<BookingPrv>()
+                                          .cancel(context);
+                                    },
+                                  ),
+                                ),
+                              if (!isBook && schedule?.status != "CANCEL")
+                                Expanded(
+                                  flex: 1,
+                                  child: hpad(0),
+                                ),
+                              Expanded(
+                                flex: 10,
+                                child: PrimaryButton(
+                                  isFit: true,
+                                  isLoading:
+                                      context.watch<BookingPrv>().isSendLoading,
+                                  buttonType: isBook
+                                      ? ButtonType.green
+                                      : ButtonType.yellow,
+                                  buttonSize: ButtonSize.medium,
+                                  text: isBook
+                                      ? S.of(context).send_request
+                                      : S.of(context).re_book,
+                                  onTap: () {
+                                    if (isBook) {
+                                      return context
+                                          .read<BookingPrv>()
+                                          .send(context);
+                                    } else {
+                                      return context
+                                          .read<BookingPrv>()
+                                          .reBook(context);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          vpad(40)
+                        ],
                       ),
-                    vpad(30),
-                    PrimaryButton(
-                      width: dvWidth(context) - 48,
-                      isFit: true,
-                      isLoading: context.watch<BookingPrv>().isSendLoading,
-                      buttonType: isBook ? ButtonType.green : ButtonType.yellow,
-                      buttonSize: ButtonSize.medium,
-                      text: isBook
-                          ? S.of(context).send_request
-                          : S.of(context).re_book,
-                      onTap: () {},
                     ),
-                    vpad(40)
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

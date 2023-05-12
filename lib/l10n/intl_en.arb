@@ -765,5 +765,13 @@
   "note_can_reason": "Note cancel reason",
   "tranfer_rule": "Transfer rules",
   "cmnd_images": "Identity images (2 sides)",
-  "cmnd_images_not_less_2": "Identity images at less 2 Images"
+  "cmnd_images_not_less_2": "Identity images at less 2 Images",
+  "success_book_schedule": "You booked handover schedule successfully for apartment [{name}] .Please wait to building management department approve.",
+  "can_schedule": "Cancel schedule",
+  "change_schedule": "Change schedule",
+  "confirm_change_schedule": "Do you want to change schedule of handover, old  schedule for apartment [{name}] will be cancel?",
+  "new_schedule": "New schedule",
+  "can_schedule_hand_over": "Cancel handover schedule",
+  "confirm_can_schedule": "Do you want to cancel schedule of handover for apartment [{name}] ?",
+  "success_can_schedule": "Cancel schedule of handover for apartment [{name}] successfully"
 }

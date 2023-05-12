@@ -149,13 +149,12 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
           ),
           if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
               card.status != "LOST"
-          // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+          //&& (card.status == "LOCK" && card.status == "KHOAHETHAN")
           )
             vpad(24),
           if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
               card.status != "LOST"
-          // && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
-
+          // &&  (card.status == "LOCK" && card.status == "KHOAHETHAN")
           )
             PrimaryButton(
               width: double.infinity,

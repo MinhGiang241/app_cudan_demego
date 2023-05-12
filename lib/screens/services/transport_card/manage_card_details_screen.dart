@@ -149,7 +149,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                         isHorizontal: true,
                         title: S.of(context).card_status,
                         content: loadedCard.s?.name ?? "",
-                        contentStyle: genContentStyle(card.status ?? ""),
+                        contentStyle: genContentStyle(loadedCard.status ?? ""),
                       ),
                       if (loadedCard.r != null)
                         InfoContentView(
@@ -266,7 +266,9 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                               ],
                             ),
                             vpad(5),
-                            if (loadedCard.status == "ACTIVED")
+                            if (loadedCard.status == "ACTIVED" ||
+                                (loadedCard.status == "LOCK" &&
+                                    loadedCard.reasons == "KHOAHETHAN"))
                               Row(
                                 children: [
                                   PrimaryButton(
@@ -277,7 +279,10 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                     textColor: yellowColorBase,
                                     text: S.of(context).extend,
                                     onTap: () {
-                                      if (loadedCard.status != "ACTIVED") {
+                                      if (!(loadedCard.status == "ACTIVED" ||
+                                          (loadedCard.status == "LOCK" &&
+                                              loadedCard.reasons ==
+                                                  "KHOAHETHAN"))) {
                                         Utils.showErrorMessage(
                                           context,
                                           S
