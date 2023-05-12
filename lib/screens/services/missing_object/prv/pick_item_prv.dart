@@ -111,6 +111,7 @@ class PickItemPrv extends ChangeNotifier {
           validateFoundTime = null;
           notifyListeners();
         }).catchError((e) {
+          submitImagesLoot.clear();
           isLoading = false;
           validateName = null;
           validatePlace = null;
@@ -119,6 +120,7 @@ class PickItemPrv extends ChangeNotifier {
           Utils.showErrorMessage(context, e.toString());
         });
       } catch (e) {
+        submitImagesLoot.clear();
         isLoading = false;
         validateName = null;
         validatePlace = null;

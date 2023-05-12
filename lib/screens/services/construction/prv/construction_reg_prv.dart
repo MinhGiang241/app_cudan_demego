@@ -375,6 +375,8 @@ class ConstructionRegPrv extends ChangeNotifier {
         validateEmail = null;
         notifyListeners();
       }).catchError((e) {
+        uploadedCurrentDrawings.clear();
+        uploadedRenewDrawings.clear();
         isAddNewLoading = false;
         isSendApproveLoading = false;
         validateSurface = null;
@@ -398,6 +400,8 @@ class ConstructionRegPrv extends ChangeNotifier {
       //   listError.add(S.of(context).end_date_after_start_date);
       // }
     } catch (e) {
+      uploadedCurrentDrawings.clear();
+      uploadedRenewDrawings.clear();
       isAddNewLoading = false;
       isSendApproveLoading = false;
       validateSurface = null;

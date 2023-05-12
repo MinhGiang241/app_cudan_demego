@@ -189,6 +189,7 @@ class CreateReflectionPrv extends ChangeNotifier {
       }).catchError((e) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
         Utils.showErrorMessage(context, e);
+        submitedImages.clear();
         notifyListeners();
       });
     } else {

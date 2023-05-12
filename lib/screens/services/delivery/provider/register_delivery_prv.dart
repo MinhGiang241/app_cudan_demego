@@ -236,6 +236,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           isAddNewLoading = false;
           notifyListeners();
         }).catchError((e) {
+          submitImageDelivery.clear();
           isSendApproveLoading = false;
           isAddNewLoading = false;
           validateStartDate = null;
@@ -252,6 +253,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
           Utils.showErrorMessage(context, e.toString());
         });
       } catch (e) {
+        submitImageDelivery.clear();
         isSendApproveLoading = false;
         isAddNewLoading = false;
         validateStartDate = null;

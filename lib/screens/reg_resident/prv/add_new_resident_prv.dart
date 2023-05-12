@@ -478,6 +478,9 @@ class AddNewResidentPrv extends ChangeNotifier {
       } catch (e) {
         isLoading = false;
         notifyListeners();
+        uploadedDocuments.clear();
+        uploadedIdentityImages.clear();
+        uploadedResImages.clear();
         Utils.showErrorMessage(context, e.toString());
       }
     } else {

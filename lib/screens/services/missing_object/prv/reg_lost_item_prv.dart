@@ -110,6 +110,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
           validateLostHour = null;
           notifyListeners();
         }).catchError((e) {
+          submitImagesLost.clear();
           isLoading = false;
           validateName = null;
           validateLostTime = null;
@@ -118,6 +119,7 @@ class RegisterLostItemPrv extends ChangeNotifier {
           Utils.showErrorMessage(context, e.toString());
         });
       } catch (e) {
+        submitImagesLost.clear();
         isLoading = false;
         validateName = null;
         validateLostTime = null;

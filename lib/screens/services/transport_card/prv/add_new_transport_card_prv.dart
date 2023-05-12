@@ -623,6 +623,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     } catch (e) {
       autoValid = false;
       isAddTransLoading = false;
+      cusUploadedIdentity.clear();
+      resUploadedImages.clear();
+      otherUploadedImages.clear();
       notifyListeners();
       Utils.showErrorMessage(context, e.toString());
     }

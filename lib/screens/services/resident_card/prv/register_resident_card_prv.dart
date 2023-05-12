@@ -141,6 +141,9 @@ class RegisterResidentCardPrv extends ChangeNotifier {
         Utils.showErrorMessage(context, e.toString());
       });
     } catch (e) {
+      residentImageUploaded.clear();
+      identityImageUploaded.clear();
+      otherImageUploaded.clear();
       isAddNewLoading = false;
       isSendApproveLoading = false;
       notifyListeners();

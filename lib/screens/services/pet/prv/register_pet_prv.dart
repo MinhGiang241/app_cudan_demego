@@ -241,6 +241,9 @@ class RegisterPetPrv extends ChangeNotifier {
           throw (e);
         });
       } catch (e) {
+        submitCertificateFiles.clear();
+        submitImagesPet.clear();
+        submitReportFiles.clear();
         isSendApproveLoading = false;
         isAddNewLoading = false;
         validateName = null;
