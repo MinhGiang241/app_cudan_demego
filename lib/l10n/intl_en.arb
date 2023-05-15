@@ -773,5 +773,10 @@
   "new_schedule": "New schedule",
   "can_schedule_hand_over": "Cancel handover schedule",
   "confirm_can_schedule": "Do you want to cancel schedule of handover for apartment [{name}] ?",
-  "success_can_schedule": "Cancel schedule of handover for apartment [{name}] successfully"
+  "success_can_schedule": "Cancel schedule of handover for apartment [{name}] successfully",
+  "s_usage_apartment": "Usage area of apartment",
+  "s_cons_apartment": "Construction area of apartment",
+  "time_hanover": "Time preparing handover ",
+  "employee_handover": "Hand over employee",
+  "hand_over_rule": "Hand over rule"
 }

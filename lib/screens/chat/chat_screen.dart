@@ -198,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
               return StreamBuilder(
                 stream: state.webSocketChannel!.stream,
                 builder: (context, snapshot) {
-                  print(snapshot);
+                  log(snapshot.toString());
                   rocket_notification.Notification? notification =
                       snapshot.hasData
                           ? rocket_notification.Notification.fromMap(

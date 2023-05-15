@@ -103,6 +103,8 @@ class CardHistory {
   String? person;
   String? manageCardId;
   String? status;
+  String? residentId;
+  String? name;
   Status? s;
   CardHistory({
     this.id,
@@ -115,6 +117,8 @@ class CardHistory {
     this.person,
     this.manageCardId,
     this.status,
+    this.residentId,
+    this.name,
     this.s,
   });
 
@@ -129,7 +133,9 @@ class CardHistory {
       'content': content,
       'person': person,
       'manageCardId': manageCardId,
+      'residentId': residentId,
       'status': status,
+      'name': name,
     };
   }
 
@@ -150,6 +156,9 @@ class CardHistory {
       manageCardId:
           map['manageCardId'] != null ? map['manageCardId'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
       s: map['s'] != null ? Status.fromJson(map['s']) : null,
     );
   }

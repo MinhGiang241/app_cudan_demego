@@ -7799,6 +7799,56 @@ class S {
       args: [name],
     );
   }
+
+  /// `Usage area of apartment`
+  String get s_usage_apartment {
+    return Intl.message(
+      'Usage area of apartment',
+      name: 's_usage_apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction area of apartment`
+  String get s_cons_apartment {
+    return Intl.message(
+      'Construction area of apartment',
+      name: 's_cons_apartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time preparing handover `
+  String get time_hanover {
+    return Intl.message(
+      'Time preparing handover ',
+      name: 'time_hanover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over employee`
+  String get employee_handover {
+    return Intl.message(
+      'Hand over employee',
+      name: 'employee_handover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hand over rule`
+  String get hand_over_rule {
+    return Intl.message(
+      'Hand over rule',
+      name: 'hand_over_rule',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

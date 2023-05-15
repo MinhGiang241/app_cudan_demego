@@ -63,13 +63,12 @@ class _HistoryTabState extends State<HistoryTab> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
-    List<AppointmentSchedule> listHandOver =
-        context.read<HandOverPrv>().listHandOverSchedule;
     return FutureBuilder(
-      future: context.read<HandOverPrv>().getHandOverBookingByResidentId(
+      future: context.read<HandOverPrv>().getHanOverHistory(
             context,
           ),
       builder: (context, snapshot) {
+        List<HandOver> list = context.watch<HandOverPrv>().listHandOver;
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
@@ -80,7 +79,7 @@ class _HistoryTabState extends State<HistoryTab> {
               setState(() {});
             },
           );
-        } else if (listHandOver.isEmpty) {
+        } else if (list.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
@@ -101,6 +100,7 @@ class _HistoryTabState extends State<HistoryTab> {
             ),
           );
         }
+
         return SafeArea(
           child: SmartRefresher(
             enablePullDown: true,
@@ -116,7 +116,7 @@ class _HistoryTabState extends State<HistoryTab> {
             child: ListView(
               children: [
                 vpad(24),
-                ...listHandOver.map((e) {
+                ...list.map((e) {
                   return Stack(
                     children: [
                       PrimaryCard(
@@ -129,7 +129,7 @@ class _HistoryTabState extends State<HistoryTab> {
                           Navigator.pushNamed(
                             context,
                             AcceptHandOverScreen.routeName,
-                            arguments: {"status": e.status},
+                            arguments: {"status": e.status, "handover": e},
                           );
                           // if (e.status == "COMPLETE") {
                           //   Navigator.pushNamed(
@@ -169,7 +169,7 @@ class _HistoryTabState extends State<HistoryTab> {
                                   children: [
                                     vpad(10),
                                     Text(
-                                      e.apartmentId ?? "",
+                                      e.label ?? "",
                                       style: txtBold(16),
                                     ),
                                     vpad(4),
@@ -187,7 +187,7 @@ class _HistoryTabState extends State<HistoryTab> {
                                             Text('${S.of(context).hand_date}:'),
                                             Text(
                                               Utils.dateFormat(
-                                                e.apartmentId ?? '',
+                                                e.schedule_time ?? '',
                                                 1,
                                               ),
                                             ),
@@ -198,7 +198,7 @@ class _HistoryTabState extends State<HistoryTab> {
                                           children: [
                                             Text('${S.of(context).hand_time}:'),
                                             Text(
-                                              e.apartmentId ?? '',
+                                              e.schedule_hour ?? '',
                                             ),
                                           ],
                                         ),
@@ -207,10 +207,10 @@ class _HistoryTabState extends State<HistoryTab> {
                                           children: [
                                             Text('${S.of(context).status}:'),
                                             Text(
-                                              e.apartmentId ?? "",
+                                              e.s?.name ?? "",
                                               style: txtBold(
                                                 14,
-                                                genStatusColor(
+                                                genStatusColorHandOver(
                                                   e.status as String,
                                                 ),
                                               ),
@@ -226,27 +226,29 @@ class _HistoryTabState extends State<HistoryTab> {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: (genStatusColor(e.status as String)),
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(12),
-                              bottomLeft: Radius.circular(8),
+                      if (e.status_error != null)
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  (genStatusColorHandOver(e.status as String)),
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(8),
+                              ),
+                            ),
+                            child: Text(
+                              e.se?.name ?? "",
+                              style: txtSemiBold(12, Colors.white),
                             ),
                           ),
-                          child: Text(
-                            e.apartmentId ?? "",
-                            style: txtSemiBold(12, Colors.white),
-                          ),
                         ),
-                      ),
                     ],
                   );
                 }),

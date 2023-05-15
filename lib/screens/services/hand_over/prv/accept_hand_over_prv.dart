@@ -51,33 +51,33 @@ class AcceptHandOverPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  pickHandOverDate(BuildContext context) async {
-    await Utils.showDatePickers(
-      context,
-      initDate: handOverDate ?? DateTime.now(),
-      startDate: DateTime(DateTime.now().year - 10, 1, 1),
-      endDate: DateTime(DateTime.now().year + 10, 1, 1),
-    ).then((v) {
-      if (v != null) {
-        handOverDate = v;
-        handOverDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
+  // pickHandOverDate(BuildContext context) async {
+  //   await Utils.showDatePickers(
+  //     context,
+  //     initDate: handOverDate ?? DateTime.now(),
+  //     startDate: DateTime(DateTime.now().year - 10, 1, 1),
+  //     endDate: DateTime(DateTime.now().year + 10, 1, 1),
+  //   ).then((v) {
+  //     if (v != null) {
+  //       handOverDate = v;
+  //       handOverDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
 
-        notifyListeners();
-      }
-    });
-  }
+  //       notifyListeners();
+  //     }
+  //   });
+  // }
 
-  pickHandOverTime(BuildContext context) {
-    showTimePicker(
-            context: context,
-            initialTime: handOverTime ?? const TimeOfDay(hour: 0, minute: 0))
-        .then((v) {
-      if (v != null) {
-        handOverTimeController.text = v.format(context);
-        handOverTime = v;
-      }
-    });
-  }
+  // pickHandOverTime(BuildContext context) {
+  //   showTimePicker(
+  //           context: context,
+  //           initialTime: handOverTime ?? const TimeOfDay(hour: 0, minute: 0))
+  //       .then((v) {
+  //     if (v != null) {
+  //       handOverTimeController.text = v.format(context);
+  //       handOverTime = v;
+  //     }
+  //   });
+  // }
 
   toggleGeneralInfo() {
     generalInfoExpand = !generalInfoExpand;

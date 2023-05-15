@@ -1,12 +1,16 @@
 import 'dart:math';
 
+import 'package:app_cudan/models/hand_over.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
+import 'package:app_cudan/widgets/select_file_widget.dart';
+import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
@@ -57,6 +61,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     final status = arg['status'];
+    HandOver handOver = arg['handover'];
     return ChangeNotifierProvider(
       create: (context) => AcceptHandOverPrv(),
       builder: (context, snapshot) {
@@ -81,222 +86,320 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
           curve: Curves.easeInOut,
         );
 
-        return PrimaryScreen(
-            appBar: PrimaryAppbar(
-              title: S.of(context).accept_hand_over,
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: SingleChildScrollView(
-                    child: Form(
-                  child: Column(
-                    children: [
-                      vpad(20),
-                      InkWell(
-                        onTap: () {
-                          if (isShowInfo) {
-                            isShowInfo = false;
-                            animationInfoController.reverse();
-                          } else {
-                            isShowInfo = true;
-                            animationInfoController.forward();
-                          }
-                          // showController.add(isShow);
-                          context.read<AcceptHandOverPrv>().toggleGeneralInfo();
-                        },
-                        child: Row(
-                          children: [
-                            const Icon(Icons.layers_outlined),
-                            hpad(20),
-                            Text(S.of(context).general_info,
-                                style: txtBoldUnderline(14)),
-                            hpad(30),
-                            SizedBox(
-                              height: 15.0,
-                              width: 15.0,
-                              child: AnimatedBuilder(
-                                animation: animationInfoController,
-                                builder: (context, child) => Transform.rotate(
-                                  origin: const Offset(4, 4),
-                                  angle: rotateInfoAnimation.value,
-                                  child: child,
+        return FutureBuilder(
+          future: () async {}(),
+          builder: (context, snapshot) {
+            return PrimaryScreen(
+                appBar: PrimaryAppbar(
+                  title: S.of(context).accept_hand_over,
+                ),
+                body: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: SingleChildScrollView(
+                        child: Form(
+                      child: Column(
+                        children: [
+                          vpad(20),
+                          InkWell(
+                            onTap: () {
+                              if (isShowInfo) {
+                                isShowInfo = false;
+                                animationInfoController.reverse();
+                              } else {
+                                isShowInfo = true;
+                                animationInfoController.forward();
+                              }
+                              // showController.add(isShow);
+                              context
+                                  .read<AcceptHandOverPrv>()
+                                  .toggleGeneralInfo();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.layers_outlined),
+                                hpad(20),
+                                Text(S.of(context).general_info,
+                                    style: txtBoldUnderline(14)),
+                                hpad(30),
+                                SizedBox(
+                                  height: 15.0,
+                                  width: 15.0,
+                                  child: AnimatedBuilder(
+                                    animation: animationInfoController,
+                                    builder: (context, child) =>
+                                        Transform.rotate(
+                                      origin: const Offset(4, 4),
+                                      angle: rotateInfoAnimation.value,
+                                      child: child,
+                                    ),
+                                    child: const Icon(
+                                        Icons.keyboard_arrow_down_rounded),
+                                  ),
                                 ),
-                                child: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      // if (isShowInfo)
-                      SizeTransition(
-                        sizeFactor: animationInfoDrop,
-                        child: SingleChildScrollView(
-                          key: context.read<AcceptHandOverPrv>().infoKey,
-                          child: Column(
-                            children: [
-                              vpad(16),
-                              PrimaryDropDown(
-                                label: S.of(context).surface,
-                                selectList: listApartmentChoice,
-                                isDense: false,
-                              ),
-                              vpad(16),
-                              PrimaryTextField(
-                                validator: Utils.emptyValidator,
-                                label: S.of(context).hand_over_date,
-                                isRequired: true,
-                                isReadOnly: true,
-                                hint: "dd/mm/yyyy",
-                                onTap: () => context
-                                    .read<AcceptHandOverPrv>()
-                                    .pickHandOverDate(context),
-                                suffixIcon: const PrimaryIcon(
-                                    icons: PrimaryIcons.calendar),
-                                controller: context
-                                    .read<AcceptHandOverPrv>()
-                                    .handOverDateController,
-                                validateString: context
-                                    .watch<AcceptHandOverPrv>()
-                                    .validateHandOverDate,
-                              ),
-                              vpad(16),
-                              PrimaryTextField(
-                                validator: Utils.emptyValidator,
-                                label: S.of(context).hand_over_time,
-                                isReadOnly: true,
-                                isRequired: true,
-                                onTap: () => context
-                                    .read<AcceptHandOverPrv>()
-                                    .pickHandOverTime(context),
-                                suffixIcon: const PrimaryIcon(
-                                    icons: PrimaryIcons.clock),
-                                hint: "hh/mm",
-                                controller: context
-                                    .read<AcceptHandOverPrv>()
-                                    .handOverTimeController,
-                                validateString: context
-                                    .watch<AcceptHandOverPrv>()
-                                    .validateHandOverTime,
-                              ),
-                              vpad(16),
-                              PrimaryTextField(
-                                hint: S.of(context).note,
-                                label: S.of(context).note,
-                                maxLines: 3,
-                                controller: context
-                                    .read<AcceptHandOverPrv>()
-                                    .noteController,
-                              ),
-                            ],
                           ),
-                        ),
-                      ),
-                      vpad(30),
-                      InkWell(
-                        onTap: () {
-                          if (isShowAsset) {
-                            isShowAsset = false;
-                            animationAssetController.reverse();
-                          } else {
-                            isShowAsset = true;
-                            animationAssetController.forward();
-                          }
-
-                          context.read<AcceptHandOverPrv>().toggleAssetList();
-                        },
-                        child: Row(
-                          children: [
-                            const Icon(Icons.home_outlined),
-                            hpad(20),
-                            Text(S.of(context).asset_list,
-                                style: txtBoldUnderline(14)),
-                            hpad(20),
-                            SizedBox(
-                              height: 15.0,
-                              width: 15.0,
-                              child: AnimatedBuilder(
-                                animation: animationAssetController,
-                                builder: (context, child) => Transform.rotate(
-                                  origin: const Offset(4, 4),
-                                  angle: rotateAssetAnimation.value,
-                                  child: child,
-                                ),
-                                child: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
+                          // if (isShowInfo)
+                          SizeTransition(
+                            sizeFactor: animationInfoDrop,
+                            child: SingleChildScrollView(
+                              key: context.read<AcceptHandOverPrv>().infoKey,
+                              child: Column(
+                                children: [
+                                  vpad(16),
+                                  PrimaryDropDown(
+                                    label: S.of(context).surface,
+                                    selectList: listApartmentChoice,
+                                    isDense: false,
+                                  ),
+                                  vpad(16),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        flex: 4,
+                                        child: PrimaryTextField(
+                                          label:
+                                              S.of(context).s_usage_apartment,
+                                          isRequired: true,
+                                          enable: false,
+                                          initialValue:
+                                              (handOver.floor_area ?? '0')
+                                                  .toString(),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: Column(
+                                            children: [
+                                              vpad(24),
+                                              const Text('(m²)'),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  vpad(16),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 4,
+                                        child: PrimaryTextField(
+                                          label: S.of(context).s_cons_apartment,
+                                          isRequired: true,
+                                          enable: false,
+                                          initialValue:
+                                              (handOver.real_floor_area ?? '0')
+                                                  .toString(),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: Column(
+                                            children: [
+                                              vpad(24),
+                                              const Text('(m²)'),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  vpad(16),
+                                  PrimaryTextField(
+                                    enable: false,
+                                    isRequired: true,
+                                    label: S.of(context).time_hanover,
+                                    initialValue:
+                                        "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
+                                  ),
+                                  vpad(16),
+                                  PrimaryTextField(
+                                    enable: false,
+                                    isRequired: true,
+                                    label: S.of(context).hand_over_employee,
+                                    initialValue:
+                                        "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
+                                  ),
+                                  vpad(16),
+                                  SelectFileWidget(
+                                    isDash: false,
+                                    existFiles: handOver.floor_plan_drawing ??
+                                        // ?.map(
+                                        //   (v) =>
+                                        //       "${ApiConstants.uploadURL}?load=${v.id}",
+                                        // )
+                                        // .toList() ??
+                                        [],
+                                  ),
+                                  vpad(16),
+                                  // PrimaryTextField(
+                                  //   validator: Utils.emptyValidator,
+                                  //   label: S.of(context).hand_over_date,
+                                  //   isRequired: true,
+                                  //   isReadOnly: true,
+                                  //   hint: "dd/mm/yyyy",
+                                  //   onTap: () => context
+                                  //       .read<AcceptHandOverPrv>()
+                                  //       .pickHandOverDate(context),
+                                  //   suffixIcon: const PrimaryIcon(
+                                  //       icons: PrimaryIcons.calendar),
+                                  //   controller: context
+                                  //       .read<AcceptHandOverPrv>()
+                                  //       .handOverDateController,
+                                  //   validateString: context
+                                  //       .watch<AcceptHandOverPrv>()
+                                  //       .validateHandOverDate,
+                                  // ),
+                                  // vpad(16),
+                                  // PrimaryTextField(
+                                  //   validator: Utils.emptyValidator,
+                                  //   label: S.of(context).hand_over_time,
+                                  //   isReadOnly: true,
+                                  //   isRequired: true,
+                                  //   onTap: () => context
+                                  //       .read<AcceptHandOverPrv>()
+                                  //       .pickHandOverTime(context),
+                                  //   suffixIcon: const PrimaryIcon(
+                                  //       icons: PrimaryIcons.clock),
+                                  //   hint: "hh/mm",
+                                  //   controller: context
+                                  //       .read<AcceptHandOverPrv>()
+                                  //       .handOverTimeController,
+                                  //   validateString: context
+                                  //       .watch<AcceptHandOverPrv>()
+                                  //       .validateHandOverTime,
+                                  // ),
+                                  // vpad(16),
+                                  PrimaryTextField(
+                                    hint: S.of(context).note,
+                                    label: S.of(context).note,
+                                    maxLines: 3,
+                                    controller: context
+                                        .read<AcceptHandOverPrv>()
+                                        .noteController,
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      SizeTransition(
-                        sizeFactor: animationAssetDrop,
-                        child: SingleChildScrollView(
-                            child: Column(
-                          children: [
-                            vpad(16),
-                            ...context
-                                .watch<AcceptHandOverPrv>()
-                                .data
-                                .asMap()
-                                .entries
-                                .map((e) {
-                              return AssetItem(
-                                region: e.value['title'] as String,
-                                selectPass: context
+                          ),
+                          vpad(30),
+                          InkWell(
+                            onTap: () {
+                              if (isShowAsset) {
+                                isShowAsset = false;
+                                animationAssetController.reverse();
+                              } else {
+                                isShowAsset = true;
+                                animationAssetController.forward();
+                              }
+
+                              context
+                                  .read<AcceptHandOverPrv>()
+                                  .toggleAssetList();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.home_outlined),
+                                hpad(20),
+                                Text(S.of(context).asset_list,
+                                    style: txtBoldUnderline(14)),
+                                hpad(20),
+                                SizedBox(
+                                  height: 15.0,
+                                  width: 15.0,
+                                  child: AnimatedBuilder(
+                                    animation: animationAssetController,
+                                    builder: (context, child) =>
+                                        Transform.rotate(
+                                      origin: const Offset(4, 4),
+                                      angle: rotateAssetAnimation.value,
+                                      child: child,
+                                    ),
+                                    child: const Icon(
+                                        Icons.keyboard_arrow_down_rounded),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizeTransition(
+                            sizeFactor: animationAssetDrop,
+                            child: SingleChildScrollView(
+                                child: Column(
+                              children: [
+                                vpad(16),
+                                ...context
                                     .watch<AcceptHandOverPrv>()
-                                    .selectItemPass,
-                                data: e.value,
-                                index: e.key,
-                              );
-                            }),
-                            NotPassWidget(
-                              selectItem:
-                                  (bool value, int indexAsset, int indexItem) =>
+                                    .data
+                                    .asMap()
+                                    .entries
+                                    .map((e) {
+                                  return AssetItem(
+                                    region: e.value['title'] as String,
+                                    selectPass: context
+                                        .watch<AcceptHandOverPrv>()
+                                        .selectItemPass,
+                                    data: e.value,
+                                    index: e.key,
+                                  );
+                                }),
+                                NotPassWidget(
+                                  selectItem: (bool value, int indexAsset,
+                                          int indexItem) =>
                                       context
                                           .read<AcceptHandOverPrv>()
                                           .selectItemPass(
                                               value, indexAsset, indexItem),
-                              status: status,
-                              list: context
-                                  .watch<AcceptHandOverPrv>()
-                                  .notPassList,
-                            ),
-                          ],
-                        )),
-                      ),
-                      vpad(16),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: InkWell(
-                          onTap: () {},
-                          child: Text(
-                            'Biên bản bàn giao',
-                            textAlign: TextAlign.start,
-                            style: txtMediumUnderline(13, greenColorBase),
+                                  status: status,
+                                  list: context
+                                      .watch<AcceptHandOverPrv>()
+                                      .notPassList,
+                                ),
+                              ],
+                            )),
                           ),
-                        ),
+                          vpad(16),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: InkWell(
+                              onTap: () {},
+                              child: Text(
+                                'Biên bản bàn giao',
+                                textAlign: TextAlign.start,
+                                style: txtMediumUnderline(13, greenColorBase),
+                              ),
+                            ),
+                          ),
+                          vpad(16),
+                          PrimaryTextField(
+                            enable: false,
+                            isReadOnly: true,
+                            initialValue: genStatus(status),
+                            textColor: genStatusColor(status),
+                          ),
+                          vpad(40),
+                          PrimaryButton(
+                            onTap: () {},
+                            width: dvWidth(context) - 24,
+                            text: S.of(context).close,
+                          ),
+                          vpad(60),
+                        ],
                       ),
-                      vpad(16),
-                      PrimaryTextField(
-                        enable: false,
-                        isReadOnly: true,
-                        initialValue: genStatus(status),
-                        textColor: genStatusColor(status),
-                      ),
-                      vpad(40),
-                      PrimaryButton(
-                        onTap: () {},
-                        width: dvWidth(context) - 24,
-                        text: S.of(context).close,
-                      ),
-                      vpad(60),
-                    ],
+                    )),
                   ),
-                )),
-              ),
-            ));
+                ));
+          },
+        );
       },
     );
   }

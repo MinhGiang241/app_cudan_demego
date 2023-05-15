@@ -74,7 +74,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
         lost.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
         destroy.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
-        List<ManageCard> list = active + inActive + lock + lost + destroy;
+        List<ManageCard> list = active + lock + destroy + lost + inActive;
 
         if (list.isEmpty) {
           return SmartRefresher(
@@ -250,8 +250,13 @@ class _TransportCardTabState extends State<TransportCardTab> {
                               ],
                             ),
                           ),
-                          if (list[index].status != "LOST" &&
-                              list[index].status != "DESTROY")
+                          // Text(list[index].status ?? ""),
+                          // Text(list[index].reasons ?? ""),
+                          if (
+                          // (list[index].status == "DESTROY" &&
+                          //       list[index].reasons == 'NGUOIDUNGKHOA') ||
+                          (list[index].status != "LOST" &&
+                              list[index].status != "INACTIVE"))
                             Row(
                               children: [
                                 hpad(12),

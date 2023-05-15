@@ -74,6 +74,7 @@ class DeliveryListPrv extends ChangeNotifier {
                     Navigator.pop(context);
                     copyData.status = "CANCEL";
                     copyData.reasons = 'CHUHOTUCHOI';
+                    copyData.isMobile = true;
                     copyData.note_reason = reasonController.text;
                     APIDelivery.changeStatus(copyData.toJson()).then((v) {
                       Utils.showSuccessMessage(
@@ -141,6 +142,7 @@ class DeliveryListPrv extends ChangeNotifier {
       onConfirm: () {
         copyData.status = 'CANCEL';
         copyData.reasons = 'NGUOIDUNGHUY';
+        copyData.isMobile = true;
         // APIDelivery.saveNewDelivery(data.toJson())
         APIDelivery.changeStatus(copyData.toJson()).then((v) {
           Navigator.pop(context);

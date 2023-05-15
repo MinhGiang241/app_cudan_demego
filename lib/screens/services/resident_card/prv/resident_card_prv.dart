@@ -72,12 +72,20 @@ class ResidentCardPrv extends ChangeNotifier {
       ),
       onConfirm: () async {
         Navigator.pop(context);
-
+        var acc =
+            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var accName =
+            context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+        var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
+        var residentId = context.read<ResidentInfoPrv>().residentId;
         var submitCard = card.copyWith();
         submitCard.status = "LOST";
         submitCard.reasons = 'BAOMAT';
         await APITransport.saveManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
+            residentId: residentId,
+            person: resName ?? accName ?? acc,
+            name: resName ?? accName ?? acc,
             status: "LOST",
             action: "Báo mất",
             content: "Người dùng báo mất thẻ",
@@ -86,7 +94,8 @@ class ResidentCardPrv extends ChangeNotifier {
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
           );
-          APIHistory.saveHistoryCard(his.toMap());
+          return APIHistory.saveHistoryCard(his.toMap());
+        }).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_report_missing,
@@ -146,17 +155,27 @@ class ResidentCardPrv extends ChangeNotifier {
         var submitCard = card.copyWith();
         submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
+        var acc =
+            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var accName =
+            context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+        var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
+        var residentId = context.read<ResidentInfoPrv>().residentId;
         await APITransport.saveManageCard(submitCard.toMap()).then((v) {
           var his = CardHistory(
+            residentId: residentId,
+            person: resName ?? accName ?? acc,
+            name: resName ?? accName ?? acc,
             status: "DESTROY",
-            action: "Khóa thẻ",
-            content: "Người dùng khóa thẻ",
+            action: "Hủy thẻ",
+            content: "Người dùng hủy thẻ",
             manageCardId: card.id,
             perform_date: DateTime.now()
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
           );
           APIHistory.saveHistoryCard(his.toMap());
+        }).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_can_res_card,

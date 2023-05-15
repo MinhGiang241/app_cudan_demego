@@ -376,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email không được để trống"),
         "email_not_same": MessageLookupByLibrary.simpleMessage(
             "Email mới không được trùng với email cũ"),
+        "employee_handover": MessageLookupByLibrary.simpleMessage(
+            "Nhân viên phụ trách bàn giao"),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "end_chat":
@@ -499,6 +501,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ngày nhận bàn giao"),
         "hand_over_employee": MessageLookupByLibrary.simpleMessage(
             "Nhân viên phụ trách bàn giao"),
+        "hand_over_rule":
+            MessageLookupByLibrary.simpleMessage("Quy định bàn giao"),
         "hand_over_time":
             MessageLookupByLibrary.simpleMessage("Giờ nhận bàn giao"),
         "hand_time": MessageLookupByLibrary.simpleMessage("Giờ nhận"),
@@ -956,6 +960,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_8": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),
         "rgstr_code_9": MessageLookupByLibrary.simpleMessage(
             "Tài khoản chưa được kích hoạt"),
+        "s_cons_apartment": MessageLookupByLibrary.simpleMessage(
+            "Diện tích sàn xây dựng căn hộ (tim tường)"),
+        "s_usage_apartment": MessageLookupByLibrary.simpleMessage(
+            "Diện tích sử dụng căn hộ (thông thủy)"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
         "scuccess_participation": m19,
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
@@ -1118,6 +1126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra sự kiện"),
+        "time_hanover": MessageLookupByLibrary.simpleMessage(
+            "Thời gian nhận bàn giao dự kiến"),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),

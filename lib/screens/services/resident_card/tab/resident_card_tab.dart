@@ -215,8 +215,12 @@ class ResidentCardTab extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (list[index].status != "LOST" &&
-                                    list[index].status != "DESTROY")
+                                if (
+                                // (list[index].status == "DESTROY" &&
+                                //       list[index].reasons ==
+                                //           'NGUOIDUNGKHOA') ||
+                                (list[index].status != "LOST" &&
+                                    list[index].status != "INACTIVE"))
                                   Row(
                                     children: [
                                       hpad(12),

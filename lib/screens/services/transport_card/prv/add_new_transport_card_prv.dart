@@ -565,13 +565,14 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         var vehicleImages = otherExistedImages + otherUploadedImages;
         var regImages = resExistedImages + resUploadedImages;
         var cusImages = cusExistedIdentity + cusUploadedIdentity;
-        if (regImages.length < 2 && transTypeValue != "BICYCLE") {
+        if (regImages.length + imageFileRes.length < 2 &&
+            transTypeValue != "BICYCLE") {
           listError.add(S.of(context).reg_images_not_empty);
         }
-        if (cusImages.length < 2 && !isResident) {
+        if (cusImages.length + cusIdentity.length < 2 && !isResident) {
           listError.add(S.of(context).cmnd_images_not_less_2);
         }
-        if (vehicleImages.isEmpty) {
+        if (vehicleImages.isEmpty && otherImages.isEmpty) {
           listError.add(S.of(context).trans_images_not_empty);
         }
 

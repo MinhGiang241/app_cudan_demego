@@ -774,5 +774,10 @@
   "new_schedule": "Lịch hẹn mới",
   "can_schedule_hand_over": "Huỷ lịch bàn giao",
   "confirm_can_schedule": "Bạn chắc chắn muốn huỷ lịch bàn giao cho căn hộ [{name}] ?",
-  "success_can_schedule": "Bạn đã hủy lịch bàn giao thành công cho căn hộ [{name}]"
+  "success_can_schedule": "Bạn đã hủy lịch bàn giao thành công cho căn hộ [{name}]",
+  "s_usage_apartment": "Diện tích sử dụng căn hộ (thông thủy)",
+  "s_cons_apartment": "Diện tích sàn xây dựng căn hộ (tim tường)",
+  "time_hanover": "Thời gian nhận bàn giao dự kiến",
+  "employee_handover": "Nhân viên phụ trách bàn giao",
+  "hand_over_rule": "Quy định bàn giao"
 }

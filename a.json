@@ -1,12 +1,94 @@
-{
-    "msg": "method",
-    "method": "livechat:getInitialData",
-    "params": [
-        {
-            "name": "Visitor Name",
-            "email": "visitor@rocket.chat",
-            "message": "Hello!"
+[
+    {
+        "msg": "method",
+        "method": "livechat:getInitialData",
+        "params": [
+            {
+                "name": "Visitor Name",
+                "email": "visitor@rocket.chat",
+                "message": "Hello!"
+            }
+        ],
+        "id": "3"
+    },
+    {
+        "msg": "result",
+        "id": "11",
+        "result": {
+            "_id": "1684144766460",
+            "rid": "E8jBGb9PGAH2D6mXy",
+            "msg": "asdasd",
+            "token": "637f39be0231c792320bf55d",
+            "alias": "Nguyễn Hải Đức",
+            "ts": {
+                "$date": 1684144766847
+            },
+            "u": {
+                "_id": "6412f1e8d0d69b6002e68b4a",
+                "username": "guest-9",
+                "name": "Nguyễn Hải Đức"
+            },
+            "_updatedAt": {
+                "$date": 1684144766906
+            },
+            "urls": [],
+            "mentions": [],
+            "channels": [],
+            "md": [
+                {
+                    "type": "PARAGRAPH",
+                    "value": [
+                        {
+                            "type": "PLAIN_TEXT",
+                            "value": "asdasd"
+                        }
+                    ]
+                }
+            ],
+            "newRoom": true,
+            "showConnecting": false
         }
-    ],
-    "id": "3"
-}
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "hTHMrxn8aFdzLAANq",
+            "args": [
+                {
+                    "_id": "1684144990774",
+                    "rid": "hTHMrxn8aFdzLAANq",
+                    "msg": "sdasd",
+                    "token": "637f39be0231c792320bf55d",
+                    "alias": "Nguyễn Hải Đức",
+                    "ts": {
+                        "$date": 1684144990991
+                    },
+                    "u": {
+                        "_id": "6412f1e8d0d69b6002e68b4a",
+                        "username": "guest-9",
+                        "name": "Nguyễn Hải Đức"
+                    },
+                    "_updatedAt": {
+                        "$date": 1684144991030
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": [],
+                    "md": [
+                        {
+                            "type": "PARAGRAPH",
+                            "value": [
+                                {
+                                    "type": "PLAIN_TEXT",
+                                    "value": "sdasd"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]

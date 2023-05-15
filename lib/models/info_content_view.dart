@@ -96,8 +96,6 @@ Color genStatusColor(String? status) {
       return yellowColor8;
     case "UNDER_ACCEPTANCE":
       return primaryColorBase;
-    case "COMPLETE":
-      return greenColor8;
     case "HANDING_OVER":
       return greenColor9;
     case "WAIT_HAND_OVER":
@@ -112,10 +110,6 @@ Color genStatusColor(String? status) {
       return redColorBase;
     case "FEEDBACK":
       return yellowColor1;
-    case "PROCESSING":
-      return primaryColor6;
-    case "PROCESSED":
-      return greenColor6;
     case "YES":
       return yellowColor7;
     case "FOUND":
@@ -144,6 +138,39 @@ Color genStatusColor(String? status) {
       return yellowColor7;
     case "DESTROY":
       return yellowColor7;
+    case "HANDING":
+      return primaryColor6;
+    case "DONE":
+      return greenColor8;
+    case "WAIT_PROCESSING":
+      return yellowColor7;
+    case "PROCESSING":
+      return blueColor3;
+    case "PROCESSED":
+      return greenColorBase;
+    case "COMPLETE":
+      return greenColor8;
+    default:
+      return grayScaleColor1;
+  }
+}
+
+Color genStatusColorHandOver(String? status) {
+  switch (status) {
+    case "WAIT":
+      return yellowColor7;
+    case "HANDING":
+      return primaryColor6;
+    case "DONE":
+      return greenColor8;
+    case "WAIT_PROCESSING":
+      return yellowColor7;
+    case "PROCESSING":
+      return blueColor3;
+    case "PROCESSED":
+      return greenColorBase;
+    case "COMPLETE":
+      return greenColor8;
     default:
       return grayScaleColor1;
   }

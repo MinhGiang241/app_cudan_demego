@@ -374,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email can not be empty"),
         "email_not_same": MessageLookupByLibrary.simpleMessage(
             "New email is not same to old email"),
+        "employee_handover":
+            MessageLookupByLibrary.simpleMessage("Hand over employee"),
         "en": MessageLookupByLibrary.simpleMessage("English"),
         "end": MessageLookupByLibrary.simpleMessage("End"),
         "end_chat": MessageLookupByLibrary.simpleMessage("End conversation!"),
@@ -494,6 +496,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hand over date"),
         "hand_over_employee":
             MessageLookupByLibrary.simpleMessage("Hand over employee"),
+        "hand_over_rule":
+            MessageLookupByLibrary.simpleMessage("Hand over rule"),
         "hand_over_time":
             MessageLookupByLibrary.simpleMessage("Hand over time"),
         "hand_time": MessageLookupByLibrary.simpleMessage("Hand over time"),
@@ -955,6 +959,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_8": MessageLookupByLibrary.simpleMessage("System error"),
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
+        "s_cons_apartment": MessageLookupByLibrary.simpleMessage(
+            "Construction area of apartment"),
+        "s_usage_apartment":
+            MessageLookupByLibrary.simpleMessage("Usage area of apartment"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "scuccess_participation": m19,
         "search": MessageLookupByLibrary.simpleMessage("Search"),
@@ -1119,6 +1127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Time event happening"),
+        "time_hanover":
+            MessageLookupByLibrary.simpleMessage("Time preparing handover "),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Time happening"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),

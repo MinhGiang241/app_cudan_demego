@@ -1,5 +1,6 @@
 import 'package:app_cudan/models/list_transport.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/letter_history.dart';
@@ -9,6 +10,7 @@ import '../../../../services/api_history.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../services/api_transportation.dart';
 import '../../../../utils/utils.dart';
+import '../../../auth/prv/resident_info_prv.dart';
 
 class ManageCardDetailsPrv extends ChangeNotifier {
   ManageCardDetailsPrv(this.cancel);
@@ -68,7 +70,29 @@ class ManageCardDetailsPrv extends ChangeNotifier {
           transportCard?.transports_list =
               List.from(listTransport..removeAt(index));
           Navigator.pop(context);
-          await APITransport.deleteListTransport(id).then((v) {
+          await APITransport.deleteListTransport(id)
+              // .then((v) {
+              //   var acc =
+              //       context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+              //   var accName =
+              //       context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+              //   var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
+              //   var residentId = context.read<ResidentInfoPrv>().residentId;
+              //   var his = CardHistory(
+              //     status: card.status,
+              //     residentId: residentId,
+              //     person: resName ?? accName ?? acc,
+              //     name: resName ?? accName ?? acc,
+              //     action: "Hủy phương tiện",
+              //     content: "Người dùng hủy phương tiện",
+              //     manageCardId: card.id,
+              //     perform_date: DateTime.now()
+              //         .subtract(const Duration(hours: 7))
+              //         .toIso8601String(),
+              //   );
+              //   return APIHistory.saveHistoryCard(his.toMap());
+              // })
+              .then((v) {
             Utils.showSuccessMessage(
               context: context,
               e: S.of(context).success_cancel_trans,

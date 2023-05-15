@@ -31,16 +31,27 @@ class TransportCardPrv extends ChangeNotifier {
         submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
         var d = submitCard.toMap();
+        var acc =
+            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var accName =
+            context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+        var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
+        var residentId = context.read<ResidentInfoPrv>().residentId;
         await APITransport.lockManageCard(d).then((v) {
           var his = CardHistory(
-            action: "Khóa thẻ",
-            content: "Người dùng khóa thẻ",
+            status: "DESTROY",
+            residentId: residentId,
+            person: resName ?? accName ?? acc,
+            name: resName ?? accName ?? acc,
+            action: "Hủy thẻ",
+            content: "Người dùng hủy thẻ",
             manageCardId: card.id,
             perform_date: DateTime.now()
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
           );
-          APIHistory.saveHistoryCard(his.toMap());
+          return APIHistory.saveHistoryCard(his.toMap());
+        }).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_can_trans_card,
@@ -214,9 +225,19 @@ class TransportCardPrv extends ChangeNotifier {
 
         submitCard.status = "LOST";
         submitCard.reasons = 'BAOMAT';
+        var acc =
+            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var accName =
+            context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+        var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
+        var residentId = context.read<ResidentInfoPrv>().residentId;
         await APITransport.reportMissingTransportCard(submitCard.toMap())
             .then((v) {
           var his = CardHistory(
+            status: "LOST",
+            residentId: residentId,
+            person: resName ?? accName ?? acc,
+            name: resName ?? accName ?? acc,
             action: "Báo mất",
             content: "Người dùng báo mất thẻ",
             manageCardId: card.id,
@@ -224,7 +245,8 @@ class TransportCardPrv extends ChangeNotifier {
                 .subtract(const Duration(hours: 7))
                 .toIso8601String(),
           );
-          APIHistory.saveHistoryCard(his.toMap());
+          return APIHistory.saveHistoryCard(his.toMap());
+        }).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_report_missing,
