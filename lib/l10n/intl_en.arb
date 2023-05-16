@@ -779,5 +779,6 @@
   "s_cons_apartment": "Construction area of apartment",
   "time_hanover": "Time preparing handover ",
   "employee_handover": "Hand over employee",
-  "hand_over_rule": "Hand over rule"
+  "hand_over_rule": "Hand over rule",
+  "err_upload": "Upload error"
 }

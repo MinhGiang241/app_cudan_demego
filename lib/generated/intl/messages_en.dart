@@ -423,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
+        "err_upload": MessageLookupByLibrary.simpleMessage("Upload error"),
         "err_x": m16,
         "error": MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "ethnic": MessageLookupByLibrary.simpleMessage("Ethnic"),

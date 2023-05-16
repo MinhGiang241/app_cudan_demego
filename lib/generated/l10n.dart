@@ -7859,6 +7859,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Upload error`
+  String get err_upload {
+    return Intl.message(
+      'Upload error',
+      name: 'err_upload',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

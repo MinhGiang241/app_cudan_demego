@@ -380,6 +380,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     );
     weightController.text = '';
     packageNameController.text = '';
+    noteController.text = '';
     dimentionController.text = '';
     longController.text = '';
     widthController.text = '';
@@ -925,7 +926,6 @@ class RegisterDeliveryPrv extends ChangeNotifier {
                                         //   validateDimention = null;
                                         // }
                                         setState(() {});
-                                        notifyListeners();
                                       }
                                     },
                                   ),

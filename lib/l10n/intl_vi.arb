@@ -780,5 +780,6 @@
   "s_cons_apartment": "Diện tích sàn xây dựng căn hộ (tim tường)",
   "time_hanover": "Thời gian nhận bàn giao dự kiến",
   "employee_handover": "Nhân viên phụ trách bàn giao",
-  "hand_over_rule": "Quy định bàn giao"
+  "hand_over_rule": "Quy định bàn giao",
+  "err_upload": "Upload file lỗi"
 }

@@ -221,7 +221,12 @@ class APIAuth {
           data: body,
           onSendProgress: onSendProgress,
         );
-        results.add(ResponseFileUpload.fromJson(data));
+
+        var file = ResponseFileUpload.fromJson(data);
+        if (file.data == null) {
+          throw (S.current.err_upload);
+        }
+        results.add(file);
       }
     }
     return results;
