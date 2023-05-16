@@ -579,6 +579,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("Married"),
         "master_degree": MessageLookupByLibrary.simpleMessage("Master degree"),
         "material": MessageLookupByLibrary.simpleMessage("Material"),
+        "material_list": MessageLookupByLibrary.simpleMessage("Material list"),
         "matial_status": MessageLookupByLibrary.simpleMessage("Matial status"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),

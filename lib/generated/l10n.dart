@@ -5180,6 +5180,16 @@ class S {
     );
   }
 
+  /// `Material list`
+  String get material_list {
+    return Intl.message(
+      'Material list',
+      name: 'material_list',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Need to pay`
   String get need_pay {
     return Intl.message(

@@ -140,7 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
         "asset_detais":
             MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
-        "asset_list": MessageLookupByLibrary.simpleMessage("Danh sách tài sản"),
+        "asset_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách danh mục tài sản"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
         "attachment_file":
             MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
@@ -583,6 +584,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("Đã kết hôn"),
         "master_degree": MessageLookupByLibrary.simpleMessage("Bằng thạc sĩ"),
         "material": MessageLookupByLibrary.simpleMessage("Vật liệu"),
+        "material_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách danh mục vật liệu"),
         "matial_status":
             MessageLookupByLibrary.simpleMessage("Tình trạng hôn nhân"),
         "max_day_pay":

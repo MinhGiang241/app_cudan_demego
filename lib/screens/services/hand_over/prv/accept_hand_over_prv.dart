@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/file_upload.dart';
+import '../../../../services/api_rules.dart';
 import '../../../../utils/utils.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
@@ -15,8 +17,12 @@ class AcceptHandOverPrv extends ChangeNotifier {
       }
     }
   }
+
+  List<FileUploadModel> ruleFiles = [];
+
   bool generalInfoExpand = false;
   bool assetListExpand = false;
+  bool materialListExpand = false;
   bool expandNotPass = false;
   List notPassList = [];
   GlobalKey infoKey = GlobalKey();
@@ -32,6 +38,20 @@ class AcceptHandOverPrv extends ChangeNotifier {
   TimeOfDay? handOverTime;
 
   bool isSendLoading = false;
+
+  Future getRuleFiles() async {
+    await APIRule.getListRulesFiles("handover").then((v) {
+      if (v != null) {
+        ruleFiles.clear();
+        for (var i in v) {
+          ruleFiles.add(FileUploadModel.fromMap(i));
+        }
+        ruleFiles.sort(
+          (a, b) => a.id!.compareTo(b.id!),
+        );
+      }
+    });
+  }
 
   toggleExpandNotPass() {
     expandNotPass = !expandNotPass;
@@ -86,6 +106,11 @@ class AcceptHandOverPrv extends ChangeNotifier {
 
   toggleAssetList() {
     assetListExpand = !assetListExpand;
+    notifyListeners();
+  }
+
+  toggleMaterialList() {
+    materialListExpand = !materialListExpand;
     notifyListeners();
   }
 

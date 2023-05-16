@@ -1,4 +1,6 @@
+import 'dart:isolate';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:app_cudan/models/hand_over.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -8,6 +10,7 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/api_constant.dart';
@@ -32,12 +35,34 @@ class AcceptHandOverScreen extends StatefulWidget {
 
 class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
     with TickerProviderStateMixin {
+  ReceivePort port = ReceivePort();
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
   late AnimationController animationInfoController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 300));
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
   late AnimationController animationAssetController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 300));
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
+  late AnimationController animationMaterialController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
   late Animation<double> rotateInfoAnimation;
   late Animation<double> rotateAssetAnimation;
+  late Animation<double> rotateMaterialAnimation;
 
   // final StreamController<bool> showController = StreamController<bool>();
   @override
@@ -47,13 +72,34 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
         Tween<double>(begin: 0, end: pi).animate(animationInfoController);
     rotateAssetAnimation =
         Tween<double>(begin: 0, end: pi).animate(animationAssetController);
+    rotateMaterialAnimation =
+        Tween<double>(begin: 0, end: pi).animate(animationAssetController);
     // showController.add(isShow);
+    IsolateNameServer.registerPortWithName(
+      port.sendPort,
+      'downloader_send_port',
+    );
+    port.listen((dynamic data) {
+      // String id = data[0];
+      DownloadTaskStatus status = data[1];
+      // int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+        log(data);
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
   }
 
   @override
   void dispose() {
     animationInfoController.dispose();
     animationAssetController.dispose();
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
     super.dispose();
   }
 
@@ -62,6 +108,14 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     final status = arg['status'];
     HandOver handOver = arg['handover'];
+
+    Map<String, dynamic> material = {};
+    if (handOver.material_list != null) {
+      for (var i in handOver.material_list!) {
+        // material[i.]
+      }
+    }
+
     return ChangeNotifierProvider(
       create: (context) => AcceptHandOverPrv(),
       builder: (context, snapshot) {
@@ -69,13 +123,17 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
             context.read<ResidentInfoPrv>().listOwn.map((e) {
           return DropdownMenuItem(
             value: e.apartmentId,
-            child: Text(e.apartment?.name! != null
-                ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-                : e.apartmentId!),
+            child: Text(
+              e.apartment?.name! != null
+                  ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
+                  : e.apartmentId!,
+            ),
           );
         }).toList();
         bool isShowInfo = context.watch<AcceptHandOverPrv>().generalInfoExpand;
         bool isShowAsset = context.watch<AcceptHandOverPrv>().assetListExpand;
+        bool isShowMaterial =
+            context.watch<AcceptHandOverPrv>().materialListExpand;
 
         Animation<double> animationInfoDrop = CurvedAnimation(
           parent: animationInfoController,
@@ -85,19 +143,24 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
           parent: animationAssetController,
           curve: Curves.easeInOut,
         );
+        Animation<double> animationMaterialDrop = CurvedAnimation(
+          parent: animationMaterialController,
+          curve: Curves.easeInOut,
+        );
 
         return FutureBuilder(
-          future: () async {}(),
+          future: context.read<AcceptHandOverPrv>().getRuleFiles(),
           builder: (context, snapshot) {
+            var ruleFiles = context.watch<AcceptHandOverPrv>().ruleFiles;
             return PrimaryScreen(
-                appBar: PrimaryAppbar(
-                  title: S.of(context).accept_hand_over,
-                ),
-                body: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: SingleChildScrollView(
-                        child: Form(
+              appBar: PrimaryAppbar(
+                title: S.of(context).accept_hand_over,
+              ),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: SingleChildScrollView(
+                    child: Form(
                       child: Column(
                         children: [
                           vpad(20),
@@ -119,8 +182,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                               children: [
                                 const Icon(Icons.layers_outlined),
                                 hpad(20),
-                                Text(S.of(context).general_info,
-                                    style: txtBoldUnderline(14)),
+                                Text(
+                                  S.of(context).general_info,
+                                  style: txtBoldUnderline(14),
+                                ),
                                 hpad(30),
                                 SizedBox(
                                   height: 15.0,
@@ -134,7 +199,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       child: child,
                                     ),
                                     child: const Icon(
-                                        Icons.keyboard_arrow_down_rounded),
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -279,19 +345,47 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   //       .validateHandOverTime,
                                   // ),
                                   // vpad(16),
-                                  PrimaryTextField(
-                                    hint: S.of(context).note,
-                                    label: S.of(context).note,
-                                    maxLines: 3,
-                                    controller: context
-                                        .read<AcceptHandOverPrv>()
-                                        .noteController,
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "${S.of(context).hand_over_rule}:",
+                                      style: txtBodySmallBold(
+                                        color: grayScaleColorBase,
+                                      ),
+                                    ),
+                                  ),
+
+                                  if (ruleFiles.isNotEmpty) vpad(12),
+                                  ...ruleFiles.map(
+                                    (v) => Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Utils.downloadFile(
+                                            context: context,
+                                            id: v.id,
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            v.name ?? "",
+                                            style: txtRegular(
+                                              13,
+                                              primaryColorBase,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           vpad(30),
+
                           InkWell(
                             onTap: () {
                               if (isShowAsset) {
@@ -308,10 +402,15 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                             },
                             child: Row(
                               children: [
-                                const Icon(Icons.home_outlined),
+                                const Icon(Icons.house_siding_rounded),
                                 hpad(20),
-                                Text(S.of(context).asset_list,
-                                    style: txtBoldUnderline(14)),
+                                Expanded(
+                                  child: Text(
+                                    S.of(context).asset_list,
+                                    style: txtBoldUnderline(14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                                 hpad(20),
                                 SizedBox(
                                   height: 15.0,
@@ -325,47 +424,147 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       child: child,
                                     ),
                                     child: const Icon(
-                                        Icons.keyboard_arrow_down_rounded),
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
                                   ),
                                 ),
+                                hpad(10),
                               ],
                             ),
                           ),
                           SizeTransition(
                             sizeFactor: animationAssetDrop,
                             child: SingleChildScrollView(
-                                child: Column(
-                              children: [
-                                vpad(16),
-                                ...context
-                                    .watch<AcceptHandOverPrv>()
-                                    .data
-                                    .asMap()
-                                    .entries
-                                    .map((e) {
-                                  return AssetItem(
-                                    region: e.value['title'] as String,
-                                    selectPass: context
-                                        .watch<AcceptHandOverPrv>()
-                                        .selectItemPass,
-                                    data: e.value,
-                                    index: e.key,
-                                  );
-                                }),
-                                NotPassWidget(
-                                  selectItem: (bool value, int indexAsset,
-                                          int indexItem) =>
-                                      context
-                                          .read<AcceptHandOverPrv>()
-                                          .selectItemPass(
-                                              value, indexAsset, indexItem),
-                                  status: status,
-                                  list: context
+                              child: Column(
+                                children: [
+                                  vpad(16),
+                                  ...context
                                       .watch<AcceptHandOverPrv>()
-                                      .notPassList,
+                                      .data
+                                      .asMap()
+                                      .entries
+                                      .map((e) {
+                                    return AssetItem(
+                                      region: e.value['title'] as String,
+                                      selectPass: context
+                                          .watch<AcceptHandOverPrv>()
+                                          .selectItemPass,
+                                      data: e.value,
+                                      index: e.key,
+                                    );
+                                  }),
+                                  NotPassWidget(
+                                    selectItem: (
+                                      bool value,
+                                      int indexAsset,
+                                      int indexItem,
+                                    ) =>
+                                        context
+                                            .read<AcceptHandOverPrv>()
+                                            .selectItemPass(
+                                              value,
+                                              indexAsset,
+                                              indexItem,
+                                            ),
+                                    status: status,
+                                    list: context
+                                        .watch<AcceptHandOverPrv>()
+                                        .notPassList,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          vpad(30),
+                          InkWell(
+                            onTap: () {
+                              if (isShowMaterial) {
+                                isShowMaterial = false;
+                                animationMaterialController.reverse();
+                              } else {
+                                isShowMaterial = true;
+                                animationMaterialController.forward();
+                              }
+
+                              context
+                                  .read<AcceptHandOverPrv>()
+                                  .toggleMaterialList();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.home_outlined),
+                                hpad(20),
+                                Expanded(
+                                  child: Text(
+                                    S.of(context).material_list,
+                                    style: txtBoldUnderline(14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
+                                hpad(20),
+                                SizedBox(
+                                  height: 15.0,
+                                  width: 15.0,
+                                  child: AnimatedBuilder(
+                                    animation: animationMaterialDrop,
+                                    builder: (context, child) =>
+                                        Transform.rotate(
+                                      origin: const Offset(4, 4),
+                                      angle: rotateMaterialAnimation.value,
+                                      child: child,
+                                    ),
+                                    child: const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
+                                  ),
+                                ),
+                                hpad(10),
                               ],
-                            )),
+                            ),
+                          ),
+                          vpad(16),
+                          SizeTransition(
+                            sizeFactor: animationMaterialDrop,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  vpad(16),
+                                  ...context
+                                      .watch<AcceptHandOverPrv>()
+                                      .data
+                                      .asMap()
+                                      .entries
+                                      .map((e) {
+                                    return AssetItem(
+                                      region: e.value['title'] as String,
+                                      selectPass: context
+                                          .watch<AcceptHandOverPrv>()
+                                          .selectItemPass,
+                                      data: e.value,
+                                      index: e.key,
+                                    );
+                                  }),
+                                  NotPassWidget(
+                                    selectItem: (
+                                      bool value,
+                                      int indexAsset,
+                                      int indexItem,
+                                    ) =>
+                                        context
+                                            .read<AcceptHandOverPrv>()
+                                            .selectItemPass(
+                                              value,
+                                              indexAsset,
+                                              indexItem,
+                                            ),
+                                    status: status,
+                                    list: context
+                                        .watch<AcceptHandOverPrv>()
+                                        .notPassList,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           vpad(16),
                           Align(
@@ -395,9 +594,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                           vpad(60),
                         ],
                       ),
-                    )),
+                    ),
                   ),
-                ));
+                ),
+              ),
+            );
           },
         );
       },
