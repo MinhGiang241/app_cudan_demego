@@ -6,8 +6,10 @@ import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
 
 class WebsocketConnect {
-  static const String serverUrl = "https://chat.masflex.vn";
-  static const String webSocketUrl = "wss://chat.masflex.vn/websocket";
+  static const String serverUrl =
+      "https://chat.demego.vn"; // https://chat.masflex.vn
+  static const String webSocketUrl =
+      "wss://chat.demego.vn/websocket"; // wss://chat.demego.vn/websocket
   static const String username = "minhgiang241";
   static const String password = "Admin@123";
   static Channel channel = Channel(id: "GENERAL");
