@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, constant_identifier_names
 
 part of 'chat_message_bloc.dart';
 
@@ -326,3 +326,10 @@ class ChatMessageStart extends ChatMessageState {
     textEditionController.clear();
   }
 }
+
+enum StateChat {
+  INIT,
+  START,
+}
+
+class ChatState {}

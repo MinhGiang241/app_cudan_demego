@@ -6150,10 +6150,10 @@ class S {
     );
   }
 
-  /// `Không có phiếu đăng ký người phụ thuộc nào`
+  /// `Don't have any dependence registration letter`
   String get no_dependence {
     return Intl.message(
-      'Không có phiếu đăng ký người phụ thuộc nào',
+      'Don\'t have any dependence registration letter',
       name: 'no_dependence',
       desc: '',
       args: [],

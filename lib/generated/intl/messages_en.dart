@@ -621,7 +621,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_delivery":
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_dependence": MessageLookupByLibrary.simpleMessage(
-            "Không có phiếu đăng ký người phụ thuộc nào"),
+            "Don\'t have any dependence registration letter"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
         "no_hand_over": MessageLookupByLibrary.simpleMessage("No hand over"),
