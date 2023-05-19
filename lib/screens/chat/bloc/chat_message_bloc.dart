@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+// ignore_for_file: depend_on_referenced_packages
 
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'dart:async';
+import 'dart:io';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
-import 'package:app_cudan/services/api_auth.dart';
-import 'package:app_cudan/services/api_service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';
@@ -24,11 +20,40 @@ part 'chat_message_state.dart';
 
 var uuid = const Uuid();
 
-class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
-  ChatMessageBloc() : super(ChatMessageInitial(visitorToken: '')) {
+class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
+  ChatMessageBloc()
+      : super(
+          ChatState(
+            stateChat: StateChatEnum.INIT,
+            showGreeting: false,
+          ),
+        ) {
+    //   on<LoadChatMessageStart>((event, emit) async {
+    //     emit(
+    //       ChatMessageStart(
+    //         user: user,
+    //         authToken: authToken,
+    //         visitorToken: event.visitorToken ?? "",
+    //         roomId: event.roomId,
+    //         webSocketChannel: event.webSocketChannel,
+    //       ),
+    //     );
+    //   });
+    //   on<BackChatMessageInit>((event, emit) async {
+    //     emit(
+    //       ChatMessageInitial(
+    //         user: user,
+    //         authToken: authToken,
+    //         visitorToken: visitorToken,
+    //       ),
+    //     );
+    //   });
+    // }
     on<LoadChatMessageStart>((event, emit) async {
       emit(
-        ChatMessageStart(
+        ChatState(
+          stateChat: StateChatEnum.START,
+          showGreeting: true,
           user: user,
           authToken: authToken,
           visitorToken: event.visitorToken ?? "",
@@ -39,7 +64,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     });
     on<BackChatMessageInit>((event, emit) async {
       emit(
-        ChatMessageInitial(
+        ChatState(
+          stateChat: StateChatEnum.INIT,
+          showGreeting: false,
           user: user,
           authToken: authToken,
           visitorToken: visitorToken,
@@ -52,6 +79,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   String authToken = '';
   User? user;
   String visitorToken = uuid.v4();
+  CustomWebSocketService webSocketService = CustomWebSocketService();
 
   Future createVisitor(context, email, token, phone, name) async {
     await _dio.post(
@@ -59,7 +87,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       data: {
         "visitor": {
           "name": name ?? phone,
-          // "email": email,
+          "email": email,
           "token": visitorToken,
           "phone": phone,
           "customFields": [
@@ -69,10 +97,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       },
     ).then((v) {
       user = User.fromMap(v.data['visitor']);
-      print(v);
-    }).catchError((e) {
-      print(e);
-    });
+    }).catchError((e) {});
   }
 
   Future getAuthentication(context) async {
@@ -90,10 +115,137 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     // throw RocketChatException((result as Map)['body']);
   }
 
-  // @override
-  // Stream<ChatMessageState> mapEventToState(ChatMessageEvent event)async{
-  //   if(event is ChatMessageStart){
-  //     yield ();
-  //   }
-  // }
+  void registerGuestChat(String token, String name, String email) {
+    webSocketService.registerGuestChat(
+      state.webSocketChannel!,
+      visitorToken,
+      name,
+      email,
+    );
+  }
+
+  Future openNewRoomLiveChat(String token) async {
+    return await webSocketService.openNewRoomLiveChat(
+      state.webSocketChannel!,
+      token,
+      null,
+    );
+  }
+
+  setRoomId(String? rId) {
+    state.roomId = rId;
+  }
+
+  Future loadLiveChatHistory(roomId, token) async {
+    await webSocketService.loadLiveChatHistory(roomId, token).then((v) {
+      if (v['messages'] != null) {
+        state.messagesMap.clear();
+        for (var i in v['messages'].reversed) {
+          var me = MessageChat.fromJson(i);
+          // print(i);
+          state.messagesMap[me.id ?? ""] = me;
+        }
+      }
+    });
+  }
+
+  void streamLiveChatRoom(String visitorToken, String id, String param) {
+    webSocketService.streamLiveChatRoom(
+      state.webSocketChannel!,
+      visitorToken,
+      state.roomId ?? id,
+      state.roomId ?? param,
+    );
+  }
+
+  genUniqueId() {
+    return uuid.v4();
+  }
+
+  void sendStartMessage(String? token, String message) {
+    if (message.isNotEmpty) {
+      webSocketService.sendMessageLiveChat(
+        state.webSocketChannel!,
+        genUniqueId(),
+        state.roomId ?? '',
+        token ?? "",
+        message,
+      );
+    }
+  }
+
+  void addMessage(MessageChat m) {
+    state.messagesMap[m.id ?? ''] = m;
+  }
+
+  void toogleGreeting() {
+    state.showGreeting = !state.showGreeting;
+  }
+
+  void closeChatRoom(String rid) {
+    webSocketService.closeLiveChatRoom(rid, visitorToken);
+  }
+
+  void scroll() {
+    state.scrollController
+        .jumpTo(state.scrollController.position.maxScrollExtent);
+  }
+
+  selectEmoji(String emoji) {
+    state.textEditionController.text = state.textEditionController.text + emoji;
+  }
+
+  void sendMessageLiveChat(
+    String id,
+    String rid,
+    String token,
+    String message,
+  ) {
+    webSocketService.sendMessageLiveChat(
+      state.webSocketChannel!,
+      id,
+      state.roomId ?? rid,
+      visitorToken,
+      message,
+    );
+  }
+
+  void sendMessage(String token) {
+    if (state.textEditionController.text.isNotEmpty) {
+      // webSocketService.sendMessageOnChannel(textEditionController.text,
+      //     webSocketChannel!, WebsocketConnect.channel);
+      print('text:${state.textEditionController.text.trim()}');
+      webSocketService.sendMessageLiveChat(
+        state.webSocketChannel!,
+        genUniqueId(),
+        state.roomId ?? token,
+        token,
+        state.textEditionController.text.trim(),
+      );
+      state.textEditionController.clear();
+    }
+  }
+
+  sendUploadFileOnLiveChat(File file, token, rid) {
+    webSocketService.sendUploadFileOnLiveChat(
+      state.webSocketChannel!,
+      state.roomId ?? rid,
+      file,
+      state.textEditionController.text.trim(),
+      visitorToken,
+    );
+    state.textEditionController.clear();
+  }
+
+  void sendGreetingMessage(String rid, String token, String message) {
+    if (message.isNotEmpty) {
+      webSocketService.sendMessageLiveChat(
+        state.webSocketChannel!,
+        genUniqueId(),
+        state.roomId ?? rid,
+        token,
+        message,
+      );
+    }
+  }
 }

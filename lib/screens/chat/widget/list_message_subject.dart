@@ -9,10 +9,12 @@ import '../../../models/chat_subject.dart';
 import '../../../services/api_chat.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
+import '../bloc/chat_message_bloc.dart';
 
 class ListMessageSubject extends StatefulWidget {
-  ListMessageSubject({super.key, this.state, required this.toogleGreeting});
-  var state;
+  ListMessageSubject(
+      {super.key, required this.bloc, required this.toogleGreeting});
+  ChatMessageBloc bloc;
   Function() toogleGreeting;
 
   @override
@@ -91,10 +93,10 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                             widget.toogleGreeting();
                             Future.delayed(const Duration(milliseconds: 10))
                                 .then((_) {
-                              widget.state.sendGreetingMessage(
+                              widget.bloc.sendGreetingMessage(
+                                accountId!,
                                 accountId,
-                                accountId,
-                                sublist[index].name,
+                                sublist[index].name!,
                               );
                             });
                           },

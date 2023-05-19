@@ -69,10 +69,10 @@ class _ChatScreenState extends State<ChatScreen> {
           title: Text(S.of(context).customer_care),
           backgroundColor: primaryColor4,
         ),
-        body: BlocBuilder<ChatMessageBloc, ChatMessageState>(
+        body: BlocBuilder<ChatMessageBloc, ChatState>(
           bloc: bloc,
           builder: (context, state) {
-            if (state is ChatMessageInitial) {
+            if (state.stateChat == StateChatEnum.INIT) {
               state.webSocketChannel =
                   state.webSocketService.connectToWebSocketLiveChat(
                 WebsocketConnect.webSocketUrl,
@@ -82,11 +82,12 @@ class _ChatScreenState extends State<ChatScreen> {
               var roomId =
                   context.read<ResidentInfoPrv>().userInfo?.account?.id;
 
+              // var contextBloc = context.read<ChatMessageBloc>();
               return FutureBuilder(
                 future: () async {
-                  var room = await state.openNewRoomLiveChat(roomId!);
-                  state.setRoomId(room?['room']?['_id']);
-                  var his = await state.loadLiveChatHistory(
+                  var room = await bloc.openNewRoomLiveChat(token!);
+                  bloc.setRoomId(room?['room']?['_id']);
+                  var his = await bloc.loadLiveChatHistory(
                     room?['room']?['_id'],
                     roomId,
                   );
@@ -98,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     );
                   }
 
-                  state.streamLiveChatRoom(token!, token, roomId!);
+                  bloc.streamLiveChatRoom(token!, token, roomId!);
                   return SafeArea(
                     child:
                         // Column(
@@ -157,7 +158,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 Future.delayed(
                                   const Duration(milliseconds: 400),
                                 ).then((v) {
-                                  state.sendStartMessage(token, "Bắt đầu");
+                                  bloc.sendStartMessage(token, "Bắt đầu");
                                 });
                               },
                               child: Row(
@@ -182,14 +183,14 @@ class _ChatScreenState extends State<ChatScreen> {
               );
             } else if (state is ChatMessageGreeting) {
               return vpad(0);
-            } else if (state is ChatMessageStart) {
+            } else if (state.stateChat == StateChatEnum.START) {
               state.webSocketChannel =
                   state.webSocketService.connectToWebSocketLiveChat(
                 WebsocketConnect.webSocketUrl,
               );
               var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
               var roomId = state.roomId;
-              state.streamLiveChatRoom(token!, token, token);
+              bloc.streamLiveChatRoom(token!, token, token);
               // state.webSocketService.getLastes50Message(
               //   state.webSocketChannel!,
               //   WebsocketConnect.room,
@@ -233,7 +234,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _initStateRender(snapshot, ChatMessageInitial state, bloc, token) {
+  Widget _initStateRender(snapshot, ChatState state, bloc, token) {
     if (json.decode(snapshot.data)['msg'] == 'ping') {
       print("send pong");
       state.webSocketService.sendPong(state.webSocketChannel!);
@@ -242,23 +243,23 @@ class _ChatScreenState extends State<ChatScreen> {
 
     if (data.msg == "added" && data.result != null) {
       for (var element in data.result!.messages!) {
-        state.addMessage(MessageChat.fromJson(json.decode(element.toString())));
+        bloc.addMessage(MessageChat.fromJson(json.decode(element.toString())));
       }
     }
     var dataJson = json.decode(snapshot.data);
 
     if (dataJson['msg'] == "result" && dataJson['result'] != null) {
-      state.addMessage(MessageChat.fromJson(dataJson['result']));
+      bloc.addMessage(MessageChat.fromJson(dataJson['result']));
     }
     if (data.msg == "result" && data.result != null) {
       var d = data.result!.messages!.reversed.toList();
       for (var el in d) {
         // var m = json.decode(element.toString());
-        state.addMessage(el);
+        bloc.addMessage(el);
       }
     }
     if (data.msg == "changed" && data.fields != null) {
-      state.addMessage(data.fields!.args![0]);
+      bloc.addMessage(data.fields!.args![0]);
     }
 
     // Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -271,9 +272,10 @@ class _ChatScreenState extends State<ChatScreen> {
     return Messages(
       refreshController: _refreshController,
       messageMap: state.messagesMap,
-      messageBloc: state,
+      messageBloc: bloc,
+      messageState: state,
       onRefresh: () {
-        state.loadLiveChatHistory(state.roomId, token);
+        bloc.loadLiveChatHistory(state.roomId, token);
         _refreshController.refreshCompleted();
       },
     );
@@ -281,7 +283,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _activeStateRender(
     AsyncSnapshot<dynamic> snapshot,
-    ChatMessageStart state,
+    ChatState state,
     bloc,
   ) {
     var accountId = context.read<ResidentInfoPrv>().userInfo!.account?.id;
@@ -293,10 +295,10 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     var data = RocketChatData.fromJson(json.decode(snapshot.data));
     if (data.msg == "changed" && data.fields != null) {
-      state.addMessage(data.fields!.args![0]);
+      bloc.addMessage(data.fields!.args![0]);
     }
     if (dataJson['msg'] == "result" && dataJson['result'] != null) {
-      state.addMessage(MessageChat.fromJson(dataJson['result']));
+      bloc.addMessage(MessageChat.fromJson(dataJson['result']));
     }
 
     return SafeArea(
@@ -306,15 +308,16 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Messages(
               refreshController: _refreshController,
               messageMap: state.messagesMap,
-              messageBloc: state,
+              messageBloc: bloc,
+              messageState: state,
             ),
           ),
           if (state.showGreeting)
             ListMessageSubject(
-              state: state,
+              bloc: bloc,
               toogleGreeting: () {
                 setState(() {
-                  state.toogleGreeting();
+                  bloc.toogleGreeting();
                 });
               },
             ),
@@ -334,7 +337,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           context.read<ResidentInfoPrv>().userInfo?.account?.id;
                       Navigator.pop(context);
                       bloc.add(BackChatMessageInit());
-                      state.closeChatRoom(rid!);
+                      bloc.closeChatRoom(rid!);
                     },
                   );
 
@@ -354,7 +357,8 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
           ),
-          if (!state.showGreeting) InputChat(messageBloc: state),
+          if (!state.showGreeting)
+            InputChat(messageState: state, messageBloc: bloc),
           vpad(10)
         ],
       ),

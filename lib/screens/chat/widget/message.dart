@@ -296,7 +296,7 @@ class _MessageState extends State<Message> {
 
                                                   'Accept':
                                                       'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                                  'Host': 'chat.masflex.vn',
+                                                  'Host': 'chat.demego.vn',
                                                   // 'Cookie':
                                                   //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
                                                   // "sec-ch-ua":

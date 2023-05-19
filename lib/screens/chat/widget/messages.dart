@@ -7,18 +7,21 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../models/rocket_chat_data.dart';
+import '../bloc/chat_message_bloc.dart';
 import 'message.dart';
 
 class Messages extends StatefulWidget {
   const Messages({
     super.key,
     required this.messageBloc,
+    required this.messageState,
     required this.messageMap,
     required this.refreshController,
     this.onRefresh,
   });
   final RefreshController refreshController;
-  final dynamic messageBloc;
+  final ChatMessageBloc messageBloc;
+  final ChatState messageState;
   final Map<String, MessageChat> messageMap;
   final void Function()? onRefresh;
   @override
@@ -62,7 +65,7 @@ class _MessagesState extends State<Messages> {
           //   controller: widget.refreshController,
           //   onRefresh: widget.onRefresh,
           child: ListView(
-            controller: widget.messageBloc.scrollController,
+            controller: widget.messageState.scrollController,
             children: [
               ...widget.messageMap.keys.map(
                 (e) => Message(
@@ -70,8 +73,8 @@ class _MessagesState extends State<Messages> {
                   chatbloc: widget.messageBloc,
                   emojies: widget.messageMap[e]!.reactions ?? {},
                   shouldTriggerChange: changeNotifier.stream,
-                  isMe: widget.messageBloc.user!.id ==
-                      widget.messageMap[e]!.u!.id,
+                  isMe: widget.messageBloc.user?.id ==
+                      widget.messageMap[e]?.u?.id,
                   d: DateTime.now(),
                   fullName: fullName ?? "",
                   message: widget.messageMap[e]!.msg ?? "",

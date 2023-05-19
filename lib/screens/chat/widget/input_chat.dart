@@ -10,10 +10,16 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_image_netword.dart';
+import '../bloc/chat_message_bloc.dart';
 
 class InputChat extends StatefulWidget {
-  const InputChat({super.key, required this.messageBloc});
-  final dynamic messageBloc;
+  const InputChat({
+    super.key,
+    required this.messageBloc,
+    required this.messageState,
+  });
+  final ChatMessageBloc messageBloc;
+  final ChatState messageState;
 
   @override
   State<InputChat> createState() => _InputChatState();
@@ -154,9 +160,9 @@ class _InputChatState extends State<InputChat> {
                       // messageBloc.summitedMessage(accountId, accountName);
                       var roomId =
                           context.read<ResidentInfoPrv>().userInfo?.account?.id;
-                      widget.messageBloc.sendMessage(roomId);
+                      widget.messageBloc.sendMessage(roomId!);
                     },
-                    controller: widget.messageBloc.textEditionController,
+                    controller: widget.messageState.textEditionController,
                     style: txtBodySmallBold(color: grayScaleColorBase),
                     cursorColor: primaryColor2,
                     decoration: InputDecoration(
@@ -193,7 +199,7 @@ class _InputChatState extends State<InputChat> {
                   FocusScope.of(context).unfocus();
                   // messageBloc.summitedMessage(accountId, accountName);
                   if (pickedFile.isEmpty && pickedImages.isEmpty) {
-                    widget.messageBloc.sendMessage(roomId);
+                    widget.messageBloc.sendMessage(roomId!);
                   } else {
                     var uploads = pickedFile + pickedImages;
                     var token =
