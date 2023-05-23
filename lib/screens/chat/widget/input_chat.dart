@@ -212,9 +212,12 @@ class _InputChatState extends State<InputChat> {
                     });
                   }
                 },
-                child: const Icon(
-                  Icons.send,
-                  color: grayScaleColorBase,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Icon(
+                    Icons.send,
+                    color: grayScaleColorBase,
+                  ),
                 ),
               )
             ],

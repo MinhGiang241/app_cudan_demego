@@ -288,9 +288,11 @@ class _MessageState extends State<Message> {
                                         if (c.image_type == null)
                                           InkWell(
                                             onTap: () async {
-                                              await downloadFile(
-                                                "${WebsocketConnect.serverUrl}${c.title_link}?download",
-                                                {
+                                              await Utils.downloadFile(
+                                                context: context,
+                                                url:
+                                                    "${WebsocketConnect.serverUrl}${c.title_link}?download",
+                                                headers: {
                                                   // "Accept-Encoding":
                                                   //     "gzip, deflate, br",
 

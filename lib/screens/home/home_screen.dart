@@ -46,13 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // ApiService.shared.getExistClient().then((value) {
     //   log(value!.credentials.accessToken);
     // });
-    var email = context.read<ResidentInfoPrv>().userInfo?.account?.email;
-    var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.userName;
-    var name = context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
-    context
-        .read<ChatMessageBloc>()
-        .createVisitor(context, email, token, phone, name);
 
     return ChangeNotifierProvider<HomePrv>(
       create: (context) => HomePrv(context),
@@ -61,10 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         var messageCount = context.watch<HomePrv>().messageCount;
 
         return FutureBuilder(
-          future: () async {
-            // context.read<ChatMessageBloc>().getAuthentication(context);
-            // await Future.delayed(Duration.zero);
-          }(),
+          future: () {}(),
           builder: (context, snap) {
             return Stack(
               alignment: Alignment.center,

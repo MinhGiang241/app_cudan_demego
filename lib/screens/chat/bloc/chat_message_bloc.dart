@@ -84,23 +84,32 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   String visitorToken = uuid.v4();
   CustomWebSocketService webSocketService = CustomWebSocketService();
 
-  Future createVisitor(context, email, token, phone, name) async {
+  Future createVisitor(context, email, token, phone, name, residentId) async {
     await _dio.post(
       '${WebsocketConnect.serverUrl}/api/v1/livechat/visitor',
       data: {
         "visitor": {
+          "username": name,
+          "_id": token,
           "name": name ?? phone,
-          "email": email,
-          "token": visitorToken,
+          "email": email ?? "rocketchat@gmail.com",
+          "token": token,
           "phone": phone,
           "customFields": [
-            {"key": "address", "value": "Rocket.Chat street", "overwrite": true}
+            {
+              "key": "residentCode",
+              "value": residentId ?? "",
+              "overwrite": true
+            },
           ]
         }
       },
     ).then((v) {
       user = User.fromMap(v.data['visitor']);
-    }).catchError((e) {});
+      print(user);
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   Future getAuthentication(context) async {
@@ -235,7 +244,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       state.roomId ?? rid,
       file,
       state.textEditionController.text.trim(),
-      visitorToken,
+      token,
     );
     state.textEditionController.clear();
   }

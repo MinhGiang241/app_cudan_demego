@@ -79,14 +79,34 @@ class _ChatScreenState extends State<ChatScreen> {
               WebsocketConnect.webSocketUrl,
             );
             // }
+
+            var email =
+                context.read<ResidentInfoPrv>().userInfo?.account?.email;
+            var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+            var phone =
+                context.read<ResidentInfoPrv>().userInfo?.account?.userName;
+            var name =
+                context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
+            var residentId = context.read<ResidentInfoPrv>().residentId;
             return FutureBuilder(
               future: () async {
-                var room = await bloc.openNewRoomLiveChat(token!);
-                bloc.setRoomId(room?['room']?['_id']);
-                var his = await bloc.loadLiveChatHistory(
-                  room?['room']?['_id'],
-                  roomId,
-                );
+                if (state.stateChat == StateChatEnum.INIT) {
+                  await bloc.createVisitor(
+                    context,
+                    email,
+                    token,
+                    phone,
+                    name,
+                    residentId,
+                  );
+                  var room = await bloc.openNewRoomLiveChat(token!);
+                  bloc.setRoomId(room?['room']?['_id']);
+
+                  var his = await bloc.loadLiveChatHistory(
+                    room?['room']?['_id'],
+                    roomId,
+                  );
+                }
               }(),
               builder: (context, sn) {
                 if (sn.connectionState == ConnectionState.waiting) {
@@ -152,9 +172,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ListMessageSubject(
                                 bloc: bloc,
                                 toogleGreeting: () {
-                                  setState(() {
-                                    bloc.toogleGreeting();
-                                  });
+                                  bloc.toogleGreeting();
                                 },
                               ),
                             if (state.stateChat == StateChatEnum.START)
@@ -433,6 +451,10 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     if (dataJson['msg'] == "result" && dataJson['result'] != null) {
       bloc.addMessage(MessageChat.fromJson(dataJson['result']));
+    }
+
+    if (dataJson['result']['newRoom'] == true) {
+      bloc.setRoomId(dataJson['result']['rid']);
     }
 
     return SafeArea(

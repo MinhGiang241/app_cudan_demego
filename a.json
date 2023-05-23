@@ -90,5 +90,27 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "connect",
+        "version": "1",
+        "support": [
+            "1",
+            "pre2",
+            "pre1"
+        ]
+    },
+    {
+        "msg": "method",
+        "method": "livechat:registerGuest",
+        "params": [
+            "637f39be0231c792320bf55d",
+            {
+                "token": "637f39be0231c792320bf55d",
+                "name": "Nguyễn Hải Đức",
+                "email": "minhgiang241@gmail.com"
+            }
+        ],
+        "id": "5"
     }
 ]
