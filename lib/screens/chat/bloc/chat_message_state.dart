@@ -356,6 +356,7 @@ class ChatState {
     this.roomId,
     this.user,
     this.webSocketChannel,
+    required this.messagesMap,
     required this.showGreeting,
     required this.stateChat,
   });
@@ -370,6 +371,7 @@ class ChatState {
     StateChatEnum? stateChat,
   }) {
     return ChatState(
+      messagesMap: messagesMap,
       authToken: authToken ?? this.authToken,
       visitorToken: visitorToken ?? this.visitorToken,
       roomId: roomId ?? this.roomId,

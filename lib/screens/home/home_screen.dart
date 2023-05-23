@@ -72,7 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Scaffold(
                   body: _navigationTab(context),
                   bottomNavigationBar:
-                      context.watch<ChatMessageBloc>().state is ChatMessageStart
+                      context.watch<ChatMessageBloc>().state.stateChat ==
+                              StateChatEnum.START
                           ? null
                           : _bottomNavigationBar(messageCount),
                   //     BlocBuilder<ChatMessageBloc, ChatMessageState>(

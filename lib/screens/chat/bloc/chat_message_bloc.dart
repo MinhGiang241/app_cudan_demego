@@ -24,6 +24,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   ChatMessageBloc()
       : super(
           ChatState(
+            messagesMap: {},
             stateChat: StateChatEnum.INIT,
             showGreeting: false,
           ),
@@ -59,12 +60,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
           visitorToken: event.visitorToken ?? "",
           roomId: event.roomId,
           webSocketChannel: event.webSocketChannel,
+          messagesMap: event.messagesMap ?? {},
         ),
       );
     });
     on<BackChatMessageInit>((event, emit) async {
       emit(
         ChatState(
+          messagesMap: {},
           stateChat: StateChatEnum.INIT,
           showGreeting: false,
           user: user,
@@ -75,7 +78,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     });
   }
   final _dio = Dio();
-
+  WebSocketChannel? webSocketChannel;
   String authToken = '';
   User? user;
   String visitorToken = uuid.v4();
@@ -183,7 +186,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   }
 
   void closeChatRoom(String rid) {
-    webSocketService.closeLiveChatRoom(rid, visitorToken);
+    state.webSocketService.closeLiveChatRoom(rid, visitorToken);
   }
 
   void scroll() {
