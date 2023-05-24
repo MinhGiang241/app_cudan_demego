@@ -64,12 +64,15 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
           ),
           child: Column(
             children: [
-              Text(
-                S.of(context).choose_subject,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-                softWrap: true,
-                style: txtRegular(14, grayScaleColorBase),
+              SizedBox(
+                height: 64,
+                child: Text(
+                  S.of(context).choose_subject,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  softWrap: true,
+                  style: txtRegular(14, grayScaleColorBase),
+                ),
               ),
               const Divider(color: grayScaleColor3, thickness: 1),
               ConstrainedBox(

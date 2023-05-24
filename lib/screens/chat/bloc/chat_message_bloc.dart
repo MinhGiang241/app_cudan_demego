@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -260,5 +261,13 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         message,
       );
     }
+  }
+
+  void clearMessage(String key) {
+    state.messagesMap.remove(key);
+  }
+
+  void setQuit(bool v) {
+    state.quit = v;
   }
 }

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -159,6 +160,73 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     var bloc = context.read<ChatMessageBloc>();
+    var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
+    if (widget.messageChat.chatMode == 2) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: PrimaryCard(
+          width: dvWidth(context) * .7,
+          borderRadius: BorderRadius.circular(24),
+          background: grayScaleColor4,
+          margin: const EdgeInsets.only(top: 12, bottom: 12),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: Column(
+            children: [
+              Text(
+                S.of(context).wait_chat_response,
+                style: txtRegular(14, grayScaleColorBase),
+              ),
+              vpad(10),
+              const Divider(
+                color: grayScaleColor1,
+                thickness: 1,
+              ),
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: () {
+                          bloc.clearMessage(widget.messageChat.id ?? '');
+                          bloc.setQuit(false);
+                          bloc.sendStartMessage(token, S.of(context).next);
+                        },
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          S.of(context).next,
+                          style: txtRegular(14, grayScaleColorBase),
+                        ),
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: grayScaleColor1,
+                      thickness: 1,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: () {
+                          bloc.add(BackChatMessageInit());
+                        },
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          S.of(context).end,
+                          style: txtRegular(14, grayScaleColorBase),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              vpad(10),
+            ],
+          ),
+        ),
+      );
+    }
     if (widget.messageChat.chatMode == 1) {
       return Align(
         alignment: Alignment.centerLeft,
@@ -171,6 +239,7 @@ class _MessageState extends State<Message> {
         ),
       );
     }
+
     return Align(
       alignment: widget.isMe ? Alignment.centerRight : Alignment.centerLeft,
       // color: Colors.amber,

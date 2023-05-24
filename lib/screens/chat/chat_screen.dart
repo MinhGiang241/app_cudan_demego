@@ -88,6 +88,17 @@ class _ChatScreenState extends State<ChatScreen> {
             var name =
                 context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
             var residentId = context.read<ResidentInfoPrv>().residentId;
+
+            if (state.stateChat == StateChatEnum.START) {
+              bloc.sendStartMessage(token, "Bắt đầu");
+
+              // bloc.addMessage(MessageChat(id: uuid.v4(), chatMode: 1));
+              // Future.delayed(
+              //   const Duration(milliseconds: 400),
+              // ).then((v) {
+              //   bloc.addMessage(MessageChat(chatMode: 1));
+              // });
+            }
             return FutureBuilder(
               future: () async {
                 if (state.stateChat == StateChatEnum.INIT) {
@@ -109,7 +120,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
               }(),
               builder: (context, sn) {
-                if (sn.connectionState == ConnectionState.waiting) {
+                if (sn.connectionState == ConnectionState.waiting &&
+                    state.stateChat == StateChatEnum.INIT) {
                   return const Center(
                     child: PrimaryLoading(),
                   );
@@ -121,6 +133,50 @@ class _ChatScreenState extends State<ChatScreen> {
                     builder: (context, snapshot) {
                       log(snapshot.toString());
                       if (snapshot.hasData) {
+                        var accountId = context
+                            .read<ResidentInfoPrv>()
+                            .userInfo!
+                            .account
+                            ?.id;
+
+                        var dataJson = json.decode(snapshot.data);
+                        if (json.decode(snapshot.data)['msg'] == 'ping') {
+                          print("send pong");
+                          if (state.quit &&
+                              state.stateChat == StateChatEnum.START) {
+                            bloc.add(BackChatMessageInit());
+                          }
+                          bloc.webSocketService
+                              .sendPong(state.webSocketChannel!);
+                          bloc.setQuit(true);
+                          bloc.addMessage(
+                            MessageChat(id: uuid.v4(), chatMode: 2),
+                          );
+
+                          // bloc.addMessage(MessageChat(chatMode: 1));
+                        }
+                        var data =
+                            RocketChatData.fromJson(json.decode(snapshot.data));
+                        if (data.msg == "changed" && data.fields != null) {
+                          bloc.addMessage(data.fields!.args![0]);
+                        }
+                        if (dataJson['msg'] == "result" &&
+                            dataJson['result'] != null) {
+                          bloc.addMessage(
+                              MessageChat.fromJson(dataJson['result']));
+                        }
+
+                        if (dataJson?['result']?['newRoom'] == true) {
+                          bloc.setRoomId(dataJson['result']['rid']);
+                        }
+                        if (dataJson['msg'] == "changed" &&
+                            dataJson["fields"] != null &&
+                            dataJson['fields']?['args']?[0]['msg'] ==
+                                "Bắt đầu") {
+                          bloc.addMessage(
+                            MessageChat(id: uuid.v4(), chatMode: 1),
+                          );
+                        }
                         return Column(
                           children: [
                             Expanded(
@@ -146,15 +202,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                           //     state.webSocketChannel,
                                         ),
                                       );
-                                      bloc.sendStartMessage(token, "Bắt đầu");
-                                      bloc.addMessage(MessageChat(chatMode: 1));
-                                      bloc.toogleGreeting();
+                                      // bloc.sendStartMessage(token, "Bắt đầu");
 
+                                      // bloc.addMessage(MessageChat(chatMode: 1));
+                                      bloc.toogleGreeting();
+                                      bloc.scroll();
                                       // Future.delayed(
-                                      //   const Duration(milliseconds: 400),
+                                      //   const Duration(milliseconds: 0),
                                       // ).then((v) {
                                       //   bloc.addMessage(
                                       //       MessageChat(chatMode: 1));
+                                      //   bloc.scroll();
                                       // });
                                     },
                                     child: Row(
@@ -441,27 +499,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _activeStateRender(
     AsyncSnapshot<dynamic> snapshot,
     ChatState state,
-    bloc,
+    ChatMessageBloc bloc,
   ) {
-    var accountId = context.read<ResidentInfoPrv>().userInfo!.account?.id;
-
-    var dataJson = json.decode(snapshot.data);
-    if (json.decode(snapshot.data)['msg'] == 'ping') {
-      print("send pong");
-      bloc.webSocketService.sendPong(state.webSocketChannel!);
-    }
-    var data = RocketChatData.fromJson(json.decode(snapshot.data));
-    if (data.msg == "changed" && data.fields != null) {
-      bloc.addMessage(data.fields!.args![0]);
-    }
-    if (dataJson['msg'] == "result" && dataJson['result'] != null) {
-      bloc.addMessage(MessageChat.fromJson(dataJson['result']));
-    }
-
-    if (dataJson?['result']?['newRoom'] == true) {
-      bloc.setRoomId(dataJson['result']['rid']);
-    }
-
     return SafeArea(
       child: Column(
         children: [
@@ -522,9 +561,9 @@ class _ChatScreenState extends State<ChatScreen> {
           //       ),
           //     ),
           //   ),
-          // if (!state.showGreeting && state.stateChat == StateChatEnum.START)
+          // if (state.stateChat == StateChatEnum.START)
           //   InputChat(messageState: state, messageBloc: bloc),
-          vpad(10)
+          // vpad(10)
         ],
       ),
     );

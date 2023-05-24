@@ -348,7 +348,7 @@ class ChatState {
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
   final List<MessageChat> messagesList = [];
-
+  bool quit;
   StateChatEnum stateChat;
   ChatState({
     this.authToken,
@@ -359,6 +359,7 @@ class ChatState {
     required this.messagesMap,
     required this.showGreeting,
     required this.stateChat,
+    this.quit = false,
   });
 
   ChatState copyWith({
@@ -369,6 +370,7 @@ class ChatState {
     WebSocketChannel? webSocketChannel,
     bool? showGreeting,
     StateChatEnum? stateChat,
+    bool? quit,
   }) {
     return ChatState(
       messagesMap: messagesMap,
@@ -379,6 +381,7 @@ class ChatState {
       webSocketChannel: webSocketChannel ?? this.webSocketChannel,
       showGreeting: showGreeting ?? this.showGreeting,
       stateChat: stateChat ?? this.stateChat,
+      quit: quit ?? this.quit,
     );
   }
 }
