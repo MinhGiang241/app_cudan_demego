@@ -105,15 +105,21 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                                 .userInfo!
                                 .account
                                 ?.id;
+                            widget.bloc.sendGreetingMessage(
+                              accountId!,
+                              accountId,
+                              sublist[index].name!,
+                            );
+                            widget.bloc.clearMessage(sublist[index].id ?? "");
                             // widget.toogleGreeting();
-                            Future.delayed(const Duration(milliseconds: 10))
-                                .then((_) {
-                              widget.bloc.sendGreetingMessage(
-                                accountId!,
-                                accountId,
-                                sublist[index].name!,
-                              );
-                            });
+                            // Future.delayed(const Duration(milliseconds: 10))
+                            //     .then((_) {
+                            //   widget.bloc.sendGreetingMessage(
+                            //     accountId!,
+                            //     accountId,
+                            //     sublist[index].name!,
+                            //   );
+                            // });
                           },
                           child: Container(
                             decoration: BoxDecoration(
