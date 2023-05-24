@@ -145,13 +145,16 @@ class _ChatScreenState extends State<ChatScreen> {
                           if (state.quit &&
                               state.stateChat == StateChatEnum.START) {
                             bloc.add(BackChatMessageInit());
+                            bloc.closeChatRoom(state.roomId);
                           }
                           bloc.webSocketService
                               .sendPong(state.webSocketChannel!);
                           bloc.setQuit(true);
-                          bloc.addMessage(
-                            MessageChat(id: uuid.v4(), chatMode: 2),
-                          );
+                          if (state.stateChat == StateChatEnum.START) {
+                            bloc.addMessage(
+                              MessageChat(id: uuid.v4(), chatMode: 2),
+                            );
+                          }
 
                           // bloc.addMessage(MessageChat(chatMode: 1));
                         }
@@ -278,9 +281,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 ),
                               ),
-                            if (
-                            // !state.showGreeting &&
-                            state.stateChat == StateChatEnum.START)
+                            if (!state.quit &&
+                                state.stateChat == StateChatEnum.START)
                               InputChat(messageState: state, messageBloc: bloc),
                             vpad(10)
                           ],

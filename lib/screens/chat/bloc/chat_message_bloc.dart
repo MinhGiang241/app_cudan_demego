@@ -196,7 +196,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     state.showGreeting = !state.showGreeting;
   }
 
-  void closeChatRoom(String rid) {
+  void closeChatRoom(String? rid) {
     state.webSocketService.closeLiveChatRoom(rid, visitorToken);
   }
 

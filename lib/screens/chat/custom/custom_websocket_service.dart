@@ -390,7 +390,7 @@ class CustomWebSocketService {
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 
-  Future closeLiveChatRoom(String rid, String visitorToken) async {
+  Future closeLiveChatRoom(String? rid, String visitorToken) async {
     return await ApiService.shared.postApi(
       path: '${WebsocketConnect.serverUrl}/api/v1/livechat/room.close',
       data: {"rid": rid, "token": visitorToken},
