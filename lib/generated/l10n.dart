@@ -7869,6 +7869,26 @@ class S {
       args: [],
     );
   }
+
+  /// `To refer any option, please select bellow:`
+  String get choose_subject {
+    return Intl.message(
+      'To refer any option, please select bellow:',
+      name: 'choose_subject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It seam you didn't response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response.`
+  String get wait_chat_response {
+    return Intl.message(
+      'It seam you didn\'t response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response.',
+      name: 'wait_chat_response',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

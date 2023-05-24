@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'package:app_cudan/models/rocket_chat_data.dart';
@@ -23,7 +24,9 @@ import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
+import '../bloc/chat_message_bloc.dart';
 import '../bloc/websocket_connect.dart';
+import 'list_message_subject.dart';
 
 var dio = Dio();
 
@@ -48,6 +51,7 @@ class Message extends StatefulWidget {
   final String? avatar;
   final DateTime d;
   final Stream<dynamic> shouldTriggerChange;
+
   Map<String, dynamic> emojies;
   dynamic chatbloc;
 
@@ -154,6 +158,19 @@ class _MessageState extends State<Message> {
 
   @override
   Widget build(BuildContext context) {
+    var bloc = context.read<ChatMessageBloc>();
+    if (widget.messageChat.chatMode == 1) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+          width: dvWidth(context) * .7,
+          child: ListMessageSubject(
+            bloc: bloc,
+            toogleGreeting: bloc.toogleGreeting,
+          ),
+        ),
+      );
+    }
     return Align(
       alignment: widget.isMe ? Alignment.centerRight : Alignment.centerLeft,
       // color: Colors.amber,
@@ -280,158 +297,160 @@ class _MessageState extends State<Message> {
                               Wrap(
                                 children: [
                                   ...widget.messageChat.attachments!.map(
-                                    (c) => Column(
-                                      mainAxisAlignment: widget.isMe
-                                          ? MainAxisAlignment.end
-                                          : MainAxisAlignment.start,
-                                      children: [
-                                        if (c.image_type == null)
-                                          InkWell(
-                                            onTap: () async {
-                                              await Utils.downloadFile(
-                                                context: context,
-                                                url:
-                                                    "${WebsocketConnect.serverUrl}${c.title_link}?download",
-                                                headers: {
-                                                  // "Accept-Encoding":
-                                                  //     "gzip, deflate, br",
+                                    (c) {
+                                      return Column(
+                                        mainAxisAlignment: widget.isMe
+                                            ? MainAxisAlignment.end
+                                            : MainAxisAlignment.start,
+                                        children: [
+                                          if (c.image_type == null)
+                                            InkWell(
+                                              onTap: () async {
+                                                await Utils.downloadFile(
+                                                  context: context,
+                                                  url:
+                                                      "${WebsocketConnect.serverUrl}${c.title_link}?download",
+                                                  headers: {
+                                                    // "Accept-Encoding":
+                                                    //     "gzip, deflate, br",
 
-                                                  'Accept':
-                                                      'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                                  'Host': 'chat.demego.vn',
-                                                  // 'Cookie':
-                                                  //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
-                                                  // "sec-ch-ua":
-                                                  //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
-                                                  // "sec-ch-ua-mobile":
-                                                  //     "?0",
-                                                  // "sec-ch-ua-platform":
-                                                  //     '"Windows"',
-                                                  // "Sec-Fetch-Dest":
-                                                  //     "document",
-                                                  // "Sec-Fetch-Mode":
-                                                  //     "navigate",
-                                                  // "Sec-Fetch-Site":
-                                                  //     "none",
-                                                  // "Sec-Fetch-User":
-                                                  //     "?1",
-                                                  // "Upgrade-Insecure-Requests":
-                                                  //     "1",
-                                                  // "User-Agent":
-                                                  //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+                                                    'Accept':
+                                                        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                    'Host': 'chat.demego.vn',
+                                                    // 'Cookie':
+                                                    //     "rc_token=${widget.chatbloc.authToken ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""};SL_G_WPT_TO=en; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; __zi=3000.SSZzejyD5TyuZFocr4KFr6AEgBYQInUNFfoYfuW91O4atFtXWWj0nI3U_Ek5HKZ199RqxuT3GSGuCJK.1",
+                                                    // "sec-ch-ua":
+                                                    //     '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
+                                                    // "sec-ch-ua-mobile":
+                                                    //     "?0",
+                                                    // "sec-ch-ua-platform":
+                                                    //     '"Windows"',
+                                                    // "Sec-Fetch-Dest":
+                                                    //     "document",
+                                                    // "Sec-Fetch-Mode":
+                                                    //     "navigate",
+                                                    // "Sec-Fetch-Site":
+                                                    //     "none",
+                                                    // "Sec-Fetch-User":
+                                                    //     "?1",
+                                                    // "Upgrade-Insecure-Requests":
+                                                    //     "1",
+                                                    // "User-Agent":
+                                                    //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+                                                  },
+                                                );
+
+                                                // await launchUrl(
+                                                //   Uri.parse(
+                                                //       "${WebsocketConnect.serverUrl}${c.title_link}?download"),
+                                                //   mode: LaunchMode
+                                                //       .platformDefault,
+                                                //   webViewConfiguration:
+                                                //       WebViewConfiguration(
+                                                //     headers: {
+                                                //       "Connection":
+                                                //           "keep-alive",
+                                                //       "Accept-Encoding":
+                                                //           "gzip, deflate, br",
+                                                //       'Accept':
+                                                //           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                                                //       'Host':
+                                                //           'chat.masflex.vn',
+                                                //       'Cookie':
+                                                //           "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
+                                                //     },
+                                                //   ),
+                                                // );
+                                              },
+                                              child: Text(
+                                                c.title!,
+                                                textAlign: widget.isMe
+                                                    ? TextAlign.end
+                                                    : TextAlign.start,
+                                                style: txtRegular(
+                                                  14,
+                                                  primaryColorBase,
+                                                ),
+                                              ),
+                                            ),
+                                          if (c.image_type != null &&
+                                              c.image_type!.contains("image"))
+                                            InkWell(
+                                              onTap: () async {
+                                                Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (
+                                                      context,
+                                                      animation,
+                                                      secondaryAnimation,
+                                                    ) =>
+                                                        PhotoViewer(
+                                                      link:
+                                                          "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                      listLink: [
+                                                        "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                      ],
+                                                      initIndex: 0,
+                                                      heroTag: "tag",
+                                                    ),
+                                                    transitionsBuilder: (
+                                                      context,
+                                                      animation,
+                                                      secondaryAnimation,
+                                                      child,
+                                                    ) {
+                                                      return FadeTransition(
+                                                        opacity: animation,
+                                                        child: child,
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    "${WebsocketConnect.serverUrl}${c.image_url}",
+                                                placeholder: (
+                                                  context,
+                                                  url,
+                                                ) =>
+                                                    const CircularProgressIndicator(),
+                                                errorWidget: (
+                                                  context,
+                                                  url,
+                                                  error,
+                                                ) =>
+                                                    const Icon(
+                                                  Icons.error,
+                                                ),
+                                                httpHeaders: {
+                                                  "Authorization":
+                                                      "Bearer ${widget.chatbloc.authToken}",
+                                                  "X-User-Id": widget
+                                                          .chatbloc.user!.id ??
+                                                      "",
+                                                  "X-Auth-Token": widget
+                                                          .chatbloc.authToken ??
+                                                      ""
                                                 },
-                                              );
-
-                                              // await launchUrl(
-                                              //   Uri.parse(
-                                              //       "${WebsocketConnect.serverUrl}${c.title_link}?download"),
-                                              //   mode: LaunchMode
-                                              //       .platformDefault,
-                                              //   webViewConfiguration:
-                                              //       WebViewConfiguration(
-                                              //     headers: {
-                                              //       "Connection":
-                                              //           "keep-alive",
-                                              //       "Accept-Encoding":
-                                              //           "gzip, deflate, br",
-                                              //       'Accept':
-                                              //           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                                              //       'Host':
-                                              //           'chat.masflex.vn',
-                                              //       'Cookie':
-                                              //           "rc_token=${widget.chatbloc.token ?? ""}; rc_uid=${widget.chatbloc.user!.id ?? ""}"
-                                              //     },
-                                              //   ),
-                                              // );
-                                            },
-                                            child: Text(
-                                              c.title!,
+                                              ),
+                                            ),
+                                          if (c.description != null &&
+                                              c.description!.isNotEmpty)
+                                            Text(
+                                              c.description!,
                                               textAlign: widget.isMe
                                                   ? TextAlign.end
                                                   : TextAlign.start,
                                               style: txtRegular(
                                                 14,
-                                                primaryColorBase,
+                                                grayScaleColorBase,
                                               ),
-                                            ),
-                                          ),
-                                        if (c.image_type != null &&
-                                            c.image_type!.contains("image"))
-                                          InkWell(
-                                            onTap: () async {
-                                              Navigator.push(
-                                                context,
-                                                PageRouteBuilder(
-                                                  pageBuilder: (
-                                                    context,
-                                                    animation,
-                                                    secondaryAnimation,
-                                                  ) =>
-                                                      PhotoViewer(
-                                                    link:
-                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
-                                                    listLink: [
-                                                      "${WebsocketConnect.serverUrl}${c.image_url}"
-                                                    ],
-                                                    initIndex: 0,
-                                                    heroTag: "tag",
-                                                  ),
-                                                  transitionsBuilder: (
-                                                    context,
-                                                    animation,
-                                                    secondaryAnimation,
-                                                    child,
-                                                  ) {
-                                                    return FadeTransition(
-                                                      opacity: animation,
-                                                      child: child,
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                            },
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  "${WebsocketConnect.serverUrl}${c.image_url}",
-                                              placeholder: (
-                                                context,
-                                                url,
-                                              ) =>
-                                                  const CircularProgressIndicator(),
-                                              errorWidget: (
-                                                context,
-                                                url,
-                                                error,
-                                              ) =>
-                                                  const Icon(
-                                                Icons.error,
-                                              ),
-                                              httpHeaders: {
-                                                "Authorization":
-                                                    "Bearer ${widget.chatbloc.authToken}",
-                                                "X-User-Id":
-                                                    widget.chatbloc.user!.id ??
-                                                        "",
-                                                "X-Auth-Token":
-                                                    widget.chatbloc.authToken ??
-                                                        ""
-                                              },
-                                            ),
-                                          ),
-                                        if (c.description != null &&
-                                            c.description!.isNotEmpty)
-                                          Text(
-                                            c.description!,
-                                            textAlign: widget.isMe
-                                                ? TextAlign.end
-                                                : TextAlign.start,
-                                            style: txtRegular(
-                                              14,
-                                              grayScaleColorBase,
-                                            ),
-                                          )
-                                      ],
-                                    ),
+                                            )
+                                        ],
+                                      );
+                                    },
 
                                     // InkWell(
                                     //   onTap: () {},

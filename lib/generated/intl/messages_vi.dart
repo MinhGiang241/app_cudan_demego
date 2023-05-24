@@ -208,6 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
+        "choose_subject": MessageLookupByLibrary.simpleMessage(
+            "Để tham khảo các lựa chọn, vui lòng chọn bên dưới:"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
         "cmnd_images": MessageLookupByLibrary.simpleMessage(
@@ -1211,6 +1213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
+        "wait_chat_response": MessageLookupByLibrary.simpleMessage(
+            "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi."),
         "wait_confirm_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu chờ xác nhận"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Chờ xử lý"),

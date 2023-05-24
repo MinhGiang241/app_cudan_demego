@@ -146,12 +146,16 @@ class _ChatScreenState extends State<ChatScreen> {
                                           //     state.webSocketChannel,
                                         ),
                                       );
+                                      bloc.sendStartMessage(token, "Bắt đầu");
+                                      bloc.addMessage(MessageChat(chatMode: 1));
+                                      bloc.toogleGreeting();
 
-                                      Future.delayed(
-                                        const Duration(milliseconds: 400),
-                                      ).then((v) {
-                                        bloc.sendStartMessage(token, "Bắt đầu");
-                                      });
+                                      // Future.delayed(
+                                      //   const Duration(milliseconds: 400),
+                                      // ).then((v) {
+                                      //   bloc.addMessage(
+                                      //       MessageChat(chatMode: 1));
+                                      // });
                                     },
                                     child: Row(
                                       children: [
@@ -168,13 +172,13 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 ),
                               ),
-                            if (state.showGreeting)
-                              ListMessageSubject(
-                                bloc: bloc,
-                                toogleGreeting: () {
-                                  bloc.toogleGreeting();
-                                },
-                              ),
+                            // if (state.showGreeting)
+                            //   ListMessageSubject(
+                            //     bloc: bloc,
+                            //     toogleGreeting: () {
+                            //       bloc.toogleGreeting();
+                            //     },
+                            //   ),
                             if (state.stateChat == StateChatEnum.START)
                               Align(
                                 alignment: Alignment.center,
@@ -216,8 +220,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 ),
                               ),
-                            if (!state.showGreeting &&
-                                state.stateChat == StateChatEnum.START)
+                            if (
+                            // !state.showGreeting &&
+                            state.stateChat == StateChatEnum.START)
                               InputChat(messageState: state, messageBloc: bloc),
                             vpad(10)
                           ],
@@ -453,7 +458,7 @@ class _ChatScreenState extends State<ChatScreen> {
       bloc.addMessage(MessageChat.fromJson(dataJson['result']));
     }
 
-    if (dataJson['result']['newRoom'] == true) {
+    if (dataJson?['result']?['newRoom'] == true) {
       bloc.setRoomId(dataJson['result']['rid']);
     }
 

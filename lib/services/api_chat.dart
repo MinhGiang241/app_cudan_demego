@@ -6,21 +6,14 @@ import 'api_service.dart';
 class APIChat {
   static Future getChatSubject() async {
     var query = '''
-          query  {
-      response :query_MessageSubjects_dto{
-        message
+         mutation {
+    response: rocketchat_mobile_get_subject_chat  {
         code
-        data {
-          _id
-          display_name
-          createdTime
-          updatedTime
-          name
-          code
-          note
-        }
-      }
+        message
+        data
     }
+}
+        
     ''';
     final QueryOptions options = QueryOptions(
       document: gql(query),

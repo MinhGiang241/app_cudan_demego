@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: non_constant_identifier_names, prefer_null_aware_operators
 
 class RocketChatData {
@@ -67,7 +68,24 @@ class MessageChat {
   UpdatedAt? updatedAt;
   List<Attachments>? attachments;
   Map<String, dynamic>? reactions;
+  late int chatMode;
+  MessageChat({
+    this.id,
+    this.rid,
+    this.msg,
+    this.groupable,
+    this.u,
+    this.md,
+    this.ts,
+    this.file,
+    this.files,
+    this.updatedAt,
+    this.attachments,
+    this.reactions,
+    this.chatMode = 0,
+  });
   MessageChat.fromJson(Map<String, dynamic> json) {
+    chatMode = 0;
     groupable = json['groupable'];
     id = json['_id'];
     rid = json['rid'];

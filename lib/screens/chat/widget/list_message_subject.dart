@@ -5,6 +5,7 @@ import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../generated/l10n.dart';
 import '../../../models/chat_subject.dart';
 import '../../../services/api_chat.dart';
 import '../../../utils/utils.dart';
@@ -63,10 +64,18 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
           ),
           child: Column(
             children: [
+              Text(
+                S.of(context).choose_subject,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+                softWrap: true,
+                style: txtRegular(14, grayScaleColorBase),
+              ),
+              const Divider(color: grayScaleColor3, thickness: 1),
               ConstrainedBox(
                 constraints: const BoxConstraints(
                   minHeight: 0,
-                  maxHeight: 250,
+                  maxHeight: 320,
                 ),
                 child: PageView.builder(
                   itemCount: pageNum,
@@ -80,6 +89,7 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                           : pageIndex * 5 + 5,
                     );
                     return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: sublist.length,
                       itemBuilder: (context, index) {
@@ -90,7 +100,7 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                                 .userInfo!
                                 .account
                                 ?.id;
-                            widget.toogleGreeting();
+                            // widget.toogleGreeting();
                             Future.delayed(const Duration(milliseconds: 10))
                                 .then((_) {
                               widget.bloc.sendGreetingMessage(
@@ -112,12 +122,14 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                                       ),
                               ),
                             ),
-                            height: 50,
+                            height: 64,
                             child: Align(
-                              alignment: Alignment.center,
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 sublist[index].name ?? '',
                                 overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                softWrap: true,
                                 style: txtRegular(14, grayScaleColorBase),
                               ),
                             ),

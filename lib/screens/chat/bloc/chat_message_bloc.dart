@@ -13,6 +13,7 @@ import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../../models/rocket_chat_data.dart';
+import '../../../utils/utils.dart';
 import '../custom/custom_websocket_service.dart';
 
 part 'chat_message_event.dart';
@@ -89,7 +90,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       '${WebsocketConnect.serverUrl}/api/v1/livechat/visitor',
       data: {
         "visitor": {
-          "username": name,
+          // "username": name,
           "_id": token,
           "name": name ?? phone,
           "email": email ?? "rocketchat@gmail.com",
@@ -108,7 +109,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       user = User.fromMap(v.data['visitor']);
       print(user);
     }).catchError((e) {
-      print(e);
+      Utils.showErrorMessage(context, e);
     });
   }
 
@@ -179,7 +180,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       webSocketService.sendMessageLiveChat(
         state.webSocketChannel!,
         genUniqueId(),
-        state.roomId ?? '',
+        state.roomId,
         token ?? "",
         message,
       );

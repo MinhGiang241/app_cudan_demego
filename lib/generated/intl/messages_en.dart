@@ -202,6 +202,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose a project"),
         "choose_an_apartment":
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
+        "choose_subject": MessageLookupByLibrary.simpleMessage(
+            "To refer any option, please select bellow:"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
         "cmnd_images":
@@ -1214,6 +1216,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
+        "wait_chat_response": MessageLookupByLibrary.simpleMessage(
+            "It seam you didn\'t response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response."),
         "wait_confirm_letter":
             MessageLookupByLibrary.simpleMessage("Wait confirm letter"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Wait execute"),
