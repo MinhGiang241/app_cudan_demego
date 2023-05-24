@@ -233,6 +233,7 @@ class _MessageState extends State<Message> {
         child: SizedBox(
           width: dvWidth(context) * .7,
           child: ListMessageSubject(
+            messageChat: widget.messageChat,
             bloc: bloc,
             toogleGreeting: bloc.toogleGreeting,
           ),

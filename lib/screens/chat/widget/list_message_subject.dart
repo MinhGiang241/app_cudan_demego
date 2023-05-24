@@ -7,15 +7,21 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/chat_subject.dart';
+import '../../../models/rocket_chat_data.dart';
 import '../../../services/api_chat.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../bloc/chat_message_bloc.dart';
 
 class ListMessageSubject extends StatefulWidget {
-  ListMessageSubject(
-      {super.key, required this.bloc, required this.toogleGreeting});
+  ListMessageSubject({
+    super.key,
+    required this.bloc,
+    required this.toogleGreeting,
+    required this.messageChat,
+  });
   ChatMessageBloc bloc;
+  MessageChat messageChat;
   Function() toogleGreeting;
 
   @override
@@ -100,6 +106,8 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
+                            widget.bloc
+                                .clearMessage(widget.messageChat.id ?? "");
                             var accountId = context
                                 .read<ResidentInfoPrv>()
                                 .userInfo!
@@ -110,7 +118,7 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                               accountId,
                               sublist[index].name!,
                             );
-                            widget.bloc.clearMessage(sublist[index].id ?? "");
+
                             // widget.toogleGreeting();
                             // Future.delayed(const Duration(milliseconds: 10))
                             //     .then((_) {
