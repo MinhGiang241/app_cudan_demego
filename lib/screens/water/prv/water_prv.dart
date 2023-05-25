@@ -13,13 +13,13 @@ class WaterPrv extends ChangeNotifier {
   WaterPrv({this.year, this.month}) {
     year ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month - 1,
+      DateTime.now().month, // - 1,
       DateTime.now().day,
     ).year;
 
     month ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month - 1,
+      DateTime.now().month, // - 1,
       DateTime.now().day,
     ).month;
   }
@@ -66,9 +66,10 @@ class WaterPrv extends ChangeNotifier {
     var apartmentId = apartment?.apartmentId;
     // var residentId = context.read<ResidentInfoPrv>().residentId;
     // APIPayment.getReceiptsList(residentId, apartmentId, 2023, 3, '')
-    if (apartment?.type == 'RENT' || apartment?.type == "BUY") {
-      return;
-    }
+
+    // if (apartment?.type == 'RENT' || apartment?.type == "BUY") {
+    //   return;
+    // }
     APIElectricity.getReceiptByYear(apartmentId, year!, false).then((v) {
       listReceipt.clear();
       for (var i in v) {

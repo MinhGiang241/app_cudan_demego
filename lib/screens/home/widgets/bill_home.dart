@@ -39,6 +39,46 @@ class BillsHome extends StatelessWidget {
                         blurStyle: BlurStyle.normal,
                         spreadRadius: 1,
                         blurRadius: 24,
+                        color: greenColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
+                    ],
+                  ),
+                  child: PrimaryIcon(
+                    icons: PrimaryIcons.dollar,
+                    style: PrimaryIconStyle.gradient,
+                    gradients: PrimaryIconGradient.green,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(12),
+                    size: 32,
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        PaymentListScreen.routeName,
+                        arguments: {'year': null, 'month': null, 'index': null},
+                      );
+                    },
+                  ),
+                ),
+                vpad(12),
+                Text(
+                  S.of(context).pay,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 85,
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
                         color: purpleColorBase.withOpacity(0.25),
                         offset: const Offset(0, 16),
                       )
@@ -101,46 +141,6 @@ class BillsHome extends StatelessWidget {
                 vpad(12),
                 Text(
                   S.of(context).electricity,
-                  textAlign: TextAlign.center,
-                  style: txtBodySmallBold(color: grayScaleColorBase),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 85,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurStyle: BlurStyle.normal,
-                        spreadRadius: 1,
-                        blurRadius: 24,
-                        color: greenColor.withOpacity(0.25),
-                        offset: const Offset(0, 16),
-                      )
-                    ],
-                  ),
-                  child: PrimaryIcon(
-                    icons: PrimaryIcons.internet,
-                    style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.green,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    size: 32,
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        PaymentListScreen.routeName,
-                        arguments: {'year': null, 'month': null, 'index': null},
-                      );
-                    },
-                  ),
-                ),
-                vpad(12),
-                Text(
-                  S.of(context).internet,
                   textAlign: TextAlign.center,
                   style: txtBodySmallBold(color: grayScaleColorBase),
                 )
