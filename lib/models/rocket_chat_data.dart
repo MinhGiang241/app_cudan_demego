@@ -62,7 +62,8 @@ class MessageChat {
   bool? groupable;
   U? u;
   List<Md>? md;
-  Ts? ts;
+  Ts? tss;
+  String? ts;
   FileChat? file;
   List<FileChat>? files;
   UpdatedAt? updatedAt;
@@ -77,6 +78,7 @@ class MessageChat {
     this.u,
     this.md,
     this.ts,
+    this.tss,
     this.file,
     this.files,
     this.updatedAt,
@@ -103,7 +105,10 @@ class MessageChat {
             ? json['md'].map<Md>((e) => Md.fromJson(e)).toList()
             : []
         : [];
-    // ts = json['ts'] != null ? Ts.fromJson(json['ts']) : null;
+    ts = json['ts'].runtimeType == String
+        ? json['ts']
+        : null; //json['ts'] != null ? Ts.fromJson(json['ts']) : null;
+    tss = json['ts'].runtimeType != String ? Ts.fromJson(json['ts']) : null;
     // updatedAt = json['_updatedAt'] != null
     //     ? UpdatedAt.fromJson(json['_updatedAt'])
     //     : null;
@@ -132,7 +137,8 @@ class MessageChat {
           }).toList()
         : null;
 
-    data['ts'] = ts != null ? ts?.toJson() : null;
+    // data['ts'] = ts != null ? ts?.toJson() : null;
+    data['ts'] = ts;
     data['u'] = u != null ? u?.toJson() : null;
     return data;
   }

@@ -112,5 +112,47 @@
             }
         ],
         "id": "5"
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "pjQu4ozp7cn77SHQ8",
+            "args": [
+                {
+                    "_id": "1685003780879",
+                    "rid": "pjQu4ozp7cn77SHQ8",
+                    "msg": "Tôi muốn học Tiếng Anh miễn phí",
+                    "token": "646d8b0ce27a0f91cbd8c556",
+                    "alias": "Hoàng Văn Đức",
+                    "ts": {
+                        "$date": 1685003781527
+                    },
+                    "u": {
+                        "_id": "646c7c5b563da13775d1c490",
+                        "username": "Nguyễn Hải Đức",
+                        "name": "Hoàng Văn Đức"
+                    },
+                    "_updatedAt": {
+                        "$date": 1685003781575
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": [],
+                    "md": [
+                        {
+                            "type": "PARAGRAPH",
+                            "value": [
+                                {
+                                    "type": "PLAIN_TEXT",
+                                    "value": "Tôi muốn học Tiếng Anh miễn phí"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     }
 ]

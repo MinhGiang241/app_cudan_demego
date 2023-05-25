@@ -140,9 +140,13 @@ class Apartment {
   String? apartment_status;
   String? apartmentTypeId;
   String? status;
+  String? electrical_code;
+  String? water_code;
   Building? b;
   Floor? f;
   Apartment({
+    this.electrical_code,
+    this.water_code,
     this.code,
     this.f,
     this.b,
@@ -180,6 +184,8 @@ class Apartment {
     apartment_status = json['apartment_status'];
     apartmentTypeId = json['apartmentTypeId'];
     status = json['status'];
+    electrical_code = json['electrical_code'];
+    water_code = json['water_code'];
     b = json['b'] != null ? Building.fromJson(json['b']) : null;
     f = json['f'] != null ? Floor.fromJson(json['f']) : null;
   }

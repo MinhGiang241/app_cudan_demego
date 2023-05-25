@@ -624,7 +624,15 @@ class _MessageState extends State<Message> {
                     style: txtBodyMediumBold(color: grayScaleColorBase),
                   ),
                 Text(
-                  Utils.dateTimeFormat(widget.d.toIso8601String(), 0),
+                  widget.messageChat.ts != null
+                      ? Utils.dateTimeFormat(widget.messageChat.ts ?? "", 1)
+                      : Utils.dateTimeFormat(
+                          DateTime.fromMillisecondsSinceEpoch(
+                            widget.messageChat.tss?.$date ?? 0,
+                          ).toIso8601String(),
+                          0,
+                        ),
+                  // widget.messageChat?.ts?.$date.toString() ?? "",
                   style: txtBodySmallRegular(color: grayScaleColorBase),
                   overflow: TextOverflow.ellipsis,
                 ),
