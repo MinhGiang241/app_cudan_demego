@@ -154,5 +154,262 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-notify-user",
+        "id": "id",
+        "fields": {
+            "eventName": "7QpxJirkFj2tGE3SJ/subscriptions-changed",
+            "args": [
+                "updated",
+                {
+                    "_id": "kSY9aWJssxJN6eqMx",
+                    "rid": "FZP9XerqRjKZr5pvS",
+                    "fname": "0328851616",
+                    "alert": true,
+                    "open": true,
+                    "unread": 1,
+                    "userMentions": 1,
+                    "groupMentions": 0,
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham"
+                    },
+                    "t": "l",
+                    "desktopNotifications": "all",
+                    "mobilePushNotifications": "all",
+                    "emailNotifications": "all",
+                    "v": {
+                        "_id": "646c7c5b563da13775d1c490",
+                        "username": "Nguyễn Hải Đức",
+                        "token": "646d8b0ce27a0f91cbd8c556",
+                        "status": "online"
+                    },
+                    "_updatedAt": {
+                        "$date": 1685016341482
+                    },
+                    "name": "0328851616"
+                }
+            ]
+        }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-notify-user",
+        "id": "id",
+        "fields": {
+            "eventName": "7QpxJirkFj2tGE3SJ/rooms-changed",
+            "args": [
+                "updated",
+                {
+                    "_id": "FZP9XerqRjKZr5pvS",
+                    "msgs": 29,
+                    "usersCount": 2,
+                    "lm": {
+                        "$date": 1685016782616
+                    },
+                    "fname": "0328851616",
+                    "t": "l",
+                    "ts": {
+                        "$date": 1685015660542
+                    },
+                    "v": {
+                        "_id": "646c7c5b563da13775d1c490",
+                        "username": "Nguyễn Hải Đức",
+                        "token": "646d8b0ce27a0f91cbd8c556",
+                        "status": "online",
+                        "lastMessageTs": {
+                            "$date": 1685016782616
+                        }
+                    },
+                    "cl": false,
+                    "open": true,
+                    "source": {
+                        "type": "api"
+                    },
+                    "queuedAt": {
+                        "$date": 1685015660542
+                    },
+                    "_updatedAt": {
+                        "$date": 1685016782705
+                    },
+                    "lastMessage": {
+                        "_id": "1685016781292",
+                        "rid": "FZP9XerqRjKZr5pvS",
+                        "msg": "Bắt đầu",
+                        "token": "646d8b0ce27a0f91cbd8c556",
+                        "alias": "0328851616",
+                        "ts": {
+                            "$date": 1685016782616
+                        },
+                        "u": {
+                            "_id": "646c7c5b563da13775d1c490",
+                            "username": "Nguyễn Hải Đức",
+                            "name": "0328851616"
+                        },
+                        "_updatedAt": {
+                            "$date": 1685016782689
+                        },
+                        "urls": [],
+                        "mentions": [],
+                        "channels": [],
+                        "md": [
+                            {
+                                "type": "PARAGRAPH",
+                                "value": [
+                                    {
+                                        "type": "PLAIN_TEXT",
+                                        "value": "Bắt đầu"
+                                    }
+                                ]
+                            }
+                        ],
+                        "newRoom": false,
+                        "showConnecting": false
+                    },
+                    "metrics": {
+                        "reaction": {
+                            "fd": {
+                                "$date": 1685015660604
+                            },
+                            "ft": 0.062,
+                            "tt": 0.062
+                        },
+                        "response": {
+                            "avg": 0.062,
+                            "fd": {
+                                "$date": 1685015660604
+                            },
+                            "ft": 0.062,
+                            "total": 1,
+                            "tt": 0.062
+                        },
+                        "v": {
+                            "lq": {
+                                "$date": 1685015662089
+                            }
+                        }
+                    },
+                    "servedBy": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham",
+                        "ts": {
+                            "$date": 1685015660671
+                        }
+                    },
+                    "waitingResponse": true
+                }
+            ]
+        }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-notify-user",
+        "id": "id",
+        "fields": {
+            "eventName": "7QpxJirkFj2tGE3SJ/rooms-changed",
+            "args": [
+                "updated",
+                {
+                    "_id": "FZP9XerqRjKZr5pvS",
+                    "msgs": 31,
+                    "usersCount": 2,
+                    "lm": {
+                        "$date": 1685016797592
+                    },
+                    "fname": "0328851616",
+                    "t": "l",
+                    "ts": {
+                        "$date": 1685015660542
+                    },
+                    "v": {
+                        "_id": "646c7c5b563da13775d1c490",
+                        "username": "Nguyễn Hải Đức",
+                        "token": "646d8b0ce27a0f91cbd8c556",
+                        "status": "online",
+                        "lastMessageTs": {
+                            "$date": 1685016797592
+                        }
+                    },
+                    "cl": false,
+                    "open": true,
+                    "source": {
+                        "type": "api"
+                    },
+                    "queuedAt": {
+                        "$date": 1685015660542
+                    },
+                    "_updatedAt": {
+                        "$date": 1685016856272
+                    },
+                    "lastMessage": {
+                        "_id": "1685016796395",
+                        "rid": "FZP9XerqRjKZr5pvS",
+                        "msg": "Tôi muốn đăng ký khóa học Tiếng Anh",
+                        "token": "646d8b0ce27a0f91cbd8c556",
+                        "alias": "0328851616",
+                        "ts": {
+                            "$date": 1685016797592
+                        },
+                        "u": {
+                            "_id": "646c7c5b563da13775d1c490",
+                            "username": "Nguyễn Hải Đức",
+                            "name": "0328851616"
+                        },
+                        "_updatedAt": {
+                            "$date": 1685016797642
+                        },
+                        "urls": [],
+                        "mentions": [],
+                        "channels": [],
+                        "md": [
+                            {
+                                "type": "PARAGRAPH",
+                                "value": [
+                                    {
+                                        "type": "PLAIN_TEXT",
+                                        "value": "Tôi muốn đăng ký khóa học Tiếng Anh"
+                                    }
+                                ]
+                            }
+                        ],
+                        "newRoom": false,
+                        "showConnecting": false
+                    },
+                    "metrics": {
+                        "reaction": {
+                            "fd": {
+                                "$date": 1685015660604
+                            },
+                            "ft": 0.062,
+                            "tt": 0.062
+                        },
+                        "response": {
+                            "avg": 0.062,
+                            "fd": {
+                                "$date": 1685015660604
+                            },
+                            "ft": 0.062,
+                            "total": 1,
+                            "tt": 0.062
+                        },
+                        "v": {
+                            "lq": {
+                                "$date": 1685015662089
+                            }
+                        }
+                    },
+                    "servedBy": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham",
+                        "ts": {
+                            "$date": 1685015660671
+                        }
+                    },
+                    "waitingResponse": true
+                }
+            ]
+        }
     }
 ]

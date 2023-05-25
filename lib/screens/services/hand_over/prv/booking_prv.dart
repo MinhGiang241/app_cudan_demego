@@ -393,10 +393,11 @@ class BookingPrv extends ChangeNotifier {
 
   Future getApartmentListContract(BuildContext context) async {
     var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
-    await APIHandOver.getApartmentContract(phone).then((v) {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    await APIHandOver.getApartmentContract(residentId).then((v) {
       if (v != null && v['list'] != null) {
         apartmentList.clear();
-        customer = Customer.fromMap(v['customer']);
+        // customer = Customer.fromMap(v['customer']);
         for (var i in v['list']) {
           apartmentList.add(Apartment.fromJson(i));
         }
