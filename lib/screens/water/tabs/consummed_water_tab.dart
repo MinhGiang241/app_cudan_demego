@@ -126,11 +126,28 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
             scrollDirection: Axis.horizontal,
             child: Column(
               children: [
+                vpad(20),
+                Row(
+                  children: [
+                    hpad(40),
+                    Text('${S.of(context).consumed_water_detail1} (m³)',
+                        style: txtBold(14, primaryColorBase)),
+                  ],
+                ),
+                vpad(10),
+                Row(
+                  children: [
+                    hpad(40),
+                    Text(
+                        '${S.of(context).year}: ${context.read<WaterPrv>().year}',
+                        style: txtBold(12, Colors.black)),
+                  ],
+                ),
                 vpad(30),
                 // Expanded(
                 //   child:
                 SizedBox(
-                  height: dvHeight(context) - 200,
+                  height: dvHeight(context) - 250,
                   width: 850,
                   child: SfCartesianChart(
                     //selectionGesture: ActivationMode.singleTap,
@@ -142,12 +159,12 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                     primaryXAxis: CategoryAxis(labelStyle: txtRegular(12)),
                     // primaryYAxis:
                     //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
-                    title: ChartTitle(
-                      text: '${S.of(context).consumed_water_detail1} (m³)',
-                      textStyle: txtBold(14, primaryColorBase),
-                    ),
+                    // title: ChartTitle(
+                    //   text: '${S.of(context).consumed_water_detail1} (m³)',
+                    //   textStyle: txtBold(14, primaryColorBase),
+                    // ),
                     legend: Legend(
-                      isVisible: true,
+                      isVisible: false,
                       title: LegendTitle(
                         text: S.of(context).legend,
                       ),

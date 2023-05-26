@@ -101,22 +101,42 @@ class _ChatScreenState extends State<ChatScreen> {
             }
             return FutureBuilder(
               future: () async {
-                if (state.stateChat == StateChatEnum.INIT) {
-                  await bloc.createVisitor(
-                    context,
-                    email,
-                    token,
-                    phone,
-                    name,
-                    residentId,
-                  );
-                  var room = await bloc.openNewRoomLiveChat(token!);
-                  bloc.setRoomId(room?['room']?['_id']);
+                try {
+                  if (state.stateChat == StateChatEnum.INIT) {
+                    var user = await bloc.createVisitor(
+                      context,
+                      email,
+                      token,
+                      phone,
+                      name,
+                      residentId,
+                    );
 
-                  var his = await bloc.loadLiveChatHistory(
-                    room?['room']?['_id'],
-                    roomId,
-                  );
+                    print(bloc.user);
+                    var roomId = bloc.user?["roomId"];
+                    var vtoken = bloc.visitorToken;
+                    var room = await bloc.openNewRoomLiveChat(token!);
+                    if (room['success'] == false) {
+                      throw (room['error']);
+                    }
+                    bloc.setRoomId(room?['room']?['_id']);
+
+                    print(vtoken);
+                    var his = await bloc.loadLiveChatHistory(
+                      state.roomId,
+                      vtoken,
+                    );
+                  }
+                  // if (state.stateChat == StateChatEnum.START) {
+                  //   var room = await bloc.openNewRoomLiveChat(token!);
+                  //   if (room['success'] == false) {
+                  //     throw (room['error']);
+                  //   }
+                  //   bloc.setRoomId(room?['room']?['_id']);
+                  // }
+                } catch (e) {
+                  Utils.showErrorMessage(context, e.toString());
+                  bloc.hasError();
                 }
               }(),
               builder: (context, sn) {
@@ -166,11 +186,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         if (dataJson['msg'] == "result" &&
                             dataJson['result'] != null) {
                           bloc.addMessage(
-                              MessageChat.fromJson(dataJson['result']));
+                            MessageChat.fromJson(dataJson['result']),
+                          );
                         }
 
                         if (dataJson?['result']?['newRoom'] == true) {
                           bloc.setRoomId(dataJson['result']['rid']);
+                          bloc.setvisitorToken(dataJson['result']['rid']);
                         }
                         if (dataJson['msg'] == "changed" &&
                             dataJson["fields"] != null &&

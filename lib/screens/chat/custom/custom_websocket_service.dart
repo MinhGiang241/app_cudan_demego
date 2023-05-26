@@ -416,9 +416,7 @@ class CustomWebSocketService {
       params: {
         "token": token,
       },
-    ).catchError((e) {
-      print(e);
-    });
+    );
   }
 
   void sendUploadFileOnRoom(

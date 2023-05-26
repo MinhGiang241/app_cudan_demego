@@ -1,5 +1,6 @@
 // ignore_for_file: require_trailing_commas
 
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -184,7 +185,12 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                   Expanded(
                                       flex: 1,
                                       child: Text(
-                                        '12345678',
+                                        context
+                                                .read<ResidentInfoPrv>()
+                                                .selectedApartment
+                                                ?.apartment
+                                                ?.electrical_code ??
+                                            "",
                                         style: txtBold(
                                           14,
                                         ),

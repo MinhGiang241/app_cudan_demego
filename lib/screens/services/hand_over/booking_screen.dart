@@ -63,6 +63,7 @@ class BookingScreen extends StatelessWidget {
                         children: [
                           vpad(16),
                           PrimaryDropDown(
+                            //textStyle: txtBodySmallBold(color: grayScaleColor1),
                             enable: isBook,
                             value: context.watch<BookingPrv>().apartmentValue,
                             onChange:
@@ -77,6 +78,9 @@ class BookingScreen extends StatelessWidget {
                           ),
                           vpad(16),
                           PrimaryTextField(
+                            textStyle: !isBook
+                                ? txtBodySmallBold(color: grayScaleColor2)
+                                : null,
                             enable: isBook,
                             validator: Utils.emptyValidator,
                             label: S.of(context).hand_over_date,
@@ -97,6 +101,9 @@ class BookingScreen extends StatelessWidget {
                           ),
                           vpad(16),
                           PrimaryTextField(
+                            textStyle: !isBook
+                                ? txtBodySmallBold(color: grayScaleColor2)
+                                : null,
                             enable: isBook,
                             validator: Utils.emptyValidator,
                             label: S.of(context).hand_over_time,
@@ -137,6 +144,9 @@ class BookingScreen extends StatelessWidget {
                             vpad(16),
                           if (!isBook && schedule?.cancel_reason != null)
                             PrimaryTextField(
+                              textStyle: !isBook
+                                  ? txtBodySmallBold(color: grayScaleColor2)
+                                  : null,
                               label: S.of(context).cancel_reason,
                               enable: false,
                               isReadOnly: true,

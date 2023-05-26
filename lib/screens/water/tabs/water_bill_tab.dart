@@ -16,6 +16,7 @@ import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_error_widget.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
+import '../../auth/prv/resident_info_prv.dart';
 import '../prv/water_prv.dart';
 
 class WaterBillTab extends StatefulWidget {
@@ -186,7 +187,12 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      '12345678',
+                                      context
+                                              .read<ResidentInfoPrv>()
+                                              .selectedApartment
+                                              ?.apartment
+                                              ?.water_code ??
+                                          "",
                                       style: txtBold(
                                         14,
                                       ),

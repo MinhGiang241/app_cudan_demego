@@ -337,7 +337,7 @@ class ChatState {
   String? authToken;
   String? visitorToken;
   String? roomId;
-  User? user;
+  Map<String, dynamic>? user;
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   ScrollController scrollController = ScrollController();
@@ -366,7 +366,7 @@ class ChatState {
     String? authToken,
     String? visitorToken,
     String? roomId,
-    User? user,
+    Map<String, dynamic>? user,
     WebSocketChannel? webSocketChannel,
     bool? showGreeting,
     StateChatEnum? stateChat,

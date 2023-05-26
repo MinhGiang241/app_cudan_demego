@@ -73,33 +73,33 @@ class OtpBookingPrv extends ChangeNotifier {
       _onError();
     } else {
       // var accountId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
-      if (otpController.text == '000000') {
-        isSendLoading = true;
+      // if (otpController.text == '000000') {
+      isSendLoading = true;
+      notifyListeners();
+      APIHandOver.saveApointmentScheduleList(schedule.copyWith().toMap())
+          .then((v) {
+        isSendLoading = false;
         notifyListeners();
-        APIHandOver.saveApointmentScheduleList(schedule.copyWith().toMap())
-            .then((v) {
-          isSendLoading = false;
-          notifyListeners();
-          Utils.showSuccessMessage(
-            context: context,
-            e: S.of(context).success_book_schedule(apartmentName),
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                HandOverScreen.routeName,
-                (route) => route.isFirst,
-                arguments: {
-                  "init": 0,
-                },
-              );
-            },
-          );
-        }).catchError((e) {
-          isSendLoading = false;
-          notifyListeners();
-          Utils.showErrorMessage(context, e);
-        });
-      }
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_book_schedule(apartmentName),
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              HandOverScreen.routeName,
+              (route) => route.isFirst,
+              arguments: {
+                "init": 0,
+              },
+            );
+          },
+        );
+      }).catchError((e) {
+        isSendLoading = false;
+        notifyListeners();
+        Utils.showErrorMessage(context, e);
+      });
+      // }
     }
   }
 

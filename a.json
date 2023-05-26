@@ -411,5 +411,16 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "result",
+        "id": "11",
+        "error": {
+            "isClientSafe": true,
+            "error": "no-agent-online",
+            "reason": "Sorry, no online agents",
+            "message": "Sorry, no online agents [no-agent-online]",
+            "errorType": "Meteor.Error"
+        }
     }
 ]

@@ -73,7 +73,7 @@ class _MessagesState extends State<Messages> {
                   chatbloc: widget.messageBloc,
                   emojies: widget.messageMap[e]!.reactions ?? {},
                   shouldTriggerChange: changeNotifier.stream,
-                  isMe: widget.messageBloc.user?.id ==
+                  isMe: widget.messageBloc.user?["_id"] ==
                       widget.messageMap[e]?.u?.id,
                   d: DateTime.now(),
                   fullName: fullName ?? "",

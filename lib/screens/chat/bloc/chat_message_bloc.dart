@@ -82,9 +82,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   final _dio = Dio();
   WebSocketChannel? webSocketChannel;
   String authToken = '';
-  User? user;
-  String visitorToken = uuid.v4();
+  Map<String, dynamic>? user;
+  String? visitorToken;
   CustomWebSocketService webSocketService = CustomWebSocketService();
+  bool error = false;
+
+  hasError() {
+    error = true;
+  }
 
   Future createVisitor(context, email, token, phone, name, residentId) async {
     await _dio.post(
@@ -92,10 +97,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       data: {
         "visitor": {
           // "username": name,
-          "_id": token,
+          // "_id": token,
           "name": name ?? phone,
           "email": email ?? "rocketchat@gmail.com",
-          "token": token,
+          "token": uuid.v4(),
           "phone": phone,
           "customFields": [
             {
@@ -107,10 +112,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         }
       },
     ).then((v) {
-      user = User.fromMap(v.data['visitor']);
-      print(user);
+      user = (v.data?['visitor']);
+      visitorToken = v.data?['visitor']?['token'];
     }).catchError((e) {
-      Utils.showErrorMessage(context, e);
+      Utils.showErrorMessage(context, e.toString());
     });
   }
 
@@ -123,7 +128,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       // Utils.showErrorMessage(context, e.toString());
     });
     authToken = authen.data?.authToken ?? "";
-    user = authen.data!.me;
+    // user = authen.data!.me;
 
     return authen;
     // throw RocketChatException((result as Map)['body']);
@@ -132,26 +137,31 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   void registerGuestChat(String token, String name, String email) {
     webSocketService.registerGuestChat(
       state.webSocketChannel!,
-      visitorToken,
+      visitorToken!,
       name,
       email,
     );
   }
 
   Future openNewRoomLiveChat(String token) async {
-    return await webSocketService.openNewRoomLiveChat(
+    var room = await webSocketService.openNewRoomLiveChat(
       state.webSocketChannel!,
-      token,
+      visitorToken!,
       null,
     );
+    return room;
   }
 
   setRoomId(String? rId) {
     state.roomId = rId;
   }
 
+  setvisitorToken(String? token) {
+    state.visitorToken = token;
+  }
+
   Future loadLiveChatHistory(roomId, token) async {
-    await webSocketService.loadLiveChatHistory(roomId, token).then((v) {
+    await webSocketService.loadLiveChatHistory(roomId, visitorToken!).then((v) {
       if (v['messages'] != null) {
         state.messagesMap.clear();
         for (var i in v['messages'].reversed) {
@@ -182,7 +192,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         state.webSocketChannel!,
         genUniqueId(),
         state.roomId,
-        token ?? "",
+        visitorToken ?? "",
         message,
       );
     }
@@ -197,7 +207,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   }
 
   void closeChatRoom(String? rid) {
-    state.webSocketService.closeLiveChatRoom(rid, visitorToken);
+    state.webSocketService.closeLiveChatRoom(rid, visitorToken!);
   }
 
   void scroll() {
@@ -219,7 +229,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       state.webSocketChannel!,
       id,
       state.roomId ?? rid,
-      visitorToken,
+      visitorToken!,
       message,
     );
   }
@@ -233,7 +243,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         state.webSocketChannel!,
         genUniqueId(),
         state.roomId ?? token,
-        token,
+        visitorToken!,
         state.textEditionController.text.trim(),
       );
       state.textEditionController.clear();
@@ -246,7 +256,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       state.roomId ?? rid,
       file,
       state.textEditionController.text.trim(),
-      token,
+      visitorToken,
     );
     state.textEditionController.clear();
   }
@@ -257,7 +267,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         state.webSocketChannel!,
         genUniqueId(),
         state.roomId ?? rid,
-        token,
+        visitorToken!,
         message,
       );
     }

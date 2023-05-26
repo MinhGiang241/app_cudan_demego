@@ -29,7 +29,7 @@ class BookingPrv extends ChangeNotifier {
           : null;
       handOverDateController.text = Utils.dateFormat(schedule?.date ?? "", 1);
       handOverTimeController.text = schedule?.time ?? "";
-      customer = schedule?.c;
+      // customer = schedule?.c;
       apartmentValue = schedule?.apartmentId;
     }
   }
@@ -52,7 +52,7 @@ class BookingPrv extends ChangeNotifier {
   TimeOfDay? handOverTime;
 
   bool isSendLoading = false;
-  Customer? customer;
+  // Customer? customer;
   List<Apartment> apartmentList = [];
 
   final formKey = GlobalKey<FormState>();
@@ -304,11 +304,12 @@ class BookingPrv extends ChangeNotifier {
     notifyListeners();
     if (validate(context)) {
       var resPhone = context.read<ResidentInfoPrv>().userInfo?.phone_required;
-
+      var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartment =
           apartmentList.firstWhere((element) => element.id == apartmentValue);
       APIHandOver.veryfyExistScheduleAndSendOTP(
-        customer?.phone_required,
+        // customer?.phone_required,
+        residentId,
         apartmentValue,
       ).then((v) {
         isSendLoading = false;
@@ -324,11 +325,15 @@ class BookingPrv extends ChangeNotifier {
               apartmentTypeId: apartment.apartmentTypeId,
               apartment_type: apartment.apartment_type,
               date: handOverDate!
-                  .subtract(const Duration(hours: 7))
+                  // .subtract(const Duration(hours: 7))
                   .toIso8601String(),
               time: handOverTimeController.text,
-              customersId: customer?.id,
-              email: customer?.email,
+              customersId:
+                  context.read<ResidentInfoPrv>().residentId, //customer?.id,
+              email: context
+                  .read<ResidentInfoPrv>()
+                  .userInfo
+                  ?.email, //customer?.email,
               hour: handOverTimeController.text,
               resident_phone: resPhone,
               status: "WAIT",
@@ -411,7 +416,11 @@ class BookingPrv extends ChangeNotifier {
     await Utils.showDatePickers(
       context,
       initDate: handOverDate ?? DateTime.now(),
-      startDate: DateTime(DateTime.now().year - 10, 1, 1),
+      startDate: DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+      ),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
