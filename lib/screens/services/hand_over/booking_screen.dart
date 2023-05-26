@@ -114,7 +114,7 @@ class BookingScreen extends StatelessWidget {
                                 .pickHandOverTime(context),
                             suffixIcon:
                                 const PrimaryIcon(icons: PrimaryIcons.clock),
-                            hint: "hh/mm",
+                            hint: "hh:mm",
                             controller: context
                                 .read<BookingPrv>()
                                 .handOverTimeController,
@@ -193,13 +193,13 @@ class BookingScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                              if (!isBook &&
+                              if (isBook ||
                                   schedule?.status == "APPROVEDSECOND")
                                 Expanded(
                                   flex: 1,
                                   child: hpad(0),
                                 ),
-                              if (!isBook &&
+                              if (isBook ||
                                   schedule?.status == "APPROVEDSECOND")
                                 Expanded(
                                   flex: 10,

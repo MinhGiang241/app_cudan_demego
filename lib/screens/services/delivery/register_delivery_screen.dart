@@ -271,7 +271,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                   .read<RegisterDeliveryPrv>()
                                   .startHourController,
                               label: S.of(context).hour,
-                              hint: "hh/mm",
+                              hint: "hh:mm",
                               isReadOnly: true,
                               onTap: () async {
                                 await context
@@ -354,7 +354,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                   .read<RegisterDeliveryPrv>()
                                   .endHourController,
                               label: S.of(context).hour,
-                              hint: "hh/mm",
+                              hint: "hh:mm",
                               isReadOnly: true,
                               onTap: () async {
                                 await context

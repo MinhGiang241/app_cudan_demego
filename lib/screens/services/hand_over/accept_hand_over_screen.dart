@@ -336,7 +336,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   //       .pickHandOverTime(context),
                                   //   suffixIcon: const PrimaryIcon(
                                   //       icons: PrimaryIcons.clock),
-                                  //   hint: "hh/mm",
+                                  //   hint: "hh:mm",
                                   //   controller: context
                                   //       .read<AcceptHandOverPrv>()
                                   //       .handOverTimeController,

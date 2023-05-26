@@ -85,7 +85,7 @@ class GeneralInfoScreen extends StatelessWidget {
                               .pickHandOverTime(context),
                           suffixIcon:
                               const PrimaryIcon(icons: PrimaryIcons.clock),
-                          hint: "hh/mm",
+                          hint: "hh:mm",
                           controller: context
                               .read<GeneralInfoPrv>()
                               .handOverTimeController,

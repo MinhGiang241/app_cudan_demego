@@ -249,7 +249,7 @@ class BookingPrv extends ChangeNotifier {
                   isRequired: true,
                   onTap: () => pickHandOverTime(context),
                   suffixIcon: const PrimaryIcon(icons: PrimaryIcons.clock),
-                  hint: "hh/mm",
+                  hint: "hh:mm",
                   controller: handOverTimeController,
                   validateString: validateHandOverTime,
                 ),
