@@ -193,8 +193,7 @@ class BookingScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                              if (isBook ||
-                                  schedule?.status == "APPROVEDSECOND")
+                              if (!isBook && schedule?.status != "CANCEL")
                                 Expanded(
                                   flex: 1,
                                   child: hpad(0),
