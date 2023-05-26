@@ -8,6 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../models/hand_over.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
@@ -26,33 +27,6 @@ class BookingTab extends StatefulWidget {
 }
 
 class _BookingTabState extends State<BookingTab> {
-  var list = [
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "APPROVED"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "WAIT"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "CANCEL"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "APPROVED"
-    },
-  ];
-
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   @override
@@ -93,6 +67,34 @@ class _BookingTabState extends State<BookingTab> {
             ),
           );
         }
+
+        List<AppointmentSchedule> newL = [];
+        List<AppointmentSchedule> wait = [];
+        List<AppointmentSchedule> app1 = [];
+        List<AppointmentSchedule> app2 = [];
+        List<AppointmentSchedule> cancel = [];
+        for (var i in listSchedule) {
+          if (i.status == "WAIT") {
+            wait.add(i);
+          } else if (i.status == "NEW") {
+            newL.add(i);
+          } else if (i.status == "APPROVEDFIRST") {
+            app1.add(i);
+          } else if (i.status == "APPROVEDSECOND") {
+            app2.add(i);
+          } else if (i.status == "CANCEL") {
+            cancel.add(i);
+          }
+        }
+
+        newL.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+        wait.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+        app1.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+        app2.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+        cancel.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+
+        List<AppointmentSchedule> list = newL + wait + app1 + app2 + cancel;
+
         return SafeArea(
           child: SmartRefresher(
             enablePullDown: true,
@@ -108,7 +110,7 @@ class _BookingTabState extends State<BookingTab> {
             child: ListView(
               children: [
                 vpad(24),
-                ...listSchedule.map((e) {
+                ...list.map((e) {
                   return PrimaryCard(
                     margin:
                         const EdgeInsets.only(bottom: 16, left: 12, right: 12),
@@ -176,7 +178,7 @@ class _BookingTabState extends State<BookingTab> {
                                       children: [
                                         Text('${S.of(context).status}:'),
                                         Text(
-                                          e.s?.name ?? '',
+                                          genStatus(e.status ?? ""),
                                           style: txtBold(
                                             14,
                                             genStatusColor(

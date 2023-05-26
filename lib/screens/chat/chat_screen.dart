@@ -176,7 +176,8 @@ class _ChatScreenState extends State<ChatScreen> {
                             );
                           }
 
-                          // bloc.addMessage(MessageChat(chatMode: 1));
+                          // bloc.addMessage(
+                          //     MessageChat(id: uuid.v4(), chatMode: 1));
                         }
                         var data =
                             RocketChatData.fromJson(json.decode(snapshot.data));
@@ -185,9 +186,15 @@ class _ChatScreenState extends State<ChatScreen> {
                         }
                         if (dataJson['msg'] == "result" &&
                             dataJson['result'] != null) {
+                          var c = MessageChat.fromJson(dataJson['result']);
                           bloc.addMessage(
-                            MessageChat.fromJson(dataJson['result']),
+                            c,
                           );
+                          if (c.msg == "Bắt đầu") {
+                            bloc.addMessage(
+                              MessageChat(id: uuid.v4(), chatMode: 1),
+                            );
+                          }
                         }
 
                         if (dataJson?['result']?['newRoom'] == true) {
@@ -202,6 +209,15 @@ class _ChatScreenState extends State<ChatScreen> {
                             MessageChat(id: uuid.v4(), chatMode: 1),
                           );
                         }
+                        //  if (dataJson['msg'] == "result" &&
+
+                        //     dataJson['result'] != null &&
+                        //     dataJson['fields']?['args']?[0]['msg'] ==
+                        //         "Bắt đầu") {
+                        //   bloc.addMessage(
+                        //     MessageChat(id: uuid.v4(), chatMode: 1),
+                        //   );
+                        // }
                         return Column(
                           children: [
                             Expanded(

@@ -688,6 +688,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "note": MessageLookupByLibrary.simpleMessage("Note"),
         "note_can_reason":
             MessageLookupByLibrary.simpleMessage("Note cancel reason"),
+        "note_cancel":
+            MessageLookupByLibrary.simpleMessage("Note cancel reason"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),

@@ -782,5 +782,6 @@
   "hand_over_rule": "Hand over rule",
   "err_upload": "Upload error",
   "choose_subject": "To refer any option, please select bellow:",
-  "wait_chat_response": "It seam you didn't response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response."
+  "wait_chat_response": "It seam you didn't response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response.",
+  "note_cancel": "Note cancel reason"
 }

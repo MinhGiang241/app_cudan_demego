@@ -134,7 +134,7 @@ class BookingScreen extends StatelessWidget {
                               label: S.of(context).status,
                               enable: false,
                               isReadOnly: true,
-                              initialValue: schedule?.s?.name,
+                              initialValue: genStatus(schedule?.status ?? ''),
                               textColor: genStatusColor(schedule?.status),
                               textStyle:
                                   txtBold(14, genStatusColor(schedule?.status)),
@@ -151,6 +151,22 @@ class BookingScreen extends StatelessWidget {
                               enable: false,
                               isReadOnly: true,
                               initialValue: schedule?.r?.name,
+                              // textColor: genStatusColor(schedule?.status),
+                              // textStyle:
+                              //     txtBold(14, genStatusColor(schedule?.status)),
+                              // controller: context.read<BookingPrv>().noteController,
+                            ),
+                          if (!isBook && schedule?.cancel_note != null)
+                            vpad(16),
+                          if (!isBook && schedule?.cancel_note != null)
+                            PrimaryTextField(
+                              textStyle: !isBook
+                                  ? txtBodySmallBold(color: grayScaleColor2)
+                                  : null,
+                              label: S.of(context).note_can_reason,
+                              enable: false,
+                              isReadOnly: true,
+                              initialValue: schedule?.cancel_note,
                               // textColor: genStatusColor(schedule?.status),
                               // textStyle:
                               //     txtBold(14, genStatusColor(schedule?.status)),
@@ -173,7 +189,7 @@ class BookingScreen extends StatelessWidget {
                                     onTap: () {
                                       return context
                                           .read<BookingPrv>()
-                                          .cancel(context);
+                                          .cancel(context, schedule?.status);
                                     },
                                   ),
                                 ),
@@ -182,32 +198,34 @@ class BookingScreen extends StatelessWidget {
                                   flex: 1,
                                   child: hpad(0),
                                 ),
-                              Expanded(
-                                flex: 10,
-                                child: PrimaryButton(
-                                  isFit: true,
-                                  isLoading:
-                                      context.watch<BookingPrv>().isSendLoading,
-                                  buttonType: isBook
-                                      ? ButtonType.green
-                                      : ButtonType.yellow,
-                                  buttonSize: ButtonSize.medium,
-                                  text: isBook
-                                      ? S.of(context).send_request
-                                      : S.of(context).re_book,
-                                  onTap: () {
-                                    if (isBook) {
-                                      return context
-                                          .read<BookingPrv>()
-                                          .send(context);
-                                    } else {
-                                      return context
-                                          .read<BookingPrv>()
-                                          .reBook(context);
-                                    }
-                                  },
+                              if (schedule?.status != "CANCEL")
+                                Expanded(
+                                  flex: 10,
+                                  child: PrimaryButton(
+                                    isFit: true,
+                                    isLoading: context
+                                        .watch<BookingPrv>()
+                                        .isSendLoading,
+                                    buttonType: isBook
+                                        ? ButtonType.green
+                                        : ButtonType.yellow,
+                                    buttonSize: ButtonSize.medium,
+                                    text: isBook
+                                        ? S.of(context).send_request
+                                        : S.of(context).re_book,
+                                    onTap: () {
+                                      if (isBook) {
+                                        return context
+                                            .read<BookingPrv>()
+                                            .send(context);
+                                      } else {
+                                        return context
+                                            .read<BookingPrv>()
+                                            .reBook(context);
+                                      }
+                                    },
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                           vpad(40)

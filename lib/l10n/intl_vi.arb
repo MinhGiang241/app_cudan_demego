@@ -783,5 +783,6 @@
   "hand_over_rule": "Quy định bàn giao",
   "err_upload": "Upload file lỗi",
   "choose_subject": "Để tham khảo các lựa chọn, vui lòng chọn bên dưới:",
-  "wait_chat_response": "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi."
+  "wait_chat_response": "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi.",
+  "note_cancel": "Ghi chú lý do hủy"
 }

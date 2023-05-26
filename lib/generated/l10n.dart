@@ -7889,6 +7889,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Note cancel reason`
+  String get note_cancel {
+    return Intl.message(
+      'Note cancel reason',
+      name: 'note_cancel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

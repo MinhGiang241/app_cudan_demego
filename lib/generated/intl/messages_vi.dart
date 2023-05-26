@@ -697,6 +697,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "note_can_reason":
             MessageLookupByLibrary.simpleMessage("Ghi chú lý do hủy"),
+        "note_cancel":
+            MessageLookupByLibrary.simpleMessage("Ghi chú lý do hủy"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),

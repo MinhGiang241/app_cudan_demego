@@ -67,106 +67,148 @@ class BookingPrv extends ChangeNotifier {
     }
   }
 
-  cancel(BuildContext context) {
-    Utils.showConfirmMessage(
-      context: context,
-      title: S.of(context).can_schedule,
-      content: S.of(context).confirm_can_schedule(
-            "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
-          ),
-      onConfirm: () {
-        Navigator.pop(context);
-        Utils.showDialog(
-          context: context,
-          dialog: PrimaryDialog.custom(
-            content: StatefulBuilder(
-              builder: (context, setState) => Form(
-                key: formKeyReason,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                onChanged: () {
-                  if (formKeyReason.currentState!.validate()) {
-                    genReasonValidateString();
-                    setState(() {});
-                  } else {
-                    genReasonValidateString();
-                    setState(() {});
-                  }
-                },
-                child: Column(
-                  children: [
-                    PrimaryTextField(
-                      label: S.of(context).cancel_reason,
-                      isRequired: true,
-                      controller: reasonController,
-                      validateString: validateReason,
-                      validator: Utils.emptyValidator,
-                      maxLines: 3,
-                    ),
-                    vpad(12),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 10,
-                          child: PrimaryButton(
-                            buttonSize: ButtonSize.medium,
-                            buttonType: ButtonType.red,
-                            text: S.of(context).cancel,
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
+  cancel(BuildContext context, String? status) {
+    if (status == "WAIT" || status == 'APPROVEDFIRST') {
+      Utils.showConfirmMessage(
+        context: context,
+        title: S.of(context).can_schedule,
+        content: S.of(context).confirm_can_schedule(
+              "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
+            ),
+        onConfirm: () {
+          Navigator.pop(context);
+          APIHandOver.saveApointmentScheduleList(
+            schedule!
+                .copyWith(
+                  cancel_reason: "NGUOIDUNGHUY",
+                  status: "CANCEL",
+                  // cancel_note: reasonController.text,
+                )
+                .toMap(),
+          ).then((v) {
+            Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_can_schedule(
+                    "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
+                  ),
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  HandOverScreen.routeName,
+                  (route) => route.isFirst,
+                  arguments: {
+                    "init": 0,
+                  },
+                );
+              },
+            );
+          }).catchError((e) {
+            Utils.showErrorMessage(context, e);
+          });
+        },
+      );
+    }
+    if (status == 'APPROVEDSECOND') {
+      // Utils.showConfirmMessage(
+      //   context: context,
+      //   title: S.of(context).can_schedule,
+      //   content: S.of(context).confirm_can_schedule(
+      //         "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
+      //       ),
+      //   onConfirm: () {
+      //     Navigator.pop(context);
+      Utils.showDialog(
+        context: context,
+        dialog: PrimaryDialog.custom(
+          content: StatefulBuilder(
+            builder: (context, setState) => Form(
+              key: formKeyReason,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: () {
+                if (formKeyReason.currentState!.validate()) {
+                  genReasonValidateString();
+                  setState(() {});
+                } else {
+                  genReasonValidateString();
+                  setState(() {});
+                }
+              },
+              child: Column(
+                children: [
+                  PrimaryTextField(
+                    label: S.of(context).cancel_reason,
+                    isRequired: true,
+                    controller: reasonController,
+                    validateString: validateReason,
+                    validator: Utils.emptyValidator,
+                    maxLines: 3,
+                  ),
+                  vpad(12),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 10,
+                        child: PrimaryButton(
+                          buttonSize: ButtonSize.medium,
+                          buttonType: ButtonType.red,
+                          text: S.of(context).cancel,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                        Expanded(flex: 1, child: hpad(0)),
-                        Expanded(
-                          flex: 10,
-                          child: PrimaryButton(
-                            text: S.of(context).confirm,
-                            onTap: () {
-                              if (formKeyReason.currentState != null &&
-                                  formKeyReason.currentState!.validate()) {
-                                // Navigator.pop(context);
-                                APIHandOver.saveApointmentScheduleList(
-                                  schedule!
-                                      .copyWith(
-                                        cancel_reason: "NGUOIDUNGHUY",
-                                        status: "CANCEL",
-                                        cancel_note: reasonController.text,
-                                      )
-                                      .toMap(),
-                                ).then((v) {
-                                  Utils.showSuccessMessage(
-                                    context: context,
-                                    e: S.of(context).success_can_schedule(
-                                          "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
-                                        ),
-                                    onClose: () {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        HandOverScreen.routeName,
-                                        (route) => route.isFirst,
-                                        arguments: {
-                                          "init": 0,
-                                        },
-                                      );
-                                    },
-                                  );
-                                }).catchError((e) {
-                                  Utils.showErrorMessage(context, e);
-                                });
-                              }
-                            },
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                      Expanded(flex: 1, child: hpad(0)),
+                      Expanded(
+                        flex: 10,
+                        child: PrimaryButton(
+                          text: S.of(context).confirm,
+                          onTap: () {
+                            if (formKeyReason.currentState != null &&
+                                formKeyReason.currentState!.validate()) {
+                              // Navigator.pop(context);
+                              APIHandOver.saveApointmentScheduleList(
+                                schedule!
+                                    .copyWith(
+                                      cancel_reason: "NGUOIDUNGHUY",
+                                      status: "CANCEL",
+                                      cancel_note: reasonController.text,
+                                    )
+                                    .toMap(),
+                              ).then((v) {
+                                Utils.showSuccessMessage(
+                                  context: context,
+                                  e: S.of(context).success_can_schedule(
+                                        "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
+                                      ),
+                                  onClose: () {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      HandOverScreen.routeName,
+                                      (route) => route.isFirst,
+                                      arguments: {
+                                        "init": 0,
+                                      },
+                                    );
+                                  },
+                                );
+                              }).catchError((e) {
+                                Utils.showErrorMessage(context, e);
+                              });
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
+      //   },
+      // );
+    }
   }
 
   reBook(BuildContext context) {
@@ -237,7 +279,7 @@ class BookingPrv extends ChangeNotifier {
                         onTap: () async {
                           Navigator.pop(context);
 
-                          APIHandOver.saveApointmentScheduleList(
+                          APIHandOver.reBookScheduleList(
                             schedule!
                                 .copyWith(
                                   date: handOverDate!

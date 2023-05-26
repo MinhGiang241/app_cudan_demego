@@ -63,6 +63,10 @@ genStatus(String status) {
       return S.current.feedback;
     case "UNPAID":
       return S.current.wait_pay;
+    case "APPROVEDFIRST":
+      return S.current.wait_approve;
+    case "APPROVEDSECOND":
+      return S.current.approved;
     default:
       return '';
   }
@@ -150,6 +154,10 @@ Color genStatusColor(String? status) {
       return greenColorBase;
     case "COMPLETE":
       return greenColor8;
+    case "APPROVEDFIRST":
+      return primaryColor1;
+    case "APPROVEDSECOND":
+      return greenColor6;
     default:
       return grayScaleColor1;
   }
