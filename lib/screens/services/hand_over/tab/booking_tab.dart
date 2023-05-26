@@ -87,11 +87,11 @@ class _BookingTabState extends State<BookingTab> {
           }
         }
 
-        newL.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
-        wait.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
-        app1.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
-        app2.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
-        cancel.sort((a, b) => b.createdTime!.compareTo(a.createdTime!));
+        newL.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        wait.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        app1.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        app2.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        cancel.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
         List<AppointmentSchedule> list = newL + wait + app1 + app2 + cancel;
 
