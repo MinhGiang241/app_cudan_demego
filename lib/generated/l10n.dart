@@ -4990,6 +4990,16 @@ class S {
     );
   }
 
+  /// `Schedual booking hand over`
+  String get booking_hand_over_0 {
+    return Intl.message(
+      'Schedual booking hand over',
+      name: 'booking_hand_over_0',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Booking history`
   String get booking_his {
     return Intl.message(

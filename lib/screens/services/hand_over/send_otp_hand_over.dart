@@ -166,7 +166,7 @@ class _OtpBookingScreenState extends State<OtpBookingScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: PrimaryButton(
                   isLoading: context.watch<OtpBookingPrv>().isLoading,
-                  text: S.of(context).next,
+                  text: S.of(context).confirm,
                   onTap: () {
                     context
                         .read<OtpBookingPrv>()

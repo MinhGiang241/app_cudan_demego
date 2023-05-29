@@ -57,18 +57,33 @@ class _WaterBillTabState extends State<WaterBillTab> {
             receipt != null ? WaterFee.fromMap(receipt.fee_config) : null;
         double index = totalIndex;
         var waterFee = waterFeeConfig?.water_fee;
+        waterFee?.sort((a, b) => a.to!.compareTo(b.to!));
         List<double> waterTo = waterFee?.map((e) => e.to!).toList() ?? [];
         waterTo.sort((a, b) => a.compareTo(b));
-        for (var i in waterTo) {
-          index = index - i;
-          if (index < 0) {
-            list.add(index + i);
+        // for (var i in waterTo) {
+        //   index = index - i;
+        //   if (index < 0) {
+        //     list.add(index + i);
+        //     break;
+        //   } else if (i == waterTo.last) {
+        //     list.add(index + i);
+        //     break;
+        //   } else {
+        //     list.add(i);
+        //   }
+        // }
+        for (var i = 0; i < waterTo.length; i++) {
+          if (index >= waterTo[i] && i != waterTo.length - 1) {
+            list.add(waterTo[i] - (i == 0 ? 0 : waterTo[i - 1]));
+          } else if (index <= waterTo[i]) {
+            var h = index - waterTo[i - 1];
+            if (h != 0) {
+              list.add(h);
+            }
+
             break;
-          } else if (i == waterTo.last) {
-            list.add(index + i);
-            break;
-          } else {
-            list.add(i);
+          } else if (index >= waterTo[i] && i == waterTo.length - 1) {
+            list.add(index - waterTo[i]);
           }
         }
         var month = context.watch<WaterPrv>().month;
@@ -81,7 +96,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
 
           return a + b.value * price;
         });
-        var vat = totalMoney * (receipt?.vat ?? 0);
+        var vat = totalMoney * (receipt?.vat ?? 0) / 100;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,

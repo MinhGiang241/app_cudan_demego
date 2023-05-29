@@ -143,7 +143,7 @@ class _BookingTabState extends State<BookingTab> {
                               children: [
                                 vpad(10),
                                 Text(
-                                  "${e.a?.name}-${e.a?.f?.name}-${e.a?.b?.name}",
+                                  "${e.a?.name} - ${e.a?.f?.name} - ${e.a?.b?.name}",
                                   style: txtBold(16),
                                 ),
                                 vpad(4),

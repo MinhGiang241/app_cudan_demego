@@ -144,26 +144,21 @@ class APIHandOver {
   }
 
   static Future veryfyExistScheduleAndSendOTP(
-    String? phone,
-    String? apartmentId,
-  ) async {
+      String? phone, String? apartmentId, Map<String, dynamic> data) async {
     var query = '''
-    mutation (\$apartmentId:String,\$phone:String){
-    response: handover_mobile_check_existed_apointment_schedule (apartmentId: \$apartmentId,phone: \$phone ) {
+ mutation (\$apartmentId:String,\$phone:String,\$data:Dictionary){
+    response: handover_mobile_check_existed_apointment_schedule (apartmentId: \$apartmentId,phone: \$phone,data: \$data ) {
         code
         message
         data
     }
 }
         
-        
-        
-        
     ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"phone": phone, 'apartmentId': apartmentId},
+      variables: {"phone": phone, 'apartmentId': apartmentId, "data": data},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

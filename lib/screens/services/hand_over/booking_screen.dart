@@ -45,7 +45,9 @@ class BookingScreen extends StatelessWidget {
             }).toList();
             return PrimaryScreen(
               appBar: PrimaryAppbar(
-                title: S.of(context).booking_hand_over,
+                title: isBook
+                    ? S.of(context).booking_hand_over_0
+                    : S.of(context).booking_hand_over,
               ),
               body: SafeArea(
                 child: SingleChildScrollView(
@@ -83,7 +85,7 @@ class BookingScreen extends StatelessWidget {
                                 : null,
                             enable: isBook,
                             validator: Utils.emptyValidator,
-                            label: S.of(context).hand_over_date,
+                            label: S.of(context).hand_date,
                             isRequired: true,
                             isReadOnly: true,
                             hint: "dd/mm/yyyy",
@@ -106,7 +108,7 @@ class BookingScreen extends StatelessWidget {
                                 : null,
                             enable: isBook,
                             validator: Utils.emptyValidator,
-                            label: S.of(context).hand_over_time,
+                            label: S.of(context).hand_time,
                             isReadOnly: true,
                             isRequired: true,
                             onTap: () => context
@@ -193,7 +195,9 @@ class BookingScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                              if (!isBook && schedule?.status != "CANCEL")
+                              if ((!isBook && schedule?.status != "CANCEL") &&
+                                  (isBook ||
+                                      schedule?.status == "APPROVEDSECOND"))
                                 Expanded(
                                   flex: 1,
                                   child: hpad(0),

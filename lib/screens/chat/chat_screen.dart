@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
               WebsocketConnect.webSocketUrl,
             );
             // }
-
+            bloc.streamLiveChatRoom("", "", roomId!);
             var email =
                 context.read<ResidentInfoPrv>().userInfo?.account?.email;
             var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
@@ -140,13 +140,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
               }(),
               builder: (context, sn) {
+                // bloc.streamLiveChatRoom(token!, token, roomId!);
                 if (sn.connectionState == ConnectionState.waiting &&
                     state.stateChat == StateChatEnum.INIT) {
                   return const Center(
                     child: PrimaryLoading(),
                   );
                 }
-                bloc.streamLiveChatRoom(token!, token, roomId!);
+
                 return SafeArea(
                   child: StreamBuilder(
                     stream: state.webSocketChannel!.stream,
@@ -170,11 +171,11 @@ class _ChatScreenState extends State<ChatScreen> {
                           bloc.webSocketService
                               .sendPong(state.webSocketChannel!);
                           bloc.setQuit(true);
-                          if (state.stateChat == StateChatEnum.START) {
-                            bloc.addMessage(
-                              MessageChat(id: uuid.v4(), chatMode: 2),
-                            );
-                          }
+                          // if (state.stateChat == StateChatEnum.START) {
+                          //   bloc.addMessage(
+                          //     MessageChat(id: uuid.v4(), chatMode: 2),
+                          //   );
+                          // }
 
                           // bloc.addMessage(
                           //     MessageChat(id: uuid.v4(), chatMode: 1));
@@ -198,8 +199,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         }
 
                         if (dataJson?['result']?['newRoom'] == true) {
-                          bloc.setRoomId(dataJson['result']['rid']);
-                          bloc.setvisitorToken(dataJson['result']['rid']);
+                          bloc.add(BackChatMessageInit());
+                          bloc.closeChatRoom(state.roomId);
+                          // bloc.setRoomId(dataJson['result']['rid']);
+                          // bloc.setvisitorToken(dataJson['result']['rid']);
                         }
                         if (dataJson['msg'] == "changed" &&
                             dataJson["fields"] != null &&

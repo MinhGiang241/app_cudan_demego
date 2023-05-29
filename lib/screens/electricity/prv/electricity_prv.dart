@@ -14,18 +14,19 @@ class ElectricityPrv extends ChangeNotifier {
   ElectricityPrv({this.year, this.month}) {
     year ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month, // - 1,
+      DateTime.now().month - 1, // - 1,
       DateTime.now().day,
     ).year;
 
     month ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month, // - 1,
+      DateTime.now().month - 1, // - 1,
       DateTime.now().day,
     ).month;
   }
   int? year;
   int? month;
+  int indexIndicator = 0;
   List<Indicator> listIndicatorCurrentYear = [];
   List<Indicator> listIndicatorLastYear = [];
   ElectricFee? electricFee;
@@ -110,6 +111,7 @@ class ElectricityPrv extends ChangeNotifier {
     await APIElectricity.getIndicatorByYear(apartmentId, year!).then((v) {
       listIndicatorCurrentYear.clear();
       listIndicatorLastYear.clear();
+
       for (var i in v['current']) {
         listIndicatorCurrentYear.add(Indicator.fromMap(i));
       }

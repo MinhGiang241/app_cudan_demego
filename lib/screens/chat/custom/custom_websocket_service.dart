@@ -375,7 +375,7 @@ class CustomWebSocketService {
   ) {
     Map msg = {
       'msg': 'sub',
-      'id': id,
+      'id': DateTime.now().millisecond.toString(),
       'name': 'stream-room-messages',
       'params': [
         param,

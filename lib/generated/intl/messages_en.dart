@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking": MessageLookupByLibrary.simpleMessage("Booking"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
+        "booking_hand_over_0":
+            MessageLookupByLibrary.simpleMessage("Schedual booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
         "building_regulation":

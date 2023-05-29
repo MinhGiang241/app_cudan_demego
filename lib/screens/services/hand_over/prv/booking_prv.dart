@@ -28,7 +28,7 @@ class BookingPrv extends ChangeNotifier {
             )
           : null;
       handOverDateController.text = Utils.dateFormat(schedule?.date ?? "", 1);
-      handOverTimeController.text = schedule?.time ?? "";
+      handOverTimeController.text = schedule?.hour ?? "";
       // customer = schedule?.c;
       apartmentValue = schedule?.apartmentId;
     }
@@ -344,16 +344,33 @@ class BookingPrv extends ChangeNotifier {
     autoValid = true;
     isSendLoading = true;
     notifyListeners();
+
     if (validate(context)) {
       var resPhone = context.read<ResidentInfoPrv>().userInfo?.phone_required;
       var residentId = context.read<ResidentInfoPrv>().residentId;
       var apartment =
           apartmentList.firstWhere((element) => element.id == apartmentValue);
+      var data = AppointmentSchedule(
+        apartmentId: apartmentValue,
+        apartmentTypeId: apartment.apartmentTypeId,
+        apartment_type: apartment.apartment_type,
+        date: handOverDate!
+            // .subtract(const Duration(hours: 7))
+            .toIso8601String(),
+        time: handOverTimeController.text,
+        customersId: context.read<ResidentInfoPrv>().residentId, //customer?.id,
+        email:
+            context.read<ResidentInfoPrv>().userInfo?.email, //customer?.email,
+        hour: handOverTimeController.text,
+        resident_phone: resPhone,
+        status: "WAIT",
+      );
       APIHandOver.veryfyExistScheduleAndSendOTP(
-        // customer?.phone_required,
-        residentId,
-        apartmentValue,
-      ).then((v) {
+              // customer?.phone_required,
+              residentId,
+              apartmentValue,
+              data.toMap())
+          .then((v) {
         isSendLoading = false;
         notifyListeners();
         Navigator.pushNamed(
@@ -362,24 +379,7 @@ class BookingPrv extends ChangeNotifier {
           arguments: {
             "apart":
                 "${apartment.name}-${apartment.f?.name}-${apartment.b?.name}",
-            "data": AppointmentSchedule(
-              apartmentId: apartmentValue,
-              apartmentTypeId: apartment.apartmentTypeId,
-              apartment_type: apartment.apartment_type,
-              date: handOverDate!
-                  // .subtract(const Duration(hours: 7))
-                  .toIso8601String(),
-              time: handOverTimeController.text,
-              customersId:
-                  context.read<ResidentInfoPrv>().residentId, //customer?.id,
-              email: context
-                  .read<ResidentInfoPrv>()
-                  .userInfo
-                  ?.email, //customer?.email,
-              hour: handOverTimeController.text,
-              resident_phone: resPhone,
-              status: "WAIT",
-            )
+            "data": data
           },
         );
       }).catchError((e) {

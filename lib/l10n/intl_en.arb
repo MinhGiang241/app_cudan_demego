@@ -493,6 +493,7 @@
   "no_hand_over": "No hand over",
   "booking": "Booking",
   "booking_hand_over": "Booking hand over",
+  "booking_hand_over_0": "Schedual booking hand over",
   "booking_his": "Booking history",
   "hand_date": "Hand over date",
   "hand_time": "Hand over time",

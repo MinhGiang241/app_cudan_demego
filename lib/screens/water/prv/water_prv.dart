@@ -13,13 +13,13 @@ class WaterPrv extends ChangeNotifier {
   WaterPrv({this.year, this.month}) {
     year ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month, // - 1,
+      DateTime.now().month - 1, // - 1,
       DateTime.now().day,
     ).year;
 
     month ??= DateTime(
       DateTime.now().year,
-      DateTime.now().month, // - 1,
+      DateTime.now().month - 1, // - 1,
       DateTime.now().day,
     ).month;
   }

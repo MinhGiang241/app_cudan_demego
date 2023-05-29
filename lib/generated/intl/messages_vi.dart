@@ -160,6 +160,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "block": MessageLookupByLibrary.simpleMessage("Phường /xã"),
         "booking": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "booking_hand_over":
+            MessageLookupByLibrary.simpleMessage("Lịch đặt nhận bàn giao"),
+        "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),

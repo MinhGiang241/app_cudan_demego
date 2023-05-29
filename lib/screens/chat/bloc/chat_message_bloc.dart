@@ -173,10 +173,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     });
   }
 
-  void streamLiveChatRoom(String visitorToken, String id, String param) {
+  void streamLiveChatRoom(String token, String id, String param) {
     webSocketService.streamLiveChatRoom(
       state.webSocketChannel!,
-      visitorToken,
+      visitorToken!,
       state.roomId ?? id,
       state.roomId ?? param,
     );

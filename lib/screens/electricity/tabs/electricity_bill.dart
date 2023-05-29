@@ -57,18 +57,33 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
         var elecFeeConfig =
             receipt != null ? ElectricFee.fromMap(receipt.fee_config) : null;
         var elecFee = elecFeeConfig?.electric_fee;
+        elecFee?.sort((a, b) => a.to!.compareTo(b.to!));
         List<double> elecFeeTo = elecFee?.map((e) => e.to!).toList() ?? [];
         elecFeeTo.sort((a, b) => a.compareTo(b));
-        for (var i in elecFeeTo) {
-          index = index - i;
-          if (index <= 0) {
-            list.add(index + i);
+        // for (var i in elecFeeTo) {
+        //   index = index - i;
+        //   if (index <= 0) {
+        //     list.add(index + i);
+        //     break;
+        //   } else if (i == elecFeeTo.last) {
+        //     list.add(index + i);
+        //     break;
+        //   } else {
+        //     list.add(i);
+        //   }
+        // }
+        for (var i = 0; i < elecFeeTo.length; i++) {
+          if (index >= elecFeeTo[i] && i != elecFeeTo.length - 1) {
+            list.add(elecFeeTo[i] - (i == 0 ? 0 : elecFeeTo[i - 1]));
+          } else if (index <= elecFeeTo[i]) {
+            var h = index - elecFeeTo[i - 1];
+            if (h != 0) {
+              list.add(h);
+            }
+
             break;
-          } else if (i == elecFeeTo.last) {
-            list.add(index + i);
-            break;
-          } else {
-            list.add(i);
+          } else if (index >= elecFeeTo[i] && i == elecFeeTo.length - 1) {
+            list.add(index - elecFeeTo[i]);
           }
         }
         var month = context.watch<ElectricityPrv>().month;
@@ -80,7 +95,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
           var price = elecFee![b.key].price ?? 0;
           return a + b.value * price;
         });
-        var vat = totalMoney * (receipt?.vat ?? 0);
+        var vat = totalMoney * (receipt?.vat ?? 0) / 100;
         var totalMoneyVat = totalMoney + vat;
         return SmartRefresher(
           enablePullDown: true,
