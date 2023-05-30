@@ -115,13 +115,15 @@ class _ChatScreenState extends State<ChatScreen> {
                     print(bloc.user);
                     var roomId = bloc.user?["roomId"];
                     var vtoken = bloc.visitorToken;
-                    var room = await bloc.openNewRoomLiveChat(token!);
-                    if (room['success'] == false) {
-                      throw (room['error']);
-                    }
-                    bloc.setRoomId(room?['room']?['_id']);
+                    if (state.isBack) {
+                      var room = await bloc.openNewRoomLiveChat(token!);
+                      if (room['success'] == false) {
+                        throw (room['error']);
+                      }
+                      bloc.setRoomId(room?['room']?['_id']);
 
-                    print(vtoken);
+                      print(vtoken);
+                    }
                     var his = await bloc.loadLiveChatHistory(
                       state.roomId,
                       vtoken,
@@ -164,14 +166,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         var dataJson = json.decode(snapshot.data);
                         if (json.decode(snapshot.data)['msg'] == 'ping') {
                           print("send pong");
-                          if (state.quit &&
-                              state.stateChat == StateChatEnum.START) {
-                            bloc.add(BackChatMessageInit());
-                            bloc.closeChatRoom(state.roomId);
-                          }
+                          // if (state.quit &&
+                          //     state.stateChat == StateChatEnum.START) {
+                          //   bloc.add(BackChatMessageInit());
+                          //   bloc.closeChatRoom(state.roomId);
+                          // }
                           bloc.webSocketService
                               .sendPong(state.webSocketChannel!);
-                          bloc.setQuit(true);
+                          // bloc.setQuit(true);
                           // if (state.stateChat == StateChatEnum.START) {
                           //   bloc.addMessage(
                           //     MessageChat(id: uuid.v4(), chatMode: 2),
@@ -192,9 +194,10 @@ class _ChatScreenState extends State<ChatScreen> {
                           bloc.addMessage(
                             c,
                           );
-                          if (c.msg == "Bắt đầu") {
+                          if (c.msg == "Bắt đầu" &&
+                              state.messagesMap['start'] != null) {
                             bloc.addMessage(
-                              MessageChat(id: uuid.v4(), chatMode: 1),
+                              MessageChat(id: "start", chatMode: 1),
                             );
                           }
                         }

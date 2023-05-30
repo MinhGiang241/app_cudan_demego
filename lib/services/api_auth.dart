@@ -75,13 +75,12 @@ class APIAuth {
   static Future resetPassword(String userName, String newPassword) async {
     var query = '''
     mutation (\$userName:String,\$newPassword:String){
-        response: authorization_reset_password_ (userName: \$userName,newPassword: \$newPassword ) {
-            code
-            message
-            data
-        }
+    response: authorization_reset_password (userName: \$userName,newPassword: \$newPassword ) {
+        code
+        message
+        data
     }
-            
+}
     ''';
 
     final MutationOptions options = MutationOptions(

@@ -69,7 +69,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     on<BackChatMessageInit>((event, emit) async {
       emit(
         ChatState(
-          messagesMap: {},
+          roomId: state.roomId,
+          isBack: true,
+          messagesMap: state.messagesMap,
           stateChat: StateChatEnum.INIT,
           showGreeting: false,
           user: user,

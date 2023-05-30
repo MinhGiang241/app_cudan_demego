@@ -216,7 +216,7 @@ class BookingPrv extends ChangeNotifier {
       context: context,
       title: S.of(context).change_schedule,
       content: S.of(context).confirm_change_schedule(
-            "${schedule?.a?.name}-${schedule?.a?.f?.name}-${schedule?.a?.b?.name}",
+            "${schedule?.a?.name} - ${schedule?.a?.f?.name} - ${schedule?.a?.b?.name}",
           ),
       onConfirm: () {
         Navigator.pop(context);
@@ -283,7 +283,7 @@ class BookingPrv extends ChangeNotifier {
                             schedule!
                                 .copyWith(
                                   date: handOverDate!
-                                      .subtract(const Duration(hours: 7))
+                                      .subtract(const Duration(hours: 0))
                                       .toIso8601String(),
                                   time: handOverTimeController.text,
                                   hour: handOverTimeController.text,
@@ -455,9 +455,12 @@ class BookingPrv extends ChangeNotifier {
   }
 
   pickHandOverDate(BuildContext context) async {
+    var n = DateTime.now();
     await Utils.showDatePickers(
       context,
-      initDate: handOverDate ?? DateTime.now(),
+      initDate: handOverDate!.millisecondsSinceEpoch <= n.millisecondsSinceEpoch
+          ? n
+          : handOverDate, //handOverDate ?? DateTime.now(),
       startDate: DateTime(
         DateTime.now().year,
         DateTime.now().month,

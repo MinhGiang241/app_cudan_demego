@@ -20,4 +20,6 @@ class LoadChatMessageStart extends ChatMessageEvent {
 @immutable
 class BackChatMessageInit extends ChatMessageEvent {
   BackChatMessageInit();
+
+  bool isBack = true;
 }

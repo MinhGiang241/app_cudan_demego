@@ -350,6 +350,7 @@ class ChatState {
   final List<MessageChat> messagesList = [];
   bool quit;
   StateChatEnum stateChat;
+  bool isBack = false;
   ChatState({
     this.authToken,
     this.visitorToken,
@@ -360,6 +361,7 @@ class ChatState {
     required this.showGreeting,
     required this.stateChat,
     this.quit = false,
+    this.isBack = false,
   });
 
   ChatState copyWith({

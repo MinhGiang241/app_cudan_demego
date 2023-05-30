@@ -497,8 +497,8 @@ class _MessageState extends State<Message> {
                                                 httpHeaders: {
                                                   "Authorization":
                                                       "Bearer ${widget.chatbloc.authToken}",
-                                                  "X-User-Id": widget
-                                                          .chatbloc.user!.id ??
+                                                  "X-User-Id":
+                                                      //widget.chatbloc?.user?.id ??
                                                       "",
                                                   "X-Auth-Token": widget
                                                           .chatbloc.authToken ??
