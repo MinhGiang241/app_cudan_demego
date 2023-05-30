@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
               WebsocketConnect.webSocketUrl,
             );
             // }
-            bloc.streamLiveChatRoom("", "", roomId!);
+            // bloc.streamLiveChatRoom("", "", roomId!);
             var email =
                 context.read<ResidentInfoPrv>().userInfo?.account?.email;
             var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
@@ -134,6 +134,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   //   }
                   //   bloc.setRoomId(room?['room']?['_id']);
                   // }
+                  bloc.streamLiveChatRoom("", "", roomId!);
                 } catch (e) {
                   Utils.showErrorMessage(context, e.toString());
                   bloc.hasError();

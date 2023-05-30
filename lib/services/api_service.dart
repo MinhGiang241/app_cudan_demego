@@ -203,7 +203,7 @@ class ApiService {
         onSendProgress: onSendProgress,
       );
       // print(data);
-      return {"data": response.toString(), "name": data?.fields?[0]?.value};
+      return {"data": response.toString(), "name": data};
     } on DioError catch (e) {
       if (e.response != null) {
         try {
