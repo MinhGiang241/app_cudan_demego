@@ -171,7 +171,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       stream: state.webSocketChannel!.stream,
                       builder: (context, snapshot) {
                         log(snapshot.toString());
-                        if (snapshot.hasData) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
                           var accountId = context
                               .read<ResidentInfoPrv>()
                               .userInfo!
@@ -351,7 +352,30 @@ class _ChatScreenState extends State<ChatScreen> {
                               vpad(10)
                             ],
                           );
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          bloc.add(BackChatMessageInit());
+                          // if (state.stateChat == StateChatEnum.INIT) {
+                          //   bloc.add(BackChatMessageInit());
+                          // }
+                          // if (state.stateChat == StateChatEnum.START) {
+                          //   bloc.add(
+                          //     LoadChatMessageStart(
+                          //       roomId: state.roomId,
+                          //       messagesMap: state.messagesMap,
+                          //     ),
+                          //   );
+                          // }
+
+                          return const Center(child: Text('done'));
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.none) {
+                          return const Center(child: Text('none'));
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: PrimaryLoading());
                         }
+
                         return const Center(child: PrimaryLoading());
                       },
                     ),
