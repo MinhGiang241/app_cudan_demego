@@ -56,6 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
     var roomId = context.read<ResidentInfoPrv>().userInfo?.account?.id;
     return WillPopScope(
       onWillPop: () async {
+        bloc.setIntStateChat();
         Navigator.pushNamedAndRemoveUntil(
           context,
           HomeScreen.routeName,

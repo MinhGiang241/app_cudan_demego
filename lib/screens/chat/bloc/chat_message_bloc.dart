@@ -283,4 +283,12 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   void setQuit(bool v) {
     state.quit = v;
   }
+
+  void setIntStateChat() {
+    state.stateChat = StateChatEnum.INIT;
+  }
+
+  getRoomId() {
+    return state.roomId;
+  }
 }
