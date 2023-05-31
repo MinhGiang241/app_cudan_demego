@@ -458,9 +458,11 @@ class BookingPrv extends ChangeNotifier {
     var n = DateTime.now();
     await Utils.showDatePickers(
       context,
-      initDate: handOverDate!.millisecondsSinceEpoch <= n.millisecondsSinceEpoch
+      initDate: handOverDate == null
           ? n
-          : handOverDate, //handOverDate ?? DateTime.now(),
+          : handOverDate!.millisecondsSinceEpoch <= n.millisecondsSinceEpoch
+              ? n
+              : handOverDate, //handOverDate ?? DateTime.now(),
       startDate: DateTime(
         DateTime.now().year,
         DateTime.now().month,

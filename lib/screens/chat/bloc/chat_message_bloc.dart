@@ -29,6 +29,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
             messagesMap: {},
             stateChat: StateChatEnum.INIT,
             showGreeting: false,
+            isBack: false,
           ),
         ) {
     //   on<LoadChatMessageStart>((event, emit) async {
