@@ -208,8 +208,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     state.showGreeting = !state.showGreeting;
   }
 
-  void closeChatRoom(String? rid) {
-    state.webSocketService.closeLiveChatRoom(rid, visitorToken!);
+  Future closeChatRoom(String? rid) async {
+    return state.webSocketService
+        .closeLiveChatRoom(state.roomId, visitorToken!);
   }
 
   void scroll() {

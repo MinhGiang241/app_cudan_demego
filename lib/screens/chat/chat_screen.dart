@@ -61,6 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
           HomeScreen.routeName,
           (route) => route.isCurrent,
         );
+
         return false;
       },
       child: GestureDetector(
@@ -318,8 +319,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 ?.account
                                                 ?.id;
                                             Navigator.pop(context);
-                                            bloc.add(BackChatMessageInit());
-                                            bloc.closeChatRoom(rid!);
+
+                                            bloc.closeChatRoom(rid!).then((v) {
+                                              bloc.add(BackChatMessageInit());
+                                            });
                                           },
                                         );
 
