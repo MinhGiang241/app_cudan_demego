@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +18,7 @@ import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../models/selection_model.dart';
 import '../screens/auth/sign_in_screen.dart';
+import '../screens/chat/bloc/chat_message_bloc.dart';
 import '../widgets/item_selected.dart';
 import '../widgets/primary_bottom_sheet.dart';
 import '../widgets/primary_button.dart';
@@ -615,6 +617,7 @@ class Utils {
 
   static showErrorMessage(BuildContext context, String e) {
     if (e == 'RELOGIN') {
+      context.read<ChatMessageBloc>().setIntStateChat();
       Utils.showDialog(
         context: context,
         dialog: PrimaryDialog.error(
