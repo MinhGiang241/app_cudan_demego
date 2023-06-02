@@ -203,7 +203,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     "Bắt đầu") {
                               if (state.init == true) {
                                 bloc.addMessage(
-                                  MessageChat(id: uuid.v4(), chatMode: 1),
+                                  MessageChat(id: "start", chatMode: 1),
                                 );
                                 bloc.notInit();
                               }
@@ -336,161 +336,169 @@ class _ChatScreenState extends State<ChatScreen> {
                 );
               } else {
                 return SafeArea(
-                  child: StreamBuilder(
-                    stream: state.webSocketChannel!.stream,
-                    builder: (context, snapshot) {
-                      log(snapshot.toString());
-                      if (snapshot.connectionState == ConnectionState.active) {
-                        var dataJson = json.decode(snapshot.data);
-                        if (json.decode(snapshot.data)['msg'] == 'ping') {
-                          print("send pong");
+                  child: FutureBuilder(
+                    future: () {
+                      bloc.loadLiveChatHistory(state.roomId, '');
+                    }(),
+                    builder: (context, nap) => StreamBuilder(
+                      stream: state.webSocketChannel!.stream,
+                      builder: (context, snapshot) {
+                        log(snapshot.toString());
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          var dataJson = json.decode(snapshot.data);
+                          if (json.decode(snapshot.data)['msg'] == 'ping') {
+                            print("send pong");
 
-                          bloc.webSocketService
-                              .sendPong(state.webSocketChannel!);
-                        }
-                        var data =
-                            RocketChatData.fromJson(json.decode(snapshot.data));
-                        if (data.msg == "changed" && data.fields != null) {
-                          bloc.addMessage(data.fields!.args![0]);
-                        }
-                        if (dataJson['msg'] == "result" &&
-                            dataJson['result'] != null) {
-                          var c = MessageChat.fromJson(dataJson['result']);
-                          bloc.addMessage(
-                            c,
+                            bloc.webSocketService
+                                .sendPong(state.webSocketChannel!);
+                          }
+                          var data = RocketChatData.fromJson(
+                              json.decode(snapshot.data));
+                          if (data.msg == "changed" && data.fields != null) {
+                            bloc.addMessage(data.fields!.args![0]);
+                          }
+                          if (dataJson['msg'] == "result" &&
+                              dataJson['result'] != null) {
+                            var c = MessageChat.fromJson(dataJson['result']);
+                            bloc.addMessage(
+                              c,
+                            );
+                          }
+
+                          if (dataJson?['result']?['newRoom'] == true) {
+                            bloc.add(BackChatMessageInit());
+                            bloc.closeChatRoom(state.roomId);
+                            // bloc.setRoomId(dataJson['result']['rid']);
+                            // bloc.setvisitorToken(dataJson['result']['rid']);
+                          }
+                          // if (dataJson['msg'] == "changed" &&
+                          //     dataJson["fields"] != null &&
+                          //     dataJson['fields']?['args']?[0]['msg'] ==
+                          //         "Bắt đầu") {
+                          //   bloc.addMessage(
+                          //     MessageChat(id: uuid.v4(), chatMode: 1),
+                          //   );
+                          // }
+
+                          return Column(
+                            children: [
+                              Expanded(
+                                child: _activeStateRender(
+                                  snapshot,
+                                  state,
+                                  bloc,
+                                ),
+                              ),
+                              if (state.stateChat == StateChatEnum.INIT)
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: IntrinsicWidth(
+                                    child: PrimaryCard(
+                                      background: grayScaleColor4,
+                                      padding: const EdgeInsets.all(6),
+                                      onTap: () {
+                                        bloc.add(
+                                          LoadChatMessageStart(
+                                            roomId: state.roomId,
+                                            messagesMap: state.messagesMap,
+                                          ),
+                                        );
+                                        // bloc.sendStartMessage(token, "Bắt đầu");
+
+                                        // bloc.addMessage(MessageChat(chatMode: 1));
+                                        bloc.toogleGreeting();
+                                        bloc.scroll();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Icon(Icons.login),
+                                          hpad(10),
+                                          Text(
+                                            S.of(context).start_chat,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtRegular(
+                                                14, grayScaleColorBase),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              // if (state.showGreeting)
+                              //   ListMessageSubject(
+                              //     bloc: bloc,
+                              //     toogleGreeting: () {
+                              //       bloc.toogleGreeting();
+                              //     },
+                              //   ),
+                              if (state.stateChat == StateChatEnum.START)
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: IntrinsicWidth(
+                                    child: PrimaryCard(
+                                      background: grayScaleColor4,
+                                      padding: const EdgeInsets.all(6),
+                                      onTap: () {
+                                        Utils.showConfirmMessage(
+                                          context: context,
+                                          title: S.of(context).end,
+                                          content:
+                                              S.of(context).confirm_end_chat,
+                                          onConfirm: () {
+                                            var rid = context
+                                                .read<ResidentInfoPrv>()
+                                                .userInfo
+                                                ?.account
+                                                ?.id;
+                                            Navigator.pop(context);
+
+                                            bloc.closeChatRoom(rid!).then((v) {
+                                              bloc.add(BackChatMessageInit());
+                                            });
+                                          },
+                                        );
+
+                                        // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Icon(Icons.logout),
+                                          hpad(10),
+                                          Text(
+                                            S.of(context).end_chat,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: txtRegular(
+                                                14, grayScaleColorBase),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if (!state.quit &&
+                                  state.stateChat == StateChatEnum.START)
+                                InputChat(
+                                    messageState: state, messageBloc: bloc),
+                              vpad(10)
+                            ],
                           );
-                        }
-
-                        if (dataJson?['result']?['newRoom'] == true) {
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
                           bloc.add(BackChatMessageInit());
-                          bloc.closeChatRoom(state.roomId);
-                          // bloc.setRoomId(dataJson['result']['rid']);
-                          // bloc.setvisitorToken(dataJson['result']['rid']);
+
+                          return const Center(child: Text('done'));
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.none) {
+                          return const Center(child: Text('none'));
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: PrimaryLoading());
                         }
-                        // if (dataJson['msg'] == "changed" &&
-                        //     dataJson["fields"] != null &&
-                        //     dataJson['fields']?['args']?[0]['msg'] ==
-                        //         "Bắt đầu") {
-                        //   bloc.addMessage(
-                        //     MessageChat(id: uuid.v4(), chatMode: 1),
-                        //   );
-                        // }
 
-                        return Column(
-                          children: [
-                            Expanded(
-                              child: _activeStateRender(
-                                snapshot,
-                                state,
-                                bloc,
-                              ),
-                            ),
-                            if (state.stateChat == StateChatEnum.INIT)
-                              Align(
-                                alignment: Alignment.center,
-                                child: IntrinsicWidth(
-                                  child: PrimaryCard(
-                                    background: grayScaleColor4,
-                                    padding: const EdgeInsets.all(6),
-                                    onTap: () {
-                                      bloc.add(
-                                        LoadChatMessageStart(
-                                          roomId: state.roomId,
-                                          messagesMap: state.messagesMap,
-                                        ),
-                                      );
-                                      // bloc.sendStartMessage(token, "Bắt đầu");
-
-                                      // bloc.addMessage(MessageChat(chatMode: 1));
-                                      bloc.toogleGreeting();
-                                      bloc.scroll();
-                                    },
-                                    child: Row(
-                                      children: [
-                                        const Icon(Icons.login),
-                                        hpad(10),
-                                        Text(
-                                          S.of(context).start_chat,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: txtRegular(
-                                              14, grayScaleColorBase),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            // if (state.showGreeting)
-                            //   ListMessageSubject(
-                            //     bloc: bloc,
-                            //     toogleGreeting: () {
-                            //       bloc.toogleGreeting();
-                            //     },
-                            //   ),
-                            if (state.stateChat == StateChatEnum.START)
-                              Align(
-                                alignment: Alignment.center,
-                                child: IntrinsicWidth(
-                                  child: PrimaryCard(
-                                    background: grayScaleColor4,
-                                    padding: const EdgeInsets.all(6),
-                                    onTap: () {
-                                      Utils.showConfirmMessage(
-                                        context: context,
-                                        title: S.of(context).end,
-                                        content: S.of(context).confirm_end_chat,
-                                        onConfirm: () {
-                                          var rid = context
-                                              .read<ResidentInfoPrv>()
-                                              .userInfo
-                                              ?.account
-                                              ?.id;
-                                          Navigator.pop(context);
-
-                                          bloc.closeChatRoom(rid!).then((v) {
-                                            bloc.add(BackChatMessageInit());
-                                          });
-                                        },
-                                      );
-
-                                      // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
-                                    },
-                                    child: Row(
-                                      children: [
-                                        const Icon(Icons.logout),
-                                        hpad(10),
-                                        Text(
-                                          S.of(context).end_chat,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: txtRegular(
-                                              14, grayScaleColorBase),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            if (!state.quit &&
-                                state.stateChat == StateChatEnum.START)
-                              InputChat(messageState: state, messageBloc: bloc),
-                            vpad(10)
-                          ],
-                        );
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        bloc.add(BackChatMessageInit());
-
-                        return const Center(child: Text('done'));
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.none) {
-                        return const Center(child: Text('none'));
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
                         return const Center(child: PrimaryLoading());
-                      }
-
-                      return const Center(child: PrimaryLoading());
-                    },
+                      },
+                    ),
                   ),
                 );
               }

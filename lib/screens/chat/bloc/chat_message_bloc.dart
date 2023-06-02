@@ -71,6 +71,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
       clearMessage('start');
       emit(
         ChatState(
+          init: true,
           roomId: state.roomId,
           isBack: true,
           messagesMap: state.messagesMap,
