@@ -305,7 +305,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             );
                           } else if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            bloc.add(BackChatMessageInit());
+                            // bloc.add(BackChatMessageInit());
 
                             return const Center(child: Text('done'));
                           } else if (snapshot.connectionState ==
