@@ -121,117 +121,125 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
             setState(() {});
             _refreshController.refreshCompleted();
           },
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Column(
-              children: [
-                vpad(20),
-                Row(
-                  children: [
-                    hpad(40),
-                    Text('${S.of(context).consumed_water_detail1} (m³)',
-                        style: txtBold(14, primaryColorBase)),
-                  ],
-                ),
-                vpad(10),
-                Row(
-                  children: [
-                    hpad(40),
-                    Text(
-                        '${S.of(context).year}: ${context.read<WaterPrv>().year}',
-                        style: txtBold(12, Colors.black)),
-                  ],
-                ),
-                vpad(30),
-                // Expanded(
-                //   child:
-                SizedBox(
-                  height: dvHeight(context) - 250,
-                  width: 850,
-                  child: SfCartesianChart(
-                    //selectionGesture: ActivationMode.singleTap,
-                    //selectionType: SelectionType.cluster,
-                    borderWidth: 0,
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                    ),
-                    primaryXAxis: CategoryAxis(labelStyle: txtRegular(12)),
-                    // primaryYAxis:
-                    //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
-                    // title: ChartTitle(
-                    //   text: '${S.of(context).consumed_water_detail1} (m³)',
-                    //   textStyle: txtBold(14, primaryColorBase),
-                    // ),
-                    legend: Legend(
-                      isVisible: false,
-                      title: LegendTitle(
-                        text: S.of(context).legend,
+          child: Column(
+            children: [
+              vpad(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  hpad(40),
+                  Text(
+                    '${S.of(context).consumed_water_detail1} (m³)',
+                    style: txtBold(14, primaryColorBase),
+                  ),
+                ],
+              ),
+              vpad(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  hpad(40),
+                  Text(
+                    '${S.of(context).year}: ${context.read<WaterPrv>().year}',
+                    style: txtBold(12, Colors.black),
+                  ),
+                ],
+              ),
+              vpad(10),
+              // Expanded(
+              //   child:
+              SingleChildScrollView(
+                controller: _scrollController,
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: SizedBox(
+                    height: dvHeight(context) - 250,
+                    width: 850,
+                    child: SfCartesianChart(
+                      //selectionGesture: ActivationMode.singleTap,
+                      //selectionType: SelectionType.cluster,
+                      borderWidth: 0,
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 14,
                       ),
-                      toggleSeriesVisibility: false,
-                    ),
-                    tooltipBehavior: TooltipBehavior(
-                      enable: true,
-                      duration: 1000,
-                      opacity: 0.7,
-                    ),
-                    series: <ChartSeries<ChartDataViewModel, String>>[
-                      // BarSeries<ChartDataViewModel, String>(
-                      //   dataLabelMapper: (datum, index) {
-                      //     return ('${datum.num?.toStringAsFixed(0)}');
-                      //   },
-                      //   initialSelectedDataIndexes: [
-                      //     context.read<WaterPrv>().month! - 1
-                      //   ],
-                      //   selectionBehavior: _selectionBehaviorLast,
-                      //   borderRadius: BorderRadius.circular(12),
-                      //   // spacing: 10,
-                      //   color: yellowColor7,
-                      //   dataSource: dataCharLast,
-                      //   xValueMapper: (ChartDataViewModel sales, _) =>
-                      //       sales.title,
-                      //   yValueMapper: (ChartDataViewModel sales, _) =>
-                      //       sales.num,
-                      //   name: (context.watch<WaterPrv>().year! - 1).toString(),
-                      //   // Enable data label
-                      //   dataLabelSettings: DataLabelSettings(
-                      //     isVisible: true,
-                      //     showZeroValue: false,
-                      //     textStyle: txtBold(12, yellowColor7),
-                      //     showCumulativeValues: true,
-                      //   ),
+                      primaryXAxis: CategoryAxis(labelStyle: txtRegular(12)),
+                      // primaryYAxis:
+                      //     NumericAxis(minimum: 1, maximum: 20, interval: 1),
+                      // title: ChartTitle(
+                      //   text: '${S.of(context).consumed_water_detail1} (m³)',
+                      //   textStyle: txtBold(14, primaryColorBase),
                       // ),
-                      ColumnSeries<ChartDataViewModel, String>(
-                        initialSelectedDataIndexes: [
-                          context.read<WaterPrv>().month! - 1
-                        ],
-                        dataLabelMapper: (datum, index) {
-                          return ('${datum.num?.toStringAsFixed(0)}');
-                        },
-                        selectionBehavior: _selectionBehaviorCurrent,
-                        // spacing: 10,
-                        // borderRadius: BorderRadius.circular(12),
-                        color: primaryColor7,
-                        dataSource: dataCharCurrent,
-                        yValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.num,
-                        xValueMapper: (ChartDataViewModel sales, _) =>
-                            sales.title,
-                        name: context.watch<WaterPrv>().year.toString(),
-                        // Enable data label
-                        dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                          showZeroValue: false,
-                          textStyle: txtBold(12, primaryColor7),
+                      legend: Legend(
+                        isVisible: false,
+                        title: LegendTitle(
+                          text: S.of(context).legend,
                         ),
+                        toggleSeriesVisibility: false,
                       ),
-                    ],
+                      tooltipBehavior: TooltipBehavior(
+                        enable: true,
+                        duration: 1000,
+                        opacity: 0.7,
+                      ),
+                      series: <ChartSeries<ChartDataViewModel, String>>[
+                        // BarSeries<ChartDataViewModel, String>(
+                        //   dataLabelMapper: (datum, index) {
+                        //     return ('${datum.num?.toStringAsFixed(0)}');
+                        //   },
+                        //   initialSelectedDataIndexes: [
+                        //     context.read<WaterPrv>().month! - 1
+                        //   ],
+                        //   selectionBehavior: _selectionBehaviorLast,
+                        //   borderRadius: BorderRadius.circular(12),
+                        //   // spacing: 10,
+                        //   color: yellowColor7,
+                        //   dataSource: dataCharLast,
+                        //   xValueMapper: (ChartDataViewModel sales, _) =>
+                        //       sales.title,
+                        //   yValueMapper: (ChartDataViewModel sales, _) =>
+                        //       sales.num,
+                        //   name: (context.watch<WaterPrv>().year! - 1).toString(),
+                        //   // Enable data label
+                        //   dataLabelSettings: DataLabelSettings(
+                        //     isVisible: true,
+                        //     showZeroValue: false,
+                        //     textStyle: txtBold(12, yellowColor7),
+                        //     showCumulativeValues: true,
+                        //   ),
+                        // ),
+                        ColumnSeries<ChartDataViewModel, String>(
+                          initialSelectedDataIndexes: [
+                            context.read<WaterPrv>().month! - 1
+                          ],
+                          dataLabelMapper: (datum, index) {
+                            return ('${datum.num?.toStringAsFixed(0)}');
+                          },
+                          selectionBehavior: _selectionBehaviorCurrent,
+                          // spacing: 10,
+                          // borderRadius: BorderRadius.circular(12),
+                          color: primaryColor7,
+                          dataSource: dataCharCurrent,
+                          yValueMapper: (ChartDataViewModel sales, _) =>
+                              sales.num,
+                          xValueMapper: (ChartDataViewModel sales, _) =>
+                              sales.title,
+                          name: context.watch<WaterPrv>().year.toString(),
+                          // Enable data label
+                          dataLabelSettings: DataLabelSettings(
+                            isVisible: true,
+                            showZeroValue: false,
+                            textStyle: txtBold(12, primaryColor7),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                // ),
-                vpad(20),
-              ],
-            ),
+              ),
+              // ),
+              vpad(20),
+            ],
           ),
         );
       },
