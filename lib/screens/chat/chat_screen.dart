@@ -105,10 +105,6 @@ class _ChatScreenState extends State<ChatScreen> {
               var residentId = context.read<ResidentInfoPrv>().residentId;
 
               if (state.stateChat == StateChatEnum.START) {
-                bloc.sendStartMessage(token, "Bắt đầu");
-              }
-
-              if (state.stateChat == StateChatEnum.START) {
                 return FutureBuilder(
                   future: () async {
                     try {
@@ -142,6 +138,19 @@ class _ChatScreenState extends State<ChatScreen> {
 
                       if (state.stateChat == StateChatEnum.START) {
                         bloc.streamLiveChatRoom("", "", roomId!);
+                      }
+
+                      if (state.stateChat == StateChatEnum.START) {
+                        bloc.sendStartMessage(token, "Bắt đầu");
+                        // bloc.clearAllMessage();
+                        // bloc.addMessage(MessageChat(
+                        //     u: U.fromJson(bloc.user ?? {}),
+                        //     id: "startMessage",
+                        //     msg: "Bắt đầu",
+                        //     ts: DateTime.now().toIso8601String()));
+                        // bloc.addMessage(
+                        //   MessageChat(id: "start", chatMode: 1),
+                        // );
                       }
                     } catch (e) {
                       Utils.showErrorMessage(context, e.toString());
@@ -192,9 +201,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                 dataJson["fields"] != null &&
                                 dataJson['fields']?['args']?[0]['msg'] ==
                                     "Bắt đầu") {
-                              bloc.addMessage(
-                                MessageChat(id: uuid.v4(), chatMode: 1),
-                              );
+                              if (state.init == true) {
+                                bloc.addMessage(
+                                  MessageChat(id: uuid.v4(), chatMode: 1),
+                                );
+                                bloc.notInit();
+                              }
                             }
 
                             return Column(
@@ -223,8 +235,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                           // bloc.sendStartMessage(token, "Bắt đầu");
 
                                           // bloc.addMessage(MessageChat(chatMode: 1));
-                                          bloc.toogleGreeting();
-                                          bloc.scroll();
+                                          // bloc.toogleGreeting();
+                                          // bloc.scroll();
                                         },
                                         child: Row(
                                           children: [
@@ -305,7 +317,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             );
                           } else if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            // bloc.add(BackChatMessageInit());
+                            bloc.add(BackChatMessageInit());
 
                             return const Center(child: Text('done'));
                           } else if (snapshot.connectionState ==
@@ -329,12 +341,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     builder: (context, snapshot) {
                       log(snapshot.toString());
                       if (snapshot.connectionState == ConnectionState.active) {
-                        var accountId = context
-                            .read<ResidentInfoPrv>()
-                            .userInfo!
-                            .account
-                            ?.id;
-
                         var dataJson = json.decode(snapshot.data);
                         if (json.decode(snapshot.data)['msg'] == 'ping') {
                           print("send pong");
@@ -353,12 +359,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           bloc.addMessage(
                             c,
                           );
-                          if (c.msg == "Bắt đầu" &&
-                              state.messagesMap['start'] != null) {
-                            bloc.addMessage(
-                              MessageChat(id: "start", chatMode: 1),
-                            );
-                          }
                         }
 
                         if (dataJson?['result']?['newRoom'] == true) {
@@ -367,14 +367,14 @@ class _ChatScreenState extends State<ChatScreen> {
                           // bloc.setRoomId(dataJson['result']['rid']);
                           // bloc.setvisitorToken(dataJson['result']['rid']);
                         }
-                        if (dataJson['msg'] == "changed" &&
-                            dataJson["fields"] != null &&
-                            dataJson['fields']?['args']?[0]['msg'] ==
-                                "Bắt đầu") {
-                          bloc.addMessage(
-                            MessageChat(id: uuid.v4(), chatMode: 1),
-                          );
-                        }
+                        // if (dataJson['msg'] == "changed" &&
+                        //     dataJson["fields"] != null &&
+                        //     dataJson['fields']?['args']?[0]['msg'] ==
+                        //         "Bắt đầu") {
+                        //   bloc.addMessage(
+                        //     MessageChat(id: uuid.v4(), chatMode: 1),
+                        //   );
+                        // }
 
                         return Column(
                           children: [
@@ -501,53 +501,6 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _initStateRender(snapshot, ChatState state, bloc, token) {
-    if (json.decode(snapshot.data)['msg'] == 'ping') {
-      print("send pong");
-      bloc.webSocketService.sendPong(state.webSocketChannel!);
-    }
-    var data = RocketChatData.fromJson(json.decode(snapshot.data));
-
-    if (data.msg == "added" && data.result != null) {
-      for (var element in data.result!.messages!) {
-        bloc.addMessage(MessageChat.fromJson(json.decode(element.toString())));
-      }
-    }
-    var dataJson = json.decode(snapshot.data);
-
-    if (dataJson['msg'] == "result" && dataJson['result'] != null) {
-      bloc.addMessage(MessageChat.fromJson(dataJson['result']));
-    }
-    if (data.msg == "result" && data.result != null) {
-      var d = data.result!.messages!.reversed.toList();
-      for (var el in d) {
-        // var m = json.decode(element.toString());
-        bloc.addMessage(el);
-      }
-    }
-    if (data.msg == "changed" && data.fields != null) {
-      bloc.addMessage(data.fields!.args![0]);
-    }
-
-    // Timer.periodic(const Duration(seconds: 1), (timer) {
-    //   state.webSocketService.streamChannelMessagesSubscribe(
-    //     state.webSocketChannel!,
-    //     WebsocketConnect.channel,
-    //   );
-    // });
-
-    return Messages(
-      refreshController: _refreshController,
-      messageMap: state.messagesMap,
-      messageBloc: bloc,
-      messageState: state,
-      onRefresh: () {
-        bloc.loadLiveChatHistory(state.roomId, token);
-        _refreshController.refreshCompleted();
-      },
-    );
-  }
-
   Widget _activeStateRender(
     AsyncSnapshot<dynamic> snapshot,
     ChatState state,
@@ -564,58 +517,6 @@ class _ChatScreenState extends State<ChatScreen> {
               messageState: state,
             ),
           ),
-          // if (state.showGreeting)
-          //   ListMessageSubject(
-          //     bloc: bloc,
-          //     toogleGreeting: () {
-          //       setState(() {
-          //         bloc.toogleGreeting();
-          //       });
-          //     },
-          //   ),
-          // if (state.stateChat == StateChatEnum.START)
-          //   Align(
-          //     alignment: Alignment.center,
-          //     child: IntrinsicWidth(
-          //       child: PrimaryCard(
-          //         background: grayScaleColor4,
-          //         padding: const EdgeInsets.all(6),
-          //         onTap: () {
-          //           Utils.showConfirmMessage(
-          //             context: context,
-          //             title: S.of(context).end,
-          //             content: S.of(context).confirm_end_chat,
-          //             onConfirm: () {
-          //               var rid = context
-          //                   .read<ResidentInfoPrv>()
-          //                   .userInfo
-          //                   ?.account
-          //                   ?.id;
-          //               Navigator.pop(context);
-          //               bloc.add(BackChatMessageInit());
-          //               bloc.closeChatRoom(rid!);
-          //             },
-          //           );
-
-          //           // widget.ctx.watch<HomePrv>().toogleNavigatorFooter();
-          //         },
-          //         child: Row(
-          //           children: [
-          //             const Icon(Icons.logout),
-          //             hpad(10),
-          //             Text(
-          //               S.of(context).end_chat,
-          //               overflow: TextOverflow.ellipsis,
-          //               style: txtRegular(14, grayScaleColorBase),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // if (state.stateChat == StateChatEnum.START)
-          //   InputChat(messageState: state, messageBloc: bloc),
-          // vpad(10)
         ],
       ),
     );

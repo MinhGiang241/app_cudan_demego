@@ -41,7 +41,13 @@ class _ReflectionScreenState extends State<ReflectionScreen>
         tabController.index = initIndex;
         return PrimaryScreen(
           appBar: PrimaryAppbar(
-            leading: BackButton(onPressed: () => HomeScreen),
+            leading: BackButton(
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                context,
+                HomeScreen.routeName,
+                (route) => route.isCurrent,
+              ),
+            ),
             title: S.of(context).reflection,
             tabController: tabController,
             isTabScrollabel: true,

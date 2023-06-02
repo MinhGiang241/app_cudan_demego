@@ -12,32 +12,32 @@
 // }
 
 // Tên miển đổi
-// class ApiConstants {
-//   static const String authorizationEndpoint =
-//       "https://auth.dev.buildingtenant.demego.vn/identity/connect/token";
-//   static const String clientId = "bhs.account.client";
-//   static const String clientSecret = "g2RAXgZenebyybWmmfyDWprGhxe5CLAJ";
-//   static const String scope = "api openid profile";
-//   static const String baseURL =
-//       "https://api.dev.buildingtenant.demego.vn/graphql";
-//   static const String uploadURL =
-//       'https://api.dev.buildingtenant.demego.vn/headless/stream/upload';
-//   static const String host = 'dev.buildingtenant.demego.vn';
-// }
-
-// UAT2
 class ApiConstants {
   static const String authorizationEndpoint =
-      "https://auth.uat2.buildingtenant.demego.vn/identity/connect/token";
+      "https://auth.dev.buildingtenant.demego.vn/identity/connect/token";
   static const String clientId = "bhs.account.client";
   static const String clientSecret = "g2RAXgZenebyybWmmfyDWprGhxe5CLAJ";
   static const String scope = "api openid profile";
   static const String baseURL =
-      "https://api.uat2.buildingtenant.demego.vn/graphql";
+      "https://api.dev.buildingtenant.demego.vn/graphql";
   static const String uploadURL =
-      'https://api.uat2.buildingtenant.demego.vn/headless/stream/upload';
-  static const String host = 'uat2.buildingtenant.demego.vn';
+      'https://api.dev.buildingtenant.demego.vn/headless/stream/upload';
+  static const String host = 'dev.buildingtenant.demego.vn';
 }
+
+// UAT2
+// class ApiConstants {
+//   static const String authorizationEndpoint =
+//       "https://auth.uat2.buildingtenant.demego.vn/identity/connect/token";
+//   static const String clientId = "bhs.account.client";
+//   static const String clientSecret = "g2RAXgZenebyybWmmfyDWprGhxe5CLAJ";
+//   static const String scope = "api openid profile";
+//   static const String baseURL =
+//       "https://api.uat2.buildingtenant.demego.vn/graphql";
+//   static const String uploadURL =
+//       'https://api.uat2.buildingtenant.demego.vn/headless/stream/upload';
+//   static const String host = 'uat2.buildingtenant.demego.vn';
+// }
 
 //Product
 // class ApiConstants {

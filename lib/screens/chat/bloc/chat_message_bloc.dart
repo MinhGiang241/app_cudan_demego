@@ -60,14 +60,15 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
           showGreeting: true,
           user: user,
           authToken: authToken,
-          visitorToken: event.visitorToken ?? "",
-          roomId: event.roomId,
+          // visitorToken: event.visitorToken ?? "",
+          // roomId: event.roomId,
           webSocketChannel: event.webSocketChannel,
           messagesMap: event.messagesMap ?? {},
         ),
       );
     });
     on<BackChatMessageInit>((event, emit) async {
+      clearMessage('start');
       emit(
         ChatState(
           roomId: state.roomId,
@@ -171,7 +172,9 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         for (var i in v['messages'].reversed) {
           var me = MessageChat.fromJson(i);
           // print(i);
-          state.messagesMap[me.id ?? ""] = me;
+          if (me.msg!.isNotEmpty) {
+            state.messagesMap[me.id ?? ""] = me;
+          }
         }
       }
     });
@@ -202,8 +205,16 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
     }
   }
 
+  void clearAllMessage() {
+    state.messagesMap.clear();
+  }
+
   void addMessage(MessageChat m) {
     state.messagesMap[m.id ?? ''] = m;
+  }
+
+  void notInit() {
+    state.init = false;
   }
 
   void toogleGreeting() {

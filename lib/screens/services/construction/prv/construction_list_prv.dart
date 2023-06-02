@@ -32,7 +32,7 @@ class ConstructionListPrv extends ChangeNotifier {
         : "WAIT_OWNER";
     data.status = status;
     data.isMobile = true;
-    if (data.isContructionCost == false) {
+    if (data.isContructionCost != true) {
       Receipt? receiptFee = Receipt(
           residentId: residentId,
           phone: resident?.phone_required,
@@ -58,7 +58,7 @@ class ConstructionListPrv extends ChangeNotifier {
       listReceipt.add(receiptFee.toJson());
     }
 
-    if (data.isDepositFee == false) {
+    if (data.isDepositFee != true) {
       Receipt? receiptDeposiy = Receipt(
         residentId: residentId,
         phone: resident?.phone_required,

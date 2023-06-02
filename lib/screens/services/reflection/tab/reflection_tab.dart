@@ -9,6 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
+import '../../../../models/reflection.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
@@ -58,6 +59,33 @@ class _ReflectionTabState extends State<ReflectionTab> {
           .read<ReflectionPrv>()
           .getReflection(context, status, residentId ?? ''),
       builder: (context, snapshot) {
+        List<Reflection> newL = [];
+        List<Reflection> wait = [];
+        List<Reflection> processing = [];
+        List<Reflection> processed = [];
+        List<Reflection> cancel = [];
+
+        for (var i in listReflection) {
+          if (i.status == "NEW") {
+            newL.add(i);
+          } else if (i.status == "WAIT_PROGRESS") {
+            wait.add(i);
+          } else if (i.status == "PROCESSING") {
+            processing.add(i);
+          } else if (i.status == "PROCESSED") {
+            processed.add(i);
+          } else if (i.status == "CANCEL") {
+            cancel.add(i);
+          }
+        }
+
+        newL.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        wait.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        processing.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        processed.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        cancel.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+
+        List<Reflection> list = newL + wait + processing + processed + cancel;
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
@@ -68,7 +96,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
               setState(() {});
             },
           );
-        } else if (listReflection.isEmpty) {
+        } else if (list.isEmpty) {
           return SmartRefresher(
             controller: refreshController,
             enablePullDown: true,
@@ -99,7 +127,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
           child: ListView(
             children: [
               vpad(12),
-              ...listReflection.map((e) {
+              ...list.map((e) {
                 return Stack(
                   children: [
                     PrimaryCard(

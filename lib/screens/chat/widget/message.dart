@@ -363,7 +363,8 @@ class _MessageState extends State<Message> {
                         ),
                         child: Column(
                           children: [
-                            if (widget.messageChat.attachments!.isNotEmpty)
+                            if (widget.messageChat.attachments != null &&
+                                widget.messageChat.attachments!.isNotEmpty)
                               Wrap(
                                 children: [
                                   ...widget.messageChat.attachments!.map(

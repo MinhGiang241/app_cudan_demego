@@ -85,6 +85,7 @@ class ChatMessageInitial extends ChatMessageState {
   }
 
   void addMessage(MessageChat m) {
+    print(m);
     messagesMap[m.id ?? ''] = m;
   }
 
@@ -351,6 +352,7 @@ class ChatState {
   bool quit;
   StateChatEnum stateChat;
   bool isBack = false;
+  bool init = true;
   ChatState({
     this.authToken,
     this.visitorToken,
