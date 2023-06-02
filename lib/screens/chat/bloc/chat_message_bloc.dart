@@ -161,6 +161,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
 
   setvisitorToken(String? token) {
     state.visitorToken = token;
+    visitorToken = token;
   }
 
   Future loadLiveChatHistory(roomId, token) async {
