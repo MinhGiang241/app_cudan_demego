@@ -209,6 +209,12 @@ class _ChatScreenState extends State<ChatScreen> {
                               }
                             }
 
+                            if (dataJson['msg'] == 'changed' &&
+                                dataJson['fields']?['args']?[0]?['t'] ==
+                                    "livechat-close") {
+                              bloc.add(BackChatMessageInit());
+                            }
+
                             return Column(
                               children: [
                                 Expanded(
@@ -371,6 +377,12 @@ class _ChatScreenState extends State<ChatScreen> {
                             bloc.closeChatRoom(state.roomId);
                             // bloc.setRoomId(dataJson['result']['rid']);
                             // bloc.setvisitorToken(dataJson['result']['rid']);
+                          }
+
+                          if (dataJson['msg'] == 'changed' &&
+                              dataJson['fields']?['args']?[0]?['t'] ==
+                                  "livechat-close") {
+                            bloc.add(BackChatMessageInit());
                           }
                           // if (dataJson['msg'] == "changed" &&
                           //     dataJson["fields"] != null &&

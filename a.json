@@ -422,5 +422,48 @@
             "message": "Sorry, no online agents [no-agent-online]",
             "errorType": "Meteor.Error"
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "kfWLtvtzECztFpKGi",
+            "args": [
+                {
+                    "_id": "oEx2KPnyciySsPxsr",
+                    "t": "livechat-close",
+                    "msg": "Closed by visitor",
+                    "groupable": false,
+                    "transcriptRequested": false,
+                    "ts": {
+                        "$date": 1685931331102
+                    },
+                    "u": {
+                        "_id": "646ec684563da13775d1cadb",
+                        "username": "guest-34",
+                        "name": "Nguyễn Hải Đức 2"
+                    },
+                    "rid": "kfWLtvtzECztFpKGi",
+                    "_updatedAt": {
+                        "$date": 1685931331179
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": [],
+                    "md": [
+                        {
+                            "type": "PARAGRAPH",
+                            "value": [
+                                {
+                                    "type": "PLAIN_TEXT",
+                                    "value": "Closed by visitor"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     }
 ]
