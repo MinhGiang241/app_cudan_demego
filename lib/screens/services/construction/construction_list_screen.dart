@@ -10,6 +10,7 @@ import 'construction_reg_screen.dart';
 import 'tab/construction_file_tab.dart';
 import 'tab/construction_registration_letter.dart';
 import 'prv/construction_list_prv.dart';
+import 'tab/construction_wait_tab.dart';
 
 class ConstructionListScreen extends StatefulWidget {
   const ConstructionListScreen({super.key});
@@ -21,7 +22,7 @@ class ConstructionListScreen extends StatefulWidget {
 
 class _ConstructionListScreenState extends State<ConstructionListScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 2, vsync: this);
+  late TabController tabController = TabController(length: 3, vsync: this);
   var initIndex = 0;
 
   @override
@@ -47,7 +48,8 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
             tabController: tabController,
             isTabScrollabel: false,
             tabs: [
-              Tab(text: S.of(context).cons_reg_letter),
+              Tab(text: S.of(context).my_letter),
+              Tab(text: S.of(context).wait_confirm_letter),
               Tab(text: S.of(context).cons_file),
             ],
           ),
@@ -74,6 +76,12 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
                 getList: (BuildContext ctx) => context
                     .read<ConstructionListPrv>()
                     .getContructionRegistrationLetterList(ctx),
+              ),
+              ConstructionWaitTab(
+                list: context.read<ConstructionListPrv>().listWaitRegistration,
+                getList: (BuildContext ctx) => context
+                    .read<ConstructionListPrv>()
+                    .getContructionRegistrationLetterListWait(ctx),
               ),
               ConstructionFileTab(
                 list: context.read<ConstructionListPrv>().listDocument,

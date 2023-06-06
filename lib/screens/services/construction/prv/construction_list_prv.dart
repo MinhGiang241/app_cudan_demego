@@ -1,6 +1,8 @@
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_construction.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +14,7 @@ import '../construction_list_screen.dart';
 
 class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionRegistration> listRegistration = [];
+  List<ConstructionRegistration> listWaitRegistration = [];
   List<ConstructionDocument> listDocument = [];
   FixedDateService? fixedDateService;
   getFixedDate() async {
@@ -192,10 +195,9 @@ class ConstructionListPrv extends ChangeNotifier {
 
   getContructionDocumentList(BuildContext context) async {
     await APIConstruction.getConstructionDocumentList(
-            context.read<ResidentInfoPrv>().residentId ?? "",
-            context.read<ResidentInfoPrv>().selectedApartment?.apartmentId ??
-                "")
-        .then((v) {
+      context.read<ResidentInfoPrv>().residentId ?? "",
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId ?? "",
+    ).then((v) {
       listDocument.clear();
       for (var i in v) {
         listDocument.add(ConstructionDocument.fromJson(i));
@@ -208,10 +210,9 @@ class ConstructionListPrv extends ChangeNotifier {
 
   getContructionRegistrationLetterList(BuildContext context) async {
     await APIConstruction.getConstructionRegistrationList(
-            context.read<ResidentInfoPrv>().residentId ?? "",
-            context.read<ResidentInfoPrv>().selectedApartment!.apartmentId ??
-                "")
-        .then((v) {
+      context.read<ResidentInfoPrv>().residentId ?? "",
+      context.read<ResidentInfoPrv>().selectedApartment!.apartmentId ?? "",
+    ).then((v) {
       listRegistration.clear();
       for (var i in v) {
         listRegistration.add(ConstructionRegistration.fromJson(i));
@@ -222,4 +223,38 @@ class ConstructionListPrv extends ChangeNotifier {
       Utils.showErrorMessage(context, e);
     });
   }
+
+  getContructionRegistrationLetterListWait(BuildContext context) async {
+    await APIConstruction.getConstructionRegistrationListWait(
+      context.read<ResidentInfoPrv>().residentId ?? "",
+    ).then((v) {
+      listWaitRegistration.clear();
+      for (var i in v) {
+        listWaitRegistration.add(ConstructionRegistration.fromJson(i));
+      }
+      getFixedDate();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
+  }
+
+  refuseLetter(BuildContext context, ConstructionRegistration data) async {
+    var submitData = data.copyWith();
+    Utils.showDialog(
+      context: context,
+      dialog: PrimaryDialog.custom(
+        content: Column(
+          children: [
+            PrimaryTextField(
+              label: S.of(context).reason_refuse,
+              enable: false,
+              initialValue: "Chủ hộ từ chôi",
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  acceptLetter(BuildContext context) async {}
 }

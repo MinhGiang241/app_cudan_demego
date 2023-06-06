@@ -294,6 +294,39 @@ class APIConstruction {
     }
   }
 
+  static Future getConstructionRegistrationListWait(
+    String residentId,
+  ) async {
+    var query = '''
+   mutation (\$residentId:String){
+    response: constructionregistration_get_list_wait_confirm (residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+        
+            
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'residentId': residentId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future saveNewConstructionRegistration(
     Map<String, dynamic> register,
     Map<String, dynamic>? history,
