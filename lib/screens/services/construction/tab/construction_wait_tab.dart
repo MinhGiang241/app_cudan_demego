@@ -234,7 +234,7 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                             ),
                                             Text(
                                               Utils.dateTimeFormat(
-                                                e.create_date ?? '',
+                                                e.createdTime ?? '',
                                                 1,
                                               ),
                                               style: txtMedium(
@@ -292,7 +292,7 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                 ],
                               ),
                             ),
-                            if (e.status == 'NEW')
+                            if (e.status == 'WAIT_OWNER')
                               Row(
                                 children: [
                                   hpad(10),
@@ -313,7 +313,7 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                     onTap: () {
                                       context
                                           .read<ConstructionListPrv>()
-                                          .deleteLetter(context, e);
+                                          .acceptLetter(context, e);
                                     },
                                     text: S.of(context).confirm,
                                     buttonSize: ButtonSize.xsmall,

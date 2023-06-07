@@ -1,11 +1,13 @@
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_construction.dart';
+import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/fiexed_date_service.dart';
 import '../../../../models/receipt.dart';
@@ -37,27 +39,27 @@ class ConstructionListPrv extends ChangeNotifier {
     data.isMobile = true;
     if (data.isContructionCost != true) {
       Receipt? receiptFee = Receipt(
-          residentId: residentId,
-          phone: resident?.phone_required,
-          discount_money: data.construction_cost,
-          refSchema: "ConstructionRegistration",
-          type: "ContructionCost",
-          payment_status: "UNPAID",
-          amount_due: data.construction_cost,
-          apartmentId: apartment.apartmentId,
-          check: true,
-          content: "Thanh toán phí thi công",
-          reason: "Thanh toán phí thi công",
-          customer_type: "RESIDENT",
-          full_name: resident?.info_name,
-          receipts_status: "NEW",
-          expiration_date: DateTime.now()
-              .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
-              .subtract(const Duration(hours: 7))
-              .toIso8601String(),
-          date: DateTime.now()
-              .subtract(const Duration(hours: 7))
-              .toIso8601String());
+        residentId: residentId,
+        phone: resident?.phone_required,
+        discount_money: data.construction_cost,
+        refSchema: "ConstructionRegistration",
+        type: "ContructionCost",
+        payment_status: "UNPAID",
+        amount_due: data.construction_cost,
+        apartmentId: apartment.apartmentId,
+        check: true,
+        content: "Thanh toán phí thi công",
+        reason: "Thanh toán phí thi công",
+        customer_type: "RESIDENT",
+        full_name: resident?.info_name,
+        receipts_status: "NEW",
+        expiration_date: DateTime.now()
+            .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
+            .subtract(const Duration(hours: 7))
+            .toIso8601String(),
+        date:
+            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      );
       listReceipt.add(receiptFee.toJson());
     }
 
@@ -94,43 +96,50 @@ class ConstructionListPrv extends ChangeNotifier {
       status: status,
     );
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).send_request,
-        content: S.of(context).confirm_send_request(data.code ?? ""),
-        onConfirm: () {
-          Navigator.pop(context);
-          // APIConstruction.saveConstructionRegistration(data.toJson())
-          return APIConstruction.changeStatus(
-                  data.toJson(), listReceipt, conHis.toJson())
-              .then((v) {
-            // ConstructionHistory conHis = ConstructionHistory(
-            //   constructionregistrationId: data.id,
-            //   date: DateTime.now()
-            //       .subtract(const Duration(hours: 7))
-            //       .toIso8601String(),
-            //   residentId: context.read<ResidentInfoPrv>().residentId,
-            //   person: context.read<ResidentInfoPrv>().userInfo!.info_name,
-            //   status: status,
-            // );
-            // return APIConstruction.saveConstructionHistory();
-          }).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_send_req,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      ConstructionListScreen.routeName,
-                      (route) => route.isFirst);
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).send_request,
+      content: S.of(context).confirm_send_request(data.code ?? ""),
+      onConfirm: () {
+        Navigator.pop(context);
+        // APIConstruction.saveConstructionRegistration(data.toJson())
+        return APIConstruction.changeStatus(
+          data.toJson(),
+          listReceipt,
+          conHis.toJson(),
+        ).then((v) {
+          // ConstructionHistory conHis = ConstructionHistory(
+          //   constructionregistrationId: data.id,
+          //   date: DateTime.now()
+          //       .subtract(const Duration(hours: 7))
+          //       .toIso8601String(),
+          //   residentId: context.read<ResidentInfoPrv>().residentId,
+          //   person: context.read<ResidentInfoPrv>().userInfo!.info_name,
+          //   status: status,
+          // );
+          // return APIConstruction.saveConstructionHistory();
+        }).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_send_req,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   cancelRequetsAprrove(
-      BuildContext context, ConstructionRegistration data) async {
+    BuildContext context,
+    ConstructionRegistration data,
+  ) async {
     data.status = 'CANCEL';
     data.cancel_reason = 'NGUOIDUNGHUY';
     data.isMobile = true;
@@ -142,55 +151,60 @@ class ConstructionListPrv extends ChangeNotifier {
       status: "CANCEL",
     );
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).cancel_request,
-        content: S.of(context).confirm_cancel_request(data.code ?? ""),
-        onConfirm: () {
-          Navigator.pop(context);
-          // APIConstruction.saveConstructionRegistration(data.toJson())
-          APIConstruction.changeStatus(data.toJson(), null, conHis.toJson())
-              .then((v) {
-            // return APIConstruction.saveConstructionHistory(conHis.toJson());
-          }).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_can_req,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      ConstructionListScreen.routeName,
-                      (route) => route.isFirst);
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).cancel_request,
+      content: S.of(context).confirm_cancel_request(data.code ?? ""),
+      onConfirm: () {
+        Navigator.pop(context);
+        // APIConstruction.saveConstructionRegistration(data.toJson())
+        APIConstruction.changeStatus(data.toJson(), null, conHis.toJson())
+            .then((v) {
+          // return APIConstruction.saveConstructionHistory(conHis.toJson());
+        }).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_can_req,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   deleteLetter(BuildContext context, ConstructionRegistration data) async {
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).delete_letter,
-        content: S.of(context).confirm_delete_letter(data.code ?? ""),
-        onConfirm: () {
-          Navigator.pop(context);
-          APIConstruction.removeConstructionRegistration(data.id ?? "")
-              .then((v) {
-            return APIConstruction.removeConstructionHistory(data.id ?? "");
-          }).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_remove,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      ConstructionListScreen.routeName,
-                      (route) => route.isFirst);
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).delete_letter,
+      content: S.of(context).confirm_delete_letter(data.code ?? ""),
+      onConfirm: () {
+        Navigator.pop(context);
+        APIConstruction.removeConstructionRegistration(data.id ?? "").then((v) {
+          return APIConstruction.removeConstructionHistory(data.id ?? "");
+        }).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_remove,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   getContructionDocumentList(BuildContext context) async {
@@ -240,15 +254,77 @@ class ConstructionListPrv extends ChangeNotifier {
 
   refuseLetter(BuildContext context, ConstructionRegistration data) async {
     var submitData = data.copyWith();
+    TextEditingController noteController = TextEditingController();
     Utils.showDialog(
       context: context,
       dialog: PrimaryDialog.custom(
         content: Column(
           children: [
             PrimaryTextField(
+              isRequired: true,
+              background: grayScaleColor4,
               label: S.of(context).reason_refuse,
               enable: false,
-              initialValue: "Chủ hộ từ chôi",
+              initialValue: S.of(context).owner_refuse,
+            ),
+            vpad(10),
+            PrimaryTextField(
+              controller: noteController,
+              maxLines: 3,
+              label: S.of(context).note,
+              hint: S.of(context).note,
+            ),
+            vpad(20),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: PrimaryButton(
+                    text: S.of(context).cancel,
+                    buttonType: ButtonType.red,
+                    buttonSize: ButtonSize.small,
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                hpad(10),
+                Expanded(
+                  flex: 1,
+                  child: PrimaryButton(
+                    text: S.of(context).confirm,
+                    buttonType: ButtonType.primary,
+                    buttonSize: ButtonSize.small,
+                    onTap: () async {
+                      Navigator.pop(context);
+                      submitData.status = "CANCEL";
+                      submitData.cancel_reason = "CHUHOTUCHOI";
+                      submitData.reason_description =
+                          noteController.text.trim();
+                      await APIConstruction.ownerChangeStatus(
+                        submitData.toJson(),
+                      ).then((v) {
+                        Utils.showSuccessMessage(
+                          context: context,
+                          e: S.of(context).success_refuse_letter,
+                          onClose: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              ConstructionListScreen.routeName,
+                              (route) => route.isFirst,
+                              arguments: {
+                                "index": 1,
+                              },
+                            );
+                          },
+                        );
+                      }).catchError((e) {
+                        Utils.showErrorMessage(context, e);
+                      });
+                    },
+                  ),
+                )
+              ],
             )
           ],
         ),
@@ -256,5 +332,37 @@ class ConstructionListPrv extends ChangeNotifier {
     );
   }
 
-  acceptLetter(BuildContext context) async {}
+  acceptLetter(BuildContext context, ConstructionRegistration data) async {
+    var submitData = data.copyWith();
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).confirm,
+      content: S.of(context).confirm_accept_letter(data.code ?? ""),
+      onConfirm: () async {
+        Navigator.pop(context);
+        submitData.status = "WAIT_TECHNICAL";
+
+        await APIConstruction.ownerChangeStatus(
+          submitData.toJson(),
+        ).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_accept_letter,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "index": 1,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+  }
 }

@@ -245,7 +245,7 @@ class _ConstructionRegistrationLetterTabState
                                             ),
                                             Text(
                                               Utils.dateTimeFormat(
-                                                e.create_date ?? '',
+                                                e.createdTime ?? '',
                                                 1,
                                               ),
                                               style: txtMedium(

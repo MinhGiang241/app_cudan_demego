@@ -162,7 +162,7 @@ class _ConstructionRegistrationDetailsScreenState
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).reg_date,
-                      content: Utils.dateTimeFormat(reg.create_date ?? "", 1),
+                      content: Utils.dateTimeFormat(reg.createdTime ?? "", 1),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     InfoContentView(
