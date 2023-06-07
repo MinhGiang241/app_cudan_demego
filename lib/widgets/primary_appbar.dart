@@ -1,9 +1,11 @@
 import 'dart:ui';
 
-import '../constants/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PrimaryAppbar extends StatelessWidget with PreferredSizeWidget {
+import '../constants/constants.dart';
+
+class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
   const PrimaryAppbar({
     Key? key,
     this.title,

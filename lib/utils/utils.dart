@@ -741,7 +741,7 @@ class Utils {
 
   static showSnackBar(BuildContext context, String title) {
     showTopSnackBar(
-      Overlay.of(context),
+      Overlay.of(context) as OverlayState,
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         decoration: BoxDecoration(
