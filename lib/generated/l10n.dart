@@ -7909,6 +7909,46 @@ class S {
       args: [],
     );
   }
+
+  /// `First approve`
+  String get approve_1 {
+    return Intl.message(
+      'First approve',
+      name: 'approve_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second approve`
+  String get approve_2 {
+    return Intl.message(
+      'Second approve',
+      name: 'approve_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay done`
+  String get pay_done {
+    return Intl.message(
+      'Pay done',
+      name: 'pay_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new`
+  String get create_new {
+    return Intl.message(
+      'Create new',
+      name: 'create_new',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

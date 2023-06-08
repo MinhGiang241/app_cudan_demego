@@ -134,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Căn hộ không được để trống"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "approve_1": MessageLookupByLibrary.simpleMessage("Duyệt lần 1"),
+        "approve_2": MessageLookupByLibrary.simpleMessage("Duyệt lần 2"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "area": MessageLookupByLibrary.simpleMessage("Diện tích"),
@@ -303,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
         "create_acc_1": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
+        "create_new": MessageLookupByLibrary.simpleMessage("Tạo mới"),
         "created_date": MessageLookupByLibrary.simpleMessage("Ngày tạo"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
@@ -764,6 +767,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Ngày thanh toán"),
+        "pay_done":
+            MessageLookupByLibrary.simpleMessage("Hoàn thành thanh toán"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(

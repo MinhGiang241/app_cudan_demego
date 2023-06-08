@@ -784,5 +784,9 @@
   "err_upload": "Upload error",
   "choose_subject": "To refer any option, please select bellow:",
   "wait_chat_response": "It seam you didn't response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response.",
-  "note_cancel": "Note cancel reason"
+  "note_cancel": "Note cancel reason",
+  "approve_1": "First approve",
+  "approve_2": "Second approve",
+  "pay_done": "Pay done",
+  "create_new": "Create new"
 }

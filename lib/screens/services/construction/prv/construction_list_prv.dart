@@ -25,8 +25,9 @@ class ConstructionListPrv extends ChangeNotifier {
     });
   }
 
-  sendToApprove(BuildContext context, ConstructionRegistration data) async {
+  sendToApprove(BuildContext context, ConstructionRegistration c) async {
     List<Map<String, dynamic>> listReceipt = [];
+    var data = c.copyWith();
     var resident = context.read<ResidentInfoPrv>().userInfo;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
@@ -138,8 +139,9 @@ class ConstructionListPrv extends ChangeNotifier {
 
   cancelRequetsAprrove(
     BuildContext context,
-    ConstructionRegistration data,
+    ConstructionRegistration c,
   ) async {
+    var data = c.copyWith();
     data.status = 'CANCEL';
     data.cancel_reason = 'NGUOIDUNGHUY';
     data.isMobile = true;

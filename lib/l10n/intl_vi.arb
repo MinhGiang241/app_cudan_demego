@@ -785,5 +785,9 @@
   "err_upload": "Upload file lỗi",
   "choose_subject": "Để tham khảo các lựa chọn, vui lòng chọn bên dưới:",
   "wait_chat_response": "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi.",
-  "note_cancel": "Ghi chú lý do hủy"
+  "note_cancel": "Ghi chú lý do hủy",
+  "approve_1": "Duyệt lần 1",
+  "approve_2": "Duyệt lần 2",
+  "pay_done": "Hoàn thành thanh toán",
+  "create_new": "Tạo mới"
 }

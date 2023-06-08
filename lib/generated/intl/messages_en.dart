@@ -126,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Apartment can not be empty"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "approve_1": MessageLookupByLibrary.simpleMessage("First approve"),
+        "approve_2": MessageLookupByLibrary.simpleMessage("Second approve"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "area": MessageLookupByLibrary.simpleMessage("Area"),
@@ -303,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
         "create_acc_1":
             MessageLookupByLibrary.simpleMessage("Create an account"),
+        "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
         "created_date": MessageLookupByLibrary.simpleMessage("Created date"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
@@ -755,6 +758,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pay": MessageLookupByLibrary.simpleMessage("Payment"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Pay date"),
+        "pay_done": MessageLookupByLibrary.simpleMessage("Pay done"),
         "payment_circle":
             MessageLookupByLibrary.simpleMessage("Payment circle"),
         "payment_cycle_not_empty": MessageLookupByLibrary.simpleMessage(
