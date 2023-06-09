@@ -1,63 +1,33 @@
 {
   "project_info": {
-    "project_number": "474814233890",
-    "firebase_url": "https://giang-fc6c8.firebaseio.com",
-    "project_id": "giang-fc6c8",
-    "storage_bucket": "giang-fc6c8.appspot.com"
+    "project_number": "123621110759",
+    "project_id": "app-cudan-demego",
+    "storage_bucket": "app-cudan-demego.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:474814233890:android:a498f4d4d6dc36b358f97b",
+        "mobilesdk_app_id": "1:123621110759:android:5e7cc8a8f25d8fbddb4342",
         "android_client_info": {
           "package_name": "com.demego.dev.building_management"
         }
       },
       "oauth_client": [
         {
-          "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+          "client_id": "123621110759-5aib19es6lka2ij0lbncuqgl0cs8io1l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAV9ko7LPa6t3KBfKuHMtVxVbzL-wha4SE"
+          "current_key": "AIzaSyB-ICX98caYQM6eYTA4qfs8Jjt-BqimTDg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:474814233890:android:524f6a923f78625f58f97b",
-        "android_client_info": {
-          "package_name": "com.example.chat"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAV9ko7LPa6t3KBfKuHMtVxVbzL-wha4SE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "474814233890-vcenfc70agbhaknj6623e1tl6onj1821.apps.googleusercontent.com",
+              "client_id": "123621110759-5aib19es6lka2ij0lbncuqgl0cs8io1l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

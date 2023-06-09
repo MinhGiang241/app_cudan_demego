@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,11 +18,16 @@ import 'generated/l10n.dart';
 import 'routes/routes.dart';
 import 'screens/account/language/cubit/lang_cubit.dart';
 import 'screens/auth/prv/auth_prv.dart';
+import 'services/firebase_api.dart';
 import 'services/prf_data.dart';
 import 'package:timeago/timeago.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNotification();
   await FlutterDownloader.initialize(
       debug:
           true, // optional: set to false to disable printing logs to console (default: true)
@@ -88,6 +94,7 @@ class MyApp extends StatelessWidget {
         return BlocProvider(
           create: (context) => ChatMessageBloc(),
           child: MaterialApp(
+            navigatorKey: navigatorKey,
             builder: (context, child) {
               final mediaQueryData = MediaQuery.of(context);
               final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.2);

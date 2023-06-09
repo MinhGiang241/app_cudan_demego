@@ -58,7 +58,7 @@ class RegisterResidentCardPrv extends ChangeNotifier {
   List<FileUploadModel> rulesFiles = [];
 
   getRuleFiles() async {
-    await APIRule.getListRulesFiles('transportcard').then((v) {
+    await APIRule.getListRulesFiles('residentcard').then((v) {
       if (v != null) {
         rulesFiles.clear();
         for (var i in v) {

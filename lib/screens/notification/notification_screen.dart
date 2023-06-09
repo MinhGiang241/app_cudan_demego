@@ -1,5 +1,6 @@
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -29,6 +30,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    final messages =
+        ModalRoute.of(context)?.settings.arguments as RemoteMessage?;
     var category = [
       {"title": S.current.all, "icon": PrimaryIcons.bell_fill, "isRead": true},
       {
@@ -73,6 +76,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
         isScrollControlled: true,
         context: context,
         builder: (contex) => Column(children: [
+          Text('${messages?.notification?.title}'),
+          Text('${messages?.notification?.body}'),
+          Text('${messages?.data}'),
           vpad(30),
           Container(
             color: Colors.white,

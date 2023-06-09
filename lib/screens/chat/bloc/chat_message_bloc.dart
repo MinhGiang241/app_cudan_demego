@@ -167,7 +167,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   }
 
   Future loadLiveChatHistory(roomId, token) async {
-    await webSocketService.loadLiveChatHistory(roomId, visitorToken!).then((v) {
+    await webSocketService.loadLiveChatHistory(roomId, visitorToken).then((v) {
       if (v['messages'] != null) {
         state.messagesMap.clear();
         for (var i in v['messages'].reversed) {
