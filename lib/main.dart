@@ -23,11 +23,12 @@ import 'services/prf_data.dart';
 import 'package:timeago/timeago.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
+var FCMtoken;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseApi().initNotification();
+  FCMtoken = await FirebaseApi().initNotification();
+
   await FlutterDownloader.initialize(
       debug:
           true, // optional: set to false to disable printing logs to console (default: true)
@@ -87,7 +88,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthPrv()..start(context),
         ),
-        ChangeNotifierProvider(create: (context) => LangPrv(lang)),
+        ChangeNotifierProvider(create: (context) => LangPrv(lang, FCMtoken)),
         ChangeNotifierProvider(create: (context) => ResidentInfoPrv())
       ],
       builder: (context, child) {

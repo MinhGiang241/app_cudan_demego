@@ -15,6 +15,7 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 }
 
 void handleMesage(RemoteMessage? message) {
+  print('handle message');
   if (message == null) return;
 
   navigatorKey.currentState!
@@ -28,14 +29,34 @@ callbalck(notification) {
   handleMesage(message);
 }
 
+final _androidChannel = const AndroidNotificationChannel(
+  'high_importance_channel',
+  "high_importantce_notification",
+  description: "this chanel is used for important notification",
+  importance: Importance.max,
+);
+
+listen(message) {
+  final notification = message.notification;
+  if (notification == null) return;
+  _localNotifications.show(
+    notification.hashCode,
+    notification.title,
+    notification.body,
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        _androidChannel.id,
+        _androidChannel.name,
+        channelDescription: _androidChannel.description,
+        icon: "@mipmap/ic_launcher",
+      ),
+    ),
+    payload: jsonEncode(message.toMap()),
+  );
+}
+
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
-  final _androidChannel = const AndroidNotificationChannel(
-    'high_importance_channel',
-    "high_importantce_notification",
-    description: "this chanel is used for important notification",
-    importance: Importance.defaultImportance,
-  );
 
   Future initPushNotifications() async {
     await FirebaseMessaging.instance
@@ -47,24 +68,7 @@ class FirebaseApi {
     FirebaseMessaging.instance.getInitialMessage().then(handleMesage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleMesage);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
-    FirebaseMessaging.onMessage.listen((message) {
-      final notification = message.notification;
-      if (notification == null) return;
-      _localNotifications.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            _androidChannel.id,
-            _androidChannel.name,
-            channelDescription: _androidChannel.description,
-            icon: "@drawable/ic_launcher",
-          ),
-        ),
-        payload: jsonEncode(message.toMap()),
-      );
-    });
+    FirebaseMessaging.onMessage.listen(listen);
   }
 
   Future initLocalNotifications() async {
@@ -91,12 +95,14 @@ class FirebaseApi {
     await platform?.createNotificationChannel(_androidChannel);
   }
 
-  Future<void> initNotification() async {
+  Future<String?> initNotification() async {
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
     log('Token: $fCMToken');
+
     // FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     initPushNotifications();
     initLocalNotifications();
+    return fCMToken;
   }
 }
