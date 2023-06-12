@@ -324,4 +324,5 @@ class AppImage {
   static const String instagram = "assets/images/instagram.png";
   static const String tiktok = "assets/images/tiktok.png";
   static const String linkedin = "assets/images/linkedin.png";
+  static const String demepro = "assets/images/demepro.png";
 }

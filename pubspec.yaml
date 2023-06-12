@@ -90,10 +90,17 @@ dependencies:
   firebase_core: ^2.13.1
   firebase_messaging: ^14.6.2
   flutter_local_notifications: ^14.1.1
+  flutter_launcher_icons: ^0.12.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/demepro.png"
+  min_sdk_android: 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
