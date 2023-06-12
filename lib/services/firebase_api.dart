@@ -14,50 +14,28 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Payload: ${message.data}');
 }
 
+void handleMesage(RemoteMessage? message) {
+  if (message == null) return;
+
+  navigatorKey.currentState!
+      .pushNamed(NotificationScreen.routeName, arguments: message);
+}
+
+final _localNotifications = FlutterLocalNotificationsPlugin();
+
+callbalck(notification) {
+  final message = RemoteMessage.fromMap(jsonDecode(notification.payload ?? ''));
+  handleMesage(message);
+}
+
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
   final _androidChannel = const AndroidNotificationChannel(
-    'high_importantce_channel',
+    'high_importance_channel',
     "high_importantce_notification",
     description: "this chanel is used for important notification",
     importance: Importance.defaultImportance,
   );
-
-  final _localNotifications = FlutterLocalNotificationsPlugin();
-
-  void handleMesage(RemoteMessage? message) {
-    if (message == null) return;
-
-    navigatorKey.currentState!
-        .pushNamed(NotificationScreen.routeName, arguments: message);
-  }
-
-  Future initLocalNotifications() async {
-    const iOS = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings("@drawable/ic_launcher");
-    const settings = InitializationSettings(
-      android: android,
-      iOS: iOS,
-    );
-
-    await _localNotifications.initialize(
-      settings,
-      onDidReceiveNotificationResponse: (notification) {
-        final message =
-            RemoteMessage.fromMap(jsonDecode(notification.payload ?? ''));
-        handleMesage(message);
-      },
-      onDidReceiveBackgroundNotificationResponse: (notification) {
-        final message =
-            RemoteMessage.fromMap(jsonDecode(notification.payload ?? ''));
-        handleMesage(message);
-      },
-    );
-
-    final platform = _localNotifications.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
-    await platform?.createNotificationChannel(_androidChannel);
-  }
 
   Future initPushNotifications() async {
     await FirebaseMessaging.instance
@@ -87,6 +65,30 @@ class FirebaseApi {
         payload: jsonEncode(message.toMap()),
       );
     });
+  }
+
+  Future initLocalNotifications() async {
+    var iOS = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      onDidReceiveLocalNotification: (id, title, body, payload) {},
+    );
+    const android = AndroidInitializationSettings("@drawable/ic_launcher");
+    var settings = InitializationSettings(
+      android: android,
+      iOS: iOS,
+    );
+
+    await _localNotifications.initialize(
+      settings,
+      onDidReceiveNotificationResponse: callbalck,
+      onDidReceiveBackgroundNotificationResponse: callbalck,
+    );
+
+    final platform = _localNotifications.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    await platform?.createNotificationChannel(_androidChannel);
   }
 
   Future<void> initNotification() async {
