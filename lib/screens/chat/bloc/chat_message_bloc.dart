@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
+import 'package:app_cudan/services/api_chat.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../../models/rocket_chat_data.dart';
+import '../../../models/session_chat_subject.dart';
 import '../../../utils/utils.dart';
 import '../custom/custom_websocket_service.dart';
 
@@ -304,5 +306,19 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
 
   getRoomId() {
     return state.roomId;
+  }
+
+  Future saveSessionChatSubject(String subjectId) async {
+    var data = SessionChatSubject(
+      sessionId: state.roomId,
+      subjectId: subjectId,
+    );
+
+    await APIChat.saveSessionChatSubject(data.toMap());
+  }
+
+  Future checkExistedSessionSubject(String roomId) async {
+    var existed = await APIChat.checkExistedSessionChatSubject(roomId);
+    state.isExistedSubject = existed;
   }
 }

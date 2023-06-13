@@ -16,6 +16,7 @@ class ChatState {
   String? visitorToken;
   String? roomId;
   Map<String, dynamic>? user;
+  bool isExistedSubject = false;
   WebSocketChannel? webSocketChannel;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   ScrollController scrollController = ScrollController();

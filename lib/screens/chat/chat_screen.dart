@@ -134,6 +134,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           state.roomId,
                           vtoken,
                         );
+                        bloc.checkExistedSessionSubject(room?['room']?['_id']);
                       }
 
                       if (state.stateChat == StateChatEnum.START) {
@@ -201,7 +202,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                 dataJson["fields"] != null &&
                                 dataJson['fields']?['args']?[0]['msg'] ==
                                     "Bắt đầu") {
-                              if (state.init == true) {
+                              if (state.init == true &&
+                                  !state.isExistedSubject) {
                                 bloc.addMessage(
                                   MessageChat(id: "start", chatMode: 1),
                                 );

@@ -94,7 +94,7 @@ class ConstructionRegistration {
       code: code ?? this.code,
       createdTime: createdTime ?? this.createdTime,
       updatedTime: updatedTime ?? this.updatedTime,
-      residentId: residentId ?? this.apartmentId,
+      residentId: residentId ?? this.residentId,
       resident_code: resident_code ?? this.resident_code,
       resident_phone: resident_phone ?? this.resident_phone,
       resident_identity: resident_identity ?? this.resident_identity,

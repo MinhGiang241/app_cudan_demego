@@ -105,7 +105,10 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                       itemCount: sublist.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            widget.bloc.saveSessionChatSubject(
+                              sublist[index].id ?? "",
+                            );
                             widget.bloc
                                 .clearMessage(widget.messageChat.id ?? "");
                             var accountId = context
@@ -118,16 +121,6 @@ class _ListMessageSubjectState extends State<ListMessageSubject> {
                               accountId,
                               sublist[index].name!,
                             );
-
-                            // widget.toogleGreeting();
-                            // Future.delayed(const Duration(milliseconds: 10))
-                            //     .then((_) {
-                            //   widget.bloc.sendGreetingMessage(
-                            //     accountId!,
-                            //     accountId,
-                            //     sublist[index].name!,
-                            //   );
-                            // });
                           },
                           child: Container(
                             decoration: BoxDecoration(
