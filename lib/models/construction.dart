@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'reason.dart';
+import 'resident_info.dart';
 import 'status.dart';
 
 class ConstructionRegistration {
@@ -44,6 +45,7 @@ class ConstructionRegistration {
     this.off_day,
     this.working_day,
     this.file_cancel,
+    this.re,
   });
 
   ConstructionRegistration copyWith({
@@ -87,6 +89,7 @@ class ConstructionRegistration {
     List<ConstructionFile>? current_draw,
     List<ConstructionFile>? renovation_draw,
     List<ConstructionFile>? file_cancel,
+    ResponseResidentInfo? re,
   }) {
     return ConstructionRegistration(
       id: id ?? this.id,
@@ -130,6 +133,7 @@ class ConstructionRegistration {
       current_draw: current_draw ?? this.current_draw,
       renovation_draw: renovation_draw ?? this.renovation_draw,
       file_cancel: file_cancel ?? this.file_cancel,
+      re: re ?? this.re,
     );
   }
 
@@ -175,6 +179,7 @@ class ConstructionRegistration {
   List<ConstructionFile>? current_draw;
   List<ConstructionFile>? renovation_draw;
   List<ConstructionFile>? file_cancel;
+  ResponseResidentInfo? re;
 
   ConstructionRegistration.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -219,7 +224,7 @@ class ConstructionRegistration {
     reason_description = json['reason_description'];
     history_code = json['history_code'];
     resident_name = json['resident_name'];
-
+    re = json['re'] != null ? ResponseResidentInfo.fromJson(json['re']) : null;
     construction_type_name = json['construction_type_name'];
     create_date = json['create_date'];
     isMobile = json['isMobile'];

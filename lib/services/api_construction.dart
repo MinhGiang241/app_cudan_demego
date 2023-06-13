@@ -143,23 +143,12 @@ class APIConstruction {
 
   static Future getDayOff() async {
     var query = '''
-   query{
-	response: query_DayOffs_dto{
-		message
-		code
-		data {
-			_id
-			createdTime
-			updatedTime
-			d_0
-			d_1
-			d_2
-			d_3
-			d_4
-			d_5
-			d_6
-		}
-	}
+   mutation {
+    response: construction_mobile_get_dayoff  {
+        code
+        message
+        data
+    }
 }
         
     ''';
@@ -432,22 +421,26 @@ class APIConstruction {
     }
   }
 
-  static Future ownerChangeStatus(Map<String, dynamic> data) async {
+  static Future ownerChangeStatus(
+    Map<String, dynamic> data,
+    List<Map<String, dynamic>> receiptList,
+  ) async {
     var query = '''
- mutation (\$data:Dictionary){
-    response: constructionregistration_owner_refuse_or_accept (data: \$data ) {
+ mutation (\$data:Dictionary,\$receiptList:Dictionary){
+    response: constructionregistration_owner_refuse_or_accept (data: \$data,receiptList: \$receiptList ) {
         code
         message
         data
     }
 }
         
+        
            
     ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {'data': data},
+      variables: {'data': data, "receiptList": receiptList},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

@@ -261,17 +261,19 @@ class ConstructionRegPrv extends ChangeNotifier {
             date: DateTime.now().toIso8601String(),
             residentId: residentId,
             person: resident.info_name,
-            status: isRequest
-                ? (apartment.type == 'BUY' || apartment.type == 'RENT')
-                    ? 'WAIT_PAY'
-                    : 'WAIT_OWNER'
-                : 'NEW',
+            status: existedConReg != null
+                ? "EDIT"
+                : isRequest
+                    ? (apartment.type == 'BUY' || apartment.type == 'RENT')
+                        ? 'WAIT_PAY'
+                        : 'WAIT_OWNER'
+                    : 'NEW',
           );
           // return APIConstruction.saveNewConstructionRegistration();
         }
         List<Map<String, dynamic>> listReceipt = [];
 
-        if (!isPaidFee && isRequest) {
+        if (!isPaidFee && isRequest && conReg.status != "WAIT_OWNER") {
           Receipt? receiptFee = Receipt(
               payment: fixedDateService!.cut_service_date ?? 0,
               residentId: residentId,
@@ -298,7 +300,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           listReceipt.add(receiptFee.toJson());
         }
 
-        if (!isPaidDeposit && isRequest) {
+        if (!isPaidDeposit && isRequest && conReg.status != "WAIT_OWNER") {
           Receipt? receiptDeposiy = Receipt(
             payment: fixedDateService!.cut_service_date ?? 0,
             residentId: residentId,
@@ -328,7 +330,10 @@ class ConstructionRegPrv extends ChangeNotifier {
         var dataHis = conHis?.toJson();
         var dataReg = conReg.toJson();
         return APIConstruction.saveNewConstructionRegistration(
-            dataReg, dataHis, listReceipt);
+          dataReg,
+          dataHis,
+          listReceipt,
+        );
       })
           // .then((v) {
           //   if (existedConReg != null) {

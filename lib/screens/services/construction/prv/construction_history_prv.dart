@@ -38,6 +38,8 @@ class ConstructionHistoryPrv extends ChangeNotifier {
     switch (status) {
       case "CANCEL":
         return S.current.cancel;
+      case "EDIT":
+        return S.current.edit;
       case "REJECT":
         return S.current.refuse;
       case "APPROVED":

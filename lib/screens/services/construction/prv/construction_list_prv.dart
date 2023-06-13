@@ -91,7 +91,7 @@ class ConstructionListPrv extends ChangeNotifier {
     }
     ConstructionHistory conHis = ConstructionHistory(
       constructionregistrationId: data.id,
-      date: DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      date: DateTime.now().toIso8601String(),
       residentId: context.read<ResidentInfoPrv>().residentId,
       person: context.read<ResidentInfoPrv>().userInfo!.info_name,
       status: status,
@@ -147,7 +147,7 @@ class ConstructionListPrv extends ChangeNotifier {
     data.isMobile = true;
     ConstructionHistory conHis = ConstructionHistory(
       constructionregistrationId: data.id,
-      date: DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+      date: DateTime.now().toIso8601String(),
       residentId: context.read<ResidentInfoPrv>().residentId,
       person: context.read<ResidentInfoPrv>().userInfo!.info_name,
       status: "CANCEL",
@@ -305,6 +305,7 @@ class ConstructionListPrv extends ChangeNotifier {
                           noteController.text.trim();
                       await APIConstruction.ownerChangeStatus(
                         submitData.toJson(),
+                        [],
                       ).then((v) {
                         Utils.showSuccessMessage(
                           context: context,
@@ -336,6 +337,62 @@ class ConstructionListPrv extends ChangeNotifier {
 
   acceptLetter(BuildContext context, ConstructionRegistration data) async {
     var submitData = data.copyWith();
+
+    List<Map<String, dynamic>> listReceipt = [];
+
+    Receipt? receiptFee = Receipt(
+      payment: fixedDateService!.cut_service_date ?? 0,
+      residentId: data.residentId,
+      phone: data.re?.phone_required,
+      refSchema: 'ConstructionRegistration',
+      discount_money: data.construction_cost,
+      type: 'ContructionCost',
+      payment_status: 'UNPAID',
+      amount_due: data.construction_cost,
+      apartmentId: data.apartmentId,
+      check: true,
+      content: 'Thanh toán phí thi công ',
+      reason: 'Thanh toán phí thi công',
+      customer_type: 'RESIDENT',
+      full_name: data.re?.info_name,
+      receipts_status: 'NEW',
+      expiration_date: DateTime.now()
+          .add(
+            Duration(
+              days: fixedDateService != null
+                  ? fixedDateService!.cut_service_date ?? 0
+                  : 0,
+            ),
+          )
+          .toIso8601String(),
+      date: DateTime.now().toIso8601String(),
+    );
+    listReceipt.add(receiptFee.toJson());
+
+    Receipt? receiptDeposiy = Receipt(
+      payment: fixedDateService!.cut_service_date ?? 0,
+      residentId: data.residentId,
+      phone: data.re?.phone_required,
+      discount_money: data.deposit_fee,
+      refSchema: 'ConstructionRegistration',
+      type: 'DepositFee',
+      payment_status: 'UNPAID',
+      amount_due: data.deposit_fee,
+      apartmentId: data.apartmentId,
+      check: true,
+      reason: 'Thanh toán phí đặt cọc thi công',
+      content: 'Thanh toán phí đặt cọc thi công',
+      customer_type: 'RESIDENT',
+      full_name: data.re?.info_name,
+      receipts_status: 'NEW',
+      expiration_date: DateTime.now()
+          .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
+          .subtract(const Duration(hours: 7))
+          .toIso8601String(),
+      date: DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+    );
+
+    listReceipt.add(receiptDeposiy.toJson());
     Utils.showConfirmMessage(
       context: context,
       title: S.of(context).confirm,
@@ -346,6 +403,7 @@ class ConstructionListPrv extends ChangeNotifier {
 
         await APIConstruction.ownerChangeStatus(
           submitData.toJson(),
+          listReceipt,
         ).then((v) {
           Utils.showSuccessMessage(
             context: context,
