@@ -788,5 +788,6 @@
   "approve_1": "First approve",
   "approve_2": "Second approve",
   "pay_done": "Pay done",
-  "create_new": "Create new"
+  "create_new": "Create new",
+  "perform_person": "Performed person"
 }

@@ -21,9 +21,10 @@ class ConstructionHistoryPrv extends ChangeNotifier {
         content.add(
           TimelineModel(
             date: conHis.date,
-            title: conHis.s!.name,
+            title: genConstructHistory(conHis.status ?? ""),
             color: genStatusColor(conHis.status),
-            subTitle: genConstructHistory(conHis.status ?? ""),
+            subTitle:
+                "${S.of(context).perform_person}: ${conHis.e != null ? conHis.e?.name : conHis.re != null ? conHis.re?.info_name : null}",
           ),
         );
       }
@@ -37,9 +38,9 @@ class ConstructionHistoryPrv extends ChangeNotifier {
   genConstructHistory(String status) {
     switch (status) {
       case "CANCEL":
-        return S.current.cancel;
+        return S.current.cancel_reg;
       case "EDIT":
-        return S.current.edit;
+        return S.current.cancel;
       case "REJECT":
         return S.current.refuse;
       case "APPROVED":
@@ -54,6 +55,10 @@ class ConstructionHistoryPrv extends ChangeNotifier {
         return S.current.pay_done;
       case "NEW":
         return S.current.create_new;
+      case "WAIT_OWNER":
+        return S.current.confirm;
+      case "WAIT_PAY":
+        return S.current.send_request;
       default:
         return '';
     }

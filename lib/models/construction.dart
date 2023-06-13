@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'employee.dart';
 import 'reason.dart';
 import 'resident_info.dart';
 import 'status.dart';
@@ -569,6 +570,8 @@ class ConstructionHistory {
     this.residentId,
     this.status,
     this.updatedTime,
+    this.e,
+    this.re,
   });
   String? id;
   String? createdTime;
@@ -581,6 +584,9 @@ class ConstructionHistory {
   String? employeeId;
   String? constructionregistrationId;
   Status? s;
+
+  Employee? e;
+  ResponseResidentInfo? re;
   ConstructionHistory.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];
@@ -593,6 +599,8 @@ class ConstructionHistory {
     employeeId = json['employeeId'];
     constructionregistrationId = json['constructionregistrationId'];
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
+    e = json['e'] != null ? Employee.fromJson(json['e']) : null;
+    re = json['re'] != null ? ResponseResidentInfo.fromJson(json['re']) : null;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

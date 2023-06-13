@@ -769,6 +769,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "per_res_address":
             MessageLookupByLibrary.simpleMessage("Permanent resident address"),
         "percent": MessageLookupByLibrary.simpleMessage("Percent"),
+        "perform_person":
+            MessageLookupByLibrary.simpleMessage("Performed person"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Permission denied"),
         "permission_denied_msg":

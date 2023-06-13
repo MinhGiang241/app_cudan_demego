@@ -399,7 +399,7 @@ class ConstructionListPrv extends ChangeNotifier {
       content: S.of(context).confirm_accept_letter(data.code ?? ""),
       onConfirm: () async {
         Navigator.pop(context);
-        submitData.status = "WAIT_TECHNICAL";
+        submitData.status = "WAIT_PAY";
 
         await APIConstruction.ownerChangeStatus(
           submitData.toJson(),

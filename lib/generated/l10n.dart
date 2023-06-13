@@ -7949,6 +7949,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Performed person`
+  String get perform_person {
+    return Intl.message(
+      'Performed person',
+      name: 'perform_person',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

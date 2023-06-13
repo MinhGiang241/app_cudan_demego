@@ -779,6 +779,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "per_res_address":
             MessageLookupByLibrary.simpleMessage("Địa chỉ thường trú"),
         "percent": MessageLookupByLibrary.simpleMessage("Phần trăm"),
+        "perform_person":
+            MessageLookupByLibrary.simpleMessage("Người thực hiện"),
         "permission_denied":
             MessageLookupByLibrary.simpleMessage("Từ chối truy cập"),
         "permission_denied_msg":
