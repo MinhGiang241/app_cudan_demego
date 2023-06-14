@@ -34,8 +34,8 @@ class ConstructionListPrv extends ChangeNotifier {
       return e.apartment!.id == data.apartmentId;
     });
     var status = (apartment.type == 'BUY' || apartment.type == "RENT")
-        ? 'WAIT_PAY'
-        : "WAIT_OWNER";
+        ? 'CONFIRM'
+        : "CONFIRM";
     data.status = status;
     data.isMobile = true;
     if (data.isContructionCost != true) {

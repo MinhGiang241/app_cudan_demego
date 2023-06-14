@@ -274,7 +274,7 @@ class _CardListTabState extends State<CardListTab> {
                                 bottom: 10,
                                 right: 8,
                                 width: 60,
-                                child: Image.asset(AppImage.qltnLogo),
+                                child: Image.asset(AppImage.demeproLogo),
                               )
                             ],
                           ),

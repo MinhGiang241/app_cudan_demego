@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      Image.asset(AppImage.qltnLogo,
+                      Image.asset(AppImage.demeproLogo,
                           width: dvWidth(context) / 4),
                       vpad(16),
                       Text.rich(TextSpan(children: [

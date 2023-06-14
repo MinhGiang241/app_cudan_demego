@@ -630,7 +630,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                           onlyNum: true,
                                           maxLength: 10,
                                           validator: (v) {
-                                            if (v!.isEmpty && v.length < 10) {
+                                            if (v!.isEmpty || v.length < 10) {
                                               return "";
                                             }
                                           },

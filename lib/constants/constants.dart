@@ -315,6 +315,7 @@ TextStyle txtRegular([double? size, Color? color, double? opacity]) =>
 
 class AppImage {
   static const String qltnLogo = "assets/images/qltn_logo.png";
+  static const String demeproLogo = "assets/images/demego-transparent.png";
   static const String illustration = "assets/images/illustration.png";
   static const String splashBackground = "assets/images/splash_background.png";
   static const String receiption = "assets/images/receiption.png";

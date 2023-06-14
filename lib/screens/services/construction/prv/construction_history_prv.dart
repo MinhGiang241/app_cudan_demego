@@ -18,6 +18,7 @@ class ConstructionHistoryPrv extends ChangeNotifier {
       for (var i in v) {
         var conHis = ConstructionHistory.fromJson(i);
         list.add(conHis);
+        list.sort((a, b) => a.createdTime!.compareTo(b.createdTime!));
         content.add(
           TimelineModel(
             date: conHis.date,

@@ -253,8 +253,8 @@ class ConstructionRegPrv extends ChangeNotifier {
           //   // resident_relationship: apartment.type,
           construction_type_name: consType.name ?? '',
         );
-        ConstructionHistory? conHis;
-        if (existedConReg != null) {
+        var conHis;
+        if (existedConReg == null) {
           conHis = ConstructionHistory(
             constructionregistrationId:
                 existedConReg != null ? existedConReg!.id : null,
@@ -265,8 +265,8 @@ class ConstructionRegPrv extends ChangeNotifier {
                 ? "EDIT"
                 : isRequest
                     ? (apartment.type == 'BUY' || apartment.type == 'RENT')
-                        ? 'WAIT_PAY'
-                        : 'WAIT_OWNER'
+                        ? 'SEND'
+                        : 'SEND'
                     : 'NEW',
           );
           // return APIConstruction.saveNewConstructionRegistration();
@@ -275,28 +275,32 @@ class ConstructionRegPrv extends ChangeNotifier {
 
         if (!isPaidFee && isRequest && conReg.status != "WAIT_OWNER") {
           Receipt? receiptFee = Receipt(
-              payment: fixedDateService!.cut_service_date ?? 0,
-              residentId: residentId,
-              phone: resident.phone_required,
-              refSchema: 'ConstructionRegistration',
-              discount_money: fee,
-              type: 'ContructionCost',
-              payment_status: 'UNPAID',
-              amount_due: fee,
-              apartmentId: apartment.apartmentId,
-              check: true,
-              content: 'Thanh toán phí thi công ',
-              reason: 'Thanh toán phí thi công',
-              customer_type: 'RESIDENT',
-              full_name: resident.info_name,
-              receipts_status: 'NEW',
-              expiration_date: DateTime.now()
-                  .add(Duration(
-                      days: fixedDateService != null
-                          ? fixedDateService!.cut_service_date ?? 0
-                          : 0))
-                  .toIso8601String(),
-              date: DateTime.now().toIso8601String());
+            payment: fixedDateService!.cut_service_date ?? 0,
+            residentId: residentId,
+            phone: resident.phone_required,
+            refSchema: 'ConstructionRegistration',
+            discount_money: fee,
+            type: 'ContructionCost',
+            payment_status: 'UNPAID',
+            amount_due: fee,
+            apartmentId: apartment.apartmentId,
+            check: true,
+            content: 'Thanh toán phí thi công ',
+            reason: 'Thanh toán phí thi công',
+            customer_type: 'RESIDENT',
+            full_name: resident.info_name,
+            receipts_status: 'NEW',
+            expiration_date: DateTime.now()
+                .add(
+                  Duration(
+                    days: fixedDateService != null
+                        ? fixedDateService!.cut_service_date ?? 0
+                        : 0,
+                  ),
+                )
+                .toIso8601String(),
+            date: DateTime.now().toIso8601String(),
+          );
           listReceipt.add(receiptFee.toJson());
         }
 
@@ -327,7 +331,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           );
           listReceipt.add(receiptDeposiy.toJson());
         }
-        var dataHis = conHis?.toJson();
+        var dataHis = conHis.toJson();
         var dataReg = conReg.toJson();
         return APIConstruction.saveNewConstructionRegistration(
           dataReg,
@@ -353,16 +357,20 @@ class ConstructionRegPrv extends ChangeNotifier {
           // })
           .then((v) {
         Utils.showSuccessMessage(
-            context: context,
-            e: isRequest
-                ? S.of(context).success_send_req
-                : existedConReg != null && existedConReg!.id != null
-                    ? S.of(context).success_edit
-                    : S.of(context).success_cr_new,
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(context,
-                  ConstructionListScreen.routeName, (route) => route.isFirst);
-            });
+          context: context,
+          e: isRequest
+              ? S.of(context).success_send_req
+              : existedConReg != null && existedConReg!.id != null
+                  ? S.of(context).success_edit
+                  : S.of(context).success_cr_new,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              ConstructionListScreen.routeName,
+              (route) => route.isFirst,
+            );
+          },
+        );
         isSendApproveLoading = false;
         isAddNewLoading = false;
         validateSurface = null;
@@ -547,9 +555,11 @@ class ConstructionRegPrv extends ChangeNotifier {
       notifyListeners();
       clearValidStringStep1();
       controller
-          .animateToPage(++activeStep,
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.bounceInOut)
+          .animateToPage(
+        ++activeStep,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.bounceInOut,
+      )
           .then((_) {
         isDisableRightCroll = true;
         notifyListeners();
@@ -572,7 +582,11 @@ class ConstructionRegPrv extends ChangeNotifier {
 
   genValidStep1() {
     var now = DateTime(
-        DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      24,
+    );
     if (surfaceController.text.trim().isEmpty) {
       validateSurface = S.current.not_blank;
     } else {
@@ -676,9 +690,11 @@ class ConstructionRegPrv extends ChangeNotifier {
       isDisableRightCroll = false;
       notifyListeners();
       clearValidStringStep2();
-      controller.animateToPage(++activeStep,
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.bounceInOut);
+      controller.animateToPage(
+        ++activeStep,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.bounceInOut,
+      );
     } else {
       genValidStep2();
     }
