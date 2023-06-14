@@ -25,6 +25,7 @@ void handleMesage(RemoteMessage? message) {
 final _localNotifications = FlutterLocalNotificationsPlugin();
 
 callbalck(notification) {
+  print("callback");
   final message = RemoteMessage.fromMap(jsonDecode(notification.payload ?? ''));
   handleMesage(message);
 }
@@ -49,6 +50,11 @@ listen(message) {
         _androidChannel.name,
         channelDescription: _androidChannel.description,
         icon: "@mipmap/ic_launcher",
+      ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
       ),
     ),
     payload: jsonEncode(message.toMap()),
@@ -76,7 +82,9 @@ class FirebaseApi {
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
-      onDidReceiveLocalNotification: (id, title, body, payload) {},
+      onDidReceiveLocalNotification: (id, title, body, payload) {
+        print('onDidReceiveLocalNotification');
+      },
     );
     const android = AndroidInitializationSettings("@drawable/ic_launcher");
     var settings = InitializationSettings(
@@ -100,7 +108,7 @@ class FirebaseApi {
     final fCMToken = await _firebaseMessaging.getToken();
     log('Token: $fCMToken');
 
-    // FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+    //FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     initPushNotifications();
     initLocalNotifications();
     return fCMToken;
