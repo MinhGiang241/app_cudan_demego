@@ -2,6 +2,7 @@ import UIKit
 import Flutter
 import flutter_downloader
 import FirebaseCore
+import flutter_local_notifications
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -16,6 +17,10 @@ import FirebaseCore
     UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
     }
     FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
+    // This is required to make any communication available in the action isolate.
+    FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
+      GeneratedPluginRegistrant.register(with: registry)
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

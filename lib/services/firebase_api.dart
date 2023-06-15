@@ -1,10 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:app_cudan/main.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../screens/notification/notification_screen.dart';
 
@@ -24,7 +27,7 @@ void handleMesage(RemoteMessage? message) {
 
 final _localNotifications = FlutterLocalNotificationsPlugin();
 
-callbalck(notification) {
+listtenCallback(notification) {
   print("callback");
   final message = RemoteMessage.fromMap(jsonDecode(notification.payload ?? ''));
   handleMesage(message);
@@ -77,6 +80,8 @@ class FirebaseApi {
     FirebaseMessaging.onMessage.listen(listen);
   }
 
+  void onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {}
   Future initLocalNotifications() async {
     var iOS = DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -94,8 +99,8 @@ class FirebaseApi {
 
     await _localNotifications.initialize(
       settings,
-      onDidReceiveNotificationResponse: callbalck,
-      onDidReceiveBackgroundNotificationResponse: callbalck,
+      onDidReceiveNotificationResponse: listtenCallback,
+      onDidReceiveBackgroundNotificationResponse: listtenCallback,
     );
 
     final platform = _localNotifications.resolvePlatformSpecificImplementation<
