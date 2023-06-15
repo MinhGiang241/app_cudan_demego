@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
+import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -11,6 +15,7 @@ import 'package:uuid/uuid.dart';
 
 import '../constants/api_constant.dart';
 import '../constants/constants.dart';
+import '../utils/utils.dart';
 
 class PrimaryImageNetwork extends StatelessWidget {
   const PrimaryImageNetwork({
@@ -249,10 +254,48 @@ class PhotoViewer extends StatefulWidget {
 
 class _PhotoViewerState extends State<PhotoViewer> {
   int currentIndex = 1;
+  ReceivePort port = ReceivePort();
+
   @override
   void initState() {
     super.initState();
     currentIndex = widget.initIndex + 1;
+    IsolateNameServer.registerPortWithName(
+      port.sendPort,
+      'downloader_send_port',
+    );
+    port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+
+        log(data);
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
+    super.dispose();
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
   }
 
   onPageChanged(int index) {
@@ -275,6 +318,24 @@ class _PhotoViewerState extends State<PhotoViewer> {
           //   "$currentIndex/${widget.listLink.length}",
           //   style: txtMedium(15, Colors.white),
           // ),
+          actions: [
+            if (widget.listLink.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: InkWell(
+                  onTap: () async {
+                    Utils.downloadFile(
+                      context: context,
+                      id: widget.listLink[0],
+                    );
+                  },
+                  child: Icon(
+                    Icons.download,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+          ],
         ),
         body: Column(
           children: [
