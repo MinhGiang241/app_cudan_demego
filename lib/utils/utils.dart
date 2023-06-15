@@ -787,7 +787,9 @@ class Utils {
     var status = await Permission.storage.request();
     if (status.isGranted) {
       showSnackBar(context!, S.current.file_downloading);
-      final baseStorage = await getExternalStorageDirectory();
+      final baseStorage = Platform.isIOS
+          ? await getApplicationDocumentsDirectory()
+          : await getExternalStorageDirectory();
 
       var taskId = await FlutterDownloader.enqueue(
         url: url ?? "${ApiConstants.uploadURL}?load=$id ",
@@ -797,7 +799,7 @@ class Utils {
                   'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jpg,image/jpeg,image/png,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
               // 'Host': ApiConstants.host,
             }, // optional: header send with url (auth token etc)
-        savedDir: baseStorage!.path,
+        savedDir: (baseStorage as Directory).path,
         showNotification:
             true, // show download progress in status bar (for Android)
         saveInPublicStorage: true,
