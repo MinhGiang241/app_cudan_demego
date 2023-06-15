@@ -326,7 +326,7 @@ class _PhotoViewerState extends State<PhotoViewer> {
                   onTap: () async {
                     Utils.downloadFile(
                       context: context,
-                      id: widget.listLink[0],
+                      url: widget.listLink[0],
                     );
                   },
                   child: Icon(
