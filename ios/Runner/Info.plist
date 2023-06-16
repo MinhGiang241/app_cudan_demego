@@ -4,6 +4,10 @@
 <dict>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key> 
+	<true/>
+	<key>UIFileSharingEnabled</key> 
+	<true/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
