@@ -8,6 +8,7 @@ import 'package:app_cudan/services/api_chat.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:rocket_chat_flutter_connector/services/authentication_service.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -213,7 +214,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
   }
 
   void addMessage(MessageChat m) {
-    state.messagesMap[m.id ?? ''] = m;
+    state.messagesMap[m.id ?? ''] = (m);
   }
 
   void notInit() {

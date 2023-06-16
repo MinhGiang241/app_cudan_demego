@@ -213,7 +213,7 @@ class _InputChatState extends State<InputChat> {
                   }
                 },
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 10),
                   child: Icon(
                     Icons.send,
                     color: grayScaleColorBase,

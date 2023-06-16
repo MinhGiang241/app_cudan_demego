@@ -176,7 +176,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             var data = RocketChatData.fromJson(
                                 json.decode(snapshot.data));
                             if (data.msg == "changed" && data.fields != null) {
-                              bloc.addMessage(data.fields!.args![0]);
+                              bloc.addMessage((data.fields!.args![0]));
                             }
                             if (dataJson['msg'] == "result" &&
                                 dataJson['result'] != null) {
