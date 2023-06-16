@@ -788,7 +788,7 @@ class Utils {
     if (status.isGranted) {
       showSnackBar(context!, S.current.file_downloading);
       final baseStorage = await (Platform.isIOS
-          ? getDownloadsDirectory()
+          ? getApplicationDocumentsDirectory()
           : getExternalStorageDirectory());
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
