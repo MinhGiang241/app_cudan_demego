@@ -22,7 +22,6 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../utils/emoji_with_text.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
@@ -446,7 +445,7 @@ class _MessageState extends State<Message> {
                                                   //   ),
                                                   // )
                                                   Text(
-                                                parser.emojify(c.title!),
+                                                c.title!,
                                                 textAlign: widget.isMe
                                                     ? TextAlign.end
                                                     : TextAlign.start,

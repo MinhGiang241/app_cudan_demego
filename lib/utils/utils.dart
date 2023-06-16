@@ -7,11 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/api_constant.dart';
 import '../constants/constants.dart';
@@ -792,22 +794,27 @@ class Utils {
           : getExternalStorageDirectory());
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
-      var taskId = await FlutterDownloader.enqueue(
-        url: url ?? "${ApiConstants.uploadURL}?load=$id ",
-        headers: headers ??
-            {
-              'Accept':
-                  'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jpg,image/jpeg,image/png,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-              // 'Host': ApiConstants.host,
-            }, // optional: header send with url (auth token etc)
-        savedDir: baseStorage!.path,
-        showNotification:
-            true, // show download progress in status bar (for Android)
-        saveInPublicStorage: true,
-        openFileFromNotification:
-            true, // click on notification to open downloaded file (for Android)
-      );
-      await FlutterDownloader.open(taskId: taskId!);
+      if (Platform.isIOS) {
+        launchUrl(Uri.parse(url ?? "${ApiConstants.uploadURL}?load=$id"));
+      } else {
+        var taskId = await FlutterDownloader.enqueue(
+          url: url ?? "${ApiConstants.uploadURL}?load=$id",
+          headers: headers ??
+              {
+                'Accept':
+                    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jpg,image/jpeg,image/png,image/webp,file/pdf,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                // 'Host': ApiConstants.host,
+              }, // optional: header send with url (auth token etc)
+          savedDir: baseStorage!.path,
+          showNotification:
+              true, // show download progress in status bar (for Android)
+          saveInPublicStorage: true,
+          openFileFromNotification:
+              true, // click on notification to open downloaded file (for Android)
+        );
+        print(taskId);
+        await FlutterDownloader.open(taskId: taskId!);
+      }
     }
   }
 
