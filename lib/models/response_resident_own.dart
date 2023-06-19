@@ -221,6 +221,7 @@ class Floor {
   String? name;
   String? buildingId;
   double? area;
+  Building? b;
 
   Floor({
     this.area,
@@ -232,6 +233,7 @@ class Floor {
     this.isLocked,
     this.name,
     this.updatedTime,
+    this.b,
   });
   Floor.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -247,6 +249,7 @@ class Floor {
             : 0
         : 0;
     buildingId = json['buildingId'];
+    b = json['b'] != null ? Building.fromJson(json['b']) : null;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

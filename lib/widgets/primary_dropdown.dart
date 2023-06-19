@@ -219,23 +219,29 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   hpad(10),
-                                  PrimaryButton(
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: redColor4,
-                                    textColor: redColor1,
-                                    buttonSize: ButtonSize.medium,
-                                    text: S.of(context).close,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
+                                  Expanded(
+                                    flex: 1,
+                                    child: PrimaryButton(
+                                      buttonType: ButtonType.secondary,
+                                      secondaryBackgroundColor: redColor4,
+                                      textColor: redColor1,
+                                      buttonSize: ButtonSize.medium,
+                                      text: S.of(context).close,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
                                   ),
                                   hpad(20),
-                                  PrimaryButton(
-                                    buttonSize: ButtonSize.medium,
-                                    text: S.of(context).confirm,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
+                                  Expanded(
+                                    flex: 1,
+                                    child: PrimaryButton(
+                                      buttonSize: ButtonSize.medium,
+                                      text: S.of(context).confirm,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
                                   ),
                                   hpad(10),
                                 ],

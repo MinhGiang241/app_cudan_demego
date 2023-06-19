@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app_cudan/models/area.dart';
 import 'package:app_cudan/models/reflection.dart';
+import 'package:app_cudan/models/response_resident_own.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/reflection/reflection_screen.dart';
 import 'package:app_cudan/services/api_reflection.dart';
@@ -16,7 +17,7 @@ import '../../../../services/api_auth.dart';
 import '../../../../utils/utils.dart';
 
 class CreateReflectionPrv extends ChangeNotifier {
-  CreateReflectionPrv(this.ref) {
+  CreateReflectionPrv(this.context, this.ref) {
     if (ref != null) {
       ticketId = ref!.id;
       ticketCode = ref!.code;
@@ -24,24 +25,50 @@ class CreateReflectionPrv extends ChangeNotifier {
       typeController.text = ref!.ticket_type!;
       reasonController.text = ref!.opinionContributeId ?? '';
       describeController.text = ref!.description ?? '';
-      zoneTypeController.text = ref!.areaTypeId ?? '';
-      if (ref!.areaTypeId != null) {
-        getListAreaByType(ref!.areaTypeId).then((_) {
-          // zoneController.text = ref!.areaId ?? [];
-          zoneValueList = ref!.areaId ?? [];
-          for (var i in listZone) {
-            if (zoneValueList.contains(i.value)) {
-              i.isSelected = true;
+      zoneTypeController.text = ref!.areaType ?? '';
+      if (ref!.areaType != null) {
+        isFloor = ref!.areaType == 'BUILDING' ? true : false;
+        zoneValueList = ref!.areaIds ?? [];
+        var listChoice = zoneValueList.map((e) => e["_id"]).toList();
+        if (ref!.areaType == 'BUILDING') {
+          getFloorList(context).then((_) {
+            // zoneController.text = ref!.areaId ?? [];
+
+            for (var i in floorList) {
+              if (listChoice.contains(i.value)) {
+                i.isSelected = true;
+              }
             }
-          }
-          print(listZone);
-          notifyListeners();
-        });
+
+            notifyListeners();
+          });
+        } else {
+          getListAreaByType(ref!.areaType).then((_) {
+            // zoneController.text = ref!.areaId ?? [];
+            zoneValueList = ref!.areaIds ?? [];
+            for (var i in listZone) {
+              if (listChoice.contains(i.value)) {
+                i.isSelected = true;
+              }
+            }
+
+            notifyListeners();
+          });
+        }
+
+        print(zoneValueList);
       }
+      if (ref!.areaType == "BUILDING") {
+        isFloor = true;
+      } else {
+        isFloor = false;
+      }
+      ;
     } else {
       isUpdate = true;
     }
   }
+  final BuildContext context;
   bool isUpdate = false;
   Reflection? ref;
   List<FileTicket> existedImage = [];
@@ -57,6 +84,7 @@ class CreateReflectionPrv extends ChangeNotifier {
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
   bool isCancelLoading = false;
+  bool isFloor = true;
 
   final TextEditingController typeController = TextEditingController();
   final TextEditingController reasonController = TextEditingController();
@@ -76,6 +104,26 @@ class CreateReflectionPrv extends ChangeNotifier {
 
   List<MultiSelectViewModel> listZone = [];
   List<dynamic> zoneValueList = [];
+  List<MultiSelectViewModel> floorList = [];
+
+  getFloorList(BuildContext context) async {
+    await APIReflection.getFloorList(
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
+    ).then((v) {
+      floorList.clear();
+      if (v != null) {
+        for (var i in v) {
+          var floor = Floor.fromJson(i);
+          floorList.add(
+            MultiSelectViewModel(
+              title: '${floor.name}-${floor.b?.name}',
+              value: floor.id,
+            ),
+          );
+        }
+      }
+    });
+  }
 
   onSelectMulti(List<dynamic> slectedList, dynamic sdelectedValue) {
     zoneValueList = slectedList;
@@ -160,8 +208,8 @@ class CreateReflectionPrv extends ChangeNotifier {
         status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
-        areaId: zoneValueList.map((e) => e.toString()).toList(),
-        areaTypeId: zoneTypeController.text.trim(),
+        areaIds: zoneValueList.map((e) => {"_id": e.toString()}).toList(),
+        areaType: zoneTypeController.text.trim(),
         description: describeController.text.trim(),
       );
       // return
@@ -243,9 +291,16 @@ class CreateReflectionPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  onSelectZoneType(v) async {
+  onSelectZoneType(context, v) async {
     if (v != null) {
       validateZoneType = null;
+      if (v == "BUILDING") {
+        isFloor = true;
+        notifyListeners();
+      } else {
+        isFloor = false;
+        notifyListeners();
+      }
       if (zoneTypeController.text != v) {
         zoneTypeController.text = v;
         zoneController.clear();
@@ -259,6 +314,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         }
 
         await getListAreaByType(v);
+        await getFloorList(context);
       } else {}
     }
     notifyListeners();
@@ -293,19 +349,6 @@ class CreateReflectionPrv extends ChangeNotifier {
   }
 
   getReflectionReason(BuildContext context) async {
-    // await APIReflection.getComplainReaction().then((v) {
-    //   listReasons.clear();
-    //   for (var i in v) {
-    //     listReasons.add(ComplainReason.fromJson(i));
-    //   }
-    //    return APIReflection.getOpinion();
-    // })
-    // .then((v) {
-    //   listOpinion.clear();
-    //   for (var i in v) {
-    //     listOpinion.add(ComplainReason.fromJson(i));
-    //   }
-    // })
     await APIReflection.getOpinion().then((v) {
       listOpinion.clear();
       for (var i in v) {

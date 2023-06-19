@@ -1,7 +1,11 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,6 +33,47 @@ class _ConstructionDocumentDetailsState
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var isShowRecorg = false;
+  ReceivePort port = ReceivePort();
+  @override
+  void initState() {
+    super.initState();
+
+    IsolateNameServer.registerPortWithName(
+      port.sendPort,
+      'downloader_send_port',
+    );
+    port.listen((dynamic data) {
+      // String id = data[0];
+      DownloadTaskStatus status = data[1];
+      // int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -144,10 +189,14 @@ class _ConstructionDocumentDetailsState
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
                       onTap: () async {
-                        await launchUrl(
-                          Uri.parse("${ApiConstants.uploadURL}?load=${e.id}"),
-                          mode: LaunchMode.externalApplication,
+                        Utils.downloadFile(
+                          context: context,
+                          id: e.id,
                         );
+                        // await launchUrl(
+                        //   Uri.parse("${ApiConstants.uploadURL}?load=${e.id}"),
+                        //   mode: LaunchMode.externalApplication,
+                        // );
                       },
                       child: Align(
                         alignment: Alignment.centerLeft,

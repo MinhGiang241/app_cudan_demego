@@ -145,21 +145,21 @@ class APIReflection {
 
   static Future saveTicket(Map<String, dynamic> data) async {
     var query = '''
-        mutation(\$data: TicketInputDto){
-	response: save_Ticket_dto(data:\$data){
-		message
-		code
-		data {
-			_id
-			
-		}
-	}
+        mutation (\$data:Dictionary){
+    response: ticket_mobile_save_ticket (data: \$data ) {
+        code
+        message
+        data
+    }
 }
+        
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -214,6 +214,36 @@ class APIReflection {
         MutationOptions(document: gql(query), variables: {
       "data": data,
     });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getFloorList(String? apartmentId) async {
+    var query = '''
+         mutation (\$apartmentId:String){
+    response: ticket_mobile_get_floor_list_by_apartmentId (apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+      ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "apartmentId": apartmentId,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

@@ -123,7 +123,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
       ),
       body: FutureBuilder(
         future: () async {
-          await APIReflection.getListAreaByType(arg.areaTypeId ?? '').then((v) {
+          await APIReflection.getListAreaByType(arg.areaType ?? '').then((v) {
             listZoneChoice.clear();
             for (var i in v) {
               var a = Area.fromMap(i);
@@ -132,7 +132,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                 title: a.name,
                 isSelected: false,
               );
-              if (arg.areaId!.contains(i["_id"])) {
+              if (arg.areaIds!.contains(i["_id"])) {
                 s.isSelected = true;
               }
               listZoneChoice.add(
@@ -230,7 +230,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             hint: '',
                             selectList: listAreaType,
                             label: S.of(context).zone_type,
-                            value: arg.areaTypeId,
+                            value: arg.areaType,
                             enable: false,
                           ),
                           vpad(12),
@@ -239,7 +239,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             isMultiple: true,
                             selectMultileList: listZoneChoice,
                             label: S.of(context).zone,
-                            value: arg.areaId,
+                            value: arg.areaIds,
                             enable: false,
                           ),
                           if (arg.files!.isNotEmpty) vpad(12),

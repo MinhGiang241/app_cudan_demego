@@ -40,8 +40,8 @@ class Reflection {
   String? process_content;
   String? priority_level;
   String? complaintReasonId;
-  List<dynamic>? areaId;
-  String? areaTypeId;
+  List<dynamic>? areaIds;
+  String? areaType;
   String? cancel_reason;
   Reason? r;
   ComplainReason? complainReason;
@@ -56,8 +56,8 @@ class Reflection {
     this.description,
     this.opinion_note,
     this.cancel_reason,
-    this.areaId,
-    this.areaTypeId,
+    this.areaIds,
+    this.areaType,
     this.complainReason,
     this.complaintReasonId,
     this.createdTime,
@@ -126,8 +126,8 @@ class Reflection {
       'position_handle': position_handle,
       'process_content': process_content,
       'priority_level': priority_level,
-      'areaId': areaId,
-      'areaTypeId': areaTypeId,
+      'areaIds': areaIds,
+      'areaType': areaType,
       'cancel_reason': cancel_reason,
       'opinion_note': opinion_note,
       'description': description,
@@ -212,9 +212,8 @@ class Reflection {
           map['result_note'] != null ? map['result_note'] as String : null,
       description:
           map['description'] != null ? map['description'] as String : null,
-      areaId: map['areaId'] != null ? map['areaId'] as List<dynamic> : null,
-      areaTypeId:
-          map['areaTypeId'] != null ? map['areaTypeId'] as String : null,
+      areaIds: map['areaIds'] != null ? map['areaIds'] as List<dynamic> : null,
+      areaType: map['areaType'] != null ? map['areaType'] as String : null,
       cancel_reason:
           map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
       r: map['r'] != null ? Reason.fromJson(map['r']) : null,
