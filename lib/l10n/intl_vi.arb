@@ -790,5 +790,8 @@
   "approve_2": "Duyệt lần 2",
   "pay_done": "Hoàn thành thanh toán",
   "create_new": "Tạo mới",
-  "perform_person": "Người thực hiện"
+  "perform_person": "Người thực hiện",
+  "drawing": "Bản vẽ",
+  "err_report": "Báo lỗi",
+  "err_reason": "Lý do báo lỗi"
 }

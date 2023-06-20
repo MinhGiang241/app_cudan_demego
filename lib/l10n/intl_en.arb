@@ -789,5 +789,8 @@
   "approve_2": "Second approve",
   "pay_done": "Pay done",
   "create_new": "Create new",
-  "perform_person": "Performed person"
+  "perform_person": "Performed person",
+  "drawing": "Drawing",
+  "err_report": "Error report",
+  "err_reason": "Error reason"
 }

@@ -215,8 +215,20 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                 children: [
                                   vpad(16),
                                   PrimaryDropDown(
+                                    enable: false,
+                                    value: handOver.apartmentId,
                                     label: S.of(context).surface,
-                                    selectList: listApartmentChoice,
+                                    selectList: [
+                                      DropdownMenuItem(
+                                        value: handOver.apartmentId,
+                                        child: Text(
+                                          handOver.a?.name! != null
+                                              ? handOver.label ??
+                                                  '${handOver.a?.name} - ${handOver.a?.f?.name} - ${handOver.a?.b?.name}'
+                                              : handOver.apartmentId!,
+                                        ),
+                                      )
+                                    ],
                                     isDense: false,
                                   ),
                                   vpad(16),
@@ -228,6 +240,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       Expanded(
                                         flex: 4,
                                         child: PrimaryTextField(
+                                          unit: '(m²)',
                                           label:
                                               S.of(context).s_usage_apartment,
                                           isRequired: true,
@@ -237,18 +250,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .toString(),
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Column(
-                                            children: [
-                                              vpad(24),
-                                              const Text('(m²)'),
-                                            ],
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
                                   vpad(16),
@@ -257,6 +258,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       Expanded(
                                         flex: 4,
                                         child: PrimaryTextField(
+                                          unit: '(m²)',
                                           label: S.of(context).s_cons_apartment,
                                           isRequired: true,
                                           enable: false,
@@ -265,18 +267,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .toString(),
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Column(
-                                            children: [
-                                              vpad(24),
-                                              const Text('(m²)'),
-                                            ],
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
                                   vpad(16),
@@ -297,6 +287,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   ),
                                   vpad(16),
                                   SelectFileWidget(
+                                    title: S.of(context).drawing,
+                                    isRequired: true,
                                     isDash: false,
                                     existFiles: handOver.floor_plan_drawing ??
                                         // ?.map(
@@ -307,44 +299,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         [],
                                   ),
                                   vpad(16),
-                                  // PrimaryTextField(
-                                  //   validator: Utils.emptyValidator,
-                                  //   label: S.of(context).hand_over_date,
-                                  //   isRequired: true,
-                                  //   isReadOnly: true,
-                                  //   hint: "dd/mm/yyyy",
-                                  //   onTap: () => context
-                                  //       .read<AcceptHandOverPrv>()
-                                  //       .pickHandOverDate(context),
-                                  //   suffixIcon: const PrimaryIcon(
-                                  //       icons: PrimaryIcons.calendar),
-                                  //   controller: context
-                                  //       .read<AcceptHandOverPrv>()
-                                  //       .handOverDateController,
-                                  //   validateString: context
-                                  //       .watch<AcceptHandOverPrv>()
-                                  //       .validateHandOverDate,
-                                  // ),
-                                  // vpad(16),
-                                  // PrimaryTextField(
-                                  //   validator: Utils.emptyValidator,
-                                  //   label: S.of(context).hand_over_time,
-                                  //   isReadOnly: true,
-                                  //   isRequired: true,
-                                  //   onTap: () => context
-                                  //       .read<AcceptHandOverPrv>()
-                                  //       .pickHandOverTime(context),
-                                  //   suffixIcon: const PrimaryIcon(
-                                  //       icons: PrimaryIcons.clock),
-                                  //   hint: "hh:mm",
-                                  //   controller: context
-                                  //       .read<AcceptHandOverPrv>()
-                                  //       .handOverTimeController,
-                                  //   validateString: context
-                                  //       .watch<AcceptHandOverPrv>()
-                                  //       .validateHandOverTime,
-                                  // ),
-                                  // vpad(16),
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
@@ -354,7 +308,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       ),
                                     ),
                                   ),
-
                                   if (ruleFiles.isNotEmpty) vpad(12),
                                   ...ruleFiles.map(
                                     (v) => Align(
@@ -406,7 +359,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                 hpad(20),
                                 Expanded(
                                   child: Text(
-                                    S.of(context).asset_list,
+                                    S.of(context).material_list,
                                     style: txtBoldUnderline(14),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -496,7 +449,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                 hpad(20),
                                 Expanded(
                                   child: Text(
-                                    S.of(context).material_list,
+                                    S.of(context).asset_list,
                                     style: txtBoldUnderline(14),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -567,29 +520,51 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                             ),
                           ),
                           vpad(16),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Text(
-                                'Biên bản bàn giao',
-                                textAlign: TextAlign.start,
-                                style: txtMediumUnderline(13, greenColorBase),
-                              ),
-                            ),
-                          ),
-                          vpad(16),
                           PrimaryTextField(
+                            textColor: genStatusColor(status ?? ''),
+                            label: S.of(context).status,
                             enable: false,
-                            isReadOnly: true,
-                            initialValue: genStatus(status),
-                            textColor: genStatusColor(status),
+                            initialValue: handOver.s?.name,
+                            textStyle: txtBold(14, genStatusColor(status)),
                           ),
+                          if (handOver.cancel_note != null) vpad(16),
+                          if (handOver.cancel_note != null)
+                            PrimaryTextField(
+                              maxLines: 2,
+                              label: S.of(context).err_reason,
+                              enable: false,
+                              isReadOnly: true,
+                              initialValue: genStatus(status),
+                            ),
+                          if (handOver.cancel_note != null) vpad(16),
+                          if (handOver.cancel_note != null)
+                            PrimaryTextField(
+                              maxLines: 2,
+                              label: S.of(context).note,
+                              enable: false,
+                              isReadOnly: true,
+                              initialValue: handOver.cancel_note,
+                            ),
                           vpad(40),
-                          PrimaryButton(
-                            onTap: () {},
-                            width: dvWidth(context) - 24,
-                            text: S.of(context).close,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: PrimaryButton(
+                                  buttonType: ButtonType.orange,
+                                  onTap: () {},
+                                  width: dvWidth(context) - 24,
+                                  text: S.of(context).err_report,
+                                ),
+                              ),
+                              hpad(20),
+                              Expanded(
+                                child: PrimaryButton(
+                                  onTap: () {},
+                                  width: dvWidth(context) - 24,
+                                  text: S.of(context).accept_hand_over,
+                                ),
+                              ),
+                            ],
                           ),
                           vpad(60),
                         ],

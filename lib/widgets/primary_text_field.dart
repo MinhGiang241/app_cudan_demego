@@ -43,9 +43,11 @@ class PrimaryTextField extends StatefulWidget {
       this.onlyText = false,
       this.isShow = true,
       this.onlyNum = false,
+      this.unit,
       this.textStyle});
   final TextStyle? textStyle;
   final String? label;
+  final String? unit;
   final String? initialValue;
   final String? hint;
   final TextEditingController? controller;
@@ -104,8 +106,13 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
         if (widget.label != null)
           Row(
             children: [
-              Text(widget.label!,
-                  style: txtBodySmallRegular(color: grayScaleColorBase)),
+              Expanded(
+                child: Text(
+                  widget.label!,
+                  style: txtBodySmallRegular(color: grayScaleColorBase),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               if (widget.isRequired) hpad(4),
               if (widget.isRequired && widget.isShow)
                 Text("*", style: txtBodySmallRegular(color: redColorBase))
@@ -121,116 +128,138 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
               builder: (context, snapshot) {
                 final showPass = snapshot.data!;
 
-                return PrimaryCard(
-                  onTap: widget.enable ? widget.onTap : null,
-                  background: widget.background,
-                  margin: widget.margin,
-                  child: TextFormField(
-                    onChanged: widget.onChanged,
-                    onFieldSubmitted: widget.controller != null
-                        ? (text) {
-                            widget.controller!.text = text.trim();
-                          }
-                        : null,
-                    maxLength: widget.maxLength,
-                    onTap: widget.enable ? widget.onTap : null,
-                    textAlign: widget.textAlign ?? TextAlign.start,
-                    inputFormatters: <TextInputFormatter>[
-                      // FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                      if (widget.onlyTextNotVietChar)
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'[0-9a-zA-Z]')),
-                      if (widget.onlyNum)
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      if (widget.onlyText)
-                        FilteringTextInputFormatter.allow(RegExp(
-                            r"[ 0-9a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]")),
-                      if (widget.blockSpace)
-                        FilteringTextInputFormatter.deny(RegExp(r'[ ]')),
-                      if (widget.blockSpecial)
-                        FilteringTextInputFormatter.deny(RegExp(
-                          r'''(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%_*#?&\[\]\(\)<>`\'+-={}"|\\/]''',
-                        )),
-                      if (widget.blockSpecial)
-                        FilteringTextInputFormatter.deny(RegExp(r'''["]''')),
-                      if (widget.blockSpecial)
-                        FilteringTextInputFormatter.deny(RegExp(r'''[_]''')),
-                      ...?widget.filter
-                    ],
-                    enabled: widget.enable,
-                    autofocus: widget.autoFocus,
-                    controller: widget.controller,
-                    initialValue: widget.initialValue,
-                    obscureText: !showPass && widget.obscureText,
-                    readOnly: widget.isReadOnly,
-                    // onTap: onTap,
-                    cursorHeight: 15,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    keyboardType: widget.keyboardType,
-                    textCapitalization: widget.textCapitalization,
-                    textInputAction: widget.textInputAction ??
-                        (widget.maxLines! < 2 ? TextInputAction.done : null),
-                    style: widget.textStyle ??
-                        txtBodySmallBold(
-                            color: widget.enable
-                                ? widget.textColor
-                                : grayScaleColor3),
-                    cursorColor: primaryColor2,
-                    maxLines: widget.maxLines,
-                    decoration: InputDecoration(
-                        // enabledBorder: widget.validateString != null
-                        //     ? OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(12),
-                        //         borderSide: const BorderSide(
-                        //             color: redColor2, width: 2),
-                        //       )
-                        //     : OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(12),
-                        //         borderSide: BorderSide.none,
-                        //       ),
+                return Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryCard(
+                        onTap: widget.enable ? widget.onTap : null,
+                        background: widget.background,
+                        margin: widget.margin,
+                        child: TextFormField(
+                          onChanged: widget.onChanged,
+                          onFieldSubmitted: widget.controller != null
+                              ? (text) {
+                                  widget.controller!.text = text.trim();
+                                }
+                              : null,
+                          maxLength: widget.maxLength,
+                          onTap: widget.enable ? widget.onTap : null,
+                          textAlign: widget.textAlign ?? TextAlign.start,
+                          inputFormatters: <TextInputFormatter>[
+                            // FilteringTextInputFormatter.deny(RegExp('[ ]')),
+                            if (widget.onlyTextNotVietChar)
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9a-zA-Z]')),
+                            if (widget.onlyNum)
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            if (widget.onlyText)
+                              FilteringTextInputFormatter.allow(RegExp(
+                                  r"[ 0-9a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ]")),
+                            if (widget.blockSpace)
+                              FilteringTextInputFormatter.deny(RegExp(r'[ ]')),
+                            if (widget.blockSpecial)
+                              FilteringTextInputFormatter.deny(RegExp(
+                                r'''(?=.*[@$!%*#?&)(\-+=\[\]\{\}\.\,<>\'\`~:;\\|/])[A-Za-z\d@$!%_*#?&\[\]\(\)<>`\'+-={}"|\\/]''',
+                              )),
+                            if (widget.blockSpecial)
+                              FilteringTextInputFormatter.deny(
+                                  RegExp(r'''["]''')),
+                            if (widget.blockSpecial)
+                              FilteringTextInputFormatter.deny(
+                                  RegExp(r'''[_]''')),
+                            ...?widget.filter
+                          ],
+                          enabled: widget.enable,
+                          autofocus: widget.autoFocus,
+                          controller: widget.controller,
+                          initialValue: widget.initialValue,
+                          obscureText: !showPass && widget.obscureText,
+                          readOnly: widget.isReadOnly,
+                          // onTap: onTap,
+                          cursorHeight: 15,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          keyboardType: widget.keyboardType,
+                          textCapitalization: widget.textCapitalization,
+                          textInputAction: widget.textInputAction ??
+                              (widget.maxLines! < 2
+                                  ? TextInputAction.done
+                                  : null),
+                          style: widget.textStyle ??
+                              txtBodySmallBold(
+                                  color: widget.enable
+                                      ? widget.textColor
+                                      : grayScaleColor3),
+                          cursorColor: primaryColor2,
+                          maxLines: widget.maxLines,
+                          decoration: InputDecoration(
+                              // enabledBorder: widget.validateString != null
+                              //     ? OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(12),
+                              //         borderSide: const BorderSide(
+                              //             color: redColor2, width: 2),
+                              //       )
+                              //     : OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(12),
+                              //         borderSide: BorderSide.none,
+                              //       ),
 
-                        counterText: '',
-                        hintText: widget.hint,
-                        hintStyle: txtBodySmallBold(color: grayScaleColor3),
-                        errorStyle: const TextStyle(fontSize: 0, height: 0),
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 16,
+                              counterText: '',
+                              hintText: widget.hint,
+                              hintStyle:
+                                  txtBodySmallBold(color: grayScaleColor3),
+                              errorStyle:
+                                  const TextStyle(fontSize: 0, height: 0),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 16,
+                                horizontal: 16,
+                              ),
+                              prefixIcon: widget.prefixIcon,
+                              suffixIconConstraints: const BoxConstraints(
+                                  minHeight: 35, minWidth: 35),
+                              suffixIcon: widget.obscureText
+                                  ? showPass
+                                      ? IconButton(
+                                          onPressed: () {
+                                            showPassController?.add(false);
+                                          },
+                                          icon:
+                                              const Icon(Icons.visibility_off))
+                                      : IconButton(
+                                          onPressed: () {
+                                            showPassController?.add(true);
+                                          },
+                                          icon: const Icon(Icons.visibility))
+                                  : widget.suffixIcon,
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                      color: primaryColor2, width: 2)),
+                              errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                      color: redColor2, width: 2)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none)),
+                          validator: widget.isRequired
+                              ? widget.validator
+                              : (val) {
+                                  return null;
+                                },
                         ),
-                        prefixIcon: widget.prefixIcon,
-                        suffixIconConstraints:
-                            const BoxConstraints(minHeight: 35, minWidth: 35),
-                        suffixIcon: widget.obscureText
-                            ? showPass
-                                ? IconButton(
-                                    onPressed: () {
-                                      showPassController?.add(false);
-                                    },
-                                    icon: const Icon(Icons.visibility_off))
-                                : IconButton(
-                                    onPressed: () {
-                                      showPassController?.add(true);
-                                    },
-                                    icon: const Icon(Icons.visibility))
-                            : widget.suffixIcon,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                                color: primaryColor2, width: 2)),
-                        errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: redColor2, width: 2)),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none)),
-                    validator: widget.isRequired
-                        ? widget.validator
-                        : (val) {
-                            return null;
-                          },
-                  ),
+                      ),
+                    ),
+                    if (widget.unit != null)
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          widget.unit!,
+                          style: txtBodySmallBold(color: grayScaleColor3),
+                        ),
+                      )
+                  ],
                 );
               },
             ),

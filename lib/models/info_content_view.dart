@@ -175,7 +175,7 @@ Color genStatusColorHandOver(String? status) {
       return yellowColor7;
     case "PROCESSING":
       return blueColor3;
-    case "PROCESSED":
+    case "PROCEED":
       return greenColorBase;
     case "COMPLETE":
       return greenColor8;

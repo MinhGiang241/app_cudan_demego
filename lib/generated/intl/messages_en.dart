@@ -345,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doctor_degree": MessageLookupByLibrary.simpleMessage("Doctor degree"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "drawing": MessageLookupByLibrary.simpleMessage("Drawing"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Due date"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Edit package"),
@@ -429,6 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_conn": MessageLookupByLibrary.simpleMessage("Error Connection"),
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),
+        "err_reason": MessageLookupByLibrary.simpleMessage("Error reason"),
+        "err_report": MessageLookupByLibrary.simpleMessage("Error report"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_upload": MessageLookupByLibrary.simpleMessage("Upload error"),
         "err_x": m16,

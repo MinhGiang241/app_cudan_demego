@@ -349,6 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doctor_degree": MessageLookupByLibrary.simpleMessage("Bằng tiến sĩ"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
         "done": MessageLookupByLibrary.simpleMessage("Xong"),
+        "drawing": MessageLookupByLibrary.simpleMessage("Bản vẽ"),
         "due_bill": MessageLookupByLibrary.simpleMessage("Hạn thanh toán"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "edit_package": MessageLookupByLibrary.simpleMessage("Sửa hàng hóa"),
@@ -434,6 +435,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_conn": MessageLookupByLibrary.simpleMessage("Lỗi kết nối "),
         "err_internet": MessageLookupByLibrary.simpleMessage(
             "Không kết nối được với máy chủ"),
+        "err_reason": MessageLookupByLibrary.simpleMessage("Lý do báo lỗi"),
+        "err_report": MessageLookupByLibrary.simpleMessage("Báo lỗi"),
         "err_unknown":
             MessageLookupByLibrary.simpleMessage("Lỗi Không xác định"),
         "err_upload": MessageLookupByLibrary.simpleMessage("Upload file lỗi"),

@@ -292,22 +292,6 @@ class _NotPassWidgetState extends State<NotPassWidget>
                           ),
                         ),
                       ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                          color: (genStatusColor(widget.status)),
-                          borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(12),
-                              bottomLeft: Radius.circular(8))),
-                      child: Text(
-                        genStatus(widget.status),
-                        style: txtSemiBold(12, Colors.white),
-                      ),
-                    ),
-                  )
                 ],
               )),
         ),

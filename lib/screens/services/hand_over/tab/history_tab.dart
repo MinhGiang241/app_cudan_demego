@@ -236,8 +236,8 @@ class _HistoryTabState extends State<HistoryTab> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color:
-                                  (genStatusColorHandOver(e.status as String)),
+                              color: (genStatusColorHandOver(
+                                  e.status_error as String)),
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(8),

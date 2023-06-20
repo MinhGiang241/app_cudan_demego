@@ -7959,6 +7959,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Drawing`
+  String get drawing {
+    return Intl.message(
+      'Drawing',
+      name: 'drawing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error report`
+  String get err_report {
+    return Intl.message(
+      'Error report',
+      name: 'err_report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error reason`
+  String get err_reason {
+    return Intl.message(
+      'Error reason',
+      name: 'err_reason',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
