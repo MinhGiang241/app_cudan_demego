@@ -289,45 +289,54 @@ class _PetListScreenState extends State<PetListScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        PrimaryButton(
-                                          onTap: () {
-                                            context
-                                                .read<PetListPrv>()
-                                                .sendToApprove(context, e);
-                                          },
-                                          text: S.of(context).send_request,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: greenColor7,
-                                          textColor: greenColor8,
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            onTap: () {
+                                              context
+                                                  .read<PetListPrv>()
+                                                  .sendToApprove(context, e);
+                                            },
+                                            text: S.of(context).send_request,
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor:
+                                                greenColor7,
+                                            textColor: greenColor8,
+                                          ),
                                         ),
-                                        PrimaryButton(
-                                          onTap: () {
-                                            Navigator.pushNamed(context,
-                                                RegisterPetScreen.routeName,
-                                                arguments: {
-                                                  "isEdit": true,
-                                                  "data": e,
-                                                });
-                                          },
-                                          text: S.of(context).edit,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor:
-                                              primaryColor5,
-                                          textColor: primaryColorBase,
+                                        hpad(5),
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            onTap: () {
+                                              Navigator.pushNamed(context,
+                                                  RegisterPetScreen.routeName,
+                                                  arguments: {
+                                                    "isEdit": true,
+                                                    "data": e,
+                                                  });
+                                            },
+                                            text: S.of(context).edit,
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor:
+                                                primaryColor5,
+                                            textColor: primaryColorBase,
+                                          ),
                                         ),
-                                        PrimaryButton(
-                                          onTap: () {
-                                            context
-                                                .read<PetListPrv>()
-                                                .deleteLetter(context, e);
-                                          },
-                                          text: S.of(context).delete_letter,
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: redColor5,
-                                          textColor: redColorBase,
+                                        hpad(5),
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            onTap: () {
+                                              context
+                                                  .read<PetListPrv>()
+                                                  .deleteLetter(context, e);
+                                            },
+                                            text: S.of(context).delete_letter,
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor: redColor5,
+                                            textColor: redColorBase,
+                                          ),
                                         ),
                                       ],
                                     ),

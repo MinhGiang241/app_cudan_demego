@@ -228,40 +228,50 @@ class ResidentLetterTab extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        PrimaryButton(
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: greenColor7,
-                                          text: S.of(context).send_request,
-                                          textColor: greenColor8,
-                                          onTap: () => sendRequest(list[index]),
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor:
+                                                greenColor7,
+                                            text: S.of(context).send_request,
+                                            textColor: greenColor8,
+                                            onTap: () =>
+                                                sendRequest(list[index]),
+                                          ),
                                         ),
-                                        PrimaryButton(
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor:
-                                              primaryColor5,
-                                          text: S.of(context).edit,
-                                          textColor: primaryColor1,
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RegisterResidentCard.routeName,
-                                              arguments: {
-                                                "isEdit": true,
-                                                "data": list[index]
-                                              },
-                                            );
-                                          },
+                                        hpad(5),
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor:
+                                                primaryColor5,
+                                            text: S.of(context).edit,
+                                            textColor: primaryColor1,
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                context,
+                                                RegisterResidentCard.routeName,
+                                                arguments: {
+                                                  "isEdit": true,
+                                                  "data": list[index]
+                                                },
+                                              );
+                                            },
+                                          ),
                                         ),
-                                        PrimaryButton(
-                                          buttonSize: ButtonSize.xsmall,
-                                          buttonType: ButtonType.secondary,
-                                          secondaryBackgroundColor: redColor4,
-                                          textColor: redColor,
-                                          text: S.of(context).delete,
-                                          onTap: () => deleteLetter(
-                                            list[index],
+                                        hpad(5),
+                                        Expanded(
+                                          child: PrimaryButton(
+                                            buttonSize: ButtonSize.xsmall,
+                                            buttonType: ButtonType.secondary,
+                                            secondaryBackgroundColor: redColor4,
+                                            textColor: redColor,
+                                            text: S.of(context).delete,
+                                            onTap: () => deleteLetter(
+                                              list[index],
+                                            ),
                                           ),
                                         ),
                                       ],

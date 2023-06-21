@@ -271,53 +271,62 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                               ],
                             ),
                           if (list[index].ticket_status == "NEW")
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: greenColor7,
-                                  text: S.of(context).send_request,
-                                  textColor: greenColor8,
-                                  onTap: () {
-                                    context
-                                        .read<TransportCardPrv>()
-                                        .sendApprove(context, list[index]);
-                                    // sendRequest(list[index]);
-                                  },
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: primaryColor5,
-                                  text: S.of(context).edit,
-                                  textColor: primaryColor1,
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      AddNewTransportCardScreen.routeName,
-                                      arguments: {
-                                        "isEdit": true,
-                                        "data": list[index],
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  PrimaryButton(
+                                    buttonSize: ButtonSize.xsmall,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: greenColor7,
+                                    text: S.of(context).send_request,
+                                    textColor: greenColor8,
+                                    onTap: () {
+                                      context
+                                          .read<TransportCardPrv>()
+                                          .sendApprove(context, list[index]);
+                                      // sendRequest(list[index]);
+                                    },
+                                  ),
+                                  hpad(5),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      buttonSize: ButtonSize.xsmall,
+                                      buttonType: ButtonType.secondary,
+                                      secondaryBackgroundColor: primaryColor5,
+                                      text: S.of(context).edit,
+                                      textColor: primaryColor1,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                          context,
+                                          AddNewTransportCardScreen.routeName,
+                                          arguments: {
+                                            "isEdit": true,
+                                            "data": list[index],
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
-                                ),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor4,
-                                  textColor: redColor,
-                                  text: S.of(context).delete,
-                                  onTap: () {
-                                    // return deleteLetter(list[index]);
-                                    context
-                                        .read<TransportCardPrv>()
-                                        .deleteLetter(context, list[index]);
-                                  },
-                                ),
-                              ],
+                                    ),
+                                  ),
+                                  hpad(5),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      buttonSize: ButtonSize.xsmall,
+                                      buttonType: ButtonType.secondary,
+                                      secondaryBackgroundColor: redColor4,
+                                      textColor: redColor,
+                                      text: S.of(context).delete,
+                                      onTap: () {
+                                        // return deleteLetter(list[index]);
+                                        context
+                                            .read<TransportCardPrv>()
+                                            .deleteLetter(context, list[index]);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           vpad(12)
                         ],
