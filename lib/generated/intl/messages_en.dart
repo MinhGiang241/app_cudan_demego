@@ -132,7 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "area": MessageLookupByLibrary.simpleMessage("Area"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Arrived date"),
-        "asset_detais": MessageLookupByLibrary.simpleMessage("Asset details"),
+        "asset_details": MessageLookupByLibrary.simpleMessage("Asset details"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Asset list"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Asset name"),
         "attachment_file":
@@ -477,6 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "find_time_now": MessageLookupByLibrary.simpleMessage(
             "Found time not after now day"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
+        "floor": MessageLookupByLibrary.simpleMessage("Floor"),
         "follow_ser": MessageLookupByLibrary.simpleMessage("Follow services"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forum": MessageLookupByLibrary.simpleMessage("Forum"),
@@ -590,6 +591,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("Married"),
         "master_degree": MessageLookupByLibrary.simpleMessage("Master degree"),
         "material": MessageLookupByLibrary.simpleMessage("Material"),
+        "material_details":
+            MessageLookupByLibrary.simpleMessage("Material details"),
         "material_list": MessageLookupByLibrary.simpleMessage("Material list"),
         "matial_status": MessageLookupByLibrary.simpleMessage("Matial status"),
         "max_day_pay":
@@ -608,6 +611,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "my_letter": MessageLookupByLibrary.simpleMessage("My letter"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "You need to choose payment cycle and register date first"),
@@ -1049,6 +1053,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step1": MessageLookupByLibrary.simpleMessage("Step 1"),
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
+        "stt": MessageLookupByLibrary.simpleMessage("STT"),
         "succees_extend_trans": MessageLookupByLibrary.simpleMessage(
             "Extend transportation successfully"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
@@ -1221,6 +1226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "vew_records": MessageLookupByLibrary.simpleMessage("View records"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "view": MessageLookupByLibrary.simpleMessage("View"),
         "view_record": MessageLookupByLibrary.simpleMessage("View record"),
         "violation_record":
             MessageLookupByLibrary.simpleMessage("Violation record"),

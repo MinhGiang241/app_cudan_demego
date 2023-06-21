@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/asset_Item_view_model.dart';
 import '../../../models/info_content_view.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
@@ -73,7 +74,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
     rotateAssetAnimation =
         Tween<double>(begin: 0, end: pi).animate(animationAssetController);
     rotateMaterialAnimation =
-        Tween<double>(begin: 0, end: pi).animate(animationAssetController);
+        Tween<double>(begin: 0, end: pi).animate(animationMaterialController);
     // showController.add(isShow);
     IsolateNameServer.registerPortWithName(
       port.sendPort,
@@ -98,6 +99,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
   void dispose() {
     animationInfoController.dispose();
     animationAssetController.dispose();
+    animationMaterialController.dispose();
     IsolateNameServer.removePortNameMapping('downloader_send_port');
 
     super.dispose();
@@ -117,19 +119,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
     }
 
     return ChangeNotifierProvider(
-      create: (context) => AcceptHandOverPrv(),
+      create: (context) => AcceptHandOverPrv(handOver),
       builder: (context, snapshot) {
-        var listApartmentChoice =
-            context.read<ResidentInfoPrv>().listOwn.map((e) {
-          return DropdownMenuItem(
-            value: e.apartmentId,
-            child: Text(
-              e.apartment?.name! != null
-                  ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-                  : e.apartmentId!,
-            ),
-          );
-        }).toList();
         bool isShowInfo = context.watch<AcceptHandOverPrv>().generalInfoExpand;
         bool isShowAsset = context.watch<AcceptHandOverPrv>().assetListExpand;
         bool isShowMaterial =
@@ -287,6 +278,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   ),
                                   vpad(16),
                                   SelectFileWidget(
+                                    enable: false,
                                     title: S.of(context).drawing,
                                     isRequired: true,
                                     isDash: false,
@@ -393,37 +385,57 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   vpad(16),
                                   ...context
                                       .watch<AcceptHandOverPrv>()
-                                      .data
-                                      .asMap()
+                                      .assetList
                                       .entries
                                       .map((e) {
                                     return AssetItem(
-                                      region: e.value['title'] as String,
+                                      vote: true,
+                                      type: DetailType.ASSET,
+                                      region: e.value[0].assetposition
+                                              ?.asset_postision ??
+                                          "",
                                       selectPass: context
                                           .watch<AcceptHandOverPrv>()
                                           .selectItemPass,
-                                      data: e.value,
+                                      data: AssetItemViewModel(
+                                        type: 'material',
+                                        title: e.value[0].assetposition
+                                            ?.asset_postision,
+                                        list: e.value
+                                            .map(
+                                              (e) => ItemViewModel(
+                                                id: e.id,
+                                                code: e.id,
+                                                name: e.name_additional,
+                                                achieve: e.achieve ?? false,
+                                                not_achieve:
+                                                    e.not_achieve ?? false,
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
                                       index: e.key,
                                     );
                                   }),
-                                  NotPassWidget(
-                                    selectItem: (
-                                      bool value,
-                                      int indexAsset,
-                                      int indexItem,
-                                    ) =>
-                                        context
-                                            .read<AcceptHandOverPrv>()
-                                            .selectItemPass(
-                                              value,
-                                              indexAsset,
-                                              indexItem,
-                                            ),
-                                    status: status,
-                                    list: context
-                                        .watch<AcceptHandOverPrv>()
-                                        .notPassList,
-                                  ),
+                                  vpad(3),
+                                  // NotPassWidget(
+                                  //   selectItem: (
+                                  //     bool value,
+                                  //     int indexAsset,
+                                  //     int indexItem,
+                                  //   ) =>
+                                  //       context
+                                  //           .read<AcceptHandOverPrv>()
+                                  //           .selectItemPass(
+                                  //             value,
+                                  //             indexAsset,
+                                  //             indexItem,
+                                  //           ),
+                                  //   status: status,
+                                  //   list: context
+                                  //       .watch<AcceptHandOverPrv>()
+                                  //       .notPassList,
+                                  // ),
                                 ],
                               ),
                             ),
@@ -459,7 +471,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   height: 15.0,
                                   width: 15.0,
                                   child: AnimatedBuilder(
-                                    animation: animationMaterialDrop,
+                                    animation: animationMaterialController,
                                     builder: (context, child) =>
                                         Transform.rotate(
                                       origin: const Offset(4, 4),
@@ -484,37 +496,58 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   vpad(16),
                                   ...context
                                       .watch<AcceptHandOverPrv>()
-                                      .data
-                                      .asMap()
+                                      .materialList
                                       .entries
                                       .map((e) {
                                     return AssetItem(
-                                      region: e.value['title'] as String,
+                                      vote: true,
+                                      type: DetailType.MATERIAL,
+                                      region: e.value[0].assetposition
+                                              ?.asset_postision ??
+                                          "",
                                       selectPass: context
                                           .watch<AcceptHandOverPrv>()
                                           .selectItemPass,
-                                      data: e.value,
+                                      data: AssetItemViewModel(
+                                        type: 'material',
+                                        title: e.value[0].assetposition
+                                            ?.asset_postision,
+                                        list: e.value
+                                            .map(
+                                              (e) => ItemViewModel(
+                                                id: e.id,
+                                                code: e.code,
+                                                name: e.materiallist
+                                                    ?.material_list,
+                                                achieve: e.achieve ?? false,
+                                                not_achieve:
+                                                    e.not_achieve ?? false,
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
                                       index: e.key,
                                     );
                                   }),
-                                  NotPassWidget(
-                                    selectItem: (
-                                      bool value,
-                                      int indexAsset,
-                                      int indexItem,
-                                    ) =>
-                                        context
-                                            .read<AcceptHandOverPrv>()
-                                            .selectItemPass(
-                                              value,
-                                              indexAsset,
-                                              indexItem,
-                                            ),
-                                    status: status,
-                                    list: context
-                                        .watch<AcceptHandOverPrv>()
-                                        .notPassList,
-                                  ),
+                                  vpad(3),
+                                  // NotPassWidget(
+                                  //   selectItem: (
+                                  //     bool value,
+                                  //     int indexAsset,
+                                  //     int indexItem,
+                                  //   ) =>
+                                  //       context
+                                  //           .read<AcceptHandOverPrv>()
+                                  //           .selectItemPass(
+                                  //             value,
+                                  //             indexAsset,
+                                  //             indexItem,
+                                  //           ),
+                                  //   status: status,
+                                  //   list: context
+                                  //       .watch<AcceptHandOverPrv>()
+                                  //       .notPassList,
+                                  // ),
                                 ],
                               ),
                             ),

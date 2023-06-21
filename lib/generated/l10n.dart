@@ -5261,10 +5261,20 @@ class S {
   }
 
   /// `Asset details`
-  String get asset_detais {
+  String get asset_details {
     return Intl.message(
       'Asset details',
-      name: 'asset_detais',
+      name: 'asset_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Material details`
+  String get material_details {
+    return Intl.message(
+      'Material details',
+      name: 'material_details',
       desc: '',
       args: [],
     );
@@ -7985,6 +7995,46 @@ class S {
     return Intl.message(
       'Error reason',
       name: 'err_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `STT`
+  String get stt {
+    return Intl.message(
+      'STT',
+      name: 'stt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor`
+  String get floor {
+    return Intl.message(
+      'Floor',
+      name: 'floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View`
+  String get view {
+    return Intl.message(
+      'View',
+      name: 'view',
       desc: '',
       args: [],
     );

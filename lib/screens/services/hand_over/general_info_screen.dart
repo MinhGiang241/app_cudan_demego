@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../models/asset_Item_view_model.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dropdown.dart';
@@ -113,19 +114,19 @@ class GeneralInfoScreen extends StatelessWidget {
                   SingleChildScrollView(
                     child: Column(children: [
                       vpad(12),
-                      ...context
-                          .watch<GeneralInfoPrv>()
-                          .dataAsset
-                          .asMap()
-                          .entries
-                          .map((e) => AssetItem(
-                                region: e.value['title'] as String,
-                                selectPass: context
-                                    .watch<GeneralInfoPrv>()
-                                    .selectItemPass,
-                                data: e.value,
-                                index: e.key,
-                              )),
+                      // ...context
+                      //     .watch<GeneralInfoPrv>()
+                      //     .dataAsset
+                      //     .asMap()
+                      //     .entries
+                      //     .map((e) => AssetItem(
+                      //           region: e.value['title'] as String,
+                      //           selectPass: context
+                      //               .watch<GeneralInfoPrv>()
+                      //               .selectItemPass,
+                      //           data: AssetItemViewModel(list: dataAsset),
+                      //           index: e.key,
+                      //         )),
                       vpad(30),
                       PrimaryButton(
                         width: dvWidth(context) - 36,

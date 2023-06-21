@@ -140,7 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "area": MessageLookupByLibrary.simpleMessage("Diện tích"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
-        "asset_detais":
+        "asset_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
         "asset_list":
             MessageLookupByLibrary.simpleMessage("Danh sách danh mục tài sản"),
@@ -482,6 +482,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "find_time_now": MessageLookupByLibrary.simpleMessage(
             "Thời điểm thấy phải nhỏ hơn hoặc bằng ngày hiện tại"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
+        "floor": MessageLookupByLibrary.simpleMessage("Tầng"),
         "follow_ser": MessageLookupByLibrary.simpleMessage("Theo dõi dịch vụ"),
         "forgot_pass": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forum": MessageLookupByLibrary.simpleMessage("Diễn đàn"),
@@ -595,6 +596,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("Đã kết hôn"),
         "master_degree": MessageLookupByLibrary.simpleMessage("Bằng thạc sĩ"),
         "material": MessageLookupByLibrary.simpleMessage("Vật liệu"),
+        "material_details":
+            MessageLookupByLibrary.simpleMessage("Chi tiết vật liệu"),
         "material_list":
             MessageLookupByLibrary.simpleMessage("Danh sách danh mục vật liệu"),
         "matial_status":
@@ -614,6 +617,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thời điểm thất lạc"),
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
+        "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc tịch"),
         "need_choose_cylce_regdate": MessageLookupByLibrary.simpleMessage(
             "Bạn cần chọn chu kỳ thanh toán và ngày đăng ký trước"),
@@ -1051,6 +1055,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step1": MessageLookupByLibrary.simpleMessage("Bước 1"),
         "step2": MessageLookupByLibrary.simpleMessage("Bước 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Bước 3"),
+        "stt": MessageLookupByLibrary.simpleMessage("STT"),
         "succees_extend_trans": MessageLookupByLibrary.simpleMessage(
             "Gia hạn phương tiện thành công"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
@@ -1219,6 +1224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "vew_records": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "view": MessageLookupByLibrary.simpleMessage("Xem"),
         "view_record": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "violation_record":
             MessageLookupByLibrary.simpleMessage("Biên bản vi phạm"),

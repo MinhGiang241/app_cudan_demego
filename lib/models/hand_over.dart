@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/reason.dart';
 import 'package:app_cudan/models/response_resident_own.dart';
@@ -35,7 +37,7 @@ class HandOver {
   dynamic floor_area;
   dynamic acreage;
   List<FileUploadModel>? floor_plan_drawing;
-  List<Material>? material_list;
+  List<Materials>? material_list;
   List<AddAsset>? list_assets_additional;
   String? rules;
   dynamic in_project;
@@ -225,9 +227,9 @@ class HandOver {
             )
           : null,
       material_list: map['material_list'] != null
-          ? List<Material>.from(
-              (map['material_list'] as List<dynamic>).map<Material?>(
-                (x) => Material.fromMap(x as Map<String, dynamic>),
+          ? List<Materials>.from(
+              (map['material_list'] as List<dynamic>).map<Materials?>(
+                (x) => Materials.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
@@ -305,7 +307,7 @@ class HandOver {
       HandOver.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
-class Material {
+class Materials {
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -314,8 +316,13 @@ class Material {
   String? material_specification;
   String? trademark;
   String? note;
+  String? code;
+  bool? not_achieve;
+  bool? achieve;
   List<FileUploadModel>? img;
-  Material({
+  AssetPosition? assetposition;
+  MaterialList? materiallist;
+  Materials({
     this.id,
     this.createdTime,
     this.updatedTime,
@@ -325,6 +332,11 @@ class Material {
     this.trademark,
     this.note,
     this.img,
+    this.not_achieve,
+    this.achieve,
+    this.assetposition,
+    this.materiallist,
+    this.code,
   });
 
   Map<String, dynamic> toMap() {
@@ -337,12 +349,15 @@ class Material {
       'material_specification': material_specification,
       'trademark': trademark,
       'note': note,
+      'code': code,
       'img': img?.map((x) => x.toMap()).toList(),
+      'not_achieve': not_achieve,
+      'achieve': achieve,
     };
   }
 
-  factory Material.fromMap(Map<String, dynamic> map) {
-    return Material(
+  factory Materials.fromMap(Map<String, dynamic> map) {
+    return Materials(
       id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
@@ -359,6 +374,7 @@ class Material {
           : null,
       trademark: map['trademark'] != null ? map['trademark'] as String : null,
       note: map['note'] != null ? map['note'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
       img: map['img'] != null
           ? List<FileUploadModel>.from(
               (map['img'] as List<dynamic>).map<FileUploadModel?>(
@@ -366,13 +382,22 @@ class Material {
               ),
             )
           : null,
+      not_achieve:
+          map["not_achieve"] != null ? map["not_achieve"] as bool : null,
+      achieve: map["achieve"] != null ? map["achieve"] as bool : null,
+      assetposition: map["assetposition"] != null
+          ? AssetPosition.fromMap(map["assetposition"])
+          : null,
+      materiallist: map["materiallist"] != null
+          ? MaterialList.fromMap(map["materiallist"])
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Material.fromJson(String source) =>
-      Material.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Materials.fromJson(String source) =>
+      Materials.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class AddAsset {
@@ -386,6 +411,11 @@ class AddAsset {
   int? quantity_additional;
   String? unitId_additional;
   String? note_additional;
+  bool? not_achieve;
+  bool? achieve;
+  String? reason_not_achieve;
+  AssetPosition? assetposition;
+  Unit? unit;
   AddAsset({
     this.id,
     this.createdTime,
@@ -397,6 +427,11 @@ class AddAsset {
     this.quantity_additional,
     this.unitId_additional,
     this.note_additional,
+    this.assetposition,
+    this.unit,
+    this.reason_not_achieve,
+    this.not_achieve,
+    this.achieve,
   });
 
   Map<String, dynamic> toMap() {
@@ -411,6 +446,9 @@ class AddAsset {
       'quantity_additional': quantity_additional,
       'unitId_additional': unitId_additional,
       'note_additional': note_additional,
+      'not_achieve': not_achieve,
+      'achieve': achieve,
+      'reason_not_achieve': reason_not_achieve,
     };
   }
 
@@ -442,6 +480,16 @@ class AddAsset {
           : null,
       note_additional: map['note_additional'] != null
           ? map['note_additional'] as String
+          : null,
+      assetposition: map["assetposition"] != null
+          ? AssetPosition.fromMap(map["assetposition"])
+          : null,
+      unit: map["unit"] != null ? Unit.fromMap(map["unit"]) : null,
+      not_achieve:
+          map["not_achieve"] != null ? map["not_achieve"] as bool : null,
+      achieve: map["achieve"] != null ? map["achieve"] as bool : null,
+      reason_not_achieve: map["reason_not_achieve"] != null
+          ? map["reason_not_achieve"] as String
           : null,
     );
   }
@@ -774,4 +822,282 @@ class Customer {
 
   factory Customer.fromJson(String source) =>
       Customer.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class AssetPosition {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? apartment_type;
+  String? asset_postision;
+  String? note;
+  String? code;
+  AssetPosition({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.apartment_type,
+    this.asset_postision,
+    this.note,
+    this.code,
+  });
+
+  AssetPosition copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? apartment_type,
+    String? asset_postision,
+    String? note,
+    String? code,
+  }) {
+    return AssetPosition(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      apartment_type: apartment_type ?? this.apartment_type,
+      asset_postision: asset_postision ?? this.asset_postision,
+      note: note ?? this.note,
+      code: code ?? this.code,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'apartment_type': apartment_type,
+      'asset_postision': asset_postision,
+      'note': note,
+      'code': code,
+    };
+  }
+
+  factory AssetPosition.fromMap(Map<String, dynamic> map) {
+    return AssetPosition(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      apartment_type: map['apartment_type'] != null
+          ? map['apartment_type'] as String
+          : null,
+      asset_postision: map['asset_postision'] != null
+          ? map['asset_postision'] as String
+          : null,
+      note: map['note'] != null ? map['note'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory AssetPosition.fromJson(String source) =>
+      AssetPosition.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'AssetPossition(id: $id, createdTime: $createdTime, updatedTime: $updatedTime, apartment_type: $apartment_type, asset_postision: $asset_postision, note: $note, code: $code)';
+  }
+
+  @override
+  bool operator ==(covariant AssetPosition other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.createdTime == createdTime &&
+        other.updatedTime == updatedTime &&
+        other.apartment_type == apartment_type &&
+        other.asset_postision == asset_postision &&
+        other.note == note &&
+        other.code == code;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        createdTime.hashCode ^
+        updatedTime.hashCode ^
+        apartment_type.hashCode ^
+        asset_postision.hashCode ^
+        note.hashCode ^
+        code.hashCode;
+  }
+}
+
+class Unit {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? name;
+  String? describe;
+  Unit({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.name,
+    this.describe,
+  });
+
+  Unit copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? name,
+    String? describe,
+  }) {
+    return Unit(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      name: name ?? this.name,
+      describe: describe ?? this.describe,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'name': name,
+      'describe': describe,
+    };
+  }
+
+  factory Unit.fromMap(Map<String, dynamic> map) {
+    return Unit(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      describe: map['describe'] != null ? map['describe'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Unit.fromJson(String source) =>
+      Unit.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Unit(id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, name: $name, describe: $describe)';
+  }
+
+  @override
+  bool operator ==(covariant Unit other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.createdTime == createdTime &&
+        other.updatedTime == updatedTime &&
+        other.code == code &&
+        other.name == name &&
+        other.describe == describe;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        createdTime.hashCode ^
+        updatedTime.hashCode ^
+        code.hashCode ^
+        name.hashCode ^
+        describe.hashCode;
+  }
+}
+
+class MaterialList {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? material_list;
+  MaterialList({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.material_list,
+  });
+
+  MaterialList copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? material_list,
+  }) {
+    return MaterialList(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      material_list: material_list ?? this.material_list,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'material_list': material_list,
+    };
+  }
+
+  factory MaterialList.fromMap(Map<String, dynamic> map) {
+    return MaterialList(
+      id: map['id'] != null ? map['id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      material_list:
+          map['material_list'] != null ? map['material_list'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MaterialList.fromJson(String source) =>
+      MaterialList.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'MaterialList(id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, material_list: $material_list)';
+  }
+
+  @override
+  bool operator ==(covariant MaterialList other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.createdTime == createdTime &&
+        other.updatedTime == updatedTime &&
+        other.code == code &&
+        other.material_list == material_list;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        createdTime.hashCode ^
+        updatedTime.hashCode ^
+        code.hashCode ^
+        material_list.hashCode;
+  }
 }

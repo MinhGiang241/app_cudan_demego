@@ -128,7 +128,7 @@ class _NotPassWidgetState extends State<NotPassWidget>
                                       Utils.showDialog(
                                           context: context,
                                           dialog: PrimaryDialog.custom(
-                                            title: S.of(context).asset_detais,
+                                            title: S.of(context).asset_details,
                                             content: SingleChildScrollView(
                                               child: Column(children: [
                                                 Table(

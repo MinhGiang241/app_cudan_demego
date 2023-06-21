@@ -520,7 +520,8 @@
   "wait_hand_over": "Wait to hand over",
   "handed_over": "Handed over",
   "re_book": "Re book",
-  "asset_detais": "Asset details",
+  "asset_details": "Asset details",
+  "material_details": "Material details",
   "customer_care": "Customer care",
   "error": "Something went wrong",
   "total_bill": "Total bill",
@@ -792,5 +793,9 @@
   "perform_person": "Performed person",
   "drawing": "Drawing",
   "err_report": "Error report",
-  "err_reason": "Error reason"
+  "err_reason": "Error reason",
+  "name": "Name",
+  "stt": "STT",
+  "floor": "Floor",
+  "view": "View"
 }

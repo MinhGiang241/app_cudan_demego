@@ -219,6 +219,7 @@ class APIAuth {
           path: ApiConstants.uploadURL,
           data: body,
           onSendProgress: onSendProgress,
+          name: files[i].path.split('/').last,
         );
 
         var file = ResponseFileUpload.fromJson(data);

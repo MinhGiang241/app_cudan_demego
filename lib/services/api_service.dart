@@ -155,6 +155,7 @@ class ApiService {
     bool remember = false,
     OnSendProgress? onSendProgress,
     Options? op,
+    String? name,
   }) async {
     Options? options;
     if (useToken) {
@@ -203,7 +204,7 @@ class ApiService {
         onSendProgress: onSendProgress,
       );
       // print(data);
-      return {"data": response.toString(), "name": response.data};
+      return {"data": response.toString(), "name": name};
     } on DioError catch (e) {
       if (e.response != null) {
         try {

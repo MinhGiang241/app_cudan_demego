@@ -195,8 +195,12 @@ class CreateReflection extends StatelessWidget {
                         dropKey:
                             context.read<CreateReflectionPrv>().dropdownKey,
                         // selectList: listZone,
-                        label: S.of(context).zone,
-                        hint: S.of(context).zone,
+                        label: context.watch<CreateReflectionPrv>().isFloor
+                            ? S.of(context).floor
+                            : S.of(context).zone,
+                        hint: context.watch<CreateReflectionPrv>().isFloor
+                            ? S.of(context).floor
+                            : S.of(context).zone,
                       ),
                       vpad(12),
                       SelectMediaWidget(

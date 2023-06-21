@@ -521,7 +521,8 @@
   "wait_hand_over": "Chờ bàn giao",
   "handed_over": "Đã bàn giao",
   "re_book": "Đổi lịch",
-  "asset_detais": "Chi tiết tài sản",
+  "asset_details": "Chi tiết tài sản",
+  "material_details": "Chi tiết vật liệu",
   "customer_care": "Chăm sóc khách hàng",
   "error": "Có lỗi xảy ra",
   "total_bill": "Tổng hóa đơn",
@@ -793,5 +794,9 @@
   "perform_person": "Người thực hiện",
   "drawing": "Bản vẽ",
   "err_report": "Báo lỗi",
-  "err_reason": "Lý do báo lỗi"
+  "err_reason": "Lý do báo lỗi",
+  "name": "Tên",
+  "stt": "STT",
+  "floor": "Tầng",
+  "view": "Xem"
 }

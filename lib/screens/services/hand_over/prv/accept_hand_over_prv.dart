@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../models/file_upload.dart';
+import '../../../../models/hand_over.dart';
 import '../../../../services/api_rules.dart';
 import '../../../../utils/utils.dart';
+import '../widget/asset_item.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
-  AcceptHandOverPrv() {
+  AcceptHandOverPrv(this.handOver) {
     for (var i = 0; i < data.length; ++i) {
       for (var a = 0; a < (data[i]['assets'] as List).length; a++) {
         (data[i]['assets'] as List)[a]['region'] = data[i]['title'];
@@ -16,8 +18,36 @@ class AcceptHandOverPrv extends ChangeNotifier {
         }
       }
     }
+
+    //mateial
+    materialList = {};
+    for (var i in handOver.material_list ?? <Materials>[]) {
+      if (materialList[i.assetPositionId] == null) {
+        materialList[i.assetPositionId!] = <Materials>[];
+        materialList[i.assetPositionId]!.add(i);
+      } else {
+        materialList[i.assetPositionId]!.add(i);
+      }
+    }
+
+    // asset
+    assetList = {};
+    for (var i in handOver.list_assets_additional ?? <AddAsset>[]) {
+      if (assetList[i.assetPositionId_additional] == null) {
+        assetList[i.assetPositionId_additional!] = <AddAsset>[];
+        assetList[i.assetPositionId_additional]!.add(i);
+      } else {
+        assetList[i.assetPositionId_additional]!.add(i);
+      }
+    }
+
+    print(materialList);
+    print(assetList);
   }
 
+  late Map<String, List<Materials>> materialList;
+  late Map<String, List<AddAsset>> assetList;
+  late HandOver handOver;
   List<FileUploadModel> ruleFiles = [];
 
   bool generalInfoExpand = false;
@@ -58,15 +88,24 @@ class AcceptHandOverPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  selectItemPass(bool value, int indexAsset, int indexItem) {
-    (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
-    var a = (data[indexAsset]["assets"] as List)[indexItem];
-    if (value && notPassList.contains(a)) {
-      notPassList.remove(a);
+  selectItemPass(bool value, String key, int indexItem, DetailType type) {
+    if (type == DetailType.ASSET) {
+      assetList[key]![indexItem].achieve = value;
+      assetList[key]![indexItem].not_achieve = !value;
     }
-    if (!value && !notPassList.contains(a)) {
-      notPassList.add(a);
+    if (type == DetailType.MATERIAL) {
+      materialList[key]![indexItem].achieve = value;
+      materialList[key]![indexItem].not_achieve = !value;
     }
+
+    // (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
+    // var a = (data[indexAsset]["assets"] as List)[indexItem];
+    // if (value && notPassList.contains(a)) {
+    //   notPassList.remove(a);
+    // }
+    // if (!value && !notPassList.contains(a)) {
+    //   notPassList.add(a);
+    // }
 
     notifyListeners();
   }

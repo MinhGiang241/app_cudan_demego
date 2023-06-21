@@ -331,7 +331,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           );
           listReceipt.add(receiptDeposiy.toJson());
         }
-        var dataHis = conHis.toJson();
+        var dataHis = conHis?.toJson();
         var dataReg = conReg.toJson();
         return APIConstruction.saveNewConstructionRegistration(
           dataReg,
