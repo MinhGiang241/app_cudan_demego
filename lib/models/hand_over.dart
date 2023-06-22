@@ -992,7 +992,7 @@ class Unit {
 
   @override
   String toString() {
-    return 'Unit(id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, name: $name, describe: $describe)';
+    return 'Unit(_id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, name: $name, describe: $describe)';
   }
 
   @override
@@ -1050,7 +1050,7 @@ class MaterialList {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      '_id': id,
       'createdTime': createdTime,
       'updatedTime': updatedTime,
       'code': code,
@@ -1060,7 +1060,7 @@ class MaterialList {
 
   factory MaterialList.fromMap(Map<String, dynamic> map) {
     return MaterialList(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:
@@ -1078,7 +1078,7 @@ class MaterialList {
 
   @override
   String toString() {
-    return 'MaterialList(id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, material_list: $material_list)';
+    return 'MaterialList(_id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, material_list: $material_list)';
   }
 
   @override
@@ -1099,5 +1099,75 @@ class MaterialList {
         updatedTime.hashCode ^
         code.hashCode ^
         material_list.hashCode;
+  }
+}
+
+class Defect {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? name;
+  String? describe;
+  String? date;
+  Defect({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.name,
+    this.describe,
+    this.date,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'name': name,
+      'describe': describe,
+      'date': date,
+    };
+  }
+
+  factory Defect.fromMap(Map<String, dynamic> map) {
+    return Defect(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      describe: map['describe'] != null ? map['describe'] as String : null,
+      date: map['date'] != null ? map['date'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Defect.fromJson(String source) =>
+      Defect.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Defect copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? name,
+    String? describe,
+    String? date,
+  }) {
+    return Defect(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      name: name ?? this.name,
+      describe: describe ?? this.describe,
+      date: date ?? this.date,
+    );
   }
 }

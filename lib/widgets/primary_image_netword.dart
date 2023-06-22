@@ -64,80 +64,106 @@ class PrimaryImageNetwork extends StatelessWidget {
                           path!.endsWith(".xlsx") ||
                           path!.endsWith(".pdf") ||
                           path!.endsWith(".txt")) {
-                        launchUrlString(path!,
-                            // "${ApiConstants.baseURL}/content/media/$path",
-                            mode: LaunchMode.externalApplication);
+                        launchUrlString(
+                          path!,
+                          // "${ApiConstants.baseURL}/content/media/$path",
+                          mode: LaunchMode.externalApplication,
+                        );
                       } else if (file != null) {
                         Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation,
-                                      secondaryAnimation) =>
-                                  PhotoViewer(
-                                      link: path!,
-                                      // "${ApiConstants.baseURL}/content/media/$path",
-                                      listLink: listLink ??
-                                          [
-                                            path!,
-                                            //"${ApiConstants.baseURL}/content/media/$path"
-                                          ],
-                                      initIndex: initIndex ?? 0,
-                                      heroTag: tag),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ));
-                      } else {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation,
-                                      secondaryAnimation) =>
-                                  PhotoViewer(
-                                      link: path!,
-                                      // "${ApiConstants.baseURL}/content/media/$path",
-                                      listLink: listLink ??
-                                          [
-                                            path!,
-                                            //"${ApiConstants.baseURL}/content/media/$path"
-                                          ],
-                                      initIndex: initIndex ?? 0,
-                                      heroTag: tag),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ));
-                      }
-                    } else {
-                      Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    PhotoViewer(
-                                        file: file,
-                                        link: customUrl,
-                                        initIndex: 0,
-                                        listLink: const [
-                                          // customUrl!,
-                                        ],
-                                        heroTag: tag),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
+                            pageBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                            ) =>
+                                PhotoViewer(
+                              link: path!,
+                              // "${ApiConstants.baseURL}/content/media/$path",
+                              listLink: listLink ??
+                                  [
+                                    path!,
+                                    //"${ApiConstants.baseURL}/content/media/$path"
+                                  ],
+                              initIndex: initIndex ?? 0,
+                              heroTag: tag,
+                            ),
+                            transitionsBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                              child,
+                            ) {
                               return FadeTransition(
                                 opacity: animation,
                                 child: child,
                               );
                             },
-                          ));
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                            ) =>
+                                PhotoViewer(
+                              link: path!,
+                              // "${ApiConstants.baseURL}/content/media/$path",
+                              listLink: listLink ??
+                                  [
+                                    path!,
+                                    //"${ApiConstants.baseURL}/content/media/$path"
+                                  ],
+                              initIndex: initIndex ?? 0,
+                              heroTag: tag,
+                            ),
+                            transitionsBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                              child,
+                            ) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                    } else {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  PhotoViewer(
+                            file: file,
+                            link: customUrl,
+                            initIndex: 0,
+                            listLink: const [
+                              // customUrl!,
+                            ],
+                            heroTag: tag,
+                          ),
+                          transitionsBuilder: (
+                            context,
+                            animation,
+                            secondaryAnimation,
+                            child,
+                          ) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     }
                   }
                 : null,
@@ -214,12 +240,17 @@ class PrimaryImageNetwork extends StatelessWidget {
                         );
                       }
                       return Container(
-                          color: Colors.black38, child: Center(child: eWidget));
+                        color: Colors.black38,
+                        child: Center(child: eWidget),
+                      );
                     },
                     placeholder: (context, url) {
                       return Center(
-                        child: Icon(Icons.image,
-                            color: grayScaleColor1.withOpacity(0.6), size: 30),
+                        child: Icon(
+                          Icons.image,
+                          color: grayScaleColor1.withOpacity(0.6),
+                          size: 30,
+                        ),
                       );
                     },
                   )
@@ -232,14 +263,14 @@ class PrimaryImageNetwork extends StatelessWidget {
 }
 
 class PhotoViewer extends StatefulWidget {
-  PhotoViewer(
-      {Key? key,
-      this.link,
-      this.file,
-      required this.heroTag,
-      required this.listLink,
-      required this.initIndex})
-      : pageController = PageController(initialPage: initIndex),
+  PhotoViewer({
+    Key? key,
+    this.link,
+    this.file,
+    required this.heroTag,
+    required this.listLink,
+    required this.initIndex,
+  })  : pageController = PageController(initialPage: initIndex),
         super(key: key);
   final String? link;
   final List<String> listLink;
@@ -307,93 +338,97 @@ class _PhotoViewerState extends State<PhotoViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          elevation: 0,
-          leading: const CloseButton(
-            color: Colors.white,
-          ),
-          // title: Text(
-          //   "$currentIndex/${widget.listLink.length}",
-          //   style: txtMedium(15, Colors.white),
-          // ),
-          actions: [
-            if (widget.listLink.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: InkWell(
-                  onTap: () async {
-                    Utils.downloadFile(
-                      context: context,
-                      url: widget.listLink[0],
-                    );
-                  },
-                  child: Icon(
-                    Icons.download,
-                    color: Colors.white,
-                  ),
-                ),
-              )
-          ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        leading: const CloseButton(
+          color: Colors.white,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: widget.file != null
-                  ? (PhotoViewGallery.builder(
-                          itemCount: 1,
-                          scrollPhysics: const ClampingScrollPhysics(),
-                          builder: (BuildContext context, int index) {
-                            return PhotoViewGalleryPageOptions(
-                                imageProvider: FileImage(widget.file!),
-                                initialScale: PhotoViewComputedScale.contained,
-                                heroAttributes: PhotoViewHeroAttributes(
-                                    tag: widget.heroTag));
-                          })
+        // title: Text(
+        //   "$currentIndex/${widget.listLink.length}",
+        //   style: txtMedium(15, Colors.white),
+        // ),
+        actions: [
+          if (widget.listLink.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: InkWell(
+                onTap: () async {
+                  Utils.downloadFile(
+                    context: context,
+                    url: widget.listLink[0],
+                  );
+                },
+                child: Icon(
+                  Icons.download,
+                  color: Colors.white,
+                ),
+              ),
+            )
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: widget.file != null
+                ? (PhotoViewGallery.builder(
+                    itemCount: 1,
+                    scrollPhysics: const ClampingScrollPhysics(),
+                    builder: (BuildContext context, int index) {
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider: FileImage(widget.file!),
+                        initialScale: PhotoViewComputedScale.contained,
+                        heroAttributes: PhotoViewHeroAttributes(
+                          tag: widget.heroTag,
+                        ),
+                      );
+                    },
+                  )
 
-                      // PhotoView(
-                      //   imageProvider: FileImage(widget.file!),
-                      // )
-                      )
-                  : PhotoViewGallery.builder(
-                      scrollPhysics: const ClampingScrollPhysics(),
-                      builder: (BuildContext context, int index) {
-                        return PhotoViewGalleryPageOptions(
-                          imageProvider: CachedNetworkImageProvider(
-                            widget.listLink[index].startsWith("http")
-                                ? widget.listLink[index]
-                                : widget.listLink[
-                                    index], //"${ApiConstants.baseURL}/content/media/${widget.listLink[index]}",
-                          ),
-                          initialScale: PhotoViewComputedScale.contained,
-                          heroAttributes:
-                              PhotoViewHeroAttributes(tag: widget.heroTag),
-                        );
-                      },
-                      itemCount: widget.listLink.length,
+                    // PhotoView(
+                    //   imageProvider: FileImage(widget.file!),
+                    // )
+                    )
+                : PhotoViewGallery.builder(
+                    scrollPhysics: const ClampingScrollPhysics(),
+                    builder: (BuildContext context, int index) {
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider: CachedNetworkImageProvider(
+                          widget.listLink[index].startsWith("http")
+                              ? widget.listLink[index]
+                              : widget.listLink[
+                                  index], //"${ApiConstants.baseURL}/content/media/${widget.listLink[index]}",
+                        ),
+                        initialScale: PhotoViewComputedScale.contained,
+                        heroAttributes:
+                            PhotoViewHeroAttributes(tag: widget.heroTag),
+                      );
+                    },
+                    itemCount: widget.listLink.length,
 
-                      loadingBuilder: (context, event) => Center(
-                        child: SizedBox(
-                          width: 20.0,
-                          height: 20.0,
-                          child: CircularProgressIndicator(
-                            value: event == null
-                                ? 0
-                                : event.cumulativeBytesLoaded /
-                                    (event.expectedTotalBytes ?? 1),
-                          ),
+                    loadingBuilder: (context, event) => Center(
+                      child: SizedBox(
+                        width: 20.0,
+                        height: 20.0,
+                        child: CircularProgressIndicator(
+                          value: event == null
+                              ? 0
+                              : event.cumulativeBytesLoaded /
+                                  (event.expectedTotalBytes ?? 1),
                         ),
                       ),
-                      backgroundDecoration:
-                          const BoxDecoration(color: Colors.black),
-
-                      pageController: widget.pageController,
-                      onPageChanged: onPageChanged,
-                      // heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
                     ),
-            ),
-          ],
-        ));
+                    backgroundDecoration:
+                        const BoxDecoration(color: Colors.black),
+
+                    pageController: widget.pageController,
+                    onPageChanged: onPageChanged,
+                    // heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
+                  ),
+          ),
+        ],
+      ),
+    );
   }
 }

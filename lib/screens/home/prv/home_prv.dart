@@ -24,7 +24,7 @@ class HomePrv extends ChangeNotifier {
 
   HomePrv(ctx) {
     context = ctx;
-    _initial();
+    initial();
   }
   onParticipate() {
     if (event != null) {
@@ -55,7 +55,7 @@ class HomePrv extends ChangeNotifier {
     onNavigatorFooter = !onNavigatorFooter;
   }
 
-  Future _initial() async {
+  Future initial() async {
     // var filter = {
     //   "skip": 0,
     //   "limit": 2,
@@ -116,5 +116,6 @@ class HomePrv extends ChangeNotifier {
       notifyListeners();
       Utils.showErrorMessage(context!, e.toString());
     }
+    notifyListeners();
   }
 }

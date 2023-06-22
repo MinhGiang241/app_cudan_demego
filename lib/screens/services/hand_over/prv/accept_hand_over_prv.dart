@@ -1,5 +1,12 @@
+import 'package:app_cudan/services/api_hand_over.dart';
+import 'package:app_cudan/widgets/primary_button.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_dropdown.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../constants/constants.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../models/file_upload.dart';
 import '../../../../models/hand_over.dart';
 import '../../../../services/api_rules.dart';
@@ -8,17 +15,6 @@ import '../widget/asset_item.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
   AcceptHandOverPrv(this.handOver) {
-    for (var i = 0; i < data.length; ++i) {
-      for (var a = 0; a < (data[i]['assets'] as List).length; a++) {
-        (data[i]['assets'] as List)[a]['region'] = data[i]['title'];
-        (data[i]['assets'] as List)[a]["indexRegion"] = i;
-        (data[i]['assets'] as List)[a]["indexAsset"] = a;
-        if (!(data[i]['assets'] as List)[a]['pass']) {
-          notPassList.add((data[i]['assets'] as List)[a]);
-        }
-      }
-    }
-
     //mateial
     materialList = {};
     for (var i in handOver.material_list ?? <Materials>[]) {
@@ -40,15 +36,21 @@ class AcceptHandOverPrv extends ChangeNotifier {
         assetList[i.assetPositionId_additional]!.add(i);
       }
     }
-
+    valueReason = handOver.cancel_reason;
     print(materialList);
     print(assetList);
   }
+
+  final formKeyReason = GlobalKey<FormState>();
+  TextEditingController reasonController = TextEditingController();
+  String? validateReason;
+  String? valueReason;
 
   late Map<String, List<Materials>> materialList;
   late Map<String, List<AddAsset>> assetList;
   late HandOver handOver;
   List<FileUploadModel> ruleFiles = [];
+  List<Defect> defectList = [];
 
   bool generalInfoExpand = false;
   bool assetListExpand = false;
@@ -98,45 +100,8 @@ class AcceptHandOverPrv extends ChangeNotifier {
       materialList[key]![indexItem].not_achieve = !value;
     }
 
-    // (data[indexAsset]["assets"] as List)[indexItem]['pass'] = value;
-    // var a = (data[indexAsset]["assets"] as List)[indexItem];
-    // if (value && notPassList.contains(a)) {
-    //   notPassList.remove(a);
-    // }
-    // if (!value && !notPassList.contains(a)) {
-    //   notPassList.add(a);
-    // }
-
     notifyListeners();
   }
-
-  // pickHandOverDate(BuildContext context) async {
-  //   await Utils.showDatePickers(
-  //     context,
-  //     initDate: handOverDate ?? DateTime.now(),
-  //     startDate: DateTime(DateTime.now().year - 10, 1, 1),
-  //     endDate: DateTime(DateTime.now().year + 10, 1, 1),
-  //   ).then((v) {
-  //     if (v != null) {
-  //       handOverDate = v;
-  //       handOverDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
-
-  //       notifyListeners();
-  //     }
-  //   });
-  // }
-
-  // pickHandOverTime(BuildContext context) {
-  //   showTimePicker(
-  //           context: context,
-  //           initialTime: handOverTime ?? const TimeOfDay(hour: 0, minute: 0))
-  //       .then((v) {
-  //     if (v != null) {
-  //       handOverTimeController.text = v.format(context);
-  //       handOverTime = v;
-  //     }
-  //   });
-  // }
 
   toggleGeneralInfo() {
     generalInfoExpand = !generalInfoExpand;
@@ -153,86 +118,146 @@ class AcceptHandOverPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  var data = [
-    {
-      "id": 1,
-      "title": "Nhà vệ sinh",
-      "assets": [
-        {
-          "id": "01",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-        {
-          "id": "02",
-          "name": "Bàn trang điểm",
-          "amount": 1,
-          "pass": false,
-        },
-        {
-          "id": "03",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Nhà bếp",
-      "assets": [
-        {
-          "id": "04",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-        {
-          "id": "05",
-          "name": "Bàn trang điểm",
-          "amount": 1,
-          "pass": false,
-          "material": "Sứ",
-        },
-        {
-          "id": "06",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Phòng ăn",
-      "assets": [
-        {
-          "id": "07",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-        {
-          "id": "08",
-          "name": "Bàn trang điểm",
-          "amount": 1,
-          "pass": false,
-          "material": "Sứ",
-        },
-        {
-          "id": "09",
-          "name": "Bổn rửa mặt",
-          "amount": 2,
-          "pass": true,
-          "material": "Sứ",
-        },
-      ]
-    },
-  ];
+  genReasonValidateString() {
+    if (valueReason == null) {
+      validateReason = S.current.not_blank;
+    } else {
+      validateReason = null;
+    }
+  }
+
+  clearReasonValidateString() {
+    validateReason = null;
+  }
+
+  onChangeValue(v) {
+    if (v != null) {
+      valueReason = v;
+      validateReason = null;
+    }
+  }
+
+  submitError(BuildContext context) async {
+    if (formKeyReason.currentState!.validate()) {
+      clearReasonValidateString();
+      Navigator.pop(context);
+      await APIHandOver.errorReport(
+        handOver.toMap(),
+        valueReason!,
+        reasonController.text.trim(),
+      ).then((value) {
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_report_handover,
+          onClose: () {
+            Navigator.pop(context);
+          },
+        );
+      }).catchError((e) {
+        Utils.showErrorMessage(
+          context,
+          e,
+        );
+      });
+    } else {
+      genReasonValidateString();
+    }
+  }
+
+  reportError(BuildContext context) {
+    Utils.showDialog(
+      context: context,
+      dialog: PrimaryDialog.custom(
+        content: StatefulBuilder(
+          builder: (context, setState) {
+            return FutureBuilder(
+              future: () async {
+                await APIHandOver.getDefect().then((v) {
+                  defectList.clear();
+                  if (v != null) {
+                    for (var i in v) {
+                      defectList.add(Defect.fromMap(i));
+                    }
+                  }
+                });
+              }(),
+              builder: (snap, builder) {
+                var defectChoicesList = defectList
+                    .map(
+                      (d) => DropdownMenuItem(
+                        value: d.code,
+                        child: Text(d.name ?? ""),
+                      ),
+                    )
+                    .toList();
+                return Form(
+                  key: formKeyReason,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  onChanged: () {
+                    if (formKeyReason.currentState!.validate()) {
+                      genReasonValidateString();
+                      setState(() {});
+                    } else {
+                      clearReasonValidateString();
+                      setState(() {});
+                    }
+                  },
+                  child: Column(
+                    children: [
+                      vpad(12),
+                      PrimaryDropDown(
+                        isDense: false,
+                        hint: S.of(context).err_reason,
+                        onChange: onChangeValue,
+                        selectList: defectChoicesList,
+                        validateString: validateReason,
+                        value: valueReason,
+                        label: S.of(context).err_reason,
+                        validator: Utils.emptyValidatorDropdown,
+                        isRequired: true,
+                      ),
+                      vpad(12),
+                      PrimaryTextField(
+                        label: S.of(context).note,
+                        maxLines: 3,
+                        controller: reasonController,
+                        maxLength: 550,
+                      ),
+                      vpad(20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: PrimaryButton(
+                              text: S.of(context).cancel,
+                              buttonSize: ButtonSize.small,
+                              buttonType: ButtonType.red,
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          hpad(10),
+                          Expanded(
+                            child: PrimaryButton(
+                              text: S.of(context).save,
+                              buttonSize: ButtonSize.small,
+                              buttonType: ButtonType.primary,
+                              onTap: () async {
+                                await submitError(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      vpad(12),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
 }

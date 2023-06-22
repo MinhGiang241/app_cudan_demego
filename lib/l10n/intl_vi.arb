@@ -521,8 +521,8 @@
   "wait_hand_over": "Chờ bàn giao",
   "handed_over": "Đã bàn giao",
   "re_book": "Đổi lịch",
-  "asset_details": "Chi tiết tài sản",
-  "material_details": "Chi tiết vật liệu",
+  "asset_details": "Chi tiết danh mục tài sản",
+  "material_details": "Chi tiết danh mục vật liệu",
   "customer_care": "Chăm sóc khách hàng",
   "error": "Có lỗi xảy ra",
   "total_bill": "Tổng hóa đơn",
@@ -798,5 +798,12 @@
   "name": "Tên",
   "stt": "STT",
   "floor": "Tầng",
-  "view": "Xem"
+  "view": "Xem",
+  "unit_count": "Đơn vị tính",
+  "material_specification": "Vật liệu, quy cách",
+  "location": "Vị trí",
+  "asset": "Tài sản",
+  "brand": "Thương hiệu",
+  "success_report_handover": "Báo lỗi thành công",
+  "not_date_handover": "Chưa đến hạn bàn giao"
 }

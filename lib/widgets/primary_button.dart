@@ -28,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
     this.secondaryBackgroundColor,
     this.textColor,
     this.buttonType,
-    this.buttonSize,
+    this.buttonSize = ButtonSize.large,
     this.width,
     this.icon,
     this.isRectangle = false,
@@ -48,10 +48,25 @@ class PrimaryButton extends StatelessWidget {
   final bool isRectangle;
   final bool isFit;
   final bool isLoading;
+  double genHeight() {
+    switch (buttonSize) {
+      case ButtonSize.large:
+        return 56;
+      case ButtonSize.medium:
+        return 48;
+      case ButtonSize.small:
+        return 41;
+      case ButtonSize.xsmall:
+        return 30;
+      default:
+        return 30;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: genHeight(),
       width: width,
       margin: margin,
       decoration: BoxDecoration(

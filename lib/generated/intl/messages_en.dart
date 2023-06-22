@@ -132,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "area": MessageLookupByLibrary.simpleMessage("Area"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Arrived date"),
+        "asset": MessageLookupByLibrary.simpleMessage("Asset"),
         "asset_details": MessageLookupByLibrary.simpleMessage("Asset details"),
         "asset_list": MessageLookupByLibrary.simpleMessage("Asset list"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Asset name"),
@@ -156,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Schedual booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
+        "brand": MessageLookupByLibrary.simpleMessage("Brand"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
         "building_regulation":
             MessageLookupByLibrary.simpleMessage("Building regulation"),
@@ -580,6 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "list_transport":
             MessageLookupByLibrary.simpleMessage("Transportation list"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "lock_reason": MessageLookupByLibrary.simpleMessage("Lock reason"),
@@ -594,6 +597,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "material_details":
             MessageLookupByLibrary.simpleMessage("Material details"),
         "material_list": MessageLookupByLibrary.simpleMessage("Material list"),
+        "material_specification":
+            MessageLookupByLibrary.simpleMessage("Material specification"),
         "matial_status": MessageLookupByLibrary.simpleMessage("Matial status"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
@@ -666,6 +671,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not be empty"),
+        "not_date_handover":
+            MessageLookupByLibrary.simpleMessage("Not yet handover date"),
         "not_dimention":
             MessageLookupByLibrary.simpleMessage("Not be dimention"),
         "not_email": MessageLookupByLibrary.simpleMessage("Not is email."),
@@ -1104,6 +1111,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Register dependent person successfully"),
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Remove successfully"),
+        "success_report_handover": MessageLookupByLibrary.simpleMessage(
+            "Report Handover successfully"),
         "success_report_missing": MessageLookupByLibrary.simpleMessage(
             "Report missing report successfully"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -1212,6 +1221,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "unit_count": MessageLookupByLibrary.simpleMessage("Unit"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Unit price (VNĐ)"),
         "unkhown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),

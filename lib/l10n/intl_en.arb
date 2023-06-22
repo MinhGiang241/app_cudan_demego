@@ -797,5 +797,12 @@
   "name": "Name",
   "stt": "STT",
   "floor": "Floor",
-  "view": "View"
+  "view": "View",
+  "unit_count": "Unit",
+  "material_specification": "Material specification",
+  "location": "Location",
+  "asset": "Asset",
+  "brand": "Brand",
+  "success_report_handover": "Report Handover successfully",
+  "not_date_handover": "Not yet handover date"
 }

@@ -53,6 +53,26 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
     duration: const Duration(milliseconds: 300),
   );
 
+  TableRow renderTableRow(String title, String value) {
+    return TableRow(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
+          ),
+          child: Text(
+            "${title}:",
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
+          ),
+          child: Text(value),
+        ),
+      ],
+    );
+  }
   // @override
   // void dispose() {
   //   animationItemController.dispose();
@@ -225,112 +245,43 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                 1: FlexColumnWidth(3)
                                               },
                                               children: [
-                                                TableRow(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${S.of(context).asset_name}:",
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${e.value.name}",
-                                                      ),
-                                                    ),
-                                                  ],
+                                                renderTableRow(
+                                                  S.of(context).location,
+                                                  widget.region,
                                                 ),
-                                                TableRow(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${S.of(context).region}:",
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child:
-                                                          Text(widget.region),
-                                                    ),
-                                                  ],
+                                                renderTableRow(
+                                                  S.of(context).asset,
+                                                  "${e.value.name}",
                                                 ),
-                                                TableRow(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${S.of(context).material}:",
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${e.value.name}",
-                                                      ),
-                                                    ),
-                                                  ],
+                                                renderTableRow(
+                                                  widget.type ==
+                                                          DetailType.MATERIAL
+                                                      ? S
+                                                          .of(context)
+                                                          .material_specification
+                                                      : S.of(context).material,
+                                                  e.value.material_specification ??
+                                                      "",
                                                 ),
-                                                TableRow(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${S.of(context).amount}:",
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        '1'.toString(),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                renderTableRow(
+                                                  S.of(context).brand,
+                                                  "${e.value.brand}",
                                                 ),
-                                                TableRow(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text(
-                                                        "${S.of(context).note}:",
-                                                      ),
-                                                    ),
-                                                    const Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                        vertical: 8.0,
-                                                      ),
-                                                      child: Text("${1}"),
-                                                    ),
-                                                  ],
+                                                if (widget.type ==
+                                                    DetailType.ASSET)
+                                                  renderTableRow(
+                                                    S.of(context).amount,
+                                                    e.value.amount.toString(),
+                                                  ),
+                                                if (widget.type ==
+                                                    DetailType.ASSET)
+                                                  renderTableRow(
+                                                    S.of(context).unit_count,
+                                                    e.value.unit ?? '',
+                                                  ),
+                                                renderTableRow(
+                                                  S.of(context).note,
+                                                  e.value.note ?? '',
                                                 ),
                                               ],
                                             ),
@@ -378,7 +329,20 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                   ),
                                                 )
                                               ],
-                                            )
+                                            ),
+                                            vpad(12),
+                                            PrimaryButton(
+                                              width: double.infinity,
+                                              text: S.of(context).cancel,
+                                              buttonType: ButtonType.secondary,
+                                              secondaryBackgroundColor:
+                                                  redColor4,
+                                              textColor: redColor1,
+                                              buttonSize: ButtonSize.xsmall,
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),

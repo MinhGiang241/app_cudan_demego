@@ -2,6 +2,7 @@ import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/primary_card.dart';
@@ -31,7 +32,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
   void _onItemTapped(int index) async {
     if (index == 1 && _selectedIndex != index) {
       context.read<ChatMessageBloc>().add(BackChatMessageInit());
@@ -117,31 +119,40 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (_selectedIndex) {
       case 0:
         return RepaintBoundary(
-          child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                vpad(16 + MediaQuery.of(context).padding.top),
-                const HeaderTitle(),
-                vpad(30),
-                const HeaderHome(),
-                vpad(30),
-                const ProjectInfoHome(),
-                vpad(30),
-                const BillsHome(),
-                vpad(30),
-                const ServicesHome(),
-                vpad(30),
-                // const ConvinientServiceHome(),
-                // vpad(30),
-                const FeedbackHome(),
-                vpad(30),
-                const EventsHome(),
-                vpad(24),
-                if (context.read<ResidentInfoPrv>().residentId != null)
-                  const NewsHome(),
-                vpad(kBottomNavigationBarHeight + 50)
-              ],
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: false,
+              controller: refreshController,
+              onRefresh: () async {
+                await context.read<HomePrv>().initial();
+                refreshController.refreshCompleted();
+              },
+              child: ListView(
+                children: [
+                  vpad(16 + MediaQuery.of(context).padding.top),
+                  const HeaderTitle(),
+                  vpad(30),
+                  const HeaderHome(),
+                  vpad(30),
+                  const ProjectInfoHome(),
+                  vpad(30),
+                  const BillsHome(),
+                  vpad(30),
+                  const ServicesHome(),
+                  vpad(30),
+                  // const ConvinientServiceHome(),
+                  // vpad(30),
+                  const FeedbackHome(),
+                  vpad(30),
+                  const EventsHome(),
+                  vpad(24),
+                  if (context.read<ResidentInfoPrv>().residentId != null)
+                    const NewsHome(),
+                  vpad(kBottomNavigationBarHeight + 50)
+                ],
+              ),
             ),
           ),
         );

@@ -20,47 +20,70 @@ class NewDetailsScreen extends StatelessWidget {
     final arg = ModalRoute.of(context)!.settings.arguments as New;
 
     return PrimaryScreen(
-        appBar: PrimaryAppbar(
-          title: S.of(context).news,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: [
-              vpad(16),
-              Text(
-                arg.title ?? '',
-                style: txtBodyLargeBold(),
-                textAlign: TextAlign.left,
+      appBar: PrimaryAppbar(
+        title: S.of(context).news,
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          children: [
+            vpad(16),
+            Text(
+              arg.title ?? '',
+              style: txtBodyLargeBold(),
+              textAlign: TextAlign.left,
+            ),
+            vpad(12),
+            Text(
+              Utils.dateFormat(arg.date ?? '', 1),
+              style: txtRegular(14, grayScaleColorBase),
+            ),
+            vpad(12),
+            Text(arg.content ?? '', style: txtBodyMediumRegular()),
+            vpad(16),
+            if (arg.image != null)
+              PrimaryImageNetwork(
+                canShowPhotoView: true,
+                path: "${ApiConstants.uploadURL}?load=${arg.image}",
               ),
-              vpad(12),
-              Text(Utils.dateFormat(arg.date ?? '', 1),
-                  style: txtRegular(14, grayScaleColorBase)),
-              vpad(12),
-              Text(arg.content ?? '', style: txtBodyMediumRegular()),
-              vpad(16),
-              if (arg.image != null)
-                PrimaryImageNetwork(
-                  canShowPhotoView: false,
-                  path: "${ApiConstants.uploadURL}?load=${arg.image}",
-                ),
 
-              vpad(16),
-              // Text(document.outerHtml),
-              HtmlWidget(
-                '''${arg.detail}''',
-                onTapUrl: (url) {
-                  launchUrl(Uri.parse(url));
-                  return false;
-                },
-                textStyle: txtBodyMediumRegular(),
-                // onTapImage: (v) {
-                //   launchUrl(Uri.parse(v.sources.first.url));
-                // },
-              ),
-              vpad(60),
-            ],
-          ),
-        ));
+            vpad(16),
+            // Text(document.outerHtml),
+            HtmlWidget(
+              '''${arg.detail}''',
+              onTapUrl: (url) {
+                launchUrl(Uri.parse(url));
+                return false;
+              },
+              textStyle: txtBodyMediumRegular(),
+              onTapImage: (ImageMetadata data) {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        PhotoViewer(
+                      heroTag: 'hero',
+                      link: data.sources.first.url,
+                      listLink: [
+                        data.sources.first.url,
+                      ],
+                      initIndex: 0,
+                    ),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+            vpad(60),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -8039,6 +8039,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Unit`
+  String get unit_count {
+    return Intl.message(
+      'Unit',
+      name: 'unit_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Material specification`
+  String get material_specification {
+    return Intl.message(
+      'Material specification',
+      name: 'material_specification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asset`
+  String get asset {
+    return Intl.message(
+      'Asset',
+      name: 'asset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Brand`
+  String get brand {
+    return Intl.message(
+      'Brand',
+      name: 'brand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report Handover successfully`
+  String get success_report_handover {
+    return Intl.message(
+      'Report Handover successfully',
+      name: 'success_report_handover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not yet handover date`
+  String get not_date_handover {
+    return Intl.message(
+      'Not yet handover date',
+      name: 'not_date_handover',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

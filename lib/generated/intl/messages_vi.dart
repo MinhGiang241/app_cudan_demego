@@ -140,8 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "area": MessageLookupByLibrary.simpleMessage("Diện tích"),
         "arrived_date": MessageLookupByLibrary.simpleMessage("Ngày đến"),
+        "asset": MessageLookupByLibrary.simpleMessage("Tài sản"),
         "asset_details":
-            MessageLookupByLibrary.simpleMessage("Chi tiết tài sản"),
+            MessageLookupByLibrary.simpleMessage("Chi tiết danh mục tài sản"),
         "asset_list":
             MessageLookupByLibrary.simpleMessage("Danh sách danh mục tài sản"),
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
@@ -166,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
+        "brand": MessageLookupByLibrary.simpleMessage("Thương hiệu"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
         "building_regulation":
             MessageLookupByLibrary.simpleMessage("Quy định của tòa nhà"),
@@ -585,6 +587,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "list_transport":
             MessageLookupByLibrary.simpleMessage("Danh sách phương tiện"),
+        "location": MessageLookupByLibrary.simpleMessage("Vị trí"),
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "lock_reason": MessageLookupByLibrary.simpleMessage("Lý do khóa"),
@@ -597,9 +600,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "master_degree": MessageLookupByLibrary.simpleMessage("Bằng thạc sĩ"),
         "material": MessageLookupByLibrary.simpleMessage("Vật liệu"),
         "material_details":
-            MessageLookupByLibrary.simpleMessage("Chi tiết vật liệu"),
+            MessageLookupByLibrary.simpleMessage("Chi tiết danh mục vật liệu"),
         "material_list":
             MessageLookupByLibrary.simpleMessage("Danh sách danh mục vật liệu"),
+        "material_specification":
+            MessageLookupByLibrary.simpleMessage("Vật liệu, quy cách"),
         "matial_status":
             MessageLookupByLibrary.simpleMessage("Tình trạng hôn nhân"),
         "max_day_pay":
@@ -674,6 +679,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
+        "not_date_handover":
+            MessageLookupByLibrary.simpleMessage("Chưa đến hạn bàn giao"),
         "not_dimention":
             MessageLookupByLibrary.simpleMessage("Kích thước không đúng"),
         "not_email":
@@ -1106,6 +1113,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đăng ký người phụ thuộc thành công"),
         "success_remove":
             MessageLookupByLibrary.simpleMessage("Xóa thành công"),
+        "success_report_handover":
+            MessageLookupByLibrary.simpleMessage("Báo lỗi thành công"),
         "success_report_missing":
             MessageLookupByLibrary.simpleMessage("Báo mất thẻ thành công"),
         "success_returned": MessageLookupByLibrary.simpleMessage(
@@ -1210,6 +1219,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transport_reg": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "unit_count": MessageLookupByLibrary.simpleMessage("Đơn vị tính"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Đơn giá (VNĐ)"),
         "unkhown": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),

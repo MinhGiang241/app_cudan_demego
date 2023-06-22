@@ -155,23 +155,25 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                                         '${ApiConstants.uploadURL}/?load=${e.value.id!}',
                                   ),
                                 ),
-                                Positioned(
-                                  top: 2,
-                                  right: 2,
-                                  child: PrimaryIcon(
-                                    icons: PrimaryIcons.close,
-                                    style: PrimaryIconStyle.gradient,
-                                    gradients: PrimaryIconGradient.red,
-                                    color: Colors.white,
-                                    padding: const EdgeInsets.all(4),
-                                    onTap: () {
-                                      var index = widget.existFiles.indexWhere(
-                                        (element) => element.id == e.value.id,
-                                      );
-                                      widget.onRemoveExist?.call(index);
-                                    },
-                                  ),
-                                )
+                                if (widget.enable)
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        var index =
+                                            widget.existFiles.indexWhere(
+                                          (element) => element.id == e.value.id,
+                                        );
+                                        widget.onRemoveExist?.call(index);
+                                      },
+                                    ),
+                                  )
                               ],
                             ),
                           ),

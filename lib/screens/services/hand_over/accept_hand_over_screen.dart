@@ -398,12 +398,18 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           .watch<AcceptHandOverPrv>()
                                           .selectItemPass,
                                       data: AssetItemViewModel(
-                                        type: 'material',
+                                        type: 'asset',
                                         title: e.value[0].assetposition
                                             ?.asset_postision,
                                         list: e.value
                                             .map(
                                               (e) => ItemViewModel(
+                                                material_specification:
+                                                    e.material_additional,
+                                                brand: e.trademark_additional,
+                                                amount: e.quantity_additional,
+                                                unit: e.unit?.name,
+                                                note: e.note_additional,
                                                 id: e.id,
                                                 code: e.id,
                                                 name: e.name_additional,
@@ -515,6 +521,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         list: e.value
                                             .map(
                                               (e) => ItemViewModel(
+                                                brand: e.trademark,
+                                                material_specification:
+                                                    e.material_specification,
+                                                note: e.note,
                                                 id: e.id,
                                                 code: e.code,
                                                 name: e.materiallist
@@ -560,14 +570,14 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                             initialValue: handOver.s?.name,
                             textStyle: txtBold(14, genStatusColor(status)),
                           ),
-                          if (handOver.cancel_note != null) vpad(16),
-                          if (handOver.cancel_note != null)
+                          if (handOver.cancel_reason != null) vpad(16),
+                          if (handOver.cancel_reason != null)
                             PrimaryTextField(
                               maxLines: 2,
                               label: S.of(context).err_reason,
                               enable: false,
                               isReadOnly: true,
-                              initialValue: genStatus(status),
+                              initialValue: handOver.cancel_reason,
                             ),
                           if (handOver.cancel_note != null) vpad(16),
                           if (handOver.cancel_note != null)
@@ -584,7 +594,25 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                               Expanded(
                                 child: PrimaryButton(
                                   buttonType: ButtonType.orange,
-                                  onTap: () {},
+                                  onTap: () {
+                                    var handDate = DateTime.parse(
+                                      handOver.schedule_time ?? '',
+                                    );
+                                    var now = DateTime(
+                                      DateTime.now().year,
+                                      DateTime.now().month,
+                                      24,
+                                    );
+                                    if (handDate.compareTo(now) < 0) {
+                                      return Utils.showErrorMessage(
+                                        context,
+                                        S.of(context).not_date_handover,
+                                      );
+                                    }
+                                    context
+                                        .read<AcceptHandOverPrv>()
+                                        .reportError(context);
+                                  },
                                   width: dvWidth(context) - 24,
                                   text: S.of(context).err_report,
                                 ),
