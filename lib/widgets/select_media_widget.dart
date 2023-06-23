@@ -39,13 +39,15 @@ class SelectMediaWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            DashButton(
-              isDash: isDash && enable,
-              text: S.of(context).add_photo,
-              lable: title,
-              isRequired: isRequired,
-              icon: const PrimaryIcon(icons: PrimaryIcons.image_add),
-              onTap: onSelect,
+            Expanded(
+              child: DashButton(
+                isDash: isDash && enable,
+                text: S.of(context).add_photo,
+                lable: title,
+                isRequired: isRequired,
+                icon: const PrimaryIcon(icons: PrimaryIcons.image_add),
+                onTap: onSelect,
+              ),
             ),
           ],
         ),

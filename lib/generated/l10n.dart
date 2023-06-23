@@ -8109,6 +8109,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Complete`
+  String get complete {
+    return Intl.message(
+      'Complete',
+      name: 'complete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Handover list has {c} item not pass .Do you want to confirm handover.`
+  String count_err_handover(Object c) {
+    return Intl.message(
+      'Handover list has $c item not pass .Do you want to confirm handover.',
+      name: 'count_err_handover',
+      desc: '',
+      args: [c],
+    );
+  }
+
+  /// `You completed handover for apartment [{a}]`
+  String complete_handover(Object a) {
+    return Intl.message(
+      'You completed handover for apartment [$a]',
+      name: 'complete_handover',
+      desc: '',
+      args: [a],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

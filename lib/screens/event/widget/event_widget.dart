@@ -72,31 +72,72 @@ class EventCardWidget extends StatelessWidget {
       // onTap: onTap,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       background: Colors.white,
-      child: Column(children: [
-        if (type == "HISTORY")
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
+      child: Column(
+        children: [
+          if (type == "HISTORY")
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
                   color: genColor(timeStatus ?? ""),
                   borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(8))),
-              child: Text(
-                genStatus(timeStatus ?? ""),
-                style: txtSemiBold(12, Colors.white),
+                    topRight: Radius.circular(12),
+                    bottomLeft: Radius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  genStatus(timeStatus ?? ""),
+                  style: txtSemiBold(12, Colors.white),
+                ),
               ),
             ),
+          type == "HISTORY" ? vpad(2) : vpad(24),
+          Text(
+            title ?? '',
+            style: txtBold(18, primaryColor6),
+            textAlign: TextAlign.center,
           ),
-        type == "HISTORY" ? vpad(2) : vpad(24),
-        Text(
-          title ?? '',
-          style: txtBold(18, primaryColor6),
-          textAlign: TextAlign.center,
-        ),
-        if (endDate != null) vpad(16),
-        if (endDate != null)
+          if (endDate != null) vpad(16),
+          if (endDate != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Row(
+                children: [
+                  const PrimaryIcon(
+                    icons: PrimaryIcons.calendar,
+                    color: grayScaleColor4,
+                  ),
+                  hpad(12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          type != "HISTORY"
+                              ? '${S.of(context).end_time_reg}:'
+                              : '${S.of(context).reg_time}:',
+                          style: txtRegular(12, grayScaleColorBase),
+                          overflow: TextOverflow.visible,
+                        ),
+                        Text(
+                          Utils.dateFormat(
+                            type != "HISTORY"
+                                ? (endDate ?? "")
+                                : (participate!.createdTime ?? ""),
+                            1,
+                          ),
+                          style: txtRegular(12, grayScaleColorBase),
+                          overflow: TextOverflow.visible,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          vpad(16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Row(
@@ -106,96 +147,73 @@ class EventCardWidget extends StatelessWidget {
                   color: grayScaleColor4,
                 ),
                 hpad(12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      type != "HISTORY"
-                          ? '${S.of(context).end_time_reg}:'
-                          : '${S.of(context).reg_time}:',
-                      style: txtRegular(12, grayScaleColorBase),
-                    ),
-                    Text(
-                        Utils.dateFormat(
-                            type != "HISTORY"
-                                ? (endDate ?? "")
-                                : (participate!.createdTime ?? ""),
-                            1),
-                        style: txtRegular(12, grayScaleColorBase))
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${S.of(context).time_event_happening}:',
+                        style: txtRegular(12, grayScaleColorBase),
+                        overflow: TextOverflow.visible,
+                      ),
+                      Text(
+                        "${Utils.dateFormat(startEvent ?? '', 1)} - ${Utils.dateFormat(endEvent ?? "", 1)}",
+                        style: txtRegular(12, grayScaleColorBase),
+                        overflow: TextOverflow.visible,
+                      )
+                    ],
+                  ),
                 )
               ],
             ),
           ),
-        vpad(16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Row(
-            children: [
-              const PrimaryIcon(
-                icons: PrimaryIcons.calendar,
-                color: grayScaleColor4,
-              ),
-              hpad(12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${S.of(context).time_event_happening}:',
-                    style: txtRegular(12, grayScaleColorBase),
-                  ),
-                  Text(
-                      "${Utils.dateFormat(startEvent ?? '', 1)} - ${Utils.dateFormat(endEvent ?? "", 1)}",
-                      style: txtRegular(12, grayScaleColorBase))
-                ],
-              )
-            ],
-          ),
-        ),
-        vpad(16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Row(
-            children: [
-              const PrimaryIcon(
-                icons: PrimaryIcons.mappin,
-                color: grayScaleColor4,
-              ),
-              hpad(12),
-              Expanded(
-                child: Text(
-                  location ?? '',
-                  maxLines: 2,
-                  style: txtRegular(12, grayScaleColorBase),
-                  overflow: TextOverflow.visible,
+          vpad(16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
+            child: Row(
+              children: [
+                const PrimaryIcon(
+                  icons: PrimaryIcons.mappin,
+                  color: grayScaleColor4,
                 ),
-              ),
-            ],
-          ),
-        ),
-        vpad(16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            PrimaryButton(
-              buttonSize: ButtonSize.small,
-              buttonType: ButtonType.primary,
-              text: S.of(context).detail_view,
-              onTap: onTap,
-              width: 130,
+                hpad(12),
+                Expanded(
+                  child: Text(
+                    location ?? '',
+                    maxLines: 2,
+                    style: txtRegular(12, grayScaleColorBase),
+                    overflow: TextOverflow.visible,
+                  ),
+                ),
+              ],
             ),
-            if (type == "COMING" && !isPaticipation && isShowButtonParticipate)
+          ),
+          vpad(16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
               PrimaryButton(
                 buttonSize: ButtonSize.small,
-                buttonType: ButtonType.green,
-                text: S.of(context).participate,
-                onTap: onPart,
+                buttonType: ButtonType.primary,
+                text: S.of(context).detail_view,
+                onTap: onTap,
                 width: 130,
               ),
-          ],
-        ),
-        vpad(16),
-      ]),
+              if (type == "COMING" &&
+                  !isPaticipation &&
+                  isShowButtonParticipate)
+                PrimaryButton(
+                  buttonSize: ButtonSize.small,
+                  buttonType: ButtonType.green,
+                  text: S.of(context).participate,
+                  onTap: onPart,
+                  width: 130,
+                ),
+            ],
+          ),
+          vpad(16),
+        ],
+      ),
     );
   }
 }

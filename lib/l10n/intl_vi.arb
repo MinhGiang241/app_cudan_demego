@@ -805,5 +805,8 @@
   "asset": "Tài sản",
   "brand": "Thương hiệu",
   "success_report_handover": "Báo lỗi thành công",
-  "not_date_handover": "Chưa đến hạn bàn giao"
+  "not_date_handover": "Chưa đến hạn bàn giao",
+  "complete": "Hoàn thành",
+  "count_err_handover": "Danh sách bàn giao có {c} danh mục không đạt Bạn chắc chắn muốn xác nhận nhận bàn giao.",
+  "complete_handover": " Bạn đã hoàn thành nhận bàn giao cho căn hộ [{a}]"
 }

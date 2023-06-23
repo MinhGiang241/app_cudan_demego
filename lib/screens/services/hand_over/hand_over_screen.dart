@@ -50,7 +50,7 @@ class _HandOverScreenState extends State<HandOverScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            tooltip: S.of(context).booking_hand_over,
+            tooltip: S.of(context).booking_hand_over_0,
             onPressed: () {
               Navigator.pushNamed(
                 context,

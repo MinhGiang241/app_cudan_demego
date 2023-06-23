@@ -88,13 +88,13 @@ class HandOver {
       this.resident_address,
       this.apartment_status,
       this.contract_code,
-      required this.floor_area,
-      required this.acreage,
+      this.floor_area,
+      this.acreage,
       this.floor_plan_drawing,
       this.material_list,
       this.list_assets_additional,
       this.rules,
-      required this.in_project,
+      this.in_project,
       this.name_company,
       this.business_code,
       this.tax_code,
@@ -123,7 +123,7 @@ class HandOver {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      '_id': id,
       'createdTime': createdTime,
       'updatedTime': updatedTime,
       'code': code,
@@ -177,7 +177,7 @@ class HandOver {
 
   factory HandOver.fromMap(Map<String, dynamic> map) {
     return HandOver(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:
@@ -305,6 +305,118 @@ class HandOver {
 
   factory HandOver.fromJson(String source) =>
       HandOver.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  HandOver copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? apartmentId,
+    String? apartmentTypeId,
+    String? residentId,
+    String? schedule_date,
+    String? appointmentScheduleId,
+    String? date,
+    String? hour,
+    String? time,
+    String? status,
+    String? status_error,
+    String? resident_code,
+    String? resident_phone,
+    String? resident_card,
+    String? resident_address,
+    String? apartment_status,
+    String? contract_code,
+    dynamic floor_area,
+    dynamic acreage,
+    List<FileUploadModel>? floor_plan_drawing,
+    List<Materials>? material_list,
+    List<AddAsset>? list_assets_additional,
+    String? rules,
+    dynamic? in_project,
+    String? name_company,
+    String? business_code,
+    String? tax_code,
+    String? tel_company,
+    String? legal_representative,
+    String? positon,
+    String? person_handover,
+    String? cancel_reason,
+    String? cancel_note,
+    String? work_code,
+    String? departmentId,
+    String? assignee_employeeId,
+    List<FileUploadModel>? work_file,
+    String? saleContractId,
+    double? real_floor_area,
+    double? real_acreage,
+    String? filter_time_schedule,
+    String? filter_time,
+    String? schedule_hour,
+    String? schedule_time,
+    String? reason_cancel,
+    String? label,
+    Apartment? a,
+  }) {
+    return HandOver(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      apartmentId: apartmentId ?? this.apartmentId,
+      apartmentTypeId: apartmentTypeId ?? this.apartmentTypeId,
+      residentId: residentId ?? this.residentId,
+      schedule_date: schedule_date ?? this.schedule_date,
+      appointmentScheduleId:
+          appointmentScheduleId ?? this.appointmentScheduleId,
+      date: date ?? this.date,
+      hour: hour ?? this.hour,
+      time: time ?? this.time,
+      status: status ?? this.status,
+      status_error: status_error ?? this.status_error,
+      resident_code: resident_code ?? this.resident_code,
+      resident_phone: resident_phone ?? this.resident_phone,
+      resident_card: resident_card ?? this.resident_card,
+      resident_address: resident_address ?? this.resident_address,
+      apartment_status: apartment_status ?? this.apartment_status,
+      contract_code: contract_code ?? this.contract_code,
+      floor_area: floor_area ?? this.floor_area,
+      acreage: acreage ?? this.acreage,
+      floor_plan_drawing: floor_plan_drawing ?? this.floor_plan_drawing,
+      material_list: material_list ??
+          this.material_list?.map<Materials>((e) => e.copyWith()).toList(),
+      list_assets_additional: list_assets_additional ??
+          this
+              .list_assets_additional
+              ?.map<AddAsset>((e) => e.copyWith())
+              .toList(),
+      rules: rules ?? this.rules,
+      in_project: in_project ?? this.in_project,
+      name_company: name_company ?? this.name_company,
+      business_code: business_code ?? this.business_code,
+      tax_code: tax_code ?? this.tax_code,
+      tel_company: tel_company ?? this.tel_company,
+      legal_representative: legal_representative ?? this.legal_representative,
+      positon: positon ?? this.positon,
+      person_handover: person_handover ?? this.person_handover,
+      cancel_reason: cancel_reason ?? this.cancel_reason,
+      cancel_note: cancel_note ?? this.cancel_note,
+      work_code: work_code ?? this.work_code,
+      departmentId: departmentId ?? this.departmentId,
+      assignee_employeeId: assignee_employeeId ?? this.assignee_employeeId,
+      work_file: work_file ?? this.work_file,
+      saleContractId: saleContractId ?? this.saleContractId,
+      real_floor_area: real_floor_area ?? this.real_floor_area,
+      real_acreage: real_acreage ?? this.real_acreage,
+      filter_time_schedule: filter_time_schedule ?? this.filter_time_schedule,
+      filter_time: filter_time ?? this.filter_time,
+      schedule_hour: schedule_hour ?? this.schedule_hour,
+      schedule_time: schedule_time ?? this.schedule_time,
+      reason_cancel: reason_cancel ?? this.reason_cancel,
+      label: label ?? this.label,
+      a: a ?? this.a,
+    );
+  }
 }
 
 class Materials {
@@ -398,6 +510,41 @@ class Materials {
 
   factory Materials.fromJson(String source) =>
       Materials.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Materials copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? assetPositionId,
+    String? materialListId,
+    String? material_specification,
+    String? trademark,
+    String? note,
+    String? code,
+    bool? not_achieve,
+    bool? achieve,
+    List<FileUploadModel>? img,
+    AssetPosition? assetposition,
+    MaterialList? materiallist,
+  }) {
+    return Materials(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      assetPositionId: assetPositionId ?? this.assetPositionId,
+      materialListId: materialListId ?? this.materialListId,
+      material_specification:
+          material_specification ?? this.material_specification,
+      trademark: trademark ?? this.trademark,
+      note: note ?? this.note,
+      code: code ?? this.code,
+      not_achieve: not_achieve ?? this.not_achieve,
+      achieve: achieve ?? this.achieve,
+      img: img ?? this.img,
+      assetposition: assetposition ?? this.assetposition?.copyWith(),
+      materiallist: materiallist ?? this.materiallist?.copyWith(),
+    );
+  }
 }
 
 class AddAsset {
@@ -415,6 +562,8 @@ class AddAsset {
   bool? achieve;
   String? reason_not_achieve;
   AssetPosition? assetposition;
+  List<FileUploadModel>? img_additional;
+  List<FileUploadModel>? file_reason_archive;
   Unit? unit;
   AddAsset({
     this.id,
@@ -432,6 +581,8 @@ class AddAsset {
     this.reason_not_achieve,
     this.not_achieve,
     this.achieve,
+    this.file_reason_archive,
+    this.img_additional,
   });
 
   Map<String, dynamic> toMap() {
@@ -449,6 +600,8 @@ class AddAsset {
       'not_achieve': not_achieve,
       'achieve': achieve,
       'reason_not_achieve': reason_not_achieve,
+      'file_reason_archive': file_reason_archive,
+      'img_additional': img_additional,
     };
   }
 
@@ -491,6 +644,21 @@ class AddAsset {
       reason_not_achieve: map["reason_not_achieve"] != null
           ? map["reason_not_achieve"] as String
           : null,
+      img_additional: map['img_additional'] != null
+          ? List<FileUploadModel>.from(
+              (map['img_additional'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      file_reason_archive: map['file_reason_archive'] != null
+          ? List<FileUploadModel>.from(
+              (map['file_reason_archive'] as List<dynamic>)
+                  .map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
     );
   }
 
@@ -498,6 +666,47 @@ class AddAsset {
 
   factory AddAsset.fromJson(String source) =>
       AddAsset.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  AddAsset copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? assetPositionId_additional,
+    String? name_additional,
+    String? material_additional,
+    String? trademark_additional,
+    int? quantity_additional,
+    String? unitId_additional,
+    String? note_additional,
+    bool? not_achieve,
+    bool? achieve,
+    String? reason_not_achieve,
+    AssetPosition? assetposition,
+    Unit? unit,
+    List<FileUploadModel>? file_reason_archive,
+    List<FileUploadModel>? img_additional,
+  }) {
+    return AddAsset(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      assetPositionId_additional:
+          assetPositionId_additional ?? this.assetPositionId_additional,
+      name_additional: name_additional ?? this.name_additional,
+      material_additional: material_additional ?? this.material_additional,
+      trademark_additional: trademark_additional ?? this.trademark_additional,
+      quantity_additional: quantity_additional ?? this.quantity_additional,
+      unitId_additional: unitId_additional ?? this.unitId_additional,
+      note_additional: note_additional ?? this.note_additional,
+      not_achieve: not_achieve ?? this.not_achieve,
+      achieve: achieve ?? this.achieve,
+      reason_not_achieve: reason_not_achieve ?? this.reason_not_achieve,
+      assetposition: assetposition ?? this.assetposition?.copyWith(),
+      unit: unit ?? this.unit?.copyWith(),
+      file_reason_archive: file_reason_archive ?? this.file_reason_archive,
+      img_additional: img_additional ?? this.img_additional,
+    );
+  }
 }
 
 class HandOverStatus {

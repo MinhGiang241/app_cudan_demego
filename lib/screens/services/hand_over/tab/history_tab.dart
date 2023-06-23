@@ -129,7 +129,11 @@ class _HistoryTabState extends State<HistoryTab> {
                           Navigator.pushNamed(
                             context,
                             AcceptHandOverScreen.routeName,
-                            arguments: {"status": e.status, "handover": e},
+                            arguments: {
+                              "status": e.status,
+                              "handover": e,
+                              'vote': false
+                            },
                           );
                           // if (e.status == "COMPLETE") {
                           //   Navigator.pushNamed(

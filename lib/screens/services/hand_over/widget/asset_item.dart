@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_checkbox.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
@@ -30,17 +31,20 @@ class AssetItem extends StatefulWidget {
     super.key,
     this.vote = false,
     required this.data,
-    required this.index,
     required this.selectPass,
     required this.region,
     required this.type,
+    required this.keyMap,
+    required this.functionSave,
   });
   final AssetItemViewModel data;
-  final index;
-  final Function(bool, String, int, DetailType) selectPass;
+  final String keyMap;
+  final Function(bool, String, int, DetailType, List<FileUploadModel>)
+      selectPass;
   final String region;
   final bool vote;
   final DetailType type;
+  final Function functionSave;
 
   @override
   State<AssetItem> createState() => _AssetItemState();
@@ -81,14 +85,17 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    addReasonReject(
-      function,
-    ) {
+    addReasonReject(function, functionSave, int index) {
       Utils.showDialog(
         context: context,
         dialog: PrimaryDialog.custom(
           content: ReasonDailog(
+            functionSave: functionSave,
+            type: widget.type,
             function: function,
+            data: widget.data,
+            index: index,
+            keyMap: widget.keyMap,
           ),
         ),
       );
@@ -286,50 +293,69 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                               ],
                                             ),
                                             vpad(12),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: PrimaryButton(
-                                                    onTap: () {
-                                                      Navigator.pop(context);
-                                                      widget.selectPass(
-                                                        true,
-                                                        widget.index,
-                                                        e.key,
-                                                        widget.type,
-                                                      );
-                                                    },
-                                                    buttonSize:
-                                                        ButtonSize.xsmall,
-                                                    buttonType:
-                                                        ButtonType.primary,
-                                                    text: S.of(context).pass,
-                                                  ),
-                                                ),
-                                                hpad(30),
-                                                Expanded(
-                                                  child: PrimaryButton(
-                                                    onTap: () {
-                                                      Navigator.pop(context);
+                                            if (widget.vote)
+                                              Row(
+                                                children: [
+                                                  if (e.value.achieve != true)
+                                                    Expanded(
+                                                      child: PrimaryButton(
+                                                        onTap: () {
+                                                          Navigator.pop(
+                                                            context,
+                                                          );
+                                                          widget.selectPass(
+                                                            true,
+                                                            widget.keyMap,
+                                                            e.key,
+                                                            widget.type,
+                                                            e.value.photos,
+                                                          );
+                                                        },
+                                                        buttonSize:
+                                                            ButtonSize.xsmall,
+                                                        buttonType:
+                                                            ButtonType.primary,
+                                                        text:
+                                                            S.of(context).pass,
+                                                      ),
+                                                    ),
+                                                  if (e.value.achieve == null &&
+                                                      e.value.not_achieve ==
+                                                          null)
+                                                    hpad(30),
+                                                  if (e.value.not_achieve !=
+                                                      true)
+                                                    Expanded(
+                                                      child: PrimaryButton(
+                                                        onTap: () {
+                                                          Navigator.pop(
+                                                            context,
+                                                          );
 
-                                                      addReasonReject(
-                                                        () => widget.selectPass(
-                                                          false,
-                                                          widget.index,
-                                                          e.key,
-                                                          widget.type,
-                                                        ),
-                                                      );
-                                                    },
-                                                    buttonSize:
-                                                        ButtonSize.xsmall,
-                                                    buttonType: ButtonType.red,
-                                                    text:
-                                                        S.of(context).not_pass,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                                          addReasonReject(
+                                                            () => widget
+                                                                .selectPass(
+                                                              false,
+                                                              widget.keyMap,
+                                                              e.key,
+                                                              widget.type,
+                                                              e.value.photos,
+                                                            ),
+                                                            widget.functionSave,
+                                                            e.key,
+                                                          );
+                                                        },
+                                                        buttonSize:
+                                                            ButtonSize.xsmall,
+                                                        buttonType:
+                                                            ButtonType.red,
+                                                        text: S
+                                                            .of(context)
+                                                            .not_pass,
+                                                      ),
+                                                    )
+                                                ],
+                                              ),
                                             vpad(12),
                                             PrimaryButton(
                                               width: double.infinity,
@@ -369,9 +395,10 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                     onChanged: (v) {
                                       widget.selectPass(
                                         true,
-                                        widget.index,
+                                        widget.keyMap,
                                         e.key,
                                         widget.type,
+                                        e.value.photos,
                                       );
                                     },
                                     value: e.value.achieve,
@@ -389,13 +416,16 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                       addReasonReject(
                                         () => widget.selectPass(
                                           false,
-                                          widget.index,
+                                          widget.keyMap,
                                           e.key,
                                           widget.type,
+                                          e.value.photos,
                                         ),
+                                        widget.functionSave,
+                                        e.key,
                                       );
                                     },
-                                    value: !e.value.achieve,
+                                    value: e.value.not_achieve,
                                   ),
                                 ),
                               ),

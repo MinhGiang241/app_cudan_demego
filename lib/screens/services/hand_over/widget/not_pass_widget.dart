@@ -9,6 +9,7 @@ import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_dialog.dart';
+import 'asset_item.dart';
 import 'dailog_reason.dart';
 
 class NotPassWidget extends StatefulWidget {
@@ -36,12 +37,13 @@ class _NotPassWidgetState extends State<NotPassWidget>
   addReasonReject(
     function,
   ) {
-    Utils.showDialog(
-        context: context,
-        dialog: PrimaryDialog.custom(
-            content: ReasonDailog(
-          function: function,
-        )));
+    // Utils.showDialog(
+    //     context: context,
+    //     dialog: PrimaryDialog.custom(
+    //         content: ReasonDailog(
+    //       type: DetailType.ASSET,
+    //       function: function,
+    //     )));
   }
 
   @override

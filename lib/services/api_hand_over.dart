@@ -259,4 +259,98 @@ mutation (\$data:Dictionary,\$reason:String,\$note:String){
       return res.response.data;
     }
   }
+
+  static Future check_handle_handover(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary){
+    response: handover_check_handle (data: \$data )
+}
+        
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'data': data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getHandOverById(
+    String? id,
+  ) async {
+    var query = '''
+mutation (\$id:String){
+    response: handover_mobile_get_handover_by_Id (id: \$id ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'id': id,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveHandOverUncontrol(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary){
+    response: handover_mobile_save_handover (data: \$data ) {
+        code
+        message
+        data
+    }
+}          
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

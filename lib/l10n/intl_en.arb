@@ -804,5 +804,8 @@
   "asset": "Asset",
   "brand": "Brand",
   "success_report_handover": "Report Handover successfully",
-  "not_date_handover": "Not yet handover date"
+  "not_date_handover": "Not yet handover date",
+  "complete": "Complete",
+  "count_err_handover": "Handover list has {c} item not pass .Do you want to confirm handover.",
+  "complete_handover": "You completed handover for apartment [{a}]"
 }
