@@ -43,11 +43,11 @@ class PrimaryTextField extends StatefulWidget {
       this.onlyText = false,
       this.isShow = true,
       this.onlyNum = false,
-      this.unit,
+      this.component,
       this.textStyle});
   final TextStyle? textStyle;
   final String? label;
-  final String? unit;
+  final Widget? component;
   final String? initialValue;
   final String? hint;
   final TextEditingController? controller;
@@ -251,14 +251,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                         ),
                       ),
                     ),
-                    if (widget.unit != null)
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          widget.unit!,
-                          style: txtBodySmallBold(color: grayScaleColor3),
-                        ),
-                      )
+                    if (widget.component != null) widget.component!
                   ],
                 );
               },

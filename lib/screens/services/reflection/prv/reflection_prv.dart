@@ -22,6 +22,7 @@ class ReflectionPrv extends ChangeNotifier {
       for (var i in v) {
         listReflection.add(Reflection.fromJson(i));
       }
+      print(listReflection);
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

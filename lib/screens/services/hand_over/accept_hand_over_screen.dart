@@ -245,7 +245,16 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           Expanded(
                                             flex: 4,
                                             child: PrimaryTextField(
-                                              unit: '(m²)',
+                                              component: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(
+                                                  '(m²)',
+                                                  style: txtBodySmallBold(
+                                                    color: grayScaleColor3,
+                                                  ),
+                                                ),
+                                              ),
                                               label: S
                                                   .of(context)
                                                   .s_usage_apartment,
@@ -264,7 +273,28 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           Expanded(
                                             flex: 4,
                                             child: PrimaryTextField(
-                                              unit: '(m²)',
+                                              component: Row(
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      (handOver.real_floor_area ??
+                                                              "0")
+                                                          .toString(),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: 10,
+                                                    ),
+                                                    child: Text(
+                                                      '(m²)',
+                                                      style: txtBodySmallBold(
+                                                        color: grayScaleColor3,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               label: S
                                                   .of(context)
                                                   .s_cons_apartment,

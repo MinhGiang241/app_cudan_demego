@@ -334,16 +334,17 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           PrimaryTextField(
                             maxLines: 3,
                             label: S.of(context).processing_content,
-                            initialValue: arg.process_content ?? '',
+                            initialValue:
+                                arg.result?.to_do_list_result?[0].result ?? '',
                             enable: false,
                           ),
-                          vpad(12),
-                          PrimaryTextField(
-                            maxLines: 3,
-                            label: S.of(context).note,
-                            initialValue: arg.result_note ?? '',
-                            enable: false,
-                          ),
+                          // vpad(12),
+                          // PrimaryTextField(
+                          //   maxLines: 3,
+                          //   label: S.of(context).note,
+                          //   initialValue: arg.result_note ?? '',
+                          //   enable: false,
+                          // ),
                           vpad(12),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -354,7 +355,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             ),
                           ),
                           vpad(12),
-                          ...arg.document!.map(
+                          ...(arg.result?.to_do_list_result?[0].file ?? []).map(
                             (e) => InkWell(
                               onTap: () async {
                                 await Utils.downloadFile(

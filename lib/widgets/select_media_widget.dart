@@ -12,18 +12,18 @@ import 'primary_icon.dart';
 import 'primary_image_netword.dart';
 
 class SelectMediaWidget extends StatelessWidget {
-  const SelectMediaWidget(
-      {Key? key,
-      this.title,
-      this.images = const [],
-      this.existImages = const [],
-      this.onSelect,
-      this.onRemove,
-      this.onRemoveExist,
-      this.isDash = true,
-      this.enable = true,
-      this.isRequired = false})
-      : super(key: key);
+  const SelectMediaWidget({
+    Key? key,
+    this.title,
+    this.images = const [],
+    this.existImages = const [],
+    this.onSelect,
+    this.onRemove,
+    this.onRemoveExist,
+    this.isDash = true,
+    this.enable = true,
+    this.isRequired = false,
+  }) : super(key: key);
   final String? title;
   final List existImages;
   final List<File> images;
@@ -56,70 +56,77 @@ class SelectMediaWidget extends StatelessWidget {
             children: [
               vpad(16),
               SizedBox(
-                  height: 116,
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
+                height: 116,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
                     ...existImages.asMap().entries.map(
                           (e) => Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        canShowPhotoView: true,
-                                        path:
-                                            '${ApiConstants.uploadURL}/?load=${e.value.id!}',
-                                      )),
-                                  if (enable)
-                                    Positioned(
-                                      top: 2,
-                                      right: 2,
-                                      child: PrimaryIcon(
-                                        icons: PrimaryIcons.close,
-                                        style: PrimaryIconStyle.gradient,
-                                        gradients: PrimaryIconGradient.red,
-                                        color: Colors.white,
-                                        padding: const EdgeInsets.all(4),
-                                        onTap: () {
-                                          onRemoveExist?.call(e.key);
-                                        },
-                                      ),
-                                    )
-                                ],
-                              )),
+                            padding: const EdgeInsets.only(right: 14.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: PrimaryImageNetwork(
+                                    canShowPhotoView: true,
+                                    path:
+                                        '${ApiConstants.uploadURL}/?load=${e.value.id!}',
+                                  ),
+                                ),
+                                if (enable)
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        onRemoveExist?.call(e.key);
+                                      },
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
                         ),
                     ...images.asMap().entries.map(
                           (e) => Padding(
-                              padding: const EdgeInsets.only(right: 14.0),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: PrimaryImageNetwork(
-                                        file: e.value,
-                                      )
+                            padding: const EdgeInsets.only(right: 14.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: PrimaryImageNetwork(
+                                    file: e.value,
+                                  ),
 
-                                      //  Image.file(e.value),
-                                      ),
-                                  if (enable)
-                                    Positioned(
-                                      top: 2,
-                                      right: 2,
-                                      child: PrimaryIcon(
-                                        icons: PrimaryIcons.close,
-                                        style: PrimaryIconStyle.gradient,
-                                        gradients: PrimaryIconGradient.red,
-                                        color: Colors.white,
-                                        padding: const EdgeInsets.all(4),
-                                        onTap: () {
-                                          onRemove?.call(e.key);
-                                        },
-                                      ),
-                                    )
-                                ],
-                              )),
+                                  //  Image.file(e.value),
+                                ),
+                                if (enable)
+                                  Positioned(
+                                    top: 2,
+                                    right: 2,
+                                    child: PrimaryIcon(
+                                      icons: PrimaryIcons.close,
+                                      style: PrimaryIconStyle.gradient,
+                                      gradients: PrimaryIconGradient.red,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(4),
+                                      onTap: () {
+                                        onRemove?.call(e.key);
+                                      },
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
                         )
-                  ])),
+                  ],
+                ),
+              ),
             ],
           )
       ],

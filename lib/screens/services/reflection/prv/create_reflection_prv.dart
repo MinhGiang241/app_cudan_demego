@@ -126,7 +126,7 @@ class CreateReflectionPrv extends ChangeNotifier {
   }
 
   onSelectMulti(List<dynamic> slectedList, dynamic sdelectedValue) {
-    zoneValueList = slectedList;
+    zoneValueList = slectedList.map((e) => {'_id': e}).toList();
     if (zoneValueList.isEmpty) {
       validateZone = S.current.not_blank;
     } else {
@@ -177,6 +177,8 @@ class CreateReflectionPrv extends ChangeNotifier {
     FocusScope.of(context).unfocus();
     isSend ? isSendApproveLoading = true : isAddNewLoading = true;
     notifyListeners();
+    print(listZone);
+    print(ref);
     if (formKey.currentState!.validate()) {
       var apartmentId =
           context.read<ResidentInfoPrv>().selectedApartment!.apartmentId;
@@ -199,8 +201,8 @@ class CreateReflectionPrv extends ChangeNotifier {
         // complaintReasonId: typeController.text == "COMPLAIN"
         //     ? reasonController.text.trim()
         //     : null,
-        date:
-            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+        // date:
+        //     DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
         files: submitedImages + existedImage,
         isMobile: true,
         phoneNumber: phoneNumber,
@@ -208,12 +210,14 @@ class CreateReflectionPrv extends ChangeNotifier {
         status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
-        areaIds: zoneValueList.map((e) => {"_id": e.toString()}).toList(),
+        areaIds: zoneValueList,
         areaType: zoneTypeController.text.trim(),
         description: describeController.text.trim(),
       );
       // return
-      APIReflection.saveTicket(newTicket.toMap())
+      var data = newTicket.toMap();
+
+      APIReflection.saveTicket(data)
           // ;})
           .then((v) {
         isSend ? isSendApproveLoading = false : isAddNewLoading = false;
@@ -230,7 +234,7 @@ class CreateReflectionPrv extends ChangeNotifier {
               context,
               ReflectionScreen.routeName,
               (route) => route.isFirst,
-              arguments: {'initTab': isSend ? 1 : 4},
+              arguments: {'initTab': isSend ? 1 : 0},
             );
           },
         );
@@ -252,7 +256,7 @@ class CreateReflectionPrv extends ChangeNotifier {
       } else {
         validateReason = null;
       }
-      if (zoneController.text.trim().isEmpty) {
+      if (zoneValueList.isEmpty) {
         validateZone = S.of(context).not_blank;
       } else {
         validateZone = null;
@@ -366,7 +370,7 @@ class CreateReflectionPrv extends ChangeNotifier {
       for (var i in v) {
         var a = Area.fromMap(i);
         listZone.add(
-          MultiSelectViewModel(title: a.name, isSelected: false, value: a.id),
+          MultiSelectViewModel(title: a.name, value: a.id),
         );
       }
     });

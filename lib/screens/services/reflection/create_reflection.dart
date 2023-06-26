@@ -102,11 +102,10 @@ class CreateReflection extends StatelessWidget {
                           enable: !isEdit,
                         ),
                       if (isEdit) vpad(12),
-                      if (isEdit)
+                      if (isEdit && ref?.date != null)
                         PrimaryTextField(
                           label: S.of(context).date_send,
-                          initialValue:
-                              Utils.dateFormat(ref!.createdTime ?? '', 1),
+                          initialValue: Utils.dateFormat(ref!.date ?? '', 1),
                           enable: !isEdit,
                         ),
                       if (isEdit) vpad(12),

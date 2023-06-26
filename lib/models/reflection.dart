@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app_cudan/models/reason.dart';
 
 import 'status.dart';
+import 'workarising.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
@@ -49,9 +50,12 @@ class Reflection {
   OpinionContribute? opinionContribute;
   List<FileTicket>? files;
   List<FileTicket>? document;
+
+  WorkArising? result;
   Reflection({
     this.id,
     this.r,
+    this.result,
     this.result_note,
     this.description,
     this.opinion_note,
@@ -236,6 +240,7 @@ class Reflection {
               .toList()
           : [],
       s: map['s'] != null ? Status.fromJson(map['s']) : null,
+      result: map['result'] != null ? WorkArising.fromMap(map['result']) : null,
     );
   }
 

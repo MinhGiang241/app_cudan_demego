@@ -60,13 +60,11 @@ class DashButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (icon != null) icon!,
-                    Expanded(
-                      child: Text(
-                        text,
-                        style: txtLinkMedium(color: primaryColorBase),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
+                    Text(
+                      text,
+                      style: txtLinkMedium(color: primaryColorBase),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               ),

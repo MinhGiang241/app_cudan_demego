@@ -110,6 +110,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
         if (widget.label != null) vpad(8),
         if (widget.isMultiple)
           PrimaryTextField(
+            enable: widget.enable,
             textStyle: widget.textStyle,
             validator: widget.validator,
             isRequired: widget.isRequired,
