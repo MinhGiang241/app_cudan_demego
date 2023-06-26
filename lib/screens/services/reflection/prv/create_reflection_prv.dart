@@ -26,32 +26,17 @@ class CreateReflectionPrv extends ChangeNotifier {
       reasonController.text = ref!.opinionContributeId ?? '';
       describeController.text = ref!.description ?? '';
       zoneTypeController.text = ref!.areaType ?? '';
-      if (ref!.areaType != null) {
+      if (ref?.areaType != null) {
         isFloor = ref!.areaType == 'BUILDING' ? true : false;
-        zoneValueList = ref!.areaIds ?? [];
-        var listChoice = zoneValueList.map((e) => e["_id"]).toList();
+        zoneValueList =
+            ref!.areaType == 'PIN' ? ref?.areaIds ?? [] : ref?.floorIds ?? [];
+        print(zoneValueList);
         if (ref!.areaType == 'BUILDING') {
           getFloorList(context).then((_) {
-            // zoneController.text = ref!.areaId ?? [];
-
-            for (var i in floorList) {
-              if (listChoice.contains(i.value)) {
-                i.isSelected = true;
-              }
-            }
-
             notifyListeners();
           });
         } else {
           getListAreaByType(ref!.areaType).then((_) {
-            // zoneController.text = ref!.areaId ?? [];
-            zoneValueList = ref!.areaIds ?? [];
-            for (var i in listZone) {
-              if (listChoice.contains(i.value)) {
-                i.isSelected = true;
-              }
-            }
-
             notifyListeners();
           });
         }
@@ -108,17 +93,25 @@ class CreateReflectionPrv extends ChangeNotifier {
 
   getFloorList(BuildContext context) async {
     await APIReflection.getFloorList(
-      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
+      ref?.apartmentId ??
+          context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
     ).then((v) {
       floorList.clear();
       if (v != null) {
+        var listChoice = zoneValueList.map((e) => e["_id"]).toList();
         for (var i in v) {
           var floor = Floor.fromJson(i);
+          var s = MultiSelectViewModel(
+            title: '${floor.name}-${floor.b?.name}',
+            value: floor.id,
+          );
+
+          if (listChoice.contains(i['_id'])) {
+            s.isSelected = true;
+          }
+
           floorList.add(
-            MultiSelectViewModel(
-              title: '${floor.name}-${floor.b?.name}',
-              value: floor.id,
-            ),
+            s,
           );
         }
       }
@@ -180,7 +173,7 @@ class CreateReflectionPrv extends ChangeNotifier {
     print(listZone);
     print(ref);
     if (formKey.currentState!.validate()) {
-      var apartmentId =
+      var apartmentId = ref?.apartmentId ??
           context.read<ResidentInfoPrv>().selectedApartment!.apartmentId;
       var phoneNumber =
           context.read<ResidentInfoPrv>().userInfo!.phone_required;
@@ -210,7 +203,9 @@ class CreateReflectionPrv extends ChangeNotifier {
         status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
-        areaIds: zoneValueList,
+        areaIds: zoneTypeController.text.trim() == 'PIN' ? zoneValueList : null,
+        floorIds:
+            zoneTypeController.text.trim() == 'BUILDING' ? zoneValueList : null,
         areaType: zoneTypeController.text.trim(),
         description: describeController.text.trim(),
       );
@@ -365,13 +360,17 @@ class CreateReflectionPrv extends ChangeNotifier {
 
   getListAreaByType(type) async {
     return await APIReflection.getListAreaByType(type).then((v) {
-      zoneValueList.clear();
       listZone.clear();
+      var listChoice = zoneValueList.map((e) => e["_id"]).toList();
       for (var i in v) {
         var a = Area.fromMap(i);
-        listZone.add(
-          MultiSelectViewModel(title: a.name, value: a.id),
-        );
+        var s = MultiSelectViewModel(title: a.name, value: a.id);
+
+        if (listChoice.contains(i['_id'])) {
+          s.isSelected = true;
+        }
+
+        listZone.add(s);
       }
     });
   }

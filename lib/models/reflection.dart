@@ -42,6 +42,7 @@ class Reflection {
   String? priority_level;
   String? complaintReasonId;
   List<dynamic>? areaIds;
+  List<dynamic>? floorIds;
   String? areaType;
   String? cancel_reason;
   Reason? r;
@@ -61,6 +62,7 @@ class Reflection {
     this.opinion_note,
     this.cancel_reason,
     this.areaIds,
+    this.floorIds,
     this.areaType,
     this.complainReason,
     this.complaintReasonId,
@@ -131,6 +133,7 @@ class Reflection {
       'process_content': process_content,
       'priority_level': priority_level,
       'areaIds': areaIds,
+      'floorIds': floorIds,
       'areaType': areaType,
       'cancel_reason': cancel_reason,
       'opinion_note': opinion_note,
@@ -217,6 +220,8 @@ class Reflection {
       description:
           map['description'] != null ? map['description'] as String : null,
       areaIds: map['areaIds'] != null ? map['areaIds'] as List<dynamic> : null,
+      floorIds:
+          map['floorIds'] != null ? map['floorIds'] as List<dynamic> : null,
       areaType: map['areaType'] != null ? map['areaType'] as String : null,
       cancel_reason:
           map['cancel_reason'] != null ? map['cancel_reason'] as String : null,

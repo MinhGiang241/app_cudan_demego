@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:app_cudan/models/reflection.dart';
+import 'package:app_cudan/screens/services/reflection/prv/create_reflection_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
@@ -17,10 +18,12 @@ import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/multi_select_view_model.dart';
+import '../../../models/response_resident_own.dart';
 import '../../../services/api_reflection.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_screen.dart';
+import '../../auth/prv/resident_info_prv.dart';
 
 class ReflectionProcessedDetails extends StatefulWidget {
   const ReflectionProcessedDetails({super.key});
@@ -54,6 +57,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
     )
   ];
   List<MultiSelectViewModel> listZoneChoice = [];
+  List<MultiSelectViewModel> listFloorChoice = [];
 
   @override
   void initState() {
@@ -132,7 +136,9 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                 title: a.name,
                 isSelected: false,
               );
-              if (arg.areaIds!.contains(i["_id"])) {
+              if (arg.areaType == 'PIN' &&
+                  arg.areaIds != null &&
+                  arg.areaIds!.contains(i["_id"])) {
                 s.isSelected = true;
               }
               listZoneChoice.add(
@@ -140,6 +146,31 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
               );
             }
           });
+          await APIReflection.getFloorList(
+            arg.apartmentId,
+          ).then((v) {
+            listFloorChoice.clear();
+            if (v != null) {
+              for (var i in v) {
+                var floor = Floor.fromJson(i);
+                var s = MultiSelectViewModel(
+                  title: '${floor.name}-${floor.b?.name}',
+                  value: floor.id,
+                  isSelected: false,
+                );
+
+                if (arg.areaType == 'BUILDING' &&
+                    arg.floorIds != null &&
+                    arg.floorIds!.contains(i["_id"])) {
+                  s.isSelected = true;
+                }
+                listFloorChoice.add(s);
+              }
+            }
+          });
+
+          print(listZoneChoice);
+          print(listFloorChoice);
         }(),
         builder: (context, snapshot) {
           return SafeArea(
@@ -237,9 +268,13 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           PrimaryDropDown(
                             hint: '',
                             isMultiple: true,
-                            selectMultileList: listZoneChoice,
+                            selectMultileList: arg.areaType == 'PIN'
+                                ? listZoneChoice
+                                : listFloorChoice,
                             label: S.of(context).zone,
-                            value: arg.areaIds,
+                            value: arg.areaType == 'PIN'
+                                ? arg.areaIds
+                                : arg.floorIds,
                             enable: false,
                           ),
                           if (arg.files!.isNotEmpty) vpad(12),
