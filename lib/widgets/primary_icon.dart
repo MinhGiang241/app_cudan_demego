@@ -172,6 +172,7 @@ class PrimaryIcon extends StatelessWidget {
                 onTap: onTap,
                 borderRadius: borderRadius ?? BorderRadius.circular(24),
                 child: B.Badge(
+                  padding: EdgeInsets.zero,
                   badgeContent:
                       Text(badge ?? '', style: txtBold(10, Colors.white)),
                   showBadge: badge != null,

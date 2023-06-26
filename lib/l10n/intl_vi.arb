@@ -808,5 +808,8 @@
   "not_date_handover": "Chưa đến hạn bàn giao",
   "complete": "Hoàn thành",
   "count_err_handover": "Danh sách bàn giao có {c} danh mục không đạt Bạn chắc chắn muốn xác nhận nhận bàn giao.",
-  "complete_handover": " Bạn đã hoàn thành nhận bàn giao cho căn hộ [{a}]"
+  "complete_handover": " Bạn đã hoàn thành nhận bàn giao cho căn hộ [{a}]",
+  "reality": "Thực tế",
+  "reality_handover_date": "Ngày nhận thực tế",
+  "reality_handover_hour": "Giờ nhận thực tế"
 }

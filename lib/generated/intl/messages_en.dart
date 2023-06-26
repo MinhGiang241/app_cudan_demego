@@ -849,6 +849,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "re_book": MessageLookupByLibrary.simpleMessage("Re book"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
+        "reality": MessageLookupByLibrary.simpleMessage("Reality"),
+        "reality_handover_date":
+            MessageLookupByLibrary.simpleMessage("Reality hand over date"),
+        "reality_handover_hour":
+            MessageLookupByLibrary.simpleMessage("Reality hand over hour"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Refuse reason"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),

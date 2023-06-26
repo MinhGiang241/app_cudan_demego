@@ -858,6 +858,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trình độ chuyên môn"),
         "re_book": MessageLookupByLibrary.simpleMessage("Đổi lịch"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
+        "reality": MessageLookupByLibrary.simpleMessage("Thực tế"),
+        "reality_handover_date":
+            MessageLookupByLibrary.simpleMessage("Ngày nhận thực tế"),
+        "reality_handover_hour":
+            MessageLookupByLibrary.simpleMessage("Giờ nhận thực tế"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Lý do từ chối"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),

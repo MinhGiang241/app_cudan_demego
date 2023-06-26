@@ -6,6 +6,7 @@ import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/reason.dart';
 import 'package:app_cudan/models/response_resident_own.dart';
 
+import 'employee.dart';
 import 'status.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -63,10 +64,10 @@ class HandOver {
   String? schedule_time;
   String? reason_cancel;
   String? label;
-
   Apartment? a;
   HandOverStatus? s;
   HandOverStatus? se;
+  Employee? e;
   HandOver(
       {this.id,
       this.createdTime,
@@ -119,6 +120,7 @@ class HandOver {
       this.a,
       this.s,
       this.se,
+      this.e,
       this.label});
 
   Map<String, dynamic> toMap() {
@@ -298,6 +300,7 @@ class HandOver {
       a: map['a'] != null ? Apartment.fromJson(map['a']) : null,
       s: map['s'] != null ? HandOverStatus.fromJson(map['s']) : null,
       se: map['se'] != null ? HandOverStatus.fromJson(map['se']) : null,
+      e: map['e'] != null ? Employee.fromMap(map['e']) : null,
     );
   }
 

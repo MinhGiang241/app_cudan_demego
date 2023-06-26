@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:app_cudan/models/hand_over.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
+import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
@@ -18,7 +19,9 @@ import '../../../models/asset_Item_view_model.dart';
 import '../../../models/info_content_view.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
+import '../../../widgets/primary_icon.dart';
 import 'hand_over_check_screen.dart';
+import 'hand_over_info_step.dart';
 import 'prv/accept_hand_over_prv.dart';
 import 'widget/asset_item.dart';
 
@@ -245,14 +248,62 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           Expanded(
                                             flex: 4,
                                             child: PrimaryTextField(
-                                              component: Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(
-                                                  '(m²)',
-                                                  style: txtBodySmallBold(
-                                                    color: grayScaleColor3,
-                                                  ),
+                                              component: Expanded(
+                                                flex: 21,
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          S.of(context).reality,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style:
+                                                              txtBodySmallRegular(
+                                                            color:
+                                                                grayScaleColorBase,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 15,
+                                                      child: PrimaryCard(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 12,
+                                                        ),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          vertical: 16,
+                                                          horizontal: 12,
+                                                        ),
+                                                        child: Text(
+                                                          (handOver.real_acreage ??
+                                                                  "0")
+                                                              .toString(),
+                                                          style:
+                                                              txtBodySmallBold(
+                                                            color:
+                                                                grayScaleColor3,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Text(
+                                                        '(m²)',
+                                                        style: txtBodySmallBold(
+                                                          color:
+                                                              grayScaleColor3,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               label: S
@@ -270,30 +321,67 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       vpad(16),
                                       Row(
                                         children: [
+                                          hpad(5),
                                           Expanded(
                                             flex: 4,
                                             child: PrimaryTextField(
-                                              component: Row(
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      (handOver.real_floor_area ??
-                                                              "0")
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                      left: 10,
-                                                    ),
-                                                    child: Text(
-                                                      '(m²)',
-                                                      style: txtBodySmallBold(
-                                                        color: grayScaleColor3,
+                                              component: Expanded(
+                                                flex: 21,
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          S.of(context).reality,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style:
+                                                              txtBodySmallRegular(
+                                                            color:
+                                                                grayScaleColorBase,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                    Expanded(
+                                                      flex: 15,
+                                                      child: PrimaryCard(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 12,
+                                                        ),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          vertical: 16,
+                                                          horizontal: 12,
+                                                        ),
+                                                        child: Text(
+                                                          (handOver.real_acreage ??
+                                                                  "0")
+                                                              .toString(),
+                                                          style:
+                                                              txtBodySmallBold(
+                                                            color:
+                                                                grayScaleColor3,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Text(
+                                                        '(m²)',
+                                                        style: txtBodySmallBold(
+                                                          color:
+                                                              grayScaleColor3,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               label: S
                                                   .of(context)
@@ -317,12 +405,46 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                             "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
                                       ),
                                       vpad(16),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: PrimaryTextField(
+                                              enable: false,
+                                              initialValue: Utils.dateFormat(
+                                                handOver.date ?? "",
+                                                1,
+                                              ),
+                                              label: S
+                                                  .of(context)
+                                                  .reality_handover_date,
+                                              suffixIcon: const PrimaryIcon(
+                                                padding: EdgeInsets.zero,
+                                                icons: PrimaryIcons.calendar,
+                                              ),
+                                            ),
+                                          ),
+                                          hpad(16),
+                                          Expanded(
+                                            child: PrimaryTextField(
+                                              enable: false,
+                                              initialValue: handOver.hour,
+                                              label: S
+                                                  .of(context)
+                                                  .reality_handover_hour,
+                                              suffixIcon: const PrimaryIcon(
+                                                padding: EdgeInsets.zero,
+                                                icons: PrimaryIcons.clock,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      vpad(16),
                                       PrimaryTextField(
                                         enable: false,
                                         isRequired: true,
                                         label: S.of(context).hand_over_employee,
-                                        initialValue:
-                                            "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
+                                        initialValue: handOver.e?.name,
                                       ),
                                       vpad(16),
                                       SelectFileWidget(
@@ -344,30 +466,13 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         ),
                                       ),
                                       if (ruleFiles.isNotEmpty) vpad(12),
-                                      ...ruleFiles.map(
-                                        (v) => Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: InkWell(
-                                            onTap: () {
-                                              Utils.downloadFile(
-                                                context: context,
-                                                id: v.id,
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                bottom: 5,
-                                              ),
-                                              child: Text(
-                                                v.name ?? "",
-                                                style: txtRegular(
-                                                  13,
-                                                  primaryColorBase,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                      SelectFileWidget(
+                                        enable: false,
+                                        // title:
+                                        //     "${S.of(context).hand_over_rule}:",
+                                        isRequired: true,
+                                        isDash: false,
+                                        existFiles: ruleFiles,
                                       ),
                                     ],
                                   ),
@@ -616,11 +721,15 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
 
                               vpad(30),
                               PrimaryTextField(
-                                textColor: genStatusColor(status ?? ''),
+                                textColor:
+                                    genStatusColor(handOver.status ?? ''),
                                 label: S.of(context).status,
                                 enable: false,
                                 initialValue: handOver.s?.name,
-                                textStyle: txtBold(14, genStatusColor(status)),
+                                textStyle: txtBold(
+                                  14,
+                                  genStatusColor(handOver.status),
+                                ),
                               ),
                               if (handOver.cancel_reason != null) vpad(16),
                               if (handOver.cancel_reason != null)
@@ -663,7 +772,6 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                             .read<AcceptHandOverPrv>()
                                             .checkHandleHandOver(
                                               context,
-                                              handOverProvider,
                                             );
                                       },
                                       text: S.of(context).accept_hand_over,
@@ -676,6 +784,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                           ),
                         ),
                       ),
+                      HandOverInfoStep(),
                       HandOverCheckScreen()
                     ],
                   ),

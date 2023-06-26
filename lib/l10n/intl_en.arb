@@ -807,5 +807,8 @@
   "not_date_handover": "Not yet handover date",
   "complete": "Complete",
   "count_err_handover": "Handover list has {c} item not pass .Do you want to confirm handover.",
-  "complete_handover": "You completed handover for apartment [{a}]"
+  "complete_handover": "You completed handover for apartment [{a}]",
+  "reality": "Reality",
+  "reality_handover_date": "Reality hand over date",
+  "reality_handover_hour": "Reality hand over hour"
 }

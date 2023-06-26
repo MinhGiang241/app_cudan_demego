@@ -8139,6 +8139,36 @@ class S {
       args: [a],
     );
   }
+
+  /// `Reality`
+  String get reality {
+    return Intl.message(
+      'Reality',
+      name: 'reality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reality hand over date`
+  String get reality_handover_date {
+    return Intl.message(
+      'Reality hand over date',
+      name: 'reality_handover_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reality hand over hour`
+  String get reality_handover_hour {
+    return Intl.message(
+      'Reality hand over hour',
+      name: 'reality_handover_hour',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

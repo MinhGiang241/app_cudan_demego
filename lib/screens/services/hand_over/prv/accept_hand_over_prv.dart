@@ -271,7 +271,6 @@ class AcceptHandOverPrv extends ChangeNotifier {
 
   checkHandleHandOver(
     BuildContext context,
-    AcceptHandOverPrv handOverProvider,
   ) async {
     var data = handOver.copyWith().toMap();
     data['isMobile'] = true;
