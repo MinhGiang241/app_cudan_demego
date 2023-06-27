@@ -810,5 +810,7 @@
   "complete_handover": "You completed handover for apartment [{a}]",
   "reality": "Reality",
   "reality_handover_date": "Reality hand over date",
-  "reality_handover_hour": "Reality hand over hour"
+  "reality_handover_hour": "Reality hand over hour",
+  "file_image": "File/ Image",
+  "success_handover": "You already hand over for {ap} successfully"
 }

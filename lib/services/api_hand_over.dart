@@ -323,7 +323,7 @@ mutation (\$id:String){
     }
   }
 
-  static Future saveHandOverUncontrol(
+  static Future saveHandOver(
     Map<String, dynamic> data,
   ) async {
     var query = '''
@@ -334,6 +334,73 @@ mutation (\$data:Dictionary){
         data
     }
 }          
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getResultsWorkByVirtualId(
+    String handOverId,
+    String? virtualId,
+  ) async {
+    var query = '''
+mutation (\$virtualId:String,\$handOverId:String){
+    response: handover_mobile_get_work_arising_by_virtualId (virtualId: \$virtualId,handOverId: \$handOverId ) {
+        code
+        message
+        data
+    }
+}
+         
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "virtualId": virtualId,
+        "handOverId": handOverId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future checkComplete(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary){
+    response: handover_mobile_check_complete (data: \$data ) {
+        code
+        message
+        data
+    }
+}
+        
+         
     ''';
 
     final MutationOptions options = MutationOptions(

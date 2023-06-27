@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/workarising.dart';
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
@@ -11,6 +12,7 @@ import '../../../../models/file_upload.dart';
 import '../../../../models/hand_over.dart';
 import '../../../../services/api_rules.dart';
 import '../../../../utils/utils.dart';
+import '../hand_over_screen.dart';
 import '../widget/asset_item.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
@@ -18,7 +20,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
     handOver = handOver;
     handOverCopy = handOver.copyWith();
     makeList();
-
+    getWorkArisingHandOver();
     print(materialList);
     print(assetList);
   }
@@ -35,7 +37,9 @@ class AcceptHandOverPrv extends ChangeNotifier {
   List<FileUploadModel> ruleFiles = [];
   List<Defect> defectList = [];
   bool isLoading = false;
+  bool isLoadingComplete = false;
   bool complete = false;
+  WorkArising? workArising;
 
   bool generalInfoExpand = false;
   bool assetListExpand = false;
@@ -67,14 +71,23 @@ class AcceptHandOverPrv extends ChangeNotifier {
     String reason,
     List<FileUploadModel> list,
   ) async {
-    selectItemPass(value, key, indexItem, type, list);
+    selectItemPass(value, key, indexItem, type, list, reason);
     if (type == DetailType.MATERIAL) {
       print(handOverCopy);
     } else {}
 // await APIHandOver.saveHandOverUncontrol(handOverCopy.toMap());
   }
 
-  saveHandOver(BuildContext context) async {
+  getWorkArisingHandOver() async {
+    APIHandOver.getResultsWorkByVirtualId(handOver.id ?? '', null).then((v) {
+      if (v != null) {
+        workArising = WorkArising.fromMap(v);
+      }
+      notifyListeners();
+    });
+  }
+
+  checkHandOver(BuildContext context) async {
     var count = 0;
     for (var i in handOverCopy.material_list ?? <Materials>[]) {
       if (i.not_achieve == true ||
@@ -99,7 +112,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
           isLoading = true;
           notifyListeners();
 
-          await APIHandOver.saveHandOverUncontrol(data).then((v) async {
+          await APIHandOver.checkComplete(data).then((v) async {
             return await getHandOverById();
           }).then((v) {
             isLoading = false;
@@ -113,7 +126,9 @@ class AcceptHandOverPrv extends ChangeNotifier {
                 if (activeStep == 1) {
                   // Navigator.pop(context);
                   backScreen(context);
-                } else {
+                } else if (activeStep == 2) {
+                  backScreen(context);
+                  backScreen(context);
                   // Navigator.pop(context);
                 }
               },
@@ -126,12 +141,51 @@ class AcceptHandOverPrv extends ChangeNotifier {
         },
       );
     } else {
-      await APIHandOver.saveHandOverUncontrol(data).then((v) {
-        return getHandOverById();
+      await APIHandOver.checkComplete(data).then((v) async {
+        await getHandOverById();
+        if (activeStep == 1) {
+          // Navigator.pop(context);
+          backScreen(context);
+        } else if (activeStep == 2) {
+          backScreen(context);
+          backScreen(context);
+          // Navigator.pop(context);
+        }
       }).catchError((e) {
         Utils.showErrorMessage(context, e);
       });
     }
+  }
+
+  completeHandover(BuildContext context) async {
+    isLoadingComplete = true;
+    notifyListeners();
+    var data = handOverCopy.toMap();
+    await APIHandOver.saveHandOver(data).then((v) {
+      isLoadingComplete = false;
+      notifyListeners();
+      Utils.showSuccessMessage(
+        context: context,
+        e: S.of(context).success_handover(handOverCopy.label ?? ""),
+        onClose: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            HandOverScreen.routeName,
+            (route) => route.isFirst,
+            arguments: {
+              'init': 1,
+            },
+          );
+        },
+      );
+    }).catchError((e) {
+      isLoadingComplete = false;
+      notifyListeners();
+      Utils.showSuccessMessage(
+        context: context,
+        e: e,
+      );
+    });
   }
 
   finishCheck(context) async {
@@ -220,16 +274,19 @@ class AcceptHandOverPrv extends ChangeNotifier {
     int indexItem,
     DetailType type,
     List<FileUploadModel> list,
+    String reason,
   ) {
     if (type == DetailType.ASSET) {
       assetList[key]![indexItem].achieve = value;
       assetList[key]![indexItem].not_achieve = !value;
       assetList[key]![indexItem].img_additional = list;
+      assetList[key]![indexItem].reason_not_archive = value ? null : reason;
     }
     if (type == DetailType.MATERIAL) {
       materialList[key]![indexItem].achieve = value;
       materialList[key]![indexItem].not_achieve = !value;
       materialList[key]![indexItem].img = list;
+      materialList[key]![indexItem].reason_not_archive = value ? null : reason;
     }
 
     notifyListeners();

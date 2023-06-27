@@ -432,6 +432,9 @@ class Materials {
   String? trademark;
   String? note;
   String? code;
+  String? virtualId;
+  String? reason_not_archive;
+  List<FileUploadModel>? file_reason_archive;
   bool? not_achieve;
   bool? achieve;
   List<FileUploadModel>? img;
@@ -441,6 +444,8 @@ class Materials {
     this.id,
     this.createdTime,
     this.updatedTime,
+    this.reason_not_archive,
+    this.file_reason_archive,
     this.assetPositionId,
     this.materialListId,
     this.material_specification,
@@ -452,6 +457,7 @@ class Materials {
     this.assetposition,
     this.materiallist,
     this.code,
+    this.virtualId,
   });
 
   Map<String, dynamic> toMap() {
@@ -468,6 +474,9 @@ class Materials {
       'img': img?.map((x) => x.toMap()).toList(),
       'not_achieve': not_achieve,
       'achieve': achieve,
+      'virtualId': virtualId,
+      'reason_not_archive': reason_not_archive,
+      'file_reason_archive': file_reason_archive,
     };
   }
 
@@ -484,6 +493,10 @@ class Materials {
       materialListId: map['materialListId'] != null
           ? map['materialListId'] as String
           : null,
+      virtualId: map['virtualId'] != null ? map['virtualId'] as String : null,
+      reason_not_archive: map['reason_not_archive'] != null
+          ? map['reason_not_archive'] as String
+          : null,
       material_specification: map['material_specification'] != null
           ? map['material_specification'] as String
           : null,
@@ -493,6 +506,14 @@ class Materials {
       img: map['img'] != null
           ? List<FileUploadModel>.from(
               (map['img'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      file_reason_archive: map['file_reason_archive'] != null
+          ? List<FileUploadModel>.from(
+              (map['file_reason_archive'] as List<dynamic>)
+                  .map<FileUploadModel?>(
                 (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
               ),
             )
@@ -524,11 +545,14 @@ class Materials {
     String? trademark,
     String? note,
     String? code,
+    String? reason_not_archive,
     bool? not_achieve,
     bool? achieve,
     List<FileUploadModel>? img,
+    List<FileUploadModel>? file_reason_archive,
     AssetPosition? assetposition,
     MaterialList? materiallist,
+    String? virtualId,
   }) {
     return Materials(
       id: id ?? this.id,
@@ -544,6 +568,9 @@ class Materials {
       not_achieve: not_achieve ?? this.not_achieve,
       achieve: achieve ?? this.achieve,
       img: img ?? this.img,
+      file_reason_archive: file_reason_archive ?? this.file_reason_archive,
+      virtualId: virtualId ?? this.virtualId,
+      reason_not_archive: reason_not_archive ?? this.reason_not_archive,
       assetposition: assetposition ?? this.assetposition?.copyWith(),
       materiallist: materiallist ?? this.materiallist?.copyWith(),
     );
@@ -561,9 +588,10 @@ class AddAsset {
   int? quantity_additional;
   String? unitId_additional;
   String? note_additional;
+  String? virtualId;
   bool? not_achieve;
   bool? achieve;
-  String? reason_not_achieve;
+  String? reason_not_archive;
   AssetPosition? assetposition;
   List<FileUploadModel>? img_additional;
   List<FileUploadModel>? file_reason_archive;
@@ -581,11 +609,12 @@ class AddAsset {
     this.note_additional,
     this.assetposition,
     this.unit,
-    this.reason_not_achieve,
+    this.reason_not_archive,
     this.not_achieve,
     this.achieve,
     this.file_reason_archive,
     this.img_additional,
+    this.virtualId,
   });
 
   Map<String, dynamic> toMap() {
@@ -602,9 +631,10 @@ class AddAsset {
       'note_additional': note_additional,
       'not_achieve': not_achieve,
       'achieve': achieve,
-      'reason_not_achieve': reason_not_achieve,
+      'reason_not_archive': reason_not_archive,
       'file_reason_archive': file_reason_archive,
       'img_additional': img_additional,
+      'virtualId': virtualId,
     };
   }
 
@@ -627,6 +657,7 @@ class AddAsset {
       trademark_additional: map['trademark_additional'] != null
           ? map['trademark_additional'] as String
           : null,
+      virtualId: map['virtualId'] != null ? map['virtualId'] as String : null,
       quantity_additional:
           int.tryParse(map['quantity_additional'].toString()) != null
               ? int.parse(map['quantity_additional'].toString())
@@ -644,8 +675,8 @@ class AddAsset {
       not_achieve:
           map["not_achieve"] != null ? map["not_achieve"] as bool : null,
       achieve: map["achieve"] != null ? map["achieve"] as bool : null,
-      reason_not_achieve: map["reason_not_achieve"] != null
-          ? map["reason_not_achieve"] as String
+      reason_not_archive: map["reason_not_archive"] != null
+          ? map["reason_not_archive"] as String
           : null,
       img_additional: map['img_additional'] != null
           ? List<FileUploadModel>.from(
@@ -681,9 +712,10 @@ class AddAsset {
     int? quantity_additional,
     String? unitId_additional,
     String? note_additional,
+    String? virtualId,
     bool? not_achieve,
     bool? achieve,
-    String? reason_not_achieve,
+    String? reason_not_archive,
     AssetPosition? assetposition,
     Unit? unit,
     List<FileUploadModel>? file_reason_archive,
@@ -703,11 +735,12 @@ class AddAsset {
       note_additional: note_additional ?? this.note_additional,
       not_achieve: not_achieve ?? this.not_achieve,
       achieve: achieve ?? this.achieve,
-      reason_not_achieve: reason_not_achieve ?? this.reason_not_achieve,
+      reason_not_archive: reason_not_archive ?? this.reason_not_archive,
       assetposition: assetposition ?? this.assetposition?.copyWith(),
       unit: unit ?? this.unit?.copyWith(),
       file_reason_archive: file_reason_archive ?? this.file_reason_archive,
       img_additional: img_additional ?? this.img_additional,
+      virtualId: virtualId ?? this.virtualId,
     );
   }
 }

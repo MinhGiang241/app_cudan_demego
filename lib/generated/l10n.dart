@@ -8169,6 +8169,26 @@ class S {
       args: [],
     );
   }
+
+  /// `File/ Image`
+  String get file_image {
+    return Intl.message(
+      'File/ Image',
+      name: 'file_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You already hand over for {ap} successfully`
+  String success_handover(Object ap) {
+    return Intl.message(
+      'You already hand over for $ap successfully',
+      name: 'success_handover',
+      desc: '',
+      args: [ap],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

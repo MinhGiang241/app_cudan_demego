@@ -81,12 +81,14 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m25(name) =>
       "Cancel schedule of handover for apartment [${name}] successfully";
 
-  static String m26(p) => "Make payment for ${p} successfully";
+  static String m26(ap) => "You already hand over for ${ap} successfully";
 
-  static String m27(month, year) =>
+  static String m27(p) => "Make payment for ${p} successfully";
+
+  static String m28(month, year) =>
       "Total consumed water month ${month}/${year}";
 
-  static String m28(to) => "We sent otp code to :${to}";
+  static String m29(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -478,6 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "file_code": MessageLookupByLibrary.simpleMessage("Document code"),
         "file_downloading":
             MessageLookupByLibrary.simpleMessage("File is downloading"),
+        "file_image": MessageLookupByLibrary.simpleMessage("File/ Image"),
         "file_info": MessageLookupByLibrary.simpleMessage("File information"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "Upload file is not supported"),
@@ -1113,11 +1116,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
         "success_found": MessageLookupByLibrary.simpleMessage("Found"),
+        "success_handover": m26,
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m26,
+        "success_payment": m27,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Refuse letter successfully"),
         "success_register_dependence": MessageLookupByLibrary.simpleMessage(
@@ -1180,7 +1184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("To money (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Total bill"),
-        "total_consumed_water_month": m27,
+        "total_consumed_water_month": m28,
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Total money payment"),
@@ -1274,7 +1278,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m28,
+        "we_send_to": m29,
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
         "weight_not_15":
             MessageLookupByLibrary.simpleMessage("Weight is not larger 15kg"),

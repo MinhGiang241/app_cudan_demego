@@ -92,6 +92,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
       parent: animationInfoController,
       curve: Curves.easeInOut,
     );
+    var workArising = context.watch<AcceptHandOverPrv>().workArising;
 
     return SingleChildScrollView(
       child: Form(
@@ -399,8 +400,33 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                 isReadOnly: true,
                 initialValue: handOver.cancel_note,
               ),
+            vpad(16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                S.of(context).processing_result,
+                style: txtBodySmallBold(
+                  color: grayScaleColorBase,
+                ),
+              ),
+            ),
+            if (workArising != null) vpad(10),
+            if (workArising != null)
+              PrimaryTextField(
+                maxLines: 2,
+                label: S.of(context).processing_content,
+                enable: false,
+                isReadOnly: true,
+                initialValue: workArising.to_do_list_result?[0].result,
+              ),
+            if (workArising != null) vpad(16),
+            if (workArising != null)
+              SelectFileWidget(
+                text: S.of(context).file_image,
+                enable: false,
+                existFiles: workArising.to_do_list_result?[0].file ?? [],
+              ),
             vpad(40),
-
             PrimaryButton(
               onTap: () async {
                 await context.read<AcceptHandOverPrv>().checkHandleHandOver(

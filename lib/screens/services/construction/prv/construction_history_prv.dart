@@ -11,7 +11,9 @@ class ConstructionHistoryPrv extends ChangeNotifier {
   List<ConstructionHistory> list = [];
   List<TimelineModel> content = [];
   getHistoryList(
-      BuildContext context, String constructionregistrationId) async {
+    BuildContext context,
+    String constructionregistrationId,
+  ) async {
     await APIConstruction.getConstructionHistory(constructionregistrationId)
         .then((v) {
       list.clear();

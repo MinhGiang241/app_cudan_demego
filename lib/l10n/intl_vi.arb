@@ -545,7 +545,7 @@
   "letter_info": "Thông tin phiếu",
   "date_send": "Ngày gửi",
   "processing_result": "Kết quả xử lý",
-  "processing_content": "Nội dung  xử lý",
+  "processing_content": "Nội dung xử lý",
   "reflection_type": "Loại phản ánh",
   "reflection_details": "Chi tiết phản ánh",
   "zone": "Khu vực",
@@ -811,5 +811,7 @@
   "complete_handover": " Bạn đã hoàn thành nhận bàn giao cho căn hộ [{a}]",
   "reality": "Thực tế",
   "reality_handover_date": "Ngày nhận thực tế",
-  "reality_handover_hour": "Giờ nhận thực tế"
+  "reality_handover_hour": "Giờ nhận thực tế",
+  "file_image": "File/ Ảnh",
+  "success_handover": "Bạn đã bàn giao thành công cho căn hộ {ap}"
 }

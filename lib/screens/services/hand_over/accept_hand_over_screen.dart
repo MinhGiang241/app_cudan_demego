@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:app_cudan/models/hand_over.dart';
+import 'package:app_cudan/models/workarising.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
@@ -117,11 +118,13 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
       create: (context) => handOverProvider,
       builder: (context, snapshot) {
         var handOver = context.watch<AcceptHandOverPrv>().handOver;
+        var complete = context.watch<AcceptHandOverPrv>().complete;
         bool isShowInfo = context.watch<AcceptHandOverPrv>().generalInfoExpand;
         bool isShowAsset = context.watch<AcceptHandOverPrv>().assetListExpand;
         bool isShowMaterial =
             context.watch<AcceptHandOverPrv>().materialListExpand;
-
+        vote = handOver.status == 'HANDING';
+        var workArising = context.watch<AcceptHandOverPrv>().workArising;
         Animation<double> animationInfoDrop = CurvedAnimation(
           parent: animationInfoController,
           curve: Curves.easeInOut,
@@ -549,12 +552,20 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                               .watch<AcceptHandOverPrv>()
                                               .selectItemPass,
                                           data: AssetItemViewModel(
+                                            handOverId: handOver.id!,
                                             type: 'material',
                                             title: e.value[0].assetposition
                                                 ?.asset_postision,
                                             list: e.value
                                                 .map(
                                                   (e) => ItemViewModel(
+                                                    photos: e.img ?? [],
+                                                    error_notpass:
+                                                        e.reason_not_archive,
+                                                    photosError:
+                                                        e.file_reason_archive ??
+                                                            [],
+                                                    virtualId: e.virtualId,
                                                     brand: e.trademark,
                                                     material_specification: e
                                                         .material_specification,
@@ -668,12 +679,21 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                               .watch<AcceptHandOverPrv>()
                                               .selectItemPass,
                                           data: AssetItemViewModel(
+                                            handOverId: handOver.id!,
                                             type: 'asset',
                                             title: e.value[0].assetposition
                                                 ?.asset_postision,
                                             list: e.value
                                                 .map(
                                                   (e) => ItemViewModel(
+                                                    photos:
+                                                        e.img_additional ?? [],
+                                                    error_notpass:
+                                                        e.reason_not_archive,
+                                                    photosError:
+                                                        e.file_reason_archive ??
+                                                            [],
+                                                    virtualId: e.virtualId,
                                                     material_specification:
                                                         e.material_additional,
                                                     brand:
@@ -740,45 +760,93 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   isReadOnly: true,
                                   initialValue: handOver.cancel_reason,
                                 ),
-                              if (handOver.cancel_note != null) vpad(16),
-                              if (handOver.cancel_note != null)
+                              if (handOver.reason_cancel != null) vpad(16),
+                              if (handOver.reason_cancel != null)
                                 PrimaryTextField(
                                   maxLines: 2,
-                                  label: S.of(context).note,
+                                  label: S.of(context).cancel_reason,
                                   enable: false,
                                   isReadOnly: true,
-                                  initialValue: handOver.cancel_note,
+                                  initialValue: handOver.reason_cancel,
+                                ),
+                              vpad(16),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  S.of(context).processing_result,
+                                  style: txtBodySmallBold(
+                                    color: grayScaleColorBase,
+                                  ),
+                                ),
+                              ),
+                              if (workArising != null) vpad(10),
+                              if (workArising != null)
+                                PrimaryTextField(
+                                  maxLines: 2,
+                                  label: S.of(context).processing_content,
+                                  enable: false,
+                                  isReadOnly: true,
+                                  initialValue:
+                                      workArising.to_do_list_result?[0].result,
+                                ),
+                              if (workArising != null) vpad(16),
+                              if (workArising != null)
+                                SelectFileWidget(
+                                  text: S.of(context).file_image,
+                                  enable: false,
+                                  existFiles:
+                                      workArising.to_do_list_result?[0].file ??
+                                          [],
                                 ),
                               vpad(40),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      buttonType: ButtonType.orange,
-                                      onTap: () {
-                                        context
-                                            .read<AcceptHandOverPrv>()
-                                            .reportError(context);
-                                      },
-                                      width: dvWidth(context) - 24,
-                                      text: S.of(context).err_report,
+                              if (handOver.status != "CANCEL" &&
+                                  handOver.status != "COMPLETE" &&
+                                  !complete)
+                                Row(
+                                  children: [
+                                    if (handOver.cancel_reason == null)
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          buttonType: ButtonType.orange,
+                                          onTap: () {
+                                            context
+                                                .read<AcceptHandOverPrv>()
+                                                .reportError(context);
+                                          },
+                                          width: dvWidth(context) - 24,
+                                          text: S.of(context).err_report,
+                                        ),
+                                      ),
+                                    if (handOver.cancel_reason == null)
+                                      hpad(20),
+                                    Expanded(
+                                      child: PrimaryButton(
+                                        onTap: () async {
+                                          await context
+                                              .read<AcceptHandOverPrv>()
+                                              .checkHandleHandOver(
+                                                context,
+                                              );
+                                        },
+                                        text: S.of(context).accept_hand_over,
+                                      ),
                                     ),
-                                  ),
-                                  hpad(20),
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      onTap: () async {
-                                        await context
-                                            .read<AcceptHandOverPrv>()
-                                            .checkHandleHandOver(
-                                              context,
-                                            );
-                                      },
-                                      text: S.of(context).accept_hand_over,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                              if (handOver.status != "COMPLETE" && complete)
+                                PrimaryButton(
+                                  isLoading: context
+                                      .watch<AcceptHandOverPrv>()
+                                      .isLoadingComplete,
+                                  buttonType: ButtonType.green,
+                                  onTap: () async {
+                                    await context
+                                        .read<AcceptHandOverPrv>()
+                                        .completeHandover(context);
+                                  },
+                                  text: S.of(context).complete,
+                                ),
+
                               vpad(60),
                             ],
                           ),

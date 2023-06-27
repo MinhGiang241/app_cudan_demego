@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/asset_Item_view_model.dart';
+import '../../../models/hand_over.dart';
 import 'prv/accept_hand_over_prv.dart';
 import 'widget/asset_item.dart';
 
@@ -51,6 +52,7 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
   Widget build(BuildContext context) {
     bool isShowAsset = context.watch<AcceptHandOverPrv>().assetListExpand;
     bool isShowMaterial = context.watch<AcceptHandOverPrv>().materialListExpand;
+    HandOver handOver = context.watch<AcceptHandOverPrv>().handOver;
     Animation<double> animationAssetDrop = CurvedAnimation(
       parent: animationAssetController,
       curve: Curves.easeInOut,
@@ -125,11 +127,15 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                     selectPass:
                         context.watch<AcceptHandOverPrv>().selectItemPass,
                     data: AssetItemViewModel(
+                      handOverId: handOver.id!,
                       type: 'material',
                       title: e.value[0].assetposition?.asset_postision,
                       list: e.value
                           .map(
                             (e) => ItemViewModel(
+                              photosError: e.file_reason_archive ?? [],
+                              error_notpass: e.reason_not_archive,
+                              virtualId: e.virtualId,
                               photos: e.img ?? [],
                               brand: e.trademark,
                               material_specification: e.material_specification,
@@ -211,11 +217,15 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                     selectPass:
                         context.watch<AcceptHandOverPrv>().selectItemPass,
                     data: AssetItemViewModel(
+                      handOverId: handOver.id!,
                       type: 'asset',
                       title: e.value[0].assetposition?.asset_postision,
                       list: e.value
                           .map(
                             (e) => ItemViewModel(
+                              error_notpass: e.reason_not_archive,
+                              photosError: e.file_reason_archive ?? [],
+                              virtualId: e.virtualId,
                               photos: e.img_additional ?? [],
                               material_specification: e.material_additional,
                               brand: e.trademark_additional,
@@ -244,7 +254,7 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
           isLoading: context.watch<AcceptHandOverPrv>().isLoading,
           text: S.of(context).complete,
           onTap: () {
-            context.read<AcceptHandOverPrv>().saveHandOver(context);
+            context.read<AcceptHandOverPrv>().checkHandOver(context);
           },
         ),
         vpad(30),

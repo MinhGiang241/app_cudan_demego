@@ -88,12 +88,14 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m25(name) =>
       "Bạn đã hủy lịch bàn giao thành công cho căn hộ [${name}]";
 
-  static String m26(p) => "Bạn đã thanh toán cho ${p} thành công ";
+  static String m26(ap) => "Bạn đã bàn giao thành công cho căn hộ ${ap}";
 
-  static String m27(month, year) =>
+  static String m27(p) => "Bạn đã thanh toán cho ${p} thành công ";
+
+  static String m28(month, year) =>
       "Tổng lượng nước thiêu thụ tháng ${month}/${year}";
 
-  static String m28(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m29(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -484,6 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "file_code": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "file_downloading":
             MessageLookupByLibrary.simpleMessage("Đang tải file xuống"),
+        "file_image": MessageLookupByLibrary.simpleMessage("File/ Ảnh"),
         "file_info": MessageLookupByLibrary.simpleMessage("Thông tin hồ sơ"),
         "file_not_support": MessageLookupByLibrary.simpleMessage(
             "File tải lên không đúng định dạng. Vui lòng tải lại"),
@@ -846,7 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("đang học cao học"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
         "processing_content":
-            MessageLookupByLibrary.simpleMessage("Nội dung  xử lý"),
+            MessageLookupByLibrary.simpleMessage("Nội dung xử lý"),
         "processing_result":
             MessageLookupByLibrary.simpleMessage("Kết quả xử lý"),
         "project": MessageLookupByLibrary.simpleMessage("Dự án"),
@@ -1115,11 +1118,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find": MessageLookupByLibrary.simpleMessage(
             "Đổi trạng thái đồ thành đã tìm thấy thành công"),
         "success_found": MessageLookupByLibrary.simpleMessage("Đã tìm thấy"),
+        "success_handover": m26,
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_payment": m26,
+        "success_payment": m27,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Từ chối phiếu thành công"),
         "success_register_dependence": MessageLookupByLibrary.simpleMessage(
@@ -1183,7 +1187,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thành tiền (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Tổng cộng"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Tổng hóa đơn"),
-        "total_consumed_water_month": m27,
+        "total_consumed_water_month": m28,
         "total_money": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
@@ -1271,7 +1275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m28,
+        "we_send_to": m29,
         "weight": MessageLookupByLibrary.simpleMessage("Trọng lượng"),
         "weight_not_15": MessageLookupByLibrary.simpleMessage(
             "Trọng lượng không được quá 15kg"),

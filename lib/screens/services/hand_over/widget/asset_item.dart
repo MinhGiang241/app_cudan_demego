@@ -1,16 +1,13 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'dart:io';
-
 import 'package:app_cudan/models/file_upload.dart';
+import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/models/workarising.dart';
+import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
-import 'package:app_cudan/widgets/primary_checkbox.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
@@ -18,7 +15,6 @@ import '../../../../models/asset_Item_view_model.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_dialog.dart';
-import '../prv/accept_hand_over_prv.dart';
 import 'dailog_reason.dart';
 
 enum DetailType {
@@ -39,8 +35,14 @@ class AssetItem extends StatefulWidget {
   });
   final AssetItemViewModel data;
   final String keyMap;
-  final Function(bool, String, int, DetailType, List<FileUploadModel>)
-      selectPass;
+  final Function(
+    bool,
+    String,
+    int,
+    DetailType,
+    List<FileUploadModel>,
+    String,
+  ) selectPass;
   final String region;
   final bool vote;
   final DetailType type;
@@ -57,7 +59,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
     duration: const Duration(milliseconds: 300),
   );
 
-  TableRow renderTableRow(String title, String value) {
+  TableRow renderTableRow(String title, String value, TextStyle? style) {
     return TableRow(
       children: [
         Padding(
@@ -66,13 +68,17 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
           ),
           child: Text(
             "${title}:",
+            style: txtBodySmallRegular(color: grayScaleColorBase),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 8.0,
           ),
-          child: Text(value),
+          child: Text(
+            value,
+            style: style ?? txtBodySmallRegular(color: grayScaleColorBase),
+          ),
         ),
       ],
     );
@@ -208,229 +214,367 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                   ],
                 ),
                 ...widget.data.list.asMap().entries.map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                (e.key + 1).toString(),
-                                textAlign: TextAlign.center,
-                                style: txtMedium(13),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Text(
-                                e.value.name ?? "",
-                                textAlign: TextAlign.center,
-                                style: txtMedium(13),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: InkWell(
-                                onTap: () {
-                                  Utils.showDialog(
-                                    context: context,
-                                    dialog: PrimaryDialog.custom(
-                                      title: widget.type == DetailType.ASSET
-                                          ? S.of(context).asset_details
-                                          : S.of(context).material_details,
-                                      content: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            Table(
-                                              textBaseline:
-                                                  TextBaseline.ideographic,
-                                              defaultVerticalAlignment:
-                                                  TableCellVerticalAlignment
-                                                      .baseline,
-                                              columnWidths: const {
-                                                0: FlexColumnWidth(3),
-                                                1: FlexColumnWidth(3)
-                                              },
+                      (e) => FutureBuilder(
+                        future: () async {
+                          var a = await APIHandOver.getResultsWorkByVirtualId(
+                            e.value.virtualId ?? '',
+                            widget.data.handOverId,
+                          );
+                          print("hah ${e.value.virtualId}");
+                          print('hah ${widget.data.handOverId}');
+                          return a;
+                        }(),
+                        builder: (context, snapshot) {
+                          WorkArising? work;
+                          if (snapshot.data != null) {
+                            work = WorkArising.fromMap(snapshot.data);
+                          }
+
+                          print(work);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    (e.key + 1).toString(),
+                                    textAlign: TextAlign.center,
+                                    style: txtMedium(13),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    e.value.name ?? "",
+                                    textAlign: TextAlign.center,
+                                    style: txtMedium(13),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Utils.showDialog(
+                                        context: context,
+                                        dialog: PrimaryDialog.custom(
+                                          title: widget.type == DetailType.ASSET
+                                              ? S.of(context).asset_details
+                                              : S.of(context).material_details,
+                                          content: SingleChildScrollView(
+                                            child: Column(
                                               children: [
-                                                renderTableRow(
-                                                  S.of(context).location,
-                                                  widget.region,
+                                                Table(
+                                                  textBaseline:
+                                                      TextBaseline.ideographic,
+                                                  defaultVerticalAlignment:
+                                                      TableCellVerticalAlignment
+                                                          .baseline,
+                                                  columnWidths: const {
+                                                    0: FlexColumnWidth(3),
+                                                    1: FlexColumnWidth(3)
+                                                  },
+                                                  children: [
+                                                    renderTableRow(
+                                                      S.of(context).location,
+                                                      widget.region,
+                                                      null,
+                                                    ),
+                                                    renderTableRow(
+                                                      S.of(context).asset,
+                                                      "${e.value.name}",
+                                                      null,
+                                                    ),
+                                                    renderTableRow(
+                                                      widget.type ==
+                                                              DetailType
+                                                                  .MATERIAL
+                                                          ? S
+                                                              .of(context)
+                                                              .material_specification
+                                                          : S
+                                                              .of(context)
+                                                              .material,
+                                                      e.value.material_specification ??
+                                                          "",
+                                                      null,
+                                                    ),
+                                                    renderTableRow(
+                                                      S.of(context).brand,
+                                                      "${e.value.brand}",
+                                                      null,
+                                                    ),
+                                                    if (widget.type ==
+                                                        DetailType.ASSET)
+                                                      renderTableRow(
+                                                        S.of(context).amount,
+                                                        e.value.amount
+                                                            .toString(),
+                                                        null,
+                                                      ),
+                                                    if (widget.type ==
+                                                        DetailType.ASSET)
+                                                      renderTableRow(
+                                                        S
+                                                            .of(context)
+                                                            .unit_count,
+                                                        e.value.unit ?? '',
+                                                        null,
+                                                      ),
+                                                    renderTableRow(
+                                                      S.of(context).note,
+                                                      e.value.note ?? '',
+                                                      null,
+                                                    ),
+                                                    renderTableRow(
+                                                      S.of(context).status,
+                                                      e.value.achieve == true
+                                                          ? S.of(context).pass
+                                                          : e.value.not_achieve ==
+                                                                  true
+                                                              ? S
+                                                                  .of(context)
+                                                                  .not_pass
+                                                              : '',
+                                                      (e.value.achieve == true
+                                                          ? txtBold(
+                                                              14,
+                                                              primaryColorBase,
+                                                            )
+                                                          : txtBold(
+                                                              14,
+                                                              redColorBase,
+                                                            )),
+                                                    ),
+                                                  ],
                                                 ),
-                                                renderTableRow(
-                                                  S.of(context).asset,
-                                                  "${e.value.name}",
+                                                vpad(12),
+                                                SelectMediaWidget(
+                                                  enable: false,
+                                                  title:
+                                                      S.of(context).file_image,
+                                                  existImages: e.value.photos,
                                                 ),
-                                                renderTableRow(
-                                                  widget.type ==
-                                                          DetailType.MATERIAL
-                                                      ? S
-                                                          .of(context)
-                                                          .material_specification
-                                                      : S.of(context).material,
-                                                  e.value.material_specification ??
-                                                      "",
-                                                ),
-                                                renderTableRow(
-                                                  S.of(context).brand,
-                                                  "${e.value.brand}",
-                                                ),
-                                                if (widget.type ==
-                                                    DetailType.ASSET)
-                                                  renderTableRow(
-                                                    S.of(context).amount,
-                                                    e.value.amount.toString(),
+                                                vpad(12),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    S
+                                                        .of(context)
+                                                        .not_pass_reason,
+                                                    style: txtBodySmallBold(
+                                                      color: grayScaleColorBase,
+                                                    ),
                                                   ),
-                                                if (widget.type ==
-                                                    DetailType.ASSET)
-                                                  renderTableRow(
-                                                    S.of(context).unit_count,
-                                                    e.value.unit ?? '',
+                                                ),
+                                                vpad(12),
+                                                PrimaryTextField(
+                                                  // label: S
+                                                  //     .of(context)
+                                                  //     .not_pass_reason,
+                                                  enable: false,
+                                                  initialValue:
+                                                      e.value.error_notpass,
+                                                  maxLines: 2,
+                                                ),
+                                                vpad(12),
+                                                SelectMediaWidget(
+                                                  enable: false,
+                                                  title:
+                                                      S.of(context).file_image,
+                                                  existImages:
+                                                      e.value.photosError,
+                                                ),
+                                                vpad(12),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    S
+                                                        .of(context)
+                                                        .processing_result,
+                                                    style: txtBodySmallBold(
+                                                      color: grayScaleColorBase,
+                                                    ),
                                                   ),
-                                                renderTableRow(
-                                                  S.of(context).note,
-                                                  e.value.note ?? '',
+                                                ),
+                                                vpad(12),
+                                                PrimaryTextField(
+                                                  label: S
+                                                      .of(context)
+                                                      .processing_content,
+                                                  enable: false,
+                                                  initialValue: work
+                                                      ?.to_do_list_result?[0]
+                                                      .result,
+                                                  maxLines: 2,
+                                                ),
+                                                vpad(12),
+                                                SelectMediaWidget(
+                                                  enable: false,
+                                                  title:
+                                                      S.of(context).file_image,
+                                                  existImages: work
+                                                          ?.to_do_list_result?[
+                                                              0]
+                                                          .file ??
+                                                      [],
+                                                ),
+                                                vpad(12),
+                                                if (widget.vote)
+                                                  Row(
+                                                    children: [
+                                                      if (e.value.not_achieve !=
+                                                          true)
+                                                        Expanded(
+                                                          child: PrimaryButton(
+                                                            onTap: () {
+                                                              Navigator.pop(
+                                                                context,
+                                                              );
+
+                                                              addReasonReject(
+                                                                () => widget
+                                                                    .selectPass(
+                                                                  false,
+                                                                  widget.keyMap,
+                                                                  e.key,
+                                                                  widget.type,
+                                                                  e.value
+                                                                      .photos,
+                                                                  '',
+                                                                ),
+                                                                widget
+                                                                    .functionSave,
+                                                                e.key,
+                                                              );
+                                                            },
+                                                            buttonSize:
+                                                                ButtonSize
+                                                                    .xsmall,
+                                                            buttonType:
+                                                                ButtonType.red,
+                                                            text: S
+                                                                .of(context)
+                                                                .not_pass,
+                                                          ),
+                                                        ),
+                                                      if (e.value.achieve !=
+                                                              true &&
+                                                          e.value.not_achieve !=
+                                                              true)
+                                                        hpad(10),
+                                                      if (e.value.achieve !=
+                                                          true)
+                                                        Expanded(
+                                                          child: PrimaryButton(
+                                                            onTap: () {
+                                                              Navigator.pop(
+                                                                context,
+                                                              );
+                                                              widget.selectPass(
+                                                                true,
+                                                                widget.keyMap,
+                                                                e.key,
+                                                                widget.type,
+                                                                e.value.photos,
+                                                                '',
+                                                              );
+                                                            },
+                                                            buttonSize:
+                                                                ButtonSize
+                                                                    .xsmall,
+                                                            buttonType:
+                                                                ButtonType
+                                                                    .green,
+                                                            text: S
+                                                                .of(context)
+                                                                .pass,
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  ),
+                                                vpad(12),
+                                                PrimaryButton(
+                                                  width: double.infinity,
+                                                  text: S.of(context).cancel,
+                                                  buttonType:
+                                                      ButtonType.secondary,
+                                                  secondaryBackgroundColor:
+                                                      redColor4,
+                                                  textColor: redColor1,
+                                                  buttonSize: ButtonSize.xsmall,
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
                                                 ),
                                               ],
                                             ),
-                                            vpad(12),
-                                            if (widget.vote)
-                                              Row(
-                                                children: [
-                                                  if (e.value.achieve != true)
-                                                    Expanded(
-                                                      child: PrimaryButton(
-                                                        onTap: () {
-                                                          Navigator.pop(
-                                                            context,
-                                                          );
-                                                          widget.selectPass(
-                                                            true,
-                                                            widget.keyMap,
-                                                            e.key,
-                                                            widget.type,
-                                                            e.value.photos,
-                                                          );
-                                                        },
-                                                        buttonSize:
-                                                            ButtonSize.xsmall,
-                                                        buttonType:
-                                                            ButtonType.primary,
-                                                        text:
-                                                            S.of(context).pass,
-                                                      ),
-                                                    ),
-                                                  if (e.value.achieve == null &&
-                                                      e.value.not_achieve ==
-                                                          null)
-                                                    hpad(30),
-                                                  if (e.value.not_achieve !=
-                                                      true)
-                                                    Expanded(
-                                                      child: PrimaryButton(
-                                                        onTap: () {
-                                                          Navigator.pop(
-                                                            context,
-                                                          );
-
-                                                          addReasonReject(
-                                                            () => widget
-                                                                .selectPass(
-                                                              false,
-                                                              widget.keyMap,
-                                                              e.key,
-                                                              widget.type,
-                                                              e.value.photos,
-                                                            ),
-                                                            widget.functionSave,
-                                                            e.key,
-                                                          );
-                                                        },
-                                                        buttonSize:
-                                                            ButtonSize.xsmall,
-                                                        buttonType:
-                                                            ButtonType.red,
-                                                        text: S
-                                                            .of(context)
-                                                            .not_pass,
-                                                      ),
-                                                    )
-                                                ],
-                                              ),
-                                            vpad(12),
-                                            PrimaryButton(
-                                              width: double.infinity,
-                                              text: S.of(context).cancel,
-                                              buttonType: ButtonType.secondary,
-                                              secondaryBackgroundColor:
-                                                  redColor4,
-                                              textColor: redColor1,
-                                              buttonSize: ButtonSize.xsmall,
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
+                                          ),
                                         ),
+                                      );
+                                    },
+                                    child: Text(
+                                      S.of(context).view,
+                                      textAlign: TextAlign.center,
+                                      style: txtSemiBoldUnderline(
+                                        13,
+                                        greenColorBase,
                                       ),
                                     ),
-                                  );
-                                },
-                                child: Text(
-                                  S.of(context).view,
-                                  textAlign: TextAlign.center,
-                                  style: txtSemiBoldUnderline(
-                                    13,
-                                    greenColorBase,
                                   ),
                                 ),
-                              ),
+                                if (widget.vote)
+                                  Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: Checkbox(
+                                        onChanged: (v) {
+                                          widget.selectPass(
+                                            true,
+                                            widget.keyMap,
+                                            e.key,
+                                            widget.type,
+                                            e.value.photos,
+                                            '',
+                                          );
+                                        },
+                                        value: e.value.achieve,
+                                      ),
+                                    ),
+                                  ),
+                                if (widget.vote)
+                                  Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: Checkbox(
+                                        onChanged: (v) {
+                                          addReasonReject(
+                                            () => widget.selectPass(
+                                              false,
+                                              widget.keyMap,
+                                              e.key,
+                                              widget.type,
+                                              e.value.photos,
+                                              '',
+                                            ),
+                                            widget.functionSave,
+                                            e.key,
+                                          );
+                                        },
+                                        value: e.value.not_achieve,
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
-                            if (widget.vote)
-                              Expanded(
-                                flex: 1,
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: Checkbox(
-                                    onChanged: (v) {
-                                      widget.selectPass(
-                                        true,
-                                        widget.keyMap,
-                                        e.key,
-                                        widget.type,
-                                        e.value.photos,
-                                      );
-                                    },
-                                    value: e.value.achieve,
-                                  ),
-                                ),
-                              ),
-                            if (widget.vote)
-                              Expanded(
-                                flex: 1,
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: Checkbox(
-                                    onChanged: (v) {
-                                      addReasonReject(
-                                        () => widget.selectPass(
-                                          false,
-                                          widget.keyMap,
-                                          e.key,
-                                          widget.type,
-                                          e.value.photos,
-                                        ),
-                                        widget.functionSave,
-                                        e.key,
-                                      );
-                                    },
-                                    value: e.value.not_achieve,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
               ],

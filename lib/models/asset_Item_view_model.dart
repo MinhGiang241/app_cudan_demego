@@ -5,9 +5,11 @@ class AssetItemViewModel {
   final String? type;
   final String? title;
   final List<ItemViewModel> list;
+  final String handOverId;
   AssetItemViewModel({
     this.type,
     this.title,
+    required this.handOverId,
     this.list = const <ItemViewModel>[],
   });
 }
@@ -16,14 +18,17 @@ class ItemViewModel {
   final String? name;
   final String? code;
   final String? id;
+  final String? virtualId;
   final bool? achieve;
   final bool? not_achieve;
   final String? unit;
   final String? material_specification;
   final String? note;
   final String? brand;
+  final String? error_notpass;
   final int? amount;
   final List<FileUploadModel> photos;
+  final List<FileUploadModel> photosError;
   ItemViewModel({
     this.name,
     this.code,
@@ -35,6 +40,9 @@ class ItemViewModel {
     this.note,
     this.amount,
     this.brand,
+    required this.virtualId,
+    required this.error_notpass,
     this.photos = const [],
+    required this.photosError,
   });
 }
