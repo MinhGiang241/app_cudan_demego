@@ -27,8 +27,8 @@ class HandOverPrv extends ChangeNotifier {
   Future getHanOverHistory(
     BuildContext context,
   ) async {
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
-    await APIHandOver.getHandOverList(phone).then((v) {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    await APIHandOver.getHandOverList(residentId).then((v) {
       listHandOver.clear();
       for (var i in v) {
         listHandOver.add(HandOver.fromMap(i));

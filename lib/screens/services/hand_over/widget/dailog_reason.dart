@@ -127,6 +127,7 @@ class _ReasonDailogState extends State<ReasonDailog> {
       child: Column(
         children: [
           PrimaryTextField(
+            maxLength: 550,
             controller: rController,
             maxLines: 2,
             label: S.of(context).not_pass_reason,

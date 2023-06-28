@@ -102,7 +102,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
       }
     }
     var data = handOverCopy.toMap();
-    data["status"] = 'COMPLETE';
+    // data["status"] = 'WAIT';
     if (count > 0) {
       Utils.showConfirmMessage(
         context: context,
@@ -136,6 +136,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
           }).catchError((e) {
             isLoading = false;
             notifyListeners();
+            Navigator.pop(context);
             Utils.showErrorMessage(context, e);
           });
         },
@@ -160,6 +161,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
   completeHandover(BuildContext context) async {
     isLoadingComplete = true;
     notifyListeners();
+    handOverCopy.status = 'COMPLETE';
     var data = handOverCopy.toMap();
     await APIHandOver.saveHandOver(data).then((v) {
       isLoadingComplete = false;

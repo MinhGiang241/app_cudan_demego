@@ -543,7 +543,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           functionSave: context
                                               .read<AcceptHandOverPrv>()
                                               .saveCheckItem,
-                                          vote: vote,
+                                          vote: complete,
                                           type: DetailType.MATERIAL,
                                           region: e.value[0].assetposition
                                                   ?.asset_postision ??
@@ -670,7 +670,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           functionSave: context
                                               .read<AcceptHandOverPrv>()
                                               .saveCheckItem,
-                                          vote: vote,
+                                          vote: complete,
                                           type: DetailType.ASSET,
                                           region: e.value[0].assetposition
                                                   ?.asset_postision ??
