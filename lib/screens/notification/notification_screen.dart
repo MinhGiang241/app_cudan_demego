@@ -76,9 +76,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
         isScrollControlled: true,
         context: context,
         builder: (contex) => Column(children: [
-          Text('${messages?.notification?.title}'),
-          Text('${messages?.notification?.body}'),
-          Text('${messages?.data}'),
           vpad(30),
           Container(
             color: Colors.white,

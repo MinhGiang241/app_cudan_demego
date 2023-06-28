@@ -106,8 +106,6 @@ class _WaterPaymentTabState extends State<WaterPaymentTab> {
                           ? Align(
                               alignment: Alignment.centerRight,
                               child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 12),
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 10,
                                   vertical: 4,

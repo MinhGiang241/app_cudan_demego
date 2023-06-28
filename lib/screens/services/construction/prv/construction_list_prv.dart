@@ -271,6 +271,7 @@ class ConstructionListPrv extends ChangeNotifier {
             ),
             vpad(10),
             PrimaryTextField(
+              maxLength: 500,
               controller: noteController,
               maxLines: 3,
               label: S.of(context).note,

@@ -195,21 +195,14 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                                   ),
                                   Expanded(
                                     flex: 15,
-                                    child: PrimaryCard(
+                                    child: PrimaryTextField(
                                       margin: EdgeInsets.symmetric(
                                         horizontal: 12,
                                       ),
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 16,
-                                        horizontal: 12,
-                                      ),
-                                      child: Text(
-                                        (handOver.real_acreage ?? "0")
-                                            .toString(),
-                                        style: txtBodySmallBold(
-                                          color: grayScaleColor3,
-                                        ),
-                                      ),
+                                      enable: false,
+                                      initialValue:
+                                          (handOver.real_acreage ?? '0')
+                                              .toString(),
                                     ),
                                   ),
                                   Expanded(
@@ -259,21 +252,14 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                                   ),
                                   Expanded(
                                     flex: 15,
-                                    child: PrimaryCard(
+                                    child: PrimaryTextField(
                                       margin: EdgeInsets.symmetric(
                                         horizontal: 12,
                                       ),
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 16,
-                                        horizontal: 12,
-                                      ),
-                                      child: Text(
-                                        (handOver.real_floor_area ?? "0")
-                                            .toString(),
-                                        style: txtBodySmallBold(
-                                          color: grayScaleColor3,
-                                        ),
-                                      ),
+                                      enable: false,
+                                      initialValue:
+                                          (handOver.real_floor_area ?? '0')
+                                              .toString(),
                                     ),
                                   ),
                                   Expanded(

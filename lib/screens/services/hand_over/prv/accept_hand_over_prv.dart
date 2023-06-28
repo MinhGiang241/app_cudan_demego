@@ -333,7 +333,12 @@ class AcceptHandOverPrv extends ChangeNotifier {
   ) async {
     var data = handOver.copyWith().toMap();
     data['isMobile'] = true;
-    await APIHandOver.check_handle_handover(data).then((v) {
+    await APIHandOver.check_handle_handover(data).then((v) async {
+      handOverCopy.status = 'HANDING';
+      var data = handOverCopy.toMap();
+      await APIHandOver.saveHandOver(data);
+    }).then((v) {
+      getHandOverById();
       pageController.animateToPage(
         ++activeStep,
         duration: const Duration(milliseconds: 250),

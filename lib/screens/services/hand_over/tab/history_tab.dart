@@ -28,37 +28,6 @@ class HistoryTab extends StatefulWidget {
 }
 
 class _HistoryTabState extends State<HistoryTab> {
-  var list = [
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "HANDING_OVER",
-      "ticket_status": "WAIT_EXECUTE"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "WAIT_HAND_OVER",
-      "ticket_status": "WAIT_EXECUTE"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "HANDED_OVER",
-      "ticket_status": "EXECUTED"
-    },
-    {
-      "name": "Tên mặt bằng",
-      "hand_date": "02/03/2023",
-      "hand_time": "09:30",
-      "status": "HANDED_OVER",
-      "ticket_status": "EXECUTED"
-    },
-  ];
-
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   @override
@@ -68,7 +37,7 @@ class _HistoryTabState extends State<HistoryTab> {
             context,
           ),
       builder: (context, snapshot) {
-        List<HandOver> list = context.watch<HandOverPrv>().listHandOver;
+        List<HandOver> listH = context.watch<HandOverPrv>().listHandOver;
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
@@ -79,7 +48,7 @@ class _HistoryTabState extends State<HistoryTab> {
               setState(() {});
             },
           );
-        } else if (list.isEmpty) {
+        } else if (listH.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
@@ -100,6 +69,28 @@ class _HistoryTabState extends State<HistoryTab> {
             ),
           );
         }
+
+        List<HandOver> complete = [];
+        List<HandOver> wait = [];
+        List<HandOver> handing = [];
+        List<HandOver> cancel = [];
+        for (var i in listH) {
+          if (i.status == "COMPLETE") {
+            complete.add(i);
+          } else if (i.status == "WAIT") {
+            wait.add(i);
+          } else if (i.status == "HANDING") {
+            handing.add(i);
+          } else if (i.status == "CANCEL") {
+            cancel.add(i);
+          }
+        }
+
+        complete.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        wait.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        handing.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        cancel.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        List<HandOver> list = wait + handing + complete + cancel;
 
         return SafeArea(
           child: SmartRefresher(
@@ -135,21 +126,6 @@ class _HistoryTabState extends State<HistoryTab> {
                               'vote': false
                             },
                           );
-                          // if (e.status == "COMPLETE") {
-                          //   Navigator.pushNamed(
-                          //       context, AcceptHandOverScreen.routeName,
-                          //       arguments: {"status": e.status});
-                          // } else if (e.status == "WAIT") {
-                          //   Navigator.pushNamed(
-                          //     context,
-                          //     GeneralInfoScreen.routeName,
-                          //   );
-                          // } else {
-                          //   Navigator.pushNamed(
-                          //     context,
-                          //     GeneralInfoScreen.routeName,
-                          //   );
-                          // }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

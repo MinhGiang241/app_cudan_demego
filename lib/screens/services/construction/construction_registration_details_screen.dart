@@ -6,6 +6,7 @@ import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/construction/tab/construction_history_tab.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
+import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -231,7 +232,7 @@ class _ConstructionRegistrationDetailsScreenState
                     if (reg.reason_description != null)
                       InfoContentView(
                         isHorizontal: true,
-                        title: S.of(context).description,
+                        title: S.of(context).note,
                         content: reg.reason_description ?? "",
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
@@ -305,34 +306,34 @@ class _ConstructionRegistrationDetailsScreenState
                   style: txtMedium(14, grayScaleColor2),
                 ),
               ),
-              ...draws.map(
-                (e) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: InkWell(
-                    onTap: () async {
-                      Utils.downloadFile(
-                        context: context,
-                        id: e.id,
-                      );
-                      // await launchUrl(
-                      //   Uri.parse("${ApiConstants.uploadURL}?load=${e.id}"),
-                      //   mode: LaunchMode.externalApplication,
-                      // );
-                    },
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        e.name ?? "",
-                        textAlign: TextAlign.left,
-                        style: txtMedium(
-                          14,
-                          primaryColor6,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              SelectFileWidget(
+                enable: false,
+                existFiles: draws,
               ),
+              // ...draws.map(
+              //   (e) => Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 12),
+              //     child: InkWell(
+              //       onTap: () async {
+              //         Utils.downloadFile(
+              //           context: context,
+              //           id: e.id,
+              //         );
+              //       },
+              //       child: Align(
+              //         alignment: Alignment.centerLeft,
+              //         child: Text(
+              //           e.name ?? "",
+              //           textAlign: TextAlign.left,
+              //           style: txtMedium(
+              //             14,
+              //             primaryColor6,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               vpad(16),
               Row(
                 children: [
