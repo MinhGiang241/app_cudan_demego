@@ -457,7 +457,15 @@ class AcceptHandOverPrv extends ChangeNotifier {
           context: context,
           e: S.of(context).success_report_handover,
           onClose: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              HandOverScreen.routeName,
+              (route) => route.isFirst,
+              arguments: {
+                'init': 1,
+              },
+            );
           },
         );
       }).catchError((e) {
