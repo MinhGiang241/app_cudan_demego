@@ -18,4 +18,19 @@ class Reason {
     name = json['name'];
     code = json['code'];
   }
+  Reason copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? name,
+  }) {
+    return Reason(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      name: name ?? this.name,
+      code: code ?? this.code,
+    );
+  }
 }

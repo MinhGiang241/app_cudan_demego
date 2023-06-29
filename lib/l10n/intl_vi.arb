@@ -813,5 +813,8 @@
   "reality_handover_date": "Ngày nhận thực tế",
   "reality_handover_hour": "Giờ nhận thực tế",
   "file_image": "File/ Ảnh",
-  "success_handover": "Bạn đã bàn giao thành công cho căn hộ {ap}"
+  "success_handover": "Bạn đã bàn giao thành công cho căn hộ {ap}",
+  "not_larger": "Giá trị không lớn hơn {s}",
+  "material0": "Vật liệu",
+  "category_name": "Tên danh mục"
 }

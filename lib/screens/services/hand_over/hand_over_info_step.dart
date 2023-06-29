@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:app_cudan/screens/services/hand_over/prv/accept_hand_over_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -86,7 +87,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
   var isShowInfo = false;
   @override
   Widget build(BuildContext context) {
-    var handOver = context.watch<AcceptHandOverPrv>().handOver;
+    var handOverCopy = context.watch<AcceptHandOverPrv>().handOverCopy;
     var ruleFiles = context.watch<AcceptHandOverPrv>().ruleFiles;
     Animation<double> animationInfoDrop = CurvedAnimation(
       parent: animationInfoController,
@@ -148,276 +149,317 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
               sizeFactor: animationInfoDrop,
               child: SingleChildScrollView(
                 // key: context.read<AcceptHandOverPrv>().infoKey,
-                child: Column(
-                  children: [
-                    vpad(16),
-                    PrimaryDropDown(
-                      enable: false,
-                      value: handOver.apartmentId,
-                      label: S.of(context).surface,
-                      selectList: [
-                        DropdownMenuItem(
-                          value: handOver.apartmentId,
-                          child: Text(
-                            handOver.a?.name! != null
-                                ? handOver.label ??
-                                    '${handOver.a?.name} - ${handOver.a?.f?.name} - ${handOver.a?.b?.name}'
-                                : handOver.apartmentId!,
-                          ),
-                        )
-                      ],
-                      isDense: false,
-                    ),
-                    vpad(16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: PrimaryTextField(
-                            component: Expanded(
-                              flex: 21,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        S.of(context).reality,
-                                        textAlign: TextAlign.center,
-                                        style: txtBodySmallRegular(
-                                          color: grayScaleColorBase,
+                child: Form(
+                  key: context.read<AcceptHandOverPrv>().infoKeyStep,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  onChanged:
+                      context.read<AcceptHandOverPrv>().onChangeFormInfoStep,
+                  child: Column(
+                    children: [
+                      vpad(16),
+                      PrimaryDropDown(
+                        enable: false,
+                        value: handOverCopy.apartmentId,
+                        label: S.of(context).surface,
+                        selectList: [
+                          DropdownMenuItem(
+                            value: handOverCopy.apartmentId,
+                            child: Text(
+                              handOverCopy.a?.name! != null
+                                  ? handOverCopy.label ??
+                                      '${handOverCopy.a?.name} - ${handOverCopy.a?.f?.name} - ${handOverCopy.a?.b?.name}'
+                                  : handOverCopy.apartmentId!,
+                            ),
+                          )
+                        ],
+                        isDense: false,
+                      ),
+                      vpad(16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: PrimaryTextField(
+                              component: Expanded(
+                                flex: 21,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 5,
+                                      child: Align(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          S.of(context).reality,
+                                          textAlign: TextAlign.center,
+                                          style: txtBodySmallRegular(
+                                            color: grayScaleColorBase,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 15,
-                                    child: PrimaryTextField(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: 12,
+                                    Expanded(
+                                      flex: 15,
+                                      child: PrimaryTextField(
+                                        controller: context
+                                            .read<AcceptHandOverPrv>()
+                                            .realAreaController,
+                                        isRequired: true,
+                                        isShow: false,
+                                        filter: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9.]'),
+                                          ),
+                                        ],
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                        ),
+                                        enable: true,
+                                        validateString: context
+                                            .watch<AcceptHandOverPrv>()
+                                            .validaterRealArea,
+                                        keyboardType: TextInputType.number,
+                                        // initialValue:
+                                        //     (handOver.real_acreage ?? '0')
+                                        //         .toString(),
                                       ),
-                                      enable: false,
-                                      initialValue:
-                                          (handOver.real_acreage ?? '0')
-                                              .toString(),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: Text(
-                                      '(m²)',
-                                      style: txtBodySmallBold(
-                                        color: grayScaleColor3,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            label: S.of(context).s_usage_apartment,
-                            isRequired: true,
-                            enable: false,
-                            initialValue:
-                                (handOver.floor_area ?? '0').toString(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    vpad(16),
-                    Row(
-                      children: [
-                        hpad(5),
-                        Expanded(
-                          flex: 4,
-                          child: PrimaryTextField(
-                            component: Expanded(
-                              flex: 21,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Align(
-                                      alignment: Alignment.center,
+                                    Expanded(
+                                      flex: 5,
                                       child: Text(
-                                        S.of(context).reality,
-                                        textAlign: TextAlign.center,
-                                        style: txtBodySmallRegular(
-                                          color: grayScaleColorBase,
+                                        '(m²)',
+                                        style: txtBodySmallBold(
+                                          color: grayScaleColor3,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 15,
-                                    child: PrimaryTextField(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: 12,
+                                  ],
+                                ),
+                              ),
+                              label: S.of(context).s_usage_apartment,
+                              isRequired: true,
+                              enable: false,
+                              initialValue:
+                                  (handOverCopy.sale?.area_of_private ?? '0')
+                                      .toString(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      vpad(16),
+                      Row(
+                        children: [
+                          hpad(5),
+                          Expanded(
+                            flex: 4,
+                            child: PrimaryTextField(
+                              component: Expanded(
+                                flex: 21,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 5,
+                                      child: Align(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          S.of(context).reality,
+                                          textAlign: TextAlign.center,
+                                          style: txtBodySmallRegular(
+                                            color: grayScaleColorBase,
+                                          ),
+                                        ),
                                       ),
-                                      enable: false,
-                                      initialValue:
-                                          (handOver.real_floor_area ?? '0')
-                                              .toString(),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: Text(
-                                      '(m²)',
-                                      style: txtBodySmallBold(
-                                        color: grayScaleColor3,
+                                    Expanded(
+                                      flex: 15,
+                                      child: PrimaryTextField(
+                                        controller: context
+                                            .read<AcceptHandOverPrv>()
+                                            .realFloorController,
+                                        isRequired: true,
+                                        isShow: false,
+                                        filter: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9.]'),
+                                          ),
+                                        ],
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                        ),
+                                        enable: true,
+                                        validateString: context
+                                            .watch<AcceptHandOverPrv>()
+                                            .validateRealFloor,
+                                        validator: context
+                                            .read<AcceptHandOverPrv>()
+                                            .validateAreaForm,
+                                        keyboardType: TextInputType.number,
+                                        // initialValue:
+                                        //     (handOver.real_floor_area ?? '0')
+                                        //         .toString(),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      flex: 5,
+                                      child: Text(
+                                        '(m²)',
+                                        style: txtBodySmallBold(
+                                          color: grayScaleColor3,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              label: S.of(context).s_cons_apartment,
+                              isRequired: true,
+                              enable: false,
+                              initialValue:
+                                  (handOverCopy.sale?.floor_area ?? '0')
+                                      .toString(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      vpad(16),
+                      PrimaryTextField(
+                        enable: false,
+                        isRequired: true,
+                        label: S.of(context).time_hanover,
+                        initialValue:
+                            "${handOverCopy.schedule_hour} ${Utils.dateFormat(handOverCopy.schedule_time ?? "", 1)}",
+                      ),
+                      vpad(16),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: PrimaryTextField(
+                              enable: false,
+                              initialValue: Utils.dateFormat(
+                                handOverCopy.date ?? "",
+                                1,
+                              ),
+                              label: S.of(context).reality_handover_date,
+                              suffixIcon: const PrimaryIcon(
+                                padding: EdgeInsets.zero,
+                                icons: PrimaryIcons.calendar,
                               ),
                             ),
-                            label: S.of(context).s_cons_apartment,
-                            isRequired: true,
-                            enable: false,
-                            initialValue:
-                                (handOver.real_floor_area ?? '0').toString(),
                           ),
-                        ),
-                      ],
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      enable: false,
-                      isRequired: true,
-                      label: S.of(context).time_hanover,
-                      initialValue:
-                          "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
-                    ),
-                    vpad(16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: PrimaryTextField(
-                            enable: false,
-                            initialValue: Utils.dateFormat(
-                              handOver.date ?? "",
-                              1,
-                            ),
-                            label: S.of(context).reality_handover_date,
-                            suffixIcon: const PrimaryIcon(
-                              padding: EdgeInsets.zero,
-                              icons: PrimaryIcons.calendar,
+                          hpad(16),
+                          Expanded(
+                            child: PrimaryTextField(
+                              enable: false,
+                              initialValue: handOverCopy.hour,
+                              label: S.of(context).reality_handover_hour,
+                              suffixIcon: const PrimaryIcon(
+                                padding: EdgeInsets.zero,
+                                icons: PrimaryIcons.clock,
+                              ),
                             ),
                           ),
-                        ),
-                        hpad(16),
-                        Expanded(
-                          child: PrimaryTextField(
-                            enable: false,
-                            initialValue: handOver.hour,
-                            label: S.of(context).reality_handover_hour,
-                            suffixIcon: const PrimaryIcon(
-                              padding: EdgeInsets.zero,
-                              icons: PrimaryIcons.clock,
-                            ),
+                        ],
+                      ),
+                      vpad(16),
+                      PrimaryTextField(
+                        enable: false,
+                        isRequired: true,
+                        label: S.of(context).hand_over_employee,
+                        initialValue: handOverCopy.e?.name ?? '',
+                      ),
+                      vpad(16),
+                      SelectFileWidget(
+                        enable: false,
+                        title: S.of(context).drawing,
+                        isRequired: true,
+                        isDash: false,
+                        existFiles: handOverCopy.floor_plan_drawing ?? [],
+                      ),
+                      vpad(16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "${S.of(context).hand_over_rule}:",
+                          style: txtBodySmallBold(
+                            color: grayScaleColorBase,
                           ),
-                        ),
-                      ],
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      enable: false,
-                      isRequired: true,
-                      label: S.of(context).hand_over_employee,
-                      initialValue: handOver.e?.name ?? '',
-                    ),
-                    vpad(16),
-                    SelectFileWidget(
-                      enable: false,
-                      title: S.of(context).drawing,
-                      isRequired: true,
-                      isDash: false,
-                      existFiles: handOver.floor_plan_drawing ?? [],
-                    ),
-                    vpad(16),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "${S.of(context).hand_over_rule}:",
-                        style: txtBodySmallBold(
-                          color: grayScaleColorBase,
                         ),
                       ),
-                    ),
-                    if (ruleFiles.isNotEmpty) vpad(12),
-                    SelectFileWidget(
-                      enable: false,
-                      // title:
-                      //     "${S.of(context).hand_over_rule}:",
-                      isRequired: true,
-                      isDash: false,
-                      existFiles: ruleFiles,
-                    ),
-                  ],
+                      if (ruleFiles.isNotEmpty) vpad(12),
+                      SelectFileWidget(
+                        enable: false,
+                        // title:
+                        //     "${S.of(context).hand_over_rule}:",
+                        isRequired: true,
+                        isDash: false,
+                        existFiles: ruleFiles,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             vpad(30),
             PrimaryTextField(
-              textColor: genStatusColor(handOver.status ?? ''),
+              textColor: genStatusColor(handOverCopy.status ?? ''),
               label: S.of(context).status,
               enable: false,
-              initialValue: handOver.s?.name,
-              textStyle: txtBold(14, genStatusColor(handOver.status)),
+              initialValue: handOverCopy.s?.name,
+              textStyle: txtBold(14, genStatusColor(handOverCopy.status)),
             ),
-            if (handOver.cancel_reason != null) vpad(16),
-            if (handOver.cancel_reason != null)
+            if (handOverCopy.cancel_reason != null) vpad(16),
+            if (handOverCopy.cancel_reason != null)
               PrimaryTextField(
                 maxLines: 2,
                 label: S.of(context).err_reason,
                 enable: false,
                 isReadOnly: true,
-                initialValue: handOver.cancel_reason,
+                initialValue: handOverCopy.df?.name,
               ),
-            if (handOver.cancel_note != null) vpad(16),
-            if (handOver.cancel_note != null)
+            if (handOverCopy.cancel_note != null) vpad(16),
+            if (handOverCopy.cancel_note != null)
               PrimaryTextField(
                 maxLines: 2,
                 label: S.of(context).note,
                 enable: false,
                 isReadOnly: true,
-                initialValue: handOver.cancel_note,
+                initialValue: handOverCopy.cancel_note,
               ),
-            vpad(16),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                S.of(context).processing_result,
-                style: txtBodySmallBold(
-                  color: grayScaleColorBase,
+            if (workArising != null) vpad(16),
+            if (workArising != null)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  S.of(context).processing_result,
+                  style: txtBodySmallBold(
+                    color: grayScaleColorBase,
+                  ),
                 ),
               ),
-            ),
-            if (workArising != null) vpad(10),
-            if (workArising != null)
+            if (workArising?.to_do_list_result?[0].result != null) vpad(10),
+            if (workArising?.to_do_list_result?[0].result != null)
               PrimaryTextField(
                 maxLines: 2,
                 label: S.of(context).processing_content,
                 enable: false,
                 isReadOnly: true,
-                initialValue: workArising.to_do_list_result?[0].result,
+                initialValue: workArising?.to_do_list_result?[0].result,
               ),
-            if (workArising != null) vpad(16),
-            if (workArising != null)
+            if ((workArising?.to_do_list_result?[0].file ?? []).isNotEmpty)
+              vpad(16),
+            if ((workArising?.to_do_list_result?[0].file ?? []).isNotEmpty)
               SelectFileWidget(
-                text: S.of(context).file_image,
+                title: S.of(context).file_image,
                 enable: false,
-                existFiles: workArising.to_do_list_result?[0].file ?? [],
+                existFiles: workArising?.to_do_list_result?[0].file ?? [],
               ),
             vpad(40),
             PrimaryButton(
               onTap: () async {
-                await context.read<AcceptHandOverPrv>().checkHandleHandOver(
-                      context,
-                    );
+                await context.read<AcceptHandOverPrv>().infoStep2Next();
               },
               text: S.of(context).next,
             ),

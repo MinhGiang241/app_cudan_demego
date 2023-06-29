@@ -119,6 +119,7 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                 vpad(16),
                 ...materialList.entries.map((e) {
                   return AssetItem(
+                    complete: true,
                     functionSave:
                         context.read<AcceptHandOverPrv>().saveCheckItem,
                     vote: true,
@@ -209,6 +210,7 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                 vpad(16),
                 ...assetList.entries.map((e) {
                   return AssetItem(
+                    complete: true,
                     functionSave:
                         context.read<AcceptHandOverPrv>().saveCheckItem,
                     vote: true,

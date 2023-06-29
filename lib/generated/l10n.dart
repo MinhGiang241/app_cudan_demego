@@ -8189,6 +8189,36 @@ class S {
       args: [ap],
     );
   }
+
+  /// `Value is not greater than {s}`
+  String not_larger(Object s) {
+    return Intl.message(
+      'Value is not greater than $s',
+      name: 'not_larger',
+      desc: '',
+      args: [s],
+    );
+  }
+
+  /// `Material`
+  String get material0 {
+    return Intl.message(
+      'Material',
+      name: 'material0',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category name`
+  String get category_name {
+    return Intl.message(
+      'Category name',
+      name: 'category_name',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

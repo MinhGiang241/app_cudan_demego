@@ -1,10 +1,12 @@
 import 'package:app_cudan/models/workarising.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
@@ -19,7 +21,12 @@ class AcceptHandOverPrv extends ChangeNotifier {
   AcceptHandOverPrv(this.handOver) {
     handOver = handOver;
     handOverCopy = handOver.copyWith();
+    realAreaController.text = (handOver.real_acreage ?? '0').toString();
+    realFloorController.text = (handOver.real_floor_area ?? '0').toString();
     makeList();
+    if (handOver.status == 'COMPLETE') {
+      complete = true;
+    }
     getWorkArisingHandOver();
     print(materialList);
     print(assetList);
@@ -28,6 +35,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
   final formKeyReason = GlobalKey<FormState>();
   TextEditingController reasonController = TextEditingController();
   String? validateReason;
+  String? validateReasonNote;
   String? valueReason;
 
   late Map<String, List<Materials>> materialList;
@@ -47,13 +55,20 @@ class AcceptHandOverPrv extends ChangeNotifier {
   bool expandNotPass = false;
   List notPassList = [];
   GlobalKey infoKey = GlobalKey();
+  final infoKeyStep = GlobalKey<FormState>();
 
   final TextEditingController handOverDateController = TextEditingController();
   final TextEditingController handOverTimeController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
+  final TextEditingController realAreaController = TextEditingController();
+  final TextEditingController realFloorController = TextEditingController();
+
   String? validateHandOverDate;
   String? validateHandOverTime;
+
+  String? validaterRealArea;
+  String? validateRealFloor;
 
   DateTime? handOverDate;
   TimeOfDay? handOverTime;
@@ -62,6 +77,67 @@ class AcceptHandOverPrv extends ChangeNotifier {
   final PageController pageController = PageController();
   int activeStep = 0;
   bool isDisableCroll = true;
+
+  String? validateAreaForm(String? v) {
+    if (v!.isEmpty) {
+      return '';
+    } else if (double.tryParse(v) != null && double.parse(v) > 9999) {
+      return '';
+    }
+    return null;
+  }
+
+  genAreaValidate() {
+    if (realAreaController.text.trim().isEmpty) {
+      validaterRealArea = S.current.not_blank;
+    } else if (double.tryParse(realAreaController.text.trim()) != null &&
+        double.parse(realAreaController.text.trim()) > 9999) {
+      validaterRealArea = S.current.not_larger('9999');
+    } else {
+      validaterRealArea = null;
+    }
+
+    if (realFloorController.text.trim().isEmpty) {
+      validateRealFloor = S.current.not_blank;
+    } else if (double.tryParse(realFloorController.text.trim()) != null &&
+        double.parse(realFloorController.text.trim()) > 9999) {
+      validateRealFloor = S.current.not_larger('9999');
+    } else {
+      validateRealFloor = null;
+    }
+
+    print(validateRealFloor);
+    print(validaterRealArea);
+    notifyListeners();
+  }
+
+  clearAreaValidate() {
+    validaterRealArea = null;
+    validateRealFloor = null;
+    notifyListeners();
+  }
+
+  onChangeFormInfoStep() {
+    if (infoKeyStep.currentState!.validate()) {
+      clearAreaValidate();
+    } else {
+      genAreaValidate();
+    }
+    notifyListeners();
+  }
+
+  infoStep2Next() {
+    if (infoKeyStep.currentState!.validate()) {
+      clearAreaValidate();
+      pageController.animateToPage(
+        ++activeStep,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.bounceInOut,
+      );
+    } else {
+      genAreaValidate();
+    }
+  }
 
   saveCheckItem(
     bool value,
@@ -162,6 +238,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
     isLoadingComplete = true;
     notifyListeners();
     handOverCopy.status = 'COMPLETE';
+    handOverCopy.status_error = 'COMPLETE';
     var data = handOverCopy.toMap();
     await APIHandOver.saveHandOver(data).then((v) {
       isLoadingComplete = false;
@@ -281,13 +358,13 @@ class AcceptHandOverPrv extends ChangeNotifier {
     if (type == DetailType.ASSET) {
       assetList[key]![indexItem].achieve = value;
       assetList[key]![indexItem].not_achieve = !value;
-      assetList[key]![indexItem].img_additional = list;
+      assetList[key]![indexItem].file_reason_archive = list;
       assetList[key]![indexItem].reason_not_archive = value ? null : reason;
     }
     if (type == DetailType.MATERIAL) {
       materialList[key]![indexItem].achieve = value;
       materialList[key]![indexItem].not_achieve = !value;
-      materialList[key]![indexItem].img = list;
+      materialList[key]![indexItem].file_reason_archive = list;
       materialList[key]![indexItem].reason_not_archive = value ? null : reason;
     }
 
@@ -315,10 +392,18 @@ class AcceptHandOverPrv extends ChangeNotifier {
     } else {
       validateReason = null;
     }
+    if (reasonController.text.isEmpty) {
+      validateReasonNote = S.current.not_blank;
+    } else {
+      validateReasonNote = null;
+    }
+    notifyListeners();
   }
 
   clearReasonValidateString() {
     validateReason = null;
+    validateReasonNote = null;
+    notifyListeners();
   }
 
   onChangeValue(v) {
@@ -326,16 +411,26 @@ class AcceptHandOverPrv extends ChangeNotifier {
       valueReason = v;
       validateReason = null;
     }
+    notifyListeners();
   }
 
   checkHandleHandOver(
     BuildContext context,
   ) async {
+    // pageController.animateToPage(
+    //   ++activeStep,
+    //   duration: const Duration(milliseconds: 250),
+    //   curve: Curves.bounceInOut,
+    // );
     var data = handOver.copyWith().toMap();
+
     data['isMobile'] = true;
     await APIHandOver.check_handle_handover(data).then((v) async {
       handOverCopy.status = 'HANDING';
       var data = handOverCopy.toMap();
+      var now = DateTime.now().subtract(Duration(hours: 7));
+      data['data'] = now.toIso8601String();
+      data['hour'] = "${now.hour}:${now.minute}";
       await APIHandOver.saveHandOver(data);
     }).then((v) {
       getHandOverById();
@@ -434,10 +529,13 @@ class AcceptHandOverPrv extends ChangeNotifier {
                         ),
                         vpad(12),
                         PrimaryTextField(
+                          isRequired: true,
+                          validateString: validateReasonNote,
                           label: S.of(context).note,
                           maxLines: 3,
                           controller: reasonController,
                           maxLength: 550,
+                          validator: Utils.emptyValidator,
                         ),
                         vpad(20),
                         Row(
@@ -448,6 +546,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
                                 buttonSize: ButtonSize.small,
                                 buttonType: ButtonType.red,
                                 onTap: () {
+                                  clearReasonValidateString();
                                   Navigator.pop(context);
                                 },
                               ),
@@ -459,6 +558,9 @@ class AcceptHandOverPrv extends ChangeNotifier {
                                 buttonSize: ButtonSize.small,
                                 buttonType: ButtonType.primary,
                                 onTap: () async {
+                                  setState(
+                                    () {},
+                                  );
                                   await submitError(context);
                                 },
                               ),

@@ -103,7 +103,7 @@ class _ReasonDailogState extends State<ReasonDailog> {
 
   @override
   void initState() {
-    existededImageResons = widget.data.list[widget.index].photos;
+    existededImageResons = widget.data.list[widget.index].photosError;
     super.initState();
   }
 

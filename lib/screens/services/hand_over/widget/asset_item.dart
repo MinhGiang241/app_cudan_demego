@@ -31,6 +31,7 @@ class AssetItem extends StatefulWidget {
     required this.region,
     required this.type,
     required this.keyMap,
+    required this.complete,
     required this.functionSave,
   });
   final AssetItemViewModel data;
@@ -45,6 +46,7 @@ class AssetItem extends StatefulWidget {
   ) selectPass;
   final String region;
   final bool vote;
+  final bool complete;
   final DetailType type;
   final Function functionSave;
 
@@ -180,7 +182,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                     Expanded(
                       flex: 3,
                       child: Text(
-                        S.of(context).name,
+                        S.of(context).category_name,
                         textAlign: TextAlign.center,
                         style: txtMedium(12, grayScaleColor2),
                       ),
@@ -193,7 +195,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                         style: txtMedium(12, grayScaleColor2),
                       ),
                     ),
-                    if (widget.vote)
+                    if (widget.complete)
                       Expanded(
                         flex: 1,
                         child: Text(
@@ -202,7 +204,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                           style: txtMedium(12, grayScaleColor2),
                         ),
                       ),
-                    if (widget.vote)
+                    if (widget.complete)
                       Expanded(
                         flex: 1,
                         child: Text(
@@ -220,8 +222,6 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                             e.value.virtualId ?? '',
                             widget.data.handOverId,
                           );
-                          print("hah ${e.value.virtualId}");
-                          print('hah ${widget.data.handOverId}');
                           return a;
                         }(),
                         builder: (context, snapshot) {
@@ -294,7 +294,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                               .material_specification
                                                           : S
                                                               .of(context)
-                                                              .material,
+                                                              .material0,
                                                       e.value.material_specification ??
                                                           "",
                                                       null,
@@ -355,72 +355,108 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                       S.of(context).file_image,
                                                   existImages: e.value.photos,
                                                 ),
-                                                vpad(12),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Text(
-                                                    S
-                                                        .of(context)
-                                                        .not_pass_reason,
-                                                    style: txtBodySmallBold(
-                                                      color: grayScaleColorBase,
+                                                if (e.value.error_notpass !=
+                                                    null)
+                                                  vpad(12),
+                                                if (e.value.error_notpass !=
+                                                    null)
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      S
+                                                          .of(context)
+                                                          .not_pass_reason,
+                                                      style: txtBodySmallBold(
+                                                        color:
+                                                            grayScaleColorBase,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                vpad(12),
-                                                PrimaryTextField(
-                                                  // label: S
-                                                  //     .of(context)
-                                                  //     .not_pass_reason,
-                                                  enable: false,
-                                                  initialValue:
-                                                      e.value.error_notpass,
-                                                  maxLines: 2,
-                                                ),
-                                                vpad(12),
-                                                SelectMediaWidget(
-                                                  enable: false,
-                                                  title:
-                                                      S.of(context).file_image,
-                                                  existImages:
-                                                      e.value.photosError,
-                                                ),
-                                                vpad(12),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Text(
-                                                    S
+                                                if (e.value.error_notpass !=
+                                                    null)
+                                                  vpad(12),
+                                                if (e.value.error_notpass !=
+                                                    null)
+                                                  PrimaryTextField(
+                                                    // label: S
+                                                    //     .of(context)
+                                                    //     .not_pass_reason,
+                                                    enable: false,
+                                                    initialValue:
+                                                        e.value.error_notpass,
+                                                    maxLines: 2,
+                                                  ),
+                                                if (e.value.photosError
+                                                    .isNotEmpty)
+                                                  vpad(12),
+                                                if (e.value.photosError
+                                                    .isNotEmpty)
+                                                  SelectMediaWidget(
+                                                    enable: false,
+                                                    title: S
                                                         .of(context)
-                                                        .processing_result,
-                                                    style: txtBodySmallBold(
-                                                      color: grayScaleColorBase,
+                                                        .file_image,
+                                                    existImages:
+                                                        e.value.photosError,
+                                                  ),
+                                                if (work?.to_do_list_result?[0]
+                                                        .result !=
+                                                    null)
+                                                  vpad(12),
+                                                if (work?.to_do_list_result?[0]
+                                                        .result !=
+                                                    null)
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      S
+                                                          .of(context)
+                                                          .processing_result,
+                                                      style: txtBodySmallBold(
+                                                        color:
+                                                            grayScaleColorBase,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                vpad(12),
-                                                PrimaryTextField(
-                                                  label: S
-                                                      .of(context)
-                                                      .processing_content,
-                                                  enable: false,
-                                                  initialValue: work
-                                                      ?.to_do_list_result?[0]
-                                                      .result,
-                                                  maxLines: 2,
-                                                ),
-                                                vpad(12),
-                                                SelectMediaWidget(
-                                                  enable: false,
-                                                  title:
-                                                      S.of(context).file_image,
-                                                  existImages: work
-                                                          ?.to_do_list_result?[
-                                                              0]
-                                                          .file ??
-                                                      [],
-                                                ),
+                                                if (work?.to_do_list_result?[0]
+                                                        .result !=
+                                                    null)
+                                                  vpad(12),
+                                                if (work?.to_do_list_result?[0]
+                                                        .result !=
+                                                    null)
+                                                  PrimaryTextField(
+                                                    label: S
+                                                        .of(context)
+                                                        .processing_content,
+                                                    enable: false,
+                                                    initialValue: work
+                                                        ?.to_do_list_result?[0]
+                                                        .result,
+                                                    maxLines: 2,
+                                                  ),
+                                                if ((work?.to_do_list_result?[0]
+                                                            .file ??
+                                                        [])
+                                                    .isNotEmpty)
+                                                  vpad(12),
+                                                if ((work?.to_do_list_result?[0]
+                                                            .file ??
+                                                        [])
+                                                    .isNotEmpty)
+                                                  SelectMediaWidget(
+                                                    enable: false,
+                                                    title: S
+                                                        .of(context)
+                                                        .file_image,
+                                                    existImages: work
+                                                            ?.to_do_list_result?[
+                                                                0]
+                                                            .file ??
+                                                        [],
+                                                  ),
                                                 vpad(12),
                                                 if (widget.vote)
                                                   Row(
@@ -498,7 +534,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                 vpad(12),
                                                 PrimaryButton(
                                                   width: double.infinity,
-                                                  text: S.of(context).cancel,
+                                                  text: S.of(context).close,
                                                   buttonType:
                                                       ButtonType.secondary,
                                                   secondaryBackgroundColor:
@@ -525,7 +561,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                     ),
                                   ),
                                 ),
-                                if (widget.vote)
+                                if (widget.complete)
                                   Expanded(
                                     flex: 1,
                                     child: SizedBox(
@@ -533,20 +569,22 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                       width: 20,
                                       child: Checkbox(
                                         onChanged: (v) {
-                                          widget.selectPass(
-                                            true,
-                                            widget.keyMap,
-                                            e.key,
-                                            widget.type,
-                                            e.value.photos,
-                                            '',
-                                          );
+                                          widget.vote
+                                              ? widget.selectPass(
+                                                  true,
+                                                  widget.keyMap,
+                                                  e.key,
+                                                  widget.type,
+                                                  e.value.photos,
+                                                  '',
+                                                )
+                                              : null;
                                         },
                                         value: e.value.achieve,
                                       ),
                                     ),
                                   ),
-                                if (widget.vote)
+                                if (widget.complete)
                                   Expanded(
                                     flex: 1,
                                     child: SizedBox(
@@ -554,18 +592,20 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                       width: 20,
                                       child: Checkbox(
                                         onChanged: (v) {
-                                          addReasonReject(
-                                            () => widget.selectPass(
-                                              false,
-                                              widget.keyMap,
-                                              e.key,
-                                              widget.type,
-                                              e.value.photos,
-                                              '',
-                                            ),
-                                            widget.functionSave,
-                                            e.key,
-                                          );
+                                          widget.vote
+                                              ? addReasonReject(
+                                                  () => widget.selectPass(
+                                                    false,
+                                                    widget.keyMap,
+                                                    e.key,
+                                                    widget.type,
+                                                    e.value.photos,
+                                                    '',
+                                                  ),
+                                                  widget.functionSave,
+                                                  e.key,
+                                                )
+                                              : null;
                                         },
                                         value: e.value.not_achieve,
                                       ),

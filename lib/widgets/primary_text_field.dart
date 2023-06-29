@@ -107,12 +107,10 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
         if (widget.label != null)
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  widget.label!,
-                  style: txtBodySmallRegular(color: grayScaleColorBase),
-                  overflow: TextOverflow.ellipsis,
-                ),
+              Text(
+                widget.label!,
+                style: txtBodySmallRegular(color: grayScaleColorBase),
+                overflow: TextOverflow.ellipsis,
               ),
               if (widget.isRequired) hpad(4),
               if (widget.isRequired && widget.isShow)
@@ -130,6 +128,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                 final showPass = snapshot.data!;
 
                 return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 10,

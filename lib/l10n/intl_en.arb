@@ -812,5 +812,8 @@
   "reality_handover_date": "Reality hand over date",
   "reality_handover_hour": "Reality hand over hour",
   "file_image": "File/ Image",
-  "success_handover": "You already hand over for {ap} successfully"
+  "success_handover": "You already hand over for {ap} successfully",
+  "not_larger": "Value is not greater than {s}",
+  "material0": "Material",
+  "category_name": "Category name"
 }

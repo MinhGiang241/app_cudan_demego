@@ -68,11 +68,16 @@ class HandOver {
   HandOverStatus? s;
   HandOverStatus? se;
   Employee? e;
+  Defect? df;
+  SaleContract? sale;
+  Reason? re;
   HandOver(
       {this.id,
       this.createdTime,
       this.updatedTime,
       this.code,
+      this.sale,
+      this.re,
       this.apartmentId,
       this.apartmentTypeId,
       this.residentId,
@@ -121,6 +126,7 @@ class HandOver {
       this.s,
       this.se,
       this.e,
+      this.df,
       this.label});
 
   Map<String, dynamic> toMap() {
@@ -301,6 +307,9 @@ class HandOver {
       s: map['s'] != null ? HandOverStatus.fromJson(map['s']) : null,
       se: map['se'] != null ? HandOverStatus.fromJson(map['se']) : null,
       e: map['e'] != null ? Employee.fromMap(map['e']) : null,
+      df: map['df'] != null ? Defect.fromMap(map['df']) : null,
+      sale: map['sale'] != null ? SaleContract.fromMap(map['sale']) : null,
+      re: map['re'] != null ? Reason.fromJson(map['re']) : null,
     );
   }
 
@@ -314,6 +323,7 @@ class HandOver {
     String? createdTime,
     String? updatedTime,
     String? code,
+    Reason? re,
     String? apartmentId,
     String? apartmentTypeId,
     String? residentId,
@@ -360,6 +370,7 @@ class HandOver {
     String? reason_cancel,
     String? label,
     Apartment? a,
+    SaleContract? sale,
   }) {
     return HandOver(
       id: id ?? this.id,
@@ -418,6 +429,12 @@ class HandOver {
       reason_cancel: reason_cancel ?? this.reason_cancel,
       label: label ?? this.label,
       a: a ?? this.a,
+      sale: sale ?? this.sale?.copyWith(),
+      df: df ?? this.df?.copyWith(),
+      e: e ?? this.e?.copyWith(),
+      s: s ?? this.s?.copyWith(),
+      se: se ?? this.se?.copyWith(),
+      re: re ?? this.re?.copyWith(),
     );
   }
 }
@@ -752,6 +769,14 @@ class HandOverStatus {
   String? name;
   String? code;
   int? order;
+  HandOverStatus({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.name,
+    this.code,
+    this.order,
+  });
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -773,6 +798,24 @@ class HandOverStatus {
     order = int.tryParse(map['order'].toString()) != null
         ? int.parse(map['order'].toString())
         : null;
+  }
+
+  HandOverStatus copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? name,
+    String? code,
+    int? order,
+  }) {
+    return HandOverStatus(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      name: name ?? this.name,
+      code: code ?? this.code,
+      order: order ?? this.order,
+    );
   }
 }
 
@@ -1413,6 +1456,69 @@ class Defect {
       name: name ?? this.name,
       describe: describe ?? this.describe,
       date: date ?? this.date,
+    );
+  }
+}
+
+class SaleContract {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  double? floor_area;
+  double? area_of_private;
+  SaleContract({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.floor_area,
+    this.area_of_private,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'floor_area': floor_area,
+      'area_of_private': area_of_private,
+    };
+  }
+
+  factory SaleContract.fromMap(Map<String, dynamic> map) {
+    return SaleContract(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      floor_area: double.tryParse(map['floor_area'].toString()) != null
+          ? double.parse(map['floor_area'].toString())
+          : null,
+      area_of_private:
+          double.tryParse(map['area_of_private'].toString()) != null
+              ? double.parse(map['area_of_private'].toString())
+              : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory SaleContract.fromJson(String source) =>
+      SaleContract.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  SaleContract copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    double? floor_area,
+    double? area_of_private,
+  }) {
+    return SaleContract(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      floor_area: floor_area ?? this.floor_area,
+      area_of_private: area_of_private ?? this.area_of_private,
     );
   }
 }

@@ -118,6 +118,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
       create: (context) => handOverProvider,
       builder: (context, snapshot) {
         var handOver = context.watch<AcceptHandOverPrv>().handOver;
+        var handOverCopy = context.watch<AcceptHandOverPrv>().handOverCopy;
         var complete = context.watch<AcceptHandOverPrv>().complete;
         bool isShowInfo = context.watch<AcceptHandOverPrv>().generalInfoExpand;
         bool isShowAsset = context.watch<AcceptHandOverPrv>().assetListExpand;
@@ -226,16 +227,16 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                       vpad(16),
                                       PrimaryDropDown(
                                         enable: false,
-                                        value: handOver.apartmentId,
+                                        value: handOverCopy.apartmentId,
                                         label: S.of(context).surface,
                                         selectList: [
                                           DropdownMenuItem(
-                                            value: handOver.apartmentId,
+                                            value: handOverCopy.apartmentId,
                                             child: Text(
-                                              handOver.a?.name! != null
-                                                  ? handOver.label ??
-                                                      '${handOver.a?.name} - ${handOver.a?.f?.name} - ${handOver.a?.b?.name}'
-                                                  : handOver.apartmentId!,
+                                              handOverCopy.a?.name! != null
+                                                  ? handOverCopy.label ??
+                                                      '${handOverCopy.a?.name} - ${handOverCopy.a?.f?.name} - ${handOverCopy.a?.b?.name}'
+                                                  : handOverCopy.apartmentId!,
                                             ),
                                           )
                                         ],
@@ -290,7 +291,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                           ),
                                                           enable: false,
                                                           initialValue:
-                                                              (handOver.real_acreage ??
+                                                              (handOverCopy
+                                                                          .real_acreage ??
                                                                       '0')
                                                                   .toString(),
                                                         ),
@@ -313,9 +315,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .s_usage_apartment,
                                               isRequired: true,
                                               enable: false,
-                                              initialValue:
-                                                  (handOver.floor_area ?? '0')
-                                                      .toString(),
+                                              initialValue: (handOverCopy.sale
+                                                          ?.area_of_private ??
+                                                      '0')
+                                                  .toString(),
                                             ),
                                           ),
                                         ],
@@ -366,7 +369,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                           ),
                                                           enable: false,
                                                           initialValue:
-                                                              (handOver.real_floor_area ??
+                                                              (handOverCopy
+                                                                          .real_floor_area ??
                                                                       '0')
                                                                   .toString(),
                                                         ),
@@ -389,10 +393,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .s_cons_apartment,
                                               isRequired: true,
                                               enable: false,
-                                              initialValue:
-                                                  (handOver.real_floor_area ??
-                                                          '0')
-                                                      .toString(),
+                                              initialValue: (handOverCopy
+                                                          .sale?.floor_area ??
+                                                      '0')
+                                                  .toString(),
                                             ),
                                           ),
                                         ],
@@ -403,7 +407,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         isRequired: true,
                                         label: S.of(context).time_hanover,
                                         initialValue:
-                                            "${handOver.schedule_hour} ${Utils.dateFormat(handOver.schedule_time ?? "", 1)}",
+                                            "${handOverCopy.schedule_hour} ${Utils.dateFormat(handOverCopy.schedule_time ?? "", 1)}",
                                       ),
                                       if (complete) vpad(16),
                                       if (complete)
@@ -413,7 +417,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                               child: PrimaryTextField(
                                                 enable: false,
                                                 initialValue: Utils.dateFormat(
-                                                  handOver.date ?? "",
+                                                  handOverCopy.date ?? "",
                                                   1,
                                                 ),
                                                 label: S
@@ -429,7 +433,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                             Expanded(
                                               child: PrimaryTextField(
                                                 enable: false,
-                                                initialValue: handOver.hour,
+                                                initialValue: handOverCopy.hour,
                                                 label: S
                                                     .of(context)
                                                     .reality_handover_hour,
@@ -446,7 +450,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         enable: false,
                                         isRequired: true,
                                         label: S.of(context).hand_over_employee,
-                                        initialValue: handOver.e?.name,
+                                        initialValue: handOverCopy.e?.name,
                                       ),
                                       vpad(16),
                                       SelectFileWidget(
@@ -455,7 +459,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                         isRequired: true,
                                         isDash: false,
                                         existFiles:
-                                            handOver.floor_plan_drawing ?? [],
+                                            handOverCopy.floor_plan_drawing ??
+                                                [],
                                       ),
                                       vpad(16),
                                       Align(
@@ -539,10 +544,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           .entries
                                           .map((e) {
                                         return AssetItem(
+                                          complete: complete,
                                           functionSave: context
                                               .read<AcceptHandOverPrv>()
                                               .saveCheckItem,
-                                          vote: complete,
+                                          vote: false,
                                           type: DetailType.MATERIAL,
                                           region: e.value[0].assetposition
                                                   ?.asset_postision ??
@@ -551,7 +557,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                               .watch<AcceptHandOverPrv>()
                                               .selectItemPass,
                                           data: AssetItemViewModel(
-                                            handOverId: handOver.id!,
+                                            handOverId: handOverCopy.id!,
                                             type: 'material',
                                             title: e.value[0].assetposition
                                                 ?.asset_postision,
@@ -666,10 +672,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           .entries
                                           .map((e) {
                                         return AssetItem(
+                                          complete: complete,
                                           functionSave: context
                                               .read<AcceptHandOverPrv>()
                                               .saveCheckItem,
-                                          vote: complete,
+                                          vote: false,
                                           type: DetailType.ASSET,
                                           region: e.value[0].assetposition
                                                   ?.asset_postision ??
@@ -678,7 +685,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                               .watch<AcceptHandOverPrv>()
                                               .selectItemPass,
                                           data: AssetItemViewModel(
-                                            handOverId: handOver.id!,
+                                            handOverId: handOverCopy.id!,
                                             type: 'asset',
                                             title: e.value[0].assetposition
                                                 ?.asset_postision,
@@ -740,71 +747,81 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
 
                               vpad(30),
                               PrimaryTextField(
-                                textColor:
-                                    genStatusColor(handOver.status ?? ''),
+                                textColor: genStatusColorHandOver(
+                                  handOver.status ?? '',
+                                ),
                                 label: S.of(context).status,
                                 enable: false,
                                 initialValue: handOver.s?.name,
                                 textStyle: txtBold(
                                   14,
-                                  genStatusColor(handOver.status),
+                                  genStatusColorHandOver(handOverCopy.status),
                                 ),
                               ),
-                              if (handOver.cancel_reason != null) vpad(16),
-                              if (handOver.cancel_reason != null)
+                              if (handOverCopy.cancel_reason != null) vpad(16),
+                              if (handOverCopy.cancel_reason != null)
                                 PrimaryTextField(
                                   maxLines: 2,
                                   label: S.of(context).err_reason,
                                   enable: false,
                                   isReadOnly: true,
-                                  initialValue: handOver.cancel_reason,
+                                  initialValue: handOverCopy.df?.name,
                                 ),
-                              if (handOver.reason_cancel != null) vpad(16),
-                              if (handOver.reason_cancel != null)
+                              if (handOverCopy.reason_cancel != null) vpad(16),
+                              if (handOverCopy.reason_cancel != null)
                                 PrimaryTextField(
                                   maxLines: 2,
                                   label: S.of(context).cancel_reason,
                                   enable: false,
                                   isReadOnly: true,
-                                  initialValue: handOver.reason_cancel,
+                                  initialValue: handOverCopy.re?.name,
                                 ),
-                              vpad(16),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  S.of(context).processing_result,
-                                  style: txtBodySmallBold(
-                                    color: grayScaleColorBase,
+                              if (workArising != null) vpad(16),
+                              if (workArising != null)
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    S.of(context).processing_result,
+                                    style: txtBodySmallBold(
+                                      color: grayScaleColorBase,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              if (workArising != null) vpad(10),
-                              if (workArising != null)
+                              if (workArising?.to_do_list_result?[0].result !=
+                                  null)
+                                vpad(10),
+                              if (workArising?.to_do_list_result?[0].result !=
+                                  null)
                                 PrimaryTextField(
                                   maxLines: 2,
                                   label: S.of(context).processing_content,
                                   enable: false,
                                   isReadOnly: true,
                                   initialValue:
-                                      workArising.to_do_list_result?[0].result,
+                                      workArising?.to_do_list_result?[0].result,
                                 ),
-                              if (workArising != null) vpad(16),
-                              if (workArising != null)
+                              if ((workArising?.to_do_list_result?[0].file ??
+                                      [])
+                                  .isNotEmpty)
+                                vpad(16),
+                              if ((workArising?.to_do_list_result?[0].file ??
+                                      [])
+                                  .isNotEmpty)
                                 SelectFileWidget(
-                                  text: S.of(context).file_image,
+                                  title: S.of(context).file_image,
                                   enable: false,
                                   existFiles:
-                                      workArising.to_do_list_result?[0].file ??
+                                      workArising?.to_do_list_result?[0].file ??
                                           [],
                                 ),
                               vpad(40),
-                              if (handOver.status != "CANCEL" &&
-                                  handOver.status != "COMPLETE" &&
+                              if (handOverCopy.status != "CANCEL" &&
+                                  handOverCopy.status != "COMPLETE" &&
                                   !complete)
                                 Row(
                                   children: [
-                                    if (handOver.cancel_reason == null &&
-                                        handOver.status == "WAIT")
+                                    if (handOverCopy.cancel_reason == null &&
+                                        handOverCopy.status == "WAIT")
                                       Expanded(
                                         child: PrimaryButton(
                                           buttonType: ButtonType.orange,
@@ -817,7 +834,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           text: S.of(context).err_report,
                                         ),
                                       ),
-                                    if (handOver.cancel_reason == null)
+                                    if (handOverCopy.cancel_reason == null &&
+                                        handOverCopy.status == "WAIT")
                                       hpad(20),
                                     Expanded(
                                       child: PrimaryButton(
@@ -833,7 +851,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                     ),
                                   ],
                                 ),
-                              if (handOver.status != "COMPLETE" && complete)
+                              if (handOverCopy.status == "COMPLETE" &&
+                                  handOverCopy.status_error != "COMPLETE")
                                 PrimaryButton(
                                   isLoading: context
                                       .watch<AcceptHandOverPrv>()

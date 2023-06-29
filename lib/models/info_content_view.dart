@@ -179,6 +179,8 @@ Color genStatusColorHandOver(String? status) {
       return greenColorBase;
     case "COMPLETE":
       return greenColor8;
+    case "CANCEL":
+      return redColor9;
     default:
       return grayScaleColor1;
   }
