@@ -426,10 +426,10 @@ class AcceptHandOverPrv extends ChangeNotifier {
 
     data['isMobile'] = true;
     await APIHandOver.check_handle_handover(data).then((v) async {
+      var now = DateTime.now().subtract(Duration(hours: 7));
       handOverCopy.status = 'HANDING';
       var data = handOverCopy.toMap();
-      var now = DateTime.now().subtract(Duration(hours: 7));
-      data['data'] = now.toIso8601String();
+      data['date'] = now.toIso8601String();
       data['hour'] = "${now.hour}:${now.minute}";
       await APIHandOver.saveHandOver(data);
     }).then((v) {
