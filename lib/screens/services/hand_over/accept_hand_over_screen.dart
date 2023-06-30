@@ -18,6 +18,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/asset_Item_view_model.dart';
 import '../../../models/info_content_view.dart';
+import '../../../services/api_hand_over.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_icon.dart';
@@ -446,11 +447,29 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                           ],
                                         ),
                                       vpad(16),
-                                      PrimaryTextField(
-                                        enable: false,
-                                        isRequired: true,
-                                        label: S.of(context).hand_over_employee,
-                                        initialValue: handOverCopy.e?.name,
+                                      FutureBuilder(
+                                        future: () async {
+                                          var name = await APIHandOver
+                                              .getHanOverPerson(
+                                            handOverCopy.appointmentScheduleId,
+                                          );
+
+                                          return name;
+                                        }(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            var nameEmployee = snapshot.data;
+                                            return PrimaryTextField(
+                                              enable: false,
+                                              isRequired: true,
+                                              label: S
+                                                  .of(context)
+                                                  .hand_over_employee,
+                                              initialValue: nameEmployee,
+                                            );
+                                          }
+                                          return vpad(0);
+                                        },
                                       ),
                                       vpad(16),
                                       SelectFileWidget(
@@ -752,7 +771,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                 ),
                                 label: S.of(context).status,
                                 enable: false,
-                                initialValue: handOver.s?.name,
+                                initialValue:
+                                    genStatusHandOver(handOver.status),
                                 textStyle: txtBold(
                                   14,
                                   genStatusColorHandOver(handOverCopy.status),
@@ -766,6 +786,15 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   enable: false,
                                   isReadOnly: true,
                                   initialValue: handOverCopy.df?.name,
+                                ),
+                              if (handOverCopy.cancel_note != null) vpad(16),
+                              if (handOverCopy.cancel_note != null)
+                                PrimaryTextField(
+                                  maxLines: 2,
+                                  label: S.of(context).note,
+                                  enable: false,
+                                  isReadOnly: true,
+                                  initialValue: handOverCopy.cancel_note,
                                 ),
                               if (handOverCopy.reason_cancel != null) vpad(16),
                               if (handOverCopy.reason_cancel != null)

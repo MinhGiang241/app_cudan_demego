@@ -187,7 +187,8 @@ class _HistoryTabState extends State<HistoryTab> {
                                           children: [
                                             Text('${S.of(context).status}:'),
                                             Text(
-                                              e.s?.name ?? "",
+                                              // e.s?.name ?? "",
+                                              genStatusHandOver(e.status),
                                               style: txtBold(
                                                 14,
                                                 genStatusColorHandOver(

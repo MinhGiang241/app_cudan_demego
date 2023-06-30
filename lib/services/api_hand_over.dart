@@ -420,4 +420,38 @@ mutation (\$data:Dictionary){
       return res.response.data;
     }
   }
+
+  static Future getHanOverPerson(
+    String? appointmentScheduleId,
+  ) async {
+    var query = '''
+mutation (\$appointmentScheduleId:String){
+    response: handover_get_person_handover (appointmentScheduleId: \$appointmentScheduleId ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+         
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "appointmentScheduleId": appointmentScheduleId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

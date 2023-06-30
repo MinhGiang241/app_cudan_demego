@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:app_cudan/screens/services/hand_over/prv/accept_hand_over_prv.dart';
+import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -185,6 +186,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                               component: Expanded(
                                 flex: 21,
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       flex: 5,
@@ -216,6 +218,9 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                                           horizontal: 12,
                                         ),
                                         enable: true,
+                                        validator: context
+                                            .read<AcceptHandOverPrv>()
+                                            .validateAreaForm,
                                         validateString: context
                                             .watch<AcceptHandOverPrv>()
                                             .validaterRealArea,
@@ -337,24 +342,45 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                         children: [
                           Expanded(
                             child: PrimaryTextField(
-                              enable: false,
-                              initialValue: Utils.dateFormat(
-                                handOverCopy.date ?? "",
-                                1,
-                              ),
+                              isReadOnly: true,
+                              isRequired: true,
+                              controller: context
+                                  .read<AcceptHandOverPrv>()
+                                  .handOverDateController,
+                              validateString: context
+                                  .watch<AcceptHandOverPrv>()
+                                  .validateHandOverDate,
+                              onTap: () {
+                                context
+                                    .read<AcceptHandOverPrv>()
+                                    .pickHandOverDate(context);
+                              },
                               label: S.of(context).reality_handover_date,
                               suffixIcon: const PrimaryIcon(
                                 padding: EdgeInsets.zero,
                                 icons: PrimaryIcons.calendar,
                               ),
+                              validator: Utils.emptyValidator,
                             ),
                           ),
                           hpad(16),
                           Expanded(
                             child: PrimaryTextField(
-                              enable: false,
-                              initialValue: handOverCopy.hour,
+                              validator: Utils.emptyValidator,
+                              isReadOnly: true,
+                              isRequired: true,
                               label: S.of(context).reality_handover_hour,
+                              controller: context
+                                  .read<AcceptHandOverPrv>()
+                                  .handOverHourController,
+                              validateString: context
+                                  .watch<AcceptHandOverPrv>()
+                                  .validateHandOverHour,
+                              onTap: () {
+                                context
+                                    .read<AcceptHandOverPrv>()
+                                    .pickHandOverHour(context);
+                              },
                               suffixIcon: const PrimaryIcon(
                                 padding: EdgeInsets.zero,
                                 icons: PrimaryIcons.clock,
@@ -364,11 +390,26 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                         ],
                       ),
                       vpad(16),
-                      PrimaryTextField(
-                        enable: false,
-                        isRequired: true,
-                        label: S.of(context).hand_over_employee,
-                        initialValue: handOverCopy.e?.name ?? '',
+                      FutureBuilder(
+                        future: () async {
+                          var name = await APIHandOver.getHanOverPerson(
+                            handOverCopy.appointmentScheduleId,
+                          );
+
+                          return name;
+                        }(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            var nameEmployee = snapshot.data;
+                            return PrimaryTextField(
+                              enable: false,
+                              isRequired: true,
+                              label: S.of(context).hand_over_employee,
+                              initialValue: nameEmployee,
+                            );
+                          }
+                          return vpad(0);
+                        },
                       ),
                       vpad(16),
                       SelectFileWidget(

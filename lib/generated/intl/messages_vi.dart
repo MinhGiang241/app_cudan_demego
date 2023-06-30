@@ -316,6 +316,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "consumed_water_detail1":
             MessageLookupByLibrary.simpleMessage("Chi tiết lượng nước sử dụng"),
         "content": MessageLookupByLibrary.simpleMessage("Nội dung"),
+        "continue_construction":
+            MessageLookupByLibrary.simpleMessage("Mở khóa thi công"),
         "count_err_handover": m16,
         "covenient_service": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
@@ -694,6 +696,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
+        "not_complete_check": MessageLookupByLibrary.simpleMessage(
+            "Bạn cần đánh giá đầy đủ các đầu mục của danh mục vật liệu. Vui lòng kiểm tra lại"),
         "not_date_handover":
             MessageLookupByLibrary.simpleMessage("Chưa đến hạn bàn giao"),
         "not_dimention":
@@ -795,6 +799,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu phải gồm 1 ký tự đặc biệt"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "pause_construction":
+            MessageLookupByLibrary.simpleMessage("Khóa thi công"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Ngày thanh toán"),
         "pay_done":
@@ -1241,6 +1247,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transport_reg": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "under_acceptance": MessageLookupByLibrary.simpleMessage("Nghiệm thu"),
+        "under_construction":
+            MessageLookupByLibrary.simpleMessage("Bắt đầu thi công"),
         "unit_count": MessageLookupByLibrary.simpleMessage("Đơn vị tính"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Đơn giá (VNĐ)"),
         "unkhown": MessageLookupByLibrary.simpleMessage("Không xác định"),
@@ -1258,12 +1267,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view": MessageLookupByLibrary.simpleMessage("Xem"),
         "view_record": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
+        "violation_exe": MessageLookupByLibrary.simpleMessage("Xử lý vi phạm"),
         "violation_record":
             MessageLookupByLibrary.simpleMessage("Biên bản vi phạm"),
         "violation_records":
             MessageLookupByLibrary.simpleMessage("Biên bản vi phạm"),
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
+        "wait_acceptance":
+            MessageLookupByLibrary.simpleMessage("Báo nghiệm thu"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
         "wait_chat_response": MessageLookupByLibrary.simpleMessage(
             "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi."),

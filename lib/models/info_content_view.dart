@@ -163,6 +163,21 @@ Color genStatusColor(String? status) {
   }
 }
 
+String genStatusHandOver(String? status) {
+  switch (status) {
+    case "WAIT":
+      return S.current.wait_hand_over;
+    case "HANDING":
+      return S.current.handing_over;
+    case "COMPLETE":
+      return S.current.handed_over;
+    case "CANCEL":
+      return S.current.cancel;
+    default:
+      return '';
+  }
+}
+
 Color genStatusColorHandOver(String? status) {
   switch (status) {
     case "WAIT":
@@ -178,7 +193,7 @@ Color genStatusColorHandOver(String? status) {
     case "PROCEED":
       return greenColorBase;
     case "COMPLETE":
-      return greenColor8;
+      return greenColor6;
     case "CANCEL":
       return redColor9;
     default:

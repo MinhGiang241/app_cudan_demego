@@ -222,6 +222,38 @@ class APIConstruction {
     }
   }
 
+  static Future getConstructionDocumentHistory(
+    String constructionDocumentId,
+  ) async {
+    var query = '''
+    mutation (\$constructionDocumentId:String){
+    response: constructiondocument_mobile_get_construction_document_history (constructionDocumentId: \$constructionDocumentId ) {
+        code
+        message
+        data
+    }
+}
+        
+              
+  ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'constructionDocumentId': constructionDocumentId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getConstructionDocumentList(
     String residentId,
     String apartmentId,

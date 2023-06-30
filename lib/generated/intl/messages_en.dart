@@ -314,6 +314,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "consumed_water_detail1":
             MessageLookupByLibrary.simpleMessage("Consumed water detail"),
         "content": MessageLookupByLibrary.simpleMessage("Content"),
+        "continue_construction":
+            MessageLookupByLibrary.simpleMessage("Continue construction"),
         "count_err_handover": m16,
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
@@ -686,6 +688,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not be empty"),
+        "not_complete_check": MessageLookupByLibrary.simpleMessage(
+            "You need check all item. Please check again."),
         "not_date_handover":
             MessageLookupByLibrary.simpleMessage("Not yet handover date"),
         "not_dimention":
@@ -786,6 +790,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pass_special": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 special character"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pause_construction":
+            MessageLookupByLibrary.simpleMessage("Pause construction"),
         "pay": MessageLookupByLibrary.simpleMessage("Payment"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Pay date"),
         "pay_done": MessageLookupByLibrary.simpleMessage("Pay done"),
@@ -1243,6 +1249,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "under_acceptance":
+            MessageLookupByLibrary.simpleMessage("Under acceptance"),
+        "under_construction":
+            MessageLookupByLibrary.simpleMessage("Under construction"),
         "unit_count": MessageLookupByLibrary.simpleMessage("Unit"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Unit price (VNĐ)"),
         "unkhown": MessageLookupByLibrary.simpleMessage("Unknown"),
@@ -1260,12 +1270,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view": MessageLookupByLibrary.simpleMessage("View"),
         "view_record": MessageLookupByLibrary.simpleMessage("View record"),
+        "violation_exe":
+            MessageLookupByLibrary.simpleMessage("Violation Execution"),
         "violation_record":
             MessageLookupByLibrary.simpleMessage("Violation record"),
         "violation_records":
             MessageLookupByLibrary.simpleMessage("Violation records"),
         "w":
             MessageLookupByLibrary.simpleMessage("Home Community Smart Living"),
+        "wait_acceptance":
+            MessageLookupByLibrary.simpleMessage("Wait acceptance"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
         "wait_chat_response": MessageLookupByLibrary.simpleMessage(
             "It seam you didn\'t response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response."),

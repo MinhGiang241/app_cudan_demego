@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: non_constant_identifier_names
+
+import 'dart:convert';
 
 import 'employee.dart';
 import 'reason.dart';
@@ -599,7 +602,7 @@ class ConstructionHistory {
     employeeId = json['employeeId'];
     constructionregistrationId = json['constructionregistrationId'];
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
-    e = json['e'] != null ? Employee.fromJson(json['e']) : null;
+    e = json['e'] != null ? Employee.fromMap(json['e']) : null;
     re = json['re'] != null ? ResponseResidentInfo.fromJson(json['re']) : null;
   }
   Map<String, dynamic> toJson() {
@@ -835,5 +838,92 @@ class ViolationList {
     data['sanctionsManagementId'] = sanctionsManagementId;
     data['order'] = order;
     return data;
+  }
+}
+
+class ConstructionDocumentHistory {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? date;
+  String? constructionDocumentId;
+  String? status;
+  String? employeeId;
+  String? person;
+  String? content;
+  ConstructionDocumentHistory({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.date,
+    this.constructionDocumentId,
+    this.status,
+    this.employeeId,
+    this.person,
+    this.content,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'date': date,
+      'constructionDocumentId': constructionDocumentId,
+      'status': status,
+      'employeeId': employeeId,
+      'person': person,
+      'content': content,
+    };
+  }
+
+  factory ConstructionDocumentHistory.fromMap(Map<String, dynamic> map) {
+    return ConstructionDocumentHistory(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      date: map['date'] != null ? map['date'] as String : null,
+      constructionDocumentId: map['constructionDocumentId'] != null
+          ? map['constructionDocumentId'] as String
+          : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      employeeId:
+          map['employeeId'] != null ? map['employeeId'] as String : null,
+      person: map['person'] != null ? map['person'] as String : null,
+      content: map['content'] != null ? map['content'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionDocumentHistory.fromJson(String source) =>
+      ConstructionDocumentHistory.fromMap(
+          json.decode(source) as Map<String, dynamic>);
+
+  ConstructionDocumentHistory copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? date,
+    String? constructionDocumentId,
+    String? status,
+    String? employeeId,
+    String? person,
+    String? content,
+  }) {
+    return ConstructionDocumentHistory(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      date: date ?? this.date,
+      constructionDocumentId:
+          constructionDocumentId ?? this.constructionDocumentId,
+      status: status ?? this.status,
+      employeeId: employeeId ?? this.employeeId,
+      person: person ?? this.person,
+      content: content ?? this.content,
+    );
   }
 }

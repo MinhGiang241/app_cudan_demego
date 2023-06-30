@@ -23,7 +23,7 @@ class ConstructionHistoryPrv extends ChangeNotifier {
         list.sort((a, b) => a.createdTime!.compareTo(b.createdTime!));
         content.add(
           TimelineModel(
-            date: conHis.date,
+            date: conHis.date ?? conHis.createdTime,
             title: genConstructHistory(conHis.status ?? ""),
             color: genStatusColor(conHis.status),
             subTitle:

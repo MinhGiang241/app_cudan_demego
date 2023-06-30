@@ -815,5 +815,12 @@
   "success_handover": "You already hand over for {ap} successfully",
   "not_larger": "Value is not greater than {s}",
   "material0": "Material",
-  "category_name": "Category name"
+  "category_name": "Category name",
+  "under_construction": "Under construction",
+  "wait_acceptance": "Wait acceptance",
+  "under_acceptance": "Under acceptance",
+  "violation_exe": "Violation Execution",
+  "pause_construction": "Pause construction",
+  "continue_construction": "Continue construction",
+  "not_complete_check": "You need check all item. Please check again."
 }

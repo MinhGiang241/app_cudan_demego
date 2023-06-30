@@ -8219,6 +8219,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Under construction`
+  String get under_construction {
+    return Intl.message(
+      'Under construction',
+      name: 'under_construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait acceptance`
+  String get wait_acceptance {
+    return Intl.message(
+      'Wait acceptance',
+      name: 'wait_acceptance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under acceptance`
+  String get under_acceptance {
+    return Intl.message(
+      'Under acceptance',
+      name: 'under_acceptance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Violation Execution`
+  String get violation_exe {
+    return Intl.message(
+      'Violation Execution',
+      name: 'violation_exe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pause construction`
+  String get pause_construction {
+    return Intl.message(
+      'Pause construction',
+      name: 'pause_construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue construction`
+  String get continue_construction {
+    return Intl.message(
+      'Continue construction',
+      name: 'continue_construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You need check all item. Please check again.`
+  String get not_complete_check {
+    return Intl.message(
+      'You need check all item. Please check again.',
+      name: 'not_complete_check',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

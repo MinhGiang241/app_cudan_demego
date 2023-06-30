@@ -816,5 +816,12 @@
   "success_handover": "Bạn đã bàn giao thành công cho căn hộ {ap}",
   "not_larger": "Giá trị không lớn hơn {s}",
   "material0": "Vật liệu",
-  "category_name": "Tên danh mục"
+  "category_name": "Tên danh mục",
+  "under_construction": "Bắt đầu thi công",
+  "wait_acceptance": "Báo nghiệm thu",
+  "under_acceptance": "Nghiệm thu",
+  "violation_exe": "Xử lý vi phạm",
+  "pause_construction": "Khóa thi công",
+  "continue_construction": "Mở khóa thi công",
+  "not_complete_check": "Bạn cần đánh giá đầy đủ các đầu mục của danh mục vật liệu. Vui lòng kiểm tra lại"
 }

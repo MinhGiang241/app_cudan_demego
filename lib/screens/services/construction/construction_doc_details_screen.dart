@@ -19,6 +19,7 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
+import 'tab/construction_document_history_tab.dart';
 import 'tab/construction_history_tab.dart';
 
 class ConstructionDocumentDetailsScreen extends StatefulWidget {
@@ -343,8 +344,8 @@ class _ConstructionDocumentDetailsState
                 vpad(40),
               ],
             ),
-            ConstructionHistoryTab(
-              constructionregistrationId: reg.constructionRegistrationId ?? "",
+            ConstructionDocumentHistoryTab(
+              constructionDocumentId: reg.id ?? "",
             )
           ],
         ));

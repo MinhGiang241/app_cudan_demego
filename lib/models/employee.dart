@@ -105,7 +105,7 @@ class Employee {
 
   factory Employee.fromMap(Map<String, dynamic> map) {
     return Employee(
-      id: map['_id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:
@@ -157,7 +157,7 @@ class Employee {
           ? map['direct_management'] as String
           : null,
       level: int.tryParse(map['level'].toString()) != null
-          ? int.parse(map['level'])
+          ? int.parse(map['level'].toString())
           : null,
     );
   }
