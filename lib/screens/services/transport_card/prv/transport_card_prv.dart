@@ -37,21 +37,23 @@ class TransportCardPrv extends ChangeNotifier {
             context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
         var residentId = context.read<ResidentInfoPrv>().residentId;
-        await APITransport.lockManageCard(d).then((v) {
-          var his = CardHistory(
-            status: "DESTROY",
-            residentId: residentId,
-            person: resName ?? accName ?? acc,
-            name: resName ?? accName ?? acc,
-            action: "Hủy thẻ",
-            content: "Người dùng hủy thẻ",
-            manageCardId: card.id,
-            perform_date: DateTime.now()
-                .subtract(const Duration(hours: 7))
-                .toIso8601String(),
-          );
-          return APIHistory.saveHistoryCard(his.toMap());
-        }).then((v) {
+        await APITransport.lockManageCard(d)
+            // .then((v) {
+            //   var his = CardHistory(
+            //     status: "DESTROY",
+            //     residentId: residentId,
+            //     person: resName ?? accName ?? acc,
+            //     name: resName ?? accName ?? acc,
+            //     action: "Hủy thẻ",
+            //     content: "Người dùng hủy thẻ",
+            //     manageCardId: card.id,
+            //     perform_date: DateTime.now()
+            //         .subtract(const Duration(hours: 7))
+            //         .toIso8601String(),
+            //   );
+            //   return APIHistory.saveHistoryCard(his.toMap());
+            // })
+            .then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_can_trans_card,
@@ -232,21 +234,22 @@ class TransportCardPrv extends ChangeNotifier {
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
         var residentId = context.read<ResidentInfoPrv>().residentId;
         await APITransport.reportMissingTransportCard(submitCard.toMap())
+            //     .then((v) {
+            //   var his = CardHistory(
+            //     status: "LOST",
+            //     residentId: residentId,
+            //     person: resName ?? accName ?? acc,
+            //     name: resName ?? accName ?? acc,
+            //     action: "Báo mất",
+            //     content: "Người dùng báo mất thẻ",
+            //     manageCardId: card.id,
+            //     perform_date: DateTime.now()
+            //         .subtract(const Duration(hours: 7))
+            //         .toIso8601String(),
+            //   );
+            //   return APIHistory.saveHistoryCard(his.toMap());
+            // })
             .then((v) {
-          var his = CardHistory(
-            status: "LOST",
-            residentId: residentId,
-            person: resName ?? accName ?? acc,
-            name: resName ?? accName ?? acc,
-            action: "Báo mất",
-            content: "Người dùng báo mất thẻ",
-            manageCardId: card.id,
-            perform_date: DateTime.now()
-                .subtract(const Duration(hours: 7))
-                .toIso8601String(),
-          );
-          return APIHistory.saveHistoryCard(his.toMap());
-        }).then((v) {
           Utils.showSuccessMessage(
             context: context,
             e: S.of(context).success_report_missing,
