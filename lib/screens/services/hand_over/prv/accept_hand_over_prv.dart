@@ -327,16 +327,15 @@ class AcceptHandOverPrv extends ChangeNotifier {
         );
       } else {
         await APIHandOver.checkComplete(data).then((v) async {
-          await getHandOverById();
-          if (activeStep == 1) {
-            // Navigator.pop(context);
-            backScreen(context);
-          } else if (activeStep == 2) {
-            backScreen(context);
-            backScreen(context);
-            // Navigator.pop(context);
-          }
-          _initValue(handOverCopy);
+          // await getHandOverById();
+          // _initValue(handOverCopy);
+          navigatorKey.currentState!.pushNamedAndRemoveUntil(
+            HandOverScreen.routeName,
+            (route) => route.isFirst,
+            arguments: {
+              'init': 1,
+            },
+          );
         }).catchError((e) {
           Utils.showErrorMessage(context, e);
         });

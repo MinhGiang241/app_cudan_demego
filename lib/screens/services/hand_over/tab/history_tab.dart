@@ -207,7 +207,7 @@ class _HistoryTabState extends State<HistoryTab> {
                           ),
                         ),
                       ),
-                      if (e.status_error != null)
+                      if (e.status_error != null && e.status_error != '')
                         Align(
                           alignment: Alignment.centerRight,
                           child: Container(
@@ -218,7 +218,8 @@ class _HistoryTabState extends State<HistoryTab> {
                             ),
                             decoration: BoxDecoration(
                               color: (genStatusColorHandOver(
-                                  e.status_error as String)),
+                                e.status_error as String,
+                              )),
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(12),
                                 bottomLeft: Radius.circular(8),
