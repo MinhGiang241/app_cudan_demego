@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lịch đặt nhận bàn giao"),
         "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
-        "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử đặt lịch"),
+        "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử bàn giao"),
         "brand": MessageLookupByLibrary.simpleMessage("Thương hiệu"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
         "building_regulation":

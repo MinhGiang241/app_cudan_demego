@@ -12,6 +12,7 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -108,6 +109,8 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
 
   @override
   Widget build(BuildContext context) {
+    NumberFormat formatter = NumberFormat('#######.###');
+
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     final status = arg['status'];
     arg['handover'];
@@ -292,10 +295,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                           ),
                                                           enable: false,
                                                           initialValue:
-                                                              (handOverCopy
-                                                                          .real_acreage ??
-                                                                      '0')
-                                                                  .toString(),
+                                                              formatter.format(
+                                                            handOverCopy
+                                                                    .real_acreage ??
+                                                                0,
+                                                          ),
                                                         ),
                                                       ),
                                                     Expanded(
@@ -316,10 +320,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .s_usage_apartment,
                                               isRequired: true,
                                               enable: false,
-                                              initialValue: (handOverCopy.sale
-                                                          ?.area_of_private ??
-                                                      '0')
-                                                  .toString(),
+                                              initialValue: formatter.format(
+                                                handOverCopy.sale
+                                                        ?.area_of_private ??
+                                                    0,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -370,10 +375,11 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                           ),
                                                           enable: false,
                                                           initialValue:
-                                                              (handOverCopy
-                                                                          .real_floor_area ??
-                                                                      '0')
-                                                                  .toString(),
+                                                              formatter.format(
+                                                            handOverCopy
+                                                                    .real_floor_area ??
+                                                                0,
+                                                          ),
                                                         ),
                                                       ),
                                                     Expanded(
@@ -394,10 +400,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                   .s_cons_apartment,
                                               isRequired: true,
                                               enable: false,
-                                              initialValue: (handOverCopy
-                                                          .sale?.floor_area ??
-                                                      '0')
-                                                  .toString(),
+                                              initialValue: formatter.format(
+                                                handOverCopy.sale?.floor_area ??
+                                                    0,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -417,10 +423,13 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                             Expanded(
                                               child: PrimaryTextField(
                                                 enable: false,
-                                                initialValue: Utils.dateFormat(
-                                                  handOverCopy.date ?? "",
-                                                  1,
-                                                ),
+                                                controller: context
+                                                    .read<AcceptHandOverPrv>()
+                                                    .handOverDateController,
+                                                // initialValue: Utils.dateFormat(
+                                                //   handOverCopy.date ?? "",
+                                                //   1,
+                                                // ),
                                                 label: S
                                                     .of(context)
                                                     .reality_handover_date,
@@ -434,7 +443,10 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                             Expanded(
                                               child: PrimaryTextField(
                                                 enable: false,
-                                                initialValue: handOverCopy.hour,
+                                                controller: context
+                                                    .read<AcceptHandOverPrv>()
+                                                    .handOverHourController,
+                                                // initialValue: handOverCopy.hour,
                                                 label: S
                                                     .of(context)
                                                     .reality_handover_hour,

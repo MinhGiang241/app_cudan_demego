@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/asset_Item_view_model.dart';
+import '../../../models/file_upload.dart';
 import '../../../models/hand_over.dart';
 import 'prv/accept_hand_over_prv.dart';
 import 'widget/asset_item.dart';
@@ -131,24 +132,34 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                       handOverId: handOver.id!,
                       type: 'material',
                       title: e.value[0].assetposition?.asset_postision,
-                      list: e.value
-                          .map(
-                            (e) => ItemViewModel(
-                              photosError: e.file_reason_archive ?? [],
-                              error_notpass: e.reason_not_archive,
-                              virtualId: e.virtualId,
-                              photos: e.img ?? [],
-                              brand: e.trademark,
-                              material_specification: e.material_specification,
-                              note: e.note,
-                              id: e.id,
-                              code: e.code,
-                              name: e.materiallist?.material_list,
-                              achieve: e.achieve ?? false,
-                              not_achieve: e.not_achieve ?? false,
-                            ),
-                          )
-                          .toList(),
+                      list: e.value.map(
+                        (e) {
+                          List<FileUploadModel> photosError = [];
+                          List<FileUploadModel> photos = [];
+
+                          for (var i in (e.file_reason_archive ?? [])) {
+                            photosError
+                                .add(FileUploadModel(id: i.id, name: i.name));
+                          }
+                          for (var i in (e.img ?? [])) {
+                            photos.add(FileUploadModel(id: i.id, name: i.name));
+                          }
+                          return ItemViewModel(
+                            photosError: photosError,
+                            error_notpass: e.reason_not_archive,
+                            virtualId: e.virtualId,
+                            photos: photos,
+                            brand: e.trademark,
+                            material_specification: e.material_specification,
+                            note: e.note,
+                            id: e.id,
+                            code: e.code,
+                            name: e.materiallist?.material_list,
+                            achieve: e.achieve ?? false,
+                            not_achieve: e.not_achieve ?? false,
+                          );
+                        },
+                      ).toList(),
                     ),
                     keyMap: e.key,
                   );
@@ -217,31 +228,41 @@ class _HandOverCheckScreenState extends State<HandOverCheckScreen>
                     type: DetailType.ASSET,
                     region: e.value[0].assetposition?.asset_postision ?? "",
                     selectPass:
-                        context.watch<AcceptHandOverPrv>().selectItemPass,
+                        context.read<AcceptHandOverPrv>().selectItemPass,
                     data: AssetItemViewModel(
                       handOverId: handOver.id!,
                       type: 'asset',
                       title: e.value[0].assetposition?.asset_postision,
-                      list: e.value
-                          .map(
-                            (e) => ItemViewModel(
-                              error_notpass: e.reason_not_archive,
-                              photosError: e.file_reason_archive ?? [],
-                              virtualId: e.virtualId,
-                              photos: e.img_additional ?? [],
-                              material_specification: e.material_additional,
-                              brand: e.trademark_additional,
-                              amount: e.quantity_additional,
-                              unit: e.unit?.name,
-                              note: e.note_additional,
-                              id: e.id,
-                              code: e.id,
-                              name: e.name_additional,
-                              achieve: e.achieve ?? false,
-                              not_achieve: e.not_achieve ?? false,
-                            ),
-                          )
-                          .toList(),
+                      list: e.value.map(
+                        (e) {
+                          List<FileUploadModel> photosError = [];
+                          List<FileUploadModel> photos = [];
+
+                          for (var i in (e.file_reason_archive ?? [])) {
+                            photosError
+                                .add(FileUploadModel(id: i.id, name: i.name));
+                          }
+                          for (var i in (e.img_additional ?? [])) {
+                            photos.add(FileUploadModel(id: i.id, name: i.name));
+                          }
+                          return ItemViewModel(
+                            error_notpass: e.reason_not_archive,
+                            photosError: photosError,
+                            virtualId: e.virtualId,
+                            photos: photos,
+                            material_specification: e.material_additional,
+                            brand: e.trademark_additional,
+                            amount: e.quantity_additional,
+                            unit: e.unit?.name,
+                            note: e.note_additional,
+                            id: e.id,
+                            code: e.id,
+                            name: e.name_additional,
+                            achieve: e.achieve ?? false,
+                            not_achieve: e.not_achieve ?? false,
+                          );
+                        },
+                      ).toList(),
                     ),
                     keyMap: e.key,
                   );

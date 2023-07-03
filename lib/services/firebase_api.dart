@@ -1,15 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:app_cudan/main.dart';
+import 'package:graphql/client.dart';
 
+import '../models/response.dart';
 import '../screens/notification/notification_screen.dart';
+import 'api_service.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Title: ${message.notification?.title}');
@@ -66,6 +71,9 @@ listen(message) {
 
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
+  String? fCMToken;
+  Map<String, dynamic>? device_info;
+  String uniqueDeviceId = '';
 
   Future initPushNotifications() async {
     await FirebaseMessaging.instance
@@ -110,12 +118,67 @@ class FirebaseApi {
 
   Future<String?> initNotification() async {
     await _firebaseMessaging.requestPermission();
-    final fCMToken = await _firebaseMessaging.getToken();
+    fCMToken = await _firebaseMessaging.getToken();
     log('Token: $fCMToken');
 
     //FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     initPushNotifications();
     initLocalNotifications();
     return fCMToken;
+  }
+
+  Future push_device(String account) async {
+    await getUniqueDeviceId();
+    print(device_info);
+    var query = '''
+mutation (\$data: PushDeviceInput){
+	response:reg_push_device (data:\$data){
+		code
+		message
+	}
+}
+
+    ''';
+    print(query);
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      "data": {
+        "tokenId": fCMToken,
+        "deviceId": uniqueDeviceId,
+        "userId": account,
+        "platform": Platform.isAndroid ? "ANDROID" : "IOS",
+        "appId": "demepro",
+        "device_info": device_info,
+        "extra_info": {},
+      }
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  Future<String> getUniqueDeviceId() async {
+    var deviceInfo = DeviceInfoPlugin();
+
+    if (Platform.isIOS) {
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      device_info = iosDeviceInfo.data;
+      uniqueDeviceId =
+          '${iosDeviceInfo.name}:${iosDeviceInfo.identifierForVendor}'; // unique ID on iOS
+    } else if (Platform.isAndroid) {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      device_info = androidDeviceInfo.data;
+      uniqueDeviceId =
+          '${androidDeviceInfo.device}:${androidDeviceInfo.id}'; // unique ID  on Android
+    }
+
+    return uniqueDeviceId;
   }
 }

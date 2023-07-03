@@ -6,6 +6,7 @@ import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
@@ -16,23 +17,30 @@ import '../../../../services/api_rules.dart';
 import '../../../../utils/utils.dart';
 import '../hand_over_screen.dart';
 import '../widget/asset_item.dart';
+import '../../../../main.dart';
 
 class AcceptHandOverPrv extends ChangeNotifier {
   AcceptHandOverPrv(this.handOver) {
-    handOver = handOver;
+    _initValue(handOver);
+  }
+  NumberFormat formatter = NumberFormat('#######.###');
+
+  _initValue(handOverA) {
+    handOver = handOverA;
     handOverCopy = handOver.copyWith();
     if (handOver.real_acreage != null) {
-      realAreaController.text = (handOver.real_acreage ?? '0').toString();
+      realAreaController.text = formatter.format(handOver.real_acreage ?? 0);
     }
     if (handOver.real_floor_area != null) {
-      realFloorController.text = (handOver.real_floor_area ?? '0').toString();
+      realFloorController.text =
+          formatter.format(handOver.real_floor_area ?? 0);
     }
-    var handDate = DateTime.tryParse(handOverCopy.date ?? "") != null
+    handDate = DateTime.tryParse(handOverCopy.date ?? "") != null
         ? DateTime.parse(handOverCopy.date!)
         : null;
     if (handDate != null) {
       handOverDateController.text =
-          Utils.dateFormat(handDate.toIso8601String(), 0);
+          Utils.dateFormat(handDate!.toIso8601String(), 0);
     }
     if (handOver.hour != null) {
       handOverHourController.text = handOver.hour ?? "";
@@ -45,6 +53,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
     getWorkArisingHandOver();
     print(materialList);
     print(assetList);
+    notifyListeners();
   }
 
   final formKeyReason = GlobalKey<FormState>();
@@ -52,6 +61,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
   String? validateReason;
   String? validateReasonNote;
   String? valueReason;
+  DateTime? handDate;
 
   late Map<String, List<Materials>> materialList;
   late Map<String, List<AddAsset>> assetList;
@@ -93,18 +103,18 @@ class AcceptHandOverPrv extends ChangeNotifier {
   String? validateHandOverDate;
 
   pickHandOverDate(BuildContext context) {
-    var handDate = handOverCopy.date != null
-        ? DateTime.parse(handOverCopy.date!)
-        : DateTime.now();
+    // var handDate = handOverCopy.date != null
+    //     ? DateTime.parse(handOverCopy.date!)
+    //     : DateTime.now();
     Utils.showDatePickers(
       context,
-      initDate: handDate,
+      initDate: handDate ?? DateTime.now(),
       startDate: DateTime(DateTime.now().year - 10, 1, 1),
       endDate: DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
-        handOverDateController.text =
-            Utils.dateFormat(handDate.toIso8601String(), 0);
+        handDate = v;
+        handOverDateController.text = Utils.dateFormat(v.toIso8601String(), 0);
         validateHandOverDate = null;
         notifyListeners();
       } else {
@@ -200,10 +210,24 @@ class AcceptHandOverPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  infoStep2Next() {
+  infoStep2Next(BuildContext context) {
+    // pageController.animateToPage(
+    //   ++activeStep,
+    //   duration: const Duration(milliseconds: 250),
+    //   curve: Curves.bounceInOut,
+    // );
     if (infoKeyStep.currentState!.validate()) {
-      handOverCopy.date = handOverDateController.text.trim();
+      handOverCopy.date = handDate?.toIso8601String();
       handOverCopy.hour = handOverHourController.text.trim();
+      handOverCopy.real_acreage =
+          double.tryParse(realAreaController.text.trim()) != null
+              ? double.parse(realAreaController.text.trim())
+              : null;
+      handOverCopy.real_floor_area =
+          double.tryParse(realFloorController.text.trim()) != null
+              ? double.parse(realFloorController.text.trim())
+              : null;
+      ;
       clearAreaValidate();
       pageController.animateToPage(
         ++activeStep,
@@ -211,6 +235,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
         curve: Curves.bounceInOut,
       );
     } else {
+      Utils.showSnackBar(context, S.of(context).invalid_data);
       genAreaValidate();
     }
   }
@@ -261,7 +286,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
         }
       }
       var data = handOverCopy.toMap();
-      // data["status"] = 'WAIT';
+      data["date"] = handDate?.toIso8601String();
       if (count > 0) {
         Utils.showConfirmMessage(
           context: context,
@@ -311,6 +336,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
             backScreen(context);
             // Navigator.pop(context);
           }
+          _initValue(handOverCopy);
         }).catchError((e) {
           Utils.showErrorMessage(context, e);
         });
@@ -323,9 +349,9 @@ class AcceptHandOverPrv extends ChangeNotifier {
   completeHandover(BuildContext context) async {
     isLoadingComplete = true;
     notifyListeners();
-    handOverCopy.status = 'COMPLETE';
-    handOverCopy.status_error = 'COMPLETE';
     var data = handOverCopy.toMap();
+    data['status'] = 'COMPLETE';
+    data['status_error'] = 'COMPLETE';
     await APIHandOver.saveHandOver(data).then((v) {
       isLoadingComplete = false;
       notifyListeners();
@@ -386,6 +412,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
       if (v != null) {
         handOver = HandOver.fromMap(v);
         handOverCopy = HandOver.fromMap(v);
+        _initValue(handOver);
         makeList();
       }
       notifyListeners();
@@ -503,49 +530,49 @@ class AcceptHandOverPrv extends ChangeNotifier {
   checkHandleHandOver(
     BuildContext context,
   ) async {
-    pageController.animateToPage(
-      ++activeStep,
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.bounceInOut,
-    );
+    // pageController.animateToPage(
+    //   ++activeStep,
+    //   duration: const Duration(milliseconds: 250),
+    //   curve: Curves.bounceInOut,
+    // );
     var data = handOver.copyWith().toMap();
 
-    // data['isMobile'] = true;
-    // await APIHandOver.check_handle_handover(data).then((v) async {
-    //   var now = DateTime.now().subtract(Duration(hours: 7));
-    //   handOverCopy.status = 'HANDING';
-    //   var data = handOverCopy.toMap();
-    //   data['date'] = now.toIso8601String();
-    //   data['hour'] = "${now.hour}:${now.minute}";
-    //   // await APIHandOver.saveHandOver(data);
-    // }).then((v) {
-    //   getHandOverById();
-    //   pageController.animateToPage(
-    //     ++activeStep,
-    //     duration: const Duration(milliseconds: 250),
-    //     curve: Curves.bounceInOut,
-    //   );
-    // }).catchError((e) {
-    //   Utils.showErrorMessage(context, e);
-    // });
+    data['isMobile'] = true;
+    await APIHandOver.check_handle_handover(data).then((v) async {
+      // var now = DateTime.now().subtract(Duration(hours: 7));
+      handOverCopy.status = 'HANDING';
+      // var data = handOverCopy.toMap();
+      // data['date'] = now.toIso8601String();
+      // data['hour'] = "${now.hour}:${now.minute}";
+      await APIHandOver.saveHandOver(data);
+    }).then((v) {
+      getHandOverById();
+      pageController.animateToPage(
+        ++activeStep,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.bounceInOut,
+      );
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
   }
 
   submitError(BuildContext context) async {
     if (formKeyReason.currentState!.validate()) {
       clearReasonValidateString();
       Navigator.pop(context);
-      await APIHandOver.errorReport(
-        handOver.toMap(),
-        valueReason!,
-        reasonController.text.trim(),
-      ).then((value) {
+      var data = handOver.toMap();
+      try {
+        await APIHandOver.errorReport(
+          data,
+          valueReason!,
+          reasonController.text.trim(),
+        );
         Utils.showSuccessMessage(
           context: context,
           e: S.of(context).success_report_handover,
           onClose: () {
-            // Navigator.pop(context);
-            Navigator.pushNamedAndRemoveUntil(
-              context,
+            navigatorKey.currentState!.pushNamedAndRemoveUntil(
               HandOverScreen.routeName,
               (route) => route.isFirst,
               arguments: {
@@ -554,12 +581,38 @@ class AcceptHandOverPrv extends ChangeNotifier {
             );
           },
         );
-      }).catchError((e) {
+      } catch (e) {
         Utils.showErrorMessage(
           context,
-          e,
+          e.toString(),
         );
-      });
+      }
+      // await APIHandOver.errorReport(
+      //   data,
+      //   valueReason!,
+      //   reasonController.text.trim(),
+      // ).then((value) {
+      //   Utils.showSuccessMessage(
+      //     context: context,
+      //     e: S.of(context).success_report_handover,
+      //     onClose: () {
+      //       Navigator.pop(context);
+      //       Navigator.pushNamedAndRemoveUntil(
+      //         context,
+      //         HandOverScreen.routeName,
+      //         (route) => route.isFirst,
+      //         arguments: {
+      //           'init': 1,
+      //         },
+      //       );
+      //     },
+      //   );
+      // }).catchError((e) {
+      //   Utils.showErrorMessage(
+      //     context,
+      //     e,
+      //   );
+      // });
     } else {
       genReasonValidateString();
     }
@@ -574,7 +627,7 @@ class AcceptHandOverPrv extends ChangeNotifier {
         context: context,
         dialog: PrimaryDialog.custom(
           content: StatefulBuilder(
-            builder: (context, setState) {
+            builder: (ctx, setState) {
               return FutureBuilder(
                 future: () async {
                   await APIHandOver.getDefect().then((v) {

@@ -500,7 +500,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
             vpad(40),
             PrimaryButton(
               onTap: () async {
-                await context.read<AcceptHandOverPrv>().infoStep2Next();
+                await context.read<AcceptHandOverPrv>().infoStep2Next(context);
               },
               text: S.of(context).next,
             ),

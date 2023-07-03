@@ -6,6 +6,7 @@ import 'package:app_cudan/models/workarising.dart';
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
+import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -219,8 +220,8 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                       (e) => FutureBuilder(
                         future: () async {
                           var a = await APIHandOver.getResultsWorkByVirtualId(
-                            e.value.virtualId ?? '',
                             widget.data.handOverId,
+                            e.value.virtualId ?? '',
                           );
                           return a;
                         }(),
@@ -231,6 +232,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                           }
 
                           print(work);
+
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -349,11 +351,11 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                   ],
                                                 ),
                                                 vpad(12),
-                                                SelectMediaWidget(
+                                                SelectFileWidget(
                                                   enable: false,
                                                   title:
                                                       S.of(context).file_image,
-                                                  existImages: e.value.photos,
+                                                  existFiles: e.value.photos,
                                                 ),
                                                 if (e.value.error_notpass !=
                                                     null)
@@ -392,12 +394,12 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                   vpad(12),
                                                 if (e.value.photosError
                                                     .isNotEmpty)
-                                                  SelectMediaWidget(
+                                                  SelectFileWidget(
                                                     enable: false,
                                                     title: S
                                                         .of(context)
                                                         .file_image,
-                                                    existImages:
+                                                    existFiles:
                                                         e.value.photosError,
                                                   ),
                                                 if (work?.to_do_list_result?[0]
@@ -446,12 +448,12 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                             .file ??
                                                         [])
                                                     .isNotEmpty)
-                                                  SelectMediaWidget(
+                                                  SelectFileWidget(
                                                     enable: false,
                                                     title: S
                                                         .of(context)
                                                         .file_image,
-                                                    existImages: work
+                                                    existFiles: work
                                                             ?.to_do_list_result?[
                                                                 0]
                                                             .file ??
@@ -477,8 +479,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                                   widget.keyMap,
                                                                   e.key,
                                                                   widget.type,
-                                                                  e.value
-                                                                      .photos,
+                                                                  [],
                                                                   '',
                                                                 ),
                                                                 widget
@@ -514,7 +515,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                                 widget.keyMap,
                                                                 e.key,
                                                                 widget.type,
-                                                                e.value.photos,
+                                                                [],
                                                                 '',
                                                               );
                                                             },
@@ -535,11 +536,6 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                 PrimaryButton(
                                                   width: double.infinity,
                                                   text: S.of(context).close,
-                                                  buttonType:
-                                                      ButtonType.secondary,
-                                                  secondaryBackgroundColor:
-                                                      redColor4,
-                                                  textColor: redColor1,
                                                   buttonSize: ButtonSize.xsmall,
                                                   onTap: () {
                                                     Navigator.pop(context);
@@ -575,7 +571,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                                   widget.keyMap,
                                                   e.key,
                                                   widget.type,
-                                                  e.value.photos,
+                                                  [],
                                                   '',
                                                 )
                                               : null;

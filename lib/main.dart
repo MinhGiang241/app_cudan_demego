@@ -24,10 +24,11 @@ import 'package:timeago/timeago.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 var FCMtoken;
+var firebase = FirebaseApi();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FCMtoken = await FirebaseApi().initNotification();
+  FCMtoken = await firebase.initNotification();
 
   await FlutterDownloader.initialize(
       debug:
