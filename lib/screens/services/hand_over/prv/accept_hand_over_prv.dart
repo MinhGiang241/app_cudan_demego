@@ -329,13 +329,26 @@ class AcceptHandOverPrv extends ChangeNotifier {
         await APIHandOver.checkComplete(data).then((v) async {
           // await getHandOverById();
           // _initValue(handOverCopy);
-          navigatorKey.currentState!.pushNamedAndRemoveUntil(
-            HandOverScreen.routeName,
-            (route) => route.isFirst,
-            arguments: {
-              'init': 1,
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_handover(handOverCopy.label ?? ""),
+            onClose: () {
+              navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                HandOverScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  'init': 1,
+                },
+              );
             },
           );
+          // navigatorKey.currentState!.pushNamedAndRemoveUntil(
+          //   HandOverScreen.routeName,
+          //   (route) => route.isFirst,
+          //   arguments: {
+          //     'init': 1,
+          //   },
+          // );
         }).catchError((e) {
           Utils.showErrorMessage(context, e);
         });

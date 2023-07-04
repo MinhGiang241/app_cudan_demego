@@ -893,7 +893,9 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                   ],
                                 ),
                               if (handOverCopy.status == "COMPLETE" &&
-                                  handOverCopy.status_error != "COMPLETE")
+                                  handOverCopy.status_error != "COMPLETE" &&
+                                  handOverCopy.status_error != '' &&
+                                  handOverCopy.status_error != null)
                                 PrimaryButton(
                                   isLoading: context
                                       .watch<AcceptHandOverPrv>()
