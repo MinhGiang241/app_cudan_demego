@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/reason.dart';
 import 'package:app_cudan/models/resident_card.dart';
+import 'package:app_cudan/models/response_resident_own.dart';
 import 'package:app_cudan/models/transportation_card.dart';
 
 import 'resident_info.dart';
@@ -52,6 +53,7 @@ class ManageCard {
   ResponseResidentInfo? re;
   ResidentCard? res_card;
   List<TransportItem>? l;
+  Apartment? a;
 
   ManageCard({
     this.id,
@@ -92,6 +94,7 @@ class ManageCard {
     this.re,
     this.res_card,
     this.l,
+    this.a,
   });
 
   Map<String, dynamic> toMap() {
@@ -226,6 +229,7 @@ class ManageCard {
               ),
             )
           : null,
+      a: map['a'] != null ? Apartment.fromJson(map['a']) : null,
     );
   }
 

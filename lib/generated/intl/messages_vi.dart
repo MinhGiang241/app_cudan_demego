@@ -851,6 +851,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chỉ có thể upload file jpeg, jpg, png"),
         "pin": MessageLookupByLibrary.simpleMessage("Chốt trực"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Nơi cấp"),
+        "plan_code": MessageLookupByLibrary.simpleMessage("Mã mặt bằng"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Thông tin mặt bằng"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Tên mặt bằng"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),

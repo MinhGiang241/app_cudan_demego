@@ -114,4 +114,71 @@ class APITower {
       return res.response.data;
     }
   }
+
+  static Future getCardCountOwnInfo(
+    String? residentId,
+    String? apartmentId,
+  ) async {
+    var query = '''
+   mutation (\$residentId:String,\$apartmentId:String){
+    response: card_mobile_count_managecard_by_residentId_and_apartmentId (residentId: \$residentId,apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "residentId": residentId,
+        "apartmentId": apartmentId,
+      },
+    );
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getManageCardList(
+    String? residentId,
+    String? phone,
+  ) async {
+    var query = '''
+   mutation (\$phone:String,\$residentId:String){
+    response: card_mobile_get_managecard_list_by_resident_id_and_phone (phone: \$phone,residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "residentId": residentId,
+        "phone": phone,
+      },
+    );
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

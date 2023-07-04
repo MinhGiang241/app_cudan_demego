@@ -408,6 +408,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                         )
                                       ],
                                     ),
+
                                     // Text(apartOwn.type ?? ''),
                                     // Text(apartOwn.apartmentId ?? ''),
                                     // Text(widget.own.apartment!.id ?? ''),
@@ -446,6 +447,52 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                           )
                                         ],
                                       ),
+                                    vpad(5),
+                                    FutureBuilder(
+                                      future: () async {
+                                        return await APITower
+                                            .getCardCountOwnInfo(
+                                          context
+                                              .read<ResidentInfoPrv>()
+                                              .residentId,
+                                          widget.own.apartment?.id,
+                                        );
+                                      }(),
+                                      builder: (ctx, snap) {
+                                        if (snap.hasData) {
+                                          print(snap.data);
+                                          var resCount = snap.data['resident'];
+                                          var transCount =
+                                              snap.data['transport'];
+                                          return Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "${S.of(context).res_card}: ${resCount}",
+                                                  style: txtRegular(
+                                                    12,
+                                                    grayScaleColor2,
+                                                  ),
+                                                ),
+                                              ),
+                                              const Spacer(),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "${S.of(context).trans_card}: ${transCount}",
+                                                  style: txtRegular(
+                                                    12,
+                                                    grayScaleColor2,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                        return vpad(0);
+                                      },
+                                    ),
                                   ],
                                 ),
                           if (isShow)

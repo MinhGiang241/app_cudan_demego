@@ -823,5 +823,6 @@
   "violation_exe": "Xử lý vi phạm",
   "pause_construction": "Khóa thi công",
   "continue_construction": "Mở khóa thi công",
-  "not_complete_check": "Bạn cần đánh giá đầy đủ các đầu mục của danh mục vật liệu. Vui lòng kiểm tra lại"
+  "not_complete_check": "Bạn cần đánh giá đầy đủ các đầu mục của danh mục vật liệu. Vui lòng kiểm tra lại",
+  "plan_code": "Mã mặt bằng"
 }

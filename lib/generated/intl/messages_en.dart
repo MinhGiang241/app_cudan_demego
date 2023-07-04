@@ -842,6 +842,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can only upload file jpeg, jpg, png"),
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "place_issue": MessageLookupByLibrary.simpleMessage("Issue place"),
+        "plan_code": MessageLookupByLibrary.simpleMessage("Plan code"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Plan infomation"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),

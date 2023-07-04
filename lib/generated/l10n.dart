@@ -8289,6 +8289,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Plan code`
+  String get plan_code {
+    return Intl.message(
+      'Plan code',
+      name: 'plan_code',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
