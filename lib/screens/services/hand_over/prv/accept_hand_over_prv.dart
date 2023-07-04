@@ -705,6 +705,8 @@ class AcceptHandOverPrv extends ChangeNotifier {
                                 buttonSize: ButtonSize.small,
                                 buttonType: ButtonType.red,
                                 onTap: () {
+                                  reasonController.text = '';
+                                  valueReason = null;
                                   clearReasonValidateString();
                                   Navigator.pop(context);
                                 },
