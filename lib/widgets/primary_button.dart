@@ -85,8 +85,6 @@ class PrimaryButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (icon != null) icon!,
-                if (icon != null && text != null) hpad(8),
                 if (text != null)
                   Flexible(
                     child: isFit
@@ -137,7 +135,9 @@ class PrimaryButton extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                  )
+                  ),
+                if (icon != null && text != null) hpad(8),
+                if (icon != null) icon!,
               ],
             ),
           ),

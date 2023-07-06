@@ -226,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn căn hộ"),
         "choose_subject": MessageLookupByLibrary.simpleMessage(
             "Để tham khảo các lựa chọn, vui lòng chọn bên dưới:"),
+        "click_here": MessageLookupByLibrary.simpleMessage("vào đây"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
         "cmnd_images": MessageLookupByLibrary.simpleMessage(
@@ -323,6 +324,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_acc": MessageLookupByLibrary.simpleMessage("Đăng ký tài khoản"),
         "create_acc_1": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "create_new": MessageLookupByLibrary.simpleMessage("Tạo mới"),
+        "create_reg_proj":
+            MessageLookupByLibrary.simpleMessage("Tạo đăng ký mới"),
         "created_date": MessageLookupByLibrary.simpleMessage("Ngày tạo"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
@@ -569,6 +572,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh CMND/CCCD/Hộ chiếu mặt trước không được để trống"),
         "identity_photo":
             MessageLookupByLibrary.simpleMessage("Ảnh CMND/ CCCD/ Hộ chiếu"),
+        "if_not_resident": MessageLookupByLibrary.simpleMessage(
+            "Nếu Anh/Chị chưa đăng ký thông tin cư dân vui lòng click"),
         "image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Hình ảnh không được để trống"),
         "inactive": MessageLookupByLibrary.simpleMessage("Dừng hoạt động"),
@@ -684,10 +689,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có đăng ký vật nuôi nào"),
         "no_pick_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
+        "no_project":
+            MessageLookupByLibrary.simpleMessage("Không có dự án nào"),
         "no_reflection": MessageLookupByLibrary.simpleMessage(
             "Không có góp ý hay khiếu nại nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký thi công nào"),
+        "no_reg_proj": MessageLookupByLibrary.simpleMessage(
+            "Anh/Chị hiện tại chưa có bản đăng ký cư dân nào"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký dịch vụ vào"),
         "no_trans_card":
@@ -1036,6 +1045,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
         "select_expire": MessageLookupByLibrary.simpleMessage("Chọn thời hạn"),
+        "select_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "select_seat_num":
             MessageLookupByLibrary.simpleMessage("Chọn số chỗ ngồi"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
@@ -1288,6 +1298,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_pay": MessageLookupByLibrary.simpleMessage("Chờ thanh toán"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
+        "waiting_project_resistration":
+            MessageLookupByLibrary.simpleMessage("Thông tin đăng ký chờ duyệt"),
         "ward": MessageLookupByLibrary.simpleMessage("Quận/Huyện"),
         "water": MessageLookupByLibrary.simpleMessage("Nước"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),

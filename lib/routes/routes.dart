@@ -15,6 +15,8 @@ import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
 import '../screens/event/event_details_screen.dart';
 import '../screens/event/event_list_screen.dart';
+import '../screens/ho/project_registration_screen.dart';
+import '../screens/ho/select_project_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
 import '../screens/news/news_screen.dart';
@@ -393,6 +395,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const HandOverCheckScreen(),
+        );
+      case SelectProjectScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const SelectProjectScreen(),
+        );
+      case ProjectRegistrationScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ProjectRegistrationScreen(),
         );
 
       default:

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -88,6 +89,9 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProxyProvider(create: create, update: update)
         ChangeNotifierProvider(
           create: (context) => AuthPrv()..start(context),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HOAccountServicePrv(context),
         ),
         ChangeNotifierProvider(create: (context) => LangPrv(lang, FCMtoken)),
         ChangeNotifierProvider(create: (context) => ResidentInfoPrv())

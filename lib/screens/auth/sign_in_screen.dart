@@ -4,6 +4,7 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:app_cudan/screens/auth/prv/sign_in_prv.dart';
 import 'package:app_cudan/screens/auth/sign_up_screen.dart';
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:app_cudan/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -195,10 +196,25 @@ class _SignInScreenState extends State<SignInScreen> {
                   PrimaryButton(
                     onTap: () async {
                       FocusScope.of(context).unfocus();
-                      return await context.read<SingInPrv>().signIn(context);
-
-                      // Navigator.pushNamed(
-                      //     context, ApartmentSeletionScreen.routeName);
+                      // await context.read<HOAccountServicePrv>().loginHO(
+                      //       context
+                      //           .read<SingInPrv>()
+                      //           .accountController
+                      //           .text
+                      //           .trim(),
+                      //       context
+                      //           .read<SingInPrv>()
+                      //           .passController
+                      //           .text
+                      //           .trim(),
+                      //       context,
+                      //     );
+                      return await context
+                          .read<SingInPrv>()
+                          .signInHO(context, context.read<AuthPrv>().remember);
+                      // return await context.read<SingInPrv>().signIn(
+                      //       context,
+                      //     );
                     },
                     text: S.of(context).sign_in,
                     isLoading: context.watch<SingInPrv>().isLoading,

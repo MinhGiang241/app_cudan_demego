@@ -8299,6 +8299,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Select project`
+  String get select_project {
+    return Intl.message(
+      'Select project',
+      name: 'select_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you have not registered information yet, please click`
+  String get if_not_resident {
+    return Intl.message(
+      'If you have not registered information yet, please click',
+      name: 'if_not_resident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `here`
+  String get click_here {
+    return Intl.message(
+      'here',
+      name: 'click_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any project`
+  String get no_project {
+    return Intl.message(
+      'Don\'t have any project',
+      name: 'no_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting Project Resistration`
+  String get waiting_project_resistration {
+    return Intl.message(
+      'Waiting Project Resistration',
+      name: 'waiting_project_resistration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new registration`
+  String get create_reg_proj {
+    return Intl.message(
+      'Create new registration',
+      name: 'create_reg_proj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any registration`
+  String get no_reg_proj {
+    return Intl.message(
+      'You don\'t have any registration',
+      name: 'no_reg_proj',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

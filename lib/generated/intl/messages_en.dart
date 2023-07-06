@@ -220,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose an apartment"),
         "choose_subject": MessageLookupByLibrary.simpleMessage(
             "To refer any option, please select bellow:"),
+        "click_here": MessageLookupByLibrary.simpleMessage("here"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
         "cmnd_images":
@@ -323,6 +324,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_acc_1":
             MessageLookupByLibrary.simpleMessage("Create an account"),
         "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
+        "create_reg_proj":
+            MessageLookupByLibrary.simpleMessage("Create new registration"),
         "created_date": MessageLookupByLibrary.simpleMessage("Created date"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
@@ -564,6 +567,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Identity card front side image can not be empty"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
             "Identity card/ passport photos"),
+        "if_not_resident": MessageLookupByLibrary.simpleMessage(
+            "If you have not registered information yet, please click"),
         "image_not_empty":
             MessageLookupByLibrary.simpleMessage("Image can not be empty"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
@@ -677,10 +682,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any pet registration"),
         "no_pick_obj": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any picked object"),
+        "no_project":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any project"),
         "no_reflection":
             MessageLookupByLibrary.simpleMessage("No have any feedback"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any construction registration"),
+        "no_reg_proj": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have any registration"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any service registration"),
         "no_trans_card":
@@ -1033,6 +1042,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select construction type"),
         "select_expire":
             MessageLookupByLibrary.simpleMessage("Select expired time"),
+        "select_project":
+            MessageLookupByLibrary.simpleMessage("Select project"),
         "select_seat_num":
             MessageLookupByLibrary.simpleMessage("Select number seat"),
         "select_surface":
@@ -1293,6 +1304,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_pay": MessageLookupByLibrary.simpleMessage("Wait to pay"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
+        "waiting_project_resistration": MessageLookupByLibrary.simpleMessage(
+            "Waiting Project Resistration"),
         "ward": MessageLookupByLibrary.simpleMessage("Distric/ward"),
         "water": MessageLookupByLibrary.simpleMessage("Water"),
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),

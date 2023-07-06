@@ -823,5 +823,12 @@
   "pause_construction": "Pause construction",
   "continue_construction": "Continue construction",
   "not_complete_check": "You need check all item. Please check again.",
-  "plan_code": "Plan code"
+  "plan_code": "Plan code",
+  "select_project": "Select project",
+  "if_not_resident": "If you have not registered information yet, please click",
+  "click_here": "here",
+  "no_project": "Don't have any project",
+  "waiting_project_resistration": "Waiting Project Resistration",
+  "create_reg_proj": "Create new registration",
+  "no_reg_proj": "You don't have any registration"
 }
