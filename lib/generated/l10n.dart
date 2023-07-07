@@ -8369,6 +8369,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Registration information`
+  String get reg_info {
+    return Intl.message(
+      'Registration information',
+      name: 'reg_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sell contract number`
+  String get sell_contract_num {
+    return Intl.message(
+      'Sell contract number',
+      name: 'sell_contract_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter sell contract number`
+  String get enter_sell_contract_num {
+    return Intl.message(
+      'Enter sell contract number',
+      name: 'enter_sell_contract_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search an apartment`
+  String get search_apartment {
+    return Intl.message(
+      'Search an apartment',
+      name: 'search_apartment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

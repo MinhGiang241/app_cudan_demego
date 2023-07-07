@@ -82,6 +82,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
 
     return ChangeNotifierProvider(
       create: (context) => RegisterDeliveryPrv(
+        delivery: delivery,
         endTime: delivery.end_hour != null
             ? TimeOfDay(
                 hour: int.parse(delivery.end_hour!.split(":")[0]),
@@ -110,24 +111,6 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
       ),
       builder: ((context, child) {
         var ruleFiles = context.watch<RegisterDeliveryPrv>().rulesFiles;
-        if (isEdit) {
-          context.read<RegisterDeliveryPrv>().noteController.text =
-              delivery.note_reason ?? '';
-          context.read<RegisterDeliveryPrv>().startDateController.text =
-              Utils.dateFormat(delivery.start_time ?? '', 1);
-          context.read<RegisterDeliveryPrv>().endDateController.text =
-              Utils.dateFormat(delivery.end_time ?? '', 1);
-          context.read<RegisterDeliveryPrv>().describleController.text =
-              delivery.describe ?? '';
-          if (delivery.start_hour != null) {
-            context.read<RegisterDeliveryPrv>().startHourController.text =
-                delivery.start_hour!.substring(0, 5);
-          }
-          if (delivery.end_hour != null) {
-            context.read<RegisterDeliveryPrv>().endHourController.text =
-                delivery.end_hour!.substring(0, 5);
-          }
-        }
 
         return PrimaryScreen(
           appBar: PrimaryAppbar(
@@ -268,7 +251,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                   .validateStartHour,
                               validator: Utils.emptyValidator,
                               controller: context
-                                  .read<RegisterDeliveryPrv>()
+                                  .watch<RegisterDeliveryPrv>()
                                   .startHourController,
                               label: S.of(context).hour,
                               hint: "hh:mm",

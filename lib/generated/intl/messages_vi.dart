@@ -448,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập lý do từ chối"),
         "enter_reg_num":
             MessageLookupByLibrary.simpleMessage("Nhập số đăng ký xe"),
+        "enter_sell_contract_num":
+            MessageLookupByLibrary.simpleMessage("Nhập số hợp đồng mua bán"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
         "enter_worker_num":
@@ -915,6 +917,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ"),
         "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh"),
+        "reg_info": MessageLookupByLibrary.simpleMessage("Thông tin đăng ký"),
         "reg_letter_num":
             MessageLookupByLibrary.simpleMessage("Mã phiếu đăng ký"),
         "reg_missing_obj":
@@ -1037,6 +1040,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
+        "search_apartment":
+            MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
         "search_project":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm dự án"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),
@@ -1051,6 +1056,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Chọn phương tiện"),
+        "sell_contract_num":
+            MessageLookupByLibrary.simpleMessage("Số hợp đồng mua bán"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),

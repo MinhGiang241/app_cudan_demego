@@ -1413,6 +1413,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.8"
+  searchable_paginated_dropdown:
+    dependency: "direct main"
+    description:
+      name: searchable_paginated_dropdown
+      sha256: "289a40f7b0964f91b3d8123b4654a8397ec9df9fd1a6bc8ab545ec33c81a9eb2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   sky_engine:
     dependency: transitive
     description: flutter

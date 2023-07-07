@@ -830,5 +830,9 @@
   "no_project": "Don't have any project",
   "waiting_project_resistration": "Waiting Project Resistration",
   "create_reg_proj": "Create new registration",
-  "no_reg_proj": "You don't have any registration"
+  "no_reg_proj": "You don't have any registration",
+  "reg_info": "Registration information",
+  "sell_contract_num": "Sell contract number",
+  "enter_sell_contract_num": "Enter sell contract number",
+  "search_apartment": "Search an apartment"
 }

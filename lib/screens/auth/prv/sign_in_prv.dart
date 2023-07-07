@@ -34,49 +34,6 @@ class SingInPrv extends ChangeNotifier {
     return 0;
   }
 
-  signInHO(BuildContext context, bool remember) async {
-    if (formKey.currentState!.validate()) {
-      try {
-        accountValidate = passValidate = null;
-        isLoading = true;
-        notifyListeners();
-        await context.read<HOAccountServicePrv>().loginHO(
-              accountController.text.trim(),
-              passController.text.trim(),
-              context,
-            );
-        isLoading = false;
-        if (remember) {
-          await PrfData.shared.setSignInStore(
-              accountController.text.trim(), passController.text.trim());
-        } else {
-          await PrfData.shared.deteleSignInStore();
-        }
-        notifyListeners();
-      } catch (e) {
-        isLoading = false;
-        notifyListeners();
-        Utils.showErrorMessage(context, e.toString());
-        return;
-      }
-    } else {
-      context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
-      isLoading = false;
-      if (accountController.text.isEmpty) {
-        accountValidate = S.current.can_not_empty;
-      } else {
-        accountValidate = null;
-      }
-      if (passController.text.isEmpty) {
-        passValidate = S.current.can_not_empty;
-      } else {
-        passValidate = null;
-      }
-      notifyListeners();
-      return;
-    }
-  }
-
   signIn(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       accountValidate = passValidate = null;

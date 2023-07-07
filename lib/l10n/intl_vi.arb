@@ -831,5 +831,9 @@
   "no_project": "Không có dự án nào",
   "waiting_project_resistration": "Thông tin đăng ký chờ duyệt",
   "create_reg_proj": "Tạo đăng ký mới",
-  "no_reg_proj": "Anh/Chị hiện tại chưa có bản đăng ký cư dân nào"
+  "no_reg_proj": "Anh/Chị hiện tại chưa có bản đăng ký cư dân nào",
+  "reg_info": "Thông tin đăng ký",
+  "sell_contract_num": "Số hợp đồng mua bán",
+  "enter_sell_contract_num": "Nhập số hợp đồng mua bán",
+  "search_apartment": "Tìm kiếm căn hộ"
 }

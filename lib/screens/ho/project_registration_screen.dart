@@ -13,6 +13,7 @@ import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
 import '../auth/prv/auth_prv.dart';
+import 'add_new_proj_reg_screen.dart';
 import 'prv/ho_account_service_prv.dart';
 
 class ProjectRegistrationScreen extends StatefulWidget {
@@ -113,8 +114,11 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
               ),
             ),
             PrimaryButton(
+              onTap: () {
+                Navigator.pushNamed(context, AddNewProjRegScreen.routeName);
+              },
               width: double.infinity,
-              text: "Tạo đăng ký mới",
+              text: S.of(context).create_reg_proj,
               icon: Icon(Icons.add, color: Colors.white, size: 24),
             ),
             vpad(10)

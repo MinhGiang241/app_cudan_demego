@@ -443,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter refuse reason"),
         "enter_reg_num":
             MessageLookupByLibrary.simpleMessage("Enter registration number"),
+        "enter_sell_contract_num":
+            MessageLookupByLibrary.simpleMessage("Enter sell contract number"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "enter_worker_num":
@@ -908,6 +910,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Register delivery"),
         "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
             "Registered image must be at least 2 photo"),
+        "reg_info":
+            MessageLookupByLibrary.simpleMessage("Registration information"),
         "reg_letter_num":
             MessageLookupByLibrary.simpleMessage("Registration letter code"),
         "reg_missing_obj": MessageLookupByLibrary.simpleMessage(
@@ -1033,6 +1037,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
+        "search_apartment":
+            MessageLookupByLibrary.simpleMessage("Search an apartment"),
         "search_project":
             MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
@@ -1050,6 +1056,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select surface"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Select transport"),
+        "sell_contract_num":
+            MessageLookupByLibrary.simpleMessage("Sell contract number"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "System is sending to your email, please wait"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),

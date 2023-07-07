@@ -31,7 +31,24 @@ class RegisterDeliveryPrv extends ChangeNotifier {
     this.endDate,
     this.startTime,
     this.endTime,
-  });
+    this.delivery,
+  }) {
+    if (delivery != null) {
+      noteController.text = delivery?.note_reason ?? '';
+      startDateController.text =
+          Utils.dateFormat(delivery!.start_time ?? '', 1);
+      endDateController.text = Utils.dateFormat(delivery!.end_time ?? '', 1);
+      describleController.text = delivery!.describe ?? '';
+      if (delivery!.start_hour != null) {
+        startHourController.text = delivery!.start_hour!.substring(0, 5);
+      }
+      if (delivery!.end_hour != null) {
+        endHourController.text = delivery!.end_hour!.substring(0, 5);
+      }
+    }
+  }
+  Delivery? delivery;
+
   final formKey = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
   int type = 1;
@@ -451,10 +468,13 @@ class RegisterDeliveryPrv extends ChangeNotifier {
       if (v != null) {
         startTime = v;
         validateStartHour = null;
-        startHourController.text = v.format(context);
+        var a = v.format(context);
+        startHourController.text = a;
+        print(startHourController.text);
         notifyListeners();
       }
     });
+    notifyListeners();
   }
 
   pickEndDate(BuildContext context) {
