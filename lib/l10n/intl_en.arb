@@ -834,5 +834,10 @@
   "reg_info": "Registration information",
   "sell_contract_num": "Sell contract number",
   "enter_sell_contract_num": "Enter sell contract number",
-  "search_apartment": "Search an apartment"
+  "search_apartment": "Search an apartment",
+  "success_reg_res": "Register resident sucessfully",
+  "sys_support": "System suport",
+  "appoved_status": "Approved status",
+  "result_date": "Result date",
+  "note_content": "Note content"
 }

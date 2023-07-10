@@ -72,6 +72,32 @@ genStatus(String status) {
   }
 }
 
+String genResRegStatusString(String? status) {
+  switch (status) {
+    case 'PENDING':
+      return S.current.executing;
+    case 'APPROVED':
+      return S.current.approved;
+    case 'REJECT':
+      return S.current.refuse;
+    default:
+      return S.current.executing;
+  }
+}
+
+Color genResRegStatusColor(String? status) {
+  switch (status) {
+    case 'PENDING':
+      return primaryColorBase;
+    case 'APPROVED':
+      return greenColor6;
+    case 'REJECT':
+      return redColor9;
+    default:
+      return primaryColorBase;
+  }
+}
+
 Color genStatusColor(String? status) {
   switch (status) {
     case "NEW":

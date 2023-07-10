@@ -14,10 +14,15 @@ import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_dropdown_search.dart';
 import 'prv/create_new_proj_registration_prv.dart';
 
-class AddNewProjRegScreen extends StatelessWidget {
+class AddNewProjRegScreen extends StatefulWidget {
   const AddNewProjRegScreen({super.key});
   static const routeName = '/project-register';
 
+  @override
+  State<AddNewProjRegScreen> createState() => _AddNewProjRegScreenState();
+}
+
+class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -42,9 +47,14 @@ class AddNewProjRegScreen extends StatelessWidget {
               children: [
                 vpad(12),
                 PrimaryDropDown(
-                  onChange: context
+                  selectList: context
+                      .watch<CreateNewProjRegistrationPrv>()
+                      .projectListChoice,
+                  onChange: (v) => context
                       .read<CreateNewProjRegistrationPrv>()
-                      .onChangeProject,
+                      .onChangeProject(
+                        v,
+                      ),
                   isRequired: true,
                   label: S.of(context).project,
                   hint: S.of(context).choose_a_project,
@@ -55,6 +65,12 @@ class AddNewProjRegScreen extends StatelessWidget {
                 ),
                 vpad(12),
                 PrimaryDropDownSearch(
+                  key: context
+                      .watch<CreateNewProjRegistrationPrv>()
+                      .searchApartmentKey,
+                  onSaved: context
+                      .read<CreateNewProjRegistrationPrv>()
+                      .onSaveApartment,
                   isAuto:
                       context.watch<CreateNewProjRegistrationPrv>().autoValid,
                   onChanged: context
@@ -78,6 +94,11 @@ class AddNewProjRegScreen extends StatelessWidget {
                 ),
                 vpad(12),
                 PrimaryDropDown(
+                  key:
+                      context.watch<CreateNewProjRegistrationPrv>().relationKey,
+                  selectList: context
+                      .watch<CreateNewProjRegistrationPrv>()
+                      .relationshipList,
                   onChange: context
                       .read<CreateNewProjRegistrationPrv>()
                       .onChangeRelation,
@@ -103,7 +124,9 @@ class AddNewProjRegScreen extends StatelessWidget {
                 ),
                 vpad(40),
                 PrimaryButton(
-                  onTap: context.read<CreateNewProjRegistrationPrv>().onSubmit,
+                  onTap: () => context
+                      .read<CreateNewProjRegistrationPrv>()
+                      .onSubmit(context),
                   text: S.of(context).confirm,
                 ),
                 vpad(40),

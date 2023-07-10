@@ -107,9 +107,9 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                                       style: txtMedium(14, primaryColorBase),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Utils.showSuccessMessage(
-                                            context: context,
-                                            e: "sadasdasdsad",
+                                          Navigator.pushNamed(
+                                            context,
+                                            ProjectRegistrationScreen.routeName,
                                           );
                                         },
                                     ),

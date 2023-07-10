@@ -27,6 +27,7 @@ class PrimaryDropDownSearch extends StatefulWidget {
     this.onChanged,
     this.validator,
     this.paginatedRequest,
+    this.onSaved,
     this.isAuto = true,
   });
   final bool isRequired;
@@ -48,6 +49,7 @@ class PrimaryDropDownSearch extends StatefulWidget {
   final Future<List<SearchableDropdownMenuItem<String>>?> Function(
       int, String?)? paginatedRequest;
   final void Function(String?)? onChanged;
+  final void Function(String?)? onSaved;
 
   @override
   State<PrimaryDropDownSearch> createState() => _PrimaryDropDownSearchState();
@@ -55,6 +57,12 @@ class PrimaryDropDownSearch extends StatefulWidget {
 
 class _PrimaryDropDownSearchState extends State<PrimaryDropDownSearch> {
   bool isValid = true;
+
+  @override
+  void didUpdateWidget(covariant oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,6 +97,7 @@ class _PrimaryDropDownSearchState extends State<PrimaryDropDownSearch> {
         // )
 
         SearchableDropdownFormField.paginated(
+          onSaved: widget.onSaved,
           requestItemCount: 100,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: (v) {

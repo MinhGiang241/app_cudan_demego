@@ -17,6 +17,7 @@ import '../screens/event/event_details_screen.dart';
 import '../screens/event/event_list_screen.dart';
 import '../screens/ho/add_new_proj_reg_screen.dart';
 import '../screens/ho/project_registration_screen.dart';
+import '../screens/ho/resident_registration_details_screen.dart';
 import '../screens/ho/select_project_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
@@ -411,6 +412,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const AddNewProjRegScreen(),
+        );
+      case ResidentRegistrationDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const ResidentRegistrationDetailsScreen(),
         );
 
       default:

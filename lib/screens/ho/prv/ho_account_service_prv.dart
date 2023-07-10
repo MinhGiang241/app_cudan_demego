@@ -23,6 +23,7 @@ class HOAccountServicePrv extends ChangeNotifier {
   // String? access_token;
   // DateTime? expireDate;
   List<Project> projectList = [];
+  List<ResidentResitration> registrationList = [];
   var isLoginLoading = false;
 
   Future loginHO(
@@ -62,9 +63,8 @@ class HOAccountServicePrv extends ChangeNotifier {
         projectList.clear();
         for (var i in v) {
           var pj = Project.fromMap(i);
-          if (pj.status == "ACTIVED") {
-            projectList.add(pj);
-          }
+
+          projectList.add(pj);
         }
       }
       print(projectList);
@@ -76,5 +76,22 @@ class HOAccountServicePrv extends ChangeNotifier {
     return;
   }
 
-  Future getRegisterList(BuildContext context) async {}
+  Future getRegisterList(BuildContext context) async {
+    await APIHOAccount.getProjectListNotApprovedRegistrationApi().then((v) {
+      if (v != null) {
+        registrationList.clear();
+        for (var i in v) {
+          var resReg = ResidentResitration.fromMap(i);
+
+          registrationList.add(resReg);
+        }
+      }
+      print(projectList);
+      notifyListeners();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
+
+    return;
+  }
 }

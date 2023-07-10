@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -7,6 +8,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../utils/utils.dart';
+import '../../widgets/primary_card.dart';
 import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
@@ -15,6 +18,8 @@ import '../../widgets/primary_screen.dart';
 import '../auth/prv/auth_prv.dart';
 import 'add_new_proj_reg_screen.dart';
 import 'prv/ho_account_service_prv.dart';
+import 'resident_registration_details_screen.dart';
+import 'select_project_screen.dart';
 
 class ProjectRegistrationScreen extends StatefulWidget {
   const ProjectRegistrationScreen({super.key});
@@ -32,6 +37,12 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
   Widget build(BuildContext context) {
     return PrimaryScreen(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => Navigator.pushReplacementNamed(
+            context,
+            SelectProjectScreen.routeName,
+          ),
+        ),
         elevation: 0,
         actions: [
           IconButton(
@@ -61,7 +72,8 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                     .read<HOAccountServicePrv>()
                     .getRegisterList(context),
                 builder: (context, snapshot) {
-                  var list = [];
+                  var list =
+                      context.watch<HOAccountServicePrv>().registrationList;
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: PrimaryLoading());
                   } else if (snapshot.connectionState == ConnectionState.none) {
@@ -107,7 +119,113 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                     },
                     child: ListView(
                       shrinkWrap: true,
-                      children: [Text("kldsdldfksldskdlasdkjaskljklj")],
+                      children: [
+                        ...list.map(
+                          (e) => PrimaryCard(
+                            onTap: () async {
+                              Navigator.pushNamed(
+                                context,
+                                ResidentRegistrationDetailsScreen.routeName,
+                                arguments: e,
+                              );
+                            },
+                            margin: const EdgeInsets.only(
+                              bottom: 16,
+                              // left: 12,
+                              // right: 12,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 14,
+                              horizontal: 12,
+                            ),
+                            child: Row(
+                              children: [
+                                PrimaryIcon(
+                                  icons: PrimaryIcons.follow_service,
+                                  style: PrimaryIconStyle.gradient,
+                                  gradients: PrimaryIconGradient.green,
+                                  size: 32,
+                                  padding: EdgeInsets.all(12),
+                                  color: Colors.white,
+                                ),
+                                hpad(10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        e.project?.project_name ?? "",
+                                        style: txtBold(12, grayScaleColorBase),
+                                      ),
+                                      Text(
+                                        "${S.of(context).apartment}: ${e.apartmentCode}",
+                                        style: txtRegular(
+                                          13,
+                                          grayScaleColorBase,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.usb_sharp),
+                                          Text(
+                                            e.relationship ?? '',
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColorBase,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.calendar_month_outlined),
+                                          Text(
+                                            Utils.dateFormat(
+                                              e.updatedTime ?? '',
+                                              1,
+                                            ),
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColorBase,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '${S.of(context).status}: ',
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColorBase,
+                                            ),
+                                          ),
+                                          Text(
+                                            genResRegStatusString(e.status),
+                                            style: txtBold(
+                                              12,
+                                              genResRegStatusColor(e.status),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      if (e.note != null)
+                                        Text(
+                                          e.note ?? "",
+                                          style: txtRegular(
+                                            12,
+                                            grayScaleColor3,
+                                          ),
+                                        )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },

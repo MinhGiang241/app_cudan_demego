@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Apartment can not be empty"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "appoved_status":
+            MessageLookupByLibrary.simpleMessage("Approved status"),
         "approve_1": MessageLookupByLibrary.simpleMessage("First approve"),
         "approve_2": MessageLookupByLibrary.simpleMessage("Second approve"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
@@ -740,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Note cancel reason"),
         "note_cancel":
             MessageLookupByLibrary.simpleMessage("Note cancel reason"),
+        "note_content": MessageLookupByLibrary.simpleMessage("Note content"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
@@ -1008,6 +1011,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resident_reg":
             MessageLookupByLibrary.simpleMessage("Resident registration"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Resident type"),
+        "result_date": MessageLookupByLibrary.simpleMessage("Result date"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "return_image": MessageLookupByLibrary.simpleMessage("Returned images"),
         "returned": MessageLookupByLibrary.simpleMessage("Returned"),
@@ -1155,6 +1159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_payment": m28,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Refuse letter successfully"),
+        "success_reg_res": MessageLookupByLibrary.simpleMessage(
+            "Register resident sucessfully"),
         "success_register_dependence": MessageLookupByLibrary.simpleMessage(
             "Register dependent person successfully"),
         "success_remove":
@@ -1178,6 +1184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Update email successfully"),
         "surface": MessageLookupByLibrary.simpleMessage("Plan"),
+        "sys_support": MessageLookupByLibrary.simpleMessage("System suport"),
         "system_notification":
             MessageLookupByLibrary.simpleMessage("System_notification"),
         "take_place_time":

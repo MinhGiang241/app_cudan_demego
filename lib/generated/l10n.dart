@@ -8409,6 +8409,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Register resident sucessfully`
+  String get success_reg_res {
+    return Intl.message(
+      'Register resident sucessfully',
+      name: 'success_reg_res',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System suport`
+  String get sys_support {
+    return Intl.message(
+      'System suport',
+      name: 'sys_support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved status`
+  String get appoved_status {
+    return Intl.message(
+      'Approved status',
+      name: 'appoved_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Result date`
+  String get result_date {
+    return Intl.message(
+      'Result date',
+      name: 'result_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note content`
+  String get note_content {
+    return Intl.message(
+      'Note content',
+      name: 'note_content',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

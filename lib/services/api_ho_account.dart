@@ -62,13 +62,14 @@ class APIHOAccount {
 
   static Future getProjectListApi() async {
     var query = '''
-    mutation {
-      response: guest_qltn_get_tenant_suggestion{
+   mutation {
+    response: guest_qltn_my_approved_registrations_1hld8x3wv  {
         code
         message
         data
-      }
     }
+}
+        
   ''';
 
     final MutationOptions options = MutationOptions(
@@ -86,20 +87,22 @@ class APIHOAccount {
     }
   }
 
-  static Future getProjectListApprovedRegistrationApi(bool status) async {
+  static Future getProjectListNotApprovedRegistrationApi() async {
     var query = '''
-    mutation (\$status:Boolean){
-      response: guest_qltn_my_approved_registrations(status:\$status){
+    mutation {
+    response: guest_qltn_my_not_approved_registrations  {
         code
         message
         data
-      }
     }
+}
+        
+        
+        
   ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"status": status},
     );
     final results = await mutationhqlQuery(options);
 
@@ -171,6 +174,33 @@ class APIHOAccount {
     }
   }
 
+  static Future getProjectSuggestion() async {
+    var query = '''
+    mutation {
+    response: guest_qltn_get_tenant_suggestion  {
+        code
+        message
+        data
+    }
+}
+        
+      
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+    final results = await mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future loginHO(
     String userName,
     String password,
@@ -202,6 +232,102 @@ class APIHOAccount {
       // Navigator.pushNamed(context, ProjectSelectionScreen.routeName);
     } catch (e) {
       throw (e);
+    }
+  }
+
+  static Future getRelationshipList(
+    String registrationId,
+  ) async {
+    var query = '''
+    mutation (\$registrationId:String){
+    response: guest_qltn_load_relationships (registrationId: \$registrationId ) {
+        code
+        message
+        data
+    }
+}
+        
+      
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "registrationId": registrationId,
+      },
+    );
+    final results = await mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future submitResidentRegister(
+    String registrationId,
+    String apartmentCode,
+    String relationship,
+    String contractCode,
+  ) async {
+    var query = '''
+   mutation (\$registrationId:String,\$apartmentCode:String,\$relationship:String,\$contractCode:String){
+    response: guest_qltn_register_resident (registrationId: \$registrationId,apartmentCode: \$apartmentCode,relationship: \$relationship,contractCode: \$contractCode ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+      
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "registrationId": registrationId,
+        "apartmentCode": apartmentCode,
+        "relationship": relationship,
+        "contractCode": contractCode,
+      },
+    );
+    final results = await mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getSupportPhoneNumber() async {
+    var query = '''
+   mutation {
+    response: guest_qltn_mobile_get_support_phone_number  {
+        code
+        message
+        data
+    }
+}   
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+    final results = await mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
     }
   }
 }

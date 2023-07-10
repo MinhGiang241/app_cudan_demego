@@ -835,5 +835,10 @@
   "reg_info": "Thông tin đăng ký",
   "sell_contract_num": "Số hợp đồng mua bán",
   "enter_sell_contract_num": "Nhập số hợp đồng mua bán",
-  "search_apartment": "Tìm kiếm căn hộ"
+  "search_apartment": "Tìm kiếm căn hộ",
+  "success_reg_res": "Đăng ký cư dân thành công",
+  "sys_support": "Đường dây hỗ trợ",
+  "appoved_status": "Tình trạng duyệt",
+  "result_date": "Ngày nhận kết quả",
+  "note_content": "Nội dung ghi chú"
 }

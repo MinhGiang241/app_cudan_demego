@@ -74,3 +74,201 @@ class Project {
     );
   }
 }
+
+class ResidentResitration {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? tenantId;
+  String? guestId;
+  String? registrationId;
+  String? apartmentCode;
+  String? relationship;
+  String? contractCode;
+  String? status;
+  String? note;
+  Project? project;
+  GuestAccount? guestaccount;
+  ResidentResitration({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.tenantId,
+    this.guestId,
+    this.registrationId,
+    this.apartmentCode,
+    this.relationship,
+    this.contractCode,
+    this.project,
+    this.guestaccount,
+    this.status,
+    this.note,
+  });
+
+  ResidentResitration copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? tenantId,
+    String? guestId,
+    String? registrationId,
+    String? apartmentCode,
+    String? relationship,
+    String? contractCode,
+    Project? project,
+    GuestAccount? guestaccount,
+    String? status,
+    String? note,
+  }) {
+    return ResidentResitration(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      tenantId: tenantId ?? this.tenantId,
+      guestId: guestId ?? this.guestId,
+      registrationId: registrationId ?? this.registrationId,
+      apartmentCode: apartmentCode ?? this.apartmentCode,
+      relationship: relationship ?? this.relationship,
+      contractCode: contractCode ?? this.contractCode,
+      project: project ?? this.project,
+      guestaccount: guestaccount ?? this.guestaccount,
+      status: status ?? this.status,
+      note: note ?? this.note,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'tenantId': tenantId,
+      'guestId': guestId,
+      'registrationId': registrationId,
+      'apartmentCode': apartmentCode,
+      'relationship': relationship,
+      'contractCode': contractCode,
+      'status': status,
+      'note': note,
+      'project': project?.toMap(),
+      'guestaccount': guestaccount?.toMap(),
+    };
+  }
+
+  factory ResidentResitration.fromMap(Map<String, dynamic> map) {
+    return ResidentResitration(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      tenantId: map['tenantId'] != null ? map['tenantId'] as String : null,
+      guestId: map['guestId'] != null ? map['guestId'] as String : null,
+      registrationId: map['registrationId'] != null
+          ? map['registrationId'] as String
+          : null,
+      apartmentCode:
+          map['apartmentCode'] != null ? map['apartmentCode'] as String : null,
+      relationship:
+          map['relationship'] != null ? map['relationship'] as String : null,
+      contractCode:
+          map['contractCode'] != null ? map['contractCode'] as String : null,
+      note: map['note'] != null ? map['note'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      project: map['project'] != null
+          ? Project.fromMap(map['project'] as Map<String, dynamic>)
+          : null,
+      guestaccount: map['guestaccount'] != null
+          ? GuestAccount.fromMap(map['guestaccount'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ResidentResitration.fromJson(String source) =>
+      ResidentResitration.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class GuestAccount {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? userName;
+  String? password;
+  String? email;
+  String? phone;
+  String? passwordHash;
+  bool? isActive;
+  GuestAccount({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.userName,
+    this.password,
+    this.email,
+    this.phone,
+    this.passwordHash,
+    this.isActive,
+  });
+
+  GuestAccount copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? userName,
+    String? password,
+    String? email,
+    String? phone,
+    String? passwordHash,
+    bool? isActive,
+  }) {
+    return GuestAccount(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      userName: userName ?? this.userName,
+      password: password ?? this.password,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      passwordHash: passwordHash ?? this.passwordHash,
+      isActive: isActive ?? this.isActive,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'userName': userName,
+      'password': password,
+      'email': email,
+      'phone': phone,
+      'passwordHash': passwordHash,
+      'isActive': isActive,
+    };
+  }
+
+  factory GuestAccount.fromMap(Map<String, dynamic> map) {
+    return GuestAccount(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      userName: map['userName'] != null ? map['userName'] as String : null,
+      password: map['password'] != null ? map['password'] as String : null,
+      email: map['email'] != null ? map['email'] as String : null,
+      phone: map['phone'] != null ? map['phone'] as String : null,
+      passwordHash:
+          map['passwordHash'] != null ? map['passwordHash'] as String : null,
+      isActive: map['isActive'] != null ? map['isActive'] as bool : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory GuestAccount.fromJson(String source) =>
+      GuestAccount.fromMap(json.decode(source) as Map<String, dynamic>);
+}

@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Căn hộ không được để trống"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
+        "appoved_status":
+            MessageLookupByLibrary.simpleMessage("Tình trạng duyệt"),
         "approve_1": MessageLookupByLibrary.simpleMessage("Duyệt lần 1"),
         "approve_2": MessageLookupByLibrary.simpleMessage("Duyệt lần 2"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
@@ -749,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ghi chú lý do hủy"),
         "note_cancel":
             MessageLookupByLibrary.simpleMessage("Ghi chú lý do hủy"),
+        "note_content":
+            MessageLookupByLibrary.simpleMessage("Nội dung ghi chú"),
         "noti_history":
             MessageLookupByLibrary.simpleMessage("Lịch sử thông báo"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
@@ -1011,6 +1015,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("cư dân không được để trống"),
         "resident_reg": MessageLookupByLibrary.simpleMessage("Đăng ký cư dân"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Loại cư trú"),
+        "result_date":
+            MessageLookupByLibrary.simpleMessage("Ngày nhận kết quả"),
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
         "return_image": MessageLookupByLibrary.simpleMessage("Hình ảnh đã trả"),
         "returned": MessageLookupByLibrary.simpleMessage("Đã trả"),
@@ -1155,6 +1161,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_payment": m28,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Từ chối phiếu thành công"),
+        "success_reg_res":
+            MessageLookupByLibrary.simpleMessage("Đăng ký cư dân thành công"),
         "success_register_dependence": MessageLookupByLibrary.simpleMessage(
             "Đăng ký người phụ thuộc thành công"),
         "success_remove":
@@ -1178,6 +1186,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Cập nhật email thành công"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
+        "sys_support": MessageLookupByLibrary.simpleMessage("Đường dây hỗ trợ"),
         "system_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo hệ thống"),
         "take_place_time":
