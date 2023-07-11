@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthPrv()..start(context),
         ),
         ChangeNotifierProvider(
-          create: (context) => HOAccountServicePrv(context),
+          create: (context) => HOAccountServicePrv(),
         ),
         ChangeNotifierProvider(create: (context) => LangPrv(lang, FCMtoken)),
         ChangeNotifierProvider(create: (context) => ResidentInfoPrv())

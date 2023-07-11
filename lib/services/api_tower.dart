@@ -181,4 +181,30 @@ class APITower {
       return res.response.data;
     }
   }
+
+  static Future mobileMe() async {
+    var query = '''
+ mutation {
+    response: authorization_me_resident_app  {
+        code
+        message
+        data
+    }
+}
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

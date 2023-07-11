@@ -218,8 +218,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       //     );
                     },
                     text: S.of(context).sign_in,
-                    isLoading:
-                        context.watch<HOAccountServicePrv>().isLoginLoading,
+                    isLoading: context.watch<SingInPrv>().isLoading,
+                    // context.watch<HOAccountServicePrv>().isLoginLoading,
                     width: double.infinity,
                   )
                 ],

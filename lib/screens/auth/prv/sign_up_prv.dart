@@ -1,9 +1,11 @@
 import 'package:app_cudan/constants/regex_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
+import '../../ho/prv/ho_account_service_prv.dart';
 import '../sign_in_screen.dart';
 import '../verify_otp_screen.dart';
 import 'auth_prv.dart';
@@ -50,6 +52,15 @@ class SignUpPrv extends ChangeNotifier {
       cPassValidate =
           emailValidate = phoneValidate = passValidate = nameValidate = null;
       notifyListeners();
+
+      await context.read<HOAccountServicePrv>().createAccount(
+            phoneController.text.trim(),
+            passController.text.trim(),
+            emailController.text.trim(),
+            nameController.text.trim(),
+            context,
+          );
+
       onSignUp() async {
         // await authPrv.onCreateAccount(
         //   context,
@@ -59,6 +70,18 @@ class SignUpPrv extends ChangeNotifier {
         //   passController.text.trim(),
         //   cPassController.text.trim(),
         // );
+
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_sign_up,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              SignInScreen.routeName,
+              ((route) => route.isCurrent),
+            );
+          },
+        );
 
         await APIAuth.createResidentAccount(
                 context: context,
@@ -82,17 +105,17 @@ class SignUpPrv extends ChangeNotifier {
         notifyListeners();
       }
 
-      Utils.pushScreen(
-          context,
-          VerifyOTPScreen(
-            isForgotPass: false,
-            phone: phoneController.text.trim(),
-            name: phoneController.text.trim(),
-            pass: passController.text.trim(),
-            email: emailController.text.trim(),
-            verify: onSignUp,
-            isPhone: true,
-          ));
+      // Utils.pushScreen(
+      //     context,
+      //     VerifyOTPScreen(
+      //       isForgotPass: false,
+      //       phone: phoneController.text.trim(),
+      //       name: phoneController.text.trim(),
+      //       pass: passController.text.trim(),
+      //       email: emailController.text.trim(),
+      //       verify: onSignUp,
+      //       isPhone: true,
+      //     ));
     } else {
       if (nameController.text.trim().isEmpty) {
         nameValidate = S.of(context).can_not_empty;

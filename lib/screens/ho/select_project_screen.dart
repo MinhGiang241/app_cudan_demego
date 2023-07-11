@@ -1,3 +1,5 @@
+import 'package:app_cudan/services/api_ho_account.dart';
+import 'package:app_cudan/services/api_tower.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,6 +10,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/api_auth.dart';
+import '../../services/api_ho_service.dart';
+import '../../services/api_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_empty_widget.dart';
@@ -44,7 +48,7 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                context.read<AuthPrv>().onSignOut(context);
+                context.read<HOAccountServicePrv>().logOutHO(context);
               },
               icon: const Icon(Icons.logout),
             ),
@@ -168,15 +172,9 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                           vpad(10),
                           ...list.map(
                             (e) => PrimaryCard(
-                              onTap: () async {
-                                await AuthPrv()
-                                    .onSignIn(context, '0969881567', '1234');
-
-                                Navigator.of(context).pushNamed(
-                                  ApartmentSeletionScreen.routeName,
-                                  arguments: e.project_name,
-                                );
-                              },
+                              onTap: () => context
+                                  .read<HOAccountServicePrv>()
+                                  .navigateToProject(context, e),
                               margin: const EdgeInsets.only(
                                 bottom: 16,
                                 // left: 12,

@@ -47,7 +47,7 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<AuthPrv>().onSignOut(context);
+              context.read<HOAccountServicePrv>().logOutHO(context);
             },
             icon: const Icon(Icons.logout),
           ),

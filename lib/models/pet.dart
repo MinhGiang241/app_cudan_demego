@@ -20,7 +20,7 @@ class Pet {
     this.regulations,
     this.sex,
     this.species,
-    this.subscriberId,
+    this.residentId,
     this.tel,
     this.updatedTime,
     this.weight,
@@ -34,7 +34,7 @@ class Pet {
   String? updatedTime;
   String? code;
   String? apartmentId;
-  String? subscriberId;
+  String? residentId;
   String? tel;
   String? pet_name;
   String? pet_type;
@@ -60,7 +60,7 @@ class Pet {
     updatedTime = json['updatedTime'];
     code = json['code'];
     apartmentId = json['apartmentId'];
-    subscriberId = json['subscriberId'];
+    residentId = json['residentId'];
     tel = json['tel'];
     pet_name = json['pet_name'];
     pet_type = json['pet_type'];
@@ -109,7 +109,7 @@ class Pet {
     data['updatedTime'] = updatedTime;
     data['code'] = code;
     data['apartmentId'] = apartmentId;
-    data['subscriberId'] = subscriberId;
+    data['residentId'] = residentId;
     data['tel'] = tel;
     data['pet_name'] = pet_name;
     data['pet_type'] = pet_type;

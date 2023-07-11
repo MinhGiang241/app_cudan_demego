@@ -205,7 +205,7 @@ class _ConfirmChoiceState extends State<ConfirmChoice> {
                 ],
               ),
               Positioned(
-                bottom: 240,
+                bottom: 30,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: PrimaryButton(

@@ -9,6 +9,8 @@ class Project {
   String? project_location;
   String? status;
   String? registrationId;
+  String? domain;
+  String? project_code;
   Project({
     this.id,
     this.project_name,
@@ -17,6 +19,8 @@ class Project {
     this.project_location,
     this.status,
     this.registrationId,
+    this.domain,
+    this.project_code,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +32,8 @@ class Project {
       'project_location': project_location,
       'status': status,
       'registrationId': registrationId,
+      'domain': domain,
+      'project_code': project_code,
     };
   }
 
@@ -43,6 +49,9 @@ class Project {
           ? map['project_location'] as String
           : null,
       status: map['status'] != null ? map['status'] as String : null,
+      domain: map['domain'] != null ? map['domain'] as String : null,
+      project_code:
+          map['project_code'] != null ? map['project_code'] as String : null,
       registrationId: map['registrationId'] != null
           ? map['registrationId'] as String
           : null,

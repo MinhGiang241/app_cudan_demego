@@ -202,7 +202,7 @@ class RegisterPetPrv extends ChangeNotifier {
             sex: sexController.text.trim(),
             pet_type: typeController.text.trim(),
             species: originController.text.trim(),
-            subscriberId: context.read<ResidentInfoPrv>().residentId,
+            residentId: context.read<ResidentInfoPrv>().residentId,
             tel: context.read<ResidentInfoPrv>().userInfo!.phone_required,
             weight: double.tryParse(weightController.text.trim()) != null
                 ? double.parse(weightController.text.trim())

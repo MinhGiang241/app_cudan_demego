@@ -3,21 +3,13 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:app_cudan/utils/utils.dart';
-import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../constants/constants.dart';
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import 'package:graphql/client.dart';
-
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
-
 import '../generated/l10n.dart';
-import '../screens/auth/sign_in_screen.dart';
 import '../utils/error_handler.dart';
 
 typedef OnSendProgress = Function(int, int);
@@ -25,7 +17,7 @@ typedef OnSendProgress = Function(int, int);
 class ApiService {
   static ApiService shared = ApiService();
 
-  final Dio _dio = Dio(BaseOptions(baseUrl: ApiConstants.baseURL));
+  Dio _dio = Dio(BaseOptions(baseUrl: ApiConstants.baseURL));
   String tokenEndpointUrl = ApiConstants.authorizationEndpoint;
   String clientId = ApiConstants.clientId; //"importer";
   String secret = ApiConstants.clientSecret;
@@ -34,7 +26,20 @@ class ApiService {
   String userName = '';
   String passWord = '';
 
-  final _graphqlLink = HttpLink(ApiConstants.baseURL);
+  var _graphqlLink = HttpLink(ApiConstants.baseURL);
+
+  String? access_token;
+  DateTime? expireDate;
+
+  setAPI(
+    String URL,
+    String? access_tokenHO,
+    DateTime? expireDateHO,
+  ) {
+    _dio = Dio(BaseOptions(baseUrl: URL));
+    access_token = access_tokenHO;
+    expireDate = expireDateHO;
+  }
 
   Future<oauth2.Client?> getClient({
     required BuildContext context,
@@ -347,6 +352,29 @@ class ApiService {
     }
   }
 
+  Future<GraphQLClient> getClientGraphQLfromHO() async {
+    late AuthLink authLink;
+    if (access_token == null) {
+      authLink = AuthLink(getToken: () => 'Bearer ');
+    } else if (expireDate == null ||
+        expireDate!.compareTo(DateTime.now()) < 0) {
+      authLink = AuthLink(getToken: () => 'Bearer ');
+    } else {
+      log(access_token!);
+      authLink = AuthLink(
+        getToken: () async => 'Bearer ${access_token}',
+      );
+    }
+    Link link = authLink.concat(_graphqlLink);
+
+    final GraphQLClient graphQLClient = GraphQLClient(
+      cache: GraphQLCache(),
+      link: link,
+    );
+
+    return graphQLClient;
+  }
+
   Future<GraphQLClient> getClientGraphQL({
     ErrorHandleFunc? onError,
     bool remember = false,
@@ -384,7 +412,7 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> graphqlQuery(QueryOptions options) async {
-    final cl = await getClientGraphQL();
+    final cl = await getClientGraphQLfromHO(); // getClientGraphQL(old)
     try {
       final result = await cl.query(options);
       if (result.data == null) {
@@ -409,7 +437,7 @@ class ApiService {
     MutationOptions options,
   ) async {
     try {
-      final cl = await getClientGraphQL();
+      final cl = await getClientGraphQLfromHO();
       final result = await cl.mutate(options);
 
       if (result.data == null) {
