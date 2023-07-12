@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/resident_info.dart';
 import '../../../models/response_resident_own.dart';
+import '../../../models/user_account_HO.dart';
 import '../../../services/prf_data.dart';
 
 class ResidentInfoPrv extends ChangeNotifier {
@@ -13,6 +14,14 @@ class ResidentInfoPrv extends ChangeNotifier {
   List<ResponseResidentOwn> listOwnAll = [];
   ResponseResidentOwn? selectedApartment;
   String? residentId;
+
+  setUserInfoFromHO(UserAccountHO userHO) {
+    userInfo = userHO.resident;
+    userInfo?.account = userHO.user;
+    residentId = userHO.resident?.id;
+
+    print(userInfo);
+  }
 
   addListOwn(i) {
     listOwn.add(ResponseResidentOwn.fromJson(i));

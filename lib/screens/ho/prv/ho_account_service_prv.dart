@@ -1,9 +1,12 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/ho_model.dart';
+import '../../../models/user_account_HO.dart';
 import '../../../services/api_ho_account.dart';
 import '../../../services/api_ho_service.dart';
 import '../../../services/api_service.dart';
@@ -12,6 +15,7 @@ import '../../../services/prf_data.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dialog.dart';
+import '../../auth/apartment_selection_screen.dart';
 import '../../auth/prv/auth_prv.dart';
 import '../../auth/sign_in_screen.dart';
 import '../select_project_screen.dart';
@@ -35,6 +39,15 @@ class HOAccountServicePrv extends ChangeNotifier {
       );
       var a = await APITower.mobileMe();
       print(a);
+      if (a != null) {
+        var userHO = UserAccountHO.fromMap(a);
+        context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
+      }
+
+      Navigator.of(context).pushNamed(
+        ApartmentSeletionScreen.routeName,
+        arguments: e.project_name,
+      );
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }
