@@ -139,7 +139,8 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                         title: S.of(context).related_photo,
                         images: [
                           ...card.other_image!.map(
-                            (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                            (e) =>
+                                "${ApiService.shared.uploadURL}?load=${e.id}",
                           )
                         ],
                       ),
