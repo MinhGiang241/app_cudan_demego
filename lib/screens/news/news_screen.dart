@@ -10,6 +10,7 @@ import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/new.dart';
+import '../../services/api_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/custom_footer_refresh.dart';
 import '../../widgets/primary_empty_widget.dart';
@@ -175,7 +176,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                             child: PrimaryImageNetwork(
                                               canShowPhotoView: true,
                                               path:
-                                                  "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                                  "${ApiService.shared.uploadURL}?load=${e.value.image}",
                                               fit: BoxFit.cover,
                                               height: 150,
                                             ),
@@ -247,7 +248,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                           width: 120,
                                           height: double.infinity,
                                           path:
-                                              "${ApiConstants.uploadURL}?load=${e.value.image}",
+                                              "${ApiService.shared.uploadURL}?load=${e.value.image}",
                                         ),
                                         hpad(12),
                                         Expanded(

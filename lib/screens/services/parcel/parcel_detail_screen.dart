@@ -9,6 +9,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/parcel.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -68,7 +69,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               if (arg.image != null && arg.image!.isNotEmpty)
                 InfoContentView(title: S.of(context).photos, images: [
                   ...arg.image!.map(
-                    (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                    (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
                   )
                 ]),
             ],

@@ -12,6 +12,7 @@ import '../../../models/manage_card.dart';
 import '../../../models/resident_card.dart';
 import '../../../models/timeline_model.dart';
 import '../../../services/api_history.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -121,7 +122,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).cmnd_photos,
                     images: [
                       ...card.identity_image!.map(
-                        (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
                       )
                     ],
                   ),
@@ -131,7 +132,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).res_photo,
                     images: [
                       ...card.resident_image!.map(
-                        (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
                       )
                     ],
                   ),
@@ -140,7 +141,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).related_photo,
                     images: [
                       ...card.other_image!.map(
-                        (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
                       )
                     ],
                   ),

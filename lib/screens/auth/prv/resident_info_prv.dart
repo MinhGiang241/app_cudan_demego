@@ -15,6 +15,26 @@ class ResidentInfoPrv extends ChangeNotifier {
   ResponseResidentOwn? selectedApartment;
   String? residentId;
 
+  setListOwn(BuildContext context) async {
+    await APITower.getUserOwnInfo(
+      residentId ?? '',
+    ).then((v) async {
+      listOwn.clear();
+      listOwnAll.clear();
+      v.forEach((i) {
+        listOwnAll.add(ResponseResidentOwn.fromJson(i));
+        if (i['status'] == 'ACTIVE' &&
+            (i['type'] == 'BUY' ||
+                i['type'] == 'RENT' ||
+                i['type'] == 'DEPENDENT_HOST')) {
+          listOwn.add(ResponseResidentOwn.fromJson(i));
+        }
+      });
+      String? aprtId = await PrfData.shared.getApartments();
+      var index = selectApartmentFromHive(aprtId);
+    });
+  }
+
   setUserInfoFromHO(UserAccountHO userHO) {
     userInfo = userHO.resident;
     userInfo?.account = userHO.user;

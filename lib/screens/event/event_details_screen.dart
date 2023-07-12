@@ -9,6 +9,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/event.dart';
 import '../../services/api_event.dart';
+import '../../services/api_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_appbar.dart';
 import '../../widgets/primary_button.dart';
@@ -72,7 +73,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               PrimaryImageNetwork(
                 canShowPhotoView: false,
                 path:
-                    "${ApiConstants.uploadURL}?load=${event.file_upload![0].id}",
+                    "${ApiService.shared.uploadURL}?load=${event.file_upload![0].id}",
               ),
             vpad(12),
             HtmlWidget(

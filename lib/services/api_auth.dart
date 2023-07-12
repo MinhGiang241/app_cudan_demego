@@ -12,6 +12,7 @@ import '../constants/regex_text.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 import '../utils/error_handler.dart';
+import 'api_ho_service.dart';
 
 class APIAuth {
   static Future<oauth2.Client?> signIn({
@@ -216,10 +217,11 @@ class APIAuth {
         };
         final body = FormData.fromMap(map);
         final data = await ApiService.shared.postApi(
-          path: ApiConstants.uploadURL,
+          path: ApiService.shared.uploadURL, // ApiConstants.uploadURL,
           data: body,
           onSendProgress: onSendProgress,
           name: files[i].path.split('/').last,
+          accessToken: ApiService.shared.access_token,
         );
 
         var file = ResponseFileUpload.fromJson(data);
@@ -245,9 +247,10 @@ class APIAuth {
     final map = {'files': multipartFiles};
     final body = FormData.fromMap(map);
     final data = await ApiService.shared.postApi(
-      path: ApiConstants.uploadURL,
+      path: ApiService.shared.uploadURL, // ApiConstants.uploadURL,
       data: body,
       onSendProgress: onSendProgress,
+      accessToken: ApiHOService.shared.access_token,
     );
     // print(data);
     return ResponseFileUpload.fromJson(data);

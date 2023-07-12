@@ -55,32 +55,7 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
         ],
       ),
       body: FutureBuilder(
-        future: () async {
-          await APITower.getUserOwnInfo(
-            context.read<ResidentInfoPrv>().residentId ?? '',
-          ).then((v) async {
-            context.read<ResidentInfoPrv>().listOwn.clear();
-            context.read<ResidentInfoPrv>().listOwnAll.clear();
-            v.forEach((i) {
-              context
-                  .read<ResidentInfoPrv>()
-                  .listOwnAll
-                  .add(ResponseResidentOwn.fromJson(i));
-              if (i['status'] == 'ACTIVE' &&
-                  (i['type'] == 'BUY' ||
-                      i['type'] == 'RENT' ||
-                      i['type'] == 'DEPENDENT_HOST')) {
-                context
-                    .read<ResidentInfoPrv>()
-                    .listOwn
-                    .add(ResponseResidentOwn.fromJson(i));
-              }
-            });
-            String? aprtId = await PrfData.shared.getApartments();
-            var index =
-                context.read<ResidentInfoPrv>().selectApartmentFromHive(aprtId);
-          });
-        }(),
+        future: context.read<ResidentInfoPrv>().setListOwn(context),
         builder: (context, snapshot) {
           var listOwn = widget.context.read<ResidentInfoPrv>().listOwn;
 
@@ -93,81 +68,79 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
 
           listProject.toSet().toList();
 
-          return Column(
-            children: [
-              vpad(
-                24 +
-                    AppBar().preferredSize.height +
-                    MediaQuery.of(context).padding.top,
-              ),
-              Center(
-                child: Text(
-                  S.of(context).choose_an_apartment,
-                  style: txtDisplayMedium(),
+          return SafeArea(
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    S.of(context).choose_an_apartment,
+                    style: txtDisplayMedium(),
+                  ),
                 ),
-              ),
-              vpad(36),
-              Expanded(
-                child: ListView(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                  children: [
-                    vpad(12),
-                    Text(arg, style: txtBold(14, grayScaleColorBase)),
-                    vpad(12),
-                    ...listOwn.asMap().entries.map(
-                          (e) => PrimaryCard(
-                            onTap: () async {
-                              context.read<AuthPrv>().authStatus =
-                                  AuthStatus.auth;
-                              widget.context
-                                  .read<ResidentInfoPrv>()
-                                  .selectedApartment = e.value;
-                              await PrfData.shared
-                                  .setApartments(e.value.apartmentId ?? "");
+                vpad(20),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 12),
+                    children: [
+                      vpad(12),
+                      Text(arg, style: txtBold(14, grayScaleColorBase)),
+                      vpad(12),
+                      ...listOwn.asMap().entries.map(
+                            (e) => PrimaryCard(
+                              onTap: () async {
+                                context.read<AuthPrv>().authStatus =
+                                    AuthStatus.auth;
+                                widget.context
+                                    .read<ResidentInfoPrv>()
+                                    .selectedApartment = e.value;
+                                await PrfData.shared
+                                    .setApartments(e.value.apartmentId ?? "");
 
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                HomeScreen.routeName,
-                                (route) => route.isCurrent,
-                              );
-                            },
-                            margin: const EdgeInsets.only(bottom: 16),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: ListTile(
-                                leading: const PrimaryIcon(
-                                  icons: PrimaryIcons.home_smile,
-                                  color: primaryColor4,
-                                  backgroundColor: primaryColor5,
-                                  style: PrimaryIconStyle.round,
-                                  padding: EdgeInsets.all(12),
-                                ),
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      e.value.building?.name ?? '',
-                                      style: txtLinkSmall(),
-                                    ),
-                                    vpad(4),
-                                    Text(
-                                      '${e.value.apartment?.name ?? ''} - ${e.value.floor?.name ?? ''}',
-                                      style: txtBodySmallBold(),
-                                    ),
-                                    // vpad(4),
-                                    // Text('Thông tin thêm',
-                                    //     style: txtBodySmallRegular()),
-                                  ],
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  HomeScreen.routeName,
+                                  (route) => route.isCurrent,
+                                );
+                              },
+                              margin: const EdgeInsets.only(bottom: 16),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: ListTile(
+                                  leading: const PrimaryIcon(
+                                    icons: PrimaryIcons.home_smile,
+                                    color: primaryColor4,
+                                    backgroundColor: primaryColor5,
+                                    style: PrimaryIconStyle.round,
+                                    padding: EdgeInsets.all(12),
+                                  ),
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        e.value.building?.name ?? '',
+                                        style: txtLinkSmall(),
+                                      ),
+                                      vpad(4),
+                                      Text(
+                                        '${e.value.apartment?.name ?? ''} - ${e.value.floor?.name ?? ''}',
+                                        style: txtBodySmallBold(),
+                                      ),
+                                      // vpad(4),
+                                      // Text('Thông tin thêm',
+                                      //     style: txtBodySmallRegular()),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                    vpad(50)
-                  ],
+                      vpad(50)
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

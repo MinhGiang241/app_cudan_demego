@@ -22,6 +22,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
@@ -607,7 +608,7 @@ class _MessageState extends State<Message> {
                         radius: 10,
                         backgroundImage: widget.avatar != null
                             ? CachedNetworkImageProvider(
-                                "${ApiConstants.uploadURL}?load=${widget.avatar}",
+                                "${ApiService.shared.uploadURL}?load=${widget.avatar}",
                               )
                             : const AssetImage(
                                 AppImage.defaultAvatar,

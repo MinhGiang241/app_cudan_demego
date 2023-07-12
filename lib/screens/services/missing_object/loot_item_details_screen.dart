@@ -8,6 +8,7 @@ import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -84,7 +85,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
             if (lootItem.photo != null && lootItem.photo!.isNotEmpty)
               InfoContentView(title: S.of(context).photos, images: [
                 ...lootItem.photo!
-                    .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
+                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
               ]),
             InfoContentView(
                 title: S.of(context).status,
@@ -95,7 +96,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
                 lootItem.return_image!.isNotEmpty)
               InfoContentView(title: S.of(context).return_image, images: [
                 ...lootItem.return_image!
-                    .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
+                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
               ])
           ],
         ),

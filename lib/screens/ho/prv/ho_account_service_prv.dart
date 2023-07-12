@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../main.dart';
 import '../../../models/ho_model.dart';
 import '../../../models/user_account_HO.dart';
 import '../../../services/api_ho_account.dart';
@@ -30,7 +31,10 @@ class HOAccountServicePrv extends ChangeNotifier {
   var isLoginLoading = false;
   var isSignupLoading = false;
 
-  navigateToProject(BuildContext context, Project e) async {
+  navigateToProject(
+    BuildContext context,
+    Project e,
+  ) async {
     try {
       await ApiService.shared.setAPI(
         e.domain ?? "",
@@ -38,9 +42,11 @@ class HOAccountServicePrv extends ChangeNotifier {
         ApiHOService.shared.expireDate,
       );
       var a = await APITower.mobileMe();
+      //
       print(a);
       if (a != null) {
         var userHO = UserAccountHO.fromMap(a);
+        await firebase.push_device(userHO.user?.userName ?? "");
         context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
       }
 

@@ -7,6 +7,7 @@ import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/new.dart';
+import '../../services/api_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_image_netword.dart';
 import '../../widgets/primary_screen.dart';
@@ -44,7 +45,7 @@ class NewDetailsScreen extends StatelessWidget {
             if (arg.image != null)
               PrimaryImageNetwork(
                 canShowPhotoView: true,
-                path: "${ApiConstants.uploadURL}?load=${arg.image}",
+                path: "${ApiService.shared.uploadURL}?load=${arg.image}",
               ),
 
             vpad(16),

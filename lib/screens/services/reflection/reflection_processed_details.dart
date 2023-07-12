@@ -20,6 +20,7 @@ import '../../../models/info_content_view.dart';
 import '../../../models/multi_select_view_model.dart';
 import '../../../models/response_resident_own.dart';
 import '../../../services/api_reflection.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_screen.dart';
@@ -301,7 +302,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                                             const EdgeInsets.only(right: 14),
                                         child: PrimaryImageNetwork(
                                           path:
-                                              "${ApiConstants.uploadURL}?load=${e.id ?? ""}",
+                                              "${ApiService.shared.uploadURL}?load=${e.id ?? ""}",
                                         ),
                                       ),
                                     )
@@ -394,7 +395,8 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             (e) => InkWell(
                               onTap: () async {
                                 await Utils.downloadFile(
-                                  url: '${ApiConstants.uploadURL}?load=${e.id}',
+                                  url:
+                                      '${ApiService.shared.uploadURL}?load=${e.id}',
                                   context: context,
                                 );
                                 // await launchUrl(

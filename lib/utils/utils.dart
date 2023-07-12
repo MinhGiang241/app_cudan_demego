@@ -21,6 +21,7 @@ import '../generated/l10n.dart';
 import '../models/selection_model.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/chat/bloc/chat_message_bloc.dart';
+import '../services/api_service.dart';
 import '../widgets/item_selected.dart';
 import '../widgets/primary_bottom_sheet.dart';
 import '../widgets/primary_button.dart';
@@ -795,10 +796,10 @@ class Utils {
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
       if (Platform.isIOS) {
-        launchUrl(Uri.parse(url ?? "${ApiConstants.uploadURL}?load=$id"));
+        launchUrl(Uri.parse(url ?? "${ApiService.shared.uploadURL}?load=$id"));
       } else {
         var taskId = await FlutterDownloader.enqueue(
-          url: url ?? "${ApiConstants.uploadURL}?load=$id",
+          url: url ?? "${ApiService.shared.uploadURL}?load=$id",
           headers: headers ??
               {
                 'Accept':

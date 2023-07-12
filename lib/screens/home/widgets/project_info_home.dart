@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
@@ -79,7 +80,7 @@ class ProjectInfoHome extends StatelessWidget {
                                 child: PrimaryImageNetwork(
                                     canShowPhotoView: false,
                                     path:
-                                        "${ApiConstants.uploadURL}?load=${list[index].image}"),
+                                        "${ApiService.shared.uploadURL}?load=${list[index].image}"),
                               ),
                               vpad(8),
                               Text(

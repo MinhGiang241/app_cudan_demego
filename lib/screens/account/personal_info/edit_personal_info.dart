@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_icon.dart';
@@ -81,7 +82,7 @@ class EditPersonalInfo extends StatelessWidget {
                             radius: 60,
                             backgroundColor: grayScaleColor4,
                             backgroundImage: CachedNetworkImageProvider(
-                              "${ApiConstants.uploadURL}?load=$avatarLink",
+                              "${ApiService.shared.uploadURL}?load=$avatarLink",
                             ),
                           ),
                       if (fileAvatar != null)

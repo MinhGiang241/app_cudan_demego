@@ -18,6 +18,7 @@ import '../../../models/info_content_view.dart';
 import '../../../models/letter_history.dart';
 import '../../../models/timeline_model.dart';
 import '../../../services/api_history.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -211,7 +212,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                 : [
                                     ...card.image!.map(
                                       (v) =>
-                                          "${ApiConstants.uploadURL}/?load=${v.id}",
+                                          "${ApiService.shared.uploadURL}/?load=${v.id}",
                                     )
                                   ],
                           )

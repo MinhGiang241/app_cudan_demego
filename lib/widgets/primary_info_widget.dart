@@ -5,6 +5,7 @@ import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../models/info_content_view.dart';
+import '../services/api_service.dart';
 import 'primary_button.dart';
 import 'primary_card.dart';
 import 'primary_image_netword.dart';
@@ -63,7 +64,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                                     onTap: () async {
                                       await launchUrl(
                                         Uri.parse(
-                                          "${ApiConstants.uploadURL}?load=${e.id}",
+                                          "${ApiService.shared.uploadURL}?load=${e.id}",
                                         ),
                                         mode: LaunchMode.externalApplication,
                                       );

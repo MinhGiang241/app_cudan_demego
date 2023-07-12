@@ -22,6 +22,7 @@ class ApiService {
   String clientId = ApiConstants.clientId; //"importer";
   String secret = ApiConstants.clientSecret;
   String scope = ApiConstants.scope;
+  String uploadURL = '';
 
   String userName = '';
   String passWord = '';
@@ -39,6 +40,7 @@ class ApiService {
     _dio = Dio(BaseOptions(baseUrl: URL));
     access_token = access_tokenHO;
     expireDate = expireDateHO;
+    uploadURL = 'https://api.${URL}/headless/stream/upload';
   }
 
   Future<oauth2.Client?> getClient({
@@ -161,45 +163,52 @@ class ApiService {
     OnSendProgress? onSendProgress,
     Options? op,
     String? name,
+    String? accessToken,
   }) async {
     Options? options;
     if (useToken) {
-      var client = await getExistClient();
-      if (client == null) {
-        onError?.call('');
-      } else {
-        //print(client.credentials.expiration);
-        if (client.credentials.isExpired) {
-          // print("EXPired");
-          // ignore: use_build_context_synchronously
-          client = await refresh(
-            client,
-            remember,
-          );
-          log(client.credentials.accessToken);
-          if (op == null) {
-            options = Options(
-              headers: {
-                'Authorization': "Bearer ${client.credentials.accessToken}",
-                "Accept": "application/json"
-              },
-            );
-          }
-        } else {
-          //await client.refreshCredentials();
-          log(client.credentials.accessToken);
-          if (op == null) {
-            options = Options(
-              headers: {
-                'Authorization': "Bearer ${client.credentials.accessToken}",
-                "Accept": "application/json"
-              },
-            );
-          } else {
-            options = op;
-          }
-        }
-      }
+      options = Options(
+        headers: {
+          'Authorization': "Bearer ${accessToken}",
+          "Accept": "application/json"
+        },
+      );
+      //   var client = await getExistClient();
+      //   if (client == null) {
+      //     onError?.call('');
+      //   } else {
+      //     //print(client.credentials.expiration);
+      //     if (client.credentials.isExpired) {
+      //       // print("EXPired");
+      //       // ignore: use_build_context_synchronously
+      //       client = await refresh(
+      //         client,
+      //         remember,
+      //       );
+      //       log(client.credentials.accessToken);
+      //       if (op == null) {
+      //         options = Options(
+      //           headers: {
+      //             'Authorization': "Bearer ${client.credentials.accessToken}",
+      //             "Accept": "application/json"
+      //           },
+      //         );
+      //       }
+      //     } else {
+      //       //await client.refreshCredentials();
+      //       log(client.credentials.accessToken);
+      //       if (op == null) {
+      //         options = Options(
+      //           headers: {
+      //             'Authorization': "Bearer ${client.credentials.accessToken}",
+      //             "Accept": "application/json"
+      //           },
+      //         );
+      //       } else {
+      //         options = op;
+      //       }
+      //     }
+      //   }
     }
     try {
       final response = await _dio.post(

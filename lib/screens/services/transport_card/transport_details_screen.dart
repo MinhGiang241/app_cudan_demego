@@ -6,6 +6,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/transportation_card.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -77,7 +78,7 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                     // isHorizontal: true,
                     images: (item.registration_image ?? [])
                         .map<String>(
-                          (e) => "${ApiConstants.uploadURL}?load=${e.id}",
+                          (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
                         )
                         .toList(),
                     title: S.of(context).reg_trans_photos,
@@ -87,8 +88,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                   InfoContentView(
                     // isHorizontal: true,
                     images: (item.vehicle_image ?? [])
-                        .map<String>(
-                            (e) => "${ApiConstants.uploadURL}?load=${e.id}")
+                        .map<String>((e) =>
+                            "${ApiService.shared.uploadURL}?load=${e.id}")
                         .toList(),
                     title: S.of(context).trans_images,
                   ),

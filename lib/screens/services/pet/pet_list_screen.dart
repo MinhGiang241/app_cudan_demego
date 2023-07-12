@@ -13,6 +13,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/pet.dart';
+import '../../../services/api_service.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_empty_widget.dart';
@@ -162,7 +163,7 @@ class _PetListScreenState extends State<PetListScreen> {
                               images: [
                                 ...e.avt_pet!.map(
                                   (i) =>
-                                      "${ApiConstants.uploadURL}?load=${i.id}",
+                                      "${ApiService.shared.uploadURL}?load=${i.id}",
                                 )
                               ],
                             ),

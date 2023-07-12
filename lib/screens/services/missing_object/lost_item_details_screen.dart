@@ -10,6 +10,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../services/api_lost.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -95,7 +96,7 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
             if (lostItem.image != null && lostItem.image!.isNotEmpty)
               InfoContentView(title: S.of(context).photos, images: [
                 ...lostItem.image!
-                    .map((e) => "${ApiConstants.uploadURL}?load=${e.id}"),
+                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
               ]),
           ],
         ),

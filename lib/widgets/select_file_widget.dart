@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
+import '../services/api_service.dart';
 import '../utils/utils.dart';
 import 'dash_button.dart';
 import 'package:path/path.dart';
@@ -152,7 +153,7 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                                   child: PrimaryImageNetwork(
                                     canShowPhotoView: true,
                                     path:
-                                        '${ApiConstants.uploadURL}/?load=${e.value.id!}',
+                                        '${ApiService.shared.uploadURL}/?load=${e.value.id!}',
                                   ),
                                 ),
                                 if (widget.enable)

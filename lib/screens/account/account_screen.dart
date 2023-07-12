@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/api_ho_service.dart';
+import '../../services/api_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
@@ -48,7 +50,7 @@ class AccountScreen extends StatelessWidget {
                       radius: 32,
                       backgroundColor: grayScaleColor4,
                       backgroundImage: CachedNetworkImageProvider(
-                        "${ApiConstants.uploadURL}?load=${userInfo?.avatar ?? ""}",
+                        "${ApiService.shared.uploadURL}?load=${userInfo?.avatar ?? ""}",
                       ),
                     )
                   else if (userInfo?.avatar.runtimeType.toString() ==
@@ -58,7 +60,7 @@ class AccountScreen extends StatelessWidget {
                       radius: 32,
                       backgroundColor: grayScaleColor4,
                       backgroundImage: CachedNetworkImageProvider(
-                        "${ApiConstants.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}",
+                        "${ApiService.shared.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}",
                       ),
                     )
                   else

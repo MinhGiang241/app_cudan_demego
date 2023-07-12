@@ -14,6 +14,7 @@ import '../../../models/letter_history.dart';
 import '../../../models/pet.dart';
 import '../../../models/timeline_model.dart';
 import '../../../services/api_history.dart';
+import '../../../services/api_service.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
@@ -136,7 +137,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                             images: [
                               ...arg.avt_pet!.map(
                                 (e) =>
-                                    "${ApiConstants.uploadURL}/?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}/?load=${e.id}",
                               ),
                             ],
                           ),
@@ -162,7 +163,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               onTap: () async {
                                 await launchUrl(
                                   Uri.parse(
-                                    "${ApiConstants.uploadURL}?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}?load=${e.id}",
                                   ),
                                   mode: LaunchMode.externalApplication,
                                 );
@@ -195,7 +196,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               onTap: () async {
                                 await launchUrl(
                                   Uri.parse(
-                                    "${ApiConstants.uploadURL}?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}?load=${e.id}",
                                   ),
                                   mode: LaunchMode.externalApplication,
                                 );

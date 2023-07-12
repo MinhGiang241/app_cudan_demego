@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/api_service.dart';
 import '../auth/prv/resident_info_prv.dart';
 import 'construction/construction_list_screen.dart';
 import 'delivery/delivery_list_screen.dart';
@@ -309,7 +310,7 @@ class ServiceScreen extends StatelessWidget {
                                               canShowPhotoView: false,
                                               fit: BoxFit.contain,
                                               path:
-                                                  "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}",
+                                                  "${ApiService.shared.uploadURL}?load=${e.service_icon!.id ?? ""}",
                                               borderRadius:
                                                   const BorderRadius.all(
                                                 Radius.circular(

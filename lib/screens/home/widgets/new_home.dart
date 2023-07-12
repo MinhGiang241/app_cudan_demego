@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
+import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_image_netword.dart';
@@ -73,7 +74,7 @@ class NewsHome extends StatelessWidget {
                         child: PrimaryImageNetwork(
                             canShowPhotoView: false,
                             path:
-                                "${ApiConstants.uploadURL}?load=${newList[index].image ?? ""}"),
+                                "${ApiService.shared.uploadURL}?load=${newList[index].image ?? ""}"),
                       ),
                       vpad(3),
                       Padding(

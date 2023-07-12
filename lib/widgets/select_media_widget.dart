@@ -7,6 +7,7 @@ import '../constants/constants.dart';
 
 import '../generated/l10n.dart';
 import '../models/transportation_card.dart';
+import '../services/api_service.dart';
 import 'dash_button.dart';
 import 'primary_icon.dart';
 import 'primary_image_netword.dart';
@@ -70,7 +71,7 @@ class SelectMediaWidget extends StatelessWidget {
                                   child: PrimaryImageNetwork(
                                     canShowPhotoView: true,
                                     path:
-                                        '${ApiConstants.uploadURL}/?load=${e.value.id!}',
+                                        '${ApiService.shared.uploadURL}/?load=${e.value.id!}',
                                   ),
                                 ),
                                 if (enable)
