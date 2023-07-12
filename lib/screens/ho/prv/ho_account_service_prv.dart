@@ -7,6 +7,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../main.dart';
 import '../../../models/ho_model.dart';
+import '../../../models/response_resident_own.dart';
 import '../../../models/user_account_HO.dart';
 import '../../../services/api_ho_account.dart';
 import '../../../services/api_ho_service.dart';
@@ -19,6 +20,7 @@ import '../../../widgets/primary_dialog.dart';
 import '../../auth/apartment_selection_screen.dart';
 import '../../auth/prv/auth_prv.dart';
 import '../../auth/sign_in_screen.dart';
+import '../../home/home_screen.dart';
 import '../select_project_screen.dart';
 
 class HOAccountServicePrv extends ChangeNotifier {
@@ -29,13 +31,27 @@ class HOAccountServicePrv extends ChangeNotifier {
   List<Project> projectList = [];
   List<ResidentResitration> registrationList = [];
   var isLoginLoading = false;
+  var isSelectProjectLoading = false;
   var isSignupLoading = false;
+
+  navigateToHomeScreen(BuildContext context, ResponseResidentOwn e) async {
+    context.read<AuthPrv>().authStatus = AuthStatus.auth;
+    context.read<ResidentInfoPrv>().selectedApartment = e;
+    await PrfData.shared.setApartments(e.apartmentId ?? "");
+
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      HomeScreen.routeName,
+      (route) => route.isCurrent,
+    );
+  }
 
   navigateToProject(
     BuildContext context,
     Project e,
   ) async {
     try {
+      isSelectProjectLoading = true;
+      notifyListeners();
       await ApiService.shared.setAPI(
         e.domain ?? "",
         ApiHOService.shared.access_token,
@@ -50,11 +66,24 @@ class HOAccountServicePrv extends ChangeNotifier {
         context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
       }
 
-      Navigator.of(context).pushNamed(
-        ApartmentSeletionScreen.routeName,
-        arguments: e.project_name,
-      );
+      await context.read<ResidentInfoPrv>().setListOwn(context);
+      if (context.read<ResidentInfoPrv>().listOwn.isEmpty) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          HomeScreen.routeName,
+          (route) => route.isCurrent,
+        );
+      } else {
+        Navigator.of(context).pushNamed(
+          ApartmentSeletionScreen.routeName,
+          arguments: e.project_name,
+        );
+      }
+      isSelectProjectLoading = false;
+      notifyListeners();
     } catch (e) {
+      isSelectProjectLoading = false;
+      notifyListeners();
       Utils.showErrorMessage(context, e.toString());
     }
 
@@ -91,6 +120,7 @@ class HOAccountServicePrv extends ChangeNotifier {
                       authStatus = AuthStatus.unauthen;
                       access_token = null;
                       expireDate = null;
+                      context.read<ResidentInfoPrv>().clearData();
                       notifyListeners();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         SignInScreen.routeName,

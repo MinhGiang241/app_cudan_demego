@@ -132,11 +132,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 children: [
                   vpad(16 + MediaQuery.of(context).padding.top),
-                  const HeaderTitle(),
+                  HeaderTitle(
+                    onMenuTab: _onItemTapped,
+                  ),
                   vpad(30),
                   const HeaderHome(),
-                  vpad(30),
-                  const ProjectInfoHome(),
                   vpad(30),
                   const BillsHome(),
                   vpad(30),
@@ -147,6 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   const FeedbackHome(),
                   vpad(30),
                   const EventsHome(),
+                  vpad(30),
+                  const ProjectInfoHome(),
+
                   vpad(24),
                   if (context.read<ResidentInfoPrv>().residentId != null)
                     const NewsHome(),

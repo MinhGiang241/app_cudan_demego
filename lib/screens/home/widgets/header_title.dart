@@ -10,22 +10,29 @@ import '../../notification/notification_screen.dart';
 class HeaderTitle extends StatelessWidget {
   const HeaderTitle({
     Key? key,
+    required this.onMenuTab,
   }) : super(key: key);
-
+  final Function onMenuTab;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Transform(
-        alignment: Alignment.center,
-        transform: Matrix4.rotationY(math.pi),
-        child: IconButton(
-          onPressed: () {
-            context.read<AuthPrv>().onSignOut(context);
-          },
-          icon: const Icon(Icons.logout),
-        ),
+      leading: IconButton(
+        onPressed: () {
+          onMenuTab(2);
+        },
+        icon: Icon(Icons.menu),
       ),
+      // leading: Transform(
+      //   alignment: Alignment.center,
+      //   transform: Matrix4.rotationY(math.pi),
+      //   child: IconButton(
+      //     onPressed: () {
+      //       context.read<AuthPrv>().onSignOut(context);
+      //     },
+      //     icon: const Icon(Icons.logout),
+      //   ),
+      // ),
       title: Center(
         child: Text.rich(TextSpan(children: [
           TextSpan(text: "DEME", style: txtBold(24)),

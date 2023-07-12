@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../services/api_ho_service.dart';
 import '../../../services/prf_data.dart';
 import '../../../utils/utils.dart';
 import '../../ho/prv/ho_account_service_prv.dart';
@@ -34,21 +35,20 @@ class SingInPrv extends ChangeNotifier {
     return 0;
   }
 
-  signIn(BuildContext context) async {
+  signIn(BuildContext context, bool remember) async {
     if (formKey.currentState!.validate()) {
       accountValidate = passValidate = null;
       isLoading = true;
       notifyListeners();
-      await authPrv
-          .onSignIn(context, accountController.text, passController.text)
-          .then((value) {
+      // await authPrv
+      //     .onSignIn(context, accountController.text, passController.text)
+      await context
+          .read<HOAccountServicePrv>()
+          .loginHO(accountController.text.trim(), passController.text.trim(),
+              context, remember)
+          .then((value) async {
         isLoading = false;
         notifyListeners();
-        return;
-      }).catchError((e) {
-        isLoading = false;
-        notifyListeners();
-        Utils.showErrorMessage(context, e);
         return;
       });
     } else {

@@ -196,26 +196,26 @@ class _SignInScreenState extends State<SignInScreen> {
                   PrimaryButton(
                     onTap: () async {
                       FocusScope.of(context).unfocus();
-                      return await context.read<HOAccountServicePrv>().loginHO(
-                            context
-                                .read<SingInPrv>()
-                                .accountController
-                                .text
-                                .trim(),
-                            context
-                                .read<SingInPrv>()
-                                .passController
-                                .text
-                                .trim(),
-                            context,
-                            context.read<AuthPrv>().remember,
-                          );
+                      // return await context.read<HOAccountServicePrv>().loginHO(
+                      //       context
+                      //           .read<SingInPrv>()
+                      //           .accountController
+                      //           .text
+                      //           .trim(),
+                      //       context
+                      //           .read<SingInPrv>()
+                      //           .passController
+                      //           .text
+                      //           .trim(),
+                      //       context,
+                      //       context.read<AuthPrv>().remember,
+                      //     );
                       // return await context
                       //     .read<SingInPrv>()
                       //     .signInHO(context, context.read<AuthPrv>().remember);
-                      // return await context.read<SingInPrv>().signIn(
-                      //       context,
-                      //     );
+                      return await context
+                          .read<SingInPrv>()
+                          .signIn(context, context.read<AuthPrv>().remember);
                     },
                     text: S.of(context).sign_in,
                     isLoading: context.watch<SingInPrv>().isLoading,

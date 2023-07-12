@@ -168,125 +168,125 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  hpad(5),
-                  InkWell(
-                    onTap: () {
-                      Utils.showDialog(
-                          context: context,
-                          dialog: PrimaryDialog.custom(
-                            title: S.of(context).edit,
-                            content: Column(children: [
-                              PrimaryTextField(
-                                controller: emailcontroller,
-                                isRequired: true,
-                                label: S.of(context).email,
-                                hint: S.of(context).email,
-                              ),
-                              vpad(16),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  PrimaryButton(
-                                    text: S.of(context).close,
-                                    buttonSize: ButtonSize.medium,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: redColor4,
-                                    textColor: redColorBase,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  PrimaryButton(
-                                    buttonSize: ButtonSize.medium,
-                                    text: userInfo.account?.email == null
-                                        ? S.of(context).add_new
-                                        : S.of(context).update,
-                                    onTap: () async {
-                                      if (emailcontroller.text.trim().isEmpty) {
-                                        Utils.showErrorMessage(
-                                          context,
-                                          S.of(context).email_not_empty,
-                                        );
-                                      } else if (!RegexText.isEmail(
-                                        emailcontroller.text.trim(),
-                                      )) {
-                                        Utils.showErrorMessage(
-                                          context,
-                                          S.of(context).not_email,
-                                        );
-                                      } else if (emailcontroller.text.trim() ==
-                                          context
-                                              .read<ResidentInfoPrv>()
-                                              .userInfo
-                                              ?.account
-                                              ?.email) {
-                                        Utils.showErrorMessage(
-                                          context,
-                                          S.of(context).email_not_same,
-                                        );
-                                      } else {
-                                        Navigator.pop(context);
-                                        Utils.showSnackBar(context,
-                                            S.of(context).send_email_wait);
-                                        await APIAuth.sendOtpAddMoreEmail(
-                                                emailcontroller.text.trim(),
-                                                false,
-                                                context
-                                                        .read<ResidentInfoPrv>()
-                                                        .userInfo
-                                                        ?.account
-                                                        ?.id ??
-                                                    "")
-                                            .then((v) {
-                                          ScaffoldMessenger.of(context)
-                                              .hideCurrentSnackBar();
-                                          Utils.showBottomSheet(
-                                            context: context,
-                                            child: Container(
-                                              color: backgroundColor,
-                                              padding: const EdgeInsets.only(
-                                                  top: 30),
-                                              child: OtpAddEmailScreen(
-                                                acc: userInfo.account!,
-                                                email: emailcontroller,
-                                                isAddNew:
-                                                    userInfo.account?.email ==
-                                                            null
-                                                        ? true
-                                                        : false,
-                                              ),
-                                            ),
-                                          );
-                                        }).catchError((e) {
-                                          Utils.showErrorMessage(context, e);
-                                        });
-                                      }
-                                    },
-                                  ),
-                                ],
-                              )
-                            ]),
-                          ));
-                    },
-                    child: userInfo.account?.email == null
-                        ? Text(
-                            userInfo.account?.email == null
-                                ? S.current.add
-                                : S.current.edit,
-                            style: const TextStyle(
-                                fontFamily: family,
-                                color: primaryColorBase,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          )
-                        : const Icon(
-                            Icons.edit,
-                            color: primaryColorBase,
-                          ),
-                  )
+                  // hpad(5),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Utils.showDialog(
+                  //         context: context,
+                  //         dialog: PrimaryDialog.custom(
+                  //           title: S.of(context).edit,
+                  //           content: Column(children: [
+                  //             PrimaryTextField(
+                  //               controller: emailcontroller,
+                  //               isRequired: true,
+                  //               label: S.of(context).email,
+                  //               hint: S.of(context).email,
+                  //             ),
+                  //             vpad(16),
+                  //             Row(
+                  //               crossAxisAlignment: CrossAxisAlignment.center,
+                  //               mainAxisSize: MainAxisSize.max,
+                  //               mainAxisAlignment:
+                  //                   MainAxisAlignment.spaceEvenly,
+                  //               children: [
+                  //                 PrimaryButton(
+                  //                   text: S.of(context).close,
+                  //                   buttonSize: ButtonSize.medium,
+                  //                   buttonType: ButtonType.secondary,
+                  //                   secondaryBackgroundColor: redColor4,
+                  //                   textColor: redColorBase,
+                  //                   onTap: () {
+                  //                     Navigator.pop(context);
+                  //                   },
+                  //                 ),
+                  //                 PrimaryButton(
+                  //                   buttonSize: ButtonSize.medium,
+                  //                   text: userInfo.account?.email == null
+                  //                       ? S.of(context).add_new
+                  //                       : S.of(context).update,
+                  //                   onTap: () async {
+                  //                     if (emailcontroller.text.trim().isEmpty) {
+                  //                       Utils.showErrorMessage(
+                  //                         context,
+                  //                         S.of(context).email_not_empty,
+                  //                       );
+                  //                     } else if (!RegexText.isEmail(
+                  //                       emailcontroller.text.trim(),
+                  //                     )) {
+                  //                       Utils.showErrorMessage(
+                  //                         context,
+                  //                         S.of(context).not_email,
+                  //                       );
+                  //                     } else if (emailcontroller.text.trim() ==
+                  //                         context
+                  //                             .read<ResidentInfoPrv>()
+                  //                             .userInfo
+                  //                             ?.account
+                  //                             ?.email) {
+                  //                       Utils.showErrorMessage(
+                  //                         context,
+                  //                         S.of(context).email_not_same,
+                  //                       );
+                  //                     } else {
+                  //                       Navigator.pop(context);
+                  //                       Utils.showSnackBar(context,
+                  //                           S.of(context).send_email_wait);
+                  //                       await APIAuth.sendOtpAddMoreEmail(
+                  //                               emailcontroller.text.trim(),
+                  //                               false,
+                  //                               context
+                  //                                       .read<ResidentInfoPrv>()
+                  //                                       .userInfo
+                  //                                       ?.account
+                  //                                       ?.id ??
+                  //                                   "")
+                  //                           .then((v) {
+                  //                         ScaffoldMessenger.of(context)
+                  //                             .hideCurrentSnackBar();
+                  //                         Utils.showBottomSheet(
+                  //                           context: context,
+                  //                           child: Container(
+                  //                             color: backgroundColor,
+                  //                             padding: const EdgeInsets.only(
+                  //                                 top: 30),
+                  //                             child: OtpAddEmailScreen(
+                  //                               acc: userInfo.account!,
+                  //                               email: emailcontroller,
+                  //                               isAddNew:
+                  //                                   userInfo.account?.email ==
+                  //                                           null
+                  //                                       ? true
+                  //                                       : false,
+                  //                             ),
+                  //                           ),
+                  //                         );
+                  //                       }).catchError((e) {
+                  //                         Utils.showErrorMessage(context, e);
+                  //                       });
+                  //                     }
+                  //                   },
+                  //                 ),
+                  //               ],
+                  //             )
+                  //           ]),
+                  //         ));
+                  //   },
+                  //   child: userInfo.account?.email == null
+                  //       ? Text(
+                  //           userInfo.account?.email == null
+                  //               ? S.current.add
+                  //               : S.current.edit,
+                  //           style: const TextStyle(
+                  //               fontFamily: family,
+                  //               color: primaryColorBase,
+                  //               fontSize: 14,
+                  //               fontWeight: FontWeight.w600),
+                  //         )
+                  //       : const Icon(
+                  //           Icons.edit,
+                  //           color: primaryColorBase,
+                  //         ),
+                  // )
                 ]),
           content: userInfo.account?.email ?? "",
           contentStyle: userInfo.account?.email != null

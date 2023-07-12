@@ -78,7 +78,7 @@ String genResRegStatusString(String? status) {
       return S.current.executing;
     case 'APPROVED':
       return S.current.approved;
-    case 'REJECT':
+    case 'REJECTED':
       return S.current.refuse;
     default:
       return S.current.executing;
@@ -91,7 +91,7 @@ Color genResRegStatusColor(String? status) {
       return primaryColorBase;
     case 'APPROVED':
       return greenColor6;
-    case 'REJECT':
+    case 'REJECTED':
       return redColor9;
     default:
       return primaryColorBase;

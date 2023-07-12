@@ -35,6 +35,7 @@ class SelectProjectScreen extends StatefulWidget {
 class _SelectProjectScreenState extends State<SelectProjectScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -172,9 +173,11 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                           vpad(10),
                           ...list.map(
                             (e) => PrimaryCard(
-                              onTap: () => context
-                                  .read<HOAccountServicePrv>()
-                                  .navigateToProject(context, e),
+                              onTap: () async {
+                                await context
+                                    .read<HOAccountServicePrv>()
+                                    .navigateToProject(context, e);
+                              },
                               margin: const EdgeInsets.only(
                                 bottom: 16,
                                 // left: 12,
