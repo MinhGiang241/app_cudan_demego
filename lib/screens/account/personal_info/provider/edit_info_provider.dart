@@ -46,7 +46,7 @@ class EditInfoProvider extends ChangeNotifier {
     // date = user?.birthday;
     // gender = user?.sex;
     nameController = TextEditingController(text: user?.fullName ?? "");
-    phoneController = TextEditingController(text: user?.phone_number ?? "");
+    phoneController = TextEditingController(text: user?.phone ?? "");
     emailController = TextEditingController(text: user?.email ?? "");
     userNameController = TextEditingController(text: user?.userName ?? "");
 

@@ -18,6 +18,8 @@ class SignUpPrv extends ChangeNotifier {
   final TextEditingController cPassController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  bool isAuto = false;
+
   String? nameValidate;
   String? phoneValidate;
   String? emailValidate;
@@ -28,6 +30,16 @@ class SignUpPrv extends ChangeNotifier {
   SignUpPrv({required this.authPrv});
 
   bool isLoading = false;
+
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      cPassValidate =
+          emailValidate = phoneValidate = passValidate = nameValidate = null;
+    } else {
+      genValidateString(context);
+    }
+    notifyListeners();
+  }
 
   sendOtpViaPhone(BuildContext context, String? phone) async {
     isLoading = true;
@@ -47,7 +59,48 @@ class SignUpPrv extends ChangeNotifier {
     });
   }
 
+  genValidateString(context) {
+    if (nameController.text.trim().isEmpty) {
+      nameValidate = S.of(context).can_not_empty;
+    } else {
+      nameValidate = null;
+    }
+    if (phoneController.text.trim().isEmpty) {
+      phoneValidate = S.of(context).can_not_empty;
+    } else {
+      phoneValidate = null;
+    }
+    if (passController.text.trim().isEmpty) {
+      passValidate = S.of(context).can_not_empty;
+    } else if (passController.text.trim().length < 8) {
+      passValidate = S.of(context).pass_min_length;
+    } else if (!RegexText.requiredSpecialChar(passController.text.trim())) {
+      passValidate = S.of(context).pass_special;
+    } else {
+      passValidate = null;
+    }
+    if (cPassController.text.trim().isEmpty) {
+      cPassValidate = S.of(context).can_not_empty;
+    } else if (cPassController.text.trim().length < 8) {
+      cPassValidate = S.of(context).pass_min_length;
+    } else if (cPassController.text.trim() != passController.text.trim()) {
+      cPassValidate = S.of(context).rgstr_code_2;
+    } else {
+      cPassValidate = null;
+    }
+    if (emailController.text.trim().isEmpty) {
+      emailValidate = S.of(context).not_blank;
+    } else if (!RegexText.isEmail(emailController.text.trim())) {
+      emailValidate = S.of(context).not_email;
+    } else {
+      emailValidate = null;
+    }
+    notifyListeners();
+  }
+
   signUp(BuildContext context) async {
+    isAuto = true;
+    notifyListeners();
     if (formKey.currentState!.validate()) {
       cPassValidate =
           emailValidate = phoneValidate = passValidate = nameValidate = null;
@@ -117,41 +170,7 @@ class SignUpPrv extends ChangeNotifier {
       //       isPhone: true,
       //     ));
     } else {
-      if (nameController.text.trim().isEmpty) {
-        nameValidate = S.of(context).can_not_empty;
-      } else {
-        nameValidate = null;
-      }
-      if (phoneController.text.trim().isEmpty) {
-        phoneValidate = S.of(context).can_not_empty;
-      } else {
-        phoneValidate = null;
-      }
-      if (passController.text.trim().isEmpty) {
-        passValidate = S.of(context).can_not_empty;
-      } else if (passController.text.trim().length < 8) {
-        passValidate = S.of(context).pass_min_length;
-      } else if (!RegexText.requiredSpecialChar(passController.text.trim())) {
-        passValidate = S.of(context).pass_special;
-      } else {
-        passValidate = null;
-      }
-      if (cPassController.text.trim().isEmpty) {
-        cPassValidate = S.of(context).can_not_empty;
-      } else if (cPassController.text.trim().length < 8) {
-        cPassValidate = S.of(context).pass_min_length;
-      } else if (cPassController.text.trim() != passController.text.trim()) {
-        cPassValidate = S.of(context).rgstr_code_2;
-      } else {
-        cPassValidate = null;
-      }
-      if (emailController.text.trim() != '' &&
-          !RegexText.isEmail(emailController.text.trim())) {
-        emailValidate = S.of(context).not_email;
-      } else {
-        emailValidate = null;
-      }
-      notifyListeners();
+      genValidateString(context);
     }
   }
 }

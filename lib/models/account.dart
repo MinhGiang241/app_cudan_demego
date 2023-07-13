@@ -14,7 +14,7 @@ class Account {
   String? type;
   String? code;
   String? residentId;
-  String? phone_number;
+  String? phone;
   String? fullName;
   String? avatar;
   String? passwordHash;
@@ -30,7 +30,7 @@ class Account {
     this.isLocked,
     this.isRoot,
     this.password,
-    this.phone_number,
+    this.phone,
     this.residentId,
     this.type,
     this.updatedTime,
@@ -54,7 +54,7 @@ class Account {
     email = json['email'];
     code = json['code'];
     type = json['type'];
-    phone_number = json['phoneNumber'];
+    phone = json['phone'];
     fullName = json['fullName'];
     avatar = json['avatar'];
     passwordHash = json['passwordHash'];
@@ -72,7 +72,7 @@ class Account {
     data['password'] = password;
     data['passwordHash'] = passwordHash;
     data['email'] = email;
-    data['phoneNumber'] = phone_number;
+    data['phone'] = phone;
     data['type'] = type;
     data['code'] = code;
     data['fullName'] = fullName;

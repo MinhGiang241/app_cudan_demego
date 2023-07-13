@@ -95,11 +95,8 @@ class _ChatScreenState extends State<ChatScreen> {
               var email =
                   context.read<ResidentInfoPrv>().userInfo?.account?.email;
               var token = context.read<ResidentInfoPrv>().userInfo?.account?.id;
-              var phone = context
-                  .read<ResidentInfoPrv>()
-                  .userInfo
-                  ?.account
-                  ?.phone_number;
+              var phone =
+                  context.read<ResidentInfoPrv>().userInfo?.account?.phone;
               var name = context.read<ResidentInfoPrv>().userInfo?.info_name ??
                   context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
               var residentId = context.read<ResidentInfoPrv>().residentId;

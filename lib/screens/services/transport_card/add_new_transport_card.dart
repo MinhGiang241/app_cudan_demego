@@ -233,7 +233,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                           .read<ResidentInfoPrv>()
                                           .userInfo
                                           ?.account
-                                          ?.phone_number ??
+                                          ?.phone ??
                                       context
                                           .read<ResidentInfoPrv>()
                                           .userInfo

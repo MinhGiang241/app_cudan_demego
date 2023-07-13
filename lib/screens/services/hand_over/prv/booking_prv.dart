@@ -439,7 +439,7 @@ class BookingPrv extends ChangeNotifier {
   }
 
   Future getApartmentListContract(BuildContext context) async {
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     await APIHandOver.getApartmentContract(residentId).then((v) {
       if (v != null && v['list'] != null) {

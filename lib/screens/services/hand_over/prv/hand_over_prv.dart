@@ -12,7 +12,7 @@ class HandOverPrv extends ChangeNotifier {
   Future getHandOverBookingByResidentId(
     BuildContext context,
   ) async {
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     await APIHandOver.getApointmentScheduleList(residentId).then((v) {
       listHandOverSchedule.clear();

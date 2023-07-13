@@ -290,4 +290,136 @@ class APIHOAccount {
       return res.response.data;
     }
   }
+
+  static Future sendOtpResetPassword(
+    String email,
+  ) async {
+    var query = '''
+mutation (\$email:String){
+    response: authorization_mobile_send_OTP_reset_password (email: \$email ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "email": email,
+      },
+    );
+    final results = await ApiHOService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future verifyOtp(
+    String otp,
+    String sendTo,
+  ) async {
+    var query = '''
+ mutation (\$otp:String,\$sendTo:String){
+    response: authorization_veryfyOTP (otp: \$otp,sendTo: \$sendTo ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "otp": otp,
+        "sendTo": sendTo,
+      },
+    );
+    final results = await ApiHOService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future resetPassword(
+    String username,
+    String new_password,
+  ) async {
+    var query = '''
+mutation (\$username:String,\$new_password:Dictionary){
+    response: authorization_mobile_reset_password (username: \$username,new_password: \$new_password ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "username": username,
+        "new_password": new_password,
+      },
+    );
+    final results = await ApiHOService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getUserInformationByUsername(
+    String username,
+  ) async {
+    var query = '''
+mutation (\$username:String){
+    response: authorization_mobile_find_user_info_by_username (username: \$username ) {
+        code
+        message
+        data
+    }
+}
+       
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "username": username,
+      },
+    );
+    final results = await ApiHOService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

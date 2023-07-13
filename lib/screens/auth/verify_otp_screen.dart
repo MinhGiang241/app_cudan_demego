@@ -81,7 +81,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ),
                 vpad(24),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: PinCodeTextField(
                     controller: context.read<VerifyOTPPrv>().otpController,
                     appContext: context,
@@ -197,7 +197,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             }
                           },
                   ),
-                )
+                ),
+                vpad(12),
               ],
             ),
           );

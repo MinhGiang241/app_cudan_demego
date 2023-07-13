@@ -31,7 +31,7 @@ class _OtpBookingScreenState extends State<OtpBookingScreen> {
     var schedule = arg['data'] as AppointmentSchedule;
     var name = arg['apart'] as String;
 
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
     return ChangeNotifierProvider(
       create: (context) => OtpBookingPrv(
         schedule: schedule,

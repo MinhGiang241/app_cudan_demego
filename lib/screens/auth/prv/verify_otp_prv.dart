@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:app_cudan/services/api_ho_account.dart';
+import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -68,13 +70,26 @@ class VerifyOTPPrv extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       if (isForgotPass) {
-        await authPrv
-            .onVerify(context, name, email, phone, otpController.text,
-                isForgotPass, isPhone, () {})
+        // await authPrv
+        //     .onVerify(context, name, email, phone, otpController.text,
+        //         isForgotPass, isPhone, () {})
+        await APIHOAccount.verifyOtp(otpController.text, "signup:${email}")
             .then((value) {
           isLoading = false;
           notifyListeners();
+          Utils.pushScreen(
+            context,
+            ResetPassScreen(
+              user: name,
+              token: '',
+            ),
+          );
+        }).catchError((e) {
+          isLoading = false;
+          notifyListeners();
+          Utils.showErrorMessage(context, e);
         });
+        ;
       } else {
         await verify().then((v) {});
         // await

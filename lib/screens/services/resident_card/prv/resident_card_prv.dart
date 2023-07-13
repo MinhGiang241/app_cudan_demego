@@ -72,8 +72,7 @@ class ResidentCardPrv extends ChangeNotifier {
       ),
       onConfirm: () async {
         Navigator.pop(context);
-        var acc =
-            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var acc = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
         var accName =
             context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
@@ -158,8 +157,7 @@ class ResidentCardPrv extends ChangeNotifier {
         var submitCard = card.copyWith();
         submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
-        var acc =
-            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var acc = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
         var accName =
             context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;

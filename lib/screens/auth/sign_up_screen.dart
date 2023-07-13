@@ -79,6 +79,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Form(
+                  onChanged: context.watch<SignUpPrv>().isAuto
+                      ? () => context.read<SignUpPrv>().validate(context)
+                      : null,
+                  autovalidateMode: context.watch<SignUpPrv>().isAuto
+                      ? AutovalidateMode.onUserInteraction
+                      : null,
                   key: context.read<SignUpPrv>().formKey,
                   child: Column(
                     children: [
@@ -125,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       vpad(16),
                       PrimaryTextField(
-                        isShow: false,
+                        // isShow: false,
                         isRequired: true,
                         controller: context.read<SignUpPrv>().emailController,
                         label: S.of(context).email,
@@ -133,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validateString:
                             context.watch<SignUpPrv>().emailValidate,
                         validator: (v) {
-                          if (v!.isNotEmpty && !RegexText.isEmail(v.trim())) {
+                          if (v!.isEmpty || !RegexText.isEmail(v.trim())) {
                             return '';
                           }
                           return null;

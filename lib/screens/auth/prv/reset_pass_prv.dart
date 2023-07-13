@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/sign_in_screen.dart';
+import 'package:app_cudan/services/api_ho_account.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
@@ -28,16 +29,18 @@ class ResetPassPrv extends ChangeNotifier {
       validateNewPass = validateCNewPass = null;
       isLoading = true;
       notifyListeners();
-      await APIAuth.resetPassword(user, newPassController.text.trim())
+      await APIHOAccount.resetPassword(user, newPassController.text.trim())
+          //await APIAuth.resetPassword(user, newPassController.text.trim())
           .then((v) {
         isLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(
-            context: context,
-            e: S.of(context).reset_pass_success,
-            onClose: () {
-              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-            });
+          context: context,
+          e: S.of(context).reset_pass_success,
+          onClose: () {
+            Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+          },
+        );
       }).catchError((e) {
         isLoading = false;
         notifyListeners();

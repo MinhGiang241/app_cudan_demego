@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:app_cudan/constants/regex_text.dart';
+import 'package:app_cudan/services/api_ho_account.dart';
+import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
@@ -42,7 +44,7 @@ class ForgotPassPrv extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     if (mail != null) {
-      await APIAuth.sendOtpViaEmail(mail).then(
+      await APIHOAccount.sendOtpResetPassword(mail).then(
         (data) {
           isLoading = false;
           notifyListeners();
@@ -70,15 +72,15 @@ class ForgotPassPrv extends ChangeNotifier {
         phoneValidate = null;
         isLoading = true;
         userName = phoneController.text.trim();
-        if (RegexText.isEmail(phoneController.text.trim())) {
-          var userNameByEmail =
-              await APIAuth.findUserNameByEmail(email: userName!);
-          if (userNameByEmail != null) {
-            userName = userNameByEmail;
-          }
-        }
+        // if (RegexText.isEmail(phoneController.text.trim())) {
+        //   var userNameByEmail =
+        //       await APIAuth.findUserNameByEmail(email: userName!);
+        //   if (userNameByEmail != null) {
+        //     userName = userNameByEmail;
+        //   }
+        // }
         var userInfoResponseData =
-            await APIAuth.getUserInformationByUsername(userName!);
+            await APIHOAccount.getUserInformationByUsername(userName!);
 
         var userInfoResponse = Account.fromJson(userInfoResponseData);
         if (userInfoResponse == null) {
@@ -87,19 +89,20 @@ class ForgotPassPrv extends ChangeNotifier {
           throw (S.of(context).not_found_account);
         } else {
           var userInfo = userInfoResponse;
-          phoneNumber = userInfo.phone_number;
+          phoneNumber = userInfo.phone;
           email = userInfo.email;
           isLoading = false;
           notifyListeners();
 
           Utils.pushScreen(
-              context,
-              (OptionSendOtp(
-                userName: userName,
-                isForgotPass: true,
-                email: email,
-                phone: phoneNumber,
-              )));
+            context,
+            (OptionSendOtp(
+              userName: userName,
+              isForgotPass: true,
+              email: email,
+              phone: phoneNumber,
+            )),
+          );
         }
       } catch (e) {
         isLoading = false;

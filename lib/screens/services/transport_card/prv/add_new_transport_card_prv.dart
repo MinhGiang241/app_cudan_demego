@@ -653,8 +653,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           residentId: residentId,
           phone_number: residentId != null
               ? residentInfo?.phone_required
-              : residentInfo?.account?.phone_number ??
-                  residentInfo?.account?.userName,
+              : residentInfo?.account?.phone ?? residentInfo?.account?.userName,
           confirmation: isObey,
           integrated: isIntergate,
           isMobile: true,

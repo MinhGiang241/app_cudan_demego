@@ -216,7 +216,7 @@ class _ConfirmChoiceState extends State<ConfirmChoice> {
                         ? null
                         : () async {
                             if (widget.numChoice == 1) {
-                              sendOTPviaPhone();
+                              await sendOTPviaPhone();
                               setState(() {
                                 context.read<ForgotPassPrv>().isLoading = false;
                               });

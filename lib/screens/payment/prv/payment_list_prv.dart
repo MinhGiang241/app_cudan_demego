@@ -41,7 +41,7 @@ class PaymentListPrv extends ChangeNotifier {
     var residentId = context.read<ResidentInfoPrv>().residentId;
     var account = context.read<ResidentInfoPrv>().userInfo!.account;
     APIPayment.getReceiptsList(residentId ?? account?.userName, apartmentId,
-            year!, month!, account?.phone_number ?? "")
+            year!, month!, account?.phone ?? "")
         .then((v) {
       listPay.clear();
       listUnpay.clear();

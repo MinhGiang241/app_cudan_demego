@@ -31,8 +31,7 @@ class TransportCardPrv extends ChangeNotifier {
         submitCard.status = "DESTROY";
         submitCard.reasons = 'NGUOIDUNGKHOA';
         var d = submitCard.toMap();
-        var acc =
-            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var acc = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
         var accName =
             context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;
@@ -81,7 +80,7 @@ class TransportCardPrv extends ChangeNotifier {
     await APITransport.getTransportCardList(
       residentId,
       apartmentId,
-      userInfo?.account?.phone_number ?? userInfo?.account?.userName,
+      userInfo?.account?.phone ?? userInfo?.account?.userName,
     ).then((v) {
       cardList.clear();
       for (var i in v) {
@@ -101,7 +100,7 @@ class TransportCardPrv extends ChangeNotifier {
       residentId,
       apartmentId,
       true,
-      userInfo?.account?.phone_number ?? userInfo?.account?.userName,
+      userInfo?.account?.phone ?? userInfo?.account?.userName,
     ).then((v) {
       letterList.clear();
 
@@ -227,8 +226,7 @@ class TransportCardPrv extends ChangeNotifier {
 
         submitCard.status = "LOST";
         submitCard.reasons = 'BAOMAT';
-        var acc =
-            context.read<ResidentInfoPrv>().userInfo?.account?.phone_number;
+        var acc = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
         var accName =
             context.read<ResidentInfoPrv>().userInfo?.account?.fullName;
         var resName = context.read<ResidentInfoPrv>().userInfo?.info_name;

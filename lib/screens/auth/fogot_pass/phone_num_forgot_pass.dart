@@ -28,71 +28,76 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
 
   next() {
     if (pageIndex <= 4) {
-      pageController.animateToPage(pageIndex++,
-          duration: const Duration(milliseconds: 200), curve: Curves.linear);
+      pageController.animateToPage(
+        pageIndex++,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.linear,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ForgotPassPrv>(
-        create: (context) => ForgotPassPrv(
-              isForgotPass: true,
-            ),
-        builder: (context, snapshot) {
-          return PrimaryScreen(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-            ),
-            body: Form(
-              key: context.read<ForgotPassPrv>().formKey,
-              child: SafeArea(
-                child: ListView(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  children: [
-                    // vpad(24 + topSafePad(context) + appbarHeight(context)),
-                    Center(
-                      child: Text(
-                        S.of(context).forgot_pass,
-                        style: txtDisplayMedium(),
-                      ),
+      create: (context) => ForgotPassPrv(
+        isForgotPass: true,
+      ),
+      builder: (context, snapshot) {
+        return PrimaryScreen(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+          ),
+          body: Form(
+            key: context.read<ForgotPassPrv>().formKey,
+            child: SafeArea(
+              child: ListView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                children: [
+                  // vpad(24 + topSafePad(context) + appbarHeight(context)),
+                  Center(
+                    child: Text(
+                      S.of(context).forgot_pass,
+                      style: txtDisplayMedium(),
                     ),
-                    vpad(45),
-                    PrimaryTextField(
-                      controller: context.read<ForgotPassPrv>().phoneController,
-                      label: S.of(context).phone_email,
-                      hint: S.of(context).enter_phone_email,
-                      // keyboardType: TextInputType.phone,
-                      isRequired: true,
-                      validator: (v) {
-                        if (v!.isEmpty) {
-                          return "";
-                        }
-                        return null;
-                      },
-                      validateString:
-                          context.watch<ForgotPassPrv>().phoneValidate,
-                    ),
+                  ),
+                  vpad(45),
+                  PrimaryTextField(
+                    controller: context.read<ForgotPassPrv>().phoneController,
+                    label: S.of(context).username,
+                    hint: S.of(context).username,
+                    // keyboardType: TextInputType.phone,
+                    isRequired: true,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return "";
+                      }
+                      return null;
+                    },
+                    validateString:
+                        context.watch<ForgotPassPrv>().phoneValidate,
+                  ),
 
-                    vpad(30),
-                    PrimaryButton(
-                        onTap: () async {
-                          FocusScope.of(context).unfocus();
-                          await context
-                              .read<ForgotPassPrv>()
-                              .getEmailAndPhone(context)
-                              .then((value) {})
-                              .catchError((e) {});
-                        },
-                        text: S.of(context).next,
-                        isLoading: context.watch<ForgotPassPrv>().isLoading,
-                        width: double.infinity)
-                  ],
-                ),
+                  vpad(30),
+                  PrimaryButton(
+                    onTap: () async {
+                      FocusScope.of(context).unfocus();
+                      await context
+                          .read<ForgotPassPrv>()
+                          .getEmailAndPhone(context)
+                          .then((value) {})
+                          .catchError((e) {});
+                    },
+                    text: S.of(context).next,
+                    isLoading: context.watch<ForgotPassPrv>().isLoading,
+                    width: double.infinity,
+                  )
+                ],
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
