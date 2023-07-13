@@ -87,8 +87,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
         searchApartmentKey = UniqueKey();
         relationKey = UniqueKey();
         relationshipList.clear();
-        valueRelation = null;
-        onChangeApartment(null);
+
         var apiEndpoint =
             projectList.firstWhere((e) => e.registrationId == v).apiEndpoint;
         notifyListeners();
@@ -158,7 +157,25 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   TextEditingController contractNumController = TextEditingController();
   onChangeApartment(String? v) {
     valueApartment = v;
+    var selectedAprt = listOwnHO.firstWhere((e) => e.id == v);
 
+    if (selectedAprt.relation == null) {
+      relationshipList = [
+        DropdownMenuItem(
+          value: '',
+          child: Text(S.current.owner),
+        )
+      ];
+      valueRelation = '';
+    } else {
+      relationshipList = [
+        DropdownMenuItem(
+          value: selectedAprt.relation?.code,
+          child: Text(selectedAprt.relation?.name ?? ""),
+        )
+      ];
+      valueRelation = selectedAprt.relation?.code;
+    }
     notifyListeners();
   }
 
@@ -256,21 +273,21 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     //"6495a54c093b143e81f6b660"
     if (valueProject == null) return;
 
-    await APIHOAccount.getRelationshipList(valueProject!).then((v) {
-      if (v != null) {
-        relationshipList.clear();
-        for (var i in v) {
-          relationshipList.add(
-            DropdownMenuItem(
-              value: i['value'],
-              child: Text(i['label'] ?? ''),
-            ),
-          );
-        }
-      }
-    }).catchError((e) {
-      relationshipList.clear();
-    });
+    // await APIHOAccount.getRelationshipList(valueProject!).then((v) {
+    //   if (v != null) {
+    //     relationshipList.clear();
+    //     for (var i in v) {
+    //       relationshipList.add(
+    //         DropdownMenuItem(
+    //           value: i['value'],
+    //           child: Text(i['label'] ?? ''),
+    //         ),
+    //       );
+    //     }
+    //   }
+    // }).catchError((e) {
+    //   relationshipList.clear();
+    // });
 
     notifyListeners();
   }

@@ -488,6 +488,34 @@ class ResidentInfoFromHO {
   }
 }
 
+class RelationFromHO {
+  String? code;
+  String? name;
+  RelationFromHO({
+    this.code,
+    this.name,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'code': code,
+      'name': name,
+    };
+  }
+
+  factory RelationFromHO.fromMap(Map<String, dynamic> map) {
+    return RelationFromHO(
+      code: map['code'] != null ? map['code'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RelationFromHO.fromJson(String source) =>
+      RelationFromHO.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
 class OwnInfofromHO {
   String? id;
   String? createdTime;
@@ -497,6 +525,7 @@ class OwnInfofromHO {
   String? apartmentId;
   String? type;
   String? residentId;
+  RelationFromHO? relation;
   String? status;
   ApartmentFromHO? apartment;
   OwnInfofromHO({
@@ -510,6 +539,7 @@ class OwnInfofromHO {
     this.residentId,
     this.status,
     this.apartment,
+    this.relation,
   });
 
   OwnInfofromHO copyWith({
@@ -571,6 +601,9 @@ class OwnInfofromHO {
       status: map['status'] != null ? map['status'] as String : null,
       apartment: map['apartment'] != null
           ? ApartmentFromHO.fromMap(map['apartment'] as Map<String, dynamic>)
+          : null,
+      relation: map['relation'] != null
+          ? RelationFromHO.fromMap(map['relation'] as Map<String, dynamic>)
           : null,
     );
   }

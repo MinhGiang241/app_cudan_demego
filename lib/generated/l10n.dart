@@ -8489,6 +8489,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Owner`
+  String get owner {
+    return Intl.message(
+      'Owner',
+      name: 'owner',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

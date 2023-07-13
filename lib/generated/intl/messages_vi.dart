@@ -787,6 +787,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
             "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
+        "owner": MessageLookupByLibrary.simpleMessage("Chủ hộ"),
         "owner_refuse": MessageLookupByLibrary.simpleMessage("Chủ hộ từ chối"),
         "package": MessageLookupByLibrary.simpleMessage("Hàng hóa"),
         "package_info":

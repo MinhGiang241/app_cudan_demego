@@ -842,5 +842,6 @@
   "note_content": "Note content",
   "account_type": "Account type",
   "resident_account": "Resident account",
-  "guest_account": "Guest account"
+  "guest_account": "Guest account",
+  "owner": "Owner"
 }

@@ -843,5 +843,6 @@
   "note_content": "Nội dung ghi chú",
   "account_type": "Loại tài khoản",
   "resident_account": "Tài khoản cư dân",
-  "guest_account": "Tài khoản khách"
+  "guest_account": "Tài khoản khách",
+  "owner": "Chủ hộ"
 }

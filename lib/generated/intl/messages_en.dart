@@ -776,6 +776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
+        "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "owner_refuse": MessageLookupByLibrary.simpleMessage("Owner refuse"),
         "package": MessageLookupByLibrary.simpleMessage("Package"),
         "package_info":
