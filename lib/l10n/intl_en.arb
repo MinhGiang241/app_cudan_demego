@@ -839,5 +839,8 @@
   "sys_support": "System suport",
   "appoved_status": "Approved status",
   "result_date": "Result date",
-  "note_content": "Note content"
+  "note_content": "Note content",
+  "account_type": "Account type",
+  "resident_account": "Resident account",
+  "guest_account": "Guest account"
 }

@@ -8459,6 +8459,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Account type`
+  String get account_type {
+    return Intl.message(
+      'Account type',
+      name: 'account_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident account`
+  String get resident_account {
+    return Intl.message(
+      'Resident account',
+      name: 'resident_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guest account`
+  String get guest_account {
+    return Intl.message(
+      'Guest account',
+      name: 'guest_account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

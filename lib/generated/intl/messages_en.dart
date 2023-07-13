@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Accept hand over"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
+        "account_type": MessageLookupByLibrary.simpleMessage("Account type"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "add_dependent_person":
@@ -524,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("going high school"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Going university"),
+        "guest_account": MessageLookupByLibrary.simpleMessage("Guest account"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Hand over date"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Hand over"),
@@ -1000,6 +1002,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Resgiter vehicle card front site  image can not be empty"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
+        "resident_account":
+            MessageLookupByLibrary.simpleMessage("Resident account"),
         "resident_address":
             MessageLookupByLibrary.simpleMessage("Resident address"),
         "resident_info":

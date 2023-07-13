@@ -28,6 +28,9 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
     return ChangeNotifierProvider(
       create: (context) => CreateNewProjRegistrationPrv(),
       builder: (context, state) {
+        var isResident =
+            context.watch<CreateNewProjRegistrationPrv>().valueType ==
+                "RESIDENT";
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).reg_info,
@@ -64,64 +67,89 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
                       .validateProject,
                 ),
                 vpad(12),
-                PrimaryDropDownSearch(
-                  key: context
-                      .watch<CreateNewProjRegistrationPrv>()
-                      .searchApartmentKey,
-                  onSaved: context
-                      .read<CreateNewProjRegistrationPrv>()
-                      .onSaveApartment,
-                  isAuto:
-                      context.watch<CreateNewProjRegistrationPrv>().autoValid,
-                  onChanged: context
-                      .read<CreateNewProjRegistrationPrv>()
-                      .onChangeApartment,
-                  paginatedRequest: context
-                      .read<CreateNewProjRegistrationPrv>()
-                      .paginatedRequest,
-                  isRequired: true,
-                  label: S.of(context).apartment,
-                  hint: S.of(context).search_apartment,
-                  validator: (v) {
-                    if (v == null) {
-                      return S.of(context).not_blank;
-                    }
-                    return null;
-                  },
-                  validateString: context
-                      .watch<CreateNewProjRegistrationPrv>()
-                      .validateContractNum,
-                ),
-                vpad(12),
                 PrimaryDropDown(
-                  key:
-                      context.watch<CreateNewProjRegistrationPrv>().relationKey,
-                  selectList: context
-                      .watch<CreateNewProjRegistrationPrv>()
-                      .relationshipList,
-                  onChange: context
-                      .read<CreateNewProjRegistrationPrv>()
-                      .onChangeRelation,
                   isRequired: true,
-                  label: S.of(context).relation_owner,
+                  onChange:
+                      context.read<CreateNewProjRegistrationPrv>().onSelectType,
+                  validateString: context
+                      .watch<CreateNewProjRegistrationPrv>()
+                      .validateType,
+                  label: S.of(context).account_type,
+                  hint: S.of(context).account_type,
+                  selectList: [
+                    DropdownMenuItem(
+                      child: Text(S.of(context).resident_account),
+                      value: "RESIDENT",
+                    ),
+                    DropdownMenuItem(
+                      child: Text(S.of(context).guest_account),
+                      value: "GUEST",
+                    ),
+                  ],
                   validator: Utils.emptyValidatorDropdown,
-                  validateString: context
-                      .watch<CreateNewProjRegistrationPrv>()
-                      .validateRelation,
                 ),
-                vpad(12),
-                PrimaryTextField(
-                  controller: context
-                      .read<CreateNewProjRegistrationPrv>()
-                      .contractNumController,
-                  isRequired: true,
-                  hint: S.of(context).enter_sell_contract_num,
-                  label: S.of(context).sell_contract_num,
-                  validator: Utils.emptyValidator,
-                  validateString: context
-                      .watch<CreateNewProjRegistrationPrv>()
-                      .validateContractNum,
-                ),
+                if (isResident) vpad(12),
+                if (isResident)
+                  PrimaryDropDownSearch(
+                    key: context
+                        .watch<CreateNewProjRegistrationPrv>()
+                        .searchApartmentKey,
+                    onSaved: context
+                        .read<CreateNewProjRegistrationPrv>()
+                        .onSaveApartment,
+                    isAuto:
+                        context.watch<CreateNewProjRegistrationPrv>().autoValid,
+                    onChanged: context
+                        .read<CreateNewProjRegistrationPrv>()
+                        .onChangeApartment,
+                    paginatedRequest: context
+                        .read<CreateNewProjRegistrationPrv>()
+                        .paginatedRequest,
+                    isRequired: true,
+                    label: S.of(context).apartment,
+                    hint: S.of(context).search_apartment,
+                    validator: (v) {
+                      if (v == null) {
+                        return S.of(context).not_blank;
+                      }
+                      return null;
+                    },
+                    validateString: context
+                        .watch<CreateNewProjRegistrationPrv>()
+                        .validateContractNum,
+                  ),
+                if (isResident) vpad(12),
+                if (isResident)
+                  PrimaryDropDown(
+                    key: context
+                        .watch<CreateNewProjRegistrationPrv>()
+                        .relationKey,
+                    selectList: context
+                        .watch<CreateNewProjRegistrationPrv>()
+                        .relationshipList,
+                    onChange: context
+                        .read<CreateNewProjRegistrationPrv>()
+                        .onChangeRelation,
+                    isRequired: true,
+                    label: S.of(context).relation_owner,
+                    validator: Utils.emptyValidatorDropdown,
+                    validateString: context
+                        .watch<CreateNewProjRegistrationPrv>()
+                        .validateRelation,
+                  ),
+                // vpad(12),
+                // PrimaryTextField(
+                //   controller: context
+                //       .read<CreateNewProjRegistrationPrv>()
+                //       .contractNumController,
+                //   isRequired: true,
+                //   hint: S.of(context).enter_sell_contract_num,
+                //   label: S.of(context).sell_contract_num,
+                //   validator: Utils.emptyValidator,
+                //   validateString: context
+                //       .watch<CreateNewProjRegistrationPrv>()
+                //       .validateContractNum,
+                // ),
                 vpad(40),
                 PrimaryButton(
                   onTap: () => context

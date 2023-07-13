@@ -100,13 +100,13 @@ class AuthPrv extends ChangeNotifier {
           await PrfData.shared.deteleSignInStore();
         }
 
-        await firebase.push_device(account).catchError((e) {
-          Utils.showErrorMessage(context, e);
-          return;
-        });
-        // await APIAuth.getAccountInfo().then((v) {
-        //   context.watch<AuthPrv>().account = Account.fromJson(v);
-        // }).catchError((e) {});
+        // await firebase.push_device(account).catchError((e) {
+        //   Utils.showErrorMessage(context, e);
+        //   return;
+        // });
+        await APIAuth.getAccountInfo().then((v) {
+          context.watch<AuthPrv>().account = Account.fromJson(v);
+        }).catchError((e) {});
         await APITower.getResidentInfo(account).then((value) async {
           if (value != null) {
             context.read<ResidentInfoPrv>().userInfo =

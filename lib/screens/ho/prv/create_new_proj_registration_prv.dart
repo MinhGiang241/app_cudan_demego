@@ -22,17 +22,30 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   String? validateProject;
   String? validateApartment;
   String? validateRelation;
+  String? validateType;
   String? validateContractNum;
 
   String? valueProject;
   String? valueApartment;
   String? valueRelation;
+  String? valueType;
 
   bool isSelectAprt = false;
 
   List<DropdownMenuItem<String>> relationshipList = [];
   List<DropdownMenuItem<String>> projectListChoice = [];
   List<Project> projectList = [];
+
+  onSelectType(v) {
+    searchApartmentKey = UniqueKey();
+    relationKey = UniqueKey();
+    if (v != null) {
+      valueType = v;
+      validateType = null;
+    }
+
+    notifyListeners();
+  }
 
   onSaveApartment(v) {
     print(v);
@@ -84,6 +97,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     validateProject = null;
     validateRelation = null;
     validateContractNum = null;
+    validateType = null;
     notifyListeners();
   }
 
@@ -97,6 +111,11 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
       validateRelation = S.current.not_blank;
     } else {
       validateRelation = null;
+    }
+    if (valueType == null) {
+      validateType = S.current.not_blank;
+    } else {
+      validateType = null;
     }
     if (contractNumController.text.trim().isEmpty) {
       validateContractNum = S.current.not_blank;
@@ -146,10 +165,10 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   }
 
   onSubmit(BuildContext context) async {
+    autoValid = true;
+    isLoading = true;
+    notifyListeners();
     if (formKey.currentState!.validate()) {
-      autoValid = true;
-      isLoading = true;
-      notifyListeners();
       clearValidateString();
 
       await APIHOAccount.submitResidentRegister(

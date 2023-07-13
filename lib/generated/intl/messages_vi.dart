@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
+        "account_type": MessageLookupByLibrary.simpleMessage("Loại tài khoản"),
         "active": MessageLookupByLibrary.simpleMessage("Hoạt động"),
         "add": MessageLookupByLibrary.simpleMessage("Thêm"),
         "add_dependent_person":
@@ -530,6 +531,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang học trung học"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Đang học đại học"),
+        "guest_account":
+            MessageLookupByLibrary.simpleMessage("Tài khoản khách"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
@@ -1005,6 +1008,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Ảnh đăng ký xe mặt trước không được để trống"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
+        "resident_account":
+            MessageLookupByLibrary.simpleMessage("Tài khoản cư dân"),
         "resident_address":
             MessageLookupByLibrary.simpleMessage("Địa chỉ thường trú"),
         "resident_info":

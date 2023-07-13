@@ -840,5 +840,8 @@
   "sys_support": "Đường dây hỗ trợ",
   "appoved_status": "Tình trạng duyệt",
   "result_date": "Ngày nhận kết quả",
-  "note_content": "Nội dung ghi chú"
+  "note_content": "Nội dung ghi chú",
+  "account_type": "Loại tài khoản",
+  "resident_account": "Tài khoản cư dân",
+  "guest_account": "Tài khoản khách"
 }
