@@ -36,7 +36,7 @@ class HeaderTitle extends StatelessWidget {
       title: Center(
         child: Text.rich(TextSpan(children: [
           TextSpan(text: "DEME", style: txtBold(24)),
-          TextSpan(text: "GO", style: txtBold(24, yellowColor1)),
+          TextSpan(text: "PRO", style: txtBold(24, yellowColor1)),
         ])),
       ),
       trailing: PrimaryIcon(

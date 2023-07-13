@@ -1,14 +1,21 @@
 import 'package:app_cudan/services/api_ho_account.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/ho_model.dart';
+import '../../../models/response_resident_own.dart';
+import '../../../services/Api_project_service.dart';
+import '../../../services/api_ho_service.dart';
 import '../../../utils/utils.dart';
 import '../project_registration_screen.dart';
+import 'ho_account_service_prv.dart';
 
 class CreateNewProjRegistrationPrv extends ChangeNotifier {
+  ApiProjectService? projectApi;
+
   final formKey = GlobalKey<FormState>();
 
   var searchApartmentKey = UniqueKey();
@@ -32,9 +39,18 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
 
   bool isSelectAprt = false;
 
+  List<OwnInfofromHO> listOwnHO = [];
   List<DropdownMenuItem<String>> relationshipList = [];
   List<DropdownMenuItem<String>> projectListChoice = [];
   List<Project> projectList = [];
+
+  setNewApiProject(String apiEndPoint) {
+    projectApi = ApiProjectService(
+      access_token: ApiHOService.shared.access_token ?? "",
+      expireDate: ApiHOService.shared.expireDate,
+      domain: apiEndPoint,
+    );
+  }
 
   onSelectType(v) {
     searchApartmentKey = UniqueKey();
@@ -47,13 +63,25 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  getProjectData(String apiEndPoint, BuildContext context) async {
+    setNewApiProject(apiEndPoint);
+    await projectApi!.loadDataRegister().then((v) {
+      if (v != null) {
+        var info = ResidentInfoFromHO.fromMap(v);
+        listOwnHO.clear();
+        for (var i in info.owninfo ?? []) {
+          listOwnHO.add(i);
+        }
+      }
+    });
+  }
+
   onSaveApartment(v) {
     print(v);
   }
 
-  onChangeProject(
-    v,
-  ) async {
+  onChangeProject(v, context) async {
+    print(projectList);
     if (v != null) {
       if (valueProject != v) {
         searchApartmentKey = UniqueKey();
@@ -61,8 +89,10 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
         relationshipList.clear();
         valueRelation = null;
         onChangeApartment(null);
+        var apiEndpoint =
+            projectList.firstWhere((e) => e.registrationId == v).apiEndpoint;
         notifyListeners();
-        await futureApart();
+        await getProjectData(apiEndpoint!, context);
       }
       valueProject = v.toString();
       validateProject = null;
@@ -128,6 +158,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   TextEditingController contractNumController = TextEditingController();
   onChangeApartment(String? v) {
     valueApartment = v;
+
     notifyListeners();
   }
 
@@ -139,23 +170,23 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     if (valueProject == null) return [];
     //"6495a54c093b143e81f6b660"
     try {
-      var results = await APIHOAccount.getApartmentSuggestion(
-        valueProject!,
-        key ?? "",
-      );
-      print(results);
+      // var results = await APIHOAccount.getApartmentSuggestion(
+      //   valueProject!,
+      //   key ?? "",
+      // );
+      // print(results);
 
       return <SearchableDropdownMenuItem<String>>[
-        ...(results ?? []).map(
+        ...(listOwnHO).map(
           (e) => SearchableDropdownMenuItem(
             child: Text(
-              '${e['label']}',
+              '${e.apartment?.label}',
               style: txtBodySmallBold(
                 color: grayScaleColorBase,
               ),
             ),
-            value: '${e['value']}',
-            label: '${e['label']}',
+            value: '${e.id}',
+            label: '${e.apartment?.label}',
           ),
         )
       ];
@@ -170,13 +201,15 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     notifyListeners();
     if (formKey.currentState!.validate()) {
       clearValidateString();
-
-      await APIHOAccount.submitResidentRegister(
-        valueProject!,
-        valueApartment!,
-        valueRelation!,
-        contractNumController.text.trim(),
-      ).then((v) {
+      await projectApi!
+          .registeResident(valueType!, valueApartment)
+          // await APIHOAccount.submitResidentRegister(
+          //   valueProject!,
+          //   valueApartment!,
+          //   valueRelation!,
+          //   contractNumController.text.trim(),
+          // )
+          .then((v) {
         isLoading = false;
         notifyListeners();
         Utils.showSuccessMessage(

@@ -11,6 +11,7 @@ class Project {
   String? registrationId;
   String? domain;
   String? project_code;
+  String? apiEndpoint;
   Project({
     this.id,
     this.project_name,
@@ -21,6 +22,7 @@ class Project {
     this.registrationId,
     this.domain,
     this.project_code,
+    this.apiEndpoint,
   });
 
   Map<String, dynamic> toMap() {
@@ -34,6 +36,7 @@ class Project {
       'registrationId': registrationId,
       'domain': domain,
       'project_code': project_code,
+      'apiEndpoint': apiEndpoint,
     };
   }
 
@@ -42,6 +45,8 @@ class Project {
       id: map['_id'] != null ? map['_id'] as String : null,
       project_name:
           map['project_name'] != null ? map['project_name'] as String : null,
+      apiEndpoint:
+          map['apiEndpoint'] != null ? map['apiEndpoint'] as String : null,
       projectTypeId:
           map['projectTypeId'] != null ? map['projectTypeId'] as String : null,
       investor: map['investor'] != null ? map['investor'] as String : null,
@@ -71,6 +76,7 @@ class Project {
     String? project_location,
     String? status,
     String? registrationId,
+    String? apiEndpoint,
   }) {
     return Project(
       id: id ?? this.id,
@@ -80,6 +86,7 @@ class Project {
       project_location: project_location ?? this.project_location,
       status: status ?? this.status,
       registrationId: registrationId ?? this.registrationId,
+      apiEndpoint: apiEndpoint ?? this.apiEndpoint,
     );
   }
 }

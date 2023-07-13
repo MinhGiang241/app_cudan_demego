@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
               );
             },
             debugShowCheckedModeBanner: false,
-            title: 'DEMEGO',
+            title: 'DEMEPRO',
             theme: AppTheme.lightTheme(),
             locale: context.watch<LangPrv>().locale,
             onGenerateRoute: _appRouter.onGenerateRoute,

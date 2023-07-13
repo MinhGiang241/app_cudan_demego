@@ -55,9 +55,7 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
                       .projectListChoice,
                   onChange: (v) => context
                       .read<CreateNewProjRegistrationPrv>()
-                      .onChangeProject(
-                        v,
-                      ),
+                      .onChangeProject(v, context),
                   isRequired: true,
                   label: S.of(context).project,
                   hint: S.of(context).choose_a_project,

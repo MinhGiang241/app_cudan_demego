@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       vpad(16),
                       Text.rich(TextSpan(children: [
                         TextSpan(text: "DEME", style: txtBold(24)),
-                        TextSpan(text: "GO", style: txtBold(24, yellowColor1)),
+                        TextSpan(text: "PRO", style: txtBold(24, yellowColor1)),
                       ])),
                       vpad(8),
                       Text(
