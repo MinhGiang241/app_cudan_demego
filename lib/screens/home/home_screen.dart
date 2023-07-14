@@ -116,6 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _navigationTab(BuildContext context) {
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     switch (_selectedIndex) {
       case 0:
         return RepaintBoundary(
@@ -144,12 +146,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   vpad(30),
                   // const ConvinientServiceHome(),
                   // vpad(30),
-                  const FeedbackHome(),
-                  vpad(30),
+                  if (isResident) const FeedbackHome(),
+                  if (isResident) vpad(30),
                   const EventsHome(),
                   vpad(30),
                   const ProjectInfoHome(),
-
                   vpad(24),
                   if (context.read<ResidentInfoPrv>().residentId != null)
                     const NewsHome(),

@@ -307,53 +307,63 @@ class _ExtraServiceCardListScreenState
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      PrimaryButton(
-                                        onTap: () {
-                                          context
-                                              .read<ExtraServiceCardListPrv>()
-                                              .sendToApprove(context, e);
-                                        },
-                                        text: S.of(context).send_request,
-                                        buttonSize: ButtonSize.xsmall,
-                                        buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: greenColor7,
-                                        textColor: greenColor8,
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          onTap: () {
+                                            context
+                                                .read<ExtraServiceCardListPrv>()
+                                                .sendToApprove(context, e);
+                                          },
+                                          text: S.of(context).send_request,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor: greenColor7,
+                                          textColor: greenColor8,
+                                        ),
                                       ),
-                                      PrimaryButton(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                            context,
-                                            ExtraServiceRegistrationScreen
-                                                .routeName,
-                                            arguments: {
-                                              'service': service,
-                                              'isEdit': true,
-                                              'name': service.name != null
-                                                  ? service.name!.toLowerCase()
-                                                  : '',
-                                              'serviceId': service.id,
-                                              'data': e
-                                              // "data": arg,
-                                            },
-                                          );
-                                        },
-                                        text: S.of(context).edit,
-                                        buttonSize: ButtonSize.xsmall,
-                                        buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: primaryColor5,
-                                        textColor: primaryColorBase,
+                                      hpad(2),
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                              context,
+                                              ExtraServiceRegistrationScreen
+                                                  .routeName,
+                                              arguments: {
+                                                'service': service,
+                                                'isEdit': true,
+                                                'name': service.name != null
+                                                    ? service.name!
+                                                        .toLowerCase()
+                                                    : '',
+                                                'serviceId': service.id,
+                                                'data': e
+                                                // "data": arg,
+                                              },
+                                            );
+                                          },
+                                          text: S.of(context).edit,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor:
+                                              primaryColor5,
+                                          textColor: primaryColorBase,
+                                        ),
                                       ),
-                                      PrimaryButton(
-                                        onTap: () {
-                                          context
-                                              .read<ExtraServiceCardListPrv>()
-                                              .deleteLetter(context, e);
-                                        },
-                                        text: S.of(context).delete_letter,
-                                        buttonSize: ButtonSize.xsmall,
-                                        buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: redColor5,
-                                        textColor: redColorBase,
+                                      hpad(2),
+                                      Expanded(
+                                        child: PrimaryButton(
+                                          onTap: () {
+                                            context
+                                                .read<ExtraServiceCardListPrv>()
+                                                .deleteLetter(context, e);
+                                          },
+                                          text: S.of(context).delete_letter,
+                                          buttonSize: ButtonSize.xsmall,
+                                          buttonType: ButtonType.secondary,
+                                          secondaryBackgroundColor: redColor5,
+                                          textColor: redColorBase,
+                                        ),
                                       ),
                                     ],
                                   ),

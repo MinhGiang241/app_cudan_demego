@@ -1,9 +1,11 @@
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/service_registration.dart';
 import 'package:app_cudan/models/transportation_card.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_extra_service.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/extra_service.dart';
@@ -14,7 +16,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   ExtraServiceRegistrationPrv({
     required this.selectedApartmentId,
     required this.arisingServiceId,
-    required this.phoneNumber,
+    this.phoneNumber,
     this.residentId,
     this.id,
     this.note,
@@ -51,6 +53,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   final TextEditingController regDateController = TextEditingController();
   final TextEditingController expiredDateController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String? note;
   String? regDateString;
@@ -67,12 +70,13 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   String? id;
   String? code;
   final String arisingServiceId;
-  final String phoneNumber;
+  final String? phoneNumber;
   final ExtraService service;
   String? residentId;
   String? shelfLifeId;
 
   String? apartValidate;
+  String? addressValidate;
   String? shelfValidate;
   String? maxDayValidate;
   String? regDateValidate;
@@ -93,6 +97,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     shelfValidate = null;
     maxDayValidate = null;
     regDateValidate = null;
+    addressValidate = null;
     notifyListeners();
   }
 
@@ -106,6 +111,11 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
       apartValidate = S.current.not_blank;
     } else {
       apartValidate = null;
+    }
+    if (addressController.text.trim().isEmpty) {
+      addressValidate = S.current.not_blank;
+    } else {
+      addressValidate = null;
     }
     if (shelfLifeId == null) {
       shelfValidate = S.current.not_blank;
@@ -134,6 +144,9 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
   }
 
   onSendSummit(BuildContext context, bool isRequest) async {
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
+    var isRes = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     FocusScope.of(context).unfocus();
     autoValid = true;
     if (isRequest) {
@@ -172,7 +185,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
             (expiredDate!.subtract(const Duration(hours: 7))).toIso8601String();
 
         var registerService = ServiceRegistration(
-          people: residentId != null ? 'resident' : 'quest',
+          people: isRes ? 'resident' : 'guest',
           residentId: residentId,
           isMobile: true,
           code: code,
@@ -180,14 +193,21 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
           apartmentId: selectedApartmentId,
           arisingServiceId: arisingServiceId,
           registration_date: id != null
-              ? (regDate!.subtract(const Duration(hours: 7))).toIso8601String()
+              ? (regDate!).toIso8601String()
               : (regDate!).toIso8601String(),
           expiration_date: expiredDateString,
           id: id,
-          phoneNumber: phoneNumber,
+          phoneNumber: (phoneNumber) ??
+              (isRes
+                  ? userInfo?.account?.phone
+                  : userInfo?.account?.phone ?? userInfo?.account?.userName),
           maximum_day: maxDayPay,
           shelfLifeId: shelfLifeId,
+          customer_address: isRes ? null : addressController.text.trim(),
           note: noteController.text.trim(),
+          customer_name: !isRes
+              ? userInfo?.account?.fullName ?? userInfo?.account?.userName
+              : null,
         );
 
         await APIExtraService.saveRegistrationService(

@@ -227,7 +227,7 @@ class ConstructionListPrv extends ChangeNotifier {
   getContructionRegistrationLetterList(BuildContext context) async {
     await APIConstruction.getConstructionRegistrationList(
       context.read<ResidentInfoPrv>().residentId ?? "",
-      context.read<ResidentInfoPrv>().selectedApartment!.apartmentId ?? "",
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId ?? "",
     ).then((v) {
       listRegistration.clear();
       for (var i in v) {

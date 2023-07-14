@@ -38,6 +38,8 @@ class _ExtraServiceRegistrationScreenState
     if (isEdit) {
       regService = arg['data'];
     }
+    var isRes = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     return ChangeNotifierProvider(
       create: (context) => ExtraServiceRegistrationPrv(
         payList: service.pay ?? [],
@@ -51,9 +53,10 @@ class _ExtraServiceRegistrationScreenState
         expiredDateString: isEdit ? regService.expiration_date : null,
         residentId: context.read<ResidentInfoPrv>().residentId,
         phoneNumber: regService.phoneNumber ??
-            context.read<ResidentInfoPrv>().userInfo!.phone_required!,
+            context.read<ResidentInfoPrv>().userInfo?.phone_required,
         selectedApartmentId: regService.apartmentId ??
-            context.read<ResidentInfoPrv>().selectedApartment!.apartmentId!,
+            context.read<ResidentInfoPrv>().selectedApartment?.apartmentId ??
+            "",
         arisingServiceId: arg['serviceId'],
       ),
       builder: ((context, child) {
@@ -85,9 +88,9 @@ class _ExtraServiceRegistrationScreenState
                     return DropdownMenuItem(
                       value: e.apartmentId,
                       child: Text(
-                        e.apartment?.name! != null
+                        e.apartment?.name != null
                             ? '${e.apartment?.name} - ${e.floor?.name} - ${e.building?.name}'
-                            : e.apartmentId!,
+                            : e.apartmentId ?? "",
                       ),
                     );
                   }).toList();
@@ -145,22 +148,37 @@ class _ExtraServiceRegistrationScreenState
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       children: [
                         vpad(20),
-                        PrimaryDropDown(
-                          validateString: context
-                              .watch<ExtraServiceRegistrationPrv>()
-                              .apartValidate,
-                          validator: Utils.emptyValidatorDropdown,
-                          isDense: false,
-                          isRequired: true,
-                          label: S.of(context).apartment,
-                          selectList: listApartmentChoice,
-                          value: context
-                              .watch<ExtraServiceRegistrationPrv>()
-                              .selectedApartmentId,
-                          onChange: (v) => context
-                              .read<ExtraServiceRegistrationPrv>()
-                              .onChooseApartment(context, v),
-                        ),
+                        if (!isRes)
+                          PrimaryTextField(
+                            hint: S.of(context).address,
+                            isRequired: true,
+                            maxLength: 550,
+                            label: S.of(context).address,
+                            controller: context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .addressController,
+                            validator: Utils.emptyValidator,
+                            validateString: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .addressValidate,
+                          ),
+                        if (isRes)
+                          PrimaryDropDown(
+                            validateString: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .apartValidate,
+                            validator: Utils.emptyValidatorDropdown,
+                            isDense: false,
+                            isRequired: true,
+                            label: S.of(context).apartment,
+                            selectList: listApartmentChoice,
+                            value: context
+                                .watch<ExtraServiceRegistrationPrv>()
+                                .selectedApartmentId,
+                            onChange: (v) => context
+                                .read<ExtraServiceRegistrationPrv>()
+                                .onChooseApartment(context, v),
+                          ),
                         if (context
                             .watch<ExtraServiceRegistrationPrv>()
                             .payList
@@ -298,28 +316,35 @@ class _ExtraServiceRegistrationScreenState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            PrimaryButton(
-                              isLoading: context
-                                  .watch<ExtraServiceRegistrationPrv>()
-                                  .isAddNewLoading,
-                              buttonSize: ButtonSize.medium,
-                              text: isEdit
-                                  ? S.of(context).update
-                                  : S.of(context).add_new,
-                              onTap: () => context
-                                  .read<ExtraServiceRegistrationPrv>()
-                                  .onSendSummit(context, false),
+                            Expanded(
+                              flex: 10,
+                              child: PrimaryButton(
+                                isLoading: context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .isAddNewLoading,
+                                buttonSize: ButtonSize.medium,
+                                text: isEdit
+                                    ? S.of(context).update
+                                    : S.of(context).add_new,
+                                onTap: () => context
+                                    .read<ExtraServiceRegistrationPrv>()
+                                    .onSendSummit(context, false),
+                              ),
                             ),
-                            PrimaryButton(
-                              isLoading: context
-                                  .watch<ExtraServiceRegistrationPrv>()
-                                  .isSendApproveLoading,
-                              buttonType: ButtonType.green,
-                              buttonSize: ButtonSize.medium,
-                              text: S.of(context).send_request,
-                              onTap: () => context
-                                  .read<ExtraServiceRegistrationPrv>()
-                                  .onSendSummit(context, true),
+                            hpad(20),
+                            Expanded(
+                              flex: 10,
+                              child: PrimaryButton(
+                                isLoading: context
+                                    .watch<ExtraServiceRegistrationPrv>()
+                                    .isSendApproveLoading,
+                                buttonType: ButtonType.green,
+                                buttonSize: ButtonSize.medium,
+                                text: S.of(context).send_request,
+                                onTap: () => context
+                                    .read<ExtraServiceRegistrationPrv>()
+                                    .onSendSummit(context, true),
+                              ),
                             ),
                           ],
                         ),

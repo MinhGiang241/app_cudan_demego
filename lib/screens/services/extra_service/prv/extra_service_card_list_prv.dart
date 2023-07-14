@@ -9,17 +9,26 @@ import '../../../../utils/utils.dart';
 import '../extra_service_card_list.dart';
 
 class ExtraServiceCardListPrv extends ChangeNotifier {
-  ExtraServiceCardListPrv(
-      {required this.extraService, required this.year, required this.month});
+  ExtraServiceCardListPrv({
+    required this.extraService,
+    required this.year,
+    required this.month,
+  });
   List<ServiceRegistration> listCard = [];
   int year;
   int month;
   ExtraService extraService;
   getRegisterExtraServiceList(
-      BuildContext context, String residentId, String serviceId) async {
+    BuildContext context,
+    String residentId,
+    String serviceId,
+  ) async {
     await APIExtraService.getServiceRegistration(
-            residentId, serviceId, year, month)
-        .then((v) {
+      residentId,
+      serviceId,
+      year,
+      month,
+    ).then((v) {
       listCard.clear();
       for (var i in v) {
         listCard.add(ServiceRegistration.fromJson(i));
@@ -39,95 +48,101 @@ class ExtraServiceCardListPrv extends ChangeNotifier {
 
   cancelRequetsAprrove(BuildContext context, ServiceRegistration card) {
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).cancel_request,
-        content: S.of(context).confirm_cancel_request(card.code ?? ""),
-        onConfirm: () {
-          card.status = 'CANCEL';
-          card.cancel_reason = 'NGUOIDUNGHUY';
-          card.isMobile = true;
-          Navigator.pop(context);
-          // APIExtraService.saveRegistrationService(card.toJson())
-          APIExtraService.changeStatus(card.toJson()).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_can_req,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    ExtraServiceCardListScreen.routeName,
-                    (route) => route.isFirst,
-                    arguments: {
-                      "service": extraService,
-                      "year": year,
-                      "month": month,
-                    },
-                  );
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).cancel_request,
+      content: S.of(context).confirm_cancel_request(card.code ?? ""),
+      onConfirm: () {
+        card.status = 'CANCEL';
+        card.cancel_reason = 'NGUOIDUNGHUY';
+        card.isMobile = true;
+        Navigator.pop(context);
+        // APIExtraService.saveRegistrationService(card.toJson())
+        APIExtraService.changeStatus(card.toJson()).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_can_req,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ExtraServiceCardListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "service": extraService,
+                  "year": year,
+                  "month": month,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   sendToApprove(BuildContext context, ServiceRegistration card) {
     card.status = 'WAIT';
     Utils.showConfirmMessage(
-        title: S.of(context).send_request,
-        content: S.of(context).confirm_send_request(card.code ?? ""),
-        context: context,
-        onConfirm: () {
-          Navigator.pop(context);
-          // APIExtraService.saveRegistrationService(card.toJson())
-          APIExtraService.changeStatus(card.toJson()).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_send_req,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    ExtraServiceCardListScreen.routeName,
-                    (route) => route.isFirst,
-                    arguments: {
-                      "service": extraService,
-                      "year": year,
-                      "month": month,
-                    },
-                  );
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      title: S.of(context).send_request,
+      content: S.of(context).confirm_send_request(card.code ?? ""),
+      context: context,
+      onConfirm: () {
+        Navigator.pop(context);
+        // APIExtraService.saveRegistrationService(card.toJson())
+        APIExtraService.changeStatus(card.toJson()).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_send_req,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ExtraServiceCardListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "service": extraService,
+                  "year": year,
+                  "month": month,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   deleteLetter(BuildContext context, ServiceRegistration card) {
     Utils.showConfirmMessage(
-        title: S.of(context).delete_letter,
-        content: S.of(context).confirm_delete_letter(card.code ?? ''),
-        context: context,
-        onConfirm: () async {
-          Navigator.pop(context);
-          await APIExtraService.deleteRegistrationService(card.id ?? '')
-              .then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_remove,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    ExtraServiceCardListScreen.routeName,
-                    (route) => route.isFirst,
-                    arguments: {
-                      "service": extraService,
-                      "year": year,
-                      "month": month,
-                    },
-                  );
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      title: S.of(context).delete_letter,
+      content: S.of(context).confirm_delete_letter(card.code ?? ''),
+      context: context,
+      onConfirm: () async {
+        Navigator.pop(context);
+        await APIExtraService.deleteRegistrationService(card.id ?? '')
+            .then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_remove,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ExtraServiceCardListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "service": extraService,
+                  "year": year,
+                  "month": month,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 }

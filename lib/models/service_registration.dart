@@ -32,6 +32,8 @@ class ServiceRegistration {
     this.maximum_day,
     this.note,
     this.ticket,
+    this.customer_address,
+    this.customer_name,
   });
   String? id;
   String? createdTime;
@@ -50,6 +52,8 @@ class ServiceRegistration {
   String? cancel_note;
   String? cancel_reason;
   Reason? cancel_reasons;
+  String? customer_address;
+  String? customer_name;
   Pay? pay;
   bool? isMobile;
   bool? ticket;
@@ -68,6 +72,8 @@ class ServiceRegistration {
     apartmentId = json['apartmentId'];
     residentId = json['residentId'];
     phoneNumber = json['phoneNumber'];
+    customer_address = json['customer_address'];
+    customer_name = json['customer_name'];
     arisingServiceId = json['arisingServiceId'];
     shelfLifeId = json['shelfLifeId'];
     registration_date = json['registration_date'];
@@ -116,6 +122,8 @@ class ServiceRegistration {
     data['note'] = note;
     data['cancel_reason'] = cancel_reason;
     data['ticket'] = ticket;
+    data['customer_address'] = customer_address;
+    data['customer_name'] = customer_name;
     // data['pay'] = pay != null ? pay!.toJson() : null;
     return data;
   }

@@ -85,9 +85,11 @@ class PetListPrv extends ChangeNotifier {
   }
 
   getPetList(BuildContext context) async {
-    await APIPet.getPetList(context.read<ResidentInfoPrv>().residentId,
-            context.read<ResidentInfoPrv>().selectedApartment!.apartmentId)
-        .then((v) {
+    if (context.read<ResidentInfoPrv>().selectedApartment == null) return;
+    await APIPet.getPetList(
+      context.read<ResidentInfoPrv>().residentId,
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
+    ).then((v) {
       listPet.clear();
       for (var i in v) {
         listPet.add(Pet.fromJson(i));

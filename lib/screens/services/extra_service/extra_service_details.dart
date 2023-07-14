@@ -32,6 +32,8 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as ServiceRegistration;
+    var isRes = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).details,
@@ -59,18 +61,27 @@ class _ExtraServiceDetailsScreenState extends State<ExtraServiceDetailsScreen>
                     ),
                     InfoContentView(
                       title: S.of(context).full_name,
-                      content: context.read<ResidentInfoPrv>().userInfo != null
-                          ? context.read<ResidentInfoPrv>().userInfo!.info_name
-                          : '',
+                      content: isRes
+                          ? arg.resident?.info_name ?? ""
+                          : arg.customer_name,
                       contentStyle: txtBold(16, grayScaleColorBase),
                     ),
-                    InfoContentView(
-                      title: S.of(context).apartment,
-                      content: arg.apartment != null
-                          ? "${arg.apartment!.name ?? ""} - ${arg.floor!.name ?? ""} - ${arg.building!.name ?? ""}"
-                          : '',
-                      contentStyle: txtBold(14, grayScaleColorBase),
-                    ),
+                    if (!isRes)
+                      InfoContentView(
+                        title: S.of(context).address,
+                        content: arg.customer_address != null
+                            ? arg.customer_address
+                            : '',
+                        contentStyle: txtBold(14, grayScaleColorBase),
+                      ),
+                    if (isRes)
+                      InfoContentView(
+                        title: S.of(context).apartment,
+                        content: arg.apartment != null
+                            ? "${arg.apartment!.name ?? ""} - ${arg.floor!.name ?? ""} - ${arg.building!.name ?? ""}"
+                            : '',
+                        contentStyle: txtBold(14, grayScaleColorBase),
+                      ),
                     InfoContentView(
                       title: S.of(context).phone_num,
                       content: arg.phoneNumber,
