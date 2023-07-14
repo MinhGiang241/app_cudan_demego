@@ -52,12 +52,12 @@ class ResidentRegistrationDetailsScreen extends StatelessWidget {
                 content: arg.relationship,
                 contentStyle: txtBodySmallBold(color: grayScaleColorBase),
               ),
-              InfoContentView(
-                isHorizontal: true,
-                title: S.of(context).sell_contract_num,
-                content: arg.contractCode,
-                contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-              ),
+              // InfoContentView(
+              //   isHorizontal: true,
+              //   title: S.of(context).sell_contract_num,
+              //   content: arg.contractCode,
+              //   contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+              // ),
             ],
           ),
           vpad(12),

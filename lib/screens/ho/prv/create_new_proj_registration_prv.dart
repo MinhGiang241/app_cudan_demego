@@ -44,17 +44,20 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   List<DropdownMenuItem<String>> projectListChoice = [];
   List<Project> projectList = [];
 
-  setNewApiProject(String apiEndPoint) {
+  setNewApiProject(String apiEndPoint, String regcode) {
     projectApi = ApiProjectService(
+      regcode: regcode,
       access_token: ApiHOService.shared.access_token ?? "",
       expireDate: ApiHOService.shared.expireDate,
-      domain: apiEndPoint,
+      domain: "${apiEndPoint}/graphql",
     );
   }
 
   onSelectType(v) {
     searchApartmentKey = UniqueKey();
     relationKey = UniqueKey();
+    relationshipList.clear();
+    valueRelation = null;
     if (v != null) {
       valueType = v;
       validateType = null;
@@ -63,8 +66,12 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  getProjectData(String apiEndPoint, BuildContext context) async {
-    setNewApiProject(apiEndPoint);
+  getProjectData(
+    String apiEndPoint,
+    String regcode,
+    BuildContext context,
+  ) async {
+    setNewApiProject(apiEndPoint, regcode);
     await projectApi!.loadDataRegister().then((v) {
       if (v != null) {
         var info = ResidentInfoFromHO.fromMap(v);
@@ -87,11 +94,11 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
         searchApartmentKey = UniqueKey();
         relationKey = UniqueKey();
         relationshipList.clear();
+        valueRelation = null;
 
-        var apiEndpoint =
-            projectList.firstWhere((e) => e.registrationId == v).apiEndpoint;
+        var pro = projectList.firstWhere((e) => e.registrationId == v);
         notifyListeners();
-        await getProjectData(apiEndpoint!, context);
+        await getProjectData(pro.apiEndpoint!, pro.regcode ?? "", context);
       }
       valueProject = v.toString();
       validateProject = null;
@@ -157,25 +164,32 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
   TextEditingController contractNumController = TextEditingController();
   onChangeApartment(String? v) {
     valueApartment = v;
-    var selectedAprt = listOwnHO.firstWhere((e) => e.id == v);
+    if (v != null) {
+      var selectedAprt = listOwnHO.firstWhere((e) => e.id == v);
 
-    if (selectedAprt.relation == null) {
-      relationshipList = [
-        DropdownMenuItem(
-          value: '',
-          child: Text(S.current.owner),
-        )
-      ];
-      valueRelation = '';
+      if (selectedAprt.relation == null) {
+        relationshipList = [
+          DropdownMenuItem(
+            value: '',
+            child: Text(S.current.owner),
+          )
+        ];
+        valueRelation = '';
+      } else {
+        relationshipList = [
+          DropdownMenuItem(
+            value: selectedAprt.relation?.code,
+            child: Text(selectedAprt.relation?.name ?? ""),
+          )
+        ];
+        valueRelation = selectedAprt.relation?.code;
+      }
     } else {
-      relationshipList = [
-        DropdownMenuItem(
-          value: selectedAprt.relation?.code,
-          child: Text(selectedAprt.relation?.name ?? ""),
-        )
-      ];
-      valueRelation = selectedAprt.relation?.code;
+      relationKey = UniqueKey();
+      relationshipList.clear();
+      valueRelation = null;
     }
+
     notifyListeners();
   }
 

@@ -36,7 +36,7 @@ class ResidentInfoPrv extends ChangeNotifier {
   }
 
   setUserInfoFromHO(UserAccountHO userHO) {
-    userInfo = userHO.resident;
+    userInfo = userHO.resident ?? ResponseResidentInfo();
     userInfo?.account = userHO.user;
     residentId = userHO.resident?.id;
 

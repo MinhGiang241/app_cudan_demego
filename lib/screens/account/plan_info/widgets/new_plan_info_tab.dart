@@ -39,6 +39,7 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
           future: () async {
             var residentId = context.read<ResidentInfoPrv>().residentId;
             listResOwn.clear();
+            if (residentId == null) return;
             await APITower.getResidentOwnInfo(residentId).then((v) {
               context.read<ResidentInfoPrv>().listOwnAll.clear();
               context.read<ResidentInfoPrv>().listOwn.clear();
@@ -99,61 +100,62 @@ class _NewPlanInfoTabState extends State<NewPlanInfoTab> {
             return Column(
               children: [
                 vpad(12),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.of(context).registed_resident,
-                            style: txtBold(14, grayScaleColorBase),
-                            textAlign: TextAlign.start,
-                          ),
-                          vpad(6),
-                          Text(
-                            S.of(context).confirmed_by_manager_resident,
-                            style: txtRegular(12, grayScaleColorBase),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
-                    ),
-                    hpad(5),
-                    if (listAll.isNotEmpty)
+                if (context.read<ResidentInfoPrv>().residentId != null)
+                  Row(
+                    children: [
                       Expanded(
-                        flex: 1,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                side: const BorderSide(
-                                  color: primaryColorBase,
-                                  width: 2,
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              S.of(context).registed_resident,
+                              style: txtBold(14, grayScaleColorBase),
+                              textAlign: TextAlign.start,
+                            ),
+                            vpad(6),
+                            Text(
+                              S.of(context).confirmed_by_manager_resident,
+                              style: txtRegular(12, grayScaleColorBase),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      hpad(5),
+                      if (listAll.isNotEmpty)
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: const BorderSide(
+                                    color: primaryColorBase,
+                                    width: 2,
+                                  ),
                                 ),
                               ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
                             ),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AddNewResidentScreen.routeName,
+                              );
+                            },
+                            child: Text(
+                              S.of(context).add,
+                              style: txtMedium(14, primaryColorBase),
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              AddNewResidentScreen.routeName,
-                            );
-                          },
-                          child: Text(
-                            S.of(context).add,
-                            style: txtMedium(14, primaryColorBase),
-                          ),
-                        ),
-                      )
-                  ],
-                ),
+                        )
+                    ],
+                  ),
                 listResOwn.isEmpty
                     ? Expanded(
                         child: SmartRefresher(

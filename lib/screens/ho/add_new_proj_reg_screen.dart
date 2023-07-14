@@ -119,6 +119,7 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
                 if (isResident) vpad(12),
                 if (isResident)
                   PrimaryDropDown(
+                    hint: '',
                     value: context
                         .watch<CreateNewProjRegistrationPrv>()
                         .valueRelation,

@@ -24,7 +24,7 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userInfo = context.watch<ResidentInfoPrv>().userInfo!.account;
+    final userInfo = context.watch<ResidentInfoPrv>().userInfo?.account;
     return PrimaryScreen(
       body: ListView(
         children: [
@@ -78,7 +78,7 @@ class AccountScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userInfo?.userName ?? "Username",
+                          userInfo?.userName ?? "",
                           style: txtLinkLarge(),
                         ),
                         const Spacer(),

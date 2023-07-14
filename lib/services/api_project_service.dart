@@ -10,17 +10,23 @@ import '../models/response.dart';
 class ApiProjectService {
   ApiProjectService({
     this.expireDate,
+    required this.regcode,
     required this.domain,
     required this.access_token,
   }) {
     _dio = Dio(BaseOptions(baseUrl: domain));
     apiGraphql = domain;
-    _graphqlLink = HttpLink(apiGraphql);
+
+    _graphqlLink = HttpLink(
+      apiGraphql,
+      defaultHeaders: {"regcode": regcode},
+    );
   }
 
   final String access_token;
   DateTime? expireDate;
   String domain;
+  String regcode;
   late String apiGraphql;
 
   late Dio _dio;
@@ -49,6 +55,7 @@ class ApiProjectService {
 
   Future<GraphQLClient> getClientGraphQL() async {
     late AuthLink authLink;
+
     if (access_token == null) {
       authLink = AuthLink(getToken: () => 'Bearer ');
     } else if (expireDate == null ||

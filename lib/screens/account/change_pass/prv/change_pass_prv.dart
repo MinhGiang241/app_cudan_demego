@@ -2,9 +2,12 @@
 
 import 'package:app_cudan/screens/auth/sign_in_screen.dart';
 import 'package:app_cudan/screens/home/home_screen.dart';
+import 'package:app_cudan/services/api_ho_account.dart';
+import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../services/api_auth.dart';
+import '../../../../services/prf_data.dart';
 import '../../../../utils/utils.dart';
 import '../../../../utils/utils.dart';
 import '../../../../widgets/primary_dialog.dart';
@@ -13,6 +16,7 @@ import 'package:flutter/material.dart';
 
 import '../../../auth/prv/auth_prv.dart';
 import '../../../auth/prv/resident_info_prv.dart';
+import '../../../ho/prv/ho_account_service_prv.dart';
 
 class ChangePassPrv extends ChangeNotifier {
   final TextEditingController currentPassController = TextEditingController();
@@ -82,11 +86,16 @@ class ChangePassPrv extends ChangeNotifier {
       isLoading = true;
 
       clearValidate();
-      await APIAuth.changePassword(
+      await APIHOAccount.changePassword(
               currentPassController.text.trim(),
               newPassController.text.trim(),
               cNewPassController.text.trim(),
-              accountId)
+              context.read<ResidentInfoPrv>().userInfo?.account?.id ?? "")
+          // await APIAuth.changePassword(
+          //         currentPassController.text.trim(),
+          //         newPassController.text.trim(),
+          //         cNewPassController.text.trim(),
+          //         accountId)
           .then((v) {
         isLoading = false;
         notifyListeners();
@@ -94,13 +103,19 @@ class ChangePassPrv extends ChangeNotifier {
             context: context,
             e: S.of(context).success_change_pass,
             onClose: () async {
-              await APIAuth.signOut(context: context);
+              // await APIAuth.signOut(context: context);
+
               context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
               context.read<ResidentInfoPrv>().clearData();
               context.read<AuthPrv>().account = null;
               context.read<AuthPrv>().clearData();
+              PrfData.shared.deleteApartment();
+              context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
+              context.read<HOAccountServicePrv>().access_token = null;
+              context.read<HOAccountServicePrv>().expireDate = null;
+              context.read<ResidentInfoPrv>().clearData();
               Navigator.pushNamedAndRemoveUntil(
-                  context, SignInScreen.routeName, (route) => route.isFirst);
+                  context, SignInScreen.routeName, (route) => route.isCurrent);
             });
       }).catchError((e) {
         isLoading = false;
