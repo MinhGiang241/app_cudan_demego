@@ -121,109 +121,123 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                       shrinkWrap: true,
                       children: [
                         ...list.map(
-                          (e) => PrimaryCard(
-                            onTap: () async {
-                              Navigator.pushNamed(
-                                context,
-                                ResidentRegistrationDetailsScreen.routeName,
-                                arguments: e,
-                              );
-                            },
-                            margin: const EdgeInsets.only(
-                              bottom: 16,
-                              // left: 12,
-                              // right: 12,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 14,
-                              horizontal: 12,
-                            ),
-                            child: Row(
-                              children: [
-                                PrimaryIcon(
-                                  icons: PrimaryIcons.follow_service,
-                                  style: PrimaryIconStyle.gradient,
-                                  gradients: PrimaryIconGradient.green,
-                                  size: 32,
-                                  padding: EdgeInsets.all(12),
-                                  color: Colors.white,
-                                ),
-                                hpad(10),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        e.project?.project_name ?? "",
-                                        style: txtBold(12, grayScaleColorBase),
-                                      ),
-                                      Text(
-                                        "${S.of(context).apartment}: ${e.apartmentCode}",
-                                        style: txtRegular(
-                                          13,
-                                          grayScaleColorBase,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.usb_sharp),
-                                          Text(
-                                            e.relationship ?? '',
-                                            style: txtRegular(
-                                              12,
-                                              grayScaleColorBase,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.calendar_month_outlined),
-                                          Text(
-                                            Utils.dateFormat(
-                                              e.updatedTime ?? '',
-                                              1,
-                                            ),
-                                            style: txtRegular(
-                                              12,
-                                              grayScaleColorBase,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '${S.of(context).status}: ',
-                                            style: txtRegular(
-                                              12,
-                                              grayScaleColorBase,
-                                            ),
-                                          ),
-                                          Text(
-                                            genResRegStatusString(e.status),
-                                            style: txtBold(
-                                              12,
-                                              genResRegStatusColor(e.status),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      if (e.note != null)
-                                        Text(
-                                          e.note ?? "",
-                                          style: txtRegular(
-                                            12,
-                                            grayScaleColor3,
-                                          ),
-                                        )
-                                    ],
+                          (e) {
+                            var isGuest =
+                                e.accountType?.toUpperCase() == "GUEST";
+                            return PrimaryCard(
+                              onTap: () async {
+                                Navigator.pushNamed(
+                                  context,
+                                  ResidentRegistrationDetailsScreen.routeName,
+                                  arguments: e,
+                                );
+                              },
+                              margin: const EdgeInsets.only(
+                                bottom: 16,
+                                // left: 12,
+                                // right: 12,
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 14,
+                                horizontal: 12,
+                              ),
+                              child: Row(
+                                children: [
+                                  PrimaryIcon(
+                                    icons: PrimaryIcons.follow_service,
+                                    style: PrimaryIconStyle.gradient,
+                                    gradients: PrimaryIconGradient.green,
+                                    size: 32,
+                                    padding: EdgeInsets.all(12),
+                                    color: Colors.white,
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
+                                  hpad(10),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          e.project?.project_name ?? "",
+                                          style:
+                                              txtBold(12, grayScaleColorBase),
+                                        ),
+                                        Text(
+                                          "${S.of(context).account_type}: ${isGuest ? S.of(context).guest : S.of(context).resident}",
+                                          style: txtRegular(
+                                            13,
+                                            grayScaleColorBase,
+                                          ),
+                                        ),
+                                        if (!isGuest)
+                                          Text(
+                                            "${S.of(context).apartment}: ${e.apartmentCode}",
+                                            style: txtRegular(
+                                              13,
+                                              grayScaleColorBase,
+                                            ),
+                                          ),
+                                        if (!isGuest)
+                                          Row(
+                                            children: [
+                                              Icon(Icons.usb_sharp),
+                                              Text(
+                                                e.relationship ?? '',
+                                                style: txtRegular(
+                                                  12,
+                                                  grayScaleColorBase,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.calendar_month_outlined),
+                                            Text(
+                                              Utils.dateFormat(
+                                                e.updatedTime ?? '',
+                                                1,
+                                              ),
+                                              style: txtRegular(
+                                                12,
+                                                grayScaleColorBase,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '${S.of(context).status}: ',
+                                              style: txtRegular(
+                                                12,
+                                                grayScaleColorBase,
+                                              ),
+                                            ),
+                                            Text(
+                                              genResRegStatusString(e.status),
+                                              style: txtBold(
+                                                12,
+                                                genResRegStatusColor(e.status),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        if (e.note != null)
+                                          Text(
+                                            e.note ?? "",
+                                            style: txtRegular(
+                                              12,
+                                              grayScaleColor3,
+                                            ),
+                                          )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

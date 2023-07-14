@@ -109,6 +109,7 @@ class ResidentResitration {
   String? contractCode;
   String? status;
   String? note;
+  String? accountType;
   Project? project;
   GuestAccount? guestaccount;
   ResidentResitration({
@@ -125,6 +126,7 @@ class ResidentResitration {
     this.guestaccount,
     this.status,
     this.note,
+    this.accountType,
   });
 
   ResidentResitration copyWith({
@@ -141,6 +143,7 @@ class ResidentResitration {
     GuestAccount? guestaccount,
     String? status,
     String? note,
+    String? accountType,
   }) {
     return ResidentResitration(
       id: id ?? this.id,
@@ -156,6 +159,7 @@ class ResidentResitration {
       guestaccount: guestaccount ?? this.guestaccount,
       status: status ?? this.status,
       note: note ?? this.note,
+      accountType: note ?? this.accountType,
     );
   }
 
@@ -172,6 +176,7 @@ class ResidentResitration {
       'contractCode': contractCode,
       'status': status,
       'note': note,
+      'accountType': accountType,
       'project': project?.toMap(),
       'guestaccount': guestaccount?.toMap(),
     };
@@ -197,6 +202,8 @@ class ResidentResitration {
           map['contractCode'] != null ? map['contractCode'] as String : null,
       note: map['note'] != null ? map['note'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,
+      accountType:
+          map['accountType'] != null ? map['accountType'] as String : null,
       project: map['project'] != null
           ? Project.fromMap(map['project'] as Map<String, dynamic>)
           : null,

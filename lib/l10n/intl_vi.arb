@@ -844,5 +844,7 @@
   "account_type": "Loại tài khoản",
   "resident_account": "Tài khoản cư dân",
   "guest_account": "Tài khoản khách",
-  "owner": "Chủ hộ"
+  "owner": "Chủ hộ",
+  "guest": "Khách",
+  "resident": "Cư dân"
 }

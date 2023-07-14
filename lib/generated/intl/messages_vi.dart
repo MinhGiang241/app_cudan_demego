@@ -531,6 +531,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang học trung học"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Đang học đại học"),
+        "guest": MessageLookupByLibrary.simpleMessage("Khách"),
         "guest_account":
             MessageLookupByLibrary.simpleMessage("Tài khoản khách"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
@@ -1009,6 +1010,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Ảnh đăng ký xe mặt trước không được để trống"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Bảng tin cư dân"),
+        "resident": MessageLookupByLibrary.simpleMessage("Cư dân"),
         "resident_account":
             MessageLookupByLibrary.simpleMessage("Tài khoản cư dân"),
         "resident_address":

@@ -24,6 +24,7 @@ class ResidentRegistrationDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)!.settings.arguments as ResidentResitration;
+    var isGuest = arg.accountType?.toUpperCase() == 'GUEST';
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).reg_info,
@@ -42,16 +43,24 @@ class ResidentRegistrationDetailsScreen extends StatelessWidget {
               ),
               InfoContentView(
                 isHorizontal: true,
-                title: S.of(context).apartment,
-                content: arg.apartmentCode,
+                title: S.of(context).account_type,
+                content: isGuest ? S.of(context).guest : S.of(context).resident,
                 contentStyle: txtBodySmallBold(color: grayScaleColorBase),
               ),
-              InfoContentView(
-                isHorizontal: true,
-                title: S.of(context).relation_with_owner,
-                content: arg.relationship,
-                contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-              ),
+              if (!isGuest)
+                InfoContentView(
+                  isHorizontal: true,
+                  title: S.of(context).apartment,
+                  content: arg.apartmentCode,
+                  contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+                ),
+              if (!isGuest)
+                InfoContentView(
+                  isHorizontal: true,
+                  title: S.of(context).relation_with_owner,
+                  content: arg.relationship,
+                  contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+                ),
               // InfoContentView(
               //   isHorizontal: true,
               //   title: S.of(context).sell_contract_num,

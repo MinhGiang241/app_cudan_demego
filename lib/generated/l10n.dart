@@ -8499,6 +8499,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Guest`
+  String get guest {
+    return Intl.message(
+      'Guest',
+      name: 'guest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident`
+  String get resident {
+    return Intl.message(
+      'Resident',
+      name: 'resident',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -525,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("going high school"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Going university"),
+        "guest": MessageLookupByLibrary.simpleMessage("Guest"),
         "guest_account": MessageLookupByLibrary.simpleMessage("Guest account"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Hand over date"),
@@ -1003,6 +1004,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Resgiter vehicle card front site  image can not be empty"),
         "residence_news":
             MessageLookupByLibrary.simpleMessage("Residence news"),
+        "resident": MessageLookupByLibrary.simpleMessage("Resident"),
         "resident_account":
             MessageLookupByLibrary.simpleMessage("Resident account"),
         "resident_address":

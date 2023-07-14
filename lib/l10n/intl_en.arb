@@ -843,5 +843,7 @@
   "account_type": "Account type",
   "resident_account": "Resident account",
   "guest_account": "Guest account",
-  "owner": "Owner"
+  "owner": "Owner",
+  "guest": "Guest",
+  "resident": "Resident"
 }
