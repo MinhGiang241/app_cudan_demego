@@ -171,7 +171,7 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                                         ),
                                         if (!isGuest)
                                           Text(
-                                            "${S.of(context).apartment}: ${e.apartmentCode}",
+                                            "${S.of(context).apartment}: ${e.apartmentCode ?? ""}",
                                             style: txtRegular(
                                               13,
                                               grayScaleColorBase,

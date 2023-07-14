@@ -67,6 +67,7 @@ class HOAccountServicePrv extends ChangeNotifier {
       }
 
       await context.read<ResidentInfoPrv>().setListOwn(context);
+      var residentId = context.read<ResidentInfoPrv>().residentId;
       if (context.read<ResidentInfoPrv>().listOwn.isEmpty) {
         Navigator.pushNamedAndRemoveUntil(
           context,

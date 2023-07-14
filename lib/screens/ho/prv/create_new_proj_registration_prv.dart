@@ -259,6 +259,8 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
         Utils.showErrorMessage(context, e);
       });
     } else {
+      isLoading = false;
+      notifyListeners();
       genValidateString();
     }
   }

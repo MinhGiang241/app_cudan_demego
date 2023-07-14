@@ -159,6 +159,8 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
                       .read<CreateNewProjRegistrationPrv>()
                       .onSubmit(context),
                   text: S.of(context).confirm,
+                  isLoading:
+                      context.watch<CreateNewProjRegistrationPrv>().isLoading,
                 ),
                 vpad(40),
               ],
