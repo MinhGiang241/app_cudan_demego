@@ -13,6 +13,7 @@ class Project {
   String? project_code;
   String? apiEndpoint;
   String? regcode;
+  Registration? registration;
   Project({
     this.id,
     this.project_name,
@@ -25,6 +26,7 @@ class Project {
     this.project_code,
     this.apiEndpoint,
     this.regcode,
+    this.registration,
   });
 
   Map<String, dynamic> toMap() {
@@ -40,6 +42,7 @@ class Project {
       'project_code': project_code,
       'apiEndpoint': apiEndpoint,
       'regcode': regcode,
+      'registration': registration?.toMap(),
     };
   }
 
@@ -48,8 +51,6 @@ class Project {
       id: map['_id'] != null ? map['_id'] as String : null,
       project_name:
           map['project_name'] != null ? map['project_name'] as String : null,
-      apiEndpoint:
-          map['apiEndpoint'] != null ? map['apiEndpoint'] as String : null,
       projectTypeId:
           map['projectTypeId'] != null ? map['projectTypeId'] as String : null,
       investor: map['investor'] != null ? map['investor'] as String : null,
@@ -57,12 +58,17 @@ class Project {
           ? map['project_location'] as String
           : null,
       status: map['status'] != null ? map['status'] as String : null,
-      domain: map['domain'] != null ? map['domain'] as String : null,
-      regcode: map['regcode'] != null ? map['regcode'] as String : null,
-      project_code:
-          map['project_code'] != null ? map['project_code'] as String : null,
       registrationId: map['registrationId'] != null
           ? map['registrationId'] as String
+          : null,
+      domain: map['domain'] != null ? map['domain'] as String : null,
+      project_code:
+          map['project_code'] != null ? map['project_code'] as String : null,
+      apiEndpoint:
+          map['apiEndpoint'] != null ? map['apiEndpoint'] as String : null,
+      regcode: map['regcode'] != null ? map['regcode'] as String : null,
+      registration: map['registration'] != null
+          ? Registration.fromMap(map['registration'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -80,8 +86,11 @@ class Project {
     String? project_location,
     String? status,
     String? registrationId,
+    String? domain,
+    String? project_code,
     String? apiEndpoint,
     String? regcode,
+    Registration? registration,
   }) {
     return Project(
       id: id ?? this.id,
@@ -91,9 +100,51 @@ class Project {
       project_location: project_location ?? this.project_location,
       status: status ?? this.status,
       registrationId: registrationId ?? this.registrationId,
+      domain: domain ?? this.domain,
+      project_code: project_code ?? this.project_code,
       apiEndpoint: apiEndpoint ?? this.apiEndpoint,
       regcode: regcode ?? this.regcode,
+      registration: registration ?? this.registration,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Project(id: $id, project_name: $project_name, projectTypeId: $projectTypeId, investor: $investor, project_location: $project_location, status: $status, registrationId: $registrationId, domain: $domain, project_code: $project_code, apiEndpoint: $apiEndpoint, regcode: $regcode, registration: $registration)';
+  }
+
+  @override
+  bool operator ==(covariant Project other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.project_name == project_name &&
+        other.projectTypeId == projectTypeId &&
+        other.investor == investor &&
+        other.project_location == project_location &&
+        other.status == status &&
+        other.registrationId == registrationId &&
+        other.domain == domain &&
+        other.project_code == project_code &&
+        other.apiEndpoint == apiEndpoint &&
+        other.regcode == regcode &&
+        other.registration == registration;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        project_name.hashCode ^
+        projectTypeId.hashCode ^
+        investor.hashCode ^
+        project_location.hashCode ^
+        status.hashCode ^
+        registrationId.hashCode ^
+        domain.hashCode ^
+        project_code.hashCode ^
+        apiEndpoint.hashCode ^
+        regcode.hashCode ^
+        registration.hashCode;
   }
 }
 

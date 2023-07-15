@@ -36,13 +36,12 @@ class ApiService {
     String URL,
     String? access_tokenHO,
     DateTime? expireDateHO,
+    String? regCode,
   ) {
     _dio = Dio(BaseOptions(baseUrl: URL));
     access_token = access_tokenHO;
     expireDate = expireDateHO;
-    _graphqlLink = HttpLink(
-      URL,
-    );
+    _graphqlLink = HttpLink(URL, defaultHeaders: {"regcode": regCode ?? ''});
     uploadURL = '${URL}/headless/stream/upload';
   }
 
