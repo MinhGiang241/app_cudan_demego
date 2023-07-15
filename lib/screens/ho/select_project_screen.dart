@@ -72,7 +72,9 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                       .read<HOAccountServicePrv>()
                       .getProjectList(context),
                   builder: (context, snapshot) {
-                    var list = context.watch<HOAccountServicePrv>().projectList;
+                    var list = context
+                        .watch<HOAccountServicePrv>()
+                        .registrationProjectList;
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: PrimaryLoading());
                     } else if (snapshot.connectionState ==
@@ -204,12 +206,12 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          e.project_name ?? "",
+                                          e.project?.project_name ?? "",
                                           style:
                                               txtBold(13, grayScaleColorBase),
                                         ),
                                         Text(
-                                          e.project_location ?? "",
+                                          e.project?.project_location ?? "",
                                           style: txtRegular(
                                             13,
                                             grayScaleColorBase,

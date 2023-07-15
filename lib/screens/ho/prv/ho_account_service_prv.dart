@@ -29,6 +29,7 @@ class HOAccountServicePrv extends ChangeNotifier {
   String? access_token;
   DateTime? expireDate;
   List<Project> projectList = [];
+  List<RegistrationProjectListList> registrationProjectList = [];
   List<ResidentResitration> registrationList = [];
   var isLoginLoading = false;
   var isSelectProjectLoading = false;
@@ -47,13 +48,13 @@ class HOAccountServicePrv extends ChangeNotifier {
 
   navigateToProject(
     BuildContext context,
-    Project e,
+    RegistrationProjectListList e,
   ) async {
     try {
       isSelectProjectLoading = true;
       notifyListeners();
       await ApiService.shared.setAPI(
-        e.domain ?? "",
+        e.deployment?.apiEndpoint ?? "",
         ApiHOService.shared.access_token,
         ApiHOService.shared.expireDate,
       );
@@ -77,7 +78,7 @@ class HOAccountServicePrv extends ChangeNotifier {
       } else {
         Navigator.of(context).pushNamed(
           ApartmentSeletionScreen.routeName,
-          arguments: e.project_name,
+          arguments: e.project?.project_name,
         );
       }
       isSelectProjectLoading = false;
@@ -218,14 +219,13 @@ class HOAccountServicePrv extends ChangeNotifier {
   Future getProjectList(BuildContext context) async {
     await APIHOAccount.getProjectListApi().then((v) {
       if (v != null) {
-        projectList.clear();
+        registrationProjectList.clear();
         for (var i in v) {
-          var pj = Project.fromMap(i);
+          var pj = RegistrationProjectListList.fromMap(i);
 
-          projectList.add(pj);
+          registrationProjectList.add(pj);
         }
       }
-      print(projectList);
       notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);

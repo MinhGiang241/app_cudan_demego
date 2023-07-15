@@ -12,14 +12,25 @@ import 'api_ho_service.dart';
 
 class APIHOAccount {
   static Future getProjectListApi() async {
+//     var query = '''
+//    mutation {
+//     response: guest_qltn_my_approved_registrations_1hld8x3wv  {
+//         code
+//         message
+//         data
+//     }
+// }
+
+//   ''';
     var query = '''
    mutation {
-    response: guest_qltn_my_approved_registrations_1hld8x3wv  {
+    response: guest_qltn_mobile_get_approved_registered_project_list  {
         code
         message
         data
     }
 }
+        
         
   ''';
 

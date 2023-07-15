@@ -40,7 +40,10 @@ class ApiService {
     _dio = Dio(BaseOptions(baseUrl: URL));
     access_token = access_tokenHO;
     expireDate = expireDateHO;
-    uploadURL = 'https://api.${URL}/headless/stream/upload';
+    _graphqlLink = HttpLink(
+      URL,
+    );
+    uploadURL = '${URL}/headless/stream/upload';
   }
 
   Future<oauth2.Client?> getClient({
