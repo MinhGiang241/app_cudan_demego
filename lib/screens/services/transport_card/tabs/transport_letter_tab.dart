@@ -136,17 +136,6 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                           "",
                       contentStyle: txtBold(14),
                     ),
-                    // InfoContentView(
-                    //   title: S.of(context).transportation,
-                    //   content: list[index].vehicleType?.name ?? '',
-                    //   contentStyle: txtBold(14),
-                    // ),
-                    // if (list[index].type != "BICYCLE")
-                    //   InfoContentView(
-                    //     title: S.of(context).licene_plate,
-                    //     content: list[index].number_plate,
-                    //     contentStyle: txtBold(14),
-                    //   ),
                     InfoContentView(
                       title: S.of(context).transport,
                       content: list[index]
@@ -192,27 +181,6 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                       },
                       child: Column(
                         children: [
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: Container(
-                          //     padding: const EdgeInsets.symmetric(
-                          //         horizontal: 10, vertical: 4),
-                          //     decoration: BoxDecoration(
-                          //         color: cardList[index].card_status ==
-                          //                 "ACTIVE"
-                          //             ? greenColorBase
-                          //             : pinkColorBase,
-                          //         borderRadius: const BorderRadius.only(
-                          //             topRight: Radius.circular(12),
-                          //             bottomLeft: Radius.circular(8))),
-                          //     child: Text(
-                          //       cardList[index].card_status == "ACTIVE"
-                          //           ? S.of(context).active
-                          //           : S.of(context).lock,
-                          //       style: txtSemiBold(12, Colors.white),
-                          //     ),
-                          //   ),
-                          // ),
                           vpad(16),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -271,62 +239,59 @@ class _TransportLetterTabState extends State<TransportLetterTab> {
                               ],
                             ),
                           if (list[index].ticket_status == "NEW")
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  PrimaryButton(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                PrimaryButton(
+                                  buttonSize: ButtonSize.xsmall,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: greenColor7,
+                                  text: S.of(context).send_request,
+                                  textColor: greenColor8,
+                                  onTap: () {
+                                    context
+                                        .read<TransportCardPrv>()
+                                        .sendApprove(context, list[index]);
+                                    // sendRequest(list[index]);
+                                  },
+                                ),
+                                hpad(5),
+                                Expanded(
+                                  child: PrimaryButton(
                                     buttonSize: ButtonSize.xsmall,
                                     buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: greenColor7,
-                                    text: S.of(context).send_request,
-                                    textColor: greenColor8,
+                                    secondaryBackgroundColor: primaryColor5,
+                                    text: S.of(context).edit,
+                                    textColor: primaryColor1,
                                     onTap: () {
-                                      context
-                                          .read<TransportCardPrv>()
-                                          .sendApprove(context, list[index]);
-                                      // sendRequest(list[index]);
+                                      Navigator.pushNamed(
+                                        context,
+                                        AddNewTransportCardScreen.routeName,
+                                        arguments: {
+                                          "isEdit": true,
+                                          "data": list[index],
+                                        },
+                                      );
                                     },
                                   ),
-                                  hpad(5),
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      buttonSize: ButtonSize.xsmall,
-                                      buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: primaryColor5,
-                                      text: S.of(context).edit,
-                                      textColor: primaryColor1,
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                          context,
-                                          AddNewTransportCardScreen.routeName,
-                                          arguments: {
-                                            "isEdit": true,
-                                            "data": list[index],
-                                          },
-                                        );
-                                      },
-                                    ),
+                                ),
+                                hpad(5),
+                                Expanded(
+                                  child: PrimaryButton(
+                                    buttonSize: ButtonSize.xsmall,
+                                    buttonType: ButtonType.secondary,
+                                    secondaryBackgroundColor: redColor4,
+                                    textColor: redColor,
+                                    text: S.of(context).delete,
+                                    onTap: () {
+                                      // return deleteLetter(list[index]);
+                                      context
+                                          .read<TransportCardPrv>()
+                                          .deleteLetter(context, list[index]);
+                                    },
                                   ),
-                                  hpad(5),
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      buttonSize: ButtonSize.xsmall,
-                                      buttonType: ButtonType.secondary,
-                                      secondaryBackgroundColor: redColor4,
-                                      textColor: redColor,
-                                      text: S.of(context).delete,
-                                      onTap: () {
-                                        // return deleteLetter(list[index]);
-                                        context
-                                            .read<TransportCardPrv>()
-                                            .deleteLetter(context, list[index]);
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           vpad(12)
                         ],

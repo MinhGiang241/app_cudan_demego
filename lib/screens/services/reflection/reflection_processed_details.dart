@@ -302,7 +302,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                                             const EdgeInsets.only(right: 14),
                                         child: PrimaryImageNetwork(
                                           path:
-                                              "${ApiService.shared.uploadURL}?load=${e.id ?? ""}",
+                                              "${ApiService.shared.uploadURL}?load=${e.id ?? ""}&regcode=${ApiService.shared.regCode}",
                                         ),
                                       ),
                                     )
@@ -396,7 +396,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                               onTap: () async {
                                 await Utils.downloadFile(
                                   url:
-                                      '${ApiService.shared.uploadURL}?load=${e.id}',
+                                      '${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}',
                                   context: context,
                                 );
                                 // await launchUrl(

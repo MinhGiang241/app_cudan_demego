@@ -315,7 +315,7 @@ class ServiceScreen extends StatelessWidget {
                                               canShowPhotoView: false,
                                               fit: BoxFit.contain,
                                               path:
-                                                  "${ApiService.shared.uploadURL}?load=${e.service_icon!.id ?? ""}",
+                                                  "${ApiService.shared.uploadURL}?load=${e.service_icon!.id ?? ""}&regcode=${ApiService.shared.regCode}",
                                               borderRadius:
                                                   const BorderRadius.all(
                                                 Radius.circular(

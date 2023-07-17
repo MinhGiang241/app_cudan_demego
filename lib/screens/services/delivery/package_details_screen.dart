@@ -212,7 +212,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                 : [
                                     ...card.image!.map(
                                       (v) =>
-                                          "${ApiService.shared.uploadURL}/?load=${v.id}",
+                                          "${ApiService.shared.uploadURL}/?load=${v.id}&regcode=${ApiService.shared.regCode}",
                                     )
                                   ],
                           )

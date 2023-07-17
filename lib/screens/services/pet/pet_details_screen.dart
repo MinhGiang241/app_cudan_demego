@@ -137,7 +137,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                             images: [
                               ...arg.avt_pet!.map(
                                 (e) =>
-                                    "${ApiService.shared.uploadURL}/?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}/?load=${e.id}&regcode=${ApiService.shared.regCode}",
                               ),
                             ],
                           ),
@@ -163,7 +163,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               onTap: () async {
                                 await launchUrl(
                                   Uri.parse(
-                                    "${ApiService.shared.uploadURL}?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                                   ),
                                   mode: LaunchMode.externalApplication,
                                 );
@@ -196,7 +196,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                               onTap: () async {
                                 await launchUrl(
                                   Uri.parse(
-                                    "${ApiService.shared.uploadURL}?load=${e.id}",
+                                    "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                                   ),
                                   mode: LaunchMode.externalApplication,
                                 );

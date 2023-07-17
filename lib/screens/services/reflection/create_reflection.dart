@@ -139,6 +139,11 @@ class CreateReflection extends StatelessWidget {
                       ),
                       vpad(12),
                       PrimaryTextField(
+                        isRequired: true,
+                        validator: Utils.emptyValidator,
+                        validateString: context
+                            .watch<CreateReflectionPrv>()
+                            .validateDescrible,
                         maxLength: 550,
                         enable: isUpdate,
                         label: S.of(context).description,

@@ -54,10 +54,11 @@ class HOAccountServicePrv extends ChangeNotifier {
       isSelectProjectLoading = true;
       notifyListeners();
       await ApiService.shared.setAPI(
-          e.deployment?.apiEndpoint ?? "",
-          ApiHOService.shared.access_token,
-          ApiHOService.shared.expireDate,
-          e.project?.registration?.code);
+        e.deployment?.apiEndpoint ?? "",
+        ApiHOService.shared.access_token,
+        ApiHOService.shared.expireDate,
+        e.project?.registration?.code,
+      );
       var a = await APITower.mobileMe();
       //
       print(a);

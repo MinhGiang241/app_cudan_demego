@@ -73,7 +73,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               PrimaryImageNetwork(
                 canShowPhotoView: false,
                 path:
-                    "${ApiService.shared.uploadURL}?load=${event.file_upload![0].id}",
+                    "${ApiService.shared.uploadURL}?load=${event.file_upload![0].id}&regcode=${ApiService.shared.regCode}",
               ),
             vpad(12),
             HtmlWidget(

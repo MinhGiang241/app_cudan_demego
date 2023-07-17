@@ -40,12 +40,24 @@ class ElectricFee {
           ? double.parse(map['fixed_price'].toString())
           : null,
       message: map['message'] != null ? map['message'] as String : null,
-      electric_fee: map['electric_fee'] != null
-          ? List<ElectricFeeDetail>.from(
-              (map['electric_fee'] as List<dynamic>).map<ElectricFeeDetail?>(
-                (x) => ElectricFeeDetail.fromMap(x as Map<String, dynamic>),
-              ),
-            )
+      electric_fee: map['electric_fee'].runtimeType.toString() ==
+              "_InternalLinkedHashMap<String, dynamic>"
+          ? map['electric_fee']['_v'] != null
+              ? List<ElectricFeeDetail>.from(
+                  (map['electric_fee']['_v'] as List<dynamic>)
+                      .map<ElectricFeeDetail?>(
+                    (x) => ElectricFeeDetail.fromMap(x as Map<String, dynamic>),
+                  ),
+                )
+              : map['electric_fee'] != null
+                  ? List<ElectricFeeDetail>.from(
+                      (map['electric_fee'] as List<dynamic>)
+                          .map<ElectricFeeDetail?>(
+                        (x) => ElectricFeeDetail.fromMap(
+                            x as Map<String, dynamic>),
+                      ),
+                    )
+                  : null
           : null,
     );
   }

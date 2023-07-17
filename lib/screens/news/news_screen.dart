@@ -176,7 +176,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                             child: PrimaryImageNetwork(
                                               canShowPhotoView: true,
                                               path:
-                                                  "${ApiService.shared.uploadURL}?load=${e.value.image}",
+                                                  "${ApiService.shared.uploadURL}?load=${e.value.image}&regcode=${ApiService.shared.regCode}",
                                               fit: BoxFit.cover,
                                               height: 150,
                                             ),
@@ -248,7 +248,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                           width: 120,
                                           height: double.infinity,
                                           path:
-                                              "${ApiService.shared.uploadURL}?load=${e.value.image}",
+                                              "${ApiService.shared.uploadURL}?load=${e.value.image}&regcode=${ApiService.shared.regCode}&regcode=${ApiService.shared.regCode}",
                                         ),
                                         hpad(12),
                                         Expanded(

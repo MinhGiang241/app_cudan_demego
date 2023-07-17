@@ -40,12 +40,23 @@ class WaterFee {
           ? double.parse(map['fixed_price'].toString())
           : null,
       message: map['message'] != null ? map['message'] as String : null,
-      water_fee: map['water_fee'] != null
-          ? List<WaterFeeDetail>.from(
-              (map['water_fee'] as List<dynamic>).map<WaterFeeDetail?>(
-                (x) => WaterFeeDetail.fromMap(x as Map<String, dynamic>),
-              ),
-            )
+      water_fee: map['water_fee'].runtimeType.toString() ==
+              "_InternalLinkedHashMap<String, dynamic>"
+          ? map['water_fee']['_v'] != null
+              ? List<WaterFeeDetail>.from(
+                  (map['water_fee']['_v'] as List<dynamic>)
+                      .map<WaterFeeDetail?>(
+                    (x) => WaterFeeDetail.fromMap(x as Map<String, dynamic>),
+                  ),
+                )
+              : map['water_fee'] != null
+                  ? List<WaterFeeDetail>.from(
+                      (map['water_fee'] as List<dynamic>).map<WaterFeeDetail?>(
+                        (x) =>
+                            WaterFeeDetail.fromMap(x as Map<String, dynamic>),
+                      ),
+                    )
+                  : null
           : null,
     );
   }

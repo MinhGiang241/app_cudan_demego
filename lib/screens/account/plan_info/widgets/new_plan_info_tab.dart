@@ -405,7 +405,7 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                               12,
                                               grayScaleColor1,
                                             ),
-                                            overflow: TextOverflow.ellipsis,
+                                            //  overflow: TextOverflow.ellipsis,
                                           ),
                                         )
                                       ],
@@ -537,41 +537,51 @@ class _RRecidentInfoItemState extends State<RRecidentInfoItem>
                                       children: [
                                         Row(
                                           children: [
-                                            Text(
-                                              "${S.of(context).full_name}:",
-                                              style: txtMedium(
-                                                14,
-                                                grayScaleColor2,
+                                            Expanded(
+                                              child: Text(
+                                                "${S.of(context).full_name}:",
+                                                style: txtMedium(
+                                                  14,
+                                                  grayScaleColor2,
+                                                ),
                                               ),
                                             ),
-                                            const Spacer(),
-                                            Text(
-                                              resList[index].info_name ?? "",
-                                              style: txtLinkSmall(
-                                                  // color: grayScaleColorBase,
-                                                  ),
+                                            // const Spacer(),
+                                            hpad(10),
+                                            Expanded(
+                                              child: Text(
+                                                resList[index].info_name ?? "",
+                                                style: txtLinkSmall(
+                                                    // color: grayScaleColorBase,
+                                                    ),
+                                              ),
                                             )
                                           ],
                                         ),
                                         vpad(5),
                                         Row(
                                           children: [
-                                            Text(
-                                              "${S.of(context).relation_owner}:",
-                                              style: txtMedium(
-                                                14,
-                                                grayScaleColor2,
+                                            Expanded(
+                                              child: Text(
+                                                "${S.of(context).relation_owner}:",
+                                                style: txtMedium(
+                                                  14,
+                                                  grayScaleColor2,
+                                                ),
                                               ),
                                             ),
-                                            const Spacer(),
-                                            Text(
-                                              r.re != null
-                                                  ? r.re?.name ?? ""
-                                                  : genDependentType(
-                                                      r.type ?? "",
-                                                    ),
-                                              style: txtLinkSmall(
-                                                color: grayScaleColorBase,
+                                            // const Spacer(),
+                                            hpad(10),
+                                            Expanded(
+                                              child: Text(
+                                                r.re != null
+                                                    ? r.re?.name ?? ""
+                                                    : genDependentType(
+                                                        r.type ?? "",
+                                                      ),
+                                                style: txtLinkSmall(
+                                                  color: grayScaleColorBase,
+                                                ),
                                               ),
                                             )
                                           ],

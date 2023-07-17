@@ -163,7 +163,7 @@ class _PetListScreenState extends State<PetListScreen> {
                               images: [
                                 ...e.avt_pet!.map(
                                   (i) =>
-                                      "${ApiService.shared.uploadURL}?load=${i.id}",
+                                      "${ApiService.shared.uploadURL}?load=${i.id}&regcode=${ApiService.shared.regCode}",
                                 )
                               ],
                             ),

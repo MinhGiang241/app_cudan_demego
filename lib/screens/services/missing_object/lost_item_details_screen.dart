@@ -95,8 +95,8 @@ class _LostItemDetailsScreenState extends State<LostItemDetailsScreen> {
               ),
             if (lostItem.image != null && lostItem.image!.isNotEmpty)
               InfoContentView(title: S.of(context).photos, images: [
-                ...lostItem.image!
-                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
+                ...lostItem.image!.map((e) =>
+                    "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}"),
               ]),
           ],
         ),

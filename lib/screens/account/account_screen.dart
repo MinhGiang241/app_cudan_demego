@@ -50,7 +50,7 @@ class AccountScreen extends StatelessWidget {
                       radius: 32,
                       backgroundColor: grayScaleColor4,
                       backgroundImage: CachedNetworkImageProvider(
-                        "${ApiService.shared.uploadURL}?load=${userInfo?.avatar ?? ""}",
+                        "${ApiService.shared.uploadURL}?load=${userInfo?.avatar ?? ""}&regcode=${ApiService.shared.regCode}",
                       ),
                     )
                   else if (userInfo?.avatar.runtimeType.toString() ==
@@ -60,7 +60,7 @@ class AccountScreen extends StatelessWidget {
                       radius: 32,
                       backgroundColor: grayScaleColor4,
                       backgroundImage: CachedNetworkImageProvider(
-                        "${ApiService.shared.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}",
+                        "${ApiService.shared.uploadURL}?load=${(userInfo?.avatar as List)[0]['file_id'] ?? ""}&regcode=${ApiService.shared.regCode}",
                       ),
                     )
                   else

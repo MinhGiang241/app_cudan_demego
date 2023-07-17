@@ -19,6 +19,7 @@ import 'generated/l10n.dart';
 import 'routes/routes.dart';
 import 'screens/account/language/cubit/lang_cubit.dart';
 import 'screens/auth/prv/auth_prv.dart';
+import 'screens/notification/prv/notification_prv.dart';
 import 'services/firebase_api.dart';
 import 'services/prf_data.dart';
 import 'package:timeago/timeago.dart';
@@ -94,7 +95,8 @@ class MyApp extends StatelessWidget {
           create: (context) => HOAccountServicePrv(),
         ),
         ChangeNotifierProvider(create: (context) => LangPrv(lang, FCMtoken)),
-        ChangeNotifierProvider(create: (context) => ResidentInfoPrv())
+        ChangeNotifierProvider(create: (context) => ResidentInfoPrv()),
+        ChangeNotifierProvider(create: (context) => NotificationPrv())
       ],
       builder: (context, child) {
         return BlocProvider(

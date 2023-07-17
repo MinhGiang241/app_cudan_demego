@@ -69,7 +69,8 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
               if (arg.image != null && arg.image!.isNotEmpty)
                 InfoContentView(title: S.of(context).photos, images: [
                   ...arg.image!.map(
-                    (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                    (e) =>
+                        "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                   )
                 ]),
             ],

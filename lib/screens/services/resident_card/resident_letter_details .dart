@@ -118,7 +118,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                         images: [
                           ...card.identity_image!.map(
                             (e) =>
-                                "${ApiService.shared.uploadURL}?load=${e.id}",
+                                "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                           )
                         ],
                       ),
@@ -129,7 +129,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                         images: [
                           ...card.resident_image!.map(
                             (e) =>
-                                "${ApiService.shared.uploadURL}?load=${e.id}",
+                                "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                           )
                         ],
                       ),
@@ -140,7 +140,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                         images: [
                           ...card.other_image!.map(
                             (e) =>
-                                "${ApiService.shared.uploadURL}?load=${e.id}",
+                                "${ApiService.shared.uploadURL}${e.id}&regcode=${ApiService.shared.regCode}",
                           )
                         ],
                       ),

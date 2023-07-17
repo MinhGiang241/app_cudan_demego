@@ -26,6 +26,7 @@ class ApiService {
 
   String userName = '';
   String passWord = '';
+  String regCode = '';
 
   var _graphqlLink = HttpLink(ApiConstants.baseURL);
 
@@ -36,12 +37,13 @@ class ApiService {
     String URL,
     String? access_tokenHO,
     DateTime? expireDateHO,
-    String? regCode,
+    String? regcode,
   ) {
     _dio = Dio(BaseOptions(baseUrl: URL));
     access_token = access_tokenHO;
     expireDate = expireDateHO;
-    _graphqlLink = HttpLink(URL, defaultHeaders: {"regcode": regCode ?? ''});
+    regCode = regcode ?? '';
+    _graphqlLink = HttpLink(URL, defaultHeaders: {"regcode": regcode ?? ''});
     uploadURL = '${URL}/headless/stream/upload';
   }
 

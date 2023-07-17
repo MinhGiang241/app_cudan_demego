@@ -64,7 +64,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                                     onTap: () async {
                                       await launchUrl(
                                         Uri.parse(
-                                          "${ApiService.shared.uploadURL}?load=${e.id}",
+                                          "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                                         ),
                                         mode: LaunchMode.externalApplication,
                                       );

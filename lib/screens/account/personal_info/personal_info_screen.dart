@@ -47,7 +47,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       InfoContentView(
           isHorizontal: true,
           title: S.current.phone_num,
-          content: userInfo.account?.phone ?? "",
+          content: userInfo.phone_required ??
+              userInfo.account?.phone ??
+              userInfo.account?.userName,
           contentStyle: userInfo.account?.phone != null
               ? const TextStyle(
                   fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)

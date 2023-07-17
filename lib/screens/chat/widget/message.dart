@@ -608,7 +608,7 @@ class _MessageState extends State<Message> {
                         radius: 10,
                         backgroundImage: widget.avatar != null
                             ? CachedNetworkImageProvider(
-                                "${ApiService.shared.uploadURL}?load=${widget.avatar}",
+                                "${ApiService.shared.uploadURL}?load=${widget.avatar}&regcode=${ApiService.shared.regCode}",
                               )
                             : const AssetImage(
                                 AppImage.defaultAvatar,

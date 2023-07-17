@@ -76,6 +76,10 @@ class _WaterBillTabState extends State<WaterBillTab> {
           if (index >= waterTo[i] && i != waterTo.length - 1) {
             list.add(waterTo[i] - (i == 0 ? 0 : waterTo[i - 1]));
           } else if (index <= waterTo[i]) {
+            if (i == 0) {
+              list.add(index);
+              break;
+            }
             var h = index - waterTo[i - 1];
             if (h != 0) {
               list.add(h);

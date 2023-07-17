@@ -108,7 +108,8 @@ class ElectricityPrv extends ChangeNotifier {
   Future getIndicatorByYear(BuildContext context) async {
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-    await APIElectricity.getIndicatorByYear(apartmentId, year!).then((v) {
+    print(apartmentId);
+    await APIElectricity.getIndicatorByYear(apartmentId, year!, true).then((v) {
       listIndicatorCurrentYear.clear();
       listIndicatorLastYear.clear();
 

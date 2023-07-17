@@ -74,7 +74,7 @@ class NewsHome extends StatelessWidget {
                         child: PrimaryImageNetwork(
                             canShowPhotoView: false,
                             path:
-                                "${ApiService.shared.uploadURL}?load=${newList[index].image ?? ""}"),
+                                "${ApiService.shared.uploadURL}?load=${newList[index].image ?? ""}&regcode=${ApiService.shared.regCode}"),
                       ),
                       vpad(3),
                       Padding(

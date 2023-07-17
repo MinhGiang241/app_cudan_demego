@@ -71,7 +71,7 @@ class SelectMediaWidget extends StatelessWidget {
                                   child: PrimaryImageNetwork(
                                     canShowPhotoView: true,
                                     path:
-                                        '${ApiService.shared.uploadURL}/?load=${e.value.id!}',
+                                        '${ApiService.shared.uploadURL}/?load=${e.value.id!}&regcode=${ApiService.shared.regCode}',
                                   ),
                                 ),
                                 if (enable)

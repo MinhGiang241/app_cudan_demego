@@ -82,7 +82,7 @@ class EditPersonalInfo extends StatelessWidget {
                             radius: 60,
                             backgroundColor: grayScaleColor4,
                             backgroundImage: CachedNetworkImageProvider(
-                              "${ApiService.shared.uploadURL}?load=$avatarLink",
+                              "${ApiService.shared.uploadURL}?load=$avatarLink&regcode=${ApiService.shared.regCode}",
                             ),
                           ),
                       if (fileAvatar != null)

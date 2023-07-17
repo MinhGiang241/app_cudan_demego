@@ -115,7 +115,8 @@ class WaterPrv extends ChangeNotifier {
   Future getIndicatorByYear(BuildContext context) async {
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-    await APIElectricity.getIndicatorByYear(apartmentId, year!).then((v) {
+    await APIElectricity.getIndicatorByYear(apartmentId, year!, false)
+        .then((v) {
       listIndicatorCurrentYear.clear();
       listIndicatorLastYear.clear();
       for (var i in v['current']) {

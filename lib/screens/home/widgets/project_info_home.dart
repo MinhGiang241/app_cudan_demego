@@ -80,7 +80,7 @@ class ProjectInfoHome extends StatelessWidget {
                                 child: PrimaryImageNetwork(
                                     canShowPhotoView: false,
                                     path:
-                                        "${ApiService.shared.uploadURL}?load=${list[index].image}"),
+                                        "${ApiService.shared.uploadURL}?load=${list[index].image}&regcode=${ApiService.shared.regCode}"),
                               ),
                               vpad(8),
                               Text(

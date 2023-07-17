@@ -796,10 +796,12 @@ class Utils {
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
       if (Platform.isIOS) {
-        launchUrl(Uri.parse(url ?? "${ApiService.shared.uploadURL}?load=$id"));
+        launchUrl(Uri.parse(url ??
+            "${ApiService.shared.uploadURL}?load=$id&regcode=${ApiService.shared.regCode}"));
       } else {
         var taskId = await FlutterDownloader.enqueue(
-          url: url ?? "${ApiService.shared.uploadURL}?load=$id",
+          url: url ??
+              "${ApiService.shared.uploadURL}?load=$id&regcode=${ApiService.shared.regCode}",
           headers: headers ??
               {
                 'Accept':

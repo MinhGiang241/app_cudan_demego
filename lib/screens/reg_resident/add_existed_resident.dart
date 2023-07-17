@@ -122,24 +122,29 @@ class _AddExistedResidentState extends State<AddExistedResident> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  PrimaryButton(
-                    buttonSize: ButtonSize.medium,
-                    text: S.of(context).close,
-                    buttonType: ButtonType.secondary,
-                    secondaryBackgroundColor: redColor4,
-                    textColor: redColor,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
+                  Expanded(
+                    child: PrimaryButton(
+                      buttonSize: ButtonSize.small,
+                      text: S.of(context).close,
+                      buttonType: ButtonType.secondary,
+                      secondaryBackgroundColor: redColor4,
+                      textColor: redColor,
+                      onTap: () async {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
-                  PrimaryButton(
-                    isLoading: isLoading,
-                    buttonSize: ButtonSize.medium,
-                    text: S.of(context).confirm,
-                    onTap: () async {
-                      Navigator.pop(context);
-                      await onSubmit(context);
-                    },
+                  hpad(3),
+                  Expanded(
+                    child: PrimaryButton(
+                      isLoading: isLoading,
+                      buttonSize: ButtonSize.small,
+                      text: S.of(context).confirm,
+                      onTap: () async {
+                        Navigator.pop(context);
+                        await onSubmit(context);
+                      },
+                    ),
                   ),
                 ],
               )

@@ -78,10 +78,11 @@ class APIElectricity {
     }
   }
 
-  static Future getIndicatorByYear(String? apartmentId, int year) async {
+  static Future getIndicatorByYear(
+      String? apartmentId, int year, bool isElectric) async {
     var query = '''
-        mutation (\$apartmentId:String,\$year:Float){
-    response: indicator_mobile_get_indicator_by_apartmentId_and_year (apartmentId: \$apartmentId,year: \$year ) {
+        mutation (\$apartmentId:String,\$year:Float, \$isElectric: Boolean){
+    response: indicator_mobile_get_indicator_by_apartmentId_and_year (apartmentId: \$apartmentId,year: \$year ,isElectric: \$isElectric) {
         code
         message
         data
@@ -93,6 +94,7 @@ class APIElectricity {
       variables: {
         "apartmentId": apartmentId,
         "year": year,
+        "isElectric": isElectric,
       },
     );
 

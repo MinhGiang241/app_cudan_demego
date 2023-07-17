@@ -122,7 +122,8 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).cmnd_photos,
                     images: [
                       ...card.identity_image!.map(
-                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                        (e) =>
+                            "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                       )
                     ],
                   ),
@@ -132,7 +133,8 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).res_photo,
                     images: [
                       ...card.resident_image!.map(
-                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                        (e) =>
+                            "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                       )
                     ],
                   ),
@@ -141,7 +143,8 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                     title: S.of(context).related_photo,
                     images: [
                       ...card.other_image!.map(
-                        (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                        (e) =>
+                            "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                       )
                     ],
                   ),

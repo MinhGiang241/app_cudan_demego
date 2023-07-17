@@ -75,7 +75,8 @@ class _TransportDetailsLetterScreenState
                     // isHorizontal: true,
                     images: (item.registration_image ?? [])
                         .map<String>(
-                          (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                          (e) =>
+                              "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                         )
                         .toList(),
                     title: S.of(context).reg_trans_photos,
@@ -86,7 +87,8 @@ class _TransportDetailsLetterScreenState
                     // isHorizontal: true,
                     images: (item.vehicle_image ?? [])
                         .map<String>(
-                          (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                          (e) =>
+                              "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                         )
                         .toList(),
                     title: S.of(context).trans_images,
@@ -97,7 +99,8 @@ class _TransportDetailsLetterScreenState
                     // isHorizontal: true,
                     images: (item.identity_image ?? [])
                         .map<String>(
-                          (e) => "${ApiService.shared.uploadURL}?load=${e.id}",
+                          (e) =>
+                              "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                         )
                         .toList(),
                     title: S.of(context).cmnd_images,

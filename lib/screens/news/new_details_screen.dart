@@ -45,7 +45,8 @@ class NewDetailsScreen extends StatelessWidget {
             if (arg.image != null)
               PrimaryImageNetwork(
                 canShowPhotoView: true,
-                path: "${ApiService.shared.uploadURL}?load=${arg.image}",
+                path:
+                    "${ApiService.shared.uploadURL}?load=${arg.image}&regcode=${ApiService.shared.regCode}&regcode=${ApiService.shared.regCode}",
               ),
 
             vpad(16),

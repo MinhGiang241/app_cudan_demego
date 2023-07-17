@@ -84,8 +84,8 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
               ),
             if (lootItem.photo != null && lootItem.photo!.isNotEmpty)
               InfoContentView(title: S.of(context).photos, images: [
-                ...lootItem.photo!
-                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
+                ...lootItem.photo!.map((e) =>
+                    "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}"),
               ]),
             InfoContentView(
                 title: S.of(context).status,
@@ -95,8 +95,8 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
             if (lootItem.return_image != null &&
                 lootItem.return_image!.isNotEmpty)
               InfoContentView(title: S.of(context).return_image, images: [
-                ...lootItem.return_image!
-                    .map((e) => "${ApiService.shared.uploadURL}?load=${e.id}"),
+                ...lootItem.return_image!.map((e) =>
+                    "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}"),
               ])
           ],
         ),

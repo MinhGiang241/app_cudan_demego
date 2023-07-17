@@ -78,6 +78,7 @@ class CreateReflectionPrv extends ChangeNotifier {
   final TextEditingController zoneTypeController = TextEditingController();
   String? validateType;
   String? validateReason;
+  String? validateDescrible;
   String? validateZone;
   String? validateZoneType;
 
@@ -129,7 +130,42 @@ class CreateReflectionPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  onChangeFormValid(BuildContext context) {}
+  onChangeFormValid(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      validateType = null;
+      validateReason = null;
+      validateDescrible = null;
+      validateZone = null;
+      validateZoneType = null;
+    } else {
+      if (typeController.text.trim().isEmpty) {
+        validateType = S.of(context).not_blank;
+      } else {
+        validateType = null;
+      }
+      if (reasonController.text.trim().isEmpty) {
+        validateReason = S.of(context).not_blank;
+      } else {
+        validateReason = null;
+      }
+      if (describeController.text.trim().isEmpty) {
+        validateDescrible = S.of(context).not_blank;
+      } else {
+        validateDescrible = null;
+      }
+      if (zoneValueList.isEmpty) {
+        validateZone = S.of(context).not_blank;
+      } else {
+        validateZone = null;
+      }
+      if (zoneTypeController.text.trim().isEmpty) {
+        validateZoneType = S.of(context).not_blank;
+      } else {
+        validateZoneType = null;
+      }
+    }
+    notifyListeners();
+  }
 
   cancelLetter(BuildContext context) async {
     ref!.status = 'CANCEL';
@@ -250,6 +286,11 @@ class CreateReflectionPrv extends ChangeNotifier {
         validateReason = S.of(context).not_blank;
       } else {
         validateReason = null;
+      }
+      if (describeController.text.trim().isEmpty) {
+        validateDescrible = S.of(context).not_blank;
+      } else {
+        validateDescrible = null;
       }
       if (zoneValueList.isEmpty) {
         validateZone = S.of(context).not_blank;

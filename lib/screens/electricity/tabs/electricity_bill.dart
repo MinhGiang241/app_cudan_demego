@@ -76,6 +76,10 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
           if (index >= elecFeeTo[i] && i != elecFeeTo.length - 1) {
             list.add(elecFeeTo[i] - (i == 0 ? 0 : elecFeeTo[i - 1]));
           } else if (index <= elecFeeTo[i]) {
+            if (i == 0) {
+              list.add(index);
+              break;
+            }
             var h = index - elecFeeTo[i - 1];
             if (h != 0) {
               list.add(h);

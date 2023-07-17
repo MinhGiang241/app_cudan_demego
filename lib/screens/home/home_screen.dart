@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return RepaintBoundary(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
@@ -132,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 refreshController.refreshCompleted();
               },
               child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 children: [
                   vpad(16 + MediaQuery.of(context).padding.top),
                   HeaderTitle(
