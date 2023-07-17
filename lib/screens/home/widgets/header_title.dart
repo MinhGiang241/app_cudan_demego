@@ -23,30 +23,25 @@ class HeaderTitle extends StatelessWidget {
         },
         icon: Icon(Icons.menu),
       ),
-      // leading: Transform(
-      //   alignment: Alignment.center,
-      //   transform: Matrix4.rotationY(math.pi),
-      //   child: IconButton(
-      //     onPressed: () {
-      //       context.read<AuthPrv>().onSignOut(context);
-      //     },
-      //     icon: const Icon(Icons.logout),
-      //   ),
-      // ),
       title: Center(
-        child: Text.rich(TextSpan(children: [
-          TextSpan(text: "DEME", style: txtBold(24)),
-          TextSpan(text: "PRO", style: txtBold(24, yellowColor1)),
-        ])),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: "DEME", style: txtBold(24)),
+              TextSpan(text: "PRO", style: txtBold(24, yellowColor1)),
+            ],
+          ),
+        ),
       ),
       trailing: PrimaryIcon(
-          icons: PrimaryIcons.bell_outline,
-          style: PrimaryIconStyle.gradient,
-          color: grayScaleColor2,
-          badge: "7",
-          onTap: () {
-            Navigator.pushNamed(context, NotificationScreen.routeName);
-          }),
+        icons: PrimaryIcons.bell_outline,
+        style: PrimaryIconStyle.gradient,
+        color: grayScaleColor2,
+        badge: "7",
+        onTap: () {
+          Navigator.pushNamed(context, NotificationScreen.routeName);
+        },
+      ),
     );
   }
 }

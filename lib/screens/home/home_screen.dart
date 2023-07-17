@@ -68,33 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               StateChatEnum.START
                           ? null
                           : _bottomNavigationBar(messageCount),
-                  //     BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                  //   bloc: bloc,
-                  //   builder: (context, state) {
-                  //     print("hhhhhhh");
-                  //     if (state is ChatMessageStart) {
-                  //       return vpad(0);
-                  //     } else {
-                  //       return _bottomNavigationBar(messageCount);
-                  //     }
-                  //   },
-                  // ),
-
-                  // floatingActionButton: _selectedIndex == 2
-                  //     ? null
-                  //     : FloatingActionButton(
-                  //         onPressed: () {},
-                  //         backgroundColor: Colors.white,
-                  //         child: Icon(Icons.phone_sharp,
-                  //             size: 40,
-                  //             color: primaryColorBase,
-                  //             shadows: [
-                  //               Shadow(
-                  //                   offset: const Offset(-2, 2),
-                  //                   color: Colors.black.withOpacity(0.5),
-                  //                   blurRadius: 10.0),
-                  //             ]),
-                  //       ),
                 ),
                 if (isLoading)
                   const Center(
