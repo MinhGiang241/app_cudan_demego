@@ -606,7 +606,9 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                     title: S.of(context).attachment_file,
                                   ),
                                   vpad(20),
-                                  if (!(arg != null && arg.status == 'CANCEL'))
+                                  if (!(arg != null &&
+                                      (arg.status == 'CANCEL' ||
+                                          arg.status == 'APPROVED')))
                                     PrimaryButton(
                                       isLoading: context
                                           .watch<AddNewResidentPrv>()
@@ -659,6 +661,11 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                 children: [
                                   vpad(12),
                                   PrimaryTextField(
+                                    validateString: context
+                                        .watch<AddNewResidentPrv>()
+                                        .phoneValidate,
+                                    validator: Utils.emptyValidator,
+                                    isRequired: true,
                                     onlyNum: true,
                                     maxLength: 10,
                                     keyboardType: TextInputType.number,
@@ -738,6 +745,9 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                   vpad(12),
                                   PrimaryDropDown(
                                     enable: enable,
+                                    onChange: context
+                                        .read<AddNewResidentPrv>()
+                                        .onSellectEthnic,
                                     isFull: true,
                                     isRequired: true,
                                     selectList: listEthnicChoice,
@@ -898,7 +908,9 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                     ],
                                   ),
                                   vpad(20),
-                                  if (!(arg != null && arg.status == 'CANCEL'))
+                                  if (!(arg != null &&
+                                      (arg.status == 'CANCEL' ||
+                                          arg.status == "APPROVED")))
                                     PrimaryButton(
                                       isLoading: context
                                           .watch<AddNewResidentPrv>()

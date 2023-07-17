@@ -126,6 +126,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   String? ethnicValidate;
   String? perResValidate;
   String? emailValidate;
+  String? phoneValidate;
 
   List<FileUploadModel> existedResImages = [];
   List<FileUploadModel> existedIdentityImages = [];
@@ -250,6 +251,7 @@ class AddNewResidentPrv extends ChangeNotifier {
   clearValidStringStep2() {
     ethnicValidate = null;
     emailValidate = null;
+    phoneValidate = null;
     notifyListeners();
   }
 
@@ -258,6 +260,11 @@ class AddNewResidentPrv extends ChangeNotifier {
       ethnicValidate = S.current.not_blank;
     } else {
       ethnicValidate = null;
+    }
+    if (phoneController.text.trim().isEmpty) {
+      phoneValidate = S.current.not_blank;
+    } else {
+      phoneValidate = null;
     }
     if (emailController.text.trim().isNotEmpty &&
         !RegexText.isEmail(emailController.text.trim())) {
