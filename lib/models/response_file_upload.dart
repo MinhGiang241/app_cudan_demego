@@ -37,16 +37,17 @@ class ResponseFile {
   String? mediaText;
   Anchor? anchor;
 
-  ResponseFile(
-      {this.name,
-      this.size,
-      this.lastModify,
-      this.folder,
-      this.url,
-      this.mediaPath,
-      this.mime,
-      this.mediaText,
-      this.anchor});
+  ResponseFile({
+    this.name,
+    this.size,
+    this.lastModify,
+    this.folder,
+    this.url,
+    this.mediaPath,
+    this.mime,
+    this.mediaText,
+    this.anchor,
+  });
 
   ResponseFile.fromJson(Map<String, dynamic> json) {
     name = json["name"];

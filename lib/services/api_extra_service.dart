@@ -114,7 +114,11 @@ class APIExtraService {
   }
 
   static Future getServiceRegistration(
-      String residentId, String arisingServiceId, int year, int month) async {
+    String residentId,
+    String arisingServiceId,
+    int year,
+    int month,
+  ) async {
     var query = '''
     mutation (\$residentId:String,\$arisingServiceId:String,\$year:Float,\$month:Float){
     response: service_mobile_get_service_registration_by_residentId_and_arising_service_id (residentId: \$residentId,arisingServiceId: \$arisingServiceId,year: \$year,month: \$month ) {
@@ -125,13 +129,15 @@ class APIExtraService {
 }
         
     ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "residentId": residentId,
-      "arisingServiceId": arisingServiceId,
-      "year": year,
-      "month": month,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "residentId": residentId,
+        "arisingServiceId": arisingServiceId,
+        "year": year,
+        "month": month,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

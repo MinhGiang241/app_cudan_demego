@@ -144,7 +144,10 @@ class APIHandOver {
   }
 
   static Future veryfyExistScheduleAndSendOTP(
-      String? phone, String? apartmentId, Map<String, dynamic> data) async {
+    String? phone,
+    String? apartmentId,
+    Map<String, dynamic> data,
+  ) async {
     var query = '''
  mutation (\$apartmentId:String,\$phone:String,\$data:Dictionary){
     response: handover_mobile_check_existed_apointment_schedule (apartmentId: \$apartmentId,phone: \$phone,data: \$data ) {

@@ -5,10 +5,8 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:app_cudan/main.dart';
 import 'package:graphql/client.dart';
 
@@ -89,7 +87,11 @@ class FirebaseApi {
   }
 
   void onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {}
+    int id,
+    String title,
+    String body,
+    String payload,
+  ) async {}
   Future initLocalNotifications() async {
     var iOS = DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -140,18 +142,20 @@ mutation (\$data: PushDeviceInput){
 
     ''';
     print(query);
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": {
-        "tokenId": fCMToken,
-        "deviceId": uniqueDeviceId,
-        "userId": account,
-        "platform": Platform.isAndroid ? "ANDROID" : "IOS",
-        "appId": "demepro",
-        "device_info": device_info,
-        "extra_info": {},
-      }
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": {
+          "tokenId": fCMToken,
+          "deviceId": uniqueDeviceId,
+          "userId": account,
+          "platform": Platform.isAndroid ? "ANDROID" : "IOS",
+          "appId": "demepro",
+          "device_info": device_info,
+          "extra_info": {},
+        }
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

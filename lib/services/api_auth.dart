@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql/client.dart';
 
-import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import '../generated/l10n.dart';
 import '../models/response_file_upload.dart';
@@ -194,8 +193,10 @@ class APIAuth {
     }
   }
 
-  static Future<void> signOut(
-      {ErrorHandleFunc? onError, required BuildContext context}) async {
+  static Future<void> signOut({
+    ErrorHandleFunc? onError,
+    required BuildContext context,
+  }) async {
     return await ApiService.shared.deleteCre();
   }
 
@@ -234,10 +235,11 @@ class APIAuth {
     return results;
   }
 
-  static Future<ResponseFileUpload> uploadImage(
-      {required List<File> files,
-      OnSendProgress? onSendProgress,
-      required BuildContext context}) async {
+  static Future<ResponseFileUpload> uploadImage({
+    required List<File> files,
+    OnSendProgress? onSendProgress,
+    required BuildContext context,
+  }) async {
     final multipartFiles = <MultipartFile>[];
     for (var i = 0; i < files.length; i++) {
       final mpf = await MultipartFile.fromFile(files[i].path);
@@ -283,13 +285,14 @@ class APIAuth {
     }
   }
 
-  static Future createResidentAccount(
-      {required BuildContext context,
-      required String user,
-      required String name,
-      required String email,
-      required String passWord,
-      required String confirmPassword}) async {
+  static Future createResidentAccount({
+    required BuildContext context,
+    required String user,
+    required String name,
+    required String email,
+    required String passWord,
+    required String confirmPassword,
+  }) async {
     var mutationCreateResidentAccount = '''
       mutation (\$name:String,\$password:String,\$email:String,\$confirmPassword:String,\$user:String){
     response: resident_mobile_create_resident_account (name: \$name,password: \$password,email: \$email,confirmPassword: \$confirmPassword,user: \$user ) {

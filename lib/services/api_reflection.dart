@@ -20,13 +20,15 @@ class APIReflection {
     }
 
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "status": status,
-      "year": year,
-      "month": month,
-      "residentId": residentId,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "status": status,
+        "year": year,
+        "month": month,
+        "residentId": residentId,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -58,10 +60,12 @@ class APIReflection {
 }
         
       ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 1000}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 
@@ -92,10 +96,12 @@ class APIReflection {
       }
     }
       ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 1000}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 
@@ -127,10 +133,12 @@ class APIReflection {
   }
           
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -183,10 +191,12 @@ class APIReflection {
     }
         
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "type": type,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "type": type,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -210,10 +220,12 @@ class APIReflection {
     }
         
       ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

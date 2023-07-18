@@ -33,7 +33,8 @@ response: save_DependentSignUp_dto(data:\$data){
   }
 
   static Future changeStatusFormResidentAddApartment(
-      Map<String, dynamic> data) async {
+    Map<String, dynamic> data,
+  ) async {
     var query = '''
     mutation (\$data:Dictionary){
         response: formAddNewResidentApartment_mobile_change_status (data: \$data ) {
@@ -60,7 +61,9 @@ response: save_DependentSignUp_dto(data:\$data){
   }
 
   static Future getFormResidentAddApartment(
-      String residentId, String? apartmentId) async {
+    String residentId,
+    String? apartmentId,
+  ) async {
     var query = '''
    mutation (\$residentId:String,\$apartmentId:String){
     response: formAddNewResidentApartment_mobile_get_form_add_new_resident_apartment_by_residentId (residentId: \$residentId,apartmentId: \$apartmentId ) {
@@ -74,8 +77,9 @@ response: save_DependentSignUp_dto(data:\$data){
     ''';
 
     final MutationOptions options = MutationOptions(
-        document: gql(query),
-        variables: {"residentId": residentId, "apartmentId": apartmentId});
+      document: gql(query),
+      variables: {"residentId": residentId, "apartmentId": apartmentId},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -100,10 +104,12 @@ mutation (\$residentId:String){
    
     ''';
 
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "residentId": residentId,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "residentId": residentId,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

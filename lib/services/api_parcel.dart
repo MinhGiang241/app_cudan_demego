@@ -5,7 +5,11 @@ import 'api_service.dart';
 
 class APIParcel {
   static Future getParcelList(
-      int year, int month, String phone, bool init) async {
+    int year,
+    int month,
+    String phone,
+    bool init,
+  ) async {
     var query = '''
     mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
     response: reception_mobile_find_parcel_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {

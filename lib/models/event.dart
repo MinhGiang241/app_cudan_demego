@@ -1,33 +1,34 @@
 // ignore_for_file: non_constant_identifier_names
 
 class Event {
-  Event(
-      {this.approveManId,
-      this.approve_date,
-      this.code,
-      this.content_event,
-      this.cost_event,
-      this.create_time,
-      this.createdTime,
-      this.end_time,
-      this.event_for,
-      this.file_upload,
-      this.human_paticipate,
-      this.id,
-      this.location,
-      this.notice,
-      this.staffCreatedId,
-      this.start_time,
-      this.status_ticket,
-      this.title,
-      this.updatedTime,
-      this.valid,
-      this.human_number,
-      this.due_regist,
-      this.e,
-      this.isParticipation,
-      this.time_status,
-      this.isShowButtonParticipate});
+  Event({
+    this.approveManId,
+    this.approve_date,
+    this.code,
+    this.content_event,
+    this.cost_event,
+    this.create_time,
+    this.createdTime,
+    this.end_time,
+    this.event_for,
+    this.file_upload,
+    this.human_paticipate,
+    this.id,
+    this.location,
+    this.notice,
+    this.staffCreatedId,
+    this.start_time,
+    this.status_ticket,
+    this.title,
+    this.updatedTime,
+    this.valid,
+    this.human_number,
+    this.due_regist,
+    this.e,
+    this.isParticipation,
+    this.time_status,
+    this.isShowButtonParticipate,
+  });
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -130,14 +131,15 @@ class FileUpload {
 }
 
 class EventParticipation {
-  EventParticipation(
-      {this.accountId,
-      this.createdTime,
-      this.eventId,
-      this.event_for,
-      this.id,
-      this.updatedTime,
-      this.residentId});
+  EventParticipation({
+    this.accountId,
+    this.createdTime,
+    this.eventId,
+    this.event_for,
+    this.id,
+    this.updatedTime,
+    this.residentId,
+  });
 
   String? id;
   String? createdTime;

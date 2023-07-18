@@ -16,10 +16,12 @@ response: remove_Pet_dto(_id:\$_id){
 }
 }
 ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "_id": id,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "_id": id,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -76,10 +78,12 @@ response: remove_Pet_dto(_id:\$_id){
         
         
         ''';
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -104,11 +108,13 @@ response: remove_Pet_dto(_id:\$_id){
             
     ''';
 
-    final MutationOptions options =
-        MutationOptions(document: gql(query), variables: {
-      "residentId": residentId,
-      "apartmentId": apartmentId,
-    });
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "residentId": residentId,
+        "apartmentId": apartmentId,
+      },
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

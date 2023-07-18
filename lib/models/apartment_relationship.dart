@@ -64,5 +64,6 @@ class ApartmentRelationship {
 
   factory ApartmentRelationship.fromJson(String source) =>
       ApartmentRelationship.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }

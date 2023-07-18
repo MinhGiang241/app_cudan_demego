@@ -5,7 +5,9 @@ import 'api_service.dart';
 
 class APIDelivery {
   static Future getWaitConfirmLetter(
-      String? residentId, String? apartmentId) async {
+    String? residentId,
+    String? apartmentId,
+  ) async {
     var query = '''
        mutation (\$residentId:String,\$apartmentId:String){
     response: transfer_mobile_get_transfer_letter_wait_confirm (residentId: \$residentId,apartmentId: \$apartmentId ) {

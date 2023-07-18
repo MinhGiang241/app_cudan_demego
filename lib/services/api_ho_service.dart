@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:app_cudan/services/api_service.dart';
 import 'package:dio/dio.dart';
 import 'package:graphql/client.dart';
 

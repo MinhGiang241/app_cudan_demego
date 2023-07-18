@@ -140,12 +140,13 @@ class Pay {
 }
 
 class Payment {
-  Payment(
-      {this.createdTime,
-      this.id,
-      this.shelfLifeId,
-      this.price,
-      this.updatedTime});
+  Payment({
+    this.createdTime,
+    this.id,
+    this.shelfLifeId,
+    this.price,
+    this.updatedTime,
+  });
   String? id;
   String? createdTime;
   String? updatedTime;

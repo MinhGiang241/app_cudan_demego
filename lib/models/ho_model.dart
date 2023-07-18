@@ -455,7 +455,8 @@ class RegistrationProjectListList {
 
   factory RegistrationProjectListList.fromJson(String source) =>
       RegistrationProjectListList.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }
 
 class Deployment {

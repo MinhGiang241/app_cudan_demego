@@ -1,25 +1,21 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
 import 'package:app_cudan/screens/auth/prv/sign_in_prv.dart';
 import 'package:app_cudan/screens/auth/sign_up_screen.dart';
-import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:app_cudan/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../services/prf_data.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
-import '../account/language/cubit/lang_cubit.dart';
-import 'apartment_selection_screen.dart';
 import 'fogot_pass/phone_num_forgot_pass.dart';
 
+// ignore: must_be_immutable
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key? key, this.isFromSignUp = false, this.context})
       : super(key: key);

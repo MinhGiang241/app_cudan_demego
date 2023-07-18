@@ -15,7 +15,9 @@ class APITower {
        
     ''';
     final MutationOptions options = MutationOptions(
-        document: gql(query), variables: {"userName": userName});
+      document: gql(query),
+      variables: {"userName": userName},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 

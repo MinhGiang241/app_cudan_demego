@@ -1,7 +1,6 @@
-import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
+import 'package:app_cudan/screens/notification/prv/notification_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:math' as math;
 
 import '../../../constants/constants.dart';
 import '../../../widgets/primary_icon.dart';
@@ -33,13 +32,19 @@ class HeaderTitle extends StatelessWidget {
           ),
         ),
       ),
-      trailing: PrimaryIcon(
-        icons: PrimaryIcons.bell_outline,
-        style: PrimaryIconStyle.gradient,
-        color: grayScaleColor2,
-        badge: "7",
-        onTap: () {
-          Navigator.pushNamed(context, NotificationScreen.routeName);
+      trailing: FutureBuilder(
+        future: context.read<NotificationPrv>().getUnReadNotification(context),
+        builder: (context, snapshot) {
+          var badgeNum = context.watch<NotificationPrv>().unRead;
+          return PrimaryIcon(
+            icons: PrimaryIcons.bell_outline,
+            style: PrimaryIconStyle.gradient,
+            color: grayScaleColor2,
+            badge: badgeNum != 0 ? "${badgeNum}" : null,
+            onTap: () {
+              Navigator.pushNamed(context, NotificationScreen.routeName);
+            },
+          );
         },
       ),
     );

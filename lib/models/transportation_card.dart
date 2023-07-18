@@ -4,7 +4,6 @@
 import 'dart:convert';
 
 import 'package:app_cudan/models/reason.dart';
-import 'package:app_cudan/models/resident_card.dart';
 import 'package:app_cudan/models/response_resident_own.dart';
 
 import 'file_upload.dart';

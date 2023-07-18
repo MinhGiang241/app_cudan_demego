@@ -334,14 +334,15 @@ class ConstructionFile {
 }
 
 class ConstructionType {
-  ConstructionType(
-      {this.id,
-      this.name,
-      this.code,
-      this.createdTime,
-      this.describe,
-      this.updatedTime,
-      this.c});
+  ConstructionType({
+    this.id,
+    this.name,
+    this.code,
+    this.createdTime,
+    this.describe,
+    this.updatedTime,
+    this.c,
+  });
   String? id;
   String? name;
   String? createdTime;
@@ -900,7 +901,8 @@ class ConstructionDocumentHistory {
 
   factory ConstructionDocumentHistory.fromJson(String source) =>
       ConstructionDocumentHistory.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 
   ConstructionDocumentHistory copyWith({
     String? id,

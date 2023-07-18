@@ -79,7 +79,10 @@ class APIElectricity {
   }
 
   static Future getIndicatorByYear(
-      String? apartmentId, int year, bool isElectric) async {
+    String? apartmentId,
+    int year,
+    bool isElectric,
+  ) async {
     var query = '''
         mutation (\$apartmentId:String,\$year:Float, \$isElectric: Boolean){
     response: indicator_mobile_get_indicator_by_apartmentId_and_year (apartmentId: \$apartmentId,year: \$year ,isElectric: \$isElectric) {

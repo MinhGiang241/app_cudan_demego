@@ -1,8 +1,4 @@
-import 'package:app_cudan/services/api_auth.dart';
-import 'package:app_cudan/utils/error_handler.dart';
 import 'package:graphql/client.dart';
-
-import '../generated/l10n.dart';
 import '../models/response.dart';
 import 'api_service.dart';
 

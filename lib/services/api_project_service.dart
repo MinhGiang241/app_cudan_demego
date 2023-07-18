@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:graphql/client.dart';
 
 import '../generated/l10n.dart';
@@ -14,7 +13,6 @@ class ApiProjectService {
     required this.domain,
     required this.access_token,
   }) {
-    _dio = Dio(BaseOptions(baseUrl: domain));
     apiGraphql = domain;
 
     _graphqlLink = HttpLink(
@@ -29,7 +27,6 @@ class ApiProjectService {
   String regcode;
   late String apiGraphql;
 
-  late Dio _dio;
   late HttpLink _graphqlLink;
 
   Future<Map<String, dynamic>> mutationhqlQuery(
@@ -56,7 +53,7 @@ class ApiProjectService {
   Future<GraphQLClient> getClientGraphQL() async {
     late AuthLink authLink;
 
-    if (access_token == null) {
+    if (access_token.isEmpty) {
       authLink = AuthLink(getToken: () => 'Bearer ');
     } else if (expireDate == null ||
         expireDate!.compareTo(DateTime.now()) < 0) {

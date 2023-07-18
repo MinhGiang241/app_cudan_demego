@@ -54,7 +54,8 @@ class ElectricFee {
                       (map['electric_fee'] as List<dynamic>)
                           .map<ElectricFeeDetail?>(
                         (x) => ElectricFeeDetail.fromMap(
-                            x as Map<String, dynamic>),
+                          x as Map<String, dynamic>,
+                        ),
                       ),
                     )
                   : null

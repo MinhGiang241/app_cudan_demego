@@ -57,7 +57,7 @@ class AssetStorage {
     String? unit,
     String? supplierId,
     String? asset_type,
-    dynamic? file,
+    dynamic file,
     List<FileUploadModel>? image_asset,
     String? receive_date,
     String? shelfLifeId,

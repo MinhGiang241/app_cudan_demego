@@ -64,7 +64,8 @@ class UserAccountHO {
           map['updatedTime'] != null ? map['updatedTime'] as String : null,
       resident: map['resident'] != null
           ? ResponseResidentInfo.fromJson(
-              map['resident'] as Map<String, dynamic>)
+              map['resident'] as Map<String, dynamic>,
+            )
           : null,
       user: map['user'] != null
           ? Account.fromJson(map['user'] as Map<String, dynamic>)

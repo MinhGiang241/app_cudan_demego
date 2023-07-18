@@ -2,7 +2,6 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
@@ -13,9 +12,7 @@ import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
 import 'prv/auth_prv.dart';
 import 'prv/sign_up_prv.dart';
-import 'prv/verify_otp_prv.dart';
 import 'sign_in_screen.dart';
-import 'verify_otp_screen.dart';
 import 'widgets/term_policies.dart';
 
 class SignUpScreen extends StatefulWidget {

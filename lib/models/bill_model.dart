@@ -12,15 +12,16 @@ class BillModel {
   bool isSelected;
   Receipt re;
 
-  BillModel(
-      {this.id,
-      required this.re,
-      this.name,
-      this.code,
-      this.content,
-      this.vat,
-      this.price,
-      this.status,
-      this.date,
-      this.isSelected = false});
+  BillModel({
+    this.id,
+    required this.re,
+    this.name,
+    this.code,
+    this.content,
+    this.vat,
+    this.price,
+    this.status,
+    this.date,
+    this.isSelected = false,
+  });
 }

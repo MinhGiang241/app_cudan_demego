@@ -16,19 +16,23 @@ class InfoContentView {
   final String? rowKey;
   final Widget? widget;
 
-  InfoContentView(
-      {required this.title,
-      this.rowKey,
-      this.content,
-      this.images,
-      this.files,
-      this.isCheckType = false,
-      this.isCheck = false,
-      this.isHorizontal = false,
-      this.widget,
-      this.dateRange,
-      this.contentStyle = const TextStyle(
-          fontFamily: family, fontSize: 14, fontWeight: FontWeight.w600)});
+  InfoContentView({
+    required this.title,
+    this.rowKey,
+    this.content,
+    this.images,
+    this.files,
+    this.isCheckType = false,
+    this.isCheck = false,
+    this.isHorizontal = false,
+    this.widget,
+    this.dateRange,
+    this.contentStyle = const TextStyle(
+      fontFamily: family,
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+    ),
+  });
 }
 
 genStatus(String status) {

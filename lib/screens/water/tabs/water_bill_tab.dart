@@ -1,7 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -320,8 +318,9 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                       align: Alignment.centerRight,
                                     ),
                                     genCell(
-                                        text:
-                                            "${formatter.format(receipt.vat ?? 0)}%"),
+                                      text:
+                                          "${formatter.format(receipt.vat ?? 0)}%",
+                                    ),
                                     genCell(
                                       text: formatter.format(vat).toString(),
                                     ),

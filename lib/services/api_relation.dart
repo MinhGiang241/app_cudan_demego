@@ -21,10 +21,12 @@ class APIRelation {
       }
     }
 ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 1000}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 

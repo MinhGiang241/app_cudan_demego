@@ -1,4 +1,3 @@
-import 'package:app_cudan/screens/account/plan_info/widgets/recident_info_tab.dart';
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
@@ -10,7 +9,6 @@ import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/api_constant.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/api_service.dart';

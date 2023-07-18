@@ -26,10 +26,12 @@ class APIProvince {
       }
     }
     ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 1000}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 
@@ -54,7 +56,9 @@ class APIProvince {
         
     ''';
     final MutationOptions options = MutationOptions(
-        document: gql(query), variables: {"provinceCode": provinceCode});
+      document: gql(query),
+      variables: {"provinceCode": provinceCode},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -80,7 +84,9 @@ class APIProvince {
         
     ''';
     final MutationOptions options = MutationOptions(
-        document: gql(query), variables: {"districtCode": districtCode});
+      document: gql(query),
+      variables: {"districtCode": districtCode},
+    );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
 
@@ -108,10 +114,12 @@ class APIProvince {
 	}
 }
     ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 60}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 60}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(
       options,
@@ -140,10 +148,12 @@ class APIProvince {
     }
     }
     ''';
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: const {
-      "filter": {"limit": 1000}
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: const {
+        "filter": {"limit": 1000}
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(
       options,

@@ -16,9 +16,12 @@ class APINew {
       }
     }
     ''';
-    final QueryOptions options = QueryOptions(document: gql(query), variables: {
-      "data": data,
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 
@@ -32,7 +35,11 @@ class APINew {
   }
 
   static Future getNewList(
-      int limit, int skip, String type, String accountId) async {
+    int limit,
+    int skip,
+    String type,
+    String accountId,
+  ) async {
 //     var query = '''
 //     query (\$filter: GeneralCollectionFilterInput){
 // 	response: query_Newss_dto(filter:\$filter){
@@ -68,12 +75,15 @@ class APINew {
          
     ''';
 
-    final QueryOptions options = QueryOptions(document: gql(query), variables: {
-      "limit": limit,
-      "skip": skip,
-      "type": type,
-      "accountId": accountId
-    });
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        "limit": limit,
+        "skip": skip,
+        "type": type,
+        "accountId": accountId
+      },
+    );
 
     final results = await ApiService.shared.graphqlQuery(options);
 

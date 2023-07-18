@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
@@ -28,7 +30,7 @@ class ListOwn extends HiveObject {
 //   }
 
 //   @override
-//   // TODO: implement typeId
+//    implement typeId
 //   int get typeId => 1;
 // }
 
@@ -95,13 +97,16 @@ class PrfData {
 
   Future<void> deleteListApartment() async {
     return await _listApartmentBox.deleteAll(
-        List.generate(_listApartmentBox.length, (index) => index.toString()));
+      List.generate(_listApartmentBox.length, (index) => index.toString()),
+    );
   }
 
   setListApartment(List<ResponseResidentOwn> list) {
     list.asMap().entries.forEach((e) async {
       await _listApartmentBox.put(
-          e.key.toString(), jsonEncode(e.value.toJson()).toString());
+        e.key.toString(),
+        jsonEncode(e.value.toJson()).toString(),
+      );
     });
     return;
   }
@@ -110,8 +115,11 @@ class PrfData {
     List<ResponseResidentOwn> list = [];
 
     for (var i = 0; i < _listApartmentBox.length; i++) {
-      list.add(ResponseResidentOwn.fromJson(
-          jsonDecode(_listApartmentBox.get(i.toString()))));
+      list.add(
+        ResponseResidentOwn.fromJson(
+          jsonDecode(_listApartmentBox.get(i.toString())),
+        ),
+      );
     }
     return list;
   }
