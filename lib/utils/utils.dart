@@ -1,21 +1,17 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:open_file_plus/open_file_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:timeago/timeago.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../models/selection_model.dart';
@@ -164,7 +160,7 @@ class Utils {
     if (date.isEmpty) {
       return "";
     }
-    DateTime dateTime = DateTime.parse(date);
+    //DateTime dateTime = DateTime.parse(date);
     return '';
 
     //  timeago.format(dateTime,
@@ -744,6 +740,7 @@ class Utils {
 
   static showSnackBar(BuildContext context, String title) {
     showTopSnackBar(
+      // ignore: unnecessary_cast
       Overlay.of(context) as OverlayState,
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -762,23 +759,6 @@ class Utils {
       animationDuration: const Duration(milliseconds: 1000),
       displayDuration: const Duration(milliseconds: 1500),
     );
-
-    // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     behavior: SnackBarBehavior.floating,
-    //     margin: EdgeInsets.only(
-    //         bottom: MediaQuery.of(context).size.height - 100,
-    //         right: 20,
-    //         left: 20),
-    //     duration: const Duration(seconds: 1),
-    //     backgroundColor: primaryColorBase,
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(12),
-    //     ),
-    //     content: Text(title),
-    //   ),
-    // );
   }
 
   static downloadFile({
@@ -796,8 +776,12 @@ class Utils {
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
       if (Platform.isIOS) {
-        launchUrl(Uri.parse(url ??
-            "${ApiService.shared.uploadURL}?load=$id&regcode=${ApiService.shared.regCode}"));
+        launchUrl(
+          Uri.parse(
+            url ??
+                "${ApiService.shared.uploadURL}?load=$id&regcode=${ApiService.shared.regCode}",
+          ),
+        );
       } else {
         var taskId = await FlutterDownloader.enqueue(
           url: url ??

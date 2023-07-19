@@ -19,6 +19,8 @@ class ResidentInfoPrv extends ChangeNotifier {
     await APITower.getUserOwnInfo(
       residentId ?? '',
     ).then((v) async {
+      var a = residentId;
+      print(a);
       listOwn.clear();
       listOwnAll.clear();
       v.forEach((i) {
@@ -26,7 +28,8 @@ class ResidentInfoPrv extends ChangeNotifier {
         if (i['status'] == 'ACTIVE' &&
             (i['type'] == 'BUY' ||
                 i['type'] == 'RENT' ||
-                i['type'] == 'DEPENDENT_HOST')) {
+                i['type'] == 'DEPENDENT_HOST' ||
+                i['type'] == 'DEPENDENT_RENT')) {
           listOwn.add(ResponseResidentOwn.fromJson(i));
         }
       });

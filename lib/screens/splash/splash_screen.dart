@@ -1,12 +1,7 @@
-import 'package:app_cudan/screens/auth/prv/auth_prv.dart';
-import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../services/prf_data.dart';
-import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
@@ -61,8 +56,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: SizedBox(
                     height: dvHeight(context) * 1.2,
                     width: dvWidth(context) * 1.2,
-                    child: Image.asset(AppImage.splashBackground,
-                        fit: BoxFit.cover),
+                    child: Image.asset(
+                      AppImage.splashBackground,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -74,21 +71,32 @@ class _SplashScreenState extends State<SplashScreen> {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      Image.asset(AppImage.demeproLogo,
-                          width: dvWidth(context) / 4),
+                      Image.asset(
+                        AppImage.demeproLogo,
+                        width: dvWidth(context) / 4,
+                      ),
                       vpad(16),
-                      Text.rich(TextSpan(children: [
-                        TextSpan(text: "DEME", style: txtBold(24)),
-                        TextSpan(text: "PRO", style: txtBold(24, yellowColor1)),
-                      ])),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(text: "DEME", style: txtBold(24)),
+                            TextSpan(
+                              text: "PRO",
+                              style: txtBold(24, yellowColor1),
+                            ),
+                          ],
+                        ),
+                      ),
                       vpad(8),
                       Text(
                         S.of(context).w,
                         style: txtBold(14, grayScaleColor2),
                       ),
                       vpad(8),
-                      Image.asset(AppImage.illustration,
-                          width: dvWidth(context) * 0.8),
+                      Image.asset(
+                        AppImage.illustration,
+                        width: dvWidth(context) * 0.8,
+                      ),
                       vpad(24),
                     ],
                   ),
@@ -105,11 +113,16 @@ class _SplashScreenState extends State<SplashScreen> {
                     switchOutCurve: Curves.elasticIn,
                     transitionBuilder: (child, animate) {
                       return Center(
-                          child: SlideTransition(
-                        position: animate.drive(Tween<Offset>(
-                            begin: const Offset(0, 1), end: Offset.zero)),
-                        child: FadeTransition(opacity: animate, child: child),
-                      ));
+                        child: SlideTransition(
+                          position: animate.drive(
+                            Tween<Offset>(
+                              begin: const Offset(0, 1),
+                              end: Offset.zero,
+                            ),
+                          ),
+                          child: FadeTransition(opacity: animate, child: child),
+                        ),
+                      );
                     },
                     child: widget.isUnathen
                         ? Column(

@@ -10,18 +10,44 @@ class NotificationPrv extends ChangeNotifier {
   int skip = 0;
   String selectedType = '';
 
+  var key = UniqueKey();
+
+  resetSelectType() {
+    selectedType = '';
+  }
+
   List<NotificationAccessor> notificationList = [];
   List<NotificationType> notiTypeList = [];
+  List<UnReadCount> unReadCount = [];
+  markReadNotification(String? id, int index) async {
+    var a = id;
+    print(a);
+    notificationList[index].isRead = true;
+    notifyListeners();
+    await APINotification.markReadNotification(id);
+    await getUnReadNotification();
+  }
 
   setSelectedType(String typeID) async {
     selectedType = typeID;
-    await getNotiflcationList(true);
+    key = UniqueKey();
+    //await getNotiflcationList(true);
     notifyListeners();
   }
 
-  Future getUnReadNotification(BuildContext context) async {
+  Future getUnReadNotification() async {
     await APINotification.getUnreadNotfication().then((v) {
-      unRead = v != null ? v.length : 0;
+      unRead = 0;
+      if (v != null) {
+        unReadCount.clear();
+        for (var i in v) {
+          unRead += i['total'] as int;
+          unReadCount.add(UnReadCount.fromMap(i));
+        }
+      } else {
+        unRead = 0;
+      }
+      notifyListeners();
     });
   }
 
@@ -64,6 +90,7 @@ class NotificationPrv extends ChangeNotifier {
         }
       }
       print(notificationList);
+      notifyListeners();
     });
   }
 }

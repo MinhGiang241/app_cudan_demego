@@ -22,6 +22,7 @@ import '../screens/ho/select_project_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/news/new_details_screen.dart';
 import '../screens/news/news_screen.dart';
+import '../screens/notification/notification_detail_screen.dart';
 import '../screens/notification/notification_screen.dart';
 import '../screens/payment/bill_details_screen.dart';
 import '../screens/payment/payment_list_screen.dart';
@@ -91,11 +92,12 @@ class AppRoutes {
         );
       case SignUpScreen.routeName:
         return MaterialPageRoute(
-            settings: routeSetting,
-            builder: (_) => ChangeNotifierProvider(
-                create: (context) =>
-                    SignUpPrv(authPrv: context.read<AuthPrv>()),
-                builder: (context, child) => const SignUpScreen()));
+          settings: routeSetting,
+          builder: (_) => ChangeNotifierProvider(
+            create: (context) => SignUpPrv(authPrv: context.read<AuthPrv>()),
+            builder: (context, child) => const SignUpScreen(),
+          ),
+        );
 
       case PhoneNumForgotPassScreen.routeName:
         return MaterialPageRoute(
@@ -105,11 +107,12 @@ class AppRoutes {
 
       case HomeScreen.routeName:
         return MaterialPageRoute(
-            settings: routeSetting,
-            builder: (_) => ChangeNotifierProvider(
-                create: (context) =>
-                    SignUpPrv(authPrv: context.read<AuthPrv>()),
-                builder: (context, child) => const HomeScreen()));
+          settings: routeSetting,
+          builder: (_) => ChangeNotifierProvider(
+            create: (context) => SignUpPrv(authPrv: context.read<AuthPrv>()),
+            builder: (context, child) => const HomeScreen(),
+          ),
+        );
       case ProjectSelectionScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
@@ -418,7 +421,11 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => const ResidentRegistrationDetailsScreen(),
         );
-
+      case NotificationDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => const NotificationDetailsScreen(),
+        );
       default:
         return MaterialPageRoute(
           settings: routeSetting,

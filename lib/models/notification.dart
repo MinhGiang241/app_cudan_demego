@@ -381,3 +381,33 @@ class NotifyMessage {
     );
   }
 }
+
+class UnReadCount {
+  String? id;
+  int? total;
+  UnReadCount({
+    this.id,
+    this.total,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'total': total,
+    };
+  }
+
+  factory UnReadCount.fromMap(Map<String, dynamic> map) {
+    return UnReadCount(
+      id: map['id'] != null ? map['id'] as String : null,
+      total: int.tryParse(map['total'].toString()) != null
+          ? int.parse(map['total'].toString())
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UnReadCount.fromJson(String source) =>
+      UnReadCount.fromMap(json.decode(source) as Map<String, dynamic>);
+}

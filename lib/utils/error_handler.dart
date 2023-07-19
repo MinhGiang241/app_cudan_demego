@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:graphql/client.dart';
-
 import '../generated/l10n.dart';
 
 enum ErrorType {

@@ -33,7 +33,7 @@ class HeaderTitle extends StatelessWidget {
         ),
       ),
       trailing: FutureBuilder(
-        future: context.read<NotificationPrv>().getUnReadNotification(context),
+        future: context.read<NotificationPrv>().getUnReadNotification(),
         builder: (context, snapshot) {
           var badgeNum = context.watch<NotificationPrv>().unRead;
           return PrimaryIcon(
@@ -42,6 +42,7 @@ class HeaderTitle extends StatelessWidget {
             color: grayScaleColor2,
             badge: badgeNum != 0 ? "${badgeNum}" : null,
             onTap: () {
+              context.read<NotificationPrv>().resetSelectType();
               Navigator.pushNamed(context, NotificationScreen.routeName);
             },
           );

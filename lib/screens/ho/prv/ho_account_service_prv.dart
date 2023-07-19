@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_extra_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +66,7 @@ class HOAccountServicePrv extends ChangeNotifier {
       if (a != null) {
         var userHO = UserAccountHO.fromMap(a);
         await firebase.push_device(userHO.user?.userName ?? "");
-        context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
+        await context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
       }
 
       await context.read<ResidentInfoPrv>().setListOwn(context);
@@ -118,6 +119,7 @@ class HOAccountServicePrv extends ChangeNotifier {
                     buttonType: ButtonType.secondary,
                     secondaryBackgroundColor: redColor2,
                     onTap: () async {
+                      ApiService.shared.clearToken();
                       Utils.pop(context, true);
                       PrfData.shared.deleteApartment();
                       authStatus = AuthStatus.unauthen;

@@ -33,6 +33,11 @@ class ApiService {
   String? access_token;
   DateTime? expireDate;
 
+  clearToken() {
+    access_token = null;
+    expireDate = null;
+  }
+
   setAPI(
     String URL,
     String? access_tokenHO,
