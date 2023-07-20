@@ -1,5 +1,4 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
-import 'package:app_cudan/screens/notification/prv/notification_prv.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

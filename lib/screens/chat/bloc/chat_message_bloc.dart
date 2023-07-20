@@ -2,14 +2,11 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
 import 'package:app_cudan/services/api_chat.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:rocket_chat_flutter_connector/services/authentication_service.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:uuid/uuid.dart';
@@ -132,6 +129,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
         AuthenticationService(WebsocketConnect.rocketHttpService);
     var authen = await authenticationService
         .login(WebsocketConnect.username, WebsocketConnect.password)
+        // ignore: body_might_complete_normally_catch_error
         .catchError((e) {
       // Utils.showErrorMessage(context, e.toString());
     });

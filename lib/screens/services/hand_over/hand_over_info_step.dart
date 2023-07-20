@@ -6,8 +6,6 @@ import 'package:app_cudan/screens/services/hand_over/prv/accept_hand_over_prv.da
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +14,6 @@ import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';
-import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_dropdown.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_text_field.dart';

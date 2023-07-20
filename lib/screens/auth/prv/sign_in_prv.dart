@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../services/api_ho_service.dart';
 import '../../../services/prf_data.dart';
-import '../../../utils/utils.dart';
 import '../../ho/prv/ho_account_service_prv.dart';
 import 'auth_prv.dart';
 
@@ -44,8 +42,12 @@ class SingInPrv extends ChangeNotifier {
       //     .onSignIn(context, accountController.text, passController.text)
       await context
           .read<HOAccountServicePrv>()
-          .loginHO(accountController.text.trim(), passController.text.trim(),
-              context, remember)
+          .loginHO(
+            accountController.text.trim(),
+            passController.text.trim(),
+            context,
+            remember,
+          )
           .then((value) async {
         isLoading = false;
         notifyListeners();

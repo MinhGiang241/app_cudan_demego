@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../constants/constants.dart';
-import '../generated/l10n.dart';
 
+// ignore: must_be_immutable
 class PrimaryTabBar extends StatelessWidget {
   PrimaryTabBar({
     super.key,
@@ -32,10 +30,11 @@ class PrimaryTabBar extends StatelessWidget {
           tabs: titles
               .map(
                 (e) => Tab(
-                    child: Text(
-                  e,
-                  style: txtBodySmallBold(),
-                )),
+                  child: Text(
+                    e,
+                    style: txtBodySmallBold(),
+                  ),
+                ),
               )
               .toList(),
         ),

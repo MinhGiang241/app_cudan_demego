@@ -63,7 +63,11 @@ class RegisterLostItemPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       try {
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          24,
+        );
 
         var listError = [];
 
@@ -93,17 +97,21 @@ class RegisterLostItemPrv extends ChangeNotifier {
           return APILost.saveLostItem(lost.toJson());
         }).then((v) {
           Utils.showSuccessMessage(
-              context: context,
-              e: S.of(context).success_send_letter,
-              onClose: () {
-                Navigator.pushNamedAndRemoveUntil(context,
-                    MissingObectScreen.routeName, (route) => route.isFirst,
-                    arguments: {
-                      "year": lostDate!.year,
-                      "month": lostDate!.month,
-                      "index": 0,
-                    });
-              });
+            context: context,
+            e: S.of(context).success_send_letter,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                MissingObectScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "year": lostDate!.year,
+                  "month": lostDate!.month,
+                  "index": 0,
+                },
+              );
+            },
+          );
           isLoading = false;
           validateName = null;
           validateLostTime = null;
@@ -183,9 +191,9 @@ class RegisterLostItemPrv extends ChangeNotifier {
 
   pickLostHour(BuildContext context) {
     showTimePicker(
-            context: context,
-            initialTime: lostHour ?? const TimeOfDay(hour: 0, minute: 0))
-        .then((v) {
+      context: context,
+      initialTime: lostHour ?? const TimeOfDay(hour: 0, minute: 0),
+    ).then((v) {
       if (v != null) {
         lostHour = v;
         lostHourController.text =

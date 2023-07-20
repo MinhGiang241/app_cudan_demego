@@ -2,11 +2,11 @@ import 'package:app_cudan/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
-import '../models/construction.dart';
 import '../models/timeline_model.dart';
 import '../utils/utils.dart';
 import 'primary_card.dart';
 
+// ignore: must_be_immutable
 class TimeLineView extends StatelessWidget {
   TimeLineView({Key? key, this.content = const []}) : super(key: key);
   List<TimelineModel> content = [];

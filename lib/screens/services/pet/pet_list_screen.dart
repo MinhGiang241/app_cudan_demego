@@ -3,12 +3,9 @@ import 'package:app_cudan/screens/services/pet/prv/pet_list_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
@@ -46,14 +43,19 @@ class _PetListScreenState extends State<PetListScreen> {
             title: S.of(context).reg_pet_list,
             leading: BackButton(
               onPressed: () => Navigator.pushReplacementNamed(
-                  context, ServiceScreen.routeName),
+                context,
+                ServiceScreen.routeName,
+              ),
             ),
           ),
           floatingActionButton: FloatingActionButton(
             tooltip: S.of(context).reg_pet,
             onPressed: () {
-              Navigator.pushNamed(context, RegisterPetScreen.routeName,
-                  arguments: {"isEdit": false});
+              Navigator.pushNamed(
+                context,
+                RegisterPetScreen.routeName,
+                arguments: {"isEdit": false},
+              );
             },
             backgroundColor: primaryColorBase,
             child: const Icon(
@@ -95,18 +97,20 @@ class _PetListScreenState extends State<PetListScreen> {
                 return const Center(child: PrimaryLoading());
               } else if (snapshot.connectionState == ConnectionState.none) {
                 return PrimaryErrorWidget(
-                    code: snapshot.hasError ? "err" : "1",
-                    message: snapshot.data.toString(),
-                    onRetry: () async {
-                      setState(() {});
-                    });
+                  code: snapshot.hasError ? "err" : "1",
+                  message: snapshot.data.toString(),
+                  onRetry: () async {
+                    setState(() {});
+                  },
+                );
               } else if (list.isEmpty) {
                 return SafeArea(
                   child: SmartRefresher(
                     enablePullDown: true,
                     enablePullUp: false,
                     header: WaterDropMaterialHeader(
-                        backgroundColor: Theme.of(context).primaryColor),
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
                     controller: _refreshController,
                     onRefresh: () {
                       setState(() {});
@@ -126,7 +130,8 @@ class _PetListScreenState extends State<PetListScreen> {
                   enablePullDown: true,
                   enablePullUp: false,
                   header: WaterDropMaterialHeader(
-                      backgroundColor: Theme.of(context).primaryColor),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
                   controller: _refreshController,
                   onRefresh: () {
                     setState(() {});
@@ -195,7 +200,8 @@ class _PetListScreenState extends State<PetListScreen> {
                                   vpad(12),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                      horizontal: 16,
+                                    ),
                                     child: Table(
                                       textBaseline: TextBaseline.ideographic,
                                       defaultVerticalAlignment:
@@ -208,60 +214,77 @@ class _PetListScreenState extends State<PetListScreen> {
                                         ...listContent.map<TableRow>((i) {
                                           if (i.images != null &&
                                               i.images!.isNotEmpty) {
-                                            return TableRow(children: [
+                                            return TableRow(
+                                              children: [
+                                                TableCell(
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        bottom: 20,
+                                                      ),
+                                                      child: Text(
+                                                        i.title,
+                                                        style: txtMedium(
+                                                          12,
+                                                          grayScaleColor2,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  verticalAlignment:
+                                                      TableCellVerticalAlignment
+                                                          .top,
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: Row(
+                                                        children: [
+                                                          ...i.images!.map(
+                                                            (o) =>
+                                                                PrimaryImageNetwork(
+                                                              path: o,
+                                                              width: 60,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          }
+                                          return TableRow(
+                                            children: [
                                               TableCell(
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 20),
-                                                    child: Text(
-                                                      i.title,
-                                                      style: txtMedium(
-                                                          12, grayScaleColor2),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    bottom: 16,
+                                                  ),
+                                                  child: Text(
+                                                    i.title,
+                                                    style: txtMedium(
+                                                      12,
+                                                      grayScaleColor2,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                               TableCell(
-                                                verticalAlignment:
-                                                    TableCellVerticalAlignment
-                                                        .top,
-                                                child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: SingleChildScrollView(
-                                                      child: Row(
-                                                    children: [
-                                                      ...i.images!.map((o) =>
-                                                          PrimaryImageNetwork(
-                                                            path: o,
-                                                            width: 60,
-                                                          ))
-                                                    ],
-                                                  )),
+                                                child: Text(
+                                                  i.content ?? "",
+                                                  style: i.contentStyle,
                                                 ),
                                               )
-                                            ]);
-                                          }
-                                          return TableRow(children: [
-                                            TableCell(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 16),
-                                                child: Text(
-                                                  i.title,
-                                                  style: txtMedium(
-                                                      12, grayScaleColor2),
-                                                ),
-                                              ),
-                                            ),
-                                            TableCell(
-                                              child: Text(i.content ?? "",
-                                                  style: i.contentStyle),
-                                            )
-                                          ]);
+                                            ],
+                                          );
                                         })
                                       ],
                                     ),
@@ -275,7 +298,9 @@ class _PetListScreenState extends State<PetListScreen> {
                                             context
                                                 .read<PetListPrv>()
                                                 .cancelRequetsAprrove(
-                                                    context, e);
+                                                  context,
+                                                  e,
+                                                );
                                           },
                                           text: S.of(context).cancel_register,
                                           buttonSize: ButtonSize.xsmall,
@@ -309,12 +334,14 @@ class _PetListScreenState extends State<PetListScreen> {
                                         Expanded(
                                           child: PrimaryButton(
                                             onTap: () {
-                                              Navigator.pushNamed(context,
-                                                  RegisterPetScreen.routeName,
-                                                  arguments: {
-                                                    "isEdit": true,
-                                                    "data": e,
-                                                  });
+                                              Navigator.pushNamed(
+                                                context,
+                                                RegisterPetScreen.routeName,
+                                                arguments: {
+                                                  "isEdit": true,
+                                                  "data": e,
+                                                },
+                                              );
                                             },
                                             text: S.of(context).edit,
                                             buttonSize: ButtonSize.xsmall,

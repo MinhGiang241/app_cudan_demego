@@ -1,7 +1,6 @@
 import 'package:app_cudan/models/extra_service.dart';
 import 'package:app_cudan/models/service_registration.dart';
 import 'package:app_cudan/services/api_extra_service.dart';
-import 'package:app_cudan/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../generated/l10n.dart';

@@ -4,7 +4,6 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_auth.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
-import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -219,6 +218,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     );
   }
 
+  // ignore: unused_element
   String _genderString(BuildContext context, String? gen) {
     if (gen == "Male") {
       return S.of(context).male;

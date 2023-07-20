@@ -2,8 +2,6 @@ import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -28,126 +26,117 @@ class _RegisterLostItemScreenState extends State<RegisterLostItemScreen> {
       create: (context) => RegisterLostItemPrv(),
       builder: (context, child) {
         return PrimaryScreen(
-            appBar: PrimaryAppbar(
-              title: S.of(context).reg_missing_obj,
-            ),
-            body: SafeArea(
-              child: Form(
-                onChanged: context.watch<RegisterLostItemPrv>().autoValid
-                    ? () =>
-                        context.read<RegisterLostItemPrv>().validate(context)
-                    : null,
-                autovalidateMode: context.watch<RegisterLostItemPrv>().autoValid
-                    ? AutovalidateMode.onUserInteraction
-                    : null,
-                key: context.read<RegisterLostItemPrv>().formKey,
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  children: [
-                    vpad(24),
-                    PrimaryTextField(
-                      maxLength: 255,
-                      validateString:
-                          context.read<RegisterLostItemPrv>().validateName,
-                      controller:
-                          context.read<RegisterLostItemPrv>().nameController,
-                      label: S.of(context).object_name,
-                      isRequired: true,
-                      hint: S.of(context).object_name,
-                      validator: (v) {
-                        if (v!.isEmpty) {
-                          return '';
-                        }
-                        return null;
-                      },
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      validateString:
-                          context.read<RegisterLostItemPrv>().validateLostTime,
-                      controller: context
-                          .read<RegisterLostItemPrv>()
-                          .lostDateController,
-                      label: S.of(context).missing_time,
-                      isRequired: true,
-                      isReadOnly: true,
-                      hint: "dd/mm/yyyy",
-                      onTap: () {
-                        context
-                            .read<RegisterLostItemPrv>()
-                            .pickLostDate(context);
-                      },
-                      suffixIcon:
-                          const PrimaryIcon(icons: PrimaryIcons.calendar),
-                      validator: (v) {
-                        if (v!.isEmpty) {
-                          return '';
-                        }
-                        return null;
-                      },
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      validateString:
-                          context.read<RegisterLostItemPrv>().validateLostHour,
-                      controller: context
-                          .read<RegisterLostItemPrv>()
-                          .lostHourController,
-                      label: S.of(context).lost_time,
-                      isRequired: true,
-                      isReadOnly: true,
-                      hint: "hh:mm",
-                      onTap: () {
-                        context
-                            .read<RegisterLostItemPrv>()
-                            .pickLostHour(context);
-                      },
-                      suffixIcon:
-                          const PrimaryIcon(icons: PrimaryIcons.calendar),
-                      validator: (v) {
-                        if (v!.isEmpty) {
-                          return '';
-                        }
-                        return null;
-                      },
-                    ),
-                    vpad(16),
-                    SelectMediaWidget(
-                      title: S.of(context).photos,
-                      existImages:
-                          context.watch<RegisterLostItemPrv>().existedImage,
-                      images: context.watch<RegisterLostItemPrv>().imagesLost,
-                      onRemove:
-                          context.read<RegisterLostItemPrv>().onRemoveImageLost,
-                      onRemoveExist: context
-                          .read<RegisterLostItemPrv>()
-                          .removeExistedImages,
-                      onSelect: () => context
-                          .read<RegisterLostItemPrv>()
-                          .onSelectImageLost(context),
-                    ),
-                    vpad(16),
-                    PrimaryTextField(
-                      maxLength: 500,
-                      hint: S.of(context).note,
-                      controller:
-                          context.read<RegisterLostItemPrv>().noteController,
-                      label: S.of(context).note,
-                      maxLines: 3,
-                    ),
-                    vpad(30),
-                    PrimaryButton(
-                      isLoading: context.watch<RegisterLostItemPrv>().isLoading,
-                      text: S.of(context).send_letter,
-                      onTap: () => context
-                          .read<RegisterLostItemPrv>()
-                          .submitRegisterLost(context),
-                    ),
-                    vpad(40),
-                  ],
-                ),
+          appBar: PrimaryAppbar(
+            title: S.of(context).reg_missing_obj,
+          ),
+          body: SafeArea(
+            child: Form(
+              onChanged: context.watch<RegisterLostItemPrv>().autoValid
+                  ? () => context.read<RegisterLostItemPrv>().validate(context)
+                  : null,
+              autovalidateMode: context.watch<RegisterLostItemPrv>().autoValid
+                  ? AutovalidateMode.onUserInteraction
+                  : null,
+              key: context.read<RegisterLostItemPrv>().formKey,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                children: [
+                  vpad(24),
+                  PrimaryTextField(
+                    maxLength: 255,
+                    validateString:
+                        context.read<RegisterLostItemPrv>().validateName,
+                    controller:
+                        context.read<RegisterLostItemPrv>().nameController,
+                    label: S.of(context).object_name,
+                    isRequired: true,
+                    hint: S.of(context).object_name,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return '';
+                      }
+                      return null;
+                    },
+                  ),
+                  vpad(16),
+                  PrimaryTextField(
+                    validateString:
+                        context.read<RegisterLostItemPrv>().validateLostTime,
+                    controller:
+                        context.read<RegisterLostItemPrv>().lostDateController,
+                    label: S.of(context).missing_time,
+                    isRequired: true,
+                    isReadOnly: true,
+                    hint: "dd/mm/yyyy",
+                    onTap: () {
+                      context.read<RegisterLostItemPrv>().pickLostDate(context);
+                    },
+                    suffixIcon: const PrimaryIcon(icons: PrimaryIcons.calendar),
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return '';
+                      }
+                      return null;
+                    },
+                  ),
+                  vpad(16),
+                  PrimaryTextField(
+                    validateString:
+                        context.read<RegisterLostItemPrv>().validateLostHour,
+                    controller:
+                        context.read<RegisterLostItemPrv>().lostHourController,
+                    label: S.of(context).lost_time,
+                    isRequired: true,
+                    isReadOnly: true,
+                    hint: "hh:mm",
+                    onTap: () {
+                      context.read<RegisterLostItemPrv>().pickLostHour(context);
+                    },
+                    suffixIcon: const PrimaryIcon(icons: PrimaryIcons.calendar),
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return '';
+                      }
+                      return null;
+                    },
+                  ),
+                  vpad(16),
+                  SelectMediaWidget(
+                    title: S.of(context).photos,
+                    existImages:
+                        context.watch<RegisterLostItemPrv>().existedImage,
+                    images: context.watch<RegisterLostItemPrv>().imagesLost,
+                    onRemove:
+                        context.read<RegisterLostItemPrv>().onRemoveImageLost,
+                    onRemoveExist:
+                        context.read<RegisterLostItemPrv>().removeExistedImages,
+                    onSelect: () => context
+                        .read<RegisterLostItemPrv>()
+                        .onSelectImageLost(context),
+                  ),
+                  vpad(16),
+                  PrimaryTextField(
+                    maxLength: 500,
+                    hint: S.of(context).note,
+                    controller:
+                        context.read<RegisterLostItemPrv>().noteController,
+                    label: S.of(context).note,
+                    maxLines: 3,
+                  ),
+                  vpad(30),
+                  PrimaryButton(
+                    isLoading: context.watch<RegisterLostItemPrv>().isLoading,
+                    text: S.of(context).send_letter,
+                    onTap: () => context
+                        .read<RegisterLostItemPrv>()
+                        .submitRegisterLost(context),
+                  ),
+                  vpad(40),
+                ],
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }

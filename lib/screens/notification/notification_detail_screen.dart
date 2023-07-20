@@ -33,6 +33,10 @@ class NotificationDetailsScreen extends StatelessWidget {
         content: Utils.dateFormat(arg.message?.createdTime ?? '', 1),
         //contentStyle: txtBold(14, grayScaleColorBase),
       ),
+      // InfoContentView(
+      //   title: S.of(context).image,
+      //   images: arg.message
+      // )
     ];
     return PrimaryScreen(
       appBar: PrimaryAppbar(title: S.of(context).notification),

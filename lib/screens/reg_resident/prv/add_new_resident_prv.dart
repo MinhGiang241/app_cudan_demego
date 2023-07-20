@@ -4,9 +4,7 @@ import 'dart:io';
 
 import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/reg_resident/add_new_resident_screen.dart';
 import 'package:app_cudan/services/api_province.dart';
-import 'package:app_cudan/services/api_reflection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

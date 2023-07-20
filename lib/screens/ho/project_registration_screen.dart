@@ -1,8 +1,6 @@
 import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -15,7 +13,6 @@ import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
-import '../auth/prv/auth_prv.dart';
 import 'add_new_proj_reg_screen.dart';
 import 'prv/ho_account_service_prv.dart';
 import 'resident_registration_details_screen.dart';

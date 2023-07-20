@@ -2,6 +2,7 @@ import 'package:rocket_chat_flutter_connector/models/channel.dart';
 import 'package:rocket_chat_flutter_connector/models/room.dart';
 import 'package:rocket_chat_flutter_connector/services/http_service.dart'
     as rocket_http_service;
+// ignore: unused_import
 import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
 

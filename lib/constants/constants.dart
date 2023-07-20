@@ -97,46 +97,83 @@ const Color pinkColor4 = Color(0xffFFC5DD);
 const Color pinkColor5 = Color(0xffFFE9F2);
 
 const gradientBackground = LinearGradient(
-    colors: [Color(0xffFFFFFF), Color(0xffF6F5FF), Color(0xffDEE5FF)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [Color(0xffFFFFFF), Color(0xffF6F5FF), Color(0xffDEE5FF)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
-final gradientPrimary = LinearGradient(colors: [
-  const Color(0xff4A54FF).withOpacity(1),
-  const Color(0xff0066FF).withOpacity(0.8)
-], begin: Alignment.centerLeft, end: Alignment.centerRight);
-final gradientPrimaryGreen = LinearGradient(colors: [
-  const Color(0xff40BD45).withOpacity(1),
-  const Color(0xff40BD45).withOpacity(0.8)
-], begin: Alignment.centerLeft, end: Alignment.centerRight);
-final gradientPrimaryCyan = LinearGradient(colors: [
-  const Color(0xff4286C3).withOpacity(1),
-  const Color(0xff4286C3).withOpacity(0.8)
-], begin: Alignment.centerLeft, end: Alignment.centerRight);
-final gradientPrimaryGreen2 = LinearGradient(colors: [
-  const Color(0xff23D2C3).withOpacity(1),
-  const Color(0xff23D2C3).withOpacity(0.8)
-], begin: Alignment.centerLeft, end: Alignment.centerRight);
-final gradientPrimaryRed = LinearGradient(colors: [
-  const Color(0xffFF4141).withOpacity(1),
-  const Color(0xffFF4141).withOpacity(0.8)
-], begin: Alignment.centerLeft, end: Alignment.centerRight);
-final gradientPrimaryWhite = LinearGradient(colors: [
-  const Color(0xffFFFFFF).withOpacity(0.9),
-  const Color(0xffFFFFFF).withOpacity(0.7)
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
-final gradientPrimaryBlack = LinearGradient(colors: [
-  const Color(0xff4E4B66).withOpacity(0.9),
-  const Color(0xffA0A3BD).withOpacity(0.9)
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
-final gradientPrimaryYellow = LinearGradient(colors: [
-  const Color(0xffFFA900).withOpacity(0.9),
-  const Color(0xffFFBE34).withOpacity(0.9),
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
-final gradientPrimaryOrange = LinearGradient(colors: [
-  const Color(0xffFF9900).withOpacity(0.9),
-  const Color(0xffFF9900).withOpacity(0.7),
-], begin: Alignment.topLeft, end: Alignment.bottomRight);
+final gradientPrimary = LinearGradient(
+  colors: [
+    const Color(0xff4A54FF).withOpacity(1),
+    const Color(0xff0066FF).withOpacity(0.8)
+  ],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
+final gradientPrimaryGreen = LinearGradient(
+  colors: [
+    const Color(0xff40BD45).withOpacity(1),
+    const Color(0xff40BD45).withOpacity(0.8)
+  ],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
+final gradientPrimaryCyan = LinearGradient(
+  colors: [
+    const Color(0xff4286C3).withOpacity(1),
+    const Color(0xff4286C3).withOpacity(0.8)
+  ],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
+final gradientPrimaryGreen2 = LinearGradient(
+  colors: [
+    const Color(0xff23D2C3).withOpacity(1),
+    const Color(0xff23D2C3).withOpacity(0.8)
+  ],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
+final gradientPrimaryRed = LinearGradient(
+  colors: [
+    const Color(0xffFF4141).withOpacity(1),
+    const Color(0xffFF4141).withOpacity(0.8)
+  ],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
+final gradientPrimaryWhite = LinearGradient(
+  colors: [
+    const Color(0xffFFFFFF).withOpacity(0.9),
+    const Color(0xffFFFFFF).withOpacity(0.7)
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+final gradientPrimaryBlack = LinearGradient(
+  colors: [
+    const Color(0xff4E4B66).withOpacity(0.9),
+    const Color(0xffA0A3BD).withOpacity(0.9)
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+final gradientPrimaryYellow = LinearGradient(
+  colors: [
+    const Color(0xffFFA900).withOpacity(0.9),
+    const Color(0xffFFBE34).withOpacity(0.9),
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+final gradientPrimaryOrange = LinearGradient(
+  colors: [
+    const Color(0xffFF9900).withOpacity(0.9),
+    const Color(0xffFF9900).withOpacity(0.7),
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
 
 const Color blueColor = Color(0xff466FFF);
 const Color blueColor2 = Color(0xff4975FF);
@@ -150,51 +187,61 @@ const Color redColor = Color(0xffFF4141);
 const Color orangeColor = Color(0xFFF56420);
 
 final gradientBlue = LinearGradient(
-    colors: [const Color(0xff466FFF).withOpacity(0.6), const Color(0xff3462FF)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xff466FFF).withOpacity(0.6), const Color(0xff3462FF)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientTurquoise = LinearGradient(
-    colors: [const Color(0xff00BCE5).withOpacity(0.6), const Color(0xff02AACF)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xff00BCE5).withOpacity(0.6), const Color(0xff02AACF)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientGreen = LinearGradient(
-    colors: [const Color(0xff23D2C3).withOpacity(0.6), const Color(0xff01BCAD)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xff23D2C3).withOpacity(0.6), const Color(0xff01BCAD)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientPink = LinearGradient(
-    colors: [const Color(0xffFF4E98).withOpacity(0.6), const Color(0xffFF227F)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xffFF4E98).withOpacity(0.6), const Color(0xffFF227F)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientYellow = LinearGradient(
-    colors: [const Color(0xffFFBF35).withOpacity(0.6), const Color(0xffFFA900)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xffFFBF35).withOpacity(0.6), const Color(0xffFFA900)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 final gradientBrow = LinearGradient(
-    colors: [const Color(0xFFDB7C23).withOpacity(0.6), const Color(0xFFDB7C23)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xFFDB7C23).withOpacity(0.6), const Color(0xFFDB7C23)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 final gradientOrange = LinearGradient(
-    colors: [const Color(0xFFF56420).withOpacity(0.6), const Color(0xFFF56420)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xFFF56420).withOpacity(0.6), const Color(0xFFF56420)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientPurple = LinearGradient(
-    colors: [const Color(0xff6C4DDA).withOpacity(0.6), const Color(0xff522ED2)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xff6C4DDA).withOpacity(0.6), const Color(0xff522ED2)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 final gradientRed = LinearGradient(
-    colors: [const Color(0xffFF4141).withOpacity(0.6), const Color(0xffEB2323)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xffFF4141).withOpacity(0.6), const Color(0xffEB2323)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 final gradientBlack = LinearGradient(
-    colors: [const Color(0xff4E4B66).withOpacity(0.6), const Color(0xff4E4B66)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter);
+  colors: [const Color(0xff4E4B66).withOpacity(0.6), const Color(0xff4E4B66)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
 
 TextStyle txtDisplayLarge({Color? color}) => TextStyle(
       fontFamily: family,
@@ -203,45 +250,53 @@ TextStyle txtDisplayLarge({Color? color}) => TextStyle(
       color: color,
     );
 TextStyle txtDisplayMedium({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 24,
-    fontWeight: FontWeight.w700,
-    color: color);
+      fontFamily: family,
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+      color: color,
+    );
 TextStyle txtDisplaySmall({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 22,
-    fontWeight: FontWeight.w700,
-    color: color);
+      fontFamily: family,
+      fontSize: 22,
+      fontWeight: FontWeight.w700,
+      color: color,
+    );
 TextStyle txtDisplayXSmall({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 20,
-    fontWeight: FontWeight.w700,
-    color: color);
+      fontFamily: family,
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+      color: color,
+    );
 TextStyle txtLinkLarge({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    color: color);
+      fontFamily: family,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
 TextStyle txtLinkMedium({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    color: color);
+      fontFamily: family,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
 TextStyle txtLinkSmall({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: color);
+      fontFamily: family,
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
 TextStyle txtLinkXSmall({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 13,
-    fontWeight: FontWeight.w600,
-    color: color);
+      fontFamily: family,
+      fontSize: 13,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
 TextStyle txtLinkXXSmall({Color? color}) => TextStyle(
-    fontFamily: family,
-    fontSize: 11,
-    fontWeight: FontWeight.w600,
-    color: color);
+      fontFamily: family,
+      fontSize: 11,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
 
 TextStyle txtBodyLargeRegular({Color? color}) =>
     TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: color);
@@ -263,55 +318,63 @@ TextStyle txtBodyXSmallBold({Color? color}) =>
 
 TextStyle txtBoldUnderline([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        decoration: TextDecoration.underline,
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w700,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      decoration: TextDecoration.underline,
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w700,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtMediumUnderline([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        decoration: TextDecoration.underline,
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w500,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      decoration: TextDecoration.underline,
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w500,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtRegularUnderline([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        decoration: TextDecoration.underline,
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w400,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      decoration: TextDecoration.underline,
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w400,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtSemiBoldUnderline([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        decoration: TextDecoration.underline,
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w600,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      decoration: TextDecoration.underline,
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w600,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 
 TextStyle txtBold([double? size, Color? color, double? opacity]) => TextStyle(
-    fontFamily: family,
-    fontSize: size,
-    fontWeight: FontWeight.w700,
-    color: opacity != null ? color!.withOpacity(opacity) : color);
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w700,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtSemiBold([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w600,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w600,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtMedium([double? size, Color? color, double? opacity]) => TextStyle(
-    fontFamily: family,
-    fontSize: size,
-    fontWeight: FontWeight.w500,
-    color: opacity != null ? color!.withOpacity(opacity) : color);
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w500,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 TextStyle txtRegular([double? size, Color? color, double? opacity]) =>
     TextStyle(
-        fontFamily: family,
-        fontSize: size,
-        fontWeight: FontWeight.w400,
-        color: opacity != null ? color!.withOpacity(opacity) : color);
+      fontFamily: family,
+      fontSize: size,
+      fontWeight: FontWeight.w400,
+      color: opacity != null ? color!.withOpacity(opacity) : color,
+    );
 
 class AppImage {
   static const String qltnLogo = "assets/images/qltn_logo.png";

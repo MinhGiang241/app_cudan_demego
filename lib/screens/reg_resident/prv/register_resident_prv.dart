@@ -1,4 +1,3 @@
-import 'package:app_cudan/models/form_add_resident.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_resident_add_apartment.dart';
 import 'package:flutter/material.dart';

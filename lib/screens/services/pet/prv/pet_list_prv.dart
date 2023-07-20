@@ -27,8 +27,11 @@ class PetListPrv extends ChangeNotifier {
               context: context,
               e: S.of(context).success_can_req,
               onClose: () {
-                Navigator.pushNamedAndRemoveUntil(context,
-                    PetListScreen.routeName, ((route) => route.isFirst));
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  PetListScreen.routeName,
+                  ((route) => route.isFirst),
+                );
               },
             );
           },
@@ -41,47 +44,57 @@ class PetListPrv extends ChangeNotifier {
 
   deleteLetter(BuildContext context, Pet data) {
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).delete_letter,
-        content: S.of(context).confirm_delete_letter(data.code ?? ''),
-        onConfirm: () async {
-          Navigator.pop(context);
-          await APIPet.deletePet(data.id ?? "").then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_remove,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(context,
-                      PetListScreen.routeName, ((route) => route.isFirst));
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).delete_letter,
+      content: S.of(context).confirm_delete_letter(data.code ?? ''),
+      onConfirm: () async {
+        Navigator.pop(context);
+        await APIPet.deletePet(data.id ?? "").then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_remove,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                PetListScreen.routeName,
+                ((route) => route.isFirst),
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   sendToApprove(BuildContext context, Pet data) {
     data.pet_status = 'WAIT';
     data.isMobile = true;
     Utils.showConfirmMessage(
-        context: context,
-        title: S.of(context).send_request,
-        content: S.of(context).confirm_send_request(data.code ?? ""),
-        onConfirm: () {
-          Navigator.pop(context);
-          // APIPet.savePet(data.toJson())
-          APIPet.changeStatus(data.toJson()).then((v) {
-            Utils.showSuccessMessage(
-                context: context,
-                e: S.of(context).success_send_req,
-                onClose: () {
-                  Navigator.pushNamedAndRemoveUntil(context,
-                      PetListScreen.routeName, (route) => route.isFirst);
-                });
-          }).catchError((e) {
-            Utils.showErrorMessage(context, e);
-          });
+      context: context,
+      title: S.of(context).send_request,
+      content: S.of(context).confirm_send_request(data.code ?? ""),
+      onConfirm: () {
+        Navigator.pop(context);
+        // APIPet.savePet(data.toJson())
+        APIPet.changeStatus(data.toJson()).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_send_req,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                PetListScreen.routeName,
+                (route) => route.isFirst,
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
         });
+      },
+    );
   }
 
   getPetList(BuildContext context) async {

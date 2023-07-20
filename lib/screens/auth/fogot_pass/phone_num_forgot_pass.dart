@@ -3,15 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../utils/utils.dart';
-import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
-import '../../../widgets/primary_dialog.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/primary_text_field.dart';
 import '../prv/forgot_pass_prv.dart';
-import '../verify_otp_screen.dart';
-import 'option_send_otp.dart';
 
 class PhoneNumForgotPassScreen extends StatefulWidget {
   const PhoneNumForgotPassScreen({Key? key}) : super(key: key);

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
 import '../../../../models/manage_card.dart';
-import '../../../../models/resident_card.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../resident_card_details.dart';
 
+// ignore: must_be_immutable
 class ResidentCardTab extends StatelessWidget {
   ResidentCardTab({
     super.key,

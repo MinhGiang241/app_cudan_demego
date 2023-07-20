@@ -64,7 +64,11 @@ class PickItemPrv extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       try {
         var now = DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day, 24);
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          24,
+        );
         var listError = [];
         if (foundDate!.compareTo(now) > 0) {
           listError.add(S.of(context).find_time_now);
@@ -94,17 +98,21 @@ class PickItemPrv extends ChangeNotifier {
           return APILost.saveLootItem(loot.toJson());
         }).then((v) {
           Utils.showSuccessMessage(
-              context: context,
-              e: S.of(context).success_send_letter,
-              onClose: () {
-                Navigator.pushNamedAndRemoveUntil(context,
-                    MissingObectScreen.routeName, (route) => route.isFirst,
-                    arguments: {
-                      "year": foundDate!.year,
-                      "month": foundDate!.month,
-                      "index": 1,
-                    });
-              });
+            context: context,
+            e: S.of(context).success_send_letter,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                MissingObectScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  "year": foundDate!.year,
+                  "month": foundDate!.month,
+                  "index": 1,
+                },
+              );
+            },
+          );
           isLoading = false;
           validateName = null;
           validatePlace = null;

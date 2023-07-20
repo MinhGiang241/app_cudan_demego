@@ -29,11 +29,12 @@ class ConvinientServiceHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: yellowColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: yellowColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -49,9 +50,11 @@ class ConvinientServiceHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).shopping_represent,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).shopping_represent,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -63,11 +66,12 @@ class ConvinientServiceHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: turquoiseColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: turquoiseColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -83,9 +87,11 @@ class ConvinientServiceHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).shopping_online,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).shopping_online,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -97,11 +103,12 @@ class ConvinientServiceHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: greenColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: greenColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -117,9 +124,11 @@ class ConvinientServiceHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).housework,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).housework,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),

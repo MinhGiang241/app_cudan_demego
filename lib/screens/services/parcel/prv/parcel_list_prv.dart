@@ -22,11 +22,11 @@ class ParcelListPrv extends ChangeNotifier {
 
   getParcelList(BuildContext context) async {
     await APIParcel.getParcelList(
-            year,
-            month,
-            context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "",
-            isInit)
-        .then((v) {
+      year,
+      month,
+      context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "",
+      isInit,
+    ).then((v) {
       listWaitParcel.clear();
       listReceiptedParcel.clear();
       for (var i in v) {

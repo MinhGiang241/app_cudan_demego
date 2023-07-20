@@ -1,11 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:app_cudan/services/api_auth.dart';
-import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -13,15 +9,15 @@ import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_screen.dart';
 import '../prv/forgot_pass_prv.dart';
-import '../verify_otp_screen.dart';
 
 class OptionSendOtp extends StatefulWidget {
-  const OptionSendOtp(
-      {super.key,
-      this.email,
-      this.phone,
-      required this.isForgotPass,
-      required this.userName});
+  const OptionSendOtp({
+    super.key,
+    this.email,
+    this.phone,
+    required this.isForgotPass,
+    required this.userName,
+  });
   final bool isForgotPass;
   final String? email;
   final String? phone;
@@ -40,106 +36,110 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
       create: (context) => ForgotPassPrv(isForgotPass: widget.isForgotPass),
       builder: (context, snapshot) {
         return PrimaryScreen(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-            ),
-            body: Stack(
-              children: [
-                ListView(
-                  padding: const EdgeInsets.all(0),
-                  children: [
-                    vpad(24 + topSafePad(context) + appbarHeight(context)),
-                    Center(
-                      child: Text(
-                        S.of(context).reset_pass,
-                        style: txtDisplayMedium(),
-                      ),
-                    ),
-                    vpad(20),
-                    Text(
-                      S.of(context).way_send_otp,
-                      style: txtBodySmallRegular(color: grayScaleColorBase),
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                    ),
-                    vpad(42),
-                    if (widget.phone != null)
-                      RadioListTile<int>(
-                        title: Text(
-                          '${S.of(context).send_to_phone}: ${widget.phone}',
-                          style: txtBodySmallRegular(color: grayScaleColorBase),
-                        ),
-                        value: 1,
-                        groupValue: _selectedOption,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedOption = value!;
-                          });
-                        },
-                      ),
-                    if (widget.email != null)
-                      RadioListTile<int>(
-                        title: Text(
-                          '${S.of(context).send_to_email}: ${widget.email}',
-                          style: txtBodySmallRegular(color: grayScaleColorBase),
-                        ),
-                        value: 2,
-                        groupValue: _selectedOption,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedOption = value!;
-                          });
-                        },
-                      ),
-                  ],
-                ),
-                Positioned(
-                  bottom: 40,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: PrimaryButton(
-                      width: dvWidth(context) - 48,
-                      text: S.of(context).next,
-                      onTap: () {
-                        if (_selectedOption == 1) {
-                          Utils.pushScreen(
-                              context,
-                              ConfirmChoice(
-                                userName: widget.userName,
-                                choice: widget.phone,
-                                isForgotPass: widget.isForgotPass,
-                              ));
-                        } else if (_selectedOption == 2) {
-                          Utils.pushScreen(
-                              context,
-                              ConfirmChoice(
-                                userName: widget.userName,
-                                isForgotPass: widget.isForgotPass,
-                                choice: widget.email,
-                                numChoice: _selectedOption,
-                              ));
-                        } else {}
-                        // await context
-                        //     .read<ForgotPassPrv>()
-                        //     .sendVerify(context);
-                      },
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+          ),
+          body: Stack(
+            children: [
+              ListView(
+                padding: const EdgeInsets.all(0),
+                children: [
+                  vpad(24 + topSafePad(context) + appbarHeight(context)),
+                  Center(
+                    child: Text(
+                      S.of(context).reset_pass,
+                      style: txtDisplayMedium(),
                     ),
                   ),
-                )
-              ],
-            ));
+                  vpad(20),
+                  Text(
+                    S.of(context).way_send_otp,
+                    style: txtBodySmallRegular(color: grayScaleColorBase),
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  ),
+                  vpad(42),
+                  if (widget.phone != null)
+                    RadioListTile<int>(
+                      title: Text(
+                        '${S.of(context).send_to_phone}: ${widget.phone}',
+                        style: txtBodySmallRegular(color: grayScaleColorBase),
+                      ),
+                      value: 1,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                  if (widget.email != null)
+                    RadioListTile<int>(
+                      title: Text(
+                        '${S.of(context).send_to_email}: ${widget.email}',
+                        style: txtBodySmallRegular(color: grayScaleColorBase),
+                      ),
+                      value: 2,
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                ],
+              ),
+              Positioned(
+                bottom: 40,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: PrimaryButton(
+                    width: dvWidth(context) - 48,
+                    text: S.of(context).next,
+                    onTap: () {
+                      if (_selectedOption == 1) {
+                        Utils.pushScreen(
+                          context,
+                          ConfirmChoice(
+                            userName: widget.userName,
+                            choice: widget.phone,
+                            isForgotPass: widget.isForgotPass,
+                          ),
+                        );
+                      } else if (_selectedOption == 2) {
+                        Utils.pushScreen(
+                          context,
+                          ConfirmChoice(
+                            userName: widget.userName,
+                            isForgotPass: widget.isForgotPass,
+                            choice: widget.email,
+                            numChoice: _selectedOption,
+                          ),
+                        );
+                      } else {}
+                      // await context
+                      //     .read<ForgotPassPrv>()
+                      //     .sendVerify(context);
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
       },
     );
   }
 }
 
 class ConfirmChoice extends StatefulWidget {
-  const ConfirmChoice(
-      {super.key,
-      this.choice,
-      this.numChoice,
-      required this.isForgotPass,
-      required this.userName});
+  const ConfirmChoice({
+    super.key,
+    this.choice,
+    this.numChoice,
+    required this.isForgotPass,
+    required this.userName,
+  });
   final String? choice;
   final String? userName;
   final int? numChoice;

@@ -1,8 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 
 import '../constants/constants.dart';
@@ -47,7 +43,9 @@ class PrimaryDropDownSearch extends StatefulWidget {
   final Future<List<SearchableDropdownMenuItem<String>>?> Function()?
       futureRequest;
   final Future<List<SearchableDropdownMenuItem<String>>?> Function(
-      int, String?)? paginatedRequest;
+    int,
+    String?,
+  )? paginatedRequest;
   final void Function(String?)? onChanged;
   final void Function(String?)? onSaved;
 

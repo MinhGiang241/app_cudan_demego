@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:badges/src/badge.dart' as B;
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../constants/constants.dart';
 
@@ -113,18 +111,19 @@ enum PrimaryIconGradient {
 }
 
 class PrimaryIcon extends StatelessWidget {
-  const PrimaryIcon(
-      {super.key,
-      this.size,
-      required this.icons,
-      this.color = primaryColorBase,
-      this.style = PrimaryIconStyle.none,
-      this.padding,
-      this.backgroundColor,
-      this.badge,
-      this.borderRadius,
-      this.gradients = PrimaryIconGradient.white,
-      this.onTap});
+  const PrimaryIcon({
+    super.key,
+    this.size,
+    required this.icons,
+    this.color = primaryColorBase,
+    this.style = PrimaryIconStyle.none,
+    this.padding,
+    this.backgroundColor,
+    this.badge,
+    this.borderRadius,
+    this.gradients = PrimaryIconGradient.white,
+    this.onTap,
+  });
 
   final double? size;
   final Color color;
@@ -147,32 +146,11 @@ class PrimaryIcon extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-                onTap: onTap,
-                borderRadius: borderRadius ?? BorderRadius.circular(24),
-                child: Padding(
-                    padding: padding ?? const EdgeInsets.all(8),
-                    child: B.Badge(
-                      badgeContent:
-                          Text(badge ?? '', style: txtBold(10, Colors.white)),
-                      showBadge: badge != null,
-                      child: SvgPicture.asset(
-                        _assetName(),
-                        width: size ?? 24,
-                        height: size ?? 24,
-                        color: color,
-                      ),
-                    ))),
-          ),
-        );
-
-      case PrimaryIconStyle.none:
-        return Material(
-            color: Colors.transparent,
-            child: InkWell(
-                onTap: onTap,
-                borderRadius: borderRadius ?? BorderRadius.circular(24),
+              onTap: onTap,
+              borderRadius: borderRadius ?? BorderRadius.circular(24),
+              child: Padding(
+                padding: padding ?? const EdgeInsets.all(8),
                 child: B.Badge(
-                  padding: EdgeInsets.zero,
                   badgeContent:
                       Text(badge ?? '', style: txtBold(10, Colors.white)),
                   showBadge: badge != null,
@@ -182,7 +160,31 @@ class PrimaryIcon extends StatelessWidget {
                     height: size ?? 24,
                     color: color,
                   ),
-                )));
+                ),
+              ),
+            ),
+          ),
+        );
+
+      case PrimaryIconStyle.none:
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: borderRadius ?? BorderRadius.circular(24),
+            child: B.Badge(
+              padding: EdgeInsets.zero,
+              badgeContent: Text(badge ?? '', style: txtBold(10, Colors.white)),
+              showBadge: badge != null,
+              child: SvgPicture.asset(
+                _assetName(),
+                width: size ?? 24,
+                height: size ?? 24,
+                color: color,
+              ),
+            ),
+          ),
+        );
 
       default:
         return Container(
@@ -228,6 +230,7 @@ class PrimaryIcon extends StatelessWidget {
     return 'assets/icons/${icons.name}.svg';
   }
 
+  // ignore: unused_element
   Color _gradientWhite() {
     switch (gradients) {
       case PrimaryIconGradient.blue:

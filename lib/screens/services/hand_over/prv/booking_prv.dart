@@ -366,11 +366,11 @@ class BookingPrv extends ChangeNotifier {
         status: "WAIT",
       );
       APIHandOver.veryfyExistScheduleAndSendOTP(
-              // customer?.phone_required,
-              residentId,
-              apartmentValue,
-              data.toMap())
-          .then((v) {
+        // customer?.phone_required,
+        residentId,
+        apartmentValue,
+        data.toMap(),
+      ).then((v) {
         isSendLoading = false;
         notifyListeners();
         Navigator.pushNamed(
@@ -439,7 +439,7 @@ class BookingPrv extends ChangeNotifier {
   }
 
   Future getApartmentListContract(BuildContext context) async {
-    var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
+    //var phone = context.read<ResidentInfoPrv>().userInfo?.account?.phone;
     var residentId = context.read<ResidentInfoPrv>().residentId;
     await APIHandOver.getApartmentContract(residentId).then((v) {
       if (v != null && v['list'] != null) {

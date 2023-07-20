@@ -10,7 +10,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../models/extra_service.dart';
 import '../../../widgets/primary_card.dart';
 import '../payment_list_screen.dart';
 

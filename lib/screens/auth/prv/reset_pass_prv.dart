@@ -3,9 +3,7 @@ import 'package:app_cudan/services/api_ho_account.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/primary_dialog.dart';
 
 class ResetPassPrv extends ChangeNotifier {
   final newPassController = TextEditingController();

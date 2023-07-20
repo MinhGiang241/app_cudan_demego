@@ -2,12 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
-import 'package:app_cudan/screens/chat/widget/message.dart';
 import 'package:app_cudan/services/api_service.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:loggy/loggy.dart';
-import 'package:rocket_chat_flutter_connector/models/authentication.dart';
 import 'package:rocket_chat_flutter_connector/models/channel.dart';
 import 'package:rocket_chat_flutter_connector/models/room.dart';
 import 'package:rocket_chat_flutter_connector/models/user.dart';

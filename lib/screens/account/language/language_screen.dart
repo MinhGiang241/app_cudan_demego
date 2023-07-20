@@ -29,66 +29,81 @@ class _LanguageScreenState extends State<LanguageScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: PrimaryCard(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      context.read<LangPrv>().setViLang();
-                    },
-                    child: SizedBox(
-                      height: 62,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset("assets/icons/vn.svg",
-                                width: 32, height: 24),
-                            hpad(12),
-                            Expanded(
-                                child: Text(S.of(context).vi,
-                                    style: txtBodySmallRegular())),
-                            if (locale == const Locale("vi", "VN"))
-                              const PrimaryIcon(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        context.read<LangPrv>().setViLang();
+                      },
+                      child: SizedBox(
+                        height: 62,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/vn.svg",
+                                width: 32,
+                                height: 24,
+                              ),
+                              hpad(12),
+                              Expanded(
+                                child: Text(
+                                  S.of(context).vi,
+                                  style: txtBodySmallRegular(),
+                                ),
+                              ),
+                              if (locale == const Locale("vi", "VN"))
+                                const PrimaryIcon(
                                   icons: PrimaryIcons.check,
-                                  style: PrimaryIconStyle.none)
-                            else
-                              vpad(32)
-                          ],
+                                  style: PrimaryIconStyle.none,
+                                )
+                              else
+                                vpad(32)
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Divider(height: 1),
-                  InkWell(
-                    onTap: () {
-                      context.read<LangPrv>().setEnLang();
-                    },
-                    child: SizedBox(
-                      height: 62,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset("assets/icons/uk.svg",
-                                width: 32, height: 24),
-                            hpad(12),
-                            Expanded(
-                                child: Text(S.of(context).en,
-                                    style: txtBodySmallRegular())),
-                            if (locale == const Locale("en", "US"))
-                              const PrimaryIcon(
+                    const Divider(height: 1),
+                    InkWell(
+                      onTap: () {
+                        context.read<LangPrv>().setEnLang();
+                      },
+                      child: SizedBox(
+                        height: 62,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/uk.svg",
+                                width: 32,
+                                height: 24,
+                              ),
+                              hpad(12),
+                              Expanded(
+                                child: Text(
+                                  S.of(context).en,
+                                  style: txtBodySmallRegular(),
+                                ),
+                              ),
+                              if (locale == const Locale("en", "US"))
+                                const PrimaryIcon(
                                   icons: PrimaryIcons.check,
-                                  style: PrimaryIconStyle.none)
-                          ],
+                                  style: PrimaryIconStyle.none,
+                                )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )),
+            ),
           )
         ],
       ),

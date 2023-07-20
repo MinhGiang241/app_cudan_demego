@@ -6,7 +6,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/extra_service.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/service_registration.dart';
 import '../../../widgets/choose_month_year.dart';

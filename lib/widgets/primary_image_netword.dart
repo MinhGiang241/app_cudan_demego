@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
@@ -9,11 +11,9 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import "package:photo_view/photo_view_gallery.dart";
 
 import 'package:uuid/uuid.dart';
 
-import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 import '../utils/utils.dart';
 

@@ -1,10 +1,7 @@
 import 'package:app_cudan/services/api_parcel.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
@@ -67,12 +64,15 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                   contentStyle: txtBold(14, grayScaleColorBase),
                 ),
               if (arg.image != null && arg.image!.isNotEmpty)
-                InfoContentView(title: S.of(context).photos, images: [
-                  ...arg.image!.map(
-                    (e) =>
-                        "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                  )
-                ]),
+                InfoContentView(
+                  title: S.of(context).photos,
+                  images: [
+                    ...arg.image!.map(
+                      (e) =>
+                          "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
+                    )
+                  ],
+                ),
             ],
           ),
           vpad(20),
@@ -90,15 +90,17 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     isLoading = false;
                   });
                   Utils.showSuccessMessage(
-                      context: context,
-                      e: S.of(context).success_accept,
-                      onClose: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            ParcelListScreen.routeName,
-                            (route) => route.isFirst,
-                            arguments: {'initTab': 1});
-                      });
+                    context: context,
+                    e: S.of(context).success_accept,
+                    onClose: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        ParcelListScreen.routeName,
+                        (route) => route.isFirst,
+                        arguments: {'initTab': 1},
+                      );
+                    },
+                  );
                 }).catchError((e) {
                   setState(() {
                     isLoading = false;

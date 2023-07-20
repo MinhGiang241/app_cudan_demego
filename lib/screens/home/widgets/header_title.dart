@@ -46,7 +46,11 @@ class HeaderTitle extends StatelessWidget {
             icons: PrimaryIcons.bell_outline,
             style: PrimaryIconStyle.gradient,
             color: grayScaleColor2,
-            badge: snapshot.data != null ? snapshot.data.toString() : null,
+            badge: snapshot.data != null
+                ? snapshot.data != 0
+                    ? snapshot.data.toString()
+                    : null
+                : null,
             onTap: () {
               context.read<NotificationPrv>().resetSelectType();
               Navigator.pushNamed(context, NotificationScreen.routeName);

@@ -1,7 +1,5 @@
 import 'package:app_cudan/screens/services/resident_card/prv/resident_card_prv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -14,9 +12,9 @@ import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../register_resident_card.dart';
-import '../resident_card_details.dart';
 import '../resident_letter_details .dart';
 
+// ignore: must_be_immutable
 class ResidentLetterTab extends StatelessWidget {
   ResidentLetterTab({
     super.key,

@@ -1,26 +1,16 @@
-import 'package:app_cudan/services/api_ho_account.dart';
-import 'package:app_cudan/services/api_tower.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../services/api_auth.dart';
-import '../../services/api_ho_service.dart';
-import '../../services/api_service.dart';
-import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_loading.dart';
 import '../../widgets/primary_screen.dart';
-import '../auth/apartment_selection_screen.dart';
-import '../auth/prv/auth_prv.dart';
 import 'project_registration_screen.dart';
 import 'prv/ho_account_service_prv.dart';
 

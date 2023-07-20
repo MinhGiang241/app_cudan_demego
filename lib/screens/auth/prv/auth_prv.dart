@@ -7,14 +7,12 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../main.dart';
 import '../../../models/account.dart';
 import '../../../models/resident_info.dart';
 import '../../../models/response_resident_own.dart';
 import '../../../services/api_auth.dart';
 import '../../../services/api_service.dart';
 import '../../../services/api_tower.dart';
-import '../../../services/firebase_api.dart';
 import '../../../services/prf_data.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_button.dart';

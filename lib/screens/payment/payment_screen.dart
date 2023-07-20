@@ -12,7 +12,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/info_content_view.dart';
-import '../../models/receipt.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';

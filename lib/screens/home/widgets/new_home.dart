@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../services/api_service.dart';
@@ -31,18 +30,25 @@ class NewsHome extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(S.of(context).residence_news,
-                style: txtLinkSmall(color: grayScaleColor2)),
+            Text(
+              S.of(context).residence_news,
+              style: txtLinkSmall(color: grayScaleColor2),
+            ),
             const Spacer(),
             InkWell(
               borderRadius: BorderRadius.circular(5),
               onTap: () {
-                Navigator.pushNamed(context, NewListScreen.routeName,
-                    arguments: "RESIDENT");
+                Navigator.pushNamed(
+                  context,
+                  NewListScreen.routeName,
+                  arguments: "RESIDENT",
+                );
               },
-              child: Text(S.of(context).all,
-                  style: txtLinkSmall(color: grayScaleColor2)
-                      .copyWith(decoration: TextDecoration.underline)),
+              child: Text(
+                S.of(context).all,
+                style: txtLinkSmall(color: grayScaleColor2)
+                    .copyWith(decoration: TextDecoration.underline),
+              ),
             ),
           ],
         ),
@@ -60,8 +66,11 @@ class NewsHome extends StatelessWidget {
                 child: PrimaryCard(
                   onTap: () {
                     context.read<HomePrv>().markRead(context, newList[index]);
-                    Navigator.pushNamed(context, NewDetailsScreen.routeName,
-                        arguments: newList[index]);
+                    Navigator.pushNamed(
+                      context,
+                      NewDetailsScreen.routeName,
+                      arguments: newList[index],
+                    );
                   },
                   width: 256 + 32,
                   margin: const EdgeInsets.only(right: 12),
@@ -72,32 +81,41 @@ class NewsHome extends StatelessWidget {
                         height: 170,
                         width: double.infinity,
                         child: PrimaryImageNetwork(
-                            canShowPhotoView: false,
-                            path:
-                                "${ApiService.shared.uploadURL}?load=${newList[index].image ?? ""}&regcode=${ApiService.shared.regCode}"),
+                          canShowPhotoView: false,
+                          path:
+                              "${ApiService.shared.uploadURL}?load=${newList[index].image ?? ""}&regcode=${ApiService.shared.regCode}",
+                        ),
                       ),
                       vpad(3),
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(newList[index].title ?? "",
-                              style: txtLinkSmall(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          newList[index].title ?? "",
+                          style: txtLinkSmall(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                       vpad(3),
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(newList[index].content ?? "",
-                              style: txtBodySmallRegular(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          newList[index].content ?? "",
+                          style: txtBodySmallRegular(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                       vpad(3),
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(
-                              Utils.dateFormat(newList[index].date ?? "", 1),
-                              style: txtBodySmallRegular(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          Utils.dateFormat(newList[index].date ?? "", 1),
+                          style: txtBodySmallRegular(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
                 ),

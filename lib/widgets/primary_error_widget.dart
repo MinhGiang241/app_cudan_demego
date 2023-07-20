@@ -25,11 +25,12 @@ class PrimaryErrorWidget extends StatelessWidget {
           if (code == 'internet_error') Text(S.of(context).err_conn),
           vpad(10),
           TextButton.icon(
-              onPressed: onRetry,
-              icon: const Icon(
-                Icons.replay_outlined,
-              ),
-              label: Text(S.of(context).retry))
+            onPressed: onRetry,
+            icon: const Icon(
+              Icons.replay_outlined,
+            ),
+            label: Text(S.of(context).retry),
+          )
         ],
       ),
     );

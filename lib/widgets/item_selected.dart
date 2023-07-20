@@ -37,11 +37,13 @@ class ItemSelected extends StatelessWidget {
               AnimatedOpacity(
                 opacity: isSelected ? 1 : 0,
                 duration: const Duration(milliseconds: 250),
+                // ignore: require_trailing_commas
                 child: AnimatedScale(
-                    scale: isSelected ? 1 : 0,
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeOutBack,
-                    child: const PrimaryIcon(icons: PrimaryIcons.check)),
+                  scale: isSelected ? 1 : 0,
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeOutBack,
+                  child: const PrimaryIcon(icons: PrimaryIcons.check),
+                ),
               ),
             ],
           ),

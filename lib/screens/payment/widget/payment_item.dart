@@ -100,6 +100,7 @@ genName(String? type) {
 
 final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
 
+// ignore: must_be_immutable
 class PaymentItem extends StatelessWidget {
   PaymentItem({
     Key? key,
@@ -251,7 +252,9 @@ class PaymentItem extends StatelessWidget {
                                 height: 26,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      width: 3, color: primaryColor3),
+                                    width: 3,
+                                    color: primaryColor3,
+                                  ),
                                   shape: BoxShape.circle,
                                 ),
                               ),

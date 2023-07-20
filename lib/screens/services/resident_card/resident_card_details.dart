@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:provider/provider.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/letter_history.dart';
 import '../../../models/manage_card.dart';
-import '../../../models/resident_card.dart';
-import '../../../models/timeline_model.dart';
-import '../../../services/api_history.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../../widgets/timeline_view.dart';
-import '../../auth/prv/resident_info_prv.dart';
 
 class ResidentCardDetails extends StatefulWidget {
   const ResidentCardDetails({super.key});

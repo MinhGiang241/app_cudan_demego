@@ -2,10 +2,7 @@ import 'dart:isolate';
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:app_cudan/models/hand_over.dart';
-import 'package:app_cudan/models/workarising.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
-import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
@@ -112,8 +109,9 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
     NumberFormat formatter = NumberFormat('#######.###');
 
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
-    final status = arg['status'];
+    //final status = arg['status'];
     arg['handover'];
+    // ignore: unused_local_variable
     bool vote = arg['vote'] ?? false;
 
     var handOverProvider = AcceptHandOverPrv(arg['handover']);

@@ -30,9 +30,11 @@ class HomeTitleWidget extends StatelessWidget {
               InkWell(
                 borderRadius: BorderRadius.circular(5),
                 onTap: onTapShowAll,
-                child: Text(S.of(context).all,
-                    style: txtLinkSmall(color: grayScaleColor2)
-                        .copyWith(decoration: TextDecoration.underline)),
+                child: Text(
+                  S.of(context).all,
+                  style: txtLinkSmall(color: grayScaleColor2)
+                      .copyWith(decoration: TextDecoration.underline),
+                ),
               ),
           ],
         ),

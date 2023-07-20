@@ -46,6 +46,7 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     var user = context.read<ResidentInfoPrv>().userInfo;
+    // ignore: unused_local_variable
     var accountId = user!.account!.id;
     var avatar = user.account!.avatar;
     var fullName = user.account!.fullName;

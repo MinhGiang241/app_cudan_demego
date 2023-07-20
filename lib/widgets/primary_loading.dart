@@ -13,7 +13,8 @@ class PrimaryLoading extends StatelessWidget {
       width: width,
       height: height,
       child: const CircularProgressIndicator.adaptive(
-          valueColor: AlwaysStoppedAnimation(primaryColorBase)),
+        valueColor: AlwaysStoppedAnimation(primaryColorBase),
+      ),
     );
   }
 }

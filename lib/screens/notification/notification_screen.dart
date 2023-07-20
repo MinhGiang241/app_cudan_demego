@@ -34,45 +34,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     // final messages =
     //     ModalRoute.of(context)?.settings.arguments as RemoteMessage?;
-    var category = [
-      {"title": S.current.all, "icon": PrimaryIcons.bell_fill, "isRead": true},
-      {
-        "title": S.current.general_notification,
-        "icon": PrimaryIcons.star,
-        "isRead": true
-      },
-      {
-        "title": S.current.event_notification,
-        "icon": PrimaryIcons.calendar_block,
-        "isRead": false
-      },
-      {
-        "title": S.current.system_notification,
-        "icon": PrimaryIcons.setting,
-        "isRead": true
-      },
-      {
-        "title": S.current.service_reflection,
-        "icon": PrimaryIcons.service_feedback,
-        "isRead": false
-      },
-      {"title": S.current.forum, "icon": PrimaryIcons.detail, "isRead": true},
-      {
-        "title": S.current.birthday_congratulaion,
-        "icon": PrimaryIcons.birthday,
-        "isRead": true
-      },
-      {
-        "title": S.current.new_resident,
-        "icon": PrimaryIcons.new_user,
-        "isRead": false
-      },
-      {
-        "title": S.current.debt,
-        "icon": PrimaryIcons.remind_debt,
-        "isRead": false
-      },
-    ];
     onTapFilter(BuildContext context, setState) {
       var notiTypeList = context.read<NotificationPrv>().notiTypeList;
       var unReadCount = UnreadNotification.unReadCount;
@@ -181,44 +142,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return ChangeNotifierProvider(
       create: (_) => NotificationPrv(),
       builder: (context, state) {
-        var notifications = [
-          {
-            "title": "Tiêu đề",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Thông báo sự kiện",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Thông báo hệ thống",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Phản hồi dịch vụ",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Diễn đàn",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Chúc mừng sinh nhật",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-          {
-            "title": "Cư dân mới",
-            "content": "Nội dung vắn tắt",
-            'date': "09/01/2023"
-          },
-        ];
-
         return WillPopScope(
           onWillPop: () async {
             return false;

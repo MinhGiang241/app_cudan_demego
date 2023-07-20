@@ -2,11 +2,7 @@
 
 import 'package:app_cudan/screens/electricity/tabs/electric_payment_tab.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
-import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
 

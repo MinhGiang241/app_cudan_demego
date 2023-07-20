@@ -2,8 +2,6 @@ import 'package:app_cudan/screens/services/missing_object/pick_item_screen.dart'
 import 'package:app_cudan/screens/services/missing_object/prv/missing_object_prv.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -46,147 +44,147 @@ class _MissingObectScreenState extends State<MissingObectScreen>
     int? month;
 
     return ChangeNotifierProvider(
-        create: (context) => MissingObjectPrv(year: year, month: month),
-        builder: (context, state) {
-          if (arg != null && init) {
-            year = arg['year'];
-            month = arg['month'];
-            context.read<MissingObjectPrv>().initIndex = arg['index'];
-          }
-          tabController.index = context.read<MissingObjectPrv>().initIndex;
-          return PrimaryScreen(
-              appBar: PrimaryAppbar(
-                leading: BackButton(
-                  onPressed: () => Navigator.pushReplacementNamed(
-                      context, ServiceScreen.routeName),
-                ),
-                title: S.of(context).missing_obj,
-                tabController: tabController,
-                isTabScrollabel: false,
-                tabs: [
-                  Tab(text: S.of(context).history_find_obj),
-                  Tab(text: S.of(context).found_object),
-                ],
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Center(
-                      child: PrimaryIcon(
-                        icons: PrimaryIcons.filter,
-                        onTap: () {
-                          DatePicker.showPicker(
-                            context,
-                            onChanged: (v) {},
-                            onConfirm: (v) {
-                              context
-                                  .read<MissingObjectPrv>()
-                                  .onChooseMonthYear(v);
-                              setState(() {
-                                context.read<MissingObjectPrv>().initIndex =
-                                    tabController.index;
-                                init = false;
-                              });
-                            },
-                            pickerModel: CustomMonthPicker(
-                                minTime:
-                                    DateTime(DateTime.now().year - 10, 1, 1),
-                                maxTime:
-                                    DateTime(DateTime.now().year + 10, 12, 31),
-                                currentTime: DateTime(
-                                    context.read<MissingObjectPrv>().year!,
-                                    context.read<MissingObjectPrv>().month!,
-                                    1),
-                                locale: LocaleType.vi),
-                          );
-                        },
-                      ),
-                    ),
-                  )
-                ],
+      create: (context) => MissingObjectPrv(year: year, month: month),
+      builder: (context, state) {
+        if (arg != null && init) {
+          year = arg['year'];
+          month = arg['month'];
+          context.read<MissingObjectPrv>().initIndex = arg['index'];
+        }
+        tabController.index = context.read<MissingObjectPrv>().initIndex;
+        return PrimaryScreen(
+          appBar: PrimaryAppbar(
+            leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                ServiceScreen.routeName,
               ),
-              floatingActionButton: FloatingActionButton(
-                // tooltip: tabController.index == 0
-                //     ? S.of(context).reg_missing_obj
-                //     : S.of(context).found_object,
-                onPressed: () {
-                  if (tabController.index == 0) {
-                    Navigator.pushNamed(
-                      context,
-                      RegisterLostItemScreen.routeName,
-                    );
-                  } else {
-                    Navigator.pushNamed(
-                      context,
-                      PickItemScreen.routeName,
-                    );
-                  }
-                },
-                backgroundColor: primaryColorBase,
-                child: const Icon(
-                  Icons.add,
-                  size: 40,
-                ),
-              ),
-              body: FutureBuilder(
-                  future:
-                      context.read<MissingObjectPrv>().getLostItemList(context),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: PrimaryLoading());
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.none) {
-                      return PrimaryErrorWidget(
-                          code: snapshot.hasError ? "err" : "1",
-                          message: snapshot.data.toString(),
-                          onRetry: () async {
-                            setState(() {
-                              init = false;
-                              context.read<MissingObjectPrv>().initIndex =
-                                  tabController.index;
-                            });
+            ),
+            title: S.of(context).missing_obj,
+            tabController: tabController,
+            isTabScrollabel: false,
+            tabs: [
+              Tab(text: S.of(context).history_find_obj),
+              Tab(text: S.of(context).found_object),
+            ],
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Center(
+                  child: PrimaryIcon(
+                    icons: PrimaryIcons.filter,
+                    onTap: () {
+                      DatePicker.showPicker(
+                        context,
+                        onChanged: (v) {},
+                        onConfirm: (v) {
+                          context.read<MissingObjectPrv>().onChooseMonthYear(v);
+                          setState(() {
+                            context.read<MissingObjectPrv>().initIndex =
+                                tabController.index;
+                            init = false;
                           });
-                    }
-                    return SafeArea(
-                      child: TabBarView(
-                        controller: tabController,
-                        children: [
-                          MissingObjectTab(
-                            changeStatus:
-                                (BuildContext ctx, MissingObject lost) =>
-                                    context
-                                        .read<MissingObjectPrv>()
-                                        .saveLostItem(ctx, lost),
-                            type: "HISTORY",
-                            list: context.watch<MissingObjectPrv>().lostList,
-                            refreshController: _refreshHistoryController,
-                            onRefresh: () {
-                              setState(() {
-                                init = false;
-                                context.read<MissingObjectPrv>().initIndex =
-                                    tabController.index;
-                              });
-                            },
+                        },
+                        pickerModel: CustomMonthPicker(
+                          minTime: DateTime(DateTime.now().year - 10, 1, 1),
+                          maxTime: DateTime(DateTime.now().year + 10, 12, 31),
+                          currentTime: DateTime(
+                            context.read<MissingObjectPrv>().year!,
+                            context.read<MissingObjectPrv>().month!,
+                            1,
                           ),
-                          PickedItemTab(
-                            changeStatus: (BuildContext ctx, LootItem loot) =>
-                                context
-                                    .read<MissingObjectPrv>()
-                                    .saveLootItem(ctx, loot),
-                            type: "FOUND",
-                            list: context.watch<MissingObjectPrv>().lootList,
-                            refreshController: _refreshFoundController,
-                            onRefresh: () {
-                              setState(() {
-                                init = false;
-                                context.read<MissingObjectPrv>().initIndex =
-                                    tabController.index;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  }));
-        });
+                          locale: LocaleType.vi,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            // tooltip: tabController.index == 0
+            //     ? S.of(context).reg_missing_obj
+            //     : S.of(context).found_object,
+            onPressed: () {
+              if (tabController.index == 0) {
+                Navigator.pushNamed(
+                  context,
+                  RegisterLostItemScreen.routeName,
+                );
+              } else {
+                Navigator.pushNamed(
+                  context,
+                  PickItemScreen.routeName,
+                );
+              }
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
+          ),
+          body: FutureBuilder(
+            future: context.read<MissingObjectPrv>().getLostItemList(context),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: PrimaryLoading());
+              } else if (snapshot.connectionState == ConnectionState.none) {
+                return PrimaryErrorWidget(
+                  code: snapshot.hasError ? "err" : "1",
+                  message: snapshot.data.toString(),
+                  onRetry: () async {
+                    setState(() {
+                      init = false;
+                      context.read<MissingObjectPrv>().initIndex =
+                          tabController.index;
+                    });
+                  },
+                );
+              }
+              return SafeArea(
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    MissingObjectTab(
+                      changeStatus: (BuildContext ctx, MissingObject lost) =>
+                          context
+                              .read<MissingObjectPrv>()
+                              .saveLostItem(ctx, lost),
+                      type: "HISTORY",
+                      list: context.watch<MissingObjectPrv>().lostList,
+                      refreshController: _refreshHistoryController,
+                      onRefresh: () {
+                        setState(() {
+                          init = false;
+                          context.read<MissingObjectPrv>().initIndex =
+                              tabController.index;
+                        });
+                      },
+                    ),
+                    PickedItemTab(
+                      changeStatus: (BuildContext ctx, LootItem loot) => context
+                          .read<MissingObjectPrv>()
+                          .saveLootItem(ctx, loot),
+                      type: "FOUND",
+                      list: context.watch<MissingObjectPrv>().lootList,
+                      refreshController: _refreshFoundController,
+                      onRefresh: () {
+                        setState(() {
+                          init = false;
+                          context.read<MissingObjectPrv>().initIndex =
+                              tabController.index;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

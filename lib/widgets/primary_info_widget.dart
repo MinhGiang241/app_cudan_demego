@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constants/api_constant.dart';
 import '../constants/constants.dart';
-import '../generated/l10n.dart';
 import '../models/info_content_view.dart';
 import '../services/api_service.dart';
 import 'primary_button.dart';

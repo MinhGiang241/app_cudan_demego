@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:app_cudan/models/file_upload.dart';
-import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/models/workarising.dart';
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
-import 'package:app_cudan/widgets/select_media_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/constants.dart';

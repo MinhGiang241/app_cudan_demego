@@ -4,8 +4,6 @@ import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -148,7 +146,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                           child: PrimaryTextField(
                             filter: [
                               FilteringTextInputFormatter.deny(
-                                  RegExp(r'''[0123456789]'''))
+                                RegExp(r'''[0123456789]'''),
+                              )
                             ],
                             maxLength: 100,
                             controller:
@@ -216,7 +215,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                           child: PrimaryTextField(
                             filter: [
                               FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.]'))
+                                RegExp(r'[0-9.]'),
+                              )
                             ],
                             controller:
                                 context.read<RegisterPetPrv>().weightController,
@@ -326,25 +326,28 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                         Expanded(
                           child: RichText(
                             text: TextSpan(
-                                style: txtBodyMediumBold(
-                                    color: grayScaleColorBase),
-                                children: [
-                                  TextSpan(text: S.of(context).i_agree),
-                                  TextSpan(
-                                    text: " ${S.of(context).regulations}",
-                                    style:
-                                        txtBodyMediumBold(color: primaryColor6),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        context
-                                            .read<RegisterPetPrv>()
-                                            .toogleShow();
-                                      },
-                                  ),
-                                  TextSpan(
-                                      text:
-                                          " ${S.of(context).of_building_management}"),
-                                ]),
+                              style: txtBodyMediumBold(
+                                color: grayScaleColorBase,
+                              ),
+                              children: [
+                                TextSpan(text: S.of(context).i_agree),
+                                TextSpan(
+                                  text: " ${S.of(context).regulations}",
+                                  style:
+                                      txtBodyMediumBold(color: primaryColor6),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      context
+                                          .read<RegisterPetPrv>()
+                                          .toogleShow();
+                                    },
+                                ),
+                                TextSpan(
+                                  text:
+                                      " ${S.of(context).of_building_management}",
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],

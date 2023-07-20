@@ -93,32 +93,17 @@ class APINotification {
 
   static Future getNotficationTypeList() async {
     var query = '''
-    query (\$filter:GeneralCollectionFilterInput ){
-      response:query_NotificationTypes_dto (filter: \$filter){
-        code
-        message
-        data {
-            _id
-            createdTime
-            updatedTime
-            icon
+    mutation {
+        response: notify_mobile_get_resident_notification_type  {
             code
-            name
-            targetType
-            description
+            message
+            data
         }
-      }
-    }
+    }       
     ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {
-        "filter": {
-          "skip": 0,
-          "limit": 100,
-        }
-      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

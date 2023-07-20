@@ -4,14 +4,10 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
-import '../../models/response_resident_own.dart';
-import '../../services/api_tower.dart';
-import '../../services/prf_data.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
 import '../ho/prv/ho_account_service_prv.dart';
-import '../home/home_screen.dart';
 import 'prv/resident_info_prv.dart';
 
 class ApartmentSeletionScreen extends StatefulWidget {

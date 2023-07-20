@@ -1,6 +1,5 @@
 import 'package:app_cudan/models/list_transport.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/letter_history.dart';
@@ -10,7 +9,6 @@ import '../../../../services/api_history.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../services/api_transportation.dart';
 import '../../../../utils/utils.dart';
-import '../../../auth/prv/resident_info_prv.dart';
 
 class ManageCardDetailsPrv extends ChangeNotifier {
   ManageCardDetailsPrv(this.cancel);

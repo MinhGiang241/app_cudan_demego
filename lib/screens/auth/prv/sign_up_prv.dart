@@ -46,14 +46,16 @@ class SignUpPrv extends ChangeNotifier {
     notifyListeners();
     await APIAuth.sendOTPviaPhone(phoneController.text.trim()).then((v) {
       Utils.pushScreen(
-          context,
-          VerifyOTPScreen(
-              isPhone: false,
-              phone: phoneController.text.trim(),
-              name: "",
-              pass: "",
-              email: '',
-              isForgotPass: false));
+        context,
+        VerifyOTPScreen(
+          isPhone: false,
+          phone: phoneController.text.trim(),
+          name: "",
+          pass: "",
+          email: '',
+          isForgotPass: false,
+        ),
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
@@ -114,6 +116,7 @@ class SignUpPrv extends ChangeNotifier {
             context,
           );
 
+      // ignore: unused_element
       onSignUp() async {
         // await authPrv.onCreateAccount(
         //   context,
@@ -137,19 +140,20 @@ class SignUpPrv extends ChangeNotifier {
         );
 
         await APIAuth.createResidentAccount(
-                context: context,
-                user: phoneController.text.trim(),
-                name: nameController.text.trim(),
-                email: emailController.text.trim(),
-                passWord: passController.text.trim(),
-                confirmPassword: cPassController.text.trim())
-            .then((value) {
+          context: context,
+          user: phoneController.text.trim(),
+          name: nameController.text.trim(),
+          email: emailController.text.trim(),
+          passWord: passController.text.trim(),
+          confirmPassword: cPassController.text.trim(),
+        ).then((value) {
           Utils.showSuccessMessage(
-              context: context,
-              e: S.of(context).success_sign_up,
-              onClose: () {
-                Navigator.pushReplacementNamed(context, SignInScreen.routeName);
-              });
+            context: context,
+            e: S.of(context).success_sign_up,
+            onClose: () {
+              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+            },
+          );
         }).catchError((e) {
           Utils.showErrorMessage(context, e);
         });

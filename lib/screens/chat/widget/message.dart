@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
@@ -11,15 +10,12 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'package:app_cudan/models/rocket_chat_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:emoji_dialog_picker/emoji_dialog_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../services/api_service.dart';
@@ -32,6 +28,7 @@ import 'list_message_subject.dart';
 
 var dio = Dio();
 
+// ignore: must_be_immutable
 class Message extends StatefulWidget {
   Message({
     super.key,
@@ -66,6 +63,7 @@ class _MessageState extends State<Message> {
   late Stream shouldTriggerChange;
   bool isShow = false;
   bool showVisible = false;
+  // ignore: unused_field
   late Offset _tapPosition;
   late StreamSubscription streamSubscription;
 
@@ -103,8 +101,10 @@ class _MessageState extends State<Message> {
       'downloader_send_port',
     );
     _port.listen((dynamic data) {
+      // ignore: unused_local_variable
       String id = data[0];
       DownloadTaskStatus status = data[1];
+      // ignore: unused_local_variable
       int progress = data[2];
 
       if (status == DownloadTaskStatus.complete) {

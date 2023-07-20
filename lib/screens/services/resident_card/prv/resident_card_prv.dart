@@ -1,13 +1,13 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../models/letter_history.dart';
 import '../../../../models/manage_card.dart';
 import '../../../../models/resident_card.dart';
-import '../../../../services/api_history.dart';
 import '../../../../services/api_resident_card.dart';
 import '../../../../services/api_transport.dart';
 import '../../../../utils/utils.dart';

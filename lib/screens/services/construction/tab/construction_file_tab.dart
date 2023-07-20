@@ -13,6 +13,7 @@ import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../construction_doc_details_screen.dart';
 
+// ignore: must_be_immutable
 class ConstructionFileTab extends StatefulWidget {
   ConstructionFileTab({super.key, required this.getList, required this.list});
   List<ConstructionDocument> list = [];
@@ -34,18 +35,20 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
           return const Center(child: PrimaryLoading());
         } else if (snapshot.connectionState == ConnectionState.none) {
           return PrimaryErrorWidget(
-              code: snapshot.hasError ? "err" : "1",
-              message: snapshot.data.toString(),
-              onRetry: () async {
-                setState(() {});
-              });
+            code: snapshot.hasError ? "err" : "1",
+            message: snapshot.data.toString(),
+            onRetry: () async {
+              setState(() {});
+            },
+          );
         } else if (widget.list.isEmpty) {
           return SafeArea(
             child: SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
               header: WaterDropMaterialHeader(
-                  backgroundColor: Theme.of(context).primaryColor),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               controller: _refreshController,
               onRefresh: () {
                 setState(() {});
@@ -95,7 +98,8 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
             enablePullDown: true,
             enablePullUp: false,
             header: WaterDropMaterialHeader(
-                backgroundColor: Theme.of(context).primaryColor),
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
             controller: _refreshController,
             onRefresh: () {
               setState(() {});
@@ -137,7 +141,11 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 16, right: 16),
+                              top: 10,
+                              bottom: 10,
+                              left: 16,
+                              right: 16,
+                            ),
                             child: Row(
                               children: [
                                 const PrimaryIcon(
@@ -156,9 +164,10 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(e.constructionType!.name ?? "",
-                                          style:
-                                              txtBold(14, grayScaleColorBase)),
+                                      Text(
+                                        e.constructionType!.name ?? "",
+                                        style: txtBold(14, grayScaleColorBase),
+                                      ),
                                       vpad(4),
                                       Table(
                                         textBaseline: TextBaseline.ideographic,
@@ -169,40 +178,56 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                           1: FlexColumnWidth(5)
                                         },
                                         children: [
-                                          TableRow(children: [
-                                            TableCell(
-                                              child: Text(
-                                                '${S.of(context).reg_date}:',
-                                                style: txtMedium(
-                                                    12, grayScaleColor2),
+                                          TableRow(
+                                            children: [
+                                              TableCell(
+                                                child: Text(
+                                                  '${S.of(context).reg_date}:',
+                                                  style: txtMedium(
+                                                    12,
+                                                    grayScaleColor2,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            TableCell(
-                                              child: Text(
-                                                Utils.dateTimeFormat(
-                                                    e.reg_date ?? "", 1),
-                                                style: txtMedium(
-                                                    12, greenColorBase),
+                                              TableCell(
+                                                child: Text(
+                                                  Utils.dateTimeFormat(
+                                                    e.reg_date ?? "",
+                                                    1,
+                                                  ),
+                                                  style: txtMedium(
+                                                    12,
+                                                    greenColorBase,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          TableRow(
+                                            children: [
+                                              TableCell(
+                                                child: Text(
+                                                  '${S.of(context).approved_date}:',
+                                                  style: txtMedium(
+                                                    12,
+                                                    grayScaleColor2,
+                                                  ),
+                                                ),
                                               ),
-                                            )
-                                          ]),
-                                          TableRow(children: [
-                                            TableCell(
-                                              child: Text(
-                                                '${S.of(context).approved_date}:',
-                                                style: txtMedium(
-                                                    12, grayScaleColor2),
-                                              ),
-                                            ),
-                                            TableCell(
-                                              child: Text(
-                                                Utils.dateTimeFormat(
-                                                    e.createdTime ?? "", 1),
-                                                style: txtMedium(
-                                                    12, greenColorBase),
-                                              ),
-                                            )
-                                          ])
+                                              TableCell(
+                                                child: Text(
+                                                  Utils.dateTimeFormat(
+                                                    e.createdTime ?? "",
+                                                    1,
+                                                  ),
+                                                  style: txtMedium(
+                                                    12,
+                                                    greenColorBase,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          )
                                         ],
                                       )
                                     ],
@@ -225,22 +250,27 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                               },
                               children: [
                                 ...listContent.map<TableRow>((i) {
-                                  return TableRow(children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 16),
-                                        child: Text(
-                                          i.title,
-                                          style: txtMedium(12, grayScaleColor2),
+                                  return TableRow(
+                                    children: [
+                                      TableCell(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 16),
+                                          child: Text(
+                                            i.title,
+                                            style:
+                                                txtMedium(12, grayScaleColor2),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    TableCell(
-                                      child: Text(i.content ?? "",
-                                          style: i.contentStyle),
-                                    )
-                                  ]);
+                                      TableCell(
+                                        child: Text(
+                                          i.content ?? "",
+                                          style: i.contentStyle,
+                                        ),
+                                      )
+                                    ],
+                                  );
                                 })
                               ],
                             ),

@@ -9,14 +9,10 @@ import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/regulation.dart';
 import '../../../generated/l10n.dart';
@@ -25,8 +21,6 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../../widgets/primary_text_field.dart';
-import '../../../widgets/timeline_view.dart';
 import '../../payment/widget/payment_item.dart';
 import 'tab/construction_bill_tab.dart';
 
@@ -97,6 +91,7 @@ class _ConstructionRegistrationDetailsScreenState
     var apartment = listApart
         .firstWhere((element) => element.apartmentId == reg.apartmentId);
     var surface = '';
+    // ignore: unnecessary_null_comparison
     if (apartment != null) {
       surface =
           "${apartment.apartment!.name}, ${apartment.floor!.name}, ${apartment.building!.name}";

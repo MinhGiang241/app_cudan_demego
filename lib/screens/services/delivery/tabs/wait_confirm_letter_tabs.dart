@@ -1,12 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/delivery/package_details_screen.dart';
 import 'package:app_cudan/screens/services/delivery/provider/delivery_list_prv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -21,7 +17,6 @@ import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
-import '../register_delivery_screen.dart';
 
 class WaitConfirmLetterTab extends StatefulWidget {
   const WaitConfirmLetterTab({super.key});

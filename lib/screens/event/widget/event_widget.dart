@@ -2,15 +2,13 @@ import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/event.dart';
 import '../../../utils/utils.dart';
-import '../event_details_screen.dart';
 
+// ignore: must_be_immutable
 class EventCardWidget extends StatelessWidget {
   EventCardWidget({
     super.key,

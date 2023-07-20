@@ -34,52 +34,60 @@ class _RecidentCardInfoState extends State<RecidentCardInfo>
           Tab(text: 'S.of(context).timeline'),
         ],
       ),
-      body: TabBarView(controller: tabController, children: [
-        ListView(
-          children: [
-            vpad(24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: PrimaryInfoWidget(
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          ListView(
+            children: [
+              vpad(24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: PrimaryInfoWidget(
                   label: 'S.of(context).r_card_info',
                   listInfoView: [
                     InfoContentView(
-                        title: 'S.of(context).signal',
-                        content: "widget.items.theCuDan?.soThe?.text" ?? ""),
+                      title: 'S.of(context).signal',
+                      content: "widget.items.theCuDan?.soThe?.text",
+                    ),
                     InfoContentView(
-                        title: 'S.of(context).plan_name',
-                        content:
-                            " widget.items.theCuDan?.canHo?.displayTexts?[0]"),
+                      title: 'S.of(context).plan_name',
+                      content:
+                          " widget.items.theCuDan?.canHo?.displayTexts?[0]",
+                    ),
                     InfoContentView(
-                        title: S.of(context).full_name,
-                        content:
-                            "widget.items.theCuDan?.chuThe?.displayTexts?[0]" ??
-                                ""),
+                      title: S.of(context).full_name,
+                      content:
+                          "widget.items.theCuDan?.chuThe?.displayTexts?[0]",
+                    ),
                     InfoContentView(
-                        title: S.of(context).phone_num,
-                        content:
-                            "widget.items.theCuDan?.soDienThoai?.text" ?? ""),
+                      title: S.of(context).phone_num,
+                      content: "widget.items.theCuDan?.soDienThoai?.text",
+                    ),
                     InfoContentView(
-                        title: 'S.of(context).card_num',
-                        content: "widget.items.theCuDan?.soThe?.text" ?? ""),
+                      title: 'S.of(context).card_num',
+                      content: "widget.items.theCuDan?.soThe?.text",
+                    ),
                     InfoContentView(
-                        title: S.of(context).status,
-                        content: 'S.of(context).active',
-                        contentStyle: txtLinkSmall(color: greenColorBase)),
-                  ]),
-            )
-          ],
-        ),
-        ListView(
-          children: [
-            vpad(24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TimeLineView(),
-            )
-          ],
-        )
-      ]),
+                      title: S.of(context).status,
+                      content: 'S.of(context).active',
+                      contentStyle: txtLinkSmall(color: greenColorBase),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          ListView(
+            children: [
+              vpad(24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: TimeLineView(),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

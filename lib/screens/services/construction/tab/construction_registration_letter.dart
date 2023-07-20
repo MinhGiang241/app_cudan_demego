@@ -18,6 +18,7 @@ import '../construction_reg_screen.dart';
 import '../construction_registration_details_screen.dart';
 import '../prv/construction_list_prv.dart';
 
+// ignore: must_be_immutable
 class ConstructionRegistrationLetterTab extends StatefulWidget {
   ConstructionRegistrationLetterTab({
     super.key,

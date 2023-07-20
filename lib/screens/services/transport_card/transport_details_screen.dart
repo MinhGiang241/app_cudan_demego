@@ -1,11 +1,8 @@
-import 'package:app_cudan/models/list_transport.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
-import '../../../models/transportation_card.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
@@ -89,8 +86,10 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                   InfoContentView(
                     // isHorizontal: true,
                     images: (item.vehicle_image ?? [])
-                        .map<String>((e) =>
-                            "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}")
+                        .map<String>(
+                          (e) =>
+                              "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
+                        )
                         .toList(),
                     title: S.of(context).trans_images,
                   ),

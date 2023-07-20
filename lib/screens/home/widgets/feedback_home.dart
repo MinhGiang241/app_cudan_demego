@@ -32,11 +32,12 @@ class FeedbackHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: yellowColor.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: yellowColor.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -53,9 +54,11 @@ class FeedbackHome extends StatelessWidget {
                   ),
                 ),
                 vpad(12),
-                Text(S.of(context).reflex,
-                    textAlign: TextAlign.center,
-                    style: txtBodySmallBold(color: grayScaleColorBase))
+                Text(
+                  S.of(context).reflex,
+                  textAlign: TextAlign.center,
+                  style: txtBodySmallBold(color: grayScaleColorBase),
+                )
               ],
             ),
           ),
@@ -67,11 +70,12 @@ class FeedbackHome extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          blurStyle: BlurStyle.normal,
-                          spreadRadius: 1,
-                          blurRadius: 24,
-                          color: greenColorBase.withOpacity(0.25),
-                          offset: const Offset(0, 16))
+                        blurStyle: BlurStyle.normal,
+                        spreadRadius: 1,
+                        blurRadius: 24,
+                        color: greenColorBase.withOpacity(0.25),
+                        offset: const Offset(0, 16),
+                      )
                     ],
                   ),
                   child: PrimaryIcon(
@@ -84,7 +88,9 @@ class FeedbackHome extends StatelessWidget {
                     onTap: () {
                       // Utils.pushScreen(context, const ParkingCardListScreen());
                       Navigator.pushNamed(
-                          context, RegisterResidentScreen.routeName);
+                        context,
+                        RegisterResidentScreen.routeName,
+                      );
                     },
                   ),
                 ),

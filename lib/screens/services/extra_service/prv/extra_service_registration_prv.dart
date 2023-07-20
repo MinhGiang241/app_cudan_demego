@@ -1,4 +1,3 @@
-import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/service_registration.dart';
 import 'package:app_cudan/models/transportation_card.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
@@ -107,6 +106,7 @@ class ExtraServiceRegistrationPrv extends ChangeNotifier {
     } else {
       regDateValidate = null;
     }
+    // ignore: unnecessary_null_comparison
     if (selectedApartmentId == null) {
       apartValidate = S.current.not_blank;
     } else {

@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, require_trailing_commas
+// ignore_for_file: prefer_const_constructors, require_trailing_commas, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../constants/constants.dart';
@@ -95,6 +94,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
           dataCurent[i.month.toString()] = i.electricity_consumption;
         }
 
+        // ignore: unused_local_variable
         List<ChartDataViewModel> dataCharLast = [
           ...List.generate(
             12,

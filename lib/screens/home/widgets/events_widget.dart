@@ -37,9 +37,10 @@ class EventWidget extends StatelessWidget {
               // ],
             ),
             child: const PrimaryIcon(
-                icons: PrimaryIcons.calendar_check,
-                style: PrimaryIconStyle.none,
-                color: Colors.white),
+              icons: PrimaryIcons.calendar_check,
+              style: PrimaryIconStyle.none,
+              color: Colors.white,
+            ),
           ),
         )
       ],

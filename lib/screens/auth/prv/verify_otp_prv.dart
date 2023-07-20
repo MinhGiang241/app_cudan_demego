@@ -1,16 +1,13 @@
 import 'dart:async';
 
 import 'package:app_cudan/services/api_ho_account.dart';
-import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/primary_dialog.dart';
 import '../fogot_pass/reset_pass_screen.dart';
-import '../sign_in_screen.dart';
 import 'auth_prv.dart';
 
 class VerifyOTPPrv extends ChangeNotifier {
@@ -33,8 +30,15 @@ class VerifyOTPPrv extends ChangeNotifier {
   final String pass;
   final bool isPhone;
   late Timer timer;
-  VerifyOTPPrv(this.authPrv, this.user, this.name, this.pass, this.email,
-      this.phone, this.isPhone) {
+  VerifyOTPPrv(
+    this.authPrv,
+    this.user,
+    this.name,
+    this.pass,
+    this.email,
+    this.phone,
+    this.isPhone,
+  ) {
     _startTimer();
   }
 
@@ -119,7 +123,9 @@ class VerifyOTPPrv extends ChangeNotifier {
     if (isPhone) {
       await APIAuth.sendOTPviaPhone(phone).then((v) {
         Utils.showSuccessMessage(
-            context: context, e: S.of(context).success_opt);
+          context: context,
+          e: S.of(context).success_opt,
+        );
 
         second = 30;
         // _startTimer();
@@ -132,7 +138,9 @@ class VerifyOTPPrv extends ChangeNotifier {
     } else {
       await APIAuth.sendOtpViaEmail(email).then((v) {
         Utils.showSuccessMessage(
-            context: context, e: S.of(context).success_opt);
+          context: context,
+          e: S.of(context).success_opt,
+        );
         second = 30;
 
         _startTimer();

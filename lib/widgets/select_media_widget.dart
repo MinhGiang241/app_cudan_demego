@@ -2,11 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../constants/api_constant.dart';
 import '../constants/constants.dart';
 
 import '../generated/l10n.dart';
-import '../models/transportation_card.dart';
 import '../services/api_service.dart';
 import 'dash_button.dart';
 import 'primary_icon.dart';

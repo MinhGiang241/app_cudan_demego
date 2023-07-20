@@ -1,5 +1,4 @@
 import 'package:app_cudan/models/workarising.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_hand_over.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
@@ -7,7 +6,6 @@ import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';

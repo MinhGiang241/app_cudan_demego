@@ -1,22 +1,18 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/resident_card.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
-import '../../../widgets/primary_dropdown.dart';
-import '../../../widgets/primary_icon.dart';
-import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../../widgets/select_media_widget.dart';
 import '../../auth/prv/resident_info_prv.dart';

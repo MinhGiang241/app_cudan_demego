@@ -1,6 +1,5 @@
 import 'package:app_cudan/services/api_ho_account.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 
 import '../../../constants/constants.dart';
@@ -11,7 +10,6 @@ import '../../../services/Api_project_service.dart';
 import '../../../services/api_ho_service.dart';
 import '../../../utils/utils.dart';
 import '../project_registration_screen.dart';
-import 'ho_account_service_prv.dart';
 
 class CreateNewProjRegistrationPrv extends ChangeNotifier {
   ApiProjectService? projectApi;

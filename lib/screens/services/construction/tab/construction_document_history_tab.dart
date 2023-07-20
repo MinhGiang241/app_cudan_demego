@@ -8,8 +8,10 @@ import '../../../../models/timeline_model.dart';
 import '../../../../widgets/timeline_view.dart';
 
 class ConstructionDocumentHistoryTab extends StatefulWidget {
-  const ConstructionDocumentHistoryTab(
-      {super.key, required this.constructionDocumentId});
+  const ConstructionDocumentHistoryTab({
+    super.key,
+    required this.constructionDocumentId,
+  });
   final String constructionDocumentId;
   @override
   State<ConstructionDocumentHistoryTab> createState() =>

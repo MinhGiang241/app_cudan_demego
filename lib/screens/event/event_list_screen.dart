@@ -22,6 +22,7 @@ class _EventListScreenState extends State<EventListScreen>
   var initIndex = 0;
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_element
     void _onRefresh() {
       setState(() {
         initIndex = tabController.index;

@@ -1,11 +1,7 @@
 import 'package:app_cudan/models/info_content_view.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/services/hand_over/general_info_screen.dart';
 import 'package:app_cudan/screens/services/hand_over/prv/hand_over_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -18,7 +14,6 @@ import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../accept_hand_over_screen.dart';
-import '../booking_screen.dart';
 
 class HistoryTab extends StatefulWidget {
   const HistoryTab({super.key});

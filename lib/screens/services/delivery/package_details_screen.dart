@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/file_upload.dart';
@@ -350,7 +349,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                   height: 20.0,
                                   child: Checkbox(
                                     fillColor: MaterialStateProperty.all(
-                                        primaryColorBase),
+                                      primaryColorBase,
+                                    ),
                                     value: card.elevator,
                                     onChanged: (v) {},
                                   ),

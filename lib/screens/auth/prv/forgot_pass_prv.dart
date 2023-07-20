@@ -1,15 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/services/api_ho_account.dart';
-import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/account.dart';
 import '../../../services/api_auth.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/primary_dialog.dart';
 import '../fogot_pass/option_send_otp.dart';
 import '../verify_otp_screen.dart';
 
@@ -49,15 +46,16 @@ class ForgotPassPrv extends ChangeNotifier {
           isLoading = false;
           notifyListeners();
           Utils.pushScreen(
-              context,
-              VerifyOTPScreen(
-                isForgotPass: true,
-                phone: '',
-                name: userNa,
-                pass: '',
-                email: mail,
-                isPhone: false,
-              ));
+            context,
+            VerifyOTPScreen(
+              isForgotPass: true,
+              phone: '',
+              name: userNa,
+              pass: '',
+              email: mail,
+              isPhone: false,
+            ),
+          );
           if (data != null) {}
         },
       ).catchError((e) {
@@ -83,6 +81,7 @@ class ForgotPassPrv extends ChangeNotifier {
             await APIHOAccount.getUserInformationByUsername(userName!);
 
         var userInfoResponse = Account.fromJson(userInfoResponseData);
+        // ignore: unnecessary_null_comparison
         if (userInfoResponse == null) {
           isLoading = false;
           notifyListeners();

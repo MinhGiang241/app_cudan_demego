@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
@@ -56,105 +58,109 @@ class _InputChatState extends State<InputChat> {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {
-                      setState(() {
-                        pickedFile.clear();
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: redColor,
-                    ))
+                  onPressed: () {
+                    setState(() {
+                      pickedFile.clear();
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    color: redColor,
+                  ),
+                )
               ],
             ),
           if (pickedImages.isNotEmpty)
             Container(
-                height: 100,
-                padding: const EdgeInsets.only(right: 14.0),
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: PrimaryImageNetwork(
-                          file: pickedImages[0],
-                          height: 300,
-                        )
+              height: 100,
+              padding: const EdgeInsets.only(right: 14.0),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: PrimaryImageNetwork(
+                      file: pickedImages[0],
+                      height: 300,
+                    ),
 
-                        //  Image.file(e.value),
-                        ),
-                    Positioned(
-                      top: 2,
-                      right: 2,
-                      child: PrimaryIcon(
-                        icons: PrimaryIcons.close,
-                        style: PrimaryIconStyle.gradient,
-                        gradients: PrimaryIconGradient.red,
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(4),
-                        onTap: () {
-                          setState(() {
-                            pickedImages.clear();
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                )),
+                    //  Image.file(e.value),
+                  ),
+                  Positioned(
+                    top: 2,
+                    right: 2,
+                    child: PrimaryIcon(
+                      icons: PrimaryIcons.close,
+                      style: PrimaryIconStyle.gradient,
+                      gradients: PrimaryIconGradient.red,
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(4),
+                      onTap: () {
+                        setState(() {
+                          pickedImages.clear();
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
           vpad(10),
           Row(
             children: [
               InkWell(
-                  onTap: () async {
-                    await Utils.selectFile(context, false).then((value) {
-                      setState(() {
-                        pickedImages.clear();
-                        pickedFile.clear();
-                        if (value != null) {
-                          for (var i in value) {
-                            if (listImageExt
-                                .contains(i!.name.split('.').last)) {
-                              pickedImages.add(File(i.path));
-                            } else {
-                              pickedFile.add(File(i.path));
-                            }
+                onTap: () async {
+                  await Utils.selectFile(context, false).then((value) {
+                    setState(() {
+                      pickedImages.clear();
+                      pickedFile.clear();
+                      if (value != null) {
+                        for (var i in value) {
+                          if (listImageExt.contains(i!.name.split('.').last)) {
+                            pickedImages.add(File(i.path));
+                          } else {
+                            pickedFile.add(File(i.path));
                           }
                         }
-                      });
-                    });
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.folder_copy_outlined,
-                      color: grayScaleColor2,
-                    ),
-                  )),
-              InkWell(
-                  onTap: () async {
-                    await Utils.selectImage(context, true).then((value) {
-                      if (value != null) {
-                        final list =
-                            value.map<File>((e) => File(e.path)).toList();
-                        setState(() {
-                          pickedFile.clear();
-                          pickedImages.clear();
-                          pickedImages.addAll(list);
-                        });
                       }
                     });
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      color: grayScaleColor2,
-                    ),
-                  )),
+                  });
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Icon(
+                    Icons.folder_copy_outlined,
+                    color: grayScaleColor2,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  await Utils.selectImage(context, true).then((value) {
+                    if (value != null) {
+                      final list =
+                          value.map<File>((e) => File(e.path)).toList();
+                      setState(() {
+                        pickedFile.clear();
+                        pickedImages.clear();
+                        pickedImages.addAll(list);
+                      });
+                    }
+                  });
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    color: grayScaleColor2,
+                  ),
+                ),
+              ),
               Expanded(
                 child: PrimaryCard(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: grayScaleColor6),
+                    borderRadius: BorderRadius.circular(24),
+                    color: grayScaleColor6,
+                  ),
                   child: TextField(
                     onSubmitted: (value) {
                       // messageBloc.summitedMessage(accountId, accountName);
@@ -173,17 +179,20 @@ class _InputChatState extends State<InputChat> {
                       hintText: "Aa",
                       hintStyle: txtBodySmallBold(color: grayScaleColor3),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide:
-                              const BorderSide(color: primaryColor2, width: 2)),
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide:
+                            const BorderSide(color: primaryColor2, width: 2),
+                      ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none),
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                       suffixIcon: SizedBox(
                         width: 20,
                         child: EmojiButton(
                           emojiPickerView: EmojiPickerView(
-                              onEmojiSelected: widget.messageBloc.selectEmoji),
+                            onEmojiSelected: widget.messageBloc.selectEmoji,
+                          ),
                           child: const Icon(Icons.emoji_emotions_outlined),
                         ),
                       ),

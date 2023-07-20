@@ -53,19 +53,22 @@ class MissingObjectPrv extends ChangeNotifier {
     // lost.apartment = "${context}";
     await APILost.saveLostItem(lost.toJson()).then((v) {
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_confirm,
-          onClose: () {
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(
-                  context, MissingObectScreen.routeName,
-                  arguments: {
-                    'year': year,
-                    'month': month,
-                    'index': 0,
-                  });
-            });
+        context: context,
+        e: S.of(context).success_confirm,
+        onClose: () {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacementNamed(
+              context,
+              MissingObectScreen.routeName,
+              arguments: {
+                'year': year,
+                'month': month,
+                'index': 0,
+              },
+            );
           });
+        },
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
@@ -77,19 +80,22 @@ class MissingObjectPrv extends ChangeNotifier {
         (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
     await APILost.saveLootItem(loot.toJson()).then((v) {
       Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).returned,
-          onClose: () {
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(
-                  context, MissingObectScreen.routeName,
-                  arguments: {
-                    'year': year,
-                    'month': month,
-                    'index': 1,
-                  });
-            });
+        context: context,
+        e: S.of(context).returned,
+        onClose: () {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacementNamed(
+              context,
+              MissingObectScreen.routeName,
+              arguments: {
+                'year': year,
+                'month': month,
+                'index': 1,
+              },
+            );
           });
+        },
+      );
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

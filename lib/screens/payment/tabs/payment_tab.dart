@@ -1,16 +1,11 @@
 import 'package:app_cudan/screens/payment/prv/payment_list_prv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/bill_model.dart';
-import '../../../models/extra_service.dart';
 import '../../../models/receipt.dart';
-import '../../../widgets/custom_footer_refresh.dart';
 import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_empty_widget.dart';
 

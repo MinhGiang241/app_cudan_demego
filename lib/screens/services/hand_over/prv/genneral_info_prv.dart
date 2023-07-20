@@ -45,9 +45,9 @@ class GeneralInfoPrv extends ChangeNotifier {
 
   pickHandOverTime(BuildContext context) {
     showTimePicker(
-            context: context,
-            initialTime: handOverTime ?? const TimeOfDay(hour: 0, minute: 0))
-        .then((v) {
+      context: context,
+      initialTime: handOverTime ?? const TimeOfDay(hour: 0, minute: 0),
+    ).then((v) {
       if (v != null) {
         handOverTimeController.text = v.format(context);
         handOverTime = v;

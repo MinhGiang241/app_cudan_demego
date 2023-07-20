@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
-import '../../../models/timeline_model.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_button.dart';
@@ -14,7 +13,6 @@ import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../../widgets/timeline_view.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import 'add_new_transport_card.dart';
 import 'extend_card_screen.dart';
@@ -179,6 +177,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                 ),
                 vpad(16),
                 ...(listTranspost).asMap().entries.map((e) {
+                  // ignore: unused_local_variable
                   var isExpired = e.value.expire_date == null
                       ? true
                       : DateTime.parse(e.value.expire_date ?? "")

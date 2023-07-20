@@ -3,8 +3,6 @@ import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
@@ -14,7 +12,6 @@ import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_dropdown.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../auth/prv/resident_info_prv.dart';
 import 'prv/booking_prv.dart';
 
 class BookingScreen extends StatelessWidget {

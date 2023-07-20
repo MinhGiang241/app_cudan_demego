@@ -1,16 +1,10 @@
 // ignore_for_file: iterable_contains_unrelated_type
 
 import 'package:app_cudan/widgets/primary_button.dart';
-import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
-
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../constants/constants.dart';
 import '../generated/l10n.dart';
@@ -32,6 +26,7 @@ var items = data.asMap().entries.map((v) {
   );
 }).toList();
 
+// ignore: must_be_immutable
 class PrimaryDropDown extends StatefulWidget {
   PrimaryDropDown({
     super.key,
@@ -349,7 +344,9 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                                color: primaryColor2, width: 2),
+                              color: primaryColor2,
+                              width: 2,
+                            ),
                           ),
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),

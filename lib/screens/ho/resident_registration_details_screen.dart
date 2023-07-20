@@ -6,10 +6,7 @@ import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_info_widget.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';

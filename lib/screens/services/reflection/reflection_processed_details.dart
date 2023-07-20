@@ -1,18 +1,16 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:isolate';
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:app_cudan/models/reflection.dart';
-import 'package:app_cudan/screens/services/reflection/prv/create_reflection_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
@@ -24,7 +22,6 @@ import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_image_netword.dart';
 import '../../../widgets/primary_screen.dart';
-import '../../auth/prv/resident_info_prv.dart';
 
 class ReflectionProcessedDetails extends StatefulWidget {
   const ReflectionProcessedDetails({super.key});

@@ -1,4 +1,3 @@
-import 'package:app_cudan/services/api_auth.dart';
 import 'package:app_cudan/services/api_tower.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +33,7 @@ class ResidentInfoPrv extends ChangeNotifier {
         }
       });
       String? aprtId = await PrfData.shared.getApartments();
+      // ignore: unused_local_variable
       var index = selectApartmentFromHive(aprtId);
     });
   }

@@ -1,4 +1,5 @@
-import 'dart:async';
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+// ignore: unused_import
 import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
     as rocket_notification;
 
@@ -23,6 +25,7 @@ import '../../widgets/primary_card.dart';
 import '../home/home_screen.dart';
 import 'bloc/websocket_connect.dart';
 import 'widget/input_chat.dart';
+// ignore: unused_import
 import 'widget/list_message_subject.dart';
 import 'widget/messages.dart';
 
@@ -176,7 +179,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                   .sendPong(state.webSocketChannel!);
                             }
                             var data = RocketChatData.fromJson(
-                                json.decode(snapshot.data));
+                              json.decode(snapshot.data),
+                            );
                             if (data.msg == "changed" && data.fields != null) {
                               bloc.addMessage((data.fields!.args![0]));
                             }
@@ -311,7 +315,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                               S.of(context).end_chat,
                                               overflow: TextOverflow.ellipsis,
                                               style: txtRegular(
-                                                  14, grayScaleColorBase),
+                                                14,
+                                                grayScaleColorBase,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -321,7 +327,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                 if (!state.quit &&
                                     state.stateChat == StateChatEnum.START)
                                   InputChat(
-                                      messageState: state, messageBloc: bloc),
+                                    messageState: state,
+                                    messageBloc: bloc,
+                                  ),
                                 vpad(10)
                               ],
                             );
@@ -364,7 +372,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                 .sendPong(state.webSocketChannel!);
                           }
                           var data = RocketChatData.fromJson(
-                              json.decode(snapshot.data));
+                            json.decode(snapshot.data),
+                          );
                           if (data.msg == "changed" && data.fields != null) {
                             bloc.addMessage(data.fields!.args![0]);
                           }
@@ -434,7 +443,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                             S.of(context).start_chat,
                                             overflow: TextOverflow.ellipsis,
                                             style: txtRegular(
-                                                14, grayScaleColorBase),
+                                              14,
+                                              grayScaleColorBase,
+                                            ),
                                           )
                                         ],
                                       ),
@@ -485,7 +496,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                             S.of(context).end_chat,
                                             overflow: TextOverflow.ellipsis,
                                             style: txtRegular(
-                                                14, grayScaleColorBase),
+                                              14,
+                                              grayScaleColorBase,
+                                            ),
                                           )
                                         ],
                                       ),
@@ -495,7 +508,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               if (!state.quit &&
                                   state.stateChat == StateChatEnum.START)
                                 InputChat(
-                                    messageState: state, messageBloc: bloc),
+                                  messageState: state,
+                                  messageBloc: bloc,
+                                ),
                               vpad(10)
                             ],
                           );

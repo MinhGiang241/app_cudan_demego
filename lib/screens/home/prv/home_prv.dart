@@ -1,5 +1,4 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/notification/prv/notification_prv.dart';
 import 'package:app_cudan/services/api_event.dart';
 import 'package:app_cudan/services/api_new.dart';
 
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/utils.dart';
-import '../../chat/bloc/chat_message_bloc.dart';
 import '../../notification/prv/undread_noti.dart';
 
 class HomePrv extends ChangeNotifier {
@@ -43,9 +41,10 @@ class HomePrv extends ChangeNotifier {
   markRead(BuildContext context, New e) async {
     if (e.isRead != true) {
       var mark = MarkRead(
-          accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
-          newId: e.id,
-          type: "NEW");
+        accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
+        newId: e.id,
+        type: "NEW",
+      );
       await APINew.markRead(mark.toJson());
 
       // listNews[index].isRead = true;

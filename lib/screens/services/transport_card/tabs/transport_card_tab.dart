@@ -1,4 +1,3 @@
-import 'package:app_cudan/models/resident_card.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/transport_card/manage_card_details_screen.dart';
 import 'package:flutter/material.dart';

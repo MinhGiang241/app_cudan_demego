@@ -1,4 +1,3 @@
-import 'package:app_cudan/models/extra_service.dart';
 import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/screens/electricity/prv/electricity_prv.dart';
 import 'package:app_cudan/screens/payment/bill_details_screen.dart';
@@ -6,8 +5,6 @@ import 'package:app_cudan/widgets/primary_empty_widget.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -15,7 +12,6 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../widgets/primary_error_widget.dart';
-import '../../home/home_screen.dart';
 import '../../payment/widget/payment_item.dart';
 
 class ElectricityPaymentTab extends StatefulWidget {

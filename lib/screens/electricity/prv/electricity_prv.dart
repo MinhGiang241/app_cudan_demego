@@ -1,7 +1,6 @@
 import 'package:app_cudan/models/electric_fee.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
-import 'package:app_cudan/services/api_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,5 @@
-import 'package:app_cudan/models/list_transport.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/api_constant.dart';
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
