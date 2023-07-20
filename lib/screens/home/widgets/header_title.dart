@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../constants/constants.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../notification/notification_screen.dart';
+import '../../notification/prv/undread_noti.dart';
 
 class HeaderTitle extends StatelessWidget {
   const HeaderTitle({
@@ -32,19 +33,26 @@ class HeaderTitle extends StatelessWidget {
           ),
         ),
       ),
-      trailing: FutureBuilder(
-        future: context.read<NotificationPrv>().getUnReadNotification(),
+      trailing:
+          //FutureBuilder(
+          //future: context.read<NotificationPrv>().getUnReadNotification(),
+          // builder: (context, snapshot) {
+          //  var badgeNum = context.watch<NotificationPrv>().unRead;
+          //return
+          StreamBuilder(
+        stream: UnreadNotification.count.stream,
         builder: (context, snapshot) {
-          var badgeNum = context.watch<NotificationPrv>().unRead;
           return PrimaryIcon(
             icons: PrimaryIcons.bell_outline,
             style: PrimaryIconStyle.gradient,
             color: grayScaleColor2,
-            badge: badgeNum != 0 ? "${badgeNum}" : null,
+            badge: snapshot.data != null ? snapshot.data.toString() : null,
             onTap: () {
               context.read<NotificationPrv>().resetSelectType();
               Navigator.pushNamed(context, NotificationScreen.routeName);
             },
+            //  );
+            //},
           );
         },
       ),

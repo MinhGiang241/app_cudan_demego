@@ -11,6 +11,7 @@ import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
 import '../auth/prv/resident_info_prv.dart';
 import '../chat/bloc/chat_message_bloc.dart';
+import '../notification/prv/undread_noti.dart';
 import 'prv/home_prv.dart';
 import 'widgets/bill_home.dart';
 import 'widgets/event_home.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: refreshController,
               onRefresh: () async {
                 await context.read<HomePrv>().initial();
-                await context.read<NotificationPrv>().getUnReadNotification();
+                UnreadNotification.getUnReadNotification();
                 refreshController.refreshCompleted();
               },
               child: ListView(

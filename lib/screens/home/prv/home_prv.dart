@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/notification/prv/notification_prv.dart';
 import 'package:app_cudan/services/api_event.dart';
 import 'package:app_cudan/services/api_new.dart';
 
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/utils.dart';
 import '../../chat/bloc/chat_message_bloc.dart';
+import '../../notification/prv/undread_noti.dart';
 
 class HomePrv extends ChangeNotifier {
   Event? event;
@@ -78,6 +80,7 @@ class HomePrv extends ChangeNotifier {
       isResNewsLoading = true;
       isProNewsLoading = true;
       notifyListeners();
+      UnreadNotification.getUnReadNotification();
       var accountId = context!.read<ResidentInfoPrv>().userInfo != null
           ? context!.read<ResidentInfoPrv>().userInfo!.account!.id
           : null;

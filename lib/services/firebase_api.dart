@@ -12,6 +12,7 @@ import 'package:graphql/client.dart';
 
 import '../models/response.dart';
 import '../screens/notification/notification_screen.dart';
+import '../screens/notification/prv/undread_noti.dart';
 import 'api_service.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
@@ -23,7 +24,7 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 void handleMesage(RemoteMessage? message) {
   print('handle message');
   if (message == null) return;
-
+  UnreadNotification.getUnReadNotification();
   navigatorKey.currentState!
       .pushNamed(NotificationScreen.routeName, arguments: message);
 }

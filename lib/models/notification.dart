@@ -10,6 +10,7 @@ class NotificationType {
   String? name;
   String? targetType;
   String? description;
+  bool? isRead;
   NotificationType({
     this.id,
     this.createdTime,
@@ -19,6 +20,7 @@ class NotificationType {
     this.name,
     this.targetType,
     this.description,
+    this.isRead = true,
   });
 
   NotificationType copyWith({
@@ -392,14 +394,14 @@ class UnReadCount {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      '_id': id,
       'total': total,
     };
   }
 
   factory UnReadCount.fromMap(Map<String, dynamic> map) {
     return UnReadCount(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       total: int.tryParse(map['total'].toString()) != null
           ? int.parse(map['total'].toString())
           : null,

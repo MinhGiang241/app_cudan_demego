@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:app_cudan/services/api_notification.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/notification.dart';
 import '../../../utils/utils.dart';
+import 'undread_noti.dart';
 
 class NotificationPrv extends ChangeNotifier {
   int unRead = 0;
@@ -18,14 +21,25 @@ class NotificationPrv extends ChangeNotifier {
 
   List<NotificationAccessor> notificationList = [];
   List<NotificationType> notiTypeList = [];
-  List<UnReadCount> unReadCount = [];
-  markReadNotification(String? id, int index) async {
-    var a = id;
+
+  markReadNotification(
+    NotificationAccessor e,
+    int index,
+  ) async {
+    var a = e.id;
     print(a);
     notificationList[index].isRead = true;
+    var indexCount = UnreadNotification.unReadCount
+        .indexWhere((i) => i.id == e.message?.typeId);
+    if (indexCount != -1 &&
+        UnreadNotification.unReadCount[indexCount].total != null) {
+      UnreadNotification.unReadCount[indexCount].total =
+          UnreadNotification.unReadCount[indexCount].total! - 1;
+    }
+    UnreadNotification.count.add(unRead);
     notifyListeners();
-    await APINotification.markReadNotification(id);
-    await getUnReadNotification();
+    await APINotification.markReadNotification(e.id);
+    // await getUnReadNotification();s
   }
 
   setSelectedType(String typeID) async {
@@ -35,26 +49,27 @@ class NotificationPrv extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future getUnReadNotification() async {
-    await APINotification.getUnreadNotfication().then((v) {
-      unRead = 0;
-      if (v != null) {
-        unReadCount.clear();
-        for (var i in v) {
-          unRead += i['total'] as int;
-          unReadCount.add(UnReadCount.fromMap(i));
-        }
-      } else {
-        unRead = 0;
-      }
-      notifyListeners();
-    });
-  }
+  // Future getUnReadNotification() async {
+  //   await APINotification.getUnreadNotfication().then((v) {
+  //     unRead = 0;
+  //     if (v != null) {
+  //       unReadCount.clear();
+  //       for (var i in v) {
+  //         unRead += i['total'] as int;
+  //         unReadCount.add(UnReadCount.fromMap(i));
+  //       }
+  //     } else {
+  //       unRead = 0;
+  //     }
+  //     UnreadNotification.count.add(unRead);
+  //     notifyListeners();
+  //   });
+  // }
 
   Future getInitData(BuildContext context) async {
     try {
       await getNotificationTypeList();
-      await getNotiflcationList(true);
+      await getNotificationList(true);
     } catch (e) {
       Utils.showErrorMessage(context, e.toString());
     }
@@ -74,7 +89,7 @@ class NotificationPrv extends ChangeNotifier {
     });
   }
 
-  Future getNotiflcationList(bool isInit) async {
+  Future getNotificationList(bool isInit) async {
     if (isInit) {
       skip = 0;
     }
