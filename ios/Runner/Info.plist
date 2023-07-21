@@ -4,9 +4,9 @@
 <dict>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key> 
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
-	<key>UIFileSharingEnabled</key> 
+	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
@@ -25,11 +25,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FDAllFilesDownloadedMessage</key>
 	<string>All files have been downloaded</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -79,7 +79,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-  	<string>tel</string>
-</array>
+		<string>tel</string>
+	</array>
 </dict>
 </plist>
