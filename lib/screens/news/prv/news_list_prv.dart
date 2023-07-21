@@ -21,9 +21,10 @@ class NewListPrv extends ChangeNotifier {
   markRead(BuildContext context, int index, New e) async {
     if (e.isRead != true) {
       var mark = MarkRead(
-          accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
-          newId: e.id,
-          type: "NEW");
+        accountId: context.read<ResidentInfoPrv>().userInfo!.account!.id,
+        newId: e.id,
+        type: "NEW",
+      );
       await APINew.markRead(mark.toJson());
 
       listNews[index].isRead = true;
@@ -36,9 +37,12 @@ class NewListPrv extends ChangeNotifier {
       skip = 0;
       listNews.clear();
     }
-    await APINew.getNewList(5, skip, type,
-            context.read<ResidentInfoPrv>().userInfo!.account!.id!)
-        .then((v) {
+    await APINew.getNewList(
+      5,
+      skip,
+      type,
+      context.read<ResidentInfoPrv>().userInfo!.account!.id!,
+    ).then((v) {
       for (var i in v) {
         listNews.add(New.fromJson(i));
       }
