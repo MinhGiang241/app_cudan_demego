@@ -102,7 +102,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
       validateProject = null;
       isSelectAprt = false;
     }
-    getRelationShipList();
+    //getRelationShipList();
     notifyListeners();
   }
 

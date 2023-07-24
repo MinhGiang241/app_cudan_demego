@@ -44,20 +44,20 @@ class ResidentRegistrationDetailsScreen extends StatelessWidget {
                 content: isGuest ? S.of(context).guest : S.of(context).resident,
                 contentStyle: txtBodySmallBold(color: grayScaleColorBase),
               ),
-              if (!isGuest)
-                InfoContentView(
-                  isHorizontal: true,
-                  title: S.of(context).apartment,
-                  content: arg.apartmentCode,
-                  contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-                ),
-              if (!isGuest)
-                InfoContentView(
-                  isHorizontal: true,
-                  title: S.of(context).relation_with_owner,
-                  content: arg.relationship,
-                  contentStyle: txtBodySmallBold(color: grayScaleColorBase),
-                ),
+              // if (!isGuest)
+              //   InfoContentView(
+              //     isHorizontal: true,
+              //     title: S.of(context).apartment,
+              //     content: arg.apartmentCode,
+              //     contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+              //   ),
+              // if (!isGuest)
+              //   InfoContentView(
+              //     isHorizontal: true,
+              //     title: S.of(context).relation_with_owner,
+              //     content: arg.relationship,
+              //     contentStyle: txtBodySmallBold(color: grayScaleColorBase),
+              //   ),
               // InfoContentView(
               //   isHorizontal: true,
               //   title: S.of(context).sell_contract_num,

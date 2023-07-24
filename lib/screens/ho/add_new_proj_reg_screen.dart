@@ -83,60 +83,60 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
                   ],
                   validator: Utils.emptyValidatorDropdown,
                 ),
-                if (isResident) vpad(12),
-                if (isResident)
-                  PrimaryDropDownSearch(
-                    key: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .searchApartmentKey,
-                    onSaved: context
-                        .read<CreateNewProjRegistrationPrv>()
-                        .onSaveApartment,
-                    isAuto:
-                        context.watch<CreateNewProjRegistrationPrv>().autoValid,
-                    onChanged: context
-                        .read<CreateNewProjRegistrationPrv>()
-                        .onChangeApartment,
-                    paginatedRequest: context
-                        .read<CreateNewProjRegistrationPrv>()
-                        .paginatedRequest,
-                    isRequired: true,
-                    label: S.of(context).apartment,
-                    hint: S.of(context).search_apartment,
-                    validator: (v) {
-                      if (v == null) {
-                        return S.of(context).not_blank;
-                      }
-                      return null;
-                    },
-                    validateString: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .validateContractNum,
-                  ),
-                if (isResident) vpad(12),
-                if (isResident)
-                  PrimaryDropDown(
-                    hint: '',
-                    value: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .valueRelation,
-                    enable: false,
-                    key: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .relationKey,
-                    selectList: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .relationshipList,
-                    onChange: context
-                        .read<CreateNewProjRegistrationPrv>()
-                        .onChangeRelation,
-                    isRequired: true,
-                    label: S.of(context).relation_owner,
-                    validator: Utils.emptyValidatorDropdown,
-                    validateString: context
-                        .watch<CreateNewProjRegistrationPrv>()
-                        .validateRelation,
-                  ),
+                // if (isResident) vpad(12),
+                // if (isResident)
+                //   PrimaryDropDownSearch(
+                //     key: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .searchApartmentKey,
+                //     onSaved: context
+                //         .read<CreateNewProjRegistrationPrv>()
+                //         .onSaveApartment,
+                //     isAuto:
+                //         context.watch<CreateNewProjRegistrationPrv>().autoValid,
+                //     onChanged: context
+                //         .read<CreateNewProjRegistrationPrv>()
+                //         .onChangeApartment,
+                //     paginatedRequest: context
+                //         .read<CreateNewProjRegistrationPrv>()
+                //         .paginatedRequest,
+                //     isRequired: true,
+                //     label: S.of(context).apartment,
+                //     hint: S.of(context).search_apartment,
+                //     validator: (v) {
+                //       if (v == null) {
+                //         return S.of(context).not_blank;
+                //       }
+                //       return null;
+                //     },
+                //     validateString: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .validateContractNum,
+                //   ),
+                // if (isResident) vpad(12),
+                // if (isResident)
+                //   PrimaryDropDown(
+                //     hint: '',
+                //     value: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .valueRelation,
+                //     enable: false,
+                //     key: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .relationKey,
+                //     selectList: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .relationshipList,
+                //     onChange: context
+                //         .read<CreateNewProjRegistrationPrv>()
+                //         .onChangeRelation,
+                //     isRequired: true,
+                //     label: S.of(context).relation_owner,
+                //     validator: Utils.emptyValidatorDropdown,
+                //     validateString: context
+                //         .watch<CreateNewProjRegistrationPrv>()
+                //         .validateRelation,
+                //   ),
                 vpad(40),
                 PrimaryButton(
                   onTap: () => context

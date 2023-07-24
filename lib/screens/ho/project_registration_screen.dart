@@ -166,27 +166,27 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                                             grayScaleColorBase,
                                           ),
                                         ),
-                                        if (!isGuest)
-                                          Text(
-                                            "${S.of(context).apartment}: ${e.apartmentCode ?? ""}",
-                                            style: txtRegular(
-                                              13,
-                                              grayScaleColorBase,
-                                            ),
-                                          ),
-                                        if (!isGuest)
-                                          Row(
-                                            children: [
-                                              Icon(Icons.usb_sharp),
-                                              Text(
-                                                e.relationship ?? '',
-                                                style: txtRegular(
-                                                  12,
-                                                  grayScaleColorBase,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                        // if (!isGuest)
+                                        //   Text(
+                                        //     "${S.of(context).apartment}: ${e.apartmentCode ?? ""}",
+                                        //     style: txtRegular(
+                                        //       13,
+                                        //       grayScaleColorBase,
+                                        //     ),
+                                        //   ),
+                                        // if (!isGuest)
+                                        //   Row(
+                                        //     children: [
+                                        //       Icon(Icons.usb_sharp),
+                                        //       Text(
+                                        //         e.relationship ?? '',
+                                        //         style: txtRegular(
+                                        //           12,
+                                        //           grayScaleColorBase,
+                                        //         ),
+                                        //       ),
+                                        //     ],
+                                        //   ),
                                         Row(
                                           children: [
                                             Icon(Icons.calendar_month_outlined),
