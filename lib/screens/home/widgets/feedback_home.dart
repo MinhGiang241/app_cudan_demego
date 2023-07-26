@@ -20,9 +20,11 @@ class FeedbackHome extends StatelessWidget {
       onTapShowAll: () {
         // Utils.pushScreen(context, const ListServicesScreen());
       },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        childAspectRatio: 1,
         children: [
           SizedBox(
             width: 85,
@@ -106,6 +108,13 @@ class FeedbackHome extends StatelessWidget {
           hpad(85)
         ],
       ),
+      //  Row(
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: [
+
+      //   ],
+      // ),
     );
   }
 }

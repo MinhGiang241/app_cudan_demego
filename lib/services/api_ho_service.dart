@@ -48,6 +48,9 @@ class ApiHOService {
           "response": {"code": 1, "message": S.current.err_conn}
         };
       }
+      if (result.data?['response']?['message'] == 2) {
+        throw ("RELOGIN");
+      }
       return result.data!;
     } catch (e) {
       return {

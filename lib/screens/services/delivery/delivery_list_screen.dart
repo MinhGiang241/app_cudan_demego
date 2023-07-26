@@ -39,53 +39,48 @@ class _DeliveryListScreenState extends State<DeliveryListScreen>
     }
     tabController.index = initIndex;
     return ChangeNotifierProvider(
-      create: (context) => DeliveryListPrv(),
+      create: (_) => DeliveryListPrv(),
       builder: (context, child) {
-        return ChangeNotifierProvider(
-          create: (_) => DeliveryListPrv(),
-          builder: (context, child) {
-            return PrimaryScreen(
-              appBar: PrimaryAppbar(
-                leading: BackButton(
-                  onPressed: () => Navigator.pushReplacementNamed(
-                    context,
-                    ServiceScreen.routeName,
-                  ),
-                ),
-                title: S.of(context).transfer_list,
-                tabController: tabController,
-                isTabScrollabel: false,
-                tabs: [
-                  Tab(text: S.of(context).my_letter),
-                  Tab(text: S.of(context).wait_confirm_letter),
-                ],
+        return PrimaryScreen(
+          appBar: PrimaryAppbar(
+            leading: BackButton(
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                ServiceScreen.routeName,
               ),
-              floatingActionButton: FloatingActionButton(
-                tooltip: S.of(context).add_trans_card,
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    RegisterDelivery.routeName,
-                    arguments: {"isEdit": false},
-                  );
-                },
-                backgroundColor: primaryColorBase,
-                child: const Icon(
-                  Icons.add,
-                  size: 40,
-                ),
-              ),
-              body: SafeArea(
-                child: TabBarView(
-                  controller: tabController,
-                  children: [
-                    MyLettersTabs(),
-                    WaitConfirmLetterTab(),
-                  ],
-                ),
-              ),
-            );
-          },
+            ),
+            title: S.of(context).transfer_list,
+            tabController: tabController,
+            isTabScrollabel: false,
+            tabs: [
+              Tab(text: S.of(context).my_letter),
+              Tab(text: S.of(context).wait_confirm_letter),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            tooltip: S.of(context).add_trans_card,
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RegisterDelivery.routeName,
+                arguments: {"isEdit": false},
+              );
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
+          ),
+          body: SafeArea(
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                MyLettersTabs(),
+                WaitConfirmLetterTab(),
+              ],
+            ),
+          ),
         );
       },
     );

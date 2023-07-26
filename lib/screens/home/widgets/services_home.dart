@@ -25,9 +25,11 @@ class ServicesHome extends StatelessWidget {
       onTapShowAll: () {
         Navigator.pushNamed(context, ServiceScreen.routeName);
       },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        childAspectRatio: 1,
         children: [
           SizedBox(
             width: 85,
@@ -152,6 +154,13 @@ class ServicesHome extends StatelessWidget {
                 ),
         ],
       ),
+      //  Row(
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: [
+
+      //   ],
+      // ),
     );
   }
 }

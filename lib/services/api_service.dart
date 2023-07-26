@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -438,11 +439,14 @@ class ApiService {
           "response": {"code": 1, "message": S.current.err_conn, "data": null}
         };
       }
+      if (result.data?['response']?['message'] == 2) {
+        throw ("RELOGIN");
+      }
       return result.data!;
     } on OperationException catch (e) {
       if (e.toString() == "RELOGIN") {
         return {
-          "response": {"code": 10, "message": e.toString(), "data": null}
+          "response": {"code": 2, "message": e.toString(), "data": null}
         };
       }
       return {
@@ -463,6 +467,9 @@ class ApiService {
         return {
           "response": {"code": 1, "message": S.current.err_conn}
         };
+      }
+      if (result.data?['response']?['message'] == 2) {
+        throw ("RELOGIN");
       }
       return result.data!;
     } catch (e) {

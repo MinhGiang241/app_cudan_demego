@@ -17,9 +17,11 @@ class ConvinientServiceHome extends StatelessWidget {
       onTapShowAll: () {
         // Utils.pushScreen(context, const BillsScreen());
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        childAspectRatio: 1,
         children: [
           SizedBox(
             width: 85,
@@ -134,6 +136,13 @@ class ConvinientServiceHome extends StatelessWidget {
           ),
         ],
       ),
+      //  Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: [
+
+      //   ],
+      // ),
     );
   }
 }

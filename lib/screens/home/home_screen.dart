@@ -20,6 +20,7 @@ import 'widgets/header_title.dart';
 import 'widgets/new_home.dart';
 import 'widgets/project_info_home.dart';
 import 'widgets/services_home.dart';
+import 'widgets/utility_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -119,6 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   const BillsHome(),
                   vpad(30),
                   const ServicesHome(),
+                  vpad(30),
+                  const UtilityService(),
                   vpad(30),
                   // const ConvinientServiceHome(),
                   // vpad(30),

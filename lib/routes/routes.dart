@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
+import 'package:app_cudan/screens/services/ultilty/utility_service_screen.dart';
 import 'package:app_cudan/screens/water/water_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,6 +71,7 @@ import '../screens/services/transport_card/transport_details_letter_screen.dart'
 import '../screens/services/transport_card/transport_details_screen.dart';
 import '../screens/services/transport_card/transport_card_screen.dart.dart';
 import '../screens/services/transport_card/transport_letter_details_screen.dart';
+import '../screens/services/ultilty/add_new_letter_ultility_service_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -425,6 +427,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => const NotificationDetailsScreen(),
+        );
+      case UtilityServiceScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => UtilityServiceScreen(),
+        );
+      case AddNewLetterUltilityScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => AddNewLetterUltilityScreen(),
         );
       default:
         return MaterialPageRoute(
