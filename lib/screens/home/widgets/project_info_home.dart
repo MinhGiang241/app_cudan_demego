@@ -50,6 +50,7 @@ class ProjectInfoHome extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16),
               child: PrimaryCard(
                 width: 256 + 32,
+                borderRadius: BorderRadius.circular(12),
                 onTap: () async {
                   context.read<HomePrv>().markRead(context, list[index]);
                   Navigator.pushNamed(
@@ -79,6 +80,7 @@ class ProjectInfoHome extends StatelessWidget {
                         width: 256,
                         height: 120,
                         child: PrimaryImageNetwork(
+                          borderRadius: BorderRadius.circular(12),
                           canShowPhotoView: false,
                           path:
                               "${ApiService.shared.uploadURL}?load=${list[index].image}&regcode=${ApiService.shared.regCode}",

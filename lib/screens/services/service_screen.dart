@@ -224,7 +224,7 @@ class ServiceScreen extends StatelessWidget {
                                             )
                                           ],
                                           borderRadius: const BorderRadius.all(
-                                            Radius.circular(24),
+                                            Radius.circular(12),
                                           ),
                                           gradient: e['background'] as Gradient,
                                         ),
@@ -304,7 +304,7 @@ class ServiceScreen extends StatelessWidget {
                                               borderRadius:
                                                   const BorderRadius.all(
                                                 Radius.circular(
-                                                  24,
+                                                  5,
                                                 ),
                                               ),
                                               gradient: gradientBlue,
@@ -317,7 +317,7 @@ class ServiceScreen extends StatelessWidget {
                                               borderRadius:
                                                   const BorderRadius.all(
                                                 Radius.circular(
-                                                  24,
+                                                  5,
                                                 ),
                                               ),
                                             ),

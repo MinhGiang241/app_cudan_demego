@@ -372,27 +372,32 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        PrimaryButton(
-                          isLoading:
-                              context.watch<RegisterPetPrv>().isAddNewLoading,
-                          buttonSize: ButtonSize.medium,
-                          text: isEdit
-                              ? S.of(context).update
-                              : S.of(context).add_new,
-                          onTap: () => context
-                              .read<RegisterPetPrv>()
-                              .onSendSummitPet(context, false),
+                        Expanded(
+                          child: PrimaryButton(
+                            isLoading:
+                                context.watch<RegisterPetPrv>().isAddNewLoading,
+                            buttonSize: ButtonSize.medium,
+                            text: isEdit
+                                ? S.of(context).update
+                                : S.of(context).add_new,
+                            onTap: () => context
+                                .read<RegisterPetPrv>()
+                                .onSendSummitPet(context, false),
+                          ),
                         ),
-                        PrimaryButton(
-                          isLoading: context
-                              .watch<RegisterPetPrv>()
-                              .isSendApproveLoading,
-                          buttonType: ButtonType.green,
-                          buttonSize: ButtonSize.medium,
-                          text: S.of(context).send_request,
-                          onTap: () => context
-                              .read<RegisterPetPrv>()
-                              .onSendSummitPet(context, true),
+                        hpad(10),
+                        Expanded(
+                          child: PrimaryButton(
+                            isLoading: context
+                                .watch<RegisterPetPrv>()
+                                .isSendApproveLoading,
+                            buttonType: ButtonType.green,
+                            buttonSize: ButtonSize.medium,
+                            text: S.of(context).send_request,
+                            onTap: () => context
+                                .read<RegisterPetPrv>()
+                                .onSendSummitPet(context, true),
+                          ),
                         ),
                       ],
                     ),

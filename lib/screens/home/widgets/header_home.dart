@@ -71,9 +71,10 @@ class _HeaderHomeState extends State<HeaderHome> {
             ],
           ),
         ),
-       if (Provider.of<ResidentInfoPrv>(context, listen: false)
+        if (Provider.of<ResidentInfoPrv>(context, listen: false)
             .listOwn
-            .isNotEmpty) vpad(30),
+            .isNotEmpty)
+          vpad(30),
         if (Provider.of<ResidentInfoPrv>(context, listen: false)
             .listOwn
             .isNotEmpty)
@@ -91,7 +92,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                       ),
                     );
                   },
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(12),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: ListTile(

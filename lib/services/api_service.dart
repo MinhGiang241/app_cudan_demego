@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants/api_constant.dart';
 import 'package:dio/dio.dart';

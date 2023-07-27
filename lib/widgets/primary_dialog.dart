@@ -33,7 +33,7 @@ class CustomDialog extends StatelessWidget {
     return Center(
       child: Dialog(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         elevation: 0,
         insetAnimationCurve: Curves.bounceInOut,
@@ -43,7 +43,7 @@ class CustomDialog extends StatelessWidget {
             color:
                 useBackground ? backgroundColor : Colors.white.withOpacity(0.9),
             border: Border.all(color: Colors.white54, width: 0.5),
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(12),
           ),
           child: SingleChildScrollView(
             child: Padding(

@@ -31,6 +31,7 @@ class EventsHome extends StatelessWidget {
           context.watch<HomePrv>().isEventLoading
               ? const PrimaryLoading()
               : PrimaryCard(
+                  borderRadius: BorderRadius.circular(12),
                   onTap: () {
                     Navigator.pushNamed(
                       context,

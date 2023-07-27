@@ -70,12 +70,12 @@ class PrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: _backgroundColor(buttonType ?? ButtonType.primary),
         gradient: _gradientColor(buttonType ?? ButtonType.primary),
-        borderRadius: isRectangle ? null : BorderRadius.circular(28),
+        borderRadius: isRectangle ? null : BorderRadius.circular(12),
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: isRectangle ? null : BorderRadius.circular(28),
+          borderRadius: isRectangle ? null : BorderRadius.circular(12),
           onTap: isLoading ? () {} : onTap,
           child: Padding(
             padding: _paddingContent(buttonSize ?? ButtonSize.large),

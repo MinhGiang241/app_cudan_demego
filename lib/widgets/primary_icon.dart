@@ -147,7 +147,7 @@ class PrimaryIcon extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
-              borderRadius: borderRadius ?? BorderRadius.circular(24),
+              borderRadius: borderRadius ?? BorderRadius.circular(12),
               child: Padding(
                 padding: padding ?? const EdgeInsets.all(8),
                 child: B.Badge(
@@ -171,7 +171,7 @@ class PrimaryIcon extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: borderRadius ?? BorderRadius.circular(24),
+            borderRadius: borderRadius ?? BorderRadius.circular(12),
             child: B.Badge(
               padding: EdgeInsets.zero,
               badgeContent: Text(badge ?? '', style: txtBold(10, Colors.white)),
@@ -191,7 +191,7 @@ class PrimaryIcon extends StatelessWidget {
           decoration: BoxDecoration(
             // color: _gradientWhite(),
             gradient: _gradientColor(),
-            borderRadius: borderRadius ?? BorderRadius.circular(24),
+            borderRadius: borderRadius ?? BorderRadius.circular(12),
             // gradient: _gradientWhite(),
             border: Border.all(color: Colors.white30, width: 0.5),
             // boxShadow: [
@@ -205,7 +205,7 @@ class PrimaryIcon extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
-              borderRadius: borderRadius ?? BorderRadius.circular(24),
+              borderRadius: borderRadius ?? BorderRadius.circular(12),
               child: Padding(
                 padding: padding ?? const EdgeInsets.all(8),
                 child: B.Badge(

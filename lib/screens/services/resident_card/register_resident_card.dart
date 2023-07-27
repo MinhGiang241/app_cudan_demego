@@ -248,34 +248,39 @@ class _RegisterResidentCardState extends State<RegisterResidentCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        PrimaryButton(
-                          isLoading: context
-                              .watch<RegisterResidentCardPrv>()
-                              .isAddNewLoading,
-                          buttonSize: ButtonSize.medium,
-                          text: isEdit
-                              ? S.of(context).update
-                              : S.of(context).add_new,
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            context
-                                .read<RegisterResidentCardPrv>()
-                                .onSubmitCard(context, false);
-                          },
+                        Expanded(
+                          child: PrimaryButton(
+                            isLoading: context
+                                .watch<RegisterResidentCardPrv>()
+                                .isAddNewLoading,
+                            buttonSize: ButtonSize.medium,
+                            text: isEdit
+                                ? S.of(context).update
+                                : S.of(context).add_new,
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              context
+                                  .read<RegisterResidentCardPrv>()
+                                  .onSubmitCard(context, false);
+                            },
+                          ),
                         ),
-                        PrimaryButton(
-                          isLoading: context
-                              .watch<RegisterResidentCardPrv>()
-                              .isSendApproveLoading,
-                          buttonSize: ButtonSize.medium,
-                          buttonType: ButtonType.green,
-                          text: S.of(context).send_request,
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            context
-                                .read<RegisterResidentCardPrv>()
-                                .onSubmitCard(context, true);
-                          },
+                        hpad(10),
+                        Expanded(
+                          child: PrimaryButton(
+                            isLoading: context
+                                .watch<RegisterResidentCardPrv>()
+                                .isSendApproveLoading,
+                            buttonSize: ButtonSize.medium,
+                            buttonType: ButtonType.green,
+                            text: S.of(context).send_request,
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              context
+                                  .read<RegisterResidentCardPrv>()
+                                  .onSubmitCard(context, true);
+                            },
+                          ),
                         ),
                       ],
                     ),
