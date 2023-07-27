@@ -166,14 +166,14 @@ class _HomeScreenState extends State<HomeScreen> {
           BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10)
         ],
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
         child: Theme(
           data: Theme.of(context).copyWith(

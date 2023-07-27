@@ -42,7 +42,7 @@ class ServicesHome extends StatelessWidget {
                         blurStyle: BlurStyle.normal,
                         spreadRadius: 1,
                         blurRadius: 24,
-                        color: turquoiseColor.withOpacity(0.25),
+                        color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
                       )
                     ],
@@ -50,8 +50,8 @@ class ServicesHome extends StatelessWidget {
                   child: PrimaryIcon(
                     icons: PrimaryIcons.car,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.turquoise,
-                    color: Colors.white,
+                    gradients: PrimaryIconGradient.primary,
+                    color: demepro3,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
@@ -84,7 +84,7 @@ class ServicesHome extends StatelessWidget {
                               blurStyle: BlurStyle.normal,
                               spreadRadius: 1,
                               blurRadius: 24,
-                              color: primaryColorBase.withOpacity(0.25),
+                              color: demepro2.withOpacity(0.25),
                               offset: const Offset(0, 16),
                             )
                           ],
@@ -93,7 +93,7 @@ class ServicesHome extends StatelessWidget {
                           icons: PrimaryIcons.inbox,
                           style: PrimaryIconStyle.gradient,
                           gradients: PrimaryIconGradient.primary,
-                          color: Colors.white,
+                          color: demepro3,
                           padding: const EdgeInsets.all(12),
                           size: 32,
                           onTap: () {
@@ -125,7 +125,7 @@ class ServicesHome extends StatelessWidget {
                               blurStyle: BlurStyle.normal,
                               spreadRadius: 1,
                               blurRadius: 24,
-                              color: yellowColorBase.withOpacity(0.25),
+                              color: demepro2.withOpacity(0.25),
                               offset: const Offset(0, 16),
                             )
                           ],
@@ -133,8 +133,8 @@ class ServicesHome extends StatelessWidget {
                         child: PrimaryIcon(
                           icons: PrimaryIcons.box,
                           style: PrimaryIconStyle.gradient,
-                          gradients: PrimaryIconGradient.yellow,
-                          color: Colors.white,
+                          gradients: PrimaryIconGradient.primary,
+                          color: demepro3,
                           padding: const EdgeInsets.all(12),
                           size: 32,
                           onTap: () {

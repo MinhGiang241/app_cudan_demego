@@ -125,6 +125,8 @@ class WaterPrv extends ChangeNotifier {
       for (var i in v['last']) {
         listIndicatorLastYear.add(Indicator.fromMap(i));
       }
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
     notifyListeners();
   }

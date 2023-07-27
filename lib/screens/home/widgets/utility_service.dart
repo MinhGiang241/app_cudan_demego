@@ -12,38 +12,38 @@ class UtilityService extends StatelessWidget {
     final data = [
       {
         'icon': PrimaryIcons.dollar,
-        'icon-gradient': PrimaryIconGradient.green,
-        'color': Colors.white,
+        'icon-gradient': PrimaryIconGradient.primary,
+        'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': greenColor
+        'shadow-color': demepro2
       },
       {
         'icon': PrimaryIcons.dollar,
-        'icon-gradient': PrimaryIconGradient.green,
-        'color': Colors.white,
+        'icon-gradient': PrimaryIconGradient.primary,
+        'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': greenColor,
+        'shadow-color': demepro2,
       },
       {
         'icon': PrimaryIcons.dollar,
-        'icon-gradient': PrimaryIconGradient.green,
-        'color': Colors.white,
+        'icon-gradient': PrimaryIconGradient.primary,
+        'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': greenColor,
+        'shadow-color': demepro2,
       },
       {
         'icon': PrimaryIcons.dollar,
-        'icon-gradient': PrimaryIconGradient.green,
-        'color': Colors.white,
+        'icon-gradient': PrimaryIconGradient.primary,
+        'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': greenColor,
+        'shadow-color': demepro2,
       },
       {
         'icon': PrimaryIcons.dollar,
-        'icon-gradient': PrimaryIconGradient.green,
-        'color': Colors.white,
+        'icon-gradient': PrimaryIconGradient.primary,
+        'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': greenColor,
+        'shadow-color': demepro2,
       },
     ];
     return HomeTitleWidget(

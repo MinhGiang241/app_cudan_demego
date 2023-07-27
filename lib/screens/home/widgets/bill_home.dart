@@ -45,7 +45,7 @@ class BillsHome extends StatelessWidget {
                         blurStyle: BlurStyle.normal,
                         spreadRadius: 1,
                         blurRadius: 24,
-                        color: greenColor.withOpacity(0.25),
+                        color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
                       )
                     ],
@@ -53,8 +53,8 @@ class BillsHome extends StatelessWidget {
                   child: PrimaryIcon(
                     icons: PrimaryIcons.dollar,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.green,
-                    color: Colors.white,
+                    gradients: PrimaryIconGradient.primary,
+                    color: demepro3,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
@@ -86,7 +86,7 @@ class BillsHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: purpleColorBase.withOpacity(0.25),
+                          color: demepro2.withOpacity(0.25),
                           offset: const Offset(0, 16),
                         )
                       ],
@@ -94,8 +94,8 @@ class BillsHome extends StatelessWidget {
                     child: PrimaryIcon(
                       icons: PrimaryIcons.water,
                       style: PrimaryIconStyle.gradient,
-                      gradients: PrimaryIconGradient.purple,
-                      color: Colors.white,
+                      gradients: PrimaryIconGradient.primary,
+                      color: demepro3,
                       padding: const EdgeInsets.all(12),
                       size: 32,
                       onTap: () {
@@ -131,7 +131,7 @@ class BillsHome extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           spreadRadius: 1,
                           blurRadius: 24,
-                          color: yellowColor.withOpacity(0.25),
+                          color: demepro2.withOpacity(0.25),
                           offset: const Offset(0, 16),
                         )
                       ],
@@ -139,8 +139,8 @@ class BillsHome extends StatelessWidget {
                     child: PrimaryIcon(
                       icons: PrimaryIcons.electricity,
                       style: PrimaryIconStyle.gradient,
-                      gradients: PrimaryIconGradient.yellow,
-                      color: Colors.white,
+                      gradients: PrimaryIconGradient.primary,
+                      color: demepro3,
                       padding: const EdgeInsets.all(12),
                       size: 32,
                       onTap: () {

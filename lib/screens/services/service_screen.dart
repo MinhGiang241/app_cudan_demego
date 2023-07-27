@@ -33,14 +33,14 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": primaryColorBase,
-          "background": gradientBlue,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.inbox,
           "title": S.current.res_card,
           "navigator": ResidentCardListScreen.routeName,
         },
       {
         "color": turquoiseColor,
-        "background": gradientTurquoise,
+        "background": gradientPrimary,
         "icon": PrimaryIcons.car_bg,
         "title": S.current.parking_card,
         "navigator": TransportCardScreen.routeName,
@@ -48,7 +48,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": greenColorBase,
-          "background": gradientGreen,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.bone,
           "title": S.current.pet,
           "navigator": PetListScreen.routeName,
@@ -56,7 +56,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": pinkColorBase,
-          "background": gradientPink,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.wrench,
           "title": S.current.construction,
           "navigator": ConstructionListScreen.routeName,
@@ -64,7 +64,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": yellowColorBase,
-          "background": gradientYellow,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.box,
           "title": S.current.reg_deliver,
           "navigator": DeliveryListScreen.routeName,
@@ -72,7 +72,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": primaryColorBase,
-          "background": gradientBlue,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.package,
           "title": S.current.parcel,
           "navigator": ParcelListScreen.routeName,
@@ -87,7 +87,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": turquoiseColor,
-          "background": gradientTurquoise,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.binoculars,
           "title": S.current.missing_obj,
           "navigator": MissingObectScreen.routeName,
@@ -102,7 +102,7 @@ class ServiceScreen extends StatelessWidget {
       if (isRes)
         {
           "color": yellowColorBase,
-          "background": gradientYellow,
+          "background": gradientPrimary,
           "icon": PrimaryIcons.home,
           "title": S.current.hand_over,
           "navigator": HandOverScreen.routeName,
@@ -231,7 +231,7 @@ class ServiceScreen extends StatelessWidget {
                                         child: PrimaryIcon(
                                           icons: e['icon'] as PrimaryIcons,
                                           size: 40,
-                                          color: Colors.white,
+                                          color: demepro3,
                                         ),
                                       ),
                                       vpad(11),

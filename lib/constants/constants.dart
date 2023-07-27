@@ -18,7 +18,11 @@ const Color backgroundColor = Color(0xffF8FAFE);
 
 const Color shadowColor = Color(0xff6575A7);
 
-const Color primaryColorBase = Color(0xff466FFF);
+const Color demepro1 = Color(0xff201C6E);
+const Color demepro2 = Color(0xff127CC1);
+const Color demepro3 = Color(0xffFFCB08);
+
+const Color primaryColorBase = demepro2; //Color(0xff466FFF);
 const Color primaryColor1 = Color(0xff3462FF);
 const Color primaryColor2 = Color(0xff5F8BFF);
 const Color primaryColor3 = Color(0xff789CFF);
@@ -104,8 +108,10 @@ const gradientBackground = LinearGradient(
 
 final gradientPrimary = LinearGradient(
   colors: [
-    const Color(0xff4A54FF).withOpacity(1),
-    const Color(0xff0066FF).withOpacity(0.8)
+    // const Color(0xff4A54FF).withOpacity(1),
+    // const Color(0xff0066FF).withOpacity(0.8)
+    demepro1.withOpacity(1),
+    demepro2.withOpacity(1),
   ],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,

@@ -37,7 +37,7 @@ class FeedbackHome extends StatelessWidget {
                         blurStyle: BlurStyle.normal,
                         spreadRadius: 1,
                         blurRadius: 24,
-                        color: yellowColor.withOpacity(0.25),
+                        color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
                       )
                     ],
@@ -45,8 +45,8 @@ class FeedbackHome extends StatelessWidget {
                   child: PrimaryIcon(
                     icons: PrimaryIcons.mail,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.yellow,
-                    color: Colors.white,
+                    gradients: PrimaryIconGradient.primary,
+                    color: demepro3,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {
@@ -75,7 +75,7 @@ class FeedbackHome extends StatelessWidget {
                         blurStyle: BlurStyle.normal,
                         spreadRadius: 1,
                         blurRadius: 24,
-                        color: greenColorBase.withOpacity(0.25),
+                        color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
                       )
                     ],
@@ -83,8 +83,8 @@ class FeedbackHome extends StatelessWidget {
                   child: PrimaryIcon(
                     icons: PrimaryIcons.avatar,
                     style: PrimaryIconStyle.gradient,
-                    gradients: PrimaryIconGradient.green,
-                    color: Colors.white,
+                    gradients: PrimaryIconGradient.primary,
+                    color: demepro3,
                     padding: const EdgeInsets.all(12),
                     size: 32,
                     onTap: () {

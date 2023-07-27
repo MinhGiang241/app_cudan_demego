@@ -62,7 +62,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                   ),
                   if (userInfo != null)
                     Text(
-                      userInfo.info_name ?? '',
+                      userInfo.info_name ?? userInfo.account?.fullName ?? '',
                       style: txtLinkMedium(),
                       overflow: TextOverflow.ellipsis,
                     )

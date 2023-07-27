@@ -8,7 +8,6 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_screen.dart';
-import '../../widgets/primary_dropdown_search.dart';
 import 'prv/create_new_proj_registration_prv.dart';
 
 class AddNewProjRegScreen extends StatefulWidget {
@@ -25,9 +24,9 @@ class _AddNewProjRegScreenState extends State<AddNewProjRegScreen> {
     return ChangeNotifierProvider(
       create: (context) => CreateNewProjRegistrationPrv(),
       builder: (context, state) {
-        var isResident =
-            context.watch<CreateNewProjRegistrationPrv>().valueType ==
-                "RESIDENT";
+        // var isResident =
+        //     context.watch<CreateNewProjRegistrationPrv>().valueType ==
+        //         "RESIDENT";
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).reg_info,
