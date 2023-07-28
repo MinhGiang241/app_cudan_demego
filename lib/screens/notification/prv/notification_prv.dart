@@ -15,6 +15,11 @@ class NotificationPrv extends ChangeNotifier {
 
   var key = UniqueKey();
 
+  setUnread(int v) {
+    unRead = v;
+    notifyListeners();
+  }
+
   resetSelectType() {
     selectedType = '';
   }

@@ -42,15 +42,17 @@ class HeaderTitle extends StatelessWidget {
           StreamBuilder(
         stream: UnreadNotification.count.stream,
         builder: (context, snapshot) {
+          if (snapshot.data != null && snapshot.data != 0) {
+            int v = int.tryParse(snapshot.data.toString()) != null
+                ? int.parse(snapshot.data.toString())
+                : 0;
+            context.watch<NotificationPrv>().setUnread(v);
+          }
           return PrimaryIcon(
             icons: PrimaryIcons.bell_outline,
             style: PrimaryIconStyle.gradient,
             color: grayScaleColor2,
-            badge: snapshot.data != null
-                ? snapshot.data != 0
-                    ? snapshot.data.toString()
-                    : null
-                : null,
+            badge: context.watch<NotificationPrv>().unRead.toString(),
             onTap: () {
               context.read<NotificationPrv>().resetSelectType();
               Navigator.pushNamed(context, NotificationScreen.routeName);
