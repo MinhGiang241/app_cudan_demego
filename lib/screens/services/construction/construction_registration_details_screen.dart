@@ -224,13 +224,13 @@ class _ConstructionRegistrationDetailsScreenState
                         content: reg.r!.name ?? "",
                         contentStyle: txtBold(14, grayScaleColorBase),
                       ),
-                    if (reg.reason_description != null)
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).note,
-                        content: reg.reason_description ?? "",
-                        contentStyle: txtBold(14, grayScaleColorBase),
-                      ),
+                    // if (reg.reason_description != null)
+                    //   InfoContentView(
+                    //     isHorizontal: true,
+                    //     title: S.of(context).note,
+                    //     content: reg.reason_description ?? "",
+                    //     contentStyle: txtBold(14, grayScaleColorBase),
+                    //   ),
                     if (reg.file_cancel != null && reg.file_cancel!.isNotEmpty)
                       InfoContentView(
                         // isHorizontal: true,
