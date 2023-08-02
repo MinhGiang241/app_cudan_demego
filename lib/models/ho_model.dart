@@ -425,10 +425,10 @@ class Registration {
   }
 }
 
-class RegistrationProjectListList {
+class RegistrationProjectList {
   Project? project;
   Deployment? deployment;
-  RegistrationProjectListList({
+  RegistrationProjectList({
     this.project,
     this.deployment,
   });
@@ -440,8 +440,8 @@ class RegistrationProjectListList {
     };
   }
 
-  factory RegistrationProjectListList.fromMap(Map<String, dynamic> map) {
-    return RegistrationProjectListList(
+  factory RegistrationProjectList.fromMap(Map<String, dynamic> map) {
+    return RegistrationProjectList(
       project: map['project'] != null
           ? Project.fromMap(map['project'] as Map<String, dynamic>)
           : null,
@@ -453,8 +453,8 @@ class RegistrationProjectListList {
 
   String toJson() => json.encode(toMap());
 
-  factory RegistrationProjectListList.fromJson(String source) =>
-      RegistrationProjectListList.fromMap(
+  factory RegistrationProjectList.fromJson(String source) =>
+      RegistrationProjectList.fromMap(
         json.decode(source) as Map<String, dynamic>,
       );
 }

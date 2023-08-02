@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/auto_navigation.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
@@ -29,6 +30,9 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await AutoNavigation.autoSelectApartment(context);
+    });
   }
 
   @override

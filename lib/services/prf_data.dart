@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
+import '../models/ho_model.dart';
 import '../models/resident_info.dart';
 import '../models/response_resident_own.dart';
 
@@ -43,6 +44,8 @@ class PrfData {
   final _apartmentBox = Hive.box("APARTMENTS");
   final _listApartmentBox = Hive.box("LISTAPARTMENTS");
   final __residentBox = Hive.box("RESIDENT");
+// Ho
+  final _projectBox = Hive.box('PROJECT');
 
   static Future open() async {
     await Hive.openBox("USER");
@@ -51,6 +54,7 @@ class PrfData {
     await Hive.openBox("APARTMENTS");
     await Hive.openBox("LISTAPARTMENTS");
     await Hive.openBox("RESIDENT");
+    await Hive.openBox("PROJECT");
   }
 
   final String _tokenKey = "token";
@@ -61,12 +65,28 @@ class PrfData {
   final String _resident = "resident";
   final String _listApartment = "listapartment";
 
+  final String _project = "project";
+
+  Future<void> setProjectInStore(RegistrationProjectList p) async {
+    var c = p.toJson();
+    _projectBox.put('project', c);
+  }
+
+  Future<String?> getProjectInstore() async {
+    return await _projectBox.get(_project);
+  }
+
+  Future<void> deleteProject() async {
+    await _projectBox.deleteAll([_project]);
+  }
+
   Future<void> deleteApartment() async {
     return await _apartmentBox.deleteAll([_floorPlan, _apartment]);
   }
 
-  Future<void> setApartments(String id) async {
-    return await _apartmentBox.put(_apartment, id);
+  Future<void> setApartments(String apartment) async {
+    print(apartment);
+    return await _apartmentBox.put(_apartment, apartment);
   }
 
   Future<String?> getApartments() async {

@@ -5,6 +5,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/auto_navigation.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
@@ -25,6 +26,14 @@ class SelectProjectScreen extends StatefulWidget {
 class _SelectProjectScreenState extends State<SelectProjectScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await AutoNavigation.autoSelectProject(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

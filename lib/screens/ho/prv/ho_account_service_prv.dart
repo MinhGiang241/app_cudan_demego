@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/auto_navigation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +32,7 @@ class HOAccountServicePrv extends ChangeNotifier {
   String? access_token;
   DateTime? expireDate;
   List<Project> projectList = [];
-  List<RegistrationProjectListList> registrationProjectList = [];
+  List<RegistrationProjectList> registrationProjectList = [];
   List<ResidentResitration> registrationList = [];
   var isLoginLoading = false;
   var isSelectProjectLoading = false;
@@ -38,7 +41,7 @@ class HOAccountServicePrv extends ChangeNotifier {
   navigateToHomeScreen(BuildContext context, ResponseResidentOwn e) async {
     context.read<AuthPrv>().authStatus = AuthStatus.auth;
     context.read<ResidentInfoPrv>().selectedApartment = e;
-    await PrfData.shared.setApartments(e.apartmentId ?? "");
+    await PrfData.shared.setApartments(json.encode(e.toJson()));
 
     Navigator.of(context).pushNamedAndRemoveUntil(
       HomeScreen.routeName,
@@ -48,7 +51,7 @@ class HOAccountServicePrv extends ChangeNotifier {
 
   navigateToProject(
     BuildContext context,
-    RegistrationProjectListList e,
+    RegistrationProjectList e,
   ) async {
     try {
       isSelectProjectLoading = true;
@@ -59,6 +62,8 @@ class HOAccountServicePrv extends ChangeNotifier {
         ApiHOService.shared.expireDate,
         e.project?.registration?.code,
       );
+
+      await PrfData.shared.setProjectInStore(e);
       var a = await APITower.mobileMe();
       //
       print(a);
@@ -224,7 +229,7 @@ class HOAccountServicePrv extends ChangeNotifier {
       if (v != null) {
         registrationProjectList.clear();
         for (var i in v) {
-          var pj = RegistrationProjectListList.fromMap(i);
+          var pj = RegistrationProjectList.fromMap(i);
 
           registrationProjectList.add(pj);
         }

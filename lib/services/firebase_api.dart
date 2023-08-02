@@ -26,7 +26,7 @@ void handleMesage(RemoteMessage? message) {
   if (message == null) return;
   UnreadNotification.getUnReadNotification();
   navigatorKey.currentState!
-      .pushNamed(NotificationScreen.routeName, arguments: message);
+      .pushNamed(NotificationScreen.routeName, arguments: {"message": message});
 }
 
 final _localNotifications = FlutterLocalNotificationsPlugin();

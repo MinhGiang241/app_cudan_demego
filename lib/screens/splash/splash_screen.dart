@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/auto_navigation.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
 import '../auth/sign_up_screen.dart';
+import '../home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.isUnathen}) : super(key: key);
@@ -33,8 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
     //         .onSignIn(context, acc['acc'], acc['pass']);
     //   }
     // });
+    //Navigator.of(context).pushNamed(HomeScreen.routeName);
 
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await AutoNavigation.autoLogin(context);
+    });
   }
 
   @override

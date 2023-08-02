@@ -58,7 +58,6 @@ class _SignInScreenState extends State<SignInScreen> {
           onPressed: () => Navigator.pushReplacementNamed(
             context,
             SplashScreen.routeName,
-            arguments: true,
           ),
         ),
       ),
