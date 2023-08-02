@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:app_cudan/screens/chat/bloc/websocket_connect.dart';
 import 'package:app_cudan/services/api_chat.dart';
+import 'package:app_cudan/services/api_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
           "name": name ?? phone,
           "email": email ?? "rocketchat@gmail.com",
           "token": uuid.v4(),
+          "department": ApiService.shared.regCode, //tecco
           "phone": phone,
           "customFields": [
             {
