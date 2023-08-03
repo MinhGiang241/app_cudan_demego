@@ -7,7 +7,6 @@ import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
 import '../auth/sign_up_screen.dart';
-import '../home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.isUnathen}) : super(key: key);
@@ -21,22 +20,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // Provider.of<SingInPrv>(context).initAccountSave();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    //   var acc = await PrfData.shared.getSignInStore();
-    //   var isBack = false;
-    //   var arg = ModalRoute.of(context)!.settings.arguments as bool?;
-    //   if (arg != null) {
-    //     isBack = arg;
-    //   }
-
-    //   if (acc['acc'] != null && acc['pass'] != null && !isBack) {
-    //     Provider.of<AuthPrv>(context, listen: false)
-    //         .onSignIn(context, acc['acc'], acc['pass']);
-    //   }
-    // });
-    //Navigator.of(context).pushNamed(HomeScreen.routeName);
-
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await AutoNavigation.autoLogin(context);
@@ -45,11 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // var status = context.watch<AuthPrv>().authStatus;
-    // print(status);
-    // if (status == AuthStatus.auth) {
-    //   return const HomeScreen();
-    // }
     return Material(
       child: Scaffold(
         body: Container(

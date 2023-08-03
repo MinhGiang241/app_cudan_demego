@@ -39,36 +39,39 @@ class _HeaderHomeState extends State<HeaderHome> {
 
     return Column(
       children: [
-        FittedBox(
-          child: Row(
-            // textBaseline: TextBaseline.ideographic,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.baseline,
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              hpad(21),
-              const Icon(
-                Icons.favorite,
-                color: primaryColor4,
-              ),
-              Row(
-                textBaseline: TextBaseline.ideographic,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                children: [
-                  hpad(12),
-                  Text(
-                    '${S.of(context).hello}, ',
-                    style: txtBodySmallRegular(color: grayScaleColor2),
-                  ),
-                  if (userInfo != null)
+        Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: Row(
+              // textBaseline: TextBaseline.ideographic,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.baseline,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                hpad(21),
+                const Icon(
+                  Icons.favorite,
+                  color: primaryColor4,
+                ),
+                Row(
+                  textBaseline: TextBaseline.ideographic,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: [
+                    hpad(12),
                     Text(
-                      userInfo.info_name ?? userInfo.account?.fullName ?? '',
-                      style: txtLinkMedium(),
-                      overflow: TextOverflow.ellipsis,
-                    )
-                ],
-              ),
-            ],
+                      '${S.of(context).hello}, ',
+                      style: txtBodySmallRegular(color: grayScaleColor2),
+                    ),
+                    if (userInfo != null)
+                      Text(
+                        userInfo.info_name ?? userInfo.account?.fullName ?? '',
+                        style: txtLinkMedium(),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         if (Provider.of<ResidentInfoPrv>(context, listen: false)

@@ -192,6 +192,12 @@ const Color purpleColor = Color(0xff6C4DDA);
 const Color redColor = Color(0xffFF4141);
 const Color orangeColor = Color(0xFFF56420);
 
+var gradientPimaryFade = LinearGradient(
+  colors: [demepro1.withOpacity(0.9), demepro2.withOpacity(0.9)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+);
+
 final gradientBlue = LinearGradient(
   colors: [const Color(0xff466FFF).withOpacity(0.6), const Color(0xff3462FF)],
   begin: Alignment.topCenter,

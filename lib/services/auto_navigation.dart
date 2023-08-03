@@ -12,8 +12,6 @@ import '../models/response_resident_own.dart';
 import '../models/user_account_HO.dart';
 import '../screens/auth/apartment_selection_screen.dart';
 import '../screens/auth/prv/auth_prv.dart';
-import '../screens/auth/prv/sign_in_prv.dart';
-import '../screens/ho/prv/ho_account_service_prv.dart';
 import '../screens/ho/select_project_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../utils/utils.dart';

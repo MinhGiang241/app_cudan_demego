@@ -11,16 +11,12 @@ import '../account/account_screen.dart';
 import '../auth/prv/resident_info_prv.dart';
 import '../chat/bloc/chat_message_bloc.dart';
 import '../notification/prv/undread_noti.dart';
+import 'home_service.dart';
 import 'prv/home_prv.dart';
-import 'widgets/bill_home.dart';
-import 'widgets/event_home.dart';
-import 'widgets/feedback_home.dart';
 import 'widgets/header_home.dart';
 import 'widgets/header_title.dart';
 import 'widgets/new_home.dart';
 import 'widgets/project_info_home.dart';
-import 'widgets/services_home.dart';
-import 'widgets/utility_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -91,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _navigationTab(BuildContext context) {
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
-        context.read<ResidentInfoPrv>().selectedApartment != null;
+    // var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    //     context.read<ResidentInfoPrv>().selectedApartment != null;
     switch (_selectedIndex) {
       case 0:
         return RepaintBoundary(
@@ -117,18 +113,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   vpad(30),
                   const HeaderHome(),
                   vpad(30),
-                  const BillsHome(),
+                  HomeServices(),
                   vpad(30),
-                  const ServicesHome(),
-                  vpad(30),
-                  const UtilityService(),
-                  vpad(30),
-                  // const ConvinientServiceHome(),
+                  // const BillsHome(),
                   // vpad(30),
-                  if (isResident) const FeedbackHome(),
-                  if (isResident) vpad(30),
-                  const EventsHome(),
-                  vpad(30),
+                  // const ServicesHome(),
+                  // vpad(30),
+                  // const UtilityService(),
+                  // vpad(30),
+                  // // const ConvinientServiceHome(),
+                  // // vpad(30),
+                  // if (isResident) const FeedbackHome(),
+                  // if (isResident) vpad(30),
+                  // const EventsHome(),
+                  // vpad(30),
                   const ProjectInfoHome(),
                   vpad(24),
                   if (context.read<ResidentInfoPrv>().residentId != null)
