@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_cudan/services/api_tower.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +90,7 @@ class ResidentInfoPrv extends ChangeNotifier {
 
   selectApartment(MapEntry<int, ResponseResidentOwn> select) async {
     selectedApartment = select.value;
-    PrfData.shared.setApartments(select.value.apartmentId ?? "");
+    PrfData.shared.setApartments(json.encode(select.value.toJson()));
     notifyListeners();
   }
 

@@ -26,13 +26,20 @@ import 'prf_data.dart';
 class AutoNavigation {
   static Future autoLogin(BuildContext context) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    bool notAuto = arg?['not-auto'] ?? false;
+    if (notAuto) {
+      return;
+    }
     var a, p;
     var acc = await PrfData.shared.getSignInStore();
     if (acc != null && acc['acc'] != null && acc['pass'] != null) {
       a = acc['acc'];
       p = acc['pass'];
       await APIHOAccount.loginHO(a, p).then((v) async {
-        Navigator.pushNamed(context, SelectProjectScreen.routeName);
+        Navigator.pushNamed(
+          context,
+          SelectProjectScreen.routeName,
+        );
       }).catchError((e) {
         if ((e as DioError).response?.statusCode == 401) {
           Utils.showErrorMessage(context, S.of(context).incorrect_usn_pass);
@@ -44,6 +51,11 @@ class AutoNavigation {
   }
 
   static Future autoSelectProject(BuildContext context) async {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    bool notAuto = arg?['not-auto'] ?? false;
+    if (notAuto) {
+      return;
+    }
     var a = await PrfData.shared.getProjectInstore();
     print("a: $a");
     if (a != null) {
@@ -79,7 +91,7 @@ class AutoNavigation {
         } else {
           Navigator.of(context).pushNamed(
             ApartmentSeletionScreen.routeName,
-            arguments: project.project?.project_name,
+            arguments: {"project": project.project?.project_name},
           );
         }
       } catch (e) {
@@ -93,6 +105,11 @@ class AutoNavigation {
   }
 
   static Future autoSelectApartment(BuildContext context) async {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    bool notAuto = arg?['not-auto'] ?? false;
+    if (notAuto) {
+      return;
+    }
     var a = await PrfData.shared.getApartments();
     if (a != null) {
       var selectedApartment = ResponseResidentOwn.fromJson(json.decode(a));

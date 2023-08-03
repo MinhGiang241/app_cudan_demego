@@ -38,6 +38,18 @@ class SingInPrv extends ChangeNotifier {
       accountValidate = passValidate = null;
       isLoading = true;
       notifyListeners();
+
+      var acc = await PrfData.shared.getSignInStore();
+      if (acc != null && acc['acc'] != null && acc['pass'] != null) {
+        final a = acc['acc'];
+        final p = acc['pass'];
+        if (accountController.text != a || passController.text != p) {
+          PrfData.shared.deleteProject();
+          PrfData.shared.deleteSignInStore();
+          PrfData.shared.deleteApartment();
+        }
+        notifyListeners();
+      }
       // await authPrv
       //     .onSignIn(context, accountController.text, passController.text)
       await context

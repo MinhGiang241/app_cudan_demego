@@ -37,7 +37,8 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as String;
+    final argMap = ModalRoute.of(context)!.settings.arguments as Map?;
+    final arg = argMap?['project'];
     var listOwn = widget.context.read<ResidentInfoPrv>().listOwn;
 
     var listProject = [];

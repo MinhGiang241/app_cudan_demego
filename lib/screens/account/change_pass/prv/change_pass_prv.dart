@@ -109,7 +109,7 @@ class ChangePassPrv extends ChangeNotifier {
               context.read<ResidentInfoPrv>().clearData();
               context.read<AuthPrv>().account = null;
               context.read<AuthPrv>().clearData();
-              PrfData.shared.deleteApartment();
+              // PrfData.shared.deleteApartment();
               context.read<AuthPrv>().authStatus = AuthStatus.unauthen;
               context.read<HOAccountServicePrv>().access_token = null;
               context.read<HOAccountServicePrv>().expireDate = null;

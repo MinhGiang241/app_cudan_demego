@@ -38,6 +38,9 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
           onPressed: () => Navigator.pushReplacementNamed(
             context,
             SelectProjectScreen.routeName,
+            arguments: {
+              "not-auto": true,
+            },
           ),
         ),
         elevation: 0,

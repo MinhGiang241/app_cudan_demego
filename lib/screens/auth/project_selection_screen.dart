@@ -68,7 +68,10 @@ class ProjectSelectionScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         ApartmentSeletionScreen.routeName,
-                        arguments: e['title'],
+                        arguments: {
+                          "project": e['title'],
+                          "not-auto": true,
+                        },
                       );
                     },
                     margin: const EdgeInsets.only(bottom: 16),

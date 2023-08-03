@@ -353,7 +353,7 @@ class AuthPrv extends ChangeNotifier {
         if ((value as bool)) {
           await APIAuth.signOut(context: context).then((value) async {
             authStatus = AuthStatus.unauthen;
-            await PrfData.shared.deleteApartment();
+            // await PrfData.shared.deleteApartment();
             notifyListeners();
           });
         }

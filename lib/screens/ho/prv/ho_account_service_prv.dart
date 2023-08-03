@@ -85,7 +85,10 @@ class HOAccountServicePrv extends ChangeNotifier {
       } else {
         Navigator.of(context).pushNamed(
           ApartmentSeletionScreen.routeName,
-          arguments: e.project?.project_name,
+          arguments: {
+            "project": e.project?.project_name,
+            "not-auto": true,
+          },
         );
       }
       isSelectProjectLoading = false;
@@ -126,7 +129,7 @@ class HOAccountServicePrv extends ChangeNotifier {
                     onTap: () async {
                       ApiService.shared.clearToken();
                       Utils.pop(context, true);
-                      PrfData.shared.deleteApartment();
+                      // PrfData.shared.deleteApartment();
                       authStatus = AuthStatus.unauthen;
                       access_token = null;
                       expireDate = null;
@@ -212,7 +215,13 @@ class HOAccountServicePrv extends ChangeNotifier {
       }
       isLoginLoading = false;
       notifyListeners();
-      Navigator.pushNamed(context, SelectProjectScreen.routeName);
+      Navigator.pushNamed(
+        context,
+        SelectProjectScreen.routeName,
+        arguments: {
+          "not-auto": true,
+        },
+      );
     }).catchError((e) {
       isLoginLoading = false;
       notifyListeners();
