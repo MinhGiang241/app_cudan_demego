@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +59,12 @@ class AutoNavigation {
     print("a: $a");
     if (a != null) {
       var project = RegistrationProjectList.fromJson(a);
-      // var s = context.read<ResidentInfoPrv>().;
+      var listProject = context.read<HOAccountServicePrv>().projectList;
+      var indexProject = listProject
+          .indexWhere((e) => e.project_code == project.project?.project_code);
+      if (indexProject == -1) {
+        return;
+      }
       try {
         await ApiService.shared.setAPI(
           project.deployment?.apiEndpoint ?? "",
@@ -111,6 +117,12 @@ class AutoNavigation {
     var a = await PrfData.shared.getApartments();
     if (a != null) {
       var selectedApartment = ResponseResidentOwn.fromJson(json.decode(a));
+      var listOwn = context.read<ResidentInfoPrv>().listOwn;
+      var indexOwn = listOwn
+          .indexWhere((e) => e.apartmentId == selectedApartment.apartmentId);
+      if (indexOwn == -1) {
+        return;
+      }
       context.read<AuthPrv>().authStatus = AuthStatus.auth;
       context.read<ResidentInfoPrv>().selectedApartment = selectedApartment;
       // await PrfData.shared
