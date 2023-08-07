@@ -67,7 +67,8 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                 InfoContentView(
                   isHorizontal: true,
                   title: S.of(context).used_expired_date,
-                  content: '${item.sh?.use_time} ${item.sh?.type_time}',
+                  content:
+                      '${item.sh?.use_time} ${genShelifeString(item.sh?.type_time)}',
                 ),
                 if (item.registration_image != null &&
                     item.registration_image!.isNotEmpty)

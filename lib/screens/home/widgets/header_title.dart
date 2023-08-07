@@ -33,26 +33,23 @@ class HeaderTitle extends StatelessWidget {
           ),
         ),
       ),
-      trailing:
-          //FutureBuilder(
-          //future: context.read<NotificationPrv>().getUnReadNotification(),
-          // builder: (context, snapshot) {
-          //  var badgeNum = context.watch<NotificationPrv>().unRead;
-          //return
-          StreamBuilder(
+      trailing: StreamBuilder(
         stream: UnreadNotification.count.stream,
         builder: (context, snapshot) {
           if (snapshot.data != null && snapshot.data != 0) {
+            context.read<NotificationPrv>().unRead = 0;
             int v = int.tryParse(snapshot.data.toString()) != null
                 ? int.parse(snapshot.data.toString())
                 : 0;
-            context.watch<NotificationPrv>().setUnread(v);
+            context.read<NotificationPrv>().setUnread(v);
           }
           return PrimaryIcon(
             icons: PrimaryIcons.bell_outline,
             style: PrimaryIconStyle.gradient,
             color: grayScaleColor2,
-            badge: context.watch<NotificationPrv>().unRead.toString(),
+            badge: context.read<NotificationPrv>().unRead == 0
+                ? null
+                : context.read<NotificationPrv>().unRead.toString(),
             onTap: () {
               context.read<NotificationPrv>().resetSelectType();
               Navigator.pushNamed(context, NotificationScreen.routeName);

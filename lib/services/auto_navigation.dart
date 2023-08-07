@@ -59,9 +59,20 @@ class AutoNavigation {
     print("a: $a");
     if (a != null) {
       var project = RegistrationProjectList.fromJson(a);
-      var listProject = context.read<HOAccountServicePrv>().projectList;
-      var indexProject = listProject
-          .indexWhere((e) => e.project_code == project.project?.project_code);
+      List<RegistrationProjectList> registrationProjectList = [];
+
+      await APIHOAccount.getProjectListApi().then((v) {
+        if (v != null) {
+          registrationProjectList.clear();
+          for (var i in v) {
+            var pj = RegistrationProjectList.fromMap(i);
+
+            registrationProjectList.add(pj);
+          }
+        }
+      });
+      var indexProject = registrationProjectList.indexWhere(
+          (e) => e.project?.project_code == project.project?.project_code);
       if (indexProject == -1) {
         return;
       }

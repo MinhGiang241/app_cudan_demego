@@ -287,7 +287,7 @@ class _ConstructionRegistrationDetailsScreenState
                     InfoContentView(
                       isHorizontal: true,
                       title: S.of(context).worker_num,
-                      content: reg.worker_num.toString(),
+                      content: (reg.worker_num ?? '').toString(),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                   ],

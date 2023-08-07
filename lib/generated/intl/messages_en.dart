@@ -1089,6 +1089,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "services": MessageLookupByLibrary.simpleMessage("Service"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "sex": MessageLookupByLibrary.simpleMessage("Sex"),
+        "shelflife_money":
+            MessageLookupByLibrary.simpleMessage("Payment period"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Shopping online"),
         "shopping_represent":

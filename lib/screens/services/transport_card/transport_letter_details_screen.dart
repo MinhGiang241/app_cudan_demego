@@ -211,7 +211,7 @@ class _TransportLetterDetailsScreenState
                                 // ),
                                 vpad(2),
                                 Text(
-                                  "${S.of(context).used_expired_date}: ${e.value.shelfLife?.use_time} ${e.value.shelfLife?.type_time}",
+                                  "${S.of(context).shelflife_money}: ${e.value.shelfLife?.use_time} ${genShelifeString(e.value.shelfLife?.type_time)}",
                                   style: txtBodyXSmallRegular(),
                                 ),
                               ],

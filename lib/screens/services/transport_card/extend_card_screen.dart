@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/models/list_transport.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
@@ -62,7 +63,9 @@ class _ExtendCardScreenState extends State<ExtendCardScreen> {
                   context.read<ExtendTransportPrv>().shelfLifeList.map((e) {
                 return DropdownMenuItem(
                   value: e.id,
-                  child: Text('${e.use_time ?? ""} ${e.type_time ?? ""}'),
+                  child: Text(
+                    '${e.use_time ?? ""} ${genShelifeString(e.type_time)}',
+                  ),
                 );
               }).toList();
               return SafeArea(

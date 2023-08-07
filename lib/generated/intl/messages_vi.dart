@@ -1092,6 +1092,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "services": MessageLookupByLibrary.simpleMessage("Dịch vụ"),
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "sex": MessageLookupByLibrary.simpleMessage("Giới tính"),
+        "shelflife_money": MessageLookupByLibrary.simpleMessage("Kỳ đóng tiền"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Mua sắm online"),
         "shopping_represent": MessageLookupByLibrary.simpleMessage("Đi chợ hộ"),

@@ -102,6 +102,19 @@ Color genResRegStatusColor(String? status) {
   }
 }
 
+String genShelifeString(String? v) {
+  switch (v) {
+    case "TH":
+      return S.current.month;
+    case "NG":
+      return S.current.date;
+    case "N":
+      return S.current.year;
+    default:
+      return '';
+  }
+}
+
 Color genStatusColor(String? status) {
   switch (status) {
     case "NEW":

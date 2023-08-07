@@ -235,10 +235,12 @@ class ServiceScreen extends StatelessWidget {
                                         ),
                                       ),
                                       vpad(11),
-                                      Text(
-                                        e['title'] as String,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: txtBold(12),
+                                      Flexible(
+                                        child: Text(
+                                          e['title'] as String,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: txtBold(12),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -329,11 +331,13 @@ class ServiceScreen extends StatelessWidget {
                                             //     height: 20,
                                             //     "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
                                           ),
-                                          vpad(12),
-                                          Text(
-                                            e.name ?? "",
-                                            style: txtBold(13),
-                                            overflow: TextOverflow.ellipsis,
+                                          vpad(7),
+                                          Flexible(
+                                            child: Text(
+                                              e.name ?? "",
+                                              style: txtBold(13),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           )
                                         ],
                                       ),

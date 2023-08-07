@@ -134,19 +134,19 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     var shelf =
         shelfLifeList.firstWhere((element) => element.id == expiredValue);
 
-    if (shelf.type_time?.toLowerCase() == 'tháng') {
+    if (shelf.type_time?.toLowerCase() == 'th') {
       expireDate = DateTime(
         now.year,
         now.month + (shelf.use_time ?? 0),
         now.day,
       );
-    } else if (shelf.type_time?.toLowerCase() == 'năm') {
+    } else if (shelf.type_time?.toLowerCase() == 'n') {
       expireDate = DateTime(
         now.year + (shelf.use_time ?? 0),
         now.month,
         now.day,
       );
-    } else if (shelf.type_time?.toLowerCase() == 'ngày') {
+    } else if (shelf.type_time?.toLowerCase() == 'ng') {
       expireDate = DateTime(
         now.year,
         now.month,

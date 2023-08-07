@@ -845,5 +845,6 @@
   "guest_account": "Guest account",
   "owner": "Owner",
   "guest": "Guest",
-  "resident": "Resident"
+  "resident": "Resident",
+  "shelflife_money": "Payment period"
 }

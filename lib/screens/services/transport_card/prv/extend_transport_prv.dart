@@ -73,21 +73,21 @@ class ExtendTransportPrv extends ChangeNotifier {
     var shelf =
         shelfLifeList.firstWhere((element) => element.id == expireValue);
 
-    if (shelf.type_time?.toLowerCase() == 'tháng') {
+    if (shelf.type_time?.toLowerCase() == 'th') {
       newExpireDate = DateTime(
         expireDate!.year,
         expireDate!.month + (shelf.use_time ?? 0),
         expireDate!.day,
       );
     }
-    if (shelf.type_time?.toLowerCase() == 'năm') {
+    if (shelf.type_time?.toLowerCase() == 'n') {
       newExpireDate = DateTime(
         expireDate!.year + (shelf.use_time ?? 0),
         expireDate!.month,
         expireDate!.day,
       );
     }
-    if (shelf.type_time?.toLowerCase() == 'ngày') {
+    if (shelf.type_time?.toLowerCase() == 'ng') {
       newExpireDate = DateTime(
         expireDate!.year,
         expireDate!.month,

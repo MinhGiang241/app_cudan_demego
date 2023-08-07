@@ -3,6 +3,7 @@
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/transport_card/prv/add_new_transport_card_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -136,7 +137,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                 var shelfLifeListChoices = shelfLifeList.map((e) {
                   return DropdownMenuItem(
                     value: e.id,
-                    child: Text('${e.use_time} ${e.type_time}'),
+                    child:
+                        Text('${e.use_time} ${genShelifeString(e.type_time)}'),
                   );
                 }).toList();
 
@@ -378,7 +380,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                                       ),
                                                     vpad(2),
                                                     Text(
-                                                      "${S.of(context).used_expired_date}: ${expired?.use_time} ${expired?.type_time}",
+                                                      "${S.of(context).shelflife_money}: ${expired?.use_time} ${genShelifeString(expired?.type_time)}",
                                                       style:
                                                           txtBodyXSmallRegular(),
                                                     ),
@@ -494,28 +496,35 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  PrimaryButton(
-                                    isLoading: context
-                                        .watch<AddNewTransportCardPrv>()
-                                        .isAddNewLoading,
-                                    buttonSize: ButtonSize.medium,
-                                    text: isEdit
-                                        ? S.of(context).update
-                                        : S.of(context).add_new,
-                                    onTap: () => context
-                                        .read<AddNewTransportCardPrv>()
-                                        .onSendSubmit(context, false, isEdit),
+                                  Expanded(
+                                    flex: 1,
+                                    child: PrimaryButton(
+                                      isLoading: context
+                                          .watch<AddNewTransportCardPrv>()
+                                          .isAddNewLoading,
+                                      buttonSize: ButtonSize.medium,
+                                      text: isEdit
+                                          ? S.of(context).update
+                                          : S.of(context).add_new,
+                                      onTap: () => context
+                                          .read<AddNewTransportCardPrv>()
+                                          .onSendSubmit(context, false, isEdit),
+                                    ),
                                   ),
-                                  PrimaryButton(
-                                    isLoading: context
-                                        .watch<AddNewTransportCardPrv>()
-                                        .isSendApproveLoading,
-                                    buttonType: ButtonType.green,
-                                    buttonSize: ButtonSize.medium,
-                                    text: S.of(context).send_request,
-                                    onTap: () => context
-                                        .read<AddNewTransportCardPrv>()
-                                        .onSendSubmit(context, true, isEdit),
+                                  hpad(10),
+                                  Expanded(
+                                    flex: 1,
+                                    child: PrimaryButton(
+                                      isLoading: context
+                                          .watch<AddNewTransportCardPrv>()
+                                          .isSendApproveLoading,
+                                      buttonType: ButtonType.green,
+                                      buttonSize: ButtonSize.medium,
+                                      text: S.of(context).send_request,
+                                      onTap: () => context
+                                          .read<AddNewTransportCardPrv>()
+                                          .onSendSubmit(context, true, isEdit),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -659,7 +668,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 value: context
                                     .read<AddNewTransportCardPrv>()
                                     .expiredValue,
-                                label: S.of(context).used_expired_date,
+                                label: S.of(context).shelflife_money,
                                 isRequired: true,
                                 validator: Utils.emptyValidatorDropdown,
                                 onChange: context

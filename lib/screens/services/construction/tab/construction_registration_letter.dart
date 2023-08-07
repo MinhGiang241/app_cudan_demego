@@ -50,6 +50,7 @@ class _ConstructionRegistrationLetterTabState
         List<ConstructionRegistration> waitLetter = [];
         List<ConstructionRegistration> waitPayLetter = [];
         List<ConstructionRegistration> cancelLetter = [];
+        List<ConstructionRegistration> confirmLetter = [];
         for (var i in widget.list) {
           if (i.status == 'NEW') {
             newLetter.add(i);
@@ -58,9 +59,10 @@ class _ConstructionRegistrationLetterTabState
           } else if (i.status == 'WAIT_PAY') {
             waitPayLetter.add(i);
           }
-          //  else if (i.status == "WAIT_OWNER") {
-          //   waitOwnerLetter.add(i);
-          // } else if (i.status == "WAIT_TECHNICAL") {
+          // else if (i.status == "CONFIRM") {
+          //   confirmLetter.add(i);
+          // }
+          // else if (i.status == "WAIT_TECHNICAL") {
           //   waitTechLetter.add(i);
           // } else if (i.status == "WAIT_MANAGER") {
           //   waitManagerLetter.add(i);
@@ -85,6 +87,7 @@ class _ConstructionRegistrationLetterTabState
         waitManagerLetter
             .sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
         cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        // confirmLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
 
         List<ConstructionRegistration> list = newLetter +
             waitOwnerLetter +
@@ -92,6 +95,7 @@ class _ConstructionRegistrationLetterTabState
             // waitTechLetter +
             // waitManagerLetter +
             waitLetter +
+            // confirmLetter +
             approvedLetter +
             cancelLetter;
         if (snapshot.connectionState == ConnectionState.waiting) {

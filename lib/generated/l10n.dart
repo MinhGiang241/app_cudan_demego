@@ -8519,6 +8519,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Payment period`
+  String get shelflife_money {
+    return Intl.message(
+      'Payment period',
+      name: 'shelflife_money',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

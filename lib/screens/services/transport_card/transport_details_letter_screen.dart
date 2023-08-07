@@ -63,9 +63,9 @@ class _TransportDetailsLetterScreenState
                   ),
                 InfoContentView(
                   isHorizontal: true,
-                  title: S.of(context).used_expired_date,
+                  title: S.of(context).shelflife_money,
                   content:
-                      '${item.shelfLife?.use_time} ${item.shelfLife?.type_time}',
+                      '${item.shelfLife?.use_time} ${genShelifeString(item.shelfLife?.type_time)}',
                 ),
                 if (item.registration_image != null &&
                     item.registration_image!.isNotEmpty)

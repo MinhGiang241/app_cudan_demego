@@ -846,5 +846,6 @@
   "guest_account": "Tài khoản khách",
   "owner": "Chủ hộ",
   "guest": "Khách",
-  "resident": "Cư dân"
+  "resident": "Cư dân",
+  "shelflife_money": "Kỳ đóng tiền"
 }
