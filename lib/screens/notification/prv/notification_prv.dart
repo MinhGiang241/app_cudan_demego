@@ -17,7 +17,7 @@ class NotificationPrv extends ChangeNotifier {
 
   setUnread(int v) {
     unRead = v;
-    notifyListeners();
+    //notifyListeners();
   }
 
   resetSelectType() {

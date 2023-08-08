@@ -15,6 +15,7 @@ class HeaderTitle extends StatelessWidget {
   final Function onMenuTab;
   @override
   Widget build(BuildContext context) {
+    var setUnReadCount = context.read<NotificationPrv>().setUnread;
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: IconButton(
@@ -37,11 +38,11 @@ class HeaderTitle extends StatelessWidget {
         stream: UnreadNotification.count.stream,
         builder: (context, snapshot) {
           if (snapshot.data != null && snapshot.data != 0) {
-            context.read<NotificationPrv>().unRead = 0;
+            setUnReadCount(0);
             int v = int.tryParse(snapshot.data.toString()) != null
                 ? int.parse(snapshot.data.toString())
                 : 0;
-            context.read<NotificationPrv>().setUnread(v);
+            setUnReadCount(v);
           }
           return PrimaryIcon(
             icons: PrimaryIcons.bell_outline,
