@@ -201,6 +201,8 @@ Color genStatusColor(String? status) {
       return primaryColor1;
     case "APPROVEDSECOND":
       return greenColor6;
+    case "EDIT":
+      return orangeColor;
     default:
       return grayScaleColor1;
   }

@@ -209,6 +209,10 @@ class ConstructionRegPrv extends ChangeNotifier {
         if (!initNew) {
           regDate = DateTime.now();
         }
+
+        var isOwner = (apartment.type == 'BUY' || apartment.type == "RENT");
+        var isDepositPaid = (depositFee == 0);
+
         ConstructionRegistration conReg = ConstructionRegistration(
           id: existedConReg != null ? existedConReg!.id : null,
           code: existedConReg != null ? existedConReg!.code : null,
@@ -237,9 +241,13 @@ class ConstructionRegPrv extends ChangeNotifier {
           resident_code: resident!.code,
           resident_identity: resident.identity_card,
           status: isRequest
-              ? (apartment.type == 'BUY' || apartment.type == 'RENT')
-                  ? 'WAIT_PAY'
-                  : 'WAIT_OWNER'
+              ? isDepositPaid
+                  ? isOwner
+                      ? "WAIT_TECHNICAL"
+                      : "WAIT_OWNER"
+                  : isOwner
+                      ? "WAI_PAY"
+                      : "WAIT_OWNER"
               : 'NEW',
           working_day: workday,
           worker_num: int.tryParse(workerNumController.text.trim()) != null
@@ -254,23 +262,23 @@ class ConstructionRegPrv extends ChangeNotifier {
           construction_type_name: consType.name ?? '',
         );
         var conHis;
-        if (existedConReg == null) {
-          conHis = ConstructionHistory(
-            constructionregistrationId:
-                existedConReg != null ? existedConReg!.id : null,
-            date: DateTime.now().toIso8601String(),
-            residentId: residentId,
-            person: resident.info_name,
-            status: existedConReg != null
-                ? "EDIT"
-                : isRequest
-                    ? (apartment.type == 'BUY' || apartment.type == 'RENT')
-                        ? 'SEND'
-                        : 'SEND'
-                    : 'NEW',
-          );
-          // return APIConstruction.saveNewConstructionRegistration();
-        }
+        //if (existedConReg == null) {
+        conHis = ConstructionHistory(
+          constructionregistrationId:
+              existedConReg != null ? existedConReg!.id : null,
+          date: DateTime.now().toIso8601String(),
+          residentId: residentId,
+          person: resident.info_name,
+          status: existedConReg != null
+              ? "EDIT"
+              : isRequest
+                  ? isOwner
+                      ? 'SEND'
+                      : 'SEND'
+                  : 'NEW',
+        );
+        // return APIConstruction.saveNewConstructionRegistration();
+        //}
         List<Map<String, dynamic>> listReceipt = [];
 
         if (!isPaidFee && isRequest && conReg.status != "WAIT_OWNER") {
@@ -323,10 +331,10 @@ class ConstructionRegPrv extends ChangeNotifier {
             receipts_status: 'NEW',
             expiration_date: DateTime.now()
                 .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
-                .subtract(const Duration(hours: 7))
+                //.subtract(const Duration(hours: 7))
                 .toIso8601String(),
             date: DateTime.now()
-                .subtract(const Duration(hours: 7))
+                //.subtract(const Duration(hours: 7))
                 .toIso8601String(),
           );
           listReceipt.add(receiptDeposiy.toJson());

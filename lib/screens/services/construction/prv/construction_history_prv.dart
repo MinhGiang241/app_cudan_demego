@@ -31,7 +31,8 @@ class ConstructionHistoryPrv extends ChangeNotifier {
           ),
         );
       }
-
+      content.sort((a, b) => b.date!.compareTo(a.date!));
+      print(content);
       notifyListeners();
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
@@ -40,18 +41,18 @@ class ConstructionHistoryPrv extends ChangeNotifier {
 
   genConstructHistory(String status) {
     switch (status) {
+      case "EDIT":
+        return S.current.edit;
       case "CANCEL":
         return S.current.cancel_reg;
-      case "EDIT":
-        return S.current.cancel;
       case "REJECT":
         return S.current.refuse;
       case "APPROVED":
         return S.current.approve_2;
       case "WAIT_MANAGER":
         return S.current.approve_1;
-      case "CONFIRM":
-        return S.current.confirm;
+      case "WAIT_TECHNICAL":
+        return S.current.send_request;
       case "SEND":
         return S.current.send_request;
       case "PAY_DONE":

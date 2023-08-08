@@ -7940,6 +7940,16 @@ class S {
     );
   }
 
+  /// `Third approve`
+  String get approve_3 {
+    return Intl.message(
+      'Third approve',
+      name: 'approve_3',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pay done`
   String get pay_done {
     return Intl.message(

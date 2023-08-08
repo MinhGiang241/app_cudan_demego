@@ -293,19 +293,40 @@ class _ConstructionRegistrationDetailsScreenState
                   ],
                 ),
               ),
-              vpad(16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text(
-                  S.of(context).cons_drawing,
-                  style: txtMedium(14, grayScaleColor2),
+              if (reg.current_draw != null && reg.current_draw!.isNotEmpty)
+                vpad(16),
+              if (reg.current_draw != null && reg.current_draw!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    S.of(context).exist_drawing,
+                    style: txtMedium(14, grayScaleColor2),
+                  ),
                 ),
-              ),
-              SelectFileWidget(
-                enable: false,
-                existFiles: draws,
-              ),
+              if (reg.current_draw != null && reg.current_draw!.isNotEmpty)
+                SelectFileWidget(
+                  enable: false,
+                  existFiles: reg.current_draw ?? [],
+                ),
               // ...draws.map(
+              if (reg.renovation_draw != null &&
+                  reg.renovation_draw!.isNotEmpty)
+                vpad(16),
+              if (reg.renovation_draw != null &&
+                  reg.renovation_draw!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    S.of(context).cons_drawing,
+                    style: txtMedium(14, grayScaleColor2),
+                  ),
+                ),
+              if (reg.renovation_draw != null &&
+                  reg.renovation_draw!.isNotEmpty)
+                SelectFileWidget(
+                  enable: false,
+                  existFiles: reg.renovation_draw ?? [],
+                ),
               //   (e) => Padding(
               //     padding: const EdgeInsets.symmetric(horizontal: 12),
               //     child: InkWell(

@@ -148,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tình trạng duyệt"),
         "approve_1": MessageLookupByLibrary.simpleMessage("Duyệt lần 1"),
         "approve_2": MessageLookupByLibrary.simpleMessage("Duyệt lần 2"),
+        "approve_3": MessageLookupByLibrary.simpleMessage("Duyệt lần 3"),
         "approved": MessageLookupByLibrary.simpleMessage("Đã duyệt"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Ngày phê duyệt"),
         "area": MessageLookupByLibrary.simpleMessage("Diện tích"),

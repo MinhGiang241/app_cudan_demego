@@ -140,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Approved status"),
         "approve_1": MessageLookupByLibrary.simpleMessage("First approve"),
         "approve_2": MessageLookupByLibrary.simpleMessage("Second approve"),
+        "approve_3": MessageLookupByLibrary.simpleMessage("Third approve"),
         "approved": MessageLookupByLibrary.simpleMessage("Approved"),
         "approved_date": MessageLookupByLibrary.simpleMessage("Approved date"),
         "area": MessageLookupByLibrary.simpleMessage("Area"),

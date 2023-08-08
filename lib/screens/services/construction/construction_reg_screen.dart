@@ -674,15 +674,15 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                     keyboardType: TextInputType.number,
                                     maxLength: 3,
                                     onlyNum: true,
-                                    validator: Utils.emptyValidator,
+                                    //validator: Utils.emptyValidator,
                                     controller: context
                                         .read<ConstructionRegPrv>()
                                         .workerNumController,
-                                    validateString: context
-                                        .watch<ConstructionRegPrv>()
-                                        .validateWorkerNum,
+                                    // validateString: context
+                                    //     .watch<ConstructionRegPrv>()
+                                    //     .validateWorkerNum,
                                     label: S.of(context).worker_num,
-                                    isRequired: true,
+                                    isRequired: false,
                                     hint: S.of(context).enter_worker_num,
                                   ),
                                   vpad(30),
@@ -889,28 +889,33 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  PrimaryButton(
-                                    isLoading: context
-                                        .watch<ConstructionRegPrv>()
-                                        .isAddNewLoading,
-                                    buttonSize: ButtonSize.medium,
-                                    text: isEdit
-                                        ? S.of(context).update
-                                        : S.of(context).add_new,
-                                    onTap: () => context
-                                        .read<ConstructionRegPrv>()
-                                        .onSendSubmit(context, false),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      isLoading: context
+                                          .watch<ConstructionRegPrv>()
+                                          .isAddNewLoading,
+                                      buttonSize: ButtonSize.medium,
+                                      text: isEdit
+                                          ? S.of(context).update
+                                          : S.of(context).add_new,
+                                      onTap: () => context
+                                          .read<ConstructionRegPrv>()
+                                          .onSendSubmit(context, false),
+                                    ),
                                   ),
-                                  PrimaryButton(
-                                    isLoading: context
-                                        .watch<ConstructionRegPrv>()
-                                        .isSendApproveLoading,
-                                    buttonType: ButtonType.green,
-                                    buttonSize: ButtonSize.medium,
-                                    text: S.of(context).send_request,
-                                    onTap: () => context
-                                        .read<ConstructionRegPrv>()
-                                        .onSendSubmit(context, true),
+                                  hpad(10),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      isLoading: context
+                                          .watch<ConstructionRegPrv>()
+                                          .isSendApproveLoading,
+                                      buttonType: ButtonType.green,
+                                      buttonSize: ButtonSize.medium,
+                                      text: S.of(context).send_request,
+                                      onTap: () => context
+                                          .read<ConstructionRegPrv>()
+                                          .onSendSubmit(context, true),
+                                    ),
                                   ),
                                 ],
                               ),

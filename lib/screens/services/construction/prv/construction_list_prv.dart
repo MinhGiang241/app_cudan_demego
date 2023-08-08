@@ -33,9 +33,20 @@ class ConstructionListPrv extends ChangeNotifier {
     var apartment = context.read<ResidentInfoPrv>().listOwn.firstWhere((e) {
       return e.apartment!.id == data.apartmentId;
     });
-    var status = (apartment.type == 'BUY' || apartment.type == "RENT")
-        ? 'WAIT_PAY'
-        : 'WAIT_OWNER';
+    var isOwner = (apartment.type == 'BUY' || apartment.type == "RENT");
+    var isDepositPaid = (data.deposit_fee == 0);
+    var status = isDepositPaid
+        ? isOwner
+            ? "WAIT_TECHNICAL"
+            : "WAIT_OWNER"
+        : isOwner
+            ? "WAI_PAY"
+            : "WAIT_OWNER";
+
+// (data['deposit_fee'] == 0) ? 'WAIT_PAY' :
+//   (apartment.type == 'BUY' || apartment.type == "RENT")
+//         ? 'WAIT_PAY'
+//         : 'WAIT_OWNER';
 
     data.status = status;
     data.isMobile = true;
@@ -46,7 +57,7 @@ class ConstructionListPrv extends ChangeNotifier {
         discount_money: data.construction_cost,
         refSchema: "ConstructionRegistration",
         type: "ContructionCost",
-        payment_status: "UNPAID",
+        payment_status: data.construction_cost == 0 ? "PAID" : "UNPAID",
         amount_due: data.construction_cost,
         apartmentId: apartment.apartmentId,
         check: true,
@@ -57,10 +68,11 @@ class ConstructionListPrv extends ChangeNotifier {
         receipts_status: "NEW",
         expiration_date: DateTime.now()
             .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
-            .subtract(const Duration(hours: 7))
+            //.subtract(const Duration(hours: 7))
             .toIso8601String(),
-        date:
-            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+        date: DateTime.now()
+            //.subtract(const Duration(hours: 7))
+            .toIso8601String(),
       );
       listReceipt.add(receiptFee.toJson());
     }
@@ -72,7 +84,7 @@ class ConstructionListPrv extends ChangeNotifier {
         discount_money: data.deposit_fee,
         refSchema: "ConstructionRegistration",
         type: "DepositFee",
-        payment_status: "UNPAID",
+        payment_status: data.deposit_fee == 0 ? "PAID" : "UNPAID",
         amount_due: data.deposit_fee,
         apartmentId: apartment.apartmentId,
         check: true,
@@ -83,10 +95,11 @@ class ConstructionListPrv extends ChangeNotifier {
         receipts_status: "NEW",
         expiration_date: DateTime.parse(data.time_end!)
             .add(Duration(days: fixedDateService!.cut_service_date ?? 0))
-            .subtract(const Duration(hours: 7))
+            //   .subtract(const Duration(hours: 7))
             .toIso8601String(),
-        date:
-            DateTime.now().subtract(const Duration(hours: 7)).toIso8601String(),
+        date: DateTime.now()
+            //.subtract(const Duration(hours: 7))
+            .toIso8601String(),
       );
       listReceipt.add(receiptDeposiy.toJson());
     }
@@ -95,7 +108,7 @@ class ConstructionListPrv extends ChangeNotifier {
       date: DateTime.now().toIso8601String(),
       residentId: context.read<ResidentInfoPrv>().residentId,
       person: context.read<ResidentInfoPrv>().userInfo!.info_name,
-      status: status,
+      status: "SEND", //status,
     );
     Utils.showConfirmMessage(
       context: context,

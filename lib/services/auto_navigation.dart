@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +71,8 @@ class AutoNavigation {
         }
       });
       var indexProject = registrationProjectList.indexWhere(
-          (e) => e.project?.project_code == project.project?.project_code);
+        (e) => e.project?.project_code == project.project?.project_code,
+      );
       if (indexProject == -1) {
         return;
       }

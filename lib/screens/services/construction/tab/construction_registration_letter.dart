@@ -50,7 +50,7 @@ class _ConstructionRegistrationLetterTabState
         List<ConstructionRegistration> waitLetter = [];
         List<ConstructionRegistration> waitPayLetter = [];
         List<ConstructionRegistration> cancelLetter = [];
-        List<ConstructionRegistration> confirmLetter = [];
+        // List<ConstructionRegistration> confirmLetter = [];
         for (var i in widget.list) {
           if (i.status == 'NEW') {
             newLetter.add(i);

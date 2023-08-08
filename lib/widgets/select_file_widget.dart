@@ -188,7 +188,7 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
 
                                   //  Image.file(e.value),
                                 ),
-                                if (!widget.enable)
+                                if (widget.enable)
                                   Positioned(
                                     top: 2,
                                     right: 2,
