@@ -195,8 +195,7 @@ class PaymentItem extends StatelessWidget {
                                       style: txtLinkSmall(),
                                     )
                                   : Text(
-                                      formatCurrency
-                                          .format(re.discount_money! - paid),
+                                      formatCurrency.format(re.amount! - paid),
                                       style: txtLinkSmall(),
                                     ),
                             ],

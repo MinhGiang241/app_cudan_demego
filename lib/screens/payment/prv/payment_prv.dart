@@ -26,7 +26,7 @@ class PaymentPrv extends ChangeNotifier {
           0.0,
           (previousValue, element) =>
               previousValue + (element.payment_amount ?? 0));
-      var money = b.discount_money! - own;
+      var money = b.amount! - own;
       return (a + money);
     });
     residentId = ctx.read<ResidentInfoPrv>().residentId;
@@ -54,7 +54,7 @@ class PaymentPrv extends ChangeNotifier {
           0.0,
           (previousValue, element) =>
               previousValue + (element.payment_amount ?? 0));
-      var money = b.discount_money! - own;
+      var money = b.amount! - own;
       return (a + money);
     });
     notifyListeners();
@@ -92,7 +92,7 @@ class PaymentPrv extends ChangeNotifier {
         var time = '${now.hour}:${now.minute}';
         var paid =
             e.transactions.fold(0.0, (a, b) => a += (b.payment_amount ?? 0));
-        double a = (e.discount_money! - paid);
+        double a = (e.amount! - paid);
         print(a);
         var newTransaction = TransactionHistory(
           isMobile: true,

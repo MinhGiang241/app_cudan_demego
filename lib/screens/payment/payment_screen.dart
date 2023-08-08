@@ -240,9 +240,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   // ),
                                   InfoContentView(
                                     title: S.of(context).total_pay,
-                                    content: e.discount_money != null
+                                    content: e.amount != null
                                         ? formatCurrency
-                                            .format(e.discount_money!)
+                                            .format(e.amount!)
                                             .replaceAll("₫", "VND")
                                         : '0 VND',
                                     contentStyle:
@@ -260,9 +260,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   ),
                                   InfoContentView(
                                     title: S.of(context).need_pay,
-                                    content: e.discount_money != null
+                                    content: e.amount != null
                                         ? formatCurrency
-                                            .format(e.discount_money! - paid)
+                                            .format(e.amount! - paid)
                                             .replaceAll("₫", "VND")
                                         : '0 VND',
                                     contentStyle:

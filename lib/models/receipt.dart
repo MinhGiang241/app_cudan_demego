@@ -26,6 +26,7 @@ class Receipt {
     this.amount_due,
     this.content,
     this.discount_money,
+    this.amount,
     this.discount_percent,
     this.discount_type,
     this.full_name,
@@ -67,6 +68,7 @@ class Receipt {
   String? code;
   double? vat;
   double? discount_money;
+  double? amount;
   double? discount_percent;
   double? amount_due;
   String? discount_type;
@@ -110,6 +112,8 @@ class Receipt {
     discount_money = json['discount_money'] != null
         ? double.parse(json['discount_money'].toString())
         : null;
+    amount =
+        json['amount'] != null ? double.parse(json['amount'].toString()) : null;
     discount_percent = json['discount_percent'] != null
         ? double.parse(json['discount_percent'].toString())
         : null;
@@ -162,6 +166,7 @@ class Receipt {
     data['expiration_date'] = expiration_date;
     data['vat'] = vat;
     data['discount_money'] = discount_money;
+    data['amount'] = amount;
     data['discount_percent'] = discount_percent;
     data['amount_due'] = amount_due;
     data['refSchema'] = refSchema;

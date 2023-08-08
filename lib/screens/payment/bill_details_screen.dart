@@ -78,8 +78,8 @@ class BillDetailsScreen extends StatelessWidget {
         ),
       InfoContentView(
         title: S.of(context).total_pay,
-        content: bill.discount_money != null
-            ? formatCurrency.format(bill.discount_money!).replaceAll("₫", "VND")
+        content: bill.amount != null
+            ? formatCurrency.format(bill.amount!).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
@@ -93,10 +93,8 @@ class BillDetailsScreen extends StatelessWidget {
       // if (bill.payment_status != "PAID")
       InfoContentView(
         title: S.of(context).need_pay,
-        content: bill.discount_money != null
-            ? formatCurrency
-                .format(bill.discount_money! - paid)
-                .replaceAll("₫", "VND")
+        content: bill.amount != null
+            ? formatCurrency.format(bill.amount! - paid).replaceAll("₫", "VND")
             : '0 VND',
         contentStyle: txtBodySmallBold(color: grayScaleColorBase),
       ),
