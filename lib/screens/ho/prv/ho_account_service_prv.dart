@@ -36,6 +36,12 @@ class HOAccountServicePrv extends ChangeNotifier {
   var isLoginLoading = false;
   var isSelectProjectLoading = false;
   var isSignupLoading = false;
+  var isAutoLoginLoading = true;
+
+  onSetAutoLoginLoading(bool value) {
+    isAutoLoginLoading = value;
+    notifyListeners();
+  }
 
   navigateToHomeScreen(BuildContext context, ResponseResidentOwn e) async {
     context.read<AuthPrv>().authStatus = AuthStatus.auth;

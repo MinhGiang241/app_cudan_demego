@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class AutoNavigation {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
+      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
       return;
     }
     var a, p;
@@ -34,24 +36,29 @@ class AutoNavigation {
       a = acc['acc'];
       p = acc['pass'];
       await APIHOAccount.loginHO(a, p).then((v) async {
+        context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
         Navigator.pushNamed(
           context,
           SelectProjectScreen.routeName,
         );
       }).catchError((e) {
+        context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
         if ((e as DioError).response?.statusCode == 401) {
           Utils.showErrorMessage(context, S.of(context).incorrect_usn_pass);
         } else {
           Utils.showErrorMessage(context, e.error.toString());
         }
       });
+    } else {
+      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
     }
   }
 
-  static Future autoSelectProject(BuildContext context) async {
+  static Future autoSelectProject(BuildContext context, setLogin) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
+      setLogin(false);
       return;
     }
     var a = await PrfData.shared.getProjectInstore();
@@ -74,6 +81,7 @@ class AutoNavigation {
         (e) => e.project?.project_code == project.project?.project_code,
       );
       if (indexProject == -1) {
+        setLogin(false);
         return;
       }
       try {
@@ -110,39 +118,51 @@ class AutoNavigation {
           );
         }
       } catch (e) {
+        setLogin(false);
         Utils.showErrorMessage(context, e.toString());
       }
 
       // await context
       //     .read<HOAccountServicePrv>()
       //     .navigateToProject(context, project);
+    } else {
+      setLogin(false);
     }
   }
 
-  static Future autoSelectApartment(BuildContext context) async {
+  static Future autoSelectApartment(BuildContext context, setLogin) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
+      setLogin(false);
       return;
     }
-    var a = await PrfData.shared.getApartments();
-    if (a != null) {
-      var selectedApartment = ResponseResidentOwn.fromJson(json.decode(a));
-      var listOwn = context.read<ResidentInfoPrv>().listOwn;
-      var indexOwn = listOwn
-          .indexWhere((e) => e.apartmentId == selectedApartment.apartmentId);
-      if (indexOwn == -1) {
-        return;
-      }
-      context.read<AuthPrv>().authStatus = AuthStatus.auth;
-      context.read<ResidentInfoPrv>().selectedApartment = selectedApartment;
-      // await PrfData.shared
-      //     .setApartments(json.encode(selectedApartment.toJson()));
+    try {
+      var a = await PrfData.shared.getApartments();
+      if (a != null) {
+        var selectedApartment = ResponseResidentOwn.fromJson(json.decode(a));
+        var listOwn = context.read<ResidentInfoPrv>().listOwn;
+        var indexOwn = listOwn
+            .indexWhere((e) => e.apartmentId == selectedApartment.apartmentId);
+        if (indexOwn == -1) {
+          setLogin(false);
+          return;
+        }
+        context.read<AuthPrv>().authStatus = AuthStatus.auth;
+        context.read<ResidentInfoPrv>().selectedApartment = selectedApartment;
+        // await PrfData.shared
+        //     .setApartments(json.encode(selectedApartment.toJson()));
 
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        HomeScreen.routeName,
-        (route) => route.isCurrent,
-      );
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          HomeScreen.routeName,
+          (route) => route.isCurrent,
+        );
+      } else {
+        setLogin(false);
+      }
+    } catch (e) {
+      setLogin(false);
+      Utils.showErrorMessage(context, e.toString());
     }
   }
 }

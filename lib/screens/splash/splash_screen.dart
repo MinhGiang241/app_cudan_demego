@@ -1,8 +1,11 @@
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/auto_navigation.dart';
+import '../../widgets/auto_login_loading.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
@@ -145,7 +148,15 @@ class _SplashScreenState extends State<SplashScreen> {
                         : const PrimaryLoading(),
                   ),
                 ),
-              )
+              ),
+              if (context.watch<HOAccountServicePrv>().isAutoLoginLoading)
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: AutoLoginLoading(),
+                ),
             ],
           ),
         ),
