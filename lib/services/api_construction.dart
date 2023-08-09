@@ -416,23 +416,14 @@ class APIConstruction {
 
   static Future getFixedDateService() async {
     var query = '''
-   query (\$filter:GeneralCollectionFilterInput){
-	response: query_FixedServices_dto (filter:\$filter) {
-		message
-		code
-		data {
-			_id
-			createdTime
-			updatedTime
-			receipt_date
-			cut_service_date
-			payment_reminder {
-				after_date
-			}
-		}
-	}
-}
-           
+   mutation {
+    response: service_mobile_get_fixed_serviced  {
+        code
+        message
+        data
+      }
+    }
+    
     ''';
 
     final MutationOptions options = MutationOptions(

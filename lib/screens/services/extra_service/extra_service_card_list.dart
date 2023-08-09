@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/services/extra_service/prv/extra_service_card_list_prv.dart';
+import 'package:app_cudan/screens/services/ultilty/utility_service_list_screen.dart';
 import 'package:app_cudan/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,6 @@ import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_loading.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/resident_info_prv.dart';
-import '../service_screen.dart';
 import 'extra_service_details.dart';
 import 'extra_service_registration_screen.dart';
 
@@ -51,7 +51,7 @@ class _ExtraServiceCardListScreenState
             leading: BackButton(
               onPressed: () => Navigator.pushReplacementNamed(
                 context,
-                ServiceScreen.routeName,
+                UtilityServiceListScreen.routeName,
               ),
             ),
             title: S.of(context).service_name(

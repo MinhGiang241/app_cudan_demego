@@ -72,6 +72,7 @@ import '../screens/services/transport_card/transport_details_screen.dart';
 import '../screens/services/transport_card/transport_card_screen.dart.dart';
 import '../screens/services/transport_card/transport_letter_details_screen.dart';
 import '../screens/services/ultilty/add_new_letter_ultility_service_screen.dart';
+import '../screens/services/ultilty/utility_service_list_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -438,6 +439,12 @@ class AppRoutes {
           settings: routeSetting,
           builder: (_) => AddNewLetterUltilityScreen(),
         );
+      case UtilityServiceListScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => UtilityServiceListScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           settings: routeSetting,

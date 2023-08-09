@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:app_cudan/screens/services/missing_object/missing_object_screen.dart';
 import 'package:app_cudan/screens/services/parcel/parcel_list_screen.dart';
@@ -247,103 +249,103 @@ class ServiceScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            ...context.watch<ServicePrv>().listExtraService.map(
-                                  (e) => InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).pushNamed(
-                                        ExtraServiceCardListScreen.routeName,
-                                        arguments: {
-                                          "service": e,
-                                          "year": DateTime.now().year,
-                                          "month": DateTime.now().month
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(12),
-                                        ),
-                                        // gradient: gradientW,
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.7),
-                                            spreadRadius: 1,
-                                            blurRadius: 4,
-                                            offset: const Offset(
-                                              0,
-                                              3,
-                                            ), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: 60,
-                                            width: 60,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurStyle: BlurStyle.normal,
-                                                  spreadRadius: 1,
-                                                  blurRadius: 24,
-                                                  color: (primaryColorBase)
-                                                      .withOpacity(
-                                                    0.25,
-                                                  ),
-                                                  offset: const Offset(
-                                                    0,
-                                                    16,
-                                                  ),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(
-                                                  5,
-                                                ),
-                                              ),
-                                              gradient: gradientBlue,
-                                            ),
-                                            child: PrimaryImageNetwork(
-                                              canShowPhotoView: false,
-                                              fit: BoxFit.contain,
-                                              path:
-                                                  "${ApiService.shared.uploadURL}?load=${e.service_icon!.id ?? ""}&regcode=${ApiService.shared.regCode}",
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(
-                                                  5,
-                                                ),
-                                              ),
-                                            ),
+                            // ...context.watch<ServicePrv>().listExtraService.map(
+                            //       (e) => InkWell(
+                            //         onTap: () {
+                            //           Navigator.of(context).pushNamed(
+                            //             ExtraServiceCardListScreen.routeName,
+                            //             arguments: {
+                            //               "service": e,
+                            //               "year": DateTime.now().year,
+                            //               "month": DateTime.now().month
+                            //             },
+                            //           );
+                            //         },
+                            //         child: Container(
+                            //           decoration: BoxDecoration(
+                            //             borderRadius: const BorderRadius.all(
+                            //               Radius.circular(12),
+                            //             ),
+                            //             // gradient: gradientW,
+                            //             color: Colors.white,
+                            //             boxShadow: [
+                            //               BoxShadow(
+                            //                 color: Colors.grey.withOpacity(0.7),
+                            //                 spreadRadius: 1,
+                            //                 blurRadius: 4,
+                            //                 offset: const Offset(
+                            //                   0,
+                            //                   3,
+                            //                 ), // changes position of shadow
+                            //               ),
+                            //             ],
+                            //           ),
+                            //           child: Column(
+                            //             mainAxisAlignment:
+                            //                 MainAxisAlignment.center,
+                            //             crossAxisAlignment:
+                            //                 CrossAxisAlignment.center,
+                            //             children: [
+                            //               Container(
+                            //                 height: 60,
+                            //                 width: 60,
+                            //                 decoration: BoxDecoration(
+                            //                   boxShadow: [
+                            //                     BoxShadow(
+                            //                       blurStyle: BlurStyle.normal,
+                            //                       spreadRadius: 1,
+                            //                       blurRadius: 24,
+                            //                       color: (primaryColorBase)
+                            //                           .withOpacity(
+                            //                         0.25,
+                            //                       ),
+                            //                       offset: const Offset(
+                            //                         0,
+                            //                         16,
+                            //                       ),
+                            //                     )
+                            //                   ],
+                            //                   borderRadius:
+                            //                       const BorderRadius.all(
+                            //                     Radius.circular(
+                            //                       5,
+                            //                     ),
+                            //                   ),
+                            //                   gradient: gradientBlue,
+                            //                 ),
+                            //                 child: PrimaryImageNetwork(
+                            //                   canShowPhotoView: false,
+                            //                   fit: BoxFit.contain,
+                            //                   path:
+                            //                       "${ApiService.shared.uploadURL}?load=${e.service_icon!.id ?? ""}&regcode=${ApiService.shared.regCode}",
+                            //                   borderRadius:
+                            //                       const BorderRadius.all(
+                            //                     Radius.circular(
+                            //                       5,
+                            //                     ),
+                            //                   ),
+                            //                 ),
 
-                                            // Image.network(
+                            //                 // Image.network(
 
-                                            //     fit: BoxFit.contain,
-                                            //     width: 20,
-                                            //     height: 20,
-                                            //     "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
-                                          ),
-                                          vpad(7),
-                                          Flexible(
-                                            child: Text(
-                                              e.name ?? "",
-                                              style: txtBold(13),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                            //                 //     fit: BoxFit.contain,
+                            //                 //     width: 20,
+                            //                 //     height: 20,
+                            //                 //     "${ApiConstants.uploadURL}?load=${e.service_icon!.id ?? ""}"),
+                            //               ),
+                            //               vpad(7),
+                            //               Flexible(
+                            //                 child: Text(
+                            //                   e.name ?? "",
+                            //                   style: txtBold(13),
+                            //                   overflow: TextOverflow.ellipsis,
+                            //                 ),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
                             vpad(0),
                             vpad(0),
                           ],

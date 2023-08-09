@@ -96,7 +96,7 @@ class _ConstructionRegistrationDetailsScreenState
       surface =
           "${apartment.apartment!.name}, ${apartment.floor!.name}, ${apartment.building!.name}";
     }
-    var draws = [...reg.current_draw!, ...reg.renovation_draw!];
+    //var draws = [...reg.current_draw!, ...reg.renovation_draw!];
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).cons_reg_detail,

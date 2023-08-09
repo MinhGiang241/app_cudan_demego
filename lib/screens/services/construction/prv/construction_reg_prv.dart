@@ -45,7 +45,9 @@ class ConstructionRegPrv extends ChangeNotifier {
       deputyController.text = existedConReg!.deputy ?? '';
       phoneController.text = existedConReg!.deputy_phone ?? '';
       identityController.text = existedConReg!.deputy_identity ?? '';
-      workerNumController.text = existedConReg!.worker_num.toString();
+      workerNumController.text = existedConReg!.worker_num != null
+          ? existedConReg!.worker_num.toString()
+          : '';
       emailController.text = existedConReg!.construction_email ?? '';
       regDate = DateTime.tryParse(existedConReg!.create_date ?? '') != null
           ? DateTime.parse(existedConReg!.create_date!)
@@ -229,7 +231,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           construction_add: addressController.text.trim(),
           construction_email: emailController.text.trim(),
           create_date: existedConReg != null
-              ? (regDate!.subtract(const Duration(hours: 7))).toIso8601String()
+              ? (regDate)!.toIso8601String()
               : (regDate!).toIso8601String(),
           description: describeController.text.trim(),
           deposit_fee: depositFee,

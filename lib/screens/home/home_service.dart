@@ -10,7 +10,7 @@ import '../payment/payment_list_screen.dart';
 import '../reg_resident/register_resident_screen.dart';
 import '../services/reflection/reflection_screen.dart';
 import '../services/service_screen.dart';
-import '../services/ultilty/utility_service_screen.dart';
+import '../services/ultilty/utility_service_list_screen.dart';
 import '../water/water_screen.dart';
 
 class HomeServices extends StatelessWidget {
@@ -60,7 +60,7 @@ class HomeServices extends StatelessWidget {
         "text": "Tiện ích",
         "tap": () {
           Navigator.of(context).pushNamed(
-            UtilityServiceScreen.routeName,
+            UtilityServiceListScreen.routeName,
             arguments: {'year': null, 'month': null, 'index': null},
           );
         }
