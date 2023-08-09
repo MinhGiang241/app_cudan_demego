@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/constants.dart';
 import '../generated/l10n.dart';
 import '../main.dart';
 import '../models/ho_model.dart';
@@ -23,20 +24,25 @@ import 'api_tower.dart';
 import 'prf_data.dart';
 
 class AutoNavigation {
-  static Future autoLogin(BuildContext context) async {
+  static Future autoLogin(BuildContext context, setlogin) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
-      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
+      setlogin(false);
       return;
     }
     var a, p;
+    var authState = await PrfData.shared.getLanguage();
+    if (authState != logIn) {
+      setlogin(false);
+      return;
+    }
     var acc = await PrfData.shared.getSignInStore();
     if (acc != null && acc['acc'] != null && acc['pass'] != null) {
       a = acc['acc'];
       p = acc['pass'];
       await APIHOAccount.loginHO(a, p).then((v) async {
-        context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
+        setlogin(false);
         Navigator.pushNamed(
           context,
           SelectProjectScreen.routeName,
@@ -50,7 +56,7 @@ class AutoNavigation {
         }
       });
     } else {
-      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
+      setlogin(false);
     }
   }
 

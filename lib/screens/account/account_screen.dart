@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,6 @@ import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
-import '../auth/prv/auth_prv.dart';
 import 'change_pass/change_pass_screen.dart';
 import 'language/language_screen.dart';
 import 'personal_info/personal_info_screen.dart';
@@ -136,7 +136,7 @@ class AccountScreen extends StatelessWidget {
                       lable: S.of(context).sign_out,
                       icons: PrimaryIcons.log_out,
                       onTap: () {
-                        context.read<AuthPrv>().onSignOut(context);
+                        context.read<HOAccountServicePrv>().logOutHO(context);
                       },
                     ),
                     vpad(8),

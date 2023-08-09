@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const String family = "Lexend";
+const logIn = 'login';
+const logOut = 'logout';
 
 double dvHeight(BuildContext context) => MediaQuery.of(context).size.height;
 double dvWidth(BuildContext context) => MediaQuery.of(context).size.width;

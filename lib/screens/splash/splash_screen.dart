@@ -1,7 +1,4 @@
-import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/auto_navigation.dart';
@@ -21,11 +18,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var loading = true;
+
+  setLoading(v) {
+    setState(() {
+      loading = v;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await AutoNavigation.autoLogin(context);
+      await AutoNavigation.autoLogin(context, setLoading);
     });
   }
 
@@ -149,7 +154,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
-              if (context.watch<HOAccountServicePrv>().isAutoLoginLoading)
+              if (loading)
                 Positioned(
                   top: 0,
                   bottom: 0,

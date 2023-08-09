@@ -139,6 +139,9 @@ class HOAccountServicePrv extends ChangeNotifier {
                       access_token = null;
                       expireDate = null;
                       context.read<ResidentInfoPrv>().clearData();
+                      await PrfData.shared.setAuthState(logOut);
+                      await PrfData.shared.deleteApartment();
+                      await PrfData.shared.deleteProject();
                       notifyListeners();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         SignInScreen.routeName,
@@ -215,11 +218,13 @@ class HOAccountServicePrv extends ChangeNotifier {
           userName,
           password,
         );
+        await PrfData.shared.setAuthState(logIn);
       } else {
         await PrfData.shared.deteleSignInStore();
       }
       isLoginLoading = false;
       notifyListeners();
+
       Navigator.pushNamed(
         context,
         SelectProjectScreen.routeName,

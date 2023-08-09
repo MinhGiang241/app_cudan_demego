@@ -66,6 +66,19 @@ class PrfData {
   final String _listApartment = "listapartment";
 
   final String _project = "project";
+  final String _authState = "authState";
+
+  Future<void> setAuthState(String v) async {
+    await _signIn.put(_authState, v);
+  }
+
+  Future<String> getAuthState() async {
+    return await _signIn.get(_authState);
+  }
+
+  Future<void> deleteAuthState() async {
+    await _signIn.deleteAll([_authState]);
+  }
 
   Future<void> setProjectInStore(RegistrationProjectList p) async {
     var c = p.toJson();
