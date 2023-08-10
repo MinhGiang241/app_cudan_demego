@@ -57,7 +57,7 @@ class ConstructionListPrv extends ChangeNotifier {
         //discount_money: data.construction_cost,
         amount: data.construction_cost,
         refSchema: "ConstructionRegistration",
-        type: "ContructionCost",
+        type: "ConstructionCost",
         payment_status: data.construction_cost == 0 ? "PAID" : "UNPAID",
         amount_due: data.construction_cost,
         apartmentId: apartment.apartmentId,

@@ -61,6 +61,8 @@ class ConstructionHistoryPrv extends ChangeNotifier {
         return S.current.create_new;
       case "WAIT_OWNER":
         return S.current.confirm;
+      case "PAY_DONE":
+        return S.current.pay_construction_fee;
       case "WAIT_PAY":
         return S.current.send_request;
       default:

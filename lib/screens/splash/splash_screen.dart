@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/auto_navigation.dart';
@@ -7,6 +8,7 @@ import '../../widgets/primary_button.dart';
 import '../../widgets/primary_loading.dart';
 import '../auth/sign_in_screen.dart';
 import '../auth/sign_up_screen.dart';
+import '../ho/prv/ho_account_service_prv.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.isUnathen}) : super(key: key);
@@ -18,24 +20,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var loading = true;
-
-  setLoading(v) {
-    setState(() {
-      loading = v;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await AutoNavigation.autoLogin(context, setLoading);
+      await AutoNavigation.autoLogin(
+        context,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    var loading = context.watch<HOAccountServicePrv>().isLoginLoading;
     return Material(
       child: Scaffold(
         body: Container(

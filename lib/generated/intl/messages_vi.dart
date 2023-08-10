@@ -823,6 +823,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pause_construction":
             MessageLookupByLibrary.simpleMessage("Khóa thi công"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "pay_construction_fee":
+            MessageLookupByLibrary.simpleMessage("Thanh toán phí thi công"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Ngày thanh toán"),
         "pay_done":
             MessageLookupByLibrary.simpleMessage("Hoàn thành thanh toán"),

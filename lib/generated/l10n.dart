@@ -8539,6 +8539,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Pay construction fee`
+  String get pay_construction_fee {
+    return Intl.message(
+      'Pay construction fee',
+      name: 'pay_construction_fee',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

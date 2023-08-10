@@ -119,6 +119,8 @@ Color genStatusColor(String? status) {
   switch (status) {
     case "NEW":
       return grayScaleColor1;
+    case "PAY_DONE":
+      return pinkColorBase;
     case "SEND":
       return greenColor;
     case "WAIT":

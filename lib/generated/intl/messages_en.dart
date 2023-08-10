@@ -812,6 +812,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pause_construction":
             MessageLookupByLibrary.simpleMessage("Pause construction"),
         "pay": MessageLookupByLibrary.simpleMessage("Payment"),
+        "pay_construction_fee":
+            MessageLookupByLibrary.simpleMessage("Pay construction fee"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Pay date"),
         "pay_done": MessageLookupByLibrary.simpleMessage("Pay done"),
         "payment_circle":

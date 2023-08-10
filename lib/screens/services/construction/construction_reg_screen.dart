@@ -261,7 +261,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         DateTime.now().year,
                                         DateTime.now().month,
                                         DateTime.now().day,
-                                        24,
+                                        0,
                                       );
                                       if (v!.isEmpty) {
                                         return '';

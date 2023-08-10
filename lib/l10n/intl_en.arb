@@ -847,5 +847,6 @@
   "owner": "Owner",
   "guest": "Guest",
   "resident": "Resident",
-  "shelflife_money": "Payment period"
+  "shelflife_money": "Payment period",
+  "pay_construction_fee": "Pay construction fee"
 }

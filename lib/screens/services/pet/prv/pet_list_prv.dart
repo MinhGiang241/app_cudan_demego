@@ -11,7 +11,8 @@ import '../pet_list_screen.dart';
 class PetListPrv extends ChangeNotifier {
   List<Pet> listPet = [];
 
-  cancelRequetsAprrove(BuildContext context, Pet data) async {
+  cancelRequetsAprrove(BuildContext context, Pet p) async {
+    var data = p.copyWith();
     data.pet_status = 'CANCEL';
     data.reasons = 'NGUOIDUNGHUY';
     Utils.showConfirmMessage(
@@ -68,7 +69,8 @@ class PetListPrv extends ChangeNotifier {
     );
   }
 
-  sendToApprove(BuildContext context, Pet data) {
+  sendToApprove(BuildContext context, Pet p) {
+    var data = p.copyWith();
     data.pet_status = 'WAIT';
     data.isMobile = true;
     Utils.showConfirmMessage(

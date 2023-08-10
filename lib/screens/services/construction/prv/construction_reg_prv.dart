@@ -291,7 +291,7 @@ class ConstructionRegPrv extends ChangeNotifier {
             refSchema: 'ConstructionRegistration',
             //discount_money: fee,
             amount: fee,
-            type: 'ContructionCost',
+            type: 'ConstructionCost',
             payment_status: 'UNPAID',
             amount_due: fee,
             apartmentId: apartment.apartmentId,

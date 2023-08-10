@@ -28,6 +28,7 @@ class Pet {
     this.certificate,
     this.report,
     this.reasons,
+    this.r,
   });
   String? id;
   String? createdTime;
@@ -54,6 +55,62 @@ class Pet {
   List<PetFile>? avt_pet;
   List<PetFile>? certificate;
   List<PetFile>? report;
+  copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? apartmentId,
+    String? residentId,
+    String? tel,
+    String? pet_name,
+    String? pet_type,
+    String? color,
+    String? species,
+    String? sex,
+    String? reasons,
+    double? weight,
+    String? describe,
+    bool? check,
+    String? address,
+    String? regulations,
+    String? pet_status,
+    String? note,
+    bool? isMobile,
+    Reason? r,
+    List<PetFile>? avt_pet,
+    List<PetFile>? certificate,
+    List<PetFile>? report,
+  }) {
+    return Pet(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      apartmentId: apartmentId ?? this.apartmentId,
+      residentId: residentId ?? this.residentId,
+      tel: tel ?? this.tel,
+      pet_name: pet_name ?? this.pet_name,
+      pet_type: pet_type ?? this.pet_type,
+      color: color ?? this.color,
+      species: species ?? this.species,
+      sex: sex ?? this.sex,
+      reasons: reasons ?? this.reasons,
+      weight: weight ?? this.weight,
+      describe: describe ?? this.describe,
+      check: check ?? this.check,
+      address: address ?? this.address,
+      regulations: regulations ?? this.regulations,
+      pet_status: pet_status ?? this.pet_status,
+      note: note ?? this.note,
+      isMobile: isMobile ?? this.isMobile,
+      r: r ?? this.r,
+      avt_pet: avt_pet ?? this.avt_pet,
+      certificate: certificate ?? this.certificate,
+      report: report ?? this.report,
+    );
+  }
+
   Pet.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     createdTime = json['createdTime'];

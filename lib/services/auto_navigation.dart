@@ -24,17 +24,18 @@ import 'api_tower.dart';
 import 'prf_data.dart';
 
 class AutoNavigation {
-  static Future autoLogin(BuildContext context, setlogin) async {
+  static Future autoLogin(BuildContext context) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
-      setlogin(false);
+      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
+
       return;
     }
     var a, p;
-    var authState = await PrfData.shared.getLanguage();
+    var authState = await PrfData.shared.getAuthState();
     if (authState != logIn) {
-      setlogin(false);
+      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
       return;
     }
     var acc = await PrfData.shared.getSignInStore();
@@ -42,11 +43,11 @@ class AutoNavigation {
       a = acc['acc'];
       p = acc['pass'];
       await APIHOAccount.loginHO(a, p).then((v) async {
-        setlogin(false);
         Navigator.pushNamed(
           context,
           SelectProjectScreen.routeName,
         );
+        context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
       }).catchError((e) {
         context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
         if ((e as DioError).response?.statusCode == 401) {
@@ -56,7 +57,7 @@ class AutoNavigation {
         }
       });
     } else {
-      setlogin(false);
+      context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
     }
   }
 
