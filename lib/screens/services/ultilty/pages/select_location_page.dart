@@ -22,7 +22,7 @@ class SelectLocationPage extends StatelessWidget {
             color: primaryColorBase,
             style: BorderStyle.solid,
             width: 2,
-            strokeAlign: 1,
+            strokeAlign: StrokeAlign.outside,
           ),
           child: Text(
             "Nướng BBQ",
