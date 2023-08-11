@@ -432,9 +432,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                             ),
                             PrimaryButton(
+                              buttonType: ButtonType.secondary,
+                              secondaryBackgroundColor: grayScaleColor4,
                               onTap: () {
-                                context.read<PaymentPrv>().changeConfirm();
-                                context.read<PaymentPrv>().onEnterPin(context);
+                                //  context.read<PaymentPrv>().changeConfirm();
+                                // context.read<PaymentPrv>().onEnterPin(context);
                               },
                               width: dvWidth(context),
                               isRectangle: true,

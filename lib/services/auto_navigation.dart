@@ -47,7 +47,7 @@ class AutoNavigation {
           context,
           SelectProjectScreen.routeName,
         );
-        context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
+        // context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
       }).catchError((e) {
         context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
         if ((e as DioError).response?.statusCode == 401) {
@@ -63,6 +63,7 @@ class AutoNavigation {
 
   static Future autoSelectProject(BuildContext context, setLogin) async {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
     bool notAuto = arg?['not-auto'] ?? false;
     if (notAuto) {
       setLogin(false);
