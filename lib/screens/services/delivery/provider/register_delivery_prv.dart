@@ -196,7 +196,7 @@ class RegisterDeliveryPrv extends ChangeNotifier {
         uploadDeliveryImage(context).then((v) {
           var st = startDate!
               .subtract(const Duration(hours: 0))
-              .copyWith(isUtc: true)
+              .toUtc()
               .toIso8601String();
           var et =
               endDate!.subtract(const Duration(hours: 0)).toIso8601String();

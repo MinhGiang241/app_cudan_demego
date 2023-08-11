@@ -72,7 +72,7 @@ class PrfData {
     await _signIn.put(_authState, v);
   }
 
-  Future<String> getAuthState() async {
+  Future<String?> getAuthState() async {
     return await _signIn.get(_authState);
   }
 
