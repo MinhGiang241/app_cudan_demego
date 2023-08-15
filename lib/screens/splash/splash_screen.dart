@@ -46,7 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     height: dvHeight(context) * 1.2,
                     width: dvWidth(context) * 1.2,
                     child: Image.asset(
-                      AppImage.splashBackground,
+                      //AppImage.splashBackground,
+                      AppImage.building10,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -82,10 +83,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         style: txtBold(14, grayScaleColor2),
                       ),
                       vpad(8),
-                      Image.asset(
-                        AppImage.illustration,
-                        width: dvWidth(context) * 0.8,
-                      ),
+                      // Image.asset(
+                      //   AppImage.illustration,
+                      //   width: dvWidth(context) * 0.8,
+                      // ),
                       vpad(24),
                     ],
                   ),

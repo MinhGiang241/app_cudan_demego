@@ -51,7 +51,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                 hpad(21),
                 const Icon(
                   Icons.favorite,
-                  color: primaryColor4,
+                  color: primaryColorBase,
                 ),
                 Row(
                   textBaseline: TextBaseline.ideographic,
@@ -74,67 +74,67 @@ class _HeaderHomeState extends State<HeaderHome> {
             ),
           ),
         ),
-        if (Provider.of<ResidentInfoPrv>(context, listen: false)
-            .listOwn
-            .isNotEmpty)
-          vpad(30),
-        if (Provider.of<ResidentInfoPrv>(context, listen: false)
-            .listOwn
-            .isNotEmpty)
-          RepaintBoundary(
-            child: Row(
-              children: [
-                PrimaryCard(
-                  width: dvWidth(context) - 48,
-                  onTap: () {
-                    Utils.showBottomSheet(
-                      context: context,
-                      child: ChooseAparmentBottomSheet(
-                        selectApartment: selectApartment,
-                        list: listOwn, //context.read<AuthPrv>().apartments!,
-                      ),
-                    );
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: ListTile(
-                      leading: const PrimaryIcon(
-                        padding: EdgeInsets.all(9),
-                        icons: PrimaryIcons.home_smile,
-                        color: primaryColor4,
-                        backgroundColor: primaryColor5,
-                        style: PrimaryIconStyle.round,
-                      ),
-                      // hpad(12),
-                      title: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            selectedApartment?.name ?? "",
-                            style: txtLinkMedium(),
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
-                            style: txtBodySmallRegular(color: grayScaleColor2),
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
-                      ),
+        // if (Provider.of<ResidentInfoPrv>(context, listen: false)
+        //     .listOwn
+        //     .isNotEmpty)
+        vpad(30),
+        // if (Provider.of<ResidentInfoPrv>(context, listen: false)
+        //     .listOwn
+        //     .isNotEmpty)
+        RepaintBoundary(
+          child: Row(
+            children: [
+              PrimaryCard(
+                width: dvWidth(context) - 48,
+                onTap: () {
+                  Utils.showBottomSheet(
+                    context: context,
+                    child: ChooseAparmentBottomSheet(
+                      selectApartment: selectApartment,
+                      list: listOwn, //context.read<AuthPrv>().apartments!,
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ListTile(
+                    leading: const PrimaryIcon(
+                      padding: EdgeInsets.all(9),
+                      icons: PrimaryIcons.home_smile,
+                      color: primaryColorBase,
+                      backgroundColor: primaryColor5,
+                      style: PrimaryIconStyle.round,
+                    ),
+                    // hpad(12),
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          selectedApartment?.name ?? "",
+                          style: txtLinkMedium(),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
+                          style: txtBodySmallRegular(color: grayScaleColor2),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
 
-                      // const Spacer(),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: grayScaleColor2,
-                      ),
+                    // const Spacer(),
+                    trailing: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: grayScaleColor2,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+        ),
       ],
     );
   }

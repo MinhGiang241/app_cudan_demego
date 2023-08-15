@@ -134,7 +134,7 @@ class HomeServices extends StatelessWidget {
                         icons: e['icon'] as PrimaryIcons,
                         // style: PrimaryIconStyle.gradient,
                         // gradients: PrimaryIconGradient.primary,
-                        color: demepro3,
+                        color: primaryColorBase,
                         padding: const EdgeInsets.all(8),
                         size: 32,
                         onTap: () {
