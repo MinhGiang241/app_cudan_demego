@@ -3,6 +3,8 @@
 
 import 'dart:convert';
 
+import 'package:app_cudan/models/response_resident_own.dart';
+
 import 'employee.dart';
 import 'reason.dart';
 import 'resident_info.dart';
@@ -50,6 +52,7 @@ class ConstructionRegistration {
     this.working_day,
     this.file_cancel,
     this.re,
+    this.a,
   });
 
   ConstructionRegistration copyWith({
@@ -94,6 +97,7 @@ class ConstructionRegistration {
     List<ConstructionFile>? renovation_draw,
     List<ConstructionFile>? file_cancel,
     ResponseResidentInfo? re,
+    Apartment? a,
   }) {
     return ConstructionRegistration(
       id: id ?? this.id,
@@ -138,6 +142,7 @@ class ConstructionRegistration {
       renovation_draw: renovation_draw ?? this.renovation_draw,
       file_cancel: file_cancel ?? this.file_cancel,
       re: re ?? this.re,
+      a: a ?? this.a,
     );
   }
 
@@ -184,6 +189,7 @@ class ConstructionRegistration {
   List<ConstructionFile>? renovation_draw;
   List<ConstructionFile>? file_cancel;
   ResponseResidentInfo? re;
+  Apartment? a;
 
   ConstructionRegistration.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -208,6 +214,7 @@ class ConstructionRegistration {
     time_start = json['time_start'];
     time_end = json['time_end'];
     description = json['description'];
+    a = json['a'] != null ? Apartment.fromJson(json['a']) : null;
     s = json['s'] != null ? Status.fromJson(json['s']) : null;
     constructionType = json['constructionType'] != null
         ? ConstructionType.fromJson(json['constructionType'])

@@ -88,14 +88,19 @@ class _ConstructionRegistrationDetailsScreenState
       reg = arg['cons'];
     }
     var listApart = context.read<ResidentInfoPrv>().listOwn;
-    var apartment = listApart
-        .firstWhere((element) => element.apartmentId == reg.apartmentId);
-    var surface = '';
+    // var apartmentIndex = listApart
+    //     .indexWhere((element) => element.apartmentId == reg.apartmentId);
+    // var apartment;
+    // if (apartmentIndex >= 0) {
+    //   apartment = listApart[apartmentIndex];
+    // }
+    var surface =
+        "${reg.a?.name ?? ''}, ${reg.a?.f?.name ?? ''}, ${reg.a?.b?.name ?? ''}";
     // ignore: unnecessary_null_comparison
-    if (apartment != null) {
-      surface =
-          "${apartment.apartment!.name}, ${apartment.floor!.name}, ${apartment.building!.name}";
-    }
+    // if (apartment != null) {
+    //   surface =
+    //       "${apartment.apartment!.name}, ${apartment.floor!.name}, ${apartment.building!.name}";
+    // }
     //var draws = [...reg.current_draw!, ...reg.renovation_draw!];
     return PrimaryScreen(
       appBar: PrimaryAppbar(
