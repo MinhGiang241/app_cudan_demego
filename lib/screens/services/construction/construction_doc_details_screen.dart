@@ -42,7 +42,7 @@ class _ConstructionDocumentDetailsState
     );
     port.listen((dynamic data) {
       // String id = data[0];
-      DownloadTaskStatus status = data[1];
+      int status = data[1];
       // int progress = data[2];
 
       if (status == DownloadTaskStatus.complete) {
@@ -57,7 +57,7 @@ class _ConstructionDocumentDetailsState
   @pragma('vm:entry-point')
   static void downloadCallback(
     String id,
-    DownloadTaskStatus status,
+    int status,
     int progress,
   ) {
     final SendPort? send =
