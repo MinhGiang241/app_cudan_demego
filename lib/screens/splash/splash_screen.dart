@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: dvWidth(context) * 1.2,
                     child: Image.asset(
                       //AppImage.splashBackground,
-                      AppImage.building10,
+                      AppImage.building,
                       fit: BoxFit.cover,
                     ),
                   ),

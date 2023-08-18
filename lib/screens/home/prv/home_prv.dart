@@ -85,6 +85,7 @@ class HomePrv extends ChangeNotifier {
           : null;
       var residentNews =
           await APINew.getNewList(5, 0, "RESIDENT", accountId ?? '');
+      newResidentList.clear();
       for (var i in residentNews) {
         newResidentList.add(New.fromJson(i));
       }
@@ -93,6 +94,7 @@ class HomePrv extends ChangeNotifier {
       );
       var projectNews =
           await APINew.getNewList(5, 0, "PROJECT", accountId ?? '');
+      newProjectList.clear();
       for (var i in projectNews) {
         newProjectList.add(New.fromJson(i));
       }

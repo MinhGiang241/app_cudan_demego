@@ -248,7 +248,7 @@ class ConstructionRegPrv extends ChangeNotifier {
                       ? "WAIT_TECHNICAL"
                       : "WAIT_OWNER"
                   : isOwner
-                      ? "WAIT_PAY"
+                      ? "WAIT_TECHNICAL"
                       : "WAIT_OWNER"
               : 'NEW',
           working_day: workday,

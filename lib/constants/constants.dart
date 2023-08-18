@@ -404,15 +404,4 @@ class AppImage {
   static const String linkedin = "assets/images/linkedin.png";
   static const String demepro = "assets/images/demepro.png";
   static const String building = "assets/images/building.jpg";
-  static const String building0 = "assets/images/building0.jpg";
-  static const String building1 = "assets/images/building1.jpg";
-  static const String building2 = "assets/images/building2.jpg";
-  static const String building3 = "assets/images/building3.jpg";
-  static const String building4 = "assets/images/building4.jpg";
-  static const String building5 = "assets/images/building5.jpg";
-  static const String building6 = "assets/images/building6.jpg";
-  static const String building7 = "assets/images/building7.jpg";
-  static const String building8 = "assets/images/building8.jpg";
-  static const String building9 = "assets/images/building9.jpg";
-  static const String building10 = "assets/images/building10.jpg";
 }

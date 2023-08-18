@@ -38,7 +38,7 @@ class NewListPrv extends ChangeNotifier {
       listNews.clear();
     }
     await APINew.getNewList(
-      5,
+      10,
       skip,
       type,
       context.read<ResidentInfoPrv>().userInfo!.account!.id!,

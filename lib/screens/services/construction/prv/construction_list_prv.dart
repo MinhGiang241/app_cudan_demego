@@ -40,7 +40,7 @@ class ConstructionListPrv extends ChangeNotifier {
             ? "WAIT_TECHNICAL"
             : "WAIT_OWNER"
         : isOwner
-            ? "WAIT_PAY"
+            ? "WAIT_TECHNICAL"
             : "WAIT_OWNER";
 
 // (data['deposit_fee'] == 0) ? 'WAIT_PAY' :
