@@ -84,8 +84,9 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                 setState(() {
                   isLoading = true;
                 });
-                arg.status = "ACCEPT";
-                APIParcel.acceptParcel(arg.toJson()).then((v) {
+                var data = arg.toJson();
+                data["status"] = "ACCEPT";
+                APIParcel.acceptParcel(data).then((v) {
                   setState(() {
                     isLoading = false;
                   });

@@ -19,6 +19,9 @@ class Parcel {
     this.time_out,
     this.s,
     this.updatedTime,
+    this.residentId,
+    this.apartmentId,
+    this.storage_location,
   });
   String? id;
   String? createdTime;
@@ -33,6 +36,10 @@ class Parcel {
   String? describe;
   String? time_out;
   String? staffOutId;
+  String? residentId;
+  String? apartmentId;
+  String? storage_location;
+  String? receiving_address;
   Status? s;
   List<ParcelImage>? image;
 
@@ -58,6 +65,10 @@ class Parcel {
                 .toList()
             : []
         : [];
+    apartmentId = json['apartmentId'];
+    residentId = json['residentId'];
+    storage_location = json['storage_location'];
+    receiving_address = json['receiving_address'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -79,6 +90,10 @@ class Parcel {
             return e.toJson();
           }).toList()
         : [];
+    data['apartmentId'] = apartmentId;
+    data['residentId'] = residentId;
+    data['storage_location'] = storage_location;
+    data['receiving_address'] = receiving_address;
     return data;
   }
 }
