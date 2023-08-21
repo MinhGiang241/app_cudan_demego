@@ -8,23 +8,32 @@ class APIParcel {
     int year,
     int month,
     String phone,
+    String? residentId,
+    String? apartmentId,
     bool init,
   ) async {
     var query = '''
-    mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
-    response: reception_mobile_find_parcel_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {
+    mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean,\$residentId:String,\$apartmentId:String){
+    response: reception_mobile_find_parcel_by_month (year: \$year,month: \$month,phone: \$phone,init: \$init,residentId: \$residentId,apartmentId: \$apartmentId ) {
         code
         message
         data
     }
 }
-        
+                
             
     ''';
 
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"year": year, "month": month, "phone": phone, "init": init},
+      variables: {
+        "year": year,
+        "month": month,
+        "phone": phone,
+        "init": init,
+        "residentId": residentId,
+        "apartmentId": apartmentId,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

@@ -19,6 +19,7 @@ class MissingObject {
     this.name,
     this.updatedTime,
     this.lost_time,
+    this.residentId,
   });
   String? id;
   String? createdTime;
@@ -27,6 +28,8 @@ class MissingObject {
   String? customer;
   String? phone_number;
   String? apartmentId;
+  String? residentId;
+
   String? status;
   String? time;
   String? describe;
@@ -59,6 +62,7 @@ class MissingObject {
                 .toList()
             : []
         : [];
+    residentId = json['residentId'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -82,6 +86,7 @@ class MissingObject {
             return e.toJson();
           }).toList()
         : [];
+    data['residentId'] = residentId;
     return data;
   }
 }
@@ -119,6 +124,8 @@ class LootItem {
     this.photo,
     this.s,
     this.return_image,
+    this.apartmentId,
+    this.residentId,
   });
   String? id;
   String? createdTime;
@@ -132,6 +139,8 @@ class LootItem {
   String? describe;
   String? name;
   String? time_pay;
+  String? residentId;
+  String? apartmentId;
   List<MissingImage>? photo;
   List<MissingImage>? return_image;
   Status? s;
@@ -163,6 +172,8 @@ class LootItem {
                 .toList()
             : []
         : [];
+    residentId = json['residentId'];
+    apartmentId = json['apartmentId'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -184,6 +195,8 @@ class LootItem {
             return e.toJson();
           }).toList()
         : [];
+    data['apartmentId'] = apartmentId;
+    data['residentId'] = residentId;
     return data;
   }
 }

@@ -46,12 +46,13 @@ class MissingObjectPrv extends ChangeNotifier {
   }
 
   saveLostItem(BuildContext context, MissingObject lost) async {
-    lost.status = "ACCEPT";
-    lost.find_time =
+    var data = lost.toJson();
+    data["status"] = "ACCEPT";
+    data["find_time"] =
         (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
     // var apartment = context.read<ResidentInfoPrv>()
     // lost.apartment = "${context}";
-    await APILost.saveLostItem(lost.toJson()).then((v) {
+    await APILost.saveLostItem(data).then((v) {
       Utils.showSuccessMessage(
         context: context,
         e: S.of(context).success_confirm,
@@ -75,10 +76,11 @@ class MissingObjectPrv extends ChangeNotifier {
   }
 
   saveLootItem(BuildContext context, LootItem loot) async {
-    loot.status = "RETURNED";
-    loot.time_pay =
+    var data = loot.toJson();
+    data["status"] = "RETURNED";
+    data["time_pay"] =
         (DateTime.now().subtract(const Duration(hours: 7))).toIso8601String();
-    await APILost.saveLootItem(loot.toJson()).then((v) {
+    await APILost.saveLootItem(data).then((v) {
       Utils.showSuccessMessage(
         context: context,
         e: S.of(context).returned,
@@ -106,13 +108,28 @@ class MissingObjectPrv extends ChangeNotifier {
       lostList.clear();
       lootList.clear();
       var phone = context.read<ResidentInfoPrv>().userInfo!.phone_required;
-      var lost =
-          await APILost.getLostItemList(year!, month!, phone ?? "", isInitHis);
+      var residentId = context.read<ResidentInfoPrv>().residentId;
+      var apartmentId =
+          context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
+      var lost = await APILost.getLostItemList(
+        year!,
+        month!,
+        phone ?? "",
+        residentId,
+        apartmentId,
+        isInitHis,
+      );
       for (var i in lost) {
         lostList.add(MissingObject.fromJson(i));
       }
-      var loot =
-          await APILost.getLootItemList(year!, month!, phone ?? "", isInitPic);
+      var loot = await APILost.getLootItemList(
+        year!,
+        month!,
+        phone ?? "",
+        residentId,
+        apartmentId,
+        isInitPic,
+      );
       for (var i in loot) {
         lootList.add(LootItem.fromJson(i));
       }

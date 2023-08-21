@@ -79,7 +79,8 @@ class RegisterLostItemPrv extends ChangeNotifier {
         }
         var apartment = context.read<ResidentInfoPrv>().selectedApartment;
         var lost = MissingObject(
-          apartmentId: apartment!.apartmentId,
+          residentId: context.read<ResidentInfoPrv>().residentId,
+          apartmentId: apartment?.apartmentId,
           // apartment:
           //     "${apartment!.apartment!.name}, ${apartment.floor!.name}, ${apartment.building!.name}",
           customer: context.read<ResidentInfoPrv>().userInfo!.info_name,

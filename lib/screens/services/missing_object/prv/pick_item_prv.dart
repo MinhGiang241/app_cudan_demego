@@ -93,6 +93,9 @@ class PickItemPrv extends ChangeNotifier {
             tel: context.read<ResidentInfoPrv>().userInfo!.phone_required,
             residential: context.read<ResidentInfoPrv>().userInfo!.info_name,
             status: "WAIT_RETURN",
+            residentId: context.read<ResidentInfoPrv>().residentId,
+            apartmentId:
+                context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
           );
 
           return APILost.saveLootItem(loot.toJson());
@@ -113,8 +116,8 @@ class PickItemPrv extends ChangeNotifier {
               );
             },
           );
-          isLoading = false;
           validateName = null;
+          isLoading = false;
           validatePlace = null;
           validateFoundTime = null;
           notifyListeners();

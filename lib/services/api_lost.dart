@@ -66,11 +66,13 @@ class APILost {
     int year,
     int month,
     String phone,
+    String? residentId,
+    String? apartmentId,
     bool isInit,
   ) async {
     var query = '''
-  mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
-    response: reception_mobile_find_loot_item_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {
+mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean,\$residentId:String,\$apartmentId:String){
+    response: reception_mobile_find_loot_item_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init,residentId: \$residentId,apartmentId: \$apartmentId ) {
         code
         message
         data
@@ -79,10 +81,18 @@ class APILost {
         
         
         
+        
 ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"year": year, "month": month, "phone": phone, "init": isInit},
+      variables: {
+        "year": year,
+        "month": month,
+        "phone": phone,
+        "init": isInit,
+        "residentId": residentId,
+        "apartmentId": apartmentId,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);
@@ -99,23 +109,33 @@ class APILost {
   static Future getLostItemList(
     int year,
     int month,
-    String phone,
+    String? phone,
+    String? residentId,
+    String? apartmentId,
     bool isInit,
   ) async {
     var query = '''
-    mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean){
-    response: reception_mobile_find_lost_items_list_by_phone_and_month (year: \$year,month: \$month,phone: \$phone,init: \$init ) {
+   mutation (\$year:Float,\$month:Float,\$phone:String,\$init:Boolean,\$residentId:String,\$apartmentId:String){
+    response: reception_mobile_find_lost_items_list_by_month (year: \$year,month: \$month,phone: \$phone,init: \$init,residentId: \$residentId,apartmentId: \$apartmentId ) {
         code
         message
         data
     }
 }
         
+                
             
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
-      variables: {"year": year, "month": month, "phone": phone, "init": isInit},
+      variables: {
+        "year": year,
+        "month": month,
+        "phone": phone,
+        "init": isInit,
+        "apartmentId": apartmentId,
+        "residentId": residentId,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

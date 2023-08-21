@@ -24,7 +24,9 @@ class ParcelListPrv extends ChangeNotifier {
     await APIParcel.getParcelList(
       year,
       month,
-      context.read<ResidentInfoPrv>().userInfo!.phone_required ?? "",
+      context.read<ResidentInfoPrv>().userInfo?.phone_required ?? "",
+      context.read<ResidentInfoPrv>().residentId,
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
       isInit,
     ).then((v) {
       listWaitParcel.clear();
