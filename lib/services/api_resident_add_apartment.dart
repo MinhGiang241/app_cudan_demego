@@ -6,15 +6,15 @@ import 'api_service.dart';
 class APIResidentAddApartment {
   static Future saveFormResidentAddApartment(Map<String, dynamic> data) async {
     var query = '''
-    mutation (\$data:DependentSignUpInputDto){
-response: save_DependentSignUp_dto(data:\$data){
-	message
-	code
-	data {
-		_id
-	}
+ mutation (\$data:Dictionary){
+    response: addnewresident_mobile_db_save (data: \$data ) {
+        code
+        message
+        data
+    }
 }
-}
+        
+        
 
       ''';
 
@@ -37,7 +37,7 @@ response: save_DependentSignUp_dto(data:\$data){
   ) async {
     var query = '''
     mutation (\$data:Dictionary){
-        response: formAddNewResidentApartment_mobile_change_status (data: \$data ) {
+        response: addnewresident_mobile_change_status (data: \$data ) {
             code
             message
             data
@@ -66,7 +66,7 @@ response: save_DependentSignUp_dto(data:\$data){
   ) async {
     var query = '''
    mutation (\$residentId:String,\$apartmentId:String){
-    response: formAddNewResidentApartment_mobile_get_form_add_new_resident_apartment_by_residentId (residentId: \$residentId,apartmentId: \$apartmentId ) {
+    response: addnewresident_mobile_get_form_add_new_resident_apartment_by_residentId (residentId: \$residentId,apartmentId: \$apartmentId ) {
         code
         message
         data
@@ -95,7 +95,7 @@ response: save_DependentSignUp_dto(data:\$data){
   static Future getDependentResident(String? residentId) async {
     var query = '''
 mutation (\$residentId:String){
-    response: formAddNewResidentApartment_mobile_get_list_dependence (residentId: \$residentId ) {
+    response: addnewresident_mobile_get_list_dependence (residentId: \$residentId ) {
         code
         message
         data
