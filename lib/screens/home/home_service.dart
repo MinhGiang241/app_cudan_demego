@@ -1,6 +1,8 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
@@ -18,6 +20,8 @@ class HomeServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isResient = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     final data = [
       {
         "icon": PrimaryIcons.dollar,
@@ -29,25 +33,27 @@ class HomeServices extends StatelessWidget {
           );
         }
       },
-      {
-        "icon": PrimaryIcons.water,
-        "text": S.of(context).water,
-        'tap': () {
-          Navigator.of(context).pushNamed(
-            WaterScreen.routeName,
-            arguments: {'year': null, 'month': null, 'index': null},
-          );
-        }
-      },
-      {
-        "icon": PrimaryIcons.electricity,
-        "text": S.of(context).electricity,
-        "tap": () {
-          Navigator.of(context).pushNamed(
-            ElectricityScreen.routeName,
-          );
-        }
-      },
+      if (isResient)
+        {
+          "icon": PrimaryIcons.water,
+          "text": S.of(context).water,
+          'tap': () {
+            Navigator.of(context).pushNamed(
+              WaterScreen.routeName,
+              arguments: {'year': null, 'month': null, 'index': null},
+            );
+          }
+        },
+      if (isResient)
+        {
+          "icon": PrimaryIcons.electricity,
+          "text": S.of(context).electricity,
+          "tap": () {
+            Navigator.of(context).pushNamed(
+              ElectricityScreen.routeName,
+            );
+          }
+        },
       {
         "icon": PrimaryIcons.car,
         "text": S.of(context).services,
