@@ -33,7 +33,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
   @pragma('vm:entry-point')
   static void downloadCallback(
     String id,
-    DownloadTaskStatus status,
+    int status,
     int progress,
   ) {
     final SendPort? send =
@@ -61,7 +61,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
     );
     port.listen((dynamic data) {
       // String id = data[0];
-      DownloadTaskStatus status = data[1];
+      int status = data[1];
       // int progress = data[2];
 
       if (status == DownloadTaskStatus.complete) {

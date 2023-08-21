@@ -103,7 +103,7 @@ class _MessageState extends State<Message> {
     _port.listen((dynamic data) {
       // ignore: unused_local_variable
       String id = data[0];
-      DownloadTaskStatus status = data[1];
+      int status = data[1];
       // ignore: unused_local_variable
       int progress = data[2];
 
@@ -126,7 +126,7 @@ class _MessageState extends State<Message> {
   @pragma('vm:entry-point')
   static void downloadCallback(
     String id,
-    DownloadTaskStatus status,
+    int status,
     int progress,
   ) {
     final SendPort? send =
