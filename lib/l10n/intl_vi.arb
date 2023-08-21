@@ -849,5 +849,8 @@
   "guest": "Khách",
   "resident": "Cư dân",
   "shelflife_money": "Kỳ đóng tiền",
-  "pay_construction_fee": "Thanh toán phí thi công"
+  "pay_construction_fee": "Thanh toán phí thi công",
+  "confirm_delete_account": "Bạn có muốn xóa tài khoản không",
+  "delete_account": "Xóa tài khoản",
+  "already_delete_acc": "Bạn đã xóa tài khoản thành công"
 }

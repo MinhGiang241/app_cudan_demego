@@ -3,6 +3,7 @@
 import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_auth.dart';
+import 'package:app_cudan/services/api_ho_service.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
@@ -213,6 +214,23 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
               vpad(100)
             ],
           ),
+          Positioned(
+            bottom: 20,
+            child: PrimaryButton(
+              onTap: () {
+                Utils.showConfirmMessage(
+                    context: context,
+                    title: S.of(context).delete_account,
+                    content: S.of(context).confirm_delete_account,
+                    onConfirm: () async {
+                      await ApiHOService.shared.deleteAccount(context);
+                    });
+              },
+              width: dvWidth(context) - 24,
+              text: S.of(context).delete_account,
+              buttonType: ButtonType.red,
+            ),
+          )
         ],
       ),
     );

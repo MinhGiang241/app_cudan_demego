@@ -1,9 +1,16 @@
 import 'dart:developer';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_ho_account.dart';
+import 'package:app_cudan/services/prf_data.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/api_account_constant.dart';
 import '../generated/l10n.dart';
+import '../screens/auth/sign_in_screen.dart';
+import '../utils/utils.dart';
 
 class ApiHOService {
   static ApiHOService shared = ApiHOService();
@@ -91,5 +98,28 @@ class ApiHOService {
     } catch (e) {
       throw (e);
     }
+  }
+
+  Future deleteAccount(BuildContext context) async {
+    await APIHOAccount.deleteHOAccount()
+        //await Future.delayed(Duration(milliseconds: 0))
+        .then((v) async {
+      context.read<ResidentInfoPrv>().clearData();
+      PrfData.shared.deleteUser();
+      PrfData.shared.deleteProject();
+      PrfData.shared.deleteApartment();
+      PrfData.shared.deleteAuthState();
+      expireDate = null;
+      access_token = null;
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        SignInScreen.routeName,
+        ((route) => route.isCurrent),
+        arguments: {
+          "delete": true,
+        },
+      );
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
   }
 }

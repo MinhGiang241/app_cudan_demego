@@ -848,5 +848,8 @@
   "guest": "Guest",
   "resident": "Resident",
   "shelflife_money": "Payment period",
-  "pay_construction_fee": "Pay construction fee"
+  "pay_construction_fee": "Pay construction fee",
+  "confirm_delete_account": "Do you want to delete your account",
+  "delete_account": "Delete account",
+  "already_delete_acc": "You have already deleted your account"
 }

@@ -8549,6 +8549,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to delete your account`
+  String get confirm_delete_account {
+    return Intl.message(
+      'Do you want to delete your account',
+      name: 'confirm_delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get delete_account {
+    return Intl.message(
+      'Delete account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already deleted your account`
+  String get already_delete_acc {
+    return Intl.message(
+      'You have already deleted your account',
+      name: 'already_delete_acc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

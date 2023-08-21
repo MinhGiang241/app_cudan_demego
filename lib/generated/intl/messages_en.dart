@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "al_read": MessageLookupByLibrary.simpleMessage("read"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "already_delete_acc": MessageLookupByLibrary.simpleMessage(
+            "You have already deleted your account"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "apartment_add_resident":
@@ -257,6 +259,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": m5,
         "confirm_cancel_trans": m6,
         "confirm_change_schedule": m7,
+        "confirm_delete_account": MessageLookupByLibrary.simpleMessage(
+            "Do you want to delete your account"),
         "confirm_delete_letter": m8,
         "confirm_delete_service": m9,
         "confirm_end_chat": MessageLookupByLibrary.simpleMessage(
@@ -338,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_send": MessageLookupByLibrary.simpleMessage("Send date"),
         "debt": MessageLookupByLibrary.simpleMessage("Payment, debt remind"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete account"),
         "delete_letter": MessageLookupByLibrary.simpleMessage("Delete letter"),
         "delivery_info":
             MessageLookupByLibrary.simpleMessage("Tranfer information"),

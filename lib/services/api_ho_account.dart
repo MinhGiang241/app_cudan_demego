@@ -464,4 +464,30 @@ mutation (\$oldPass:String,\$newPass:String,\$confirmNewPass:String,\$accountId:
       return res.response.data;
     }
   }
+
+  static Future deleteHOAccount() async {
+    var query = '''
+    mutation {
+    response: guest_qltn_self_remove_account  {
+        code
+        message
+        data
+      }
+    }
+
+  ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+    final results = await ApiHOService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

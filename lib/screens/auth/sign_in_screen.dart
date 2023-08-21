@@ -28,6 +28,20 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+      if (arg?['delete'] == true) {
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).already_delete_acc,
+        );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     // return ChangeNotifierProvider<SingInPrv>(
     //   create: (context) => SingInPrv(context.read<AuthPrv>()),

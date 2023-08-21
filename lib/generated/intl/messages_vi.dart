@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
         "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "already_delete_acc": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã xóa tài khoản thành công"),
         "amount": MessageLookupByLibrary.simpleMessage("Số lượng"),
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
         "apartment_add_resident":
@@ -262,6 +264,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_cancel_request": m5,
         "confirm_cancel_trans": m6,
         "confirm_change_schedule": m7,
+        "confirm_delete_account": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn xóa tài khoản không"),
         "confirm_delete_letter": m8,
         "confirm_delete_service": m9,
         "confirm_end_chat": MessageLookupByLibrary.simpleMessage(
@@ -339,6 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_send": MessageLookupByLibrary.simpleMessage("Ngày gửi"),
         "debt": MessageLookupByLibrary.simpleMessage("Thu tiền, nhắc nợ"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
+        "delete_account": MessageLookupByLibrary.simpleMessage("Xóa tài khoản"),
         "delete_letter": MessageLookupByLibrary.simpleMessage("Xóa phiếu"),
         "delivery_info":
             MessageLookupByLibrary.simpleMessage("Thông tin đồ chuyển"),
