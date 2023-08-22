@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   vpad(30),
                   const HeaderHome(),
                   vpad(30),
-                  HomeServices(),
+                  const HomeServices(),
                   vpad(30),
                   // // const BillsHome(),
                   // // vpad(30),

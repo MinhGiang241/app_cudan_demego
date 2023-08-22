@@ -851,5 +851,6 @@
   "pay_construction_fee": "Pay construction fee",
   "confirm_delete_account": "Do you want to delete your account",
   "delete_account": "Delete account",
-  "already_delete_acc": "You have already deleted your account"
+  "already_delete_acc": "You have already deleted your account",
+  "category": "Category"
 }

@@ -216,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_unit": MessageLookupByLibrary.simpleMessage("Thẻ"),
         "card_unit2": MessageLookupByLibrary.simpleMessage("Cái"),
         "cat": MessageLookupByLibrary.simpleMessage("Mèo"),
+        "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
         "category_name": MessageLookupByLibrary.simpleMessage("Tên danh mục"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Giấy chứng nhận tiêm phòng dại"),

@@ -25,7 +25,9 @@ class HomeServices extends StatelessWidget {
     final data = [
       {
         "icon": PrimaryIcons.dollar,
-        "text": S.of(context).pay,
+        "text": S.current.pay,
+        "page": PaymentListScreen.routeName,
+        "arg": {'year': null, 'month': null, 'index': null},
         "tap": () {
           Navigator.of(context).pushNamed(
             PaymentListScreen.routeName,
@@ -36,7 +38,9 @@ class HomeServices extends StatelessWidget {
       if (isResient)
         {
           "icon": PrimaryIcons.water,
-          "text": S.of(context).water,
+          "text": S.current.water,
+          "page": WaterScreen.routeName,
+          "arg": {'year': null, 'month': null, 'index': null},
           'tap': () {
             Navigator.of(context).pushNamed(
               WaterScreen.routeName,
@@ -47,7 +51,9 @@ class HomeServices extends StatelessWidget {
       if (isResient)
         {
           "icon": PrimaryIcons.electricity,
-          "text": S.of(context).electricity,
+          "text": S.current.electricity,
+          "page": ElectricityScreen.routeName,
+          "arg": null,
           "tap": () {
             Navigator.of(context).pushNamed(
               ElectricityScreen.routeName,
@@ -56,14 +62,18 @@ class HomeServices extends StatelessWidget {
         },
       {
         "icon": PrimaryIcons.car,
-        "text": S.of(context).services,
+        "text": S.current.services,
+        "page": ServiceScreen.routeName,
+        "arg": null,
         'tap': () {
-          Navigator.pushNamed(context, ServiceScreen.routeName);
+          Navigator.of(context).pushNamed(ServiceScreen.routeName);
         }
       },
       {
         "icon": PrimaryIcons.gym,
-        "text": "Tiện ích",
+        "text": S.current.covenient_service,
+        "page": UtilityServiceListScreen.routeName,
+        "arg": {'year': null, 'month': null, 'index': null},
         "tap": () {
           Navigator.of(context).pushNamed(
             UtilityServiceListScreen.routeName,
@@ -73,26 +83,31 @@ class HomeServices extends StatelessWidget {
       },
       {
         "icon": PrimaryIcons.mail,
-        "text": S.of(context).reflex,
+        "text": S.current.reflex,
+        "page": ReflectionScreen.routeName,
+        "arg": null,
         "tap": () {
-          Navigator.pushNamed(context, ReflectionScreen.routeName);
+          Navigator.of(context).pushNamed(ReflectionScreen.routeName);
         }
       },
       {
         "icon": PrimaryIcons.avatar,
-        "text": S.of(context).resident_reg,
+        "text": S.current.resident_reg,
+        "page": RegisterResidentScreen.routeName,
+        "arg": null,
         "tap": () {
-          Navigator.pushNamed(
-            context,
+          Navigator.of(context).pushNamed(
             RegisterResidentScreen.routeName,
           );
         }
       },
       {
         "icon": PrimaryIcons.news,
-        "text": S.of(context).event,
+        "text": S.current.event,
+        "page": EventListScreen.routeName,
+        "arg": null,
         "tap": () {
-          Navigator.pushNamed(context, EventListScreen.routeName);
+          Navigator.of(context).pushNamed(EventListScreen.routeName);
         }
       },
     ];
@@ -102,7 +117,7 @@ class HomeServices extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Danh mục",
+            S.current.category,
             style: txtLinkSmall(color: grayScaleColor2)
                 .copyWith(decoration: TextDecoration.underline),
           ),

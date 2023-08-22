@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "card_unit": MessageLookupByLibrary.simpleMessage("Card"),
         "card_unit2": MessageLookupByLibrary.simpleMessage("Card"),
         "cat": MessageLookupByLibrary.simpleMessage("Cat"),
+        "category": MessageLookupByLibrary.simpleMessage("Category"),
         "category_name": MessageLookupByLibrary.simpleMessage("Category name"),
         "cer_vacxin_doc": MessageLookupByLibrary.simpleMessage(
             "Certification of rabies vaccination"),
