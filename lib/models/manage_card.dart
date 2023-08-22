@@ -3,6 +3,7 @@
 
 import 'dart:convert';
 
+import 'package:app_cudan/models/asset_storage.dart';
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/reason.dart';
 import 'package:app_cudan/models/resident_card.dart';
@@ -45,6 +46,7 @@ class ManageCard {
   String? month_filter;
   String? user;
   String? rules;
+  String? assetStorageId;
 
   //more
   Status? s;
@@ -54,6 +56,7 @@ class ManageCard {
   ResidentCard? res_card;
   List<TransportItem>? l;
   Apartment? a;
+  AssetStorage? as;
 
   ManageCard({
     this.id,
@@ -88,6 +91,7 @@ class ManageCard {
     this.month_filter,
     this.user,
     this.rules,
+    this.assetStorageId,
     this.s,
     this.t,
     this.r,
@@ -95,6 +99,7 @@ class ManageCard {
     this.res_card,
     this.l,
     this.a,
+    this.as,
   });
 
   Map<String, dynamic> toMap() {
@@ -131,6 +136,7 @@ class ManageCard {
       'month_filter': month_filter,
       'user': user,
       'rules': rules,
+      'assetStorageId': assetStorageId,
     };
   }
 
@@ -207,6 +213,9 @@ class ManageCard {
           map['month_filter'] != null ? map['month_filter'] as String : null,
       user: map['user'] != null ? map['user'] as String : null,
       rules: map['rules'] != null ? map['rules'] as String : null,
+      assetStorageId: map['assetStorageId'] != null
+          ? map['assetStorageId'] as String
+          : null,
       s: map['s'] != null
           ? Status.fromJson(map['s'] as Map<String, dynamic>)
           : null,
@@ -230,6 +239,7 @@ class ManageCard {
             )
           : null,
       a: map['a'] != null ? Apartment.fromJson(map['a']) : null,
+      as: map['as'] != null ? AssetStorage.fromMap(map['as']) : null,
     );
   }
 
@@ -271,6 +281,7 @@ class ManageCard {
     String? month_filter,
     String? user,
     String? rules,
+    String? assetStorageId,
     Status? s,
     TransportCard? t,
     Reason? r,
@@ -310,6 +321,7 @@ class ManageCard {
       month_filter: month_filter ?? this.month_filter,
       user: user ?? this.user,
       rules: rules ?? this.rules,
+      assetStorageId: assetStorageId ?? this.assetStorageId,
       s: s ?? this.s,
       t: t ?? this.t,
       r: r ?? this.r,

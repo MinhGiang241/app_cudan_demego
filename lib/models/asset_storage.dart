@@ -24,6 +24,8 @@ class AssetStorage {
   String? warranty_date;
   String? warranty_code;
   String? filter_warehouseId;
+  String? serial;
+  String? lot;
   AssetStorage({
     this.id,
     this.createdTime,
@@ -43,6 +45,8 @@ class AssetStorage {
     this.warranty_date,
     this.warranty_code,
     this.filter_warehouseId,
+    this.serial,
+    this.lot,
   });
 
   AssetStorage copyWith({
@@ -64,6 +68,8 @@ class AssetStorage {
     String? warranty_date,
     String? warranty_code,
     String? filter_warehouseId,
+    String? lot,
+    String? serial,
   }) {
     return AssetStorage(
       id: id ?? this.id,
@@ -84,6 +90,8 @@ class AssetStorage {
       warranty_date: warranty_date ?? this.warranty_date,
       warranty_code: warranty_code ?? this.warranty_code,
       filter_warehouseId: filter_warehouseId ?? this.filter_warehouseId,
+      serial: serial ?? this.serial,
+      lot: lot ?? this.lot,
     );
   }
 
@@ -107,6 +115,8 @@ class AssetStorage {
       'warranty_date': warranty_date,
       'warranty_code': warranty_code,
       'filter_warehouseId': filter_warehouseId,
+      'lot': lot,
+      'serial': serial,
     };
   }
 
@@ -150,6 +160,8 @@ class AssetStorage {
       filter_warehouseId: map['filter_warehouseId'] != null
           ? map['filter_warehouseId'] as String
           : null,
+      lot: map['lot'] != null ? map['lot'] as String : null,
+      serial: map['serial'] != null ? map['serial'] as String : null,
     );
   }
 

@@ -86,7 +86,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).card_num,
-                        content: loadedCard.serial_lot,
+                        content: loadedCard.as?.serial,
                         contentStyle: txtBold(16, purpleColorBase),
                       ),
                       InfoContentView(

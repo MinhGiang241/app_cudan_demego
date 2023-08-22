@@ -113,7 +113,7 @@ class ResidentCardTab extends StatelessWidget {
                         var listContent = [
                           InfoContentView(
                             title: S.of(context).card_num,
-                            content: list[index].serial_lot,
+                            content: list[index].as?.serial,
                             contentStyle: txtBold(14, primaryColor1),
                           ),
                           InfoContentView(

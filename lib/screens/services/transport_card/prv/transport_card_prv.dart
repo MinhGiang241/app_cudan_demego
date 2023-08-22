@@ -207,7 +207,7 @@ class TransportCardPrv extends ChangeNotifier {
   missingReport(BuildContext context, ManageCard card) async {
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card,
-      content: S.of(context).confirm_missing_report(card.serial_lot ?? ""),
+      content: S.of(context).confirm_missing_report(card.as?.serial ?? ""),
       context: context,
       child: Column(
         children: [

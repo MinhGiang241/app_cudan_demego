@@ -37,6 +37,7 @@ class HeaderTitle extends StatelessWidget {
       trailing: StreamBuilder(
         stream: UnreadNotification.count.stream,
         builder: (context, snapshot) {
+          setUnReadCount(0);
           if (snapshot.data != null && snapshot.data != 0) {
             setUnReadCount(0);
             int v = int.tryParse(snapshot.data.toString()) != null

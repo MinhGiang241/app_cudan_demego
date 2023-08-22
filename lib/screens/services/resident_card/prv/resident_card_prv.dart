@@ -58,7 +58,7 @@ class ResidentCardPrv extends ChangeNotifier {
   missingReport(BuildContext context, ManageCard card) async {
     Utils.showConfirmMessage(
       title: S.of(context).report_missing_card_res,
-      content: S.of(context).confirm_missing_report_res(card.serial_lot ?? ""),
+      content: S.of(context).confirm_missing_report_res(card.as?.serial ?? ""),
       context: context,
       child: Column(
         children: [

@@ -13,6 +13,7 @@ import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
+import '../account/language/cubit/lang_cubit.dart';
 import 'fogot_pass/phone_num_forgot_pass.dart';
 
 // ignore: must_be_immutable
@@ -89,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             vpad(15),
-            //  SelectableText(context.watch<LangPrv>().fcmToken ?? "sss"),
+            SelectableText(context.watch<LangPrv>().fcmToken ?? "sss"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

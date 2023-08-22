@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_cudan/screens/splash/splash_screen.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:app_cudan/main.dart';
 import 'package:graphql/client.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import '../models/response.dart';
 import '../screens/notification/notification_screen.dart';
@@ -19,6 +22,18 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Title: ${message.notification?.title}');
   print('Body: ${message.notification?.body}');
   print('Payload: ${message.data}');
+  // showSimpleNotification(
+  //   InkWell(
+  //     onTap: () {
+  //       navigatorKey.currentState!.pushNamed(
+  //         NotificationScreen.routeName,
+  //         arguments: {"message": message},
+  //       );
+  //     },
+  //     child: Text(message.notification?.title ?? ''),
+  //   ),
+  //   background: Colors.green,
+  // );
 }
 
 void handleMesage(RemoteMessage? message) {
@@ -26,7 +41,7 @@ void handleMesage(RemoteMessage? message) {
   if (message == null) return;
   UnreadNotification.getUnReadNotification();
   navigatorKey.currentState!
-      .pushNamed(NotificationScreen.routeName, arguments: {"message": message});
+      .pushNamed(SplashScreen.routeName, arguments: {"message": message});
 }
 
 final _localNotifications = FlutterLocalNotificationsPlugin();
@@ -42,6 +57,10 @@ final _androidChannel = const AndroidNotificationChannel(
   "high_importantce_notification",
   description: "this chanel is used for important notification",
   importance: Importance.max,
+  playSound: true,
+  enableVibration: true,
+  showBadge: true,
+  enableLights: true,
 );
 
 listen(message) {
@@ -57,6 +76,9 @@ listen(message) {
         _androidChannel.name,
         channelDescription: _androidChannel.description,
         icon: "@mipmap/ic_launcher",
+        importance: Importance.max,
+        priority: Priority.high,
+        visibility: NotificationVisibility.public,
       ),
       iOS: DarwinNotificationDetails(
         presentAlert: true,
@@ -81,6 +103,7 @@ class FirebaseApi {
       badge: true,
       sound: true,
     );
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
     FirebaseMessaging.instance.getInitialMessage().then(handleMesage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleMesage);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);

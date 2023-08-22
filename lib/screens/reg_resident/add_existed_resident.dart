@@ -221,8 +221,9 @@ class _AddExistedResidentState extends State<AddExistedResident> {
         // tiktok: tiktokController.text.trim(),
         status: "WAIT",
       );
+      var data = formAddResident.toMap();
       await APIResidentAddApartment.saveFormResidentAddApartment(
-        formAddResident.toMap(),
+        data,
       ).then((v) {
         Utils.showSuccessMessage(
           context: widget.ctx,

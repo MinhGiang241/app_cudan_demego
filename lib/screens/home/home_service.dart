@@ -145,7 +145,11 @@ class HomeServices extends StatelessWidget {
                 // ],
                 // ),
                 onTap: () {
-                  (e['tap'] as Function)();
+                  Navigator.of(context).pushNamed(
+                    e["page"] as String,
+                    arguments: e['arg'],
+                  );
+                  print(e);
                 },
                 child: Row(
                   children: [
@@ -153,21 +157,9 @@ class HomeServices extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 5),
                       child: PrimaryIcon(
                         icons: e['icon'] as PrimaryIcons,
-                        // style: PrimaryIconStyle.gradient,
-                        // gradients: PrimaryIconGradient.primary,
                         color: primaryColorBase,
                         padding: const EdgeInsets.all(8),
                         size: 32,
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            PaymentListScreen.routeName,
-                            arguments: {
-                              'year': null,
-                              'month': null,
-                              'index': null
-                            },
-                          );
-                        },
                       ),
                     ),
                     Flexible(

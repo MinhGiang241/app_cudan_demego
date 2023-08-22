@@ -120,7 +120,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                   var listContent = [
                     InfoContentView(
                       title: S.of(context).card_num,
-                      content: list[index].serial_lot,
+                      content: list[index].as?.serial,
                       contentStyle: txtBold(16, purpleColorBase),
                     ),
                     InfoContentView(

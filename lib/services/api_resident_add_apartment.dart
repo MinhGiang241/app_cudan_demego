@@ -6,17 +6,28 @@ import 'api_service.dart';
 class APIResidentAddApartment {
   static Future saveFormResidentAddApartment(Map<String, dynamic> data) async {
     var query = '''
- mutation (\$data:Dictionary){
-    response: addnewresident_mobile_db_save (data: \$data ) {
-        code
-        message
-        data
-    }
+    mutation (\$data:DependentSignUpInputDto){
+	response: save_DependentSignUp_dto(data:\$data){
+		message
+		code
+		data {
+			_id
+		}
+	}
 }
-        
-        
+    ''';
+//     var query = '''
+//  mutation (\$data:Dictionary){
+//     response: addnewresident_mobile_db_save (data: \$data ) {
+//         code
+//         message
+//         data
+//     }
+// }
+//
+//
 
-      ''';
+//       ''';
 
     final MutationOptions options =
         MutationOptions(document: gql(query), variables: {"data": data});

@@ -54,7 +54,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                 InfoContentView(
                   isHorizontal: true,
                   title: S.of(context).card_num,
-                  content: card.serial_lot,
+                  content: card.as?.serial,
                   contentStyle: txtBold(16, purpleColorBase),
                 ),
                 InfoContentView(
