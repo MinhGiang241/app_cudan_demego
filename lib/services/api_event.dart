@@ -36,7 +36,7 @@ class APIEvent {
     int skip,
     int limit,
     String type,
-    String accountId,
+    String? accountId,
   ) async {
     var query = '''
   mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String){
