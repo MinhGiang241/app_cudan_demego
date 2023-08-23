@@ -16,10 +16,12 @@ import '../screens/notification/notification_screen.dart';
 import '../screens/notification/prv/undread_noti.dart';
 import 'api_service.dart';
 
+@pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Title: ${message.notification?.title}');
   print('Body: ${message.notification?.body}');
   print('Payload: ${message.data}');
+  showFlutterNotification(message);
 }
 
 void handleMesage(RemoteMessage? message) {
@@ -76,6 +78,30 @@ listen(message) {
   );
 }
 
+var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+void showFlutterNotification(RemoteMessage message) {
+  RemoteNotification? notification = message.notification;
+  AndroidNotification? android = message.notification?.android;
+  if (notification != null && android != null) {
+    flutterLocalNotificationsPlugin.show(
+      notification.hashCode,
+      notification.title,
+      notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          _androidChannel.id,
+          _androidChannel.name,
+          channelDescription: _androidChannel.description,
+          // TODO add a proper drawable resource to android, for now using
+          //      one that already exists in example app.
+          icon: '@mipmap/ic_launcher',
+        ),
+      ),
+    );
+  }
+}
+
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
   String? fCMToken;
@@ -83,6 +109,10 @@ class FirebaseApi {
   String uniqueDeviceId = '';
 
   Future initPushNotifications() async {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(_androidChannel);
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,

@@ -90,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             vpad(15),
-            //SelectableText(context.watch<LangPrv>().fcmToken ?? "sss"),
+            // SelectableText(context.watch<LangPrv>().fcmToken ?? "sss"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
