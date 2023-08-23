@@ -30,6 +30,7 @@ class EventTabPrv extends ChangeNotifier {
       skip,
       limit,
       type,
+      context.read<ResidentInfoPrv>().userInfo?.account?.id,
       context.read<ResidentInfoPrv>().residentId,
     ).then(
       (values) {

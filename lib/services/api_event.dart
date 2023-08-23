@@ -37,15 +37,17 @@ class APIEvent {
     int limit,
     String type,
     String? accountId,
+    String? residentId,
   ) async {
     var query = '''
-  mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String){
-    response: event_mobile_get_event_list (limit: \$limit,skip: \$skip,type: \$type,accountId: \$accountId ) {
+mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String,\$residentId:String){
+    response: event_mobile_get_event_list (limit: \$limit,skip: \$skip,type: \$type,accountId: \$accountId,residentId: \$residentId ) {
         code
         message
         data
     }
 }
+        
         
   ''';
 
@@ -56,6 +58,7 @@ class APIEvent {
         'limit': limit,
         'type': type,
         'accountId': accountId,
+        'residentId': residentId,
       },
     );
 

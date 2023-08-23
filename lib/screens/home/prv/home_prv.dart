@@ -80,6 +80,7 @@ class HomePrv extends ChangeNotifier {
       isProNewsLoading = true;
       notifyListeners();
       UnreadNotification.getUnReadNotification();
+      var residentId = context!.read<ResidentInfoPrv>().residentId;
       var accountId = context!.read<ResidentInfoPrv>().userInfo != null
           ? context!.read<ResidentInfoPrv>().userInfo!.account!.id
           : null;
@@ -103,7 +104,8 @@ class HomePrv extends ChangeNotifier {
       );
       // ignore: use_build_context_synchronously
 
-      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "").then((v) {
+      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "", residentId)
+          .then((v) {
         if (v.length >= 1) {
           event = Event.fromJson(v[0]);
         }
