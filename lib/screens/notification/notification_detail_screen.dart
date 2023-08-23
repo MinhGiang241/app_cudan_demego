@@ -30,7 +30,7 @@ class NotificationDetailsScreen extends StatelessWidget {
       ),
       InfoContentView(
         title: '${S.of(context).date}',
-        content: Utils.dateFormat(arg.message?.createdTime ?? '', 1),
+        content: Utils.dateTimeFormat(arg.message?.createdTime ?? '', 1),
         //contentStyle: txtBold(14, grayScaleColorBase),
       ),
       // InfoContentView(

@@ -297,7 +297,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                   vertical: 5,
                                                 ),
                                                 child: Text(
-                                                  Utils.dateFormat(
+                                                  Utils.dateTimeFormat(
                                                     e.value.createdTime ?? "",
                                                     1,
                                                   ),
