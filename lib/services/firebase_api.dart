@@ -11,8 +11,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:app_cudan/main.dart';
 import 'package:graphql/client.dart';
-import 'package:overlay_support/overlay_support.dart';
-
 import '../models/response.dart';
 import '../screens/notification/notification_screen.dart';
 import '../screens/notification/prv/undread_noti.dart';
@@ -22,18 +20,6 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Title: ${message.notification?.title}');
   print('Body: ${message.notification?.body}');
   print('Payload: ${message.data}');
-  // showSimpleNotification(
-  //   InkWell(
-  //     onTap: () {
-  //       navigatorKey.currentState!.pushNamed(
-  //         NotificationScreen.routeName,
-  //         arguments: {"message": message},
-  //       );
-  //     },
-  //     child: Text(message.notification?.title ?? ''),
-  //   ),
-  //   background: Colors.green,
-  // );
 }
 
 void handleMesage(RemoteMessage? message) {
