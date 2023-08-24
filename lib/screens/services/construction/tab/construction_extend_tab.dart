@@ -1,0 +1,219 @@
+import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/widgets/primary_card.dart';
+import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../../../generated/l10n.dart';
+import '../../../../utils/utils.dart';
+import '../../../../widgets/primary_button.dart';
+import '../../../../widgets/primary_empty_widget.dart';
+import '../../../../widgets/primary_error_widget.dart';
+import '../../../../widgets/primary_icon.dart';
+import '../../../../widgets/primary_loading.dart';
+import '../construction_extend_screen.dart';
+
+class ConstructionExtendTab extends StatefulWidget {
+  const ConstructionExtendTab({super.key});
+
+  @override
+  State<ConstructionExtendTab> createState() => _ConstructionExtendTabState();
+}
+
+class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: () async {}(),
+      builder: (context, snapshot) {
+        var list = [1, 1, 1, 1];
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: PrimaryLoading());
+        } else if (snapshot.connectionState == ConnectionState.none) {
+          return PrimaryErrorWidget(
+            code: snapshot.hasError ? 'err' : '1',
+            message: snapshot.data.toString(),
+            onRetry: () async {
+              setState(() {});
+            },
+          );
+        } else if (list.isEmpty) {
+          return SafeArea(
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: false,
+              header: WaterDropMaterialHeader(
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              controller: _refreshController,
+              onRefresh: () {
+                setState(() {});
+                _refreshController.refreshCompleted();
+              },
+              child: PrimaryEmptyWidget(
+                emptyText: S.of(context).no_extend_letter,
+                icons: PrimaryIcons.wrench,
+                action: () {},
+              ),
+            ),
+          );
+        }
+        return SafeArea(
+          child: ListView(
+            children: [
+              vpad(24),
+              ...list.map((e) {
+                var listContent = [
+                  InfoContentView(
+                    title: "title:",
+                    content: "code",
+                    contentStyle: txtBold(14, grayScaleColorBase),
+                  )
+                ];
+
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12, right: 12, bottom: 16),
+                  child: PrimaryCard(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        ConstructionExtendScreen.routeName,
+                        arguments: {
+                          'edit': false,
+                          'letter': e,
+                        },
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            bottom: 10,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Row(
+                            children: [
+                              const PrimaryIcon(
+                                icons: PrimaryIcons.wrench,
+                                size: 28,
+                                padding: EdgeInsets.all(10),
+                                style: PrimaryIconStyle.round,
+                                backgroundColor: primaryColor5,
+                                color: primaryColor4,
+                              ),
+                              hpad(20),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'name',
+                                      style: txtBold(
+                                        14,
+                                        grayScaleColorBase,
+                                      ),
+                                    ),
+                                    vpad(4),
+                                    Wrap(
+                                      children: [
+                                        Text(
+                                          '${S.of(context).reg_date}: ',
+                                          style: txtMedium(
+                                            12,
+                                            grayScaleColor2,
+                                          ),
+                                        ),
+                                        Text(
+                                          Utils.dateTimeFormat(
+                                            '2022-11-16T02:37:06.392+0000',
+                                            1,
+                                          ),
+                                          style: txtMedium(
+                                            12,
+                                            greenColorBase,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const Divider(color: grayScaleColor4, height: 2),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Table(
+                            textBaseline: TextBaseline.ideographic,
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.baseline,
+                            columnWidths: const {
+                              0: FlexColumnWidth(4),
+                              1: FlexColumnWidth(6)
+                            },
+                            children: [
+                              ...listContent.map<TableRow>((i) {
+                                return TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 16,
+                                        ),
+                                        child: Text(
+                                          i.title,
+                                          style: txtMedium(
+                                            12,
+                                            grayScaleColor2,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Text(
+                                        i.content ?? '',
+                                        style: i.contentStyle,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              })
+                            ],
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            hpad(10),
+                            PrimaryButton(
+                              onTap: () {},
+                              text: S.of(context).cancel_letter,
+                              buttonSize: ButtonSize.xsmall,
+                              buttonType: ButtonType.secondary,
+                              secondaryBackgroundColor: redColor5,
+                              textColor: redColorBase,
+                            ),
+                          ],
+                        ),
+                        vpad(16),
+                      ],
+                    ),
+                  ),
+                );
+              })
+            ],
+          ),
+        );
+      },
+    );
+  }
+}

@@ -82,7 +82,7 @@ class HomeServices extends StatelessWidget {
         }
       },
       {
-        "icon": PrimaryIcons.mail,
+        if (isResient) "icon": PrimaryIcons.mail,
         "text": S.current.reflex,
         "page": ReflectionScreen.routeName,
         "arg": null,
@@ -90,17 +90,18 @@ class HomeServices extends StatelessWidget {
           Navigator.of(context).pushNamed(ReflectionScreen.routeName);
         }
       },
-      {
-        "icon": PrimaryIcons.avatar,
-        "text": S.current.resident_reg,
-        "page": RegisterResidentScreen.routeName,
-        "arg": null,
-        "tap": () {
-          Navigator.of(context).pushNamed(
-            RegisterResidentScreen.routeName,
-          );
-        }
-      },
+      if (isResient)
+        {
+          "icon": PrimaryIcons.avatar,
+          "text": S.current.resident_reg,
+          "page": RegisterResidentScreen.routeName,
+          "arg": null,
+          "tap": () {
+            Navigator.of(context).pushNamed(
+              RegisterResidentScreen.routeName,
+            );
+          }
+        },
       {
         "icon": PrimaryIcons.news,
         "text": S.current.event,

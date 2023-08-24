@@ -87,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _navigationTab(BuildContext context) {
-    // var isResident = context.read<ResidentInfoPrv>().residentId != null &&
-    //     context.read<ResidentInfoPrv>().selectedApartment != null;
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
     switch (_selectedIndex) {
       case 0:
         return RepaintBoundary(
@@ -110,8 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   HeaderTitle(
                     onMenuTab: _onItemTapped,
                   ),
-                  vpad(30),
-                  const HeaderHome(),
+                  if (isResident) vpad(30),
+                  if (isResident) const HeaderHome(),
                   vpad(30),
                   const HomeServices(),
                   vpad(30),

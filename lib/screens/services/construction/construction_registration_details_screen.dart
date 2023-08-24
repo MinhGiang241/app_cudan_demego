@@ -3,7 +3,6 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:app_cudan/models/construction.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/construction/tab/construction_history_tab.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
@@ -11,7 +10,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/regulation.dart';
@@ -87,7 +85,7 @@ class _ConstructionRegistrationDetailsScreenState
     if (arg['cons'] != null) {
       reg = arg['cons'];
     }
-    var listApart = context.read<ResidentInfoPrv>().listOwn;
+    // var listApart = context.read<ResidentInfoPrv>().listOwn;
     // var apartmentIndex = listApart
     //     .indexWhere((element) => element.apartmentId == reg.apartmentId);
     // var apartment;

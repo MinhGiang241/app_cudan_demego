@@ -146,6 +146,11 @@ class _CardListTabState extends State<CardListTab> {
                     backgroundColor: MaterialStateProperty.all(Colors.white),
                   ),
                   onPressed: () {
+                    var isResident =
+                        context.read<ResidentInfoPrv>().residentId != null &&
+                            context.read<ResidentInfoPrv>().selectedApartment !=
+                                null;
+
                     Utils.showBottomSheet(
                       context: context,
                       child: PrimaryBottomSheet(
@@ -165,16 +170,17 @@ class _CardListTabState extends State<CardListTab> {
                             const Divider(
                               height: 1,
                             ),
-                            ItemSelected(
-                              text: S.of(context).res_card,
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.pushNamed(
-                                  context,
-                                  RegisterResidentCard.routeName,
-                                );
-                              },
-                            ),
+                            if (isResident)
+                              ItemSelected(
+                                text: S.of(context).res_card,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(
+                                    context,
+                                    RegisterResidentCard.routeName,
+                                  );
+                                },
+                              ),
                             const Divider(
                               height: 1,
                             ),

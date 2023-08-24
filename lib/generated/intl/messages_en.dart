@@ -313,6 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_unit_info": MessageLookupByLibrary.simpleMessage(
             "Construction unit information"),
         "construction": MessageLookupByLibrary.simpleMessage("Construction"),
+        "construction_extend":
+            MessageLookupByLibrary.simpleMessage("Construction extension"),
         "consume_elec":
             MessageLookupByLibrary.simpleMessage("Consume electricity"),
         "consumed_elec_details": MessageLookupByLibrary.simpleMessage(
@@ -423,6 +425,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "End date can not be less than now"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
             "End date can not be less than start date"),
+        "end_date_extend":
+            MessageLookupByLibrary.simpleMessage("End date extension"),
         "end_date_not_empty":
             MessageLookupByLibrary.simpleMessage("End date can not be empty"),
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
@@ -492,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Login session is invalid, please sign in again"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
+        "extend_letter": MessageLookupByLibrary.simpleMessage("Extend letter"),
         "fa": MessageLookupByLibrary.simpleMessage("Single"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
@@ -680,6 +685,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any dependence registration letter"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
+        "no_extend_letter": MessageLookupByLibrary.simpleMessage(
+            "don\'t have any extend letter"),
         "no_hand_over": MessageLookupByLibrary.simpleMessage("No hand over"),
         "no_home":
             MessageLookupByLibrary.simpleMessage("Don\'t have any apartment"),
@@ -897,6 +904,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reality hand over date"),
         "reality_handover_hour":
             MessageLookupByLibrary.simpleMessage("Reality hand over hour"),
+        "reason": MessageLookupByLibrary.simpleMessage("Reason"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Refuse reason"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),
@@ -1120,6 +1128,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start date can not be greater than now"),
         "start_date_after_now_equal": MessageLookupByLibrary.simpleMessage(
             "Start date must be greater than now"),
+        "start_date_extend":
+            MessageLookupByLibrary.simpleMessage("Start date extension"),
         "start_date_not_empty":
             MessageLookupByLibrary.simpleMessage("Start date can not be empty"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),

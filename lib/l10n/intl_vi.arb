@@ -853,5 +853,11 @@
   "confirm_delete_account": "Bạn có muốn xóa tài khoản không",
   "delete_account": "Xóa tài khoản",
   "already_delete_acc": "Bạn đã xóa tài khoản thành công",
-  "category": "Danh mục"
+  "category": "Danh mục",
+  "extend_letter": "Phiếu gia hạn",
+  "no_extend_letter": "Không có phiếu gia hạn nào",
+  "construction_extend": "Gia hạn thi công",
+  "start_date_extend": "Ngày bắt đầu gia hạn",
+  "end_date_extend": "Ngày kết thúc gia hạn",
+  "reason": "Lý do"
 }

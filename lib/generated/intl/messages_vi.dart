@@ -315,6 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_unit_info":
             MessageLookupByLibrary.simpleMessage("Thông tin đơn vị thi công"),
         "construction": MessageLookupByLibrary.simpleMessage("Thi công"),
+        "construction_extend":
+            MessageLookupByLibrary.simpleMessage("Gia hạn thi công"),
         "consume_elec":
             MessageLookupByLibrary.simpleMessage("Điện năng tiêu thụ"),
         "consumed_elec_details":
@@ -426,6 +428,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngày kết thúc không được nhỏ hơn ngày hiện tại"),
         "end_date_after_start_date": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu "),
+        "end_date_extend":
+            MessageLookupByLibrary.simpleMessage("Ngày kết thúc gia hạn"),
         "end_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày kết thúc không được để trống"),
         "end_time": MessageLookupByLibrary.simpleMessage("Thời gian kết thúc"),
@@ -497,6 +501,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
+        "extend_letter": MessageLookupByLibrary.simpleMessage("Phiếu gia hạn"),
         "fa": MessageLookupByLibrary.simpleMessage("Độc thân"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "failure": MessageLookupByLibrary.simpleMessage("Thất bại"),
@@ -687,6 +692,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có phiếu đăng ký người phụ thuộc nào"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
+        "no_extend_letter":
+            MessageLookupByLibrary.simpleMessage("Không có phiếu gia hạn nào"),
         "no_hand_over":
             MessageLookupByLibrary.simpleMessage("Không có nhận bàn giao nào"),
         "no_home": MessageLookupByLibrary.simpleMessage("Không có căn hộ nào"),
@@ -907,6 +914,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ngày nhận thực tế"),
         "reality_handover_hour":
             MessageLookupByLibrary.simpleMessage("Giờ nhận thực tế"),
+        "reason": MessageLookupByLibrary.simpleMessage("Lý do"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Lý do từ chối"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
@@ -1120,6 +1128,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngày bắt đầu không được nhỏ hơn ngày hiện tại"),
         "start_date_after_now_equal": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại"),
+        "start_date_extend":
+            MessageLookupByLibrary.simpleMessage("Ngày bắt đầu gia hạn"),
         "start_date_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ngày bắt đầu không được để trống"),
         "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),

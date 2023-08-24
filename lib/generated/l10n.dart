@@ -8589,6 +8589,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Extend letter`
+  String get extend_letter {
+    return Intl.message(
+      'Extend letter',
+      name: 'extend_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `don't have any extend letter`
+  String get no_extend_letter {
+    return Intl.message(
+      'don\'t have any extend letter',
+      name: 'no_extend_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Construction extension`
+  String get construction_extend {
+    return Intl.message(
+      'Construction extension',
+      name: 'construction_extend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date extension`
+  String get start_date_extend {
+    return Intl.message(
+      'Start date extension',
+      name: 'start_date_extend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date extension`
+  String get end_date_extend {
+    return Intl.message(
+      'End date extension',
+      name: 'end_date_extend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reason`
+  String get reason {
+    return Intl.message(
+      'Reason',
+      name: 'reason',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

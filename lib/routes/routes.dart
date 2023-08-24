@@ -31,6 +31,7 @@ import '../screens/payment/payment_screen.dart';
 import '../screens/reg_resident/add_new_resident_screen.dart';
 import '../screens/reg_resident/register_resident_screen.dart';
 import '../screens/services/construction/construction_doc_details_screen.dart';
+import '../screens/services/construction/construction_extend_screen.dart';
 import '../screens/services/construction/construction_list_screen.dart';
 import '../screens/services/construction/construction_reg_screen.dart';
 import '../screens/services/construction/construction_registration_details_screen.dart';
@@ -443,6 +444,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => UtilityServiceListScreen(),
+        );
+      case ConstructionExtendScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => ConstructionExtendScreen(),
         );
 
       default:

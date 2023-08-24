@@ -852,5 +852,11 @@
   "confirm_delete_account": "Do you want to delete your account",
   "delete_account": "Delete account",
   "already_delete_acc": "You have already deleted your account",
-  "category": "Category"
+  "category": "Category",
+  "extend_letter": "Extend letter",
+  "no_extend_letter": "don't have any extend letter",
+  "construction_extend": "Construction extension",
+  "start_date_extend": "Start date extension",
+  "end_date_extend": "End date extension",
+  "reason": "Reason"
 }
