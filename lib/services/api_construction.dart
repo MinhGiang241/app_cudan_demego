@@ -476,4 +476,126 @@ class APIConstruction {
       return res.response.data;
     }
   }
+
+  static Future getConstructionExtensionList(
+    String? residentId,
+  ) async {
+    var query = '''
+mutation (\$residentId:String){
+    response: construction_mobile_get_construction_extension_list (residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'residentId': residentId},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getConstructionDocumentListByApartmentId(
+    String? apartmentId,
+  ) async {
+    var query = '''
+        mutation (\$apartmentId:String){
+    response: construction_mobile_get_construction_document_by_apartmentId (apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'apartmentId': apartmentId},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveConstructionExtension(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary){
+    response: construction_mobile_save_construction_extension (data: \$data ) {
+        code
+        message
+        data
+    }
+}
+        
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'data': data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future changeStatusConstructionExtension(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary){
+    response: construction_mobile_change_status_construction_extension (data: \$data ) {
+        code
+        message
+        data
+    }
+}
+                
+        
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'data': data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
 }

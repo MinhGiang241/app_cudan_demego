@@ -6,13 +6,11 @@ import 'dart:io';
 import 'package:app_cudan/screens/splash/splash_screen.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:app_cudan/main.dart';
 import 'package:graphql/client.dart';
 import '../models/response.dart';
-import '../screens/notification/notification_screen.dart';
 import '../screens/notification/prv/undread_noti.dart';
 import 'api_service.dart';
 
@@ -93,7 +91,7 @@ void showFlutterNotification(RemoteMessage message) {
           _androidChannel.id,
           _androidChannel.name,
           channelDescription: _androidChannel.description,
-          // TODO add a proper drawable resource to android, for now using
+          //  add a proper drawable resource to android, for now using
           //      one that already exists in example app.
           icon: '@mipmap/ic_launcher',
         ),

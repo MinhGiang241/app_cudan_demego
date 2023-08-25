@@ -1,6 +1,12 @@
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/services/api_construction.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../generated/l10n.dart';
+import '../../../../models/construction.dart';
 import '../../../../utils/utils.dart';
+import '../construction_list_screen.dart';
 
 class ConstructionExtendPrv extends ChangeNotifier {
   DateTime? startDate;
@@ -24,19 +30,96 @@ class ConstructionExtendPrv extends ChangeNotifier {
   String? validateOffDate;
   String? validateReason;
 
+  var regDateKey = UniqueKey();
+  var fileKey = UniqueKey();
+
   String? surfaceValue;
   String? fileValue;
 
   bool loading = false;
 
   final formKey = GlobalKey<FormState>();
+  ConstructionExtension? exitedExtend;
+  List<ConstructionDocument> fileList = [];
 
-  onSubmit(BuildContext context) {
+  getConstructionDocument(String? apartmentId) async {
+    await APIConstruction.getConstructionDocumentListByApartmentId(apartmentId)
+        .then((v) {
+      if (v != null) {
+        fileList.clear();
+        for (var i in v) {
+          fileList.add(ConstructionDocument.fromJson(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {});
+  }
+
+  onSubmit(BuildContext context) async {
+    loading = true;
+    autoValidate = true;
+    notifyListeners();
     if (formKey.currentState!.validate()) {
       try {
         clearValidateString();
-        loading = true;
-        notifyListeners();
+        var residentId = context.read<ResidentInfoPrv>().residentId;
+        var resident = context.read<ResidentInfoPrv>().userInfo;
+        var docIndex = fileList.indexWhere((e) => e.code == fileValue);
+        var doc = fileList[docIndex];
+
+        var newExtension = ConstructionExtension(
+          status: 'WAIT',
+          deputy: doc.deputy,
+          deputy_phone: doc.deputy_phone,
+          residentId: residentId,
+          worker_num: doc.worker_num,
+          off_day: doc.off_day,
+          deputy_identity: doc.deputy_identity,
+          working_day: doc.working_day,
+          deposit_fee: doc.deposit_fee,
+          resident_code: resident?.code,
+          apartmentId: surfaceValue,
+          current_draw: doc.current_draw,
+          confirm: doc.confirm,
+          description: doc.description,
+          resident_phone: resident?.phone_required,
+          isDepositFee: doc.isDepositFee,
+          constructionDocumentId: doc.id,
+          extend_reason: reasonController.text.trim(),
+          renovation_draw: doc.renovation_draw,
+          resident_identity:
+              context.read<ResidentInfoPrv>().userInfo?.identity_card,
+          constructionTypeId: doc.constructionTypeId,
+          resident_name: resident?.info_name,
+          construction_email: doc.construction_email,
+          isConstructionCost: doc.isContructionCost,
+          construction_add: doc.construction_add,
+          construction_cost: doc.construction_cost,
+          construction_unit: doc.construction_unit,
+          resident_relationship: doc.resident_relationship,
+          extend_working_day:
+              int.tryParse(consDateController.text.trim()) != null
+                  ? int.parse(consDateController.text.trim())
+                  : null,
+          isMobile: true,
+          time_start: startDate!.toUtc().toIso8601String(),
+          time_end: endDate!.toUtc().toIso8601String(),
+        );
+
+        await APIConstruction.saveConstructionExtension(newExtension.toMap());
+
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).send_extension_success,
+          onClose: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              ConstructionListScreen.routeName,
+              (route) => route.isFirst,
+              arguments: {'index': 2},
+            );
+          },
+        );
       } catch (e) {
         loading = false;
         notifyListeners();
@@ -49,13 +132,25 @@ class ConstructionExtendPrv extends ChangeNotifier {
     }
   }
 
-  onSelectSurfce(v) {
-    surfaceValue = v;
+  onSelectSurface(v) {
+    fileKey = UniqueKey();
+    if (v != null) {
+      surfaceValue = v;
+      validateSurface = null;
+      getConstructionDocument(v);
+    }
     notifyListeners();
   }
 
   onSelectFile(v) {
-    fileValue = v;
+    regDateKey = UniqueKey();
+    if (v != null) {
+      fileValue = v;
+      validateFile = null;
+      var fileIndex = fileList.indexWhere((element) => element.code == v);
+      var file = fileList[fileIndex];
+      regDateController.text = Utils.dateFormat(file.createdTime ?? '', 1);
+    }
     notifyListeners();
   }
 
@@ -68,6 +163,37 @@ class ConstructionExtendPrv extends ChangeNotifier {
   }
 
   genValidateString() {
+    if (surfaceValue == null) {
+      validateSurface = S.current.not_blank;
+    } else {
+      validateSurface = null;
+    }
+    if (fileValue == null) {
+      validateFile = S.current.not_blank;
+    } else {
+      validateSurface = null;
+    }
+    if (regDateController.text.trim().isEmpty) {
+      validateRegDate = S.current.not_blank;
+    } else {
+      validateRegDate = null;
+    }
+    if (startDateController.text.trim().isEmpty) {
+      validateStartDate = S.current.not_blank;
+    } else {
+      validateStartDate = null;
+    }
+    if (endDateController.text.trim().isEmpty) {
+      validateEndDate = S.current.not_blank;
+    } else {
+      validateEndDate = null;
+    }
+    if (reasonController.text.trim().isEmpty) {
+      validateReason = S.current.not_blank;
+    } else {
+      validateReason = null;
+    }
+
     notifyListeners();
   }
 

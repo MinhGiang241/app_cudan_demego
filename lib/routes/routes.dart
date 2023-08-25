@@ -278,7 +278,7 @@ class AppRoutes {
       case ConstructionListScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,
-          builder: (_) => const ConstructionListScreen(),
+          builder: (_) => ConstructionListScreen(),
         );
       case ConstructionRegistrationDetailsScreen.routeName:
         return MaterialPageRoute(

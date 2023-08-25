@@ -1,4 +1,5 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/construction/prv/construction_extend_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
@@ -6,6 +7,7 @@ import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
@@ -36,6 +38,27 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
       body: ChangeNotifierProvider(
         create: (context) => ConstructionExtendPrv(),
         builder: (context, state) {
+          var listApartmentChoice = context
+              .read<ResidentInfoPrv>()
+              .listOwn
+              .where((e) => e.type == 'RENT' || e.type == "BUY")
+              .map(
+                (i) => DropdownMenuItem(
+                  value: i.apartmentId,
+                  child: Text(
+                    "${i.apartment?.name ?? ''} - ${i.floor?.name ?? ''} - ${i.building?.name ?? ''}",
+                  ),
+                ),
+              )
+              .toList();
+          var listFileChoice = context
+              .watch<ConstructionExtendPrv>()
+              .fileList
+              .map(
+                (e) =>
+                    DropdownMenuItem(value: e.code, child: Text(e.code ?? '')),
+              )
+              .toList();
           return Form(
             key: context.read<ConstructionExtendPrv>().formKey,
             onChanged: context.watch<ConstructionExtendPrv>().autoValidate
@@ -54,9 +77,10 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryDropDown(
+                  selectList: listApartmentChoice,
                   validator: Utils.emptyValidatorDropdown,
                   onChange:
-                      context.read<ConstructionExtendPrv>().onSelectSurfce,
+                      context.read<ConstructionExtendPrv>().onSelectSurface,
                   validateString:
                       context.watch<ConstructionExtendPrv>().validateSurface,
                   isRequired: true,
@@ -64,6 +88,8 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryDropDown(
+                  key: context.read<ConstructionExtendPrv>().fileKey,
+                  selectList: listFileChoice,
                   validator: Utils.emptyValidatorDropdown,
                   onChange: context.read<ConstructionExtendPrv>().onSelectFile,
                   validateString:
@@ -73,6 +99,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryTextField(
+                  key: context.read<ConstructionExtendPrv>().regDateKey,
                   validator: Utils.emptyValidator,
                   validateString:
                       context.watch<ConstructionExtendPrv>().validateRegDate,
@@ -131,6 +158,9 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                   children: [
                     Expanded(
                       child: PrimaryTextField(
+                        maxLength: 10,
+                        keyboardType: TextInputType.number,
+                        onlyNum: true,
                         controller: context
                             .read<ConstructionExtendPrv>()
                             .consDateController,
@@ -140,6 +170,9 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                     hpad(12),
                     Expanded(
                       child: PrimaryTextField(
+                        maxLength: 10,
+                        keyboardType: TextInputType.number,
+                        onlyNum: true,
                         controller: context
                             .read<ConstructionExtendPrv>()
                             .offDateController,
@@ -150,6 +183,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryTextField(
+                  maxLength: 500,
                   controller:
                       context.read<ConstructionExtendPrv>().reasonController,
                   validateString:

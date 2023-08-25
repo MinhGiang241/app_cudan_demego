@@ -1,11 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../models/notification.dart';
 import '../../../services/api_notification.dart';
-import 'notification_prv.dart';
 
 class UnreadNotification {
   static StreamController<int> count = StreamController.broadcast();

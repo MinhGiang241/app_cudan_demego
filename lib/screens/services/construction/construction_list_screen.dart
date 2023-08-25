@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_cudan/screens/services/construction/construction_extend_screen.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,53 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
     with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 4, vsync: this);
   var initIndex = 0;
+  var tooltipKey = UniqueKey();
+  StreamController<bool> stream = StreamController.broadcast();
+  @override
+  void initState() {
+    super.initState();
+    tabController.addListener(() {
+      stream.add(tabController.index == 0 || tabController.index == 2);
+    });
+  }
+
+  Widget _bottomButtons() {
+    return StreamBuilder<bool>(
+      initialData: tabController.index == 0 || tabController.index == 2,
+      stream: stream.stream,
+      builder: (context, snapshot) {
+        if (snapshot.data == true) {
+          return FloatingActionButton(
+            key: tooltipKey,
+            tooltip: tabController.index == 2
+                ? S.current.construction_extend
+                : S.current.cons_reg,
+            onPressed: () {
+              if (tabController.index == 2) {
+                Navigator.pushNamed(
+                  context,
+                  ConstructionExtendScreen.routeName,
+                  arguments: {'edit': true},
+                );
+              } else {
+                Navigator.pushNamed(
+                  context,
+                  ConstructionRegScreen.routeName,
+                  arguments: {'isEdit': false},
+                );
+              }
+            },
+            backgroundColor: primaryColorBase,
+            child: const Icon(
+              Icons.add,
+              size: 40,
+            ),
+          );
+        }
+        return vpad(0);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,31 +105,7 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
               Tab(text: S.of(context).cons_file),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            tooltip: tabController.index == 2
-                ? S.of(context).construction_extend
-                : S.of(context).cons_reg,
-            onPressed: () {
-              if (tabController.index == 2) {
-                Navigator.pushNamed(
-                  context,
-                  ConstructionExtendScreen.routeName,
-                  arguments: {'edit': true},
-                );
-              } else {
-                Navigator.pushNamed(
-                  context,
-                  ConstructionRegScreen.routeName,
-                  arguments: {'isEdit': false},
-                );
-              }
-            },
-            backgroundColor: primaryColorBase,
-            child: const Icon(
-              Icons.add,
-              size: 40,
-            ),
-          ),
+          floatingActionButton: _bottomButtons(),
           body: TabBarView(
             controller: tabController,
             children: [
@@ -96,7 +121,12 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
                     .read<ConstructionListPrv>()
                     .getContructionRegistrationLetterListWait(ctx),
               ),
-              ConstructionExtendTab(),
+              ConstructionExtendTab(
+                list: context.read<ConstructionListPrv>().listExtension,
+                getList: (BuildContext ctx) => context
+                    .read<ConstructionListPrv>()
+                    .getConstructionExtensionList(ctx),
+              ),
               ConstructionFileTab(
                 list: context.read<ConstructionListPrv>().listDocument,
                 getList: (BuildContext ctx) => context

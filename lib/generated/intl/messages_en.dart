@@ -1089,6 +1089,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sell contract number"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "System is sending to your email, please wait"),
+        "send_extension_success": MessageLookupByLibrary.simpleMessage(
+            "Send construction extension successfully"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Send letter"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Send OTP reset password code to"),

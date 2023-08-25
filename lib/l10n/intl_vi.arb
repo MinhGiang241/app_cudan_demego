@@ -859,5 +859,6 @@
   "construction_extend": "Gia hạn thi công",
   "start_date_extend": "Ngày bắt đầu gia hạn",
   "end_date_extend": "Ngày kết thúc gia hạn",
-  "reason": "Lý do"
+  "reason": "Lý do",
+  "send_extension_success": "Gửi duyệt gia hạn thi công thành công"
 }

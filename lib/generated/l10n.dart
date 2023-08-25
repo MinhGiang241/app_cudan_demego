@@ -8649,6 +8649,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Send construction extension successfully`
+  String get send_extension_success {
+    return Intl.message(
+      'Send construction extension successfully',
+      name: 'send_extension_success',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

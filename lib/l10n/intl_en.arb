@@ -858,5 +858,6 @@
   "construction_extend": "Construction extension",
   "start_date_extend": "Start date extension",
   "end_date_extend": "End date extension",
-  "reason": "Reason"
+  "reason": "Reason",
+  "send_extension_success": "Send construction extension successfully"
 }

@@ -1091,6 +1091,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số hợp đồng mua bán"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
+        "send_extension_success": MessageLookupByLibrary.simpleMessage(
+            "Gửi duyệt gia hạn thi công thành công"),
         "send_letter": MessageLookupByLibrary.simpleMessage("Gửi phiếu"),
         "send_otp_to": MessageLookupByLibrary.simpleMessage(
             "Gửi mã để đặt lại mật khẩu về"),

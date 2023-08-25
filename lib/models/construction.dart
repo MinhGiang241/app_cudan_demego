@@ -2,7 +2,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
+import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/response_resident_own.dart';
 
 import 'employee.dart';
@@ -441,8 +443,8 @@ class ConstructionDocument {
   String? time_start;
   String? time_end;
   String? description;
-  List<ConstructionFile>? current_draw;
-  List<ConstructionFile>? renovation_draw;
+  List<FileUploadModel>? current_draw;
+  List<FileUploadModel>? renovation_draw;
   double? construction_cost;
   double? deposit_fee;
   int? working_day;
@@ -510,14 +512,14 @@ class ConstructionDocument {
     current_draw = json['current_draw'] != null
         ? json['current_draw'].isNotEmpty
             ? json['current_draw']
-                .map<ConstructionFile>((e) => ConstructionFile.fromJson(e))
+                .map<FileUploadModel>((e) => FileUploadModel.fromMap(e))
                 .toList()
             : []
         : [];
     renovation_draw = json['renovation_draw'] != null
         ? json['renovation_draw'].isNotEmpty
             ? json['renovation_draw']
-                .map<ConstructionFile>((e) => ConstructionFile.fromJson(e))
+                .map<FileUploadModel>((e) => FileUploadModel.fromMap(e))
                 .toList()
             : []
         : [];
@@ -557,12 +559,12 @@ class ConstructionDocument {
     data['deposit_fee'] = deposit_fee;
     data['current_draw'] = current_draw != null
         ? current_draw!.map((e) {
-            return e.toJson();
+            return e.toMap();
           }).toList()
         : [];
     data['renovation_draw'] = renovation_draw != null
         ? renovation_draw!.map((e) {
-            return e.toJson();
+            return e.toMap();
           }).toList()
         : [];
     return data;
@@ -934,5 +936,527 @@ class ConstructionDocumentHistory {
       person: person ?? this.person,
       content: content ?? this.content,
     );
+  }
+}
+
+class ConstructionExtension {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? apartmentId;
+  String? residentId;
+  String? resident_code;
+  String? resident_phone;
+  String? resident_identity;
+  String? resident_relationship;
+  String? status;
+  String? construction_unit;
+  String? construction_add;
+  String? construction_email;
+  String? deputy;
+  String? deputy_phone;
+  String? deputy_identity;
+  int? worker_num;
+  String? constructionTypeId;
+  String? time_start;
+  String? time_end;
+  String? description;
+  List<FileUploadModel>? current_draw;
+  List<FileUploadModel>? renovation_draw;
+  double? construction_cost;
+  double? deposit_fee;
+  int? off_day;
+  bool? isConstructionCost;
+  bool? isDepositFee;
+  bool? confirm;
+  String? cancel_reason;
+  String? reason_description;
+  String? resident_name;
+  String? create_date;
+  bool? isMobile;
+  int? working_day;
+  List<FileUploadModel>? file_cancel;
+  dynamic rules;
+  String? construction_type_name;
+  String? extend;
+  String? extend_time_start;
+  String? extend_time_end;
+  String? extend_reason;
+  int? extend_working_day;
+  int? extend_off_day;
+  String? constructionDocumentId;
+  double? extend_construction_cost;
+  String? extend_ConstructionRegistrationId;
+  dynamic history_aproved;
+  ConstructionExtension({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.apartmentId,
+    this.residentId,
+    this.resident_code,
+    this.resident_phone,
+    this.resident_identity,
+    this.resident_relationship,
+    this.status,
+    this.construction_unit,
+    this.construction_add,
+    this.construction_email,
+    this.deputy,
+    this.deputy_phone,
+    this.deputy_identity,
+    this.worker_num,
+    this.constructionTypeId,
+    this.time_start,
+    this.time_end,
+    this.description,
+    this.current_draw,
+    this.renovation_draw,
+    this.construction_cost,
+    this.deposit_fee,
+    this.off_day,
+    this.isConstructionCost,
+    this.isDepositFee,
+    this.confirm,
+    this.cancel_reason,
+    this.reason_description,
+    this.resident_name,
+    this.create_date,
+    this.isMobile,
+    this.working_day,
+    this.file_cancel,
+    this.rules,
+    this.construction_type_name,
+    this.extend,
+    this.extend_time_start,
+    this.extend_time_end,
+    this.extend_reason,
+    this.extend_working_day,
+    this.extend_off_day,
+    this.constructionDocumentId,
+    this.extend_construction_cost,
+    this.extend_ConstructionRegistrationId,
+    this.history_aproved,
+  });
+
+  ConstructionExtension copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? apartmentId,
+    String? residentId,
+    String? resident_code,
+    String? resident_phone,
+    String? resident_identity,
+    String? resident_relationship,
+    String? status,
+    String? construction_unit,
+    String? construction_add,
+    String? construction_email,
+    String? deputy,
+    String? deputy_phone,
+    String? deputy_identity,
+    int? worker_num,
+    String? constructionTypeId,
+    String? time_start,
+    String? time_end,
+    String? description,
+    List<FileUploadModel>? current_draw,
+    List<FileUploadModel>? renovation_draw,
+    double? construction_cost,
+    double? deposit_fee,
+    int? off_day,
+    bool? isConstructionCost,
+    bool? isDepositFee,
+    bool? confirm,
+    String? cancel_reason,
+    String? reason_description,
+    String? resident_name,
+    String? create_date,
+    bool? isMobile,
+    int? working_day,
+    List<FileUploadModel>? file_cancel,
+    dynamic rules,
+    String? construction_type_name,
+    String? extend,
+    String? extend_time_start,
+    String? extend_time_end,
+    String? extend_reason,
+    int? extend_working_day,
+    int? extend_off_day,
+    String? constructionDocumentId,
+    double? extend_construction_cost,
+    String? extend_ConstructionRegistrationId,
+    dynamic history_aproved,
+  }) {
+    return ConstructionExtension(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      apartmentId: apartmentId ?? this.apartmentId,
+      residentId: residentId ?? this.residentId,
+      resident_code: resident_code ?? this.resident_code,
+      resident_phone: resident_phone ?? this.resident_phone,
+      resident_identity: resident_identity ?? this.resident_identity,
+      resident_relationship:
+          resident_relationship ?? this.resident_relationship,
+      status: status ?? this.status,
+      construction_unit: construction_unit ?? this.construction_unit,
+      construction_add: construction_add ?? this.construction_add,
+      construction_email: construction_email ?? this.construction_email,
+      deputy: deputy ?? this.deputy,
+      deputy_phone: deputy_phone ?? this.deputy_phone,
+      deputy_identity: deputy_identity ?? this.deputy_identity,
+      worker_num: worker_num ?? this.worker_num,
+      constructionTypeId: constructionTypeId ?? this.constructionTypeId,
+      time_start: time_start ?? this.time_start,
+      time_end: time_end ?? this.time_end,
+      description: description ?? this.description,
+      current_draw: current_draw ?? this.current_draw,
+      renovation_draw: renovation_draw ?? this.renovation_draw,
+      construction_cost: construction_cost ?? this.construction_cost,
+      deposit_fee: deposit_fee ?? this.deposit_fee,
+      off_day: off_day ?? this.off_day,
+      isConstructionCost: isConstructionCost ?? this.isConstructionCost,
+      isDepositFee: isDepositFee ?? this.isDepositFee,
+      confirm: confirm ?? this.confirm,
+      cancel_reason: cancel_reason ?? this.cancel_reason,
+      reason_description: reason_description ?? this.reason_description,
+      resident_name: resident_name ?? this.resident_name,
+      create_date: create_date ?? this.create_date,
+      isMobile: isMobile ?? this.isMobile,
+      working_day: working_day ?? this.working_day,
+      file_cancel: file_cancel ?? this.file_cancel,
+      rules: rules ?? this.rules,
+      construction_type_name:
+          construction_type_name ?? this.construction_type_name,
+      extend: extend ?? this.extend,
+      extend_time_start: extend_time_start ?? this.extend_time_start,
+      extend_time_end: extend_time_end ?? this.extend_time_end,
+      extend_reason: extend_reason ?? this.extend_reason,
+      extend_working_day: extend_working_day ?? this.extend_working_day,
+      extend_off_day: extend_off_day ?? this.extend_off_day,
+      constructionDocumentId:
+          constructionDocumentId ?? this.constructionDocumentId,
+      extend_construction_cost:
+          extend_construction_cost ?? this.extend_construction_cost,
+      extend_ConstructionRegistrationId: extend_ConstructionRegistrationId ??
+          this.extend_ConstructionRegistrationId,
+      history_aproved: history_aproved ?? this.history_aproved,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'apartmentId': apartmentId,
+      'residentId': residentId,
+      'resident_code': resident_code,
+      'resident_phone': resident_phone,
+      'resident_identity': resident_identity,
+      'resident_relationship': resident_relationship,
+      'status': status,
+      'construction_unit': construction_unit,
+      'construction_add': construction_add,
+      'construction_email': construction_email,
+      'deputy': deputy,
+      'deputy_phone': deputy_phone,
+      'deputy_identity': deputy_identity,
+      'worker_num': worker_num,
+      'constructionTypeId': constructionTypeId,
+      'time_start': time_start,
+      'time_end': time_end,
+      'description': description,
+      'current_draw': current_draw?.map((x) => x.toMap()).toList(),
+      'renovation_draw': renovation_draw?.map((x) => x.toMap()).toList(),
+      'construction_cost': construction_cost,
+      'deposit_fee': deposit_fee,
+      'off_day': off_day,
+      'isConstructionCost': isConstructionCost,
+      'isDepositFee': isDepositFee,
+      'confirm': confirm,
+      'cancel_reason': cancel_reason,
+      'reason_description': reason_description,
+      'resident_name': resident_name,
+      'create_date': create_date,
+      'isMobile': isMobile,
+      'working_day': working_day,
+      'file_cancel': file_cancel?.map((x) => x.toMap()).toList(),
+      'rules': rules,
+      'construction_type_name': construction_type_name,
+      'extend': extend,
+      'extend_time_start': extend_time_start,
+      'extend_time_end': extend_time_end,
+      'extend_reason': extend_reason,
+      'extend_working_day': extend_working_day,
+      'extend_off_day': extend_off_day,
+      'constructionDocumentId': constructionDocumentId,
+      'extend_construction_cost': extend_construction_cost,
+      'extend_ConstructionRegistrationId': extend_ConstructionRegistrationId,
+      'history_aproved': history_aproved,
+    };
+  }
+
+  factory ConstructionExtension.fromMap(Map<String, dynamic> map) {
+    return ConstructionExtension(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      resident_code:
+          map['resident_code'] != null ? map['resident_code'] as String : null,
+      resident_phone: map['resident_phone'] != null
+          ? map['resident_phone'] as String
+          : null,
+      resident_identity: map['resident_identity'] != null
+          ? map['resident_identity'] as String
+          : null,
+      resident_relationship: map['resident_relationship'] != null
+          ? map['resident_relationship'] as String
+          : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      construction_unit: map['construction_unit'] != null
+          ? map['construction_unit'] as String
+          : null,
+      construction_add: map['construction_add'] != null
+          ? map['construction_add'] as String
+          : null,
+      construction_email: map['construction_email'] != null
+          ? map['construction_email'] as String
+          : null,
+      deputy: map['deputy'] != null ? map['deputy'] as String : null,
+      deputy_phone:
+          map['deputy_phone'] != null ? map['deputy_phone'] as String : null,
+      deputy_identity: map['deputy_identity'] != null
+          ? map['deputy_identity'] as String
+          : null,
+      worker_num: int.tryParse(map['worker_num'].toString()) != null
+          ? int.parse(map['worker_num'].toString())
+          : null,
+      constructionTypeId: map['constructionTypeId'] != null
+          ? map['constructionTypeId'] as String
+          : null,
+      time_start:
+          map['time_start'] != null ? map['time_start'] as String : null,
+      time_end: map['time_end'] != null ? map['time_end'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      current_draw: map['current_draw'] != null
+          ? List<FileUploadModel>.from(
+              (map['current_draw'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      renovation_draw: map['renovation_draw'] != null
+          ? List<FileUploadModel>.from(
+              (map['renovation_draw'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      construction_cost:
+          double.tryParse(map['construction_cost'].toString()) != null
+              ? double.parse(map['construction_cost'].toString())
+              : null,
+      deposit_fee: double.tryParse(map['deposit_fee'].toString()) != null
+          ? double.parse(map['deposit_fee'].toString())
+          : null,
+      off_day: int.tryParse(map['off_day'].toString()) != null
+          ? int.parse(map['off_day'].toString())
+          : null,
+      isConstructionCost: map['isConstructionCost'] != null
+          ? map['isConstructionCost'] as bool
+          : null,
+      isDepositFee:
+          map['isDepositFee'] != null ? map['isDepositFee'] as bool : null,
+      confirm: map['confirm'] != null ? map['confirm'] as bool : null,
+      cancel_reason:
+          map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
+      reason_description: map['reason_description'] != null
+          ? map['reason_description'] as String
+          : null,
+      resident_name:
+          map['resident_name'] != null ? map['resident_name'] as String : null,
+      create_date:
+          map['create_date'] != null ? map['create_date'] as String : null,
+      isMobile: map['isMobile'] != null ? map['isMobile'] as bool : null,
+      working_day: int.tryParse(map['working_day'].toString()) != null
+          ? int.parse(map['working_day'].toString())
+          : null,
+      file_cancel: map['file_cancel'] != null
+          ? List<FileUploadModel>.from(
+              (map['file_cancel'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      rules: map['rules'] as dynamic,
+      construction_type_name: map['construction_type_name'] != null
+          ? map['construction_type_name'] as String
+          : null,
+      extend: map['extend'] != null ? map['extend'] as String : null,
+      extend_time_start: map['extend_time_start'] != null
+          ? map['extend_time_start'] as String
+          : null,
+      extend_time_end: map['extend_time_end'] != null
+          ? map['extend_time_end'] as String
+          : null,
+      extend_reason:
+          map['extend_reason'] != null ? map['extend_reason'] as String : null,
+      extend_working_day:
+          int.tryParse(map['extend_working_day'].toString()) != null
+              ? int.parse(map['extend_working_day'].toString())
+              : null,
+      extend_off_day: int.tryParse(map['extend_off_day'].toString()) != null
+          ? int.parse(map['extend_off_day'].toString())
+          : null,
+      constructionDocumentId: map['constructionDocumentId'] != null
+          ? map['constructionDocumentId'] as String
+          : null,
+      extend_construction_cost:
+          double.tryParse(map['extend_construction_cost'].toString()) != null
+              ? double.parse(map['extend_construction_cost'].toString())
+              : null,
+      extend_ConstructionRegistrationId:
+          map['extend_ConstructionRegistrationId'] != null
+              ? map['extend_ConstructionRegistrationId'] as String
+              : null,
+      history_aproved: map['history_aproved'] as dynamic,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionExtension.fromJson(String source) =>
+      ConstructionExtension.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
+
+  @override
+  String toString() {
+    return 'ConstructionExtension(_id: $id, createdTime: $createdTime, updatedTime: $updatedTime, code: $code, apartmentId: $apartmentId, residentId: $residentId, resident_code: $resident_code, resident_phone: $resident_phone, resident_identity: $resident_identity, resident_relationship: $resident_relationship, status: $status, construction_unit: $construction_unit, construction_add: $construction_add, construction_email: $construction_email, deputy: $deputy, deputy_phone: $deputy_phone, deputy_identity: $deputy_identity, worker_num: $worker_num, constructionTypeId: $constructionTypeId, time_start: $time_start, time_end: $time_end, description: $description, current_draw: $current_draw, renovation_draw: $renovation_draw, construction_cost: $construction_cost, deposit_fee: $deposit_fee, off_day: $off_day, isConstructionCost: $isConstructionCost, isDepositFee: $isDepositFee, confirm: $confirm, cancel_reason: $cancel_reason, reason_description: $reason_description, resident_name: $resident_name, create_date: $create_date, isMobile: $isMobile, working_day: $working_day, file_cancel: $file_cancel, rules: $rules, construction_type_name: $construction_type_name, extend: $extend, extend_time_start: $extend_time_start, extend_time_end: $extend_time_end, extend_reason: $extend_reason, extend_working_day: $extend_working_day, extend_off_day: $extend_off_day, constructionDocumentId: $constructionDocumentId, extend_construction_cost: $extend_construction_cost, extend_ConstructionRegistrationId: $extend_ConstructionRegistrationId, history_aproved: $history_aproved)';
+  }
+
+  @override
+  bool operator ==(covariant ConstructionExtension other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.createdTime == createdTime &&
+        other.updatedTime == updatedTime &&
+        other.code == code &&
+        other.apartmentId == apartmentId &&
+        other.residentId == residentId &&
+        other.resident_code == resident_code &&
+        other.resident_phone == resident_phone &&
+        other.resident_identity == resident_identity &&
+        other.resident_relationship == resident_relationship &&
+        other.status == status &&
+        other.construction_unit == construction_unit &&
+        other.construction_add == construction_add &&
+        other.construction_email == construction_email &&
+        other.deputy == deputy &&
+        other.deputy_phone == deputy_phone &&
+        other.deputy_identity == deputy_identity &&
+        other.worker_num == worker_num &&
+        other.constructionTypeId == constructionTypeId &&
+        other.time_start == time_start &&
+        other.time_end == time_end &&
+        other.description == description &&
+        listEquals(other.current_draw, current_draw) &&
+        listEquals(other.renovation_draw, renovation_draw) &&
+        other.construction_cost == construction_cost &&
+        other.deposit_fee == deposit_fee &&
+        other.off_day == off_day &&
+        other.isConstructionCost == isConstructionCost &&
+        other.isDepositFee == isDepositFee &&
+        other.confirm == confirm &&
+        other.cancel_reason == cancel_reason &&
+        other.reason_description == reason_description &&
+        other.resident_name == resident_name &&
+        other.create_date == create_date &&
+        other.isMobile == isMobile &&
+        other.working_day == working_day &&
+        listEquals(other.file_cancel, file_cancel) &&
+        other.rules == rules &&
+        other.construction_type_name == construction_type_name &&
+        other.extend == extend &&
+        other.extend_time_start == extend_time_start &&
+        other.extend_time_end == extend_time_end &&
+        other.extend_reason == extend_reason &&
+        other.extend_working_day == extend_working_day &&
+        other.extend_off_day == extend_off_day &&
+        other.constructionDocumentId == constructionDocumentId &&
+        other.extend_construction_cost == extend_construction_cost &&
+        other.extend_ConstructionRegistrationId ==
+            extend_ConstructionRegistrationId &&
+        other.history_aproved == history_aproved;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        createdTime.hashCode ^
+        updatedTime.hashCode ^
+        code.hashCode ^
+        apartmentId.hashCode ^
+        residentId.hashCode ^
+        resident_code.hashCode ^
+        resident_phone.hashCode ^
+        resident_identity.hashCode ^
+        resident_relationship.hashCode ^
+        status.hashCode ^
+        construction_unit.hashCode ^
+        construction_add.hashCode ^
+        construction_email.hashCode ^
+        deputy.hashCode ^
+        deputy_phone.hashCode ^
+        deputy_identity.hashCode ^
+        worker_num.hashCode ^
+        constructionTypeId.hashCode ^
+        time_start.hashCode ^
+        time_end.hashCode ^
+        description.hashCode ^
+        current_draw.hashCode ^
+        renovation_draw.hashCode ^
+        construction_cost.hashCode ^
+        deposit_fee.hashCode ^
+        off_day.hashCode ^
+        isConstructionCost.hashCode ^
+        isDepositFee.hashCode ^
+        confirm.hashCode ^
+        cancel_reason.hashCode ^
+        reason_description.hashCode ^
+        resident_name.hashCode ^
+        create_date.hashCode ^
+        isMobile.hashCode ^
+        working_day.hashCode ^
+        file_cancel.hashCode ^
+        rules.hashCode ^
+        construction_type_name.hashCode ^
+        extend.hashCode ^
+        extend_time_start.hashCode ^
+        extend_time_end.hashCode ^
+        extend_reason.hashCode ^
+        extend_working_day.hashCode ^
+        extend_off_day.hashCode ^
+        constructionDocumentId.hashCode ^
+        extend_construction_cost.hashCode ^
+        extend_ConstructionRegistrationId.hashCode ^
+        history_aproved.hashCode;
   }
 }

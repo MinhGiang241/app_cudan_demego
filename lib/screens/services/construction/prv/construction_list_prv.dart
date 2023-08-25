@@ -18,10 +18,30 @@ class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionRegistration> listRegistration = [];
   List<ConstructionRegistration> listWaitRegistration = [];
   List<ConstructionDocument> listDocument = [];
+  List<ConstructionExtension> listExtension = [];
   FixedDateService? fixedDateService;
+  var tooltipKey = UniqueKey();
+  String s = S.current.cons_reg;
+  int index = 0;
+
   getFixedDate() async {
     await APIConstruction.getFixedDateService().then((v) {
       fixedDateService = FixedDateService.fromMap(v[0]);
+    });
+  }
+
+  getConstructionExtensionList(BuildContext context) async {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    await APIConstruction.getConstructionExtensionList(residentId).then((v) {
+      if (v != null) {
+        listExtension.clear();
+        for (var i in v) {
+          listExtension.add(ConstructionExtension.fromMap(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
   }
 

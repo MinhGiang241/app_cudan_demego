@@ -1,4 +1,5 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,14 @@ import '../../../../widgets/primary_loading.dart';
 import '../construction_extend_screen.dart';
 
 class ConstructionExtendTab extends StatefulWidget {
-  const ConstructionExtendTab({super.key});
+  const ConstructionExtendTab({
+    super.key,
+    required this.getList,
+    required this.list,
+  });
+
+  final List<ConstructionExtension> list;
+  final Function(BuildContext) getList;
 
   @override
   State<ConstructionExtendTab> createState() => _ConstructionExtendTabState();
@@ -26,9 +34,26 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: () async {}(),
+      future: widget.getList(context),
       builder: (context, snapshot) {
-        var list = [1, 1, 1, 1];
+        List<ConstructionExtension> waitLetter = [];
+        List<ConstructionExtension> approvedLetter = [];
+        List<ConstructionExtension> cancelLetter = [];
+        for (var i in widget.list) {
+          if (i.status == "WAIT") {
+            waitLetter.add(i);
+          }
+          if (i.status == 'APPROVED') {
+            approvedLetter.add(i);
+          }
+          if (i.status == 'CANCEL') {
+            cancelLetter.add(i);
+          }
+        }
+        waitLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        approvedLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        cancelLetter.sort((a, b) => b.updatedTime!.compareTo(a.updatedTime!));
+        var list = waitLetter + approvedLetter + cancelLetter;
 
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: PrimaryLoading());
@@ -62,155 +87,168 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
           );
         }
         return SafeArea(
-          child: ListView(
-            children: [
-              vpad(24),
-              ...list.map((e) {
-                var listContent = [
-                  InfoContentView(
-                    title: "title:",
-                    content: "code",
-                    contentStyle: txtBold(14, grayScaleColorBase),
-                  )
-                ];
+          child: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: false,
+            header: WaterDropMaterialHeader(
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+            controller: _refreshController,
+            onRefresh: () {
+              setState(() {});
+              _refreshController.refreshCompleted();
+            },
+            child: ListView(
+              children: [
+                vpad(24),
+                ...list.map((e) {
+                  var listContent = [
+                    InfoContentView(
+                      title: "title:",
+                      content: "code",
+                      contentStyle: txtBold(14, grayScaleColorBase),
+                    )
+                  ];
 
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 12, right: 12, bottom: 16),
-                  child: PrimaryCard(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        ConstructionExtendScreen.routeName,
-                        arguments: {
-                          'edit': false,
-                          'letter': e,
-                        },
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                            bottom: 10,
-                            left: 16,
-                            right: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              const PrimaryIcon(
-                                icons: PrimaryIcons.wrench,
-                                size: 28,
-                                padding: EdgeInsets.all(10),
-                                style: PrimaryIconStyle.round,
-                                backgroundColor: primaryColor5,
-                                color: primaryColor4,
-                              ),
-                              hpad(20),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'name',
-                                      style: txtBold(
-                                        14,
-                                        grayScaleColorBase,
-                                      ),
-                                    ),
-                                    vpad(4),
-                                    Wrap(
-                                      children: [
-                                        Text(
-                                          '${S.of(context).reg_date}: ',
-                                          style: txtMedium(
-                                            12,
-                                            grayScaleColor2,
-                                          ),
-                                        ),
-                                        Text(
-                                          Utils.dateTimeFormat(
-                                            '2022-11-16T02:37:06.392+0000',
-                                            1,
-                                          ),
-                                          style: txtMedium(
-                                            12,
-                                            greenColorBase,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const Divider(color: grayScaleColor4, height: 2),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Table(
-                            textBaseline: TextBaseline.ideographic,
-                            defaultVerticalAlignment:
-                                TableCellVerticalAlignment.baseline,
-                            columnWidths: const {
-                              0: FlexColumnWidth(4),
-                              1: FlexColumnWidth(6)
-                            },
-                            children: [
-                              ...listContent.map<TableRow>((i) {
-                                return TableRow(
-                                  children: [
-                                    TableCell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 16,
-                                        ),
-                                        child: Text(
-                                          i.title,
-                                          style: txtMedium(
-                                            12,
-                                            grayScaleColor2,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    TableCell(
-                                      child: Text(
-                                        i.content ?? '',
-                                        style: i.contentStyle,
-                                      ),
-                                    )
-                                  ],
-                                );
-                              })
-                            ],
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            hpad(10),
-                            PrimaryButton(
-                              onTap: () {},
-                              text: S.of(context).cancel_letter,
-                              buttonSize: ButtonSize.xsmall,
-                              buttonType: ButtonType.secondary,
-                              secondaryBackgroundColor: redColor5,
-                              textColor: redColorBase,
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(left: 12, right: 12, bottom: 16),
+                    child: PrimaryCard(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          ConstructionExtendScreen.routeName,
+                          arguments: {
+                            'edit': false,
+                            'letter': e,
+                          },
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              bottom: 10,
+                              left: 16,
+                              right: 16,
                             ),
-                          ],
-                        ),
-                        vpad(16),
-                      ],
+                            child: Row(
+                              children: [
+                                const PrimaryIcon(
+                                  icons: PrimaryIcons.wrench,
+                                  size: 28,
+                                  padding: EdgeInsets.all(10),
+                                  style: PrimaryIconStyle.round,
+                                  backgroundColor: primaryColor5,
+                                  color: primaryColor4,
+                                ),
+                                hpad(20),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'name',
+                                        style: txtBold(
+                                          14,
+                                          grayScaleColorBase,
+                                        ),
+                                      ),
+                                      vpad(4),
+                                      Wrap(
+                                        children: [
+                                          Text(
+                                            '${S.of(context).reg_date}: ',
+                                            style: txtMedium(
+                                              12,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
+                                          Text(
+                                            Utils.dateTimeFormat(
+                                              '2022-11-16T02:37:06.392+0000',
+                                              1,
+                                            ),
+                                            style: txtMedium(
+                                              12,
+                                              greenColorBase,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          const Divider(color: grayScaleColor4, height: 2),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Table(
+                              textBaseline: TextBaseline.ideographic,
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.baseline,
+                              columnWidths: const {
+                                0: FlexColumnWidth(4),
+                                1: FlexColumnWidth(6)
+                              },
+                              children: [
+                                ...listContent.map<TableRow>((i) {
+                                  return TableRow(
+                                    children: [
+                                      TableCell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 16,
+                                          ),
+                                          child: Text(
+                                            i.title,
+                                            style: txtMedium(
+                                              12,
+                                              grayScaleColor2,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      TableCell(
+                                        child: Text(
+                                          i.content ?? '',
+                                          style: i.contentStyle,
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                })
+                              ],
+                            ),
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              hpad(10),
+                              PrimaryButton(
+                                onTap: () {},
+                                text: S.of(context).cancel_letter,
+                                buttonSize: ButtonSize.xsmall,
+                                buttonType: ButtonType.secondary,
+                                secondaryBackgroundColor: redColor5,
+                                textColor: redColorBase,
+                              ),
+                            ],
+                          ),
+                          vpad(16),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              })
-            ],
+                  );
+                })
+              ],
+            ),
           ),
         );
       },
