@@ -45,6 +45,42 @@ class ConstructionListPrv extends ChangeNotifier {
     });
   }
 
+  cancelConstructionExtension(
+    BuildContext context,
+    ConstructionExtension e,
+  ) async {
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).cancel_letter,
+      content: S.of(context).confirm_cancel_cons_ext(e.code ?? ''),
+      onConfirm: () async {
+        Navigator.pop(context);
+        var card = e.copyWith();
+        card.status = 'CANCEL';
+        card.cancel_reason = 'NGUOIDUNGHUY';
+        await APIConstruction.changeStatusConstructionExtension(card.toMap())
+            .then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_cancel_cons_ext,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  'index': 2,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+  }
+
   sendToApprove(BuildContext context, ConstructionRegistration c) async {
     List<Map<String, dynamic>> listReceipt = [];
     var data = c.copyWith();

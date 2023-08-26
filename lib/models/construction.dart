@@ -989,11 +989,18 @@ class ConstructionExtension {
   double? extend_construction_cost;
   String? extend_ConstructionRegistrationId;
   dynamic history_aproved;
+
+  ConstructionDocument? d;
+  Status? s;
+  ConstructionType? t;
   ConstructionExtension({
     this.id,
     this.createdTime,
     this.updatedTime,
     this.code,
+    this.d,
+    this.s,
+    this.t,
     this.apartmentId,
     this.residentId,
     this.resident_code,
@@ -1336,6 +1343,9 @@ class ConstructionExtension {
               ? map['extend_ConstructionRegistrationId'] as String
               : null,
       history_aproved: map['history_aproved'] as dynamic,
+      d: map['d'] != null ? ConstructionDocument.fromJson(map['d']) : null,
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
+      t: map['t'] != null ? ConstructionType.fromJson(map['t']) : null,
     );
   }
 

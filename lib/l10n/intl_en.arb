@@ -859,5 +859,7 @@
   "start_date_extend": "Start date extension",
   "end_date_extend": "End date extension",
   "reason": "Reason",
-  "send_extension_success": "Send construction extension successfully"
+  "send_extension_success": "Send construction extension successfully",
+  "confirm_cancel_cons_ext": "Do you want to cancel letter {c}",
+  "success_cancel_cons_ext": "Cancel construcion extension letter successfully"
 }

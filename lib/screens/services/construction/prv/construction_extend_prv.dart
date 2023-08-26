@@ -6,9 +6,44 @@ import 'package:provider/provider.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/construction.dart';
 import '../../../../utils/utils.dart';
+import '../../../payment/widget/payment_item.dart';
 import '../construction_list_screen.dart';
 
 class ConstructionExtendPrv extends ChangeNotifier {
+  ConstructionExtendPrv({this.exitedExtend}) {
+    if (exitedExtend != null) {
+      surfaceValue = exitedExtend!.apartmentId;
+      getConstructionDocument(exitedExtend!.apartmentId).then((v) {
+        if (fileList.isNotEmpty) {
+          fileValue = exitedExtend!.code;
+          notifyListeners();
+        }
+      });
+
+      startDate = DateTime.tryParse(exitedExtend!.time_start ?? '') != null
+          ? DateTime.parse(exitedExtend!.time_start ?? '')
+          : null;
+      endDate = DateTime.tryParse(exitedExtend!.time_end ?? '') != null
+          ? DateTime.parse(exitedExtend!.time_end ?? '')
+          : null;
+      regDateController.text =
+          Utils.dateFormat(exitedExtend!.createdTime ?? '', 1);
+      consFeeController.text =
+          formatCurrency.format(exitedExtend!.construction_cost);
+      consDateController.text = exitedExtend!.worker_num.toString();
+      offDateController.text = exitedExtend!.off_day.toString();
+      reasonController.text = exitedExtend!.reason_description ?? '';
+      if (startDate != null) {
+        startDateController.text =
+            Utils.dateFormat(startDate!.toIso8601String(), 1);
+      }
+      if (endDate != null) {
+        endDateController.text =
+            Utils.dateFormat(endDate!.toIso8601String(), 1);
+      }
+    }
+  }
+
   DateTime? startDate;
   DateTime? endDate;
   bool autoValidate = false;
@@ -86,6 +121,7 @@ class ConstructionExtendPrv extends ChangeNotifier {
           isDepositFee: doc.isDepositFee,
           constructionDocumentId: doc.id,
           extend_reason: reasonController.text.trim(),
+          reason_description: reasonController.text.trim(),
           renovation_draw: doc.renovation_draw,
           resident_identity:
               context.read<ResidentInfoPrv>().userInfo?.identity_card,
@@ -150,6 +186,7 @@ class ConstructionExtendPrv extends ChangeNotifier {
       var fileIndex = fileList.indexWhere((element) => element.code == v);
       var file = fileList[fileIndex];
       regDateController.text = Utils.dateFormat(file.createdTime ?? '', 1);
+      consFeeController.text = formatCurrency.format(file.construction_cost);
     }
     notifyListeners();
   }

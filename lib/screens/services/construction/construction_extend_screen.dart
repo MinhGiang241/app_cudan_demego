@@ -1,4 +1,5 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/services/construction/prv/construction_extend_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -7,7 +8,6 @@ import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
@@ -31,12 +31,13 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
     if (arg['edit'] != null) {
       isEdit = arg['edit'];
     }
+    var card = arg["letter"] as ConstructionExtension?;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
         title: S.of(context).construction_extend,
       ),
       body: ChangeNotifierProvider(
-        create: (context) => ConstructionExtendPrv(),
+        create: (context) => ConstructionExtendPrv(exitedExtend: card),
         builder: (context, state) {
           var listApartmentChoice = context
               .read<ResidentInfoPrv>()
@@ -77,6 +78,8 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryDropDown(
+                  enable: isEdit,
+                  value: context.watch<ConstructionExtendPrv>().surfaceValue,
                   selectList: listApartmentChoice,
                   validator: Utils.emptyValidatorDropdown,
                   onChange:
@@ -88,6 +91,8 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryDropDown(
+                  value: context.watch<ConstructionExtendPrv>().fileValue,
+                  enable: isEdit,
                   key: context.read<ConstructionExtendPrv>().fileKey,
                   selectList: listFileChoice,
                   validator: Utils.emptyValidatorDropdown,
@@ -115,6 +120,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryTextField(
+                  enable: isEdit,
                   validator: Utils.emptyValidator,
                   validateString:
                       context.watch<ConstructionExtendPrv>().validateStartDate,
@@ -131,6 +137,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryTextField(
+                  enable: isEdit,
                   validator: Utils.emptyValidator,
                   validateString:
                       context.watch<ConstructionExtendPrv>().validateEndDate,
@@ -158,6 +165,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                   children: [
                     Expanded(
                       child: PrimaryTextField(
+                        enable: isEdit,
                         maxLength: 10,
                         keyboardType: TextInputType.number,
                         onlyNum: true,
@@ -170,6 +178,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                     hpad(12),
                     Expanded(
                       child: PrimaryTextField(
+                        enable: isEdit,
                         maxLength: 10,
                         keyboardType: TextInputType.number,
                         onlyNum: true,
@@ -183,6 +192,7 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
                 ),
                 vpad(12),
                 PrimaryTextField(
+                  enable: isEdit,
                   maxLength: 500,
                   controller:
                       context.read<ConstructionExtendPrv>().reasonController,

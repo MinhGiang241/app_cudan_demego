@@ -8659,6 +8659,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to cancel letter {c}`
+  String confirm_cancel_cons_ext(Object c) {
+    return Intl.message(
+      'Do you want to cancel letter $c',
+      name: 'confirm_cancel_cons_ext',
+      desc: '',
+      args: [c],
+    );
+  }
+
+  /// `Cancel construcion extension letter successfully`
+  String get success_cancel_cons_ext {
+    return Intl.message(
+      'Cancel construcion extension letter successfully',
+      name: 'success_cancel_cons_ext',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

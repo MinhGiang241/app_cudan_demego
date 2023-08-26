@@ -1,8 +1,10 @@
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/screens/services/construction/prv/construction_list_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../generated/l10n.dart';
@@ -104,9 +106,29 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                 ...list.map((e) {
                   var listContent = [
                     InfoContentView(
-                      title: "title:",
-                      content: "code",
+                      title: "${S.of(context).code_file}: ",
+                      content: e.d?.code ?? '',
                       contentStyle: txtBold(14, grayScaleColorBase),
+                    ),
+                    InfoContentView(
+                      title: "${S.of(context).letter_num}: ",
+                      content: e.code ?? '',
+                      contentStyle: txtBold(14, grayScaleColorBase),
+                    ),
+                    InfoContentView(
+                      title: "${S.of(context).start_date_extend}: ",
+                      content: Utils.dateFormat(e.time_start ?? '', 1),
+                      contentStyle: txtBold(14, grayScaleColorBase),
+                    ),
+                    InfoContentView(
+                      title: '${S.of(context).end_date_extend}: ',
+                      content: Utils.dateFormat(e.time_end ?? '', 1),
+                      contentStyle: txtBold(14, grayScaleColorBase),
+                    ),
+                    InfoContentView(
+                      title: '${S.of(context).letter_status}: ',
+                      content: e.s?.name ?? '',
+                      contentStyle: txtBold(14, genStatusColor(e.status)),
                     )
                   ];
 
@@ -152,7 +174,7 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'name',
+                                        e.t?.name ?? '',
                                         style: txtBold(
                                           14,
                                           grayScaleColorBase,
@@ -170,7 +192,7 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                                           ),
                                           Text(
                                             Utils.dateTimeFormat(
-                                              '2022-11-16T02:37:06.392+0000',
+                                              e.createdTime ?? '',
                                               1,
                                             ),
                                             style: txtMedium(
@@ -194,8 +216,8 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                               defaultVerticalAlignment:
                                   TableCellVerticalAlignment.baseline,
                               columnWidths: const {
-                                0: FlexColumnWidth(4),
-                                1: FlexColumnWidth(6)
+                                0: FlexColumnWidth(5),
+                                1: FlexColumnWidth(4)
                               },
                               children: [
                                 ...listContent.map<TableRow>((i) {
@@ -227,20 +249,23 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                               ],
                             ),
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              hpad(10),
-                              PrimaryButton(
-                                onTap: () {},
-                                text: S.of(context).cancel_letter,
-                                buttonSize: ButtonSize.xsmall,
-                                buttonType: ButtonType.secondary,
-                                secondaryBackgroundColor: redColor5,
-                                textColor: redColorBase,
-                              ),
-                            ],
-                          ),
+                          if (e.status == 'WAIT')
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                hpad(10),
+                                PrimaryButton(
+                                  onTap: () => context
+                                      .read<ConstructionListPrv>()
+                                      .cancelConstructionExtension(context, e),
+                                  text: S.of(context).cancel_letter,
+                                  buttonSize: ButtonSize.xsmall,
+                                  buttonType: ButtonType.secondary,
+                                  secondaryBackgroundColor: redColor5,
+                                  textColor: redColorBase,
+                                ),
+                              ],
+                            ),
                           vpad(16),
                         ],
                       ),

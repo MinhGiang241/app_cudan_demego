@@ -860,5 +860,7 @@
   "start_date_extend": "Ngày bắt đầu gia hạn",
   "end_date_extend": "Ngày kết thúc gia hạn",
   "reason": "Lý do",
-  "send_extension_success": "Gửi duyệt gia hạn thi công thành công"
+  "send_extension_success": "Gửi duyệt gia hạn thi công thành công",
+  "confirm_cancel_cons_ext": "Bạn có muốn hủy phiếu gia hạn thi công {c}",
+  "success_cancel_cons_ext": "Hủy phiếu gia hạn thi công thành công"
 }
