@@ -42,13 +42,13 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Play using while you are hiking</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Please grant camera access</string>
+	<string>This app need camera access</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>allow  users record a voice note</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Allow Motion Access to Allow</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app ưant to upload photos</string>
+	<string>This app need to upload photos</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>need spech recognition</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
