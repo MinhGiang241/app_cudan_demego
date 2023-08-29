@@ -103,6 +103,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             // tooltip: tabController.index == 0
             //     ? S.of(context).reg_missing_obj
             //     : S.of(context).found_object,
@@ -123,6 +124,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: FutureBuilder(

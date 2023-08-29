@@ -64,6 +64,7 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).register_res_card,
             onPressed: () {
               Navigator.pushNamed(
@@ -76,6 +77,7 @@ class _ResidentCardListScreenState extends State<ResidentCardListScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: FutureBuilder(

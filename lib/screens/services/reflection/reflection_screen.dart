@@ -96,6 +96,7 @@ class _ReflectionScreenState extends State<ReflectionScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).add_new,
             onPressed: () {
               Navigator.pushNamed(
@@ -110,6 +111,7 @@ class _ReflectionScreenState extends State<ReflectionScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: SafeArea(

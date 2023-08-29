@@ -50,6 +50,7 @@ class _HandOverScreenState extends State<HandOverScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).booking_hand_over_0,
             onPressed: () {
               Navigator.pushNamed(
@@ -62,6 +63,7 @@ class _HandOverScreenState extends State<HandOverScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: TabBarView(

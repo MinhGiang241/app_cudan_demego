@@ -45,6 +45,7 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
       builder: (context, snapshot) {
         if (snapshot.data == true) {
           return FloatingActionButton(
+            shape: CircleBorder(),
             key: tooltipKey,
             tooltip: tabController.index == 2
                 ? S.current.construction_extend
@@ -67,6 +68,7 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
             backgroundColor: primaryColorBase,
             child: const Icon(
               Icons.add,
+              color: Colors.white,
               size: 40,
             ),
           );

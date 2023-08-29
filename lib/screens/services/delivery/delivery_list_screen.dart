@@ -58,6 +58,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).add_trans_card,
             onPressed: () {
               Navigator.pushNamed(
@@ -70,6 +71,7 @@ class _DeliveryListScreenState extends State<DeliveryListScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: SafeArea(

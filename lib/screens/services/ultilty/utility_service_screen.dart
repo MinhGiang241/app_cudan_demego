@@ -36,6 +36,7 @@ class _UtilityServiceScreenState extends State<UtilityServiceScreen> {
             title: "Dịch vụ tiện ích",
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: "Đặt chỗ",
             onPressed: () {
               Navigator.pushNamed(
@@ -50,6 +51,7 @@ class _UtilityServiceScreenState extends State<UtilityServiceScreen> {
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: SafeArea(

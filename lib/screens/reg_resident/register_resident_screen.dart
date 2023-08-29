@@ -52,6 +52,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).reg_service,
             onPressed: () {
               Utils.showBottomSheet(
@@ -109,6 +110,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
             backgroundColor: primaryColorBase,
             child: const Icon(
               Icons.add,
+              color: Colors.white,
               size: 40,
             ),
           ),

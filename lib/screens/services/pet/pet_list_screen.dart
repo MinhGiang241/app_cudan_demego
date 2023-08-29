@@ -49,6 +49,7 @@ class _PetListScreenState extends State<PetListScreen> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).reg_pet,
             onPressed: () {
               Navigator.pushNamed(
@@ -61,6 +62,7 @@ class _PetListScreenState extends State<PetListScreen> {
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: FutureBuilder(

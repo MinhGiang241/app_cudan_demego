@@ -16,12 +16,7 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return PrimaryScreen(
       appBar: AppBar(),
-      body: StreamBuilder(
-        // stream: state.webSocketChannel!.stream,
-        builder: (context, snapshot) {
-          return vpad(0);
-        },
-      ),
+      body: vpad(0),
     );
   }
 }

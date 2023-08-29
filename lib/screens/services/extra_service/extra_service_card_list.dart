@@ -59,6 +59,7 @@ class _ExtraServiceCardListScreenState
                 ),
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).reg_service,
             onPressed: () {
               Navigator.pushNamed(
@@ -77,6 +78,7 @@ class _ExtraServiceCardListScreenState
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: FutureBuilder(
