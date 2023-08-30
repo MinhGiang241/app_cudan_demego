@@ -128,10 +128,10 @@ class EventCardWidget extends StatelessWidget {
                           ),
                           style: txtRegular(12, grayScaleColorBase),
                           overflow: TextOverflow.visible,
-                        )
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -158,10 +158,10 @@ class EventCardWidget extends StatelessWidget {
                         "${Utils.dateFormat(startEvent ?? '', 1)} - ${Utils.dateFormat(endEvent ?? "", 1)}",
                         style: txtRegular(12, grayScaleColorBase),
                         overflow: TextOverflow.visible,
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

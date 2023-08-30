@@ -89,7 +89,7 @@ class _ParcelListScreenState extends State<ParcelListScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           body: FutureBuilder(

@@ -342,9 +342,9 @@ class AuthPrv extends ChangeNotifier {
                       Utils.pop(context);
                     },
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

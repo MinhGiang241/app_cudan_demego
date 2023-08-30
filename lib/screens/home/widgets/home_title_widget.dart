@@ -39,7 +39,7 @@ class HomeTitleWidget extends StatelessWidget {
           ],
         ),
         vpad(16),
-        if (child != null) child!
+        if (child != null) child!,
       ],
     );
   }

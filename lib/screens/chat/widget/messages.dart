@@ -81,7 +81,7 @@ class _MessagesState extends State<Messages> {
                   message: widget.messageMap[e]!.msg ?? "",
                   avatar: avatar,
                 ),
-              )
+              ),
             ],
           ),
           // ),

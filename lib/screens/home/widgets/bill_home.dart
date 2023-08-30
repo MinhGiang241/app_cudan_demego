@@ -47,7 +47,7 @@ class BillsHome extends StatelessWidget {
                         blurRadius: 24,
                         color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
-                      )
+                      ),
                     ],
                   ),
                   child: PrimaryIcon(
@@ -70,7 +70,7 @@ class BillsHome extends StatelessWidget {
                   S.of(context).pay,
                   textAlign: TextAlign.center,
                   style: txtBodySmallBold(color: grayScaleColorBase),
-                )
+                ),
               ],
             ),
           ),
@@ -88,7 +88,7 @@ class BillsHome extends StatelessWidget {
                           blurRadius: 24,
                           color: demepro2.withOpacity(0.25),
                           offset: const Offset(0, 16),
-                        )
+                        ),
                       ],
                     ),
                     child: PrimaryIcon(
@@ -104,7 +104,7 @@ class BillsHome extends StatelessWidget {
                           arguments: {
                             'year': null,
                             'month': null,
-                            'index': null
+                            'index': null,
                           },
                         );
                       },
@@ -115,7 +115,7 @@ class BillsHome extends StatelessWidget {
                     S.of(context).water,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -133,7 +133,7 @@ class BillsHome extends StatelessWidget {
                           blurRadius: 24,
                           color: demepro2.withOpacity(0.25),
                           offset: const Offset(0, 16),
-                        )
+                        ),
                       ],
                     ),
                     child: PrimaryIcon(
@@ -155,7 +155,7 @@ class BillsHome extends StatelessWidget {
                     S.of(context).electricity,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase),
-                  )
+                  ),
                 ],
               ),
             ),

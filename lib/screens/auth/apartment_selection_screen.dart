@@ -70,7 +70,7 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                 },
                 icon: const Icon(Icons.logout),
               ),
-              hpad(12)
+              hpad(12),
             ],
           ),
           body: SafeArea(
@@ -133,7 +133,7 @@ class _ApartmentSeletionScreenState extends State<ApartmentSeletionScreen> {
                               ),
                             ),
                           ),
-                      vpad(50)
+                      vpad(50),
                     ],
                   ),
                 ),

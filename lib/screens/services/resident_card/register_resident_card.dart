@@ -215,7 +215,7 @@ class _RegisterResidentCardState extends State<RegisterResidentCard> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     vpad(16),
@@ -285,7 +285,7 @@ class _RegisterResidentCardState extends State<RegisterResidentCard> {
                       ],
                     ),
 
-                    vpad(MediaQuery.of(context).padding.bottom + 24)
+                    vpad(MediaQuery.of(context).padding.bottom + 24),
                   ],
                 ),
               );

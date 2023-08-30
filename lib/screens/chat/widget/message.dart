@@ -218,7 +218,7 @@ class _MessageState extends State<Message> {
                           style: txtRegular(14, grayScaleColorBase),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -472,7 +472,7 @@ class _MessageState extends State<Message> {
                                                       link:
                                                           "${WebsocketConnect.serverUrl}${c.image_url}",
                                                       listLink: [
-                                                        "${WebsocketConnect.serverUrl}${c.image_url}"
+                                                        "${WebsocketConnect.serverUrl}${c.image_url}",
                                                       ],
                                                       initIndex: 0,
                                                       heroTag: "tag",
@@ -515,7 +515,7 @@ class _MessageState extends State<Message> {
                                                       "",
                                                   "X-Auth-Token": widget
                                                           .chatbloc.authToken ??
-                                                      ""
+                                                      "",
                                                 },
                                               ),
                                             ),
@@ -530,7 +530,7 @@ class _MessageState extends State<Message> {
                                                 14,
                                                 grayScaleColorBase,
                                               ),
-                                            )
+                                            ),
                                         ],
                                       );
                                     },
@@ -544,7 +544,7 @@ class _MessageState extends State<Message> {
                                     //     fit: BoxFit.contain,
                                     //   ),
                                     // ),
-                                  )
+                                  ),
                                 ],
                               ),
                             if (widget.message.isNotEmpty)
@@ -592,10 +592,10 @@ class _MessageState extends State<Message> {
                                   ],
                                 ),
                               );
-                            })
+                            }),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                   // if (!widget.isMe && widget.message.length < 14)
@@ -651,7 +651,7 @@ class _MessageState extends State<Message> {
                 ),
               ],
             ),
-          vpad(4)
+          vpad(4),
         ],
       ),
     );

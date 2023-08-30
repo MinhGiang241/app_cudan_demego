@@ -67,7 +67,7 @@ class _InputChatState extends State<InputChat> {
                     Icons.delete,
                     color: redColor,
                   ),
-                )
+                ),
               ],
             ),
           if (pickedImages.isNotEmpty)
@@ -100,7 +100,7 @@ class _InputChatState extends State<InputChat> {
                         });
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -228,7 +228,7 @@ class _InputChatState extends State<InputChat> {
                     color: grayScaleColorBase,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],

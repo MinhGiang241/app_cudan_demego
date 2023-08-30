@@ -115,7 +115,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       ...card.identity_image!.map(
                         (e) =>
                             "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                      )
+                      ),
                     ],
                   ),
                 if (card.resident_image != null &&
@@ -126,7 +126,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       ...card.resident_image!.map(
                         (e) =>
                             "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                      )
+                      ),
                     ],
                   ),
                 if (card.other_image != null && card.other_image!.isNotEmpty)
@@ -136,21 +136,21 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                       ...card.other_image!.map(
                         (e) =>
                             "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                      )
+                      ),
                     ],
                   ),
               ],
             ),
           ),
           if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
-              card.status != "LOST"
-          //&& (card.status == "LOCK" && card.status == "KHOAHETHAN")
-          )
+                  card.status != "LOST"
+              //&& (card.status == "LOCK" && card.status == "KHOAHETHAN")
+              )
             vpad(24),
           if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
-              card.status != "LOST"
-          // &&  (card.status == "LOCK" && card.status == "KHOAHETHAN")
-          )
+                  card.status != "LOST"
+              // &&  (card.status == "LOCK" && card.status == "KHOAHETHAN")
+              )
             PrimaryButton(
               width: double.infinity,
               text: S.of(context).cancel_card,

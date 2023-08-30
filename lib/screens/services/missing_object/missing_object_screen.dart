@@ -99,7 +99,7 @@ class _MissingObectScreenState extends State<MissingObectScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           floatingActionButton: FloatingActionButton(

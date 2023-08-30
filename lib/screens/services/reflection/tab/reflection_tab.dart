@@ -194,7 +194,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
                                         TableCellVerticalAlignment.baseline,
                                     columnWidths: const {
                                       0: FlexColumnWidth(2),
-                                      1: FlexColumnWidth(2)
+                                      1: FlexColumnWidth(2),
                                     },
                                     children: [
                                       TableRow(
@@ -226,14 +226,14 @@ class _ReflectionTabState extends State<ReflectionTab> {
                                               14,
                                               genStatusColor(e.status ?? ''),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

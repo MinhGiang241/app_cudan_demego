@@ -80,10 +80,10 @@ class AccountScreen extends StatelessWidget {
                           style: txtLinkLarge(),
                         ),
                         const Spacer(),
-                        Text("", style: txtBodySmallRegular())
+                        Text("", style: txtBodySmallRegular()),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -154,13 +154,13 @@ class AccountScreen extends StatelessWidget {
                           );
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-          vpad(kBottomNavigationBarHeight + 30)
+          vpad(kBottomNavigationBarHeight + 30),
         ],
       ),
     );
@@ -188,7 +188,7 @@ class AccountItem extends StatelessWidget {
             PrimaryIcon(icons: icons),
             hpad(12),
             Expanded(child: Text(lable, style: txtBodySmallRegular())),
-            const Icon(Icons.chevron_right_rounded, color: grayScaleColor4)
+            const Icon(Icons.chevron_right_rounded, color: grayScaleColor4),
           ],
         ),
       ),

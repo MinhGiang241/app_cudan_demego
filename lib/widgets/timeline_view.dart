@@ -91,7 +91,7 @@ class TimeLineView extends StatelessWidget {
                             style: txtLinkXXSmall(
                               color: content[index].color ?? yellowColor1,
                             ),
-                          )
+                          ),
                       ]
                     : [
                         if (index != 0)

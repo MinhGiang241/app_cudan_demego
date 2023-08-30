@@ -39,13 +39,13 @@ class ApiProjectService {
       if (result.data == null) {
         // throw ("network_connection_err");
         return {
-          "response": {"code": 1, "message": S.current.err_conn}
+          "response": {"code": 1, "message": S.current.err_conn},
         };
       }
       return result.data!;
     } catch (e) {
       return {
-        "response": {"code": 1, "message": e.toString()}
+        "response": {"code": 1, "message": e.toString()},
       };
     }
   }

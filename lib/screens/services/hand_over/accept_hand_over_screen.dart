@@ -240,7 +240,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                                                       '${handOverCopy.a?.name} - ${handOverCopy.a?.f?.name} - ${handOverCopy.a?.b?.name}'
                                                   : handOverCopy.apartmentId!,
                                             ),
-                                          )
+                                          ),
                                         ],
                                         isDense: false,
                                       ),
@@ -913,7 +913,7 @@ class _AcceptHandOverScreenState extends State<AcceptHandOverScreen>
                         ),
                       ),
                       HandOverInfoStep(),
-                      HandOverCheckScreen()
+                      HandOverCheckScreen(),
                     ],
                   ),
                 ),

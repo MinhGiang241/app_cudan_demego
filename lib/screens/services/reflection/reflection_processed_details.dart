@@ -52,7 +52,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
     DropdownMenuItem(
       value: 'BUILDING',
       child: Text(S.current.building),
-    )
+    ),
   ];
   List<MultiSelectViewModel> listZoneChoice = [];
   List<MultiSelectViewModel> listFloorChoice = [];
@@ -302,7 +302,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                                               "${ApiService.shared.uploadURL}?load=${e.id ?? ""}&regcode=${ApiService.shared.regCode}",
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -420,7 +420,7 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                       ),
                     ),
                     // ),
-                    vpad(50)
+                    vpad(50),
                   ],
                 ),
               ),

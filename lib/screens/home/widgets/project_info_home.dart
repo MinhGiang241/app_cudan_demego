@@ -39,7 +39,7 @@ class ProjectInfoHome extends StatelessWidget {
         // Utils.pushScreen(context, const ListProjectInfoScreen());
       },
       child: SizedBox(
-        height: 200 + 30,
+        height: 200 + 41,
         child: ListView.builder(
           itemCount: list.length,
           clipBehavior: Clip.none,
@@ -105,7 +105,7 @@ class ProjectInfoHome extends StatelessWidget {
                           color: grayScaleColorBase,
                         ),
                         maxLines: 1,
-                      )
+                      ),
                     ],
                   ),
                 ),

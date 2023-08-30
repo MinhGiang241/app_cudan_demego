@@ -178,7 +178,7 @@ class PrimaryRadio extends StatelessWidget {
             Text(
               title,
               style: txtLinkXSmall(),
-            )
+            ),
           ],
         ),
       ),

@@ -161,7 +161,7 @@ class ResidentLetterTab extends StatelessWidget {
                                         .cancelLetter,
                                     'send': context
                                         .read<ResidentCardPrv>()
-                                        .sendRequest
+                                        .sendRequest,
                                   },
                                 );
                               },
@@ -178,7 +178,7 @@ class ResidentLetterTab extends StatelessWidget {
                                           TableCellVerticalAlignment.baseline,
                                       columnWidths: const {
                                         0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3)
+                                        1: FlexColumnWidth(3),
                                       },
                                       children: [
                                         ...listContent.map<TableRow>(
@@ -199,7 +199,7 @@ class ResidentLetterTab extends StatelessWidget {
                                                   e.content ?? "",
                                                   style: e.contentStyle,
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -253,7 +253,7 @@ class ResidentLetterTab extends StatelessWidget {
                                                 RegisterResidentCard.routeName,
                                                 arguments: {
                                                   "isEdit": true,
-                                                  "data": list[index]
+                                                  "data": list[index],
                                                 },
                                               );
                                             },
@@ -274,7 +274,7 @@ class ResidentLetterTab extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                  vpad(12)
+                                  vpad(12),
                                 ],
                               ),
                             ),

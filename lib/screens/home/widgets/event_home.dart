@@ -38,7 +38,7 @@ class EventsHome extends StatelessWidget {
                       EventDetailsScreen.routeName,
                       arguments: {
                         "event": context.read<HomePrv>().event,
-                        "part": context.read<HomePrv>().onParticipate
+                        "part": context.read<HomePrv>().onParticipate,
                       },
                     );
                   },
@@ -76,12 +76,12 @@ class EventsHome extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         )
                       : vpad(0),
-                )
+                ),
         ],
       ),
     );

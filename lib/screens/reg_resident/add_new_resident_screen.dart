@@ -633,7 +633,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .cancelLetter(context),
                                     ),
-                                  vpad(50)
+                                  vpad(50),
                                 ],
                               ),
                             ),
@@ -796,7 +796,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .tiktokController,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   vpad(16),
@@ -823,7 +823,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .zaloController,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   vpad(16),
@@ -850,7 +850,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .instagramController,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   vpad(16),
@@ -877,7 +877,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .linkedinController,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   vpad(16),
@@ -904,7 +904,7 @@ class _AddNewResidentScreenState extends State<AddNewResidentScreen>
                                               .read<AddNewResidentPrv>()
                                               .tiktokController,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   vpad(20),

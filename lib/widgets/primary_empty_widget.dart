@@ -43,7 +43,7 @@ class PrimaryEmptyWidget extends StatelessWidget {
               text: buttonText,
               buttonSize: ButtonSize.medium,
               onTap: action,
-            )
+            ),
         ],
       ),
     );

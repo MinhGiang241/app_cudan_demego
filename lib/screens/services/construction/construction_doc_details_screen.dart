@@ -237,7 +237,7 @@ class _ConstructionDocumentDetailsState
                           });
                         },
                         child: Text(S.of(context).view_record),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -351,7 +351,7 @@ class _ConstructionDocumentDetailsState
           ),
           ConstructionDocumentHistoryTab(
             constructionDocumentId: reg.id ?? "",
-          )
+          ),
         ],
       ),
     );

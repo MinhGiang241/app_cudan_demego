@@ -96,7 +96,7 @@ class _TransportDetailsScreenState extends State<TransportDetailsScreen> {
                   ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

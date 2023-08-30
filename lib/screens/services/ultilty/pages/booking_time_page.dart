@@ -137,7 +137,7 @@ class BookingTimePage extends StatelessWidget {
           onTap: () =>
               context.read<AddNewLetterUltilityPrv>().onNextStep1(context),
         ),
-        vpad(20)
+        vpad(20),
       ],
     );
   }

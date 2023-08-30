@@ -322,7 +322,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                     },
                                   ),
                                 ],
-                              )
+                              ),
                           ],
                         ),
                       ),
@@ -351,20 +351,20 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 if (!(card.status == "DESTROY" &&
-                        card.r?.code == 'NGUOIDUNGKHOA') &&
-                    card.status != "LOST"
-                //  && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
-                )
+                            card.r?.code == 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST"
+                    //  && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+                    )
                   vpad(30),
                 if (!(card.status == "DESTROY" &&
-                        card.r?.code == 'NGUOIDUNGKHOA') &&
-                    card.status != "LOST"
-                // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
-                )
+                            card.r?.code == 'NGUOIDUNGKHOA') &&
+                        card.status != "LOST"
+                    // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+                    )
                   PrimaryButton(
                     isLoading: false,
                     buttonSize: ButtonSize.medium,

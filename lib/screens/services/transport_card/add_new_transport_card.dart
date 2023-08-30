@@ -425,7 +425,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               vpad(12),
@@ -456,7 +456,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               vpad(12),
@@ -614,7 +614,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   filter: [
                                     FilteringTextInputFormatter.allow(
                                       RegExp(r'[0-9a-zA-Z-]'),
-                                    )
+                                    ),
                                   ],
                                   onChanged: context
                                       .read<AddNewTransportCardPrv>()

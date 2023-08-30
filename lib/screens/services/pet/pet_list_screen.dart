@@ -171,7 +171,7 @@ class _PetListScreenState extends State<PetListScreen> {
                                 ...e.avt_pet!.map(
                                   (i) =>
                                       "${ApiService.shared.uploadURL}?load=${i.id}&regcode=${ApiService.shared.regCode}",
-                                )
+                                ),
                               ],
                             ),
                             InfoContentView(
@@ -210,7 +210,7 @@ class _PetListScreenState extends State<PetListScreen> {
                                           TableCellVerticalAlignment.baseline,
                                       columnWidths: const {
                                         0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3)
+                                        1: FlexColumnWidth(3),
                                       },
                                       children: [
                                         ...listContent.map<TableRow>((i) {
@@ -253,12 +253,12 @@ class _PetListScreenState extends State<PetListScreen> {
                                                               path: o,
                                                               width: 60,
                                                             ),
-                                                          )
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
                                                   ),
-                                                )
+                                                ),
                                               ],
                                             );
                                           }
@@ -284,10 +284,10 @@ class _PetListScreenState extends State<PetListScreen> {
                                                   i.content ?? "",
                                                   style: i.contentStyle,
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           );
-                                        })
+                                        }),
                                       ],
                                     ),
                                   ),
@@ -309,7 +309,7 @@ class _PetListScreenState extends State<PetListScreen> {
                                           buttonType: ButtonType.secondary,
                                           secondaryBackgroundColor: redColor5,
                                           textColor: redColorBase,
-                                        )
+                                        ),
                                       ],
                                     ),
                                   if (e.pet_status == "NEW")

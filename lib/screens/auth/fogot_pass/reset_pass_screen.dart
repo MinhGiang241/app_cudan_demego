@@ -91,7 +91,7 @@ class ResetPassScreen extends StatelessWidget {
                     text: S.of(context).confirm,
                     // isLoading: context.watch<ResetPassPrv>().isLoading,
                     width: double.infinity,
-                  )
+                  ),
                 ],
               ),
             ),

@@ -212,7 +212,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           regDate = DateTime.now();
         }
 
-        var isOwner = (apartment.type == 'BUY' || apartment.type == "RENT");
+        var isOwner = (apartment.type == 'BUY');
         var isDepositPaid = (depositFee == 0);
 
         ConstructionRegistration conReg = ConstructionRegistration(

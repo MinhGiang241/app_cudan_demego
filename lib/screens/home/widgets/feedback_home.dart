@@ -39,7 +39,7 @@ class FeedbackHome extends StatelessWidget {
                         blurRadius: 24,
                         color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
-                      )
+                      ),
                     ],
                   ),
                   child: PrimaryIcon(
@@ -60,7 +60,7 @@ class FeedbackHome extends StatelessWidget {
                   S.of(context).reflex,
                   textAlign: TextAlign.center,
                   style: txtBodySmallBold(color: grayScaleColorBase),
-                )
+                ),
               ],
             ),
           ),
@@ -77,7 +77,7 @@ class FeedbackHome extends StatelessWidget {
                         blurRadius: 24,
                         color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
-                      )
+                      ),
                     ],
                   ),
                   child: PrimaryIcon(
@@ -101,11 +101,11 @@ class FeedbackHome extends StatelessWidget {
                   S.of(context).resident_reg,
                   textAlign: TextAlign.center,
                   style: txtBodySmallBold(color: grayScaleColorBase),
-                )
+                ),
               ],
             ),
           ),
-          hpad(85)
+          hpad(85),
         ],
       ),
       //  Row(

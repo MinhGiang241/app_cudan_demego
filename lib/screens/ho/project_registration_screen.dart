@@ -51,7 +51,7 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
             },
             icon: const Icon(Icons.logout),
           ),
-          hpad(12)
+          hpad(12),
         ],
       ),
       body: SafeArea(
@@ -230,10 +230,10 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
                                               12,
                                               grayScaleColor3,
                                             ),
-                                          )
+                                          ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             );
@@ -253,7 +253,7 @@ class _ProjectRegistrationScreenState extends State<ProjectRegistrationScreen> {
               text: S.of(context).create_reg_proj,
               icon: Icon(Icons.add, color: Colors.white, size: 24),
             ),
-            vpad(10)
+            vpad(10),
           ],
         ),
       ),

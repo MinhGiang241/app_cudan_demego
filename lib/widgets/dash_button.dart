@@ -34,7 +34,7 @@ class DashButton extends StatelessWidget {
               ),
               if (isRequired) hpad(4),
               if (isRequired)
-                Text("*", style: txtBodySmallRegular(color: redColor1))
+                Text("*", style: txtBodySmallRegular(color: redColor1)),
             ],
           ),
         if (lable != null) vpad(8),

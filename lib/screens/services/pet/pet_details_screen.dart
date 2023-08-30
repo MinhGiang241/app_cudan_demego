@@ -267,7 +267,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                                                             textAlign: TextAlign
                                                                 .center,
                                                           ),
-                                                          hpad(50)
+                                                          hpad(50),
                                                         ],
                                                       ),
                                                       Padding(
@@ -308,7 +308,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                   ],
                 ),
               ),
-              vpad(bottomSafePad(context) + 24)
+              vpad(bottomSafePad(context) + 24),
             ],
           ),
           FutureBuilder(
@@ -350,11 +350,11 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                           )
                           .toList(),
                     ),
-                  )
+                  ),
                 ],
               );
             },
-          )
+          ),
         ],
       ),
     );

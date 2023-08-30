@@ -1349,6 +1349,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_confirm_letter":
             MessageLookupByLibrary.simpleMessage("Wait confirm letter"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Wait execute"),
+        "wait_extend_letter":
+            MessageLookupByLibrary.simpleMessage("wait confirm extend letter"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Wait to find"),
         "wait_hand_over":
             MessageLookupByLibrary.simpleMessage("Wait to hand over"),

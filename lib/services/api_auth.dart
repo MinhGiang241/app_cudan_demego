@@ -214,7 +214,7 @@ class APIAuth {
         final mpf = await MultipartFile.fromFile(files[i].path);
         final map = {
           'file': [mpf],
-          'name': files[i].path.split('/').last
+          'name': files[i].path.split('/').last,
         };
         final body = FormData.fromMap(map);
         final data = await ApiService.shared.postApi(
@@ -312,7 +312,7 @@ class APIAuth {
         'name': name,
         'email': email,
         'password': passWord,
-        'confirmPassword': confirmPassword
+        'confirmPassword': confirmPassword,
       },
     );
 

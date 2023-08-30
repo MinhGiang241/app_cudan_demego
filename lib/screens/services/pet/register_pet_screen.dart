@@ -147,7 +147,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                             filter: [
                               FilteringTextInputFormatter.deny(
                                 RegExp(r'''[0123456789]'''),
-                              )
+                              ),
                             ],
                             maxLength: 100,
                             controller:
@@ -216,7 +216,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                             filter: [
                               FilteringTextInputFormatter.allow(
                                 RegExp(r'[0-9.]'),
-                              )
+                              ),
                             ],
                             controller:
                                 context.read<RegisterPetPrv>().weightController,
@@ -349,7 +349,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               ],
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     if (context.watch<RegisterPetPrv>().isShow) vpad(16),

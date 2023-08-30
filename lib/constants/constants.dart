@@ -121,7 +121,7 @@ final gradientPrimary = LinearGradient(
 final gradientPrimaryGreen = LinearGradient(
   colors: [
     const Color(0xff40BD45).withOpacity(1),
-    const Color(0xff40BD45).withOpacity(0.8)
+    const Color(0xff40BD45).withOpacity(0.8),
   ],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
@@ -129,7 +129,7 @@ final gradientPrimaryGreen = LinearGradient(
 final gradientPrimaryCyan = LinearGradient(
   colors: [
     const Color(0xff4286C3).withOpacity(1),
-    const Color(0xff4286C3).withOpacity(0.8)
+    const Color(0xff4286C3).withOpacity(0.8),
   ],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
@@ -137,7 +137,7 @@ final gradientPrimaryCyan = LinearGradient(
 final gradientPrimaryGreen2 = LinearGradient(
   colors: [
     const Color(0xff23D2C3).withOpacity(1),
-    const Color(0xff23D2C3).withOpacity(0.8)
+    const Color(0xff23D2C3).withOpacity(0.8),
   ],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
@@ -145,7 +145,7 @@ final gradientPrimaryGreen2 = LinearGradient(
 final gradientPrimaryRed = LinearGradient(
   colors: [
     const Color(0xffFF4141).withOpacity(1),
-    const Color(0xffFF4141).withOpacity(0.8)
+    const Color(0xffFF4141).withOpacity(0.8),
   ],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
@@ -153,7 +153,7 @@ final gradientPrimaryRed = LinearGradient(
 final gradientPrimaryWhite = LinearGradient(
   colors: [
     const Color(0xffFFFFFF).withOpacity(0.9),
-    const Color(0xffFFFFFF).withOpacity(0.7)
+    const Color(0xffFFFFFF).withOpacity(0.7),
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -161,7 +161,7 @@ final gradientPrimaryWhite = LinearGradient(
 final gradientPrimaryBlack = LinearGradient(
   colors: [
     const Color(0xff4E4B66).withOpacity(0.9),
-    const Color(0xffA0A3BD).withOpacity(0.9)
+    const Color(0xffA0A3BD).withOpacity(0.9),
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,

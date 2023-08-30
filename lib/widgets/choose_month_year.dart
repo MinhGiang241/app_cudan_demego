@@ -86,7 +86,7 @@ class _ChooseMonthYearState extends State<ChooseMonthYear> {
                       style: txtBodySmallBold(color: grayScaleColorBase),
                       textAlign: TextAlign.left,
                     ),
-                    const Icon(Icons.expand_more)
+                    const Icon(Icons.expand_more),
                   ],
                 ),
               ),

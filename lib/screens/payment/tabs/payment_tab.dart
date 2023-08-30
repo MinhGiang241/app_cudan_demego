@@ -96,7 +96,7 @@ class _PaymentTabState extends State<PaymentTab> {
                           action: () {},
                         ),
                       ),
-                      vpad(50)
+                      vpad(50),
                     ],
                   )
                 : ListView(
@@ -139,7 +139,7 @@ class _PaymentTabState extends State<PaymentTab> {
                                   .onSelect(e.key),
                             ),
                           ),
-                      vpad(80)
+                      vpad(80),
                     ],
                   ),
           ),
@@ -161,14 +161,14 @@ class _PaymentTabState extends State<PaymentTab> {
                       arguments: {
                         "list": e,
                         "year": context.read<PaymentListPrv>().year,
-                        "month": context.read<PaymentListPrv>().month
+                        "month": context.read<PaymentListPrv>().month,
                       },
                     );
                   }
                 },
               ),
             ),
-          )
+          ),
       ],
     );
   }

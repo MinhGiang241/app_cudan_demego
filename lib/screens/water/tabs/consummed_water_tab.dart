@@ -95,7 +95,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
               title: "${S.of(context).month} ${(index + 1).toString()}",
               num: dataLast[(index + 1).toString()] ?? 0,
             ),
-          )
+          ),
         ];
 
         List<ChartDataViewModel> dataCharCurrent = [
@@ -105,7 +105,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
               title: monthList[index],
               num: dataCurent[(index + 1).toString()] ?? 0,
             ),
-          )
+          ),
         ];
 
         return SmartRefresher(
@@ -208,7 +208,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                         // ),
                         ColumnSeries<ChartDataViewModel, String>(
                           initialSelectedDataIndexes: [
-                            context.read<WaterPrv>().month! - 1
+                            context.read<WaterPrv>().month! - 1,
                           ],
                           dataLabelMapper: (datum, index) {
                             return ('${datum.num?.toStringAsFixed(0)}');

@@ -61,7 +61,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                   style: PrimaryIconStyle.none,
                                 )
                               else
-                                vpad(32)
+                                vpad(32),
                             ],
                           ),
                         ),
@@ -94,7 +94,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                 const PrimaryIcon(
                                   icons: PrimaryIcons.check,
                                   style: PrimaryIconStyle.none,
-                                )
+                                ),
                             ],
                           ),
                         ),
@@ -104,7 +104,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

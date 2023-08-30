@@ -1,10 +1,9 @@
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/models/info_content_view.dart';
-import 'package:app_cudan/screens/services/construction/prv/construction_list_prv.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../generated/l10n.dart';
@@ -15,9 +14,10 @@ import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_loading.dart';
 import '../construction_extend_screen.dart';
+import '../prv/construction_list_prv.dart';
 
-class ConstructionExtendTab extends StatefulWidget {
-  const ConstructionExtendTab({
+class ConstructionExtendWaitTab extends StatefulWidget {
+  const ConstructionExtendWaitTab({
     super.key,
     required this.getList,
     required this.list,
@@ -27,10 +27,11 @@ class ConstructionExtendTab extends StatefulWidget {
   final Function(BuildContext) getList;
 
   @override
-  State<ConstructionExtendTab> createState() => _ConstructionExtendTabState();
+  State<ConstructionExtendWaitTab> createState() =>
+      _ConstructionExtendWaitTabState();
 }
 
-class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
+class _ConstructionExtendWaitTabState extends State<ConstructionExtendWaitTab> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   @override
@@ -276,24 +277,37 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                               ],
                             ),
                           ),
-                          if (e.status == 'WAIT_OWNER' ||
-                              e.status == "WAIT_TECHNICAL")
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                hpad(10),
-                                PrimaryButton(
-                                  onTap: () => context
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              hpad(10),
+                              PrimaryButton(
+                                onTap: () {
+                                  context
                                       .read<ConstructionListPrv>()
-                                      .cancelConstructionExtension(context, e),
-                                  text: S.of(context).cancel_letter,
-                                  buttonSize: ButtonSize.xsmall,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: redColor5,
-                                  textColor: redColorBase,
-                                ),
-                              ],
-                            ),
+                                      .changeStatus(context, false, e);
+                                },
+                                text: S.of(context).refuse,
+                                buttonSize: ButtonSize.xsmall,
+                                buttonType: ButtonType.secondary,
+                                secondaryBackgroundColor: redColor5,
+                                textColor: redColorBase,
+                              ),
+                              hpad(10),
+                              PrimaryButton(
+                                onTap: () {
+                                  context
+                                      .read<ConstructionListPrv>()
+                                      .changeStatus(context, true, e);
+                                },
+                                text: S.of(context).confirm,
+                                buttonSize: ButtonSize.xsmall,
+                                buttonType: ButtonType.secondary,
+                                secondaryBackgroundColor: greenColor7,
+                                textColor: greenColor8,
+                              ),
+                            ],
+                          ),
                           vpad(16),
                         ],
                       ),

@@ -54,7 +54,7 @@ class NewsHome extends StatelessWidget {
         ),
         vpad(16),
         SizedBox(
-          height: 250,
+          height: 252,
           child: ListView.builder(
             itemCount: newList.length,
             clipBehavior: Clip.none,

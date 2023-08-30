@@ -105,7 +105,7 @@ class _LootItemDetailsScreenState extends State<LootItemDetailsScreen> {
                           "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                     ),
                   ],
-                )
+                ),
             ],
           ),
           // vpad(30),

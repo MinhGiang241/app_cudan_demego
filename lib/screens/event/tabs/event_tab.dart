@@ -131,7 +131,7 @@ class _EventTabState extends State<EventTab> {
                                     'event': e.value,
                                     'part': () => context
                                         .read<EventTabPrv>()
-                                        .onParticipate(e.key)
+                                        .onParticipate(e.key),
                                   },
                                 );
                               },

@@ -44,7 +44,7 @@ class ServicesHome extends StatelessWidget {
                         blurRadius: 24,
                         color: demepro2.withOpacity(0.25),
                         offset: const Offset(0, 16),
-                      )
+                      ),
                     ],
                   ),
                   child: PrimaryIcon(
@@ -67,7 +67,7 @@ class ServicesHome extends StatelessWidget {
                   S.of(context).parking_card,
                   textAlign: TextAlign.center,
                   style: txtBodySmallBold(color: grayScaleColorBase),
-                )
+                ),
               ],
             ),
           ),
@@ -86,7 +86,7 @@ class ServicesHome extends StatelessWidget {
                               blurRadius: 24,
                               color: demepro2.withOpacity(0.25),
                               offset: const Offset(0, 16),
-                            )
+                            ),
                           ],
                         ),
                         child: PrimaryIcon(
@@ -107,7 +107,7 @@ class ServicesHome extends StatelessWidget {
                         S.of(context).res_card,
                         textAlign: TextAlign.center,
                         style: txtBodySmallBold(color: grayScaleColorBase),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -127,7 +127,7 @@ class ServicesHome extends StatelessWidget {
                               blurRadius: 24,
                               color: demepro2.withOpacity(0.25),
                               offset: const Offset(0, 16),
-                            )
+                            ),
                           ],
                         ),
                         child: PrimaryIcon(
@@ -148,7 +148,7 @@ class ServicesHome extends StatelessWidget {
                         S.of(context).reg_deliver,
                         textAlign: TextAlign.center,
                         style: txtBodySmallBold(color: grayScaleColorBase),
-                      )
+                      ),
                     ],
                   ),
                 ),

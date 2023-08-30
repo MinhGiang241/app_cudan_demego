@@ -60,7 +60,7 @@ class PrimaryCard extends StatelessWidget {
                         blurRadius: 32,
                         color: shadowColor.withOpacity(0.12),
                         offset: const Offset(0, 8),
-                      )
+                      ),
                     ]
                   : null,
             ),

@@ -84,7 +84,7 @@ class _ElectricityScreenState extends State<ElectricityScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           body: SafeArea(

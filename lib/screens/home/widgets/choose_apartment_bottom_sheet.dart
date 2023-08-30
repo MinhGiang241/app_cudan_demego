@@ -65,7 +65,7 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                                     style: txtBodySmallRegular(
                                       color: grayScaleColor2,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -73,7 +73,7 @@ class _ChooseAparmentBottomSheetState extends State<ChooseAparmentBottomSheet> {
                         ),
                       ],
                     ),
-                  )
+                  ),
             ],
           ),
         ),

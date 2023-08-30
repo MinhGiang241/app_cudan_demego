@@ -29,7 +29,7 @@ class ProjectSelectionScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.logout),
           ),
-          hpad(12)
+          hpad(12),
         ],
       ),
       body: Column(
@@ -97,15 +97,15 @@ class ProjectSelectionScreen extends StatelessWidget {
                                 style: txtBodySmallBold(),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

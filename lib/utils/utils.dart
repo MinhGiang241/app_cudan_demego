@@ -219,11 +219,11 @@ class Utils {
                                 },
                                 isSelected: selections[index].isSelected,
                               ),
-                              const Divider(height: 1)
+                              const Divider(height: 1),
                             ],
                           ),
                         ),
-                        vpad(bottomSafePad(context) + 24)
+                        vpad(bottomSafePad(context) + 24),
                       ],
                     ),
                   ),
@@ -368,7 +368,7 @@ class Utils {
                     });
                   },
                 ),
-              vpad(bottomSafePad(context) + 24)
+              vpad(bottomSafePad(context) + 24),
             ],
           ),
         ),
@@ -503,7 +503,7 @@ class Utils {
                     },
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

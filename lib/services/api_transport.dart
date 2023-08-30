@@ -99,7 +99,7 @@ class APITransport {
         "residentId": residentId,
         "apartmentId": apartmentId,
         "isLetter": isLetter,
-        "phone": phone
+        "phone": phone,
       },
     );
 
@@ -559,7 +559,7 @@ mutation (\$data:FormRenewalTransportInputDto ){
       variables: {
         "transportIds": transportIds,
         "shelflifeId": shelflifeId,
-        "isRenew": isRenew
+        "isRenew": isRenew,
       },
     );
 

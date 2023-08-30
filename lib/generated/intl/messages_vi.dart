@@ -1344,6 +1344,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_confirm_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu chờ xác nhận"),
         "wait_execute": MessageLookupByLibrary.simpleMessage("Chờ xử lý"),
+        "wait_extend_letter":
+            MessageLookupByLibrary.simpleMessage("Phiếu gia hạn chờ xác nhận"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
         "wait_hand_over": MessageLookupByLibrary.simpleMessage("Chờ bàn giao"),
         "wait_pay": MessageLookupByLibrary.simpleMessage("Chờ thanh toán"),

@@ -211,7 +211,7 @@ class _PickedItemTabState extends State<PickedItemTab> {
                                                   .baseline,
                                           columnWidths: const {
                                             0: FlexColumnWidth(3),
-                                            1: FlexColumnWidth(3)
+                                            1: FlexColumnWidth(3),
                                           },
                                           children: [
                                             TableRow(
@@ -255,14 +255,14 @@ class _PickedItemTabState extends State<PickedItemTab> {
                                                   style: genLostStyle(
                                                     e.status ?? "",
                                                   ),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

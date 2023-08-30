@@ -229,7 +229,7 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                                                   .baseline,
                                           columnWidths: const {
                                             0: FlexColumnWidth(3),
-                                            1: FlexColumnWidth(2)
+                                            1: FlexColumnWidth(2),
                                           },
                                           children: [
                                             TableRow(
@@ -276,14 +276,14 @@ class _MissingObjectTabState extends State<MissingObjectTab> {
                                                       e.status ?? "",
                                                     ),
                                                   ),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

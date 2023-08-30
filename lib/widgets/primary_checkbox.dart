@@ -31,7 +31,7 @@ class PrimaryCheckBox extends StatelessWidget {
           ),
         ),
         hpad(8),
-        Text(text, style: txtLinkXSmall())
+        Text(text, style: txtLinkXSmall()),
       ],
     );
   }

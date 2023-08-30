@@ -63,7 +63,7 @@ class APIReflection {
     final QueryOptions options = QueryOptions(
       document: gql(query),
       variables: const {
-        "filter": {"limit": 1000}
+        "filter": {"limit": 1000},
       },
     );
 
@@ -99,7 +99,7 @@ class APIReflection {
     final QueryOptions options = QueryOptions(
       document: gql(query),
       variables: const {
-        "filter": {"limit": 1000}
+        "filter": {"limit": 1000},
       },
     );
 

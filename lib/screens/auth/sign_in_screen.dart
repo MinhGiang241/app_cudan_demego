@@ -13,7 +13,6 @@ import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
-import '../account/language/cubit/lang_cubit.dart';
 import 'fogot_pass/phone_num_forgot_pass.dart';
 
 // ignore: must_be_immutable
@@ -115,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     S.of(context).sign_up,
                     style: txtLinkSmall(color: primaryColorBase),
                   ),
-                )
+                ),
               ],
             ),
             vpad(34),
@@ -187,7 +186,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 S.of(context).remember_acc,
                                 style: txtLinkSmall(color: primaryColorBase),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -232,10 +231,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     isLoading: context.watch<SingInPrv>().isLoading,
                     // context.watch<HOAccountServicePrv>().isLoginLoading,
                     width: double.infinity,
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

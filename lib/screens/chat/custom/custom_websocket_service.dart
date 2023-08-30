@@ -29,7 +29,7 @@ class CustomWebSocketService {
     Map msg = {
       'msg': 'connect',
       'version': '1',
-      'support': ['1', 'pre2', 'pre1']
+      'support': ['1', 'pre2', 'pre1'],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -43,8 +43,8 @@ class CustomWebSocketService {
       'method': 'login',
       'id': '17',
       'params': [
-        {'resume': authToken}
-      ]
+        {'resume': authToken},
+      ],
     };
 
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -64,8 +64,8 @@ class CustomWebSocketService {
       'name': 'stream-notify-user',
       'params': [
         user.id! + '/notification',
-        {'useCollection': false, 'args': []}
-      ]
+        {'useCollection': false, 'args': []},
+      ],
     };
 
     logInfo('🚀🚀  streamNotifyUserSubscribe $msg');
@@ -82,7 +82,7 @@ class CustomWebSocketService {
       'msg': 'method',
       'method': 'stream-notify-room',
       'id': '42',
-      'params': ['${room.id}/typing', user.name, true]
+      'params': ['${room.id}/typing', user.name, true],
     };
     logInfo('🚀🚀 streamNotifyRoom ${msg}');
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -96,7 +96,7 @@ class CustomWebSocketService {
       'msg': 'sub',
       'id': channel.id! + 'subscription-id',
       'name': 'stream-room-messages',
-      'params': [channel.id, false]
+      'params': [channel.id, false],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -123,8 +123,8 @@ class CustomWebSocketService {
       'name': 'stream-room-messages',
       'params': [
         room.id,
-        {'useCollection': false, 'args': []}
-      ]
+        {'useCollection': false, 'args': []},
+      ],
     };
     logInfo('🚀🚀  streamRoomMessagesSubscribe $msg');
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -146,7 +146,7 @@ class CustomWebSocketService {
       'msg': 'sub',
       'id': roomId + 'subscription-id',
       'name': 'stream-notify-room',
-      'params': ['$roomId/event']
+      'params': ['$roomId/event'],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -156,7 +156,7 @@ class CustomWebSocketService {
       'msg': 'sub',
       'id': roomId + 'subscription-id',
       'name': 'stream-notify-room',
-      'params': ['$roomId/event']
+      'params': ['$roomId/event'],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -171,8 +171,8 @@ class CustomWebSocketService {
       'method': 'sendMessage',
       'id': '42',
       'params': [
-        {'rid': channel.id, 'msg': message}
-      ]
+        {'rid': channel.id, 'msg': message},
+      ],
     };
 
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -188,8 +188,8 @@ class CustomWebSocketService {
       'method': 'sendMessage',
       'id': '42',
       'params': [
-        {'rid': room.id, 'msg': message}
-      ]
+        {'rid': room.id, 'msg': message},
+      ],
     };
     logInfo('🚀🚀 streamNotifyRoom $msg');
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -203,7 +203,7 @@ class CustomWebSocketService {
       'msg': 'method',
       'method': 'updateMessage',
       'id': '42',
-      'params': [message.toJson()]
+      'params': [message.toJson()],
     };
     logInfo('🚀🚀 streamNotifyRoom $msg');
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -223,7 +223,7 @@ class CustomWebSocketService {
         emoji,
         messageId,
         true,
-      ]
+      ],
     };
     logInfo('🚀🚀 streamNotifyRoom $msg');
     webSocketChannel.sink.add(jsonEncode(msg));
@@ -240,7 +240,7 @@ class CustomWebSocketService {
       'msg': 'method',
       'method': 'UserPresence:setDefaultStatus',
       'id': '101',
-      'params': [status]
+      'params': [status],
     };
     return webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -266,8 +266,8 @@ class CustomWebSocketService {
         'name': 'stream-user-presence',
         'params': [
           '',
-          {'added': userId}
-        ]
+          {'added': userId},
+        ],
       }),
     );
   }
@@ -282,7 +282,7 @@ class CustomWebSocketService {
         room.id, null, 50,
 
         //  { "$date": 1480377601 }
-      ]
+      ],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -295,9 +295,9 @@ class CustomWebSocketService {
       'method': 'livechat:getInitialData',
       'id': '42',
       'params': [
-        'id_user_livechat'
+        'id_user_livechat',
         //  { "$date": 1480377601 }
-      ]
+      ],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -320,7 +320,7 @@ class CustomWebSocketService {
           // "department": "3jMKjTQJxCDxwxxtx"
         }
       ],
-      'id': '5'
+      'id': '5',
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -340,10 +340,10 @@ class CustomWebSocketService {
           '_id': DateTime.now().millisecondsSinceEpoch.toString(),
           'rid': rid,
           'msg': message,
-          'token': token
+          'token': token,
         }
       ],
-      'id': '11'
+      'id': '11',
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -358,9 +358,9 @@ class CustomWebSocketService {
       'msg': 'method',
       'method': 'livechat:sendOfflineMessage',
       'params': [
-        {'name': visitorName, 'email': email, 'message': message}
+        {'name': visitorName, 'email': email, 'message': message},
       ],
-      'id': '3'
+      'id': '3',
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -380,10 +380,10 @@ class CustomWebSocketService {
         {
           'useCollection': false,
           'args': [
-            {'visitorToken': visitorToken}
-          ]
+            {'visitorToken': visitorToken},
+          ],
         }
-      ]
+      ],
     };
     webSocketChannel.sink.add(jsonEncode(msg));
   }
@@ -433,7 +433,7 @@ class CustomWebSocketService {
     }
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(file.path, contentType: contentType),
-      'description': desc
+      'description': desc,
     });
 
     var options = Options(
@@ -469,7 +469,7 @@ class CustomWebSocketService {
     }
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(file.path, contentType: contentType),
-      'description': desc
+      'description': desc,
     });
 
     var options = Options(

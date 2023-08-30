@@ -170,7 +170,7 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                                         widget.onRemoveExist?.call(index);
                                       },
                                     ),
-                                  )
+                                  ),
                               ],
                             ),
                           ),
@@ -202,11 +202,11 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                                         widget.onRemove?.call(e.key);
                                       },
                                     ),
-                                  )
+                                  ),
                               ],
                             ),
                           ),
-                        )
+                        ),
                   ],
                 ),
               ),
@@ -291,13 +291,13 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                         color: Colors.red,
                         size: 25,
                       ),
-                    )
+                    ),
                   ],
                 );
               },
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -114,7 +114,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                           ...card.identity_image!.map(
                             (e) =>
                                 "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                          )
+                          ),
                         ],
                       ),
                     if (card.resident_image != null &&
@@ -125,7 +125,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                           ...card.resident_image!.map(
                             (e) =>
                                 "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                          )
+                          ),
                         ],
                       ),
                     if (card.other_image != null &&
@@ -136,7 +136,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                           ...card.other_image!.map(
                             (e) =>
                                 "${ApiService.shared.uploadURL}${e.id}&regcode=${ApiService.shared.regCode}",
-                          )
+                          ),
                         ],
                       ),
                   ],
@@ -167,7 +167,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                       onTap: () {
                         send(context, card);
                       },
-                    )
+                    ),
                   ],
                 ),
               if (card.ticket_status == "WAIT")
@@ -221,11 +221,11 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                           )
                           .toList(),
                     ),
-                  )
+                  ),
                 ],
               );
             },
-          )
+          ),
         ],
       ),
     );

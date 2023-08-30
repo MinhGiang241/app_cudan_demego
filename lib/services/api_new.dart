@@ -81,7 +81,7 @@ class APINew {
         "limit": limit,
         "skip": skip,
         "type": type,
-        "accountId": accountId
+        "accountId": accountId,
       },
     );
 

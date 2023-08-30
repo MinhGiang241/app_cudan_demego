@@ -170,7 +170,7 @@ class _OtpAddEmailScreenState extends State<OtpAddEmailScreen> {
                     });
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),

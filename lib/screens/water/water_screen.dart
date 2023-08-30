@@ -79,7 +79,7 @@ class _WaterScreenState extends State<WaterScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           body: SafeArea(

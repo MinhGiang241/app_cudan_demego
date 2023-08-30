@@ -399,7 +399,7 @@ class APIConstruction {
       document: gql(query),
       variables: {
         'constructionregistrationId': constructionregistrationId,
-        'residentId': residentId
+        'residentId': residentId,
       },
     );
 
@@ -429,7 +429,7 @@ class APIConstruction {
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: const {
-        'filter': {'limit': 1000}
+        'filter': {'limit': 1000},
       },
     );
 
@@ -586,6 +586,36 @@ mutation (\$data:Dictionary){
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {'data': data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getConstructionExtensionWaitList(
+    String? residentId,
+  ) async {
+    var query = '''
+mutation (\$residentId:String){
+    response: construction_mobile_get_wait_owner_construction_extension (residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+                         
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'residentId': residentId},
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

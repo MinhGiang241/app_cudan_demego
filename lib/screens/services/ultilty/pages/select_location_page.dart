@@ -44,12 +44,12 @@ class SelectLocationPage extends StatelessWidget {
                   Transform.rotate(
                     child: Icon(Icons.expand_more),
                     angle: -math.pi / 2,
-                  )
+                  ),
                 ],
               ),
             ),
           );
-        })
+        }),
       ],
     );
   }

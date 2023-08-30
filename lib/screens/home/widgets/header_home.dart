@@ -67,7 +67,7 @@ class _HeaderHomeState extends State<HeaderHome> {
                         userInfo.info_name ?? userInfo.account?.fullName ?? '',
                         style: txtLinkMedium(),
                         overflow: TextOverflow.ellipsis,
-                      )
+                      ),
                   ],
                 ),
               ],

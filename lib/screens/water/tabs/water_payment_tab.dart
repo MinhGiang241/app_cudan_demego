@@ -139,7 +139,7 @@ class _WaterPaymentTabState extends State<WaterPaymentTab> {
                     ),
                   ],
                 );
-              })
+              }),
               // PaymentItem(
               //   re:,
               //

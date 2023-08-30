@@ -19,6 +19,7 @@ class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionRegistration> listWaitRegistration = [];
   List<ConstructionDocument> listDocument = [];
   List<ConstructionExtension> listExtension = [];
+  List<ConstructionExtension> listWaitExtension = [];
   FixedDateService? fixedDateService;
   var tooltipKey = UniqueKey();
   String s = S.current.cons_reg;
@@ -27,6 +28,22 @@ class ConstructionListPrv extends ChangeNotifier {
   getFixedDate() async {
     await APIConstruction.getFixedDateService().then((v) {
       fixedDateService = FixedDateService.fromMap(v[0]);
+    });
+  }
+
+  getListWaitExtension(BuildContext context) async {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    await APIConstruction.getConstructionExtensionWaitList(residentId)
+        .then((v) {
+      if (v != null) {
+        listWaitExtension.clear();
+        for (var i in v) {
+          listWaitExtension.add(ConstructionExtension.fromMap(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
   }
 
@@ -43,6 +60,127 @@ class ConstructionListPrv extends ChangeNotifier {
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
+  }
+
+  changeStatus(
+    BuildContext context,
+    bool isAccept,
+    ConstructionExtension e,
+  ) async {
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).cancel_letter,
+      content: isAccept
+          ? S.of(context).confirm_accept_letter(e.code ?? "")
+          : S.of(context).confirm_cancel_cons_ext(e.code ?? ''),
+      onConfirm: () async {
+        Navigator.pop(context);
+        var card = e.copyWith();
+        if (isAccept) {
+          card.status = 'WAIT_TECHNICAL';
+          await APIConstruction.changeStatusConstructionExtension(card.toMap())
+              .then((v) {
+            Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_cancel_cons_ext,
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  ConstructionListScreen.routeName,
+                  (route) => route.isFirst,
+                  arguments: {
+                    'index': 3,
+                  },
+                );
+              },
+            );
+          }).catchError((e) {
+            Utils.showErrorMessage(context, e);
+          });
+        } else {
+          card.status = 'CANCEL';
+          card.cancel_reason = 'CHUHOTUCHOI';
+          TextEditingController noteController = TextEditingController();
+          Utils.showDialog(
+            context: context,
+            dialog: PrimaryDialog.custom(
+              content: Column(
+                children: [
+                  PrimaryTextField(
+                    isRequired: true,
+                    background: grayScaleColor4,
+                    label: S.of(context).reason_refuse,
+                    enable: false,
+                    initialValue: S.of(context).owner_refuse,
+                  ),
+                  vpad(10),
+                  PrimaryTextField(
+                    maxLength: 500,
+                    controller: noteController,
+                    maxLines: 3,
+                    label: S.of(context).note,
+                    hint: S.of(context).note,
+                  ),
+                  vpad(20),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: PrimaryButton(
+                          text: S.of(context).cancel,
+                          buttonType: ButtonType.red,
+                          buttonSize: ButtonSize.small,
+                          onTap: () async {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      hpad(10),
+                      Expanded(
+                        flex: 1,
+                        child: PrimaryButton(
+                          text: S.of(context).confirm,
+                          buttonType: ButtonType.primary,
+                          buttonSize: ButtonSize.small,
+                          onTap: () async {
+                            Navigator.pop(context);
+                            card.status = "CANCEL";
+                            card.cancel_reason = "CHUHOTUCHOI";
+                            card.reason_description =
+                                noteController.text.trim();
+                            await APIConstruction
+                                .changeStatusConstructionExtension(
+                              card.toMap(),
+                            ).then((v) {
+                              Utils.showSuccessMessage(
+                                context: context,
+                                e: S.of(context).success_refuse_letter,
+                                onClose: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    ConstructionListScreen.routeName,
+                                    (route) => route.isFirst,
+                                    arguments: {
+                                      "index": 3,
+                                    },
+                                  );
+                                },
+                              );
+                            }).catchError((e) {
+                              Utils.showErrorMessage(context, e);
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   cancelConstructionExtension(
@@ -399,9 +537,9 @@ class ConstructionListPrv extends ChangeNotifier {
                       });
                     },
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

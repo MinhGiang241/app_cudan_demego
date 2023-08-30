@@ -118,7 +118,7 @@ class _HistoryTabState extends State<HistoryTab> {
                             arguments: {
                               "status": e.status,
                               "handover": e,
-                              'vote': false
+                              'vote': false,
                             },
                           );
                         },
@@ -154,7 +154,7 @@ class _HistoryTabState extends State<HistoryTab> {
                                           TableCellVerticalAlignment.baseline,
                                       columnWidths: const {
                                         0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(2)
+                                        1: FlexColumnWidth(2),
                                       },
                                       children: [
                                         TableRow(
@@ -190,14 +190,14 @@ class _HistoryTabState extends State<HistoryTab> {
                                                   e.status as String,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -229,7 +229,7 @@ class _HistoryTabState extends State<HistoryTab> {
                     ],
                   );
                 }),
-                vpad(60)
+                vpad(60),
               ],
             ),
           ),

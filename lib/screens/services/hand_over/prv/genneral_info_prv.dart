@@ -78,7 +78,7 @@ class GeneralInfoPrv extends ChangeNotifier {
           "pass": true,
           "material": "Sứ",
         },
-      ]
+      ],
     },
     {
       "id": 2,
@@ -102,7 +102,7 @@ class GeneralInfoPrv extends ChangeNotifier {
           "pass": true,
           "material": "Sứ",
         },
-      ]
+      ],
     },
     {
       "id": 3,
@@ -126,7 +126,7 @@ class GeneralInfoPrv extends ChangeNotifier {
           "pass": true,
           "material": "Sứ",
         },
-      ]
+      ],
     },
   ];
 }

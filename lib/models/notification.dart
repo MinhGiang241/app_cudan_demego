@@ -103,7 +103,7 @@ class Notification {
       'success': success,
       'sent': sent,
       'read': read,
-      'data': data?.toMap()
+      'data': data?.toMap(),
     };
   }
 

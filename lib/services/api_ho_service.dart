@@ -52,7 +52,7 @@ class ApiHOService {
       if (result.data == null) {
         // throw ("network_connection_err");
         return {
-          "response": {"code": 1, "message": S.current.err_conn}
+          "response": {"code": 1, "message": S.current.err_conn},
         };
       }
       if (result.data?['response']?['message'] == 2) {
@@ -61,7 +61,7 @@ class ApiHOService {
       return result.data!;
     } catch (e) {
       return {
-        "response": {"code": 1, "message": e.toString()}
+        "response": {"code": 1, "message": e.toString()},
       };
     }
   }
@@ -74,7 +74,7 @@ class ApiHOService {
       var options = Options(
         headers: {
           'Authorization': "Bearer ${ApiHOService.shared.access_token}",
-          "Accept": "application/json"
+          "Accept": "application/json",
         },
       );
 

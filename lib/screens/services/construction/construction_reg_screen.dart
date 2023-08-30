@@ -851,7 +851,7 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                                                     TextAlign
                                                                         .center,
                                                               ),
-                                                              hpad(50)
+                                                              hpad(50),
                                                             ],
                                                           ),
                                                           Padding(

@@ -145,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                   Navigator.of(context)
                                       .pushNamed(SignUpScreen.routeName);
                                 },
-                              )
+                              ),
                             ],
                           )
                         : const PrimaryLoading(),

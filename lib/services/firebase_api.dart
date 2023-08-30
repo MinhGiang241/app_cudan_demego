@@ -191,7 +191,7 @@ mutation (\$data: PushDeviceInput){
           "appId": "demepro",
           "device_info": device_info,
           "extra_info": {},
-        }
+        },
       },
     );
 

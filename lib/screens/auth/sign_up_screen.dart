@@ -69,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       S.of(context).sign_in,
                       style: txtLinkSmall(color: primaryColorBase),
                     ),
-                  )
+                  ),
                 ],
               ),
               vpad(34),
@@ -228,7 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );

@@ -37,7 +37,7 @@ class ConnectError extends StatelessWidget {
               buttonSize: ButtonSize.small,
               text: "", // S.of(context).reload,
               onTap: onTap,
-            )
+            ),
           ],
         ),
       ),

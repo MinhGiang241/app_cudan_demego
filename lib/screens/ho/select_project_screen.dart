@@ -62,7 +62,7 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                   },
                   icon: const Icon(Icons.logout),
                 ),
-                hpad(12)
+                hpad(12),
               ],
             ),
             body: SafeArea(
@@ -233,7 +233,7 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                                             ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -250,7 +250,7 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
             ),
           ),
         ),
-        if (loading) Positioned(child: AutoLoginLoading())
+        if (loading) Positioned(child: AutoLoginLoading()),
       ],
     );
   }

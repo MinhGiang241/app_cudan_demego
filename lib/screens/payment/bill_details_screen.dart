@@ -135,14 +135,14 @@ class BillDetailsScreen extends StatelessWidget {
                           "list": [bill],
                           "year": arg['year'],
                           "month": arg['month'],
-                          "navigate": arg['navigate']
+                          "navigate": arg['navigate'],
                         },
                       );
                     },
                     width: dvWidth(context) - 24,
                     text: S.of(context).pay,
                   ),
-                vpad(30)
+                vpad(30),
               ],
             ),
           ),

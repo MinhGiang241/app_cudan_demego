@@ -65,7 +65,7 @@ class CreateReflection extends StatelessWidget {
                 DropdownMenuItem(
                   value: 'FEEDBACK',
                   child: Text(S.of(context).feedback),
-                )
+                ),
               ];
               var listAreaType = [
                 DropdownMenuItem(
@@ -75,7 +75,7 @@ class CreateReflection extends StatelessWidget {
                 DropdownMenuItem(
                   value: 'BUILDING',
                   child: Text(S.of(context).building),
-                )
+                ),
               ];
 
               return SafeArea(

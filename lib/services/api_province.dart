@@ -29,7 +29,7 @@ class APIProvince {
     final QueryOptions options = QueryOptions(
       document: gql(query),
       variables: const {
-        "filter": {"limit": 1000}
+        "filter": {"limit": 1000},
       },
     );
 
@@ -117,7 +117,7 @@ class APIProvince {
     final QueryOptions options = QueryOptions(
       document: gql(query),
       variables: const {
-        "filter": {"limit": 60}
+        "filter": {"limit": 60},
       },
     );
 
@@ -151,7 +151,7 @@ class APIProvince {
     final QueryOptions options = QueryOptions(
       document: gql(query),
       variables: const {
-        "filter": {"limit": 1000}
+        "filter": {"limit": 1000},
       },
     );
 

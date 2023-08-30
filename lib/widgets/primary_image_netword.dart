@@ -190,7 +190,7 @@ class PrimaryImageNetwork extends StatelessWidget {
                             ),
                             vpad(6),
                             if (fileName != null)
-                              Text(fileName!, style: txtBold(12, Colors.white))
+                              Text(fileName!, style: txtBold(12, Colors.white)),
                           ],
                         );
                       }
@@ -205,7 +205,7 @@ class PrimaryImageNetwork extends StatelessWidget {
                             ),
                             vpad(6),
                             if (fileName != null)
-                              Text(fileName!, style: txtBold(12, Colors.white))
+                              Text(fileName!, style: txtBold(12, Colors.white)),
                           ],
                         );
                       }
@@ -220,7 +220,7 @@ class PrimaryImageNetwork extends StatelessWidget {
                             ),
                             vpad(6),
                             if (fileName != null)
-                              Text(fileName!, style: txtBold(12, Colors.white))
+                              Text(fileName!, style: txtBold(12, Colors.white)),
                           ],
                         );
                       }
@@ -235,7 +235,7 @@ class PrimaryImageNetwork extends StatelessWidget {
                             ),
                             vpad(6),
                             if (fileName != null)
-                              Text(fileName!, style: txtBold(12, Colors.white))
+                              Text(fileName!, style: txtBold(12, Colors.white)),
                           ],
                         );
                       }
@@ -365,7 +365,7 @@ class _PhotoViewerState extends State<PhotoViewer> {
                   color: Colors.white,
                 ),
               ),
-            )
+            ),
         ],
       ),
       body: Column(

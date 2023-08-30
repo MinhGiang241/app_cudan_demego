@@ -99,7 +99,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
               ),
             if (widget.isRequired) hpad(4),
             if (widget.isRequired)
-              Text("*", style: txtBodySmallRegular(color: redColorBase))
+              Text("*", style: txtBodySmallRegular(color: redColorBase)),
           ],
         ),
         if (widget.label != null) vpad(8),
@@ -265,7 +265,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                     return hpad(0);
                   }
                 },
-              )
+              ),
             ],
           ),
         if (!widget.isMultiple)
@@ -381,7 +381,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
               widget.validateString!,
               style: txtRegular(13, redColorBase),
             ),
-          )
+          ),
       ],
     );
   }

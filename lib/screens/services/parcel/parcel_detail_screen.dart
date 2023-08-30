@@ -70,7 +70,7 @@ class _ParcelDetailsScreenState extends State<ParcelDetailsScreen> {
                     ...arg.image!.map(
                       (e) =>
                           "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
-                    )
+                    ),
                   ],
                 ),
             ],

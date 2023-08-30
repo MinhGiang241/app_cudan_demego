@@ -175,7 +175,7 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                             TableCellVerticalAlignment.baseline,
                                         columnWidths: const {
                                           0: FlexColumnWidth(4),
-                                          1: FlexColumnWidth(5)
+                                          1: FlexColumnWidth(5),
                                         },
                                         children: [
                                           TableRow(
@@ -200,7 +200,7 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                                     greenColorBase,
                                                   ),
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                           TableRow(
@@ -225,14 +225,14 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                                     greenColorBase,
                                                   ),
                                                 ),
-                                              )
+                                              ),
                                             ],
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -246,7 +246,7 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                   TableCellVerticalAlignment.baseline,
                               columnWidths: const {
                                 0: FlexColumnWidth(4),
-                                1: FlexColumnWidth(6)
+                                1: FlexColumnWidth(6),
                               },
                               children: [
                                 ...listContent.map<TableRow>((i) {
@@ -268,13 +268,13 @@ class _ConstructionFileTabState extends State<ConstructionFileTab> {
                                           i.content ?? "",
                                           style: i.contentStyle,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   );
-                                })
+                                }),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

@@ -188,7 +188,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                       '${formatter.format(indi?.water_consumption ?? 0)} m³',
                                       style: txtBold(14, redColorBase),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               vpad(12),
@@ -214,7 +214,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                         14,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               vpad(12),
@@ -348,7 +348,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

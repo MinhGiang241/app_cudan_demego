@@ -263,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 14,
                                                 grayScaleColorBase,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -318,7 +318,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 14,
                                                 grayScaleColorBase,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -330,7 +330,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     messageState: state,
                                     messageBloc: bloc,
                                   ),
-                                vpad(10)
+                                vpad(10),
                               ],
                             );
                           } else if (snapshot.connectionState ==
@@ -446,7 +446,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               14,
                                               grayScaleColorBase,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -499,7 +499,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                               14,
                                               grayScaleColorBase,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -511,7 +511,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   messageState: state,
                                   messageBloc: bloc,
                                 ),
-                              vpad(10)
+                              vpad(10),
                             ],
                           );
                         } else if (snapshot.connectionState ==

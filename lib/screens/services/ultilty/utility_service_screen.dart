@@ -142,7 +142,7 @@ class _UtilityServiceScreenState extends State<UtilityServiceScreen> {
                                       TableCellVerticalAlignment.baseline,
                                   columnWidths: const {
                                     0: FlexColumnWidth(2),
-                                    1: FlexColumnWidth(3)
+                                    1: FlexColumnWidth(3),
                                   },
                                   children: [
                                     ...listContent.map<TableRow>((i) {
@@ -167,10 +167,10 @@ class _UtilityServiceScreenState extends State<UtilityServiceScreen> {
                                               i.content ?? "",
                                               style: i.contentStyle,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       );
-                                    })
+                                    }),
                                   ],
                                 ),
                               ),

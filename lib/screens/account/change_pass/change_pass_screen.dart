@@ -139,11 +139,11 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                         isLoading: context.watch<ChangePassPrv>().isLoading,
                         text: S.of(context).confirm,
                       ),
-                      vpad(40)
+                      vpad(40),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );

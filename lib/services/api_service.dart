@@ -179,7 +179,7 @@ class ApiService {
       options = Options(
         headers: {
           'Authorization': "Bearer ${accessToken}",
-          "Accept": "application/json"
+          "Accept": "application/json",
         },
       );
       //   var client = await getExistClient();
@@ -240,7 +240,7 @@ class ApiService {
       } else {
         return {
           "status": "internet_error",
-          "message": "network_connection_err"
+          "message": "network_connection_err",
         };
       }
     }
@@ -270,7 +270,7 @@ class ApiService {
           options = Options(
             headers: {
               'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
+              "Accept": "application/json",
             },
           );
         } else {
@@ -279,7 +279,7 @@ class ApiService {
           options = Options(
             headers: {
               'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
+              "Accept": "application/json",
             },
           );
         }
@@ -301,7 +301,7 @@ class ApiService {
       } else {
         return {
           "status": "internet_error",
-          "message": "network_connection_err"
+          "message": "network_connection_err",
         };
       }
     }
@@ -333,7 +333,7 @@ class ApiService {
           options = Options(
             headers: {
               'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
+              "Accept": "application/json",
             },
           );
         } else {
@@ -342,7 +342,7 @@ class ApiService {
           options = Options(
             headers: {
               'Authorization': "Bearer ${client.credentials.accessToken}",
-              "Accept": "application/json"
+              "Accept": "application/json",
             },
           );
         }
@@ -364,7 +364,7 @@ class ApiService {
       } else {
         return {
           "status": "internet_error",
-          "message": "network_connection_err"
+          "message": "network_connection_err",
         };
       }
     }
@@ -435,7 +435,7 @@ class ApiService {
       final result = await cl.query(options);
       if (result.data == null) {
         return {
-          "response": {"code": 1, "message": S.current.err_conn, "data": null}
+          "response": {"code": 1, "message": S.current.err_conn, "data": null},
         };
       }
       if (result.data?['response']?['message'] == 2) {
@@ -445,11 +445,11 @@ class ApiService {
     } on OperationException catch (e) {
       if (e.toString() == "RELOGIN") {
         return {
-          "response": {"code": 2, "message": e.toString(), "data": null}
+          "response": {"code": 2, "message": e.toString(), "data": null},
         };
       }
       return {
-        "response": {"code": 1, "message": e.toString(), "data": null}
+        "response": {"code": 1, "message": e.toString(), "data": null},
       };
     }
   }
@@ -464,7 +464,7 @@ class ApiService {
       if (result.data == null) {
         // throw ("network_connection_err");
         return {
-          "response": {"code": 1, "message": S.current.err_conn}
+          "response": {"code": 1, "message": S.current.err_conn},
         };
       }
       if (result.data?['response']?['message'] == 2) {
@@ -473,7 +473,7 @@ class ApiService {
       return result.data!;
     } catch (e) {
       return {
-        "response": {"code": 1, "message": e.toString()}
+        "response": {"code": 1, "message": e.toString()},
       };
     }
   }

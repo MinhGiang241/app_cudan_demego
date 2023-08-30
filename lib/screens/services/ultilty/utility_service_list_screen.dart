@@ -80,7 +80,7 @@ class _UtilityServiceListScreenState extends State<UtilityServiceListScreen> {
                                 arguments: {
                                   "service": e,
                                   "year": DateTime.now().year,
-                                  "month": DateTime.now().month
+                                  "month": DateTime.now().month,
                                 },
                               );
                             },
@@ -123,7 +123,7 @@ class _UtilityServiceListScreenState extends State<UtilityServiceListScreen> {
                                             0,
                                             16,
                                           ),
-                                        )
+                                        ),
                                       ],
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(
@@ -158,7 +158,7 @@ class _UtilityServiceListScreenState extends State<UtilityServiceListScreen> {
                                       style: txtBold(13),
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

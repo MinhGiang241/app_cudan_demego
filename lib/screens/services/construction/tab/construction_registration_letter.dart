@@ -259,10 +259,10 @@ class _ConstructionRegistrationLetterTabState
                                               ),
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -276,7 +276,7 @@ class _ConstructionRegistrationLetterTabState
                                     TableCellVerticalAlignment.baseline,
                                 columnWidths: const {
                                   0: FlexColumnWidth(4),
-                                  1: FlexColumnWidth(6)
+                                  1: FlexColumnWidth(6),
                                 },
                                 children: [
                                   ...listContent.map<TableRow>((i) {
@@ -301,10 +301,10 @@ class _ConstructionRegistrationLetterTabState
                                             i.content ?? '',
                                             style: i.contentStyle,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     );
-                                  })
+                                  }),
                                 ],
                               ),
                             ),
@@ -325,7 +325,7 @@ class _ConstructionRegistrationLetterTabState
                                     buttonType: ButtonType.secondary,
                                     secondaryBackgroundColor: redColor5,
                                     textColor: redColorBase,
-                                  )
+                                  ),
                                 ],
                               ),
                             if (e.status == 'NEW')

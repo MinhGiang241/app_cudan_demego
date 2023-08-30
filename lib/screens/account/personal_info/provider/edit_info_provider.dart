@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_element
 
 import 'dart:io';
 
@@ -74,16 +74,17 @@ class EditInfoProvider extends ChangeNotifier {
   save(BuildContext context) async {
     isSaving = true;
     notifyListeners();
+    // ignore: unused_local_variable
     String? link;
     if (avatar != null) {
       //final length = await avatar!.length();
       await APIAuth.uploadImage(
-              context: context,
-              files: [avatar!],
-              onSendProgress: (a, b) {
-                // print(a / b);
-              })
-          .then((value) {
+        context: context,
+        files: [avatar!],
+        onSendProgress: (a, b) {
+          // print(a / b);
+        },
+      ).then((value) {
         link = value.files?[0].url;
       });
     }
@@ -91,36 +92,43 @@ class EditInfoProvider extends ChangeNotifier {
 
   Future selectImage(BuildContext context) async {
     final bool p = await Utils.requestPermistion(
-        context, [Permission.camera, Permission.photos]);
+      context,
+      [Permission.camera, Permission.photos],
+    );
     if (p) {
       Utils.showBottomSheet(
-          context: context,
-          child: PrimaryBottomSheet(
-              child: Column(
+        context: context,
+        child: PrimaryBottomSheet(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               vpad(24),
               ItemSelected(
-                  text: "S.current.camera",
-                  icon: const PrimaryIcon(
-                      icons: PrimaryIcons.camera, color: grayScaleColor2),
-                  onTap: () async {
-                    final xfile = await _imagePicker(ImageSource.camera);
-                    if (xfile != null) {
-                      final file = File(xfile.path);
+                text: "S.current.camera",
+                icon: const PrimaryIcon(
+                  icons: PrimaryIcons.camera,
+                  color: grayScaleColor2,
+                ),
+                onTap: () async {
+                  final xfile = await _imagePicker(ImageSource.camera);
+                  if (xfile != null) {
+                    final file = File(xfile.path);
 
-                      final compressFile = await _cropAndCompressImage(file);
-                      if (compressFile != null) {
-                        avatar = File(compressFile.path);
-                        notifyListeners();
-                        Utils.pop(context);
-                      }
+                    final compressFile = await _cropAndCompressImage(file);
+                    if (compressFile != null) {
+                      avatar = File(compressFile.path);
+                      notifyListeners();
+                      Utils.pop(context);
                     }
-                  }),
+                  }
+                },
+              ),
               ItemSelected(
                 text: "S.current.gallery",
                 icon: const PrimaryIcon(
-                    icons: PrimaryIcons.image, color: grayScaleColor2),
+                  icons: PrimaryIcons.image,
+                  color: grayScaleColor2,
+                ),
                 onTap: () async {
                   final xfile = await _imagePicker(ImageSource.gallery);
                   if (xfile != null) {
@@ -134,9 +142,11 @@ class EditInfoProvider extends ChangeNotifier {
                   }
                 },
               ),
-              vpad(bottomSafePad(context) + 24)
+              vpad(bottomSafePad(context) + 24),
             ],
-          )));
+          ),
+        ),
+      );
     }
   }
 
@@ -152,16 +162,18 @@ class EditInfoProvider extends ChangeNotifier {
       aspectRatioPresets: [CropAspectRatioPreset.square],
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: primaryColorBase,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.square,
-            lockAspectRatio: false),
+          toolbarTitle: 'Cropper',
+          toolbarColor: primaryColorBase,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: false,
+        ),
         IOSUiSettings(
-            title: 'Cropper',
-            rectX: 300,
-            rectY: 300,
-            aspectRatioPickerButtonHidden: true)
+          title: 'Cropper',
+          rectX: 300,
+          rectY: 300,
+          aspectRatioPickerButtonHidden: true,
+        ),
       ],
     );
 
@@ -188,15 +200,20 @@ class EditInfoProvider extends ChangeNotifier {
     if (date != null) {
       initialdate = DateTime.parse(date!);
     }
-    await Utils.showDatePickers(context, initDate: initialdate, onChange: (v) {
-      date = v.toIso8601String();
-      final d = Utils.dateFormat(v.toString(), 0);
-      dateOfBirthController.text = d;
-    }, onDone: (v) {
-      date = v.toIso8601String();
-      final d = Utils.dateFormat(v.toString(), 0);
-      dateOfBirthController.text = d;
-    });
+    await Utils.showDatePickers(
+      context,
+      initDate: initialdate,
+      onChange: (v) {
+        date = v.toIso8601String();
+        final d = Utils.dateFormat(v.toString(), 0);
+        dateOfBirthController.text = d;
+      },
+      onDone: (v) {
+        date = v.toIso8601String();
+        final d = Utils.dateFormat(v.toString(), 0);
+        dateOfBirthController.text = d;
+      },
+    );
   }
 
   selectGender(BuildContext context) async {
@@ -213,26 +230,27 @@ class EditInfoProvider extends ChangeNotifier {
       listSelection[2].isSelected = true;
     }
     Utils.showBottomSelection(
-        context: context,
-        selections: listSelection,
-        onSelection: (index) {
-          genderController.text = listSelection[index].title;
-          if (index == 0) {
-            gender = "Male";
+      context: context,
+      selections: listSelection,
+      onSelection: (index) {
+        genderController.text = listSelection[index].title;
+        if (index == 0) {
+          gender = "Male";
+        }
+        if (index == 1) {
+          gender = "Female";
+        }
+        if (index == 2) {
+          gender = "Other";
+        }
+        for (var i = 0; i < listSelection.length; i++) {
+          if (i == index) {
+            listSelection[i].isSelected = true;
+          } else {
+            listSelection[i].isSelected = false;
           }
-          if (index == 1) {
-            gender = "Female";
-          }
-          if (index == 2) {
-            gender = "Other";
-          }
-          for (var i = 0; i < listSelection.length; i++) {
-            if (i == index) {
-              listSelection[i].isSelected = true;
-            } else {
-              listSelection[i].isSelected = false;
-            }
-          }
-        });
+        }
+      },
+    );
   }
 }

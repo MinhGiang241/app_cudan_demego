@@ -168,7 +168,7 @@ class _HandOverInfoStepState extends State<HandOverInfoStep>
                                       '${handOverCopy.a?.name} - ${handOverCopy.a?.f?.name} - ${handOverCopy.a?.b?.name}'
                                   : handOverCopy.apartmentId!,
                             ),
-                          )
+                          ),
                         ],
                         isDense: false,
                       ),

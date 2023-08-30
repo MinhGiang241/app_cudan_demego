@@ -862,5 +862,6 @@
   "reason": "Lý do",
   "send_extension_success": "Gửi duyệt gia hạn thi công thành công",
   "confirm_cancel_cons_ext": "Bạn có muốn hủy phiếu gia hạn thi công {c}",
-  "success_cancel_cons_ext": "Hủy phiếu gia hạn thi công thành công"
+  "success_cancel_cons_ext": "Hủy phiếu gia hạn thi công thành công",
+  "wait_extend_letter": "Phiếu gia hạn chờ xác nhận"
 }

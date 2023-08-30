@@ -46,7 +46,7 @@ class InfoTable extends StatelessWidget {
               blurRadius: 8,
               color: shadowColor.withOpacity(0.1),
               offset: const Offset(0, 2),
-            )
+            ),
           ],
         ),
         // width: double.infinity,
@@ -96,7 +96,7 @@ class InfoTable extends StatelessWidget {
             ),
             vpad(12),
             if (child != null) child!,
-            if (child != null) vpad(20)
+            if (child != null) vpad(20),
           ],
         ),
       ),

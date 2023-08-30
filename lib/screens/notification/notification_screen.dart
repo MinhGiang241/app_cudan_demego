@@ -129,7 +129,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           ),
                         );
                       },
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -169,7 +169,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       onTap: () => onTapFilter(context, setState),
                     ),
                   ),
-                )
+                ),
               ],
             ),
             body: FutureBuilder(
@@ -334,7 +334,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   ],
                                 ),
                               ),
-                            )
+                            ),
                       ],
                     ),
                   ),

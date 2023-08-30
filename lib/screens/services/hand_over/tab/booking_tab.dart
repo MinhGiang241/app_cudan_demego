@@ -149,7 +149,7 @@ class _BookingTabState extends State<BookingTab> {
                                       TableCellVerticalAlignment.baseline,
                                   columnWidths: const {
                                     0: FlexColumnWidth(2),
-                                    1: FlexColumnWidth(2)
+                                    1: FlexColumnWidth(2),
                                   },
                                   children: [
                                     TableRow(
@@ -181,20 +181,20 @@ class _BookingTabState extends State<BookingTab> {
                                               e.status,
                                             ),
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
                   );
                 }),
-                vpad(60)
+                vpad(60),
               ],
             ),
           ),

@@ -45,7 +45,7 @@ class DetailsBillScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           if (!isPaid)
@@ -61,7 +61,7 @@ class DetailsBillScreen extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
         ],
       ),
     );

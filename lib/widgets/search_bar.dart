@@ -50,7 +50,7 @@ class SearchBar extends StatelessWidget {
                             blurRadius: 32,
                             color: const Color(0xff6575A7).withOpacity(0.08),
                             offset: const Offset(0, 8),
-                          )
+                          ),
                         ],
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white,
@@ -62,7 +62,7 @@ class SearchBar extends StatelessWidget {
                           size: 30,
                         ),
                       ),
-                    )
+                    ),
                 ],
               ),
             ),

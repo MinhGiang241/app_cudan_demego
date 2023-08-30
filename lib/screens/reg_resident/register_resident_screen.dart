@@ -313,7 +313,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                                     .baseline,
                                             columnWidths: const {
                                               0: FlexColumnWidth(4),
-                                              1: FlexColumnWidth(6)
+                                              1: FlexColumnWidth(6),
                                             },
                                             children: [
                                               ...listContent.map<TableRow>((i) {
@@ -340,10 +340,10 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                                         i.content ?? '',
                                                         style: i.contentStyle,
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 );
-                                              })
+                                              }),
                                             ],
                                           ),
                                         ),
@@ -373,7 +373,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                                 secondaryBackgroundColor:
                                                     redColor5,
                                                 textColor: redColorBase,
-                                              )
+                                              ),
                                             ],
                                           ),
                                         vpad(16),
@@ -382,7 +382,7 @@ class _RegisterResidentScreenState extends State<RegisterResidentScreen> {
                                   ),
                                 );
                               }),
-                            if (list.isNotEmpty) vpad(60)
+                            if (list.isNotEmpty) vpad(60),
                           ],
                         ),
                       ),

@@ -1,4 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: require_trailing_commas
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'intl/messages_all.dart';
@@ -8675,6 +8677,16 @@ class S {
     return Intl.message(
       'Cancel construcion extension letter successfully',
       name: 'success_cancel_cons_ext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wait confirm extend letter`
+  String get wait_extend_letter {
+    return Intl.message(
+      'wait confirm extend letter',
+      name: 'wait_extend_letter',
       desc: '',
       args: [],
     );

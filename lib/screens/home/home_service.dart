@@ -33,7 +33,7 @@ class HomeServices extends StatelessWidget {
             PaymentListScreen.routeName,
             arguments: {'year': null, 'month': null, 'index': null},
           );
-        }
+        },
       },
       if (isResient)
         {
@@ -46,7 +46,7 @@ class HomeServices extends StatelessWidget {
               WaterScreen.routeName,
               arguments: {'year': null, 'month': null, 'index': null},
             );
-          }
+          },
         },
       if (isResient)
         {
@@ -58,7 +58,7 @@ class HomeServices extends StatelessWidget {
             Navigator.of(context).pushNamed(
               ElectricityScreen.routeName,
             );
-          }
+          },
         },
       {
         "icon": PrimaryIcons.car,
@@ -67,7 +67,7 @@ class HomeServices extends StatelessWidget {
         "arg": null,
         'tap': () {
           Navigator.of(context).pushNamed(ServiceScreen.routeName);
-        }
+        },
       },
       {
         "icon": PrimaryIcons.gym,
@@ -79,7 +79,7 @@ class HomeServices extends StatelessWidget {
             UtilityServiceListScreen.routeName,
             arguments: {'year': null, 'month': null, 'index': null},
           );
-        }
+        },
       },
       {
         if (isResient) "icon": PrimaryIcons.mail,
@@ -88,7 +88,7 @@ class HomeServices extends StatelessWidget {
         "arg": null,
         "tap": () {
           Navigator.of(context).pushNamed(ReflectionScreen.routeName);
-        }
+        },
       },
       if (isResient)
         {
@@ -100,7 +100,7 @@ class HomeServices extends StatelessWidget {
             Navigator.of(context).pushNamed(
               RegisterResidentScreen.routeName,
             );
-          }
+          },
         },
       {
         "icon": PrimaryIcons.news,
@@ -109,7 +109,7 @@ class HomeServices extends StatelessWidget {
         "arg": null,
         "tap": () {
           Navigator.of(context).pushNamed(EventListScreen.routeName);
-        }
+        },
       },
     ];
 

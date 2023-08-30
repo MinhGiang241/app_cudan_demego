@@ -111,7 +111,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
               ),
               if (widget.isRequired) hpad(4),
               if (widget.isRequired && widget.isShow)
-                Text("*", style: txtBodySmallRegular(color: redColorBase))
+                Text("*", style: txtBodySmallRegular(color: redColorBase)),
             ],
           ),
         if (widget.label != null) vpad(8),
@@ -175,7 +175,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                               FilteringTextInputFormatter.deny(
                                 RegExp(r'''[_]'''),
                               ),
-                            ...?widget.filter
+                            ...?widget.filter,
                           ],
                           enabled: widget.enable,
                           autofocus: widget.autoFocus,
@@ -268,7 +268,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                         ),
                       ),
                     ),
-                    if (widget.component != null) widget.component!
+                    if (widget.component != null) widget.component!,
                   ],
                 );
               },
@@ -280,9 +280,9 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                   widget.validateString!,
                   style: txtRegular(13, redColorBase),
                 ),
-              )
+              ),
           ],
-        )
+        ),
       ],
     );
   }

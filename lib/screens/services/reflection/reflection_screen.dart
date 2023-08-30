@@ -92,7 +92,7 @@ class _ReflectionScreenState extends State<ReflectionScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           floatingActionButton: FloatingActionButton(

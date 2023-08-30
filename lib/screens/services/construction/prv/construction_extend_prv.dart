@@ -101,9 +101,14 @@ class ConstructionExtendPrv extends ChangeNotifier {
         var resident = context.read<ResidentInfoPrv>().userInfo;
         var docIndex = fileList.indexWhere((e) => e.code == fileValue);
         var doc = fileList[docIndex];
+        var listOwn = context.read<ResidentInfoPrv>().listOwn;
+        var apartmentIndex =
+            listOwn.indexWhere((v) => v.apartmentId == surfaceValue);
+        var apartment = listOwn[apartmentIndex];
+        var isOwner = apartment.type == 'BUY';
 
         var newExtension = ConstructionExtension(
-          status: 'WAIT',
+          status: isOwner ? "WAIT_TECHNICAL" : "WAIT_OWNER",
           deputy: doc.deputy,
           deputy_phone: doc.deputy_phone,
           residentId: residentId,

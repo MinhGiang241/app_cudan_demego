@@ -241,12 +241,12 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                                 width: dvWidth(context) - 24,
                                 text: S.of(context).pay,
                               ),
-                            vpad(30)
+                            vpad(30),
                           ],
                         ),
                       );
                     },
-                  )
+                  ),
                 ],
               ),
             ),

@@ -42,7 +42,6 @@ class _ConstructionExtendScreenState extends State<ConstructionExtendScreen> {
           var listApartmentChoice = context
               .read<ResidentInfoPrv>()
               .listOwn
-              .where((e) => e.type == 'RENT' || e.type == "BUY")
               .map(
                 (i) => DropdownMenuItem(
                   value: i.apartmentId,

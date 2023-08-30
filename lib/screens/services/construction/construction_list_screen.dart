@@ -11,6 +11,7 @@ import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
 import 'construction_reg_screen.dart';
 import 'tab/construction_extend_tab.dart';
+import 'tab/construction_extend_wait_tab.dart';
 import 'tab/construction_file_tab.dart';
 import 'tab/construction_registration_letter.dart';
 import 'prv/construction_list_prv.dart';
@@ -26,7 +27,7 @@ class ConstructionListScreen extends StatefulWidget {
 
 class _ConstructionListScreenState extends State<ConstructionListScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 4, vsync: this);
+  late TabController tabController = TabController(length: 5, vsync: this);
   var initIndex = 0;
   var tooltipKey = UniqueKey();
   StreamController<bool> stream = StreamController.broadcast();
@@ -104,6 +105,7 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
               Tab(text: S.of(context).my_letter),
               Tab(text: S.of(context).wait_confirm_letter),
               Tab(text: S.of(context).extend_letter),
+              Tab(text: S.of(context).wait_extend_letter),
               Tab(text: S.of(context).cons_file),
             ],
           ),
@@ -128,6 +130,12 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
                 getList: (BuildContext ctx) => context
                     .read<ConstructionListPrv>()
                     .getConstructionExtensionList(ctx),
+              ),
+              ConstructionExtendWaitTab(
+                list: context.read<ConstructionListPrv>().listWaitExtension,
+                getList: (BuildContext ctx) => context
+                    .read<ConstructionListPrv>()
+                    .getListWaitExtension(ctx),
               ),
               ConstructionFileTab(
                 list: context.read<ConstructionListPrv>().listDocument,

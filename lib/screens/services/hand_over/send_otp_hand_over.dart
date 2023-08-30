@@ -176,7 +176,7 @@ class _OtpBookingScreenState extends State<OtpBookingScreen> {
                         .then((v) {});
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),

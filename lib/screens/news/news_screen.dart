@@ -301,14 +301,14 @@ class _NewListScreenState extends State<NewListScreen> {
                                             ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ],
                               ),
                             );
                           },
-                        )
+                        ),
                       ],
                     ),
                   );

@@ -86,7 +86,7 @@ class _PhoneNumForgotPassScreenState extends State<PhoneNumForgotPassScreen> {
                     text: S.of(context).next,
                     isLoading: context.watch<ForgotPassPrv>().isLoading,
                     width: double.infinity,
-                  )
+                  ),
                 ],
               ),
             ),

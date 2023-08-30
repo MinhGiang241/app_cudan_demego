@@ -15,7 +15,7 @@ class UtilityService extends StatelessWidget {
         'icon-gradient': PrimaryIconGradient.primary,
         'color': demepro3,
         'text': "Dịch vụ tiện ích",
-        'shadow-color': demepro2
+        'shadow-color': demepro2,
       },
       {
         'icon': PrimaryIcons.dollar,
@@ -68,7 +68,7 @@ class UtilityService extends StatelessWidget {
                           blurRadius: 24,
                           color: (e['shadow-color'] as Color).withOpacity(0.25),
                           offset: const Offset(0, 16),
-                        )
+                        ),
                       ],
                     ),
                     child: PrimaryIcon(
@@ -84,7 +84,7 @@ class UtilityService extends StatelessWidget {
                           arguments: {
                             'year': null,
                             'month': null,
-                            'index': null
+                            'index': null,
                           },
                         );
                       },
@@ -98,11 +98,11 @@ class UtilityService extends StatelessWidget {
                     overflow: TextOverflow.fade,
                     textAlign: TextAlign.center,
                     style: txtBodySmallBold(color: grayScaleColorBase),
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -53,7 +53,7 @@ class _ConstructionDocumentHistoryTabState
               child: TimeLineView(
                 content: history,
               ),
-            )
+            ),
           ],
         );
       },

@@ -89,7 +89,7 @@ class _PaymentListScreenState extends State<PaymentListScreen>
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           body: FutureBuilder(

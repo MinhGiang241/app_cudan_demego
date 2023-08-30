@@ -146,7 +146,7 @@ class ResidentCardTab extends StatelessWidget {
                                 ResidentCardDetails.routeName,
                                 arguments: {
                                   "card": list[index],
-                                  "lockCard": cancel
+                                  "lockCard": cancel,
                                 },
                               );
                             },
@@ -185,7 +185,7 @@ class ResidentCardTab extends StatelessWidget {
                                         TableCellVerticalAlignment.baseline,
                                     columnWidths: const {
                                       0: FlexColumnWidth(2),
-                                      1: FlexColumnWidth(3)
+                                      1: FlexColumnWidth(3),
                                     },
                                     children: [
                                       ...listContent.map<TableRow>(
@@ -206,19 +206,19 @@ class ResidentCardTab extends StatelessWidget {
                                                 e.content ?? "",
                                                 style: e.contentStyle,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
                                 if (
-                                // (list[index].status == "DESTROY" &&
-                                //       list[index].reasons ==
-                                //           'NGUOIDUNGKHOA') ||
-                                (list[index].status != "LOST" &&
-                                    list[index].status != "INACTIVE"))
+                                    // (list[index].status == "DESTROY" &&
+                                    //       list[index].reasons ==
+                                    //           'NGUOIDUNGKHOA') ||
+                                    (list[index].status != "LOST" &&
+                                        list[index].status != "INACTIVE"))
                                   Row(
                                     children: [
                                       hpad(12),
@@ -251,13 +251,13 @@ class ResidentCardTab extends StatelessWidget {
                                       // ),
                                     ],
                                   ),
-                                vpad(12)
+                                vpad(12),
                               ],
                             ),
                           ),
                         );
                       }),
-                      vpad(60)
+                      vpad(60),
                     ],
                   ),
                 ),

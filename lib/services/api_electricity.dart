@@ -137,7 +137,7 @@ class APIElectricity {
         "apartmentId": apartmentId,
         "month": month,
         "year": year,
-        "isElectric": isElectric
+        "isElectric": isElectric,
       },
     );
 

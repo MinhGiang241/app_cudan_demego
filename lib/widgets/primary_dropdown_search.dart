@@ -76,7 +76,7 @@ class _PrimaryDropDownSearchState extends State<PrimaryDropDownSearch> {
               ),
               if (widget.isRequired) hpad(4),
               if (widget.isRequired)
-                Text("*", style: txtBodySmallRegular(color: redColorBase))
+                Text("*", style: txtBodySmallRegular(color: redColorBase)),
             ],
           ),
         if (widget.label != null) vpad(8),

@@ -147,7 +147,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );
@@ -206,7 +206,7 @@ class _AddExistedResidentState extends State<AddExistedResident> {
                     FileUploadModel(
                       id: residentValue?.avatar!,
                       name: residentValue?.avatar!,
-                    )
+                    ),
                   ]
             : null,
         // identity_images: existedIdentityImages + uploadedIdentityImages,

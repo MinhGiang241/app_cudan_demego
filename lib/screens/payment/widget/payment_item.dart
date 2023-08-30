@@ -155,7 +155,7 @@ class PaymentItem extends StatelessWidget {
                 "re": re,
                 "year": context.read<PaymentListPrv>().year,
                 "month": context.read<PaymentListPrv>().month,
-                "navigate": navigate
+                "navigate": navigate,
               },
             );
           },
@@ -180,7 +180,7 @@ class PaymentItem extends StatelessWidget {
                             TableCellVerticalAlignment.baseline,
                         columnWidths: const {
                           0: FlexColumnWidth(3),
-                          1: FlexColumnWidth(3)
+                          1: FlexColumnWidth(3),
                         },
                         children: [
                           TableRow(
@@ -216,7 +216,7 @@ class PaymentItem extends StatelessWidget {
                             ],
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

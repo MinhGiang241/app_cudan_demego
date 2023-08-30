@@ -242,10 +242,10 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                               ),
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -259,7 +259,7 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                     TableCellVerticalAlignment.baseline,
                                 columnWidths: const {
                                   0: FlexColumnWidth(4),
-                                  1: FlexColumnWidth(6)
+                                  1: FlexColumnWidth(6),
                                 },
                                 children: [
                                   ...listContent.map<TableRow>((i) {
@@ -284,10 +284,10 @@ class _ConstructionWaitTabState extends State<ConstructionWaitTab> {
                                             i.content ?? '',
                                             style: i.contentStyle,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     );
-                                  })
+                                  }),
                                 ],
                               ),
                             ),

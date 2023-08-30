@@ -107,7 +107,7 @@ class GeneralInfoScreen extends StatelessWidget {
                             width: dvWidth(context) - 36,
                             text: S.of(context).next,
                           ),
-                          vpad(40)
+                          vpad(40),
                         ],
                       ),
                     ),
@@ -134,10 +134,10 @@ class GeneralInfoScreen extends StatelessWidget {
                           width: dvWidth(context) - 36,
                           text: S.of(context).confirm,
                         ),
-                        vpad(40)
+                        vpad(40),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

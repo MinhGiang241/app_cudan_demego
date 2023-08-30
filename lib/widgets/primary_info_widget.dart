@@ -82,7 +82,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                                 );
                               },
                             ),
-                            if (child != null) child!
+                            if (child != null) child!,
                           ],
                         );
                       }
@@ -110,7 +110,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );
@@ -122,7 +122,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                               TableCellVerticalAlignment.baseline,
                           columnWidths: const {
                             0: FlexColumnWidth(3),
-                            1: FlexColumnWidth(3)
+                            1: FlexColumnWidth(3),
                           },
                           children: [
                             TableRow(
@@ -148,7 +148,7 @@ class PrimaryInfoWidget extends StatelessWidget {
                                     ),
                                   ),
                               ],
-                            )
+                            ),
                           ],
                         );
                       }

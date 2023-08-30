@@ -140,7 +140,7 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
                     ),
                   ],
                 );
-              })
+              }),
               // PaymentItem(
               //   re:,
               //

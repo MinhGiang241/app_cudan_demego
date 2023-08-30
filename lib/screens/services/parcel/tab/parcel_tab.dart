@@ -203,7 +203,7 @@ class _ParcelTabState extends State<ParcelTab> {
                                               ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -211,11 +211,11 @@ class _ParcelTabState extends State<ParcelTab> {
                             ),
                           ),
                         ),
-                        vpad(80)
+                        vpad(80),
                       ],
                     ),
                   ),
-                )
+                ),
         ],
       ),
     );

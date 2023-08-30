@@ -30,7 +30,7 @@ class PrimaryErrorWidget extends StatelessWidget {
               Icons.replay_outlined,
             ),
             label: Text(S.of(context).retry),
-          )
+          ),
         ],
       ),
     );

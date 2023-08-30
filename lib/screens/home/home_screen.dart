@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: PrimaryLoading(),
                       ),
                     ),
-                  )
+                  ),
               ],
             );
           },
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   vpad(24),
                   if (context.read<ResidentInfoPrv>().residentId != null)
                     const NewsHome(),
-                  vpad(kBottomNavigationBarHeight + 50)
+                  vpad(kBottomNavigationBarHeight + 50),
                 ],
               ),
             ),
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
-          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10)
+          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
         ],
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),

@@ -123,7 +123,7 @@ class _OptionSendOtpState extends State<OptionSendOtp> {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -241,7 +241,7 @@ class _ConfirmChoiceState extends State<ConfirmChoice> {
                           },
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );

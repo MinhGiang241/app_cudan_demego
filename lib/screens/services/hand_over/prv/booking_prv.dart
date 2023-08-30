@@ -197,9 +197,9 @@ class BookingPrv extends ChangeNotifier {
                             }
                           },
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -329,9 +329,9 @@ class BookingPrv extends ChangeNotifier {
                           });
                         },
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -379,7 +379,7 @@ class BookingPrv extends ChangeNotifier {
           arguments: {
             "apart":
                 "${apartment.name}-${apartment.f?.name}-${apartment.b?.name}",
-            "data": data
+            "data": data,
           },
         );
       }).catchError((e) {

@@ -59,7 +59,7 @@ class _ConstructionHistoryTabState extends State<ConstructionHistoryTab> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: TimeLineView(),
-                    )
+                    ),
                   ],
                 ),
                 // ),
@@ -88,7 +88,7 @@ class _ConstructionHistoryTabState extends State<ConstructionHistoryTab> {
                     child: TimeLineView(
                       content: context.watch<ConstructionHistoryPrv>().content,
                     ),
-                  )
+                  ),
                 ],
               ),
               // ),

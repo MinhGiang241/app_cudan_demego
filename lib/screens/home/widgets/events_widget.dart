@@ -42,7 +42,7 @@ class EventWidget extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-        )
+        ),
       ],
     );
   }

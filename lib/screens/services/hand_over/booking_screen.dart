@@ -230,7 +230,7 @@ class BookingScreen extends StatelessWidget {
                                 ),
                             ],
                           ),
-                          vpad(40)
+                          vpad(40),
                         ],
                       ),
                     ),

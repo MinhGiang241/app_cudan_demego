@@ -223,7 +223,7 @@ class ServiceScreen extends StatelessWidget {
                                               color: (e['color'] as Color)
                                                   .withOpacity(0.25),
                                               offset: const Offset(0, 16),
-                                            )
+                                            ),
                                           ],
                                           borderRadius: const BorderRadius.all(
                                             Radius.circular(12),
@@ -243,7 +243,7 @@ class ServiceScreen extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                           style: txtBold(12),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),

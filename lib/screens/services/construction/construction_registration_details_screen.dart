@@ -399,7 +399,7 @@ class _ConstructionRegistrationDetailsScreenState
                                                 ),
                                                 textAlign: TextAlign.center,
                                               ),
-                                              hpad(50)
+                                              hpad(50),
                                             ],
                                           ),
                                           Padding(
@@ -436,7 +436,7 @@ class _ConstructionRegistrationDetailsScreenState
           ),
           ConstructionHistoryTab(
             constructionregistrationId: reg.id ?? "",
-          )
+          ),
         ],
       ),
     );

@@ -244,7 +244,7 @@ class _TransportLetterDetailsScreenState
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               if (card.ticket_status == "WAIT") vpad(30),
@@ -329,11 +329,11 @@ class _TransportLetterDetailsScreenState
                           )
                           .toList(),
                     ),
-                  )
+                  ),
                 ],
               );
             },
-          )
+          ),
         ],
       ),
     );

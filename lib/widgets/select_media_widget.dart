@@ -86,7 +86,7 @@ class SelectMediaWidget extends StatelessWidget {
                                         onRemoveExist?.call(e.key);
                                       },
                                     ),
-                                  )
+                                  ),
                               ],
                             ),
                           ),
@@ -118,16 +118,16 @@ class SelectMediaWidget extends StatelessWidget {
                                         onRemove?.call(e.key);
                                       },
                                     ),
-                                  )
+                                  ),
                               ],
                             ),
                           ),
-                        )
+                        ),
                   ],
                 ),
               ),
             ],
-          )
+          ),
       ],
     );
   }

@@ -113,10 +113,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatState> {
             {
               "key": "residentCode",
               "value": residentId ?? "",
-              "overwrite": true
+              "overwrite": true,
             },
-          ]
-        }
+          ],
+        },
       },
     ).then((v) {
       user = (v.data?['visitor']);

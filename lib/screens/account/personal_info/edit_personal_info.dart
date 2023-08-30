@@ -52,7 +52,7 @@ class EditPersonalInfo extends StatelessWidget {
                       child: PrimaryLoading(height: 20, width: 20),
                     ),
                   ),
-                )
+                ),
             ],
           ),
           body: ListView(
@@ -100,7 +100,7 @@ class EditPersonalInfo extends StatelessWidget {
                           gradients: PrimaryIconGradient.white,
                           borderRadius: BorderRadius.circular(50),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
