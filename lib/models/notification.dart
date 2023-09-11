@@ -8,7 +8,7 @@ class NotificationType {
   String? icon;
   String? code;
   String? name;
-  String? targetType;
+  String? target;
   String? description;
   bool? isRead;
   NotificationType({
@@ -18,7 +18,7 @@ class NotificationType {
     this.icon,
     this.code,
     this.name,
-    this.targetType,
+    this.target,
     this.description,
     this.isRead = true,
   });
@@ -30,7 +30,7 @@ class NotificationType {
     String? icon,
     String? code,
     String? name,
-    String? targetType,
+    String? target,
     String? description,
   }) =>
       NotificationType(
@@ -40,7 +40,7 @@ class NotificationType {
         icon: icon ?? this.icon,
         code: code ?? this.code,
         name: name ?? this.name,
-        targetType: targetType ?? this.targetType,
+        target: target ?? this.target,
         description: description ?? this.description,
       );
 
@@ -52,7 +52,7 @@ class NotificationType {
         icon: json["icon"],
         code: json["code"],
         name: json["name"],
-        targetType: json["targetType"],
+        target: json["target"],
         description: json["description"],
       );
 
@@ -63,7 +63,7 @@ class NotificationType {
         "icon": icon,
         "code": code,
         "name": name,
-        "targetType": targetType,
+        "target": target,
         "description": description,
       };
 }
@@ -229,7 +229,7 @@ class NotificationAccessor {
   String? id;
   String? createdTime;
   String? updatedTime;
-  String? targetType;
+  String? target;
   String? notifyId;
   String? receiverId;
   bool? isRead;
@@ -239,7 +239,7 @@ class NotificationAccessor {
     this.id,
     this.createdTime,
     this.updatedTime,
-    this.targetType,
+    this.target,
     this.notifyId,
     this.receiverId,
     this.isRead,
@@ -251,7 +251,7 @@ class NotificationAccessor {
       '_id': id,
       'createdTime': createdTime,
       'updatedTime': updatedTime,
-      'targetType': targetType,
+      'target': target,
       'notifyId': notifyId,
       'receiverId': receiverId,
       'isRead': isRead,
@@ -266,8 +266,7 @@ class NotificationAccessor {
           map['createdTime'] != null ? map['createdTime'] as String : null,
       updatedTime:
           map['updatedTime'] != null ? map['updatedTime'] as String : null,
-      targetType:
-          map['targetType'] != null ? map['targetType'] as String : null,
+      target: map['target'] != null ? map['target'] as String : null,
       notifyId: map['notifyId'] != null ? map['notifyId'] as String : null,
       receiverId:
           map['receiverId'] != null ? map['receiverId'] as String : null,
@@ -287,7 +286,7 @@ class NotificationAccessor {
     String? id,
     String? createdTime,
     String? updatedTime,
-    String? targetType,
+    String? target,
     String? notifyId,
     String? receiverId,
     bool? isRead,
@@ -297,7 +296,7 @@ class NotificationAccessor {
       id: id ?? this.id,
       createdTime: createdTime ?? this.createdTime,
       updatedTime: updatedTime ?? this.updatedTime,
-      targetType: targetType ?? this.targetType,
+      target: target ?? this.target,
       notifyId: notifyId ?? this.notifyId,
       receiverId: receiverId ?? this.receiverId,
       isRead: isRead ?? this.isRead,
