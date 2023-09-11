@@ -81,15 +81,16 @@ class HomeServices extends StatelessWidget {
           );
         },
       },
-      {
-        if (isResient) "icon": PrimaryIcons.mail,
-        "text": S.current.reflex,
-        "page": ReflectionScreen.routeName,
-        "arg": null,
-        "tap": () {
-          Navigator.of(context).pushNamed(ReflectionScreen.routeName);
+      if (isResient)
+        {
+          "icon": PrimaryIcons.mail,
+          "text": S.current.reflex,
+          "page": ReflectionScreen.routeName,
+          "arg": null,
+          "tap": () {
+            Navigator.of(context).pushNamed(ReflectionScreen.routeName);
+          },
         },
-      },
       if (isResient)
         {
           "icon": PrimaryIcons.avatar,

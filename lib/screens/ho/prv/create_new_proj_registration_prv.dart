@@ -170,7 +170,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
           DropdownMenuItem(
             value: '',
             child: Text(S.current.owner),
-          )
+          ),
         ];
         valueRelation = '';
       } else {
@@ -178,7 +178,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
           DropdownMenuItem(
             value: selectedAprt.relation?.code,
             child: Text(selectedAprt.relation?.name ?? ""),
-          )
+          ),
         ];
         valueRelation = selectedAprt.relation?.code;
       }
@@ -217,7 +217,7 @@ class CreateNewProjRegistrationPrv extends ChangeNotifier {
             value: '${e.id}',
             label: '${e.apartment?.label}',
           ),
-        )
+        ),
       ];
     } catch (e) {
       return [];
