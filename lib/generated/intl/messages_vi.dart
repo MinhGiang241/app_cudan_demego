@@ -167,7 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "base_info": MessageLookupByLibrary.simpleMessage("Thông tin cơ bản"),
-        "bill": MessageLookupByLibrary.simpleMessage("Phiếu thu"),
+        "bill": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
             MessageLookupByLibrary.simpleMessage("Chi tiết hóa đơn"),
@@ -300,6 +300,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_code": MessageLookupByLibrary.simpleMessage("Mã thi công"),
         "cons_day": MessageLookupByLibrary.simpleMessage("Số ngày thi công"),
         "cons_drawing": MessageLookupByLibrary.simpleMessage("Bản vẽ thi công"),
+        "cons_end_date":
+            MessageLookupByLibrary.simpleMessage("Ngày kết thúc thi công"),
         "cons_fee": MessageLookupByLibrary.simpleMessage("Phí thi công"),
         "cons_file": MessageLookupByLibrary.simpleMessage("Hồ sơ thi công"),
         "cons_file_details":
@@ -313,6 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký thi công"),
         "cons_regulation":
             MessageLookupByLibrary.simpleMessage("Quy định thi công"),
+        "cons_start_date":
+            MessageLookupByLibrary.simpleMessage("Ngày bắt đầu thi công"),
         "cons_type": MessageLookupByLibrary.simpleMessage("Loại thi công"),
         "cons_unit": MessageLookupByLibrary.simpleMessage("Đơn vị thi công"),
         "cons_unit_info":
@@ -471,6 +475,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
         "enter_worker_num":
             MessageLookupByLibrary.simpleMessage("Nhập số công nhân"),
+        "env_fee":
+            MessageLookupByLibrary.simpleMessage("Ngày kết thúc thi công"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Lỗi kết nối "),
         "err_internet": MessageLookupByLibrary.simpleMessage(
             "Không kết nối được với máy chủ"),

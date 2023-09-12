@@ -208,7 +208,8 @@ class PaymentItem extends StatelessWidget {
                               ),
                               Text(
                                 Utils.dateFormat(
-                                  (!isPaid ? re.date : payDate) ?? '',
+                                  (!isPaid ? re.expiration_date : payDate) ??
+                                      '',
                                   1,
                                 ),
                                 style: txtRegular(14, grayScaleColorBase),

@@ -1,3 +1,4 @@
+import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_construction.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
-import '../../../../models/receipt.dart';
-import '../../../../utils/utils.dart';
+
 import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
@@ -21,10 +21,10 @@ import '../../../payment/widget/payment_item.dart';
 class ConstructionBillTab extends StatefulWidget {
   const ConstructionBillTab({
     super.key,
-    required this.constructionregistrationId,
+    required this.constructionDocId,
     required this.isPay,
   });
-  final String constructionregistrationId;
+  final String constructionDocId;
   final bool isPay;
 
   @override
@@ -37,17 +37,18 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
   @override
   Widget build(BuildContext context) {
     var residentId = context.read<ResidentInfoPrv>().residentId;
-    List<Receipt> listReceipts = [];
+
+    List<ConstructionBill> listBill = [];
     return SafeArea(
       child: FutureBuilder(
         future: () async {
-          var data = await APIConstruction.getConstructionReceipts(
-            widget.constructionregistrationId,
+          var data = await APIConstruction.getConstructionBills(
+            widget.constructionDocId,
             residentId,
           );
-          listReceipts.clear();
+          listBill.clear();
           for (var i in data) {
-            listReceipts.add(Receipt.fromJson(i));
+            listBill.add(ConstructionBill.fromMap(i));
           }
         }(),
         builder: (context, snapshot) {
@@ -62,7 +63,7 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                 // init = false;
               },
             );
-          } else if (listReceipts.isEmpty) {
+          } else if (listBill.isEmpty) {
             return SmartRefresher(
               enablePullDown: true,
               enablePullUp: false,
@@ -95,25 +96,25 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ...listReceipts.map(
+                  ...listBill.map(
                     (e) {
-                      String? payDate;
-                      double paid = 0;
-                      if (e.transactions.isNotEmpty) {
-                        // var a = bill.transactions[0].createdTime;
+                      // String? payDate;
+                      // double paid = 0;
+                      // if (e.listBill.isNotEmpty) {
+                      //   // var a = bill.transactions[0].createdTime;
 
-                        payDate = e.transactions
-                            .map((e) => e.createdTime)
-                            .reduce((a, e) {
-                          if (a!.compareTo(e!) > 0) {
-                            return a;
-                          } else {
-                            return e;
-                          }
-                        });
-                        paid = e.transactions
-                            .fold(0, (a, b) => a += (b.payment_amount ?? 0));
-                      }
+                      //   payDate = e.transactions
+                      //       .map((e) => e.createdTime)
+                      //       .reduce((a, e) {
+                      //     if (a!.compareTo(e!) > 0) {
+                      //       return a;
+                      //     } else {
+                      //       return e;
+                      //     }
+                      //   });
+                      //   paid = e.transactions
+                      //       .fold(0, (a, b) => a += (b.payment_amount ?? 0));
+                      // }
                       var listContent = [
                         InfoContentView(
                           title: S.of(context).bill_name,
@@ -127,10 +128,10 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                           contentStyle:
                               txtBodySmallBold(color: grayScaleColorBase),
                         ),
-                        if (e.content != null)
+                        if (e.reason != null)
                           InfoContentView(
                             title: S.of(context).content,
-                            content: e.content ?? "",
+                            content: e.reason ?? "",
                             contentStyle:
                                 txtBodySmallBold(color: grayScaleColorBase),
                           ),
@@ -142,72 +143,78 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                           contentStyle:
                               txtBodySmallBold(color: grayScaleColorBase),
                         ),
-                        if (e.vat != null)
-                          InfoContentView(
-                            title: S.of(context).vat,
-                            content: e.vat != null ? "${e.vat} %" : '0 %',
-                            contentStyle:
-                                txtBodySmallBold(color: grayScaleColorBase),
-                          ),
-                        if (e.discount_percent != null)
-                          InfoContentView(
-                            title: S.of(context).discount,
-                            content: e.discount_percent != null
-                                ? e.discount_type == "Value"
-                                    ? formatCurrency
-                                        .format(e.discount_percent)
-                                        .replaceAll("₫", "VND")
-                                    : "${e.discount_percent} %"
-                                : "0 VND",
-                            contentStyle:
-                                txtBodySmallBold(color: grayScaleColorBase),
-                          ),
-                        InfoContentView(
-                          title: S.of(context).total_pay,
-                          content: e.amount != null
-                              ? formatCurrency
-                                  .format(e.amount!)
-                                  .replaceAll("₫", "VND")
-                              : '0 VND',
-                          contentStyle:
-                              txtBodySmallBold(color: grayScaleColorBase),
-                        ),
-                        InfoContentView(
-                          title: S.of(context).paid_payment,
-                          content: e.amount_due != null
-                              ? formatCurrency
-                                  .format(paid)
-                                  .replaceAll("₫", "VND")
-                              : '0 VND',
-                          contentStyle:
-                              txtBodySmallBold(color: grayScaleColorBase),
-                        ),
+                        // if (e.vat != null)
+                        //   InfoContentView(
+                        //     title: S.of(context).vat,
+                        //     content: e.vat != null ? "${e.vat} %" : '0 %',
+                        //     contentStyle:
+                        //         txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
+                        // if (e.discount_percent != null)
+                        //   InfoContentView(
+                        //     title: S.of(context).discount,
+                        //     content: e.discount_percent != null
+                        //         ? e.discount_type == "Value"
+                        //             ? formatCurrency
+                        //                 .format(e.discount_percent)
+                        //                 .replaceAll("₫", "VND")
+                        //             : "${e.discount_percent} %"
+                        //         : "0 VND",
+                        //     contentStyle:
+                        //         txtBodySmallBold(color: grayScaleColorBase),
+                        //   ),
+                        // InfoContentView(
+                        //   title: S.of(context).total_pay,
+                        //   content: e.amount_due != null
+                        //       ? formatCurrency
+                        //           .format(e.amount_due!)
+                        //           .replaceAll("₫", "VND")
+                        //       : '0 VND',
+                        //   contentStyle:
+                        //       txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
+                        // InfoContentView(
+                        //   title: S.of(context).paid_payment,
+                        //   content: e.amount_due != null
+                        //       ? formatCurrency
+                        //           .format(paid)
+                        //           .replaceAll("₫", "VND")
+                        //       : '0 VND',
+                        //   contentStyle:
+                        //       txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
                         // if (bill.payment_status != "PAID")
+                        // InfoContentView(
+                        //   title: S.of(context).need_pay,
+                        //   content: e.amount_due != null
+                        //       ? formatCurrency
+                        //           .format(e.amount_due! - paid)
+                        //           .replaceAll("₫", "VND")
+                        //       : '0 VND',
+                        //   contentStyle:
+                        //       txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
+                        // if (e.expiration_date != null)
+                        // InfoContentView(
+                        //   title: S.of(context).due_bill,
+                        //   content: Utils.dateFormat(e.createdTime ?? "", 1),
+                        //   contentStyle:
+                        //       txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
                         InfoContentView(
-                          title: S.of(context).need_pay,
-                          content: e.amount != null
-                              ? formatCurrency
-                                  .format(e.amount! - paid)
-                                  .replaceAll("₫", "VND")
-                              : '0 VND',
-                          contentStyle:
-                              txtBodySmallBold(color: grayScaleColorBase),
+                          title: S.of(context).status,
+                          content: e.s?.name,
+                          contentStyle: txtBodySmallBold(
+                            color: genStatusColor(e.payment_status),
+                          ),
                         ),
-                        if (e.expiration_date != null)
-                          InfoContentView(
-                            title: S.of(context).due_bill,
-                            content:
-                                Utils.dateFormat(e.expiration_date ?? "", 1),
-                            contentStyle:
-                                txtBodySmallBold(color: grayScaleColorBase),
-                          ),
-                        if (e.transactions.isNotEmpty)
-                          InfoContentView(
-                            title: S.of(context).pay_date,
-                            content: Utils.dateFormat(payDate ?? "", 1),
-                            contentStyle:
-                                txtBodySmallBold(color: grayScaleColorBase),
-                          ),
+                        // if (e.transactions.isNotEmpty)
+                        // InfoContentView(
+                        //   title: S.of(context).pay_date,
+                        //   content: Utils.dateFormat(payDate ?? "", 1),
+                        //   contentStyle:
+                        //       txtBodySmallBold(color: grayScaleColorBase),
+                        // ),
                         // if (e.date != null)
                         //   InfoContentView(
                         //     title: S.of(context).pay_date,
@@ -225,23 +232,23 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                               listInfoView: listContent,
                             ),
                             vpad(20),
-                            if (e.payment_status != "PAID" && widget.isPay)
-                              PrimaryButton(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    PaymentScreen.routeName,
-                                    arguments: {
-                                      "list": [e],
-                                      "year": date.year,
-                                      "month": date.month,
-                                    },
-                                  );
-                                },
-                                width: dvWidth(context) - 24,
-                                text: S.of(context).pay,
-                              ),
-                            vpad(30),
+                            //if (e.payment_status != "PAID")
+                            // PrimaryButton(
+                            //   onTap: () {
+                            //     Navigator.pushNamed(
+                            //       context,
+                            //       PaymentScreen.routeName,
+                            //       arguments: {
+                            //         "list": [e],
+                            //         "year": date.year,
+                            //         "month": date.month,
+                            //       },
+                            //     );
+                            //   },
+                            //   width: dvWidth(context) - 24,
+                            //   text: S.of(context).pay,
+                            // ),
+                            // vpad(30),
                           ],
                         ),
                       );

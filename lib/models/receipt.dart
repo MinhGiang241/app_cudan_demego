@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
@@ -27,12 +28,15 @@ class Receipt {
     this.content,
     this.discount_money,
     this.amount,
+    this.env_fee_amount,
+    this.total_amount,
     this.discount_percent,
     this.discount_type,
     this.full_name,
     this.guest_name,
     this.reason,
     this.vat,
+    this.vat_amount,
     this.expiration_date,
     this.code,
     this.refId,
@@ -42,6 +46,7 @@ class Receipt {
     this.month_indicator,
     this.year_indicator,
     this.indicator,
+    this.list_price,
   });
   String? id;
   String? createdTime;
@@ -67,8 +72,11 @@ class Receipt {
   String? full_name;
   String? code;
   double? vat;
+  double? vat_amount;
+  double? env_fee_amount;
   double? discount_money;
   double? amount;
+  double? total_amount;
   double? discount_percent;
   double? amount_due;
   String? discount_type;
@@ -80,6 +88,7 @@ class Receipt {
   int? year_indicator;
   dynamic fee_config;
   Indicator? indicator;
+  List<ListPrice>? list_price;
 
   Receipt.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -109,11 +118,20 @@ class Receipt {
     refId = json['refId'];
     expiration_date = json['expiration_date'];
     vat = json['vat'] != null ? double.parse(json['vat'].toString()) : null;
+    vat_amount = json['vat_amount'] != null
+        ? double.parse(json['vat_amount'].toString())
+        : null;
+    env_fee_amount = json['env_fee_amount'] != null
+        ? double.parse(json['env_fee_amount'].toString())
+        : null;
     discount_money = json['discount_money'] != null
         ? double.parse(json['discount_money'].toString())
         : null;
     amount =
         json['amount'] != null ? double.parse(json['amount'].toString()) : null;
+    total_amount = json['total_amount'] != null
+        ? double.parse(json['total_amount'].toString())
+        : null;
     discount_percent = json['discount_percent'] != null
         ? double.parse(json['discount_percent'].toString())
         : null;
@@ -137,6 +155,13 @@ class Receipt {
             : []
         : [];
     isSelected = false;
+    list_price = json['list_price'] != null
+        ? json['list_price'].isNotEmpty
+            ? json['list_price']
+                .map<ListPrice>((e) => ListPrice.fromMap(e))
+                .toList()
+            : []
+        : [];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -165,8 +190,11 @@ class Receipt {
     data['full_name'] = full_name;
     data['expiration_date'] = expiration_date;
     data['vat'] = vat;
+    data['vat_amount'] = vat_amount;
+    data['env_fee_amount'] = env_fee_amount;
     data['discount_money'] = discount_money;
     data['amount'] = amount;
+    data['total_amount'] = total_amount;
     data['discount_percent'] = discount_percent;
     data['amount_due'] = amount_due;
     data['refSchema'] = refSchema;
@@ -174,6 +202,7 @@ class Receipt {
     data['fee_config'] = fee_config?.toMap();
     data['month_indicator'] = month_indicator;
     data['year_indicator'] = year_indicator;
+    data['list_price'] = list_price;
     return data;
   }
 }
@@ -288,4 +317,78 @@ class FeeDetail {
 
   factory FeeDetail.fromJson(String source) =>
       FeeDetail.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class ListPrice {
+  String? createdTime;
+  String? updatedTime;
+  double? consumption;
+  double? price;
+  double? lastNum;
+  double? from;
+  double? to;
+  ListPrice({
+    this.createdTime,
+    this.updatedTime,
+    this.consumption,
+    this.price,
+    this.lastNum,
+    this.from,
+    this.to,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'consumption': consumption,
+      'price': price,
+      'lastNum': lastNum,
+      'to': to,
+    };
+  }
+
+  factory ListPrice.fromMap(Map<String, dynamic> map) {
+    return ListPrice(
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      consumption: double.tryParse(map['consumption'].toString()) != null
+          ? double.parse(map['consumption'].toString())
+          : null,
+      price: double.tryParse(map['price'].toString()) != null
+          ? double.parse(map['price'].toString())
+          : null,
+      lastNum: double.tryParse(map['lastNum'].toString()) != null
+          ? double.parse(map['lastNum'].toString())
+          : null,
+      from: double.tryParse(map['from'].toString()) != null
+          ? double.parse(map['from'].toString())
+          : null,
+      to: double.tryParse(map['to'].toString()) != null
+          ? double.parse(map['to'].toString())
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ListPrice.fromJson(String source) =>
+      ListPrice.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ListPrice copyWith({
+    String? createdTime,
+    String? updatedTime,
+    double? consumption,
+    double? price,
+  }) {
+    return ListPrice(
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      consumption: consumption ?? this.consumption,
+      price: price ?? this.price,
+      lastNum: lastNum ?? this.lastNum,
+    );
+  }
 }

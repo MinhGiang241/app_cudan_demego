@@ -49,57 +49,49 @@ class _WaterBillTabState extends State<WaterBillTab> {
         var receipt = context.watch<WaterPrv>().receiptMonth;
         var indi = receipt?.indicator;
 
-        double totalIndex = indi?.water_consumption ?? 0;
-        var list = [];
-        var waterFeeConfig =
-            receipt != null ? WaterFee.fromMap(receipt.fee_config) : null;
-        double index = totalIndex;
-        var waterFee = waterFeeConfig?.water_fee;
-        waterFee?.sort((a, b) => a.to!.compareTo(b.to!));
-        List<double> waterTo = waterFee?.map((e) => e.to!).toList() ?? [];
-        waterTo.sort((a, b) => a.compareTo(b));
-        // for (var i in waterTo) {
-        //   index = index - i;
-        //   if (index < 0) {
-        //     list.add(index + i);
+        // double totalIndex = indi?.water_consumption ?? 0;
+        // var list = [];
+        // var waterFeeConfig =
+        //     receipt != null ? WaterFee.fromMap(receipt.fee_config) : null;
+        // double index = totalIndex;
+        // var waterFee = waterFeeConfig?.water_fee;
+        // waterFee?.sort((a, b) => a.to!.compareTo(b.to!));
+        // List<double> waterTo = waterFee?.map((e) => e.to!).toList() ?? [];
+        // waterTo.sort((a, b) => a.compareTo(b));
+
+        // for (var i = 0; i < waterTo.length; i++) {
+        //   if (index >= waterTo[i] && i != waterTo.length - 1) {
+        //     list.add(waterTo[i] - (i == 0 ? 0 : waterTo[i - 1]));
+        //   } else if (index <= waterTo[i]) {
+        //     if (i == 0) {
+        //       list.add(index);
+        //       break;
+        //     }
+        //     var h = index - waterTo[i - 1];
+        //     if (h != 0) {
+        //       list.add(h);
+        //     }
+
         //     break;
-        //   } else if (i == waterTo.last) {
-        //     list.add(index + i);
-        //     break;
-        //   } else {
-        //     list.add(i);
+        //   } else if (index >= waterTo[i] && i == waterTo.length - 1) {
+        //     list.add(index - waterTo[i]);
         //   }
         // }
-        for (var i = 0; i < waterTo.length; i++) {
-          if (index >= waterTo[i] && i != waterTo.length - 1) {
-            list.add(waterTo[i] - (i == 0 ? 0 : waterTo[i - 1]));
-          } else if (index <= waterTo[i]) {
-            if (i == 0) {
-              list.add(index);
-              break;
-            }
-            var h = index - waterTo[i - 1];
-            if (h != 0) {
-              list.add(h);
-            }
-
-            break;
-          } else if (index >= waterTo[i] && i == waterTo.length - 1) {
-            list.add(index - waterTo[i]);
-          }
-        }
         var month = context.watch<WaterPrv>().month;
         var year = context.watch<WaterPrv>().year;
 
         var startMonth = DateTime(year!, month!, 1);
         var endMonth = DateTime(year, month + 1, 0);
-        var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
-          var price = waterFee![b.key].price ?? 0;
+        // var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
+        //   var price = waterFee![b.key].price ?? 0;
 
-          return a + b.value * price;
-        });
-        var vat = totalMoney * (receipt?.vat ?? 0) / 100;
-        var totalMoneyVat = totalMoney + vat;
+        //   return a + b.value * price;
+        // });
+        // var vat = totalMoney * (receipt?.vat_amount ?? 0) / 100;
+        // var totalMoneyVat = totalMoney + vat;
+
+        var list_price = receipt?.list_price ?? [];
+
         return SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
@@ -284,25 +276,50 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                 ),
                               if (receipt != null)
                                 ...List.generate(
-                                  list.length,
+                                  list_price.length,
                                   (index) => Row(
                                     children: [
-                                      genCell(text: '', flex: 2),
                                       genCell(
-                                        text: formatter
-                                            .format(list[index])
-                                            .toString(),
+                                        text: '',
+                                        flex: 2,
                                       ),
                                       genCell(
                                         text: formatter
-                                            .format(waterFee![index].price)
+                                            .format(
+                                              list_price[index].consumption ??
+                                                  0,
+                                            )
+                                            .toString(),
+                                      ),
+                                      // genCell(
+                                      //   text: formatter
+                                      //       .format(
+                                      //         list_price[index].from ?? 0,
+                                      //       )
+                                      //       .toString(),
+                                      //   flex: 1,
+                                      // ),
+                                      // genCell(
+                                      //   text: formatter
+                                      //       .format(
+                                      //         list_price[index].to ?? 0,
+                                      //       )
+                                      //       .toString(),
+                                      //   flex: 1,
+                                      // ),
+
+                                      genCell(
+                                        text: formatter
+                                            .format(list_price[index].price)
                                             .toString(),
                                       ),
                                       genCell(
                                         text: formatter
                                             .format(
-                                              list[index] *
-                                                  waterFee[index].price,
+                                              (list_price[index].consumption ??
+                                                      0) *
+                                                  (list_price[index].price ??
+                                                      0),
                                             )
                                             .toString(),
                                       ),
@@ -322,7 +339,43 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                           "${formatter.format(receipt.vat ?? 0)}%",
                                     ),
                                     genCell(
-                                      text: formatter.format(vat).toString(),
+                                      text: formatter
+                                          .format(receipt.vat_amount)
+                                          .toString(),
+                                    ),
+                                  ],
+                                ),
+                              if (receipt != null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text: "${S.of(context).env_fee}:",
+                                      flex: 4,
+                                      align: Alignment.centerRight,
+                                    ),
+                                    // genCell(
+                                    //   text:
+                                    //       "${formatter.format(receipt.env_fee_amount ?? 0)}",
+                                    // ),
+                                    genCell(
+                                      text: formatter
+                                          .format(receipt.env_fee_amount)
+                                          .toString(),
+                                    ),
+                                  ],
+                                ),
+                              if (receipt != null)
+                                Row(
+                                  children: [
+                                    genCell(
+                                      text: "${S.of(context).discount}:",
+                                      flex: 4,
+                                      align: Alignment.centerRight,
+                                    ),
+                                    genCell(
+                                      text: formatter
+                                          .format(receipt.discount_money)
+                                          .toString(),
                                     ),
                                   ],
                                 ),
@@ -336,7 +389,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(totalMoneyVat)
+                                          .format(receipt.amount_due)
                                           .toString(),
                                     ),
                                   ],

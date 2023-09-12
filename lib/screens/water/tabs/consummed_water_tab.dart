@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_field, unused_local_variable
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -126,9 +127,13 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   hpad(40),
-                  Text(
-                    '${S.of(context).consumed_water_detail1} (m³)',
-                    style: txtBold(14, primaryColorBase),
+                  Expanded(
+                    child: AutoSizeText(
+                      '${S.of(context).consumed_water_detail1} (m³)',
+                      style: txtBold(14, primaryColorBase),
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                    ),
                   ),
                 ],
               ),
@@ -137,9 +142,11 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   hpad(40),
-                  Text(
-                    '${S.of(context).year}: ${context.read<WaterPrv>().year}',
-                    style: txtBold(12, Colors.black),
+                  Expanded(
+                    child: Text(
+                      '${S.of(context).year}: ${context.read<WaterPrv>().year}',
+                      style: txtBold(12, Colors.black),
+                    ),
                   ),
                 ],
               ),
@@ -152,7 +159,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
-                    height: dvHeight(context) - 250,
+                    height: dvHeight(context) - 255,
                     width: 850,
                     child: SfCartesianChart(
                       //selectionGesture: ActivationMode.singleTap,

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, require_trailing_commas, unused_field
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -134,8 +135,11 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   hpad(30),
-                  Text('${S.of(context).consumed_elec_details} (kWh)',
-                      style: txtBold(14, primaryColorBase)),
+                  AutoSizeText(
+                    '${S.of(context).consumed_elec_details} (kWh)',
+                    style: txtBold(14, primaryColorBase),
+                    maxLines: 1,
+                  ),
                 ],
               ),
               vpad(10),
@@ -159,7 +163,7 @@ class _ConsummedElectricityTabState extends State<ConsummedElectricityTab> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
-                    height: dvHeight(context) - 250,
+                    height: dvHeight(context) - 255,
                     width: 850,
                     child: SfCartesianChart(
                       // selectionGesture: ActivationMode.singleTap,

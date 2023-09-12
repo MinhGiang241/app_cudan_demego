@@ -148,14 +148,14 @@ class _ConstructionDocumentDetailsState
                     ),
                     InfoContentView(
                       isHorizontal: true,
-                      title: S.of(context).reg_date,
-                      content: Utils.dateTimeFormat(reg.reg_date ?? "", 1),
+                      title: S.of(context).cons_start_date,
+                      content: Utils.dateFormat(reg.time_start ?? "", 1),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     InfoContentView(
                       isHorizontal: true,
-                      title: S.of(context).approved_date,
-                      content: Utils.dateTimeFormat(reg.createdTime ?? "", 1),
+                      title: S.of(context).cons_end_date,
+                      content: Utils.dateFormat(reg.time_end ?? "", 1),
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     InfoContentView(
@@ -352,7 +352,7 @@ class _ConstructionDocumentDetailsState
             ],
           ),
           ConstructionBillTab(
-            constructionregistrationId: reg.constructionRegistrationId ?? '',
+            constructionDocId: reg.id ?? '',
             isPay: reg.status == "WAIT_PAY",
           ),
           ConstructionDocumentHistoryTab(

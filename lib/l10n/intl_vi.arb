@@ -584,7 +584,7 @@
   "return_image": "Hình ảnh đã trả",
   "use_elevator": "Dùng thang máy",
   "pet_images": "Ảnh vật nuôi",
-  "bill": "Phiếu thu",
+  "bill": "Hóa đơn",
   "dob": "Ngày sinh",
   "block": "Phường /xã",
   "additional_file": "File/ Ảnh bổ sung",
@@ -863,5 +863,8 @@
   "send_extension_success": "Gửi duyệt gia hạn thi công thành công",
   "confirm_cancel_cons_ext": "Bạn có muốn hủy phiếu gia hạn thi công {c}",
   "success_cancel_cons_ext": "Hủy phiếu gia hạn thi công thành công",
-  "wait_extend_letter": "Phiếu gia hạn chờ xác nhận"
+  "wait_extend_letter": "Phiếu gia hạn chờ xác nhận",
+  "cons_start_date": "Ngày bắt đầu thi công",
+  "cons_end_date": "Ngày kết thúc thi công",
+  "env_fee": "Ngày kết thúc thi công"
 }

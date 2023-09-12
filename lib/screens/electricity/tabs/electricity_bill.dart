@@ -50,57 +50,48 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
         }
         var receipt = context.watch<ElectricityPrv>().receiptMonth;
         var indi = receipt?.indicator;
-        double totalIndex = indi?.electricity_consumption ?? 0;
-        var list = [];
+        // double totalIndex = indi?.electricity_consumption ?? 0;
+        // var list = [];
 
-        double index = totalIndex;
-        var elecFeeConfig =
-            receipt != null ? ElectricFee.fromMap(receipt.fee_config) : null;
-        var elecFee = elecFeeConfig?.electric_fee;
-        elecFee?.sort((a, b) => a.to!.compareTo(b.to!));
-        List<double> elecFeeTo = elecFee?.map((e) => e.to!).toList() ?? [];
-        elecFeeTo.sort((a, b) => a.compareTo(b));
-        // for (var i in elecFeeTo) {
-        //   index = index - i;
-        //   if (index <= 0) {
-        //     list.add(index + i);
+        // double index = totalIndex;
+        // var elecFeeConfig =
+        //     receipt != null ? ElectricFee.fromMap(receipt.fee_config) : null;
+        // var elecFee = elecFeeConfig?.electric_fee;
+        // elecFee?.sort((a, b) => a.to!.compareTo(b.to!));
+        // List<double> elecFeeTo = elecFee?.map((e) => e.to!).toList() ?? [];
+        // elecFeeTo.sort((a, b) => a.compareTo(b));
+
+        // for (var i = 0; i < elecFeeTo.length; i++) {
+        //   if (index >= elecFeeTo[i] && i != elecFeeTo.length - 1) {
+        //     list.add(elecFeeTo[i] - (i == 0 ? 0 : elecFeeTo[i - 1]));
+        //   } else if (index <= elecFeeTo[i]) {
+        //     if (i == 0) {
+        //       list.add(index);
+        //       break;
+        //     }
+        //     var h = index - elecFeeTo[i - 1];
+        //     if (h != 0) {
+        //       list.add(h);
+        //     }
+
         //     break;
-        //   } else if (i == elecFeeTo.last) {
-        //     list.add(index + i);
-        //     break;
-        //   } else {
-        //     list.add(i);
+        //   } else if (index >= elecFeeTo[i] && i == elecFeeTo.length - 1) {
+        //     list.add(index - elecFeeTo[i]);
         //   }
         // }
-        for (var i = 0; i < elecFeeTo.length; i++) {
-          if (index >= elecFeeTo[i] && i != elecFeeTo.length - 1) {
-            list.add(elecFeeTo[i] - (i == 0 ? 0 : elecFeeTo[i - 1]));
-          } else if (index <= elecFeeTo[i]) {
-            if (i == 0) {
-              list.add(index);
-              break;
-            }
-            var h = index - elecFeeTo[i - 1];
-            if (h != 0) {
-              list.add(h);
-            }
-
-            break;
-          } else if (index >= elecFeeTo[i] && i == elecFeeTo.length - 1) {
-            list.add(index - elecFeeTo[i]);
-          }
-        }
         var month = context.watch<ElectricityPrv>().month;
         var year = context.watch<ElectricityPrv>().year;
 
         var startMonth = DateTime(year!, month!, 1);
         var endMonth = DateTime(year, month + 1, 0);
-        var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
-          var price = elecFee![b.key].price ?? 0;
-          return a + b.value * price;
-        });
-        var vat = totalMoney * (receipt?.vat ?? 0) / 100;
-        var totalMoneyVat = totalMoney + vat;
+        // var totalMoney = list.asMap().entries.fold(0.0, (a, b) {
+        //   var price = elecFee![b.key].price ?? 0;
+        //   return a + b.value * price;
+        // });
+        // var vat = totalMoney * (receipt?.vat ?? 0) / 100;
+        // var totalMoneyVat = totalMoney + vat;
+
+        var list_price = receipt?.list_price ?? [];
         return SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
@@ -283,25 +274,28 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                 ),
                               if (receipt != null)
                                 ...List.generate(
-                                  list.length,
+                                  list_price.length,
                                   (index) => Row(
                                     children: [
                                       genCell(text: '', flex: 2),
                                       genCell(
                                         text: formatter
-                                            .format(list[index])
+                                            .format(
+                                                list_price[index].consumption)
                                             .toString(),
                                       ),
                                       genCell(
                                         text: formatter
-                                            .format(elecFee![index].price)
+                                            .format(list_price[index].price)
                                             .toString(),
                                       ),
                                       genCell(
                                         text: formatter
                                             .format(
-                                              list[index] *
-                                                  elecFee[index].price,
+                                              (list_price[index].consumption ??
+                                                      0) *
+                                                  (list_price[index].price ??
+                                                      0),
                                             )
                                             .toString(),
                                       ),
@@ -320,7 +314,9 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                         text:
                                             "${formatter.format(receipt.vat ?? 0)}%"),
                                     genCell(
-                                        text: formatter.format(vat).toString()),
+                                        text: formatter
+                                            .format(receipt.vat_amount)
+                                            .toString()),
                                   ],
                                 ),
                               if (receipt != null)
@@ -333,7 +329,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                     genCell(
                                         text: formatter
-                                            .format(totalMoneyVat)
+                                            .format(receipt.amount_due)
                                             .toString()),
                                   ],
                                 ),

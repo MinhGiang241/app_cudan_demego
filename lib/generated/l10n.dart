@@ -8689,6 +8689,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Start construcion date`
+  String get cons_start_date {
+    return Intl.message(
+      'Start construcion date',
+      name: 'cons_start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finish construcion date`
+  String get cons_end_date {
+    return Intl.message(
+      'Finish construcion date',
+      name: 'cons_end_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Environment fee`
+  String get env_fee {
+    return Intl.message(
+      'Environment fee',
+      name: 'env_fee',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

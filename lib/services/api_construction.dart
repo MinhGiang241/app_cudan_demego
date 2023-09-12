@@ -380,7 +380,7 @@ class APIConstruction {
     }
   }
 
-  static Future getConstructionReceipts(
+  static Future getConstructionBills(
     String constructionregistrationId,
     String? residentId,
   ) async {

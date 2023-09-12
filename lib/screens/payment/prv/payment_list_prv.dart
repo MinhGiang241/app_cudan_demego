@@ -57,8 +57,8 @@ class PaymentListPrv extends ChangeNotifier {
         }
       }
       listPay.sort((a, b) {
-        var aDate = DateTime.parse(a.date ?? "");
-        var bDate = DateTime.parse(b.date ?? "");
+        var aDate = DateTime.parse(a.updatedTime ?? "");
+        var bDate = DateTime.parse(b.updatedTime ?? "");
         var aSameDate = DateTime(aDate.year, aDate.month, aDate.day);
         var bSameDate = DateTime(bDate.year, bDate.month, bDate.day);
         var compare = bSameDate.compareTo(aSameDate);

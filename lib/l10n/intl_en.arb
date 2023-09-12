@@ -862,5 +862,8 @@
   "send_extension_success": "Send construction extension successfully",
   "confirm_cancel_cons_ext": "Do you want to cancel letter {c}",
   "success_cancel_cons_ext": "Cancel construcion extension letter successfully",
-  "wait_extend_letter": "wait confirm extend letter"
+  "wait_extend_letter": "wait confirm extend letter",
+  "cons_start_date": "Start construcion date",
+  "cons_end_date": "Finish construcion date",
+  "env_fee": "Environment fee"
 }

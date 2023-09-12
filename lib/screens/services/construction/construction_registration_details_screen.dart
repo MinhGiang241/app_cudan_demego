@@ -76,7 +76,7 @@ class _ConstructionRegistrationDetailsScreenState
     super.dispose();
   }
 
-  late TabController tabController = TabController(length: 3, vsync: this);
+  late TabController tabController = TabController(length: 2, vsync: this);
   @override
   Widget build(BuildContext context) {
     final arg =
@@ -107,7 +107,7 @@ class _ConstructionRegistrationDetailsScreenState
         isTabScrollabel: false,
         tabs: [
           Tab(text: S.of(context).details),
-          Tab(text: S.of(context).bill),
+          // Tab(text: S.of(context).bill),
           Tab(text: S.of(context).history),
         ],
       ),
@@ -430,10 +430,10 @@ class _ConstructionRegistrationDetailsScreenState
               vpad(40),
             ],
           ),
-          ConstructionBillTab(
-            constructionregistrationId: reg.id ?? "",
-            isPay: reg.status == "WAIT_PAY",
-          ),
+          // ConstructionBillTab(
+          //   constructionregistrationId: reg.id ?? "",
+          //   isPay: reg.status == "WAIT_PAY",
+          // ),
           ConstructionHistoryTab(
             constructionregistrationId: reg.id ?? "",
           ),

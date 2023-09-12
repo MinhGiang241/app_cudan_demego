@@ -61,7 +61,7 @@ class HomeServices extends StatelessWidget {
           },
         },
       {
-        "icon": PrimaryIcons.car,
+        "icon": PrimaryIcons.store_front,
         "text": S.current.services,
         "page": ServiceScreen.routeName,
         "arg": null,

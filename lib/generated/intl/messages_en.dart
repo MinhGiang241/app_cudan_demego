@@ -296,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cons_day": MessageLookupByLibrary.simpleMessage("Construction day"),
         "cons_drawing":
             MessageLookupByLibrary.simpleMessage("Construction drawing"),
+        "cons_end_date":
+            MessageLookupByLibrary.simpleMessage("Finish construcion date"),
         "cons_fee": MessageLookupByLibrary.simpleMessage("Construction fee"),
         "cons_file": MessageLookupByLibrary.simpleMessage("Construction file"),
         "cons_file_details": MessageLookupByLibrary.simpleMessage(
@@ -311,6 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Construction registration letter"),
         "cons_regulation":
             MessageLookupByLibrary.simpleMessage("Construction regulation"),
+        "cons_start_date":
+            MessageLookupByLibrary.simpleMessage("Start construcion date"),
         "cons_type": MessageLookupByLibrary.simpleMessage("Construction type"),
         "cons_unit": MessageLookupByLibrary.simpleMessage("Construction unit"),
         "cons_unit_info": MessageLookupByLibrary.simpleMessage(
@@ -467,6 +471,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "enter_worker_num":
             MessageLookupByLibrary.simpleMessage("Enter worker amount"),
+        "env_fee": MessageLookupByLibrary.simpleMessage("Environment fee"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Error Connection"),
         "err_internet":
             MessageLookupByLibrary.simpleMessage("Can not connect to server"),

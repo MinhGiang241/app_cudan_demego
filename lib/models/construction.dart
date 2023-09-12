@@ -2,6 +2,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:app_cudan/models/file_upload.dart';
@@ -1469,4 +1470,87 @@ class ConstructionExtension {
         extend_ConstructionRegistrationId.hashCode ^
         history_aproved.hashCode;
   }
+}
+
+class ConstructionBill {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  double? amount_due;
+  String? reason;
+  String? type;
+  String? constructionDocumentId;
+  String? refSchema;
+  String? code;
+  String? type_bill;
+  String? payment_status;
+  String? receipts_status;
+  ConstructionDocument? d;
+  Status? s;
+  ConstructionBill({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.amount_due,
+    this.reason,
+    this.type,
+    this.constructionDocumentId,
+    this.refSchema,
+    this.code,
+    this.type_bill,
+    this.payment_status,
+    this.receipts_status,
+    this.d,
+    this.s,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'amount_due': amount_due,
+      'reason': reason,
+      'type': type,
+      'constructionDocumentId': constructionDocumentId,
+      'refSchema': refSchema,
+      'code': code,
+      'type_bill': type_bill,
+      'payment_status': payment_status,
+    };
+  }
+
+  factory ConstructionBill.fromMap(Map<String, dynamic> map) {
+    return ConstructionBill(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      amount_due: double.tryParse(map['amount_due'].toString()) != null
+          ? double.parse(map['amount_due'].toString())
+          : null,
+      reason: map['reason'] != null ? map['reason'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      constructionDocumentId: map['constructionDocumentId'] != null
+          ? map['constructionDocumentId'] as String
+          : null,
+      refSchema: map['refSchema'] != null ? map['refSchema'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      type_bill: map['type_bill'] != null ? map['type_bill'] as String : null,
+      payment_status: map['payment_status'] != null
+          ? map['payment_status'] as String
+          : null,
+      receipts_status: map['receipts_status'] != null
+          ? map['receipts_status'] as String
+          : null,
+      d: map['d'] != null ? ConstructionDocument.fromJson(map['d']) : null,
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionBill.fromJson(String source) =>
+      ConstructionBill.fromMap(json.decode(source) as Map<String, dynamic>);
 }
