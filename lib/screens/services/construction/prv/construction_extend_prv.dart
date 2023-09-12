@@ -157,7 +157,7 @@ class ConstructionExtendPrv extends ChangeNotifier {
               context,
               ConstructionListScreen.routeName,
               (route) => route.isFirst,
-              arguments: {'index': 2},
+              arguments: {'index': 1},
             );
           },
         );

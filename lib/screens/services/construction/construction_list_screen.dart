@@ -11,11 +11,9 @@ import '../../../widgets/primary_screen.dart';
 import '../service_screen.dart';
 import 'construction_reg_screen.dart';
 import 'tab/construction_extend_tab.dart';
-import 'tab/construction_extend_wait_tab.dart';
 import 'tab/construction_file_tab.dart';
 import 'tab/construction_registration_letter.dart';
 import 'prv/construction_list_prv.dart';
-import 'tab/construction_wait_tab.dart';
 
 class ConstructionListScreen extends StatefulWidget {
   const ConstructionListScreen({super.key});
@@ -27,7 +25,7 @@ class ConstructionListScreen extends StatefulWidget {
 
 class _ConstructionListScreenState extends State<ConstructionListScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 5, vsync: this);
+  late TabController tabController = TabController(length: 3, vsync: this);
   var initIndex = 0;
   var tooltipKey = UniqueKey();
   StreamController<bool> stream = StreamController.broadcast();
@@ -35,24 +33,24 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
   void initState() {
     super.initState();
     tabController.addListener(() {
-      stream.add(tabController.index == 0 || tabController.index == 2);
+      stream.add(tabController.index == 0 || tabController.index == 1);
     });
   }
 
   Widget _bottomButtons() {
     return StreamBuilder<bool>(
-      initialData: tabController.index == 0 || tabController.index == 2,
+      initialData: tabController.index == 0 || tabController.index == 1,
       stream: stream.stream,
       builder: (context, snapshot) {
         if (snapshot.data == true) {
           return FloatingActionButton(
             shape: CircleBorder(),
             key: tooltipKey,
-            tooltip: tabController.index == 2
+            tooltip: tabController.index == 1
                 ? S.current.construction_extend
                 : S.current.cons_reg,
             onPressed: () {
-              if (tabController.index == 2) {
+              if (tabController.index == 1) {
                 Navigator.pushNamed(
                   context,
                   ConstructionExtendScreen.routeName,
@@ -103,9 +101,9 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
             isTabScrollabel: true,
             tabs: [
               Tab(text: S.of(context).my_letter),
-              Tab(text: S.of(context).wait_confirm_letter),
+              // Tab(text: S.of(context).wait_confirm_letter),
               Tab(text: S.of(context).extend_letter),
-              Tab(text: S.of(context).wait_extend_letter),
+              // Tab(text: S.of(context).wait_extend_letter),
               Tab(text: S.of(context).cons_file),
             ],
           ),
@@ -119,24 +117,24 @@ class _ConstructionListScreenState extends State<ConstructionListScreen>
                     .read<ConstructionListPrv>()
                     .getContructionRegistrationLetterList(ctx),
               ),
-              ConstructionWaitTab(
-                list: context.read<ConstructionListPrv>().listWaitRegistration,
-                getList: (BuildContext ctx) => context
-                    .read<ConstructionListPrv>()
-                    .getContructionRegistrationLetterListWait(ctx),
-              ),
+              // ConstructionWaitTab(
+              //   list: context.read<ConstructionListPrv>().listWaitRegistration,
+              //   getList: (BuildContext ctx) => context
+              //       .read<ConstructionListPrv>()
+              //       .getContructionRegistrationLetterListWait(ctx),
+              // ),
               ConstructionExtendTab(
                 list: context.read<ConstructionListPrv>().listExtension,
                 getList: (BuildContext ctx) => context
                     .read<ConstructionListPrv>()
                     .getConstructionExtensionList(ctx),
               ),
-              ConstructionExtendWaitTab(
-                list: context.read<ConstructionListPrv>().listWaitExtension,
-                getList: (BuildContext ctx) => context
-                    .read<ConstructionListPrv>()
-                    .getListWaitExtension(ctx),
-              ),
+              // ConstructionExtendWaitTab(
+              //   list: context.read<ConstructionListPrv>().listWaitExtension,
+              //   getList: (BuildContext ctx) => context
+              //       .read<ConstructionListPrv>()
+              //       .getListWaitExtension(ctx),
+              // ),
               ConstructionFileTab(
                 list: context.read<ConstructionListPrv>().listDocument,
                 getList: (BuildContext ctx) => context

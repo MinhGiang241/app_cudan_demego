@@ -15,6 +15,7 @@ import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
+import 'tab/construction_bill_tab.dart';
 import 'tab/construction_document_history_tab.dart';
 
 class ConstructionDocumentDetailsScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class ConstructionDocumentDetailsScreen extends StatefulWidget {
 class _ConstructionDocumentDetailsState
     extends State<ConstructionDocumentDetailsScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 2, vsync: this);
+  late TabController tabController = TabController(length: 3, vsync: this);
   var isShowRecorg = false;
   ReceivePort port = ReceivePort();
   @override
@@ -94,6 +95,7 @@ class _ConstructionDocumentDetailsState
         isTabScrollabel: false,
         tabs: [
           Tab(text: S.of(context).details),
+          Tab(text: S.of(context).bill),
           Tab(text: S.of(context).history),
         ],
       ),
@@ -348,6 +350,10 @@ class _ConstructionDocumentDetailsState
               // ),
               vpad(40),
             ],
+          ),
+          ConstructionBillTab(
+            constructionregistrationId: reg.constructionRegistrationId ?? '',
+            isPay: reg.status == "WAIT_PAY",
           ),
           ConstructionDocumentHistoryTab(
             constructionDocumentId: reg.id ?? "",
