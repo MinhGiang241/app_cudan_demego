@@ -323,6 +323,21 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                 Row(
                                   children: [
                                     genCell(
+                                      text: "${S.of(context).discount}:",
+                                      flex: 4,
+                                      align: Alignment.centerRight,
+                                    ),
+                                    genCell(
+                                      text: formatter
+                                          .format(receipt.discount_money)
+                                          .toString(),
+                                    ),
+                                  ],
+                                ),
+                              if (receipt != null)
+                                Row(
+                                  children: [
+                                    genCell(
                                       text:
                                           "${S.of(context).total_money_to_pay}:",
                                       flex: 4,
