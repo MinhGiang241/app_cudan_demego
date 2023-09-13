@@ -81,8 +81,8 @@ class _ElectricityPaymentTabState extends State<ElectricityPaymentTab> {
             children: [
               vpad(12),
               ...listReceipt.map((e) {
-                var date =
-                    DateTime.parse(e.date ?? '').add(const Duration(hours: 7));
+                var date = DateTime.parse(e.expiration_date ?? '')
+                    .add(const Duration(hours: 7));
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

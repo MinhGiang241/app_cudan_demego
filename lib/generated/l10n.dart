@@ -1470,10 +1470,10 @@ class S {
     );
   }
 
-  /// `Identity card/ passport photos`
+  /// `Identity card/ passport photos (2 sides)`
   String get identity_photo {
     return Intl.message(
-      'Identity card/ passport photos',
+      'Identity card/ passport photos (2 sides)',
       name: 'identity_photo',
       desc: '',
       args: [],

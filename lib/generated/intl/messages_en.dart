@@ -594,7 +594,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
             "Identity card front side image can not be empty"),
         "identity_photo": MessageLookupByLibrary.simpleMessage(
-            "Identity card/ passport photos"),
+            "Identity card/ passport photos (2 sides)"),
         "if_not_resident": MessageLookupByLibrary.simpleMessage(
             "If you have not registered information yet, please click"),
         "image_not_empty":

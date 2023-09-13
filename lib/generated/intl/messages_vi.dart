@@ -599,8 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh CMND/CCCD/Hộ chiếu mặt sau không được để trống"),
         "identity_front_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh CMND/CCCD/Hộ chiếu mặt trước không được để trống"),
-        "identity_photo":
-            MessageLookupByLibrary.simpleMessage("Ảnh CMND/ CCCD/ Hộ chiếu"),
+        "identity_photo": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMND/ CCCD/ Hộ chiếu (2 mặt)"),
         "if_not_resident": MessageLookupByLibrary.simpleMessage(
             "Nếu Anh/Chị chưa đăng ký thông tin cư dân vui lòng click"),
         "image_not_empty": MessageLookupByLibrary.simpleMessage(

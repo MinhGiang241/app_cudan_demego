@@ -11,7 +11,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/electric_fee.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_card.dart';
@@ -281,21 +280,24 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                       genCell(
                                         text: formatter
                                             .format(
-                                                list_price[index].consumption)
-                                            .toString(),
-                                      ),
-                                      genCell(
-                                        text: formatter
-                                            .format(list_price[index].price)
+                                                list_price[index].consumption ??
+                                                    list_price[index].lastNum)
                                             .toString(),
                                       ),
                                       genCell(
                                         text: formatter
                                             .format(
-                                              (list_price[index].consumption ??
-                                                      0) *
-                                                  (list_price[index].price ??
-                                                      0),
+                                              (list_price[index].price ?? 0) /
+                                                  (list_price[index]
+                                                          .consumption ??
+                                                      1),
+                                            )
+                                            .toString(),
+                                      ),
+                                      genCell(
+                                        text: formatter
+                                            .format(
+                                              (list_price[index].price ?? 0),
                                             )
                                             .toString(),
                                       ),
@@ -315,7 +317,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                             "${formatter.format(receipt.vat ?? 0)}%"),
                                     genCell(
                                         text: formatter
-                                            .format(receipt.vat_amount)
+                                            .format(receipt.vat_amount ?? 0)
                                             .toString()),
                                   ],
                                 ),
@@ -329,7 +331,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(receipt.discount_money)
+                                          .format(receipt.discount_money ?? 0)
                                           .toString(),
                                     ),
                                   ],
@@ -344,7 +346,7 @@ class _ElectricityBillTabState extends State<ElectricityBillTab> {
                                     ),
                                     genCell(
                                         text: formatter
-                                            .format(receipt.amount_due)
+                                            .format(receipt.amount_due ?? 0)
                                             .toString()),
                                   ],
                                 ),

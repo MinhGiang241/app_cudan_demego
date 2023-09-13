@@ -7,7 +7,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/waterFee.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/choose_month_year.dart';
 import '../../../widgets/primary_card.dart';
@@ -310,16 +309,18 @@ class _WaterBillTabState extends State<WaterBillTab> {
 
                                       genCell(
                                         text: formatter
-                                            .format(list_price[index].price)
+                                            .format(
+                                              (list_price[index].price ?? 0) /
+                                                  (list_price[index]
+                                                          .consumption ??
+                                                      1),
+                                            )
                                             .toString(),
                                       ),
                                       genCell(
                                         text: formatter
                                             .format(
-                                              (list_price[index].consumption ??
-                                                      0) *
-                                                  (list_price[index].price ??
-                                                      0),
+                                              (list_price[index].price ?? 0),
                                             )
                                             .toString(),
                                       ),
@@ -340,7 +341,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(receipt.vat_amount)
+                                          .format(receipt.vat_amount ?? 0)
                                           .toString(),
                                     ),
                                   ],
@@ -359,7 +360,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     // ),
                                     genCell(
                                       text: formatter
-                                          .format(receipt.env_fee_amount)
+                                          .format(receipt.env_fee_amount ?? 0)
                                           .toString(),
                                     ),
                                   ],
@@ -374,7 +375,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(receipt.discount_money)
+                                          .format(receipt.discount_money ?? 0)
                                           .toString(),
                                     ),
                                   ],
@@ -389,7 +390,7 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                     ),
                                     genCell(
                                       text: formatter
-                                          .format(receipt.amount_due)
+                                          .format(receipt.amount_due ?? 0)
                                           .toString(),
                                     ),
                                   ],

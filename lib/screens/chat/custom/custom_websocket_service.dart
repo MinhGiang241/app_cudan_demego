@@ -396,11 +396,15 @@ class CustomWebSocketService {
   }
 
   loadLiveChatHistory(String? roomId, String? token) async {
-    return await ApiService.shared.getApi(
+    if (roomId == null) {
+      return null;
+    }
+    var results = await ApiService.shared.getApi(
       path:
           '${WebsocketConnect.serverUrl}/api/v1/livechat/messages.history/$roomId',
       params: {"token": token},
     );
+    return results;
   }
 
   //upload File on Room
