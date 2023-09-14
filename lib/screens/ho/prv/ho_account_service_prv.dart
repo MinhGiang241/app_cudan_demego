@@ -70,10 +70,11 @@ class HOAccountServicePrv extends ChangeNotifier {
 
       await PrfData.shared.setProjectInStore(e);
       var a = await APITower.mobileMe();
-      //
+
       print(a);
       if (a != null) {
         var userHO = UserAccountHO.fromMap(a);
+        ApiService.shared.setToken(a["token"]);
         await firebase.push_device(userHO.user?.userName ?? "");
         await context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
       }

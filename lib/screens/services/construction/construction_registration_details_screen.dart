@@ -20,7 +20,6 @@ import '../../../widgets/primary_appbar.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../payment/widget/payment_item.dart';
-import 'tab/construction_bill_tab.dart';
 
 class ConstructionRegistrationDetailsScreen extends StatefulWidget {
   const ConstructionRegistrationDetailsScreen({super.key});

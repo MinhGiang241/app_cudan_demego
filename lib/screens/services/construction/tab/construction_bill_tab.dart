@@ -9,13 +9,11 @@ import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
 
-import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_error_widget.dart';
 import '../../../../widgets/primary_icon.dart';
 import '../../../../widgets/primary_info_widget.dart';
 import '../../../../widgets/primary_loading.dart';
-import '../../../payment/payment_screen.dart';
 import '../../../payment/widget/payment_item.dart';
 
 class ConstructionBillTab extends StatefulWidget {

@@ -52,6 +52,12 @@ class ApiService {
     uploadURL = '${URL}/headless/stream/upload';
   }
 
+  setToken(String? token) {
+    if (token != null) {
+      access_token = token;
+    }
+  }
+
   Future<oauth2.Client?> getClient({
     required BuildContext context,
     required String username,
