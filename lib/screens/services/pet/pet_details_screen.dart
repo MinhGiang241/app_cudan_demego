@@ -218,9 +218,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen>
                                 width: 22.0,
                                 height: 22.0,
                                 child: Checkbox(
-                                  fillColor: MaterialStateProperty.all(
-                                    primaryColorBase,
-                                  ),
+                                  activeColor: primaryColorBase,
                                   value: arg.check,
                                   onChanged: (v) {},
                                 ),

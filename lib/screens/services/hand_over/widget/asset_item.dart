@@ -562,6 +562,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                       height: 20,
                                       width: 20,
                                       child: Checkbox(
+                                        activeColor: primaryColorBase,
                                         onChanged: (v) {
                                           widget.vote
                                               ? widget.selectPass(
@@ -585,6 +586,7 @@ class _AssetItemState extends State<AssetItem> with TickerProviderStateMixin {
                                       height: 20,
                                       width: 20,
                                       child: Checkbox(
+                                        activeColor: primaryColorBase,
                                         onChanged: (v) {
                                           widget.vote
                                               ? addReasonReject(

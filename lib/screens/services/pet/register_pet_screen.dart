@@ -314,8 +314,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                           width: 22.0,
                           height: 22.0,
                           child: Checkbox(
-                            fillColor:
-                                MaterialStateProperty.all(primaryColorBase),
+                            activeColor: primaryColorBase,
                             value: context.watch<RegisterPetPrv>().isAgree,
                             onChanged: (v) {
                               context.read<RegisterPetPrv>().onAgree();

@@ -163,8 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: 22.0,
                               height: 22.0,
                               child: Checkbox(
-                                fillColor:
-                                    MaterialStateProperty.all(primaryColorBase),
+                                activeColor: primaryColorBase,
                                 value: context.read<AuthPrv>().remember,
                                 onChanged: (_) {
                                   setState(() {

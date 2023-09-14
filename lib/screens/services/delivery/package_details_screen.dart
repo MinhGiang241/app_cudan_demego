@@ -321,9 +321,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                       width: 20.0,
                                       height: 20.0,
                                       child: Checkbox(
-                                        fillColor: MaterialStateProperty.all(
-                                          primaryColorBase,
-                                        ),
+                                        activeColor: primaryColorBase,
                                         value: card.help_check,
                                         onChanged: (v) {},
                                       ),
@@ -348,9 +346,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen>
                                   width: 20.0,
                                   height: 20.0,
                                   child: Checkbox(
-                                    fillColor: MaterialStateProperty.all(
-                                      primaryColorBase,
-                                    ),
+                                    activeColor: primaryColorBase,
                                     value: card.elevator,
                                     onChanged: (v) {},
                                   ),

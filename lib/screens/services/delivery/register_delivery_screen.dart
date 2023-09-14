@@ -535,9 +535,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                     width: 22.0,
                                     height: 22.0,
                                     child: Checkbox(
-                                      fillColor: MaterialStateProperty.all(
-                                        primaryColorBase,
-                                      ),
+                                      activeColor: primaryColorBase,
                                       value: context
                                           .watch<RegisterDeliveryPrv>()
                                           .helpCheck,
@@ -561,7 +559,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               Row(
@@ -570,9 +568,7 @@ class _RegisterDeliveryState extends State<RegisterDelivery> {
                                     width: 22.0,
                                     height: 22.0,
                                     child: Checkbox(
-                                      fillColor: MaterialStateProperty.all(
-                                        primaryColorBase,
-                                      ),
+                                      activeColor: primaryColorBase,
                                       value: context
                                           .watch<RegisterDeliveryPrv>()
                                           .useElevator,
