@@ -244,8 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ảnh CMND/CCCD phải ít nhất 2 ảnh"),
         "cmnd_length_9":
             MessageLookupByLibrary.simpleMessage("Không được ít hơn 9 ký tự"),
-        "cmnd_photos":
-            MessageLookupByLibrary.simpleMessage("Ảnh CMND / CCCD / Hộ chiếu"),
+        "cmnd_photos": MessageLookupByLibrary.simpleMessage(
+            "Ảnh CMND / CCCD / Hộ chiếu (2 mặt)"),
         "code_file": MessageLookupByLibrary.simpleMessage("Mã hồ sơ"),
         "code_verify": MessageLookupByLibrary.simpleMessage("Nhập mã bảo mật"),
         "college_degree": MessageLookupByLibrary.simpleMessage("Bằng cao đẳng"),
