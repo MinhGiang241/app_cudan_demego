@@ -59,6 +59,7 @@ class _TransportCardScreenState extends State<TransportCardScreen>
             ],
           ),
           floatingActionButton: FloatingActionButton(
+            shape: CircleBorder(),
             tooltip: S.of(context).add_trans_card,
             onPressed: () {
               Navigator.pushNamed(
@@ -71,6 +72,7 @@ class _TransportCardScreenState extends State<TransportCardScreen>
             child: const Icon(
               Icons.add,
               size: 40,
+              color: Colors.white,
             ),
           ),
           body: SafeArea(
