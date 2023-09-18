@@ -158,8 +158,8 @@ class AutoNavigation {
         }
         context.read<AuthPrv>().authStatus = AuthStatus.auth;
         context.read<ResidentInfoPrv>().selectedApartment = selectedApartment;
-        // await PrfData.shared
-        //     .setApartments(json.encode(selectedApartment.toJson()));
+        await PrfData.shared
+            .setApartments(json.encode(selectedApartment.toJson()));
 
         Navigator.of(context).pushNamedAndRemoveUntil(
           HomeScreen.routeName,

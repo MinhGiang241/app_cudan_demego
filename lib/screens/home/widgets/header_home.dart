@@ -30,6 +30,8 @@ class _HeaderHomeState extends State<HeaderHome> {
     var selectedFloor =
         context.read<ResidentInfoPrv>().selectedApartment?.floor;
     var listOwn = context.read<ResidentInfoPrv>().listOwn;
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
 
     selectApartment(MapEntry<int, ResponseResidentOwn> select) {
       setState(() {
@@ -64,7 +66,10 @@ class _HeaderHomeState extends State<HeaderHome> {
                     ),
                     if (userInfo != null)
                       Text(
-                        userInfo.info_name ?? userInfo.account?.fullName ?? '',
+                        userInfo.info_name ??
+                            userInfo.account?.fullName ??
+                            userInfo.info_name ??
+                            '',
                         style: txtLinkMedium(),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -77,64 +82,65 @@ class _HeaderHomeState extends State<HeaderHome> {
         // if (Provider.of<ResidentInfoPrv>(context, listen: false)
         //     .listOwn
         //     .isNotEmpty)
-        vpad(30),
+        if (isResident) vpad(30),
         // if (Provider.of<ResidentInfoPrv>(context, listen: false)
         //     .listOwn
         //     .isNotEmpty)
-        RepaintBoundary(
-          child: Row(
-            children: [
-              PrimaryCard(
-                width: dvWidth(context) - 48,
-                onTap: () {
-                  Utils.showBottomSheet(
-                    context: context,
-                    child: ChooseAparmentBottomSheet(
-                      selectApartment: selectApartment,
-                      list: listOwn, //context.read<AuthPrv>().apartments!,
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ListTile(
-                    leading: const PrimaryIcon(
-                      padding: EdgeInsets.all(9),
-                      icons: PrimaryIcons.home_smile,
-                      color: primaryColorBase,
-                      backgroundColor: primaryColor5,
-                      style: PrimaryIconStyle.round,
-                    ),
-                    // hpad(12),
-                    title: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          selectedApartment?.name ?? "",
-                          style: txtLinkMedium(),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
-                          style: txtBodySmallRegular(color: grayScaleColor2),
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
+        if (isResident)
+          RepaintBoundary(
+            child: Row(
+              children: [
+                PrimaryCard(
+                  width: dvWidth(context) - 48,
+                  onTap: () {
+                    Utils.showBottomSheet(
+                      context: context,
+                      child: ChooseAparmentBottomSheet(
+                        selectApartment: selectApartment,
+                        list: listOwn, //context.read<AuthPrv>().apartments!,
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: ListTile(
+                      leading: const PrimaryIcon(
+                        padding: EdgeInsets.all(9),
+                        icons: PrimaryIcons.home_smile,
+                        color: primaryColorBase,
+                        backgroundColor: primaryColor5,
+                        style: PrimaryIconStyle.round,
+                      ),
+                      // hpad(12),
+                      title: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            selectedApartment?.name ?? "",
+                            style: txtLinkMedium(),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            '${selectedFloor?.name ?? ""} -${selectedBulding?.name ?? ""}',
+                            style: txtBodySmallRegular(color: grayScaleColor2),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
 
-                    // const Spacer(),
-                    trailing: const Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: grayScaleColor2,
+                      // const Spacer(),
+                      trailing: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: grayScaleColor2,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

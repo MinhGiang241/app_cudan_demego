@@ -112,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       HeaderTitle(
                         onMenuTab: _onItemTapped,
                       ),
-                      if (isResident) vpad(30),
-                      if (isResident) const HeaderHome(),
+                      vpad(30),
+                      const HeaderHome(),
                       vpad(30),
                       const HomeServices(),
                       vpad(30),
