@@ -107,6 +107,7 @@ class AutoNavigation {
         print(me);
         if (me != null) {
           var userHO = UserAccountHO.fromMap(me);
+          ApiService.shared.setToken(me["token"]);
           await firebase.push_device(userHO.user?.userName ?? "");
           await context.read<ResidentInfoPrv>().setUserInfoFromHO(userHO);
         }
