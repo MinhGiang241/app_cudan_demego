@@ -65,6 +65,7 @@ class AutoNavigation {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     context.read<HOAccountServicePrv>().onSetAutoLoginLoading(false);
     bool notAuto = arg?['not-auto'] ?? false;
+    print('not_auto: $notAuto');
     if (notAuto) {
       setLogin(false);
       return;
@@ -157,7 +158,7 @@ class AutoNavigation {
           return;
         }
         context.read<AuthPrv>().authStatus = AuthStatus.auth;
-        context.read<ResidentInfoPrv>().selectedApartment = selectedApartment;
+        context.read<ResidentInfoPrv>().selectedApartment = listOwn[indexOwn];
         await PrfData.shared
             .setApartments(json.encode(selectedApartment.toJson()));
 

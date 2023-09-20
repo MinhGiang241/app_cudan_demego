@@ -91,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context.read<ResidentInfoPrv>().selectedApartment != null;
     switch (_selectedIndex) {
       case 0:
+        UnreadNotification.getUnReadNotification();
         return RepaintBoundary(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),

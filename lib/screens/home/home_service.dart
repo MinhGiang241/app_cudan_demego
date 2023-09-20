@@ -61,7 +61,7 @@ class HomeServices extends StatelessWidget {
           },
         },
       {
-        "icon": PrimaryIcons.store_front,
+        "icon": PrimaryIcons.service_feedback,
         "text": S.current.services,
         "page": ServiceScreen.routeName,
         "arg": null,
@@ -83,7 +83,7 @@ class HomeServices extends StatelessWidget {
       },
       if (isResient)
         {
-          "icon": PrimaryIcons.mail,
+          "icon": PrimaryIcons.comment,
           "text": S.current.reflex,
           "page": ReflectionScreen.routeName,
           "arg": null,
@@ -93,7 +93,7 @@ class HomeServices extends StatelessWidget {
         },
       if (isResient)
         {
-          "icon": PrimaryIcons.avatar,
+          "icon": PrimaryIcons.new_user,
           "text": S.current.resident_reg,
           "page": RegisterResidentScreen.routeName,
           "arg": null,
