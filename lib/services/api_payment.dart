@@ -6,6 +6,39 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APIPayment {
+  static Future getReceiptListFromTo(
+    String from,
+    String to,
+    String? apartmentId,
+  ) async {
+    var query = '''
+       mutation (\$from:DateTime,\$to:DateTime,\$apartmentId:String){
+    response: servicebill_mobile_get_receipts_by_apartmentId (from: \$from,to: \$to,apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+} 
+        
+  ''';
+    final MutationOptions options =
+        MutationOptions(document: gql(query), variables: {
+      'from': from,
+      'to': to,
+      'apartmentId': apartmentId,
+    });
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future makePayment(Map<String, dynamic> data) async {
     var query = '''
     mutation (\$data:Dictionary){

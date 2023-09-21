@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/receipts/receipt_screen.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../electricity/electricity_screen.dart';
 import '../event/event_list_screen.dart';
 import '../payment/payment_list_screen.dart';
 import '../reg_resident/register_resident_screen.dart';
+import '../revenues/revenues_screen.dart';
 import '../services/reflection/reflection_screen.dart';
 import '../services/service_screen.dart';
 import '../services/ultilty/utility_service_list_screen.dart';
@@ -23,18 +25,44 @@ class HomeServices extends StatelessWidget {
     var isResient = context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     final data = [
-      {
-        "icon": PrimaryIcons.dollar,
-        "text": S.current.pay,
-        "page": PaymentListScreen.routeName,
-        "arg": {'year': null, 'month': null, 'index': null},
-        "tap": () {
-          Navigator.of(context).pushNamed(
-            PaymentListScreen.routeName,
-            arguments: {'year': null, 'month': null, 'index': null},
-          );
+      // {
+      //   "icon": PrimaryIcons.dollar,
+      //   "text": S.current.pay,
+      //   "page": PaymentListScreen.routeName,
+      //   "arg": {'year': null, 'month': null, 'index': null},
+      //   "tap": () {
+      //     Navigator.of(context).pushNamed(
+      //       PaymentListScreen.routeName,
+      //       arguments: {'year': null, 'month': null, 'index': null},
+      //     );
+      //   },
+      // },
+      if (isResient)
+        {
+          "icon": PrimaryIcons.dollar,
+          "text": S.current.receipt,
+          "page": ReceiptScreen.routeName,
+          "arg": {'year': null, 'month': null, 'index': null},
+          "tap": () {
+            Navigator.of(context).pushNamed(
+              ReceiptScreen.routeName,
+              arguments: {'year': null, 'month': null, 'index': null},
+            );
+          },
         },
-      },
+      if (isResient)
+        {
+          "icon": PrimaryIcons.credit_card_alt,
+          "text": S.current.revenues,
+          "page": RevenuesScreen.routeName,
+          "arg": {'year': null, 'month': null, 'index': null},
+          "tap": () {
+            Navigator.of(context).pushNamed(
+              RevenuesScreen.routeName,
+              arguments: {'year': null, 'month': null, 'index': null},
+            );
+          },
+        },
       if (isResient)
         {
           "icon": PrimaryIcons.water,

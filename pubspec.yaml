@@ -95,6 +95,7 @@ dependencies:
   searchable_paginated_dropdown: ^1.2.0
   flutter_phone_direct_caller: ^2.1.1
   another_flushbar: ^1.12.30
+  webview_flutter: ^4.2.4
 
 dev_dependencies:
   flutter_test:

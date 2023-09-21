@@ -535,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "free_res_card":
             MessageLookupByLibrary.simpleMessage("Free resident card"),
         "free_service": MessageLookupByLibrary.simpleMessage("Free service"),
+        "from_date": MessageLookupByLibrary.simpleMessage("From"),
         "front_side": MessageLookupByLibrary.simpleMessage("Front side"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
@@ -664,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_report":
             MessageLookupByLibrary.simpleMessage("Missing Report"),
         "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
+        "money": MessageLookupByLibrary.simpleMessage("Money"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "my_letter": MessageLookupByLibrary.simpleMessage("My letter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -714,6 +716,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t have any picked object"),
         "no_project":
             MessageLookupByLibrary.simpleMessage("Don\'t have any project"),
+        "no_receipt":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any receipt"),
         "no_reflection":
             MessageLookupByLibrary.simpleMessage("No have any feedback"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
@@ -914,6 +918,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reality hand over hour"),
         "reason": MessageLookupByLibrary.simpleMessage("Reason"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Refuse reason"),
+        "receipt": MessageLookupByLibrary.simpleMessage("Receipt"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
         "receipted": MessageLookupByLibrary.simpleMessage("Receipted"),
         "red_code": MessageLookupByLibrary.simpleMessage("Register code"),
@@ -1048,6 +1053,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
         "return_image": MessageLookupByLibrary.simpleMessage("Returned images"),
         "returned": MessageLookupByLibrary.simpleMessage("Returned"),
+        "revenues": MessageLookupByLibrary.simpleMessage("Revenues"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Register successfully, please sign in"),
         "rgstr_code_1":
@@ -1259,6 +1265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Time happening"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "to_date": MessageLookupByLibrary.simpleMessage("To"),
         "to_money": MessageLookupByLibrary.simpleMessage("Money"),
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("To money (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
@@ -1303,6 +1310,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation status"),
         "trans_type":
             MessageLookupByLibrary.simpleMessage("Transportation type"),
+        "transaction_code":
+            MessageLookupByLibrary.simpleMessage("transaction code"),
         "transfer_list": MessageLookupByLibrary.simpleMessage("Transfer list"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Transfer type"),
         "transport": MessageLookupByLibrary.simpleMessage("Transportation"),

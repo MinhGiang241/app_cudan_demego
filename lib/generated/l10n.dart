@@ -8719,6 +8719,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Receipt`
+  String get receipt {
+    return Intl.message(
+      'Receipt',
+      name: 'receipt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Revenues`
+  String get revenues {
+    return Intl.message(
+      'Revenues',
+      name: 'revenues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get from_date {
+    return Intl.message(
+      'From',
+      name: 'from_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get to_date {
+    return Intl.message(
+      'To',
+      name: 'to_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any receipt`
+  String get no_receipt {
+    return Intl.message(
+      'Don\'t have any receipt',
+      name: 'no_receipt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `transaction code`
+  String get transaction_code {
+    return Intl.message(
+      'transaction code',
+      name: 'transaction_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Money`
+  String get money {
+    return Intl.message(
+      'Money',
+      name: 'money',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

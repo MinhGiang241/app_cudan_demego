@@ -28,7 +28,7 @@ class ElectricityBillTab extends StatefulWidget {
 class _ElectricityBillTabState extends State<ElectricityBillTab> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  var formatter = NumberFormat('#,###,###');
+  var formatter = NumberFormat('#,###,###,###');
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

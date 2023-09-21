@@ -866,5 +866,12 @@
   "wait_extend_letter": "Phiếu gia hạn chờ xác nhận",
   "cons_start_date": "Ngày bắt đầu thi công",
   "cons_end_date": "Ngày kết thúc thi công",
-  "env_fee": "Ngày kết thúc thi công"
+  "env_fee": "Ngày kết thúc thi công",
+  "receipt": "Phiếu thu",
+  "revenues": "Dự thu",
+  "from_date": "Từ ngày",
+  "to_date": "Đến ngày",
+  "no_receipt": "Không có phiếu thu nào",
+  "transaction_code": "Mã giao dịch",
+  "money": "Số tiển"
 }

@@ -865,5 +865,12 @@
   "wait_extend_letter": "wait confirm extend letter",
   "cons_start_date": "Start construcion date",
   "cons_end_date": "Finish construcion date",
-  "env_fee": "Environment fee"
+  "env_fee": "Environment fee",
+  "receipt": "Receipt",
+  "revenues": "Revenues",
+  "from_date": "From",
+  "to_date": "To",
+  "no_receipt": "Don't have any receipt",
+  "transaction_code": "transaction code",
+  "money": "Money"
 }

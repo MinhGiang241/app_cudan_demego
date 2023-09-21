@@ -542,6 +542,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thẻ cư dân miễn phí"),
         "free_service":
             MessageLookupByLibrary.simpleMessage("Dịch vụ không tính phí"),
+        "from_date": MessageLookupByLibrary.simpleMessage("Từ ngày"),
         "front_side": MessageLookupByLibrary.simpleMessage("Mặt trước"),
         "full_name": MessageLookupByLibrary.simpleMessage("Họ và tên"),
         "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
@@ -671,6 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_report": MessageLookupByLibrary.simpleMessage("Báo mất"),
         "missing_time":
             MessageLookupByLibrary.simpleMessage("Thời điểm thất lạc"),
+        "money": MessageLookupByLibrary.simpleMessage("Số tiển"),
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
@@ -722,6 +724,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
         "no_project":
             MessageLookupByLibrary.simpleMessage("Không có dự án nào"),
+        "no_receipt":
+            MessageLookupByLibrary.simpleMessage("Không có phiếu thu nào"),
         "no_reflection": MessageLookupByLibrary.simpleMessage(
             "Không có góp ý hay khiếu nại nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
@@ -925,6 +929,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Giờ nhận thực tế"),
         "reason": MessageLookupByLibrary.simpleMessage("Lý do"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Lý do từ chối"),
+        "receipt": MessageLookupByLibrary.simpleMessage("Phiếu thu"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "receipted": MessageLookupByLibrary.simpleMessage("Đã nhận"),
         "red_code": MessageLookupByLibrary.simpleMessage("Mã đăng kí"),
@@ -1054,6 +1059,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Vui lòng kiểm tra lại."),
         "return_image": MessageLookupByLibrary.simpleMessage("Hình ảnh đã trả"),
         "returned": MessageLookupByLibrary.simpleMessage("Đã trả"),
+        "revenues": MessageLookupByLibrary.simpleMessage("Dự thu"),
         "rgstr_code_0": MessageLookupByLibrary.simpleMessage(
             "Đăng ký thành công, vui lòng đăng nhập"),
         "rgstr_code_1": MessageLookupByLibrary.simpleMessage(
@@ -1261,6 +1267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
+        "to_date": MessageLookupByLibrary.simpleMessage("Đến ngày"),
         "to_money": MessageLookupByLibrary.simpleMessage("Thành tiền"),
         "to_money_vnd":
             MessageLookupByLibrary.simpleMessage("Thành tiền (VNĐ)"),
@@ -1302,6 +1309,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trans_status":
             MessageLookupByLibrary.simpleMessage("Trạng thái phương tiện"),
         "trans_type": MessageLookupByLibrary.simpleMessage("Loại phương tiện"),
+        "transaction_code":
+            MessageLookupByLibrary.simpleMessage("Mã giao dịch"),
         "transfer_list":
             MessageLookupByLibrary.simpleMessage("Danh sách chuyển đồ"),
         "transfer_type": MessageLookupByLibrary.simpleMessage("Loại chuyển"),

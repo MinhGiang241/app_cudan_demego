@@ -26,7 +26,7 @@ class WaterBillTab extends StatefulWidget {
 class _WaterBillTabState extends State<WaterBillTab> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  var formatter = NumberFormat('#,###,###');
+  var formatter = NumberFormat('#,###,###,###');
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

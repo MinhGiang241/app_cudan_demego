@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
+import 'package:app_cudan/screens/receipts/receipt_screen.dart';
 import 'package:app_cudan/screens/services/ultilty/utility_service_screen.dart';
 import 'package:app_cudan/screens/water/water_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ import '../screens/payment/payment_list_screen.dart';
 import '../screens/payment/payment_screen.dart';
 import '../screens/reg_resident/add_new_resident_screen.dart';
 import '../screens/reg_resident/register_resident_screen.dart';
+import '../screens/revenues/revenues_screen.dart';
 import '../screens/services/construction/construction_doc_details_screen.dart';
 import '../screens/services/construction/construction_extend_screen.dart';
 import '../screens/services/construction/construction_list_screen.dart';
@@ -449,6 +451,16 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => ConstructionExtendScreen(),
+        );
+      case ReceiptScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => ReceiptScreen(),
+        );
+      case RevenuesScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => RevenuesScreen(),
         );
 
       default:
