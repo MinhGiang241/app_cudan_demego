@@ -672,7 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_report": MessageLookupByLibrary.simpleMessage("Báo mất"),
         "missing_time":
             MessageLookupByLibrary.simpleMessage("Thời điểm thất lạc"),
-        "money": MessageLookupByLibrary.simpleMessage("Số tiển"),
+        "money": MessageLookupByLibrary.simpleMessage("Số tiền"),
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
