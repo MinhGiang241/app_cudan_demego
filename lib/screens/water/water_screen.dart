@@ -12,7 +12,7 @@ import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_screen.dart';
 import 'tabs/consummed_water_tab.dart';
 import 'tabs/water_bill_tab.dart';
-import 'tabs/water_payment_tab.dart';
+// import 'tabs/water_payment_tab.dart';
 
 class WaterScreen extends StatefulWidget {
   const WaterScreen({super.key});
@@ -24,7 +24,7 @@ class WaterScreen extends StatefulWidget {
 
 class _WaterScreenState extends State<WaterScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 3, vsync: this);
+  late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _WaterScreenState extends State<WaterScreen>
             tabs: [
               Tab(text: S.of(context).details),
               Tab(text: S.of(context).bills),
-              Tab(text: S.of(context).pay),
+              // Tab(text: S.of(context).pay),
             ],
             actions: [
               Padding(
@@ -88,7 +88,7 @@ class _WaterScreenState extends State<WaterScreen>
               children: [
                 ConsummedWaterTab(),
                 WaterBillTab(),
-                WaterPaymentTab(),
+                // WaterPaymentTab(),
               ],
             ),
           ),

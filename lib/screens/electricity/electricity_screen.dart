@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app_cudan/screens/electricity/tabs/electric_payment_tab.dart';
+// import 'package:app_cudan/screens/electricity/tabs/electric_payment_tab.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -24,7 +24,7 @@ class ElectricityScreen extends StatefulWidget {
 
 class _ElectricityScreenState extends State<ElectricityScreen>
     with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: 3, vsync: this);
+  late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
 
   @override
@@ -49,7 +49,7 @@ class _ElectricityScreenState extends State<ElectricityScreen>
             tabs: [
               Tab(text: S.of(context).details),
               Tab(text: S.of(context).bills),
-              Tab(text: S.of(context).pay),
+              // Tab(text: S.of(context).pay),
             ],
             actions: [
               Padding(
@@ -93,7 +93,7 @@ class _ElectricityScreenState extends State<ElectricityScreen>
               children: [
                 ConsummedElectricityTab(),
                 ElectricityBillTab(),
-                ElectricityPaymentTab(),
+                // ElectricityPaymentTab(),
               ],
             ),
           ),
