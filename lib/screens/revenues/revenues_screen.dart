@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_revenues.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -24,40 +26,42 @@ class RevenuesScreen extends StatelessWidget {
           appBar: PrimaryAppbar(
             title: S.of(context).revenues,
           ),
-          body: FutureBuilder(
-            future: context.read<RevenuesPrv>().get(context),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: PrimaryLoading(),
-                );
-              }
-              var htmlWidget = context.watch<RevenuesPrv>().htmlWidget;
-              WebViewController controller = WebViewController()
-                ..setJavaScriptMode(JavaScriptMode.unrestricted)
-                ..setBackgroundColor(const Color(0x00000000))
-                ..setNavigationDelegate(
-                  NavigationDelegate(
-                    onProgress: (int progress) {
-                      // Update loading bar.
-                    },
-                    onPageStarted: (String url) {},
-                    onPageFinished: (String url) {},
-                    onWebResourceError: (WebResourceError error) {},
-                    onNavigationRequest: (NavigationRequest request) {
-                      if (request.url.startsWith(htmlWidget ?? '')) {
-                        return NavigationDecision.prevent;
-                      }
-                      return NavigationDecision.navigate;
-                    },
-                  ),
-                )
-                ..loadRequest(Uri.parse(htmlWidget ?? ''));
-              if (htmlWidget != null) {
-                return WebViewWidget(controller: controller);
-              }
-              return vpad(0);
-            },
+          body: SafeArea(
+            child: FutureBuilder(
+              future: context.read<RevenuesPrv>().get(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: PrimaryLoading(),
+                  );
+                }
+                var htmlWidget = context.watch<RevenuesPrv>().htmlWidget;
+                WebViewController controller = WebViewController()
+                  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+                  ..setBackgroundColor(const Color(0x00000000))
+                  ..setNavigationDelegate(
+                    NavigationDelegate(
+                      onProgress: (int progress) {
+                        // Update loading bar.
+                      },
+                      onPageStarted: (String url) {},
+                      onPageFinished: (String url) {},
+                      onWebResourceError: (WebResourceError error) {},
+                      onNavigationRequest: (NavigationRequest request) {
+                        if (request.url.startsWith(htmlWidget ?? '')) {
+                          return NavigationDecision.prevent;
+                        }
+                        return NavigationDecision.navigate;
+                      },
+                    ),
+                  )
+                  ..loadRequest(Uri.parse(htmlWidget ?? ''));
+                if (htmlWidget != null) {
+                  return WebViewWidget(controller: controller);
+                }
+                return vpad(0);
+              },
+            ),
           ),
         );
       },

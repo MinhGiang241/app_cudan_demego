@@ -221,7 +221,7 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                   TableCellVerticalAlignment.baseline,
                               columnWidths: const {
                                 0: FlexColumnWidth(2),
-                                1: FlexColumnWidth(3)
+                                1: FlexColumnWidth(3),
                               },
                               children: [
                                 ...listContent.map<TableRow>(
@@ -242,46 +242,42 @@ class _TransportCardTabState extends State<TransportCardTab> {
                                           e.content ?? "",
                                           style: e.contentStyle,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                          // Text(list[index].status ?? ""),
-                          // Text(list[index].reasons ?? ""),
-                          if (
-                          // (list[index].status == "DESTROY" &&
-                          //       list[index].reasons == 'NGUOIDUNGKHOA') ||
-                          (list[index].status != "LOST" &&
-                              list[index].status != "INACTIVE"))
-                            Row(
-                              children: [
-                                hpad(12),
-                                PrimaryButton(
-                                  buttonSize: ButtonSize.small,
-                                  buttonType: ButtonType.secondary,
-                                  secondaryBackgroundColor: primaryColor5,
-                                  textColor: primaryColor1,
-                                  text: S.of(context).report_lost,
-                                  onTap: () {
-                                    context
-                                        .read<TransportCardPrv>()
-                                        .missingReport(context, list[index]);
-                                    // return cancelRegister(list[index]);
-                                  },
                                 ),
                               ],
                             ),
-                          vpad(12)
+                          ),
+                          // if (
+                          //     (list[index].status != "LOST" &&
+                          //         list[index].status != "INACTIVE"))
+                          //   Row(
+                          //     children: [
+                          //       hpad(12),
+                          //       PrimaryButton(
+                          //         buttonSize: ButtonSize.small,
+                          //         buttonType: ButtonType.secondary,
+                          //         secondaryBackgroundColor: primaryColor5,
+                          //         textColor: primaryColor1,
+                          //         text: S.of(context).report_lost,
+                          //         onTap: () {
+                          //           context
+                          //               .read<TransportCardPrv>()
+                          //               .missingReport(context, list[index]);
+                          //           // return cancelRegister(list[index]);
+                          //         },
+                          //       ),
+                          //     ],
+                          //   ),
+                          vpad(12),
                         ],
                       ),
                     ),
                   );
                 },
               ),
-              vpad(60)
+              vpad(60),
             ],
           ),
         );

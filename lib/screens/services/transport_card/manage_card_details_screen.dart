@@ -270,39 +270,39 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                     loadedCard.reasons == "KHOAHETHAN"))
                               Row(
                                 children: [
-                                  PrimaryButton(
-                                    isLoading: false,
-                                    buttonSize: ButtonSize.xsmall,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: yellowColor4,
-                                    textColor: yellowColorBase,
-                                    text: S.of(context).extend,
-                                    onTap: () {
-                                      if (!(loadedCard.status == "ACTIVED" ||
-                                          (loadedCard.status == "LOCK" &&
-                                              loadedCard.reasons ==
-                                                  "KHOAHETHAN"))) {
-                                        Utils.showErrorMessage(
-                                          context,
-                                          S
-                                              .of(context)
-                                              .not_extend_inactive_card,
-                                        );
-                                      } else {
-                                        Navigator.pushNamed(
-                                          context,
-                                          ExtendCardScreen.routeName,
-                                          arguments: {
-                                            "card": loadedCard,
-                                            "index": e.key,
-                                            "cancel": cancel,
-                                            "item": e.value,
-                                          },
-                                        );
-                                      }
-                                    },
-                                  ),
-                                  hpad(10),
+                                  // PrimaryButton(
+                                  //   isLoading: false,
+                                  //   buttonSize: ButtonSize.xsmall,
+                                  //   buttonType: ButtonType.secondary,
+                                  //   secondaryBackgroundColor: yellowColor4,
+                                  //   textColor: yellowColorBase,
+                                  //   text: S.of(context).extend,
+                                  //   onTap: () {
+                                  //     if (!(loadedCard.status == "ACTIVED" ||
+                                  //         (loadedCard.status == "LOCK" &&
+                                  //             loadedCard.reasons ==
+                                  //                 "KHOAHETHAN"))) {
+                                  //       Utils.showErrorMessage(
+                                  //         context,
+                                  //         S
+                                  //             .of(context)
+                                  //             .not_extend_inactive_card,
+                                  //       );
+                                  //     } else {
+                                  //       Navigator.pushNamed(
+                                  //         context,
+                                  //         ExtendCardScreen.routeName,
+                                  //         arguments: {
+                                  //           "card": loadedCard,
+                                  //           "index": e.key,
+                                  //           "cancel": cancel,
+                                  //           "item": e.value,
+                                  //         },
+                                  //       );
+                                  //     }
+                                  //   },
+                                  // ),
+                                  // hpad(10),
                                   PrimaryButton(
                                     isLoading: false,
                                     buttonSize: ButtonSize.xsmall,
@@ -354,26 +354,25 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       ),
                     ],
                   ),
-                if (!(card.status == "DESTROY" &&
-                            card.r?.code == 'NGUOIDUNGKHOA') &&
-                        card.status != "LOST"
-                    //  && (card.status != "LOCK" && card.status != "KHOAVIPHAM")
-                    )
-                  vpad(30),
-                if (!(card.status == "DESTROY" &&
-                            card.r?.code == 'NGUOIDUNGKHOA') &&
-                        card.status != "LOST"
-                    // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
-                    )
-                  PrimaryButton(
-                    isLoading: false,
-                    buttonSize: ButtonSize.medium,
-                    buttonType: ButtonType.red,
-                    text: S.of(context).cancel_card,
-                    onTap: () {
-                      cancel(context, loadedCard);
-                    },
-                  ),
+                // if (!(card.status == "DESTROY" &&
+                //             card.r?.code == 'NGUOIDUNGKHOA') &&
+                //         card.status != "LOST"
+                //     )
+                //   vpad(30),
+                // if (!(card.status == "DESTROY" &&
+                //             card.r?.code == 'NGUOIDUNGKHOA') &&
+                //         card.status != "LOST"
+                //     // &&  (card.status != "LOCK" && card.status != "KHOAVIPHAM")
+                //     )
+                //   PrimaryButton(
+                //     isLoading: false,
+                //     buttonSize: ButtonSize.medium,
+                //     buttonType: ButtonType.red,
+                //     text: S.of(context).cancel_card,
+                //     onTap: () {
+                //       cancel(context, loadedCard);
+                //     },
+                //   ),
                 vpad(40),
               ],
             );

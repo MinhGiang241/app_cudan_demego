@@ -213,44 +213,24 @@ class ResidentCardTab extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (
-                                    // (list[index].status == "DESTROY" &&
-                                    //       list[index].reasons ==
-                                    //           'NGUOIDUNGKHOA') ||
-                                    (list[index].status != "LOST" &&
-                                        list[index].status != "INACTIVE"))
-                                  Row(
-                                    children: [
-                                      hpad(12),
-                                      PrimaryButton(
-                                        buttonSize: ButtonSize.xsmall,
-                                        buttonType: ButtonType.secondary,
-                                        secondaryBackgroundColor: primaryColor5,
-                                        text: S.of(context).missing_report,
-                                        textColor: primaryColor1,
-                                        onTap: () {
-                                          missingReport(context, list[index]);
-                                        },
-                                      ),
-                                      // PrimaryButton(
-                                      //   buttonSize: ButtonSize.xsmall,
-                                      //   buttonType: ButtonType.secondary,
-                                      //   secondaryBackgroundColor: yellowColor4,
-                                      //   text: S.of(context).extend,
-                                      //   textColor: yellowColor1,
-                                      //   onTap: () {},
-                                      // ),
-
-                                      // PrimaryButton(
-                                      //   buttonSize: ButtonSize.xsmall,
-                                      //   buttonType: ButtonType.secondary,
-                                      //   secondaryBackgroundColor: redColor4,
-                                      //   textColor: redColor,
-                                      //   text: S.of(context).lock_card,
-                                      //   // onTap: () => lockCard(list[index]),
-                                      // ),
-                                    ],
-                                  ),
+                                // if (
+                                //     (list[index].status != "LOST" &&
+                                //         list[index].status != "INACTIVE"))
+                                //   Row(
+                                //     children: [
+                                //       hpad(12),
+                                //       PrimaryButton(
+                                //         buttonSize: ButtonSize.xsmall,
+                                //         buttonType: ButtonType.secondary,
+                                //         secondaryBackgroundColor: primaryColor5,
+                                //         text: S.of(context).missing_report,
+                                //         textColor: primaryColor1,
+                                //         onTap: () {
+                                //           missingReport(context, list[index]);
+                                //         },
+                                //       ),
+                                //     ],
+                                //   ),
                                 vpad(12),
                               ],
                             ),

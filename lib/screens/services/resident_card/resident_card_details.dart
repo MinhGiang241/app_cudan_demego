@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, unused_import
+
 import 'package:flutter/material.dart';
 
 import '../../../constants/constants.dart';
@@ -142,70 +144,24 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
               ],
             ),
           ),
-          if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
-                  card.status != "LOST"
-              //&& (card.status == "LOCK" && card.status == "KHOAHETHAN")
-              )
-            vpad(24),
-          if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
-                  card.status != "LOST"
-              // &&  (card.status == "LOCK" && card.status == "KHOAHETHAN")
-              )
-            PrimaryButton(
-              width: double.infinity,
-              text: S.of(context).cancel_card,
-              buttonType: ButtonType.red,
-              onTap: () {
-                cancel(context, card);
-              },
-            ),
+          // if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
+          //         card.status != "LOST"
+          //     )
+          //   vpad(24),
+          // if (!(card.status == "DESTROY" && card.r?.code == 'NGUOIDUNGKHOA') &&
+          //         card.status != "LOST"
+          //     )
+          //   PrimaryButton(
+          //     width: double.infinity,
+          //     text: S.of(context).cancel_card,
+          //     buttonType: ButtonType.red,
+          //     onTap: () {
+          //       cancel(context, card);
+          //     },
+          //   ),
           vpad(kBottomNavigationBarHeight),
         ],
       ),
-      //     FutureBuilder(
-      //       future: () async {
-      //         await APIHistory.getHistoryCard(card.id).then((v) {
-      //           if (v != null) {
-      //             historyList.clear();
-      //             for (var i in v) {
-      //               historyList.add(CardHistory.fromMap(i));
-      //             }
-      //           }
-      //           historyList.sort(
-      //             (a, b) => b.perform_date!.compareTo(a.perform_date ?? ""),
-      //           );
-      //           if (mounted) {
-      //             setState(() {});
-      //           }
-      //         });
-      //       }(),
-      //       builder: (context, snapshot) {
-      //         return ListView(
-      //           children: [
-      //             vpad(24),
-      //             Padding(
-      //               padding: const EdgeInsets.symmetric(horizontal: 12),
-      //               child: TimeLineView(
-      //                 content: historyList
-      //                     .map(
-      //                       (i) => TimelineModel(
-      //                         date: i.perform_date,
-      //                         title: i.content,
-      //                         subTitle: i.action,
-      //                         color: i.status != null
-      //                             ? genStatusColor(i.status ?? "")
-      //                             : null,
-      //                       ),
-      //                     )
-      //                     .toList(),
-      //               ),
-      //             )
-      //           ],
-      //         );
-      //       },
-      //     )
-      //   ],
-      // ),
     );
   }
 }
