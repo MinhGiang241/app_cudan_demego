@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:upgrader/upgrader.dart';
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/primary_card.dart';
@@ -53,32 +54,34 @@ class _HomeScreenState extends State<HomeScreen> {
         final isLoading = context.watch<HomePrv>().isLoading;
         var messageCount = context.watch<HomePrv>().messageCount;
 
-        return FutureBuilder(
-          future: () {}(),
-          builder: (context, snap) {
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                Scaffold(
-                  body: _navigationTab(context),
-                  bottomNavigationBar:
-                      context.watch<ChatMessageBloc>().state.stateChat ==
-                              StateChatEnum.START
-                          ? null
-                          : _bottomNavigationBar(messageCount),
-                ),
-                if (isLoading)
-                  const Center(
-                    child: PrimaryCard(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: PrimaryLoading(),
+        return UpgradeAlert(
+          child: FutureBuilder(
+            future: () {}(),
+            builder: (context, snap) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Scaffold(
+                    body: _navigationTab(context),
+                    bottomNavigationBar:
+                        context.watch<ChatMessageBloc>().state.stateChat ==
+                                StateChatEnum.START
+                            ? null
+                            : _bottomNavigationBar(messageCount),
+                  ),
+                  if (isLoading)
+                    const Center(
+                      child: PrimaryCard(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: PrimaryLoading(),
+                        ),
                       ),
                     ),
-                  ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         );
 
         // _navigationTab(context);
