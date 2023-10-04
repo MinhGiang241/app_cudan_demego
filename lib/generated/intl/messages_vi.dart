@@ -476,7 +476,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_worker_num":
             MessageLookupByLibrary.simpleMessage("Nhập số công nhân"),
         "env_fee":
-            MessageLookupByLibrary.simpleMessage("Ngày kết thúc thi công"),
+            MessageLookupByLibrary.simpleMessage("Phí bảo vệ môi truòng"),
         "err_conn": MessageLookupByLibrary.simpleMessage("Lỗi kết nối "),
         "err_internet": MessageLookupByLibrary.simpleMessage(
             "Không kết nối được với máy chủ"),
