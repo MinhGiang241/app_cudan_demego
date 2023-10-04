@@ -159,7 +159,7 @@ class _ConsummedWaterTabState extends State<ConsummedWaterTab> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
-                    height: dvHeight(context) - 255,
+                    height: dvHeight(context) - 300,
                     width: 850,
                     child: SfCartesianChart(
                       //selectionGesture: ActivationMode.singleTap,
