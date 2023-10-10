@@ -350,7 +350,8 @@ class _WaterBillTabState extends State<WaterBillTab> {
                                 Row(
                                   children: [
                                     genCell(
-                                      text: "${S.of(context).env_fee}:",
+                                      text:
+                                          "${S.of(context).env_fee} (${(receipt.env_fee ?? 0)}%):",
                                       flex: 4,
                                       align: Alignment.centerRight,
                                     ),

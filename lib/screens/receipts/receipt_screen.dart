@@ -166,7 +166,12 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                                     ),
                                     InfoContentView(
                                       title: S.of(context).content,
-                                      content: e.code,
+                                      content: e.note,
+                                    ),
+                                    InfoContentView(
+                                      title: S.of(context).in_debt,
+                                      content:
+                                          formatCurrency.format(e.debt ?? 0),
                                     ),
                                   ],
                                 ),

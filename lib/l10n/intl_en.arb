@@ -872,5 +872,6 @@
   "to_date": "To",
   "no_receipt": "Don't have any receipt",
   "transaction_code": "transaction code",
-  "money": "Money"
+  "money": "Money",
+  "in_debt": "Debt"
 }
