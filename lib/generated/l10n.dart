@@ -8789,6 +8789,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Debt`
+  String get in_debt {
+    return Intl.message(
+      'Debt',
+      name: 'in_debt',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

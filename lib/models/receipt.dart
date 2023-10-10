@@ -74,6 +74,7 @@ class Receipt {
   double? vat;
   double? vat_amount;
   double? env_fee_amount;
+  int? env_fee;
   double? discount_money;
   double? amount;
   double? total_amount;
@@ -124,6 +125,8 @@ class Receipt {
     env_fee_amount = json['env_fee_amount'] != null
         ? double.parse(json['env_fee_amount'].toString())
         : null;
+    env_fee =
+        json['env_fee'] != null ? int.parse(json['env_fee'].toString()) : null;
     discount_money = json['discount_money'] != null
         ? double.parse(json['discount_money'].toString())
         : null;

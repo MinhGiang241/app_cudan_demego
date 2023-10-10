@@ -600,6 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "If you have not registered information yet, please click"),
         "image_not_empty":
             MessageLookupByLibrary.simpleMessage("Image can not be empty"),
+        "in_debt": MessageLookupByLibrary.simpleMessage("Debt"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Phone number/Email or password is not correct."),

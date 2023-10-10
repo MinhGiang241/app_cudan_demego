@@ -606,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nếu Anh/Chị chưa đăng ký thông tin cư dân vui lòng click"),
         "image_not_empty": MessageLookupByLibrary.simpleMessage(
             "Hình ảnh không được để trống"),
+        "in_debt": MessageLookupByLibrary.simpleMessage("Còn thiếu"),
         "inactive": MessageLookupByLibrary.simpleMessage("Dừng hoạt động"),
         "incorrect_usn_pass": MessageLookupByLibrary.simpleMessage(
             "Số điện thoại/Email hoặc mật khẩu không chính xác."),
