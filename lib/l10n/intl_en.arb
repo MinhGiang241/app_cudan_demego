@@ -873,5 +873,6 @@
   "no_receipt": "Don't have any receipt",
   "transaction_code": "transaction code",
   "money": "Money",
-  "in_debt": "Debt"
+  "in_debt": "Debt",
+  "policies": "Policy and services"
 }

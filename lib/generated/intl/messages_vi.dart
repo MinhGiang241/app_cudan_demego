@@ -904,6 +904,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_code": MessageLookupByLibrary.simpleMessage("Mã mặt bằng"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Thông tin mặt bằng"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Tên mặt bằng"),
+        "policies":
+            MessageLookupByLibrary.simpleMessage("Chính sách và dịch vụ"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "possessed_apartment":
             MessageLookupByLibrary.simpleMessage("Căn hộ sở hữu"),

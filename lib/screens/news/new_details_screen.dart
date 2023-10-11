@@ -41,14 +41,14 @@ class NewDetailsScreen extends StatelessWidget {
             vpad(12),
             Text(arg.content ?? '', style: txtBodyMediumRegular()),
             vpad(16),
-            if (arg.image != null)
-              PrimaryImageNetwork(
-                canShowPhotoView: true,
-                path:
-                    "${ApiService.shared.uploadURL}?load=${arg.image}&regcode=${ApiService.shared.regCode}&regcode=${ApiService.shared.regCode}",
-              ),
+            // if (arg.image != null)
+            //   PrimaryImageNetwork(
+            //     canShowPhotoView: true,
+            //     path:
+            //         "${ApiService.shared.uploadURL}?load=${arg.image}&regcode=${ApiService.shared.regCode}&regcode=${ApiService.shared.regCode}",
+            //   ),
 
-            vpad(16),
+            // vpad(16),
             // Text(document.outerHtml),
             HtmlWidget(
               '''${arg.detail}''',

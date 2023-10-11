@@ -874,5 +874,6 @@
   "no_receipt": "Không có phiếu thu nào",
   "transaction_code": "Mã giao dịch",
   "money": "Số tiền",
-  "in_debt": "Còn thiếu"
+  "in_debt": "Còn thiếu",
+  "policies": "Chính sách và dịch vụ"
 }

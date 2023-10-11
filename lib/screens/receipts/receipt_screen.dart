@@ -162,7 +162,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                                       title: S.of(context).money,
                                       content: formatCurrency
                                           .format(e.amount_money ?? 0),
-                                      contentStyle: txtBold(14, orangeColor),
+                                      contentStyle: txtBold(14, yellowColor),
                                     ),
                                     InfoContentView(
                                       title: S.of(context).content,
@@ -172,6 +172,7 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                                       title: S.of(context).in_debt,
                                       content:
                                           formatCurrency.format(e.debt ?? 0),
+                                      contentStyle: txtBold(14, redColor),
                                     ),
                                   ],
                                 ),

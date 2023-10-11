@@ -893,6 +893,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_code": MessageLookupByLibrary.simpleMessage("Plan code"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Plan infomation"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
+        "policies": MessageLookupByLibrary.simpleMessage("Policy and services"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "possessed_apartment":
             MessageLookupByLibrary.simpleMessage("Possessed apartments"),

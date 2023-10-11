@@ -178,7 +178,7 @@ class _NewListScreenState extends State<NewListScreen> {
                                         SizedBox(
                                           width: double.infinity,
                                           child: PrimaryImageNetwork(
-                                            canShowPhotoView: true,
+                                            canShowPhotoView: false,
                                             path:
                                                 "${ApiService.shared.uploadURL}?load=${e.value.image}&regcode=${ApiService.shared.regCode}",
                                             fit: BoxFit.cover,

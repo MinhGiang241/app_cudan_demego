@@ -8799,6 +8799,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Policy and services`
+  String get policies {
+    return Intl.message(
+      'Policy and services',
+      name: 'policies',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
