@@ -335,23 +335,25 @@ class Utils {
                   });
                 },
               ),
-              ItemSelected(
-                text: S.current.gallery,
-                icon: const PrimaryIcon(
-                  icons: PrimaryIcons.image,
-                  color: grayScaleColor2,
+              if (!isFile)
+                ItemSelected(
+                  text: S.current.gallery,
+                  icon: const PrimaryIcon(
+                    icons: PrimaryIcons.image,
+                    color: grayScaleColor2,
+                  ),
+                  onTap: () async {
+                    await imagePicker(isMulti, ImageSource.gallery)
+                        .then((value) {
+                      if (value != null) {
+                        pop(context, value);
+                      }
+                    }).catchError((e) {
+                      Utils.showErrorMessage(context, e);
+                    });
+                  },
                 ),
-                onTap: () async {
-                  await imagePicker(isMulti, ImageSource.gallery).then((value) {
-                    if (value != null) {
-                      pop(context, value);
-                    }
-                  }).catchError((e) {
-                    Utils.showErrorMessage(context, e);
-                  });
-                },
-              ),
-              if (Platform.isIOS && isFile)
+              if (Platform.isIOS || isFile)
                 ItemSelected(
                   text: S.current.file_selection,
                   icon: const PrimaryIcon(
@@ -359,7 +361,7 @@ class Utils {
                     color: grayScaleColor2,
                   ),
                   onTap: () async {
-                    await filePicker(false, true).then((value) {
+                    await filePicker(false, !isFile).then((value) {
                       if (value != null) {
                         pop(context, value);
                       }

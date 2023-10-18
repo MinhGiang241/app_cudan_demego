@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
+import 'package:app_cudan/screens/chat/new_chat/new_chat_screen.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -149,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.read<HomePrv>().clearMessageBadge();
         });
-        return const ChatScreen();
+        return NewChatScreen(); //ChatScreen();
       case 2:
         return const AccountScreen();
 
