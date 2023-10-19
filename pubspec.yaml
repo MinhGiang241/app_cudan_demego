@@ -99,6 +99,7 @@ dependencies:
   upgrader: ^8.1.0
   flutter_chat_ui: ^1.6.9
   open_filex: ^4.3.4
+  video_player: ^2.7.2
 
 dev_dependencies:
   flutter_test:

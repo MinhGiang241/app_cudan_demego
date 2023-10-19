@@ -12,10 +12,10 @@ import 'package:rocket_chat_flutter_connector/models/user.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-import '../../../models/rocket_chat_data.dart';
+import '../../../../models/rocket_chat_data.dart';
 
-class CustomWebSocketService {
-  static CustomWebSocketService shared = CustomWebSocketService();
+class NewChatServices {
+  static NewChatServices shared = NewChatServices();
   WebSocketChannel connectToWebSocket(String url, {required String authToken}) {
     WebSocketChannel webSocketChannel = IOWebSocketChannel.connect(url);
     _sendConnectRequest(webSocketChannel);
@@ -328,7 +328,6 @@ class CustomWebSocketService {
 
   void sendMessageLiveChat(
     WebSocketChannel webSocketChannel,
-    String id,
     String? rid,
     String token,
     String message,
@@ -369,7 +368,6 @@ class CustomWebSocketService {
   void streamLiveChatRoom(
     WebSocketChannel webSocketChannel,
     String visitorToken,
-    String id,
     String param,
   ) {
     Map msg = {

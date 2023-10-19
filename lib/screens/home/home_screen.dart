@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/chat/chat_screen.dart';
+import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/new_chat_screen.dart';
 import 'package:badges/badges.dart' as B;
 import 'package:flutter/material.dart';
@@ -65,10 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Scaffold(
                     body: _navigationTab(context),
                     bottomNavigationBar:
-                        context.watch<ChatMessageBloc>().state.stateChat ==
-                                StateChatEnum.START
-                            ? null
-                            : _bottomNavigationBar(messageCount),
+                        // context.watch<ChatMessageBloc>().state.stateChat ==
+                        //         StateChatEnum.START
+                        //     ? null
+                        context.watch<NewChatBloc>().state.isInit
+                            ? _bottomNavigationBar(messageCount)
+                            : null,
                   ),
                   if (isLoading)
                     const Center(

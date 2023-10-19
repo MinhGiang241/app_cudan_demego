@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
+import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -99,8 +100,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => NotificationPrv())
       ],
       builder: (context, child) {
-        return BlocProvider(
-          create: (context) => ChatMessageBloc(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => ChatMessageBloc()),
+            BlocProvider(create: (context) => NewChatBloc()),
+          ],
           child: MaterialApp(
             navigatorKey: navigatorKey,
             builder: (context, child) {
