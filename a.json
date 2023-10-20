@@ -1,116 +1,124 @@
-{
-    "_id": ObjectId("64afad8848385dc216721260"),
-    "createdTime": ISODate("2023-07-13T07:53:44.835Z"),
-    "updatedTime": ISODate("2023-07-13T07:53:44.836Z"),
-    "isLocked": false,
-    "isDraft": false,
-    "schema": "Receipts",
-    "creator": "Thidang",
-    "updater": "Thidang",
-    "version_number": 0,
-    "date": ISODate("2023-07-13T07:53:44.821Z"),
-    "employeeId": ObjectId("64a3e554ce75cc1ef9c290ef"),
-    "phone": "0383873719",
-    "apartmentId": ObjectId("64ad11bfe46b9552315f9c69"),
-    "residentId": ObjectId("64afa93848385dc216720c36"),
-    "payment_status": "UNPAID",
-    "receipts_status": "NEW",
-    "customer_type": "RESIDENT",
-    "check": true,
-    "payer": "Nguyễn Thị Dung",
-    "payer_phone": "0383873719",
-    "payment": 10,
-    "expiration_date": ISODate("2023-07-23T07:53:44.821Z"),
-    "vat": 5,
-    "year_indicator": 2023,
-    "month_indicator": 6,
-    "fee_config": {
-        "_id": "64a3f9af3f0cd596dda47a4f",
-        "createdTime": ISODate("2023-07-04T10:51:27.723Z"),
-        "updatedTime": ISODate("2023-07-04T10:51:27.723Z"),
-        "isLocked": false,
-        "isDraft": false,
-        "schema": "ElectricFee",
-        "creator": "adminDA000211",
-        "updater": "adminDA000211",
-        "version_number": NumberLong(0),
-        "fixed_price": NumberLong(50),
-        "electric_fee": {
-            "_t": "System.Object[]",
-            "_v": [
+[
+    {
+        "visitor": {
+            "_id": "646ec684563da13775d1cadb",
+            "username": "guest-34",
+            "status": "online",
+            "ts": "2023-05-25T02:23:00.624Z",
+            "_updatedAt": "2023-10-19T09:58:48.995Z",
+            "name": "Trương Minh Giang",
+            "phone": [
                 {
-                    "createdTime": ISODate("2023-07-04T10:51:27.748Z"),
-                    "updatedTime": ISODate("2023-07-04T10:51:27.748Z"),
-                    "from": NumberLong(1),
-                    "to": NumberLong(50),
-                    "price": NumberLong(1700)
-                },
+                    "phoneNumber": "0367333592"
+                }
+            ],
+            "token": "9817928c-f8fc-4892-9275-44898c7028cb",
+            "visitorEmails": [
                 {
-                    "createdTime": ISODate("2023-07-04T10:51:27.748Z"),
-                    "updatedTime": ISODate("2023-07-04T10:51:27.748Z"),
-                    "from": NumberLong(51),
-                    "to": NumberLong(100),
-                    "price": NumberLong(1800)
-                },
+                    "address": "minhgiang241@gmail.com"
+                }
+            ],
+            "lastChat": {
+                "_id": "dTxwBwkCnbLLQj3AA",
+                "ts": "2023-10-18T09:30:56.812Z"
+            },
+            "livechatData": {
+                "residentCode": "64c22d466215694163fd34e3"
+            },
+            "department": "DPakDJYFnHoMmjJo6"
+        },
+        "success": true
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "JvLBpxSz2iLqDYHir",
+            "args": [
                 {
-                    "createdTime": ISODate("2023-07-04T10:51:27.749Z"),
-                    "updatedTime": ISODate("2023-07-04T10:51:27.749Z"),
-                    "from": NumberLong(101),
-                    "to": NumberLong(200),
-                    "price": NumberLong(2000)
+                    "_id": "BLBYzuy6yCCyehySn",
+                    "t": "command",
+                    "rid": "JvLBpxSz2iLqDYHir",
+                    "ts": {
+                        "$date": 1697803828657
+                    },
+                    "msg": "connected",
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham"
+                    },
+                    "groupable": false,
+                    "_updatedAt": {
+                        "$date": 1697803828657
+                    }
                 }
             ]
-        },
-        "message": "Vui lòng thanh toán đúng hạn",
-        "vat": NumberLong(5)
-    },
-    "indicator": {
-        "_id": "64afad8448385dc21672125e",
-        "createdTime": ISODate("2023-07-13T07:53:40.145Z"),
-        "updatedTime": ISODate("2023-07-13T07:53:40.140Z"),
-        "isLocked": false,
-        "isDraft": false,
-        "schema": "ElectricityIndicator",
-        "creator": "Thidang",
-        "updater": "Thidang",
-        "version_number": NumberLong(0),
-        "latch": true,
-        "apartmentId": "64ad11bfe46b9552315f9c69",
-        "residentId": "64afa93848385dc216720c36",
-        "phone": "0383873719",
-        "electricity_head": NumberLong(150),
-        "electricity_last": NumberLong(180),
-        "electricity_consumption": NumberLong(30),
-        "month": NumberLong(6),
-        "year": NumberLong(2023),
-        "resident": {
-            "_id": "64afa93848385dc216720c36",
-            "createdTime": ISODate("2023-07-13T07:35:20.112Z"),
-            "updatedTime": ISODate("2023-07-13T07:35:20.070Z"),
-            "isLocked": false,
-            "isDraft": false,
-            "schema": "Resident",
-            "version_number": NumberLong(0),
-            "place_of_issue_required": "Hà Nội",
-            "phone_required": "0383873719",
-            "identity_card_required": "001300027308",
-            "email": "dungngth23@gmail.com",
-            "permanent_address": "Canh Nậu ",
-            "provinceId": "632c0b78575100006f007f8b",
-            "districtId": "632c0cc4237c000094004000",
-            "wardsId": "632c0d27237c0000940062a0",
-            "date_birth": ISODate("2000-03-01T17:00:00Z"),
-            "nationalId": "6344d2b95a6c00009a007083",
-            "info_name": "Nguyễn Thị Dung",
-            "sex": "FEMALE",
-            "code": "CD - 000321",
-            "residence_type": "RESIDENT"
         }
     },
-    "discount_money": 53550,
-    "amount_due": 51000,
-    "reason": "Thanh toán tiền điện",
-    "type": "ElectricFee",
-    "code": "PTHD - 000008",
-    "refSchema": "ElectricFee"
-}
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "3Eyi8BeABHwPnpFcK",
+            "args": [
+                {
+                    "_id": "yihyo27mKmGLw6xFd",
+                    "rid": "3Eyi8BeABHwPnpFcK",
+                    "ts": {
+                        "$date": 1697806979577
+                    },
+                    "file": {
+                        "_id": "63EwDbT2xyK7yxAHQ",
+                        "name": "alec-favale-uVjM3PlIV44-unsplash.jpg",
+                        "type": "image/jpeg"
+                    },
+                    "files": [
+                        {
+                            "_id": "63EwDbT2xyK7yxAHQ",
+                            "name": "alec-favale-uVjM3PlIV44-unsplash.jpg",
+                            "type": "image/jpeg"
+                        },
+                        {
+                            "_id": "FXfdps973j62aYNMY",
+                            "name": "alec-favale-uVjM3PlIV44-unsplash.jpg",
+                            "type": "image/jpeg"
+                        }
+                    ],
+                    "attachments": [
+                        {
+                            "ts": "1970-01-01T00:00:00.000Z",
+                            "title": "alec-favale-uVjM3PlIV44-unsplash.jpg",
+                            "title_link": "/file-upload/63EwDbT2xyK7yxAHQ/alec-favale-uVjM3PlIV44-unsplash.jpg",
+                            "title_link_download": true,
+                            "image_dimensions": {
+                                "width": 203,
+                                "height": 360
+                            },
+                            "image_preview": "/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgABIDASIAAhEBAxEB/8QAGgAAAQUBAAAAAAAAAAAAAAAAAAEDBAUGCP/EACkQAAEEAAQEBgMAAAAAAAAAAAEAAgMEERIhMQUiMlEGBxMUQWORofD/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAHBEAAgICAwAAAAAAAAAAAAAAAAECEQMSIjFB/9oADAMBAAIRAxEAPwDmOjCyWw1snT8pZq7Q9wYdjoCrjwhXglv5rPQ0Ygdyn+N1We5ecuV/ZLJ06GUbjZmfSchTDA7E7IRsWjW+X9BlmeV0gADGYgnv+Co/HpzLee50eo5cRsUvB7rak81dpxa/TFP3rdFs7shLYwzUEbn9LZGt+vCsVwooOT60KwEFJwDsu+v9ohS3QdGf/9k=",
+                            "image_url": "/file-upload/FXfdps973j62aYNMY/alec-favale-uVjM3PlIV44-unsplash.jpg",
+                            "image_type": "image/jpeg",
+                            "image_size": 1682385,
+                            "type": "file",
+                            "description": "dasddasdasd"
+                        }
+                    ],
+                    "msg": "",
+                    "groupable": false,
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham",
+                        "name": "Phạm Ngọc Huyền"
+                    },
+                    "_updatedAt": {
+                        "$date": 1697806979657
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": []
+                }
+            ]
+        }
+    }
+]

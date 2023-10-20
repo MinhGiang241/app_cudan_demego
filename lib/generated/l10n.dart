@@ -8809,6 +8809,26 @@ class S {
       args: [],
     );
   }
+
+  /// `In order to be supported, please press to start conversation to sellect topic and wait supporter reply`
+  String get chat_greeting {
+    return Intl.message(
+      'In order to be supported, please press to start conversation to sellect topic and wait supporter reply',
+      name: 'chat_greeting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter text here`
+  String get enter_text {
+    return Intl.message(
+      'Enter text here',
+      name: 'enter_text',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

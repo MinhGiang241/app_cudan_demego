@@ -229,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_pass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "change_schedule": MessageLookupByLibrary.simpleMessage("Đổi lịch hẹn"),
         "chart": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
+        "chat_greeting": MessageLookupByLibrary.simpleMessage(
+            "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện để lựa chọn chủ đề và chờ ít phút để nhân viên trả lời"),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "choose_an_apartment":
@@ -471,6 +473,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập số đăng ký xe"),
         "enter_sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Nhập số hợp đồng mua bán"),
+        "enter_text": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Nhập tên tài khoản"),
         "enter_worker_num":

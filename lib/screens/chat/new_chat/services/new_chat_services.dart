@@ -232,7 +232,7 @@ class NewChatServices {
 
   void sendPong(WebSocketChannel webSocketChannel) {
     Map msg = {'msg': 'pong'};
-    logInfo('🚀🚀 sendPong $msg');
+    print('🚀🚀 sendPong $msg');
     webSocketChannel.sink.add(jsonEncode(msg));
   }
 

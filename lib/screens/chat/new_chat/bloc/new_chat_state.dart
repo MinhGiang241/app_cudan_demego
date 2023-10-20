@@ -9,7 +9,7 @@ part of 'new_chat_bloc.dart';
 //   List<Object> get props => [];
 // }
 
-class NewChatState extends Equatable {
+class NewChatState {
   bool isInit;
   types.User? user;
   List<types.Message> messages = [

@@ -874,5 +874,7 @@
   "transaction_code": "transaction code",
   "money": "Money",
   "in_debt": "Debt",
-  "policies": "Policy and services"
+  "policies": "Policy and services",
+  "chat_greeting": "In order to be supported, please press to start conversation to sellect topic and wait supporter reply",
+  "enter_text": "Enter text here"
 }
