@@ -82,13 +82,21 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
             hpad(2),
             Text(
               '${getVideoPosition()}-${formatTime(duration)}',
-              style: txtRegular(12, Colors.white),
+              style: txtRegular(
+                12,
+                widget.p0.author.id == widget.user.id
+                    ? Colors.white
+                    : primaryColorBase,
+              ),
             ),
             hpad(2),
             Flexible(
               child: VideoProgressIndicator(
                 _controller,
-                colors: VideoProgressColors(playedColor: Colors.white),
+                colors: VideoProgressColors(
+                    playedColor: widget.p0.author.id == widget.user.id
+                        ? Colors.white
+                        : primaryColorBase),
                 allowScrubbing: true,
               ),
             ),

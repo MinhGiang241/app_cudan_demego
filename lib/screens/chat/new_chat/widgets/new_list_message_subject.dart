@@ -2,9 +2,11 @@
 
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../../generated/l10n.dart';
 import '../../../../models/chat_subject.dart';
@@ -15,7 +17,9 @@ import '../../../../widgets/primary_card.dart';
 class NewListMessageSubject extends StatefulWidget {
   NewListMessageSubject({
     super.key,
+    required this.bloc,
   });
+  final NewChatBloc bloc;
 
   @override
   State<NewListMessageSubject> createState() => _NewListMessageSubjectState();
@@ -47,6 +51,10 @@ class _NewListMessageSubjectState extends State<NewListMessageSubject> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return vpad(0);
+        }
+        if (snapshot.connectionState == ConnectionState.done &&
+            listMessageSubject.isEmpty) {
+          Navigator.pop(context);
         }
         // if (snapshot.connectionState == ConnectionState.waiting) {
         //   return const PrimaryLoading();
@@ -99,6 +107,19 @@ class _NewListMessageSubjectState extends State<NewListMessageSubject> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () async {
+                            widget.bloc.handleSendPressed(
+                              types.PartialText(
+                                text: sublist[index].name ?? "",
+                              ),
+                            );
+                            // widget.bloc.add(
+                            //   StartChatEvent(
+                            //     startMessage: types.PartialText(
+                            //       text: sublist[index].name ?? "",
+                            //     ),
+                            //   ),
+                            // );
+
                             Navigator.pop(context);
                           },
                           child: Container(

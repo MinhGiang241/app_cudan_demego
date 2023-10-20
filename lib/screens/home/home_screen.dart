@@ -56,36 +56,34 @@ class _HomeScreenState extends State<HomeScreen> {
         final isLoading = context.watch<HomePrv>().isLoading;
         var messageCount = context.watch<HomePrv>().messageCount;
 
-        return UpgradeAlert(
-          child: FutureBuilder(
-            future: () {}(),
-            builder: (context, snap) {
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  Scaffold(
-                    body: _navigationTab(context),
-                    bottomNavigationBar:
-                        // context.watch<ChatMessageBloc>().state.stateChat ==
-                        //         StateChatEnum.START
-                        //     ? null
-                        context.watch<NewChatBloc>().state.isInit
-                            ? _bottomNavigationBar(messageCount)
-                            : null,
-                  ),
-                  if (isLoading)
-                    const Center(
-                      child: PrimaryCard(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: PrimaryLoading(),
-                        ),
+        return FutureBuilder(
+          future: () {}(),
+          builder: (context, snap) {
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                Scaffold(
+                  body: _navigationTab(context),
+                  bottomNavigationBar:
+                      // context.watch<ChatMessageBloc>().state.stateChat ==
+                      //         StateChatEnum.START
+                      //     ? null
+                      context.watch<NewChatBloc>().state.isInit
+                          ? _bottomNavigationBar(messageCount)
+                          : null,
+                ),
+                if (isLoading)
+                  const Center(
+                    child: PrimaryCard(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: PrimaryLoading(),
                       ),
                     ),
-                ],
-              );
-            },
-          ),
+                  ),
+              ],
+            );
+          },
         );
 
         // _navigationTab(context);
@@ -100,7 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         UnreadNotification.getUnReadNotification();
         return RepaintBoundary(
-          child: Padding(
+          child:
+              //  UpgradeAlert(
+              //   child:
+              Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: SmartRefresher(
               enablePullDown: true,
@@ -148,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          // ),
         );
       case 1:
         WidgetsBinding.instance.addPostFrameCallback((_) {

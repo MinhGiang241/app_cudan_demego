@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_schedule":
             MessageLookupByLibrary.simpleMessage("Change schedule"),
         "chart": MessageLookupByLibrary.simpleMessage("Chart"),
+        "chat_greeting": MessageLookupByLibrary.simpleMessage(
+            "In order to be supported, please press to start conversation to sellect topic and wait supporter reply"),
         "choices": MessageLookupByLibrary.simpleMessage("Choice"),
         "choose_a_project":
             MessageLookupByLibrary.simpleMessage("Choose a project"),
@@ -467,6 +469,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter registration number"),
         "enter_sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Enter sell contract number"),
+        "enter_text": MessageLookupByLibrary.simpleMessage("Enter text here"),
         "enter_username":
             MessageLookupByLibrary.simpleMessage("Enter username"),
         "enter_worker_num":

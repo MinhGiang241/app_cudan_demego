@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/widgets/video_player_widget.dart';
+import 'package:app_cudan/screens/chat/widget/list_message_subject.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
@@ -203,10 +204,12 @@ class _NewChatScreenState extends State<NewChatScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      context.read<NewChatBloc>().state.webSocketChannel =
-          CustomWebSocketService.shared.connectToWebSocketLiveChat(
-        WebsocketConnect.webSocketUrl,
-      );
+      if (context.read<NewChatBloc>().state.isInit) {
+        context.read<NewChatBloc>().state.webSocketChannel =
+            CustomWebSocketService.shared.connectToWebSocketLiveChat(
+          WebsocketConnect.webSocketUrl,
+        );
+      }
 
       if (context.read<NewChatBloc>().state.isInit) {
         await context.read<NewChatBloc>().createVisitor(context);
@@ -216,6 +219,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
         //     content: NewListMessageSubject(),
         //   ),
         // );
+        //context.read<NewChatBloc>().keepConnectChannel(context);
       }
     });
   }
@@ -224,125 +228,152 @@ class _NewChatScreenState extends State<NewChatScreen> {
   Widget build(BuildContext context) {
     final NewChatBloc bloc = context.read<NewChatBloc>();
 
-    return PrimaryScreen(
-      isPadding: false,
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: CircleAvatar(
-            radius: 32,
-            child: Image.asset(AppImage.receiption),
-          ),
-        ),
-        // centerTitle: false,
-        title: Text(S.of(context).customer_care),
-        backgroundColor: primaryColor4,
-      ),
-      body: SafeArea(
-        child: BlocBuilder<NewChatBloc, NewChatState>(
-          builder: (context, state) {
-            return Chat(
-              customBottomWidget: state.isInit ? vpad(0) : null,
-              inputOptions: InputOptions(
-                enabled: true,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: BlocBuilder<NewChatBloc, NewChatState>(
+        builder: (context, state) {
+          return BlocListener<NewChatBloc, NewChatState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            child: PrimaryScreen(
+              isPadding: false,
+              appBar: AppBar(
+                leading: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: CircleAvatar(
+                    radius: 32,
+                    child: Image.asset(AppImage.receiption),
+                  ),
+                ),
+                // centerTitle: false,
+                title: Text(
+                  state.employee?.lastName ?? S.of(context).customer_care,
+                ),
+                backgroundColor: primaryColor4,
               ),
-              l10n: const ChatL10nEn(
-                inputPlaceholder: 'Nhập tin nhắn',
-              ),
-              listBottomWidget: Align(
-                alignment: Alignment.center,
-                child: InkWell(
-                  onTap: () {
-                    if (state.isInit) {
-                      bloc.add(StartChatEvent());
-                    } else {
-                      bloc.add(NewChatInitEvent());
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.login),
-                        hpad(10),
-                        Text(
-                          state.isInit
-                              ? S.of(context).start_chat
-                              : S.of(context).end_chat,
-                          overflow: TextOverflow.ellipsis,
-                          style: txtRegular(
-                            14,
-                            grayScaleColorBase,
-                          ),
+              body: SafeArea(
+                child: Chat(
+                  customBottomWidget: state.isInit ? vpad(0) : null,
+                  inputOptions: InputOptions(
+                    enabled: true,
+                  ),
+                  l10n: ChatL10nEn(
+                    inputPlaceholder: S.of(context).enter_text,
+                  ),
+                  listBottomWidget: Align(
+                    alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: () async {
+                        if (state.isInit) {
+                          //  bloc.sendStartChat();
+                          bloc.add(
+                            StartChatEvent(),
+                          );
+                          Utils.showDialog(
+                            context: context,
+                            dialog: PrimaryDialog.custom(
+                              content: NewListMessageSubject(
+                                bloc: bloc,
+                              ),
+                            ),
+                          );
+                          //bloc.add(StartChatEvent());
+                          //await context.read<NewChatBloc>().start();
+                        } else {
+                          bloc.closeLiveChatRoom(context);
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              state.isInit ? Icons.login : Icons.logout,
+                            ),
+                            hpad(10),
+                            Text(
+                              state.isInit
+                                  ? S.of(context).start_chat
+                                  : S.of(context).end_chat,
+                              overflow: TextOverflow.ellipsis,
+                              style: txtRegular(
+                                14,
+                                grayScaleColorBase,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
+                  theme: DefaultChatTheme(
+                    attachmentButtonIcon: Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
+                    ),
+                    documentIcon: Icon(
+                      Icons.folder,
+                      color: Colors.white,
+                    ),
+                    backgroundColor: primaryColor5,
+                    primaryColor: Colors.teal,
+                    secondaryColor: grayScaleColor4,
+                    // systemMessageTheme: ,
+                    inputContainerDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          // primaryColorBase,
+                          // primaryColor3,
+                          // primaryColor4,
+                          // purpleColor
+                          Color(0xff1f005c),
+                          Color(0xff5b0060),
+                          Color(0xff870160),
+                          Color(0xffac255e),
+                          Color(0xffca485c),
+                          Color(0xffe16b5c),
+                          Color(0xfff39060),
+                          Color(0xffffb56b),
+                        ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                        tileMode: TileMode.mirror,
+                      ),
+                    ),
+                    //inputBackgroundColor: Colors.teal,
+                    sendButtonIcon: Icon(Icons.send, color: Colors.white),
+                  ),
+                  usePreviewData: true,
+                  onMessageVisibilityChanged: (me, flase) => {},
+                  user: state.user ?? _user,
+                  messages: state.messages,
+                  onSendPressed: bloc.handleSendPressed,
+                  onMessageTap: _handleMessageTap,
+                  onPreviewDataFetched: _handlePreviewDataFetched,
+                  showUserAvatars: true,
+                  showUserNames: true,
+                  disableImageGallery: false,
+                  onAttachmentPressed: () => bloc.uploadFileLiveChat(context),
+                  hideBackgroundOnEmojiMessages: true,
+                  audioMessageBuilder: (p0, {messageWidth = 10}) {
+                    return AudioPlayerWidget(p0: p0, user: _user);
+                  },
+                  videoMessageBuilder: (p0, {messageWidth = 10}) =>
+                      VideoPlayerWidget(p0: p0, user: _user),
+                  //onPreviewDataFetched: _handlePreviewDataFetched,
                 ),
               ),
-              theme: DefaultChatTheme(
-                attachmentButtonIcon: Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
-                ),
-                documentIcon: Icon(
-                  Icons.folder,
-                  color: Colors.white,
-                ),
-                backgroundColor: primaryColor5,
-                primaryColor: Colors.teal,
-                secondaryColor: grayScaleColor4,
-                // systemMessageTheme: ,
-                inputContainerDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment(0.8, 1),
-                    colors: <Color>[
-                      // primaryColorBase,
-                      // primaryColor3,
-                      // primaryColor4,
-                      // purpleColor
-                      Color(0xff1f005c),
-                      Color(0xff5b0060),
-                      Color(0xff870160),
-                      Color(0xffac255e),
-                      Color(0xffca485c),
-                      Color(0xffe16b5c),
-                      Color(0xfff39060),
-                      Color(0xffffb56b),
-                    ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                    tileMode: TileMode.mirror,
-                  ),
-                ),
-                //inputBackgroundColor: Colors.teal,
-                sendButtonIcon: Icon(Icons.send, color: Colors.white),
-              ),
-              usePreviewData: true,
-              onMessageVisibilityChanged: (me, flase) => {},
-              user: state.user ?? _user,
-              messages: state.messages,
-              onSendPressed: bloc.handleSendPressed,
-              onMessageTap: _handleMessageTap,
-              onPreviewDataFetched: _handlePreviewDataFetched,
-              showUserAvatars: true,
-              showUserNames: true,
-              disableImageGallery: false,
-              onAttachmentPressed: _handleImageSelection,
-              hideBackgroundOnEmojiMessages: true,
-              audioMessageBuilder: (p0, {messageWidth = 10}) {
-                return AudioPlayerWidget(p0: p0, user: _user);
-              },
-              videoMessageBuilder: (p0, {messageWidth = 10}) =>
-                  VideoPlayerWidget(p0: p0, user: _user),
-              //onPreviewDataFetched: _handlePreviewDataFetched,
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
     // );

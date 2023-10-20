@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
+import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -9,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../../../constants/constants.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../services/api_service.dart';
 import '../../../../utils/utils.dart';
 import '../../../auth/prv/resident_info_prv.dart';
@@ -29,26 +34,41 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
               types.TextMessage(
                 author: types.User(
                   lastName: "Tin nhắn tự động",
-                  imageUrl:
-                      'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-                  id: '82091008-a484-4a89-ae75-a22bf8d6f3ad',
+                  imageUrl: AppImage.avatarUrl,
+                  id: '1111',
                 ),
                 createdAt: DateTime.now().millisecondsSinceEpoch,
                 id: const Uuid().v4(),
-                text:
-                    "Quý khách cần giúp đỡ , hãy chờ ít phút để nhân viên trả lời lại",
+                text: S.current.chat_greeting,
               ),
             ],
           ),
         ) {
     on<StartChatEvent>((event, emit) {
-      emit(state.copyWith(isInit: false));
+      emit(
+        state.copyWith(
+          isInit: false,
+          messages: [],
+        ),
+      );
+      start(message: event.startMessage);
     });
     on<NewChatInitEvent>((event, emit) {
       emit(state.copyWith(isInit: true));
     });
     on<NewMessageEvent>((event, emit) {
       emit(state.copyWith(messages: state.messages));
+    });
+    on<BackNewChatInitEvent>((event, emit) {
+      state.employee = null;
+      emit(
+        state.copyWith(
+          messages: state.messages,
+          isInit: true,
+        ),
+      );
+      NewChatServices.shared
+          .closeLiveChatRoom(state.roomId, state.visitorToken ?? '');
     });
   }
   var _dio = Dio();
@@ -101,16 +121,26 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           'status': v.data?['visitor']?['status'],
         },
       );
-      keepConnectChannel(context);
-      openRoomLiveChat();
-      sendStartChat();
-      streamLiveChat();
+      //openRoomLiveChat();
+      //sendStartChat();
+      //streamLiveChat();
+      //keepConnectChannel(context);
     }).catchError((e) {
       Utils.showErrorMessage(context, e.toString());
     });
   }
 
-  keepConnectChannel(BuildContext context) {
+  start({types.PartialText? message}) async {
+    await openRoomLiveChat();
+    sendStartChat();
+    if (message != null) {
+      handleSendPressed(message);
+    }
+    streamLiveChat();
+    keepConnectChannel();
+  }
+
+  keepConnectChannel() {
     state.webSocketChannel?.stream.listen((message) {
       print(message);
       var data = json.decode(message);
@@ -118,19 +148,21 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         NewChatServices.shared.sendPong(state.webSocketChannel!);
       }
       if (data['msg'] == 'changed') {
-        addMessageToScreen(context, data);
+        addMessageToScreen(data);
       }
     });
   }
 
   openRoomLiveChat() async {
-    var room = await NewChatServices.shared.openNewRoomLiveChat(
+    await NewChatServices.shared
+        .openNewRoomLiveChat(
       state.webSocketChannel!,
       state.visitorToken ?? "",
       null,
-    );
-    print(room);
-    state.roomId = room['room']?['_id'];
+    )
+        .then((v) {
+      state.roomId = v['room']?['_id'];
+    });
   }
 
   sendStartChat() async {
@@ -159,19 +191,118 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     );
   }
 
-  addMessageToScreen(BuildContext context, data) {
-    print(data);
+  addMessageToScreen(data) {
+    log(jsonEncode(data));
     types.User user = types.User(
       id: data["fields"]?['args']?[0]?['u']?['_id'],
       lastName: data["fields"]?['args']?[0]?['u']?['name'],
     );
-    types.Message message = types.TextMessage(
-      author: user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: data["fields"]?['args']?[0]?['_id'],
-      text: data["fields"]?['args']?[0]?['msg'],
+    if (state.employee == null && state.user?.id != user.id) {
+      state.employee = user;
+    }
+    if (state.employee != null && state.employee?.lastName == null) {
+      state.employee = user;
+    }
+
+    if (data["fields"]?['args']?[0]?['attachments'] != null &&
+        data["fields"]?['args']?[0]?['attachments'].isNotEmpty) {
+      var attachment = data["fields"]?['args']?[0]?['attachments']?[0];
+      // Check điều kiện file tải lên là hình ảnh
+      if (attachment?['type'] == 'file' &&
+          attachment?["image_type"].contains("image")) {
+        types.Message message = types.ImageMessage(
+          id: data["fields"]?['args']?[0]?['_id'],
+          name: attachment?['title'],
+          size: attachment?['image_size'],
+          author: user,
+          uri: '${WebsocketConnect.serverUrl}${attachment?['image_url']}',
+          createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
+              DateTime.now().microsecondsSinceEpoch,
+          roomId: state.roomId,
+          height: attachment?["image_dimensions"]?['height'].toDouble(),
+          width: attachment?["image_dimensions"]?['width'].toDouble(),
+          type: types.MessageType.image,
+        );
+        state.messages.insert(0, message);
+      }
+    } else {
+      types.Message message = types.TextMessage(
+        author: user,
+        createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
+            DateTime.now().microsecondsSinceEpoch,
+        id: data["fields"]?['args']?[0]?['_id'],
+        text: data["fields"]?['args']?[0]?['msg'],
+      );
+      state.messages.insert(0, message);
+    }
+
+    //context.read<NewChatBloc>().add(NewMessageEvent());
+  }
+
+  closeLiveChatRoom(BuildContext context) {
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).end,
+      content: S.of(context).confirm_end_chat,
+      onConfirm: () {
+        Navigator.pop(context);
+        context.read<NewChatBloc>().add(BackNewChatInitEvent());
+      },
     );
-    state.messages.insert(0, message);
-    context.read<NewChatBloc>().add(NewMessageEvent());
+  }
+
+  // void handleImageSelection(BuildContext context) async {
+  //   var listImageExt = ['png', 'jpg', 'jpeg'];
+  //   Utils.selectImage(context, false, isFile: true).then(
+  //     (value) async {
+  //       if (value != null) {
+  //         if (listImageExt.contains(value[0].name.split('.').last)) {
+  //           final bytes = await value[0].readAsBytes();
+  //           final image = await decodeImageFromList(bytes);
+
+  //           final message = types.ImageMessage(
+  //             author: state.user!,
+  //             createdAt: DateTime.now().millisecondsSinceEpoch,
+  //             height: image.height.toDouble(),
+  //             id: uuid.v4(),
+  //             name: value[0].name,
+  //             size: bytes.length,
+  //             uri: value[0].path,
+  //             width: image.width.toDouble(),
+  //           );
+
+  //           uploadFileLiveChat(message);
+  //         } else {
+  //           final bytes = await value[0].readAsBytes();
+
+  //           final message = types.FileMessage(
+  //             author: state.user!,
+  //             createdAt: DateTime.now().millisecondsSinceEpoch,
+  //             id: uuid.v4(),
+  //             name: value[0].name,
+  //             size: bytes.length,
+  //             uri: value[0].path,
+  //           );
+  //           uploadFileLiveChat(message);
+  //         }
+  //       }
+  //     },
+  //   );
+  // }
+
+  uploadFileLiveChat(BuildContext context) {
+    Utils.selectImage(context, false, isFile: true).then((v) {
+      if (v != null && v.isNotEmpty) {
+        NewChatServices.shared.sendUploadFileOnLiveChat(
+          state.webSocketChannel!,
+          state.roomId ?? "",
+          File(v[0].path),
+          v[0].name,
+          state.visitorToken,
+        );
+      }
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
   }
 }

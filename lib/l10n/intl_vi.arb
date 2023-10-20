@@ -875,5 +875,7 @@
   "transaction_code": "Mã giao dịch",
   "money": "Số tiền",
   "in_debt": "Còn thiếu",
-  "policies": "Chính sách và dịch vụ"
+  "policies": "Chính sách và dịch vụ",
+  "chat_greeting": "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện để lựa chọn chủ đề và chờ ít phút để nhân viên trả lời",
+  "enter_text": "Nhập tin nhắn"
 }
