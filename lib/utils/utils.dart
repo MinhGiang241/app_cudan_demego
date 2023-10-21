@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -390,6 +391,9 @@ class Utils {
       'docx',
       'xls',
       'xlsx',
+      'mp4',
+      'mkv',
+      'mp3',
     ];
     var allowsImage = [
       'jpg',
@@ -763,12 +767,14 @@ class Utils {
     );
   }
 
-  static downloadFile(
-      {String? url,
-      String? id,
-      Map<String, String>? headers,
-      BuildContext? context,
-      bool show = true}) async {
+  static downloadFile({
+    String? url,
+    String? id,
+    Map<String, String>? headers,
+    BuildContext? context,
+    bool show = true,
+    String? name,
+  }) async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
       if (show) {
@@ -777,7 +783,7 @@ class Utils {
 
       final baseStorage = await (Platform.isIOS
           ? getApplicationDocumentsDirectory()
-          : getExternalStorageDirectory());
+          : getApplicationDocumentsDirectory());
       //final saveDir = await Directory('${baseStorage.path}/downloads').create();
       //Directory.current = baseStorage.path;
       if (Platform.isIOS) {
@@ -805,7 +811,11 @@ class Utils {
               true, // click on notification to open downloaded file (for Android)
         );
         print(taskId);
-        await FlutterDownloader.open(taskId: taskId!);
+        if (name != null) {
+          await FlutterDownloader.open(taskId: taskId!);
+        } else {
+          await OpenFile.open("${baseStorage.path}/files/${name ?? ''}");
+        }
       }
     }
   }

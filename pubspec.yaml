@@ -100,6 +100,9 @@ dependencies:
   flutter_chat_ui: ^1.6.9
   open_filex: ^4.3.4
   video_player: ^2.7.2
+  percent_indicator: ^4.0.1
+  audioplayers: ^5.2.0
+
 
 dev_dependencies:
   flutter_test:
@@ -135,6 +138,7 @@ flutter:
     - assets/ca/
     - assets/emojies/
     - assets/lottie/
+    - assets/audios/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

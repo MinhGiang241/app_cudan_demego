@@ -12,39 +12,14 @@ part of 'new_chat_bloc.dart';
 class NewChatState {
   bool isInit;
   types.User? user;
-  List<types.Message> messages = [
-    types.TextMessage(
-      author: types.User(
-        lastName: "Giang",
-        firstName: "Minh",
-        imageUrl:
-            'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-        id: '82091008-a484-4a89-ae75-a22bf8d6f3ad',
-      ),
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: "Đây là message test",
-    )
-  ];
-  List<types.Message> v = [
-    types.TextMessage(
-      author: types.User(
-        lastName: "Giang",
-        firstName: "Minh",
-        imageUrl:
-            'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-        id: '82091008-a484-4a89-ae75-a22bf8d6f3ad',
-      ),
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: "Đây là message test",
-    )
-  ];
+  List<types.Message> messages = [];
+
   types.User? employee;
   String? authToken;
   String? visitorToken;
   String? roomId;
   WebSocketChannel? webSocketChannel;
+  int percent = 0;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   NewChatState({
     this.isInit = false,
@@ -55,6 +30,7 @@ class NewChatState {
     this.visitorToken,
     this.roomId,
     this.webSocketChannel,
+    this.percent = 0,
   }) {
     if (!isInit) {
       webSocketChannel = NewChatServices.shared.connectToWebSocketLiveChat(
@@ -72,6 +48,7 @@ class NewChatState {
     String? visitorToken,
     String? roomId,
     WebSocketChannel? webSocketChannel,
+    int? percent,
   }) {
     return NewChatState(
       isInit: isInit ?? this.isInit,
@@ -81,6 +58,7 @@ class NewChatState {
       authToken: authToken ?? this.authToken,
       visitorToken: visitorToken ?? this.visitorToken,
       roomId: roomId ?? this.roomId,
+      percent: percent ?? this.percent,
       webSocketChannel: webSocketChannel ?? this.webSocketChannel,
     );
   }
@@ -96,6 +74,7 @@ class NewChatState {
       visitorToken,
       roomId,
       webSocketChannel,
+      percent,
     ];
   }
 }

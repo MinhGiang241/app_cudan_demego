@@ -1,9 +1,13 @@
+// ignore_for_file: unused_import
+
+import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../constants/constants.dart';
+import '../../../../utils/utils.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   const VideoPlayerWidget({super.key, required this.p0, required this.user});
@@ -25,7 +29,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     duration = Duration(minutes: 12);
     _controller = VideoPlayerController.networkUrl(
       Uri.parse(
-          'https://vnno-pt-3-tf-mcloud-lpl-s7-mv-zmp3.zmdcdn.me/uTVe8ONGw-c/whls/vod/480/uENaZODxVNrTNLuEnUu/Tham-Yeu-La.m3u8?authen=exp=1697958124~acl=/uTVe8ONGw-c/*~hmac=ae5f95188a48134b01c5384a9541c3b2'),
+        widget.p0.uri,
+      ),
     )..initialize().then((_) {
         setState(() {
           position = _controller.value.position;
@@ -81,13 +86,22 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             hpad(2),
             Text(
               '${getVideoPosition()}-${formatTime(duration)}',
-              style: txtRegular(12, Colors.white),
+              style: txtRegular(
+                12,
+                widget.p0.author.id == widget.user.id
+                    ? Colors.white
+                    : primaryColorBase,
+              ),
             ),
             hpad(2),
             Flexible(
               child: VideoProgressIndicator(
                 _controller,
-                colors: VideoProgressColors(playedColor: Colors.white),
+                colors: VideoProgressColors(
+                  playedColor: widget.p0.author.id == widget.user.id
+                      ? Colors.white
+                      : primaryColorBase,
+                ),
                 allowScrubbing: true,
               ),
             ),
@@ -103,6 +117,18 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               iconSize: 30,
               icon: Icon(
                 _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                color: widget.p0.author.id == widget.user.id
+                    ? Colors.white
+                    : primaryColorBase,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Utils.downloadFile(url: widget.p0.uri, show: false);
+              },
+              iconSize: 30,
+              icon: Icon(
+                Icons.download,
                 color: widget.p0.author.id == widget.user.id
                     ? Colors.white
                     : primaryColorBase,

@@ -8829,6 +8829,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Auto measage`
+  String get auto_message {
+    return Intl.message(
+      'Auto measage',
+      name: 'auto_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading`
+  String get uploading {
+    return Intl.message(
+      'Uploading',
+      name: 'uploading',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

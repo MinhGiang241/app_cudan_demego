@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../constants/constants.dart';
+import '../../../../utils/utils.dart';
 
 class AudioPlayerWidget extends StatefulWidget {
   const AudioPlayerWidget({super.key, required this.p0, required this.user});
@@ -59,7 +60,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
 
   getVideoPosition() {
     var duration = Duration(
-        milliseconds: _controller.value.position.inMilliseconds.round());
+      milliseconds: _controller.value.position.inMilliseconds.round(),
+    );
     return [duration.inMinutes, duration.inSeconds]
         .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
         .join(':');
@@ -94,9 +96,10 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               child: VideoProgressIndicator(
                 _controller,
                 colors: VideoProgressColors(
-                    playedColor: widget.p0.author.id == widget.user.id
-                        ? Colors.white
-                        : primaryColorBase),
+                  playedColor: widget.p0.author.id == widget.user.id
+                      ? Colors.white
+                      : primaryColorBase,
+                ),
                 allowScrubbing: true,
               ),
             ),
@@ -112,6 +115,18 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               iconSize: 30,
               icon: Icon(
                 _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                color: widget.p0.author.id == widget.user.id
+                    ? Colors.white
+                    : primaryColorBase,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Utils.downloadFile(url: widget.p0.uri, show: false);
+              },
+              iconSize: 30,
+              icon: Icon(
+                Icons.download,
                 color: widget.p0.author.id == widget.user.id
                     ? Colors.white
                     : primaryColorBase,

@@ -457,18 +457,29 @@ class NewChatServices {
     });
   }
 
-  void sendUploadFileOnLiveChat(
-    WebSocketChannel webSocketChannel,
-    String roomId,
-    File file,
-    String? desc,
-    token,
-  ) async {
+  void sendUploadFileOnLiveChat(WebSocketChannel webSocketChannel,
+      String roomId, File file, String? desc, token,
+      {onSendProgress}) async {
     var listImageExt = ['jpg', 'jpeg', 'png'];
+    var listVideoExt = [
+      'mp4',
+      'avi',
+      'mkv',
+      'wmv',
+      'mov',
+      'flv',
+      'webm',
+      '3gp',
+    ];
+    var listAudioExt = ['mp3', 'wav', 'flac', 'aac', 'wma', 'm4a'];
     var ext = file.path.split('.').last;
     var contentType = MediaType('file', ext);
     if (listImageExt.contains(ext)) {
       contentType = MediaType('image', ext);
+    } else if (listVideoExt.contains(ext)) {
+      contentType = MediaType('video', ext);
+    } else if (listAudioExt.contains(ext)) {
+      contentType = MediaType('audio', ext);
     }
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(
@@ -485,14 +496,14 @@ class NewChatServices {
     );
 
     var _dio = Dio();
-    final response = await _dio.post(
+    final response = await _dio
+        .post(
       '${WebsocketConnect.serverUrl}/api/v1/livechat/upload/$roomId',
       data: formData,
       options: options,
-      onSendProgress: (uploaded, total) {
-        print('${uploaded ~/ total}%');
-      },
-    ).then((v) {
+      onSendProgress: onSendProgress,
+    )
+        .then((v) {
       print(v);
     });
     return response;

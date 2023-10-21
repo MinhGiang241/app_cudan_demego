@@ -166,5 +166,115 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "LZZ5Yv8ip2HKLryr2",
+            "args": [
+                {
+                    "_id": "EstPvPhBgJqMYpdhv",
+                    "rid": "LZZ5Yv8ip2HKLryr2",
+                    "ts": {
+                        "$date": 1697926690420
+                    },
+                    "file": {
+                        "_id": "Gq8fnn5E9gqYYxFB3",
+                        "name": "Avatar Element Animation 2.mp4",
+                        "type": "video/mp4"
+                    },
+                    "files": [
+                        {
+                            "_id": "Gq8fnn5E9gqYYxFB3",
+                            "name": "Avatar Element Animation 2.mp4",
+                            "type": "video/mp4"
+                        }
+                    ],
+                    "attachments": [
+                        {
+                            "ts": "1970-01-01T00:00:00.000Z",
+                            "title": "Avatar Element Animation 2.mp4",
+                            "title_link": "/file-upload/Gq8fnn5E9gqYYxFB3/Avatar%20Element%20Animation%202.mp4",
+                            "title_link_download": true,
+                            "video_url": "/file-upload/Gq8fnn5E9gqYYxFB3/Avatar%20Element%20Animation%202.mp4",
+                            "video_type": "video/mp4",
+                            "video_size": 4137821,
+                            "type": "file",
+                            "description": "wqwq"
+                        }
+                    ],
+                    "msg": "",
+                    "groupable": false,
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham",
+                        "name": "Phạm Ngọc Huyền"
+                    },
+                    "_updatedAt": {
+                        "$date": 1697926690486
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": []
+                }
+            ]
+        }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "iE42ja3v3Lc3cwQPh",
+            "args": [
+                {
+                    "_id": "rxRvgN47pN7LGb9AT",
+                    "rid": "iE42ja3v3Lc3cwQPh",
+                    "ts": {
+                        "$date": 1697928788237
+                    },
+                    "file": {
+                        "_id": "S8wobK8zcB2cBaCss",
+                        "name": "Zing MP3 - Nghe nhạc mới, HOT nhất và tải nhạc miễn phí.mp3",
+                        "type": "audio/mpeg"
+                    },
+                    "files": [
+                        {
+                            "_id": "S8wobK8zcB2cBaCss",
+                            "name": "Zing MP3 - Nghe nhạc mới, HOT nhất và tải nhạc miễn phí.mp3",
+                            "type": "audio/mpeg"
+                        }
+                    ],
+                    "attachments": [
+                        {
+                            "ts": "1970-01-01T00:00:00.000Z",
+                            "title": "Zing MP3 - Nghe nhạc mới, HOT nhất và tải nhạc miễn phí.mp3",
+                            "title_link": "/file-upload/S8wobK8zcB2cBaCss/Zing%20MP3%20-%20Nghe%20nh%E1%BA%A1c%20m%E1%BB%9Bi,%20HOT%20nh%E1%BA%A5t%20v%C3%A0%20t%E1%BA%A3i%20nh%E1%BA%A1c%20mi%E1%BB%85n%20ph%C3%AD.mp3",
+                            "title_link_download": true,
+                            "audio_url": "/file-upload/S8wobK8zcB2cBaCss/Zing%20MP3%20-%20Nghe%20nh%E1%BA%A1c%20m%E1%BB%9Bi,%20HOT%20nh%E1%BA%A5t%20v%C3%A0%20t%E1%BA%A3i%20nh%E1%BA%A1c%20mi%E1%BB%85n%20ph%C3%AD.mp3",
+                            "audio_type": "audio/mpeg",
+                            "audio_size": 2901100,
+                            "type": "file",
+                            "description": "yuyuty"
+                        }
+                    ],
+                    "msg": "",
+                    "groupable": false,
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham",
+                        "name": "Phạm Ngọc Huyền"
+                    },
+                    "_updatedAt": {
+                        "$date": 1697928788301
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": []
+                }
+            ]
+        }
     }
 ]

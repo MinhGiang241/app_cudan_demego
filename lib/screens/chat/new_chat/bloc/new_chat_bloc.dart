@@ -6,12 +6,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:open_filex/open_filex.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
@@ -34,7 +34,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
             messages: [
               types.TextMessage(
                 author: types.User(
-                  lastName: "Tin nhắn tự động",
+                  lastName: S.current.auto_message,
                   imageUrl: AppImage.avatarUrl,
                   id: '1111',
                 ),
@@ -93,7 +93,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           "name": name ?? phone,
           "email": email ?? "rocketchat@gmail.com",
           "token": uuid.v4(),
-          "department": ApiService.shared.regCode, //tecco
+          "department": ApiService.shared.regCode,
           "phone": phone,
           "customFields": [
             {
@@ -122,10 +122,6 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           'status': v.data?['visitor']?['status'],
         },
       );
-      //openRoomLiveChat();
-      //sendStartChat();
-      //streamLiveChat();
-      //keepConnectChannel(context);
     }).catchError((e) {
       Utils.showErrorMessage(context, e.toString());
     });
@@ -225,6 +221,33 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           type: types.MessageType.image,
         );
         state.messages.insert(0, message);
+      } else if (data["fields"]?['args']?[0]?['file']?['type'] != null &&
+          data["fields"]?['args']?[0]?['file']?['type'].contains('audio')) {
+        types.Message message = types.AudioMessage(
+          duration: Duration.zero,
+          id: data["fields"]?['args']?[0]?['_id'],
+          author: user,
+          name: attachment?['title'],
+          size: attachment?['audio_size'],
+          uri: '${WebsocketConnect.serverUrl}${attachment?['title_link']}',
+          createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
+              DateTime.now().microsecondsSinceEpoch,
+          type: types.MessageType.audio,
+        );
+        state.messages.insert(0, message);
+      } else if (data["fields"]?['args']?[0]?['file']?['type'] != null &&
+          data["fields"]?['args']?[0]?['file']?['type'].contains('video')) {
+        types.Message message = types.VideoMessage(
+          id: data["fields"]?['args']?[0]?['_id'],
+          author: user,
+          name: attachment?['title'],
+          size: attachment?['video_size'],
+          uri: '${WebsocketConnect.serverUrl}${attachment?['title_link']}',
+          createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
+              DateTime.now().microsecondsSinceEpoch,
+          type: types.MessageType.video,
+        );
+        state.messages.insert(0, message);
       } else {
         types.Message message = types.FileMessage(
           id: data["fields"]?['args']?[0]?['_id'],
@@ -246,12 +269,10 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
             DateTime.now().microsecondsSinceEpoch,
         id: data["fields"]?['args']?[0]?['_id'],
-        text: data["fields"]?['args']?[0]?['msg'],
+        text: EmojiParser().emojify(data["fields"]?['args']?[0]?['msg']),
       );
       state.messages.insert(0, message);
     }
-
-    //context.read<NewChatBloc>().add(NewMessageEvent());
   }
 
   closeLiveChatRoom(BuildContext context) {
@@ -275,6 +296,10 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           File(v[0].path),
           v[0].name,
           state.visitorToken,
+          onSendProgress: (uploaded, total) {
+            state..percent = uploaded * 100 ~/ total;
+            print('${uploaded * 100 ~/ total}%');
+          },
         );
       }
     }).catchError((e) {
@@ -297,18 +322,19 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
 
           state.messages[index] = updatedMessage;
 
-          // final client = http.Client();
-          // final request = await client.get(Uri.parse(message.uri));
-          // final bytes = request.bodyBytes;
-          final documentsDir = (await (Platform.isIOS
-                  ? getApplicationDocumentsDirectory()
-                  : getExternalStorageDirectory()))
-              ?.path;
-          localPath = '$documentsDir/${message.name}';
+          final documentsDir = Platform.isIOS
+              ? (await getApplicationDocumentsDirectory()).path
+              : Directory('/storage/emulated/0/Download').path;
 
-          if (!File(localPath).existsSync()) {
-            final file = File(localPath);
-            await Utils.downloadFile(url: message.uri, show: false);
+          localPath = '$documentsDir/${message.name}';
+          var isExistedFile = File(localPath).existsSync();
+
+          if (!isExistedFile) {
+            await Utils.downloadFile(
+              url: message.uri,
+              show: false,
+              name: message.name,
+            );
           }
         } catch (e) {
           print(e);
@@ -324,7 +350,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         }
       }
 
-      await OpenFilex.open(localPath);
+      await OpenFile.open(localPath);
     }
   }
 }

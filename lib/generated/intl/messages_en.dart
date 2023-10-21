@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "asset_name": MessageLookupByLibrary.simpleMessage("Asset name"),
         "attachment_file":
             MessageLookupByLibrary.simpleMessage("Attachment file"),
+        "auto_message": MessageLookupByLibrary.simpleMessage("Auto measage"),
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "base_info":
             MessageLookupByLibrary.simpleMessage("General information"),
@@ -1341,6 +1342,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "uploading": MessageLookupByLibrary.simpleMessage("Uploading"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Use elevator"),
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Expired_date"),

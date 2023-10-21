@@ -1,19 +1,13 @@
-import 'dart:io';
-
 import 'package:app_cudan/screens/chat/bloc/chat_message_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/widgets/video_player_widget.dart';
-import 'package:app_cudan/screens/chat/widget/list_message_subject.dart';
 import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:path_provider/path_provider.dart';
-import 'package:uuid/uuid.dart';
-
-import 'package:open_filex/open_filex.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -31,128 +25,18 @@ class NewChatScreen extends StatefulWidget {
 }
 
 class _NewChatScreenState extends State<NewChatScreen> {
-  var messages = <types.Message>[
-    types.VideoMessage(
-      uri: '',
-      size: 10,
-      id: '2',
-      name: 's',
-      author: types.User(
-        lastName: "Giang",
-        firstName: "Minh",
-        imageUrl:
-            'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-        id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-      ),
-    ),
-    types.AudioMessage(
-      duration: Duration(seconds: 333),
-      id: '11',
-      name: "alo",
-      size: 5000,
-      uri:
-          'https://vnno-zn-5-tf-a320-zmp3.zmdcdn.me/caa6c89c3a6a5a14199db65626917b36?authen=exp=1697857293~acl=/caa6c89c3a6a5a14199db65626917b36/*~hmac=4f04f2f9150008b60fe883204bd1b444',
-      author: types.User(
-        lastName: "Giang",
-        firstName: "Minh",
-        imageUrl:
-            'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-        id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-      ),
-    ),
-    ...List.generate(
-      10,
-      (index) => (types.TextMessage(
-        author: types.User(
-          lastName: "Giang",
-          firstName: "Minh",
-          imageUrl:
-              'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-          id: index % 2 == 0
-              ? '82091008-a484-4a89-ae75-a22bf8d6f3ad'
-              : '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-        ),
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: const Uuid().v4(),
-        text: "Đây là message test",
-      )),
-    ),
-  ];
-  final _user = const types.User(
-    lastName: "Giang",
-    firstName: "Minh",
-    id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-    imageUrl:
-        'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=',
-  );
-  void _addMessage(types.Message message) {
-    setState(() {
-      messages.insert(0, message);
-    });
-  }
-
-  void _handleSendPressed(types.PartialText message) {
-    final textMessage = types.TextMessage(
-      author: _user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: message.text,
-    );
-
-    _addMessage(textMessage);
-  }
-
   void _handlePreviewDataFetched(
     types.TextMessage message,
     types.PreviewData previewData,
   ) {
-    final index = messages.indexWhere((element) => element.id == message.id);
-    final updatedMessage = (messages[index] as types.TextMessage).copyWith(
-      previewData: previewData,
-    );
+    // final index = messages.indexWhere((element) => element.id == message.id);
+    // final updatedMessage = (messages[index] as types.TextMessage).copyWith(
+    //   previewData: previewData,
+    // );
 
-    setState(() {
-      messages[index] = updatedMessage;
-    });
-  }
-
-  void _handleImageSelection() async {
-    var listImageExt = ['png', 'jpg', 'jpeg'];
-    Utils.selectImage(context, false, isFile: true).then(
-      (value) async {
-        if (value != null) {
-          if (listImageExt.contains(value[0].name.split('.').last)) {
-            final bytes = await value[0].readAsBytes();
-            final image = await decodeImageFromList(bytes);
-
-            final message = types.ImageMessage(
-              author: _user,
-              createdAt: DateTime.now().millisecondsSinceEpoch,
-              height: image.height.toDouble(),
-              id: uuid.v4(),
-              name: value[0].name,
-              size: bytes.length,
-              uri: value[0].path,
-              width: image.width.toDouble(),
-            );
-
-            _addMessage(message);
-          } else {
-            final bytes = await value[0].readAsBytes();
-
-            final message = types.FileMessage(
-              author: _user,
-              createdAt: DateTime.now().millisecondsSinceEpoch,
-              id: uuid.v4(),
-              name: value[0].name,
-              size: bytes.length,
-              uri: value[0].path,
-            );
-            _addMessage(message);
-          }
-        }
-      },
-    );
+    // setState(() {
+    //   messages[index] = updatedMessage;
+    // });
   }
 
   @override
@@ -168,13 +52,6 @@ class _NewChatScreenState extends State<NewChatScreen> {
 
       if (context.read<NewChatBloc>().state.isInit) {
         await context.read<NewChatBloc>().createVisitor(context);
-        // Utils.showDialog(
-        //   context: context,
-        //   dialog: PrimaryDialog.custom(
-        //     content: NewListMessageSubject(),
-        //   ),
-        // );
-        //context.read<NewChatBloc>().keepConnectChannel(context);
       }
     });
   }
@@ -190,9 +67,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
       child: BlocBuilder<NewChatBloc, NewChatState>(
         builder: (context, state) {
           return BlocListener<NewChatBloc, NewChatState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
+            listener: (context, state) {},
             child: PrimaryScreen(
               isPadding: false,
               appBar: AppBar(
@@ -210,120 +85,145 @@ class _NewChatScreenState extends State<NewChatScreen> {
                 backgroundColor: primaryColor4,
               ),
               body: SafeArea(
-                child: Chat(
-                  customBottomWidget: state.isInit ? vpad(0) : null,
-                  inputOptions: InputOptions(
-                    enabled: true,
-                  ),
-                  l10n: ChatL10nEn(
-                    inputPlaceholder: S.of(context).enter_text,
-                  ),
-                  listBottomWidget: Align(
-                    alignment: Alignment.center,
-                    child: InkWell(
-                      onTap: () async {
-                        if (state.isInit) {
-                          //  bloc.sendStartChat();
-                          bloc.add(
-                            StartChatEvent(),
-                          );
-                          Utils.showDialog(
-                            context: context,
-                            dialog: PrimaryDialog.custom(
-                              content: NewListMessageSubject(
-                                bloc: bloc,
-                              ),
+                child: Column(
+                  children: [
+                    if (state.percent != 0 && state.percent != 100)
+                      Row(
+                        children: [
+                          Flexible(
+                            child: LinearPercentIndicator(
+                              barRadius: Radius.circular(12),
+                              lineHeight: 14.0,
+                              percent: state.percent / 100,
+                              backgroundColor: grayScaleColor4,
+                              progressColor: primaryColorBase,
                             ),
-                          );
-                          //bloc.add(StartChatEvent());
-                          //await context.read<NewChatBloc>().start();
-                        } else {
-                          bloc.closeLiveChatRoom(context);
-                        }
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              state.isInit ? Icons.login : Icons.logout,
-                            ),
-                            hpad(10),
-                            Text(
-                              state.isInit
-                                  ? S.of(context).start_chat
-                                  : S.of(context).end_chat,
-                              overflow: TextOverflow.ellipsis,
-                              style: txtRegular(
-                                14,
-                                grayScaleColorBase,
-                              ),
-                            ),
-                          ],
+                          ),
+                          Text(
+                            '${S.of(context).uploading} ${state.percent}%',
+                            style: txtBodySmallRegular(),
+                          ),
+                        ],
+                      ),
+                    Expanded(
+                      child: Chat(
+                        customBottomWidget: state.isInit ? vpad(0) : null,
+                        inputOptions: InputOptions(
+                          enabled: true,
                         ),
+                        l10n: ChatL10nEn(
+                          inputPlaceholder: S.of(context).enter_text,
+                        ),
+                        listBottomWidget: Align(
+                          alignment: Alignment.center,
+                          child: InkWell(
+                            onTap: () async {
+                              if (state.isInit) {
+                                //  bloc.sendStartChat();
+                                bloc.add(
+                                  StartChatEvent(),
+                                );
+                                Utils.showDialog(
+                                  context: context,
+                                  dialog: PrimaryDialog.custom(
+                                    content: NewListMessageSubject(
+                                      bloc: bloc,
+                                    ),
+                                  ),
+                                );
+                                //bloc.add(StartChatEvent());
+                                //await context.read<NewChatBloc>().start();
+                              } else {
+                                bloc.closeLiveChatRoom(context);
+                              }
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    state.isInit ? Icons.login : Icons.logout,
+                                  ),
+                                  hpad(10),
+                                  Text(
+                                    state.isInit
+                                        ? S.of(context).start_chat
+                                        : S.of(context).end_chat,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: txtRegular(
+                                      14,
+                                      grayScaleColorBase,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        theme: DefaultChatTheme(
+                          attachmentButtonIcon: Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                          ),
+                          documentIcon: Icon(
+                            Icons.folder,
+                            color: Colors.white,
+                          ),
+                          backgroundColor: primaryColor5,
+                          primaryColor: Colors.teal,
+                          secondaryColor: grayScaleColor4,
+                          // systemMessageTheme: ,
+                          inputContainerDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                            ),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment(0.8, 1),
+                              colors: <Color>[
+                                // primaryColorBase,
+                                // primaryColor3,
+                                // primaryColor4,
+                                // purpleColor
+                                Color(0xff1f005c),
+                                Color(0xff5b0060),
+                                Color(0xff870160),
+                                Color(0xffac255e),
+                                Color(0xffca485c),
+                                Color(0xffe16b5c),
+                                Color(0xfff39060),
+                                Color(0xffffb56b),
+                              ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                              tileMode: TileMode.mirror,
+                            ),
+                          ),
+                          //inputBackgroundColor: Colors.teal,
+                          sendButtonIcon: Icon(Icons.send, color: Colors.white),
+                        ),
+                        usePreviewData: true,
+                        onMessageVisibilityChanged: (me, flase) => {},
+                        user: state.user ?? types.User(id: uuid.v4()),
+                        messages: state.messages,
+                        onSendPressed: bloc.handleSendPressed,
+                        onMessageTap: bloc.handleMessageTap,
+                        onPreviewDataFetched: _handlePreviewDataFetched,
+                        showUserAvatars: true,
+                        showUserNames: true,
+                        disableImageGallery: false,
+                        onAttachmentPressed: () =>
+                            bloc.uploadFileLiveChat(context),
+                        hideBackgroundOnEmojiMessages: true,
+                        audioMessageBuilder: (p0, {messageWidth = 10}) {
+                          return AudioPlayerWidget(p0: p0, user: state.user!);
+                        },
+                        videoMessageBuilder: (p0, {messageWidth = 10}) =>
+                            VideoPlayerWidget(p0: p0, user: state.user!),
+                        //onPreviewDataFetched: _handlePreviewDataFetched,
                       ),
                     ),
-                  ),
-                  theme: DefaultChatTheme(
-                    attachmentButtonIcon: Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                    ),
-                    documentIcon: Icon(
-                      Icons.folder,
-                      color: Colors.white,
-                    ),
-                    backgroundColor: primaryColor5,
-                    primaryColor: Colors.teal,
-                    secondaryColor: grayScaleColor4,
-                    // systemMessageTheme: ,
-                    inputContainerDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                      ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment(0.8, 1),
-                        colors: <Color>[
-                          // primaryColorBase,
-                          // primaryColor3,
-                          // primaryColor4,
-                          // purpleColor
-                          Color(0xff1f005c),
-                          Color(0xff5b0060),
-                          Color(0xff870160),
-                          Color(0xffac255e),
-                          Color(0xffca485c),
-                          Color(0xffe16b5c),
-                          Color(0xfff39060),
-                          Color(0xffffb56b),
-                        ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                        tileMode: TileMode.mirror,
-                      ),
-                    ),
-                    //inputBackgroundColor: Colors.teal,
-                    sendButtonIcon: Icon(Icons.send, color: Colors.white),
-                  ),
-                  usePreviewData: true,
-                  onMessageVisibilityChanged: (me, flase) => {},
-                  user: state.user ?? _user,
-                  messages: state.messages,
-                  onSendPressed: bloc.handleSendPressed,
-                  onMessageTap: bloc.handleMessageTap,
-                  onPreviewDataFetched: _handlePreviewDataFetched,
-                  showUserAvatars: true,
-                  showUserNames: true,
-                  disableImageGallery: false,
-                  onAttachmentPressed: () => bloc.uploadFileLiveChat(context),
-                  hideBackgroundOnEmojiMessages: true,
-                  audioMessageBuilder: (p0, {messageWidth = 10}) {
-                    return AudioPlayerWidget(p0: p0, user: _user);
-                  },
-                  videoMessageBuilder: (p0, {messageWidth = 10}) =>
-                      VideoPlayerWidget(p0: p0, user: _user),
-                  //onPreviewDataFetched: _handlePreviewDataFetched,
+                  ],
                 ),
               ),
             ),

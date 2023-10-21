@@ -390,6 +390,10 @@ TextStyle txtRegular([double? size, Color? color, double? opacity]) =>
       color: opacity != null ? color!.withOpacity(opacity) : color,
     );
 
+class AppSound {
+  static const String message = 'audios/message.mp3';
+}
+
 class AppImage {
   static const String qltnLogo = "assets/images/qltn_logo.png";
   static const String demeproLogo = "assets/images/demego-transparent.png";

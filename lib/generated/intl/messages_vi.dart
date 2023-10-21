@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "asset_name": MessageLookupByLibrary.simpleMessage("Tên tài sản"),
         "attachment_file":
             MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
+        "auto_message":
+            MessageLookupByLibrary.simpleMessage("Tin nhắn tự động"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "base_info": MessageLookupByLibrary.simpleMessage("Thông tin cơ bản"),
         "bill": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
@@ -230,7 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_schedule": MessageLookupByLibrary.simpleMessage("Đổi lịch hẹn"),
         "chart": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
         "chat_greeting": MessageLookupByLibrary.simpleMessage(
-            "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện để lựa chọn chủ đề và chờ ít phút để nhân viên trả lời"),
+            "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện sau đó lựa chọn chủ đề và chờ ít phút để nhân viên phản hồi lại."),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "choose_an_apartment":
@@ -1339,6 +1341,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
+        "uploading": MessageLookupByLibrary.simpleMessage("Đang tải lên"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Dùng thang máy"),
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
