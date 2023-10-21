@@ -12,7 +12,7 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:open_filex/open_filex.dart';
 
 import '../../../constants/constants.dart';
@@ -100,51 +100,6 @@ class _NewChatScreenState extends State<NewChatScreen> {
     );
 
     _addMessage(textMessage);
-  }
-
-  void _handleMessageTap(BuildContext _, types.Message message) async {
-    if (message is types.FileMessage) {
-      var localPath = message.uri;
-
-      if (message.uri.startsWith('http')) {
-        try {
-          final index =
-              messages.indexWhere((element) => element.id == message.id);
-          final updatedMessage =
-              (messages[index] as types.FileMessage).copyWith(
-            isLoading: true,
-          );
-
-          setState(() {
-            messages[index] = updatedMessage;
-          });
-
-          final client = http.Client();
-          final request = await client.get(Uri.parse(message.uri));
-          final bytes = request.bodyBytes;
-          final documentsDir = (await getApplicationDocumentsDirectory()).path;
-          localPath = '$documentsDir/${message.name}';
-
-          if (!File(localPath).existsSync()) {
-            final file = File(localPath);
-            await file.writeAsBytes(bytes);
-          }
-        } finally {
-          final index =
-              messages.indexWhere((element) => element.id == message.id);
-          final updatedMessage =
-              (messages[index] as types.FileMessage).copyWith(
-            isLoading: null,
-          );
-
-          setState(() {
-            messages[index] = updatedMessage;
-          });
-        }
-      }
-
-      await OpenFilex.open(localPath);
-    }
   }
 
   void _handlePreviewDataFetched(
@@ -356,7 +311,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                   user: state.user ?? _user,
                   messages: state.messages,
                   onSendPressed: bloc.handleSendPressed,
-                  onMessageTap: _handleMessageTap,
+                  onMessageTap: bloc.handleMessageTap,
                   onPreviewDataFetched: _handlePreviewDataFetched,
                   showUserAvatars: true,
                   showUserNames: true,

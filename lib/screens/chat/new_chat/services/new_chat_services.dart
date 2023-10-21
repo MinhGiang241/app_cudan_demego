@@ -471,7 +471,10 @@ class NewChatServices {
       contentType = MediaType('image', ext);
     }
     final formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(file.path, contentType: contentType),
+      'file': await MultipartFile.fromFile(
+        file.path,
+        contentType: contentType,
+      ),
       'description': desc,
     });
 
@@ -481,14 +484,17 @@ class NewChatServices {
       },
     );
 
-    await ApiService.shared
-        .postApi(
-      path: '${WebsocketConnect.serverUrl}/api/v1/livechat/upload/$roomId',
+    var _dio = Dio();
+    final response = await _dio.post(
+      '${WebsocketConnect.serverUrl}/api/v1/livechat/upload/$roomId',
       data: formData,
-      op: options,
-    )
-        .then((v) {
+      options: options,
+      onSendProgress: (uploaded, total) {
+        print('${uploaded ~/ total}%');
+      },
+    ).then((v) {
       print(v);
     });
+    return response;
   }
 }

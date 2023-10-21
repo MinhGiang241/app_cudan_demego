@@ -120,5 +120,51 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "gD7TnTXn7pgYGn2xo",
+            "args": [
+                {
+                    "_id": "s55t5KgMc3H9sQyv3",
+                    "rid": "gD7TnTXn7pgYGn2xo",
+                    "msg": "",
+                    "token": "9817928c-f8fc-4892-9275-44898c7028cb",
+                    "file": {
+                        "_id": "joW6KbojbKDNNan2k",
+                        "name": "FILE_20220421_095914_BA1.pdf",
+                        "type": "file/pdf"
+                    },
+                    "attachments": [
+                        {
+                            "ts": "1970-01-01T00:00:00.000Z",
+                            "title": "FILE_20220421_095914_BA1.pdf",
+                            "title_link": "/file-upload/joW6KbojbKDNNan2k/FILE_20220421_095914_BA1.pdf",
+                            "title_link_download": true,
+                            "type": "file",
+                            "description": "FILE_20220421_095914_BA1.pdf"
+                        }
+                    ],
+                    "alias": "Trương Minh Giang",
+                    "ts": {
+                        "$date": 1697822946427
+                    },
+                    "u": {
+                        "_id": "646ec684563da13775d1cadb",
+                        "username": "guest-34",
+                        "name": "Trương Minh Giang"
+                    },
+                    "_updatedAt": {
+                        "$date": 1697822946467
+                    },
+                    "urls": [],
+                    "mentions": [],
+                    "channels": []
+                }
+            ]
+        }
     }
 ]

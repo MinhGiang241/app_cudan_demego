@@ -763,15 +763,18 @@ class Utils {
     );
   }
 
-  static downloadFile({
-    String? url,
-    String? id,
-    Map<String, String>? headers,
-    BuildContext? context,
-  }) async {
+  static downloadFile(
+      {String? url,
+      String? id,
+      Map<String, String>? headers,
+      BuildContext? context,
+      bool show = true}) async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
-      showSnackBar(context!, S.current.file_downloading);
+      if (show) {
+        showSnackBar(context!, S.current.file_downloading);
+      }
+
       final baseStorage = await (Platform.isIOS
           ? getApplicationDocumentsDirectory()
           : getExternalStorageDirectory());

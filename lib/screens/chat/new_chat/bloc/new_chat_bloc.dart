@@ -2,15 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:app_cudan/generated/intl/messages_en.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
@@ -208,8 +209,8 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         data["fields"]?['args']?[0]?['attachments'].isNotEmpty) {
       var attachment = data["fields"]?['args']?[0]?['attachments']?[0];
       // Check điều kiện file tải lên là hình ảnh
-      if (attachment?['type'] == 'file' &&
-          attachment?["image_type"].contains("image")) {
+      if (data["fields"]?['args']?[0]?['file']?['type'] != null &&
+          data["fields"]?['args']?[0]?['file']?['type'].contains('image')) {
         types.Message message = types.ImageMessage(
           id: data["fields"]?['args']?[0]?['_id'],
           name: attachment?['title'],
@@ -222,6 +223,20 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           height: attachment?["image_dimensions"]?['height'].toDouble(),
           width: attachment?["image_dimensions"]?['width'].toDouble(),
           type: types.MessageType.image,
+        );
+        state.messages.insert(0, message);
+      } else {
+        types.Message message = types.FileMessage(
+          id: data["fields"]?['args']?[0]?['_id'],
+          name: attachment?['title'],
+          author: user,
+          size: 0,
+          uri: '${WebsocketConnect.serverUrl}${attachment?['title_link']}',
+          roomId: state.roomId,
+          type: types.MessageType.file,
+          showStatus: true,
+          createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
+              DateTime.now().microsecondsSinceEpoch,
         );
         state.messages.insert(0, message);
       }
@@ -251,45 +266,6 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     );
   }
 
-  // void handleImageSelection(BuildContext context) async {
-  //   var listImageExt = ['png', 'jpg', 'jpeg'];
-  //   Utils.selectImage(context, false, isFile: true).then(
-  //     (value) async {
-  //       if (value != null) {
-  //         if (listImageExt.contains(value[0].name.split('.').last)) {
-  //           final bytes = await value[0].readAsBytes();
-  //           final image = await decodeImageFromList(bytes);
-
-  //           final message = types.ImageMessage(
-  //             author: state.user!,
-  //             createdAt: DateTime.now().millisecondsSinceEpoch,
-  //             height: image.height.toDouble(),
-  //             id: uuid.v4(),
-  //             name: value[0].name,
-  //             size: bytes.length,
-  //             uri: value[0].path,
-  //             width: image.width.toDouble(),
-  //           );
-
-  //           uploadFileLiveChat(message);
-  //         } else {
-  //           final bytes = await value[0].readAsBytes();
-
-  //           final message = types.FileMessage(
-  //             author: state.user!,
-  //             createdAt: DateTime.now().millisecondsSinceEpoch,
-  //             id: uuid.v4(),
-  //             name: value[0].name,
-  //             size: bytes.length,
-  //             uri: value[0].path,
-  //           );
-  //           uploadFileLiveChat(message);
-  //         }
-  //       }
-  //     },
-  //   );
-  // }
-
   uploadFileLiveChat(BuildContext context) {
     Utils.selectImage(context, false, isFile: true).then((v) {
       if (v != null && v.isNotEmpty) {
@@ -304,5 +280,51 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });
+  }
+
+  void handleMessageTap(BuildContext context, types.Message message) async {
+    if (message is types.FileMessage) {
+      var localPath = message.uri;
+
+      if (message.uri.startsWith('http')) {
+        try {
+          final index =
+              state.messages.indexWhere((element) => element.id == message.id);
+          var updatedMessage =
+              (state.messages[index] as types.FileMessage).copyWith(
+            isLoading: true,
+          );
+
+          state.messages[index] = updatedMessage;
+
+          // final client = http.Client();
+          // final request = await client.get(Uri.parse(message.uri));
+          // final bytes = request.bodyBytes;
+          final documentsDir = (await (Platform.isIOS
+                  ? getApplicationDocumentsDirectory()
+                  : getExternalStorageDirectory()))
+              ?.path;
+          localPath = '$documentsDir/${message.name}';
+
+          if (!File(localPath).existsSync()) {
+            final file = File(localPath);
+            await Utils.downloadFile(url: message.uri, show: false);
+          }
+        } catch (e) {
+          print(e);
+        } finally {
+          final index =
+              state.messages.indexWhere((element) => element.id == message.id);
+          final updatedMessage =
+              (state.messages[index] as types.FileMessage).copyWith(
+            isLoading: null,
+          );
+
+          state.messages[index] = updatedMessage;
+        }
+      }
+
+      await OpenFilex.open(localPath);
+    }
   }
 }
