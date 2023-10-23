@@ -271,7 +271,9 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         id: data["fields"]?['args']?[0]?['_id'],
         text: EmojiParser().emojify(data["fields"]?['args']?[0]?['msg']),
       );
-      state.messages.insert(0, message);
+      if (!(state.messages.isNotEmpty && message.id == state.messages[0].id)) {
+        state.messages.insert(0, message);
+      }
     }
   }
 
@@ -352,5 +354,19 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
 
       await OpenFile.open(localPath);
     }
+  }
+
+  void handlePreviewDataFetched(
+    types.TextMessage message,
+    types.PreviewData previewData,
+  ) {
+    final index =
+        state.messages.indexWhere((element) => element.id == message.id);
+    final updatedMessage =
+        (state.messages[index] as types.TextMessage).copyWith(
+      previewData: previewData,
+    );
+
+    state.messages[index] = updatedMessage;
   }
 }

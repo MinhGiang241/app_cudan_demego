@@ -4,6 +4,7 @@ import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
@@ -122,8 +123,9 @@ class AccountScreen extends StatelessWidget {
                       lable: S.of(context).terms_services,
                       icons: PrimaryIcons.news,
                       onTap: () {
-                        Utils.pushScreen(context, const TermPoliciesPage());
-                        // launchUrlString("https://www.apple.com/");
+                        //Utils.pushScreen(context, const TermPoliciesPage());
+                        launchUrlString(
+                            "http://demego.vn/chinh-sach-quyen-rieng-tu/");
                       },
                     ),
                     AccountItem(

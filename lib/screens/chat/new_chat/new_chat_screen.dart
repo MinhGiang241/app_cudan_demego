@@ -25,20 +25,6 @@ class NewChatScreen extends StatefulWidget {
 }
 
 class _NewChatScreenState extends State<NewChatScreen> {
-  void _handlePreviewDataFetched(
-    types.TextMessage message,
-    types.PreviewData previewData,
-  ) {
-    // final index = messages.indexWhere((element) => element.id == message.id);
-    // final updatedMessage = (messages[index] as types.TextMessage).copyWith(
-    //   previewData: previewData,
-    // );
-
-    // setState(() {
-    //   messages[index] = updatedMessage;
-    // });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -62,6 +48,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
 
     return WillPopScope(
       onWillPop: () async {
+        bloc.closeLiveChatRoom(context);
         return false;
       },
       child: BlocBuilder<NewChatBloc, NewChatState>(
@@ -208,7 +195,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                         messages: state.messages,
                         onSendPressed: bloc.handleSendPressed,
                         onMessageTap: bloc.handleMessageTap,
-                        onPreviewDataFetched: _handlePreviewDataFetched,
+                        onPreviewDataFetched: bloc.handlePreviewDataFetched,
                         showUserAvatars: true,
                         showUserNames: true,
                         disableImageGallery: false,

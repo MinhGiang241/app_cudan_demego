@@ -276,5 +276,60 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "H8w9XA8pihE6xXyLa",
+            "args": [
+                {
+                    "_id": "1698060125984",
+                    "rid": "H8w9XA8pihE6xXyLa",
+                    "msg": "https://dantri.com.vn/phap-luat/xet-xu-chuyen-bay-giai-cuu-cuu-pho-chu-tich-ha-noi-duoc-hoc-tro-bao-chua-20230718150937305.htm",
+                    "token": "9817928c-f8fc-4892-9275-44898c7028cb",
+                    "alias": "Trương Minh Giang",
+                    "ts": {
+                        "$date": 1698060125675
+                    },
+                    "u": {
+                        "_id": "646ec684563da13775d1cadb",
+                        "username": "guest-34",
+                        "name": "Trương Minh Giang"
+                    },
+                    "_updatedAt": {
+                        "$date": 1698060125721
+                    },
+                    "urls": [
+                        {
+                            "url": "https://dantri.com.vn/phap-luat/xet-xu-chuyen-bay-giai-cuu-cuu-pho-chu-tich-ha-noi-duoc-hoc-tro-bao-chua-20230718150937305.htm"
+                        }
+                    ],
+                    "mentions": [],
+                    "channels": [],
+                    "md": [
+                        {
+                            "type": "PARAGRAPH",
+                            "value": [
+                                {
+                                    "type": "LINK",
+                                    "value": {
+                                        "src": {
+                                            "type": "PLAIN_TEXT",
+                                            "value": "https://dantri.com.vn/phap-luat/xet-xu-chuyen-bay-giai-cuu-cuu-pho-chu-tich-ha-noi-duoc-hoc-tro-bao-chua-20230718150937305.htm"
+                                        },
+                                        "label": {
+                                            "type": "PLAIN_TEXT",
+                                            "value": "https://dantri.com.vn/phap-luat/xet-xu-chuyen-bay-giai-cuu-cuu-pho-chu-tich-ha-noi-duoc-hoc-tro-bao-chua-20230718150937305.htm"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     }
 ]
