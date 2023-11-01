@@ -877,6 +877,7 @@
   "policies": "Policy and services",
   "chat_greeting": "In order to be supported, please press to start conversation to sellect topic and wait supporter reply",
   "enter_text": "Enter text here",
-  "auto_message":"Auto measage",
-  "uploading":"Uploading"
+  "auto_message": "Auto measage",
+  "uploading": "Uploading",
+  "has_message": "You got a message"
 }

@@ -25,10 +25,12 @@ class NewChatScreen extends StatefulWidget {
 }
 
 class _NewChatScreenState extends State<NewChatScreen> {
+  late NewChatBloc bloc;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      bloc.resetCount();
       if (context.read<NewChatBloc>().state.isInit) {
         context.read<NewChatBloc>().state.webSocketChannel =
             CustomWebSocketService.shared.connectToWebSocketLiveChat(
@@ -43,12 +45,18 @@ class _NewChatScreenState extends State<NewChatScreen> {
   }
 
   @override
+  void dispose() {
+    bloc.setIsActiveScren(false);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final NewChatBloc bloc = context.read<NewChatBloc>();
+    bloc = context.read<NewChatBloc>();
 
     return WillPopScope(
       onWillPop: () async {
-        bloc.closeLiveChatRoom(context);
+        // bloc.closeLiveChatRoom(context);
         return false;
       },
       child: BlocBuilder<NewChatBloc, NewChatState>(

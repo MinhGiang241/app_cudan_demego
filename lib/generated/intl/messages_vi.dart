@@ -581,6 +581,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "happening": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
         "happening_location":
             MessageLookupByLibrary.simpleMessage("Địa điểm diễn ra"),
+        "has_message":
+            MessageLookupByLibrary.simpleMessage("Bạn có 1 tin nhắn"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản?"),
         "have_baby": MessageLookupByLibrary.simpleMessage("Đã có con"),

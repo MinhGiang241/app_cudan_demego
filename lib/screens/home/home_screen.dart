@@ -1,3 +1,5 @@
+import 'package:alert_banner/types/enums.dart';
+import 'package:alert_banner/widgets/alert.dart';
 import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/new_chat_screen.dart';
@@ -65,13 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Scaffold(
                     body: _navigationTab(context),
-                    bottomNavigationBar:
-                        // context.watch<ChatMessageBloc>().state.stateChat ==
-                        //         StateChatEnum.START
-                        //     ? null
-                        context.watch<NewChatBloc>().state.isInit
-                            ? _bottomNavigationBar(messageCount)
-                            : null,
+                    bottomNavigationBar: _bottomNavigationBar(context),
+                    // context.watch<ChatMessageBloc>().state.stateChat ==
+                    //         StateChatEnum.START
+                    //     ? null
+                    // context.watch<NewChatBloc>().state.isInit
+                    //     ? _bottomNavigationBar(messageCount)
+                    //     : null,
                   ),
                   if (isLoading)
                     const Center(
@@ -173,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _bottomNavigationBar(messageCount) {
+  Widget _bottomNavigationBar(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
@@ -184,50 +186,91 @@ class _HomeScreenState extends State<HomeScreen> {
           topRight: Radius.circular(12),
         ),
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-        ),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: Colors.white,
-          ),
-          child: BottomNavigationBar(
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.home),
-                label: S.of(context).home,
-              ),
-              // BottomNavigationBarItem(
-              //   icon: const Icon(Icons.article),
-              //   label: S.of(context).forum,
-              // ),
-              BottomNavigationBarItem(
-                icon: B.Badge(
-                  badgeContent: Text(
-                    messageCount.toString(),
-                    style: txtBold(10, Colors.white),
+      child: StreamBuilder(
+        stream: context.read<NewChatBloc>().messageController.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data != 0) {
+            Future.delayed(Duration.zero).then((v) {
+              showAlertBanner(
+                // <-- The function!
+                context,
+                () => print("TAPPED"),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black38,
+                          spreadRadius: 0,
+                          blurRadius: 10,
+                        ),
+                      ],
+                      color: greenColor10.withOpacity(0.7),
+                    ),
+                    child: Center(
+                      child: Text(
+                        S.of(context).has_message,
+                        style: txtBold(14, Colors.white),
+                      ),
+                    ),
                   ),
-                  showBadge: messageCount != null,
-                  child: const Icon(Icons.message),
+                ), // <-- Put any widget here you want!
+                alertBannerLocation: AlertBannerLocation.top,
+                durationOfStayingOnScreen: Duration(
+                  milliseconds: 400,
                 ),
-                //  Icon(Icons.chat_bubble),
-                label: S.of(context).message,
+              );
+            });
+          }
+          return ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+            ),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Colors.white,
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.account_circle),
-                label: S.of(context).account,
+              child: BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.home),
+                    label: S.of(context).home,
+                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: const Icon(Icons.article),
+                  //   label: S.of(context).forum,
+                  // ),
+                  BottomNavigationBarItem(
+                    icon: B.Badge(
+                      badgeContent: Text(
+                        snapshot.data.toString(),
+                        style: txtBold(10, Colors.white),
+                      ),
+                      showBadge: snapshot.data != null && snapshot.data != 0,
+                      child: const Icon(Icons.message),
+                    ),
+                    //  Icon(Icons.chat_bubble),
+                    label: S.of(context).message,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.account_circle),
+                    label: S.of(context).account,
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                selectedItemColor: primaryColorBase,
+                unselectedItemColor: grayScaleColorBase.withOpacity(0.58),
+                onTap: _onItemTapped,
+                showSelectedLabels: true,
+                showUnselectedLabels: true,
               ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: primaryColorBase,
-            unselectedItemColor: grayScaleColorBase.withOpacity(0.58),
-            onTap: _onItemTapped,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
