@@ -878,6 +878,7 @@
   "policies": "Chính sách và dịch vụ",
   "chat_greeting": "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện sau đó lựa chọn chủ đề và chờ ít phút để nhân viên phản hồi lại.",
   "enter_text": "Nhập tin nhắn",
-  "auto_message":"Tin nhắn tự động",
-  "uploading":"Đang tải lên"
+  "auto_message": "Tin nhắn tự động",
+  "uploading": "Đang tải lên",
+  "has_message": "Bạn có 1 tin nhắn"
 }

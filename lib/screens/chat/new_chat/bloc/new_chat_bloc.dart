@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -73,6 +74,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     });
   }
   var _dio = Dio();
+  StreamController messageController = StreamController();
 
   createVisitor(BuildContext context) async {
     var residentProvider = context.read<ResidentInfoPrv>();
@@ -199,6 +201,11 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     }
     if (state.employee != null && state.employee?.lastName == null) {
       state.employee = user;
+    }
+
+    if (user.id != state.user && !state.isActiveScreen) {
+      state.count += 1;
+      messageController.add(state.count);
     }
 
     if (data["fields"]?['args']?[0]?['attachments'] != null &&
@@ -368,5 +375,14 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     );
 
     state.messages[index] = updatedMessage;
+  }
+
+  void resetCount() {
+    state.count = 0;
+    state.isActiveScreen = true;
+  }
+
+  void setIsActiveScren(bool active) {
+    state.isActiveScreen = active;
   }
 }

@@ -574,6 +574,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "happening": MessageLookupByLibrary.simpleMessage("Happenning"),
         "happening_location":
             MessageLookupByLibrary.simpleMessage("Happening location"),
+        "has_message":
+            MessageLookupByLibrary.simpleMessage("You got a message"),
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
         "have_baby": MessageLookupByLibrary.simpleMessage("Have baby"),

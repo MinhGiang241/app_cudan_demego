@@ -8849,6 +8849,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You got a message`
+  String get has_message {
+    return Intl.message(
+      'You got a message',
+      name: 'has_message',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
