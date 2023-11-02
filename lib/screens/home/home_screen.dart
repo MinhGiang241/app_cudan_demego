@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alert_banner/types/enums.dart';
 import 'package:alert_banner/widgets/alert.dart';
 import 'package:app_cudan/screens/chat/chat_screen.dart';
@@ -15,6 +17,7 @@ import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
 import '../auth/prv/resident_info_prv.dart';
 import '../chat/bloc/chat_message_bloc.dart';
+import '../chat/new_chat/services/stream_count.dart';
 import '../notification/prv/undread_noti.dart';
 import 'home_service.dart';
 import 'prv/home_prv.dart';
@@ -39,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
       RefreshController(initialRefresh: false);
   void _onItemTapped(int index) async {
     if (index == 1 && _selectedIndex != index) {
-      context.read<ChatMessageBloc>().add(BackChatMessageInit());
+      context.read<NewChatBloc>().resetCount();
+      //context.read<ChatMessageBloc>().add(BackChatMessageInit());
     }
     setState(() {
       _selectedIndex = index;
@@ -67,7 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Scaffold(
                     body: _navigationTab(context),
-                    bottomNavigationBar: _bottomNavigationBar(context),
+                    bottomNavigationBar:
+                        _bottomNavigationBar(context, _selectedIndex),
                     // context.watch<ChatMessageBloc>().state.stateChat ==
                     //         StateChatEnum.START
                     //     ? null
@@ -175,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _bottomNavigationBar(BuildContext context) {
+  Widget _bottomNavigationBar(BuildContext context, int index) {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
@@ -189,6 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: StreamBuilder(
         stream: context.read<NewChatBloc>().messageController.stream,
         builder: (context, snapshot) {
+          // context.read<NewChatBloc>().messageController.stream.
+
           if (snapshot.hasData && snapshot.data != 0) {
             Future.delayed(Duration.zero).then((v) {
               showAlertBanner(

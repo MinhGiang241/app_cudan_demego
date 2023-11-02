@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_cudan/services/firebase_api.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ import '../../bloc/chat_message_bloc.dart';
 import '../../bloc/websocket_connect.dart';
 import '../../custom/custom_websocket_service.dart';
 import '../services/new_chat_services.dart';
+import '../services/stream_count.dart';
 
 part 'new_chat_event.dart';
 part 'new_chat_state.dart';
@@ -206,6 +208,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     if (user.id != state.user && !state.isActiveScreen) {
       state.count += 1;
       messageController.add(state.count);
+      StreamCount.shared.controller.add(state.count);
     }
 
     if (data["fields"]?['args']?[0]?['attachments'] != null &&
@@ -380,6 +383,8 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
   void resetCount() {
     state.count = 0;
     state.isActiveScreen = true;
+    messageController.add(state.count);
+    //StreamCount.shared.controller.add(state.count);
   }
 
   void setIsActiveScren(bool active) {
