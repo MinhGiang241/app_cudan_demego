@@ -39,6 +39,7 @@ class PrfData {
   static final PrfData shared = PrfData();
 
   final _userBox = Hive.box("USER");
+  final _chatBox = Hive.box("CHAT");
   final _signIn = Hive.box('SIGNIN');
   final _settingBox = Hive.box("SETTINGS");
   final _apartmentBox = Hive.box("APARTMENTS");
@@ -55,6 +56,7 @@ class PrfData {
     await Hive.openBox("LISTAPARTMENTS");
     await Hive.openBox("RESIDENT");
     await Hive.openBox("PROJECT");
+    await Hive.openBox("CHAT");
   }
 
   final String _tokenKey = "token";
@@ -67,6 +69,26 @@ class PrfData {
 
   final String _project = "project";
   final String _authState = "authState";
+
+  //chat
+  final String visitorToken = 'visitorToken';
+  final String roomId = 'roomId';
+
+  Future<void> setVisitorToken(String v) async {
+    await _chatBox.put(visitorToken, v);
+  }
+
+  Future<void> setRoomId(String v) async {
+    await _chatBox.put(roomId, v);
+  }
+
+  Future<String?> getRoomId() async {
+    return await _chatBox.get(roomId);
+  }
+
+  Future<void> deleteChat() async {
+    _chatBox.deleteAll([visitorToken, roomId]);
+  }
 
   Future<void> setAuthState(String v) async {
     await _signIn.put(_authState, v);

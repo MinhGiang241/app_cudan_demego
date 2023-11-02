@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_cudan/services/prf_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +51,8 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     on<StartChatEvent>((event, emit) {
       emit(
         state.copyWith(
-          isInit: false,
           messages: [],
+          isInit: false,
         ),
       );
       start(message: event.startMessage);
@@ -112,7 +113,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           ],
         },
       },
-    ).then((v) {
+    ).then((v) async {
       print(v);
       state.visitorToken = v.data?['visitor']?['token'];
       state.user = types.User(
@@ -125,6 +126,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
           'status': v.data?['visitor']?['status'],
         },
       );
+      await getChatHistory();
     }).catchError((e) {
       Utils.showErrorMessage(context, e.toString());
     });
@@ -137,6 +139,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       handleSendPressed(message);
     }
     streamLiveChat();
+
     keepConnectChannel();
   }
 
@@ -163,6 +166,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         .then((v) {
       state.roomId = v['room']?['_id'];
     });
+    await PrfData.shared.setRoomId(state.roomId!);
   }
 
   sendStartChat() async {
@@ -289,6 +293,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     }
     if (user.id != state.user?.id &&
         data?['fields']?['args']?[0]?['msg'] == "promptTranscript") {
+      PrfData.shared.deleteChat();
       emit(state.copyWith(isInit: true));
     }
     SystemSound.play(SystemSoundType.alert);
@@ -300,6 +305,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       title: S.of(context).end,
       content: S.of(context).confirm_end_chat,
       onConfirm: () {
+        PrfData.shared.deleteChat();
         Navigator.pop(context);
         context.read<NewChatBloc>().add(BackNewChatInitEvent());
       },
@@ -396,5 +402,101 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
 
   void setIsActiveScren(bool active) {
     state.isActiveScreen = active;
+  }
+
+  getChatHistory() async {
+    state.loading = true;
+    var roomId = await PrfData.shared.getRoomId();
+    if (roomId == null) {
+      state.loading = false;
+    } else {
+      var a = await NewChatServices.shared
+          .loadLiveChatHistory(roomId, state.visitorToken!);
+      if (a?["messages"].isNotEmpty) {
+        state.messages.clear();
+        for (var i in a?["messages"].reversed) {
+          addOfflineMassage(i);
+        }
+        emit(state.copyWith(isInit: false));
+        await openRoomLiveChat();
+        streamLiveChat();
+        keepConnectChannel();
+      }
+      state.loading = false;
+    }
+  }
+
+  addOfflineMassage(data) {
+    types.User user = types.User(
+      id: data?['u']?['_id'],
+      lastName: data?['u']?['_id'] != state.user?.id
+          ? "BQLNCC - ${ApiService.shared.projectName}"
+          : data?['u']?['name'],
+    );
+
+    if (data?['file']?['type'] != null &&
+        data?['file']?['type'].contains('image')) {
+      types.Message message = types.ImageMessage(
+        id: data?['_id'],
+        name: data['attachments']?[0]?['title'],
+        size: data['attachments']?[0] ?? ['image_size'],
+        author: user,
+        uri:
+            '${WebsocketConnect.serverUrl}${data['attachments']?[0]?['image_url']}',
+        createdAt:
+            DateTime.parse(data?['ts']?['\$date']).millisecondsSinceEpoch,
+        roomId: state.roomId,
+        height:
+            data['attachments']?[0]?["image_dimensions"]?['height'].toDouble(),
+        width:
+            data['attachments']?[0]?["image_dimensions"]?['width'].toDouble(),
+        type: types.MessageType.image,
+      );
+      state.messages.insert(0, message);
+    } else if (data?['file']?['type'] != null &&
+        data?['file']?['type'].contains('audio')) {
+      types.Message message = types.AudioMessage(
+        duration: Duration.zero,
+        id: data?['_id'],
+        author: user,
+        name: data['attachments']?[0]?['title'],
+        size: data['attachments']?[0]?['audio_size'],
+        uri:
+            '${WebsocketConnect.serverUrl}${data['attachments']?[0]?['title_link']}',
+        createdAt: DateTime.parse(data?['ts']).millisecondsSinceEpoch,
+        type: types.MessageType.audio,
+      );
+      state.messages.insert(0, message);
+    } else if (data?['file']?['type'] != null &&
+        data?['file']?['type'].contains('video')) {
+      types.Message message = types.VideoMessage(
+        id: data?['_id'],
+        author: user,
+        name: data['attachments']?['title'],
+        size: data['attachments']?['video_size'],
+        uri:
+            '${WebsocketConnect.serverUrl}${data['attachments']?['title_link']}',
+        createdAt: DateTime.parse(data?['ts']).millisecondsSinceEpoch,
+        type: types.MessageType.video,
+      );
+      state.messages.insert(0, message);
+    } else if (data?['msg'].isNotEmpty) {
+      types.Message message = types.TextMessage(
+        author: user,
+        createdAt: DateTime.parse(data?['ts']).millisecondsSinceEpoch,
+        id: data?['_id'],
+        text: data?['msg'] == "promptTranscript"
+            ? S.current.close_chat
+            : EmojiParser().emojify(data?['msg']),
+      );
+      if (!(state.messages.isNotEmpty && message.id == state.messages[0].id)) {
+        state.messages.insert(0, message);
+      }
+      if (user.id != state.user?.id &&
+          data?['fields']?['args']?[0]?['msg'] == "promptTranscript") {
+        PrfData.shared.deleteChat();
+        emit(state.copyWith(isInit: true));
+      }
+    }
   }
 }

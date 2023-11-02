@@ -22,6 +22,7 @@ class NewChatState {
   int percent = 0;
   int count = 0;
   bool isActiveScreen = true;
+  bool loading = true;
   CustomWebSocketService webSocketService = CustomWebSocketService();
   NewChatState({
     this.isInit = false,
@@ -35,6 +36,7 @@ class NewChatState {
     this.percent = 0,
     this.count = 0,
     this.isActiveScreen = true,
+    this.loading = true,
   }) {
     if (!isInit) {
       webSocketChannel = NewChatServices.shared.connectToWebSocketLiveChat(
@@ -55,6 +57,7 @@ class NewChatState {
     int? percent,
     int? count,
     bool? isActiveScreen,
+    bool? loading,
   }) {
     return NewChatState(
       isInit: isInit ?? this.isInit,
@@ -68,6 +71,7 @@ class NewChatState {
       webSocketChannel: webSocketChannel ?? this.webSocketChannel,
       count: count ?? this.count,
       isActiveScreen: isActiveScreen ?? this.isActiveScreen,
+      loading: loading ?? this.loading,
     );
   }
 
@@ -84,6 +88,7 @@ class NewChatState {
       percent,
       count,
       isActiveScreen,
+      loading,
     ];
   }
 }

@@ -274,13 +274,13 @@ class NewChatServices {
   }
 
 // Custom
-  void getLastes50Message(WebSocketChannel webSocketChannel, Room room) {
+  void getLastes50Message(WebSocketChannel webSocketChannel, String room) {
     Map msg = {
       'msg': 'method',
       'method': 'loadHistory',
       'id': '42',
       'params': [
-        room.id, null, 50,
+        room, null, 100,
 
         //  { "$date": 1480377601 }
       ],
