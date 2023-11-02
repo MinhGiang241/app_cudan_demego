@@ -241,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Để tham khảo các lựa chọn, vui lòng chọn bên dưới:"),
         "click_here": MessageLookupByLibrary.simpleMessage("vào đây"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "close_chat":
+            MessageLookupByLibrary.simpleMessage("Đã đóng cuộc trò chuyện"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Hộ chiếu"),
         "cmnd_images": MessageLookupByLibrary.simpleMessage(
             "Ảnh CMND/CCCD (ảnh chụp 2 mặt)"),

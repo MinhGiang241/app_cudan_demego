@@ -880,5 +880,6 @@
   "enter_text": "Nhập tin nhắn",
   "auto_message": "Tin nhắn tự động",
   "uploading": "Đang tải lên",
-  "has_message": "Bạn có 1 tin nhắn"
+  "has_message": "Bạn có 1 tin nhắn",
+  "close_chat":"Đã đóng cuộc trò chuyện"
 }

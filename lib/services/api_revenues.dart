@@ -37,4 +37,35 @@ class APIRevenues {
       return res.response.data;
     }
   }
+
+  static Future getHTML(
+    String? apartmentId,
+  ) async {
+    var query = '''
+  mutation (\$apartmentId:String){
+    response: servicebill_get_current_month_bill (apartmentId: \$apartmentId ) {
+        code
+        message
+        data
+    }
+}
+
+  ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'apartmentId': apartmentId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
 }

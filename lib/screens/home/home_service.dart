@@ -9,7 +9,6 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../electricity/electricity_screen.dart';
 import '../event/event_list_screen.dart';
-import '../payment/payment_list_screen.dart';
 import '../reg_resident/register_resident_screen.dart';
 import '../revenues/revenues_screen.dart';
 import '../services/reflection/reflection_screen.dart';

@@ -31,6 +31,7 @@ class ApiService {
   var _graphqlLink = HttpLink(ApiConstants.baseURL);
 
   String? access_token;
+  String? projectName;
   DateTime? expireDate;
 
   clearToken() {
@@ -43,6 +44,7 @@ class ApiService {
     String? access_tokenHO,
     DateTime? expireDateHO,
     String? regcode,
+    String? project_name,
   ) {
     _dio = Dio(BaseOptions(baseUrl: URL));
     access_token = access_tokenHO;
@@ -50,6 +52,7 @@ class ApiService {
     regCode = regcode ?? '';
     _graphqlLink = HttpLink(URL, defaultHeaders: {"regcode": regcode ?? ''});
     uploadURL = '${URL}/headless/stream/upload';
+    projectName = project_name;
   }
 
   setToken(String? token) {

@@ -22,7 +22,6 @@ import '../../models/rocket_chat_data.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_card.dart';
 
-import '../home/home_screen.dart';
 import 'bloc/websocket_connect.dart';
 import 'widget/input_chat.dart';
 // ignore: unused_import

@@ -71,7 +71,6 @@ class NewChatState {
     );
   }
 
-  @override
   List<dynamic> get props {
     return [
       isInit,

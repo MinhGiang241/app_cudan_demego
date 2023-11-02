@@ -1,10 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:app_cudan/constants/constants.dart';
-import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 

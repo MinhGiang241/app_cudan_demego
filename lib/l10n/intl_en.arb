@@ -879,5 +879,6 @@
   "enter_text": "Enter text here",
   "auto_message": "Auto measage",
   "uploading": "Uploading",
-  "has_message": "You got a message"
+  "has_message": "You got a message",
+  "close_chat":"Chat room was closed"
 }

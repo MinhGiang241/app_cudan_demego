@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:alert_banner/types/enums.dart';
 import 'package:alert_banner/widgets/alert.dart';
-import 'package:app_cudan/screens/chat/chat_screen.dart';
 import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:app_cudan/screens/chat/new_chat/new_chat_screen.dart';
 import 'package:badges/badges.dart' as B;
@@ -16,8 +15,6 @@ import '../../widgets/primary_card.dart';
 import '../../widgets/primary_loading.dart';
 import '../account/account_screen.dart';
 import '../auth/prv/resident_info_prv.dart';
-import '../chat/bloc/chat_message_bloc.dart';
-import '../chat/new_chat/services/stream_count.dart';
 import '../notification/prv/undread_noti.dart';
 import 'home_service.dart';
 import 'prv/home_prv.dart';
@@ -60,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (context) => HomePrv(context),
       builder: (context, snapshot) {
         final isLoading = context.watch<HomePrv>().isLoading;
-        var messageCount = context.watch<HomePrv>().messageCount;
+        // var messageCount = context.watch<HomePrv>().messageCount;
 
         return UpgradeAlert(
           child: FutureBuilder(
@@ -101,8 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _navigationTab(BuildContext context) {
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
-        context.read<ResidentInfoPrv>().selectedApartment != null;
+    // var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    //     context.read<ResidentInfoPrv>().selectedApartment != null;
     switch (_selectedIndex) {
       case 0:
         UnreadNotification.getUnReadNotification();
@@ -195,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
         stream: context.read<NewChatBloc>().messageController.stream,
         builder: (context, snapshot) {
           // context.read<NewChatBloc>().messageController.stream.
-
+          print('alert');
           if (snapshot.hasData && snapshot.data != 0) {
             Future.delayed(Duration.zero).then((v) {
               showAlertBanner(

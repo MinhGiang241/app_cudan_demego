@@ -12,7 +12,9 @@ class RevenuesPrv extends ChangeNotifier {
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
     var now = DateTime.now();
 
-    await APIRevenues.get(apartmentId, now.month, now.year).then((v) {
+    await APIRevenues.getHTML(
+      apartmentId,
+    ).then((v) {
       if (v != null) {
         htmlWidget = v;
         notifyListeners();

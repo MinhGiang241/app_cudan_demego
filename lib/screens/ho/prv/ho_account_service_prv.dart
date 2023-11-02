@@ -66,6 +66,7 @@ class HOAccountServicePrv extends ChangeNotifier {
         ApiHOService.shared.access_token,
         ApiHOService.shared.expireDate,
         e.project?.registration?.code,
+        e.project?.project_name,
       );
 
       await PrfData.shared.setProjectInStore(e);

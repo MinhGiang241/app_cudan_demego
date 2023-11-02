@@ -99,6 +99,7 @@ class AutoNavigation {
           ApiHOService.shared.access_token,
           ApiHOService.shared.expireDate,
           project.project?.registration?.code,
+          project.project?.project_name,
         );
 
         await PrfData.shared.setProjectInStore(project);

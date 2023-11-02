@@ -221,7 +221,7 @@ class _ConstructionBillTabState extends State<ConstructionBillTab> {
                         //         txtBodySmallBold(color: grayScaleColorBase),
                         //   ),
                       ];
-                      var date = DateTime.parse(e.createdTime ?? "");
+                      // var date = DateTime.parse(e.createdTime ?? "");
                       return Padding(
                         padding: const EdgeInsets.only(top: 28),
                         child: Column(

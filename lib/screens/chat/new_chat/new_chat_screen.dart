@@ -30,7 +30,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      bloc.resetCount();
+      //bloc.resetCount();
       //bloc.messageController.();
       if (context.read<NewChatBloc>().state.isInit) {
         context.read<NewChatBloc>().state.webSocketChannel =
@@ -79,7 +79,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
             ),
             // centerTitle: false,
             title: Text(
-              state.employee?.lastName ?? S.of(context).customer_care,
+              S.of(context).customer_care,
             ),
             backgroundColor: primaryColor4,
           ),

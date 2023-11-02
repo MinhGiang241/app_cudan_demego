@@ -8859,6 +8859,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Chat room was closed`
+  String get close_chat {
+    return Intl.message(
+      'Chat room was closed',
+      name: 'close_chat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

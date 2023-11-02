@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:app_cudan/services/firebase_api.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:open_file_plus/open_file_plus.dart';
@@ -24,7 +24,6 @@ import '../../bloc/chat_message_bloc.dart';
 import '../../bloc/websocket_connect.dart';
 import '../../custom/custom_websocket_service.dart';
 import '../services/new_chat_services.dart';
-import '../services/stream_count.dart';
 
 part 'new_chat_event.dart';
 part 'new_chat_state.dart';
@@ -196,7 +195,9 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     log(jsonEncode(data));
     types.User user = types.User(
       id: data["fields"]?['args']?[0]?['u']?['_id'],
-      lastName: data["fields"]?['args']?[0]?['u']?['name'],
+      lastName: data["fields"]?['args']?[0]?['u']?['_id'] != state.user?.id
+          ? "BQLNCC - ${ApiService.shared.projectName}"
+          : data["fields"]?['args']?[0]?['u']?['name'],
     );
     if (state.employee == null && state.user?.id != user.id) {
       state.employee = user;
@@ -208,7 +209,6 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     if (user.id != state.user && !state.isActiveScreen) {
       state.count += 1;
       messageController.add(state.count);
-      StreamCount.shared.controller.add(state.count);
     }
 
     if (data["fields"]?['args']?[0]?['attachments'] != null &&
@@ -279,12 +279,19 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
             DateTime.now().microsecondsSinceEpoch,
         id: data["fields"]?['args']?[0]?['_id'],
-        text: EmojiParser().emojify(data["fields"]?['args']?[0]?['msg']),
+        text: data?['fields']?['args']?[0]?['msg'] == "promptTranscript"
+            ? S.current.close_chat
+            : EmojiParser().emojify(data["fields"]?['args']?[0]?['msg']),
       );
       if (!(state.messages.isNotEmpty && message.id == state.messages[0].id)) {
         state.messages.insert(0, message);
       }
     }
+    if (user.id != state.user?.id &&
+        data?['fields']?['args']?[0]?['msg'] == "promptTranscript") {
+      emit(state.copyWith(isInit: true));
+    }
+    SystemSound.play(SystemSoundType.alert);
   }
 
   closeLiveChatRoom(BuildContext context) {

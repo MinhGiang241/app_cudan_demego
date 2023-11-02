@@ -331,5 +331,32 @@
                 }
             ]
         }
+    },
+    {
+        "msg": "changed",
+        "collection": "stream-room-messages",
+        "id": "id",
+        "fields": {
+            "eventName": "nM69GZiEo7e4AoFCN",
+            "args": [
+                {
+                    "_id": "rGPqrPsnzJeu2bQC8",
+                    "t": "command",
+                    "rid": "nM69GZiEo7e4AoFCN",
+                    "ts": {
+                        "$date": 1698912489182
+                    },
+                    "msg": "promptTranscript",
+                    "u": {
+                        "_id": "7QpxJirkFj2tGE3SJ",
+                        "username": "huyenpham"
+                    },
+                    "groupable": false,
+                    "_updatedAt": {
+                        "$date": 1698912489182
+                    }
+                }
+            ]
+        }
     }
 ]

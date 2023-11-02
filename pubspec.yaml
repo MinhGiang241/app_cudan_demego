@@ -103,6 +103,8 @@ dependencies:
   percent_indicator: ^4.0.1
   audioplayers: ^5.2.0
   alert_banner: ^1.0.0
+  zoom_widget: ^2.0.0
+
 
 
 dev_dependencies:

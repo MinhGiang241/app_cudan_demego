@@ -234,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "To refer any option, please select bellow:"),
         "click_here": MessageLookupByLibrary.simpleMessage("here"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "close_chat":
+            MessageLookupByLibrary.simpleMessage("Chat room was closed"),
         "cmnd": MessageLookupByLibrary.simpleMessage("CMND/ CCCD/ Passport"),
         "cmnd_images":
             MessageLookupByLibrary.simpleMessage("Identity images (2 sides)"),

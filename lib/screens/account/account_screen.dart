@@ -1,5 +1,4 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
-import 'package:app_cudan/screens/auth/widgets/term_policies_page.dart';
 import 'package:app_cudan/screens/ho/prv/ho_account_service_prv.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
