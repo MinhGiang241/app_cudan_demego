@@ -188,9 +188,15 @@ class _SelectProjectScreenState extends State<SelectProjectScreen> {
                               ...list.map(
                                 (e) => PrimaryCard(
                                   onTap: () async {
+                                    setState(() {
+                                      loading = true;
+                                    });
                                     await context
                                         .read<HOAccountServicePrv>()
                                         .navigateToProject(context, e);
+                                    setState(() {
+                                      loading = false;
+                                    });
                                   },
                                   margin: const EdgeInsets.only(
                                     bottom: 16,
