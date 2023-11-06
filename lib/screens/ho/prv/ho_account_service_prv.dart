@@ -137,6 +137,7 @@ class HOAccountServicePrv extends ChangeNotifier {
                     buttonType: ButtonType.secondary,
                     secondaryBackgroundColor: redColor2,
                     onTap: () async {
+                      context.read<NewChatBloc>().add(NewChatInitEvent());
                       ApiService.shared.clearToken();
                       Utils.pop(context, true);
                       // PrfData.shared.deleteApartment();
@@ -147,19 +148,19 @@ class HOAccountServicePrv extends ChangeNotifier {
                       await PrfData.shared.setAuthState(logOut);
                       await PrfData.shared.deleteApartment();
                       await PrfData.shared.deleteProject();
-                      context.read<NewChatBloc>().add(NewChatInitEvent());
-                      context.read<NewChatBloc>().state.messages = [
-                        types.TextMessage(
-                          author: types.User(
-                            lastName: S.current.auto_message,
-                            imageUrl: AppImage.avatarUrl,
-                            id: '1111',
-                          ),
-                          createdAt: DateTime.now().millisecondsSinceEpoch,
-                          id: const Uuid().v4(),
-                          text: S.current.chat_greeting,
-                        ),
-                      ];
+
+                      // context.read<NewChatBloc>().state.messages = [
+                      //   types.TextMessage(
+                      //     author: types.User(
+                      //       lastName: S.current.auto_message,
+                      //       imageUrl: AppImage.avatarUrl,
+                      //       id: '1111',
+                      //     ),
+                      //     createdAt: DateTime.now().millisecondsSinceEpoch,
+                      //     id: const Uuid().v4(),
+                      //     text: S.current.chat_greeting,
+                      //   ),
+                      // ];
                       notifyListeners();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         SignInScreen.routeName,

@@ -58,7 +58,23 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       start(message: event.startMessage);
     });
     on<NewChatInitEvent>((event, emit) {
-      emit(state.copyWith(isInit: true, messages: []));
+      emit(
+        state.copyWith(
+          isInit: true,
+          messages: [
+            types.TextMessage(
+              author: types.User(
+                lastName: S.current.auto_message,
+                imageUrl: AppImage.avatarUrl,
+                id: '1111',
+              ),
+              createdAt: DateTime.now().millisecondsSinceEpoch,
+              id: const Uuid().v4(),
+              text: S.current.chat_greeting,
+            ),
+          ],
+        ),
+      );
     });
     on<NewMessageEvent>((event, emit) {
       emit(state.copyWith(messages: state.messages));
