@@ -58,7 +58,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       start(message: event.startMessage);
     });
     on<NewChatInitEvent>((event, emit) {
-      emit(state.copyWith(isInit: true));
+      emit(state.copyWith(isInit: true, messages: []));
     });
     on<NewMessageEvent>((event, emit) {
       emit(state.copyWith(messages: state.messages));
@@ -76,7 +76,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
     });
   }
   var _dio = Dio();
-  StreamController messageController = StreamController();
+  StreamController messageController = StreamController.broadcast();
 
   createVisitor(BuildContext context) async {
     var residentProvider = context.read<ResidentInfoPrv>();
@@ -166,7 +166,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         .then((v) {
       state.roomId = v['room']?['_id'];
     });
-    await PrfData.shared.setRoomId(state.roomId!);
+    await PrfData.shared.setRoomId(state.roomId!, state.user!.id);
   }
 
   sendStartChat() async {
@@ -277,7 +277,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         );
         state.messages.insert(0, message);
       }
-    } else {
+    } else if (data["fields"]?['args']?[0]?['t'] != "uj") {
       types.Message message = types.TextMessage(
         author: user,
         createdAt: data["fields"]?['args']?[0]?['ts']?['\$date'] ??
@@ -407,12 +407,16 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
   getChatHistory() async {
     state.loading = true;
     var roomId = await PrfData.shared.getRoomId();
-    if (roomId == null) {
+    var userId = await PrfData.shared.getUserId();
+    if (userId != state.user?.id) {
+      state.loading = false;
+      await PrfData.shared.deleteChat();
+    } else if (roomId == null) {
       state.loading = false;
     } else {
       var a = await NewChatServices.shared
           .loadLiveChatHistory(roomId, state.visitorToken!);
-      if (a?["messages"].isNotEmpty) {
+      if (a?["messages"] != null && a?["messages"].isNotEmpty) {
         state.messages.clear();
         for (var i in a?["messages"].reversed) {
           addOfflineMassage(i);
@@ -480,7 +484,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
         type: types.MessageType.video,
       );
       state.messages.insert(0, message);
-    } else if (data?['msg'].isNotEmpty) {
+    } else if (data?['msg'].isNotEmpty && data?['t'] != "uj") {
       types.Message message = types.TextMessage(
         author: user,
         createdAt: DateTime.parse(data?['ts']).millisecondsSinceEpoch,

@@ -73,21 +73,27 @@ class PrfData {
   //chat
   final String visitorToken = 'visitorToken';
   final String roomId = 'roomId';
+  final String userId = 'userId';
 
   Future<void> setVisitorToken(String v) async {
     await _chatBox.put(visitorToken, v);
   }
 
-  Future<void> setRoomId(String v) async {
-    await _chatBox.put(roomId, v);
+  Future<void> setRoomId(String room, String user) async {
+    await _chatBox.put(roomId, room);
+    await _chatBox.put(userId, user);
   }
 
   Future<String?> getRoomId() async {
     return await _chatBox.get(roomId);
   }
 
+  Future<String?> getUserId() async {
+    return await _chatBox.get(userId);
+  }
+
   Future<void> deleteChat() async {
-    _chatBox.deleteAll([visitorToken, roomId]);
+    _chatBox.deleteAll([visitorToken, roomId, userId]);
   }
 
   Future<void> setAuthState(String v) async {

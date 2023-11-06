@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/chat/new_chat/bloc/new_chat_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
@@ -24,6 +26,7 @@ import '../../auth/prv/auth_prv.dart';
 import '../../auth/sign_in_screen.dart';
 import '../../home/home_screen.dart';
 import '../select_project_screen.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class HOAccountServicePrv extends ChangeNotifier {
   HOAccountServicePrv();
@@ -144,6 +147,19 @@ class HOAccountServicePrv extends ChangeNotifier {
                       await PrfData.shared.setAuthState(logOut);
                       await PrfData.shared.deleteApartment();
                       await PrfData.shared.deleteProject();
+                      context.read<NewChatBloc>().add(NewChatInitEvent());
+                      context.read<NewChatBloc>().state.messages = [
+                        types.TextMessage(
+                          author: types.User(
+                            lastName: S.current.auto_message,
+                            imageUrl: AppImage.avatarUrl,
+                            id: '1111',
+                          ),
+                          createdAt: DateTime.now().millisecondsSinceEpoch,
+                          id: const Uuid().v4(),
+                          text: S.current.chat_greeting,
+                        ),
+                      ];
                       notifyListeners();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         SignInScreen.routeName,

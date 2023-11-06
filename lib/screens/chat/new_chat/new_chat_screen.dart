@@ -13,6 +13,7 @@ import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_loading.dart';
+import '../../home/home_screen.dart';
 import '../bloc/websocket_connect.dart';
 import '../custom/custom_websocket_service.dart';
 import 'widgets/audio_player_widget.dart';
@@ -60,6 +61,10 @@ class _NewChatScreenState extends State<NewChatScreen> {
     return WillPopScope(
       onWillPop: () async {
         // bloc.closeLiveChatRoom(context);
+        Navigator.pushReplacementNamed(
+          context,
+          HomeScreen.routeName,
+        );
         return false;
       },
       child:

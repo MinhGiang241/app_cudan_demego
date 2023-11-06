@@ -358,5 +358,6 @@
                 }
             ]
         }
-    }
+    },
+    {"msg":"changed","collection":"stream-room-messages","id":"id","fields":{"eventName":"6APrvdypzKwNmNPqK","args":[{"_id":"6uGWKww8gKWW8fQDo","t":"uj","rid":"6APrvdypzKwNmNPqK","ts":{"$date":1699256996524},"msg":"linhphuong","u":{"_id":"Q5DyQXANSSFRiTtai","username":"linhphuong"},"groupable":false,"_updatedAt":{"$date":1699256996583}}]}}
 ]
