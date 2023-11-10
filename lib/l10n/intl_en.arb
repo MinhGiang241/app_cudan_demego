@@ -880,5 +880,12 @@
   "auto_message": "Auto measage",
   "uploading": "Uploading",
   "has_message": "You got a message",
-  "close_chat":"Chat room was closed"
+  "close_chat": "Chat room was closed",
+  "ultility_list": "Ultilities list",
+  "time_ticket": "Register time ticket",
+  "month_ticket": "Register month ticket",
+  "select_date_time": "Select date and time",
+  "select_date": "Select date",
+  "select_time": "Select time",
+  "enter_amount_resident_ticket": "Enter amount resident ticket"
 }

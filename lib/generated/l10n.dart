@@ -8869,6 +8869,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Ultilities list`
+  String get ultility_list {
+    return Intl.message(
+      'Ultilities list',
+      name: 'ultility_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register time ticket`
+  String get time_ticket {
+    return Intl.message(
+      'Register time ticket',
+      name: 'time_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register month ticket`
+  String get month_ticket {
+    return Intl.message(
+      'Register month ticket',
+      name: 'month_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select date and time`
+  String get select_date_time {
+    return Intl.message(
+      'Select date and time',
+      name: 'select_date_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select date`
+  String get select_date {
+    return Intl.message(
+      'Select date',
+      name: 'select_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select time`
+  String get select_time {
+    return Intl.message(
+      'Select time',
+      name: 'select_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter amount resident ticket`
+  String get enter_amount_resident_ticket {
+    return Intl.message(
+      'Enter amount resident ticket',
+      name: 'enter_amount_resident_ticket',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

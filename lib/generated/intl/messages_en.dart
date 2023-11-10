@@ -446,6 +446,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("End registration time"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enter_address": MessageLookupByLibrary.simpleMessage("Enter address"),
+        "enter_amount_resident_ticket": MessageLookupByLibrary.simpleMessage(
+            "Enter amount resident ticket"),
         "enter_cons_unit_name": MessageLookupByLibrary.simpleMessage(
             "Enter construction uint name"),
         "enter_deputy_name":
@@ -676,6 +678,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
         "money": MessageLookupByLibrary.simpleMessage("Money"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
+        "month_ticket":
+            MessageLookupByLibrary.simpleMessage("Register month ticket"),
         "my_letter": MessageLookupByLibrary.simpleMessage("My letter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
@@ -1099,6 +1103,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select card type"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Select construction type"),
+        "select_date": MessageLookupByLibrary.simpleMessage("Select date"),
+        "select_date_time":
+            MessageLookupByLibrary.simpleMessage("Select date and time"),
         "select_expire":
             MessageLookupByLibrary.simpleMessage("Select expired time"),
         "select_project":
@@ -1107,6 +1114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select number seat"),
         "select_surface":
             MessageLookupByLibrary.simpleMessage("Select surface"),
+        "select_time": MessageLookupByLibrary.simpleMessage("Select time"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Select transport"),
         "sell_contract_num":
@@ -1274,6 +1282,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Time preparing handover "),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Time happening"),
+        "time_ticket":
+            MessageLookupByLibrary.simpleMessage("Register time ticket"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "to_date": MessageLookupByLibrary.simpleMessage("To"),
         "to_money": MessageLookupByLibrary.simpleMessage("Money"),
@@ -1336,6 +1346,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "ultility_list":
+            MessageLookupByLibrary.simpleMessage("Ultilities list"),
         "under_acceptance":
             MessageLookupByLibrary.simpleMessage("Under acceptance"),
         "under_construction":

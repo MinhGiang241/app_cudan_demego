@@ -450,6 +450,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thời gian kết thúc đăng ký"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
         "enter_address": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
+        "enter_amount_resident_ticket":
+            MessageLookupByLibrary.simpleMessage("Nhập số lượng vé cư dân"),
         "enter_cons_unit_name":
             MessageLookupByLibrary.simpleMessage("Nhập tên đơn vị thi công"),
         "enter_deputy_name":
@@ -684,6 +686,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thời điểm thất lạc"),
         "money": MessageLookupByLibrary.simpleMessage("Số tiền"),
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
+        "month_ticket":
+            MessageLookupByLibrary.simpleMessage("Đăng ký vé tháng"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc tịch"),
@@ -1107,11 +1111,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn loại thẻ"),
         "select_cons_type":
             MessageLookupByLibrary.simpleMessage("Chọn loại thi công"),
+        "select_date": MessageLookupByLibrary.simpleMessage("Chọn  ngày"),
+        "select_date_time":
+            MessageLookupByLibrary.simpleMessage("Chọn ngày giờ"),
         "select_expire": MessageLookupByLibrary.simpleMessage("Chọn thời hạn"),
         "select_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "select_seat_num":
             MessageLookupByLibrary.simpleMessage("Chọn số chỗ ngồi"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
+        "select_time": MessageLookupByLibrary.simpleMessage("Chọn giờ"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Chọn phương tiện"),
         "sell_contract_num":
@@ -1278,6 +1286,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thời gian nhận bàn giao dự kiến"),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
+        "time_ticket": MessageLookupByLibrary.simpleMessage("Đăng ký vé lượt"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
         "to_date": MessageLookupByLibrary.simpleMessage("Đến ngày"),
         "to_money": MessageLookupByLibrary.simpleMessage("Thành tiền"),
@@ -1336,6 +1345,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transport_reg": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "ultility_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách tiện ích"),
         "under_acceptance": MessageLookupByLibrary.simpleMessage("Nghiệm thu"),
         "under_construction":
             MessageLookupByLibrary.simpleMessage("Bắt đầu thi công"),

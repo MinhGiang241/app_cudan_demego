@@ -881,5 +881,12 @@
   "auto_message": "Tin nhắn tự động",
   "uploading": "Đang tải lên",
   "has_message": "Bạn có 1 tin nhắn",
-  "close_chat":"Đã đóng cuộc trò chuyện"
+  "close_chat": "Đã đóng cuộc trò chuyện",
+  "ultility_list": "Danh sách tiện ích",
+  "time_ticket": "Đăng ký vé lượt",
+  "month_ticket": "Đăng ký vé tháng",
+  "select_date_time": "Chọn ngày giờ",
+  "select_date": "Chọn  ngày",
+  "select_time": "Chọn giờ",
+  "enter_amount_resident_ticket": "Nhập số lượng vé cư dân"
 }

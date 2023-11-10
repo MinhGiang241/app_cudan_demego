@@ -459,12 +459,11 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       types.Message message = types.ImageMessage(
         id: data?['_id'],
         name: data['attachments']?[0]?['title'],
-        size: data['attachments']?[0] ?? ['image_size'],
+        size: data['attachments']?[0]?['image_size'],
         author: user,
         uri:
             '${WebsocketConnect.serverUrl}${data['attachments']?[0]?['image_url']}',
-        createdAt:
-            DateTime.parse(data?['ts']?['\$date']).millisecondsSinceEpoch,
+        createdAt: DateTime.parse(data?['ts']).millisecondsSinceEpoch,
         roomId: state.roomId,
         height:
             data['attachments']?[0]?["image_dimensions"]?['height'].toDouble(),

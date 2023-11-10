@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/booking_services/booking_services_screen.dart';
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
 import 'package:app_cudan/screens/receipts/receipt_screen.dart';
 import 'package:app_cudan/screens/services/ultilty/utility_service_screen.dart';
@@ -15,6 +16,8 @@ import '../screens/auth/prv/sign_up_prv.dart';
 import '../screens/auth/sign_in_screen.dart';
 import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
+import '../screens/booking_services/select_booking_service_sceen.dart';
+import '../screens/booking_services/time_booking_screen.dart';
 import '../screens/event/event_details_screen.dart';
 import '../screens/event/event_list_screen.dart';
 import '../screens/ho/add_new_proj_reg_screen.dart';
@@ -461,6 +464,21 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => RevenuesScreen(),
+        );
+      case BookingServicesScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => BookingServicesScreen(),
+        );
+      case SelectBookingServiceScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => SelectBookingServiceScreen(),
+        );
+      case TimeBookingScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => TimeBookingScreen(),
         );
 
       default:

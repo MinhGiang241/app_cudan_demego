@@ -32,6 +32,7 @@ class PrimaryButton extends StatelessWidget {
     this.isRectangle = false,
     this.isFit = false,
     this.isLoading = false,
+    this.borderRadius,
   });
 
   final String? text;
@@ -46,6 +47,7 @@ class PrimaryButton extends StatelessWidget {
   final bool isRectangle;
   final bool isFit;
   final bool isLoading;
+  final BorderRadiusGeometry? borderRadius;
   double genHeight() {
     switch (buttonSize) {
       case ButtonSize.large:
@@ -70,7 +72,8 @@ class PrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: _backgroundColor(buttonType ?? ButtonType.primary),
         gradient: _gradientColor(buttonType ?? ButtonType.primary),
-        borderRadius: isRectangle ? null : BorderRadius.circular(12),
+        borderRadius:
+            borderRadius ?? (isRectangle ? null : BorderRadius.circular(12)),
       ),
       child: Material(
         color: Colors.transparent,
