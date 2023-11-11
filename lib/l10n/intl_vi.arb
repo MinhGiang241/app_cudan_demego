@@ -888,5 +888,15 @@
   "select_date_time": "Chọn ngày giờ",
   "select_date": "Chọn  ngày",
   "select_time": "Chọn giờ",
-  "enter_amount_resident_ticket": "Nhập số lượng vé cư dân"
+  "enter_amount_resident_ticket": "Nhập số lượng vé cư dân",
+  "not_yet_select_date": "Bạn chưa chọn ngày",
+  "resident_ticket": "Vé cư dân",
+  "guest_ticket": "Vé khách ngoài",
+  "max_num_ticket_per_day": "Mỗi căn hộ được đặt tối đa {ticket} vé /khung giờ ưu đãi cho cư dân",
+  "adult_ticket_num": "Số vé người lớn",
+  "child_ticket_num": "Số vé người trẻ em",
+  "weekend_ticket_num": "Số vé cuối tuần",
+  "weekend_aldult_ticket_num": "Số vé người lớn cuối tuần",
+  "weekend_child_ticket_num": "Số vé trẻ em cuối tuần",
+  "ticket_price": "Giá vé"
 }

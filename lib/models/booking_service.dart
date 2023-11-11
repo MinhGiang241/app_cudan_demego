@@ -12,6 +12,7 @@ class BoookingService {
   String? name;
   String? registration_type;
   String? object;
+  String? service_charge;
   bool? isLimitedDaysRegistration;
   int? limited_days_registration_num;
   bool? isCancelInAdvance;
@@ -49,6 +50,7 @@ class BoookingService {
     this.list_of_fees_by_month,
     this.confirm_use,
     this.icon,
+    this.service_charge,
   });
 
   Map<String, dynamic> toMap() {
@@ -79,6 +81,7 @@ class BoookingService {
           list_of_fees_by_month?.map((x) => x.toMap()).toList(),
       'confirm_use': confirm_use,
       'icon': icon,
+      'service_charge': service_charge,
     };
   }
 
@@ -113,6 +116,9 @@ class BoookingService {
           map['ticket_type'] != null ? map['ticket_type'] as String : null,
       reminder_in_advance: map['reminder_in_advance'] != null
           ? map['reminder_in_advance'] as String
+          : null,
+      service_charge: map['service_charge'] != null
+          ? map['service_charge'] as String
           : null,
       terms_of_service: map['terms_of_service'] != null
           ? List<FileUploadModel>.from(

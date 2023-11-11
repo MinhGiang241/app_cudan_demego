@@ -8880,10 +8880,10 @@ class S {
     );
   }
 
-  /// `Register time ticket`
+  /// `Register turn ticket`
   String get time_ticket {
     return Intl.message(
-      'Register time ticket',
+      'Register turn ticket',
       name: 'time_ticket',
       desc: '',
       args: [],
@@ -8935,6 +8935,106 @@ class S {
     return Intl.message(
       'Enter amount resident ticket',
       name: 'enter_amount_resident_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have not selected date yet`
+  String get not_yet_select_date {
+    return Intl.message(
+      'You have not selected date yet',
+      name: 'not_yet_select_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident ticket`
+  String get resident_ticket {
+    return Intl.message(
+      'Resident ticket',
+      name: 'resident_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guest ticket`
+  String get guest_ticket {
+    return Intl.message(
+      'Guest ticket',
+      name: 'guest_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Each apartment can book maximum {ticket} ticket  per day for resident `
+  String max_num_ticket_per_day(Object ticket) {
+    return Intl.message(
+      'Each apartment can book maximum $ticket ticket  per day for resident ',
+      name: 'max_num_ticket_per_day',
+      desc: '',
+      args: [ticket],
+    );
+  }
+
+  /// `Adult ticket number`
+  String get adult_ticket_num {
+    return Intl.message(
+      'Adult ticket number',
+      name: 'adult_ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Child ticket number`
+  String get child_ticket_num {
+    return Intl.message(
+      'Child ticket number',
+      name: 'child_ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weekend ticket number`
+  String get weekend_ticket_num {
+    return Intl.message(
+      'Weekend ticket number',
+      name: 'weekend_ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weekend aldult ticket number`
+  String get weekend_aldult_ticket_num {
+    return Intl.message(
+      'Weekend aldult ticket number',
+      name: 'weekend_aldult_ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weekend child ticket number`
+  String get weekend_child_ticket_num {
+    return Intl.message(
+      'Weekend child ticket number',
+      name: 'weekend_child_ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ticket price`
+  String get ticket_price {
+    return Intl.message(
+      'Ticket price',
+      name: 'ticket_price',
       desc: '',
       args: [],
     );

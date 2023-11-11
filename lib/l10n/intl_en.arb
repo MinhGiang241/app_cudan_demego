@@ -882,10 +882,20 @@
   "has_message": "You got a message",
   "close_chat": "Chat room was closed",
   "ultility_list": "Ultilities list",
-  "time_ticket": "Register time ticket",
+  "time_ticket": "Register turn ticket",
   "month_ticket": "Register month ticket",
   "select_date_time": "Select date and time",
   "select_date": "Select date",
   "select_time": "Select time",
-  "enter_amount_resident_ticket": "Enter amount resident ticket"
+  "enter_amount_resident_ticket": "Enter amount resident ticket",
+  "not_yet_select_date": "You have not selected date yet",
+  "resident_ticket": "Resident ticket",
+  "guest_ticket": "Guest ticket",
+  "max_num_ticket_per_day": "Each apartment can book maximum {ticket} ticket  per day for resident ",
+  "adult_ticket_num": "Adult ticket number",
+  "child_ticket_num": "Child ticket number",
+  "weekend_ticket_num": "Weekend ticket number",
+  "weekend_aldult_ticket_num": "Weekend aldult ticket number",
+  "weekend_child_ticket_num": "Weekend child ticket number",
+  "ticket_price": "Ticket price"
 }
