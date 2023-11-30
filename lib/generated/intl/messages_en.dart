@@ -1165,6 +1165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out_msg":
             MessageLookupByLibrary.simpleMessage("Do you want to sign out?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "slot_limited": MessageLookupByLibrary.simpleMessage("Limitted"),
         "social_media":
             MessageLookupByLibrary.simpleMessage("Link personal social media"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
@@ -1261,6 +1262,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Update successfully"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Update email successfully"),
+        "suggestion": MessageLookupByLibrary.simpleMessage("Suggestion"),
         "surface": MessageLookupByLibrary.simpleMessage("Plan"),
         "sys_support": MessageLookupByLibrary.simpleMessage("System suport"),
         "system_notification":

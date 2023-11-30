@@ -1167,6 +1167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out_msg": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn đăng xuất không ?"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "slot_limited": MessageLookupByLibrary.simpleMessage("Hết chỗ"),
         "social_media":
             MessageLookupByLibrary.simpleMessage("Link thông tin mạng xã hội"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
@@ -1264,6 +1265,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cập nhật thành công"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Cập nhật email thành công"),
+        "suggestion": MessageLookupByLibrary.simpleMessage("Đề xuất"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
         "sys_support": MessageLookupByLibrary.simpleMessage("Đường dây hỗ trợ"),
         "system_notification":

@@ -1,4 +1,5 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/booking_services/booking_location_screen.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
@@ -413,6 +414,22 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                   Utils.showErrorMessage(
                                     context,
                                     S.of(context).not_yet_select_date,
+                                  );
+                                } else {
+                                  Navigator.pushNamed(
+                                    context,
+                                    BookingLocationScreen.routeName,
+                                    arguments: {
+                                      'service': service,
+                                      "time_start": service
+                                          .list_hours_of_operation_per_day?[
+                                              _selectedOption]
+                                          .time_start,
+                                      "time_end": service
+                                          .list_hours_of_operation_per_day?[
+                                              _selectedOption]
+                                          .time_end,
+                                    },
                                   );
                                 }
                               },

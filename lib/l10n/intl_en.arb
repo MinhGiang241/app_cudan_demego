@@ -897,5 +897,7 @@
   "weekend_ticket_num": "Weekend ticket number",
   "weekend_aldult_ticket_num": "Weekend aldult ticket number",
   "weekend_child_ticket_num": "Weekend child ticket number",
-  "ticket_price": "Ticket price"
+  "ticket_price": "Ticket price",
+  "suggestion": "Suggestion",
+  "slot_limited": "Limitted"
 }

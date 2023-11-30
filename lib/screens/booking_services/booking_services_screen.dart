@@ -22,6 +22,12 @@ class BookingServicesScreen extends StatelessWidget {
       builder: (context, child) => PrimaryScreen(
         appBar: PrimaryAppbar(
           title: S.of(context).ultility_list,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.timer_outlined),
+            ),
+          ],
         ),
         body: FutureBuilder(
           future:
@@ -33,7 +39,7 @@ class BookingServicesScreen extends StatelessWidget {
             }
             return SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(right: 20, top: 20, left: 20),
+                padding: EdgeInsets.only(right: 10, top: 10, left: 10),
                 child: SizedBox(
                   height: dvHeight(context) - 100,
                   child: GridView.count(
@@ -54,6 +60,7 @@ class BookingServicesScreen extends StatelessWidget {
                             );
                           },
                           child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(12),

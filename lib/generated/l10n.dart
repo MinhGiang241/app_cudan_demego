@@ -9039,6 +9039,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Suggestion`
+  String get suggestion {
+    return Intl.message(
+      'Suggestion',
+      name: 'suggestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Limitted`
+  String get slot_limited {
+    return Intl.message(
+      'Limitted',
+      name: 'slot_limited',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
