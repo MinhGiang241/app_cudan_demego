@@ -1,6 +1,5 @@
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/generated/l10n.dart';
-import 'package:app_cudan/services/api_reflection.dart';
 import 'package:app_cudan/utils/utils.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
@@ -9,8 +8,11 @@ import 'package:flutter/material.dart';
 import '../../models/area.dart';
 import '../../models/booking_service.dart';
 import '../../services/api_booking_service.dart';
+import '../../widgets/primary_empty_widget.dart';
 import '../../widgets/primary_error_widget.dart';
+import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_loading.dart';
+import 'confirm_booking_service.dart';
 
 class BookingLocationScreen extends StatefulWidget {
   const BookingLocationScreen({super.key});
@@ -26,9 +28,11 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    var service = arg?['service'] as BoookingService;
+    var service = arg?['service'] as BookingService;
     var time_start = arg?['time_start'] as String;
     var time_end = arg?['time_end'] as String;
+    var dateString = arg?['date'] as String;
+    var num = arg?['num'] as int;
 
     return PrimaryScreen(
       appBar: PrimaryAppbar(title: S.of(context).zone),
@@ -63,6 +67,12 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
                 setState(() {});
               },
             );
+          } else if (areas.isEmpty) {
+            return PrimaryEmptyWidget(
+              emptyText: S.of(context).no_location,
+              icons: PrimaryIcons.faders,
+              action: () {},
+            );
           }
           return ListView(
             children: [
@@ -71,17 +81,32 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
                 (i) => Column(
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          ConfirmBookingService.routeName,
+                          arguments: {
+                            'service': service,
+                            'time-start': time_start,
+                            'time-end': time_end,
+                            'area': i,
+                            'date': dateString,
+                            'num': num,
+                            'mode': 0,
+                          },
+                        );
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Row(
                           children: [
                             Text(i.name ?? ''),
                             Spacer(),
-                            Text(
-                              S.of(context).slot_limited,
-                              style: txtRegular(14, redColorBase),
-                            ),
+                            if ((i.ticket_per_hour ?? 0) <= (i.sg ?? 0))
+                              Text(
+                                S.of(context).slot_limited,
+                                style: txtRegular(14, redColorBase),
+                              ),
                             Icon(Icons.navigate_next),
                           ],
                         ),

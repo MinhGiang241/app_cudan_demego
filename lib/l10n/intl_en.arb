@@ -899,5 +899,21 @@
   "weekend_child_ticket_num": "Weekend child ticket number",
   "ticket_price": "Ticket price",
   "suggestion": "Suggestion",
-  "slot_limited": "Limitted"
+  "slot_limited": "Limitted",
+  "no_location": "Don't have any location",
+  "confirm_register": "Confirm registration",
+  "util_type": "Service type",
+  "util_info": "Service informaton",
+  "resident_ticket_amount": "Resident ticket amount",
+  "booking_time": "Booking time",
+  "registing_persion": "Registing persion",
+  "apartment_code": "apartment/house code",
+  "policy": "Terms and condition",
+  "po_1": "I understand and agree with",
+  "po_2": "rules",
+  "and": "and",
+  "po_3": "payment security policy",
+  "po_4": "of build management department, including limits and fees according to regulations",
+  "re_booking": "Register again",
+  "booking_detail": "Booking details"
 }

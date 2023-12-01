@@ -9059,6 +9059,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Don't have any location`
+  String get no_location {
+    return Intl.message(
+      'Don\'t have any location',
+      name: 'no_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm registration`
+  String get confirm_register {
+    return Intl.message(
+      'Confirm registration',
+      name: 'confirm_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service type`
+  String get util_type {
+    return Intl.message(
+      'Service type',
+      name: 'util_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service informaton`
+  String get util_info {
+    return Intl.message(
+      'Service informaton',
+      name: 'util_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resident ticket amount`
+  String get resident_ticket_amount {
+    return Intl.message(
+      'Resident ticket amount',
+      name: 'resident_ticket_amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking time`
+  String get booking_time {
+    return Intl.message(
+      'Booking time',
+      name: 'booking_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registing persion`
+  String get registing_persion {
+    return Intl.message(
+      'Registing persion',
+      name: 'registing_persion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `apartment/house code`
+  String get apartment_code {
+    return Intl.message(
+      'apartment/house code',
+      name: 'apartment_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms and condition`
+  String get policy {
+    return Intl.message(
+      'Terms and condition',
+      name: 'policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I understand and agree with`
+  String get po_1 {
+    return Intl.message(
+      'I understand and agree with',
+      name: 'po_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `rules`
+  String get po_2 {
+    return Intl.message(
+      'rules',
+      name: 'po_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `and`
+  String get and {
+    return Intl.message(
+      'and',
+      name: 'and',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `payment security policy`
+  String get po_3 {
+    return Intl.message(
+      'payment security policy',
+      name: 'po_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `of build management department, including limits and fees according to regulations`
+  String get po_4 {
+    return Intl.message(
+      'of build management department, including limits and fees according to regulations',
+      name: 'po_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register again`
+  String get re_booking {
+    return Intl.message(
+      'Register again',
+      name: 're_booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking details`
+  String get booking_detail {
+    return Intl.message(
+      'Booking details',
+      name: 'booking_detail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

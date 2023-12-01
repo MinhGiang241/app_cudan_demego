@@ -12,6 +12,9 @@ class Area {
   String? code;
   String? buildingId;
   String? floorId;
+  int? sg;
+  int? ticket_per_hour;
+  int? ticket_person_per_hour;
   Area({
     this.id,
     this.createdTime,
@@ -22,6 +25,9 @@ class Area {
     this.code,
     this.buildingId,
     this.floorId,
+    this.sg,
+    this.ticket_per_hour,
+    this.ticket_person_per_hour,
   });
 
   Map<String, dynamic> toMap() {
@@ -52,6 +58,16 @@ class Area {
       buildingId:
           map['buildingId'] != null ? map['buildingId'] as String : null,
       floorId: map['floorId'] != null ? map['floorId'] as String : null,
+      sg: int.tryParse(map['sg'].toString()) != null
+          ? int.parse(map['sg'].toString())
+          : null,
+      ticket_person_per_hour:
+          int.tryParse(map['ticket_person_per_hour'].toString()) != null
+              ? int.parse(map['ticket_person_per_hour'].toString())
+              : null,
+      ticket_per_hour: int.tryParse(map['ticket_per_hour'].toString()) != null
+          ? int.parse(map['ticket_per_hour'].toString())
+          : null,
     );
   }
 

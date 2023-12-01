@@ -14,7 +14,7 @@ class SelectBookingServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    var service = arg?['service'] as BoookingService;
+    var service = arg?['service'] as BookingService;
     return PrimaryScreen(
       appBar: AppBar(
         elevation: 0,

@@ -900,5 +900,21 @@
   "weekend_child_ticket_num": "Số vé trẻ em cuối tuần",
   "ticket_price": "Giá vé",
   "suggestion": "Đề xuất",
-  "slot_limited": "Hết chỗ"
+  "slot_limited": "Hết chỗ",
+  "no_location": "Không có khu vực nào",
+  "confirm_register": "Xác nhận đăng ký",
+  "util_type": "Loại tiện ích",
+  "util_info": "Thông tin tiện ích",
+  "resident_ticket_amount": "Số lượng vé cư dân",
+  "booking_time": "Thời gian đặt lịch",
+  "registing_persion": "Người đăng ký",
+  "apartment_code": "Mã căn hộ biệt thự",
+  "policy": "Điều khoản và điều kiện",
+  "po_1": "Tôi đã hiểu và đồng ý với",
+  "po_2": "điều khoản",
+  "and": "và",
+  "po_3": "Chính sách bảo mật thanh toán",
+  "po_4": "của BQL, bao  gồm cả hạn mức và phí theo quy định",
+  "re_booking": "Đặt lịch khác",
+  "booking_detail": "Chi tiết đặt lịch"
 }

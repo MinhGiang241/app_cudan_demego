@@ -31,7 +31,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    var service = arg?['service'] as BoookingService;
+    var service = arg?['service'] as BookingService;
     var guestIndex =
         service.list_of_fees_by_turn?.indexWhere((e) => e.object == "guest");
     var guestFee = (service.list_of_fees_by_turn != null &&
@@ -62,6 +62,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                 service.ticket_type == "ageclassified",
               )
             : null;
+    DateTime date = DateTime.now();
 
     return PrimaryScreen(
       isPadding: false,
@@ -129,6 +130,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                       ).then((v) {
                         if (v != null) {
                           setState(() {
+                            date = v;
                             controller.text =
                                 Utils.dateFormat(v.toIso8601String(), 0);
                           });
@@ -429,6 +431,8 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                           .list_hours_of_operation_per_day?[
                                               _selectedOption]
                                           .time_end,
+                                      "date": date.toIso8601String(),
+                                      "num": num,
                                     },
                                   );
                                 }

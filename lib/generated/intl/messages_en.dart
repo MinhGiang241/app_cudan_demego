@@ -137,11 +137,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_delete_acc": MessageLookupByLibrary.simpleMessage(
             "You have already deleted your account"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
+        "and": MessageLookupByLibrary.simpleMessage("and"),
         "apartment": MessageLookupByLibrary.simpleMessage("Apartment"),
         "apartment_add_resident":
             MessageLookupByLibrary.simpleMessage("Add residence apartment"),
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Apartment bill"),
+        "apartment_code":
+            MessageLookupByLibrary.simpleMessage("apartment/house code"),
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Apartment can not be empty"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -175,11 +178,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Birthday Congratulaion"),
         "block": MessageLookupByLibrary.simpleMessage("block /village"),
         "booking": MessageLookupByLibrary.simpleMessage("Booking"),
+        "booking_detail":
+            MessageLookupByLibrary.simpleMessage("Booking details"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Booking hand over"),
         "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Schedual booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
+        "booking_time": MessageLookupByLibrary.simpleMessage("Booking time"),
         "brand": MessageLookupByLibrary.simpleMessage("Brand"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
         "building_regulation":
@@ -296,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_refuse_letter": m15,
+        "confirm_register":
+            MessageLookupByLibrary.simpleMessage("Confirm registration"),
         "confirm_send_request": m16,
         "confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
         "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
@@ -724,6 +732,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any apartment"),
         "no_letter":
             MessageLookupByLibrary.simpleMessage("Don\'t have any letter"),
+        "no_location":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any location"),
         "no_missing_obj": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any missing object"),
         "no_more_data": MessageLookupByLibrary.simpleMessage("No more data"),
@@ -916,7 +926,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_code": MessageLookupByLibrary.simpleMessage("Plan code"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Plan infomation"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
+        "po_1":
+            MessageLookupByLibrary.simpleMessage("I understand and agree with"),
+        "po_2": MessageLookupByLibrary.simpleMessage("rules"),
+        "po_3": MessageLookupByLibrary.simpleMessage("payment security policy"),
+        "po_4": MessageLookupByLibrary.simpleMessage(
+            "of build management department, including limits and fees according to regulations"),
         "policies": MessageLookupByLibrary.simpleMessage("Policy and services"),
+        "policy": MessageLookupByLibrary.simpleMessage("Terms and condition"),
         "pool": MessageLookupByLibrary.simpleMessage("Pool"),
         "possessed_apartment":
             MessageLookupByLibrary.simpleMessage("Possessed apartments"),
@@ -934,6 +951,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qualification_level":
             MessageLookupByLibrary.simpleMessage("Qualification level"),
         "re_book": MessageLookupByLibrary.simpleMessage("Re book"),
+        "re_booking": MessageLookupByLibrary.simpleMessage("Register again"),
         "re_sign_in":
             MessageLookupByLibrary.simpleMessage("Please sign in again"),
         "reality": MessageLookupByLibrary.simpleMessage("Reality"),
@@ -1005,6 +1023,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Register transportation card"),
         "registered_card":
             MessageLookupByLibrary.simpleMessage("Registered card"),
+        "registing_persion":
+            MessageLookupByLibrary.simpleMessage("Registing persion"),
         "regulations": MessageLookupByLibrary.simpleMessage("regulations"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Reject card"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Reject reason"),
@@ -1075,6 +1095,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resident registration"),
         "resident_ticket":
             MessageLookupByLibrary.simpleMessage("Resident ticket"),
+        "resident_ticket_amount":
+            MessageLookupByLibrary.simpleMessage("Resident ticket amount"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Resident type"),
         "result_date": MessageLookupByLibrary.simpleMessage("Result date"),
         "retry": MessageLookupByLibrary.simpleMessage("Please try again."),
@@ -1379,6 +1401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Expired_date"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "util_info": MessageLookupByLibrary.simpleMessage("Service informaton"),
+        "util_type": MessageLookupByLibrary.simpleMessage("Service type"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

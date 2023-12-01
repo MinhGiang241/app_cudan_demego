@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:app_cudan/models/file_upload.dart';
 
-class BoookingService {
+class BookingService {
   String? id;
   String? createdTime;
   String? updatedTime;
@@ -27,7 +27,7 @@ class BoookingService {
   List<FeeByMonth>? list_of_fees_by_month;
   bool? confirm_use;
   String? icon;
-  BoookingService({
+  BookingService({
     this.id,
     this.createdTime,
     this.updatedTime,
@@ -85,8 +85,8 @@ class BoookingService {
     };
   }
 
-  factory BoookingService.fromMap(Map<String, dynamic> map) {
-    return BoookingService(
+  factory BookingService.fromMap(Map<String, dynamic> map) {
+    return BookingService(
       id: map['_id'] != null ? map['_id'] as String : null,
       createdTime:
           map['createdTime'] != null ? map['createdTime'] as String : null,
@@ -172,8 +172,8 @@ class BoookingService {
 
   String toJson() => json.encode(toMap());
 
-  factory BoookingService.fromJson(String source) =>
-      BoookingService.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory BookingService.fromJson(String source) =>
+      BookingService.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class ServiceArea {

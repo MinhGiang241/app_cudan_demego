@@ -145,11 +145,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_delete_acc": MessageLookupByLibrary.simpleMessage(
             "Bạn đã xóa tài khoản thành công"),
         "amount": MessageLookupByLibrary.simpleMessage("Số lượng"),
+        "and": MessageLookupByLibrary.simpleMessage("và"),
         "apartment": MessageLookupByLibrary.simpleMessage("Căn hộ"),
         "apartment_add_resident":
             MessageLookupByLibrary.simpleMessage("Căn hộ thêm cư dân"),
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Tiền phí chung cư"),
+        "apartment_code":
+            MessageLookupByLibrary.simpleMessage("Mã căn hộ biệt thự"),
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Căn hộ không được để trống"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -186,11 +189,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chúc mừng sinh nhật"),
         "block": MessageLookupByLibrary.simpleMessage("Phường /xã"),
         "booking": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "booking_detail":
+            MessageLookupByLibrary.simpleMessage("Chi tiết đặt lịch"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Lịch đặt nhận bàn giao"),
         "booking_hand_over_0":
             MessageLookupByLibrary.simpleMessage("Đặt lịch nhận bàn giao"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử bàn giao"),
+        "booking_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian đặt lịch"),
         "brand": MessageLookupByLibrary.simpleMessage("Thương hiệu"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
         "building_regulation":
@@ -302,6 +309,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
         "confirm_refuse_letter": m15,
+        "confirm_register":
+            MessageLookupByLibrary.simpleMessage("Xác nhận đăng ký"),
         "confirm_send_request": m16,
         "confirmed": MessageLookupByLibrary.simpleMessage("Đã xác nhận"),
         "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
@@ -732,6 +741,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có nhận bàn giao nào"),
         "no_home": MessageLookupByLibrary.simpleMessage("Không có căn hộ nào"),
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
+        "no_location":
+            MessageLookupByLibrary.simpleMessage("Không có khu vực nào"),
         "no_missing_obj":
             MessageLookupByLibrary.simpleMessage("Không có đồ thất lạc nào"),
         "no_more_data":
@@ -928,8 +939,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_code": MessageLookupByLibrary.simpleMessage("Mã mặt bằng"),
         "plan_info": MessageLookupByLibrary.simpleMessage("Thông tin mặt bằng"),
         "plan_name": MessageLookupByLibrary.simpleMessage("Tên mặt bằng"),
+        "po_1":
+            MessageLookupByLibrary.simpleMessage("Tôi đã hiểu và đồng ý với"),
+        "po_2": MessageLookupByLibrary.simpleMessage("điều khoản"),
+        "po_3": MessageLookupByLibrary.simpleMessage(
+            "Chính sách bảo mật thanh toán"),
+        "po_4": MessageLookupByLibrary.simpleMessage(
+            "của BQL, bao  gồm cả hạn mức và phí theo quy định"),
         "policies":
             MessageLookupByLibrary.simpleMessage("Chính sách và dịch vụ"),
+        "policy":
+            MessageLookupByLibrary.simpleMessage("Điều khoản và điều kiện"),
         "pool": MessageLookupByLibrary.simpleMessage("Bể bơi"),
         "possessed_apartment":
             MessageLookupByLibrary.simpleMessage("Căn hộ sở hữu"),
@@ -948,6 +968,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qualification_level":
             MessageLookupByLibrary.simpleMessage("Trình độ chuyên môn"),
         "re_book": MessageLookupByLibrary.simpleMessage("Đổi lịch"),
+        "re_booking": MessageLookupByLibrary.simpleMessage("Đặt lịch khác"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
         "reality": MessageLookupByLibrary.simpleMessage("Thực tế"),
         "reality_handover_date":
@@ -1014,6 +1035,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thẻ phương tiện"),
         "registered_card":
             MessageLookupByLibrary.simpleMessage("Thẻ đã đăng ký"),
+        "registing_persion":
+            MessageLookupByLibrary.simpleMessage("Người đăng ký"),
         "regulations": MessageLookupByLibrary.simpleMessage("quy định"),
         "reject_card": MessageLookupByLibrary.simpleMessage("Hủy thẻ"),
         "reject_reason": MessageLookupByLibrary.simpleMessage("Lý do hủy"),
@@ -1081,6 +1104,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("cư dân không được để trống"),
         "resident_reg": MessageLookupByLibrary.simpleMessage("Đăng ký cư dân"),
         "resident_ticket": MessageLookupByLibrary.simpleMessage("Vé cư dân"),
+        "resident_ticket_amount":
+            MessageLookupByLibrary.simpleMessage("Số lượng vé cư dân"),
         "resident_type": MessageLookupByLibrary.simpleMessage("Loại cư trú"),
         "result_date":
             MessageLookupByLibrary.simpleMessage("Ngày nhận kết quả"),
@@ -1376,6 +1401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "util_info": MessageLookupByLibrary.simpleMessage("Thông tin tiện ích"),
+        "util_type": MessageLookupByLibrary.simpleMessage("Loại tiện ích"),
         "value": MessageLookupByLibrary.simpleMessage("Giá trị"),
         "vat": MessageLookupByLibrary.simpleMessage("VAT"),
         "verify": MessageLookupByLibrary.simpleMessage("Xác thực"),
