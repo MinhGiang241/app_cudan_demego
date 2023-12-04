@@ -30,8 +30,6 @@ class ConfirmBookingService extends StatefulWidget {
 **/
 
 class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
-  var agree = false;
-  var mode = 1;
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
@@ -45,6 +43,9 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         area: arg?['area'] as Area,
         dateString: arg?['date'] as String,
         mode: arg?['mode'] as int,
+        type: arg?['type'] as String,
+        configGuest: arg?['guest-cfg'] as Map<String, dynamic>?,
+        configResident: arg?['resident-cfg'] as Map<String, dynamic>?,
       ),
       builder: (context, builder) {
         var service = context.read<ConfirmBookingServicePrv>().service;
@@ -54,6 +55,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         var dateString = context.read<ConfirmBookingServicePrv>().dateString;
         var num = context.read<ConfirmBookingServicePrv>().num;
         var mode = context.watch<ConfirmBookingServicePrv>().mode;
+        var loading = context.watch<ConfirmBookingServicePrv>().loading;
         List<InfoContentView> listInfo = [
           InfoContentView(
             title: S.of(context).util_type,
@@ -65,11 +67,14 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
           ),
           InfoContentView(
             title: S.of(context).resident_ticket_amount,
-            content: '${area.sg ?? 0}',
+            content: '${num}',
           ),
           InfoContentView(
             title: S.of(context).booking_time,
-            content:
+            content: context
+                    .watch<ConfirmBookingServicePrv>()
+                    .bookingRegistration
+                    ?.time_slot ??
                 '${Utils.dateFormat(dateString, 0)} ${time_start} - ${time_end}',
           ),
         ];
@@ -95,10 +100,35 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
           body: ListView(
             children: [
               vpad(12),
-              Text(
-                service.name ?? '',
-                style: txtBold(14),
-              ),
+              mode != 2
+                  ? Text(
+                      service.name ?? '',
+                      style: txtBold(14),
+                    )
+                  : Container(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: redColor2,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.cancel, color: Colors.white),
+                          Text(
+                            S.of(context).cancelled,
+                            style: txtRegular(14, Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+              // PrimaryButton(
+              //         buttonType: ButtonType.red,
+              //         borderRadius: BorderRadius.circular(12),
+              //         buttonSize: ButtonSize.medium,
+              //         text: S.of(context).cancelled,
+              //         icon: Icon(Icons.cancel),
+              //       ),
               Divider(
                 color: Colors.black,
               ),
@@ -176,11 +206,12 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
               Row(
                 children: [
                   Checkbox(
-                    value: agree,
+                    value:
+                        context.watch<ConfirmBookingServicePrv>().confirm_use,
                     onChanged: (v) {
-                      setState(() {
-                        agree = !agree;
-                      });
+                      context
+                          .read<ConfirmBookingServicePrv>()
+                          .toggleConfirmUse();
                     },
                   ),
                   Flexible(
@@ -214,8 +245,11 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
               vpad(16),
               if (mode == 0)
                 PrimaryButton(
+                  isLoading: loading,
                   onTap: () {
-                    context.read<ConfirmBookingServicePrv>().setMode(1);
+                    context
+                        .read<ConfirmBookingServicePrv>()
+                        .saveRegisterService(context);
                   },
                   text: S.of(context).confirm,
                   buttonSize: ButtonSize.small,
@@ -223,6 +257,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 ),
               if (mode == 1)
                 PrimaryButton(
+                  isLoading: loading,
                   onTap: () {
                     context.read<ConfirmBookingServicePrv>().setMode(2);
                   },
@@ -233,6 +268,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 ),
               if (mode == 2)
                 PrimaryButton(
+                  isLoading: loading,
                   onTap: () {
                     context.read<ConfirmBookingServicePrv>().setMode(0);
                   },

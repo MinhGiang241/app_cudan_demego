@@ -32,6 +32,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     var service = arg?['service'] as BookingService;
+    var type = arg?['type'] as String;
     var guestIndex =
         service.list_of_fees_by_turn?.indexWhere((e) => e.object == "guest");
     var guestFee = (service.list_of_fees_by_turn != null &&
@@ -58,7 +59,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
         (residentFee != null && service.service_charge != "nocharge")
             ? listConfigPriceCount(
                 residentFee.toMap(),
-                configGuest,
+                configResident,
                 service.ticket_type == "ageclassified",
               )
             : null;
@@ -203,7 +204,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                         style: txtRegular(12),
                                       ),
                                       Text(
-                                        "${S.of(context).ticket_price}: ${formatCurrency.format(residentFee.toMap()[e.key]).replaceAll("₫", "VND")}",
+                                        "${S.of(context).ticket_price}: ${formatCurrency.format(residentFee.toMap()[e.key] ?? 0).replaceAll("₫", "VND")}",
                                         style: txtRegular(10),
                                       ),
                                     ],
@@ -280,7 +281,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                         style: txtRegular(12),
                                       ),
                                       Text(
-                                        "${S.of(context).ticket_price}: ${formatCurrency.format(guestFee.toMap()[e.key]).replaceAll("₫", "VND")}",
+                                        "${S.of(context).ticket_price}: ${formatCurrency.format(guestFee.toMap()[e.key] ?? 0).replaceAll("₫", "VND")}",
                                         style: txtRegular(10),
                                       ),
                                     ],
@@ -342,6 +343,29 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                             Utils.showErrorMessage(
                               context,
                               S.of(context).not_yet_select_date,
+                            );
+                          } else {
+                            print(configGuest);
+                            print(configResident);
+                            Navigator.pushNamed(
+                              context,
+                              BookingLocationScreen.routeName,
+                              arguments: {
+                                'service': service,
+                                'type': type,
+                                "time_start": service
+                                    .list_hours_of_operation_per_day?[
+                                        _selectedOption]
+                                    .time_start,
+                                "time_end": service
+                                    .list_hours_of_operation_per_day?[
+                                        _selectedOption]
+                                    .time_end,
+                                "date": date.toUtc().toIso8601String(),
+                                "num": num,
+                                "guest-cfg": configGuest,
+                                'resident-cfg': configResident,
+                              },
                             );
                           }
                         },
@@ -423,6 +447,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                     BookingLocationScreen.routeName,
                                     arguments: {
                                       'service': service,
+                                      'type': type,
                                       "time_start": service
                                           .list_hours_of_operation_per_day?[
                                               _selectedOption]
@@ -431,8 +456,10 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                           .list_hours_of_operation_per_day?[
                                               _selectedOption]
                                           .time_end,
-                                      "date": date.toIso8601String(),
+                                      "date": date.toUtc().toIso8601String(),
                                       "num": num,
+                                      "guest-cfg": guestFee,
+                                      'resident-cfg': residentFee,
                                     },
                                   );
                                 }

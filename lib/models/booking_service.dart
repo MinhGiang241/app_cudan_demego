@@ -350,3 +350,350 @@ class FeeByMonth {
   factory FeeByMonth.fromJson(String source) =>
       FeeByMonth.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
+class RegisterBookingService {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? apartmentId;
+  String? code;
+  String? residentId;
+  String? phone_number;
+  String? address;
+  String? person;
+  String? serviceConfigurationId;
+  String? use_date;
+  String? time_slot;
+  BookingInfo? booking_info;
+  bool? agree_to_terms_of_service;
+  String? note;
+  String? object;
+  String? registration_type;
+  String? ticket_type;
+  String? status;
+  String? payment_status;
+  bool? confirm_use;
+  String? fee;
+  List<FileUploadModel>? rules;
+  List<FileUploadModel>? terms_of_service;
+  String? shelfLifeId;
+  String? end_date;
+  double? total_price;
+  String? reason_refused_to_cancel;
+  int? total_num_ticket;
+  String? filter_fee;
+  String? areaId;
+  String? receipts_code;
+  RegisterBookingService({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.apartmentId,
+    this.code,
+    this.residentId,
+    this.phone_number,
+    this.address,
+    this.person,
+    this.serviceConfigurationId,
+    this.use_date,
+    this.time_slot,
+    this.booking_info,
+    this.agree_to_terms_of_service,
+    this.note,
+    this.object,
+    this.registration_type,
+    this.ticket_type,
+    this.status,
+    this.payment_status,
+    this.confirm_use,
+    this.fee,
+    this.rules,
+    this.terms_of_service,
+    this.shelfLifeId,
+    this.end_date,
+    this.areaId,
+    this.total_price,
+    this.reason_refused_to_cancel,
+    this.total_num_ticket,
+    this.filter_fee,
+    this.receipts_code,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'apartmentId': apartmentId,
+      'code': code,
+      'residentId': residentId,
+      'phone_number': phone_number,
+      'address': address,
+      'person': person,
+      'serviceConfigurationId': serviceConfigurationId,
+      'use_date': use_date,
+      'time_slot': time_slot,
+      'booking_info': booking_info?.toMap(),
+      'agree_to_terms_of_servicereaId': agree_to_terms_of_service,
+      'note': note,
+      'object': object,
+      'registration_type': registration_type,
+      'ticket_type': ticket_type,
+      'status': status,
+      'payment_status': payment_status,
+      'confirm_use': confirm_use,
+      'fee': fee,
+      'rules': rules?.map((x) => x.toMap()).toList(),
+      'terms_of_service': terms_of_service?.map((x) => x.toMap()).toList(),
+      'shelfLifeId': shelfLifeId,
+      'end_date': end_date,
+      'total_price': total_price,
+      'reason_refused_to_cancel': reason_refused_to_cancel,
+      'total_num_ticket': total_num_ticket,
+      'filter_fee': filter_fee,
+      'receipts_code': receipts_code,
+      'areaId': areaId,
+    };
+  }
+
+  factory RegisterBookingService.fromMap(Map<String, dynamic> map) {
+    return RegisterBookingService(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      phone_number:
+          map['phone_number'] != null ? map['phone_number'] as String : null,
+      address: map['address'] != null ? map['address'] as String : null,
+      person: map['person'] != null ? map['person'] as String : null,
+      serviceConfigurationId: map['serviceConfigurationId'] != null
+          ? map['serviceConfigurationId'] as String
+          : null,
+      use_date: map['use_date'] != null ? map['use_date'] as String : null,
+      time_slot: map['time_slot'] != null ? map['time_slot'] as String : null,
+      booking_info: map['booking_info'] != null
+          ? BookingInfo.fromMap(map['booking_info'] as Map<String, dynamic>)
+          : null,
+      agree_to_terms_of_service: map['agree_to_terms_of_servicereaId'] != null
+          ? map['agree_to_terms_of_servicereaId'] as bool
+          : null,
+      note: map['note'] != null ? map['note'] as String : null,
+      object: map['object'] != null ? map['object'] as String : null,
+      registration_type: map['registration_type'] != null
+          ? map['registration_type'] as String
+          : null,
+      ticket_type:
+          map['ticket_type'] != null ? map['ticket_type'] as String : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      payment_status: map['payment_status'] != null
+          ? map['payment_status'] as String
+          : null,
+      confirm_use:
+          map['confirm_use'] != null ? map['confirm_use'] as bool : null,
+      fee: map['fee'] != null ? map['fee'] as String : null,
+      rules: map['rules'] != null
+          ? List<FileUploadModel>.from(
+              (map['rules'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      terms_of_service: map['terms_of_service'] != null
+          ? List<FileUploadModel>.from(
+              (map['terms_of_service'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      shelfLifeId:
+          map['shelfLifeId'] != null ? map['shelfLifeId'] as String : null,
+      end_date: map['end_date'] != null ? map['end_date'] as String : null,
+      total_price: double.tryParse(map['total_price'].toString()) != null
+          ? double.parse(map['total_price'].toString())
+          : null,
+      reason_refused_to_cancel: map['reason_refused_to_cancel'] != null
+          ? map['reason_refused_to_cancel'] as String
+          : null,
+      total_num_ticket: int.tryParse(map['total_num_ticket'].toString()) != null
+          ? int.parse(map['total_num_ticket'].toString())
+          : null,
+      filter_fee:
+          map['filter_fee'] != null ? map['filter_fee'] as String : null,
+      areaId: map['areaId'] != null ? map['areaId'] as String : null,
+      receipts_code:
+          map['receipts_code'] != null ? map['receipts_code'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RegisterBookingService.fromJson(String source) =>
+      RegisterBookingService.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
+
+  RegisterBookingService copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? apartmentId,
+    String? code,
+    String? residentId,
+    String? phone_number,
+    String? address,
+    String? person,
+    String? serviceConfigurationId,
+    String? use_date,
+    String? time_slot,
+    BookingInfo? booking_info,
+    bool? agree_to_terms_of_servicereaId,
+    String? note,
+    String? object,
+    String? registration_type,
+    String? ticket_type,
+    String? status,
+    String? payment_status,
+    bool? confirm_use,
+    String? fee,
+    List<FileUploadModel>? rules,
+    List<FileUploadModel>? terms_of_service,
+    String? shelfLifeId,
+    String? end_date,
+    double? total_price,
+    String? reason_refused_to_cancel,
+    int? total_num_ticket,
+    String? filter_fee,
+    String? receipts_code,
+  }) {
+    return RegisterBookingService(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      apartmentId: apartmentId ?? this.apartmentId,
+      code: code ?? this.code,
+      residentId: residentId ?? this.residentId,
+      phone_number: phone_number ?? this.phone_number,
+      address: address ?? this.address,
+      person: person ?? this.person,
+      serviceConfigurationId:
+          serviceConfigurationId ?? this.serviceConfigurationId,
+      use_date: use_date ?? this.use_date,
+      time_slot: time_slot ?? this.time_slot,
+      booking_info: booking_info ?? this.booking_info,
+      agree_to_terms_of_service:
+          agree_to_terms_of_servicereaId ?? this.agree_to_terms_of_service,
+      note: note ?? this.note,
+      object: object ?? this.object,
+      registration_type: registration_type ?? this.registration_type,
+      ticket_type: ticket_type ?? this.ticket_type,
+      status: status ?? this.status,
+      payment_status: payment_status ?? this.payment_status,
+      confirm_use: confirm_use ?? this.confirm_use,
+      fee: fee ?? this.fee,
+      rules: rules ?? this.rules,
+      terms_of_service: terms_of_service ?? this.terms_of_service,
+      shelfLifeId: shelfLifeId ?? this.shelfLifeId,
+      end_date: end_date ?? this.end_date,
+      total_price: total_price ?? this.total_price,
+      reason_refused_to_cancel:
+          reason_refused_to_cancel ?? this.reason_refused_to_cancel,
+      total_num_ticket: total_num_ticket ?? this.total_num_ticket,
+      filter_fee: filter_fee ?? this.filter_fee,
+      receipts_code: receipts_code ?? this.receipts_code,
+    );
+  }
+}
+
+class BookingInfo {
+  String? object;
+  double? price;
+  double? price_child;
+  double? price_adult;
+  int? num;
+  int? num_child;
+  int? num_adult;
+  double? fee;
+  BookingInfo({
+    this.object,
+    this.price,
+    this.price_child,
+    this.price_adult,
+    this.num,
+    this.num_child,
+    this.num_adult,
+    this.fee,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'object': object,
+      'price': price,
+      'price_child': price_child,
+      'price_adult': price_adult,
+      'num': num,
+      'num_child': num_child,
+      'num_adult': num_adult,
+      'fee': fee,
+    };
+  }
+
+  factory BookingInfo.fromMap(Map<String, dynamic> map) {
+    return BookingInfo(
+      object: map['object'] != null ? map['object'] as String : null,
+      price: double.tryParse(map['price'].toString()) != null
+          ? double.parse(map['price'].toString())
+          : null,
+      price_child: double.tryParse(map['price_child'].toString()) != null
+          ? double.parse(map['price_child'].toString())
+          : null,
+      price_adult: double.tryParse(map['price_adult'].toString()) != null
+          ? double.parse(map['price_adult'].toString())
+          : null,
+      num: int.tryParse(map['num'].toString()) != null
+          ? int.parse(map['num'].toString())
+          : null,
+      num_child: int.tryParse(map['num_child'].toString()) != null
+          ? int.parse(map['num_child'].toString())
+          : null,
+      num_adult: int.tryParse(map['num_adult'].toString()) != null
+          ? int.parse(map['num_adult'].toString())
+          : null,
+      fee: double.tryParse(map['fee'].toString()) != null
+          ? double.parse(map['fee'].toString())
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory BookingInfo.fromJson(String source) =>
+      BookingInfo.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  BookingInfo copyWith({
+    String? object,
+    double? price,
+    double? price_child,
+    double? price_adult,
+    int? num,
+    int? num_child,
+    int? num_adult,
+    double? fee,
+  }) {
+    return BookingInfo(
+      object: object ?? this.object,
+      price: price ?? this.price,
+      price_child: price_child ?? this.price_child,
+      price_adult: price_adult ?? this.price_adult,
+      num: num ?? this.num,
+      num_child: num_child ?? this.num_child,
+      num_adult: num_adult ?? this.num_adult,
+      fee: fee ?? this.fee,
+    );
+  }
+}

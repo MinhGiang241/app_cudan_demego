@@ -190,7 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "block": MessageLookupByLibrary.simpleMessage("Phường /xã"),
         "booking": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "booking_detail":
-            MessageLookupByLibrary.simpleMessage("Chi tiết đặt lịch"),
+            MessageLookupByLibrary.simpleMessage("Chi tiết đăng ký"),
         "booking_hand_over":
             MessageLookupByLibrary.simpleMessage("Lịch đặt nhận bàn giao"),
         "booking_hand_over_0":
@@ -226,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "cancel_transport":
             MessageLookupByLibrary.simpleMessage("Hủy phương tiện"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Đã hủy"),
         "card_list": MessageLookupByLibrary.simpleMessage("Danh sách thẻ"),
         "card_num": MessageLookupByLibrary.simpleMessage("Mã thẻ"),
         "card_status": MessageLookupByLibrary.simpleMessage("Trạng thái thẻ"),

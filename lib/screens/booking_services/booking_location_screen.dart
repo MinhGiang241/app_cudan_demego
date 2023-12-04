@@ -29,10 +29,16 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     var service = arg?['service'] as BookingService;
+    var type = arg?['type'] as String;
     var time_start = arg?['time_start'] as String;
     var time_end = arg?['time_end'] as String;
     var dateString = arg?['date'] as String;
     var num = arg?['num'] as int;
+    var configGuest = arg?['guest-cfg'] as Map<String, dynamic>?;
+    var configResident = arg?['resident-cfg'] as Map<String, dynamic>?;
+
+    // "guest-cfg": configGuest,
+    // 'resident-cfg': configResident,
 
     return PrimaryScreen(
       appBar: PrimaryAppbar(title: S.of(context).zone),
@@ -87,12 +93,15 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
                           ConfirmBookingService.routeName,
                           arguments: {
                             'service': service,
+                            'type': type,
                             'time-start': time_start,
                             'time-end': time_end,
                             'area': i,
                             'date': dateString,
                             'num': num,
                             'mode': 0,
+                            "guest-cfg": configGuest,
+                            'resident-cfg': configResident,
                           },
                         );
                       },

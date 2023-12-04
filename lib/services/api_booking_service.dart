@@ -63,4 +63,36 @@ mutation (\$time_start:String,\$time_end:String,\$areas:Dictionary){
       return res.response.data;
     }
   }
+
+  static Future saveRegiterService(
+    Map<String, dynamic> data,
+  ) async {
+    var query = '''
+    mutation (\$data:String){
+        response: serviceconfiguration_mobile_register_service (data: \$data ) {
+            code
+            message
+            data
+        }
+    }
+        
+        
+    ''';
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

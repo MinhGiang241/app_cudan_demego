@@ -916,5 +916,6 @@
   "po_3": "Chính sách bảo mật thanh toán",
   "po_4": "của BQL, bao  gồm cả hạn mức và phí theo quy định",
   "re_booking": "Đặt lịch khác",
-  "booking_detail": "Chi tiết đặt lịch"
+  "booking_detail": "Chi tiết đăng ký",
+  "cancelled": "Đã hủy"
 }

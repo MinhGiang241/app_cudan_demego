@@ -40,6 +40,7 @@ class SelectBookingServiceScreen extends StatelessWidget {
                 TimeBookingScreen.routeName,
                 arguments: {
                   'service': service,
+                  'type': 'turn',
                 },
               );
             },

@@ -915,5 +915,6 @@
   "po_3": "payment security policy",
   "po_4": "of build management department, including limits and fees according to regulations",
   "re_booking": "Register again",
-  "booking_detail": "Booking details"
+  "booking_detail": "Booking details",
+  "cancelled": "Cancelled"
 }

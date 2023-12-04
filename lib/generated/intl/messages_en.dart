@@ -216,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_request": MessageLookupByLibrary.simpleMessage("Cancel letter"),
         "cancel_transport":
             MessageLookupByLibrary.simpleMessage("Cancel transport"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "card_list": MessageLookupByLibrary.simpleMessage("Card list"),
         "card_num": MessageLookupByLibrary.simpleMessage("Card number"),
         "card_status": MessageLookupByLibrary.simpleMessage("Card status"),
