@@ -18,6 +18,7 @@ import '../screens/auth/sign_up_screen.dart';
 import '../screens/bills/bills_screen.dart';
 import '../screens/booking_services/booking_location_screen.dart';
 import '../screens/booking_services/confirm_booking_service.dart';
+import '../screens/booking_services/month_booking_screen.dart';
 import '../screens/booking_services/select_booking_service_sceen.dart';
 import '../screens/booking_services/time_booking_screen.dart';
 import '../screens/event/event_details_screen.dart';
@@ -491,6 +492,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => ConfirmBookingService(),
+        );
+      case MonthBookingScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => MonthBookingScreen(),
         );
 
       default:

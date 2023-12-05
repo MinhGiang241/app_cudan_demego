@@ -177,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tin nhắn tự động"),
         "back_side": MessageLookupByLibrary.simpleMessage("Mặt sau"),
         "base_info": MessageLookupByLibrary.simpleMessage("Thông tin cơ bản"),
+        "begin_use_date":
+            MessageLookupByLibrary.simpleMessage("Ngày bắt đầu sử dụng"),
         "bill": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Mã hóa đơn"),
         "bill_details":
@@ -465,6 +467,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "end_time": MessageLookupByLibrary.simpleMessage("Thời gian kết thúc"),
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("Thời gian kết thúc đăng ký"),
+        "end_use_date":
+            MessageLookupByLibrary.simpleMessage("Ngày kết thúc sử dụng"),
         "enter": MessageLookupByLibrary.simpleMessage("Nhập"),
         "enter_address": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
         "enter_amount_resident_ticket":
@@ -707,6 +711,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
         "month_ticket":
             MessageLookupByLibrary.simpleMessage("Đăng ký vé tháng"),
+        "monthly_register_service":
+            MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ tháng"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc tịch"),
@@ -1028,6 +1034,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "registed_resident":
             MessageLookupByLibrary.simpleMessage("Cư dân đã đăng ký"),
         "register_code": MessageLookupByLibrary.simpleMessage("Mã đăng ký"),
+        "register_fee":
+            MessageLookupByLibrary.simpleMessage("Phí đăng ký (vnd)"),
         "register_info":
             MessageLookupByLibrary.simpleMessage("Thông tin người đăng ký"),
         "register_res_card":
@@ -1156,10 +1164,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "select_seat_num":
             MessageLookupByLibrary.simpleMessage("Chọn số chỗ ngồi"),
+        "select_shelfife":
+            MessageLookupByLibrary.simpleMessage("Chọn thời hạn đăng ký"),
         "select_surface": MessageLookupByLibrary.simpleMessage("Chọn mặt bằng"),
         "select_time": MessageLookupByLibrary.simpleMessage("Chọn giờ"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Chọn phương tiện"),
+        "select_zone": MessageLookupByLibrary.simpleMessage("Chọn khu vực"),
         "sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Số hợp đồng mua bán"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
@@ -1327,6 +1338,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thời gian nhận bàn giao dự kiến"),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra"),
+        "time_slot": MessageLookupByLibrary.simpleMessage("Khung giờ"),
         "time_ticket": MessageLookupByLibrary.simpleMessage("Đăng ký vé lượt"),
         "title": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
         "to_date": MessageLookupByLibrary.simpleMessage("Đến ngày"),

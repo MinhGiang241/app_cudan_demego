@@ -917,5 +917,12 @@
   "po_4": "của BQL, bao  gồm cả hạn mức và phí theo quy định",
   "re_booking": "Đặt lịch khác",
   "booking_detail": "Chi tiết đăng ký",
-  "cancelled": "Đã hủy"
+  "cancelled": "Đã hủy",
+  "monthly_register_service": "Đăng ký dịch vụ tháng",
+  "select_zone": "Chọn khu vực",
+  "select_shelfife": "Chọn thời hạn đăng ký",
+  "register_fee": "Phí đăng ký (vnd)",
+  "begin_use_date": "Ngày bắt đầu sử dụng",
+  "end_use_date": "Ngày kết thúc sử dụng",
+  "time_slot": "Khung giờ"
 }

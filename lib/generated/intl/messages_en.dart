@@ -167,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_side": MessageLookupByLibrary.simpleMessage("Back side"),
         "base_info":
             MessageLookupByLibrary.simpleMessage("General information"),
+        "begin_use_date":
+            MessageLookupByLibrary.simpleMessage("Started using date"),
         "bill": MessageLookupByLibrary.simpleMessage("Bill"),
         "bill_code": MessageLookupByLibrary.simpleMessage("Bill code"),
         "bill_details": MessageLookupByLibrary.simpleMessage("Bill details"),
@@ -460,6 +462,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("End registration time"),
+        "end_use_date":
+            MessageLookupByLibrary.simpleMessage("Ended using date"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enter_address": MessageLookupByLibrary.simpleMessage("Enter address"),
         "enter_amount_resident_ticket": MessageLookupByLibrary.simpleMessage(
@@ -698,6 +702,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "month_ticket":
             MessageLookupByLibrary.simpleMessage("Register month ticket"),
+        "monthly_register_service":
+            MessageLookupByLibrary.simpleMessage("Monthly register service"),
         "my_letter": MessageLookupByLibrary.simpleMessage("My letter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
@@ -1016,6 +1022,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "registed_resident":
             MessageLookupByLibrary.simpleMessage("Registed resident"),
         "register_code": MessageLookupByLibrary.simpleMessage("Register code"),
+        "register_fee":
+            MessageLookupByLibrary.simpleMessage("Registration fee"),
         "register_info":
             MessageLookupByLibrary.simpleMessage("Register information"),
         "register_res_card":
@@ -1148,11 +1156,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select project"),
         "select_seat_num":
             MessageLookupByLibrary.simpleMessage("Select number seat"),
+        "select_shelfife":
+            MessageLookupByLibrary.simpleMessage("Select expired registration"),
         "select_surface":
             MessageLookupByLibrary.simpleMessage("Select surface"),
         "select_time": MessageLookupByLibrary.simpleMessage("Select time"),
         "select_transport":
             MessageLookupByLibrary.simpleMessage("Select transport"),
+        "select_zone": MessageLookupByLibrary.simpleMessage("Select location"),
         "sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Sell contract number"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
@@ -1321,6 +1332,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Time preparing handover "),
         "time_happening":
             MessageLookupByLibrary.simpleMessage("Time happening"),
+        "time_slot": MessageLookupByLibrary.simpleMessage("Time slot"),
         "time_ticket":
             MessageLookupByLibrary.simpleMessage("Register turn ticket"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),

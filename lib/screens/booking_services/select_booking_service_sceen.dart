@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/booking_services/month_booking_screen.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,16 @@ class SelectBookingServiceScreen extends StatelessWidget {
           ),
           vpad(30),
           PrimaryCard(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                MonthBookingScreen.routeName,
+                arguments: {
+                  'service': service,
+                  'type': 'month',
+                },
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(

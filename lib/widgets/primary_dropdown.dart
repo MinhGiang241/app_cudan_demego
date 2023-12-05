@@ -52,6 +52,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.onSelectMulti,
     this.textStyle,
     this.textColor,
+    this.labelStyle,
   });
   final bool isError;
   final String? label;
@@ -63,6 +64,7 @@ class PrimaryDropDown extends StatefulWidget {
   final bool isShow;
   final Color? textColor;
   final TextStyle? textStyle;
+  final TextStyle? labelStyle;
   final GlobalKey<FormFieldState>? dropKey;
   final String? Function(dynamic)? validator;
   dynamic value;
@@ -95,7 +97,8 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
             if (widget.label != null)
               Text(
                 widget.label!,
-                style: txtBodySmallRegular(color: grayScaleColorBase),
+                style: widget.labelStyle ??
+                    txtBodySmallRegular(color: grayScaleColorBase),
               ),
             if (widget.isRequired) hpad(4),
             if (widget.isRequired)

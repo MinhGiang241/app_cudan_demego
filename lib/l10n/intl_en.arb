@@ -916,5 +916,12 @@
   "po_4": "of build management department, including limits and fees according to regulations",
   "re_booking": "Register again",
   "booking_detail": "Booking details",
-  "cancelled": "Cancelled"
+  "cancelled": "Cancelled",
+  "monthly_register_service": "Monthly register service",
+  "select_zone": "Select location",
+  "select_shelfife": "Select expired registration",
+  "register_fee": "Registration fee",
+  "begin_use_date": "Started using date",
+  "end_use_date": "Ended using date",
+  "time_slot": "Time slot"
 }

@@ -42,8 +42,10 @@ class PrimaryTextField extends StatefulWidget {
     this.onlyNum = false,
     this.component,
     this.textStyle,
+    this.labelStyle,
   });
   final TextStyle? textStyle;
+  final TextStyle? labelStyle;
   final String? label;
   final Widget? component;
   final String? initialValue;
@@ -106,7 +108,8 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
             children: [
               Text(
                 widget.label!,
-                style: txtBodySmallRegular(color: grayScaleColorBase),
+                style: widget.labelStyle ??
+                    txtBodySmallRegular(color: grayScaleColorBase),
                 overflow: TextOverflow.ellipsis,
               ),
               if (widget.isRequired) hpad(4),

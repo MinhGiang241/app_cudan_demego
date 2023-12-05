@@ -8,7 +8,7 @@ import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../services/api_service.dart';
 import '../../widgets/primary_image_netword.dart';
-import 'prv/boking_services_prv.dart';
+import 'prv/booking_services_prv.dart';
 import 'select_booking_service_sceen.dart';
 
 class BookingServicesScreen extends StatelessWidget {

@@ -153,7 +153,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                       .map(
                         (e) => RadioListTile<int>(
                           title: Text(
-                            '${e.value.time_start}- ${e.value.time_end}',
+                            '${e.value.time_start} - ${e.value.time_end}',
                             style:
                                 txtBodySmallRegular(color: grayScaleColorBase),
                           ),

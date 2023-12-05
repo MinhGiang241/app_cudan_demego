@@ -9229,6 +9229,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Monthly register service`
+  String get monthly_register_service {
+    return Intl.message(
+      'Monthly register service',
+      name: 'monthly_register_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select location`
+  String get select_zone {
+    return Intl.message(
+      'Select location',
+      name: 'select_zone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select expired registration`
+  String get select_shelfife {
+    return Intl.message(
+      'Select expired registration',
+      name: 'select_shelfife',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration fee`
+  String get register_fee {
+    return Intl.message(
+      'Registration fee',
+      name: 'register_fee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Started using date`
+  String get begin_use_date {
+    return Intl.message(
+      'Started using date',
+      name: 'begin_use_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ended using date`
+  String get end_use_date {
+    return Intl.message(
+      'Ended using date',
+      name: 'end_use_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time slot`
+  String get time_slot {
+    return Intl.message(
+      'Time slot',
+      name: 'time_slot',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

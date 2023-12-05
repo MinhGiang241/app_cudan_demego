@@ -30,8 +30,8 @@ class APIBookingService {
   }
 
   static Future getAreaListBooking(
-    String time_start,
-    String time_end,
+    String? time_start,
+    String? time_end,
     List<Map<String, dynamic>> areas,
   ) async {
     var query = '''
@@ -42,7 +42,6 @@ mutation (\$time_start:String,\$time_end:String,\$areas:Dictionary){
         data
     }
 }
-        
     ''';
     final QueryOptions options = QueryOptions(
       document: gql(query),
@@ -82,6 +81,37 @@ mutation (\$time_start:String,\$time_end:String,\$areas:Dictionary){
       document: gql(query),
       variables: {
         "data": data,
+      },
+    );
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getShelfLifeList(
+    List<Map<String, dynamic>> feeByMonthList,
+  ) async {
+    var query = '''
+mutation (\$feeByMonthList:Dictionary){
+    response: serviceconfiguration_mobile_get_all_area (feeByMonthList: \$feeByMonthList ) {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        "feeByMonthList": feeByMonthList,
       },
     );
 

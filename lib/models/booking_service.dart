@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:app_cudan/models/file_upload.dart';
+import 'package:app_cudan/models/transportation_card.dart';
 
 class BookingService {
   String? id;
@@ -318,10 +319,12 @@ class FeeByMonth {
   String? shelfLifeId;
   double? price_resident;
   double? price_guest;
+  ShelfLife? shelfLife;
   FeeByMonth({
     this.shelfLifeId,
     this.price_resident,
     this.price_guest,
+    this.shelfLife,
   });
 
   Map<String, dynamic> toMap() {
@@ -329,6 +332,7 @@ class FeeByMonth {
       'shelfLifeId': shelfLifeId,
       'price_resident': price_resident,
       'price_guest': price_guest,
+      'shelfLife': shelfLife?.toMap(),
     };
   }
 
@@ -341,6 +345,9 @@ class FeeByMonth {
           : null,
       price_guest: double.tryParse(map['price_guest'].toString()) != null
           ? double.parse(map['price_guest'].toString())
+          : null,
+      shelfLife: map['shelfLife'] != null
+          ? ShelfLife.fromMap(map['shelfLife'] as Map<String, dynamic>)
           : null,
     );
   }
