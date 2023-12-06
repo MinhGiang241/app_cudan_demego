@@ -100,7 +100,7 @@ mutation (\$time_start:String,\$time_end:String,\$areas:Dictionary){
   ) async {
     var query = '''
 mutation (\$feeByMonthList:Dictionary){
-    response: serviceconfiguration_mobile_get_all_area (feeByMonthList: \$feeByMonthList ) {
+    response: serviceconfiguration_mobile_get_all_shelflife (feeByMonthList: \$feeByMonthList ) {
         code
         message
         data

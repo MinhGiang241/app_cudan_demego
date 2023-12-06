@@ -1,11 +1,14 @@
 import 'package:app_cudan/models/booking_service.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
-import '../../../models/transportation_card.dart';
 import '../../../services/api_booking_service.dart';
-import '../../../services/api_transport.dart';
 import '../../../utils/utils.dart';
+import '../confirm_booking_service.dart';
 
 class MonthBookingServicePrv extends ChangeNotifier {
   MonthBookingServicePrv({required this.service, required this.type}) {
@@ -25,16 +28,73 @@ class MonthBookingServicePrv extends ChangeNotifier {
   int? timeOption = 0;
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
+  TextEditingController feeController = TextEditingController();
   DateTime? startDate;
   DateTime? endDate;
   List<FeeByMonth> shelflifeList = [];
-  String? selectedShelfLifeId;
   int? selectedShelfLifeIndex;
   int? selectedAreaIndex;
   List<Area> areas = [];
   double price = 0;
   FeeByMonth? guestFee;
   FeeByMonth? residentFee;
+  String? startValidate;
+  String? shelfLifeValidate;
+  String? areaValidate;
+  bool autoValid = false;
+  final formKey = GlobalKey<FormState>();
+  final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
+
+  genValidateString() {
+    if (startDate == null) {
+      startValidate = S.current.not_blank;
+    } else {
+      startValidate = null;
+    }
+
+    if (selectedAreaIndex == null) {
+      areaValidate = S.current.not_blank;
+    } else {
+      areaValidate = null;
+    }
+
+    if (selectedShelfLifeIndex == null) {
+      shelfLifeValidate = S.current.not_blank;
+    } else {
+      areaValidate = null;
+    }
+    notifyListeners();
+  }
+
+  clearValidate() {
+    startValidate = null;
+    areaValidate = null;
+    shelfLifeValidate = null;
+    notifyListeners();
+  }
+
+  validate(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      clearValidate();
+    } else {
+      genValidateString();
+    }
+  }
+
+  countFee(BuildContext context) {
+    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+        context.read<ResidentInfoPrv>().selectedApartment != null;
+    if (selectedShelfLifeIndex != null) {
+      price = service.service_charge == 'nocharge'
+          ? 0
+          : (shelflifeList[selectedShelfLifeIndex!].shelfLife?.use_time ?? 0) *
+              (isResident
+                  ? (shelflifeList[selectedShelfLifeIndex!].price_resident ?? 0)
+                  : (shelflifeList[selectedShelfLifeIndex!].price_guest ?? 0));
+      feeController.text = formatCurrency.format(price).replaceAll("₫", "VND");
+      notifyListeners();
+    }
+  }
 
   selectTime(int? value) {
     timeOption = value;
@@ -46,6 +106,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
     await APIBookingService.getShelfLifeList(
       data['list_of_fees_by_month'] ?? [],
     ).then((v) {
+      print(data);
       if (v != null) {
         shelflifeList.clear();
         selectedShelfLifeIndex = null;
@@ -71,6 +132,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
           areas.add(Area.fromMap(i));
         }
       }
+      notifyListeners();
     }).catchError((e) {
       print(e);
       //Utils.showErrorMessage(context, e);
@@ -78,25 +140,73 @@ class MonthBookingServicePrv extends ChangeNotifier {
   }
 
   onChangeArea(v) {
-    selectedAreaIndex = 1;
+    selectedAreaIndex = v;
+    areaValidate = null;
     notifyListeners();
   }
 
-  onChangeShelfLife(v) {
+  onChangeShelfLife(context, v) {
     if (v != null) {
       selectedShelfLifeIndex = v;
+      countFee(context);
+      shelfLifeValidate = null;
       if (startDate != null) {
         var freeByMonth = shelflifeList[selectedShelfLifeIndex!];
-        endDate = DateTime(
-          startDate!.year,
-          startDate!.month + (freeByMonth.shelfLife?.use_time ?? 0),
-          startDate!.day,
-        );
+        if (freeByMonth.shelfLife?.type_time == 'TH') {
+          endDate = DateTime(
+            startDate!.year,
+            startDate!.month + (freeByMonth.shelfLife?.use_time ?? 0),
+            startDate!.day,
+          );
+        } else if (freeByMonth.shelfLife?.type_time == 'N') {
+          endDate = DateTime(
+            startDate!.year + (freeByMonth.shelfLife?.use_time ?? 0),
+            startDate!.month,
+            startDate!.day,
+          );
+        } else if (freeByMonth.shelfLife?.type_time == 'NG') {
+          endDate = DateTime(
+            startDate!.year,
+            startDate!.month,
+            startDate!.day + (freeByMonth.shelfLife?.use_time ?? 0),
+          );
+        }
+
         endDateController.text =
             Utils.dateFormat(endDate!.toIso8601String(), 0);
-
-        price = service.service_charge == 'nocharge' ? 0 : 0;
       }
+      notifyListeners();
+    }
+  }
+
+  onNext(BuildContext context) {
+    autoValid = true;
+    notifyListeners();
+    if (formKey.currentState!.validate()) {
+      clearValidate();
+      Navigator.pushNamed(
+        context,
+        ConfirmBookingService.routeName,
+        arguments: {
+          'service': service,
+          'type': type,
+          'time-start':
+              service.list_hours_of_operation_per_day?[timeOption!].time_start,
+          'time-end':
+              service.list_hours_of_operation_per_day?[timeOption!].time_end,
+          'area': areas[selectedAreaIndex!],
+          'date': startDate!.toUtc().toIso8601String(),
+          'end_date': endDate!.toUtc().toIso8601String(),
+          'fee_month': shelflifeList[selectedShelfLifeIndex!],
+          'num': 1,
+          'mode': 0,
+          'price': price,
+          // "guest-cfg": configGuest,
+          // 'resident-cfg': configResident,
+        },
+      );
+    } else {
+      genValidateString();
       notifyListeners();
     }
   }

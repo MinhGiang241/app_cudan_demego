@@ -34,47 +34,53 @@ class SelectBookingServiceScreen extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           vpad(30),
-          PrimaryCard(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                TimeBookingScreen.routeName,
-                arguments: {
-                  'service': service,
-                  'type': 'turn',
-                },
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                S.of(context).time_ticket,
-                style: txtRegular(14),
-                textAlign: TextAlign.center,
+          if (service.registration_type == 'turn' ||
+              service.registration_type == 'all')
+            PrimaryCard(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  TimeBookingScreen.routeName,
+                  arguments: {
+                    'service': service,
+                    'type': 'turn',
+                  },
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  S.of(context).time_ticket,
+                  style: txtRegular(14),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          vpad(30),
-          PrimaryCard(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                MonthBookingScreen.routeName,
-                arguments: {
-                  'service': service,
-                  'type': 'month',
-                },
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                S.of(context).month_ticket,
-                style: txtRegular(14),
-                textAlign: TextAlign.center,
+          if (service.registration_type == 'month' ||
+              service.registration_type == 'all')
+            vpad(30),
+          if (service.registration_type == 'month' ||
+              service.registration_type == 'all')
+            PrimaryCard(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  MonthBookingScreen.routeName,
+                  arguments: {
+                    'service': service,
+                    'type': 'month',
+                  },
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  S.of(context).month_ticket,
+                  style: txtRegular(14),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

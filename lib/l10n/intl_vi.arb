@@ -913,7 +913,7 @@
   "po_1": "Tôi đã hiểu và đồng ý với",
   "po_2": "điều khoản",
   "and": "và",
-  "po_3": "Chính sách bảo mật thanh toán",
+  "po_3": "Nội quy",
   "po_4": "của BQL, bao  gồm cả hạn mức và phí theo quy định",
   "re_booking": "Đặt lịch khác",
   "booking_detail": "Chi tiết đăng ký",
@@ -924,5 +924,6 @@
   "register_fee": "Phí đăng ký (vnd)",
   "begin_use_date": "Ngày bắt đầu sử dụng",
   "end_use_date": "Ngày kết thúc sử dụng",
-  "time_slot": "Khung giờ"
+  "time_slot": "Khung giờ",
+  "success_booking": "Bạn đã đăng ký thành công dịch vụ {name}"
 }

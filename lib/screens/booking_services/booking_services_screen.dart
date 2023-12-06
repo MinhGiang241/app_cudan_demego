@@ -1,7 +1,11 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
@@ -11,10 +15,56 @@ import '../../widgets/primary_image_netword.dart';
 import 'prv/booking_services_prv.dart';
 import 'select_booking_service_sceen.dart';
 
-class BookingServicesScreen extends StatelessWidget {
+class BookingServicesScreen extends StatefulWidget {
   const BookingServicesScreen({super.key});
   static const routeName = '/booking-services';
 
+  @override
+  State<BookingServicesScreen> createState() => _BookingServicesScreenState();
+}
+
+class _BookingServicesScreenState extends State<BookingServicesScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    IsolateNameServer.registerPortWithName(
+      _port.sendPort,
+      'downloader_send_port',
+    );
+    _port.listen((dynamic data) {
+      String id = data[0];
+      int status = data[1];
+      int progress = data[2];
+
+      if (status == DownloadTaskStatus.complete) {
+        print("Download complete");
+      }
+      setState(() {});
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(
+    String id,
+    int status,
+    int progress,
+  ) {
+    final SendPort? send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+
+    super.dispose();
+  }
+
+  ReceivePort _port = ReceivePort();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -33,7 +83,7 @@ class BookingServicesScreen extends StatelessWidget {
           future:
               context.read<BookingServicesPrv>().getBookingServiceList(context),
           builder: (context, snapshot) {
-            var services = context.watch<BookingServicesPrv>().services;
+            var services = context.watch<BookingServicesPrv>().viewServices;
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: PrimaryLoading());
             }

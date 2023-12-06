@@ -910,9 +910,9 @@
   "apartment_code": "apartment/house code",
   "policy": "Terms and condition",
   "po_1": "I understand and agree with",
-  "po_2": "rules",
+  "po_2": "policy",
   "and": "and",
-  "po_3": "payment security policy",
+  "po_3": "rules",
   "po_4": "of build management department, including limits and fees according to regulations",
   "re_booking": "Register again",
   "booking_detail": "Booking details",
@@ -923,5 +923,6 @@
   "register_fee": "Registration fee",
   "begin_use_date": "Started using date",
   "end_use_date": "Ended using date",
-  "time_slot": "Time slot"
+  "time_slot": "Time slot",
+  "success_booking": "You already registerd services {name} successfully"
 }

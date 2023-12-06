@@ -28,6 +28,7 @@ class BookingService {
   List<FeeByMonth>? list_of_fees_by_month;
   bool? confirm_use;
   String? icon;
+  String? note;
   BookingService({
     this.id,
     this.createdTime,
@@ -52,6 +53,7 @@ class BookingService {
     this.confirm_use,
     this.icon,
     this.service_charge,
+    this.note,
   });
 
   Map<String, dynamic> toMap() {
@@ -83,6 +85,7 @@ class BookingService {
       'confirm_use': confirm_use,
       'icon': icon,
       'service_charge': service_charge,
+      'note': note,
     };
   }
 
@@ -118,6 +121,7 @@ class BookingService {
       reminder_in_advance: map['reminder_in_advance'] != null
           ? map['reminder_in_advance'] as String
           : null,
+      note: map['note'] != null ? map['note'] as String : null,
       service_charge: map['service_charge'] != null
           ? map['service_charge'] as String
           : null,

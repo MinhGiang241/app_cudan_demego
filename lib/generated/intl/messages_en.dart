@@ -86,16 +86,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "You booked handover schedule successfully for apartment [${name}] .Please wait to building management department approve.";
 
   static String m28(name) =>
+      "You already registerd services ${name} successfully";
+
+  static String m29(name) =>
       "Cancel schedule of handover for apartment [${name}] successfully";
 
-  static String m29(ap) => "You already hand over for ${ap} successfully";
+  static String m30(ap) => "You already hand over for ${ap} successfully";
 
-  static String m30(p) => "Make payment for ${p} successfully";
+  static String m31(p) => "Make payment for ${p} successfully";
 
-  static String m31(month, year) =>
+  static String m32(month, year) =>
       "Total consumed water month ${month}/${year}";
 
-  static String m32(to) => "We sent otp code to :${to}";
+  static String m33(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -935,8 +938,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "plan_name": MessageLookupByLibrary.simpleMessage("Plan name"),
         "po_1":
             MessageLookupByLibrary.simpleMessage("I understand and agree with"),
-        "po_2": MessageLookupByLibrary.simpleMessage("rules"),
-        "po_3": MessageLookupByLibrary.simpleMessage("payment security policy"),
+        "po_2": MessageLookupByLibrary.simpleMessage("policy"),
+        "po_3": MessageLookupByLibrary.simpleMessage("rules"),
         "po_4": MessageLookupByLibrary.simpleMessage(
             "of build management department, including limits and fees according to regulations"),
         "policies": MessageLookupByLibrary.simpleMessage("Policy and services"),
@@ -1236,11 +1239,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Add new reflection successfully"),
         "success_book_schedule": m27,
+        "success_booking": m28,
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_can_res_card": MessageLookupByLibrary.simpleMessage(
             "Cancel resident card successfully"),
-        "success_can_schedule": m28,
+        "success_can_schedule": m29,
         "success_can_trans_card": MessageLookupByLibrary.simpleMessage(
             "Cancel transportation card successfully"),
         "success_cancel_cons_ext": MessageLookupByLibrary.simpleMessage(
@@ -1264,12 +1268,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
         "success_found": MessageLookupByLibrary.simpleMessage("Found"),
-        "success_handover": m29,
+        "success_handover": m30,
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m30,
+        "success_payment": m31,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Refuse letter successfully"),
         "success_reg_res": MessageLookupByLibrary.simpleMessage(
@@ -1341,7 +1345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("To money (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Total bill"),
-        "total_consumed_water_month": m31,
+        "total_consumed_water_month": m32,
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Total money payment"),
@@ -1454,7 +1458,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m32,
+        "we_send_to": m33,
         "weekend_aldult_ticket_num": MessageLookupByLibrary.simpleMessage(
             "Weekend aldult ticket number"),
         "weekend_child_ticket_num":

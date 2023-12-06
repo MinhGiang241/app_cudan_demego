@@ -9160,10 +9160,10 @@ class S {
     );
   }
 
-  /// `rules`
+  /// `policy`
   String get po_2 {
     return Intl.message(
-      'rules',
+      'policy',
       name: 'po_2',
       desc: '',
       args: [],
@@ -9180,10 +9180,10 @@ class S {
     );
   }
 
-  /// `payment security policy`
+  /// `rules`
   String get po_3 {
     return Intl.message(
-      'payment security policy',
+      'rules',
       name: 'po_3',
       desc: '',
       args: [],
@@ -9297,6 +9297,16 @@ class S {
       name: 'time_slot',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `You already registerd services {name} successfully`
+  String success_booking(Object name) {
+    return Intl.message(
+      'You already registerd services $name successfully',
+      name: 'success_booking',
+      desc: '',
+      args: [name],
     );
   }
 }

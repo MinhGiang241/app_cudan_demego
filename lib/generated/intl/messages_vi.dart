@@ -92,17 +92,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m27(name) =>
       "Bạn đã đặt lịch thành công cho căn hộ [${name}] . Vui lòng chờ BQL phê duyệt.";
 
-  static String m28(name) =>
+  static String m28(name) => "Bạn đã đăng ký thành công dịch vụ ${name}";
+
+  static String m29(name) =>
       "Bạn đã hủy lịch bàn giao thành công cho căn hộ [${name}]";
 
-  static String m29(ap) => "Bạn đã bàn giao thành công cho căn hộ ${ap}";
+  static String m30(ap) => "Bạn đã bàn giao thành công cho căn hộ ${ap}";
 
-  static String m30(p) => "Bạn đã thanh toán cho ${p} thành công ";
+  static String m31(p) => "Bạn đã thanh toán cho ${p} thành công ";
 
-  static String m31(month, year) =>
+  static String m32(month, year) =>
       "Tổng lượng nước thiêu thụ tháng ${month}/${year}";
 
-  static String m32(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
+  static String m33(to) => "Chúng tôi đã gửi cho bạn mã đến: ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -949,8 +951,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "po_1":
             MessageLookupByLibrary.simpleMessage("Tôi đã hiểu và đồng ý với"),
         "po_2": MessageLookupByLibrary.simpleMessage("điều khoản"),
-        "po_3": MessageLookupByLibrary.simpleMessage(
-            "Chính sách bảo mật thanh toán"),
+        "po_3": MessageLookupByLibrary.simpleMessage("Nội quy"),
         "po_4": MessageLookupByLibrary.simpleMessage(
             "của BQL, bao  gồm cả hạn mức và phí theo quy định"),
         "policies":
@@ -1242,11 +1243,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Thêm mới phản ánh thành công"),
         "success_book_schedule": m27,
+        "success_booking": m28,
         "success_can_req": MessageLookupByLibrary.simpleMessage(
             "Hủy đăng ký phiếu thành công"),
         "success_can_res_card":
             MessageLookupByLibrary.simpleMessage("Hủy thẻ cư dân thành công"),
-        "success_can_schedule": m28,
+        "success_can_schedule": m29,
         "success_can_trans_card":
             MessageLookupByLibrary.simpleMessage("Hủy thẻ xe thành công"),
         "success_cancel_cons_ext": MessageLookupByLibrary.simpleMessage(
@@ -1270,12 +1272,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find": MessageLookupByLibrary.simpleMessage(
             "Đổi trạng thái đồ thành đã tìm thấy thành công"),
         "success_found": MessageLookupByLibrary.simpleMessage("Đã tìm thấy"),
-        "success_handover": m29,
+        "success_handover": m30,
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Khóa thẻ thành công"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Gửi mã OTP thành công"),
-        "success_payment": m30,
+        "success_payment": m31,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Từ chối phiếu thành công"),
         "success_reg_res":
@@ -1347,7 +1349,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thành tiền (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Tổng cộng"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Tổng hóa đơn"),
-        "total_consumed_water_month": m31,
+        "total_consumed_water_month": m32,
         "total_money": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Tổng cộng tiền thanh toán"),
@@ -1452,7 +1454,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Tiền nước"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?"),
-        "we_send_to": m32,
+        "we_send_to": m33,
         "weekend_aldult_ticket_num":
             MessageLookupByLibrary.simpleMessage("Số vé người lớn cuối tuần"),
         "weekend_child_ticket_num":

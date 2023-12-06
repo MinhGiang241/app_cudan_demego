@@ -1,5 +1,6 @@
 import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/models/info_content_view.dart';
+import 'package:app_cudan/models/transportation_card.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/utils/utils.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -46,6 +47,9 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         type: arg?['type'] as String,
         configGuest: arg?['guest-cfg'] as Map<String, dynamic>?,
         configResident: arg?['resident-cfg'] as Map<String, dynamic>?,
+        shelfLife: arg?['fee_month'] as FeeByMonth?,
+        end_date: arg?['end_date'] as String?,
+        price: arg?['price'] as double?,
       ),
       builder: (context, builder) {
         var service = context.read<ConfirmBookingServicePrv>().service;
@@ -195,10 +199,22 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      S.of(context).policy,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        S.of(context).policy,
+                        style: txtRegular(12, primaryColorBase),
+                      ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        service.note ?? '',
+                      ),
+                    ),
+                    vpad(10),
                   ],
                 ),
               ), // PrimaryInfoWidget(listInfoView: listInfoView),
@@ -225,13 +241,31 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                           TextSpan(
                             text: " ${S.of(context).po_2} ",
                             style: txtBodyMediumBold(color: primaryColor6),
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                if (service.terms_of_service?[0].id != null) {
+                                  await Utils.downloadFile(
+                                    url: service.terms_of_service?[0].id,
+                                    show: true,
+                                    name: service.terms_of_service?[0].name,
+                                  );
+                                }
+                              },
                           ),
                           TextSpan(text: S.of(context).and),
                           TextSpan(
                             text: " ${S.of(context).po_3} ",
                             style: txtBodyMediumBold(color: primaryColor6),
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                if (service.rules?[0].id != null) {
+                                  await Utils.downloadFile(
+                                    url: service.rules?[0].id,
+                                    show: true,
+                                    name: service.rules?[0].name,
+                                  );
+                                }
+                              },
                           ),
                           TextSpan(
                             text: S.of(context).po_4,

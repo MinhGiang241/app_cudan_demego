@@ -3,6 +3,7 @@ import 'package:app_cudan/services/api_booking_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
+import '../../../generated/l10n.dart';
 import '../../../models/area.dart';
 import '../../../models/booking_service.dart';
 import '../../../utils/utils.dart';
@@ -19,6 +20,9 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     required this.type,
     this.configGuest,
     this.configResident,
+    this.end_date,
+    this.price,
+    this.shelfLife,
   }) {
     var guestIndex =
         service.list_of_fees_by_turn?.indexWhere((e) => e.object == "guest");
@@ -51,6 +55,9 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
   Map<String, dynamic>? configResident;
   FeeByTurn? guestFee;
   FeeByTurn? residentFee;
+  String? end_date;
+  double? price;
+  FeeByMonth? shelfLife;
 
   toggleConfirmUse() {
     confirm_use = !confirm_use;
@@ -74,6 +81,8 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     print(configGuest);
     print(configResident);
     var registration = RegisterBookingService(
+      total_price: price,
+      fee: service.service_charge,
       confirm_use: confirm_use,
       total_num_ticket: type == "month" ? num : null,
       status: 'WAIT_USE',
@@ -96,13 +105,13 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
           ? BookingInfo(
               object: 'resident',
               fee: service.ticket_type == 'ageclassifided'
-                  ? 0
-                  : (residentFee?.price ?? 0),
+                  ? 0.0
+                  : (residentFee?.price ?? 0.0),
               num: num,
               price: num *
                   (service.ticket_type == 'ageclassifided'
-                      ? 0
-                      : (residentFee?.price ?? 0)),
+                      ? 0.0
+                      : (residentFee?.price ?? 0.0)),
               num_adult: service.ticket_type == 'ageclassifided'
                   ? (configResident?['price_adult'] ?? 0)
                   : 0,
@@ -110,24 +119,24 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                   ? (configResident?['price_child'] ?? 0)
                   : 0,
               price_adult: (service.ticket_type == 'ageclassifided'
-                      ? (configResident?['price_adult'] ?? 0)
-                      : 0) *
+                      ? (configResident?['price_adult'] ?? 0.0)
+                      : 0.0) *
                   (residentFee?.price_adult ?? 0),
               price_child: (service.ticket_type == 'ageclassifided'
-                      ? (configResident?['price_child'] ?? 0)
-                      : 0) *
+                      ? (configResident?['price_child'] ?? 0.0)
+                      : 0.0) *
                   (residentFee?.price_adult ?? 0),
             )
           : BookingInfo(
               object: 'guest',
               fee: service.ticket_type == 'ageclassifided'
-                  ? 0
-                  : (guestFee?.price ?? 0),
+                  ? 0.0
+                  : (guestFee?.price ?? 0.0),
               num: num,
               price: num *
                   (service.ticket_type == 'ageclassifided'
-                      ? 0
-                      : (guestFee?.price ?? 0)),
+                      ? 0.0
+                      : (guestFee?.price ?? 0.0)),
               num_adult: service.ticket_type == 'ageclassifided'
                   ? (configGuest?['price_adult'] ?? 0)
                   : 0,
@@ -135,21 +144,29 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                   ? (configGuest?['price_child'] ?? 0)
                   : 0,
               price_adult: (service.ticket_type == 'ageclassifided'
-                      ? (configGuest?['price_adult'] ?? 0)
-                      : 0) *
+                      ? (configGuest?['price_adult'] ?? 0.0)
+                      : 0.0) *
                   (guestFee?.price_adult ?? 0),
               price_child: (service.ticket_type == 'ageclassifided'
-                      ? (configGuest?['price_child'] ?? 0)
-                      : 0) *
+                      ? (configGuest?['price_child'] ?? 0.0)
+                      : 0.0) *
                   (guestFee?.price_child ?? 0),
             ),
     );
-
-    await APIBookingService.saveRegiterService(registration.toMap()).then((v) {
+    var data = registration.toMap();
+    await APIBookingService.saveRegiterService(data).then((v) {
       if (v) {
         bookingRegistration = RegisterBookingService.fromMap(v);
         mode = 1;
-        Utils.showSuccessMessage(context: context, e: "Đã lữu");
+        Utils.showSuccessMessage(
+          context: context,
+          e: S.of(context).success_booking(service.name ?? ''),
+        );
+        // Navigator.pushNamedAndRemoveUntil(
+        //   context,
+        //   RegisterResidentScreen.routeName,
+        //   (route) => route.isFirst,
+        // );
       }
       notifyListeners();
     }).catchError((e) {
