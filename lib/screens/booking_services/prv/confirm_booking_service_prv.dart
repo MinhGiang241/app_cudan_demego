@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
+import 'package:app_cudan/screens/booking_services/history_register_service_screen.dart';
 import 'package:app_cudan/services/api_booking_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +70,15 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool checkNullConfig(Map<String, dynamic> data) {
+    for (var i in data.keys) {
+      if (data[i] != null && data[i] != 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   saveRegisterService(BuildContext context) async {
     loading = true;
     notifyListeners();
@@ -80,10 +90,14 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     var now = DateTime.now();
     print(configGuest);
     print(configResident);
+
     var registration = RegisterBookingService(
+      shelfLifeId: shelfLife?.shelfLife?.id,
       total_price: price,
       fee: service.service_charge,
-      confirm_use: confirm_use,
+      serviceConfigurationId: service.id,
+      note: service.note,
+      // confirm_use: confirm_use,
       total_num_ticket: type == "month" ? num : null,
       status: 'WAIT_USE',
       payment_status: service.service_charge == 'nocharge' ? 'free' : 'UNPAID',
@@ -101,78 +115,84 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       phone_number: phone,
       filter_fee: service.service_charge == 'nocharge' ? 'free' : 'charges',
       areaId: area.id,
-      booking_info: isResident
-          ? BookingInfo(
-              object: 'resident',
-              fee: service.ticket_type == 'ageclassifided'
-                  ? 0.0
-                  : (residentFee?.price ?? 0.0),
-              num: num,
-              price: num *
-                  (service.ticket_type == 'ageclassifided'
-                      ? 0.0
-                      : (residentFee?.price ?? 0.0)),
-              num_adult: service.ticket_type == 'ageclassifided'
-                  ? (configResident?['price_adult'] ?? 0)
-                  : 0,
-              num_child: service.ticket_type == 'ageclassifided'
-                  ? (configResident?['price_child'] ?? 0)
-                  : 0,
-              price_adult: (service.ticket_type == 'ageclassifided'
-                      ? (configResident?['price_adult'] ?? 0.0)
-                      : 0.0) *
-                  (residentFee?.price_adult ?? 0),
-              price_child: (service.ticket_type == 'ageclassifided'
-                      ? (configResident?['price_child'] ?? 0.0)
-                      : 0.0) *
-                  (residentFee?.price_adult ?? 0),
-            )
-          : BookingInfo(
-              object: 'guest',
-              fee: service.ticket_type == 'ageclassifided'
-                  ? 0.0
-                  : (guestFee?.price ?? 0.0),
-              num: num,
-              price: num *
-                  (service.ticket_type == 'ageclassifided'
-                      ? 0.0
-                      : (guestFee?.price ?? 0.0)),
-              num_adult: service.ticket_type == 'ageclassifided'
-                  ? (configGuest?['price_adult'] ?? 0)
-                  : 0,
-              num_child: service.ticket_type == 'ageclassifided'
-                  ? (configGuest?['price_child'] ?? 0)
-                  : 0,
-              price_adult: (service.ticket_type == 'ageclassifided'
-                      ? (configGuest?['price_adult'] ?? 0.0)
-                      : 0.0) *
-                  (guestFee?.price_adult ?? 0),
-              price_child: (service.ticket_type == 'ageclassifided'
-                      ? (configGuest?['price_child'] ?? 0.0)
-                      : 0.0) *
-                  (guestFee?.price_child ?? 0),
-            ),
+      booking_info: [
+        if (configResident != null && !checkNullConfig(configResident!))
+          BookingInfo(
+            object: 'resident',
+            fee: service.ticket_type == 'ageclassifided'
+                ? 0.0
+                : (residentFee?.price ?? 0.0),
+            num: num,
+            price: num *
+                (service.ticket_type == 'ageclassifided'
+                    ? 0.0
+                    : (residentFee?.price ?? 0.0)),
+            num_adult: service.ticket_type == 'ageclassifided'
+                ? (configResident?['price_adult'] ?? 0)
+                : 0,
+            num_child: service.ticket_type == 'ageclassifided'
+                ? (configResident?['price_child'] ?? 0)
+                : 0,
+            price_adult: (service.ticket_type == 'ageclassifided'
+                    ? (configResident?['price_adult'] ?? 0.0)
+                    : 0.0) *
+                (residentFee?.price_adult ?? 0),
+            price_child: (service.ticket_type == 'ageclassifided'
+                    ? (configResident?['price_child'] ?? 0.0)
+                    : 0.0) *
+                (residentFee?.price_adult ?? 0),
+          ),
+        if (configGuest != null && !checkNullConfig(configGuest!))
+          BookingInfo(
+            object: 'guest',
+            fee: service.ticket_type == 'ageclassifided'
+                ? 0.0
+                : (guestFee?.price ?? 0.0),
+            num: num,
+            price: num *
+                (service.ticket_type == 'ageclassifided'
+                    ? 0.0
+                    : (guestFee?.price ?? 0.0)),
+            num_adult: service.ticket_type == 'ageclassifided'
+                ? (configGuest?['price_adult'] ?? 0)
+                : 0,
+            num_child: service.ticket_type == 'ageclassifided'
+                ? (configGuest?['price_child'] ?? 0)
+                : 0,
+            price_adult: (service.ticket_type == 'ageclassifided'
+                    ? (configGuest?['price_adult'] ?? 0.0)
+                    : 0.0) *
+                (guestFee?.price_adult ?? 0),
+            price_child: (service.ticket_type == 'ageclassifided'
+                    ? (configGuest?['price_child'] ?? 0.0)
+                    : 0.0) *
+                (guestFee?.price_child ?? 0),
+          ),
+      ],
     );
     var data = registration.toMap();
     await APIBookingService.saveRegiterService(data).then((v) {
-      if (v) {
+      loading = false;
+      notifyListeners();
+      if (v != null) {
         bookingRegistration = RegisterBookingService.fromMap(v);
         mode = 1;
         Utils.showSuccessMessage(
-          context: context,
-          e: S.of(context).success_booking(service.name ?? ''),
-        );
-        // Navigator.pushNamedAndRemoveUntil(
-        //   context,
-        //   RegisterResidentScreen.routeName,
-        //   (route) => route.isFirst,
-        // );
+            context: context,
+            e: S.of(context).success_booking(service.name ?? ''),
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                HistoryRegisterServiceScreen.routeName,
+                (route) => route.isFirst,
+              );
+            });
       }
       notifyListeners();
     }).catchError((e) {
+      loading = false;
+      notifyListeners();
       Utils.showErrorMessage(context, e);
     });
-    loading = false;
-    notifyListeners();
   }
 }

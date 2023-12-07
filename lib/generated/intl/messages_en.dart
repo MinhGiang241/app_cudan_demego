@@ -371,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_reg_proj":
             MessageLookupByLibrary.simpleMessage("Create new registration"),
         "created_date": MessageLookupByLibrary.simpleMessage("Created date"),
+        "created_time": MessageLookupByLibrary.simpleMessage("Created time"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Current password"),
         "customer_care": MessageLookupByLibrary.simpleMessage("Customer care"),
@@ -534,6 +535,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Old expired date "),
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Login session is invalid, please sign in again"),
+        "expired_reg":
+            MessageLookupByLibrary.simpleMessage("Expired registration"),
         "extend": MessageLookupByLibrary.simpleMessage("Extend"),
         "extend_letter": MessageLookupByLibrary.simpleMessage("Extend letter"),
         "fa": MessageLookupByLibrary.simpleMessage("Single"),
@@ -563,6 +566,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "found_object": MessageLookupByLibrary.simpleMessage("Found object"),
         "found_place": MessageLookupByLibrary.simpleMessage("Found place"),
         "found_time": MessageLookupByLibrary.simpleMessage("Found time"),
+        "free": MessageLookupByLibrary.simpleMessage("Free"),
         "free_res_card":
             MessageLookupByLibrary.simpleMessage("Free resident card"),
         "free_service": MessageLookupByLibrary.simpleMessage("Free service"),
@@ -703,6 +707,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "missing_time": MessageLookupByLibrary.simpleMessage("Missing time"),
         "money": MessageLookupByLibrary.simpleMessage("Money"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
+        "month_service":
+            MessageLookupByLibrary.simpleMessage("Monthly service"),
         "month_ticket":
             MessageLookupByLibrary.simpleMessage("Register month ticket"),
         "monthly_register_service":
@@ -738,6 +744,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_extend_letter": MessageLookupByLibrary.simpleMessage(
             "don\'t have any extend letter"),
         "no_hand_over": MessageLookupByLibrary.simpleMessage("No hand over"),
+        "no_have_ticket": MessageLookupByLibrary.simpleMessage(
+            "You did not select ticket amount"),
         "no_home":
             MessageLookupByLibrary.simpleMessage("Don\'t have any apartment"),
         "no_letter":
@@ -762,6 +770,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any receipt"),
         "no_reflection":
             MessageLookupByLibrary.simpleMessage("No have any feedback"),
+        "no_reg": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any registration"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any construction registration"),
         "no_reg_proj": MessageLookupByLibrary.simpleMessage(
@@ -805,6 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Can not contain special symbol"),
         "not_upload_15mb": MessageLookupByLibrary.simpleMessage(
             "Can not upload file larger 15MB"),
+        "not_use": MessageLookupByLibrary.simpleMessage("Not use"),
         "not_vietnamese": MessageLookupByLibrary.simpleMessage(
             "Can not contain Vietnamese letter"),
         "not_yet_select_date": MessageLookupByLibrary.simpleMessage(
@@ -882,6 +893,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pause_construction":
             MessageLookupByLibrary.simpleMessage("Pause construction"),
         "pay": MessageLookupByLibrary.simpleMessage("Payment"),
+        "pay_bill": MessageLookupByLibrary.simpleMessage("Bill payment"),
         "pay_construction_fee":
             MessageLookupByLibrary.simpleMessage("Pay construction fee"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Pay date"),
@@ -1330,6 +1342,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Ticket price"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
+        "time": MessageLookupByLibrary.simpleMessage("Time"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Time event happening"),
         "time_hanover":
@@ -1400,6 +1413,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transport registration"),
         "transportation":
             MessageLookupByLibrary.simpleMessage("Transportation"),
+        "turn_service":
+            MessageLookupByLibrary.simpleMessage("Turn-based service"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "ultility_list":
             MessageLookupByLibrary.simpleMessage("Ultilities list"),
@@ -1415,9 +1430,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "uploading": MessageLookupByLibrary.simpleMessage("Uploading"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Use elevator"),
+        "used": MessageLookupByLibrary.simpleMessage("Used"),
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Expired_date"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "using": MessageLookupByLibrary.simpleMessage("Using"),
         "util_info": MessageLookupByLibrary.simpleMessage("Service informaton"),
         "util_type": MessageLookupByLibrary.simpleMessage("Service type"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
@@ -1438,6 +1455,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_acceptance":
             MessageLookupByLibrary.simpleMessage("Wait acceptance"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Waiting approve"),
+        "wait_cancel":
+            MessageLookupByLibrary.simpleMessage("Wait canceling approval"),
         "wait_chat_response": MessageLookupByLibrary.simpleMessage(
             "It seam you didn\'t response any thing for a while. Do you want to continue conversation. The convsersation will be closed after several minute if you are not response."),
         "wait_confirm_letter":
@@ -1451,6 +1470,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_pay": MessageLookupByLibrary.simpleMessage("Wait to pay"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Waiting"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Wait return"),
+        "wait_use": MessageLookupByLibrary.simpleMessage("Waiting use"),
         "waiting_project_resistration": MessageLookupByLibrary.simpleMessage(
             "Waiting Project Resistration"),
         "ward": MessageLookupByLibrary.simpleMessage("Distric/ward"),

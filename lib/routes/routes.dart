@@ -1,4 +1,5 @@
 import 'package:app_cudan/screens/booking_services/booking_services_screen.dart';
+import 'package:app_cudan/screens/booking_services/history_register_service_screen.dart';
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
 import 'package:app_cudan/screens/receipts/receipt_screen.dart';
 import 'package:app_cudan/screens/services/ultilty/utility_service_screen.dart';
@@ -497,6 +498,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => MonthBookingScreen(),
+        );
+      case HistoryRegisterServiceScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => HistoryRegisterServiceScreen(),
         );
 
       default:

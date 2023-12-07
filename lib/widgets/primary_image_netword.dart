@@ -355,6 +355,8 @@ class _PhotoViewerState extends State<PhotoViewer> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: InkWell(
                 onTap: () async {
+                  var a = widget.listLink;
+                  print(a);
                   Utils.downloadFile(
                     context: context,
                     url: widget.listLink[0],

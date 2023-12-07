@@ -372,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_reg_proj":
             MessageLookupByLibrary.simpleMessage("Tạo đăng ký mới"),
         "created_date": MessageLookupByLibrary.simpleMessage("Ngày tạo"),
+        "created_time": MessageLookupByLibrary.simpleMessage("Thời gian tạo"),
         "current_pass":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
         "customer_care":
@@ -541,6 +542,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ngày hết hạn hiện tại"),
         "expired_login": MessageLookupByLibrary.simpleMessage(
             "Phiên đăng nhập hết hạn, hãy đăng nhập lại"),
+        "expired_reg": MessageLookupByLibrary.simpleMessage("Thời hạn đăng ký"),
         "extend": MessageLookupByLibrary.simpleMessage("Gia hạn"),
         "extend_letter": MessageLookupByLibrary.simpleMessage("Phiếu gia hạn"),
         "fa": MessageLookupByLibrary.simpleMessage("Độc thân"),
@@ -570,6 +572,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vật phẩm tìm thấy"),
         "found_place": MessageLookupByLibrary.simpleMessage("Địa điểm thấy"),
         "found_time": MessageLookupByLibrary.simpleMessage("Thời điểm thấy"),
+        "free": MessageLookupByLibrary.simpleMessage("Miễn phí"),
         "free_res_card":
             MessageLookupByLibrary.simpleMessage("Thẻ cư dân miễn phí"),
         "free_service":
@@ -711,6 +714,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thời điểm thất lạc"),
         "money": MessageLookupByLibrary.simpleMessage("Số tiền"),
         "month": MessageLookupByLibrary.simpleMessage("Tháng"),
+        "month_service": MessageLookupByLibrary.simpleMessage("Dịch vụ tháng"),
         "month_ticket":
             MessageLookupByLibrary.simpleMessage("Đăng ký vé tháng"),
         "monthly_register_service":
@@ -748,6 +752,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiếu gia hạn nào"),
         "no_hand_over":
             MessageLookupByLibrary.simpleMessage("Không có nhận bàn giao nào"),
+        "no_have_ticket":
+            MessageLookupByLibrary.simpleMessage("Bạn chưa chọn số lượng vé"),
         "no_home": MessageLookupByLibrary.simpleMessage("Không có căn hộ nào"),
         "no_letter": MessageLookupByLibrary.simpleMessage("Không có phiếu nào"),
         "no_location":
@@ -771,6 +777,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiếu thu nào"),
         "no_reflection": MessageLookupByLibrary.simpleMessage(
             "Không có góp ý hay khiếu nại nào"),
+        "no_reg": MessageLookupByLibrary.simpleMessage("Không có đăng ký nào"),
         "no_reg_cons": MessageLookupByLibrary.simpleMessage(
             "Không có đăng ký thi công nào"),
         "no_reg_proj": MessageLookupByLibrary.simpleMessage(
@@ -816,6 +823,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không nhập ký tự đặc biệt"),
         "not_upload_15mb": MessageLookupByLibrary.simpleMessage(
             "Không upload được file lớn hơn 15MB"),
+        "not_use": MessageLookupByLibrary.simpleMessage("Không sử dụng"),
         "not_vietnamese": MessageLookupByLibrary.simpleMessage(
             "Không nhập ký tự tiếng Việt có dấu"),
         "not_yet_select_date":
@@ -894,6 +902,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pause_construction":
             MessageLookupByLibrary.simpleMessage("Khóa thi công"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "pay_bill": MessageLookupByLibrary.simpleMessage("TT hóa đơn"),
         "pay_construction_fee":
             MessageLookupByLibrary.simpleMessage("Thanh toán phí thi công"),
         "pay_date": MessageLookupByLibrary.simpleMessage("Ngày thanh toán"),
@@ -1334,6 +1343,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Giá vé"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
+        "time": MessageLookupByLibrary.simpleMessage("Thời gian"),
         "time_event_happening":
             MessageLookupByLibrary.simpleMessage("Thời gian diễn ra sự kiện"),
         "time_hanover": MessageLookupByLibrary.simpleMessage(
@@ -1399,6 +1409,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Danh sách phương tiện"),
         "transport_reg": MessageLookupByLibrary.simpleMessage("Đăng ký xe"),
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
+        "turn_service": MessageLookupByLibrary.simpleMessage("Dịch vụ lượt"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
         "ultility_list":
             MessageLookupByLibrary.simpleMessage("Danh sách tiện ích"),
@@ -1413,9 +1424,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
         "uploading": MessageLookupByLibrary.simpleMessage("Đang tải lên"),
         "use_elevator": MessageLookupByLibrary.simpleMessage("Dùng thang máy"),
+        "used": MessageLookupByLibrary.simpleMessage("Đã sử dụng"),
         "used_expired_date":
             MessageLookupByLibrary.simpleMessage("Thời hạn sử dụng"),
         "username": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "using": MessageLookupByLibrary.simpleMessage("Đang sử dụng"),
         "util_info": MessageLookupByLibrary.simpleMessage("Thông tin tiện ích"),
         "util_type": MessageLookupByLibrary.simpleMessage("Loại tiện ích"),
         "value": MessageLookupByLibrary.simpleMessage("Giá trị"),
@@ -1435,6 +1448,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_acceptance":
             MessageLookupByLibrary.simpleMessage("Báo nghiệm thu"),
         "wait_approve": MessageLookupByLibrary.simpleMessage("Chờ duyệt"),
+        "wait_cancel": MessageLookupByLibrary.simpleMessage("Chờ duyệt hủy"),
         "wait_chat_response": MessageLookupByLibrary.simpleMessage(
             "Có vẻ như bạn đã không hoạt động trong vài phút. Bạn có muốn tiếp tục cuộc trò chuyện không? Cuộc trò chuyện sẽ kết thúc sau một ít phút nếu không có phản hồi."),
         "wait_confirm_letter":
@@ -1447,6 +1461,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wait_pay": MessageLookupByLibrary.simpleMessage("Chờ thanh toán"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
+        "wait_use": MessageLookupByLibrary.simpleMessage("Chờ sử dụng"),
         "waiting_project_resistration":
             MessageLookupByLibrary.simpleMessage("Thông tin đăng ký chờ duyệt"),
         "ward": MessageLookupByLibrary.simpleMessage("Quận/Huyện"),

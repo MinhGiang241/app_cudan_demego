@@ -924,5 +924,19 @@
   "begin_use_date": "Started using date",
   "end_use_date": "Ended using date",
   "time_slot": "Time slot",
-  "success_booking": "You already registerd services {name} successfully"
+  "success_booking": "You already registerd services {name} successfully",
+  "no_have_ticket": "You did not select ticket amount",
+  "turn_service": "Turn-based service",
+  "month_service": "Monthly service",
+  "no_reg": "Don't have any registration",
+  "wait_use": "Waiting use",
+  "using": "Using",
+  "used": "Used",
+  "not_use": "Not use",
+  "wait_cancel": "Wait canceling approval",
+  "expired_reg": "Expired registration",
+  "time": "Time",
+  "free": "Free",
+  "pay_bill": "Bill payment",
+  "created_time": "Created time"
 }

@@ -794,6 +794,8 @@ class Utils {
           ),
         );
       } else {
+        var a = ApiService.shared.uploadURL;
+        print(a);
         var taskId = await FlutterDownloader.enqueue(
           url: url ??
               "${ApiService.shared.uploadURL}?load=$id&regcode=${ApiService.shared.regCode}",

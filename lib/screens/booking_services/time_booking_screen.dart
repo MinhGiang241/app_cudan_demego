@@ -436,10 +436,48 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: PrimaryButton(
                               onTap: () {
+                                var hasFeeNotTicket = (configGuest?['price'] ==
+                                            null ||
+                                        configGuest?['price'] == 0) &&
+                                    (configGuest?['price_child'] == null ||
+                                        configGuest?['price_child'] == 0) &&
+                                    (configGuest?['price_child_weekend'] ==
+                                            null ||
+                                        configGuest?['price_child_weekend'] ==
+                                            0) &&
+                                    (configGuest?['price_adult_weekend'] ==
+                                            null ||
+                                        configGuest?['price_adult_weekend'] ==
+                                            0) &&
+                                    (configGuest?['price_weekend'] ==
+                                            null ||
+                                        configGuest?['price_weekend'] == 0) &&
+                                    (configResident?['price'] == 0) &&
+                                    (configResident?['price_child'] ==
+                                            null ||
+                                        configResident?['price_child'] == 0) &&
+                                    (configResident?['price_child_weekend'] ==
+                                            null ||
+                                        configResident?['price_child_weekend'] ==
+                                            0) &&
+                                    (configResident?['price_adult_weekend'] ==
+                                            null ||
+                                        configResident?['price_adult_weekend'] ==
+                                            0) &&
+                                    (configResident?['price_weekend'] == null ||
+                                        configResident?['price_weekend'] == 0);
                                 if (controller.text.isEmpty) {
                                   Utils.showErrorMessage(
                                     context,
                                     S.of(context).not_yet_select_date,
+                                  );
+                                } else if ((num == 0 &&
+                                        service.service_charge == 'nocharge') ||
+                                    (service.service_charge != 'nocharge') &&
+                                        hasFeeNotTicket) {
+                                  Utils.showErrorMessage(
+                                    context,
+                                    S.of(context).no_have_ticket,
                                   );
                                 } else {
                                   Navigator.pushNamed(
@@ -458,8 +496,8 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                           .time_end,
                                       "date": date.toUtc().toIso8601String(),
                                       "num": num,
-                                      "guest-cfg": guestFee,
-                                      'resident-cfg': residentFee,
+                                      "guest-cfg": configGuest,
+                                      'resident-cfg': configResident,
                                     },
                                   );
                                 }

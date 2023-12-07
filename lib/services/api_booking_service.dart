@@ -67,15 +67,14 @@ mutation (\$time_start:String,\$time_end:String,\$areas:Dictionary){
     Map<String, dynamic> data,
   ) async {
     var query = '''
-    mutation (\$data:String){
-        response: serviceconfiguration_mobile_register_service (data: \$data ) {
-            code
-            message
-            data
-        }
+    mutation (\$data:Dictionary){
+    response: serviceconfiguration_mobile_register_service (data: \$data ) {
+        code
+        message
+        data
     }
-        
-        
+}
+
     ''';
     final QueryOptions options = QueryOptions(
       document: gql(query),
@@ -112,6 +111,43 @@ mutation (\$feeByMonthList:Dictionary){
       document: gql(query),
       variables: {
         "feeByMonthList": feeByMonthList,
+      },
+    );
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getRegisterServiceHistoryList(
+    String? type,
+    String? residentId,
+    String? apartmentId,
+    String? phone,
+  ) async {
+    var query = '''
+mutation (\$type:String,\$residentId:String,\$apartmentId:String,\$phone:String){
+    response: serviceconfiguration_mobile_get_register_service_list_by_type (type: \$type,residentId: \$residentId,apartmentId: \$apartmentId,phone: \$phone ) {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        'type': type,
+        'residentId': residentId,
+        'apartmentId': apartmentId,
+        'phone': phone,
       },
     );
 

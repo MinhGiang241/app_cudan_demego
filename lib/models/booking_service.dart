@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/transportation_card.dart';
 
+import 'area.dart';
+
 class BookingService {
   String? id;
   String? createdTime;
@@ -375,7 +377,7 @@ class RegisterBookingService {
   String? serviceConfigurationId;
   String? use_date;
   String? time_slot;
-  BookingInfo? booking_info;
+  List<BookingInfo>? booking_info;
   bool? agree_to_terms_of_service;
   String? note;
   String? object;
@@ -395,6 +397,10 @@ class RegisterBookingService {
   String? filter_fee;
   String? areaId;
   String? receipts_code;
+  Area? a;
+  ShelfLife? sh;
+  BookingService? se;
+
   RegisterBookingService({
     this.id,
     this.createdTime,
@@ -428,6 +434,9 @@ class RegisterBookingService {
     this.total_num_ticket,
     this.filter_fee,
     this.receipts_code,
+    this.se,
+    this.sh,
+    this.a,
   });
 
   Map<String, dynamic> toMap() {
@@ -444,8 +453,8 @@ class RegisterBookingService {
       'serviceConfigurationId': serviceConfigurationId,
       'use_date': use_date,
       'time_slot': time_slot,
-      'booking_info': booking_info?.toMap(),
-      'agree_to_terms_of_servicereaId': agree_to_terms_of_service,
+      'booking_info': booking_info?.map((c) => c.toMap()).toList(),
+      'agree_to_terms_of_service': agree_to_terms_of_service,
       'note': note,
       'object': object,
       'registration_type': registration_type,
@@ -489,10 +498,14 @@ class RegisterBookingService {
       use_date: map['use_date'] != null ? map['use_date'] as String : null,
       time_slot: map['time_slot'] != null ? map['time_slot'] as String : null,
       booking_info: map['booking_info'] != null
-          ? BookingInfo.fromMap(map['booking_info'] as Map<String, dynamic>)
+          ? List<BookingInfo>.from(
+              (map['booking_info'] as List<dynamic>).map<BookingInfo?>(
+                (x) => BookingInfo.fromMap(x as Map<String, dynamic>),
+              ),
+            )
           : null,
-      agree_to_terms_of_service: map['agree_to_terms_of_servicereaId'] != null
-          ? map['agree_to_terms_of_servicereaId'] as bool
+      agree_to_terms_of_service: map['agree_to_terms_of_service'] != null
+          ? map['agree_to_terms_of_service'] as bool
           : null,
       note: map['note'] != null ? map['note'] as String : null,
       object: map['object'] != null ? map['object'] as String : null,
@@ -539,6 +552,9 @@ class RegisterBookingService {
       areaId: map['areaId'] != null ? map['areaId'] as String : null,
       receipts_code:
           map['receipts_code'] != null ? map['receipts_code'] as String : null,
+      a: map['a'] != null ? Area.fromMap(map['a']) : null,
+      sh: map['sh'] != null ? ShelfLife.fromMap(map['sh']) : null,
+      se: map['se'] != null ? BookingService.fromMap(map['se']) : null,
     );
   }
 
@@ -562,7 +578,7 @@ class RegisterBookingService {
     String? serviceConfigurationId,
     String? use_date,
     String? time_slot,
-    BookingInfo? booking_info,
+    List<BookingInfo>? booking_info,
     bool? agree_to_terms_of_servicereaId,
     String? note,
     String? object,

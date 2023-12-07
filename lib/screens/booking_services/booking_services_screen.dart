@@ -1,11 +1,8 @@
-import 'dart:isolate';
-import 'dart:ui';
-
+import 'package:app_cudan/screens/booking_services/history_register_service_screen.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
@@ -25,47 +22,6 @@ class BookingServicesScreen extends StatefulWidget {
 
 class _BookingServicesScreenState extends State<BookingServicesScreen> {
   @override
-  void initState() {
-    super.initState();
-
-    IsolateNameServer.registerPortWithName(
-      _port.sendPort,
-      'downloader_send_port',
-    );
-    _port.listen((dynamic data) {
-      String id = data[0];
-      int status = data[1];
-      int progress = data[2];
-
-      if (status == DownloadTaskStatus.complete) {
-        print("Download complete");
-      }
-      setState(() {});
-    });
-
-    FlutterDownloader.registerCallback(downloadCallback);
-  }
-
-  @pragma('vm:entry-point')
-  static void downloadCallback(
-    String id,
-    int status,
-    int progress,
-  ) {
-    final SendPort? send =
-        IsolateNameServer.lookupPortByName('downloader_send_port');
-    send!.send([id, status, progress]);
-  }
-
-  @override
-  void dispose() {
-    IsolateNameServer.removePortNameMapping('downloader_send_port');
-
-    super.dispose();
-  }
-
-  ReceivePort _port = ReceivePort();
-  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => BookingServicesPrv(),
@@ -74,7 +30,12 @@ class _BookingServicesScreenState extends State<BookingServicesScreen> {
           title: S.of(context).ultility_list,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  HistoryRegisterServiceScreen.routeName,
+                );
+              },
               icon: Icon(Icons.timer_outlined),
             ),
           ],

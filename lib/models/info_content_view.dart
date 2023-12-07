@@ -289,3 +289,41 @@ genContentStyle(String content) {
       return txtBold(14, genStatusColor(content));
   }
 }
+
+String genBookingStatus(String? status) {
+  switch (status) {
+    case 'WAIT_USE':
+      return S.current.wait_use;
+    case 'USING':
+      return S.current.used;
+    case 'USED':
+      return S.current.used;
+    case 'NOT_USED':
+      return S.current.not_use;
+    case 'CANCELLATION_APPROVAL':
+      return S.current.wait_cancel;
+    case 'CANCEL':
+      return S.current.cancel;
+    default:
+      return '';
+  }
+}
+
+Color genBookingStatusColor(String? status) {
+  switch (status) {
+    case 'WAIT_USE':
+      return purpleColorBase;
+    case 'USING':
+      return greenColorBase;
+    case 'USED':
+      return primaryColorBase;
+    case 'NOT_USED':
+      return yellowColorBase;
+    case 'CANCELLATION_APPROVAL':
+      return orangeColor;
+    case 'CANCEL':
+      return redColor;
+    default:
+      return Colors.white;
+  }
+}

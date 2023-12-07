@@ -925,5 +925,19 @@
   "begin_use_date": "Ngày bắt đầu sử dụng",
   "end_use_date": "Ngày kết thúc sử dụng",
   "time_slot": "Khung giờ",
-  "success_booking": "Bạn đã đăng ký thành công dịch vụ {name}"
+  "success_booking": "Bạn đã đăng ký thành công dịch vụ {name}",
+  "no_have_ticket": "Bạn chưa chọn số lượng vé",
+  "turn_service": "Dịch vụ lượt",
+  "month_service": "Dịch vụ tháng",
+  "no_reg": "Không có đăng ký nào",
+  "wait_use": "Chờ sử dụng",
+  "using": "Đang sử dụng",
+  "used": "Đã sử dụng",
+  "not_use": "Không sử dụng",
+  "wait_cancel": "Chờ duyệt hủy",
+  "expired_reg": "Thời hạn đăng ký",
+  "time": "Thời gian",
+  "free": "Miễn phí",
+  "pay_bill": "TT hóa đơn",
+  "created_time": "Thời gian tạo"
 }

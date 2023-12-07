@@ -245,7 +245,8 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                               ..onTap = () async {
                                 if (service.terms_of_service?[0].id != null) {
                                   await Utils.downloadFile(
-                                    url: service.terms_of_service?[0].id,
+                                    context: context,
+                                    id: service.terms_of_service?[0].id,
                                     show: true,
                                     name: service.terms_of_service?[0].name,
                                   );
@@ -260,7 +261,8 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                               ..onTap = () async {
                                 if (service.rules?[0].id != null) {
                                   await Utils.downloadFile(
-                                    url: service.rules?[0].id,
+                                    context: context,
+                                    id: service.rules?[0].id,
                                     show: true,
                                     name: service.rules?[0].name,
                                   );

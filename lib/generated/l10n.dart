@@ -9309,6 +9309,146 @@ class S {
       args: [name],
     );
   }
+
+  /// `You did not select ticket amount`
+  String get no_have_ticket {
+    return Intl.message(
+      'You did not select ticket amount',
+      name: 'no_have_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Turn-based service`
+  String get turn_service {
+    return Intl.message(
+      'Turn-based service',
+      name: 'turn_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly service`
+  String get month_service {
+    return Intl.message(
+      'Monthly service',
+      name: 'month_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any registration`
+  String get no_reg {
+    return Intl.message(
+      'Don\'t have any registration',
+      name: 'no_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting use`
+  String get wait_use {
+    return Intl.message(
+      'Waiting use',
+      name: 'wait_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Using`
+  String get using {
+    return Intl.message(
+      'Using',
+      name: 'using',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Used`
+  String get used {
+    return Intl.message(
+      'Used',
+      name: 'used',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not use`
+  String get not_use {
+    return Intl.message(
+      'Not use',
+      name: 'not_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wait canceling approval`
+  String get wait_cancel {
+    return Intl.message(
+      'Wait canceling approval',
+      name: 'wait_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired registration`
+  String get expired_reg {
+    return Intl.message(
+      'Expired registration',
+      name: 'expired_reg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get free {
+    return Intl.message(
+      'Free',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bill payment`
+  String get pay_bill {
+    return Intl.message(
+      'Bill payment',
+      name: 'pay_bill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Created time`
+  String get created_time {
+    return Intl.message(
+      'Created time',
+      name: 'created_time',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
