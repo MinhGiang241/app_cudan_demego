@@ -111,7 +111,8 @@ class MonthBookingScreen extends StatelessWidget {
                             title: Text(
                               '${e.value.time_start} - ${e.value.time_end}',
                               style: txtBodySmallRegular(
-                                  color: grayScaleColorBase),
+                                color: grayScaleColorBase,
+                              ),
                             ),
                             value: e.key,
                             groupValue: option,

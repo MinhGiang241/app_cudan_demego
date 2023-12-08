@@ -41,6 +41,33 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
             residentIndex != -1)
         ? service.list_of_fees_by_turn![residentIndex]
         : null;
+    if (bookingRegistration != null && service.service_charge != 'nocharge') {
+      var configResidentIndex = bookingRegistration?.booking_info
+          ?.indexWhere((e) => e.object == 'resident');
+      if (configResidentIndex != null && configResidentIndex != -1) {
+        var bi = bookingRegistration?.booking_info![configResidentIndex];
+        configResident = {
+          'price': bi?.price,
+          'price_adult': bi?.num_adult,
+          'price_child': bi?.num_child,
+          'price_adult_weekend': bi?.num_adult_weekend,
+          'price_child_weekend': bi?.price_child_weekend,
+        };
+      }
+
+      var configGuestIndex = bookingRegistration?.booking_info
+          ?.indexWhere((e) => e.object == 'guest');
+      if (configGuestIndex != null && configGuestIndex != -1) {
+        var bi = bookingRegistration?.booking_info![configGuestIndex];
+        configGuest = {
+          'price': bi?.price,
+          'price_adult': bi?.num_adult,
+          'price_child': bi?.num_child,
+          'price_adult_weekend': bi?.num_adult_weekend,
+          'price_child_weekend': bi?.price_child_weekend,
+        };
+      }
+    }
   }
 
   BookingService service;
@@ -75,10 +102,10 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
   bool checkNullConfig(Map<String, dynamic> data) {
     for (var i in data.keys) {
       if (data[i] != null && data[i] != 0) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   saveRegisterService(BuildContext context) async {
@@ -133,25 +160,25 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         if (configResident != null && !checkNullConfig(configResident!))
           BookingInfo(
             object: 'resident',
-            fee: service.ticket_type == 'ageclassifided'
-                ? 0.0
-                : (residentFee?.price ?? 0.0),
+            fee: service.ticket_type == 'ageclassified'
+                ? (guestFee?.price ?? 0.0)
+                : 0.0,
             num: num,
             price: num *
-                (service.ticket_type == 'ageclassifided'
-                    ? 0.0
-                    : (residentFee?.price ?? 0.0)),
-            num_adult: service.ticket_type == 'ageclassifided'
+                (service.ticket_type == 'ageclassified'
+                    ? (guestFee?.price ?? 0.0)
+                    : 0.0),
+            num_adult: service.ticket_type == 'ageclassified'
                 ? (configResident?['price_adult'] ?? 0)
                 : 0,
-            num_child: service.ticket_type == 'ageclassifided'
+            num_child: service.ticket_type == 'ageclassified'
                 ? (configResident?['price_child'] ?? 0)
                 : 0,
-            price_adult: (service.ticket_type == 'ageclassifided'
+            price_adult: (service.ticket_type == 'ageclassified'
                     ? (configResident?['price_adult'] ?? 0.0)
                     : 0.0) *
                 (residentFee?.price_adult ?? 0),
-            price_child: (service.ticket_type == 'ageclassifided'
+            price_child: (service.ticket_type == 'ageclassified'
                     ? (configResident?['price_child'] ?? 0.0)
                     : 0.0) *
                 (residentFee?.price_adult ?? 0),
@@ -159,25 +186,25 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         if (configGuest != null && !checkNullConfig(configGuest!))
           BookingInfo(
             object: 'guest',
-            fee: service.ticket_type == 'ageclassifided'
-                ? 0.0
-                : (guestFee?.price ?? 0.0),
+            fee: service.ticket_type == 'ageclassified'
+                ? (guestFee?.price ?? 0.0)
+                : 0.0,
             num: num,
             price: num *
-                (service.ticket_type == 'ageclassifided'
-                    ? 0.0
-                    : (guestFee?.price ?? 0.0)),
-            num_adult: service.ticket_type == 'ageclassifided'
+                (service.ticket_type == 'ageclassified'
+                    ? (guestFee?.price ?? 0.0)
+                    : 0.0),
+            num_adult: service.ticket_type == 'ageclassified'
                 ? (configGuest?['price_adult'] ?? 0)
                 : 0,
-            num_child: service.ticket_type == 'ageclassifided'
+            num_child: service.ticket_type == 'ageclassified'
                 ? (configGuest?['price_child'] ?? 0)
                 : 0,
-            price_adult: (service.ticket_type == 'ageclassifided'
+            price_adult: (service.ticket_type == 'ageclassified'
                     ? (configGuest?['price_adult'] ?? 0.0)
                     : 0.0) *
                 (guestFee?.price_adult ?? 0),
-            price_child: (service.ticket_type == 'ageclassifided'
+            price_child: (service.ticket_type == 'ageclassified'
                     ? (configGuest?['price_child'] ?? 0.0)
                     : 0.0) *
                 (guestFee?.price_child ?? 0),

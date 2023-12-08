@@ -181,7 +181,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                '${S.of(context).created_time}: ${Utils.dateTimeFormat((e.createdTime ?? ''), 0)}',
+                                '${S.of(context).created_time}: ${Utils.dateTimeFormat((e.createdTime ?? ''), 1)}',
                                 style: txtRegular(11, grayScaleColor3),
                               ),
                             ),
@@ -189,10 +189,12 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                '${e.se?.service_charge == 'nocharge' ? S.of(context).free : S.of(context).pay_bill}',
+                                '${(e.se?.service_charge == 'nocharge' || e.rec == null || e.rec!.isEmpty) ? S.of(context).free : genStatus(e.rec?[0].payment_status ?? "")}',
                                 style: txtBold(
                                   12,
-                                  e.se?.service_charge == 'nocharge'
+                                  (e.se?.service_charge == 'nocharge' ||
+                                          e.rec == null ||
+                                          e.rec!.isEmpty)
                                       ? greenColor8
                                       : primaryColorBase,
                                 ),

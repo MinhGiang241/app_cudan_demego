@@ -151,7 +151,7 @@ class _BookingServicesScreenState extends State<BookingServicesScreen> {
                                   vpad(7),
                                   Flexible(
                                     child: Text(
-                                      e.code ?? "",
+                                      e.name ?? "",
                                       style: txtBold(13),
                                       overflow: TextOverflow.ellipsis,
                                     ),

@@ -5,6 +5,7 @@ import 'package:app_cudan/models/file_upload.dart';
 import 'package:app_cudan/models/transportation_card.dart';
 
 import 'area.dart';
+import 'receipt.dart';
 
 class BookingService {
   String? id;
@@ -397,9 +398,11 @@ class RegisterBookingService {
   String? filter_fee;
   String? areaId;
   String? receipts_code;
+  // lookup
   Area? a;
   ShelfLife? sh;
   BookingService? se;
+  List<Receipt>? rec;
 
   RegisterBookingService({
     this.id,
@@ -437,6 +440,7 @@ class RegisterBookingService {
     this.se,
     this.sh,
     this.a,
+    this.rec,
   });
 
   Map<String, dynamic> toMap() {
@@ -555,6 +559,13 @@ class RegisterBookingService {
       a: map['a'] != null ? Area.fromMap(map['a']) : null,
       sh: map['sh'] != null ? ShelfLife.fromMap(map['sh']) : null,
       se: map['se'] != null ? BookingService.fromMap(map['se']) : null,
+      rec: map['rec'] != null
+          ? List<Receipt>.from(
+              (map["rec"] as List<dynamic>).map<Receipt?>(
+                (x) => Receipt.fromJson(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
     );
   }
 
@@ -643,10 +654,14 @@ class BookingInfo {
   String? object;
   double? price;
   double? price_child;
+  double? price_child_weekend;
   double? price_adult;
+  double? price_adult_weekend;
   int? num;
   int? num_child;
   int? num_adult;
+  int? num_child_weekend;
+  int? num_adult_weekend;
   double? fee;
   BookingInfo({
     this.object,
@@ -657,6 +672,10 @@ class BookingInfo {
     this.num_child,
     this.num_adult,
     this.fee,
+    this.price_adult_weekend,
+    this.price_child_weekend,
+    this.num_child_weekend,
+    this.num_adult_weekend,
   });
 
   Map<String, dynamic> toMap() {
@@ -669,6 +688,10 @@ class BookingInfo {
       'num_child': num_child,
       'num_adult': num_adult,
       'fee': fee,
+      'price_child_weekend': price_child_weekend,
+      'price_adult_weekend': price_adult_weekend,
+      'num_adult_weekend': num_adult_weekend,
+      'num_child_weekend': num_child_weekend,
     };
   }
 
@@ -693,9 +716,25 @@ class BookingInfo {
       num_adult: int.tryParse(map['num_adult'].toString()) != null
           ? int.parse(map['num_adult'].toString())
           : null,
+      num_child_weekend:
+          int.tryParse(map['num_child_weekend'].toString()) != null
+              ? int.parse(map['num_child_weekend'].toString())
+              : null,
+      num_adult_weekend:
+          int.tryParse(map['num_adult_weekend'].toString()) != null
+              ? int.parse(map['num_adult_weekend'].toString())
+              : null,
       fee: double.tryParse(map['fee'].toString()) != null
           ? double.parse(map['fee'].toString())
           : null,
+      price_child_weekend:
+          double.tryParse(map['price_child_weekend'].toString()) != null
+              ? double.parse(map['price_child_weekend'].toString())
+              : null,
+      price_adult_weekend:
+          double.tryParse(map['price_adult_weekend'].toString()) != null
+              ? double.parse(map['price_adult_weekend'].toString())
+              : null,
     );
   }
 
@@ -712,7 +751,10 @@ class BookingInfo {
     int? num,
     int? num_child,
     int? num_adult,
-    double? fee,
+    int? num_child_weekend,
+    int? num_adult_weekend,
+    double? price_adult_weekend,
+    double? price_child_weekend,
   }) {
     return BookingInfo(
       object: object ?? this.object,
@@ -723,6 +765,10 @@ class BookingInfo {
       num_child: num_child ?? this.num_child,
       num_adult: num_adult ?? this.num_adult,
       fee: fee ?? this.fee,
+      num_adult_weekend: num_adult_weekend ?? this.num_adult_weekend,
+      num_child_weekend: num_child_weekend ?? this.num_child_weekend,
+      price_adult_weekend: price_adult_weekend ?? this.price_adult_weekend,
+      price_child_weekend: price_child_weekend ?? this.price_child_weekend,
     );
   }
 }

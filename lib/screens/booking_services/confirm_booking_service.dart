@@ -1,6 +1,5 @@
 import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/models/info_content_view.dart';
-import 'package:app_cudan/models/transportation_card.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/utils/utils.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
