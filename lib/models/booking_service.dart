@@ -597,6 +597,7 @@ class RegisterBookingService {
     int? total_num_ticket,
     String? filter_fee,
     String? receipts_code,
+    String? areaId,
   }) {
     return RegisterBookingService(
       id: id ?? this.id,
@@ -633,6 +634,7 @@ class RegisterBookingService {
       total_num_ticket: total_num_ticket ?? this.total_num_ticket,
       filter_fee: filter_fee ?? this.filter_fee,
       receipts_code: receipts_code ?? this.receipts_code,
+      areaId: areaId ?? this.areaId,
     );
   }
 }

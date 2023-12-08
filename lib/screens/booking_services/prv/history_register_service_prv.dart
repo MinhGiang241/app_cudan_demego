@@ -3,12 +3,17 @@ import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../utils/utils.dart';
 
 class HistoryRegisterServicePrv extends ChangeNotifier {
   List<RegisterBookingService> monthList = [];
   List<RegisterBookingService> turnList = [];
+  var turnRefreshController = RefreshController(initialRefresh: false);
+  var monthRefreshController = RefreshController(initialRefresh: false);
+  var emptyMonthRefreshController = RefreshController(initialRefresh: false);
+  var emptyTurnRefreshController = RefreshController(initialRefresh: false);
 
   Future getRegisterServiceList(String type, BuildContext context) async {
     var residentId = context.read<ResidentInfoPrv>().residentId;
@@ -22,14 +27,19 @@ class HistoryRegisterServicePrv extends ChangeNotifier {
       phone,
     ).then((v) {
       if (v != null) {
-        monthList.clear();
-        turnList.clear();
+        if (type == 'month') {
+          monthList.clear();
+        }
+        if (type == 'turn') {
+          turnList.clear();
+        }
         for (var i in v) {
-          if (type == 'month') {
-            monthList.add(RegisterBookingService.fromMap(i));
+          var reg = RegisterBookingService.fromMap(i);
+          if (reg.registration_type == 'month') {
+            monthList.add(reg);
           }
-          if (type == 'turn') {
-            turnList.add(RegisterBookingService.fromMap(i));
+          if (reg.registration_type == 'turn') {
+            turnList.add(reg);
           }
         }
       }

@@ -24,6 +24,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     this.end_date,
     this.price,
     this.shelfLife,
+    this.bookingRegistration,
   }) {
     var guestIndex =
         service.list_of_fees_by_turn?.indexWhere((e) => e.object == "guest");
@@ -41,6 +42,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         ? service.list_of_fees_by_turn![residentIndex]
         : null;
   }
+
   BookingService service;
   String time_start;
   String time_end;
@@ -97,6 +99,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       fee: service.service_charge,
       serviceConfigurationId: service.id,
       note: service.note,
+      // address:,
       // confirm_use: confirm_use,
       total_num_ticket: type == "month" ? num : null,
       status: 'WAIT_USE',
@@ -109,13 +112,24 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       apartmentId: apartment?.apartmentId,
       registration_type: type,
       end_date: type == 'month'
-          ? DateTime(now.year, now.month + 1, now.day).toUtc().toIso8601String()
+          ? DateTime(now.year, now.month + 1, now.day).toIso8601String()
           : null,
       use_date: dateString,
       phone_number: phone,
       filter_fee: service.service_charge == 'nocharge' ? 'free' : 'charges',
       areaId: area.id,
       booking_info: [
+        if (service.service_charge == "nocharge" && type == "turn")
+          BookingInfo(
+            fee: 0,
+            num: 0,
+            num_adult: num,
+            price: 0,
+            price_child: 0,
+            price_adult: 0,
+            num_child: 0,
+            object: isResident ? 'resident' : 'guest',
+          ),
         if (configResident != null && !checkNullConfig(configResident!))
           BookingInfo(
             object: 'resident',
@@ -171,28 +185,72 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       ],
     );
     var data = registration.toMap();
-    await APIBookingService.saveRegiterService(data).then((v) {
+    await APIBookingService.changeStatusRegisterService(data, 'WAIT_USE')
+        .then((v) {
       loading = false;
       notifyListeners();
-      if (v != null) {
-        bookingRegistration = RegisterBookingService.fromMap(v);
-        mode = 1;
-        Utils.showSuccessMessage(
-            context: context,
-            e: S.of(context).success_booking(service.name ?? ''),
-            onClose: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                HistoryRegisterServiceScreen.routeName,
-                (route) => route.isFirst,
-              );
-            });
-      }
+      // if (v != null) {
+      // bookingRegistration = RegisterBookingService.fromMap(v);
+      // mode = 1;
+      Utils.showSuccessMessage(
+        context: context,
+        e: S.of(context).success_booking(service.name ?? ''),
+        onClose: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            HistoryRegisterServiceScreen.routeName,
+            (route) => route.isFirst,
+            arguments: {'init': 0},
+          );
+        },
+      );
+      // }
       notifyListeners();
     }).catchError((e) {
       loading = false;
       notifyListeners();
       Utils.showErrorMessage(context, e);
     });
+  }
+
+  onCancelService(BuildContext context) async {
+    var booking = bookingRegistration?.copyWith();
+
+    if (booking != null) {
+      var status =
+          booking.filter_fee == 'charges' ? "CANCELLATION_APPROVAL" : "CANCEL";
+      Utils.showConfirmMessage(
+        context: context,
+        title: S.of(context).cancel_reg,
+        content: S.of(context).confirm_cancel_request(booking.code ?? ''),
+        onConfirm: () async {
+          loading = true;
+          notifyListeners();
+          await APIBookingService.changeStatusRegisterService(
+            booking.toMap(),
+            status,
+          ).then((v) {
+            loading = false;
+            notifyListeners();
+            Utils.showSuccessMessage(
+              context: context,
+              e: S.of(context).success_can_req,
+              onClose: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  HistoryRegisterServiceScreen.routeName,
+                  (route) => route.isFirst,
+                  arguments: {'init': 1},
+                );
+              },
+            );
+          }).catchError((e) {
+            loading = false;
+            notifyListeners();
+            Utils.showErrorMessage(context, e);
+          });
+        },
+      );
+    }
   }
 }

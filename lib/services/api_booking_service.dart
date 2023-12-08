@@ -161,4 +161,40 @@ mutation (\$type:String,\$residentId:String,\$apartmentId:String,\$phone:String)
       return res.response.data;
     }
   }
+
+// mutation ($data:Dictionary,$status:String){
+//     response: service_change_status (data: $data,status: $status )
+// }
+  static Future changeStatusRegisterService(
+    Map<String, dynamic> data,
+    String status,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary,\$status:String){
+    response: service_mobile_change_status_register_service (data: \$data,status: \$status ) {
+        code
+        message
+        data
+    }
+}
+        
+    ''';
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: {
+        'data': data,
+        'status': status,
+      },
+    );
+
+    final results = await ApiService.shared.graphqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

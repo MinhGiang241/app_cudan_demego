@@ -22,11 +22,17 @@ class _HistoryRegisterServiceScreenState
     extends State<HistoryRegisterServiceScreen> with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map?;
+    if (arg != null && arg['init'] != null) {
+      initIndex = arg['init'];
+    }
     return ChangeNotifierProvider(
       create: (context) => HistoryRegisterServicePrv(),
       builder: (context, builder) {
+        tabController.index = initIndex;
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).his_reg_service,

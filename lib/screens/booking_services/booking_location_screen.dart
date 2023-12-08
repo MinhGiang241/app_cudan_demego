@@ -88,22 +88,24 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          ConfirmBookingService.routeName,
-                          arguments: {
-                            'service': service,
-                            'type': type,
-                            'time-start': time_start,
-                            'time-end': time_end,
-                            'area': i,
-                            'date': dateString,
-                            'num': num,
-                            'mode': 0,
-                            "guest-cfg": configGuest,
-                            'resident-cfg': configResident,
-                          },
-                        );
+                        if (!((i.ticket_per_hour ?? 0) <= (i.sg ?? 0))) {
+                          Navigator.pushNamed(
+                            context,
+                            ConfirmBookingService.routeName,
+                            arguments: {
+                              'service': service,
+                              'type': type,
+                              'time-start': time_start,
+                              'time-end': time_end,
+                              'area': i,
+                              'date': dateString,
+                              'num': num,
+                              'mode': 0,
+                              "guest-cfg": configGuest,
+                              'resident-cfg': configResident,
+                            },
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 10),

@@ -28,6 +28,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
   int num = 0;
   Map<String, dynamic>? configGuest;
   Map<String, dynamic>? configResident;
+  DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
@@ -63,7 +64,6 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                 service.ticket_type == "ageclassified",
               )
             : null;
-    DateTime date = DateTime.now();
 
     return PrimaryScreen(
       isPadding: false,
@@ -361,7 +361,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                     .list_hours_of_operation_per_day?[
                                         _selectedOption]
                                     .time_end,
-                                "date": date.toUtc().toIso8601String(),
+                                "date": date.toIso8601String(),
                                 "num": num,
                                 "guest-cfg": configGuest,
                                 'resident-cfg': configResident,
@@ -494,7 +494,7 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                           .list_hours_of_operation_per_day?[
                                               _selectedOption]
                                           .time_end,
-                                      "date": date.toUtc().toIso8601String(),
+                                      "date": date.toIso8601String(),
                                       "num": num,
                                       "guest-cfg": configGuest,
                                       'resident-cfg': configResident,

@@ -8,12 +8,14 @@ import 'package:app_cudan/widgets/primary_button.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../models/area.dart';
 import '../../models/booking_service.dart';
 import 'prv/confirm_booking_service_prv.dart';
+import 'select_booking_service_sceen.dart';
 
 class ConfirmBookingService extends StatefulWidget {
   const ConfirmBookingService({super.key});
@@ -31,6 +33,23 @@ class ConfirmBookingService extends StatefulWidget {
 **/
 
 class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
+  String genTicketTypeString(String type) {
+    switch (type.trim()) {
+      case "price_child":
+        return S.current.child_ticket_num;
+      case "price_adult":
+        return S.current.adult_ticket_num;
+      case "price_child_weekend":
+        return S.current.weekend_child_ticket_num;
+      case "price_adult_weekend":
+        return S.current.weekend_aldult_ticket_num;
+      default:
+        return '';
+    }
+  }
+
+  final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
@@ -50,6 +69,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         shelfLife: arg?['fee_month'] as FeeByMonth?,
         end_date: arg?['end_date'] as String?,
         price: arg?['price'] as double?,
+        bookingRegistration: arg?['register'] as RegisterBookingService?,
       ),
       builder: (context, builder) {
         var service = context.read<ConfirmBookingServicePrv>().service;
@@ -60,6 +80,12 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         var num = context.read<ConfirmBookingServicePrv>().num;
         var mode = context.watch<ConfirmBookingServicePrv>().mode;
         var loading = context.watch<ConfirmBookingServicePrv>().loading;
+        var reg = context.watch<ConfirmBookingServicePrv>().bookingRegistration;
+        var guestFee = context.watch<ConfirmBookingServicePrv>().guestFee;
+        var residentFee = context.watch<ConfirmBookingServicePrv>().residentFee;
+        var configGuest = context.watch<ConfirmBookingServicePrv>().configGuest;
+        var configResident =
+            context.watch<ConfirmBookingServicePrv>().configResident;
         List<InfoContentView> listInfo = [
           InfoContentView(
             title: S.of(context).util_type,
@@ -81,6 +107,11 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                     ?.time_slot ??
                 '${Utils.dateFormat(dateString, 0)} ${time_start} - ${time_end}',
           ),
+          if (mode != 0 && reg != null)
+            InfoContentView(
+              title: S.of(context).reg_code,
+              content: reg.code,
+            ),
         ];
         var resident = context.read<ResidentInfoPrv>().userInfo;
         var apartment = context.read<ResidentInfoPrv>().selectedApartment;
@@ -113,15 +144,15 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                       padding: EdgeInsets.symmetric(vertical: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: redColor2,
+                        color: redColor4,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.cancel, color: Colors.white),
+                          Icon(Icons.cancel, color: redColorBase),
                           Text(
                             S.of(context).cancelled,
-                            style: txtRegular(14, Colors.white),
+                            style: txtRegular(14, redColorBase),
                           ),
                         ],
                       ),
@@ -192,6 +223,108 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                   ),
                 ),
               ),
+
+              if (configResident != null)
+                Divider(
+                  color: Colors.black,
+                ),
+              if (configResident != null) vpad(10),
+              if (configResident != null)
+                Text(
+                  S.of(context).resident_ticket,
+                  style: txtBold(12, primaryColorBase),
+                ),
+              if (configResident != null) vpad(6),
+              if (configResident != null)
+                ...configResident.entries
+                    .where(
+                      (element) => element.value != 0 && element.value != null,
+                    )
+                    .map(
+                      (s) => Padding(
+                        padding: EdgeInsets.only(bottom: 6),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    genTicketTypeString(s.key),
+                                    style: txtSemiBold(12, grayScaleColor3),
+                                  ),
+                                ),
+                                hpad(10),
+                                Expanded(
+                                  flex: 1,
+                                  child:
+                                      Text('${s.value}', style: txtRegular(12)),
+                                ),
+                                // Expanded(child: Text('${s.value}',),),
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "${S.of(context).ticket_price} : ${formatCurrency.format(residentFee?.toMap()[s.key])}",
+                                style: txtRegular(11),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+              if (configGuest != null)
+                Divider(
+                  color: Colors.black,
+                ),
+              if (configGuest != null) vpad(10),
+              if (configGuest != null)
+                Text(
+                  S.of(context).guest_ticket,
+                  style: txtBold(12, primaryColorBase),
+                ),
+              if (configGuest != null) vpad(6),
+              if (configGuest != null)
+                ...configGuest.entries
+                    .where(
+                      (element) => element.value != 0 && element.value != null,
+                    )
+                    .map(
+                      (s) => Padding(
+                        padding: EdgeInsets.only(bottom: 6),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    genTicketTypeString(s.key),
+                                    style: txtSemiBold(12, grayScaleColor3),
+                                  ),
+                                ),
+                                hpad(10),
+                                Expanded(
+                                  flex: 1,
+                                  child:
+                                      Text('${s.value}', style: txtRegular(12)),
+                                ),
+                                // Expanded(child: Text('${s.value}',),),
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "${S.of(context).ticket_price} : ${formatCurrency.format(guestFee?.toMap()[s.key])}",
+                                style: txtRegular(11),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
               vpad(20),
               Container(
                 decoration: BoxDecoration(
@@ -217,17 +350,21 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                     vpad(10),
                   ],
                 ),
-              ), // PrimaryInfoWidget(listInfoView: listInfoView),
+              ),
+
+              // PrimaryInfoWidget(listInfoView: listInfoView),
               vpad(20),
               Row(
                 children: [
                   Checkbox(
-                    value:
+                    value: reg?.agree_to_terms_of_service ??
                         context.watch<ConfirmBookingServicePrv>().confirm_use,
                     onChanged: (v) {
-                      context
-                          .read<ConfirmBookingServicePrv>()
-                          .toggleConfirmUse();
+                      if (mode == 0) {
+                        context
+                            .read<ConfirmBookingServicePrv>()
+                            .toggleConfirmUse();
+                      }
                     },
                   ),
                   Flexible(
@@ -295,7 +432,9 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 PrimaryButton(
                   isLoading: loading,
                   onTap: () {
-                    context.read<ConfirmBookingServicePrv>().setMode(2);
+                    context
+                        .read<ConfirmBookingServicePrv>()
+                        .onCancelService(context);
                   },
                   text: S.of(context).cancel,
                   buttonType: ButtonType.red,
@@ -306,7 +445,10 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 PrimaryButton(
                   isLoading: loading,
                   onTap: () {
-                    context.read<ConfirmBookingServicePrv>().setMode(0);
+                    Navigator.of(context).pushReplacementNamed(
+                      SelectBookingServiceScreen.routeName,
+                      arguments: {'service': service},
+                    );
                   },
                   text: S.of(context).re_booking,
                   buttonSize: ButtonSize.small,

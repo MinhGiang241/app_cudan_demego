@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:app_cudan/models/info_content_view.dart';
 import 'package:app_cudan/screens/booking_services/prv/history_register_service_prv.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -26,11 +22,12 @@ class TurnServicesTab extends StatefulWidget {
 }
 
 class _TurnServicesTabState extends State<TurnServicesTab> {
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
-
   @override
   Widget build(BuildContext context) {
+    var _refreshController =
+        context.read<HistoryRegisterServicePrv>().turnRefreshController;
+    var _emptyController =
+        context.read<HistoryRegisterServicePrv>().emptyTurnRefreshController;
     return FutureBuilder(
       future: context
           .read<HistoryRegisterServicePrv>()
@@ -55,10 +52,10 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
               header: WaterDropMaterialHeader(
                 backgroundColor: Theme.of(context).primaryColor,
               ),
-              controller: _refreshController,
+              controller: _emptyController,
               onRefresh: () {
                 setState(() {});
-                _refreshController.refreshCompleted();
+                _emptyController.refreshCompleted();
               },
               child: PrimaryEmptyWidget(
                 emptyText: S.of(context).no_reg,
@@ -111,11 +108,11 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                           'service': e.se,
                           'time-start': e.time_slot?.split('-')[0].trim(),
                           'time-end': e.time_slot?.split('-')[1].trim(),
-                          'mode': 1,
+                          'mode': (e.status == "CANCEL") ? 2 : 1,
                           'area': e.a,
                           'date': e.use_date,
                           'type': 'turn',
-                          'num': 1
+                          'num': 1,
                           // "guest-cfg": configGuest,
                           // 'resident-cfg': configResident,
                         },
@@ -184,7 +181,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                '${S.of(context).created_time}: ${Utils.dateTimeFormat(e.createdTime ?? '', 0)}',
+                                '${S.of(context).created_time}: ${Utils.dateTimeFormat((e.createdTime ?? ''), 0)}',
                                 style: txtRegular(11, grayScaleColor3),
                               ),
                             ),

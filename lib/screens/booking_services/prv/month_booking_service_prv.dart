@@ -195,8 +195,8 @@ class MonthBookingServicePrv extends ChangeNotifier {
           'time-end':
               service.list_hours_of_operation_per_day?[timeOption!].time_end,
           'area': areas[selectedAreaIndex!],
-          'date': startDate!.toUtc().toIso8601String(),
-          'end_date': endDate!.toUtc().toIso8601String(),
+          'date': startDate!.toIso8601String(),
+          'end_date': endDate!.toIso8601String(),
           'fee_month': shelflifeList[selectedShelfLifeIndex!],
           'num': 1,
           'mode': 0,

@@ -251,7 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chat_greeting": MessageLookupByLibrary.simpleMessage(
             "Để được trợ giúp, xin hãy ấn vào bắt đầu cuộc trò chuyện sau đó lựa chọn chủ đề và chờ ít phút để nhân viên phản hồi lại."),
         "child_ticket_num":
-            MessageLookupByLibrary.simpleMessage("Số vé người trẻ em"),
+            MessageLookupByLibrary.simpleMessage("Số vé trẻ em"),
         "choices": MessageLookupByLibrary.simpleMessage("Lựa chọn"),
         "choose_a_project": MessageLookupByLibrary.simpleMessage("Chọn dự án"),
         "choose_an_apartment":
@@ -1289,8 +1289,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_payment": m31,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Từ chối phiếu thành công"),
-        "success_reg_res":
-            MessageLookupByLibrary.simpleMessage("Đăng ký cư dân thành công"),
+        "success_reg_res": MessageLookupByLibrary.simpleMessage(
+            "Đăng ký truy cập dự án thành công"),
         "success_register_dependence": MessageLookupByLibrary.simpleMessage(
             "Đăng ký người phụ thuộc thành công"),
         "success_remove":

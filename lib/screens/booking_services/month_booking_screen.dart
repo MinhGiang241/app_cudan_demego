@@ -95,9 +95,12 @@ class MonthBookingScreen extends StatelessWidget {
                       color: Colors.black,
                     ),
                     vpad(10),
-                    Text(
-                      S.of(context).select_time,
-                      style: txtBold(12),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        S.of(context).time_slot,
+                        style: txtBold(12),
+                      ),
                     ),
                     vpad(8),
                     ...service.list_hours_of_operation_per_day!
