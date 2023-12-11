@@ -267,12 +267,14 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         if (configResident != null && !checkNullConfig(configResident!))
           BookingInfo(
             object: 'resident',
-            fee: service.ticket_type == 'ageclassified'
+            fee: service.ticket_type == 'unclassified'
                 ? (guestFee?.price ?? 0.0)
                 : 0.0,
-            num: num,
+            num: service.ticket_type == 'unclassified'
+                ? (configResident?['price'] ?? 0)
+                : 0,
             price: num *
-                (service.ticket_type == 'ageclassified'
+                (service.ticket_type == 'unclassified'
                     ? (guestFee?.price ?? 0.0)
                     : 0.0),
             num_adult: service.ticket_type == 'ageclassified'
@@ -293,12 +295,14 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         if (configGuest != null && !checkNullConfig(configGuest!))
           BookingInfo(
             object: 'guest',
-            fee: service.ticket_type == 'ageclassified'
+            fee: service.ticket_type == 'unclassified'
                 ? (guestFee?.price ?? 0.0)
                 : 0.0,
-            num: num,
+            num: service.ticket_type == 'unclassified'
+                ? (configGuest?['price'] ?? 0)
+                : 0,
             price: num *
-                (service.ticket_type == 'ageclassified'
+                (service.ticket_type == 'unclassified'
                     ? (guestFee?.price ?? 0.0)
                     : 0.0),
             num_adult: service.ticket_type == 'ageclassified'

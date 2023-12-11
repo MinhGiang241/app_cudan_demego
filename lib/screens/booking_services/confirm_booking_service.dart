@@ -25,7 +25,7 @@ class ConfirmBookingService extends StatefulWidget {
 }
 
 /**
-* Mode 
+* Mode
 * 0 : Prepare submit
 * 1 : Alrready summitted
 * 2 : Alrready Canceled
@@ -91,7 +91,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
       ),
       builder: (context, builder) {
         var isResident =
-            context.read<ResidentInfoPrv>().selectedApartment != null ||
+            context.read<ResidentInfoPrv>().selectedApartment != null &&
                 context.read<ResidentInfoPrv>().residentId != null;
         var service = context.read<ConfirmBookingServicePrv>().service;
         var time_start = context.read<ConfirmBookingServicePrv>().time_start;
