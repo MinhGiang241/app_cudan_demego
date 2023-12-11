@@ -49,6 +49,7 @@ class MonthBookingScreen extends StatelessWidget {
             context.watch<MonthBookingServicePrv>().shelflifeList;
         var option = context.watch<MonthBookingServicePrv>().timeOption;
         var areas = context.watch<MonthBookingServicePrv>().areas;
+        var endDate = context.watch<MonthBookingServicePrv>().endDate;
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).monthly_register_service,
@@ -184,7 +185,16 @@ class MonthBookingScreen extends StatelessWidget {
                       controller: context
                           .watch<MonthBookingServicePrv>()
                           .endDateController,
+                      validateString:
+                          context.watch<MonthBookingServicePrv>().endValidate,
                       label: S.of(context).end_use_date,
+                      validator: (v) {
+                        if (endDate != null &&
+                            endDate.compareTo(DateTime.now()) < 0) {
+                          return '';
+                        }
+                        return null;
+                      },
                       isReadOnly: true,
                       enable: false,
                       hint: 'dd/mm/yyyy',

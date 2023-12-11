@@ -52,7 +52,7 @@ class SelectBookingServiceScreen extends StatelessWidget {
                 child: Text(
                   S.of(context).time_ticket,
                   style: txtRegular(14),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                 ),
               ),
             ),
@@ -77,7 +77,7 @@ class SelectBookingServiceScreen extends StatelessWidget {
                 child: Text(
                   S.of(context).month_ticket,
                   style: txtRegular(14),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                 ),
               ),
             ),

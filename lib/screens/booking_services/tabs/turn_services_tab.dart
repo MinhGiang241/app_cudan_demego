@@ -189,7 +189,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                '${(e.se?.service_charge == 'nocharge' || e.rec == null || e.rec!.isEmpty) ? S.of(context).free : genStatus(e.rec?[0].payment_status ?? "")}',
+                                '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatus(e.rec?[0].payment_status ?? '') : ''}',
                                 style: txtBold(
                                   12,
                                   (e.se?.service_charge == 'nocharge' ||
@@ -208,6 +208,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                   );
                 },
               ),
+              vpad(40),
             ],
           ),
         );

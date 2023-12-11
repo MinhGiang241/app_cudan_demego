@@ -49,12 +49,31 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
 
   final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
 
+  countFeeMonth(List<BookingInfo>? bookinfo) {
+    if (bookinfo != null) {
+      var b = bookinfo.fold(0.0, (pre, el) {
+        var a = (el.num_adult ?? 0.0) * (el.price_adult ?? 0.0) +
+            (el.num_child ?? 0.0) * (el.price_child ?? 0.0) +
+            (el.num_adult_weekend ?? 0.0) * (el.price_adult_weekend ?? 0.0) +
+            (el.num_child_weekend ?? 0.0) * (el.price_child_weekend ?? 0);
+        return a;
+      });
+      return b;
+    }
+  }
+
+  // countFeeMonthMode0() {
+  //   F
+  //   return 0;
+  // }
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
 
     return ChangeNotifierProvider(
       create: (context) => ConfirmBookingServicePrv(
+        oldContext: context,
         service: arg?['service'] as BookingService,
         time_start: arg?['time-start'] as String,
         time_end: arg?['time-end'] as String,
@@ -71,11 +90,15 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         bookingRegistration: arg?['register'] as RegisterBookingService?,
       ),
       builder: (context, builder) {
+        var isResident =
+            context.read<ResidentInfoPrv>().selectedApartment != null ||
+                context.read<ResidentInfoPrv>().residentId != null;
         var service = context.read<ConfirmBookingServicePrv>().service;
         var time_start = context.read<ConfirmBookingServicePrv>().time_start;
         var time_end = context.read<ConfirmBookingServicePrv>().time_end;
         var area = context.read<ConfirmBookingServicePrv>().area;
         var dateString = context.read<ConfirmBookingServicePrv>().dateString;
+        var sh = context.read<ConfirmBookingServicePrv>().shelfLife;
         var num = context.read<ConfirmBookingServicePrv>().num;
         var mode = context.watch<ConfirmBookingServicePrv>().mode;
         var loading = context.watch<ConfirmBookingServicePrv>().loading;
@@ -85,6 +108,18 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         var configGuest = context.watch<ConfirmBookingServicePrv>().configGuest;
         var configResident =
             context.watch<ConfirmBookingServicePrv>().configResident;
+        var numReg, numGuest;
+        var numRegIndex =
+            reg?.booking_info?.indexWhere((c) => c.object == 'resident');
+        var numGuestIndex =
+            reg?.booking_info?.indexWhere((c) => c.object == 'guest');
+        if (numRegIndex != null && numRegIndex != -1) {
+          numReg = reg?.booking_info?[numRegIndex].num_adult;
+        }
+        if (numGuestIndex != null && numGuestIndex != -1) {
+          numGuest = reg?.booking_info?[numGuestIndex].num_adult;
+        }
+
         List<InfoContentView> listInfo = [
           InfoContentView(
             title: S.of(context).util_type,
@@ -94,23 +129,60 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             title: S.of(context).zone,
             content: area.name ?? '',
           ),
-          InfoContentView(
-            title: S.of(context).resident_ticket_amount,
-            content: '${num}',
-          ),
-          InfoContentView(
-            title: S.of(context).booking_time,
-            content: context
-                    .watch<ConfirmBookingServicePrv>()
-                    .bookingRegistration
-                    ?.time_slot ??
-                '${Utils.dateFormat(dateString, 0)} ${time_start} - ${time_end}',
-          ),
-          if (mode != 0 && reg != null)
+          if (numReg != null)
             InfoContentView(
-              title: S.of(context).reg_code,
-              content: reg.code,
+              title: S.of(context).resident_ticket_amount,
+              content: '${numReg}',
             ),
+          if (numGuest != null)
+            InfoContentView(
+              title: S.of(context).guest_ticket_amount,
+              content: '${numReg}',
+            ),
+          if (reg?.registration_type == 'turn')
+            InfoContentView(
+              title: S.of(context).booking_time,
+              content:
+                  '${Utils.dateFormat(reg?.use_date ?? dateString, 0)} ${reg?.time_slot ?? "${time_start} - ${time_end}"}',
+            ),
+          if (reg?.registration_type == 'month')
+            InfoContentView(
+              title: S.of(context).expired_reg,
+              content: mode == 0
+                  ? "${sh?.shelfLife?.use_time} ${genShelifeString(sh?.shelfLife?.type_time)}"
+                  : "${reg?.sh?.use_time} ${genShelifeString(reg?.sh?.type_time)}",
+            ),
+          if (reg?.registration_type == 'month')
+            InfoContentView(
+              title: S.of(context).time_slot,
+              content: '${reg?.time_slot ?? "${time_start} - ${time_end}"}',
+            ),
+          if (reg?.registration_type == 'month')
+            InfoContentView(
+              title: S.of(context).begin_use_date,
+              content: Utils.dateFormat(reg?.use_date ?? '', 1),
+            ),
+          if (reg?.registration_type == 'month')
+            InfoContentView(
+              title: S.of(context).end_use_date,
+              content: Utils.dateFormat(reg?.end_date ?? '', 1),
+            ),
+          if (reg?.registration_type == 'month')
+            InfoContentView(
+              title: S.of(context).reg_fee,
+              content: mode == 0
+                  ? formatCurrency.format(
+                      isResident
+                          ? (sh?.price_resident ?? 0)
+                          : (sh?.price_guest ?? 0),
+                    )
+                  : formatCurrency.format(reg?.total_price ?? 0),
+            ),
+          // if (mode != 0 && reg != null)
+          //   InfoContentView(
+          //     title: S.of(context).reg_code,
+          //     content: reg.code,
+          //   ),
         ];
         var resident = context.read<ResidentInfoPrv>().userInfo;
         var apartment = context.read<ResidentInfoPrv>().selectedApartment;
@@ -121,9 +193,19 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
           ),
           InfoContentView(
             title: S.of(context).apartment_code,
-            content:
-                "${apartment?.apartment?.name}-${apartment?.floor?.name}-${apartment?.building?.name}",
+            content: (mode != 0)
+                ? "${reg?.ap?.name}-${reg?.ap?.f?.name}-${reg?.ap?.b?.name}"
+                : "${apartment?.apartment?.name}-${apartment?.floor?.name}-${apartment?.building?.name}",
           ),
+          InfoContentView(
+            title: S.of(context).phone_num,
+            content: reg?.phone_number ?? '',
+          ),
+          if (mode != 0 && reg != null)
+            InfoContentView(
+              title: S.of(context).reg_code,
+              content: reg.code,
+            ),
         ];
         return PrimaryScreen(
           appBar: PrimaryAppbar(
@@ -134,28 +216,51 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
           body: ListView(
             children: [
               vpad(12),
-              mode != 2
-                  ? Text(
-                      service.name ?? '',
-                      style: txtBold(14),
-                    )
-                  : Container(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: redColor4,
+              // if (!((mode == 1 && reg?.status == "USED") ||
+              //     (mode == 2 && reg?.status == "CANCEL")))
+              if (mode == 0)
+                Text(
+                  service.name ?? '',
+                  style: txtBold(14),
+                ),
+              if (mode == 2 && reg?.status == "CANCEL")
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: redColor4,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.cancel, color: redColorBase),
+                      Text(
+                        S.of(context).cancelled,
+                        style: txtRegular(14, redColorBase),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.cancel, color: redColorBase),
-                          Text(
-                            S.of(context).cancelled,
-                            style: txtRegular(14, redColorBase),
-                          ),
-                        ],
+                    ],
+                  ),
+                ),
+              if (mode == 1)
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: genBookingStatusColor(reg?.status).withOpacity(.4),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        genBookingStatus(reg?.status),
+                        style: txtRegular(
+                          14,
+                          genBookingStatusColor(reg?.status),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
               // PrimaryButton(
               //         buttonType: ButtonType.red,
               //         borderRadius: BorderRadius.circular(12),
@@ -356,8 +461,10 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
               Row(
                 children: [
                   Checkbox(
-                    value: reg?.agree_to_terms_of_service ??
-                        context.watch<ConfirmBookingServicePrv>().confirm_use,
+                    activeColor: mode == 0 ? primaryColorBase : grayScaleColor3,
+                    value: mode != 0
+                        ? reg?.agree_to_terms_of_service
+                        : context.watch<ConfirmBookingServicePrv>().confirm_use,
                     onChanged: (v) {
                       if (mode == 0) {
                         context
@@ -427,7 +534,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                   buttonSize: ButtonSize.small,
                   borderRadius: BorderRadius.circular(20),
                 ),
-              if (mode == 1)
+              if (mode == 1 && (reg?.status == 'WAIT_USE'))
                 PrimaryButton(
                   isLoading: loading,
                   onTap: () {
@@ -450,6 +557,20 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                     );
                   },
                   text: S.of(context).re_booking,
+                  buttonSize: ButtonSize.small,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              if (mode == 1 && reg?.status == 'USED')
+                PrimaryButton(
+                  buttonType: ButtonType.orange,
+                  isLoading: loading,
+                  onTap: () {
+                    // Navigator.of(context).pushReplacementNamed(
+                    //   SelectBookingServiceScreen.routeName,
+                    //   arguments: {'service': service},
+                    // );
+                  },
+                  text: S.of(context).judge,
                   buttonSize: ButtonSize.small,
                   borderRadius: BorderRadius.circular(20),
                 ),

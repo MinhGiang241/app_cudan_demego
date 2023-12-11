@@ -585,6 +585,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "guest": MessageLookupByLibrary.simpleMessage("Guest"),
         "guest_account": MessageLookupByLibrary.simpleMessage("Guest account"),
         "guest_ticket": MessageLookupByLibrary.simpleMessage("Guest ticket"),
+        "guest_ticket_amount":
+            MessageLookupByLibrary.simpleMessage("Guest ticket amount"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Gym service"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Hand over date"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Hand over"),
@@ -656,6 +658,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_list_not_empty":
             MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
         "job": MessageLookupByLibrary.simpleMessage("Job"),
+        "judge": MessageLookupByLibrary.simpleMessage("Judge"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
@@ -1011,6 +1014,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registration date can be not empty"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Register delivery"),
+        "reg_fee": MessageLookupByLibrary.simpleMessage("Rergistering fee"),
         "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
             "Registered image must be at least 2 photo"),
         "reg_info":
@@ -1306,6 +1310,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send to approve request letter successfully"),
         "success_send_ticket": MessageLookupByLibrary.simpleMessage(
             "Send reflection successfully"),
+        "success_send_to_cancel": MessageLookupByLibrary.simpleMessage(
+            "Send request to cancel successfully"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Sign up successfully"),
         "success_update":

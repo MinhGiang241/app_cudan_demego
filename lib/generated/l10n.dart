@@ -9110,6 +9110,16 @@ class S {
     );
   }
 
+  /// `Guest ticket amount`
+  String get guest_ticket_amount {
+    return Intl.message(
+      'Guest ticket amount',
+      name: 'guest_ticket_amount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Booking time`
   String get booking_time {
     return Intl.message(
@@ -9445,6 +9455,36 @@ class S {
     return Intl.message(
       'Created time',
       name: 'created_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Judge`
+  String get judge {
+    return Intl.message(
+      'Judge',
+      name: 'judge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rergistering fee`
+  String get reg_fee {
+    return Intl.message(
+      'Rergistering fee',
+      name: 'reg_fee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send request to cancel successfully`
+  String get success_send_to_cancel {
+    return Intl.message(
+      'Send request to cancel successfully',
+      name: 'success_send_to_cancel',
       desc: '',
       args: [],
     );

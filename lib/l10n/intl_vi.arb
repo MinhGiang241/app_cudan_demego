@@ -906,6 +906,7 @@
   "util_type": "Loại tiện ích",
   "util_info": "Thông tin tiện ích",
   "resident_ticket_amount": "Số lượng vé cư dân",
+  "guest_ticket_amount": "Số lượng vé khách",
   "booking_time": "Thời gian đặt lịch",
   "registing_persion": "Người đăng ký",
   "apartment_code": "Mã căn hộ biệt thự",
@@ -939,5 +940,8 @@
   "time": "Thời gian",
   "free": "Miễn phí",
   "pay_bill": "TT hóa đơn",
-  "created_time": "Thời gian tạo"
+  "created_time": "Thời gian tạo",
+  "judge": "Đánh giá",
+  "reg_fee": "Phí đăng ký",
+  "success_send_to_cancel": "Gửi duyệt hủy phiếu thành công"
 }

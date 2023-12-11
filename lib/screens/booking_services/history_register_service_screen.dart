@@ -28,6 +28,8 @@ class _HistoryRegisterServiceScreenState
     if (arg != null && arg['init'] != null) {
       initIndex = arg['init'];
     }
+    print(arg);
+    print(initIndex);
     return ChangeNotifierProvider(
       create: (context) => HistoryRegisterServicePrv(),
       builder: (context, builder) {

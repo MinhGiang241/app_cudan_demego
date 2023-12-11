@@ -6,6 +6,7 @@ import 'package:app_cudan/models/transportation_card.dart';
 
 import 'area.dart';
 import 'receipt.dart';
+import 'response_resident_own.dart';
 
 class BookingService {
   String? id;
@@ -403,6 +404,7 @@ class RegisterBookingService {
   ShelfLife? sh;
   BookingService? se;
   List<Receipt>? rec;
+  Apartment? ap;
 
   RegisterBookingService({
     this.id,
@@ -441,6 +443,7 @@ class RegisterBookingService {
     this.sh,
     this.a,
     this.rec,
+    this.ap,
   });
 
   Map<String, dynamic> toMap() {
@@ -566,6 +569,7 @@ class RegisterBookingService {
               ),
             )
           : null,
+      ap: map['ap'] != null ? Apartment.fromJson(map['ap']) : null,
     );
   }
 

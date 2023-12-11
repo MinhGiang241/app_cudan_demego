@@ -905,6 +905,7 @@
   "util_type": "Service type",
   "util_info": "Service informaton",
   "resident_ticket_amount": "Resident ticket amount",
+  "guest_ticket_amount": "Guest ticket amount",
   "booking_time": "Booking time",
   "registing_persion": "Registing persion",
   "apartment_code": "apartment/house code",
@@ -938,5 +939,8 @@
   "time": "Time",
   "free": "Free",
   "pay_bill": "Bill payment",
-  "created_time": "Created time"
+  "created_time": "Created time",
+  "judge": "Judge",
+  "reg_fee": "Rergistering fee",
+  "success_send_to_cancel": "Send request to cancel successfully"
 }

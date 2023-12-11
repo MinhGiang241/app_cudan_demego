@@ -25,7 +25,14 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     this.price,
     this.shelfLife,
     this.bookingRegistration,
+    required this.oldContext,
   }) {
+    var residentId = oldContext.read<ResidentInfoPrv>().residentId;
+    var userInfo = oldContext.read<ResidentInfoPrv>().userInfo;
+    var phone = userInfo?.phone_required ?? userInfo?.account?.phone;
+    var apartment = oldContext.read<ResidentInfoPrv>().selectedApartment;
+    var isResident = residentId != null && apartment != null;
+    var now = DateTime.now();
     var guestIndex =
         service.list_of_fees_by_turn?.indexWhere((e) => e.object == "guest");
     guestFee = (service.list_of_fees_by_turn != null &&
@@ -68,8 +75,103 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         };
       }
     }
-  }
 
+    if (mode == 0) {
+      bookingRegistration = RegisterBookingService(
+        shelfLifeId: shelfLife?.shelfLife?.id,
+        total_price: price,
+        fee: service.service_charge,
+        serviceConfigurationId: service.id,
+        note: service.note,
+        // address:,
+        // confirm_use: confirm_use,
+        total_num_ticket: type == "month" ? num : null,
+        status: 'WAIT_USE',
+        payment_status:
+            service.service_charge == 'nocharge' ? 'free' : 'UNPAID',
+        time_slot: '$time_start - $time_end',
+        ticket_type: service.ticket_type,
+        agree_to_terms_of_service: confirm_use,
+        object: isResident ? 'resident' : 'guest',
+        residentId: residentId,
+        apartmentId: apartment?.apartmentId,
+        registration_type: type,
+        end_date: type == 'month'
+            ? DateTime(now.year, now.month + 1, now.day).toIso8601String()
+            : null,
+        use_date: dateString,
+        phone_number: phone,
+        filter_fee: service.service_charge == 'nocharge' ? 'free' : 'charges',
+        areaId: area.id,
+        booking_info: [
+          if (service.service_charge == "nocharge" && type == "turn")
+            BookingInfo(
+              fee: 0,
+              num: 0,
+              num_adult: num,
+              price: 0,
+              price_child: 0,
+              price_adult: 0,
+              num_child: 0,
+              object: isResident ? 'resident' : 'guest',
+            ),
+          if (configResident != null && !checkNullConfig(configResident!))
+            BookingInfo(
+              object: 'resident',
+              fee: service.ticket_type == 'ageclassified'
+                  ? (guestFee?.price ?? 0.0)
+                  : 0.0,
+              num: num,
+              price: num *
+                  (service.ticket_type == 'ageclassified'
+                      ? (guestFee?.price ?? 0.0)
+                      : 0.0),
+              num_adult: service.ticket_type == 'ageclassified'
+                  ? (configResident?['price_adult'] ?? 0)
+                  : 0,
+              num_child: service.ticket_type == 'ageclassified'
+                  ? (configResident?['price_child'] ?? 0)
+                  : 0,
+              price_adult: (service.ticket_type == 'ageclassified'
+                      ? (configResident?['price_adult'] ?? 0.0)
+                      : 0.0) *
+                  (residentFee?.price_adult ?? 0),
+              price_child: (service.ticket_type == 'ageclassified'
+                      ? (configResident?['price_child'] ?? 0.0)
+                      : 0.0) *
+                  (residentFee?.price_adult ?? 0),
+            ),
+          if (configGuest != null && !checkNullConfig(configGuest!))
+            BookingInfo(
+              object: 'guest',
+              fee: service.ticket_type == 'ageclassified'
+                  ? (guestFee?.price ?? 0.0)
+                  : 0.0,
+              num: num,
+              price: num *
+                  (service.ticket_type == 'ageclassified'
+                      ? (guestFee?.price ?? 0.0)
+                      : 0.0),
+              num_adult: service.ticket_type == 'ageclassified'
+                  ? (configGuest?['price_adult'] ?? 0)
+                  : 0,
+              num_child: service.ticket_type == 'ageclassified'
+                  ? (configGuest?['price_child'] ?? 0)
+                  : 0,
+              price_adult: (service.ticket_type == 'ageclassified'
+                      ? (configGuest?['price_adult'] ?? 0.0)
+                      : 0.0) *
+                  (guestFee?.price_adult ?? 0),
+              price_child: (service.ticket_type == 'ageclassified'
+                      ? (configGuest?['price_child'] ?? 0.0)
+                      : 0.0) *
+                  (guestFee?.price_child ?? 0),
+            ),
+        ],
+      );
+    }
+  }
+  BuildContext oldContext;
   BookingService service;
   String time_start;
   String time_end;
@@ -122,7 +224,12 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
 
     var registration = RegisterBookingService(
       shelfLifeId: shelfLife?.shelfLife?.id,
-      total_price: price,
+      total_price: type == "month"
+          ? isResident
+              ? (shelfLife?.price_resident ?? 0) * num
+              : (shelfLife?.price_guest ?? 0) * num
+          : null,
+
       fee: service.service_charge,
       serviceConfigurationId: service.id,
       note: service.note,
@@ -209,6 +316,10 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                     : 0.0) *
                 (guestFee?.price_child ?? 0),
           ),
+        // if (type == "month")
+        //   BookingInfo(
+        //     object: isResident ? 'resident' : 'guest',
+        //   ),
       ],
     );
     var data = registration.toMap();
@@ -227,7 +338,9 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
             context,
             HistoryRegisterServiceScreen.routeName,
             (route) => route.isFirst,
-            arguments: {'init': 0},
+            arguments: {
+              'init': bookingRegistration?.registration_type == 'month' ? 1 : 0,
+            },
           );
         },
       );
@@ -255,19 +368,25 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
           notifyListeners();
           await APIBookingService.changeStatusRegisterService(
             booking.toMap(),
-            status,
+            "CANCEL",
           ).then((v) {
             loading = false;
             notifyListeners();
             Utils.showSuccessMessage(
               context: context,
-              e: S.of(context).success_can_req,
+              e: status == "CANCELLATION_APPROVAL"
+                  ? S.of(context).success_send_to_cancel
+                  : S.of(context).success_can_req,
               onClose: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   HistoryRegisterServiceScreen.routeName,
                   (route) => route.isFirst,
-                  arguments: {'init': 1},
+                  arguments: {
+                    'init': bookingRegistration?.registration_type == 'month'
+                        ? 1
+                        : 0,
+                  },
                 );
               },
             );

@@ -6,12 +6,14 @@ import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../models/booking_service.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/primary_icon.dart';
+import '../auth/prv/resident_info_prv.dart';
 
 class TimeBookingScreen extends StatefulWidget {
   const TimeBookingScreen({super.key});
@@ -31,6 +33,9 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
   DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    var isResident =
+        context.read<ResidentInfoPrv>().selectedApartment != null &&
+            context.read<ResidentInfoPrv>().residentId != null;
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
     var service = arg?['service'] as BookingService;
     var type = arg?['type'] as String;
@@ -376,143 +381,147 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                       ),
                     ),
                   )
-                : Positioned(
-                    bottom: 0,
-                    child: PrimaryCard(
-                      width: dvWidth(context),
-                      child: Column(
-                        children: [
-                          vpad(5),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              S.of(context).enter_amount_resident_ticket,
-                              style: txtRegular(12),
-                            ),
-                          ),
-                          vpad(5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
+                : !isResident
+                    ? vpad(0)
+                    : Positioned(
+                        bottom: 0,
+                        child: PrimaryCard(
+                          width: dvWidth(context),
+                          child: Column(
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    num += 1;
-                                  });
-                                },
-                                icon: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: Icon(Icons.add),
+                              vpad(5),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  S.of(context).enter_amount_resident_ticket,
+                                  style: txtRegular(12),
                                 ),
                               ),
-                              Text(num.toString()),
-                              IconButton(
-                                onPressed: () {
-                                  if (num > 0) {
-                                    setState(() {
-                                      num -= 1;
-                                    });
-                                  }
-                                },
-                                icon: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      width: 1,
+                              vpad(5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        num += 1;
+                                      });
+                                    },
+                                    icon: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Icon(Icons.add),
                                     ),
                                   ),
-                                  child: Icon(Icons.remove),
+                                  Text(num.toString()),
+                                  IconButton(
+                                    onPressed: () {
+                                      if (num > 0) {
+                                        setState(() {
+                                          num -= 1;
+                                        });
+                                      }
+                                    },
+                                    icon: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Icon(Icons.remove),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: PrimaryButton(
+                                  onTap: () {
+                                    var hasFeeNotTicket = (configGuest?['price'] == null ||
+                                            configGuest?['price'] == 0) &&
+                                        (configGuest?['price_child'] == null ||
+                                            configGuest?['price_child'] == 0) &&
+                                        (configGuest?['price_child_weekend'] ==
+                                                null ||
+                                            configGuest?['price_child_weekend'] ==
+                                                0) &&
+                                        (configGuest?['price_adult_weekend'] ==
+                                                null ||
+                                            configGuest?['price_adult_weekend'] ==
+                                                0) &&
+                                        (configGuest?['price_weekend'] == null ||
+                                            configGuest?['price_weekend'] ==
+                                                0) &&
+                                        (configResident?['price'] == 0) &&
+                                        (configResident?['price_child'] ==
+                                                null ||
+                                            configResident?['price_child'] ==
+                                                0) &&
+                                        (configResident?['price_child_weekend'] ==
+                                                null ||
+                                            configResident?['price_child_weekend'] ==
+                                                0) &&
+                                        (configResident?['price_adult_weekend'] ==
+                                                null ||
+                                            configResident?['price_adult_weekend'] ==
+                                                0) &&
+                                        (configResident?['price_weekend'] == null ||
+                                            configResident?['price_weekend'] == 0);
+                                    if (controller.text.isEmpty) {
+                                      Utils.showErrorMessage(
+                                        context,
+                                        S.of(context).not_yet_select_date,
+                                      );
+                                    } else if ((num == 0 &&
+                                            service.service_charge ==
+                                                'nocharge') ||
+                                        (service.service_charge !=
+                                                'nocharge') &&
+                                            hasFeeNotTicket) {
+                                      Utils.showErrorMessage(
+                                        context,
+                                        S.of(context).no_have_ticket,
+                                      );
+                                    } else {
+                                      Navigator.pushNamed(
+                                        context,
+                                        BookingLocationScreen.routeName,
+                                        arguments: {
+                                          'service': service,
+                                          'type': type,
+                                          "time_start": service
+                                              .list_hours_of_operation_per_day?[
+                                                  _selectedOption]
+                                              .time_start,
+                                          "time_end": service
+                                              .list_hours_of_operation_per_day?[
+                                                  _selectedOption]
+                                              .time_end,
+                                          "date": date.toIso8601String(),
+                                          "num": num,
+                                          "guest-cfg": configGuest,
+                                          'resident-cfg': configResident,
+                                        },
+                                      );
+                                    }
+                                  },
+                                  width: double.infinity,
+                                  text: S.of(context).next,
+                                  buttonSize: ButtonSize.small,
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                               ),
+                              vpad(5),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: PrimaryButton(
-                              onTap: () {
-                                var hasFeeNotTicket = (configGuest?['price'] ==
-                                            null ||
-                                        configGuest?['price'] == 0) &&
-                                    (configGuest?['price_child'] == null ||
-                                        configGuest?['price_child'] == 0) &&
-                                    (configGuest?['price_child_weekend'] ==
-                                            null ||
-                                        configGuest?['price_child_weekend'] ==
-                                            0) &&
-                                    (configGuest?['price_adult_weekend'] ==
-                                            null ||
-                                        configGuest?['price_adult_weekend'] ==
-                                            0) &&
-                                    (configGuest?['price_weekend'] ==
-                                            null ||
-                                        configGuest?['price_weekend'] == 0) &&
-                                    (configResident?['price'] == 0) &&
-                                    (configResident?['price_child'] ==
-                                            null ||
-                                        configResident?['price_child'] == 0) &&
-                                    (configResident?['price_child_weekend'] ==
-                                            null ||
-                                        configResident?['price_child_weekend'] ==
-                                            0) &&
-                                    (configResident?['price_adult_weekend'] ==
-                                            null ||
-                                        configResident?['price_adult_weekend'] ==
-                                            0) &&
-                                    (configResident?['price_weekend'] == null ||
-                                        configResident?['price_weekend'] == 0);
-                                if (controller.text.isEmpty) {
-                                  Utils.showErrorMessage(
-                                    context,
-                                    S.of(context).not_yet_select_date,
-                                  );
-                                } else if ((num == 0 &&
-                                        service.service_charge == 'nocharge') ||
-                                    (service.service_charge != 'nocharge') &&
-                                        hasFeeNotTicket) {
-                                  Utils.showErrorMessage(
-                                    context,
-                                    S.of(context).no_have_ticket,
-                                  );
-                                } else {
-                                  Navigator.pushNamed(
-                                    context,
-                                    BookingLocationScreen.routeName,
-                                    arguments: {
-                                      'service': service,
-                                      'type': type,
-                                      "time_start": service
-                                          .list_hours_of_operation_per_day?[
-                                              _selectedOption]
-                                          .time_start,
-                                      "time_end": service
-                                          .list_hours_of_operation_per_day?[
-                                              _selectedOption]
-                                          .time_end,
-                                      "date": date.toIso8601String(),
-                                      "num": num,
-                                      "guest-cfg": configGuest,
-                                      'resident-cfg': configResident,
-                                    },
-                                  );
-                                }
-                              },
-                              width: double.infinity,
-                              text: S.of(context).next,
-                              buttonSize: ButtonSize.small,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          vpad(5),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
           ],
         ),
       ),

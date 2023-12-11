@@ -93,7 +93,8 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                   ),
                   InfoContentView(
                     title: S.of(context).expired_reg,
-                    content: "${e.sh?.use_time} ${e.sh?.type_time}",
+                    content:
+                        "${e.sh?.use_time} ${genShelifeString(e.sh?.type_time)}",
                   ),
                   InfoContentView(
                     title: S.of(context).start_date,
@@ -187,7 +188,7 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                           Expanded(
                             flex: 3,
                             child: Text(
-                              '${S.of(context).created_time}: ${Utils.dateTimeFormat(e.createdTime ?? '', 0)}',
+                              '${S.of(context).created_time}: ${Utils.dateTimeFormat(e.createdTime ?? '', 1)}',
                               style: txtRegular(11, grayScaleColor3),
                             ),
                           ),
@@ -195,7 +196,7 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                           Expanded(
                             flex: 1,
                             child: Text(
-                              '${e.se?.service_charge == 'nocharge' ? S.of(context).free : S.of(context).pay_bill}',
+                              '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatus(e.rec?[0].payment_status ?? '') : ''}',
                               style: txtBold(
                                 12,
                                 e.se?.service_charge == 'nocharge'
@@ -211,6 +212,7 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                   ),
                 );
               }),
+              vpad(40),
             ],
           ),
         );

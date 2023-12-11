@@ -294,6 +294,8 @@ String genBookingStatus(String? status) {
   switch (status) {
     case 'WAIT_USE':
       return S.current.wait_use;
+    case 'ACTIVED':
+      return S.current.active;
     case 'USING':
       return S.current.using;
     case 'USED':

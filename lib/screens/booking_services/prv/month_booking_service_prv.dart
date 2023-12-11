@@ -39,6 +39,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
   FeeByMonth? guestFee;
   FeeByMonth? residentFee;
   String? startValidate;
+  String? endValidate;
   String? shelfLifeValidate;
   String? areaValidate;
   bool autoValid = false;
@@ -61,7 +62,13 @@ class MonthBookingServicePrv extends ChangeNotifier {
     if (selectedShelfLifeIndex == null) {
       shelfLifeValidate = S.current.not_blank;
     } else {
-      areaValidate = null;
+      shelfLifeValidate = null;
+    }
+
+    if (endDate != null && endDate!.compareTo(DateTime.now()) < 0) {
+      endValidate = S.current.end_date_after_now;
+    } else {
+      endValidate = null;
     }
     notifyListeners();
   }
@@ -87,10 +94,9 @@ class MonthBookingServicePrv extends ChangeNotifier {
     if (selectedShelfLifeIndex != null) {
       price = service.service_charge == 'nocharge'
           ? 0
-          : (shelflifeList[selectedShelfLifeIndex!].shelfLife?.use_time ?? 0) *
-              (isResident
-                  ? (shelflifeList[selectedShelfLifeIndex!].price_resident ?? 0)
-                  : (shelflifeList[selectedShelfLifeIndex!].price_guest ?? 0));
+          : (isResident
+              ? (shelflifeList[selectedShelfLifeIndex!].price_resident ?? 0)
+              : (shelflifeList[selectedShelfLifeIndex!].price_guest ?? 0));
       feeController.text = formatCurrency.format(price).replaceAll("₫", "VND");
       notifyListeners();
     }
@@ -216,36 +222,38 @@ class MonthBookingServicePrv extends ChangeNotifier {
       context,
       initDate: DateTime.now(),
       startDate: DateTime(
-        DateTime.now().year,
+        DateTime.now().year - 100,
         DateTime.now().month,
         DateTime.now().day,
       ),
-      endDate: (service.isLimitedDaysRegistration == true &&
-              service.limited_days_registration_num != null)
-          ? DateTime(
-              DateTime.now()
-                  .add(
-                    Duration(
-                      days: service.limited_days_registration_num!,
-                    ),
-                  )
-                  .year,
-              DateTime.now()
-                  .add(
-                    Duration(
-                      days: service.limited_days_registration_num!,
-                    ),
-                  )
-                  .month,
-              DateTime.now()
-                  .add(
-                    Duration(
-                      days: service.limited_days_registration_num!,
-                    ),
-                  )
-                  .day,
-            )
-          : DateTime(DateTime.now().year + 10, 1, 1),
+      endDate:
+          // (service.isLimitedDaysRegistration == true &&
+          //         service.limited_days_registration_num != null)
+          //     ? DateTime(
+          //         DateTime.now()
+          //             .add(
+          //               Duration(
+          //                 days: service.limited_days_registration_num!,
+          //               ),
+          //             )
+          //             .year,
+          //         DateTime.now()
+          //             .add(
+          //               Duration(
+          //                 days: service.limited_days_registration_num!,
+          //               ),
+          //             )
+          //             .month,
+          //         DateTime.now()
+          //             .add(
+          //               Duration(
+          //                 days: service.limited_days_registration_num!,
+          //               ),
+          //             )
+          //             .day,
+          //       )
+          //     :
+          DateTime(DateTime.now().year + 10, 1, 1),
     ).then((v) {
       if (v != null) {
         startDate = v;

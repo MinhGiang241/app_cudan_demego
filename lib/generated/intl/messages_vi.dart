@@ -592,6 +592,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "guest_account":
             MessageLookupByLibrary.simpleMessage("Tài khoản khách"),
         "guest_ticket": MessageLookupByLibrary.simpleMessage("Vé khách ngoài"),
+        "guest_ticket_amount":
+            MessageLookupByLibrary.simpleMessage("Số lượng vé khách"),
         "gym_card": MessageLookupByLibrary.simpleMessage("Dịch vụ Gym"),
         "hand_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),
         "hand_over": MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
@@ -663,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_list_not_empty": MessageLookupByLibrary.simpleMessage(
             "Danh sách chuyển đồ không được để trống"),
         "job": MessageLookupByLibrary.simpleMessage("Nghề nghiệp"),
+        "judge": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
@@ -1020,6 +1023,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngày đăng ký không được để trống"),
         "reg_deliver":
             MessageLookupByLibrary.simpleMessage("Đăng ký chuyển đồ"),
+        "reg_fee": MessageLookupByLibrary.simpleMessage("Phí đăng ký"),
         "reg_images_not_empty": MessageLookupByLibrary.simpleMessage(
             "Ảnh đăng ký phương tiện phải ít nhất 2 ảnh"),
         "reg_info": MessageLookupByLibrary.simpleMessage("Thông tin đăng ký"),
@@ -1307,6 +1311,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi duyệt thành công"),
         "success_send_ticket":
             MessageLookupByLibrary.simpleMessage("Gửi phản ánh thành công"),
+        "success_send_to_cancel": MessageLookupByLibrary.simpleMessage(
+            "Gửi duyệt hủy phiếu thành công"),
         "success_sign_up":
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "success_update":
