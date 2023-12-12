@@ -98,11 +98,11 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                   ),
                   InfoContentView(
                     title: S.of(context).start_date,
-                    content: Utils.dateFormat(e.use_date ?? '', 0),
+                    content: Utils.dateFormat(e.use_date ?? '', 1),
                   ),
                   InfoContentView(
                     title: S.of(context).start_date,
-                    content: Utils.dateFormat(e.end_date ?? '', 0),
+                    content: Utils.dateFormat(e.end_date ?? '', 1),
                   ),
                 ];
                 return PrimaryCard(
@@ -158,7 +158,7 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                       vpad(3),
                       Text(
                         '${S.of(context).reg_code}: ${e.code}',
-                        style: txtRegular(11),
+                        style: txtRegular(11, grayScaleColor3),
                       ),
                       vpad(6),
                       ...listInfoContent.map(
@@ -196,12 +196,16 @@ class _MonthServicesTabState extends State<MonthServicesTab>
                           Expanded(
                             flex: 1,
                             child: Text(
-                              '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatus(e.rec?[0].payment_status ?? '') : ''}',
+                              '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatusPaymentService(e.rec?[0].payment_status ?? '') : ''}',
                               style: txtBold(
                                 12,
                                 e.se?.service_charge == 'nocharge'
                                     ? greenColor8
-                                    : primaryColorBase,
+                                    : (e.rec != null && e.rec!.isNotEmpty)
+                                        ? genStatusColor(
+                                            e.rec?[0].payment_status ?? '',
+                                          )
+                                        : null,
                               ),
                             ),
                           ),

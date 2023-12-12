@@ -9489,6 +9489,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Display services`
+  String get display_service {
+    return Intl.message(
+      'Display services',
+      name: 'display_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Health`
+  String get health {
+    return Intl.message(
+      'Health',
+      name: 'health',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping`
+  String get shopping {
+    return Intl.message(
+      'Shopping',
+      name: 'shopping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In debt`
+  String get owe {
+    return Intl.message(
+      'In debt',
+      name: 'owe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any display services`
+  String get no_display_ser {
+    return Intl.message(
+      'Don\'t have any display services',
+      name: 'no_display_ser',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

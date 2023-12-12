@@ -1,5 +1,6 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/booking_services/booking_services_screen.dart';
+import 'package:app_cudan/screens/display_services/display_services_screen.dart';
 import 'package:app_cudan/screens/receipts/receipt_screen.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_icon.dart';
@@ -150,6 +151,15 @@ class HomeServices extends StatelessWidget {
         "arg": null,
         "tap": () {
           Navigator.of(context).pushNamed(EventListScreen.routeName);
+        },
+      },
+      {
+        "icon": PrimaryIcons.planet,
+        "text": S.current.display_service,
+        "page": DisplayServiceScreen.routeName,
+        "arg": null,
+        "tap": () {
+          Navigator.of(context).pushNamed(DisplayServiceScreen.routeName);
         },
       },
     ];

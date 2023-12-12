@@ -185,16 +185,16 @@ class MonthBookingScreen extends StatelessWidget {
                       controller: context
                           .watch<MonthBookingServicePrv>()
                           .endDateController,
-                      validateString:
-                          context.watch<MonthBookingServicePrv>().endValidate,
+                      // validateString:
+                      //     context.watch<MonthBookingServicePrv>().endValidate,
                       label: S.of(context).end_use_date,
-                      validator: (v) {
-                        if (endDate != null &&
-                            endDate.compareTo(DateTime.now()) < 0) {
-                          return '';
-                        }
-                        return null;
-                      },
+                      // validator: (v) {
+                      //   if (endDate != null &&
+                      //       endDate.compareTo(DateTime.now()) < 0) {
+                      //     return '';
+                      //   }
+                      //   return null;
+                      // },
                       isReadOnly: true,
                       enable: false,
                       hint: 'dd/mm/yyyy',

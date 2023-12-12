@@ -189,7 +189,8 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                             style: txtBold(12, primaryColorBase),
                           ),
                           Text(
-                            S.of(context).max_num_ticket_per_day(3),
+                            S.of(context).max_num_ticket_per_day(
+                                service.limited_days_registration_num ?? ''),
                             style: txtRegular(
                               12,
                             ),
@@ -217,23 +218,6 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                   Spacer(),
                                   IconButton(
                                     onPressed: () {
-                                      setState(() {
-                                        configResident![e.key] += 1;
-                                      });
-                                    },
-                                    icon: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Icon(Icons.add),
-                                    ),
-                                  ),
-                                  Text(configResident![e.key].toString()),
-                                  IconButton(
-                                    onPressed: () {
                                       if (configResident![e.key] > 0) {
                                         setState(() {
                                           configResident![e.key] -= 1;
@@ -248,6 +232,23 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                         ),
                                       ),
                                       child: Icon(Icons.remove),
+                                    ),
+                                  ),
+                                  Text(configResident![e.key].toString()),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        configResident![e.key] += 1;
+                                      });
+                                    },
+                                    icon: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Icon(Icons.add),
                                     ),
                                   ),
                                 ],
@@ -294,23 +295,6 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                   Spacer(),
                                   IconButton(
                                     onPressed: () {
-                                      setState(() {
-                                        configGuest![e.key] += 1;
-                                      });
-                                    },
-                                    icon: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Icon(Icons.add),
-                                    ),
-                                  ),
-                                  Text(configGuest![e.key].toString()),
-                                  IconButton(
-                                    onPressed: () {
                                       if (configGuest![e.key] > 0) {
                                         setState(() {
                                           configGuest![e.key] -= 1;
@@ -325,6 +309,23 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                         ),
                                       ),
                                       child: Icon(Icons.remove),
+                                    ),
+                                  ),
+                                  Text(configGuest![e.key].toString()),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        configGuest![e.key] += 1;
+                                      });
+                                    },
+                                    icon: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Icon(Icons.add),
                                     ),
                                   ),
                                 ],
@@ -404,23 +405,6 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      setState(() {
-                                        num += 1;
-                                      });
-                                    },
-                                    icon: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Icon(Icons.add),
-                                    ),
-                                  ),
-                                  Text(num.toString()),
-                                  IconButton(
-                                    onPressed: () {
                                       if (num > 0) {
                                         setState(() {
                                           num -= 1;
@@ -435,6 +419,23 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                                         ),
                                       ),
                                       child: Icon(Icons.remove),
+                                    ),
+                                  ),
+                                  Text(num.toString()),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        num += 1;
+                                      });
+                                    },
+                                    icon: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Icon(Icons.add),
                                     ),
                                   ),
                                 ],

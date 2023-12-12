@@ -689,7 +689,7 @@
   "consumed_elec_details": "Chi tiết điện năng tiêu thụ",
   "legend": "Ghi chú",
   "total_money_to_pay": "Tổng cộng tiền thanh toán",
-  "wait_pay": "Chờ thanh toán",
+  "wait_pay": "Chưa thanh toán",
   "consumed_water_detail": "Chi tiết lượng nước tiêu thụ",
   "consumed_water_detail1": "Chi tiết lượng nước sử dụng",
   "details_bill": "Hóa đơn chi tiết",
@@ -909,7 +909,7 @@
   "guest_ticket_amount": "Số lượng vé khách",
   "booking_time": "Thời gian đặt lịch",
   "registing_persion": "Người đăng ký",
-  "apartment_code": "Mã căn hộ biệt thự",
+  "apartment_code": "Mã căn hộ/ biệt thự",
   "policy": "Điều khoản và điều kiện",
   "po_1": "Tôi đã hiểu và đồng ý với",
   "po_2": "điều khoản",
@@ -943,5 +943,10 @@
   "created_time": "Thời gian tạo",
   "judge": "Đánh giá",
   "reg_fee": "Phí đăng ký",
-  "success_send_to_cancel": "Gửi duyệt hủy phiếu thành công"
+  "success_send_to_cancel": "Gửi duyệt hủy phiếu thành công",
+  "display_service": "Dịch vụ hiển thị",
+  "health": "Sức khỏe",
+  "shopping": "Mua sắm",
+  "owe": "Nợ",
+  "no_display_ser": "Không có dịch vụ hiển thị nào"
 }

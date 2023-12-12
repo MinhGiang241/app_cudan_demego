@@ -154,7 +154,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "apartment_bill":
             MessageLookupByLibrary.simpleMessage("Tiền phí chung cư"),
         "apartment_code":
-            MessageLookupByLibrary.simpleMessage("Mã căn hộ biệt thự"),
+            MessageLookupByLibrary.simpleMessage("Mã căn hộ/ biệt thự"),
         "apartment_not_empty":
             MessageLookupByLibrary.simpleMessage("Căn hộ không được để trống"),
         "app_version": MessageLookupByLibrary.simpleMessage("App version"),
@@ -412,6 +412,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "discount_type":
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
+        "display_service":
+            MessageLookupByLibrary.simpleMessage("Dịch vụ hiển thị"),
         "dob": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "doctor_degree": MessageLookupByLibrary.simpleMessage("Bằng tiến sĩ"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
@@ -619,6 +621,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "have_acc":
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản?"),
         "have_baby": MessageLookupByLibrary.simpleMessage("Đã có con"),
+        "health": MessageLookupByLibrary.simpleMessage("Sức khỏe"),
         "height": MessageLookupByLibrary.simpleMessage("cao"),
         "hello": MessageLookupByLibrary.simpleMessage("Xin chào"),
         "here": MessageLookupByLibrary.simpleMessage("tại đây"),
@@ -749,6 +752,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có đăng ký chuyển đố nào"),
         "no_dependence": MessageLookupByLibrary.simpleMessage(
             "Không có phiếu đăng ký người phụ thuộc nào"),
+        "no_display_ser": MessageLookupByLibrary.simpleMessage(
+            "Không có dịch vụ hiển thị nào"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
         "no_extend_letter":
@@ -871,6 +876,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
             "Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của bạn có 6 ký tự."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("Xác thực OTP"),
+        "owe": MessageLookupByLibrary.simpleMessage("Nợ"),
         "owner": MessageLookupByLibrary.simpleMessage("Chủ hộ"),
         "owner_refuse": MessageLookupByLibrary.simpleMessage("Chủ hộ từ chối"),
         "package": MessageLookupByLibrary.simpleMessage("Hàng hóa"),
@@ -1210,6 +1216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "sex": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "shelflife_money": MessageLookupByLibrary.simpleMessage("Kỳ đóng tiền"),
+        "shopping": MessageLookupByLibrary.simpleMessage("Mua sắm"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Mua sắm online"),
         "shopping_represent": MessageLookupByLibrary.simpleMessage("Đi chợ hộ"),
@@ -1464,7 +1471,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phiếu gia hạn chờ xác nhận"),
         "wait_find": MessageLookupByLibrary.simpleMessage("Chờ tìm"),
         "wait_hand_over": MessageLookupByLibrary.simpleMessage("Chờ bàn giao"),
-        "wait_pay": MessageLookupByLibrary.simpleMessage("Chờ thanh toán"),
+        "wait_pay": MessageLookupByLibrary.simpleMessage("Chưa thanh toán"),
         "wait_receipt": MessageLookupByLibrary.simpleMessage("Chờ nhận"),
         "wait_return": MessageLookupByLibrary.simpleMessage("Chờ trả"),
         "wait_use": MessageLookupByLibrary.simpleMessage("Chờ sử dụng"),

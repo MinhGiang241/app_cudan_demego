@@ -408,6 +408,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
+        "display_service":
+            MessageLookupByLibrary.simpleMessage("Display services"),
         "dob": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "doctor_degree": MessageLookupByLibrary.simpleMessage("Doctor degree"),
         "dog": MessageLookupByLibrary.simpleMessage("Dog"),
@@ -613,6 +615,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "have_acc":
             MessageLookupByLibrary.simpleMessage("already have an account "),
         "have_baby": MessageLookupByLibrary.simpleMessage("Have baby"),
+        "health": MessageLookupByLibrary.simpleMessage("Health"),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "here": MessageLookupByLibrary.simpleMessage("tại đây"),
@@ -742,6 +745,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any package"),
         "no_dependence": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any dependence registration letter"),
+        "no_display_ser": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any display services"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Don\'t have any event"),
         "no_extend_letter": MessageLookupByLibrary.simpleMessage(
@@ -862,6 +867,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otp_msg_phone": MessageLookupByLibrary.simpleMessage(
             "We have sent OTP code to your registered phone number. Please enter the OTP code to perform authentication."),
         "otp_verify": MessageLookupByLibrary.simpleMessage("OTP verify"),
+        "owe": MessageLookupByLibrary.simpleMessage("In debt"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "owner_refuse": MessageLookupByLibrary.simpleMessage("Owner refuse"),
         "package": MessageLookupByLibrary.simpleMessage("Package"),
@@ -1209,6 +1215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sex": MessageLookupByLibrary.simpleMessage("Sex"),
         "shelflife_money":
             MessageLookupByLibrary.simpleMessage("Payment period"),
+        "shopping": MessageLookupByLibrary.simpleMessage("Shopping"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Shopping online"),
         "shopping_represent":

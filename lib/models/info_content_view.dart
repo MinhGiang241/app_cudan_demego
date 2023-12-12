@@ -71,6 +71,21 @@ genStatus(String status) {
       return S.current.wait_approve;
     case "APPROVEDSECOND":
       return S.current.approved;
+    case "OWE":
+      return S.current.owe;
+    default:
+      return '';
+  }
+}
+
+genStatusPaymentService(String status) {
+  switch (status) {
+    case "OWE":
+      return S.current.owe;
+    case "UNPAID":
+      return S.current.wait_pay;
+    case "PAID":
+      return S.current.paid;
     default:
       return '';
   }
@@ -179,6 +194,8 @@ Color genStatusColor(String? status) {
       return redColorBase;
     case "UNPAID":
       return yellowColor7;
+    case "PAID":
+      return greenColor10;
     case "ACTIVED":
       return blueColor3;
     case "INACTIVED":
@@ -305,7 +322,7 @@ String genBookingStatus(String? status) {
     case 'CANCELLATION_APPROVAL':
       return S.current.wait_cancel;
     case 'CANCEL':
-      return S.current.cancel;
+      return S.current.cancelled;
     default:
       return '';
   }
@@ -316,7 +333,7 @@ Color genBookingStatusColor(String? status) {
     case 'WAIT_USE':
       return purpleColorBase;
     case 'USING':
-      return greenColorBase;
+      return Colors.teal;
     case 'USED':
       return primaryColorBase;
     case 'NOT_USED':

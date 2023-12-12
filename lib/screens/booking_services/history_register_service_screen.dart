@@ -1,3 +1,4 @@
+import 'package:app_cudan/screens/booking_services/booking_services_screen.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,23 +35,42 @@ class _HistoryRegisterServiceScreenState
       create: (context) => HistoryRegisterServicePrv(),
       builder: (context, builder) {
         tabController.index = initIndex;
-        return PrimaryScreen(
-          appBar: PrimaryAppbar(
-            title: S.of(context).his_reg_service,
-            tabController: tabController,
-            isTabScrollabel: false,
-            tabs: [
-              Tab(text: S.of(context).turn_service),
-              Tab(text: S.of(context).month_service),
-            ],
-          ),
-          body: SafeArea(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                TurnServicesTab(),
-                MonthServicesTab(),
+        return WillPopScope(
+          onWillPop: () async {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              BookingServicesScreen.routeName,
+              (route) => route.isFirst,
+            );
+            return false;
+          },
+          child: PrimaryScreen(
+            appBar: PrimaryAppbar(
+              title: S.of(context).his_reg_service,
+              tabController: tabController,
+              isTabScrollabel: false,
+              tabs: [
+                Tab(text: S.of(context).turn_service),
+                Tab(text: S.of(context).month_service),
               ],
+              leading: BackButton(
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    BookingServicesScreen.routeName,
+                    (route) => route.isFirst,
+                  );
+                },
+              ),
+            ),
+            body: SafeArea(
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  TurnServicesTab(),
+                  MonthServicesTab(),
+                ],
+              ),
             ),
           ),
         );

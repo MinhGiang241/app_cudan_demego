@@ -65,11 +65,11 @@ class MonthBookingServicePrv extends ChangeNotifier {
       shelfLifeValidate = null;
     }
 
-    if (endDate != null && endDate!.compareTo(DateTime.now()) < 0) {
-      endValidate = S.current.end_date_after_now;
-    } else {
-      endValidate = null;
-    }
+    // if (endDate != null && endDate!.compareTo(DateTime.now()) < 0) {
+    //   endValidate = S.current.end_date_after_now;
+    // } else {
+    //   endValidate = null;
+    // }
     notifyListeners();
   }
 

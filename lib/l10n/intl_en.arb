@@ -942,5 +942,10 @@
   "created_time": "Created time",
   "judge": "Judge",
   "reg_fee": "Rergistering fee",
-  "success_send_to_cancel": "Send request to cancel successfully"
+  "success_send_to_cancel": "Send request to cancel successfully",
+  "display_service": "Display services",
+  "health": "Health",
+  "shopping": "Shopping",
+  "owe": "In debt",
+  "no_display_ser": "Don't have any display services"
 }

@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../constants/constants.dart';
 import '../../models/area.dart';
 import '../../models/booking_service.dart';
+import 'booking_services_screen.dart';
 import 'prv/confirm_booking_service_prv.dart';
 import 'select_booking_service_sceen.dart';
 
@@ -129,12 +130,12 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             title: S.of(context).zone,
             content: area.name ?? '',
           ),
-          if (numReg != null)
+          if (numReg != null && service.service_charge == "nocharge")
             InfoContentView(
               title: S.of(context).resident_ticket_amount,
               content: '${numReg}',
             ),
-          if (numGuest != null)
+          if (numGuest != null && service.service_charge == "nocharge")
             InfoContentView(
               title: S.of(context).guest_ticket_amount,
               content: '${numReg}',
@@ -143,7 +144,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             InfoContentView(
               title: S.of(context).booking_time,
               content:
-                  '${Utils.dateFormat(reg?.use_date ?? dateString, 0)} ${reg?.time_slot ?? "${time_start} - ${time_end}"}',
+                  '${Utils.dateFormat(reg?.use_date ?? dateString, 1)} ${reg?.time_slot ?? "${time_start} - ${time_end}"}',
             ),
           if (reg?.registration_type == 'month')
             InfoContentView(
@@ -233,7 +234,8 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.cancel, color: redColorBase),
+                      Icon(Icons.cancel_outlined, color: redColorBase),
+                      hpad(10),
                       Text(
                         S.of(context).cancelled,
                         style: txtRegular(14, redColorBase),
@@ -438,13 +440,15 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        S.of(context).policy,
-                        style: txtRegular(12, primaryColorBase),
-                      ),
-                    ),
+                    vpad(12),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Text(
+                    //     '',
+                    //     //  S.of(context).policy,
+                    //     style: txtRegular(12, primaryColorBase),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
@@ -551,9 +555,9 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                 PrimaryButton(
                   isLoading: loading,
                   onTap: () {
-                    Navigator.of(context).pushReplacementNamed(
-                      SelectBookingServiceScreen.routeName,
-                      arguments: {'service': service},
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      BookingServicesScreen.routeName,
+                      (route) => route.isFirst,
                     );
                   },
                   text: S.of(context).re_booking,

@@ -90,7 +90,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                     InfoContentView(
                       title: S.of(context).time,
                       content:
-                          '${Utils.dateFormat(e.use_date ?? '', 0)} - ${e.time_slot}',
+                          '${Utils.dateFormat(e.use_date ?? '', 1)} - ${e.time_slot}',
                     ),
                     // InfoContentView(
                     //   title: S.of(context).expired_reg,
@@ -151,7 +151,7 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                         vpad(3),
                         Text(
                           '${S.of(context).reg_code}: ${e.code}',
-                          style: txtRegular(11),
+                          style: txtRegular(11, grayScaleColor3),
                         ),
                         vpad(6),
                         ...listInfoContent.map(
@@ -189,14 +189,16 @@ class _TurnServicesTabState extends State<TurnServicesTab> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatus(e.rec?[0].payment_status ?? '') : ''}',
+                                '${e.se?.service_charge == 'nocharge' ? S.of(context).free : (e.rec != null && e.rec!.isNotEmpty) ? genStatusPaymentService(e.rec?[0].payment_status ?? '') : ''}',
                                 style: txtBold(
                                   12,
-                                  (e.se?.service_charge == 'nocharge' ||
-                                          e.rec == null ||
-                                          e.rec!.isEmpty)
+                                  e.se?.service_charge == 'nocharge'
                                       ? greenColor8
-                                      : primaryColorBase,
+                                      : (e.rec != null && e.rec!.isNotEmpty)
+                                          ? genStatusColor(
+                                              e.rec?[0].payment_status ?? '',
+                                            )
+                                          : null,
                                 ),
                               ),
                             ),

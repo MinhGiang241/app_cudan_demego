@@ -54,7 +54,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       if (configResidentIndex != null && configResidentIndex != -1) {
         var bi = bookingRegistration?.booking_info![configResidentIndex];
         configResident = {
-          'price': bi?.price,
+          'price': bi?.num,
           'price_adult': bi?.num_adult,
           'price_child': bi?.num_child,
           'price_adult_weekend': bi?.num_adult_weekend,
@@ -67,7 +67,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       if (configGuestIndex != null && configGuestIndex != -1) {
         var bi = bookingRegistration?.booking_info![configGuestIndex];
         configGuest = {
-          'price': bi?.price,
+          'price': bi?.num,
           'price_adult': bi?.num_adult,
           'price_child': bi?.num_child,
           'price_adult_weekend': bi?.num_adult_weekend,
@@ -78,13 +78,15 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
 
     if (mode == 0) {
       bookingRegistration = RegisterBookingService(
+        rules: service.rules,
+        terms_of_service: service.terms_of_service,
         shelfLifeId: shelfLife?.shelfLife?.id,
         total_price: price,
         fee: service.service_charge,
         serviceConfigurationId: service.id,
         note: service.note,
         // address:,
-        // confirm_use: confirm_use,
+        confirm_use: service.confirm_use,
         total_num_ticket: type == "month" ? num : null,
         status: 'WAIT_USE',
         payment_status:
@@ -96,8 +98,8 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         residentId: residentId,
         apartmentId: apartment?.apartmentId,
         registration_type: type,
-        end_date: type == 'month'
-            ? DateTime(now.year, now.month + 1, now.day).toIso8601String()
+        end_date: type == 'month' && end_date != null
+            ? DateTime.parse(end_date!).toIso8601String()
             : null,
         use_date: dateString,
         phone_number: phone,
@@ -119,39 +121,50 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
             BookingInfo(
               object: 'resident',
               fee: service.ticket_type == 'ageclassified'
-                  ? (guestFee?.price ?? 0.0)
-                  : 0.0,
-              num: num,
-              price: num *
-                  (service.ticket_type == 'ageclassified'
-                      ? (guestFee?.price ?? 0.0)
-                      : 0.0),
+                  ? (guestFee?.price ?? 0.0) * num
+                  : ((configResident?['price_adult'] ?? 0.0) *
+                          (residentFee?.price_adult ?? 0.0) +
+                      ((configResident?['price_child'] ?? 0.0) *
+                          (residentFee?.price_adult ?? 0.0))),
+              num: !(service.service_charge == "nocharge")
+                  ? (configResident?['price'])
+                  : num,
+              price: (service.ticket_type != 'ageclassified'
+                  ? (double.parse((residentFee?.price ?? 0.0).toString()))
+                  : 0.0),
               num_adult: service.ticket_type == 'ageclassified'
-                  ? (configResident?['price_adult'] ?? 0)
+                  ? int.parse((configResident?['price_adult'] ?? 0).toString())
                   : 0,
               num_child: service.ticket_type == 'ageclassified'
-                  ? (configResident?['price_child'] ?? 0)
+                  ? (int.parse(
+                      (configResident?['price_child'] ?? 0).toString()))
                   : 0,
               price_adult: (service.ticket_type == 'ageclassified'
-                      ? (configResident?['price_adult'] ?? 0.0)
-                      : 0.0) *
-                  (residentFee?.price_adult ?? 0),
+                  ? double.parse(
+                      (configResident?['price_adult'] ?? 0).toString(),
+                    )
+                  : 0.0),
               price_child: (service.ticket_type == 'ageclassified'
-                      ? (configResident?['price_child'] ?? 0.0)
-                      : 0.0) *
-                  (residentFee?.price_adult ?? 0),
+                  ? double.parse(
+                      (configResident?['price_child'] ?? 0.0).toString(),
+                    )
+                  : 0.0),
             ),
           if (configGuest != null && !checkNullConfig(configGuest!))
             BookingInfo(
               object: 'guest',
               fee: service.ticket_type == 'ageclassified'
+                  ? (guestFee?.price ?? 0.0) * num
+                  : ((configGuest?['price_adult'] ?? 0.0) *
+                          (guestFee?.price_adult ?? 0.0) +
+                      (configGuest?['price_child'] ?? 0.0) *
+                          (guestFee?.price_child ?? 0.0)),
+              num: !(service.service_charge == "nocharge")
+                  ? (configGuest?['price'])
+                  : num,
+              price: (service.ticket_type != 'ageclassified'
                   ? (guestFee?.price ?? 0.0)
-                  : 0.0,
-              num: num,
-              price: num *
-                  (service.ticket_type == 'ageclassified'
-                      ? (guestFee?.price ?? 0.0)
-                      : 0.0),
+                  : 0.0),
               num_adult: service.ticket_type == 'ageclassified'
                   ? (configGuest?['price_adult'] ?? 0)
                   : 0,
@@ -159,13 +172,13 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                   ? (configGuest?['price_child'] ?? 0)
                   : 0,
               price_adult: (service.ticket_type == 'ageclassified'
-                      ? (configGuest?['price_adult'] ?? 0.0)
-                      : 0.0) *
-                  (guestFee?.price_adult ?? 0),
+                  ? double.parse(
+                      (configGuest?['price_adult'] ?? 0.0).toString())
+                  : 0.0),
               price_child: (service.ticket_type == 'ageclassified'
-                      ? (configGuest?['price_child'] ?? 0.0)
-                      : 0.0) *
-                  (guestFee?.price_child ?? 0),
+                  ? double.parse(
+                      (configGuest?['price_child'] ?? 0.0).toString())
+                  : 0.0),
             ),
         ],
       );
@@ -223,6 +236,8 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
     print(configResident);
 
     var registration = RegisterBookingService(
+      rules: service.rules,
+      terms_of_service: service.terms_of_service,
       shelfLifeId: shelfLife?.shelfLife?.id,
       total_price: type == "month"
           ? isResident
@@ -234,7 +249,7 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       serviceConfigurationId: service.id,
       note: service.note,
       // address:,
-      // confirm_use: confirm_use,
+      confirm_use: service.confirm_use,
       total_num_ticket: type == "month" ? num : null,
       status: 'WAIT_USE',
       payment_status: service.service_charge == 'nocharge' ? 'free' : 'UNPAID',
@@ -245,8 +260,8 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
       residentId: residentId,
       apartmentId: apartment?.apartmentId,
       registration_type: type,
-      end_date: type == 'month'
-          ? DateTime(now.year, now.month + 1, now.day).toIso8601String()
+      end_date: type == 'month' && end_date != null
+          ? DateTime.parse(end_date!).toIso8601String()
           : null,
       use_date: dateString,
       phone_number: phone,
@@ -267,16 +282,18 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
         if (configResident != null && !checkNullConfig(configResident!))
           BookingInfo(
             object: 'resident',
-            fee: service.ticket_type == 'unclassified'
-                ? (guestFee?.price ?? 0.0)
-                : 0.0,
-            num: service.ticket_type == 'unclassified'
-                ? (configResident?['price'] ?? 0)
-                : 0,
-            price: num *
-                (service.ticket_type == 'unclassified'
-                    ? (guestFee?.price ?? 0.0)
-                    : 0.0),
+            fee: service.ticket_type != 'ageclassified'
+                ? (residentFee?.price ?? 0.0) * ((configResident?['price']))
+                : ((configResident?['price_adult'] ?? 0.0) *
+                        (residentFee?.price_adult ?? 0.0) +
+                    ((configResident?['price_child'] ?? 0.0) *
+                        (residentFee?.price_adult ?? 0.0))),
+            num: !(service.service_charge == "nocharge")
+                ? (configResident?['price'])
+                : num,
+            price: (service.ticket_type != 'ageclassified'
+                ? (residentFee?.price ?? 0.0)
+                : 0.0),
             num_adult: service.ticket_type == 'ageclassified'
                 ? (configResident?['price_adult'] ?? 0)
                 : 0,
@@ -284,27 +301,27 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                 ? (configResident?['price_child'] ?? 0)
                 : 0,
             price_adult: (service.ticket_type == 'ageclassified'
-                    ? (configResident?['price_adult'] ?? 0.0)
-                    : 0.0) *
-                (residentFee?.price_adult ?? 0),
+                ? (configResident?['price_adult'] ?? 0.0)
+                : 0.0),
             price_child: (service.ticket_type == 'ageclassified'
-                    ? (configResident?['price_child'] ?? 0.0)
-                    : 0.0) *
-                (residentFee?.price_adult ?? 0),
+                ? (configResident?['price_child'] ?? 0.0)
+                : 0.0),
           ),
         if (configGuest != null && !checkNullConfig(configGuest!))
           BookingInfo(
             object: 'guest',
-            fee: service.ticket_type == 'unclassified'
+            fee: service.ticket_type != 'ageclassified'
+                ? (guestFee?.price ?? 0.0) * (configGuest?['price'])
+                : ((configGuest?['price_adult'] ?? 0.0) *
+                        (guestFee?.price_adult ?? 0.0) +
+                    (configGuest?['price_child'] ?? 0.0) *
+                        (guestFee?.price_child ?? 0.0)),
+            num: !(service.service_charge == "nocharge")
+                ? (configGuest?['price'])
+                : num,
+            price: (service.ticket_type == 'ageclassified'
                 ? (guestFee?.price ?? 0.0)
-                : 0.0,
-            num: service.ticket_type == 'unclassified'
-                ? (configGuest?['price'] ?? 0)
-                : 0,
-            price: num *
-                (service.ticket_type == 'unclassified'
-                    ? (guestFee?.price ?? 0.0)
-                    : 0.0),
+                : 0.0),
             num_adult: service.ticket_type == 'ageclassified'
                 ? (configGuest?['price_adult'] ?? 0)
                 : 0,
@@ -312,18 +329,12 @@ class ConfirmBookingServicePrv extends ChangeNotifier {
                 ? (configGuest?['price_child'] ?? 0)
                 : 0,
             price_adult: (service.ticket_type == 'ageclassified'
-                    ? (configGuest?['price_adult'] ?? 0.0)
-                    : 0.0) *
-                (guestFee?.price_adult ?? 0),
+                ? (configGuest?['price_adult'] ?? 0.0)
+                : 0.0),
             price_child: (service.ticket_type == 'ageclassified'
-                    ? (configGuest?['price_child'] ?? 0.0)
-                    : 0.0) *
-                (guestFee?.price_child ?? 0),
+                ? (configGuest?['price_child'] ?? 0.0)
+                : 0.0),
           ),
-        // if (type == "month")
-        //   BookingInfo(
-        //     object: isResident ? 'resident' : 'guest',
-        //   ),
       ],
     );
     var data = registration.toMap();
