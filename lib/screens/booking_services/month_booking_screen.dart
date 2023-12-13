@@ -1,3 +1,5 @@
+import 'package:app_cudan/models/response_resident_own.dart';
+import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/screens/booking_services/prv/month_booking_service_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
@@ -50,6 +52,9 @@ class MonthBookingScreen extends StatelessWidget {
         var option = context.watch<MonthBookingServicePrv>().timeOption;
         var areas = context.watch<MonthBookingServicePrv>().areas;
         var endDate = context.watch<MonthBookingServicePrv>().endDate;
+        var isResident =
+            context.read<ResidentInfoPrv>().selectedApartment != null;
+
         return PrimaryScreen(
           appBar: PrimaryAppbar(
             title: S.of(context).monthly_register_service,
@@ -67,6 +72,21 @@ class MonthBookingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     vpad(12),
+                    if (!isResident)
+                      PrimaryTextField(
+                        isRequired: true,
+                        labelStyle: txtBold(12),
+                        label: S.of(context).address,
+                        hint: S.of(context).address,
+                        validateString: context
+                            .watch<MonthBookingServicePrv>()
+                            .guestAddressValidate,
+                        controller: context
+                            .watch<MonthBookingServicePrv>()
+                            .guestAddressController,
+                        validator: Utils.emptyValidator,
+                      ),
+                    vpad(16),
                     PrimaryDropDown(
                       validateString:
                           context.watch<MonthBookingServicePrv>().areaValidate,

@@ -140,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "additional_file":
             MessageLookupByLibrary.simpleMessage("File/ Ảnh bổ sung"),
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
+        "address_not_empty":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ không được để trống"),
         "adult_ticket_num":
             MessageLookupByLibrary.simpleMessage("Số vé người lớn"),
         "al_read": MessageLookupByLibrary.simpleMessage("Đã đọc"),

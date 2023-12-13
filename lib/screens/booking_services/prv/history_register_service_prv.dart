@@ -17,9 +17,10 @@ class HistoryRegisterServicePrv extends ChangeNotifier {
 
   Future getRegisterServiceList(String type, BuildContext context) async {
     var residentId = context.read<ResidentInfoPrv>().residentId;
+    var userInfo = context.read<ResidentInfoPrv>().userInfo;
     var apartmentId =
         context.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
-    var phone = context.read<ResidentInfoPrv>().userInfo?.phone_required;
+    var phone = (userInfo?.account?.phone ?? userInfo?.account?.userName);
     await APIBookingService.getRegisterServiceHistoryList(
       type,
       residentId,

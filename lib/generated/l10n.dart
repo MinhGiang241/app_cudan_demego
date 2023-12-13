@@ -9539,6 +9539,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Address can not be empty`
+  String get address_not_empty {
+    return Intl.message(
+      'Address can not be empty',
+      name: 'address_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

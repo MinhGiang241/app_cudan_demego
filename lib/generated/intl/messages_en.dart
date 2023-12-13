@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "additional_file":
             MessageLookupByLibrary.simpleMessage("Additional file"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
+        "address_not_empty":
+            MessageLookupByLibrary.simpleMessage("Address can not be empty"),
         "adult_ticket_num":
             MessageLookupByLibrary.simpleMessage("Adult ticket number"),
         "al_read": MessageLookupByLibrary.simpleMessage("read"),

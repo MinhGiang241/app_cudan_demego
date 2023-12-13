@@ -457,9 +457,14 @@ class NewChatServices {
     });
   }
 
-  void sendUploadFileOnLiveChat(WebSocketChannel webSocketChannel,
-      String roomId, File file, String? desc, token,
-      {onSendProgress}) async {
+  void sendUploadFileOnLiveChat(
+    WebSocketChannel webSocketChannel,
+    String roomId,
+    File file,
+    String? desc,
+    token, {
+    onSendProgress,
+  }) async {
     var listImageExt = ['jpg', 'jpeg', 'png'];
     var listVideoExt = [
       'mp4',

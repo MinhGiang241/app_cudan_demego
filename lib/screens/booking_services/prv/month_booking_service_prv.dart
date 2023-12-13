@@ -29,6 +29,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController feeController = TextEditingController();
+  TextEditingController guestAddressController = TextEditingController();
   DateTime? startDate;
   DateTime? endDate;
   List<FeeByMonth> shelflifeList = [];
@@ -42,6 +43,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
   String? endValidate;
   String? shelfLifeValidate;
   String? areaValidate;
+  String? guestAddressValidate;
   bool autoValid = false;
   final formKey = GlobalKey<FormState>();
   final formatCurrency = NumberFormat.simpleCurrency(locale: "vi");
@@ -63,6 +65,11 @@ class MonthBookingServicePrv extends ChangeNotifier {
       shelfLifeValidate = S.current.not_blank;
     } else {
       shelfLifeValidate = null;
+    }
+    if (guestAddressController.text.trim().isEmpty) {
+      guestAddressValidate = S.current.not_blank;
+    } else {
+      guestAddressValidate = null;
     }
 
     // if (endDate != null && endDate!.compareTo(DateTime.now()) < 0) {
@@ -89,7 +96,8 @@ class MonthBookingServicePrv extends ChangeNotifier {
   }
 
   countFee(BuildContext context) {
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    var isResident =
+        //context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     if (selectedShelfLifeIndex != null) {
       price = service.service_charge == 'nocharge'
@@ -207,6 +215,7 @@ class MonthBookingServicePrv extends ChangeNotifier {
           'num': 1,
           'mode': 0,
           'price': price,
+          "guest-address": guestAddressController.text.trim()
           // "guest-cfg": configGuest,
           // 'resident-cfg': configResident,
         },

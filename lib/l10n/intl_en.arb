@@ -947,5 +947,6 @@
   "health": "Health",
   "shopping": "Shopping",
   "owe": "In debt",
-  "no_display_ser": "Don't have any display services"
+  "no_display_ser": "Don't have any display services",
+  "address_not_empty": "Address can not be empty"
 }

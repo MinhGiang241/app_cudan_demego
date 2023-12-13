@@ -82,7 +82,8 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    var isResident =
+        // context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     var isEdit = arg != null ? arg['isEdit'] : false;
     TransportCard card = TransportCard();

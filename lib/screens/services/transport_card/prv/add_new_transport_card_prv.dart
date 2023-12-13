@@ -551,7 +551,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     autoValid = true;
     isAddTransLoading = true;
     notifyListeners();
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    var isResident =
+        // context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     try {
       var residentId = context.read<ResidentInfoPrv>().residentId;

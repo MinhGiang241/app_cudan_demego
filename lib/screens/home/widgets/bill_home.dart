@@ -17,7 +17,8 @@ class BillsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    var isResident =
+        //context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
     return HomeTitleWidget(
       title: S.of(context).bills,

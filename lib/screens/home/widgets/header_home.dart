@@ -30,7 +30,8 @@ class _HeaderHomeState extends State<HeaderHome> {
     var selectedFloor =
         context.read<ResidentInfoPrv>().selectedApartment?.floor;
     var listOwn = context.read<ResidentInfoPrv>().listOwn;
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
+    var isResident =
+        // = context.read<ResidentInfoPrv>().residentId != null &&
         context.read<ResidentInfoPrv>().selectedApartment != null;
 
     selectApartment(MapEntry<int, ResponseResidentOwn> select) {

@@ -11,8 +11,8 @@ class BookingServicesPrv extends ChangeNotifier {
   List<BookingService> viewServices = [];
 
   Future getBookingServiceList(BuildContext context) async {
-    var isResident = context.read<ResidentInfoPrv>().residentId != null &&
-        context.read<ResidentInfoPrv>().selectedApartment != null;
+    var isResident = context.read<ResidentInfoPrv>().selectedApartment != null;
+    // && context.read<ResidentInfoPrv>().selectedApartment != null;
     await APIBookingService.getServiceList().then((v) {
       if (v != null) {
         services.clear();

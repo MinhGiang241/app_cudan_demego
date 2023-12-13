@@ -948,5 +948,6 @@
   "health": "Sức khỏe",
   "shopping": "Mua sắm",
   "owe": "Nợ",
-  "no_display_ser": "Không có dịch vụ hiển thị nào"
+  "no_display_ser": "Không có dịch vụ hiển thị nào",
+  "address_not_empty": "Địa chỉ không được để trống"
 }

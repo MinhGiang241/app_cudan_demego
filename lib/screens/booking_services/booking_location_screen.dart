@@ -36,6 +36,7 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
     var num = arg?['num'] as int;
     var configGuest = arg?['guest-cfg'] as Map<String, dynamic>?;
     var configResident = arg?['resident-cfg'] as Map<String, dynamic>?;
+    var guestAddress = arg?["guest-address"] as String?;
 
     // "guest-cfg": configGuest,
     // 'resident-cfg': configResident,
@@ -103,6 +104,7 @@ class _BookingLocationScreenState extends State<BookingLocationScreen> {
                               'mode': 0,
                               "guest-cfg": configGuest,
                               'resident-cfg': configResident,
+                              'guest-address': guestAddress,
                             },
                           );
                         }

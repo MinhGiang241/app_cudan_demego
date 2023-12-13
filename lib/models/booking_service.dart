@@ -667,6 +667,7 @@ class BookingInfo {
   int? num_child_weekend;
   int? num_adult_weekend;
   double? fee;
+  int? id;
   BookingInfo({
     this.object,
     this.price,
@@ -680,6 +681,7 @@ class BookingInfo {
     this.price_child_weekend,
     this.num_child_weekend,
     this.num_adult_weekend,
+    this.id,
   });
 
   Map<String, dynamic> toMap() {
@@ -696,6 +698,7 @@ class BookingInfo {
       'price_adult_weekend': price_adult_weekend,
       'num_adult_weekend': num_adult_weekend,
       'num_child_weekend': num_child_weekend,
+      'id': id,
     };
   }
 

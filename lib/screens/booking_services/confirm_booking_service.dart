@@ -15,7 +15,6 @@ import '../../models/area.dart';
 import '../../models/booking_service.dart';
 import 'booking_services_screen.dart';
 import 'prv/confirm_booking_service_prv.dart';
-import 'select_booking_service_sceen.dart';
 
 class ConfirmBookingService extends StatefulWidget {
   const ConfirmBookingService({super.key});
@@ -89,11 +88,12 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         end_date: arg?['end_date'] as String?,
         price: arg?['price'] as double?,
         bookingRegistration: arg?['register'] as RegisterBookingService?,
+        guestAddress: arg?["guest-address"] as String?,
       ),
       builder: (context, builder) {
         var isResident =
-            context.read<ResidentInfoPrv>().selectedApartment != null &&
-                context.read<ResidentInfoPrv>().residentId != null;
+            context.read<ResidentInfoPrv>().selectedApartment != null;
+        //&& context.read<ResidentInfoPrv>().residentId != null;
         var service = context.read<ConfirmBookingServicePrv>().service;
         var time_start = context.read<ConfirmBookingServicePrv>().time_start;
         var time_end = context.read<ConfirmBookingServicePrv>().time_end;
@@ -101,6 +101,7 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         var dateString = context.read<ConfirmBookingServicePrv>().dateString;
         var sh = context.read<ConfirmBookingServicePrv>().shelfLife;
         var num = context.read<ConfirmBookingServicePrv>().num;
+        var address = context.read<ConfirmBookingServicePrv>().guestAddress;
         var mode = context.watch<ConfirmBookingServicePrv>().mode;
         var loading = context.watch<ConfirmBookingServicePrv>().loading;
         var reg = context.watch<ConfirmBookingServicePrv>().bookingRegistration;
@@ -110,15 +111,30 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
         var configResident =
             context.watch<ConfirmBookingServicePrv>().configResident;
         var numReg, numGuest;
-        var numRegIndex =
-            reg?.booking_info?.indexWhere((c) => c.object == 'resident');
-        var numGuestIndex =
-            reg?.booking_info?.indexWhere((c) => c.object == 'guest');
-        if (numRegIndex != null && numRegIndex != -1) {
-          numReg = reg?.booking_info?[numRegIndex].num_adult;
-        }
-        if (numGuestIndex != null && numGuestIndex != -1) {
-          numGuest = reg?.booking_info?[numGuestIndex].num_adult;
+        if (reg?.registration_type == 'month') {
+          if (reg?.object == 'resident') {
+            numReg = reg?.total_num_ticket ?? 1;
+          }
+
+          if (reg?.object != 'resident') {
+            numGuest = reg?.total_num_ticket ?? 1;
+          }
+        } else {
+          var numRegIndex =
+              reg?.booking_info?.indexWhere((c) => c.object == 'resident');
+          var numGuestIndex =
+              reg?.booking_info?.indexWhere((c) => c.object == 'guest');
+          if (numRegIndex != null && numRegIndex != -1) {
+            numReg = service.ticket_type == 'ageclassified'
+                ? (reg?.booking_info?[numRegIndex].num_adult)
+                : (reg?.booking_info?[numRegIndex].num);
+          }
+          if (numGuestIndex != null && numGuestIndex != -1) {
+            // service.service_charge =='nocharge'
+            numGuest = (service.ticket_type == 'ageclassified')
+                ? (reg?.booking_info?[numGuestIndex].num_adult)
+                : (reg?.booking_info?[numGuestIndex].num);
+          }
         }
 
         List<InfoContentView> listInfo = [
@@ -130,15 +146,19 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             title: S.of(context).zone,
             content: area.name ?? '',
           ),
-          if (numReg != null && service.service_charge == "nocharge")
+          if (numReg != null &&
+              service.service_charge == "nocharge" &&
+              reg?.registration_type == "turn")
             InfoContentView(
               title: S.of(context).resident_ticket_amount,
               content: '${numReg}',
             ),
-          if (numGuest != null && service.service_charge == "nocharge")
+          if (numGuest != null &&
+              service.service_charge == "nocharge" &&
+              reg?.registration_type == "turn")
             InfoContentView(
               title: S.of(context).guest_ticket_amount,
-              content: '${numReg}',
+              content: '${numGuest}',
             ),
           if (reg?.registration_type == 'turn')
             InfoContentView(
@@ -172,11 +192,13 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             InfoContentView(
               title: S.of(context).reg_fee,
               content: mode == 0
-                  ? formatCurrency.format(
-                      isResident
-                          ? (sh?.price_resident ?? 0)
-                          : (sh?.price_guest ?? 0),
-                    )
+                  ? service.service_charge == 'nocharge'
+                      ? formatCurrency.format(0)
+                      : formatCurrency.format(
+                          isResident
+                              ? (sh?.price_resident ?? 0)
+                              : (sh?.price_guest ?? 0),
+                        )
                   : formatCurrency.format(reg?.total_price ?? 0),
             ),
           // if (mode != 0 && reg != null)
@@ -192,12 +214,18 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
             title: S.of(context).registing_persion,
             content: resident?.info_name,
           ),
-          InfoContentView(
-            title: S.of(context).apartment_code,
-            content: (mode != 0)
-                ? "${reg?.ap?.name}-${reg?.ap?.f?.name}-${reg?.ap?.b?.name}"
-                : "${apartment?.apartment?.name}-${apartment?.floor?.name}-${apartment?.building?.name}",
-          ),
+          if (reg?.object == 'resident')
+            InfoContentView(
+              title: S.of(context).apartment_code,
+              content: (mode != 0)
+                  ? "${reg?.ap?.name}-${reg?.ap?.f?.name}-${reg?.ap?.b?.name}"
+                  : "${apartment?.apartment?.name}-${apartment?.floor?.name}-${apartment?.building?.name}",
+            ),
+          if (reg?.object == 'guest')
+            InfoContentView(
+              title: S.of(context).address,
+              content: mode == 0 ? address : reg?.address,
+            ),
           InfoContentView(
             title: S.of(context).phone_num,
             content: reg?.phone_number ?? '',

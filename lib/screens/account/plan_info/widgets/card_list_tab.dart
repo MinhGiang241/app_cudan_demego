@@ -147,9 +147,9 @@ class _CardListTabState extends State<CardListTab> {
                   ),
                   onPressed: () {
                     var isResident =
-                        context.read<ResidentInfoPrv>().residentId != null &&
-                            context.read<ResidentInfoPrv>().selectedApartment !=
-                                null;
+                        // context.read<ResidentInfoPrv>().residentId != null &&
+                        context.read<ResidentInfoPrv>().selectedApartment !=
+                            null;
 
                     Utils.showBottomSheet(
                       context: context,
