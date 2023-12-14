@@ -9549,6 +9549,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search products in shop`
+  String get search_product {
+    return Intl.message(
+      'Search products in shop',
+      name: 'search_product',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

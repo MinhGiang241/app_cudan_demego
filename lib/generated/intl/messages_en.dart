@@ -1167,6 +1167,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Search apartment"),
         "search_apartment":
             MessageLookupByLibrary.simpleMessage("Search an apartment"),
+        "search_product":
+            MessageLookupByLibrary.simpleMessage("Search products in shop"),
         "search_project":
             MessageLookupByLibrary.simpleMessage("Search project"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),

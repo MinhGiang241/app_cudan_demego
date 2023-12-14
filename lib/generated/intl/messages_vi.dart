@@ -1172,6 +1172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
         "search_apartment":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm căn hộ"),
+        "search_product": MessageLookupByLibrary.simpleMessage(
+            "Tìm kiếm sản phẩm trong shop"),
         "search_project":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm dự án"),
         "select": MessageLookupByLibrary.simpleMessage("Chọn"),

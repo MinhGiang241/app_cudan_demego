@@ -15,6 +15,7 @@ class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.child,
     this.leading,
     this.height,
+    this.titleWidget,
   }) : super(key: key);
   final String? title;
   final List<Widget>? actions;
@@ -23,6 +24,7 @@ class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
   final bool isTabScrollabel;
   final Widget? child;
   final Widget? leading;
+  final Widget? titleWidget;
   final double? height;
 
   @override
@@ -50,7 +52,7 @@ class PrimaryAppbar extends StatelessWidget implements PreferredSizeWidget {
                   elevation: 0,
                   leading: leading,
                   centerTitle: true,
-                  title: Text(title ?? ""),
+                  title: titleWidget != null ? titleWidget : Text(title ?? ""),
                   actions: actions,
                 ),
                 if ((tabController != null || tabs != null) && child == null)

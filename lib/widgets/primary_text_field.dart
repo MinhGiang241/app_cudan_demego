@@ -43,6 +43,7 @@ class PrimaryTextField extends StatefulWidget {
     this.component,
     this.textStyle,
     this.labelStyle,
+    this.border,
   });
   final TextStyle? textStyle;
   final TextStyle? labelStyle;
@@ -75,6 +76,7 @@ class PrimaryTextField extends StatefulWidget {
   final Color? textColor;
   final TextAlign? textAlign;
   final int? maxLength;
+  final BoxBorder? border;
   final List<TextInputFormatter>? filter;
   Function(String)? onChanged;
   EdgeInsetsGeometry? margin;
@@ -133,6 +135,7 @@ class _PrimaryTextFieldState extends State<PrimaryTextField> {
                     Expanded(
                       flex: 10,
                       child: PrimaryCard(
+                        border: widget.border,
                         onTap: widget.enable ? widget.onTap : null,
                         background: widget.background,
                         margin: widget.margin,

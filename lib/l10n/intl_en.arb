@@ -948,5 +948,6 @@
   "shopping": "Shopping",
   "owe": "In debt",
   "no_display_ser": "Don't have any display services",
-  "address_not_empty": "Address can not be empty"
+  "address_not_empty": "Address can not be empty",
+  "search_product": "Search products in shop"
 }
