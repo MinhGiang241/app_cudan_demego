@@ -1,6 +1,7 @@
 import 'package:app_cudan/constants/constants.dart';
+import 'package:app_cudan/screens/display_services/details_linking_service_screen.dart';
 import 'package:app_cudan/screens/display_services/prv/display_service_prv.dart';
-import 'package:app_cudan/screens/display_services/tabs/health_tabs.dart';
+
 import 'package:app_cudan/services/api_service.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
@@ -31,22 +32,21 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
   late TabController tabController = TabController(length: 2, vsync: this);
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  final RefreshController _emptyRefreshController =
-      RefreshController(initialRefresh: false);
-  late AnimationController animationFilterController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 100),
-  );
+  late AnimationController animationFilterController;
 
-  late Animation<double> animationFilter = CurvedAnimation(
-    parent: animationFilterController,
-    curve: Curves.easeInOut,
-    // reverseCurve: Curves.easeInOut,
-  );
-
+  late Animation<double> animationFilter;
   @override
   void initState() {
-    // TODO: implement initState
+    animationFilterController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    animationFilter = CurvedAnimation(
+      parent: animationFilterController,
+      curve: Curves.easeInOut,
+      // reverseCurve: Curves.easeInOut,
+    );
+
     super.initState();
   }
 
@@ -57,6 +57,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
       builder: (context, builder) {
         var showFilter = context.watch<DisplayServicePrv>().showFilterSpec;
         var list = context.watch<DisplayServicePrv>().linkingList;
+        var specList = context.watch<DisplayServicePrv>().industryList;
         var loading = context.watch<DisplayServicePrv>().loading;
         return PrimaryScreen(
           appBar: PrimaryAppbar(
@@ -66,12 +67,15 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
             titleWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
               child: PrimaryTextField(
+                controller: context.read<DisplayServicePrv>().searchController,
                 hint: S.of(context).search,
                 border: Border.all(color: grayScaleColorBase),
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
-                    setState(() {});
+                    context
+                        .read<DisplayServicePrv>()
+                        .getLinkingService(context, false);
                   },
                 ),
               ),
@@ -80,7 +84,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
               IconButton(
                 onPressed: () {
                   context.read<DisplayServicePrv>().toggleShowFilter();
-                  if (!showFilter) {
+                  if (showFilter) {
                     // isShowAsset = false;
                     animationFilterController.reverse();
                   } else {
@@ -97,8 +101,53 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
               children: [
                 SizeTransition(
                   sizeFactor: animationFilter,
-                  child: Text(
-                    'ssssfgdfgfdgdfgdfgdffgdfgdfgretwrwerwrerwerwerews',
+                  child: SizedBox(
+                    width: dvWidth(context),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          ...specList.asMap().entries.map(
+                                (e) => Padding(
+                                  padding: EdgeInsets.all(8),
+                                  child: InkWell(
+                                    onTap: () => context
+                                        .read<DisplayServicePrv>()
+                                        .toggleSelect(e.key, context),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 11,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          width: 2,
+                                          color: e.value[
+                                                  'isSelected'] // color: e.value['isSelected']
+                                              ? primaryColorBase
+                                              : grayScaleColor4,
+                                        ),
+                                        // color: e.value['isSelected']
+                                        //     ? primaryColorBase
+                                        //     : grayScaleColorBase,
+                                      ),
+                                      child: Text(
+                                        e.value['spec'].name ?? '',
+                                        style: txtSemiBold(
+                                          14,
+                                          e.value['isSelected']
+                                              ? primaryColorBase
+                                              : grayScaleColor3,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -114,7 +163,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                           onRefresh: () async {
                             await context
                                 .read<DisplayServicePrv>()
-                                .getLinkingService(context);
+                                .getLinkingService(context, false);
                             _refreshController.refreshCompleted();
                           },
                           child: list.isEmpty
@@ -128,6 +177,14 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                     vpad(12),
                                     ...list.map(
                                       (v) => PrimaryCard(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            DetailsLinkingServiceScreen
+                                                .routeName,
+                                            arguments: {'linking-service': v},
+                                          );
+                                        },
                                         padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(bottom: 10),
                                         child: Row(
@@ -197,7 +254,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                                   ),
                                                   vpad(6),
                                                   AutoSizeText(
-                                                    v.id ?? '',
+                                                    v.i?.name ?? '',
                                                     style: txtRegular(
                                                       12,
                                                     ),

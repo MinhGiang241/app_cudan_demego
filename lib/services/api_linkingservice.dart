@@ -4,19 +4,26 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APILinkingService {
-  static Future getLinkingServiceList() async {
+  static Future getLinkingServiceList(
+    String search,
+    String industries,
+  ) async {
     var query = '''
-    mutation {
-        response: linkingservice_mobile_get_all_linking_service_list  {
-            code
-            message
-            data
-        }
+mutation (\$search:String,\$industries:String){
+    response: linkingservice_mobile_get_all_linking_service_list (search: \$search,industries: \$industries ) {
+        code
+        message
+        data
     }
-            
+}
+        
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
+      variables: {
+        'search': search,
+        'industries': industries,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

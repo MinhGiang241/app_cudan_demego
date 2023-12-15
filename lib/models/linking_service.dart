@@ -22,6 +22,7 @@ class LinkingService {
   String? status;
   List<FileUploadModel>? list_products_image_view;
   String? list_products_describe_view;
+  Industry? i;
   LinkingService({
     this.id,
     this.createdTime,
@@ -41,6 +42,7 @@ class LinkingService {
     this.status,
     this.list_products_image_view,
     this.list_products_describe_view,
+    this.i,
   });
 
   LinkingService copyWith({
@@ -152,6 +154,7 @@ class LinkingService {
       list_products_describe_view: map['list_products_describe_view'] != null
           ? map['list_products_describe_view'] as String
           : null,
+      i: map['i'] != null ? Industry.fromMap(map['i']) : null,
     );
   }
 
