@@ -196,14 +196,14 @@ class _TimeBookingScreenState extends State<TimeBookingScreen> {
                             S.of(context).resident_ticket,
                             style: txtBold(12, primaryColorBase),
                           ),
-                          Text(
-                            S.of(context).max_num_ticket_per_day(
-                                  service.limited_days_registration_num ?? '',
-                                ),
-                            style: txtRegular(
-                              12,
-                            ),
-                          ),
+                          // Text(
+                          //   S.of(context).max_num_ticket_per_day(
+                          //         service.limited_days_registration_num ?? '',
+                          //       ),
+                          //   style: txtRegular(
+                          //     12,
+                          //   ),
+                          // ),
                           Divider(),
                           if (configResident != null &&
                               service.service_charge != "nocharge")

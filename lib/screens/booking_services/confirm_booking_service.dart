@@ -460,36 +460,28 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                       ),
                     ),
               vpad(20),
-              Container(
-                decoration: BoxDecoration(
-                  color: grayScaleColor4,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    vpad(12),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: Text(
-                    //     '',
-                    //     //  S.of(context).policy,
-                    //     style: txtRegular(12, primaryColorBase),
-                    //   ),
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        service.note ?? '',
-                      ),
-                    ),
-                    vpad(10),
-                  ],
-                ),
-              ),
-
-              // PrimaryInfoWidget(listInfoView: listInfoView),
-              vpad(20),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     color: grayScaleColor4,
+              //     borderRadius: BorderRadius.circular(12),
+              //   ),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       vpad(12),
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              //         child: Text(
+              //           service.note ?? '',
+              //         ),
+              //       ),
+              //       vpad(10),
+              //     ],
+              //   ),
+              // ),
+              //
+              // // PrimaryInfoWidget(listInfoView: listInfoView),
+              // vpad(20),
               Row(
                 children: [
                   Checkbox(

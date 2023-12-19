@@ -14,7 +14,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/primary_empty_widget.dart';
-import '../../widgets/primary_error_widget.dart';
 import '../../widgets/primary_icon.dart';
 import '../../widgets/primary_image_netword.dart';
 import '../../widgets/primary_loading.dart';

@@ -141,7 +141,7 @@ class _DetailsLinkingServiceScreenState
                     Navigator.pushNamed(
                       context,
                       DetailsProductScreen.routeName,
-                      arguments: {'product': e},
+                      arguments: {'product': e, 'linking-service': service},
                     );
                   },
                   child: Container(

@@ -2,10 +2,13 @@ import 'package:app_cudan/screens/booking_services/month_booking_screen.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
 import '../../models/booking_service.dart';
+import '../../widgets/primary_image_netword.dart';
 import 'time_booking_screen.dart';
 
 class SelectBookingServiceScreen extends StatelessWidget {
@@ -81,6 +84,38 @@ class SelectBookingServiceScreen extends StatelessWidget {
                 ),
               ),
             ),
+          vpad(20),
+          HtmlWidget(
+            '''${service.note}''',
+            onTapUrl: (url) {
+              launchUrl(Uri.parse(url));
+              return false;
+            },
+            textStyle: txtBodyMediumRegular(),
+            onTapImage: (ImageMetadata data) {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      PhotoViewer(
+                    heroTag: 'hero',
+                    link: data.sources.first.url,
+                    listLink: [
+                      data.sources.first.url,
+                    ],
+                    initIndex: 0,
+                  ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
