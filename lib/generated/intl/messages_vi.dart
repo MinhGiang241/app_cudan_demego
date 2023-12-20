@@ -278,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "college_degree": MessageLookupByLibrary.simpleMessage("Bằng cao đẳng"),
         "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Sắp diễn ra"),
+        "comment_service":
+            MessageLookupByLibrary.simpleMessage("Nhận xét dịch vụ"),
         "complain": MessageLookupByLibrary.simpleMessage("Khiếu nại"),
         "complain_reason":
             MessageLookupByLibrary.simpleMessage("Lý do khiếu nại"),
@@ -671,6 +673,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Danh sách chuyển đồ không được để trống"),
         "job": MessageLookupByLibrary.simpleMessage("Nghề nghiệp"),
         "judge": MessageLookupByLibrary.simpleMessage("Đánh giá"),
+        "judge_service":
+            MessageLookupByLibrary.simpleMessage("Đánh giá dịch vụ"),
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
@@ -995,6 +999,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Kéo để xem thêm"),
         "qualification_level":
             MessageLookupByLibrary.simpleMessage("Trình độ chuyên môn"),
+        "quality_service":
+            MessageLookupByLibrary.simpleMessage("Chất lượng dịch vụ"),
         "re_book": MessageLookupByLibrary.simpleMessage("Đổi lịch"),
         "re_booking": MessageLookupByLibrary.simpleMessage("Đặt lịch khác"),
         "re_sign_in": MessageLookupByLibrary.simpleMessage("Hãy đăng nhập lại"),
@@ -1197,6 +1203,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_zone": MessageLookupByLibrary.simpleMessage("Chọn khu vực"),
         "sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Số hợp đồng mua bán"),
+        "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "Hệ thống đang gủi mã xác thực vào email, xin vui lòng đợi"),
         "send_extension_success": MessageLookupByLibrary.simpleMessage(
@@ -1285,6 +1292,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hủy phương tiện thành công"),
         "success_change_pass": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu mới đã được cập nhật thành công. Vui lòng đăng nhập bằng mật khẩu mới"),
+        "success_comment":
+            MessageLookupByLibrary.simpleMessage("Đánh giá thành công dịch vụ"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Xác nhận thành công"),
         "success_cr_new":
@@ -1454,6 +1463,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vew_records": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "vi": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view": MessageLookupByLibrary.simpleMessage("Xem"),
+        "view_comment": MessageLookupByLibrary.simpleMessage("Xem đánh giá"),
         "view_record": MessageLookupByLibrary.simpleMessage("Xem biên bản"),
         "violation_exe": MessageLookupByLibrary.simpleMessage("Xử lý vi phạm"),
         "violation_record":

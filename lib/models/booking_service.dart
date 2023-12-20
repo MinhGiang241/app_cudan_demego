@@ -399,6 +399,9 @@ class RegisterBookingService {
   String? filter_fee;
   String? areaId;
   String? receipts_code;
+  int? vote;
+  String? vote_content;
+  List<FileUploadModel>? vote_image;
   // lookup
   Area? a;
   ShelfLife? sh;
@@ -439,6 +442,9 @@ class RegisterBookingService {
     this.total_num_ticket,
     this.filter_fee,
     this.receipts_code,
+    this.vote,
+    this.vote_content,
+    this.vote_image,
     this.se,
     this.sh,
     this.a,
@@ -480,6 +486,9 @@ class RegisterBookingService {
       'filter_fee': filter_fee,
       'receipts_code': receipts_code,
       'areaId': areaId,
+      'vote': vote,
+      'vote_content': vote_content,
+      'vote_image': vote_image?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -559,6 +568,18 @@ class RegisterBookingService {
       areaId: map['areaId'] != null ? map['areaId'] as String : null,
       receipts_code:
           map['receipts_code'] != null ? map['receipts_code'] as String : null,
+      vote_content:
+          map['vote_content'] != null ? map['vote_content'] as String : null,
+      vote: int.tryParse(map['vote'].toString()) != null
+          ? int.parse(map['vote'].toString())
+          : null,
+      vote_image: map['vote_image'] != null
+          ? List<FileUploadModel>.from(
+              (map['vote_image'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
       a: map['a'] != null ? Area.fromMap(map['a']) : null,
       sh: map['sh'] != null ? ShelfLife.fromMap(map['sh']) : null,
       se: map['se'] != null ? BookingService.fromMap(map['se']) : null,
@@ -613,6 +634,9 @@ class RegisterBookingService {
     String? filter_fee,
     String? receipts_code,
     String? areaId,
+    int? vote,
+    String? vote_content,
+    List<FileUploadModel>? vote_image,
   }) {
     return RegisterBookingService(
       id: id ?? this.id,
@@ -650,6 +674,9 @@ class RegisterBookingService {
       filter_fee: filter_fee ?? this.filter_fee,
       receipts_code: receipts_code ?? this.receipts_code,
       areaId: areaId ?? this.areaId,
+      vote: vote ?? this.vote,
+      vote_content: vote_content ?? this.vote_content,
+      vote_image: vote_image ?? this.vote_image,
     );
   }
 }

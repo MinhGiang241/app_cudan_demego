@@ -949,5 +949,16 @@
   "owe": "In debt",
   "no_display_ser": "Don't have any display services",
   "address_not_empty": "Address can not be empty",
-  "search_product": "Search products in shop"
+  "search_product": "Search products in shop",
+  "judge_service": "Rate service",
+  "quality_service": "Quality of service",
+  "s1": "Terrible",
+  "s2": "Dissatisfied",
+  "s3": "Nomal",
+  "s4": "Good",
+  "s5": "Excellent",
+  "comment_service": "Comment service",
+  "send": "Send",
+  "success_comment": "Rating service successfully",
+  "view_comment": "View ratting"
 }

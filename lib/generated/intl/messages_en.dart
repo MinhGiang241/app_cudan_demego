@@ -272,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("College degree"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Comming soon"),
+        "comment_service":
+            MessageLookupByLibrary.simpleMessage("Comment service"),
         "complain": MessageLookupByLibrary.simpleMessage("Complain"),
         "complain_reason":
             MessageLookupByLibrary.simpleMessage("Complain reason"),
@@ -664,6 +666,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Item list can not be empty"),
         "job": MessageLookupByLibrary.simpleMessage("Job"),
         "judge": MessageLookupByLibrary.simpleMessage("Judge"),
+        "judge_service": MessageLookupByLibrary.simpleMessage("Rate service"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
@@ -983,6 +986,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pull_to_load": MessageLookupByLibrary.simpleMessage("Pull to load"),
         "qualification_level":
             MessageLookupByLibrary.simpleMessage("Qualification level"),
+        "quality_service":
+            MessageLookupByLibrary.simpleMessage("Quality of service"),
         "re_book": MessageLookupByLibrary.simpleMessage("Re book"),
         "re_booking": MessageLookupByLibrary.simpleMessage("Register again"),
         "re_sign_in":
@@ -1156,6 +1161,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_8": MessageLookupByLibrary.simpleMessage("System error"),
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
+        "s1": MessageLookupByLibrary.simpleMessage("Terrible"),
+        "s2": MessageLookupByLibrary.simpleMessage("Dissatisfied"),
+        "s3": MessageLookupByLibrary.simpleMessage("Nomal"),
+        "s4": MessageLookupByLibrary.simpleMessage("Good"),
+        "s5": MessageLookupByLibrary.simpleMessage("Excellent"),
         "s_cons_apartment": MessageLookupByLibrary.simpleMessage(
             "Construction area of apartment"),
         "s_usage_apartment":
@@ -1195,6 +1205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_zone": MessageLookupByLibrary.simpleMessage("Select location"),
         "sell_contract_num":
             MessageLookupByLibrary.simpleMessage("Sell contract number"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
         "send_email_wait": MessageLookupByLibrary.simpleMessage(
             "System is sending to your email, please wait"),
         "send_extension_success": MessageLookupByLibrary.simpleMessage(
@@ -1284,6 +1295,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cancel transport successfully"),
         "success_change_pass": MessageLookupByLibrary.simpleMessage(
             "Change password successfully, please re log in with new password"),
+        "success_comment":
+            MessageLookupByLibrary.simpleMessage("Rating service successfully"),
         "success_confirm":
             MessageLookupByLibrary.simpleMessage("Success confirm"),
         "success_cr_new":
@@ -1460,6 +1473,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vew_records": MessageLookupByLibrary.simpleMessage("View records"),
         "vi": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view": MessageLookupByLibrary.simpleMessage("View"),
+        "view_comment": MessageLookupByLibrary.simpleMessage("View ratting"),
         "view_record": MessageLookupByLibrary.simpleMessage("View record"),
         "violation_exe":
             MessageLookupByLibrary.simpleMessage("Violation Execution"),

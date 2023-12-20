@@ -14,6 +14,7 @@ import '../../constants/constants.dart';
 import '../../models/area.dart';
 import '../../models/booking_service.dart';
 import 'booking_services_screen.dart';
+import 'judge_scrren.dart';
 import 'prv/confirm_booking_service_prv.dart';
 
 class ConfirmBookingService extends StatefulWidget {
@@ -585,18 +586,54 @@ class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               if (mode == 1 && reg?.status == 'USED')
-                PrimaryButton(
-                  buttonType: ButtonType.orange,
-                  isLoading: loading,
-                  onTap: () {
-                    // Navigator.of(context).pushReplacementNamed(
-                    //   SelectBookingServiceScreen.routeName,
-                    //   arguments: {'service': service},
-                    // );
-                  },
-                  text: S.of(context).judge,
-                  buttonSize: ButtonSize.small,
-                  borderRadius: BorderRadius.circular(20),
+                Row(
+                  children: [
+                    if (reg?.vote != null)
+                      Expanded(
+                        child: PrimaryButton(
+                          isLoading: loading,
+                          onTap: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              BookingServicesScreen.routeName,
+                              (route) => route.isFirst,
+                            );
+                          },
+                          text: S.of(context).re_booking,
+                          buttonSize: ButtonSize.small,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    if (reg?.vote != null) hpad(10),
+                    Expanded(
+                      child: PrimaryButton(
+                        buttonType: ButtonType.orange,
+                        isLoading: loading,
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            JudgeScreen.routeName,
+                            arguments: {
+                              'service': service,
+                              'reg': reg,
+                              'area': area,
+                              'humReg': numReg,
+                              'numGuest': numGuest,
+                              'mode': mode,
+                              'sh': sh,
+                              "time_start": time_start,
+                              'time_end': time_end,
+                              'dateString': dateString,
+                              'isEdit': reg?.vote == null,
+                            },
+                          );
+                        },
+                        text: reg?.vote != null
+                            ? S.of(context).view_comment
+                            : S.of(context).judge,
+                        buttonSize: ButtonSize.small,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ],
                 ),
               vpad(40),
             ],

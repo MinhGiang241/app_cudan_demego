@@ -9559,6 +9559,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Rate service`
+  String get judge_service {
+    return Intl.message(
+      'Rate service',
+      name: 'judge_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quality of service`
+  String get quality_service {
+    return Intl.message(
+      'Quality of service',
+      name: 'quality_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terrible`
+  String get s1 {
+    return Intl.message(
+      'Terrible',
+      name: 's1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dissatisfied`
+  String get s2 {
+    return Intl.message(
+      'Dissatisfied',
+      name: 's2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nomal`
+  String get s3 {
+    return Intl.message(
+      'Nomal',
+      name: 's3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Good`
+  String get s4 {
+    return Intl.message(
+      'Good',
+      name: 's4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Excellent`
+  String get s5 {
+    return Intl.message(
+      'Excellent',
+      name: 's5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment service`
+  String get comment_service {
+    return Intl.message(
+      'Comment service',
+      name: 'comment_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rating service successfully`
+  String get success_comment {
+    return Intl.message(
+      'Rating service successfully',
+      name: 'success_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View ratting`
+  String get view_comment {
+    return Intl.message(
+      'View ratting',
+      name: 'view_comment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

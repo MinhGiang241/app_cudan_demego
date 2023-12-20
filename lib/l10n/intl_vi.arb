@@ -950,5 +950,16 @@
   "owe": "Nợ",
   "no_display_ser": "Không có dịch vụ hiển thị nào",
   "address_not_empty": "Địa chỉ không được để trống",
-  "search_product": "Tìm kiếm sản phẩm trong shop"
+  "search_product": "Tìm kiếm sản phẩm trong shop",
+  "judge_service": "Đánh giá dịch vụ",
+  "quality_service": "Chất lượng dịch vụ",
+  "1s": "Tệ",
+  "2s": "Không hài lòng",
+  "3s": "Bình thường",
+  "4s": "Tốt",
+  "5s": "Tuyệt vời",
+  "comment_service": "Nhận xét dịch vụ",
+  "send": "Gửi",
+  "success_comment": "Đánh giá thành công dịch vụ",
+  "view_comment": "Xem đánh giá"
 }
