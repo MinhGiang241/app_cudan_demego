@@ -4,9 +4,11 @@ import 'package:app_cudan/widgets/primary_image_netword.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
+import '../../constants/regex_text.dart';
 import '../../models/linking_service.dart';
 import '../../services/api_service.dart';
 import '../../widgets/primary_appbar.dart';
@@ -27,21 +29,22 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)!.settings.arguments as Map;
     var service = arg['linking-service'] as LinkingService;
-    var product = arg['product'] as Product;
+    var product = arg['product'] as LSProduct;
     return PrimaryScreen(
       appBar: PrimaryAppbar(
-        titleWidget: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
-          child: PrimaryTextField(
-            controller: searchController,
-            hint: S.of(context).search_product,
-            border: Border.all(color: grayScaleColorBase),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            ),
-          ),
-        ),
+        title: S.of(context).product,
+        // titleWidget: Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+        //   child: PrimaryTextField(
+        //     controller: searchController,
+        //     hint: S.of(context).search_product,
+        //     border: Border.all(color: grayScaleColorBase),
+        //     suffixIcon: IconButton(
+        //       icon: Icon(Icons.search),
+        //       onPressed: () {},
+        //     ),
+        //   ),
+        // ),
       ),
       body: ListView(
         children: <Widget>[
@@ -130,19 +133,12 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
           PrimaryImageNetwork(
             width: dvWidth(context) - 24,
             path:
-                '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
-          ),
-          vpad(12),
-          Text(product.name ?? '', style: txtSemiBold(16)),
-          vpad(12),
-          Text(
-            formatCurrency.format(product.listed_price ?? 0),
-            style: txtRegular(14, redColorBase),
+                '${ApiService.shared.uploadURL}/?load=${product.image}&regcode=${ApiService.shared.regCode}',
           ),
           vpad(12),
           Row(
             children: [
-              Text("Mã giảm giá: HT01"),
+              AutoSizeText(product.name ?? '', style: txtSemiBold(16)),
               Spacer(),
               InkWell(
                 onTap: () {
@@ -155,10 +151,86 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
               ),
             ],
           ),
-          Divider(),
-          Text("Mô tả sản phẩm", style: txtBold(14)),
           vpad(12),
-          Text(product.describe ?? "", style: txtRegular(12)),
+          AutoSizeText(
+            formatCurrency.format(product.price ?? 0),
+            //.replaceAll("₫", "VND"),
+            style: txtSemiBold(
+              14,
+              redColorBase,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          vpad(12),
+          AutoSizeText(
+            formatCurrency.format(product.old_price ?? 0),
+            style: TextStyle(
+              decoration: TextDecoration.lineThrough,
+              fontFamily: family,
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          Divider(),
+          Text(S.of(context).pro_images, style: txtBold(14)),
+          vpad(12),
+          GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            mainAxisSpacing: 18,
+            crossAxisSpacing: 15,
+            childAspectRatio: 1.4,
+            children: [
+              ...(product.l ?? []).map(
+                (c) => PrimaryImageNetwork(
+                  canShowPhotoView: true,
+                  path: RegexText.isUrl(c.photo ?? '')
+                      ? c.photo
+                      : '${ApiService.shared.uploadURL}/?load=${c.photo}&regcode=${ApiService.shared.regCode}',
+                ),
+              ),
+            ],
+          ),
+          vpad(12),
+          Divider(),
+          Text(S.of(context).pro_des, style: txtBold(14)),
+          vpad(12),
+          HtmlWidget(
+            '''${product.describe ?? ''}''',
+            onTapUrl: (url) {
+              launchUrl(Uri.parse(url));
+              return false;
+            },
+            textStyle: txtBodyMediumRegular(),
+            onTapImage: (ImageMetadata data) {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      PhotoViewer(
+                    heroTag: 'hero',
+                    link: data.sources.first.url,
+                    listLink: [
+                      data.sources.first.url,
+                    ],
+                    initIndex: 0,
+                  ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          vpad(50),
         ],
       ),
     );

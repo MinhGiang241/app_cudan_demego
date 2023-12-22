@@ -9581,50 +9581,50 @@ class S {
   }
 
   /// `Terrible`
-  String get s1 {
+  String get terrible {
     return Intl.message(
       'Terrible',
-      name: 's1',
+      name: 'terrible',
       desc: '',
       args: [],
     );
   }
 
   /// `Dissatisfied`
-  String get s2 {
+  String get disatified {
     return Intl.message(
       'Dissatisfied',
-      name: 's2',
+      name: 'disatified',
       desc: '',
       args: [],
     );
   }
 
   /// `Nomal`
-  String get s3 {
+  String get nomal {
     return Intl.message(
       'Nomal',
-      name: 's3',
+      name: 'nomal',
       desc: '',
       args: [],
     );
   }
 
   /// `Good`
-  String get s4 {
+  String get good {
     return Intl.message(
       'Good',
-      name: 's4',
+      name: 'good',
       desc: '',
       args: [],
     );
   }
 
   /// `Excellent`
-  String get s5 {
+  String get excellent {
     return Intl.message(
       'Excellent',
-      name: 's5',
+      name: 'excellent',
       desc: '',
       args: [],
     );
@@ -9665,6 +9665,96 @@ class S {
     return Intl.message(
       'View ratting',
       name: 'view_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop`
+  String get shop {
+    return Intl.message(
+      'Shop',
+      name: 'shop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product`
+  String get product {
+    return Intl.message(
+      'Product',
+      name: 'product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop's introduction`
+  String get shop_intro {
+    return Intl.message(
+      'Shop\'s introduction',
+      name: 'shop_intro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product images in shop`
+  String get shop_pro_images {
+    return Intl.message(
+      'Product images in shop',
+      name: 'shop_pro_images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any images`
+  String get not_have_image {
+    return Intl.message(
+      'Don\'t have any images',
+      name: 'not_have_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any products`
+  String get not_have_product {
+    return Intl.message(
+      'Don\'t have any products',
+      name: 'not_have_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product description`
+  String get pro_des {
+    return Intl.message(
+      'Product description',
+      name: 'pro_des',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product images`
+  String get pro_images {
+    return Intl.message(
+      'Product images',
+      name: 'pro_images',
       desc: '',
       args: [],
     );

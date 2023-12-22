@@ -25,24 +25,24 @@ class JudgeScreen extends StatefulWidget {
   State<JudgeScreen> createState() => _JudgeScreenState();
 }
 
-class _JudgeScreenState extends State<JudgeScreen> {
-  String genScoreString(double score) {
-    switch (score.toInt()) {
-      case 1:
-        return S.current.s1;
-      case 2:
-        return S.current.s2;
-      case 3:
-        return S.current.s3;
-      case 4:
-        return S.current.s4;
-      case 5:
-        return S.current.s5;
-      default:
-        return '';
-    }
+String genScoreString(BuildContext context, double score) {
+  switch (score.toInt()) {
+    case 1:
+      return S.of(context).terrible;
+    case 2:
+      return S.of(context).disatified;
+    case 3:
+      return S.of(context).nomal;
+    case 4:
+      return S.of(context).good;
+    case 5:
+      return S.of(context).excellent;
+    default:
+      return '';
   }
+}
 
+class _JudgeScreenState extends State<JudgeScreen> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;
@@ -196,7 +196,7 @@ class _JudgeScreenState extends State<JudgeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Text(
-                    genScoreString(score),
+                    genScoreString(context, score),
                     style: txtRegular(14, Colors.amber),
                   ),
                 ),

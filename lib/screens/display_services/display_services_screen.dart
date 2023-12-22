@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/display_services/details_linking_service_screen.dart';
 import 'package:app_cudan/screens/display_services/prv/display_service_prv.dart';
@@ -10,6 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../generated/l10n.dart';
 import '../../widgets/primary_card.dart';
@@ -186,82 +189,109 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                         },
                                         padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(bottom: 10),
-                                        child: Row(
+                                        child: Stack(
                                           children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(
-                                                  10.0,
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      10.0,
+                                                    ),
+                                                    topRight: Radius.circular(
+                                                      10.0,
+                                                    ),
+                                                    bottomLeft: Radius.circular(
+                                                      10.0,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(
+                                                      10.0,
+                                                    ),
+                                                  ),
+                                                  child: PrimaryImageNetwork(
+                                                    width: 98,
+                                                    height: 96,
+                                                    canShowPhotoView: false,
+                                                    path:
+                                                        '${ApiService.shared.uploadURL}/?load=${v.image}&regcode=${ApiService.shared.regCode}',
+                                                  ),
                                                 ),
-                                                topRight: Radius.circular(
-                                                  10.0,
+                                                hpad(10),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      AutoSizeText(
+                                                        v.name ?? '',
+                                                        style: txtBold(
+                                                          14,
+                                                          primaryColorBase,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 2,
+                                                      ),
+                                                      vpad(6),
+                                                      AutoSizeText(
+                                                        v.address ?? "",
+                                                        style: txtRegular(
+                                                          12,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 2,
+                                                      ),
+                                                      vpad(6),
+                                                      AutoSizeText(
+                                                        "${v.time_start ?? ''} - ${v.time_end ?? ''}",
+                                                        style: txtRegular(
+                                                          12,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 2,
+                                                      ),
+                                                      vpad(6),
+                                                      AutoSizeText(
+                                                        v.i?.name ?? '',
+                                                        style: txtRegular(
+                                                          12,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 2,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                bottomLeft: Radius.circular(
-                                                  10.0,
-                                                ),
-                                                bottomRight: Radius.circular(
-                                                  10.0,
-                                                ),
-                                              ),
-                                              child: PrimaryImageNetwork(
-                                                width: 98,
-                                                height: 96,
-                                                canShowPhotoView: false,
-                                                path:
-                                                    '${ApiService.shared.uploadURL}/?load=${v.image}&regcode=${ApiService.shared.regCode}',
-                                              ),
+                                                hpad(40),
+                                              ],
                                             ),
-                                            hpad(10),
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  AutoSizeText(
-                                                    v.name ?? '',
-                                                    style: txtBold(
-                                                      14,
-                                                      primaryColorBase,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
-                                                  ),
-                                                  vpad(6),
-                                                  AutoSizeText(
-                                                    v.address ?? "",
-                                                    style: txtRegular(
-                                                      12,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
-                                                  ),
-                                                  vpad(6),
-                                                  AutoSizeText(
-                                                    "${v.time_start ?? ''} - ${v.time_end ?? ''}",
-                                                    style: txtRegular(
-                                                      12,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
-                                                  ),
-                                                  vpad(6),
-                                                  AutoSizeText(
-                                                    v.i?.name ?? '',
-                                                    style: txtRegular(
-                                                      12,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
-                                                  ),
-                                                ],
+                                            Positioned(
+                                              right: 4,
+                                              child: Transform.rotate(
+                                                angle: -pi / 4,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    launchUrl(
+                                                      Uri.parse(
+                                                        v.link ?? '',
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon:
+                                                      Icon(Icons.send_outlined),
+                                                  color: primaryColorBase,
+                                                ),
                                               ),
                                             ),
                                           ],

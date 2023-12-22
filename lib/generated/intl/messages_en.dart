@@ -410,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "details_bill": MessageLookupByLibrary.simpleMessage("Details bill"),
         "dimention": MessageLookupByLibrary.simpleMessage("Dimention"),
+        "disatified": MessageLookupByLibrary.simpleMessage("Dissatisfied"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discount_type": MessageLookupByLibrary.simpleMessage("Discount type"),
         "display_service":
@@ -525,6 +526,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Follow events by date/month"),
         "event_notification":
             MessageLookupByLibrary.simpleMessage("Event_notification"),
+        "excellent": MessageLookupByLibrary.simpleMessage("Excellent"),
         "executed": MessageLookupByLibrary.simpleMessage("Executing"),
         "executing": MessageLookupByLibrary.simpleMessage("Executing"),
         "exist_drawing":
@@ -588,6 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("going high school"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Going university"),
+        "good": MessageLookupByLibrary.simpleMessage("Good"),
         "guest": MessageLookupByLibrary.simpleMessage("Guest"),
         "guest_account": MessageLookupByLibrary.simpleMessage("Guest account"),
         "guest_ticket": MessageLookupByLibrary.simpleMessage("Guest ticket"),
@@ -724,6 +727,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Register month ticket"),
         "monthly_register_service":
             MessageLookupByLibrary.simpleMessage("Monthly register service"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
         "my_letter": MessageLookupByLibrary.simpleMessage("My letter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
@@ -795,6 +799,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No have transportation card"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
             "No have transportation letter"),
+        "nomal": MessageLookupByLibrary.simpleMessage("Nomal"),
         "not_blank": MessageLookupByLibrary.simpleMessage("Can not be empty"),
         "not_complete_check": MessageLookupByLibrary.simpleMessage(
             "You need check all item. Please check again."),
@@ -818,6 +823,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Did not receive OTP?"),
         "not_greater_than_today":
             MessageLookupByLibrary.simpleMessage("Not greater than today"),
+        "not_have_image":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any images"),
+        "not_have_product":
+            MessageLookupByLibrary.simpleMessage("Don\'t have any products"),
         "not_larger": m21,
         "not_pass": MessageLookupByLibrary.simpleMessage("Not pass"),
         "not_pass_list": m22,
@@ -975,10 +984,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possessed apartments"),
         "post_graduate": MessageLookupByLibrary.simpleMessage("Going master"),
         "prev": MessageLookupByLibrary.simpleMessage("Previous"),
+        "pro_des": MessageLookupByLibrary.simpleMessage("Product description"),
+        "pro_images": MessageLookupByLibrary.simpleMessage("Product images"),
         "processing_content":
             MessageLookupByLibrary.simpleMessage("Processing Content"),
         "processing_result":
             MessageLookupByLibrary.simpleMessage("Processing result"),
+        "product": MessageLookupByLibrary.simpleMessage("Product"),
         "project": MessageLookupByLibrary.simpleMessage("Project"),
         "prov_city": MessageLookupByLibrary.simpleMessage("Province/City"),
         "pull_load_failed":
@@ -1161,11 +1173,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "rgstr_code_8": MessageLookupByLibrary.simpleMessage("System error"),
         "rgstr_code_9":
             MessageLookupByLibrary.simpleMessage("Account is not activated"),
-        "s1": MessageLookupByLibrary.simpleMessage("Terrible"),
-        "s2": MessageLookupByLibrary.simpleMessage("Dissatisfied"),
-        "s3": MessageLookupByLibrary.simpleMessage("Nomal"),
-        "s4": MessageLookupByLibrary.simpleMessage("Good"),
-        "s5": MessageLookupByLibrary.simpleMessage("Excellent"),
         "s_cons_apartment": MessageLookupByLibrary.simpleMessage(
             "Construction area of apartment"),
         "s_usage_apartment":
@@ -1230,6 +1237,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "sex": MessageLookupByLibrary.simpleMessage("Sex"),
         "shelflife_money":
             MessageLookupByLibrary.simpleMessage("Payment period"),
+        "shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "shop_intro":
+            MessageLookupByLibrary.simpleMessage("Shop\'s introduction"),
+        "shop_pro_images":
+            MessageLookupByLibrary.simpleMessage("Product images in shop"),
         "shopping": MessageLookupByLibrary.simpleMessage("Shopping"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Shopping online"),
@@ -1356,6 +1368,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terms services"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Registering for a resident account means consenting to "),
+        "terrible": MessageLookupByLibrary.simpleMessage("Terrible"),
         "th01": MessageLookupByLibrary.simpleMessage("Jan"),
         "th02": MessageLookupByLibrary.simpleMessage("Fed"),
         "th03": MessageLookupByLibrary.simpleMessage("Mar"),

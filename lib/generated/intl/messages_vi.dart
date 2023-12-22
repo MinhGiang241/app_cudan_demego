@@ -413,6 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "details_bill":
             MessageLookupByLibrary.simpleMessage("Hóa đơn chi tiết"),
         "dimention": MessageLookupByLibrary.simpleMessage("Kích thước"),
+        "disatified": MessageLookupByLibrary.simpleMessage("Không hài lòng"),
         "discount": MessageLookupByLibrary.simpleMessage("Chiết khấu"),
         "discount_type":
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
@@ -532,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Theo dõi các sự kiện từng ngày/ tháng"),
         "event_notification":
             MessageLookupByLibrary.simpleMessage("Thông báo sự kiện, tin tức"),
+        "excellent": MessageLookupByLibrary.simpleMessage("Tuyệt vời"),
         "executed": MessageLookupByLibrary.simpleMessage("Đã xử lý"),
         "executing": MessageLookupByLibrary.simpleMessage("Đang xử lý"),
         "exist_drawing":
@@ -594,6 +596,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang học trung học"),
         "go_university":
             MessageLookupByLibrary.simpleMessage("Đang học đại học"),
+        "good": MessageLookupByLibrary.simpleMessage("Tốt"),
         "guest": MessageLookupByLibrary.simpleMessage("Khách"),
         "guest_account":
             MessageLookupByLibrary.simpleMessage("Tài khoản khách"),
@@ -731,6 +734,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký vé tháng"),
         "monthly_register_service":
             MessageLookupByLibrary.simpleMessage("Đăng ký dịch vụ tháng"),
+        "more": MessageLookupByLibrary.simpleMessage("Xem thêm"),
         "my_letter": MessageLookupByLibrary.simpleMessage("Phiếu của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc tịch"),
@@ -802,6 +806,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có thẻ xe nào"),
         "no_trans_letter":
             MessageLookupByLibrary.simpleMessage("Không có phiếu đăng ký nào"),
+        "nomal": MessageLookupByLibrary.simpleMessage("Bình thường"),
         "not_blank":
             MessageLookupByLibrary.simpleMessage("Không được để trống"),
         "not_complete_check": MessageLookupByLibrary.simpleMessage(
@@ -827,6 +832,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không nhận được OTP?"),
         "not_greater_than_today":
             MessageLookupByLibrary.simpleMessage("Không lớn hơn ngày hiện tại"),
+        "not_have_image":
+            MessageLookupByLibrary.simpleMessage("Không có hình ảnh nào"),
+        "not_have_product":
+            MessageLookupByLibrary.simpleMessage("Không có sản phẩm nào"),
         "not_larger": m21,
         "not_pass": MessageLookupByLibrary.simpleMessage("Không đạt"),
         "not_pass_list": m22,
@@ -988,10 +997,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "post_graduate":
             MessageLookupByLibrary.simpleMessage("đang học cao học"),
         "prev": MessageLookupByLibrary.simpleMessage("Trở lại"),
+        "pro_des": MessageLookupByLibrary.simpleMessage("Mô tả sản phẩm"),
+        "pro_images": MessageLookupByLibrary.simpleMessage("Hình ảnh sản phẩm"),
         "processing_content":
             MessageLookupByLibrary.simpleMessage("Nội dung xử lý"),
         "processing_result":
             MessageLookupByLibrary.simpleMessage("Kết quả xử lý"),
+        "product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
         "project": MessageLookupByLibrary.simpleMessage("Dự án"),
         "prov_city": MessageLookupByLibrary.simpleMessage("Tỉnh/Thành phố"),
         "pull_load_failed":
@@ -1227,6 +1239,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "sex": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "shelflife_money": MessageLookupByLibrary.simpleMessage("Kỳ đóng tiền"),
+        "shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "shop_intro": MessageLookupByLibrary.simpleMessage("Giời thiệu shop"),
+        "shop_pro_images":
+            MessageLookupByLibrary.simpleMessage("Hình ảnh sản phẩm của shop"),
         "shopping": MessageLookupByLibrary.simpleMessage("Mua sắm"),
         "shopping_online":
             MessageLookupByLibrary.simpleMessage("Mua sắm online"),
@@ -1353,6 +1369,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Điều khoản & dịch vụ"),
         "terms_services_msg": MessageLookupByLibrary.simpleMessage(
             "Đăng ký tài khoản cư dân đồng nghĩa với việc đồng thuận với "),
+        "terrible": MessageLookupByLibrary.simpleMessage("Tệ"),
         "th01": MessageLookupByLibrary.simpleMessage("Tháng 1"),
         "th02": MessageLookupByLibrary.simpleMessage("Tháng 2"),
         "th03": MessageLookupByLibrary.simpleMessage("Tháng 3"),
