@@ -23,9 +23,11 @@ class ShopImageListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)!.settings.arguments as Map;
     var service = arg['service'] as LinkingService;
+    var product = arg['product'] as LSProduct?;
+
     var controller = RefreshController(initialRefresh: true);
     return ChangeNotifierProvider(
-      create: (_) => ImageListPrv(service: service),
+      create: (_) => ImageListPrv(service: service, product: product),
       builder: (context, builder) {
         var images = context.watch<ImageListPrv>().images;
         var loading = context.watch<ImageListPrv>().loading;

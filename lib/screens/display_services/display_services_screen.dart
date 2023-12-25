@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/screens/display_services/details_linking_service_screen.dart';
 import 'package:app_cudan/screens/display_services/prv/display_service_prv.dart';
+import 'package:app_cudan/services/api_linkingservice.dart';
 
 import 'package:app_cudan/services/api_service.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
@@ -282,6 +283,9 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                                 angle: -pi / 4,
                                                 child: IconButton(
                                                   onPressed: () {
+                                                    APILinkingService.countHit(
+                                                      v.id,
+                                                    );
                                                     launchUrl(
                                                       Uri.parse(
                                                         v.link ?? '',

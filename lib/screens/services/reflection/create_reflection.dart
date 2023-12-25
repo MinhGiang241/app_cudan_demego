@@ -50,12 +50,13 @@ class CreateReflection extends StatelessWidget {
               //   );
               // }).toList();
               var listChoiceOpinion =
-                  context.read<CreateReflectionPrv>().listOpinion.map((e) {
-                return DropdownMenuItem(
-                  value: e.id,
-                  child: Text(e.content ?? ''),
-                );
-              }).toList();
+                  context.read<CreateReflectionPrv>().topicList;
+              //     context.read<CreateReflectionPrv>().listOpinion.map((e) {
+              //   return DropdownMenuItem(
+              //     value: e.id,
+              //     child: Text(e.content ?? ''),
+              //   );
+              // }).toList();
 
               var listType = [
                 DropdownMenuItem(

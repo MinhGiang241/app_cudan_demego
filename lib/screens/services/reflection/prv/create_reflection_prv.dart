@@ -64,7 +64,8 @@ class CreateReflectionPrv extends ChangeNotifier {
   List<FileTicket> submitedImages = [];
   var formKey = GlobalKey<FormState>();
   // List<ComplainReason> listReasons = [];
-  List<ComplainReason> listOpinion = [];
+  // List<ComplainReason> listOpinion = [];
+  List<DropdownMenuItem> topicList = [];
   bool autoValid = false;
   bool isAddNewLoading = false;
   bool isSendApproveLoading = false;
@@ -389,14 +390,27 @@ class CreateReflectionPrv extends ChangeNotifier {
   }
 
   getReflectionReason(BuildContext context) async {
-    await APIReflection.getOpinion().then((v) {
-      listOpinion.clear();
-      for (var i in v) {
-        listOpinion.add(ComplainReason.fromJson(i));
+    await APIReflection.getTopicList().then((v) {
+      if (v != null) {
+        topicList.clear();
+        for (var i in v) {
+          topicList.add(
+            DropdownMenuItem(
+              value: i?["value"],
+              child: Text(i?['label'] ?? ''),
+            ),
+          );
+        }
       }
-    }).catchError((e) {
-      Utils.showErrorMessage(context, e);
     });
+    // await APIReflection.getOpinion().then((v) {
+    //   listOpinion.clear();
+    //   for (var i in v) {
+    //     listOpinion.add(ComplainReason.fromJson(i));
+    //   }
+    // }).catchError((e) {
+    //   Utils.showErrorMessage(context, e);
+    // });
   }
 
   getListAreaByType(type) async {

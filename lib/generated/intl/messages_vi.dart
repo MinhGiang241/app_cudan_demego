@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "abrv": MessageLookupByLibrary.simpleMessage("Ký hiệu"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
+        "access": MessageLookupByLibrary.simpleMessage("Access"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "account_type": MessageLookupByLibrary.simpleMessage("Loại tài khoản"),
@@ -682,6 +683,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "legend": MessageLookupByLibrary.simpleMessage("Ghi chú"),
+        "less": MessageLookupByLibrary.simpleMessage("Rút gọn"),
         "letter_info": MessageLookupByLibrary.simpleMessage("Thông tin phiếu"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Mã phiếu"),
         "letter_status":

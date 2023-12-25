@@ -267,4 +267,32 @@ class APIReflection {
       return res.response.data;
     }
   }
+
+  static Future getTopicList() async {
+    var query = '''
+    mutation {
+    response: topic_mobile_load_topic  {
+        code
+        message
+        data
+    }
+}
+
+
+      ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
 }

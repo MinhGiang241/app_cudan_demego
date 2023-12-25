@@ -45,24 +45,25 @@ mutation (\$serviceId:String,\$skip:Float,\$limit:Float,\$search:String){
 
   static Future getImageListInShop(
     String? linkingserviceId,
+    String? productId,
     int skip,
     int limit,
   ) async {
     var query = '''
-mutation (\$linkingserviceId:String,\$skip:Float,\$limit:Float){
-    response: linkingservice_mobile_get_images_by_linkingserviceId (linkingserviceId: \$linkingserviceId,skip: \$skip,limit: \$limit ) {
+mutation (\$linkingserviceId:String,\$skip:Float,\$limit:Float,\$productId:String){
+    response: linkingservice_mobile_get_images_by_linkingserviceId (linkingserviceId: \$linkingserviceId,skip: \$skip,limit: \$limit,productId: \$productId ) {
         code
         message
         data
     }
 }
-        
-        
+
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
         'linkingserviceId': linkingserviceId,
+        'productId': productId,
         'skip': skip,
         'limit': limit,
       },
@@ -91,13 +92,46 @@ mutation (\$search:String,\$industries:String){
         data
     }
 }
-        
+
     ''';
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {
         'search': search,
         'industries': industries,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future countHit(
+    String? serviceId,
+  ) async {
+    var query = '''
+mutation (
+  \$serviceId:String){
+    response: linkingservice_count_hits (serviceId: \$serviceId ) {
+        code
+        message
+        data
+    }
+}
+
+
+    ''';
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'serviceId': serviceId,
       },
     );
 

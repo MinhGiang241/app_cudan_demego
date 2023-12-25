@@ -184,7 +184,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
                                     //         : e.opinionContribute != null
                                     //             ? e.opinionContribute!.content
                                     //             : "") ??
-                                    e.opinionContribute!.content ?? '',
+                                    e.opinionContribute?.content ?? '',
                                     style: txtBold(16),
                                   ),
                                   vpad(4),

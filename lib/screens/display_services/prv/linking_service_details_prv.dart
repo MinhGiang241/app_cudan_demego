@@ -16,7 +16,7 @@ class LinkingServiceDetailsPrv extends ChangeNotifier {
   int limitPro = 30;
 
   Future getImageListinShop(BuildContext context, int skip, int limit) async {
-    await APILinkingService.getImageListInShop(service.id, skip, limit)
+    await APILinkingService.getImageListInShop(service.id, null, skip, limit)
         .then((v) {
       images.clear();
       if (v != null) {

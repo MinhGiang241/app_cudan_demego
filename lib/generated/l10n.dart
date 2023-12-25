@@ -9759,6 +9759,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Less`
+  String get less {
+    return Intl.message(
+      'Less',
+      name: 'less',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Truy cập`
+  String get access {
+    return Intl.message(
+      'Truy cập',
+      name: 'access',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

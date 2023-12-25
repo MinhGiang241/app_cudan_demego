@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "abrv": MessageLookupByLibrary.simpleMessage("Abbreviation"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Accept hand over"),
+        "access": MessageLookupByLibrary.simpleMessage("Truy cập"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "account_type": MessageLookupByLibrary.simpleMessage("Account type"),
@@ -675,6 +676,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "legend": MessageLookupByLibrary.simpleMessage("Legend"),
+        "less": MessageLookupByLibrary.simpleMessage("Less"),
         "letter_info":
             MessageLookupByLibrary.simpleMessage("Letter infomation"),
         "letter_num": MessageLookupByLibrary.simpleMessage("Letter code"),

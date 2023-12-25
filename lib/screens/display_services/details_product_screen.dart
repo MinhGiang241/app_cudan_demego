@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app_cudan/generated/l10n.dart';
 import 'package:app_cudan/screens/payment/widget/payment_item.dart';
 import 'package:app_cudan/widgets/primary_image_netword.dart';
@@ -10,10 +12,12 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/constants.dart';
 import '../../constants/regex_text.dart';
 import '../../models/linking_service.dart';
+import '../../services/api_linkingservice.dart';
 import '../../services/api_service.dart';
 import '../../widgets/primary_appbar.dart';
 import '../../widgets/primary_screen.dart';
 import '../../widgets/primary_text_field.dart';
+import 'shop_image_list_screen.dart';
 
 class DetailsProductScreen extends StatefulWidget {
   const DetailsProductScreen({super.key});
@@ -25,6 +29,7 @@ class DetailsProductScreen extends StatefulWidget {
 
 class _DetailsProductScreenState extends State<DetailsProductScreen> {
   var searchController = TextEditingController();
+  var isExpanded = false;
   @override
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)!.settings.arguments as Map;
@@ -49,81 +54,84 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
       body: ListView(
         children: <Widget>[
           vpad(12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Stack(
             children: [
-              ClipOval(
-                child: Hero(
-                  tag: service.id ?? '',
-                  child: CachedNetworkImage(
-                    errorWidget: (_, __, ___) => Icon(
-                      Icons.broken_image,
-                      color: Colors.black45,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipOval(
+                    child: PrimaryImageNetwork(
+                      width: 130,
+                      height: 130,
+                      canShowPhotoView: true,
+                      path:
+                          '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
                     ),
-                    placeholder: (context, url) {
-                      return Center(
-                        child: Icon(
-                          Icons.image,
-                          color: grayScaleColor1.withOpacity(0.6),
-                          size: 30,
-                        ),
-                      );
-                    },
-                    imageUrl:
-                        '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
-                    width: 130,
-                    height: 130,
-                    // canShowPhotoView: false,
-                    // path:
-                    //     '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
                   ),
-                ),
+                  hpad(14),
+                  Expanded(
+                    child: Container(
+                      height: 130,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          AutoSizeText(
+                            service.name ?? '',
+                            style: txtBold(
+                              16,
+                              primaryColorBase,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          AutoSizeText(
+                            service.address ?? '',
+                            style: txtRegular(
+                              14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          AutoSizeText(
+                            '${service.time_start ?? ''} - ${service.time_end ?? ''}',
+                            style: txtRegular(
+                              14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          AutoSizeText(
+                            service.i?.name ?? '',
+                            style: txtRegular(
+                              14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  hpad(30),
+                ],
               ),
-              hpad(14),
-              Expanded(
-                child: Container(
-                  height: 130,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AutoSizeText(
-                        service.name ?? '',
-                        style: txtBold(
-                          16,
-                          primaryColorBase,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                      AutoSizeText(
-                        service.address ?? '',
-                        style: txtRegular(
-                          14,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                      AutoSizeText(
-                        '${service.time_start ?? ''} - ${service.time_end ?? ''}',
-                        style: txtRegular(
-                          14,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                      AutoSizeText(
-                        service.i?.name ?? '',
-                        style: txtRegular(
-                          14,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ],
+              Positioned(
+                right: 5,
+                child: IconButton(
+                  onPressed: () {
+                    APILinkingService.countHit(
+                      service.id,
+                    );
+                    launchUrl(Uri.parse(service.link ?? ""));
+                  },
+                  icon: Transform.rotate(
+                    angle: -pi / 4,
+                    child: Icon(
+                      Icons.send_outlined,
+                      color: primaryColorBase,
+                    ),
                   ),
                 ),
               ),
@@ -142,6 +150,9 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
               Spacer(),
               InkWell(
                 onTap: () {
+                  APILinkingService.countHit(
+                    service.id,
+                  );
                   launchUrl(Uri.parse(product.link ?? ''));
                 },
                 child: Text(
@@ -163,29 +174,37 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
             maxLines: 2,
           ),
           vpad(12),
-          AutoSizeText(
-            formatCurrency.format(product.old_price ?? 0),
-            style: TextStyle(
-              decoration: TextDecoration.lineThrough,
-              fontFamily: family,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
+          if (product.old_price != null)
+            AutoSizeText(
+              formatCurrency.format(product.old_price ?? 0),
+              style: TextStyle(
+                decoration: TextDecoration.lineThrough,
+                fontFamily: family,
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+                overflow: TextOverflow.ellipsis,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
           Divider(),
           Text(S.of(context).pro_images, style: txtBold(14)),
           vpad(12),
           GridView.count(
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             crossAxisCount: 3,
             mainAxisSpacing: 18,
             crossAxisSpacing: 15,
             childAspectRatio: 1.4,
             children: [
-              ...(product.l ?? []).map(
+              ...(product.l == null
+                      ? []
+                      : (product.l!.length <= 6
+                          ? product.l
+                          : product.l!.sublist(0, 6)))!
+                  .map(
                 (c) => PrimaryImageNetwork(
                   canShowPhotoView: true,
                   path: RegexText.isUrl(c.photo ?? '')
@@ -196,39 +215,83 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
             ],
           ),
           vpad(12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  ShopImageListScreen.routeName,
+                  arguments: {
+                    'service': service,
+                    'product': product,
+                  },
+                );
+              },
+              child: Text(
+                S.of(context).more,
+                style: txtRegular(14, primaryColorBase),
+              ),
+            ),
+          ),
+          vpad(12),
           Divider(),
           Text(S.of(context).pro_des, style: txtBold(14)),
           vpad(12),
-          HtmlWidget(
-            '''${product.describe ?? ''}''',
-            onTapUrl: (url) {
-              launchUrl(Uri.parse(url));
-              return false;
-            },
-            textStyle: txtBodyMediumRegular(),
-            onTapImage: (ImageMetadata data) {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      PhotoViewer(
-                    heroTag: 'hero',
-                    link: data.sources.first.url,
-                    listLink: [
-                      data.sources.first.url,
-                    ],
-                    initIndex: 0,
-                  ),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
+          ClipRect(
+            child: Align(
+              alignment: Alignment.topCenter,
+              widthFactor: 1,
+              heightFactor: isExpanded ? 1 : 0.1,
+              child: HtmlWidget(
+                '''${product.describe ?? ''}''',
+                onTapUrl: (url) {
+                  launchUrl(Uri.parse(url));
+                  return false;
+                },
+                textStyle: txtBodyMediumRegular(),
+                onTapImage: (ImageMetadata data) {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          PhotoViewer(
+                        heroTag: 'hero',
+                        link: data.sources.first.url,
+                        listLink: [
+                          data.sources.first.url,
+                        ],
+                        initIndex: 0,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  isExpanded ? S.of(context).less : S.of(context).more,
+                  style: txtRegular(14, primaryColorBase),
                 ),
-              );
-            },
+              ),
+            ),
           ),
           vpad(50),
         ],

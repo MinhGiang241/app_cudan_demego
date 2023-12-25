@@ -85,7 +85,8 @@ class ProductTab extends StatelessWidget {
                               children: [
                                 PrimaryImageNetwork(
                                   canShowPhotoView: false,
-                                  height: 155,
+                                  height:
+                                      ((dvWidth(context) / 2) - 15 - 24) * 0.75,
                                   width: dvWidth(context) / 2,
                                   path:
                                       '${ApiService.shared.uploadURL}/?load=${e.image}&regcode=${ApiService.shared.regCode}',
@@ -96,7 +97,7 @@ class ProductTab extends StatelessWidget {
                                   child: AutoSizeText(
                                     e.name ?? '',
                                     style: txtSemiBold(
-                                      14,
+                                      12,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
@@ -108,28 +109,29 @@ class ProductTab extends StatelessWidget {
                                     formatCurrency.format(e.price ?? 0),
                                     //.replaceAll("₫", "VND"),
                                     style: txtSemiBold(
-                                      14,
+                                      12,
                                       redColorBase,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: AutoSizeText(
-                                    formatCurrency.format(e.old_price ?? 0),
-                                    style: TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      fontFamily: family,
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
+                                if (e.old_price != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8),
+                                    child: AutoSizeText(
+                                      formatCurrency.format(e.old_price ?? 0),
+                                      style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontFamily: family,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
                                   ),
-                                ),
                               ],
                             ),
                           ),

@@ -6,6 +6,7 @@ import 'package:app_cudan/screens/display_services/tabs/product_tab.dart';
 import 'package:app_cudan/screens/display_services/tabs/shop_info_tab.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_card.dart';
+import 'package:app_cudan/widgets/primary_image_netword.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,6 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/constants.dart';
 import '../../generated/l10n.dart';
+import '../../services/api_linkingservice.dart';
 import '../../services/api_service.dart';
 import '../../widgets/primary_text_field.dart';
 
@@ -89,33 +91,40 @@ class _DetailsLinkingServiceScreenState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ClipOval(
-                            child: Hero(
-                              tag: service.id ?? '',
-                              child: CachedNetworkImage(
-                                errorWidget: (_, __, ___) => Icon(
-                                  Icons.broken_image,
-                                  color: Colors.black45,
-                                ),
-                                placeholder: (context, url) {
-                                  return Center(
-                                    child: Icon(
-                                      Icons.image,
-                                      color: grayScaleColor1.withOpacity(0.6),
-                                      size: 30,
-                                    ),
-                                  );
-                                },
-                                imageUrl:
-                                    '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
-                                width: 130,
-                                height: 130,
-                                // canShowPhotoView: false,
-                                // path:
-                                //     '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
-                                fit: BoxFit.cover,
-                                alignment: Alignment.topCenter,
-                              ),
+                            child: PrimaryImageNetwork(
+                              canShowPhotoView: true,
+                              width: 130,
+                              height: 130,
+                              path:
+                                  '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
                             ),
+                            // Hero(
+                            //   tag: service.id ?? '',
+                            //   child: CachedNetworkImage(
+                            //     errorWidget: (_, __, ___) => Icon(
+                            //       Icons.broken_image,
+                            //       color: Colors.black45,
+                            //     ),
+                            //     placeholder: (context, url) {
+                            //       return Center(
+                            //         child: Icon(
+                            //           Icons.image,
+                            //           color: grayScaleColor1.withOpacity(0.6),
+                            //           size: 30,
+                            //         ),
+                            //       );
+                            //     },
+                            //     imageUrl:
+                            //         '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
+                            //     width: 130,
+                            //     height: 130,
+                            //     // canShowPhotoView: false,
+                            //     // path:
+                            //     //     '${ApiService.shared.uploadURL}/?load=${service.image}&regcode=${ApiService.shared.regCode}',
+                            //     fit: BoxFit.cover,
+                            //     alignment: Alignment.topCenter,
+                            //   ),
+                            // ),
                           ),
                           hpad(14),
                           Expanded(
@@ -171,6 +180,9 @@ class _DetailsLinkingServiceScreenState
                         right: 5,
                         child: IconButton(
                           onPressed: () {
+                            APILinkingService.countHit(
+                              service.id,
+                            );
                             launchUrl(Uri.parse(service.link ?? ""));
                           },
                           icon: Transform.rotate(

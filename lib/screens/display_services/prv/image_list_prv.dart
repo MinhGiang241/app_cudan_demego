@@ -5,8 +5,9 @@ import '../../../services/api_linkingservice.dart';
 import '../../../utils/utils.dart';
 
 class ImageListPrv extends ChangeNotifier {
-  ImageListPrv({required this.service});
+  ImageListPrv({required this.service, this.product});
   LinkingService service;
+  LSProduct? product;
   var loading = false;
   List<PhotosLSP> images = [];
   int skip = 0;
@@ -20,8 +21,12 @@ class ImageListPrv extends ChangeNotifier {
     } else {
       skip += limit;
     }
-    await APILinkingService.getImageListInShop(service.id, skip, limit)
-        .then((v) {
+    await APILinkingService.getImageListInShop(
+      service.id,
+      product?.id,
+      skip,
+      limit,
+    ).then((v) {
       if (isInit) {
         images.clear();
       }

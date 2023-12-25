@@ -969,5 +969,7 @@
   "not_have_image": "Don't have any images",
   "not_have_product": "Don't have any products",
   "pro_des": "Product description",
-  "pro_images": "Product images"
+  "pro_images": "Product images",
+  "less": "Less",
+  "access": "Truy cập"
 }

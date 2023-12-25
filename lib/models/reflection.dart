@@ -381,3 +381,19 @@ class ComplainReason {
   factory ComplainReason.fromJson(Map<String, dynamic> source) =>
       ComplainReason.fromMap(source);
 }
+
+class Topic {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? name;
+  String? type;
+  String? content;
+  String? parentId;
+  String? module;
+  String? unit;
+  double? min_value;
+  double? max_value;
+  bool? is_valuable;
+  bool? active;
+}
