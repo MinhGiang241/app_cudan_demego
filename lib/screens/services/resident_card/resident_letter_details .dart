@@ -135,7 +135,7 @@ class _ResidentLetterDetailsState extends State<ResidentLetterDetails>
                         images: [
                           ...card.other_image!.map(
                             (e) =>
-                                "${ApiService.shared.uploadURL}${e.id}&regcode=${ApiService.shared.regCode}",
+                                "${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}",
                           ),
                         ],
                       ),
