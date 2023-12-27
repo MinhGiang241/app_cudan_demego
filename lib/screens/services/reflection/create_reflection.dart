@@ -67,6 +67,10 @@ class CreateReflection extends StatelessWidget {
                   value: 'FEEDBACK',
                   child: Text(S.of(context).feedback),
                 ),
+                DropdownMenuItem(
+                  value: 'SUGGESTION',
+                  child: Text(S.of(context).suggest),
+                ),
               ];
               var listAreaType = [
                 DropdownMenuItem(
@@ -101,13 +105,13 @@ class CreateReflection extends StatelessWidget {
                           initialValue: ref?.code,
                           enable: !isEdit,
                         ),
-                      if (isEdit) vpad(12),
-                      if (isEdit && ref?.date != null)
-                        PrimaryTextField(
-                          label: S.of(context).date_send,
-                          initialValue: Utils.dateFormat(ref!.date ?? '', 1),
-                          enable: !isEdit,
-                        ),
+                      // if (isEdit) vpad(12),
+                      // if (isEdit && ref?.date != null)
+                      //   PrimaryTextField(
+                      //     label: S.of(context).date_send,
+                      //     initialValue: Utils.dateFormat(ref!.date ?? '', 1),
+                      //     enable: !isEdit,
+                      //   ),
                       if (isEdit) vpad(12),
                       PrimaryDropDown(
                         enable: isUpdate,
@@ -146,10 +150,8 @@ class CreateReflection extends StatelessWidget {
                             .validateDescrible,
                         maxLength: 550,
                         enable: isUpdate,
-                        label: S.of(context).description,
-                        hint: (isEdit && !isUpdate)
-                            ? ""
-                            : S.of(context).description,
+                        label: S.of(context).note,
+                        hint: (isEdit && !isUpdate) ? "" : S.of(context).note,
                         maxLines: 3,
                         controller: context
                             .read<CreateReflectionPrv>()
@@ -177,9 +179,10 @@ class CreateReflection extends StatelessWidget {
                       PrimaryDropDown(
                         isMultiple: true,
                         selectMultileList:
-                            context.watch<CreateReflectionPrv>().isFloor
-                                ? context.read<CreateReflectionPrv>().floorList
-                                : context.read<CreateReflectionPrv>().listZone,
+                            // context.watch<CreateReflectionPrv>().isFloor
+                            //     ? context.read<CreateReflectionPrv>().floorList
+                            //     :
+                            context.read<CreateReflectionPrv>().listZone,
                         enable: isUpdate,
                         validator: (v) {
                           if (context
@@ -199,12 +202,16 @@ class CreateReflection extends StatelessWidget {
                         dropKey:
                             context.read<CreateReflectionPrv>().dropdownKey,
                         // selectList: listZone,
-                        label: context.watch<CreateReflectionPrv>().isFloor
-                            ? S.of(context).floor
-                            : S.of(context).zone,
-                        hint: context.watch<CreateReflectionPrv>().isFloor
-                            ? S.of(context).floor
-                            : S.of(context).zone,
+                        label:
+                            // context.watch<CreateReflectionPrv>().isFloor
+                            //     ? S.of(context).floor
+                            //     :
+                            S.of(context).zone,
+                        hint:
+                            // context.watch<CreateReflectionPrv>().isFloor
+                            //     ? S.of(context).floor
+                            //     :
+                            S.of(context).zone,
                       ),
                       vpad(12),
                       SelectMediaWidget(

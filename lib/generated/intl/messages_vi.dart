@@ -111,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "abrv": MessageLookupByLibrary.simpleMessage("Ký hiệu"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
-        "access": MessageLookupByLibrary.simpleMessage("Access"),
+        "access": MessageLookupByLibrary.simpleMessage("Truy cập"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "account_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "account_type": MessageLookupByLibrary.simpleMessage("Loại tài khoản"),
@@ -1357,6 +1357,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cập nhật thành công"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Cập nhật email thành công"),
+        "suggest": MessageLookupByLibrary.simpleMessage("Đề nghị"),
         "suggestion": MessageLookupByLibrary.simpleMessage("Đề xuất"),
         "surface": MessageLookupByLibrary.simpleMessage("Mặt bằng"),
         "sys_support": MessageLookupByLibrary.simpleMessage("Đường dây hỗ trợ"),
@@ -1386,6 +1387,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "th12": MessageLookupByLibrary.simpleMessage("Tháng 12"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
+        "ticket_num": MessageLookupByLibrary.simpleMessage("Ticket quantity"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Giá vé"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time": MessageLookupByLibrary.simpleMessage("Thời gian"),

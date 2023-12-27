@@ -13,10 +13,8 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 
 import '../../../constants/constants.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/area.dart';
 import '../../../models/info_content_view.dart';
 import '../../../models/multi_select_view_model.dart';
-import '../../../models/response_resident_own.dart';
 import '../../../services/api_reflection.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/utils.dart';
@@ -125,18 +123,18 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
       ),
       body: FutureBuilder(
         future: () async {
-          await APIReflection.getListAreaByType(arg.areaType ?? '').then((v) {
+          await APIReflection.getListAreaByType("PIN" ?? '')
+              // await APIReflection.getTopicList()
+              .then((v) {
             listZoneChoice.clear();
             for (var i in v) {
-              var a = Area.fromMap(i);
+              // var a = Area.fromMap(i);
               var s = MultiSelectViewModel(
-                value: a.id,
-                title: a.name,
+                value: i['_id'],
+                title: i['name'],
                 isSelected: false,
               );
-              if (arg.areaType == 'PIN' &&
-                  arg.areaIds != null &&
-                  arg.areaIds!.contains(i["_id"])) {
+              if (arg.areaIds!.map((e) => e?['_id']).contains(i["_id"])) {
                 s.isSelected = true;
               }
               listZoneChoice.add(
@@ -144,29 +142,29 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
               );
             }
           });
-          await APIReflection.getFloorList(
-            arg.apartmentId,
-          ).then((v) {
-            listFloorChoice.clear();
-            if (v != null) {
-              for (var i in v) {
-                var floor = Floor.fromJson(i);
-                var s = MultiSelectViewModel(
-                  title: '${floor.name}-${floor.b?.name}',
-                  value: floor.id,
-                  isSelected: false,
-                );
-
-                if (arg.areaType == 'BUILDING' &&
-                    arg.floorIds != null &&
-                    arg.floorIds!.contains(i["_id"])) {
-                  s.isSelected = true;
-                }
-                listFloorChoice.add(s);
-              }
-            }
-          });
-
+          // await APIReflection.getFloorList(
+          //   arg.apartmentId,
+          // ).then((v) {
+          //   listFloorChoice.clear();
+          //   if (v != null) {
+          //     for (var i in v) {
+          //       var floor = Floor.fromJson(i);
+          //       var s = MultiSelectViewModel(
+          //         title: '${floor.name}-${floor.b?.name}',
+          //         value: floor.id,
+          //         isSelected: false,
+          //       );
+          //
+          //       if (arg.areaType == 'BUILDING' &&
+          //           arg.floorIds != null &&
+          //           arg.floorIds!.contains(i["_id"])) {
+          //         s.isSelected = true;
+          //       }
+          //       listFloorChoice.add(s);
+          //     }
+          //   }
+          // });
+          //
           print(listZoneChoice);
           print(listFloorChoice);
         }(),
@@ -227,36 +225,38 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                             initialValue: arg.code,
                             enable: false,
                           ),
-                          vpad(12),
-                          PrimaryTextField(
-                            label: S.of(context).date_send,
-                            initialValue: Utils.dateFormat(arg.date ?? '', 1),
-                            enable: false,
-                          ),
+                          // vpad(12),
+                          // PrimaryTextField(
+                          //   label: S.of(context).date_send,
+                          //   initialValue: Utils.dateFormat(arg.date ?? '', 1),
+                          //   enable: false,
+                          // ),
                           vpad(12),
                           PrimaryTextField(
                             label: S.of(context).reflection_type,
                             initialValue: arg.ticket_type == 'COMPLAIN'
                                 ? S.of(context).complain
-                                : S.of(context).feedback,
+                                : arg.ticket_type == "SUGGESTION"
+                                    ? S.of(context).suggest
+                                    : S.of(context).feedback,
                             enable: false,
                           ),
                           vpad(12),
                           PrimaryTextField(
                             label: S.of(context).reflection_reason,
-                            initialValue: arg.opinionContribute?.content,
+                            initialValue: arg.opinionContribute?.name,
                             enable: false,
                           ),
                           vpad(12),
                           PrimaryTextField(
                             maxLines: 3,
                             label: S.of(context).note,
-                            initialValue: arg.opinionContribute?.description,
+                            initialValue: arg.description,
                             enable: false,
                           ),
                           vpad(12),
                           PrimaryDropDown(
-                            hint: '',
+                            hint: S.of(context).zone_type,
                             selectList: listAreaType,
                             label: S.of(context).zone_type,
                             value: arg.areaType,
@@ -264,15 +264,14 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           ),
                           vpad(12),
                           PrimaryDropDown(
-                            hint: '',
+                            hint: S.of(context).zone,
                             isMultiple: true,
-                            selectMultileList: arg.areaType == 'PIN'
-                                ? listZoneChoice
-                                : listFloorChoice,
+                            selectMultileList: listZoneChoice,
                             label: S.of(context).zone,
-                            value: arg.areaType == 'PIN'
-                                ? arg.areaIds
-                                : arg.floorIds,
+                            // value: listZoneChoice,
+                            // arg.areaType == 'PIN'
+                            //     ? arg.areaIds
+                            //     : arg.floorIds,
                             enable: false,
                           ),
                           if (arg.files!.isNotEmpty) vpad(12),
@@ -379,14 +378,17 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                           //   enable: false,
                           // ),
                           vpad(12),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              S.of(context).attachment_file,
-                              textAlign: TextAlign.start,
-                              style: txtMediumUnderline(14, primaryColorBase),
+                          if (arg.result?.to_do_list_result?[0].file != null &&
+                              (arg.result?.to_do_list_result?[0].file ?? [])
+                                  .isNotEmpty)
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                S.of(context).attachment_file,
+                                textAlign: TextAlign.start,
+                                style: txtMediumUnderline(14, primaryColorBase),
+                              ),
                             ),
-                          ),
                           vpad(12),
                           ...(arg.result?.to_do_list_result?[0].file ?? []).map(
                             (e) => InkWell(
@@ -396,12 +398,6 @@ class _ReflectionProcessedDetailsState extends State<ReflectionProcessedDetails>
                                       '${ApiService.shared.uploadURL}?load=${e.id}&regcode=${ApiService.shared.regCode}',
                                   context: context,
                                 );
-                                // await launchUrl(
-                                //   Uri.parse(
-                                //     '${ApiConstants.uploadURL}?load=${e.id}',
-                                //   ),
-                                //   mode: LaunchMode.externalApplication,
-                                // );
                               },
                               child: Align(
                                 alignment: Alignment.centerLeft,

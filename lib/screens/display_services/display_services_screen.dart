@@ -253,7 +253,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                                       ),
                                                       vpad(6),
                                                       AutoSizeText(
-                                                        "${v.time_start ?? ''} - ${v.time_end ?? ''}",
+                                                        "${(v.time_start ?? '').substring(0, 5)} - ${(v.time_end ?? '').substring(0, 5)}",
                                                         style: txtRegular(
                                                           12,
                                                         ),

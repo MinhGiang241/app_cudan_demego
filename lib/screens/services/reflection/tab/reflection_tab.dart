@@ -163,7 +163,9 @@ class _ReflectionTabState extends State<ReflectionTab> {
                             PrimaryIcon(
                               icons: e.ticket_type == 'COMPLAIN'
                                   ? PrimaryIcons.mail
-                                  : PrimaryIcons.feedback,
+                                  : e.ticket_type == 'SUGGESTION'
+                                      ? PrimaryIcons.inbox
+                                      : PrimaryIcons.feedback,
                               style: PrimaryIconStyle.gradient,
                               gradients: PrimaryIconGradient.yellow,
                               size: 32,
@@ -184,7 +186,7 @@ class _ReflectionTabState extends State<ReflectionTab> {
                                     //         : e.opinionContribute != null
                                     //             ? e.opinionContribute!.content
                                     //             : "") ??
-                                    e.opinionContribute?.content ?? '',
+                                    e.opinionContribute?.name ?? '',
                                     style: txtBold(16),
                                   ),
                                   vpad(4),
@@ -203,7 +205,10 @@ class _ReflectionTabState extends State<ReflectionTab> {
                                             '${S.of(context).created_date}:',
                                           ),
                                           Text(
-                                            Utils.dateFormat(e.date ?? '', 1),
+                                            Utils.dateFormat(
+                                              e.createdTime ?? '',
+                                              1,
+                                            ),
                                           ),
                                         ],
                                       ),

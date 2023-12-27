@@ -35,6 +35,8 @@ class ConfirmBookingService extends StatefulWidget {
 class _ConfirmBookingServiceState extends State<ConfirmBookingService> {
   String genTicketTypeString(String type) {
     switch (type.trim()) {
+      case "price":
+        return S.current.ticket_num;
       case "price_child":
         return S.current.child_ticket_num;
       case "price_adult":

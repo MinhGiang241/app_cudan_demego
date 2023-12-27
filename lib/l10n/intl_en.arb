@@ -971,5 +971,7 @@
   "pro_des": "Product description",
   "pro_images": "Product images",
   "less": "Less",
-  "access": "Truy cập"
+  "access": "Access",
+  "suggest": "Suggestion",
+  "ticket_num": "Số vé"
 }

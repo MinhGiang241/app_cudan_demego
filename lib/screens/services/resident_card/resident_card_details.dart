@@ -69,7 +69,7 @@ class _ResidentCardDetailsState extends State<ResidentCardDetails>
                   isHorizontal: true,
                   title: S.of(context).address,
                   content:
-                      '${card.res_card?.apartment?.name ?? ""} - ${card.res_card?.apartment?.f?.name ?? ''} - ${card.res_card?.apartment?.b?.name}',
+                      '${card.a?.name ?? ""} - ${card.a?.f?.name ?? ''} - ${card.a?.b?.name ?? ''}',
                   contentStyle: txtBold(14),
                 ),
                 InfoContentView(

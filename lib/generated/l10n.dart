@@ -9770,11 +9770,31 @@ class S {
     );
   }
 
-  /// `Truy cập`
+  /// `Access`
   String get access {
     return Intl.message(
-      'Truy cập',
+      'Access',
       name: 'access',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suggestion`
+  String get suggest {
+    return Intl.message(
+      'Suggestion',
+      name: 'suggest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Số vé`
+  String get ticket_num {
+    return Intl.message(
+      'Số vé',
+      name: 'ticket_num',
       desc: '',
       args: [],
     );

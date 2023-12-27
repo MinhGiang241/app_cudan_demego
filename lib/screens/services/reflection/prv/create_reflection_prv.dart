@@ -240,7 +240,7 @@ class CreateReflectionPrv extends ChangeNotifier {
         status: !isSend ? 'NEW' : 'WAIT_PROGRESS',
         resident_code: resident_code,
         ticket_type: typeController.text.trim(),
-        areaIds: zoneTypeController.text.trim() == 'PIN' ? zoneValueList : null,
+        areaIds: zoneValueList,
         floorIds:
             zoneTypeController.text.trim() == 'BUILDING' ? zoneValueList : null,
         areaType: zoneTypeController.text.trim(),

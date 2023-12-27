@@ -37,6 +37,8 @@ class InfoContentView {
 
 genStatus(String status) {
   switch (status) {
+    case "SUGGESTION":
+      return S.current.suggest;
     case "ACTIVE":
       return S.current.active;
     case "INACTIVE":
@@ -132,6 +134,8 @@ String genShelifeString(String? v) {
 
 Color genStatusColor(String? status) {
   switch (status) {
+    case "SUGGESTION":
+      return greenColor10;
     case "NEW":
       return grayScaleColor1;
     case "PAY_DONE":

@@ -105,7 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "abrv": MessageLookupByLibrary.simpleMessage("Abbreviation"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Accept hand over"),
-        "access": MessageLookupByLibrary.simpleMessage("Truy cập"),
+        "access": MessageLookupByLibrary.simpleMessage("Access"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_name": MessageLookupByLibrary.simpleMessage("Account name"),
         "account_type": MessageLookupByLibrary.simpleMessage("Account type"),
@@ -1356,6 +1356,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Update successfully"),
         "success_update_email":
             MessageLookupByLibrary.simpleMessage("Update email successfully"),
+        "suggest": MessageLookupByLibrary.simpleMessage("Suggestion"),
         "suggestion": MessageLookupByLibrary.simpleMessage("Suggestion"),
         "surface": MessageLookupByLibrary.simpleMessage("Plan"),
         "sys_support": MessageLookupByLibrary.simpleMessage("System suport"),
@@ -1385,6 +1386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "th12": MessageLookupByLibrary.simpleMessage("Dec"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
+        "ticket_num": MessageLookupByLibrary.simpleMessage("Số vé"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Ticket price"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:app_cudan/models/reason.dart';
@@ -48,7 +49,7 @@ class Reflection {
   Reason? r;
   ComplainReason? complainReason;
   Status? s;
-  OpinionContribute? opinionContribute;
+  Topic? opinionContribute;
   List<FileTicket>? files;
   List<FileTicket>? document;
 
@@ -227,7 +228,7 @@ class Reflection {
           map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
       r: map['r'] != null ? Reason.fromJson(map['r']) : null,
       opinionContribute: map['opinionContribute'] != null
-          ? OpinionContribute.fromMap(
+          ? Topic.fromMap(
               map['opinionContribute'] as Map<String, dynamic>,
             )
           : null,
@@ -396,4 +397,99 @@ class Topic {
   double? max_value;
   bool? is_valuable;
   bool? active;
+  Topic({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.name,
+    this.type,
+    this.content,
+    this.parentId,
+    this.module,
+    this.unit,
+    this.min_value,
+    this.max_value,
+    this.is_valuable,
+    this.active,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'name': name,
+      'type': type,
+      'content': content,
+      'parentId': parentId,
+      'module': module,
+      'unit': unit,
+      'min_value': min_value,
+      'max_value': max_value,
+      'is_valuable': is_valuable,
+      'active': active,
+    };
+  }
+
+  factory Topic.fromMap(Map<String, dynamic> map) {
+    return Topic(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      content: map['content'] != null ? map['content'] as String : null,
+      parentId: map['parentId'] != null ? map['parentId'] as String : null,
+      module: map['module'] != null ? map['module'] as String : null,
+      unit: map['unit'] != null ? map['unit'] as String : null,
+      min_value: double.tryParse(map['min_value'].toString()) != null
+          ? double.parse(map['min_value'].toString())
+          : null,
+      max_value: double.tryParse(map['max_value'].toString()) != null
+          ? double.parse(map['max_value'].toString())
+          : null,
+      is_valuable:
+          map['is_valuable'] != null ? map['is_valuable'] as bool : null,
+      active: map['active'] != null ? map['active'] as bool : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Topic.fromJson(String source) =>
+      Topic.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Topic copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? name,
+    String? type,
+    String? content,
+    String? parentId,
+    String? module,
+    String? unit,
+    double? min_value,
+    double? max_value,
+    bool? is_valuable,
+    bool? active,
+  }) {
+    return Topic(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      content: content ?? this.content,
+      parentId: parentId ?? this.parentId,
+      module: module ?? this.module,
+      unit: unit ?? this.unit,
+      min_value: min_value ?? this.min_value,
+      max_value: max_value ?? this.max_value,
+      is_valuable: is_valuable ?? this.is_valuable,
+      active: active ?? this.active,
+    );
+  }
 }

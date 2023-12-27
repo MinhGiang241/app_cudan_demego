@@ -5,7 +5,6 @@ import '../../../../constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/info_content_view.dart';
 import '../../../../models/manage_card.dart';
-import '../../../../widgets/primary_button.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
@@ -127,8 +126,8 @@ class ResidentCardTab extends StatelessWidget {
                           ),
                           InfoContentView(
                             title: S.of(context).address,
-                            content: list[index].res_card?.apartment != null
-                                ? "${list[index].res_card?.apartment!.name ?? ""}, ${list[index].res_card?.apartment?.f?.name ?? ""}, ${list[index].res_card?.apartment?.b?.name}"
+                            content: list[index].a != null
+                                ? "${list[index].a?.name ?? ""}, ${list[index].a?.f?.name ?? ""}, ${list[index].a?.b?.name}"
                                 : "",
                             contentStyle: txtBold(12),
                           ),

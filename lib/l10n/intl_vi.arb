@@ -972,5 +972,7 @@
   "pro_des": "Mô tả sản phẩm",
   "pro_images": "Hình ảnh sản phẩm",
   "less": "Rút gọn",
-  "access": "Access"
+  "access": "Truy cập",
+  "suggest": "Đề nghị",
+  "ticket_num": "Ticket quantity"
 }

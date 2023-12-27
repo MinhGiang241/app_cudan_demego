@@ -95,7 +95,7 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                             maxLines: 2,
                           ),
                           AutoSizeText(
-                            '${service.time_start ?? ''} - ${service.time_end ?? ''}',
+                            '${(service.time_start ?? '').substring(0, 5)} - ${(service.time_end ?? '').substring(0, 5)}',
                             style: txtRegular(
                               14,
                             ),
@@ -163,16 +163,17 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
             ],
           ),
           vpad(12),
-          AutoSizeText(
-            formatCurrency.format(product.price ?? 0),
-            //.replaceAll("₫", "VND"),
-            style: txtSemiBold(
-              14,
-              redColorBase,
+          if (product.price != null)
+            AutoSizeText(
+              formatCurrency.format(product.price ?? 0),
+              //.replaceAll("₫", "VND"),
+              style: txtSemiBold(
+                14,
+                redColorBase,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
           vpad(12),
           if (product.old_price != null)
             AutoSizeText(
