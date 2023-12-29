@@ -16,7 +16,7 @@ class ManageCardDetailsPrv extends ChangeNotifier {
   Function? cancel;
   List<CardHistory> historyList = [];
   List<ListTransport> listTranspost = [];
-  Future getListTransport(String? id) async {
+  Future getListTransport(String? id, BuildContext context) async {
     await APITransport.getListTransportByManageCardId(id).then((v) {
       listTranspost.clear();
       if (v != null) {
@@ -25,6 +25,8 @@ class ManageCardDetailsPrv extends ChangeNotifier {
         }
       }
       notifyListeners();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
     });
   }
 
@@ -43,9 +45,11 @@ class ManageCardDetailsPrv extends ChangeNotifier {
   }
 
   Future getManageCardById(BuildContext context, String? id) async {
-    return APITrans.getManageCarById(id).then((v) {
+    await APITrans.getManageCarById(id).then((v) {
       card = ManageCard.fromMap(v);
-      return getListTransport(id);
+      print(card);
+      notifyListeners();
+      return getListTransport(id, context);
     });
   }
 

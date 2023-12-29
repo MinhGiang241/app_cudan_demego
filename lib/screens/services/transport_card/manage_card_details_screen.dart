@@ -1,5 +1,6 @@
 import 'package:app_cudan/models/manage_card.dart';
 import 'package:app_cudan/screens/services/transport_card/transport_details_screen.dart';
+import 'package:app_cudan/widgets/primary_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
 import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/resident_info_prv.dart';
+import '../resident_card/resident_card_screen.dart';
 import 'add_new_transport_card.dart';
 import 'extend_card_screen.dart';
 import 'prv/manage_card_details_prv.dart';
@@ -39,6 +41,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
 
     var card = arg['card'] as ManageCard;
     var cancel = arg['cancel'] as Function;
+    var isRes = arg['res'] ?? false;
 
     return ChangeNotifierProvider(
       create: (_) => ManageCardDetailsPrv(cancel),
@@ -46,15 +49,26 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
         appBar: PrimaryAppbar(
           leading: BackButton(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                TransportCardScreen.routeName,
-                (route) => route.isFirst,
-                arguments: 0,
-              );
+              if (isRes) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  ResidentCardListScreen.routeName,
+                  (route) => route.isFirst,
+                  arguments: 0,
+                );
+              } else {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  TransportCardScreen.routeName,
+                  (route) => route.isFirst,
+                  arguments: 0,
+                );
+              }
             },
           ),
-          title: S.of(context).trans_card_details,
+          title: isRes
+              ? S.of(context).res_card_details
+              : S.of(context).trans_card_details,
           // tabController: tabController,
           isTabScrollabel: false,
           // tabs: [
@@ -74,7 +88,11 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
             var listTranspost =
                 context.watch<ManageCardDetailsPrv>().listTranspost;
             var loadedCard = context.watch<ManageCardDetailsPrv>().card;
-
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: PrimaryLoading(),
+              );
+            }
             return ListView(
               children: [
                 vpad(24),
@@ -115,20 +133,25 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).address,
-                        content: loadedCard.t?.address,
+                        content: loadedCard.t?.address ??
+                            "${loadedCard.a?.name ?? ""}-${loadedCard.a?.f?.name ?? ""}-${loadedCard.a?.b?.name ?? ""}",
                       ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).cmnd,
-                        content: loadedCard.t?.identity,
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).phone_num,
-                        content: loadedCard.phone_number ??
-                            loadedCard.t?.re?.phone_required ??
-                            loadedCard.t?.re?.phone,
-                      ),
+                      if (isRes)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).cmnd,
+                          content: isRes
+                              ? loadedCard.res_card?.residentId
+                              : loadedCard.t?.identity,
+                        ),
+                      if (isRes)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).phone_num,
+                          content: loadedCard.phone_number ??
+                              loadedCard.t?.re?.phone_required ??
+                              loadedCard.t?.re?.phone,
+                        ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).reg_letter_num,
@@ -303,24 +326,24 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                                   //   },
                                   // ),
                                   // hpad(10),
-                                  PrimaryButton(
-                                    isLoading: false,
-                                    buttonSize: ButtonSize.xsmall,
-                                    buttonType: ButtonType.secondary,
-                                    secondaryBackgroundColor: redColor4,
-                                    textColor: redColorBase,
-                                    text: S.of(context).cancel,
-                                    onTap: () {
-                                      context
-                                          .read<ManageCardDetailsPrv>()
-                                          .cancelTranport(
-                                            context,
-                                            e.key,
-                                            e.value.id,
-                                          );
-                                      setState(() {});
-                                    },
-                                  ),
+                                  // PrimaryButton(
+                                  //   isLoading: false,
+                                  //   buttonSize: ButtonSize.xsmall,
+                                  //   buttonType: ButtonType.secondary,
+                                  //   secondaryBackgroundColor: redColor4,
+                                  //   textColor: redColorBase,
+                                  //   text: S.of(context).cancel,
+                                  //   onTap: () {
+                                  //     context
+                                  //         .read<ManageCardDetailsPrv>()
+                                  //         .cancelTranport(
+                                  //           context,
+                                  //           e.key,
+                                  //           e.value.id,
+                                  //         );
+                                  //     setState(() {});
+                                  //   },
+                                  // ),
                                 ],
                               ),
                           ],

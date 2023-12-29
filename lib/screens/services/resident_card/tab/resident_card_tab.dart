@@ -8,6 +8,7 @@ import '../../../../models/manage_card.dart';
 import '../../../../widgets/primary_card.dart';
 import '../../../../widgets/primary_empty_widget.dart';
 import '../../../../widgets/primary_icon.dart';
+import '../../transport_card/manage_card_details_screen.dart';
 import '../resident_card_details.dart';
 
 // ignore: must_be_immutable
@@ -142,10 +143,13 @@ class ResidentCardTab extends StatelessWidget {
                           child: PrimaryCard(
                             onTap: () {
                               Navigator.of(context).pushNamed(
-                                ResidentCardDetails.routeName,
+                                // ResidentCardDetails.routeName,
+                                ManageCardDetailsScreen.routeName,
                                 arguments: {
                                   "card": list[index],
                                   "lockCard": cancel,
+                                  'cancel': () {},
+                                  "res": true,
                                 },
                               );
                             },

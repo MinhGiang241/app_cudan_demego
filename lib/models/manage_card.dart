@@ -219,9 +219,9 @@ class ManageCard {
       s: map['s'] != null
           ? Status.fromJson(map['s'] as Map<String, dynamic>)
           : null,
-      t: map['t'] != null
-          ? TransportCard.fromMap(map['t'] as Map<String, dynamic>)
-          : null,
+      // t: map['t'] != null
+      //     ? TransportCard.fromMap(map['t'] as Map<String, dynamic>)
+      //     : null,
       r: map['r'] != null
           ? Reason.fromJson(map['r'] as Map<String, dynamic>)
           : null,

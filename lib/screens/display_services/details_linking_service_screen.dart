@@ -154,7 +154,7 @@ class _DetailsLinkingServiceScreenState
                                     maxLines: 2,
                                   ),
                                   AutoSizeText(
-                                    '${(service.time_start ?? '').substring(0, 5)} - ${(service.time_end ?? '').substring(0, 5)}',
+                                    '${(service.time_start ?? '     ').substring(0, 5)} - ${(service.time_end ?? '     ').substring(0, 5)}',
                                     style: txtRegular(
                                       14,
                                     ),

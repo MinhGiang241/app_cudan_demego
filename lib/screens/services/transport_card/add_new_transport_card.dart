@@ -127,7 +127,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     context.read<AddNewTransportCardPrv>().shelfLifeList;
                 var vehicleTypeListChoices = vehicleTypeList.map((e) {
                   return DropdownMenuItem(
-                    value: e.code,
+                    value: e.id,
                     child: Text(e.name ?? e.id!),
                   );
                 }).toList();
@@ -625,14 +625,14 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   controller: context
                                       .watch<AddNewTransportCardPrv>()
                                       .liceneController,
-                                  validator: Utils.emptyValidator,
+                                  // validator: Utils.emptyValidator,
                                   validateString: context
                                       .watch<AddNewTransportCardPrv>()
                                       .validateLicene,
                                   label: S.of(context).licene_plate,
-                                  isRequired: context
-                                      .watch<AddNewTransportCardPrv>()
-                                      .isShowLicense,
+                                  // isRequired: context
+                                  //     .watch<AddNewTransportCardPrv>()
+                                  //     .isShowLicense,
                                 ),
                               if (context
                                   .watch<AddNewTransportCardPrv>()
@@ -650,14 +650,14 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   controller: context
                                       .watch<AddNewTransportCardPrv>()
                                       .regNumController,
-                                  validator: context
-                                      .read<AddNewTransportCardPrv>()
-                                      .regValidate,
+                                  // validator: context
+                                  //     .read<AddNewTransportCardPrv>()
+                                  //     .regValidate,
                                   validateString: context
                                       .watch<AddNewTransportCardPrv>()
                                       .validateReg,
                                   label: S.of(context).trans_reg_num,
-                                  isRequired: true,
+                                  // isRequired: true,
                                 ),
                               vpad(12),
                               PrimaryDropDown(

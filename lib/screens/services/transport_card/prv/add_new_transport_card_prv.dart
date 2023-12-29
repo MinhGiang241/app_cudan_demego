@@ -512,13 +512,13 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   }
 
   genValidString() {
-    if (regNumController.text.trim().isEmpty) {
-      validateReg = S.current.not_blank;
-    } else if (RegexText.onlyZero(regNumController.text.trim())) {
-      validateReg = S.current.not_zero;
-    } else {
-      validateReg = null;
-    }
+    // if (regNumController.text.trim().isEmpty) {
+    //   validateReg = S.current.not_blank;
+    // } else if (RegexText.onlyZero(regNumController.text.trim())) {
+    //   validateReg = S.current.not_zero;
+    // } else {
+    //   validateReg = null;
+    // }
     if (seatNumController.text.trim().isEmpty) {
       validateSeat = S.current.not_blank;
     } else if (int.tryParse(seatNumController.text.trim()) != null &&
@@ -539,11 +539,11 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     } else {
       validateTrans = null;
     }
-    if (liceneController.text.trim().isEmpty) {
-      validateLicene = S.current.not_blank;
-    } else {
-      validateLicene = null;
-    }
+    // if (liceneController.text.trim().isEmpty) {
+    //   validateLicene = S.current.not_blank;
+    // } else {
+    //   validateLicene = null;
+    // }
     notifyListeners();
   }
 
@@ -566,6 +566,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         var vehicleImages = otherExistedImages + otherUploadedImages;
         var regImages = resExistedImages + resUploadedImages;
         var cusImages = cusExistedIdentity + cusUploadedIdentity;
+        // TODO
         if (regImages.length + imageFileRes.length < 2 &&
             transTypeValue != "BICYCLE") {
           listError.add(S.of(context).reg_images_not_empty);
@@ -585,9 +586,10 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         await uploadOther();
         await uploadCusIdentity();
 
-        var vehicleTypeId = transTypeList
-            .firstWhere((element) => element.code == transTypeValue)
-            .id;
+        var vehicleTypeId = transTypeValue;
+        // transTypeList
+        //     .firstWhere((element) => element.code == transTypeValue)
+        //     .id;
         // var shelf =
         //     shelfLifeList.firstWhere((element) => element.id == expiredValue);
 
