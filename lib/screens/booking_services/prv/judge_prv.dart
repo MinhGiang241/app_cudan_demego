@@ -15,6 +15,7 @@ class JudgePrv extends ChangeNotifier {
     if (!isEdit) {
       commentController.text = reg?.vote_content ?? '';
       existedImages = reg?.vote_image ?? [];
+      score = reg.vote?.toDouble() ?? 3.0;
     }
   }
   final bool isEdit;
@@ -23,7 +24,7 @@ class JudgePrv extends ChangeNotifier {
   List<File> images = [];
   List<FileUploadModel> uploadedImages = [];
   TextEditingController commentController = TextEditingController();
-  var score = 3.0;
+  double score = 3.0;
   final RegisterBookingService reg;
 
   setScore(double value) {

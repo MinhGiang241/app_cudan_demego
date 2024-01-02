@@ -178,6 +178,7 @@ class _DetailsLinkingServiceScreenState
                       ),
                       Positioned(
                         right: 5,
+                        top: -10,
                         child: IconButton(
                           onPressed: () {
                             APILinkingService.countHit(

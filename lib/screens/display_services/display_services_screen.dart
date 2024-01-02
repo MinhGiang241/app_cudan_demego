@@ -279,6 +279,7 @@ class _DisplayServiceScreenState extends State<DisplayServiceScreen>
                                             ),
                                             Positioned(
                                               right: 4,
+                                              top: -10,
                                               child: Transform.rotate(
                                                 angle: -pi / 4,
                                                 child: IconButton(
