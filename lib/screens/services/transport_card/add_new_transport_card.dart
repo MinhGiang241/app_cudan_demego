@@ -131,7 +131,26 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                     child: Text(e.name ?? e.id!),
                   );
                 }).toList();
-
+                var vendorListChoice = context
+                    .watch<AddNewTransportCardPrv>()
+                    .vendorList
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e.id,
+                        child: Text(e.name ?? e.id!),
+                      ),
+                    )
+                    .toList();
+                var modelListChoice = context
+                    .watch<AddNewTransportCardPrv>()
+                    .modelList
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e.id,
+                        child: Text(e.name ?? e.id!),
+                      ),
+                    )
+                    .toList();
                 var ruleFiles =
                     context.watch<AddNewTransportCardPrv>().rulesFiles;
 
@@ -579,6 +598,39 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                     .validateTrans,
                                 label: S.of(context).transport,
                                 isRequired: true,
+                              ),
+                              vpad(12),
+                              PrimaryDropDown(
+                                value: context
+                                    .watch<AddNewTransportCardPrv>()
+                                    .vendorValue,
+                                selectList: vendorListChoice,
+                                label: S.of(context).branch_vehicle,
+                                hint: S.of(context).branch_vehicle,
+                                onChange: context
+                                    .read<AddNewTransportCardPrv>()
+                                    .onSelectVendor,
+                              ),
+                              vpad(12),
+                              PrimaryDropDown(
+                                value: context
+                                    .watch<AddNewTransportCardPrv>()
+                                    .modelValue,
+                                selectList: modelListChoice,
+                                label: S.of(context).type_vehicle,
+                                hint: S.of(context).type_vehicle,
+                                onChange: context
+                                    .read<AddNewTransportCardPrv>()
+                                    .onSelectModel,
+                              ),
+                              vpad(12),
+                              PrimaryTextField(
+                                maxLength: 225,
+                                label: S.of(context).color,
+                                hint: S.of(context).color,
+                                controller: context
+                                    .read<AddNewTransportCardPrv>()
+                                    .colorController,
                               ),
                               if (context
                                   .watch<AddNewTransportCardPrv>()

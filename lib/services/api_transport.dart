@@ -4,6 +4,64 @@ import '../models/response.dart';
 import 'api_service.dart';
 
 class APITransport {
+  static Future getTransportModelList(String? vendorId) async {
+    var query = '''
+    mutation (\$vendorId:String){
+    response: vehicle_mobile_get_vehicle_model_by_vendorId (vendorId: \$vendorId ) {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        "vendorId": vendorId,
+      },
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future getTransportVendorList() async {
+    var query = '''
+    mutation {
+    response: vehicle_mobile_get_vendor_list  {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? "");
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getTransportCardList(
     String? residentId,
     String? apartmentId,

@@ -85,36 +85,43 @@ class SelectBookingServiceScreen extends StatelessWidget {
               ),
             ),
           vpad(20),
-          HtmlWidget(
-            '''${service.note}''',
-            onTapUrl: (url) {
-              launchUrl(Uri.parse(url));
-              return false;
-            },
-            textStyle: txtBodyMediumRegular(),
-            onTapImage: (ImageMetadata data) {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      PhotoViewer(
-                    heroTag: 'hero',
-                    link: data.sources.first.url,
-                    listLink: [
-                      data.sources.first.url,
-                    ],
-                    initIndex: 0,
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: grayScaleColor4,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: HtmlWidget(
+              '''${service.note}''',
+              onTapUrl: (url) {
+                launchUrl(Uri.parse(url));
+                return false;
+              },
+              textStyle: txtBodyMediumRegular(),
+              onTapImage: (ImageMetadata data) {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        PhotoViewer(
+                      heroTag: 'hero',
+                      link: data.sources.first.url,
+                      listLink: [
+                        data.sources.first.url,
+                      ],
+                      initIndex: 0,
+                    ),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
                   ),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ],
       ),

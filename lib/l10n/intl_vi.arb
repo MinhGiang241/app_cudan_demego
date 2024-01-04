@@ -974,5 +974,7 @@
   "less": "Rút gọn",
   "access": "Truy cập",
   "suggest": "Đề nghị",
-  "ticket_num": "Ticket quantity"
+  "ticket_num": "Số vé",
+  "branch_vehicle": "Hãng xe",
+  "type_vehicle": "Dòng xe"
 }

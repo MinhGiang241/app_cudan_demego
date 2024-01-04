@@ -206,6 +206,7 @@ class TransportCard {
   String? identity;
   String? note_reason;
   String? card_type;
+
   // More
   Reason? r;
   Status? s;
@@ -418,6 +419,9 @@ class TransportItem {
   List<FileUploadModel>? registration_image;
   List<FileUploadModel>? vehicle_image;
   List<FileUploadModel>? identity_image;
+  String? vendorId;
+  String? modelId;
+  String? color;
   // More
   VehicleType? vehicleType;
   ShelfLife? shelfLife;
@@ -446,6 +450,9 @@ class TransportItem {
     this.vehicleType,
     this.shelfLife,
     this.seats,
+    this.color,
+    this.modelId,
+    this.vendorId,
   });
 
   Map<String, dynamic> toMap() {
@@ -469,6 +476,9 @@ class TransportItem {
       'shelfLifeId': shelfLifeId,
       'type': type,
       'seats': seats,
+      'modelId': modelId,
+      'vendorId': vendorId,
+      'color': color,
       'registration_image': registration_image?.map((x) => x.toMap()).toList(),
       'vehicle_image': vehicle_image?.map((x) => x.toMap()).toList(),
       'identity_image': identity_image?.map((x) => x.toMap()).toList(),
@@ -491,6 +501,9 @@ class TransportItem {
       manageCardId:
           map['manageCardId'] != null ? map['manageCardId'] as String : null,
       code_seri: map['code_seri'] != null ? map['code_seri'] as String : null,
+      vendorId: map['vendorId'] != null ? map['vendorId'] as String : null,
+      modelId: map['modelId'] != null ? map['modelId'] as String : null,
+      color: map['color'] != null ? map['color'] as String : null,
       cost: double.tryParse(map['cost'].toString()) != null
           ? double.parse(map['cost'].toString())
           : null,
@@ -574,6 +587,9 @@ class TransportItem {
     List<FileUploadModel>? identity_image,
     VehicleType? vehicleType,
     ShelfLife? shelfLife,
+    String? vendorId,
+    String? modelId,
+    String? color,
   }) {
     return TransportItem(
       id: id ?? this.id,
@@ -600,6 +616,9 @@ class TransportItem {
       identity_image: identity_image ?? this.identity_image,
       vehicleType: vehicleType ?? this.vehicleType,
       shelfLife: shelfLife ?? this.shelfLife,
+      vendorId: vendorId ?? this.vendorId,
+      modelId: modelId ?? this.modelId,
+      color: color ?? this.color,
     );
   }
 }
@@ -735,4 +754,134 @@ class FormRenewalTransport {
 
   factory FormRenewalTransport.fromJson(String source) =>
       FormRenewalTransport.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class VehicleVendor {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? name;
+  String? description;
+  VehicleVendor({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.name,
+    this.description,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'name': name,
+      'description': description,
+    };
+  }
+
+  factory VehicleVendor.fromMap(Map<String, dynamic> map) {
+    return VehicleVendor(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory VehicleVendor.fromJson(String source) =>
+      VehicleVendor.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  VehicleVendor copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? name,
+    String? description,
+  }) {
+    return VehicleVendor(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
+}
+
+class VehicleModel {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? vendorId;
+  String? name;
+  String? type;
+  String? description;
+  VehicleModel({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.vendorId,
+    this.name,
+    this.type,
+    this.description,
+  });
+
+  VehicleModel copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? vendorId,
+    String? name,
+    String? type,
+    String? description,
+  }) {
+    return VehicleModel(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      vendorId: vendorId ?? this.vendorId,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      description: description ?? this.description,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'vendorId': vendorId,
+      'name': name,
+      'type': type,
+      'description': description,
+    };
+  }
+
+  factory VehicleModel.fromMap(Map<String, dynamic> map) {
+    return VehicleModel(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      vendorId: map['vendorId'] != null ? map['vendorId'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory VehicleModel.fromJson(String source) =>
+      VehicleModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

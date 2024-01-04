@@ -9790,11 +9790,31 @@ class S {
     );
   }
 
-  /// `Số vé`
+  /// `Ticket quantity`
   String get ticket_num {
     return Intl.message(
-      'Số vé',
+      'Ticket quantity',
       name: 'ticket_num',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle Vendor`
+  String get branch_vehicle {
+    return Intl.message(
+      'Vehicle Vendor',
+      name: 'branch_vehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle model`
+  String get type_vehicle {
+    return Intl.message(
+      'Vehicle model',
+      name: 'type_vehicle',
       desc: '',
       args: [],
     );

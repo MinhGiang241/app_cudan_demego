@@ -973,5 +973,7 @@
   "less": "Less",
   "access": "Access",
   "suggest": "Suggestion",
-  "ticket_num": "Số vé"
+  "ticket_num": "Ticket quantity",
+  "branch_vehicle": "Vehicle Vendor",
+  "type_vehicle": "Vehicle model"
 }

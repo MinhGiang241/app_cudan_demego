@@ -18,6 +18,7 @@ import '../transport_card_screen.dart.dart';
 
 class AddNewTransportCardPrv extends ChangeNotifier {
   AddNewTransportCardPrv({this.existedTransport}) {
+    getVendorList();
     if (existedTransport != null) {
       id = existedTransport?.id;
       isIntergate = existedTransport?.integrated ?? false;
@@ -50,6 +51,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   final TextEditingController seatNumController = TextEditingController();
   final TextEditingController regNumController = TextEditingController();
 
+  String? vendorValue;
+  String? modelValue;
+
   String? validateLicene;
   String? validateSeat;
   String? validateTrans;
@@ -69,6 +73,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   List<File> cusIdentity = [];
   List<FileUploadModel> cusExistedIdentity = [];
   List<FileUploadModel> cusUploadedIdentity = [];
+  List<VehicleVendor> vendorList = [];
+  List<VehicleModel> modelList = [];
 
   List<VehicleType> transTypeList = [];
   List<ShelfLife> shelfLifeList = [];
@@ -80,10 +86,37 @@ class AddNewTransportCardPrv extends ChangeNotifier {
   final TextEditingController cAddressController = TextEditingController();
   final TextEditingController cIdentityController = TextEditingController();
   final TextEditingController cPhoneController = TextEditingController();
+  final TextEditingController colorController = TextEditingController();
 
   String? cValidateAddress;
   String? cValidateIdentity;
   String? cValidatePhone;
+
+  getVendorList() async {
+    await APITransport.getTransportVendorList().then((v) {
+      if (v != null) {
+        vendorList.clear();
+        for (var i in v) {
+          vendorList.add(VehicleVendor.fromMap(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {});
+  }
+
+  getModelList(String? vendorId) async {
+    await APITransport.getTransportModelList(vendorId).then((v) {
+      if (v != null) {
+        modelList.clear();
+        for (var i in v) {
+          modelList.add(VehicleModel.fromMap(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   genCValidate() {
     if (cAddressController.text.trim().isEmpty) {
@@ -111,6 +144,23 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     cValidateIdentity = null;
     cValidatePhone = null;
 
+    notifyListeners();
+  }
+
+  onSelectVendor(v) {
+    if (v != null) {
+      getModelList(v);
+      vendorValue = v;
+      modelValue = null;
+    } else {
+      modelList.clear();
+      modelValue = null;
+    }
+    notifyListeners();
+  }
+
+  onSelectModel(v) {
+    modelValue = v;
     notifyListeners();
   }
 
@@ -196,7 +246,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
         .firstWhere(
           (i) => i.id == item.vehicleTypeId,
         )
-        .code;
+        .id;
     if (transTypeValue == "BICYCLE") {
       isShowLicense = false;
       regNumController.clear();
@@ -212,6 +262,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     liceneController.text = item.number_plate ?? '';
     regNumController.text = item.registration_number ?? "";
     expiredValue = item.shelfLifeId;
+    colorController.text = item.color ?? '';
+    vendorValue = item.vendorId;
+    modelValue = item.modelId;
     notifyListeners();
   }
 
@@ -491,6 +544,8 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     isShowLicense = true;
     autoValid = false;
     isAddTransLoading = false;
+    modelValue = null;
+    vendorValue = null;
 
     indexEdit = null;
     itemEdit = null;
@@ -508,6 +563,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
     regNumController.clear();
     seatNumController.clear();
     liceneController.clear();
+    colorController.clear();
     notifyListeners();
   }
 
@@ -607,6 +663,9 @@ class AddNewTransportCardPrv extends ChangeNotifier {
               : null,
           vehicle_image: otherExistedImages + otherUploadedImages,
           identity_image: cusExistedIdentity + cusUploadedIdentity,
+          color: colorController.text.trim(),
+          modelId: modelValue,
+          vendorId: vendorValue,
         );
         if (indexEdit != null) {
           transportList[indexEdit!] = transportItem;

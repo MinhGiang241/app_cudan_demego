@@ -285,9 +285,9 @@ class FeeByTurn {
       'price': price,
       'price_child': price_child,
       'price_adult': price_adult,
-      'price_weekend': price_weekend,
-      'price_child_weekend': price_child_weekend,
-      'price_adult_weekend': price_adult_weekend,
+      // 'price_weekend': price_weekend,
+      // 'price_child_weekend': price_child_weekend,
+      // 'price_adult_weekend': price_adult_weekend,
     };
   }
 

@@ -205,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_his": MessageLookupByLibrary.simpleMessage("Lịch sử bàn giao"),
         "booking_time":
             MessageLookupByLibrary.simpleMessage("Thời gian đặt lịch"),
+        "branch_vehicle": MessageLookupByLibrary.simpleMessage("Hãng xe"),
         "brand": MessageLookupByLibrary.simpleMessage("Thương hiệu"),
         "building": MessageLookupByLibrary.simpleMessage("Tòa"),
         "building_regulation":
@@ -1387,7 +1388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "th12": MessageLookupByLibrary.simpleMessage("Tháng 12"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Phiếu đăng ký xe này"),
-        "ticket_num": MessageLookupByLibrary.simpleMessage("Ticket quantity"),
+        "ticket_num": MessageLookupByLibrary.simpleMessage("Số vé"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Giá vé"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time": MessageLookupByLibrary.simpleMessage("Thời gian"),
@@ -1458,6 +1459,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transportation": MessageLookupByLibrary.simpleMessage("Phương tiện"),
         "turn_service": MessageLookupByLibrary.simpleMessage("Dịch vụ lượt"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "type_vehicle": MessageLookupByLibrary.simpleMessage("Dòng xe"),
         "ultility_list":
             MessageLookupByLibrary.simpleMessage("Danh sách tiện ích"),
         "under_acceptance": MessageLookupByLibrary.simpleMessage("Nghiệm thu"),

@@ -9,7 +9,6 @@ import '../../../generated/l10n.dart';
 import '../../../models/info_content_view.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/primary_appbar.dart';
-import '../../../widgets/primary_button.dart';
 import '../../../widgets/primary_card.dart';
 import '../../../widgets/primary_icon.dart';
 import '../../../widgets/primary_info_widget.dart';
@@ -17,7 +16,6 @@ import '../../../widgets/primary_screen.dart';
 import '../../auth/prv/resident_info_prv.dart';
 import '../resident_card/resident_card_screen.dart';
 import 'add_new_transport_card.dart';
-import 'extend_card_screen.dart';
 import 'prv/manage_card_details_prv.dart';
 import 'transport_card_screen.dart.dart';
 
@@ -136,14 +134,14 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                         content: loadedCard.t?.address ??
                             "${loadedCard.a?.name ?? ""}-${loadedCard.a?.f?.name ?? ""}-${loadedCard.a?.b?.name ?? ""}",
                       ),
-                      if (isRes)
-                        InfoContentView(
-                          isHorizontal: true,
-                          title: S.of(context).cmnd,
-                          content: isRes
-                              ? loadedCard.res_card?.residentId
-                              : loadedCard.t?.identity,
-                        ),
+                      // if (isRes)
+                      //   InfoContentView(
+                      //     isHorizontal: true,
+                      //     title: S.of(context).cmnd,
+                      //     content: isRes
+                      //         ? loadedCard.res_card?.residentId
+                      //         : loadedCard.t?.identity,
+                      //   ),
                       if (isRes)
                         InfoContentView(
                           isHorizontal: true,
@@ -152,20 +150,22 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                               loadedCard.t?.re?.phone_required ??
                               loadedCard.t?.re?.phone,
                         ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).reg_letter_num,
-                        content: loadedCard.t?.code ?? '',
-                        contentStyle: txtBold(16, purpleColorBase),
-                      ),
-                      InfoContentView(
-                        isHorizontal: true,
-                        title: S.of(context).reg_date,
-                        content: Utils.dateFormat(
-                          loadedCard.registration_date ?? "",
-                          1,
+                      if (loadedCard.t?.code != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).reg_letter_num,
+                          content: loadedCard.t?.code ?? '',
+                          contentStyle: txtBold(16, purpleColorBase),
                         ),
-                      ),
+                      if (loadedCard.registration_date != null)
+                        InfoContentView(
+                          isHorizontal: true,
+                          title: S.of(context).reg_date,
+                          content: Utils.dateFormat(
+                            loadedCard.registration_date ?? "",
+                            1,
+                          ),
+                        ),
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).card_status,

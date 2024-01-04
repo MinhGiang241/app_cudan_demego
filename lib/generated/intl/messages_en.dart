@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Schedual booking hand over"),
         "booking_his": MessageLookupByLibrary.simpleMessage("Booking history"),
         "booking_time": MessageLookupByLibrary.simpleMessage("Booking time"),
+        "branch_vehicle":
+            MessageLookupByLibrary.simpleMessage("Vehicle Vendor"),
         "brand": MessageLookupByLibrary.simpleMessage("Brand"),
         "building": MessageLookupByLibrary.simpleMessage("Building"),
         "building_regulation":
@@ -1386,7 +1388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "th12": MessageLookupByLibrary.simpleMessage("Dec"),
         "this_trans_letter":
             MessageLookupByLibrary.simpleMessage("Transportation letter"),
-        "ticket_num": MessageLookupByLibrary.simpleMessage("Số vé"),
+        "ticket_num": MessageLookupByLibrary.simpleMessage("Ticket quantity"),
         "ticket_price": MessageLookupByLibrary.simpleMessage("Ticket price"),
         "tiktok": MessageLookupByLibrary.simpleMessage("Tiktok"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
@@ -1463,6 +1465,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "turn_service":
             MessageLookupByLibrary.simpleMessage("Turn-based service"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "type_vehicle": MessageLookupByLibrary.simpleMessage("Vehicle model"),
         "ultility_list":
             MessageLookupByLibrary.simpleMessage("Ultilities list"),
         "under_acceptance":
