@@ -147,6 +147,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                           isHorizontal: true,
                           title: S.of(context).phone_num,
                           content: loadedCard.phone_number ??
+                              loadedCard.re?.phone_required ??
                               loadedCard.t?.re?.phone_required ??
                               loadedCard.t?.re?.phone,
                         ),
@@ -353,7 +354,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                   );
                 }),
                 if (card.card_type != 'CUSTOMER') vpad(16),
-                if (card.card_type != 'CUSTOMER')
+                if (card.card_type != 'CUSTOMER' && !isRes)
                   Row(
                     children: [
                       SizedBox(
