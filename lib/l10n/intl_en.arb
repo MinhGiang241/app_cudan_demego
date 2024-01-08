@@ -975,5 +975,7 @@
   "suggest": "Suggestion",
   "ticket_num": "Ticket quantity",
   "branch_vehicle": "Vehicle Vendor",
-  "type_vehicle": "Vehicle model"
+  "type_vehicle": "Vehicle model",
+  "reason_lock": "Reason lock",
+  "lock_vp": "Locked due to violation"
 }

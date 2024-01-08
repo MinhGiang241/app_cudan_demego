@@ -173,11 +173,17 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                         content: loadedCard.s?.name ?? "",
                         contentStyle: genContentStyle(loadedCard.status ?? ""),
                       ),
-                      if (loadedCard.r != null)
+                      // if (loadedCard.r != null)
+                      //   InfoContentView(
+                      //     isHorizontal: true,
+                      //     title: S.of(context).lock_reason,
+                      //     content: loadedCard.r?.name ?? "",
+                      //   ),
+                      if (loadedCard.reasons != null)
                         InfoContentView(
                           isHorizontal: true,
-                          title: S.of(context).lock_reason,
-                          content: loadedCard.r?.name ?? "",
+                          title: S.of(context).reason_lock,
+                          content: genStatus(loadedCard.reasons ?? ""),
                         ),
                       if (loadedCard.note_reason != null)
                         InfoContentView(

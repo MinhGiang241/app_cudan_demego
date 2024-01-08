@@ -75,6 +75,8 @@ genStatus(String status) {
       return S.current.approved;
     case "OWE":
       return S.current.owe;
+    case "KHOAVIPHAM":
+      return S.current.lock_vp;
     default:
       return '';
   }

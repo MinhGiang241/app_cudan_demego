@@ -9819,6 +9819,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Reason lock`
+  String get reason_lock {
+    return Intl.message(
+      'Reason lock',
+      name: 'reason_lock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Locked due to violation`
+  String get lock_vp {
+    return Intl.message(
+      'Locked due to violation',
+      name: 'lock_vp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

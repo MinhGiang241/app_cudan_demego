@@ -699,6 +699,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock": MessageLookupByLibrary.simpleMessage("Khóa"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Khóa thẻ"),
         "lock_reason": MessageLookupByLibrary.simpleMessage("Lý do khóa"),
+        "lock_vp": MessageLookupByLibrary.simpleMessage("Khóa do vi phạm"),
         "long": MessageLookupByLibrary.simpleMessage("Dài"),
         "lost_time": MessageLookupByLibrary.simpleMessage("Giờ thất lạc"),
         "lost_time_now": MessageLookupByLibrary.simpleMessage(
@@ -1025,6 +1026,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reality_handover_hour":
             MessageLookupByLibrary.simpleMessage("Giờ nhận thực tế"),
         "reason": MessageLookupByLibrary.simpleMessage("Lý do"),
+        "reason_lock": MessageLookupByLibrary.simpleMessage("Lý do khóa"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Lý do từ chối"),
         "receipt": MessageLookupByLibrary.simpleMessage("Phiếu thu"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Ngày nhận"),

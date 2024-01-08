@@ -976,5 +976,7 @@
   "suggest": "Đề nghị",
   "ticket_num": "Số vé",
   "branch_vehicle": "Hãng xe",
-  "type_vehicle": "Dòng xe"
+  "type_vehicle": "Dòng xe",
+  "reason_lock": "Lý do khóa",
+  "lock_vp": "Khóa do vi phạm"
 }

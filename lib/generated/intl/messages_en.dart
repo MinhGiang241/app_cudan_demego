@@ -693,6 +693,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lock": MessageLookupByLibrary.simpleMessage("Lock"),
         "lock_card": MessageLookupByLibrary.simpleMessage("Lock card"),
         "lock_reason": MessageLookupByLibrary.simpleMessage("Lock reason"),
+        "lock_vp":
+            MessageLookupByLibrary.simpleMessage("Locked due to violation"),
         "long": MessageLookupByLibrary.simpleMessage("Long"),
         "lost_time": MessageLookupByLibrary.simpleMessage("Lost time"),
         "lost_time_now":
@@ -1014,6 +1016,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reality_handover_hour":
             MessageLookupByLibrary.simpleMessage("Reality hand over hour"),
         "reason": MessageLookupByLibrary.simpleMessage("Reason"),
+        "reason_lock": MessageLookupByLibrary.simpleMessage("Reason lock"),
         "reason_refuse": MessageLookupByLibrary.simpleMessage("Refuse reason"),
         "receipt": MessageLookupByLibrary.simpleMessage("Receipt"),
         "receipt_date": MessageLookupByLibrary.simpleMessage("Receipted date"),
