@@ -416,39 +416,40 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                 },
                               ),
                               vpad(30),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 24,
-                                    height: 24,
-                                    child: Checkbox(
-                                      activeColor: primaryColorBase,
-                                      value: context
-                                          .watch<AddNewTransportCardPrv>()
-                                          .isIntergate,
-                                      onChanged: context
-                                          .read<AddNewTransportCardPrv>()
-                                          .toggleIntergate,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: InkWell(
-                                      onTap: () => context
-                                          .read<AddNewTransportCardPrv>()
-                                          .toggleIntergate(true),
-                                      child: Text(
-                                        S
-                                            .of(context)
-                                            .intergrate_existed_resident_card,
-                                        style:
-                                            txtRegular(14, grayScaleColorBase),
-                                        overflow: TextOverflow.ellipsis,
+                              if (isResident)
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: Checkbox(
+                                        activeColor: primaryColorBase,
+                                        value: context
+                                            .watch<AddNewTransportCardPrv>()
+                                            .isIntergate,
+                                        onChanged: context
+                                            .read<AddNewTransportCardPrv>()
+                                            .toggleIntergate,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              vpad(12),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () => context
+                                            .read<AddNewTransportCardPrv>()
+                                            .toggleIntergate(true),
+                                        child: Text(
+                                          S
+                                              .of(context)
+                                              .intergrate_existed_resident_card,
+                                          style: txtRegular(
+                                              14, grayScaleColorBase),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              if (isResident) vpad(12),
                               Row(
                                 children: [
                                   SizedBox(

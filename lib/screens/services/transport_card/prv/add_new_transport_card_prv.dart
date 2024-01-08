@@ -722,7 +722,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           name_resident: residentInfo?.info_name,
           ticket_status: isSend ? "WAIT" : "NEW",
           transports_list: transportList,
-          card_type: residentId != null ? "RESIDENT" : "CUSTOMER",
+          card_type: apartment != null ? "RESIDENT" : "CUSTOMER",
           name: residentInfo?.info_name ?? residentInfo?.account?.fullName,
           registration_date: existedTransport?.registration_date ??
               DateTime.now()
@@ -731,7 +731,7 @@ class AddNewTransportCardPrv extends ChangeNotifier {
           identity: residentId == null
               ? cIdentityController.text.trim()
               : residentInfo?.identity_card_required,
-          address: residentId != null
+          address: (residentId != null && apartment?.id != null)
               ? "${apartment?.apartment?.name ?? ""}-${apartment?.floor?.name}-${apartment?.building?.name}"
               : cAddressController.text.trim(),
         );
