@@ -29,12 +29,12 @@ class EventWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: const Color(0xff23D2C3).withOpacity(0.6),
-              // boxShadow: [
-              //   BoxShadow(
-              //       color: const Color(0xff009ED0).withOpacity(0.16),
-              //       offset: const Offset(0, 16),
-              //       blurRadius: 24)
-              // ],
+              boxShadow: [
+                BoxShadow(
+                    color: const Color(0xff009ED0).withOpacity(0.16),
+                    offset: const Offset(0, 16),
+                    blurRadius: 24)
+              ],
             ),
             child: const PrimaryIcon(
               icons: PrimaryIcons.calendar_check,

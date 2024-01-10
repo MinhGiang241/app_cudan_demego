@@ -119,7 +119,7 @@ class _EventTabState extends State<EventTab> {
                                           context,
                                           e.value,
                                         );
-                                    setState(() {});
+                                    //setState(() {});
                                   },
                                 );
                               },

@@ -26,6 +26,7 @@ class EventTabPrv extends ChangeNotifier {
     } else {
       skip += 5;
     }
+    notifyListeners();
     await APIEvent.getEventList(
       skip,
       limit,
@@ -60,6 +61,7 @@ class EventTabPrv extends ChangeNotifier {
               e.title != null ? e.title!.toLowerCase() : '',
             ),
       );
+      getEventList(context, true);
     }).catchError((e) {
       Utils.showErrorMessage(context, e);
     });

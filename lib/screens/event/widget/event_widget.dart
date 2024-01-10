@@ -197,9 +197,9 @@ class EventCardWidget extends StatelessWidget {
                 onTap: onTap,
                 width: 130,
               ),
-              if (type == "COMING" &&
-                  !isPaticipation &&
-                  isShowButtonParticipate)
+              if (type == "COMING" && !isPaticipation
+                  // && isShowButtonParticipate
+                  )
                 PrimaryButton(
                   buttonSize: ButtonSize.small,
                   buttonType: ButtonType.green,

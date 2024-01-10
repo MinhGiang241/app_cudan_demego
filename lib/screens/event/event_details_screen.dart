@@ -68,12 +68,12 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               ),
             if (event.file_upload != null && event.file_upload!.isNotEmpty)
               vpad(12),
-            if (event.file_upload != null && event.file_upload!.isNotEmpty)
-              PrimaryImageNetwork(
-                canShowPhotoView: false,
-                path:
-                    "${ApiService.shared.uploadURL}?load=${event.file_upload![0].id}&regcode=${ApiService.shared.regCode}",
-              ),
+            // if (event.file_upload != null && event.file_upload!.isNotEmpty)
+            //   PrimaryImageNetwork(
+            //     canShowPhotoView: false,
+            //     path:
+            //         "${ApiService.shared.uploadURL}?load=${event.file_upload![0].id}&regcode=${ApiService.shared.regCode}",
+            //   ),
             vpad(12),
             HtmlWidget(
               '''${event.content_event}''',

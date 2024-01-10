@@ -18,6 +18,7 @@ import '../auth/prv/resident_info_prv.dart';
 import '../notification/prv/undread_noti.dart';
 import 'home_service.dart';
 import 'prv/home_prv.dart';
+import 'widgets/event_home.dart';
 import 'widgets/header_home.dart';
 import 'widgets/header_title.dart';
 import 'widgets/new_home.dart';
@@ -142,8 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       // // // vpad(30),
                       // // if (isResident) const FeedbackHome(),
                       // // if (isResident) vpad(30),
-                      // // const EventsHome(),
-                      // // vpad(30),
+                      if (context.watch<HomePrv>().event != null)
+                        const EventsHome(),
+                      if (context.watch<HomePrv>().event != null) vpad(30),
                       const ProjectInfoHome(),
                       vpad(24),
                       if (context.read<ResidentInfoPrv>().residentId != null)
