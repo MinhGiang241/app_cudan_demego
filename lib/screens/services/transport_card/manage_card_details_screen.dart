@@ -40,6 +40,7 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
     var card = arg['card'] as ManageCard;
     var cancel = arg['cancel'] as Function;
     var isRes = arg['res'] ?? false;
+    var isResident = context.read<ResidentInfoPrv>().selectedApartment != null;
 
     return ChangeNotifierProvider(
       create: (_) => ManageCardDetailsPrv(cancel),
@@ -131,8 +132,9 @@ class _ManageCardDetailsScreenState extends State<ManageCardDetailsScreen>
                       InfoContentView(
                         isHorizontal: true,
                         title: S.of(context).address,
-                        content: loadedCard.t?.address ??
-                            "${loadedCard.a?.name ?? ""}-${loadedCard.a?.f?.name ?? ""}-${loadedCard.a?.b?.name ?? ""}",
+                        content: isResident
+                            ? "${loadedCard.a?.name ?? ""}-${loadedCard.a?.f?.name ?? ""}-${loadedCard.a?.b?.name ?? ""}"
+                            : (loadedCard.address ?? loadedCard.t?.address),
                       ),
                       // if (isRes)
                       //   InfoContentView(
