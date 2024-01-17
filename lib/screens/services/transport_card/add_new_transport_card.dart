@@ -772,7 +772,7 @@ class _AddNewTransportCardScreenState extends State<AddNewTransportCardScreen> {
                                   .watch<AddNewTransportCardPrv>()
                                   .isShowLicense)
                                 SelectMediaWidget(
-                                  isRequired: true,
+                                  // isRequired: true,
                                   existImages: context
                                       .watch<AddNewTransportCardPrv>()
                                       .resExistedImages,
