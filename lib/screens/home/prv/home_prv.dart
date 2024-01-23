@@ -81,11 +81,19 @@ class HomePrv extends ChangeNotifier {
       notifyListeners();
 
       var residentId = context!.read<ResidentInfoPrv>().residentId;
+      var apartmentId =
+          context!.read<ResidentInfoPrv>().selectedApartment?.apartmentId;
       var accountId = context!.read<ResidentInfoPrv>().userInfo != null
           ? context!.read<ResidentInfoPrv>().userInfo!.account!.id
           : null;
-      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "", residentId)
-          .then((v) {
+      await APIEvent.getEventList(
+        0,
+        1,
+        "COMING",
+        accountId ?? "",
+        residentId,
+        apartmentId,
+      ).then((v) {
         if (v.length >= 1) {
           event = Event.fromJson(v[0]);
         }

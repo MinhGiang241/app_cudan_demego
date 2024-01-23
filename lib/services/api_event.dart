@@ -38,17 +38,17 @@ class APIEvent {
     String type,
     String? accountId,
     String? residentId,
+    String? apartmentId,
   ) async {
     var query = '''
-mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String,\$residentId:String){
-    response: event_mobile_get_event_list (limit: \$limit,skip: \$skip,type: \$type,accountId: \$accountId,residentId: \$residentId ) {
+mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String,\$residentId:String,\$apartmentId:String){
+    response: event_mobile_get_event_list (limit: \$limit,skip: \$skip,type: \$type,accountId: \$accountId,residentId: \$residentId,apartmentId: \$apartmentId ) {
         code
         message
         data
     }
 }
-        
-        
+
   ''';
 
     final MutationOptions options = MutationOptions(
@@ -59,6 +59,7 @@ mutation (\$limit:Float,\$skip:Float,\$type:String,\$accountId:String,\$resident
         'type': type,
         'accountId': accountId,
         'residentId': residentId,
+        'apartmentId': apartmentId,
       },
     );
 

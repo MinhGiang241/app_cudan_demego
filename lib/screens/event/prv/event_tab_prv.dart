@@ -33,6 +33,7 @@ class EventTabPrv extends ChangeNotifier {
       type,
       context.read<ResidentInfoPrv>().userInfo?.account?.id,
       context.read<ResidentInfoPrv>().residentId,
+      context.read<ResidentInfoPrv>().selectedApartment?.apartmentId,
     ).then(
       (values) {
         for (var i in values) {
