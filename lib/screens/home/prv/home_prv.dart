@@ -79,11 +79,17 @@ class HomePrv extends ChangeNotifier {
       isResNewsLoading = true;
       isProNewsLoading = true;
       notifyListeners();
-      UnreadNotification.getUnReadNotification();
+
       var residentId = context!.read<ResidentInfoPrv>().residentId;
       var accountId = context!.read<ResidentInfoPrv>().userInfo != null
           ? context!.read<ResidentInfoPrv>().userInfo!.account!.id
           : null;
+      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "", residentId)
+          .then((v) {
+        if (v.length >= 1) {
+          event = Event.fromJson(v[0]);
+        }
+      });
       var residentNews =
           await APINew.getNewList(5, 0, "RESIDENT", accountId ?? '');
       newResidentList.clear();
@@ -102,14 +108,9 @@ class HomePrv extends ChangeNotifier {
       newProjectList.sort(
         (a, b) => b.createdTime!.compareTo(a.createdTime ?? ""),
       );
+      UnreadNotification.getUnReadNotification();
       // ignore: use_build_context_synchronously
 
-      await APIEvent.getEventList(0, 1, "COMING", accountId ?? "", residentId)
-          .then((v) {
-        if (v.length >= 1) {
-          event = Event.fromJson(v[0]);
-        }
-      });
       isEventLoading = false;
       isResNewsLoading = false;
       isProNewsLoading = false;

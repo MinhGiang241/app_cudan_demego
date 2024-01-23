@@ -144,15 +144,15 @@ class HomeServices extends StatelessWidget {
             );
           },
         },
-      // {
-      //   "icon": PrimaryIcons.news,
-      //   "text": S.current.event,
-      //   "page": EventListScreen.routeName,
-      //   "arg": null,
-      //   "tap": () {
-      //     Navigator.of(context).pushNamed(EventListScreen.routeName);
-      //   },
-      // },
+      {
+        "icon": PrimaryIcons.news,
+        "text": S.current.event,
+        "page": EventListScreen.routeName,
+        "arg": null,
+        "tap": () {
+          Navigator.of(context).pushNamed(EventListScreen.routeName);
+        },
+      },
       {
         "icon": PrimaryIcons.planet,
         "text": S.current.display_service,
