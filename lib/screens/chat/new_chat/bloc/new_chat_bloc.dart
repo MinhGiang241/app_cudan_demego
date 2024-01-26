@@ -144,7 +144,7 @@ class NewChatBloc extends Bloc<NewChatEvent, NewChatState> {
       );
       await getChatHistory();
     }).catchError((e) {
-      Utils.showErrorMessage(context, e.toString());
+      Utils.showErrorMessage(context, (e as DioError).response?.data["error"]);
     });
   }
 
