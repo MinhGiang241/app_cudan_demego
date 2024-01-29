@@ -31,7 +31,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
 
-    final event = arg['event'];
+    final event = arg['event'] as Event;
     final onParticipate = arg['part'];
     if (event.e != null || event.isShowButtonParticipate == false) {
       isShowButtonParticipation = false;
@@ -109,8 +109,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               },
             ),
             vpad(30),
-            if (isShowButtonParticipation &&
-                event.time_status == "COMING" &&
+            if (event.time_status == "COMING" &&
+                !(event.isParticipation ?? false) &&
                 !isSend)
               PrimaryButton(
                 buttonSize: ButtonSize.medium,

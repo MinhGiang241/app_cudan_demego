@@ -11,5 +11,6 @@
         "editor.defaultFormatter": "Dart-Code.dart-code",
         "editor.inlayHints.enabled": "offUnlessPressed"
     },
-    "editor.fontFamily": "Hack NF, Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "Hack NF, Consolas, 'Courier New', monospace",
+    "json.schemas": []
 }
