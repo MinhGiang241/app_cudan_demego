@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "_locale": MessageLookupByLibrary.simpleMessage("vi"),
         "abrv": MessageLookupByLibrary.simpleMessage("Ký hiệu"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Nhận bàn giao"),
@@ -680,6 +681,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "judge": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "judge_service":
             MessageLookupByLibrary.simpleMessage("Đánh giá dịch vụ"),
+        "ko": MessageLookupByLibrary.simpleMessage("Tiếng Hàn"),
         "l_new": MessageLookupByLibrary.simpleMessage("Mới"),
         "l_w_e": MessageLookupByLibrary.simpleMessage("Dài x rộng x cao"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),

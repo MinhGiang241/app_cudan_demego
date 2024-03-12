@@ -100,6 +100,39 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         ),
                       ),
                     ),
+                    const Divider(height: 1),
+                    InkWell(
+                      onTap: () {
+                        context.read<LangPrv>().setKoLang();
+                      },
+                      child: SizedBox(
+                        height: 62,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/ko.svg",
+                                width: 32,
+                                height: 24,
+                              ),
+                              hpad(12),
+                              Expanded(
+                                child: Text(
+                                  S.of(context).ko,
+                                  style: txtBodySmallRegular(),
+                                ),
+                              ),
+                              if (locale == const Locale("ko", "KR"))
+                                const PrimaryIcon(
+                                  icons: PrimaryIcons.check,
+                                  style: PrimaryIconStyle.none,
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "_locale": MessageLookupByLibrary.simpleMessage("en"),
         "abrv": MessageLookupByLibrary.simpleMessage("Abbreviation"),
         "accept_hand_over":
             MessageLookupByLibrary.simpleMessage("Accept hand over"),
@@ -673,6 +674,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "job": MessageLookupByLibrary.simpleMessage("Job"),
         "judge": MessageLookupByLibrary.simpleMessage("Judge"),
         "judge_service": MessageLookupByLibrary.simpleMessage("Rate service"),
+        "ko": MessageLookupByLibrary.simpleMessage("Korean"),
         "l_new": MessageLookupByLibrary.simpleMessage("New"),
         "l_w_e":
             MessageLookupByLibrary.simpleMessage("Length x width x elevation"),

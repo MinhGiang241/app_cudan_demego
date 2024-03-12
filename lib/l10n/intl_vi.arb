@@ -1,4 +1,5 @@
 {
+  "_locale": "vi",
   "sign_in": "Đăng nhập",
   "sign_up": "Đăng ký",
   "remember_acc": "Lưu tài khoản",
@@ -978,5 +979,6 @@
   "branch_vehicle": "Hãng xe",
   "type_vehicle": "Dòng xe",
   "reason_lock": "Lý do khóa",
-  "lock_vp": "Khóa do vi phạm"
+  "lock_vp": "Khóa do vi phạm",
+  "ko": "Tiếng Hàn"
 }

@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `en`
+  String get _locale {
+    return Intl.message(
+      'en',
+      name: '_locale',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Language`
   String get language {
     return Intl.message(
@@ -9839,6 +9849,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Korean`
+  String get ko {
+    return Intl.message(
+      'Korean',
+      name: 'ko',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -9847,6 +9867,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ko'),
       Locale.fromSubtags(languageCode: 'vi'),
     ];
   }

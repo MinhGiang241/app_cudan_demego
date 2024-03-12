@@ -1,4 +1,5 @@
 {
+  "_locale": "en",
   "language": "Language",
   "sign_in": "Sign in",
   "sign_up": "Sign up",
@@ -977,5 +978,6 @@
   "branch_vehicle": "Vehicle Vendor",
   "type_vehicle": "Vehicle model",
   "reason_lock": "Reason lock",
-  "lock_vp": "Locked due to violation"
+  "lock_vp": "Locked due to violation",
+  "ko": "Korean"
 }

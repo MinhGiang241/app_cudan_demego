@@ -105,6 +105,7 @@ dependencies:
   alert_banner: ^1.0.0
   zoom_widget: ^2.0.0
   flutter_rating_bar: ^4.0.1
+  intl_translation: 0.18.2
 
 
 
