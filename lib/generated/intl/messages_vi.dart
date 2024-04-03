@@ -118,6 +118,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_type": MessageLookupByLibrary.simpleMessage("Loại tài khoản"),
         "active": MessageLookupByLibrary.simpleMessage("Hoạt động"),
         "add": MessageLookupByLibrary.simpleMessage("Thêm"),
+        "add_content_construction":
+            MessageLookupByLibrary.simpleMessage("Thêm nội dung thi công"),
         "add_dependent_person":
             MessageLookupByLibrary.simpleMessage("Người phụ thuộc "),
         "add_dependent_person_to_apartment":
@@ -369,6 +371,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "consumed_water_detail1":
             MessageLookupByLibrary.simpleMessage("Chi tiết lượng nước sử dụng"),
         "content": MessageLookupByLibrary.simpleMessage("Nội dung"),
+        "content_construction":
+            MessageLookupByLibrary.simpleMessage("Nội dung thi công"),
         "continue_construction":
             MessageLookupByLibrary.simpleMessage("Mở khóa thi công"),
         "count_err_handover": m17,

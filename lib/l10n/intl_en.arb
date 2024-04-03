@@ -979,5 +979,7 @@
   "type_vehicle": "Vehicle model",
   "reason_lock": "Reason lock",
   "lock_vp": "Locked due to violation",
-  "ko": "Korean"
+  "ko": "Korean",
+  "content_construction": "Construction content",
+  "add_content_construction": "Add construction content"
 }

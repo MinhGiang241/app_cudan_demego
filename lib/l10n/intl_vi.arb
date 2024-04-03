@@ -980,5 +980,7 @@
   "type_vehicle": "Dòng xe",
   "reason_lock": "Lý do khóa",
   "lock_vp": "Khóa do vi phạm",
-  "ko": "Tiếng Hàn"
+  "ko": "Tiếng Hàn",
+  "content_construction": "Nội dung thi công",
+  "add_content_construction": "Thêm nội dung thi công"
 }

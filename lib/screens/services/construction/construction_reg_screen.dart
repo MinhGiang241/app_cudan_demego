@@ -2,6 +2,7 @@ import 'package:app_cudan/constants/regex_text.dart';
 import 'package:app_cudan/models/construction.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:app_cudan/widgets/primary_button.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
 import 'package:app_cudan/widgets/primary_dropdown.dart';
 import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:app_cudan/widgets/select_file_widget.dart';
@@ -47,6 +48,11 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
       create: (context) => ConstructionRegPrv(existedConReg: data),
       builder: (context, state) {
         var activeStep = context.watch<ConstructionRegPrv>().activeStep;
+        var contents = context.watch<ConstructionRegPrv>().contents;
+        var existedcontents =
+            context.watch<ConstructionRegPrv>().existedContents;
+        var contentChoice = context.watch<ConstructionRegPrv>().contentChoice;
+        var autoValidate4 = context.watch<ConstructionRegPrv>().autoValidStep4;
 
         return PrimaryScreen(
           isPadding: false,
@@ -389,37 +395,6 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                     background: grayScaleColor4,
                                   ),
                                   vpad(16),
-                                  // Row(
-                                  //   children: [
-                                  //     SizedBox(
-                                  //       width: 22.0,
-                                  //       height: 22.0,
-                                  //       child: Checkbox(
-                                  //         fillColor:
-                                  //             MaterialStateProperty.all(
-                                  //                 primaryColorBase),
-                                  //         value: context
-                                  //             .watch<ConstructionRegPrv>()
-                                  //             .isPaidFee,
-                                  //         onChanged: (v) {
-                                  //           context
-                                  //               .read<
-                                  //                   ConstructionRegPrv>()
-                                  //               .toggleFee();
-                                  //         },
-                                  //       ),
-                                  //     ),
-                                  //     hpad(12),
-                                  //     Expanded(
-                                  //       child: Text(
-                                  //         S.of(context).fee_paid,
-                                  //         style: txtBold(
-                                  //             14, grayScaleColorBase),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-                                  // vpad(16),
                                   PrimaryTextField(
                                     controller: context
                                         .read<ConstructionRegPrv>()
@@ -430,37 +405,6 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                     background: grayScaleColor4,
                                   ),
                                   vpad(16),
-                                  // Row(
-                                  //   children: [
-                                  //     SizedBox(
-                                  //       width: 22.0,
-                                  //       height: 22.0,
-                                  //       child: Checkbox(
-                                  //         fillColor:
-                                  //             MaterialStateProperty.all(
-                                  //                 primaryColorBase),
-                                  //         value: context
-                                  //             .watch<ConstructionRegPrv>()
-                                  //             .isPaidDeposit,
-                                  //         onChanged: (v) {
-                                  //           context
-                                  //               .read<
-                                  //                   ConstructionRegPrv>()
-                                  //               .toggleDeposit();
-                                  //         },
-                                  //       ),
-                                  //     ),
-                                  //     hpad(12),
-                                  //     Expanded(
-                                  //       child: Text(
-                                  //         S.of(context).fee_paid,
-                                  //         style: txtBold(
-                                  //             14, grayScaleColorBase),
-                                  //       ),
-                                  //     )
-                                  //   ],
-                                  // ),
-                                  // vpad(16),
                                   Row(
                                     children: [
                                       Expanded(
@@ -505,6 +449,322 @@ class _ConstructionRegScreenState extends State<ConstructionRegScreen>
                                         .watch<ConstructionRegPrv>()
                                         .validateDescribe,
                                   ),
+                                  vpad(16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        S.of(context).content_construction,
+                                        style: txtBodySmallRegular(
+                                          color: grayScaleColorBase,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      Spacer(),
+                                      IconButton(
+                                        color: primaryColorBase,
+                                        onPressed: () {
+                                          context
+                                              .read<ConstructionRegPrv>()
+                                              .onShowDialogAddContents(context);
+                                        },
+                                        icon: Icon(Icons.add_box),
+                                      ),
+                                    ],
+                                  ),
+                                  if (contents.isNotEmpty ||
+                                      existedcontents.isNotEmpty)
+                                    vpad(16),
+                                  if (contents.isNotEmpty ||
+                                      existedcontents.isNotEmpty)
+                                    Table(
+                                      border: TableBorder.all(
+                                        borderRadius: BorderRadius.circular(8),
+                                        width: 1,
+                                        color: Colors.black12,
+                                      ),
+                                      textBaseline: TextBaseline.ideographic,
+                                      defaultVerticalAlignment:
+                                          TableCellVerticalAlignment.middle,
+                                      columnWidths: const {
+                                        0: FlexColumnWidth(3),
+                                        1: FlexColumnWidth(3),
+                                        2: FlexColumnWidth(3),
+                                        3: FlexColumnWidth(1),
+                                      },
+                                      children: [
+                                        TableRow(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                          ),
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                S
+                                                    .of(context)
+                                                    .content_construction,
+                                                textAlign: TextAlign.center,
+                                                style: txtBold(
+                                                  12,
+                                                  primaryColorBase,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                S.of(context).description,
+                                                textAlign: TextAlign.center,
+                                                style: txtBold(
+                                                  12,
+                                                  primaryColorBase,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                S.of(context).note,
+                                                textAlign: TextAlign.center,
+                                                style: txtBold(
+                                                  12,
+                                                  primaryColorBase,
+                                                ),
+                                              ),
+                                            ),
+                                            hpad(0),
+                                          ],
+                                        ),
+                                        ...existedcontents.asMap().entries.map(
+                                          (e) {
+                                            var conIndex =
+                                                contentChoice.indexWhere((c) =>
+                                                    c.id ==
+                                                    e.value
+                                                        .constructionContentId);
+                                            var cons = conIndex != -1
+                                                ? contentChoice[conIndex]
+                                                : null;
+
+                                            return (TableRow(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    cons?.name ?? '',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(16.0),
+                                                  child: InkWell(
+                                                    onTap: () => {
+                                                      Utils.showDialog(
+                                                        context: context,
+                                                        dialog: PrimaryDialog
+                                                            .custom(
+                                                          content: Column(
+                                                            children: [
+                                                              Text(
+                                                                S
+                                                                    .of(context)
+                                                                    .description,
+                                                                style: txtBold(
+                                                                  14,
+                                                                ),
+                                                              ),
+                                                              vpad(12),
+                                                              Text(
+                                                                e.value.describe ??
+                                                                    "",
+                                                                style:
+                                                                    txtRegular(
+                                                                  12,
+                                                                ),
+                                                              ),
+                                                              vpad(30),
+                                                              PrimaryButton(
+                                                                onTap: () {
+                                                                  Navigator.pop(
+                                                                    context,
+                                                                  );
+                                                                },
+                                                                text: S
+                                                                    .of(context)
+                                                                    .close,
+                                                                buttonSize:
+                                                                    ButtonSize
+                                                                        .small,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    },
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          4,
+                                                        ),
+                                                        border: Border.all(
+                                                          width: 1,
+                                                          color:
+                                                              grayScaleColor4,
+                                                        ),
+                                                      ),
+                                                      child: Text(
+                                                        S.of(context).view,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    e.value.note ?? '',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(0.0),
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<
+                                                              ConstructionRegPrv>()
+                                                          .deleteExistedContent(
+                                                            e.key,
+                                                          );
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.delete,
+                                                      color: redColorBase,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ));
+                                          },
+                                        ),
+                                        ...contents.asMap().entries.map(
+                                              (e) => (TableRow(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text(
+                                                      e.value.name ?? '',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(16.0),
+                                                    child: InkWell(
+                                                      onTap: () => {
+                                                        Utils.showDialog(
+                                                          context: context,
+                                                          dialog: PrimaryDialog
+                                                              .custom(
+                                                            content: Column(
+                                                              children: [
+                                                                Text(
+                                                                  S
+                                                                      .of(context)
+                                                                      .description,
+                                                                  style:
+                                                                      txtBold(
+                                                                    14,
+                                                                  ),
+                                                                ),
+                                                                vpad(12),
+                                                                Text(
+                                                                  e.value.describe ??
+                                                                      "",
+                                                                  style:
+                                                                      txtRegular(
+                                                                    12,
+                                                                  ),
+                                                                ),
+                                                                vpad(30),
+                                                                PrimaryButton(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .pop(
+                                                                      context,
+                                                                    );
+                                                                  },
+                                                                  text: S
+                                                                      .of(context)
+                                                                      .close,
+                                                                  buttonSize:
+                                                                      ButtonSize
+                                                                          .small,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      },
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                            4,
+                                                          ),
+                                                          border: Border.all(
+                                                            width: 1,
+                                                            color:
+                                                                grayScaleColor4,
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          S.of(context).view,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text(
+                                                      e.value.note ?? '',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(0.0),
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                ConstructionRegPrv>()
+                                                            .deleteContent(
+                                                              e.key,
+                                                            );
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.delete,
+                                                        color: redColorBase,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                      ],
+                                    ),
                                   vpad(30),
                                   PrimaryButton(
                                     width: double.infinity,

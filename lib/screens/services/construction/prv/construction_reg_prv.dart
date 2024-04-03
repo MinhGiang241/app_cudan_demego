@@ -2,10 +2,15 @@
 
 import 'dart:io';
 
+import 'package:app_cudan/constants/constants.dart';
 import 'package:app_cudan/models/receipt.dart';
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_construction.dart';
 import 'package:app_cudan/utils/utils.dart';
+import 'package:app_cudan/widgets/primary_button.dart';
+import 'package:app_cudan/widgets/primary_dialog.dart';
+import 'package:app_cudan/widgets/primary_dropdown.dart';
+import 'package:app_cudan/widgets/primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +25,7 @@ import '../construction_list_screen.dart';
 class ConstructionRegPrv extends ChangeNotifier {
   ConstructionRegPrv({this.existedConReg}) {
     if (existedConReg != null) {
+      getConstructionContentList();
       isAgree = existedConReg!.confirm ?? true;
       existedCurrentDrawings = existedConReg!.current_draw ?? [];
       existedRenewDrawings = existedConReg!.renovation_draw ?? [];
@@ -67,6 +73,7 @@ class ConstructionRegPrv extends ChangeNotifier {
       depositFee = existedConReg!.deposit_fee ?? 0;
       workday = existedConReg!.working_day ?? 0;
       offday = existedConReg!.off_day ?? 0;
+      existedContents = existedConReg?.constructionContent ?? [];
     } else {
       initNew = false;
       regDate = DateTime.now();
@@ -77,17 +84,21 @@ class ConstructionRegPrv extends ChangeNotifier {
   bool initNew = true;
   bool autoValidStep1 = false;
   bool autoValidStep2 = false;
+  bool autoValidStep4 = false;
   FixedDateService? fixedDateService;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
   ConstructionRegistration? existedConReg = ConstructionRegistration();
   DayOff? dayoff;
   bool isDisableRightCroll = true;
   int activeStep = 0;
+  List<ConstructionContent> contentChoice = [];
   List<ConstructionType> listConstructionType = [];
+  List<ConstructionContentSelect> existedContents = [];
   final PageController controller = PageController();
-
+  String? contentValue = '';
   List<ConstructionFile> existedCurrentDrawings = [];
   List<ConstructionFile> existedRenewDrawings = [];
 
@@ -99,6 +110,8 @@ class ConstructionRegPrv extends ChangeNotifier {
 
   String? selectedApartment;
   String? selectedConstype;
+
+  List<ConstructionContentSelect> contents = [];
 
   final TextEditingController surfaceController = TextEditingController();
   final TextEditingController consTypeController = TextEditingController();
@@ -119,6 +132,11 @@ class ConstructionRegPrv extends ChangeNotifier {
   final TextEditingController workerNumController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
+  final TextEditingController describlecontentController =
+      TextEditingController();
+  final TextEditingController noteContentController = TextEditingController();
+
+  String? validateContent;
   String? validateSurface;
   String? validateConsType;
   String? validateRegDate;
@@ -167,6 +185,16 @@ class ConstructionRegPrv extends ChangeNotifier {
       clearValidStringStep2();
     } else {
       genValidStep2();
+    }
+
+    notifyListeners();
+  }
+
+  validate4(BuildContext context) {
+    if (formKey4.currentState!.validate()) {
+      clearValidStringStep4();
+    } else {
+      genValidStep4();
     }
 
     notifyListeners();
@@ -262,6 +290,7 @@ class ConstructionRegPrv extends ChangeNotifier {
           time_end: (endTime!.add(const Duration(hours: 7))).toIso8601String(),
           //   // resident_relationship: apartment.type,
           construction_type_name: consType.name ?? '',
+          constructionContent: existedContents + contents,
         );
         var conHis;
         //if (existedConReg == null) {
@@ -641,6 +670,20 @@ class ConstructionRegPrv extends ChangeNotifier {
     }
   }
 
+  clearValidStringStep4() {
+    validateContent = null;
+
+    notifyListeners();
+  }
+
+  genValidStep4() {
+    if (contentValue == null || contentValue!.isEmpty) {
+      validateContent = S.current.not_blank;
+    }
+    validateContent = S.current.not_blank;
+    notifyListeners();
+  }
+
   clearValidStringStep2() {
     validateConsUnit = null;
     validateAddress = null;
@@ -860,5 +903,158 @@ class ConstructionRegPrv extends ChangeNotifier {
   onPageChanged(v) {
     activeStep = v;
     notifyListeners();
+  }
+
+  deleteContent(int index) {
+    contents.removeAt(index);
+    notifyListeners();
+  }
+
+  deleteExistedContent(int index) {
+    existedContents.removeAt(index);
+    notifyListeners();
+  }
+
+  getConstructionContentList() async {
+    List<ConstructionContent> list = [];
+    var res = await APIConstruction.getConstructionContentList().then((v) {
+      if (v != null) {
+        contentChoice.clear();
+        for (var i in v) {
+          contentChoice.add(ConstructionContent.fromMap(i));
+        }
+      }
+    }).catchError((e) {});
+  }
+
+  onChangeContent(v) {
+    contentValue = v;
+    validateContent = null;
+    var content = contentChoice.firstWhere((element) => element.id == v);
+    describlecontentController.text = content.describe ?? "";
+    print(content);
+    notifyListeners();
+  }
+
+  onShowDialogAddContents(BuildContext context) async {
+    await getConstructionContentList();
+    var choices = [
+      ...contentChoice.map(
+        (d) => DropdownMenuItem(
+          child: Text(d.name ?? ''),
+          value: d.id,
+        ),
+      ),
+    ];
+
+    onAddContent(BuildContext context) {
+      if (formKey4.currentState!.validate()) {
+        var val =
+            contentChoice.firstWhere((element) => element.id == contentValue);
+        var content = ConstructionContentSelect(
+          constructionContentId: contentValue,
+          note: noteContentController.text.trim(),
+          describe: describlecontentController.text.trim(),
+          name: val.name,
+        );
+        contents.add(content);
+        Navigator.pop(context);
+        contentValue = null;
+        noteContentController.clear();
+        describlecontentController.clear();
+        validateContent = null;
+      } else {
+        genValidStep4();
+      }
+      notifyListeners();
+    }
+
+    Utils.showDialog(
+      context: context,
+      dialog: PrimaryDialog.custom(
+        content: StatefulBuilder(
+          builder: (ctx, setState) => Form(
+            key: formKey4,
+            onChanged: () {
+              validate4(context);
+              setState(() {});
+            },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              children: [
+                Text(
+                  S.of(context).add_content_construction,
+                  style: txtBold(14),
+                ),
+                vpad(16),
+                PrimaryDropDown(
+                  onChange: (v) {
+                    onChangeContent(v);
+                    setState(() {});
+                  },
+                  validateString: validateContent,
+                  validator: Utils.emptyValidatorDropdown,
+                  selectList: choices,
+                  hint: S.of(context).content_construction,
+                  label: S.of(context).content_construction,
+                  isRequired: true,
+                ),
+                vpad(16),
+                PrimaryTextField(
+                  enable: false,
+                  controller: describlecontentController,
+                  maxLines: 5,
+                  hint: S.of(context).description,
+                  label: S.of(context).description,
+                ),
+                vpad(16),
+                PrimaryTextField(
+                  controller: noteContentController,
+                  hint: S.of(context).note,
+                  label: S.of(context).note,
+                  maxLines: 5,
+                ),
+                vpad(16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: PrimaryButton(
+                        buttonType: ButtonType.red,
+                        buttonSize: ButtonSize.small,
+                        text: S.of(context).cancel,
+                        onTap: () {
+                          formKey4.currentState!.reset();
+                          contentValue = null;
+                          noteContentController.clear();
+                          describlecontentController.clear();
+                          validateContent = null;
+                          Navigator.pop(
+                            context,
+                          );
+                        },
+                      ),
+                    ),
+                    hpad(20),
+                    Expanded(
+                      child: PrimaryButton(
+                        buttonSize: ButtonSize.small,
+                        text: S.of(context).add_new,
+                        onTap: () {
+                          onAddContent(
+                            context,
+                          );
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

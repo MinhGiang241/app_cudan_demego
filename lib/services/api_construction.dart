@@ -628,4 +628,31 @@ mutation (\$residentId:String){
       return res.response.data;
     }
   }
+
+  static Future getConstructionContentList() async {
+    var query = '''
+mutation {
+    response: constructioncontent_mobile_get_construction_content_list  {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
 }

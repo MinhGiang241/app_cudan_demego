@@ -112,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_type": MessageLookupByLibrary.simpleMessage("Account type"),
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "add_content_construction":
+            MessageLookupByLibrary.simpleMessage("Add construction content"),
         "add_dependent_person":
             MessageLookupByLibrary.simpleMessage("Add dependent person "),
         "add_dependent_person_to_apartment":
@@ -367,6 +369,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "consumed_water_detail1":
             MessageLookupByLibrary.simpleMessage("Consumed water detail"),
         "content": MessageLookupByLibrary.simpleMessage("Content"),
+        "content_construction":
+            MessageLookupByLibrary.simpleMessage("Construction content"),
         "continue_construction":
             MessageLookupByLibrary.simpleMessage("Continue construction"),
         "count_err_handover": m17,

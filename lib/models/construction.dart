@@ -56,6 +56,7 @@ class ConstructionRegistration {
     this.file_cancel,
     this.re,
     this.a,
+    this.constructionContent,
   });
 
   ConstructionRegistration copyWith({
@@ -101,6 +102,7 @@ class ConstructionRegistration {
     List<ConstructionFile>? file_cancel,
     ResponseResidentInfo? re,
     Apartment? a,
+    List<ConstructionContent>? constructionContent,
   }) {
     return ConstructionRegistration(
       id: id ?? this.id,
@@ -146,6 +148,7 @@ class ConstructionRegistration {
       file_cancel: file_cancel ?? this.file_cancel,
       re: re ?? this.re,
       a: a ?? this.a,
+      constructionContent: this.constructionContent,
     );
   }
 
@@ -193,6 +196,7 @@ class ConstructionRegistration {
   List<ConstructionFile>? file_cancel;
   ResponseResidentInfo? re;
   Apartment? a;
+  List<ConstructionContentSelect>? constructionContent;
 
   ConstructionRegistration.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -229,6 +233,14 @@ class ConstructionRegistration {
     deposit_fee = double.tryParse(json['deposit_fee'].toString()) != null
         ? double.parse(json['deposit_fee'].toString())
         : null;
+    constructionContent = json['constructionContent'] != null
+        ? json['constructionContent'].isNotEmpty
+            ? json['constructionContent']
+                .map<ConstructionContentSelect>(
+                    (e) => ConstructionContentSelect.fromMap(e))
+                .toList()
+            : []
+        : [];
     working_day = json['working_day'];
     off_day = json['off_day'];
     isContructionCost = json['isContructionCost'];
@@ -321,6 +333,11 @@ class ConstructionRegistration {
     data['file_cancel'] = file_cancel != null
         ? file_cancel!.map((e) {
             return e.toJson();
+          }).toList()
+        : null;
+    data['constructionContent'] = constructionContent != null
+        ? constructionContent!.map((e) {
+            return e.toMap();
           }).toList()
         : null;
     return data;
@@ -1553,4 +1570,115 @@ class ConstructionBill {
 
   factory ConstructionBill.fromJson(String source) =>
       ConstructionBill.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class ConstructionContentSelect {
+  String? constructionContentId;
+  String? describe;
+  String? note;
+  String? name;
+  ConstructionContentSelect({
+    this.constructionContentId,
+    this.describe,
+    this.note,
+    this.name,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'constructionContentId': constructionContentId,
+      'describe': describe,
+      'note': note,
+      'name': name,
+    };
+  }
+
+  factory ConstructionContentSelect.fromMap(Map<String, dynamic> map) {
+    return ConstructionContentSelect(
+      constructionContentId: map['constructionContentId'] != null
+          ? map['constructionContentId'] as String
+          : null,
+      describe: map['describe'] != null ? map['describe'] as String : null,
+      note: map['note'] != null ? map['note'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionContentSelect.fromJson(String source) =>
+      ConstructionContentSelect.fromMap(
+          json.decode(source) as Map<String, dynamic>);
+
+  ConstructionContentSelect copyWith({
+    String? constructionContentId,
+    String? describe,
+    String? note,
+  }) {
+    return ConstructionContentSelect(
+      constructionContentId:
+          constructionContentId ?? this.constructionContentId,
+      describe: describe ?? this.describe,
+      note: note ?? this.note,
+      name: name ?? this.name,
+    );
+  }
+}
+
+class ConstructionContent {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? describe;
+  String? name;
+  ConstructionContent({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.describe,
+    this.name,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'describe': describe,
+      'name': name,
+    };
+  }
+
+  factory ConstructionContent.fromMap(Map<String, dynamic> map) {
+    return ConstructionContent(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      describe: map['describe'] != null ? map['describe'] as String : null,
+      name: map['name'] != null ? map['name'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionContent.fromJson(String source) =>
+      ConstructionContent.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ConstructionContent copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? describe,
+    String? name,
+  }) {
+    return ConstructionContent(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      describe: describe ?? this.describe,
+      name: name ?? this.name,
+    );
+  }
 }

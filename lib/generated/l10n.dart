@@ -9859,6 +9859,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Construction content`
+  String get content_construction {
+    return Intl.message(
+      'Construction content',
+      name: 'content_construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add construction content`
+  String get add_content_construction {
+    return Intl.message(
+      'Add construction content',
+      name: 'add_content_construction',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
