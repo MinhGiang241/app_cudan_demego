@@ -149,7 +149,7 @@ class _SelectFileWidgetState extends State<SelectFileWidget> {
                                   child: PrimaryImageNetwork(
                                     canShowPhotoView: true,
                                     path:
-                                        '${ApiService.shared.uploadURL}/?load=${e.value.id!}&regcode=${ApiService.shared.regCode}',
+                                        '${ApiService.shared.uploadURL}?load=${e.value.id!}&regcode=${ApiService.shared.regCode}',
                                   ),
                                 ),
                                 if (widget.enable)

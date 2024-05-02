@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
             navigatorKey: navigatorKey,
             builder: (context, child) {
               final mediaQueryData = MediaQuery.of(context);
-              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.1);
+              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.2);
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
                 child: child!,

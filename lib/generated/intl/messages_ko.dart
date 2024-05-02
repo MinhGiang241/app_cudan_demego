@@ -104,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_type": MessageLookupByLibrary.simpleMessage("계정 유형"),
         "active": MessageLookupByLibrary.simpleMessage("일하다"),
         "add": MessageLookupByLibrary.simpleMessage("더"),
+        "add_content_construction":
+            MessageLookupByLibrary.simpleMessage("구성 콘텐츠 추가"),
         "add_dependent_person": MessageLookupByLibrary.simpleMessage("의존하는 사람"),
         "add_dependent_person_to_apartment":
             MessageLookupByLibrary.simpleMessage("아파트에 사람들을 추가하십시오"),
@@ -318,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "consumed_water_detail1":
             MessageLookupByLibrary.simpleMessage("사용 된 물의 세부 사항"),
         "content": MessageLookupByLibrary.simpleMessage("콘텐츠"),
+        "content_construction": MessageLookupByLibrary.simpleMessage("공사 내용"),
         "continue_construction":
             MessageLookupByLibrary.simpleMessage("건설 잠금 해제"),
         "count_err_handover": m17,

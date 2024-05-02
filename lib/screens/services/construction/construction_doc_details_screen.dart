@@ -180,6 +180,15 @@ class _ConstructionDocumentDetailsState
                   ],
                 ),
               ),
+              // vpad(16),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12),
+              //   child: Text(
+              //     S.of(context).content_construction,
+              //     style: txtMedium(14, grayScaleColor2),
+              //   ),
+              // ),
+              //
               vpad(16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),

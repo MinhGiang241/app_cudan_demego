@@ -980,5 +980,7 @@
     "type_vehicle": "차량",
     "reason_lock": "잠금 이유",
     "lock_vp": "위반으로 인해 잠금",
-    "ko": "한국어"
+    "ko": "한국어",
+    "content_construction": "공사 내용",
+    "add_content_construction": "구성 콘텐츠 추가"
 }
