@@ -133,12 +133,26 @@ class _ConstructionExtendTabState extends State<ConstructionExtendTab> {
                     ),
                     InfoContentView(
                       title: "${S.of(context).start_date_extend}: ",
-                      content: Utils.dateFormat(e.time_start ?? '', 1),
+                      content: e.temporarily_extend != null &&
+                              e.temporarily_extend!.length >= 1 &&
+                              e.temporarily_extend?[0]?.length >= 1
+                          ? Utils.dateFormat(
+                              e.temporarily_extend?[0]?[0] ?? '',
+                              1,
+                            )
+                          : null,
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     InfoContentView(
                       title: '${S.of(context).end_date_extend}: ',
-                      content: Utils.dateFormat(e.time_end ?? '', 1),
+                      content: e.temporarily_extend != null &&
+                              e.temporarily_extend!.length >= 1 &&
+                              e.temporarily_extend?[0]?.length >= 2
+                          ? Utils.dateFormat(
+                              e.temporarily_extend?[0]?[1] ?? '',
+                              1,
+                            )
+                          : null,
                       contentStyle: txtBold(14, grayScaleColorBase),
                     ),
                     InfoContentView(

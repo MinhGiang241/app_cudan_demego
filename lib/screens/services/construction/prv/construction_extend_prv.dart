@@ -20,17 +20,27 @@ class ConstructionExtendPrv extends ChangeNotifier {
         }
       });
 
-      startDate = DateTime.tryParse(exitedExtend!.time_start ?? '') != null
-          ? DateTime.parse(exitedExtend!.time_start ?? '')
+      startDate = exitedExtend?.temporarily_extend != null &&
+              exitedExtend!.temporarily_extend!.length >= 1 &&
+              exitedExtend!.temporarily_extend?[0]?.length >= 1
+          ? DateTime.tryParse(exitedExtend!.temporarily_extend?[0]?[0] ?? '') !=
+                  null
+              ? DateTime.parse(exitedExtend!.temporarily_extend?[0]?[0] ?? '')
+              : null
           : null;
-      endDate = DateTime.tryParse(exitedExtend!.time_end ?? '') != null
-          ? DateTime.parse(exitedExtend!.time_end ?? '')
+      endDate = exitedExtend?.temporarily_extend != null &&
+              exitedExtend!.temporarily_extend!.length >= 1 &&
+              exitedExtend!.temporarily_extend?[0]?.length >= 2
+          ? DateTime.tryParse(exitedExtend!.temporarily_extend?[0]?[1] ?? '') !=
+                  null
+              ? DateTime.parse(exitedExtend!.temporarily_extend?[0]?[1] ?? '')
+              : null
           : null;
       regDateController.text =
           Utils.dateFormat(exitedExtend!.createdTime ?? '', 1);
       consFeeController.text =
           formatCurrency.format(exitedExtend!.construction_cost);
-      consDateController.text = exitedExtend!.worker_num.toString();
+      consDateController.text = exitedExtend!.working_day.toString();
       offDateController.text = exitedExtend!.off_day.toString();
       reasonController.text = exitedExtend!.reason_description ?? '';
       if (startDate != null) {
@@ -143,8 +153,11 @@ class ConstructionExtendPrv extends ChangeNotifier {
                   ? int.parse(consDateController.text.trim())
                   : null,
           isMobile: true,
-          time_start: startDate!.toUtc().toIso8601String(),
-          time_end: endDate!.toUtc().toIso8601String(),
+          time_start: startDate!.toIso8601String(),
+          time_end: endDate!.toIso8601String(),
+          temporarily_extend: [
+            [startDate!.toIso8601String(), endDate!.toIso8601String()],
+          ],
         );
 
         await APIConstruction.saveConstructionExtension(newExtension.toMap());

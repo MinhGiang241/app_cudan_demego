@@ -1007,6 +1007,7 @@ class ConstructionExtension {
   double? extend_construction_cost;
   String? extend_ConstructionRegistrationId;
   dynamic history_aproved;
+  List<dynamic>? temporarily_extend;
 
   ConstructionDocument? d;
   Status? s;
@@ -1064,6 +1065,7 @@ class ConstructionExtension {
     this.extend_construction_cost,
     this.extend_ConstructionRegistrationId,
     this.history_aproved,
+    this.temporarily_extend,
   });
 
   ConstructionExtension copyWith({
@@ -1116,8 +1118,10 @@ class ConstructionExtension {
     double? extend_construction_cost,
     String? extend_ConstructionRegistrationId,
     dynamic history_aproved,
+    List<dynamic>? temporarily_extend,
   }) {
     return ConstructionExtension(
+      temporarily_extend: temporarily_extend ?? this.temporarily_extend,
       id: id ?? this.id,
       createdTime: createdTime ?? this.createdTime,
       updatedTime: updatedTime ?? this.updatedTime,
@@ -1226,6 +1230,7 @@ class ConstructionExtension {
       'extend_construction_cost': extend_construction_cost,
       'extend_ConstructionRegistrationId': extend_ConstructionRegistrationId,
       'history_aproved': history_aproved,
+      'temporarily_extend': temporarily_extend,
     };
   }
 
@@ -1364,6 +1369,8 @@ class ConstructionExtension {
       d: map['d'] != null ? ConstructionDocument.fromJson(map['d']) : null,
       s: map['s'] != null ? Status.fromJson(map['s']) : null,
       t: map['t'] != null ? ConstructionType.fromJson(map['t']) : null,
+      temporarily_extend:
+          map['temporarily_extend'] != null ? map['temporarily_extend'] : null,
     );
   }
 
