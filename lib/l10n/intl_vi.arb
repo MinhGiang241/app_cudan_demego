@@ -982,5 +982,12 @@
   "lock_vp": "Khóa do vi phạm",
   "ko": "Tiếng Hàn",
   "content_construction": "Nội dung thi công",
-  "add_content_construction": "Thêm nội dung thi công"
+  "add_content_construction": "Thêm nội dung thi công",
+  "stop_construction": "Tạm dừng thi công",
+  "no_stop_letter": "Không có phiếu tạm dừng thi công nào",
+  "start_date_stop": "Ngày bắt đầu tạm dừng",
+  "end_date_stop": "Ngày kết thúc tạm dừng",
+  "send_stop_success": "Gửi duyệt tạm dừng thi công thành công",
+  "confirm_cancel_cons_stop": "Bạn có muốn hủy phiếu tạm dừng thi công {c}",
+  "success_cancel_cons_stop": "Hủy phiếu tạm dừng thi công thành công"
 }

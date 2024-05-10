@@ -33,72 +33,75 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(c) => "Do you want to cancel letter ${c}";
 
-  static String m6(code) => "Do you want to cancel request letter [${code}]";
+  static String m6(c) =>
+      "Do you want to cancel the construction suspension ticket ${c}";
 
-  static String m7(plate) => "Do you want to cancel transport ${plate}?";
+  static String m7(code) => "Do you want to cancel request letter [${code}]";
 
-  static String m8(name) =>
+  static String m8(plate) => "Do you want to cancel transport ${plate}?";
+
+  static String m9(name) =>
       "Do you want to change schedule of handover, old  schedule for apartment [${name}] will be cancel?";
 
-  static String m9(letter) => "Do you want to delete letter [${letter}]?";
+  static String m10(letter) => "Do you want to delete letter [${letter}]?";
 
-  static String m10(delete) => "Do you want to delete [${delete}]?";
+  static String m11(delete) => "Do you want to delete [${delete}]?";
 
-  static String m11(card) => "Do you want to lock card [${card}]?";
-
-  static String m12(code) => "Do you want to report missing card ${code}?";
+  static String m12(card) => "Do you want to lock card [${card}]?";
 
   static String m13(code) => "Do you want to report missing card ${code}?";
 
-  static String m14(eventName) =>
+  static String m14(code) => "Do you want to report missing card ${code}?";
+
+  static String m15(eventName) =>
       "Do you want to participate in [${eventName}]?";
 
-  static String m15(code) => "Do you want to refuse letter [${code}] ?";
+  static String m16(code) => "Do you want to refuse letter [${code}] ?";
 
-  static String m16(approved) =>
+  static String m17(approved) =>
       "Do you want to send to approve [${approved}]?";
 
-  static String m17(c) =>
+  static String m18(c) =>
       "Handover list has ${c} item not pass .Do you want to confirm handover.";
 
-  static String m18(nameser) => "Edit registration service ${nameser}";
+  static String m19(nameser) => "Edit registration service ${nameser}";
 
-  static String m19(message) => "Error: ${message}";
+  static String m20(message) => "Error: ${message}";
 
-  static String m20(ticket) =>
+  static String m21(ticket) =>
       "Each apartment can book maximum ${ticket} ticket  per day for resident ";
 
-  static String m21(s) => "Value is not greater than ${s}";
+  static String m22(s) => "Value is not greater than ${s}";
 
-  static String m22(numAsset) =>
+  static String m23(numAsset) =>
       "Hand over list has ${numAsset} assets not pass";
 
-  static String m23(nameser) => "Registration service ${nameser}";
+  static String m24(nameser) => "Registration service ${nameser}";
 
-  static String m24(eName) => "Paticipate event [${eName}] successfully";
+  static String m25(eName) => "Paticipate event [${eName}] successfully";
 
-  static String m25(service) => "Service ${service}";
+  static String m26(service) => "Service ${service}";
 
-  static String m26(person, build) =>
+  static String m27(person, build) =>
       "You has already add ${person} into apartment ${build}. Please wait management\'s approval";
 
-  static String m27(name) =>
+  static String m28(name) =>
       "You booked handover schedule successfully for apartment [${name}] .Please wait to building management department approve.";
 
-  static String m28(name) =>
+  static String m29(name) =>
       "You already registerd services ${name} successfully";
 
-  static String m29(name) =>
+  static String m30(name) =>
       "Cancel schedule of handover for apartment [${name}] successfully";
 
-  static String m30(ap) => "You already hand over for ${ap} successfully";
+  static String m31(ap) => "You already hand over for ${ap} successfully";
 
-  static String m31(p) => "Make payment for ${p} successfully";
+  static String m32(p) => "Make payment for ${p} successfully";
 
-  static String m32(month, year) =>
+  static String m33(month, year) =>
       "Total consumed water month ${month}/${year}";
 
-  static String m33(to) => "We sent otp code to :${to}";
+  static String m34(to) => "We sent otp code to :${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -294,33 +297,34 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_can_trans_card_res": MessageLookupByLibrary.simpleMessage(
             "Do you want to cancel resident card?"),
         "confirm_cancel_cons_ext": m5,
-        "confirm_cancel_request": m6,
-        "confirm_cancel_trans": m7,
-        "confirm_change_schedule": m8,
+        "confirm_cancel_cons_stop": m6,
+        "confirm_cancel_request": m7,
+        "confirm_cancel_trans": m8,
+        "confirm_change_schedule": m9,
         "confirm_delete_account": MessageLookupByLibrary.simpleMessage(
             "Do you want to delete your account"),
-        "confirm_delete_letter": m9,
-        "confirm_delete_service": m10,
+        "confirm_delete_letter": m10,
+        "confirm_delete_service": m11,
         "confirm_end_chat": MessageLookupByLibrary.simpleMessage(
             "Do you want to end this conversation."),
         "confirm_hand_over": MessageLookupByLibrary.simpleMessage(
             "Are you sure accept to hand over."),
-        "confirm_lock_card": m11,
+        "confirm_lock_card": m12,
         "confirm_lock_trans_card": MessageLookupByLibrary.simpleMessage(
             "Do you want to lock transportation card?"),
-        "confirm_missing_report": m12,
-        "confirm_missing_report_res": m13,
+        "confirm_missing_report": m13,
+        "confirm_missing_report_res": m14,
         "confirm_obey_regulation":
             MessageLookupByLibrary.simpleMessage("Confirm obey regulation"),
-        "confirm_par_ques_event": m14,
+        "confirm_par_ques_event": m15,
         "confirm_participate_event":
             MessageLookupByLibrary.simpleMessage("Confirm participate event"),
         "confirm_pass":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
-        "confirm_refuse_letter": m15,
+        "confirm_refuse_letter": m16,
         "confirm_register":
             MessageLookupByLibrary.simpleMessage("Confirm registration"),
-        "confirm_send_request": m16,
+        "confirm_send_request": m17,
         "confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
         "confirmed_by_manager_resident": MessageLookupByLibrary.simpleMessage(
             "resident confirmed by manager department"),
@@ -373,7 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Construction content"),
         "continue_construction":
             MessageLookupByLibrary.simpleMessage("Continue construction"),
-        "count_err_handover": m17,
+        "count_err_handover": m18,
         "covenient_service":
             MessageLookupByLibrary.simpleMessage("Covenient service"),
         "create_acc": MessageLookupByLibrary.simpleMessage("Create an account"),
@@ -443,7 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Edit transportation registration"),
         "edit_res_card":
             MessageLookupByLibrary.simpleMessage("edit resident card"),
-        "edit_service_a": m18,
+        "edit_service_a": m19,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage(
             "Register transportation card"),
         "edit_transport":
@@ -478,6 +482,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("End date extension"),
         "end_date_not_empty":
             MessageLookupByLibrary.simpleMessage("End date can not be empty"),
+        "end_date_stop":
+            MessageLookupByLibrary.simpleMessage("End date of pause"),
         "end_time": MessageLookupByLibrary.simpleMessage("End time"),
         "end_time_reg":
             MessageLookupByLibrary.simpleMessage("End registration time"),
@@ -526,7 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_report": MessageLookupByLibrary.simpleMessage("Error report"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "err_upload": MessageLookupByLibrary.simpleMessage("Upload error"),
-        "err_x": m19,
+        "err_x": m20,
         "error": MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "ethnic": MessageLookupByLibrary.simpleMessage("Ethnic"),
         "event": MessageLookupByLibrary.simpleMessage("Event"),
@@ -718,7 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "matial_status": MessageLookupByLibrary.simpleMessage("Matial status"),
         "max_day_pay":
             MessageLookupByLibrary.simpleMessage("Maximum payment date"),
-        "max_num_ticket_per_day": m20,
+        "max_num_ticket_per_day": m21,
         "max_pay_day_not_empty": MessageLookupByLibrary.simpleMessage(
             "Maximum payment date can not be empty"),
         "member_num": MessageLookupByLibrary.simpleMessage("Menber number"),
@@ -807,6 +813,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any registration"),
         "no_service_regitration": MessageLookupByLibrary.simpleMessage(
             "Don\'t have any service registration"),
+        "no_stop_letter": MessageLookupByLibrary.simpleMessage(
+            "Don\'t have any construction suspension tickets"),
         "no_trans_card":
             MessageLookupByLibrary.simpleMessage("No have transportation card"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage(
@@ -839,9 +847,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have any images"),
         "not_have_product":
             MessageLookupByLibrary.simpleMessage("Don\'t have any products"),
-        "not_larger": m21,
+        "not_larger": m22,
         "not_pass": MessageLookupByLibrary.simpleMessage("Not pass"),
-        "not_pass_list": m22,
+        "not_pass_list": m23,
         "not_pass_reason":
             MessageLookupByLibrary.simpleMessage("Not pass reason"),
         "not_read": MessageLookupByLibrary.simpleMessage("Unread"),
@@ -1069,7 +1077,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pet registration list"),
         "reg_service":
             MessageLookupByLibrary.simpleMessage("Registration service"),
-        "reg_service_a": m23,
+        "reg_service_a": m24,
         "reg_time": MessageLookupByLibrary.simpleMessage("Time registration"),
         "reg_trans_photos": MessageLookupByLibrary.simpleMessage(
             "Register transportation photos (2 side)"),
@@ -1191,7 +1199,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "s_usage_apartment":
             MessageLookupByLibrary.simpleMessage("Usage area of apartment"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
-        "scuccess_participation": m24,
+        "scuccess_participation": m25,
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_aparment":
             MessageLookupByLibrary.simpleMessage("Search apartment"),
@@ -1236,13 +1244,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "send_reflection":
             MessageLookupByLibrary.simpleMessage("Send feedback "),
         "send_request": MessageLookupByLibrary.simpleMessage("Send request"),
+        "send_stop_success": MessageLookupByLibrary.simpleMessage(
+            "Send for approval to stop construction successfully"),
         "send_to_email":
             MessageLookupByLibrary.simpleMessage("Send OTP to email"),
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("Send OTP to phone number"),
         "send_verify": MessageLookupByLibrary.simpleMessage("Send verify"),
         "service_bill": MessageLookupByLibrary.simpleMessage("Service bill"),
-        "service_name": m25,
+        "service_name": m26,
         "service_reflection":
             MessageLookupByLibrary.simpleMessage("Service_reflection"),
         "services": MessageLookupByLibrary.simpleMessage("Service"),
@@ -1280,6 +1290,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Start date extension"),
         "start_date_not_empty":
             MessageLookupByLibrary.simpleMessage("Start date can not be empty"),
+        "start_date_stop":
+            MessageLookupByLibrary.simpleMessage("Pause start date"),
         "start_time": MessageLookupByLibrary.simpleMessage("Start time"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "status_cons":
@@ -1288,6 +1300,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step1": MessageLookupByLibrary.simpleMessage("Step 1"),
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
+        "stop_construction": MessageLookupByLibrary.simpleMessage(
+            "Temporarily stop contruction"),
         "stt": MessageLookupByLibrary.simpleMessage("STT"),
         "succees_extend_trans": MessageLookupByLibrary.simpleMessage(
             "Extend transportation successfully"),
@@ -1296,22 +1310,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Accepted successfully"),
         "success_accept_letter":
             MessageLookupByLibrary.simpleMessage("Accept letter successfully"),
-        "success_add_dependence": m26,
+        "success_add_dependence": m27,
         "success_add_email":
             MessageLookupByLibrary.simpleMessage("Add email successfully"),
         "success_add_ticket": MessageLookupByLibrary.simpleMessage(
             "Add new reflection successfully"),
-        "success_book_schedule": m27,
-        "success_booking": m28,
+        "success_book_schedule": m28,
+        "success_booking": m29,
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("Cancel letter successfully"),
         "success_can_res_card": MessageLookupByLibrary.simpleMessage(
             "Cancel resident card successfully"),
-        "success_can_schedule": m29,
+        "success_can_schedule": m30,
         "success_can_trans_card": MessageLookupByLibrary.simpleMessage(
             "Cancel transportation card successfully"),
         "success_cancel_cons_ext": MessageLookupByLibrary.simpleMessage(
             "Cancel construcion extension letter successfully"),
+        "success_cancel_cons_stop": MessageLookupByLibrary.simpleMessage(
+            "Successfully canceled the construction suspension ticket"),
         "success_cancel_dependence": MessageLookupByLibrary.simpleMessage(
             "Cancel register dependent person successfully"),
         "success_cancel_reflection": MessageLookupByLibrary.simpleMessage(
@@ -1333,12 +1349,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find": MessageLookupByLibrary.simpleMessage(
             "change status item successfully"),
         "success_found": MessageLookupByLibrary.simpleMessage("Found"),
-        "success_handover": m30,
+        "success_handover": m31,
         "success_lock_card":
             MessageLookupByLibrary.simpleMessage("Lock card successfully"),
         "success_opt":
             MessageLookupByLibrary.simpleMessage("Send OTP code successfully"),
-        "success_payment": m31,
+        "success_payment": m32,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("Refuse letter successfully"),
         "success_reg_res": MessageLookupByLibrary.simpleMessage(
@@ -1416,7 +1432,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("To money (VNĐ)"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "total_bill": MessageLookupByLibrary.simpleMessage("Total bill"),
-        "total_consumed_water_month": m32,
+        "total_consumed_water_month": m33,
         "total_money": MessageLookupByLibrary.simpleMessage("Total money"),
         "total_money_pay":
             MessageLookupByLibrary.simpleMessage("Total money payment"),
@@ -1538,7 +1554,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("Water bill"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "How would you like to receive a code to reset your password?"),
-        "we_send_to": m33,
+        "we_send_to": m34,
         "weekend_aldult_ticket_num": MessageLookupByLibrary.simpleMessage(
             "Weekend aldult ticket number"),
         "weekend_child_ticket_num":

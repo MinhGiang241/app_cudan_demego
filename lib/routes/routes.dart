@@ -49,6 +49,7 @@ import '../screens/services/construction/construction_extend_screen.dart';
 import '../screens/services/construction/construction_list_screen.dart';
 import '../screens/services/construction/construction_reg_screen.dart';
 import '../screens/services/construction/construction_registration_details_screen.dart';
+import '../screens/services/construction/construction_stop_screen.dart';
 import '../screens/services/delivery/delivery_list_screen.dart';
 import '../screens/services/delivery/package_details_screen.dart';
 import '../screens/services/delivery/register_delivery_screen.dart';
@@ -533,6 +534,11 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: routeSetting,
           builder: (_) => ShopImageListScreen(),
+        );
+      case ConstructionStopScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (_) => ConstructionStopScreen(),
         );
 
       default:

@@ -9879,6 +9879,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Temporarily stop contruction`
+  String get stop_construction {
+    return Intl.message(
+      'Temporarily stop contruction',
+      name: 'stop_construction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have any construction suspension tickets`
+  String get no_stop_letter {
+    return Intl.message(
+      'Don\'t have any construction suspension tickets',
+      name: 'no_stop_letter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pause start date`
+  String get start_date_stop {
+    return Intl.message(
+      'Pause start date',
+      name: 'start_date_stop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date of pause`
+  String get end_date_stop {
+    return Intl.message(
+      'End date of pause',
+      name: 'end_date_stop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send for approval to stop construction successfully`
+  String get send_stop_success {
+    return Intl.message(
+      'Send for approval to stop construction successfully',
+      name: 'send_stop_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cancel the construction suspension ticket {c}`
+  String confirm_cancel_cons_stop(Object c) {
+    return Intl.message(
+      'Do you want to cancel the construction suspension ticket $c',
+      name: 'confirm_cancel_cons_stop',
+      desc: '',
+      args: [c],
+    );
+  }
+
+  /// `Successfully canceled the construction suspension ticket`
+  String get success_cancel_cons_stop {
+    return Intl.message(
+      'Successfully canceled the construction suspension ticket',
+      name: 'success_cancel_cons_stop',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

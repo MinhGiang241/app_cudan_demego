@@ -507,6 +507,36 @@ mutation (\$residentId:String){
     }
   }
 
+  static Future getConstructionStopList(
+    String? residentId,
+  ) async {
+    var query = '''
+mutation (\$residentId:String){
+    response: construction_mobile_get_construction_stop_list (residentId: \$residentId ) {
+        code
+        message
+        data
+    }
+}
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {'residentId': residentId},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
   static Future getConstructionDocumentListByApartmentId(
     String? apartmentId,
   ) async {
@@ -555,6 +585,40 @@ mutation (\$data:Dictionary){
     final MutationOptions options = MutationOptions(
       document: gql(query),
       variables: {'data': data},
+    );
+
+    final results = await ApiService.shared.mutationhqlQuery(options);
+
+    var res = ResponseModule.fromJson(results);
+
+    if (res.response.code != 0) {
+      throw (res.response.message ?? '');
+    } else {
+      return res.response.data;
+    }
+  }
+
+  static Future saveAndChangeConstructionStop(
+    Map<String, dynamic> data,
+    String status,
+    String? reason,
+    bool? editable,
+  ) async {
+    var query = '''
+mutation (\$data:Dictionary,\$status:String,\$reason:String,\$note:String,\$editable:Boolean,\$file_cancel:Dictionary){
+    response: constructiontemporarilystopped_change_status (data: \$data,status: \$status,reason: \$reason,note: \$note,editable: \$editable,file_cancel: \$file_cancel )
+}
+
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: {
+        'data': data,
+        'status': status,
+        'reason': reason,
+        'editable': editable,
+      },
     );
 
     final results = await ApiService.shared.mutationhqlQuery(options);

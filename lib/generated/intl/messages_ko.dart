@@ -32,66 +32,68 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(c) => "건설 확장을 취소 하시겠습니까?";
 
-  static String m6(code) => "[${code}] 투표 등록을 취소 하시겠습니까?";
+  static String m6(c) => "공사 중단 티켓 ${c}을 취소하시겠습니까?";
 
-  static String m7(plate) => "차량을 취소해야합니까 [${plate}]?";
+  static String m7(code) => "[${code}] 투표 등록을 취소 하시겠습니까?";
 
-  static String m8(name) =>
+  static String m8(plate) => "차량을 취소해야합니까 [${plate}]?";
+
+  static String m9(name) =>
       "당신은 확실히 약속을 바꾸고 싶고, 아파트에 대한 이전 약속에 대한 약속 [${name}]이 취소 될 것입니까?";
 
-  static String m9(letter) => "투표를 삭제 하시겠습니까?";
+  static String m10(letter) => "투표를 삭제 하시겠습니까?";
 
-  static String m10(delete) => "[${delete}]를 삭제 하시겠습니까?";
+  static String m11(delete) => "[${delete}]를 삭제 하시겠습니까?";
 
-  static String m11(card) => "[${card}] 카드를 잠그고 싶습니까?";
+  static String m12(card) => "[${card}] 카드를 잠그고 싶습니까?";
 
-  static String m12(code) => "${code} 자동차 카드를 잃어버린보고를 원하십니까?";
+  static String m13(code) => "${code} 자동차 카드를 잃어버린보고를 원하십니까?";
 
-  static String m13(code) => "거주자 상실을보고 하시겠습니까 ${code}?";
+  static String m14(code) => "거주자 상실을보고 하시겠습니까 ${code}?";
 
-  static String m14(eventName) => "[${eventName}] 이벤트에 확실히 참여하고 싶습니까?";
+  static String m15(eventName) => "[${eventName}] 이벤트에 확실히 참여하고 싶습니까?";
 
-  static String m15(code) => "투표를 거부 하시겠습니까 [${code}]?";
+  static String m16(code) => "투표를 거부 하시겠습니까 [${code}]?";
 
-  static String m16(approved) => "투표 승인을 보내고 싶습니까?";
+  static String m17(approved) => "투표 승인을 보내고 싶습니까?";
 
-  static String m17(c) =>
+  static String m18(c) =>
       "핸드 오버 목록에는 ${c} 핸드 오버를 확실히 확인하려는 변하지 않은 포트폴리오가 있습니다.";
 
-  static String m18(nameser) => "서비스 등록 편집 ${nameser}";
+  static String m19(nameser) => "서비스 등록 편집 ${nameser}";
 
-  static String m19(message) => "에러 메시지}";
+  static String m20(message) => "에러 메시지}";
 
-  static String m20(ticket) =>
+  static String m21(ticket) =>
       "각 아파트는 주민을위한 최대 ${ticket} 티켓 /우선 시간 프레임을 설정합니다.";
 
-  static String m21(s) => "값은 ${s}보다 크지 않습니다.";
+  static String m22(s) => "값은 ${s}보다 크지 않습니다.";
 
-  static String m22(numAsset) => "핸드 오버 목록에는 ${numAsset}이 자격이없는 속성이 있습니다.";
+  static String m23(numAsset) => "핸드 오버 목록에는 ${numAsset}이 자격이없는 속성이 있습니다.";
 
-  static String m23(nameser) => "서비스 등록 ${nameser}";
+  static String m24(nameser) => "서비스 등록 ${nameser}";
 
-  static String m24(eName) => "참여를 확인했습니다 [${eName}] 성공";
+  static String m25(eName) => "참여를 확인했습니다 [${eName}] 성공";
 
-  static String m25(service) => "서비스 ${service}";
+  static String m26(service) => "서비스 ${service}";
 
-  static String m26(person, build) =>
+  static String m27(person, build) =>
       "아파트 ${build}에 ${person}을 추가합니다. 관리위원회가 승인 될 때까지 기다리십시오";
 
-  static String m27(name) =>
+  static String m28(name) =>
       "아파트를 성공적으로 예약했습니다 [${name}]. 관리위원회가 승인 될 때까지 기다리십시오.";
 
-  static String m28(name) => "서비스 ${name}을 성공적으로 등록했습니다.";
+  static String m29(name) => "서비스 ${name}을 성공적으로 등록했습니다.";
 
-  static String m29(name) => "아파트의 성공적인 핸드 오버 일정을 취소했습니다 [${name}]";
+  static String m30(name) => "아파트의 성공적인 핸드 오버 일정을 취소했습니다 [${name}]";
 
-  static String m30(ap) => "당신은 아파트를 성공적으로 전달했습니다 ${ap}";
+  static String m31(ap) => "당신은 아파트를 성공적으로 전달했습니다 ${ap}";
 
-  static String m31(p) => "당신은 ${p} 성공을 지불했습니다";
+  static String m32(p) => "당신은 ${p} 성공을 지불했습니다";
 
-  static String m32(month, year) => "물 화상의 총 금액 ${month}/${year}";
+  static String m33(month, year) => "물 화상의 총 금액 ${month}/${year}";
 
-  static String m33(to) => "코드를 다음과 같이 보냈습니다. ${to}";
+  static String m34(to) => "코드를 다음과 같이 보냈습니다. ${to}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -259,31 +261,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_can_trans_card_res":
             MessageLookupByLibrary.simpleMessage("거주자의 카드를 취소 하시겠습니까?"),
         "confirm_cancel_cons_ext": m5,
-        "confirm_cancel_request": m6,
-        "confirm_cancel_trans": m7,
-        "confirm_change_schedule": m8,
+        "confirm_cancel_cons_stop": m6,
+        "confirm_cancel_request": m7,
+        "confirm_cancel_trans": m8,
+        "confirm_change_schedule": m9,
         "confirm_delete_account":
             MessageLookupByLibrary.simpleMessage("계정을 삭제 하시겠습니까?"),
-        "confirm_delete_letter": m9,
-        "confirm_delete_service": m10,
+        "confirm_delete_letter": m10,
+        "confirm_delete_service": m11,
         "confirm_end_chat":
             MessageLookupByLibrary.simpleMessage("당신은 확실히 대화를 끝내고 싶어합니다."),
         "confirm_hand_over":
             MessageLookupByLibrary.simpleMessage("당신은 확실히 핸드 오버를 확인하고 싶습니다."),
-        "confirm_lock_card": m11,
+        "confirm_lock_card": m12,
         "confirm_lock_trans_card":
             MessageLookupByLibrary.simpleMessage("자동차 카드를 잠그고 싶습니까?"),
-        "confirm_missing_report": m12,
-        "confirm_missing_report_res": m13,
+        "confirm_missing_report": m13,
+        "confirm_missing_report_res": m14,
         "confirm_obey_regulation":
             MessageLookupByLibrary.simpleMessage("건물 규정 준수 인증 :"),
-        "confirm_par_ques_event": m14,
+        "confirm_par_ques_event": m15,
         "confirm_participate_event":
             MessageLookupByLibrary.simpleMessage("이벤트를 확인하십시오"),
         "confirm_pass": MessageLookupByLibrary.simpleMessage("비밀번호를 입력하십시오"),
-        "confirm_refuse_letter": m15,
+        "confirm_refuse_letter": m16,
         "confirm_register": MessageLookupByLibrary.simpleMessage("등록 확인"),
-        "confirm_send_request": m16,
+        "confirm_send_request": m17,
         "confirmed": MessageLookupByLibrary.simpleMessage("확인"),
         "confirmed_by_manager_resident":
             MessageLookupByLibrary.simpleMessage("주민들은 관리위원회에 의해 확인되었습니다"),
@@ -323,7 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_construction": MessageLookupByLibrary.simpleMessage("공사 내용"),
         "continue_construction":
             MessageLookupByLibrary.simpleMessage("건설 잠금 해제"),
-        "count_err_handover": m17,
+        "count_err_handover": m18,
         "covenient_service": MessageLookupByLibrary.simpleMessage("유용"),
         "create_acc": MessageLookupByLibrary.simpleMessage("계정 등록"),
         "create_acc_1": MessageLookupByLibrary.simpleMessage("계정을 만듭니다"),
@@ -375,7 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_reg_pet": MessageLookupByLibrary.simpleMessage("가축 등록 수정"),
         "edit_reg_transport": MessageLookupByLibrary.simpleMessage("카드 등록 편집"),
         "edit_res_card": MessageLookupByLibrary.simpleMessage("카드 편집 거주자"),
-        "edit_service_a": m18,
+        "edit_service_a": m19,
         "edit_trans_card": MessageLookupByLibrary.simpleMessage("카드 편집 차량"),
         "edit_transport": MessageLookupByLibrary.simpleMessage("수리하다"),
         "education_level": MessageLookupByLibrary.simpleMessage("학업 수준"),
@@ -403,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("날짜 종료를 연장하십시오"),
         "end_date_not_empty":
             MessageLookupByLibrary.simpleMessage("종료 날짜는 떠날 수 없습니다"),
+        "end_date_stop": MessageLookupByLibrary.simpleMessage("일시 중지 종료 날짜"),
         "end_time": MessageLookupByLibrary.simpleMessage("종료 시간"),
         "end_time_reg": MessageLookupByLibrary.simpleMessage("등록 종료 시간"),
         "end_use_date": MessageLookupByLibrary.simpleMessage("이용 날짜"),
@@ -447,7 +451,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "err_report": MessageLookupByLibrary.simpleMessage("오류"),
         "err_unknown": MessageLookupByLibrary.simpleMessage("알 수없는 오류"),
         "err_upload": MessageLookupByLibrary.simpleMessage("오류 파일을 업로드하십시오"),
-        "err_x": m19,
+        "err_x": m20,
         "error": MessageLookupByLibrary.simpleMessage("에러 발생됨"),
         "ethnic": MessageLookupByLibrary.simpleMessage("국가"),
         "event": MessageLookupByLibrary.simpleMessage("이벤트"),
@@ -607,7 +611,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("재료, 사양"),
         "matial_status": MessageLookupByLibrary.simpleMessage("결혼 상태"),
         "max_day_pay": MessageLookupByLibrary.simpleMessage("최대 지불 일 수"),
-        "max_num_ticket_per_day": m20,
+        "max_num_ticket_per_day": m21,
         "max_pay_day_not_empty":
             MessageLookupByLibrary.simpleMessage("최대 지불 일 수는 비워 두지 않아야합니다."),
         "member_num": MessageLookupByLibrary.simpleMessage("회원 수"),
@@ -672,6 +676,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_reg_proj": MessageLookupByLibrary.simpleMessage("현재 거주자가 없습니다"),
         "no_service_regitration":
             MessageLookupByLibrary.simpleMessage("서비스 등록이 없습니다"),
+        "no_stop_letter": MessageLookupByLibrary.simpleMessage("공사 중단권은 없습니다"),
         "no_trans_card": MessageLookupByLibrary.simpleMessage("자동차 카드가 없습니다"),
         "no_trans_letter": MessageLookupByLibrary.simpleMessage("등록 양식이 없습니다"),
         "nomal": MessageLookupByLibrary.simpleMessage("정상"),
@@ -698,9 +703,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("현재보다 크지 않습니다"),
         "not_have_image": MessageLookupByLibrary.simpleMessage("아직 이미지가 없습니다"),
         "not_have_product": MessageLookupByLibrary.simpleMessage("제품이 없습니다"),
-        "not_larger": m21,
+        "not_larger": m22,
         "not_pass": MessageLookupByLibrary.simpleMessage("달성되지 않았습니다"),
-        "not_pass_list": m22,
+        "not_pass_list": m23,
         "not_pass_reason":
             MessageLookupByLibrary.simpleMessage("그 이유는 달성되지 않습니다"),
         "not_read": MessageLookupByLibrary.simpleMessage("읽히지 않는"),
@@ -888,7 +893,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reg_pet_info": MessageLookupByLibrary.simpleMessage("애완 동물 등록 정보"),
         "reg_pet_list": MessageLookupByLibrary.simpleMessage("가축 등록 목록"),
         "reg_service": MessageLookupByLibrary.simpleMessage("등록 서비스"),
-        "reg_service_a": m23,
+        "reg_service_a": m24,
         "reg_time": MessageLookupByLibrary.simpleMessage("등록 시간"),
         "reg_trans_photos":
             MessageLookupByLibrary.simpleMessage("자동차 등록 사진 (2- 부드러운 사진)"),
@@ -986,7 +991,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "s_usage_apartment":
             MessageLookupByLibrary.simpleMessage("아파트 사용 구역 (끈 끈)"),
         "save": MessageLookupByLibrary.simpleMessage("구하다"),
-        "scuccess_participation": m24,
+        "scuccess_participation": m25,
         "search": MessageLookupByLibrary.simpleMessage("찾다"),
         "search_aparment": MessageLookupByLibrary.simpleMessage("아파트 검색"),
         "search_apartment": MessageLookupByLibrary.simpleMessage("아파트 검색"),
@@ -1021,12 +1026,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("암호를 다시 보내려면 코드를 보내십시오"),
         "send_reflection": MessageLookupByLibrary.simpleMessage("피드백을 보내십시오"),
         "send_request": MessageLookupByLibrary.simpleMessage("보내다"),
+        "send_stop_success": MessageLookupByLibrary.simpleMessage(
+            "성공적으로 건설을 중지하려면 승인을 위해 보냅니다."),
         "send_to_email": MessageLookupByLibrary.simpleMessage("이메일로 코드를 보냅니다"),
         "send_to_phone":
             MessageLookupByLibrary.simpleMessage("코드를 전화 번호로 보냅니다"),
         "send_verify": MessageLookupByLibrary.simpleMessage("정통을 보내십시오"),
         "service_bill": MessageLookupByLibrary.simpleMessage("서비스 등록비"),
-        "service_name": m25,
+        "service_name": m26,
         "service_reflection": MessageLookupByLibrary.simpleMessage("서비스 응답"),
         "services": MessageLookupByLibrary.simpleMessage("서비스"),
         "setting": MessageLookupByLibrary.simpleMessage("환경"),
@@ -1054,6 +1061,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date_extend": MessageLookupByLibrary.simpleMessage("시작일"),
         "start_date_not_empty":
             MessageLookupByLibrary.simpleMessage("시작일은 떠날 수 없습니다"),
+        "start_date_stop": MessageLookupByLibrary.simpleMessage("시작일 일시중지"),
         "start_time": MessageLookupByLibrary.simpleMessage("시작 시간"),
         "status": MessageLookupByLibrary.simpleMessage("상태"),
         "status_cons": MessageLookupByLibrary.simpleMessage("건축 상태"),
@@ -1061,6 +1069,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step1": MessageLookupByLibrary.simpleMessage("1 단계"),
         "step2": MessageLookupByLibrary.simpleMessage("2 단계"),
         "step3": MessageLookupByLibrary.simpleMessage("3 단계"),
+        "stop_construction": MessageLookupByLibrary.simpleMessage("임시 공사 중단"),
         "stt": MessageLookupByLibrary.simpleMessage("stt"),
         "succees_extend_trans":
             MessageLookupByLibrary.simpleMessage("성공적인 차량 확장"),
@@ -1068,22 +1077,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_accept": MessageLookupByLibrary.simpleMessage("성공 확인"),
         "success_accept_letter":
             MessageLookupByLibrary.simpleMessage("투표를 성공적으로 확인하십시오"),
-        "success_add_dependence": m26,
+        "success_add_dependence": m27,
         "success_add_email":
             MessageLookupByLibrary.simpleMessage("성공적인 이메일을 추가하십시오"),
         "success_add_ticket":
             MessageLookupByLibrary.simpleMessage("새로운 성공을 추가하십시오"),
-        "success_book_schedule": m27,
-        "success_booking": m28,
+        "success_book_schedule": m28,
+        "success_booking": m29,
         "success_can_req":
             MessageLookupByLibrary.simpleMessage("등록을 성공적으로 취소하십시오"),
         "success_can_res_card":
             MessageLookupByLibrary.simpleMessage("주거용 카드 취소 성공"),
-        "success_can_schedule": m29,
+        "success_can_schedule": m30,
         "success_can_trans_card":
             MessageLookupByLibrary.simpleMessage("자동차 카드를 성공적으로 취소하십시오"),
         "success_cancel_cons_ext":
             MessageLookupByLibrary.simpleMessage("성공적인 건설 확장의 취소"),
+        "success_cancel_cons_stop":
+            MessageLookupByLibrary.simpleMessage("공사 중단 티켓을 성공적으로 취소했습니다."),
         "success_cancel_dependence":
             MessageLookupByLibrary.simpleMessage("성공적인 부양 가족의 등록을 취소하십시오"),
         "success_cancel_reflection":
@@ -1102,10 +1113,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "success_find":
             MessageLookupByLibrary.simpleMessage("벽의 상태를 바꾸는 것은 성공을 발견했습니다"),
         "success_found": MessageLookupByLibrary.simpleMessage("찾았습니다"),
-        "success_handover": m30,
+        "success_handover": m31,
         "success_lock_card": MessageLookupByLibrary.simpleMessage("성공적인 카드 잠금"),
         "success_opt": MessageLookupByLibrary.simpleMessage("성공적인 OTP 코드"),
-        "success_payment": m31,
+        "success_payment": m32,
         "success_refuse_letter":
             MessageLookupByLibrary.simpleMessage("성공적인 투표를 거부하십시오"),
         "success_reg_res":
@@ -1173,7 +1184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to_money_vnd": MessageLookupByLibrary.simpleMessage("돈 (VND)"),
         "total": MessageLookupByLibrary.simpleMessage("총"),
         "total_bill": MessageLookupByLibrary.simpleMessage("총 송장"),
-        "total_consumed_water_month": m32,
+        "total_consumed_water_month": m33,
         "total_money": MessageLookupByLibrary.simpleMessage("총"),
         "total_money_pay": MessageLookupByLibrary.simpleMessage("총 지불"),
         "total_money_to_pay": MessageLookupByLibrary.simpleMessage("총 지불"),
@@ -1265,7 +1276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "water_bill": MessageLookupByLibrary.simpleMessage("물"),
         "way_send_otp": MessageLookupByLibrary.simpleMessage(
             "암호를 재설정하기 위해 코드를 어떻게 받으려고합니까?"),
-        "we_send_to": m33,
+        "we_send_to": m34,
         "weekend_aldult_ticket_num":
             MessageLookupByLibrary.simpleMessage("주말에 성인 티켓 수"),
         "weekend_child_ticket_num":

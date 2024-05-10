@@ -982,5 +982,12 @@
     "lock_vp": "위반으로 인해 잠금",
     "ko": "한국어",
     "content_construction": "공사 내용",
-    "add_content_construction": "구성 콘텐츠 추가"
+    "add_content_construction": "구성 콘텐츠 추가",
+    "stop_construction": "임시 공사 중단",
+    "no_stop_letter": "공사 중단권은 없습니다",
+    "start_date_stop": "시작일 일시중지",
+    "end_date_stop": "일시 중지 종료 날짜",
+    "send_stop_success": "성공적으로 건설을 중지하려면 승인을 위해 보냅니다.",
+    "confirm_cancel_cons_stop": "공사 중단 티켓 {c}을 취소하시겠습니까?",
+    "success_cancel_cons_stop": "공사 중단 티켓을 성공적으로 취소했습니다."
 }

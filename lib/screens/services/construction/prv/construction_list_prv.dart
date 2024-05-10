@@ -19,6 +19,7 @@ class ConstructionListPrv extends ChangeNotifier {
   List<ConstructionRegistration> listWaitRegistration = [];
   List<ConstructionDocument> listDocument = [];
   List<ConstructionExtension> listExtension = [];
+  List<ConstructionTemporarilyStopped> listStop = [];
   List<ConstructionExtension> listWaitExtension = [];
   FixedDateService? fixedDateService;
   var tooltipKey = UniqueKey();
@@ -54,6 +55,21 @@ class ConstructionListPrv extends ChangeNotifier {
         listExtension.clear();
         for (var i in v) {
           listExtension.add(ConstructionExtension.fromMap(i));
+        }
+      }
+      notifyListeners();
+    }).catchError((e) {
+      Utils.showErrorMessage(context, e);
+    });
+  }
+
+  getConstructionStopList(BuildContext context) async {
+    var residentId = context.read<ResidentInfoPrv>().residentId;
+    await APIConstruction.getConstructionStopList(residentId).then((v) {
+      if (v != null) {
+        listStop.clear();
+        for (var i in v) {
+          listStop.add(ConstructionTemporarilyStopped.fromMap(i));
         }
       }
       notifyListeners();
@@ -183,6 +199,46 @@ class ConstructionListPrv extends ChangeNotifier {
     );
   }
 
+  cancelConstructionStop(
+    BuildContext context,
+    ConstructionTemporarilyStopped e,
+  ) async {
+    Utils.showConfirmMessage(
+      context: context,
+      title: S.of(context).cancel_letter,
+      content: S.of(context).confirm_cancel_cons_stop(e.code ?? ''),
+      onConfirm: () async {
+        Navigator.pop(context);
+        var card = e.copyWith();
+        card.status = 'CANCEL';
+        card.cancel_reason = 'NGUOIDUNGHUY';
+        await APIConstruction.saveAndChangeConstructionStop(
+          card.toMap(),
+          'CANCEL',
+          'NGUOIDUNGHUY',
+          true,
+        ).then((v) {
+          Utils.showSuccessMessage(
+            context: context,
+            e: S.of(context).success_cancel_cons_stop,
+            onClose: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                ConstructionListScreen.routeName,
+                (route) => route.isFirst,
+                arguments: {
+                  'index': 2,
+                },
+              );
+            },
+          );
+        }).catchError((e) {
+          Utils.showErrorMessage(context, e);
+        });
+      },
+    );
+  }
+
   cancelConstructionExtension(
     BuildContext context,
     ConstructionExtension e,
@@ -207,7 +263,7 @@ class ConstructionListPrv extends ChangeNotifier {
                 ConstructionListScreen.routeName,
                 (route) => route.isFirst,
                 arguments: {
-                  'index': 2,
+                  'index': 1,
                 },
               );
             },

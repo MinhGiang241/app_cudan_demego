@@ -981,5 +981,12 @@
   "lock_vp": "Locked due to violation",
   "ko": "Korean",
   "content_construction": "Construction content",
-  "add_content_construction": "Add construction content"
+  "add_content_construction": "Add construction content",
+  "stop_construction": "Temporarily stop contruction",
+  "no_stop_letter": "Don't have any construction suspension tickets",
+  "start_date_stop": "Pause start date",
+  "end_date_stop": "End date of pause",
+  "send_stop_success": "Send for approval to stop construction successfully",
+  "confirm_cancel_cons_stop": "Do you want to cancel the construction suspension ticket {c}",
+  "success_cancel_cons_stop": "Successfully canceled the construction suspension ticket"
 }

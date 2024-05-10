@@ -957,6 +957,295 @@ class ConstructionDocumentHistory {
   }
 }
 
+class ConstructionTemporarilyStopped {
+  String? id;
+  String? createdTime;
+  String? updatedTime;
+  String? code;
+  String? apartmentId;
+  String? residentId;
+  String? resident_code;
+  String? resident_phone;
+  String? resident_identity;
+  String? resident_relationship;
+  String? status;
+  String? constructionTypeId;
+  String? description;
+  List<FileUploadModel>? current_draw;
+  List<FileUploadModel>? renovation_draw;
+  double? construction_cost;
+  int? off_day;
+  int? working_day;
+  bool? confirm;
+  String? cancel_reason;
+  String? reason_description;
+  String? resident_name;
+  String? create_date;
+  bool? isMobile;
+  List<FileUploadModel>? file_cancel;
+  String? construction_type_name;
+  String? extend;
+  String? constructionDocumentId;
+  String? extend_ConstructionRegistrationId;
+  List<String>? date_range;
+  String? accountId;
+  List<dynamic>? temporarily_stopped;
+
+  ConstructionDocument? d;
+  Status? s;
+  ConstructionType? t;
+  ConstructionTemporarilyStopped({
+    this.id,
+    this.createdTime,
+    this.updatedTime,
+    this.code,
+    this.apartmentId,
+    this.residentId,
+    this.resident_code,
+    this.resident_phone,
+    this.resident_identity,
+    this.resident_relationship,
+    this.status,
+    this.constructionTypeId,
+    this.description,
+    this.current_draw,
+    this.renovation_draw,
+    this.construction_cost,
+    this.temporarily_stopped,
+    this.off_day,
+    this.working_day,
+    this.confirm,
+    this.cancel_reason,
+    this.reason_description,
+    this.resident_name,
+    this.create_date,
+    this.isMobile,
+    this.file_cancel,
+    this.construction_type_name,
+    this.extend,
+    this.constructionDocumentId,
+    this.extend_ConstructionRegistrationId,
+    this.date_range,
+    this.accountId,
+    this.d,
+    this.s,
+    this.t,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      '_id': id,
+      'createdTime': createdTime,
+      'updatedTime': updatedTime,
+      'code': code,
+      'apartmentId': apartmentId,
+      'residentId': residentId,
+      'resident_code': resident_code,
+      'resident_phone': resident_phone,
+      'resident_identity': resident_identity,
+      'resident_relationship': resident_relationship,
+      'status': status,
+      'constructionTypeId': constructionTypeId,
+      'description': description,
+      'current_draw': current_draw?.map((x) => x.toMap()).toList(),
+      'renovation_draw': renovation_draw?.map((x) => x.toMap()).toList(),
+      'construction_cost': construction_cost,
+      'temporarily_stopped': temporarily_stopped,
+      'off_day': off_day,
+      'working_day': working_day,
+      'confirm': confirm,
+      'cancel_reason': cancel_reason,
+      'reason_description': reason_description,
+      'resident_name': resident_name,
+      'create_date': create_date,
+      'isMobile': isMobile,
+      'file_cancel': file_cancel?.map((x) => x.toMap()).toList(),
+      'construction_type_name': construction_type_name,
+      'extend': extend,
+      'constructionDocumentId': constructionDocumentId,
+      'extend_ConstructionRegistrationId': extend_ConstructionRegistrationId,
+      'date_range': date_range,
+      'accountId': accountId,
+    };
+  }
+
+  factory ConstructionTemporarilyStopped.fromMap(Map<String, dynamic> map) {
+    return ConstructionTemporarilyStopped(
+      id: map['id'] != null ? map['id'] as String : null,
+      createdTime:
+          map['createdTime'] != null ? map['createdTime'] as String : null,
+      updatedTime:
+          map['updatedTime'] != null ? map['updatedTime'] as String : null,
+      code: map['code'] != null ? map['code'] as String : null,
+      apartmentId:
+          map['apartmentId'] != null ? map['apartmentId'] as String : null,
+      residentId:
+          map['residentId'] != null ? map['residentId'] as String : null,
+      resident_code:
+          map['resident_code'] != null ? map['resident_code'] as String : null,
+      resident_phone: map['resident_phone'] != null
+          ? map['resident_phone'] as String
+          : null,
+      resident_identity: map['resident_identity'] != null
+          ? map['resident_identity'] as String
+          : null,
+      resident_relationship: map['resident_relationship'] != null
+          ? map['resident_relationship'] as String
+          : null,
+      status: map['status'] != null ? map['status'] as String : null,
+      constructionTypeId: map['constructionTypeId'] != null
+          ? map['constructionTypeId'] as String
+          : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      current_draw: map['current_draw'] != null
+          ? List<FileUploadModel>.from(
+              (map['current_draw'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      renovation_draw: map['renovation_draw'] != null
+          ? List<FileUploadModel>.from(
+              (map['renovation_draw'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      construction_cost:
+          double.tryParse(map['construction_cost'].toString()) != null
+              ? double.parse(map['construction_cost'].toString())
+              : null,
+      temporarily_stopped: map['temporarily_stopped'] != null
+          ? map['temporarily_stopped'] as List<dynamic>
+          : null,
+      off_day: int.tryParse(map['off_day'].toString()) != null
+          ? int.parse(map['off_day'].toString())
+          : null,
+      working_day: int.tryParse(map['working_day'].toString()) != null
+          ? int.parse(map['working_day'].toString())
+          : null,
+      confirm: map['confirm'] != null ? map['confirm'] as bool : null,
+      cancel_reason:
+          map['cancel_reason'] != null ? map['cancel_reason'] as String : null,
+      reason_description: map['reason_description'] != null
+          ? map['reason_description'] as String
+          : null,
+      resident_name:
+          map['resident_name'] != null ? map['resident_name'] as String : null,
+      create_date:
+          map['create_date'] != null ? map['create_date'] as String : null,
+      isMobile: map['isMobile'] != null ? map['isMobile'] as bool : null,
+      file_cancel: map['file_cancel'] != null
+          ? List<FileUploadModel>.from(
+              (map['file_cancel'] as List<dynamic>).map<FileUploadModel?>(
+                (x) => FileUploadModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      construction_type_name: map['construction_type_name'] != null
+          ? map['construction_type_name'] as String
+          : null,
+      extend: map['extend'] != null ? map['extend'] as String : null,
+      constructionDocumentId: map['constructionDocumentId'] != null
+          ? map['constructionDocumentId'] as String
+          : null,
+      extend_ConstructionRegistrationId:
+          map['extend_ConstructionRegistrationId'] != null
+              ? map['extend_ConstructionRegistrationId'] as String
+              : null,
+      date_range: map['date_range'] != null
+          ? List<String>.from((map['date_range'] as List<String>))
+          : null,
+      accountId: map['accountId'] != null ? map['accountId'] as String : null,
+      d: map['d'] != null ? ConstructionDocument.fromJson(map['d']) : null,
+      s: map['s'] != null ? Status.fromJson(map['s']) : null,
+      t: map['t'] != null ? ConstructionType.fromJson(map['t']) : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ConstructionTemporarilyStopped.fromJson(String source) =>
+      ConstructionTemporarilyStopped.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
+
+  ConstructionTemporarilyStopped copyWith({
+    String? id,
+    String? createdTime,
+    String? updatedTime,
+    String? code,
+    String? apartmentId,
+    String? residentId,
+    String? resident_code,
+    String? resident_phone,
+    String? resident_identity,
+    String? resident_relationship,
+    String? status,
+    String? constructionTypeId,
+    String? description,
+    List<FileUploadModel>? current_draw,
+    List<FileUploadModel>? renovation_draw,
+    double? construction_cost,
+    List<dynamic>? temporarily_stopped,
+    int? off_day,
+    int? working_day,
+    bool? confirm,
+    String? cancel_reason,
+    String? reason_description,
+    String? resident_name,
+    String? create_date,
+    bool? isMobile,
+    List<FileUploadModel>? file_cancel,
+    String? construction_type_name,
+    String? extend,
+    String? constructionDocumentId,
+    String? extend_ConstructionRegistrationId,
+    List<String>? date_range,
+    String? accountId,
+  }) {
+    return ConstructionTemporarilyStopped(
+      id: id ?? this.id,
+      createdTime: createdTime ?? this.createdTime,
+      updatedTime: updatedTime ?? this.updatedTime,
+      code: code ?? this.code,
+      apartmentId: apartmentId ?? this.apartmentId,
+      residentId: residentId ?? this.residentId,
+      resident_code: resident_code ?? this.resident_code,
+      resident_phone: resident_phone ?? this.resident_phone,
+      resident_identity: resident_identity ?? this.resident_identity,
+      resident_relationship:
+          resident_relationship ?? this.resident_relationship,
+      status: status ?? this.status,
+      constructionTypeId: constructionTypeId ?? this.constructionTypeId,
+      description: description ?? this.description,
+      current_draw: current_draw ?? this.current_draw,
+      renovation_draw: renovation_draw ?? this.renovation_draw,
+      construction_cost: construction_cost ?? this.construction_cost,
+      temporarily_stopped: temporarily_stopped ?? this.temporarily_stopped,
+      off_day: off_day ?? this.off_day,
+      working_day: working_day ?? this.working_day,
+      confirm: confirm ?? this.confirm,
+      cancel_reason: cancel_reason ?? this.cancel_reason,
+      reason_description: reason_description ?? this.reason_description,
+      resident_name: resident_name ?? this.resident_name,
+      create_date: create_date ?? this.create_date,
+      isMobile: isMobile ?? this.isMobile,
+      file_cancel: file_cancel ?? this.file_cancel,
+      construction_type_name:
+          construction_type_name ?? this.construction_type_name,
+      extend: extend ?? this.extend,
+      constructionDocumentId:
+          constructionDocumentId ?? this.constructionDocumentId,
+      extend_ConstructionRegistrationId: extend_ConstructionRegistrationId ??
+          this.extend_ConstructionRegistrationId,
+      date_range: date_range ?? this.date_range,
+      accountId: accountId ?? this.accountId,
+    );
+  }
+}
+
 class ConstructionExtension {
   String? id;
   String? createdTime;
