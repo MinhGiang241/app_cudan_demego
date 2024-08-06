@@ -1,5 +1,6 @@
 import 'package:app_cudan/screens/booking_services/booking_services_screen.dart';
 import 'package:app_cudan/screens/booking_services/history_register_service_screen.dart';
+import 'package:app_cudan/screens/components/WebViewerWidget.dart';
 import 'package:app_cudan/screens/display_services/shop_image_list_screen.dart';
 import 'package:app_cudan/screens/electricity/electricity_screen.dart';
 import 'package:app_cudan/screens/receipts/receipt_screen.dart';
@@ -117,7 +118,16 @@ class AppRoutes {
             builder: (context, child) => const SignUpScreen(),
           ),
         );
-
+      case WebViewerWidget.routeName:
+        return MaterialPageRoute(
+          settings: routeSetting,
+          builder: (context)  {
+            final arg = ModalRoute.of(context)!.settings.arguments as Map;
+            var url = arg["url"] as String;
+            var title= arg["title"];
+            return WebViewerWidget(url:url,title: title);
+            },
+        );
       case PhoneNumForgotPassScreen.routeName:
         return MaterialPageRoute(
           settings: routeSetting,

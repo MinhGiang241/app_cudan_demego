@@ -33,10 +33,14 @@ class BookingService {
   bool? confirm_use;
   String? icon;
   String? note;
+  String? settingType;//kiểu Ticket/ExternalLink
+  String? externalLink;//link neu la kieu ExternalLink
   BookingService({
     this.id,
     this.createdTime,
     this.updatedTime,
+    this.settingType=null,
+    this.externalLink=null,
     this.code,
     this.status,
     this.name,
@@ -65,6 +69,8 @@ class BookingService {
       '_id': id,
       'createdTime': createdTime,
       'updatedTime': updatedTime,
+      'settingType': settingType,
+      'externalLink': externalLink,
       'code': code,
       'status': status,
       'name': name,
@@ -120,6 +126,8 @@ class BookingService {
       cancel_in_advance_num: map['cancel_in_advance_num'] != null
           ? map['cancel_in_advance_num'] as int
           : null,
+      settingType: map['settingType']??'Ticket',
+      externalLink: map['externalLink']??'',
       ticket_type:
           map['ticket_type'] != null ? map['ticket_type'] as String : null,
       reminder_in_advance: map['reminder_in_advance'] != null

@@ -428,7 +428,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount_type":
             MessageLookupByLibrary.simpleMessage("Loại chiết khấu"),
         "display_service":
-            MessageLookupByLibrary.simpleMessage("Dịch vụ hiển thị"),
+            MessageLookupByLibrary.simpleMessage("Dịch vụ quanh đây"),
         "dob": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "doctor_degree": MessageLookupByLibrary.simpleMessage("Bằng tiến sĩ"),
         "dog": MessageLookupByLibrary.simpleMessage("Chó"),
@@ -778,7 +778,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_dependence": MessageLookupByLibrary.simpleMessage(
             "Không có phiếu đăng ký người phụ thuộc nào"),
         "no_display_ser": MessageLookupByLibrary.simpleMessage(
-            "Không có dịch vụ hiển thị nào"),
+            "Chưa tìm thấy dịch vụ phù hợp"),
         "no_event":
             MessageLookupByLibrary.simpleMessage("Không có sự kiện nào"),
         "no_extend_letter":

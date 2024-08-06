@@ -2,7 +2,7 @@
 
 import 'package:app_cudan/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/constants.dart';

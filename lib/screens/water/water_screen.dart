@@ -3,7 +3,7 @@
 import 'package:app_cudan/screens/water/prv/water_prv.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
@@ -16,16 +16,17 @@ import 'tabs/water_bill_tab.dart';
 
 class WaterScreen extends StatefulWidget {
   const WaterScreen({super.key});
+
   static const routeName = "/water";
 
   @override
   State<WaterScreen> createState() => _WaterScreenState();
 }
 
-class _WaterScreenState extends State<WaterScreen>
-    with TickerProviderStateMixin {
+class _WaterScreenState extends State<WaterScreen> with TickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
   var initIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map?;

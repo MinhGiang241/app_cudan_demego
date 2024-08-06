@@ -45,7 +45,7 @@ void main() async {
   SecurityContext.defaultContext
       .setTrustedCertificatesBytes(data.buffer.asUint8List());
 
-  Paint.enableDithering = true;
+  // Paint.enableDithering = true;
 
   await Hive.initFlutter();
   await PrfData.open();

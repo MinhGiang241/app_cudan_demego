@@ -37,7 +37,7 @@ class APIRevenues {
       return res.response.data;
     }
   }
-
+//load html hoa don ky nay
   static Future getHTML(
     String? apartmentId,
   ) async {

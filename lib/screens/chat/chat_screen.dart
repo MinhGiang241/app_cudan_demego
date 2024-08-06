@@ -14,8 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 // ignore: unused_import
-import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
-    as rocket_notification;
+// import 'package:rocket_chat_flutter_connector/web_socket/notification.dart'
+//     as rocket_notification;
 
 import '../../generated/l10n.dart';
 import '../../models/rocket_chat_data.dart';

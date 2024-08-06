@@ -2,7 +2,7 @@ import 'package:app_cudan/screens/services/missing_object/pick_item_screen.dart'
 import 'package:app_cudan/screens/services/missing_object/prv/missing_object_prv.dart';
 import 'package:app_cudan/widgets/primary_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

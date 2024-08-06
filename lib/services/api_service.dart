@@ -10,6 +10,7 @@ import 'package:graphql/client.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:path_provider/path_provider.dart';
 import '../generated/l10n.dart';
+import '../models/response.dart';
 import '../utils/error_handler.dart';
 
 typedef OnSendProgress = Function(int, int);
@@ -461,6 +462,52 @@ class ApiService {
         "response": {"code": 1, "message": e.toString(), "data": null},
       };
     }
+  }
+
+  ///Dung=> Viet them ham tra thang ve ket qua cuoi thay vi xu ly long vong
+  Future<Map<String, dynamic>> executeGraphQueryResponse(
+      String query, dynamic variables) async {
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: variables ?? {},
+    );
+    final cl = await getClientGraphQLfromHO(); // getClientGraphQL(old)
+
+    final result = await cl.query(options);
+    if (result.data == null) {
+      return {
+        "response": {"code": 1, "message": S.current.err_conn, "data": null},
+      };
+    }
+    var res = ResponseModule.fromJson(result.data as Map<String, dynamic>);
+    if (res.response.code == 2) {
+      throw ("RELOGIN");
+    } else if (res.response.code != 0) {
+      throw res.response.message ?? 'Có lỗi xảy ra';
+    }
+    return res.response.data;
+  }
+
+  Future<Map<String, dynamic>> executeGraphMutationResponse(
+      String query, dynamic variables) async {
+    final MutationOptions options = MutationOptions(
+      document: gql(query),
+      variables: variables ?? {},
+    );
+    final cl = await getClientGraphQLfromHO();
+    final result = await cl.mutate(options);
+
+    if (result.data == null) {
+      throw (S.current.err_conn);
+    }
+    var res = ResponseModule.fromJson(result.data as Map<String, dynamic>);
+
+    if (res.response.code == 2) {
+      throw ("RELOGIN");
+    } else if (res.response.code != 0) {
+      throw res.response.message ?? "Có lỗi xảy ra";
+    }
+    return res.response.data;
   }
 
   Future<Map<String, dynamic>> mutationhqlQuery(

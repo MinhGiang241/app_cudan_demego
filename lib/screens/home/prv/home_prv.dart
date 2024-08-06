@@ -1,12 +1,13 @@
 import 'package:app_cudan/screens/auth/prv/resident_info_prv.dart';
 import 'package:app_cudan/services/api_event.dart';
+import 'package:app_cudan/services/api_load_home_config.dart';
 import 'package:app_cudan/services/api_new.dart';
 
 import '../../../models/event.dart';
 import '../../../models/new.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../../../models/HomeCategory.dart';
 import '../../../utils/utils.dart';
 import '../../notification/prv/undread_noti.dart';
 
@@ -57,27 +58,12 @@ class HomePrv extends ChangeNotifier {
   }
 
   Future initial() async {
-    // var filter = {
-    //   "skip": 0,
-    //   "limit": 2,
-    //   "postQueryBeforePaging": true,
-    //   "group": {
-    //     "op": "AND",
-    //     "children": [],
-    //     "operation": "~i",
-    //     "rawFilter": false,
-    //   },
-    //   "text": "",
-    //   "skipDefaultTextSearch": false,
-    //   "withRecords": false,
-    //   "inline": false,
-    //   "is_debug": false,
-    //   "unionLimit": 10
-    // };
+
     try {
       isEventLoading = true;
       isResNewsLoading = true;
       isProNewsLoading = true;
+      isLoading=true;
       notifyListeners();
 
       var residentId = context!.read<ResidentInfoPrv>().residentId;
@@ -98,6 +84,7 @@ class HomePrv extends ChangeNotifier {
           event = Event.fromJson(v[0]);
         }
       });
+
       var residentNews =
           await APINew.getNewList(5, 0, "RESIDENT", accountId ?? '');
       newResidentList.clear();
@@ -118,19 +105,33 @@ class HomePrv extends ChangeNotifier {
       );
       UnreadNotification.getUnReadNotification();
       // ignore: use_build_context_synchronously
-
-      isEventLoading = false;
-      isResNewsLoading = false;
-      isProNewsLoading = false;
-      notifyListeners();
+      // notifyListeners();
     } catch (e) {
-      isEventLoading = false;
-      isResNewsLoading = false;
-      isProNewsLoading = false;
-
-      notifyListeners();
+      // notifyListeners();
       Utils.showErrorMessage(context!, e.toString());
     }
+
+    isEventLoading = false;
+    isResNewsLoading = false;
+    isProNewsLoading = false;
+    isLoading=false;
     notifyListeners();
   }
 }
+// var filter = {
+//   "skip": 0,
+//   "limit": 2,
+//   "postQueryBeforePaging": true,
+//   "group": {
+//     "op": "AND",
+//     "children": [],
+//     "operation": "~i",
+//     "rawFilter": false,
+//   },
+//   "text": "",
+//   "skipDefaultTextSearch": false,
+//   "withRecords": false,
+//   "inline": false,
+//   "is_debug": false,
+//   "unionLimit": 10
+// };

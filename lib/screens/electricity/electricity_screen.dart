@@ -3,7 +3,7 @@
 // import 'package:app_cudan/screens/electricity/tabs/electric_payment_tab.dart';
 import 'package:app_cudan/widgets/primary_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
